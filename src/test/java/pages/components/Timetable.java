@@ -1,4 +1,4 @@
 package pages.components;
 
-public class timetable {
+public class Timetable {
 }
