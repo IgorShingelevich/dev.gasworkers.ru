@@ -1,19 +1,20 @@
 package tests;
 
 import org.junit.jupiter.api.Test;
-import pages.components.SidebarClient;
+import pages.components.SidebarClientComponent;
+import pages.profile.client.ProfileClientPage;
 
 import static io.qameta.allure.Allure.step;
 
 public class StageTest extends TestBase {
 
-    // new exemplar of class SidebarClient
-    SidebarClient sidebarClient = new SidebarClient();
+    // new exemplar of class SidebarClientComponent
+    SidebarClientComponent sidebarClientComponent = new SidebarClientComponent();
     // new LoginPage exemplar
     pages.LoginPage loginPage = new pages.LoginPage();
 
-    // new exemplar of class ProfileClient
-    pages.profile.client.ProfileClient profileClient = new pages.profile.client.ProfileClient();
+    // new exemplar of class ProfileClientPage
+    ProfileClientPage profileClientPage = new ProfileClientPage();
 
 
     String emailClient = "shingelevich@gmail.com";
@@ -24,17 +25,17 @@ public class StageTest extends TestBase {
     /*void sidebarClientItems() {
         loginPage.open();
         loginPage.login(emailClient, passwordClient);
-        profileClient.verifyLastOrderInfoTitleLocator();
-        sidebarClient.clickMainPage();
-        sidebarClient.clickObjectsAndEquipmentLocator();
-        sidebarClient.clickOrdersAndInvoicesDropdownLocator();
-        sidebarClient.clickOrdersListLocator();
-        sidebarClient.clickInvoicesListLocator();
-        sidebarClient.clickProfileLocator();
-        sidebarClient.click2MainPage();
+        profileClientPage.verifyLastOrderInfoTitleLocator();
+        sidebarClientComponent.clickMainPage();
+        sidebarClientComponent.clickObjectsAndEquipmentLocator();
+        sidebarClientComponent.clickOrdersAndInvoicesDropdownLocator();
+        sidebarClientComponent.clickOrdersListLocator();
+        sidebarClientComponent.clickInvoicesListLocator();
+        sidebarClientComponent.clickProfileLocator();
+        sidebarClientComponent.click2MainPage();
     }*/
 
-    void sidebarClientItems() { // step scenario
+    void ProfileClientLocatorsIntegrity() { // step scenario
         step("Open login page", () -> {
             loginPage.open();
         });
@@ -42,28 +43,28 @@ public class StageTest extends TestBase {
             loginPage.login(emailClient, passwordClient);
         });
         step("Verify last order info title", () -> {
-            profileClient.verifyLastOrderInfoTitleLocator();
+            profileClientPage.verifyLastOrderInfoTitleLocator();
         });
         step("Click main page", () -> {
-            sidebarClient.clickMainPage();
+            sidebarClientComponent.clickMainPage();
         });
         step("Click objects and equipment", () -> {
-            sidebarClient.clickObjectsAndEquipmentLocator();
+            sidebarClientComponent.clickObjectsAndEquipmentLocator();
         });
         step("Click orders and invoices dropdown", () -> {
-            sidebarClient.clickOrdersAndInvoicesDropdownLocator();
+            sidebarClientComponent.clickOrdersAndInvoicesDropdownLocator();
         });
         step("Click orders list", () -> {
-            sidebarClient.clickOrdersListLocator();
+            sidebarClientComponent.clickOrdersListLocator();
         });
         step("Click invoices list", () -> {
-            sidebarClient.clickInvoicesListLocator();
+            sidebarClientComponent.clickInvoicesListLocator();
         });
         step("Click profile", () -> {
-            sidebarClient.clickProfileLocator();
+            sidebarClientComponent.clickProfileLocator();
         });
         step("Click main page", () -> {
-            sidebarClient.click2MainPage();
+            sidebarClientComponent.click2MainPage();
         });
     }
 

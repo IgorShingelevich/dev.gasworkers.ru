@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
-public class SidebarSelfEmployed {
+public class SidebarSelfEmployedComponent {
 
     /*<div class="notifications gas-scrollbar-inline mb-32" data-v-2647b5ad=""><div class="item item" data-v-a02b3682="" data-v-2647b5ad=""><div class="w-100" data-v-a02b3682=""><div class="gas-notice-warning short" data-v-a02b3682=""><div class="item-header d-flex justify-content-between w-100 gas-notice-warning__text" data-v-a02b3682=""><div class="h4 w-100 pe-2 flex-nowrap align-items-start gas-notice-warning__text--title cursor-pointer" data-v-a02b3682=""><span class="ic" data-v-a02b3682=""></span> <div class="d-flex flex-wrap text-break" data-v-a02b3682=""><span class="me-1" data-v-a02b3682="">
                 Заказ №

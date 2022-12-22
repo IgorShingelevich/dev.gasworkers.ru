@@ -1,5 +1,5 @@
 package pages.profile.dispatcher;
 
-public class ProfileDispatcher {
+public class ProfileDispatcherPage {
 
 }

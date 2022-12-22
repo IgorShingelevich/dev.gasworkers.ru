@@ -1,5 +1,5 @@
 package pages.profile.master;
 
-public class ProfileMaster {
+public class ProfileMasterPage {
 
 }

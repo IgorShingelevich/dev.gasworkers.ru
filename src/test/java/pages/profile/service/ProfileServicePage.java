@@ -1,5 +1,5 @@
 package pages.profile.service;
 
-public class ProfileService {
+public class ProfileServicePage {
 
 }

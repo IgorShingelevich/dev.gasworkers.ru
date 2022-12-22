@@ -1,6 +1,6 @@
 package pages.profile.recruit;
 
-public class ProfileRecruit {
+public class ProfileRecruitPage {
 
 
 }

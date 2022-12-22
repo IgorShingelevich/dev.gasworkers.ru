@@ -1,13 +1,12 @@
 package pages.components;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class SidebarClient {
+public class SidebarClientComponent {
 
 
     SelenideElement
