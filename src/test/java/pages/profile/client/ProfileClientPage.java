@@ -3,6 +3,7 @@ package pages.profile.client;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ProfileClientPage {
@@ -338,11 +339,11 @@ public class ProfileClientPage {
 
 
     public ProfileClientPage verifyProfileClientName(String ClientName) {
-        profileClientNameLocator.shouldHave(text(ClientName));
+        profileClientNameLocator.shouldHave(text(ClientName)).shouldBe(visible);
         return this;
     }
     public ProfileClientPage verifyLastOrderInfoTitleLocator () {
-        lastOrderInfoTitleLocator.shouldHave(text(LAST_ORDER_INFO_TITLE));
+        lastOrderInfoTitleLocator.shouldHave(text(LAST_ORDER_INFO_TITLE)).shouldBe(visible);
         return this;
     }
 
