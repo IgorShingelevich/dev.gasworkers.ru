@@ -3,6 +3,8 @@ package tests;
 import org.junit.jupiter.api.Test;
 import pages.components.SidebarClient;
 
+import static io.qameta.allure.Allure.step;
+
 public class StageTest extends TestBase {
 
     // new exemplar of class SidebarClient
@@ -19,10 +21,10 @@ public class StageTest extends TestBase {
     @Test
 
 
-    void sidebarClientItems() {
+    /*void sidebarClientItems() {
         loginPage.open();
         loginPage.login(emailClient, passwordClient);
-//        profileClient.verifyLastOrderInfoTitleLocator();
+        profileClient.verifyLastOrderInfoTitleLocator();
         sidebarClient.clickMainPage();
         sidebarClient.clickObjectsAndEquipmentLocator();
         sidebarClient.clickOrdersAndInvoicesDropdownLocator();
@@ -30,6 +32,39 @@ public class StageTest extends TestBase {
         sidebarClient.clickInvoicesListLocator();
         sidebarClient.clickProfileLocator();
         sidebarClient.click2MainPage();
+    }*/
+
+    void sidebarClientItems() { // step scenario
+        step("Open login page", () -> {
+            loginPage.open();
+        });
+        step("Login as client", () -> {
+            loginPage.login(emailClient, passwordClient);
+        });
+        step("Verify last order info title", () -> {
+            profileClient.verifyLastOrderInfoTitleLocator();
+        });
+        step("Click main page", () -> {
+            sidebarClient.clickMainPage();
+        });
+        step("Click objects and equipment", () -> {
+            sidebarClient.clickObjectsAndEquipmentLocator();
+        });
+        step("Click orders and invoices dropdown", () -> {
+            sidebarClient.clickOrdersAndInvoicesDropdownLocator();
+        });
+        step("Click orders list", () -> {
+            sidebarClient.clickOrdersListLocator();
+        });
+        step("Click invoices list", () -> {
+            sidebarClient.clickInvoicesListLocator();
+        });
+        step("Click profile", () -> {
+            sidebarClient.clickProfileLocator();
+        });
+        step("Click main page", () -> {
+            sidebarClient.click2MainPage();
+        });
     }
 
 

@@ -3,8 +3,7 @@ package pages.profile.client;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class ProfileClient {
     /**<body>
@@ -325,7 +324,10 @@ public class ProfileClient {
             profileClientRatingLocator = $(".profile-card").$(".rating-badge"),
             profileClientReviewsLocator = $(".profile-card").$(".reviews"),
             profileClientImageLocator = $(".profile-card").$(".profile-image"),
-            lastOrderInfoTitleLocator = $(".title d-flex justify-content-between align-items-center");
+            lastOrderInfoTitleLocator = $x("//h3"); //$(".title d-flex justify-content-between align-items-center")
+
+
+    
 
 
 
