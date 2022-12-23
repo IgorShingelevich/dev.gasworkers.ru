@@ -17,35 +17,38 @@ public class SidebarClientComponent {
             invoicesListLocator = $("ul.dropdown-menu").$(byText("Список счетов")),  //$(By.xpath("//div[@class='link']")).$(byText("Список счетов"));
             profileLocator = $$(".sidebar-nav>li").get(3); //$(By.xpath("//div[@class='link']")).$(byText("Профиль"));
 
-    public void clickMainPage() {
+    public SidebarClientComponent visibilityMainPage() {
         mainPageLocator.shouldBe(visible);
+        return this;
     }
 
-    public void clickObjectsAndEquipmentLocator() {
+    public SidebarClientComponent visibilityObjectsAndEquipmentLocator() {
         objectsAndEquipmentLocator.shouldBe(visible);
-        objectsAndEquipmentLocator.click();
+        return this;
     }
 
-    public void clickOrdersAndInvoicesDropdownLocator() {
+    public SidebarClientComponent clickOrdersAndInvoicesDropdownLocator() {
         ordersAndInvoicesDropdownLocator.shouldBe(visible);
         ordersAndInvoicesDropdownLocator.click();
+        return this;
     }
 
-    public void clickOrdersListLocator() {
+    public SidebarClientComponent visibilityOrdersListLocator() {
         ordersListLocator.shouldBe(visible);
+        return this;
     }
 
-    public void clickInvoicesListLocator() {
+    public SidebarClientComponent visibilityInvoicesListLocator() {
         invoicesListLocator.shouldBe(visible);
+        return this;
     }
 
-    public void clickProfileLocator() {
+    public SidebarClientComponent visibilityProfileLocator() {
         profileLocator.shouldBe(visible);
+        return this;
     }
 
-    public void click2MainPage() {
-        mainPageLocator.shouldBe(visible);
-    }
+
 
 
 }

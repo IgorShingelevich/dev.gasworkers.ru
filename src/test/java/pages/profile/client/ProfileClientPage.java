@@ -316,7 +316,9 @@ public class ProfileClientPage {
      * */
 
 
-    String ClientName = "Шингелевич Игорь Сергеевич";
+
+
+     String ClientName = "Шингелевич Игорь Сергеевич";
     private final String LAST_ORDER_INFO_TITLE = "Информация о последнем заказе";
 
     SelenideElement

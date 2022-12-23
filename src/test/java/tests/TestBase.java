@@ -10,7 +10,7 @@ public class TestBase {
     static void setup() {
         Configuration.baseUrl = "https://dev.gasworkers.ru";
         Configuration.browserSize = "1920x1080";
-        Configuration.headless = true;
+//        Configuration.headless = true;
     }
 
 }

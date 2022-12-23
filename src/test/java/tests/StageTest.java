@@ -1,5 +1,8 @@
 package tests;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pages.components.SidebarClientComponent;
 import pages.profile.client.ProfileClientPage;
@@ -16,8 +19,32 @@ public class StageTest extends TestBase {
     // new exemplar of class ProfileClientPage
     ProfileClientPage profileClientPage = new ProfileClientPage();
 
+    // new exemplar of  ActionsBlockClientComponent 
+    pages.components.header.ActionsBlockClientComponent actionsBlockClientComponent = new pages.components.header.ActionsBlockClientComponent();
+    
+    
+
+@BeforeEach
+    void openLoginPage() {
+        loginPage.open();
+        loginPage.login(emailClient, passwordClient);
+    }
+
+    @AfterEach
+    void logout() {
+        actionsBlockClientComponent.logout();
+        //set sleep for logout 5 sec
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+    }
 
     String emailClient = "shingelevich@gmail.com";
+    String ClientName = "Шингелевич Игорь Сергеевич";
     String passwordClient = "123456";
     @Test
 
@@ -26,7 +53,7 @@ public class StageTest extends TestBase {
         loginPage.open();
         loginPage.login(emailClient, passwordClient);
         profileClientPage.verifyLastOrderInfoTitleLocator();
-        sidebarClientComponent.clickMainPage();
+        sidebarClientComponent.visibleMainPage();
         sidebarClientComponent.clickObjectsAndEquipmentLocator();
         sidebarClientComponent.clickOrdersAndInvoicesDropdownLocator();
         sidebarClientComponent.clickOrdersListLocator();
@@ -36,37 +63,50 @@ public class StageTest extends TestBase {
     }*/
 
     void ProfileClientLocatorsIntegrity() { // step scenario
-        step("Open login page", () -> {
-            loginPage.open();
-        });
-        step("Login as client", () -> {
-            loginPage.login(emailClient, passwordClient);
-        });
+
         step("Verify last order info title", () -> {
             profileClientPage.verifyLastOrderInfoTitleLocator();
         });
         step("Click main page", () -> {
-            sidebarClientComponent.clickMainPage();
+            sidebarClientComponent.visibilityMainPage();
         });
         step("Click objects and equipment", () -> {
-            sidebarClientComponent.clickObjectsAndEquipmentLocator();
+            sidebarClientComponent.visibilityObjectsAndEquipmentLocator();
         });
         step("Click orders and invoices dropdown", () -> {
             sidebarClientComponent.clickOrdersAndInvoicesDropdownLocator();
         });
         step("Click orders list", () -> {
-            sidebarClientComponent.clickOrdersListLocator();
+            sidebarClientComponent.visibilityOrdersListLocator();
         });
         step("Click invoices list", () -> {
-            sidebarClientComponent.clickInvoicesListLocator();
+            sidebarClientComponent.visibilityInvoicesListLocator();
         });
         step("Click profile", () -> {
-            sidebarClientComponent.clickProfileLocator();
+            sidebarClientComponent.visibilityProfileLocator();
         });
-        step("Click main page", () -> {
-            sidebarClientComponent.click2MainPage();
-        });
+
     }
+    
+    //   ActionsBlockClientComponent
+    @Test
+    void ActionsBlockClientComponent() {
+        actionsBlockClientComponent.visibilityActionsBlock();
+        actionsBlockClientComponent.visibilityLinkNotificationsABLocator();
+        actionsBlockClientComponent.visibilityLinkMessagesABLocator();
+        actionsBlockClientComponent.visibilityDropdownProfileABLocator();
+        actionsBlockClientComponent.clickDropdownProfileABLocator();
+        actionsBlockClientComponent.visibilityProfileNameABLocator(ClientName);
+        actionsBlockClientComponent.visibilityLinkProfileEditABLocator();
+        actionsBlockClientComponent.visibilityLinkReviewABLocator();
+        actionsBlockClientComponent.visibilityLinkLogoutABLocator();
+        actionsBlockClientComponent.clickDropdownProfileABLocator();
+
+    }
+    
+    
+   
+    
 
 
 
