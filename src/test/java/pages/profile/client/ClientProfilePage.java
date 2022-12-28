@@ -6,7 +6,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
-public class ProfileClientPage {
+public class ClientProfilePage {
     /**<body>
      <noscript data-n-head="ssr" data-hid="gtm-noscript" data-pbody="true"><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4L682B&" height="0" width="0" style="display:none;visibility:hidden" title="gtm"></iframe></noscript><div id="__nuxt"><!----><div id="__layout"><div data-v-2647b5ad="" id="app"><div data-v-2647b5ad="" class="container wrapper"><div data-v-af68ad0e="" data-v-2647b5ad="" id="gas__content-header" class="container"><div data-v-af68ad0e="" class="logo-wrap"><div data-v-af68ad0e="" class="logo"><a data-v-af68ad0e="" href="/" class="nuxt-link-active"><img data-v-af68ad0e="" src="/_ipx/_/images/logo-blue.svg" alt="Gasworkers"> <span data-v-af68ad0e="">Gasworkers</span></a></div></div> <div data-v-af68ad0e="" class="actions-block"><div data-v-af68ad0e="" class="notifications icon"><!----></div> <div data-v-af68ad0e="" class="messages icon"><!----></div> <div data-v-af68ad0e="" class="profile-wrap"><div data-v-af68ad0e="" class="profile icon"></div> <span data-v-af68ad0e="" class="arrow-down"></span> <div data-v-af68ad0e="" class="profile-menu"><div data-v-af68ad0e="" class="profile-menu__link text-primary">Шингелевич Игорь Сергеевич</div> <hr data-v-af68ad0e=""> <a data-v-af68ad0e="" href="/profile/edit" class="profile-menu__link">
      Профиль
@@ -340,11 +340,11 @@ public class ProfileClientPage {
 
 
 
-    public ProfileClientPage verifyProfileClientName(String ClientName) {
+    public ClientProfilePage verifyProfileClientName(String ClientName) {
         profileClientNameLocator.shouldHave(text(ClientName)).shouldBe(visible);
         return this;
     }
-    public ProfileClientPage verifyLastOrderInfoTitleLocator () {
+    public ClientProfilePage isOpened() {
         lastOrderInfoTitleLocator.shouldHave(text(LAST_ORDER_INFO_TITLE)).shouldBe(visible);
         return this;
     }

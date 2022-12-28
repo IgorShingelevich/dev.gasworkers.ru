@@ -13,4 +13,11 @@ public class TestBase {
 //        Configuration.headless = true;
     }
 
+    @AfterAll
+    static void tearDown() {
+//        Configuration.holdBrowserOpen = false;
+    }
+
+
+
 }
