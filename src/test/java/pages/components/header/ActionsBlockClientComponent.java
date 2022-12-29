@@ -3,8 +3,7 @@ package pages.components.header;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class ActionsBlockClientComponent {
@@ -59,12 +58,13 @@ public class ActionsBlockClientComponent {
     }
 
     public ActionsBlockClientComponent clickDropdownProfileABLocator() {
+        dropdownProfileABLocator.shouldBe(interactable);
         dropdownProfileABLocator.click();
         return this;
     }
 
-    public ActionsBlockClientComponent visibilityProfileNameABLocator(String ClientName) {
-        profileNameABLocator.shouldHave(text(ClientName)).shouldBe(visible);
+    public ActionsBlockClientComponent visibilityProfileNameABLocator(String clientName) {
+        profileNameABLocator.shouldHave(text(clientName)).shouldBe(visible);
         return this;
     }
 
@@ -83,7 +83,9 @@ public class ActionsBlockClientComponent {
         return this;
     }
     public ActionsBlockClientComponent logout() {
+        dropdownProfileABLocator.shouldBe(interactable);
         dropdownProfileABLocator.click();
+        linkLogoutABLocator.shouldBe(visible);
         linkLogoutABLocator.click();
         return this;
     }
