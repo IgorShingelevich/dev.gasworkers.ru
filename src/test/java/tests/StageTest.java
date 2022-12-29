@@ -1,5 +1,6 @@
 package tests;
 
+import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.*;
 import pages.components.SidebarClientComponent;
 import pages.profile.client.ClientProfilePage;
@@ -9,18 +10,13 @@ import static io.qameta.allure.Allure.step;
 
 public class StageTest extends TestBase {
 
-    // new exemplar of class SidebarClientComponent
     SidebarClientComponent sidebarClient = new SidebarClientComponent();
-    // new LoginPage exemplar
     pages.LoginPage loginPage = new pages.LoginPage();
 
-    // new exemplar of class ClientProfilePage
     ClientProfilePage clientProfilePage = new ClientProfilePage();
 
-    // new exemplar of  ActionsBlockClientComponent 
     pages.components.header.ActionsBlockClientComponent actionsBlockClient = new pages.components.header.ActionsBlockClientComponent();
 
-    // new exemplar of    pages.profile.client.EquipmentPage
     EquipmentPage equipmentPage = new EquipmentPage();
 
 
@@ -31,9 +27,10 @@ public class StageTest extends TestBase {
         loginPage.login(emailClient, passwordClient);
     }
 
-    @AfterEach
-    void clientLogOut() {
 
+    @AfterEach
+
+    void clientLogOut() {
         actionsBlockClient.logout();
     }
 
@@ -44,30 +41,43 @@ public class StageTest extends TestBase {
     @DisplayName("sidebarClientLocatorsIntegrityTest")
     @Test
 
-    void sidebarClientLocatorsIntegrity() { // step scenario
+    void sidebarClientLocatorsIntegrity() {
 
-//        step("Verify last order info title", () -> {
-            clientProfilePage.isOpened();
-//        });
-//        step("Click main page", () -> {
-            sidebarClient.isVisible();
-//        });
-//        step("Click objects and equipment", () -> {
+
+        step("sidebarClient.isVisible", () -> {
+            sidebarClient.isVisibleHomeButton();
+        });
+        step("sidebarClient.isVisibleObjectsAndEquipment", () -> {
             sidebarClient.isVisibleObjectsAndEquipment();
-//        });
-//        step("Click orders and invoices dropdown", () -> {
+        });
+        step("sidebarClient.clickOrdersAndInvoicesDropdown", () -> {
             sidebarClient.clickOrdersAndInvoicesDropdown();
-//        });
-//        step("Click orders list", () -> {
+        });
+        step("sidebarClient.isVisibleOrdersList", () -> {
             sidebarClient.isVisibleOrdersList();
-//        });
-//        step("Click invoices list", () -> {
+        });
+        step(" sidebarClient.isVisibleInvoicesList", () -> {
             sidebarClient.isVisibleInvoicesList();
-//        });
-//        step("Click profile", () -> {
+        });
+        step("sidebarClient.isVisibleProfile", () -> {
             sidebarClient.isVisibleProfile();
-//        });
-//        actionsBlockClient.clickDropdownProfileABLocator();
+        });
+        step(" sidebarClient.isVisibleSupportServiceHeadline", () -> {
+            sidebarClient.isVisibleSupportServiceHeadline();
+        });
+        step("sidebarClient.isVisibleSupportServicePhone", () -> {
+            sidebarClient.isVisibleSupportServicePhone();
+        });
+        step(" sidebarClient.isVisibleSupportServiceEmail", () -> {
+            sidebarClient.isVisibleSupportServiceEmail();
+        });
+       /* step("clickDropdownProfileABLocator", () -> {
+            actionsBlockClient.clickDropdownProfileABLocator();
+        });*/
+
+
+
+
 
 
     }
@@ -91,15 +101,43 @@ public class StageTest extends TestBase {
 
     }
 
+    @DisplayName("clientProfilePageLocatorsIntegrityTest")
+    @Test
+    void clientProfilePageLocatorsIntegrityTest(){
+        step("verifyProfileClientName", () -> {
+            clientProfilePage.verifyProfileClientName(clientName);
+        });
+        step("isVisibleLastOrderHeadline", () -> {
+            clientProfilePage.isVisibleLastOrderHeadline();
+        });
+    }
+
     @DisplayName("equipmentClientPageLocatorsIntegrityTest")
     @Test
     void equipmentClientPageLocatorsIntegrity() {
-        clientProfilePage.isOpened();
+        clientProfilePage.isVisibleLastOrderHeadline();
         equipmentPage.open();
+        equipmentPage.createNewObject();
+
+
+
+
+
+
 //        actionsBlockClient.clickDropdownProfileABLocator();
 
 
     }
+    @DisplayName("objectClientPageLocatorsIntegrityTest")
+    @Test
+    void objectClientPageLocatorsIntegrity() {
+
+        clientProfilePage.goto1thObjectActionButtonLocator();
+
+
+    }
+
+
 
 
 }

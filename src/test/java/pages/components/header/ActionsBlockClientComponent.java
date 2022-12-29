@@ -84,7 +84,6 @@ public class ActionsBlockClientComponent {
     }
     public ActionsBlockClientComponent logout() {
         dropdownProfileABLocator.click();
-//        Configuration.timeout = 1000;
         linkLogoutABLocator.click();
         return this;
     }

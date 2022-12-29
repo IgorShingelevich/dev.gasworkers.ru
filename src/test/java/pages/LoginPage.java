@@ -1,5 +1,6 @@
 package pages;
 
+import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
@@ -36,6 +37,7 @@ public void open() {
         passwordFieldLocator.click();
         passwordFieldLocator.setValue(passwordClient);
         loginButtonLocator.click();
+
     }
 
 }

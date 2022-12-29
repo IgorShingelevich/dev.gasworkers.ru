@@ -1,5 +1,6 @@
 package pages.profile.client;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
@@ -322,12 +323,19 @@ public class ClientProfilePage {
     private final String LAST_ORDER_INFO_TITLE = "Информация о последнем заказе";
 
     SelenideElement
-            profileClientNameLocator = $(".profile-card").$(".title"),
+            profileClientNameLocator = $(".profile-card .title"),
             profileClientSinceDateLocator = $(".profile-card").$(".since-date"),
             profileClientRatingLocator = $(".profile-card").$(".rating-badge"),
             profileClientReviewsLocator = $(".profile-card").$(".reviews"),
             profileClientImageLocator = $(".profile-card").$(".profile-image"),
             lastOrderInfoTitleLocator = $x("//h3"); //$(".title d-flex justify-content-between align-items-center")
+
+            ElementsCollection gotoObjectActionButtonLocator = $$(".actions .actions__slot--link");
+            ElementsCollection ActionButtonLocator = $$(".actions .actions__btn");
+
+
+
+
 
 
     
@@ -340,12 +348,18 @@ public class ClientProfilePage {
 
 
 
-    public ClientProfilePage verifyProfileClientName(String ClientName) {
-        profileClientNameLocator.shouldHave(text(ClientName)).shouldBe(visible);
+    public ClientProfilePage verifyProfileClientName(String clientName) {
+        profileClientNameLocator.shouldHave(text(clientName)).shouldBe(visible);
         return this;
     }
-    public ClientProfilePage isOpened() {
+    public ClientProfilePage isVisibleLastOrderHeadline() {
         lastOrderInfoTitleLocator.shouldHave(text(LAST_ORDER_INFO_TITLE)).shouldBe(visible);
+        return this;
+    }
+
+    public ClientProfilePage goto1thObjectActionButtonLocator() {
+        ActionButtonLocator.get(3).click();
+        gotoObjectActionButtonLocator.get(3).click();
         return this;
     }
 
