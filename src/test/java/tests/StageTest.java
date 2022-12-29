@@ -31,6 +31,7 @@ public class StageTest extends TestBase {
 
     void clientLogOut() {
         actionsBlockClient.logout();
+
     }
 
     String emailClient = "shingelevich@gmail.com",

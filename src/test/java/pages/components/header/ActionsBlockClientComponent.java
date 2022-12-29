@@ -37,6 +37,10 @@ public class ActionsBlockClientComponent {
         //$x("//button[@class='profile-menu__link'][contains(.,'Выйти')]");
     //$x("//div[@class='actions-block']
         // div[@class='profile-menu__link'] //button");
+
+    SelenideElement mainPageHeaderLocator = $(".primary-header");
+
+
     public ActionsBlockClientComponent visibilityActionsBlock() {
         actionsBlock.shouldBe(visible);
         return this;
@@ -87,6 +91,8 @@ public class ActionsBlockClientComponent {
         dropdownProfileABLocator.click();
         linkLogoutABLocator.shouldBe(visible);
         linkLogoutABLocator.click();
+        mainPageHeaderLocator.shouldBe(visible);
+
         return this;
     }
     public   ActionsBlockClientComponent visibilityAllElements(String clientName) {
