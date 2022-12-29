@@ -5,6 +5,7 @@ import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import pages.profile.client.ClientProfilePage;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -17,6 +18,10 @@ public class LoginPage {
      *       </a></div> <div class="form-section center" data-v-e4e033d2=""><button class="btn btn-primary disable-outline" data-v-6d08f792="" data-v-e4e033d2="">
      *   Далее
      * </button></div></div>*/
+
+
+    ClientProfilePage clientProfilePage = new ClientProfilePage();
+
 
     private final String LOGIN_PAGE_TITLE_TEXT = "Войдите в личный кабинет";
 
@@ -50,8 +55,10 @@ public void open() {
         passwordFieldLocator.click();
         passwordFieldLocator.setValue(passwordClient);
 
-        loginButtonLocator.shouldBe(interactable);
+        loginButtonLocator.shouldNotBe(disabled);
         loginButtonLocator.click();
+        clientProfilePage.isVisibleLastOrderHeadline();
+
 
     }
 

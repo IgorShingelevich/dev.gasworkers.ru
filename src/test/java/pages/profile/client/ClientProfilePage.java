@@ -338,12 +338,22 @@ public class ClientProfilePage {
 
 
 
-    
 
 
 
 
 
+
+    //  open("/profile/client");
+    public ClientProfilePage openPage() {
+        open("/profile/client");
+        profileClientNameLocator.shouldBe(visible);
+
+
+
+
+        return this;
+    }
 
 
 

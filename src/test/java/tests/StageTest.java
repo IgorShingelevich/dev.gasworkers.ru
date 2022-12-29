@@ -114,8 +114,8 @@ public class StageTest extends TestBase {
     @DisplayName("equipmentClientPageLocatorsIntegrityTest")
     @Test
     void equipmentClientPageLocatorsIntegrity() {
-        clientProfilePage.isVisibleLastOrderHeadline();
-        equipmentPage.open();
+//        clientProfilePage.isVisibleLastOrderHeadline();
+        equipmentPage.openPage();
         equipmentPage.createNewObject();
 
 

@@ -4,11 +4,12 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.SidebarClientComponent;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class EquipmentPage {
+    // exemplar of pages.profile.client.ClientProfilePage
+    ClientProfilePage clientProfilePage = new ClientProfilePage();
 
 
     /**<div class="page-content" data-v-35550176=""> <button class="mb-4 btn btn-primary disable-outline" data-v-6d08f792="" data-v-ef75ca32="" data-v-35550176="">
@@ -142,8 +143,9 @@ public class EquipmentPage {
 
 
 
-    public void open() {
-      //  open("profile/client");
+    public void openPage() {
+        clientProfilePage.openPage();
+        clientProfilePage.isVisibleLastOrderHeadline();
         Selenide.open("/equipment");
     }
 
@@ -152,7 +154,9 @@ public class EquipmentPage {
     }
 
     public void createNewObject() {
-        createNewObjectButtonLocator.click();
+        createNewObjectButtonLocator.shouldBe(visible);
+        createNewObjectButtonLocator.shouldNotBe(disabled).click();
+//        createNewObjectButtonLocator.click();
     }
 
 
