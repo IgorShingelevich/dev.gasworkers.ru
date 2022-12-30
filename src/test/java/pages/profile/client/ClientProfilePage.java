@@ -1,6 +1,7 @@
 package pages.profile.client;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
@@ -345,8 +346,8 @@ public class ClientProfilePage {
 
 
     //  open("/profile/client");
-    public ClientProfilePage openPage() {
-        open("/profile/client");
+    public ClientProfilePage open() {
+        Selenide.open("/profile/client");
         profileClientNameLocator.shouldBe(visible);
 
 

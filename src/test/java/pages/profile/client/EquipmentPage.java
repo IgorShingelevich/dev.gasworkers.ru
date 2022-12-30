@@ -132,10 +132,14 @@ public class EquipmentPage {
     private final String EQUIPMENT_PAGE_TITLE_TEXT = "Объекты и оборудование";
 
     SelenideElement equipmentPageTitleLocator = $(".page-title"),
-                    createNewObjectButtonLocator = $x("//button[@class='mb-4 btn btn-primary disable-outline'][contains(.,'Создать объект')]"),
+
+    createNewObjectButtonLocator = $x("//button[@class='mb-4 btn btn-primary disable-outline'][contains(.,'Создать объект')]"),
+                            //$(".button"),
+                            //$x("//button[@class='mb-4 btn btn-primary disable-outline'][contains(.,'Создать объект')]"),
                             //$(".mb-4 btn btn-primary disable-outline"),
-                    object1thCollectionLocator = $$(".objects .object").get(0),
-                    object$$ActionsDropdownCollectionLocator = $(".actions");
+      object1thCollectionLocator = $$(".objects .object").get(0),
+     object$$ActionsDropdownCollectionLocator = $(".actions"),
+      pickGasDistributorDropdownLocator = $(".gas-select .gas-select__header");
 
 
 
@@ -143,20 +147,22 @@ public class EquipmentPage {
 
 
 
-    public void openPage() {
-        clientProfilePage.openPage();
-        clientProfilePage.isVisibleLastOrderHeadline();
+    public EquipmentPage open() {
+
         Selenide.open("/equipment");
+        checkEquipmentPageTitle();
+
+        return this;
     }
 
     public void checkEquipmentPageTitle() {
         equipmentPageTitleLocator.shouldHave(text(EQUIPMENT_PAGE_TITLE_TEXT));
     }
 
-    public void createNewObject() {
-        createNewObjectButtonLocator.shouldBe(visible);
-        createNewObjectButtonLocator.shouldNotBe(disabled).click();
-//        createNewObjectButtonLocator.click();
+    public void clickCreateNewObject() {
+//        createNewObjectButtonLocator.shouldHave(text("Создать объект")).shouldNotBe(disabled).click();
+        createNewObjectButtonLocator.shouldHave(text("Создать объект")).shouldNotBe(disabled).click();
+        pickGasDistributorDropdownLocator.shouldBe(visible);
     }
 
 

@@ -46,14 +46,17 @@ public void open() {
     }
 
     public void login(String emailClient, String passwordClient) {
-        loginPageTitleLocator.shouldHave(text(LOGIN_PAGE_TITLE_TEXT));
+        loginPageTitleLocator.shouldHave(text(LOGIN_PAGE_TITLE_TEXT)).shouldBe(visible);
         emailFieldLocator.shouldBe(interactable);
+        emailFieldLocator.shouldBe(visible);
         emailFieldLocator.click();
         emailFieldLocator.setValue(emailClient);
+        emailFieldLocator.pressEnter();
         passwordFieldLocator.shouldBe(interactable);
         passwordFieldLocator.shouldBe(editable);
         passwordFieldLocator.click();
         passwordFieldLocator.setValue(passwordClient);
+        passwordFieldLocator.pressEnter();
 
         loginButtonLocator.shouldNotBe(disabled);
         loginButtonLocator.click();

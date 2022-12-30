@@ -1,6 +1,5 @@
 package pages.components.header;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.*;
@@ -22,15 +21,19 @@ public class ActionsBlockClientComponent {
 
     public SelenideElement linkMessagesABLocator = $x("//div[@class='messages icon']"); // $(".messages icon");
 
-    public SelenideElement dropdownProfileABLocator = $(".actions-block .arrow-down");
+    public SelenideElement dropdownABLocator = $(".actions-block .arrow-down");
+    public SelenideElement dropdown2ABLocator = $(".profile icon");
 
-    public SelenideElement profileNameABLocator = $x("//div[contains(@class, 'text-primary')]"); // $(".profile-menu__link text-primary");
+    public SelenideElement profileNameABLocator = $(".profile-menu .profile-menu__link text-primary");
+        //$x("//div[contains(@class, 'text-primary')]"); // $(".profile-menu__link text-primary");
 
     public SelenideElement linkProfileEditABLocator = $x("//a[@href='/profile/edit']"); //
 
     public SelenideElement linkReviewABLocator = $x("//a[@href='/profile/reviews']");
 
     public SelenideElement linkLogoutABLocator = $$("button.profile-menu__link").findBy(text("Выйти"));
+            // $(".profile-wrap active .back-ic");
+            //$$("button.profile-menu__link").findBy(text("Выйти"));
     //$x("//button[contains(text(), 'Выйти')]");
     // $$x(("//button[contains(text(),'Выйти')]")).get(0);
     //
@@ -41,70 +44,82 @@ public class ActionsBlockClientComponent {
     SelenideElement mainPageHeaderLocator = $(".primary-header");
 
 
-    public ActionsBlockClientComponent visibilityActionsBlock() {
+    public ActionsBlockClientComponent isVisible() {
         actionsBlock.shouldBe(visible);
         return this;
     }
 
-    public ActionsBlockClientComponent visibilityLinkNotificationsABLocator() {
+    public ActionsBlockClientComponent isVisibleNotificationsButton() {
         linkNotificationsABLocator.shouldBe(visible);
         return this;
     }
 
-    public ActionsBlockClientComponent visibilityLinkMessagesABLocator() {
+    public ActionsBlockClientComponent isVisibleMessagesButton() {
         linkMessagesABLocator.shouldBe(visible);
         return this;
     }
 
-    public ActionsBlockClientComponent visibilityDropdownProfileABLocator() {
-        dropdownProfileABLocator.shouldBe(visible);
+    public ActionsBlockClientComponent isVisibleDropdown() {
+        dropdownABLocator.shouldBe(visible);
         return this;
     }
 
-    public ActionsBlockClientComponent clickDropdownProfileABLocator() {
-        dropdownProfileABLocator.shouldBe(interactable);
-        dropdownProfileABLocator.click();
+    public ActionsBlockClientComponent clickDropdown() {
+        dropdownABLocator.shouldBe(interactable);
+        dropdownABLocator.click();
         return this;
     }
 
-    public ActionsBlockClientComponent visibilityProfileNameABLocator(String clientName) {
+    public ActionsBlockClientComponent clickDropdown2() {
+        dropdown2ABLocator.shouldBe(interactable);
+        dropdown2ABLocator.click();
+        return this;
+    }
+
+    /*public ActionsBlockClientComponent isVisibleProfileName(String clientName) {
         profileNameABLocator.shouldHave(text(clientName)).shouldBe(visible);
         return this;
-    }
-
-    public ActionsBlockClientComponent visibilityLinkProfileEditABLocator() {
-        linkProfileEditABLocator.shouldBe(visible);
+    } */
+    public ActionsBlockClientComponent isVisibleProfileName() {
+        profileNameABLocator.shouldHave().shouldBe(hidden);
         return this;
     }
 
-    public ActionsBlockClientComponent visibilityLinkReviewABLocator() {
-        linkReviewABLocator.shouldBe(visible);
+    public ActionsBlockClientComponent isVisibleProfileButton() {
+        linkProfileEditABLocator.shouldBe(hidden);
         return this;
     }
 
-    public ActionsBlockClientComponent visibilityLinkLogoutABLocator() {
-        linkLogoutABLocator.shouldBe(visible);
+    public ActionsBlockClientComponent isVisibleReviewButton() {
+        linkReviewABLocator.shouldBe(hidden);
+        return this;
+    }
+
+    public ActionsBlockClientComponent isVisibleLogoutButton() {
+        linkLogoutABLocator.shouldBe(hidden);
         return this;
     }
     public ActionsBlockClientComponent logout() {
-        dropdownProfileABLocator.shouldBe(interactable);
-        dropdownProfileABLocator.click();
-        linkLogoutABLocator.shouldBe(visible);
+        dropdownABLocator.shouldBe(interactable);
+        dropdownABLocator.shouldBe(exist);
+        dropdownABLocator.click();
+        linkLogoutABLocator.shouldBe(interactable);
+        linkLogoutABLocator.shouldBe(exist);
         linkLogoutABLocator.click();
         mainPageHeaderLocator.shouldBe(visible);
 
         return this;
     }
     public   ActionsBlockClientComponent visibilityAllElements(String clientName) {
-        visibilityActionsBlock();
-        visibilityLinkNotificationsABLocator();
-        visibilityLinkMessagesABLocator();
-        visibilityDropdownProfileABLocator();
-        clickDropdownProfileABLocator();
-        visibilityProfileNameABLocator(clientName);
-        visibilityLinkProfileEditABLocator();
-        visibilityLinkReviewABLocator();
-        visibilityLinkLogoutABLocator();
+        isVisible();
+        isVisibleNotificationsButton();
+        isVisibleMessagesButton();
+        isVisibleDropdown();
+        clickDropdown();
+        isVisibleProfileName();
+        isVisibleProfileButton();
+        isVisibleReviewButton();
+        isVisibleLogoutButton();
         return this;
     }
 

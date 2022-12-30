@@ -1,10 +1,14 @@
 package tests;
 
 import org.junit.jupiter.api.*;
+import pages.LandingPage;
 import pages.components.SidebarClientComponent;
 import pages.profile.client.ClientProfilePage;
-import pages.profile.client.EquipmentPage;
 
+
+import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.switchTo;
 import static io.qameta.allure.Allure.step;
 
 public class StageTest extends TestBase {
@@ -16,22 +20,23 @@ public class StageTest extends TestBase {
 
     pages.components.header.ActionsBlockClientComponent actionsBlockClient = new pages.components.header.ActionsBlockClientComponent();
 
-    EquipmentPage equipmentPage = new EquipmentPage();
+//    EquipmentPage equipmentPage = new EquipmentPage();
+    pages.profile.client.EquipmentPage equipmentPage = new pages.profile.client.EquipmentPage();
 
+    LandingPage landingPage = new LandingPage();
 
 
     @BeforeEach
     void clientLogin() {
+        open("/login");
         loginPage.open();
         loginPage.login(emailClient, passwordClient);
     }
 
 
     @AfterEach
-
     void clientLogOut() {
         actionsBlockClient.logout();
-
     }
 
     String emailClient = "shingelevich@gmail.com",
@@ -71,13 +76,6 @@ public class StageTest extends TestBase {
         step(" sidebarClient.isVisibleSupportServiceEmail", () -> {
             sidebarClient.isVisibleSupportServiceEmail();
         });
-       /* step("clickDropdownProfileABLocator", () -> {
-            actionsBlockClient.clickDropdownProfileABLocator();
-        });*/
-
-
-
-
 
 
     }
@@ -87,16 +85,35 @@ public class StageTest extends TestBase {
 //    @Disabled
     @Test
      void actionsBlockClientComponentLocatorsIntegrity() {
-        actionsBlockClient.visibilityActionsBlock();
-        actionsBlockClient.visibilityLinkNotificationsABLocator();
-        actionsBlockClient.visibilityLinkMessagesABLocator();
-        actionsBlockClient.visibilityDropdownProfileABLocator();
-        actionsBlockClient.clickDropdownProfileABLocator();
-        actionsBlockClient.visibilityProfileNameABLocator(clientName);
-        actionsBlockClient.visibilityLinkProfileEditABLocator();
-        actionsBlockClient.visibilityLinkReviewABLocator();
-        actionsBlockClient.visibilityLinkLogoutABLocator();
-        actionsBlockClient.clickDropdownProfileABLocator();
+        step("actionsBlockClient.isVisible", () -> {
+            actionsBlockClient.isVisible();
+        });
+        step("actionsBlockClient.isVisibleNotificationsButton", () -> {
+            actionsBlockClient.isVisibleNotificationsButton();
+        });
+        step("actionsBlockClient.isVisibleMessagesButton", () -> {
+            actionsBlockClient.isVisibleMessagesButton();
+        });
+        step("actionsBlockClient.isVisibleDropdown", () -> {
+            actionsBlockClient.isVisibleDropdown();
+        });
+       /* step("actionsBlockClient.clickDropdown2", () -> {
+            actionsBlockClient.clickDropdown2();
+        });*/
+        step("actionsBlockClient.isVisibleProfileName", () -> {
+            actionsBlockClient.isVisibleProfileName();
+        });
+        step("actionsBlockClient.isVisibleProfileButton", () -> {
+            actionsBlockClient.isVisibleProfileButton();
+        });
+        step("actionsBlockClient.isVisibleReviewButton", () -> {
+            actionsBlockClient.isVisibleReviewButton();
+        });
+
+        step("actionsBlockClient.isVisibleLogoutButton", () -> {
+            actionsBlockClient.isVisibleLogoutButton();
+        });
+
 
 
     }
@@ -115,32 +132,83 @@ public class StageTest extends TestBase {
     @DisplayName("equipmentClientPageLocatorsIntegrityTest")
     @Test
     void equipmentClientPageLocatorsIntegrity() {
-//        clientProfilePage.isVisibleLastOrderHeadline();
-        equipmentPage.openPage();
-        equipmentPage.createNewObject();
-
-
-
-
-
-
-//        actionsBlockClient.clickDropdownProfileABLocator();
+        clientProfilePage.isVisibleLastOrderHeadline();
+        equipmentPage.open();
+        landingPage.open();
+        back();
+        equipmentPage.checkEquipmentPageTitle();
+        equipmentPage.clickCreateNewObject();
+        back();
 
 
     }
+
     @DisplayName("objectClientPageLocatorsIntegrityTest")
     @Test
     void objectClientPageLocatorsIntegrity() {
-
         clientProfilePage.goto1thObjectActionButtonLocator();
 
+    }
+
+
+
+    @DisplayName("landingPageLocatorsIntegrityTest")
+    @Test
+    void landingPageLocatorsIntegrityTest () {
+        step("openLandingPage", () -> {
+            landingPage.open();
+        });
+
+
+
+        step("visibilityPrimaryHeaderLocator", () -> {
+            landingPage.visibilityPrimaryHeaderLocator();
+        });
+        step("clickRepairButton", () -> {
+            landingPage.clickRepairButton();
+            back();
+        });
+        step("clickMaintenanceButton", () -> {
+            landingPage.clickMaintenanceButton();
+            back();
+        });
+    }
+
+
+
+     @DisplayName("switchToNewTab")
+    @Test
+    void openClientTwoTabs() {
+
+        executeJavaScript("window.open('https://dev.gasworkers.ru/','_blank');");
+        switchTo().window(1);
+        open("https://dev.gasworkers.ru/profile/edit");
+        switchTo().window(0);
 
     }
+
+
+
+
+
+
+
 
 
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

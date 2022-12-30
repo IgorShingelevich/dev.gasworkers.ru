@@ -10,12 +10,15 @@ public class TestBase {
     static void setup() {
         Configuration.baseUrl = "https://dev.gasworkers.ru";
         Configuration.browserSize = "1920x1080";
-        Configuration.headless = true;
+        Configuration.headless = false;
     }
 
     @AfterAll
     static void tearDown() {
-//        Configuration.holdBrowserOpen = false;
+//        Configuration.holdBrowserOpen = true;
+        ////set timeout for closing browser 3 sec
+        Configuration.timeout = 3000;
+
     }
 
 
