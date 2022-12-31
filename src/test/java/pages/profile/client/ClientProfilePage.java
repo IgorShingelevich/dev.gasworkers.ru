@@ -363,7 +363,7 @@ public class ClientProfilePage {
         profileClientNameLocator.shouldHave(text(clientName)).shouldBe(visible);
         return this;
     }
-    public ClientProfilePage isVisibleLastOrderHeadline() {
+    public ClientProfilePage isOpened() {
         lastOrderInfoTitleLocator.shouldHave(text(LAST_ORDER_INFO_TITLE)).shouldBe(visible);
         return this;
     }

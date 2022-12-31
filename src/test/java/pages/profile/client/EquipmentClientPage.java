@@ -7,7 +7,7 @@ import pages.components.SidebarClientComponent;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
-public class EquipmentPage {
+public class EquipmentClientPage {
     // exemplar of pages.profile.client.ClientProfilePage
     ClientProfilePage clientProfilePage = new ClientProfilePage();
 
@@ -147,7 +147,7 @@ public class EquipmentPage {
 
 
 
-    public EquipmentPage open() {
+    public EquipmentClientPage open() {
 
         Selenide.open("/equipment");
         checkEquipmentPageTitle();

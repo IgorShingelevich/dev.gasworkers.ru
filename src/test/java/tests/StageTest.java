@@ -3,7 +3,10 @@ package tests;
 import org.junit.jupiter.api.*;
 import pages.LandingPage;
 import pages.components.SidebarClientComponent;
-import pages.profile.client.ClientProfilePage;
+import pages.profile.client.*;
+import pages.profile.client.infoServices.InfoMaintenancePage;
+import pages.profile.client.infoServices.InfoRepairPage;
+import pages.profile.client.infoServices.InfoVideoPage;
 
 
 import static com.codeborne.selenide.Selenide.*;
@@ -15,15 +18,22 @@ public class StageTest extends TestBase {
 
     SidebarClientComponent sidebarClient = new SidebarClientComponent();
     pages.LoginPage loginPage = new pages.LoginPage();
+    TypeOrders typeOrders = new TypeOrders();
+    InfoRepairPage infoRepairPage = new InfoRepairPage();
+    InfoMaintenancePage infoMaintenancePage = new InfoMaintenancePage();
+    InfoVideoPage infoVideoPage = new InfoVideoPage();
 
     ClientProfilePage clientProfilePage = new ClientProfilePage();
 
     pages.components.header.ActionsBlockClientComponent actionsBlockClient = new pages.components.header.ActionsBlockClientComponent();
 
-//    EquipmentPage equipmentPage = new EquipmentPage();
-    pages.profile.client.EquipmentPage equipmentPage = new pages.profile.client.EquipmentPage();
+//    EquipmentClientPage equipmentClientPage = new EquipmentClientPage();
+    EquipmentClientPage equipmentClientPage = new EquipmentClientPage();
 
     LandingPage landingPage = new LandingPage();
+
+    SelectMaintenanceObjectPage selectMaintenanceObjectPage = new SelectMaintenanceObjectPage();
+    SelectDateClientPage selectDateClientPage = new SelectDateClientPage();
 
 
     @BeforeEach
@@ -125,19 +135,19 @@ public class StageTest extends TestBase {
             clientProfilePage.verifyProfileClientName(clientName);
         });
         step("isVisibleLastOrderHeadline", () -> {
-            clientProfilePage.isVisibleLastOrderHeadline();
+            clientProfilePage.isOpened();
         });
     }
 
     @DisplayName("equipmentClientPageLocatorsIntegrityTest")
     @Test
     void equipmentClientPageLocatorsIntegrity() {
-        clientProfilePage.isVisibleLastOrderHeadline();
-        equipmentPage.open();
+        clientProfilePage.isOpened();
+        equipmentClientPage.open();
         landingPage.open();
         back();
-        equipmentPage.checkEquipmentPageTitle();
-        equipmentPage.clickCreateNewObject();
+        equipmentClientPage.checkEquipmentPageTitle();
+        equipmentClientPage.clickCreateNewObject();
         back();
 
 
@@ -155,23 +165,17 @@ public class StageTest extends TestBase {
     @DisplayName("landingPageLocatorsIntegrityTest")
     @Test
     void landingPageLocatorsIntegrityTest () {
-        step("openLandingPage", () -> {
             landingPage.open();
-        });
+            landingPage.isOpened();
+            landingPage.clickUserMaintenanceButton();
+            infoMaintenancePage.isOpened();
+            infoMaintenancePage.clickMaintenanceButton();
+            selectMaintenanceObjectPage.isOpened();
+            selectMaintenanceObjectPage.clickObject1thButton();
+            selectDateClientPage.isOpened();
+            landingPage.open();
+            landingPage.clickUserRepairButton();
 
-
-
-        step("visibilityPrimaryHeaderLocator", () -> {
-            landingPage.visibilityPrimaryHeaderLocator();
-        });
-        step("clickRepairButton", () -> {
-            landingPage.clickRepairButton();
-            back();
-        });
-        step("clickMaintenanceButton", () -> {
-            landingPage.clickMaintenanceButton();
-            back();
-        });
     }
 
 

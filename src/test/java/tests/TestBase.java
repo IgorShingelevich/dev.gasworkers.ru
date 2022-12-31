@@ -15,9 +15,8 @@ public class TestBase {
 
     @AfterAll
     static void tearDown() {
-//        Configuration.holdBrowserOpen = true;
-        ////set timeout for closing browser 3 sec
-        Configuration.timeout = 3000;
+        Configuration.holdBrowserOpen = true;
+//        Configuration.timeout = 6000;
 
     }
 
