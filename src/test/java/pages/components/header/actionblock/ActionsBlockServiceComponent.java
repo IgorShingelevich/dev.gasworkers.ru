@@ -1,4 +1,4 @@
-package pages.components.header;
+package pages.components.header.actionblock;
 
 public class ActionsBlockServiceComponent {
 }

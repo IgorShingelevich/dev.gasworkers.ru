@@ -1,4 +1,4 @@
-package pages.components.header;
+package pages.components.header.actionblock;
 
 import com.codeborne.selenide.SelenideElement;
 
@@ -100,11 +100,11 @@ public class ActionsBlockClientComponent {
         return this;
     }
     public ActionsBlockClientComponent logout() {
-        dropdownABLocator.shouldBe(interactable);
         dropdownABLocator.shouldBe(exist);
+        dropdownABLocator.shouldBe(interactable);
         dropdownABLocator.click();
-        linkLogoutABLocator.shouldBe(interactable);
         linkLogoutABLocator.shouldBe(exist);
+        linkLogoutABLocator.shouldBe(interactable);
         linkLogoutABLocator.click();
         mainPageHeaderLocator.shouldBe(visible);
 

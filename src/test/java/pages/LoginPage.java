@@ -24,18 +24,19 @@ public class LoginPage {
     private final String LOGIN_PAGE_TITLE_TEXT = "Войдите в личный кабинет";
 
     /*<h3 data-v-3e43ab48="">Войдите в личный кабинет</h3>*/
-    SelenideElement loginPageTitleLocator = $(".login-form>.title>h3");
+    SelenideElement
+        loginPageTitleLocator = $(".login-form>.title>h3"),
 
 
 /*<input data-v-9be155e4="" id="94" placeholder="E-mail" type="text">*/
-    SelenideElement emailFieldLocator = $(".gas-input input[placeholder=E-mail]");
+     emailFieldLocator = $(".gas-input input[placeholder=E-mail]"),
         //$(By.xpath("//div[@class='login-form'] //input[@placeholder='E-mail']"));
     /*<input data-v-9be155e4="" id="95" placeholder="Пароль" type="password">*/
-    SelenideElement passwordFieldLocator = $(By.xpath("//div[@class='login-form'] //input[@placeholder='Пароль']"));
+     passwordFieldLocator = $(By.xpath("//div[@class='login-form'] //input[@placeholder='Пароль']")),
     /*<button data-v-6d08f792="" data-v-3e43ab48="" class="btn btn-primary disable-outline">
   Далее
 </button>*/
-    SelenideElement loginButtonLocator = $(By.xpath("//button[@class='btn btn-primary disable-outline']"));
+     loginButtonLocator = $(By.xpath("//button[@class='btn btn-primary disable-outline']"));
         //$(".form-section center .btn btn-primary disable-outline"); // this is wrong
         //$(By.xpath("//div[@class='login-form'] //button[@class='btn btn-primary disable-outline']")); // Other element would receive the click: <div class="form-section center"
 
@@ -48,7 +49,9 @@ public void open() {
         emailFieldLocator.shouldBe(interactable);
         emailFieldLocator.shouldBe(visible);
         emailFieldLocator.click();
-        emailFieldLocator.setValue(emailClient);
+        emailFieldLocator.clear();
+        emailFieldLocator.sendKeys(emailClient);
+//        emailFieldLocator.setValue(emailClient);
         emailFieldLocator.pressEnter();
         passwordFieldLocator.shouldBe(interactable);
         passwordFieldLocator.shouldBe(editable);

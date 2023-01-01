@@ -20,7 +20,8 @@ public class LandingPage {
     //$(".main-block__btns .btn btn-primary disable-outline"),
     mainBlockTitleLocator = $(".main-block__title"),
     signInButtonLocator = $(".primary-header .link"),
-    userProfileButtonLocator = $(".primary-header .link"),
+    userProfileButtonLocator = $(".primary-header .primary-header--nav"),
+    //$(".primary-header .link"),
     signUpDropdownLocator = $(".dropdown-title .arrow-down");
 
 

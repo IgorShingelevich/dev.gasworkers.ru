@@ -15,10 +15,11 @@ public class TestBase {
 
     @AfterAll
     static void tearDown() {
-        Configuration.holdBrowserOpen = true;
+//        Configuration.holdBrowserOpen = true;
 //        Configuration.timeout = 6000;
 
     }
+
 
 
 

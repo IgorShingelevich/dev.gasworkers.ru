@@ -1,4 +1,4 @@
-package tests.locators;
+package tests.locatorsTest;
 
 import pages.components.SidebarClientComponent;
 import pages.profile.client.ClientProfilePage;

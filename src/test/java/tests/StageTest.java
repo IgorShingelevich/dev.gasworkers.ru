@@ -3,6 +3,9 @@ package tests;
 import org.junit.jupiter.api.*;
 import pages.LandingPage;
 import pages.components.SidebarClientComponent;
+import pages.components.header.FocusHeaderComponent;
+import pages.components.header.ProfileHeaderComponent;
+import pages.components.header.actionblock.ActionsBlockClientComponent;
 import pages.profile.client.*;
 import pages.profile.client.infoServices.InfoMaintenancePage;
 import pages.profile.client.infoServices.InfoRepairPage;
@@ -25,7 +28,7 @@ public class StageTest extends TestBase {
 
     ClientProfilePage clientProfilePage = new ClientProfilePage();
 
-    pages.components.header.ActionsBlockClientComponent actionsBlockClient = new pages.components.header.ActionsBlockClientComponent();
+    ActionsBlockClientComponent actionsBlockClient = new ActionsBlockClientComponent();
 
 //    EquipmentClientPage equipmentClientPage = new EquipmentClientPage();
     EquipmentClientPage equipmentClientPage = new EquipmentClientPage();
@@ -34,6 +37,8 @@ public class StageTest extends TestBase {
 
     SelectMaintenanceObjectPage selectMaintenanceObjectPage = new SelectMaintenanceObjectPage();
     SelectDateClientPage selectDateClientPage = new SelectDateClientPage();
+    FocusHeaderComponent focusHeaderComponent = new FocusHeaderComponent();
+    ProfileHeaderComponent profileHeaderComponent = new ProfileHeaderComponent();
 
 
     @BeforeEach
@@ -156,6 +161,7 @@ public class StageTest extends TestBase {
     @DisplayName("objectClientPageLocatorsIntegrityTest")
     @Test
     void objectClientPageLocatorsIntegrity() {
+        clientProfilePage.isOpened();
         clientProfilePage.goto1thObjectActionButtonLocator();
 
     }
@@ -173,8 +179,9 @@ public class StageTest extends TestBase {
             selectMaintenanceObjectPage.isOpened();
             selectMaintenanceObjectPage.clickObject1thButton();
             selectDateClientPage.isOpened();
-            landingPage.open();
-            landingPage.clickUserRepairButton();
+            focusHeaderComponent.clickLogo();
+            landingPage.isOpened();
+            landingPage.clickUserProfile();
 
     }
 
@@ -204,7 +211,10 @@ public class StageTest extends TestBase {
 }
 
 
-
+/**questions
+ * flex after html elements. How flex affects the Locators elements
+ *
+ * */
 
 
 
