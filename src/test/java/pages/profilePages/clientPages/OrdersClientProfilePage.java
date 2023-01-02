@@ -1,4 +1,4 @@
-package pages.profile.client;
+package pages.profilePages.clientPages;
 
 import pages.components.SidebarClientComponent;
 

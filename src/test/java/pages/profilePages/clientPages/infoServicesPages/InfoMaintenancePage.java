@@ -1,7 +1,6 @@
-package pages.profile.client.infoServices;
+package pages.profilePages.clientPages.infoServicesPages;
 
 import com.codeborne.selenide.SelenideElement;
-import pages.profile.client.TypeOrders;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;

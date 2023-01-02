@@ -6,10 +6,10 @@ import pages.components.SidebarClientComponent;
 import pages.components.header.FocusHeaderComponent;
 import pages.components.header.ProfileHeaderComponent;
 import pages.components.header.actionblock.ActionsBlockClientComponent;
-import pages.profile.client.*;
-import pages.profile.client.infoServices.InfoMaintenancePage;
-import pages.profile.client.infoServices.InfoRepairPage;
-import pages.profile.client.infoServices.InfoVideoPage;
+import pages.profilePages.clientPages.*;
+import pages.profilePages.clientPages.infoServicesPages.InfoMaintenancePage;
+import pages.profilePages.clientPages.infoServicesPages.InfoRepairPage;
+import pages.profilePages.clientPages.infoServicesPages.InfoVideoPage;
 
 
 import static com.codeborne.selenide.Selenide.*;

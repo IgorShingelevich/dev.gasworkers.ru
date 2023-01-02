@@ -1,4 +1,4 @@
-package pages.profile.selfEmployed;
+package pages.profilePages.selfEmployedPages;
 
 public class ProfileSelfEmployedMasterPage {
 

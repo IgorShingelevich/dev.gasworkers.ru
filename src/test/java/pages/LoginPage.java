@@ -3,7 +3,7 @@ package pages;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import pages.profile.client.ClientProfilePage;
+import pages.profilePages.clientPages.ClientProfilePage;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;

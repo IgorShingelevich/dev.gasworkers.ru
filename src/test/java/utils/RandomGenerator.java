@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomGenerator {
 
-       /* TestData testData = new TestData();
+        static TestData testData = new TestData();
 
         public static  void main (String[] args) {
 
@@ -61,7 +61,7 @@ public class RandomGenerator {
             return generatedString;
         }
 
-        public String randomString2(int len) {
+        public static String randomString2(int len) {
             final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
             SecureRandom rnd = new SecureRandom();
             StringBuilder sb = new StringBuilder(len);
@@ -70,9 +70,9 @@ public class RandomGenerator {
             return sb.toString() + "_some_text";
         }
 
-        public String generatedString = RandomStringUtils.random(20, true, true);
+        public static String generatedString = RandomStringUtils.random(20, true, true);
 
-        public Long randomLong(int lenArg) {
+        public static long randomLong(int lenArg) {
             final String AB = "0123456789";
             SecureRandom rnd = new SecureRandom();
             StringBuilder sb = new StringBuilder(lenArg);
@@ -81,11 +81,11 @@ public class RandomGenerator {
             return Long.parseLong(sb.toString());
         }
 
-        public  Long randomLongRange(Long minArg, Long maxArg) {
+        public static   Long randomLongRange(Long minArg, Long maxArg) {
             return ThreadLocalRandom.current().nextLong(minArg, maxArg + 1); // return (long) (Math.random() * (max - min + 1) + min);
         }
 
-        public  int randomIntRange (int min, int max) {
+        public static   int randomIntRange (int min, int max) {
             // return ThreadLocalRandom.current().nextInt(min, max + 1); // Java ThreadLocalRandom
             Random random = new Random(); //java.util.Random
             return random.nextInt(max - min + 1) + min;
@@ -97,59 +97,58 @@ public class RandomGenerator {
             return someArrayItems[randomIndex];
         }
 
-        *//* cause  the error: java.lang.ArrayIndexOutOfBoundsException
         public static String randomItemFromAllArrayOLD (String[] arrayNameArg) {
             int randomIndex = randomIntRange(0, arrayNameArg.length ); // error ArrayIndexOutOfBoundsException,  try to set - 1
             return arrayNameArg[randomIndex];
-        } *//*
+        }
         public static String randomItemFromAllArray (String[] arrayNameArg) {
             int randomIndex = (int) (Math.random() * (arrayNameArg.length )); // (int) (Math.random() * (arrayNameArg.length - 1));
             return arrayNameArg[randomIndex];
         }
 
-        public  String randomEmail(int len) {// to lower case
+        public static   String randomEmail(int len) {// to lower case
             return randomString2(len).toLowerCase() + "@some.com";
         }
 
-        String [] month  = testData.month;
+        static String [] month  = testData.month;
         String [] randomDomainArray = testData.randomDomainArray;
 
 
-        public  String actualTimeStampEmail(int len) {
+        public static   String actualTimeStampEmail(int len) {
             String generatedString = RandomStringUtils.randomAlphabetic(len).toLowerCase();
             return "test_mail_" + LocalDate.now() + "_" + LocalTime.now().format(DateTimeFormatter.ofPattern("HH_mm")) + generatedString + "@some.com";
         }
 
 
-        public  String randomPhone(String countryCode, int lenArg) {
-            return countryCode + randomLong(lenArg).toString();
+        public static   String randomPhone(String countryCode, int lenArg) {
+            return countryCode + randomLong(lenArg);
         }
 
 
-        public  String randomMonth() {
+        public static   String randomMonth() {
             int randomMonth = (int) (Math.random() * month.length);
             return month[randomMonth].toString();
         }
 
-        public  String randomDayOfWeek() {
+        public static String randomDayOfWeek() {
             String[] weekDay = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
             int randomDayOfWeek = (int) (Math.random() * weekDay.length);
             return weekDay[randomDayOfWeek].toString();
         }
 
-        public  String getActualDate() {
+        public static   String getActualDate() {
             LocalDate localDate = LocalDate.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMMM/yyyy");  // https://stackoverflow.com/questions/28177370/how-to-format-localdate-to-string
             return localDate.format(formatter);
         }
 
-        public  String getActualTime() {
+        public static String getActualTime() {
             LocalTime localTime = LocalTime.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH_mm"); //("HH:mm"), ("HH:mm:ss"), ("HH:mm:ss.SSS"), ("HH:mm:ss.SSSSSS"), ("HH:mm:ss.SSSSSSSSS")
             return localTime.format(formatter);
         }
 
-        public  String randomDob() {
+        public static   String randomDob() {
             LocalDate localDate = LocalDate.now(); // ("dd/MM/yyyy")
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMMM/yyyy").withLocale(Locale.ENGLISH);  //https://stackoverflow.com/questions/51843760/how-can-i-change-the-language-of-the-months-provided-by-localdate
             int randomYear = (int) (Math.random() * (localDate.getYear() - 1950 + 1) + 1950);
@@ -158,27 +157,27 @@ public class RandomGenerator {
             return LocalDate.of(randomYear, randomMonth, randomDay).format(formatter).toString();
         }
 
-        public  String randomDobDay() {
+        public static  String randomDobDay() {
             String[] dob = randomDob().split("/");
             return dob[0];
         }
-        public  String randomDobMonth() {
+        public static  String randomDobMonth() {
             String[] dob = randomDob().split("/");
             return dob[1];
         }
-        public  String randomDobYear() {
+        public static  String randomDobYear() {
             String[] dob = randomDob().split("/");
             return dob[2];
         }
 
 
-        public  String getActualDayOfWeekAndMonth() {
+        public static  String getActualDayOfWeekAndMonth() {
             LocalDate localDate = LocalDate.now();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE, d MMMM");
             return localDate.format(formatter);
         }
 
-        public  String randomDate85to23y() {
+        public static  String randomDate85to23y() {
             LocalDate localDate = LocalDate.of(Math.toIntExact((Long) randomLongRange(1985L, 2023L)), Math.toIntExact((Long) randomLongRange(1L, 12L)), Math.toIntExact((Long) randomLongRange(1L, 28L)));
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy");
             return localDate.format(formatter);
@@ -187,30 +186,30 @@ public class RandomGenerator {
 
 
 
-        public  String getFakerFirstName(){
+        public static  String getFakerFirstName(){
             Faker faker = new Faker(new Locale("ru"));
             return faker.name().firstName();
         }
 
-        public  String getFakerMiddleName(){
+        public static String getFakerMiddleName(){
             Faker faker = new Faker(new Locale("ru"));
             return faker.name().firstName();
         }
-        public  String getFakerLastName(){
+        public static  String getFakerLastName(){
             Faker faker = new Faker(new Locale("ru"));
             return faker.name().lastName();
         }
 
-        public Faker faker = new Faker(new Locale("ru"));
-        public String SNP = faker.name().fullName().toString();
+        public static Faker faker = new Faker(new Locale("ru"));
+        public static String SNP = faker.name().fullName().toString();
 
-        public List<String> SNPList = Arrays.asList(SNP.split(" "));
+        public static List<String> SNPList = Arrays.asList(SNP.split(" "));
 
-        public  String fakerRelativeSurname(){
+        public static String fakerRelativeSurname(){
             return SNPList.get(0);
         }
 
-        public  String fakerRelativeName() {
+        public  static String fakerRelativeName() {
             String name = SNPList.get(1);
             return name;
         }
@@ -220,7 +219,6 @@ public class RandomGenerator {
             return  patronymic.toString();
         }
 
-*/
 
 
 

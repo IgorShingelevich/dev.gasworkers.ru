@@ -1,7 +1,7 @@
 package tests.locatorsTest;
 
 import pages.components.SidebarClientComponent;
-import pages.profile.client.ClientProfilePage;
+import pages.profilePages.clientPages.ClientProfilePage;
 
 public class ProfileClientLocatorsTest {
     // new exemplar of pages.profile.client.ClientProfilePage Class
