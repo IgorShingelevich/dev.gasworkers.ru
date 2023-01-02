@@ -2,14 +2,14 @@ package pages.profilePages.clientPages;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import pages.components.SidebarClientComponent;
+import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
 public class EquipmentClientPage {
-    // exemplar of pages.profile.client.ClientProfilePage
-    ClientProfilePage clientProfilePage = new ClientProfilePage();
+    // exemplar of pages.profile.client.ProfileClientPage
+    ProfileClientPage profileClientPage = new ProfileClientPage();
 
 
     /**<div class="page-content" data-v-35550176=""> <button class="mb-4 btn btn-primary disable-outline" data-v-6d08f792="" data-v-ef75ca32="" data-v-35550176="">

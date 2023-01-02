@@ -2,10 +2,10 @@ package tests;
 
 import org.junit.jupiter.api.*;
 import pages.LandingPage;
-import pages.components.SidebarClientComponent;
-import pages.components.header.FocusHeaderComponent;
-import pages.components.header.ProfileHeaderComponent;
-import pages.components.header.actionblock.ActionsBlockClientComponent;
+import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
+import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
+import pages.components.sharedComponents.headerComponents.ProfileHeaderComponent;
+import pages.components.sharedComponents.headerComponents.actionblockComponents.ActionsBlockClientComponent;
 import pages.profilePages.clientPages.*;
 import pages.profilePages.clientPages.infoServicesPages.InfoMaintenancePage;
 import pages.profilePages.clientPages.infoServicesPages.InfoRepairPage;
@@ -26,7 +26,7 @@ public class StageTest extends TestBase {
     InfoMaintenancePage infoMaintenancePage = new InfoMaintenancePage();
     InfoVideoPage infoVideoPage = new InfoVideoPage();
 
-    ClientProfilePage clientProfilePage = new ClientProfilePage();
+    ProfileClientPage profileClientPage = new ProfileClientPage();
 
     ActionsBlockClientComponent actionsBlockClient = new ActionsBlockClientComponent();
 
@@ -137,17 +137,17 @@ public class StageTest extends TestBase {
     @Test
     void clientProfilePageLocatorsIntegrityTest(){
         step("verifyProfileClientName", () -> {
-            clientProfilePage.verifyProfileClientName(clientName);
+            profileClientPage.verifyProfileClientName(clientName);
         });
         step("isVisibleLastOrderHeadline", () -> {
-            clientProfilePage.isOpened();
+            profileClientPage.isOpened();
         });
     }
 
     @DisplayName("equipmentClientPageLocatorsIntegrityTest")
     @Test
     void equipmentClientPageLocatorsIntegrity() {
-        clientProfilePage.isOpened();
+        profileClientPage.isOpened();
         equipmentClientPage.open();
         landingPage.open();
         back();
@@ -161,8 +161,8 @@ public class StageTest extends TestBase {
     @DisplayName("objectClientPageLocatorsIntegrityTest")
     @Test
     void objectClientPageLocatorsIntegrity() {
-        clientProfilePage.isOpened();
-        clientProfilePage.goto1thObjectActionButtonLocator();
+        profileClientPage.isOpened();
+        profileClientPage.goto1thObjectActionButtonLocator();
 
     }
 

@@ -1,4 +1,4 @@
-package pages.components;
+package pages.components.sharedComponents;
 
 public class PushNotificationsComponent {
 

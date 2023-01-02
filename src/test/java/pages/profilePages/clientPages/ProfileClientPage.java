@@ -3,12 +3,13 @@ package pages.profilePages.clientPages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import pages.components.clientComponents.LastOrderProfileClientComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
-public class ClientProfilePage {
+public class ProfileClientPage {
     /**<body>
      <noscript data-n-head="ssr" data-hid="gtm-noscript" data-pbody="true"><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K4L682B&" height="0" width="0" style="display:none;visibility:hidden" title="gtm"></iframe></noscript><div id="__nuxt"><!----><div id="__layout"><div data-v-2647b5ad="" id="app"><div data-v-2647b5ad="" class="container wrapper"><div data-v-af68ad0e="" data-v-2647b5ad="" id="gas__content-header" class="container"><div data-v-af68ad0e="" class="logo-wrap"><div data-v-af68ad0e="" class="logo"><a data-v-af68ad0e="" href="/" class="nuxt-link-active"><img data-v-af68ad0e="" src="/_ipx/_/images/logo-blue.svg" alt="Gasworkers"> <span data-v-af68ad0e="">Gasworkers</span></a></div></div> <div data-v-af68ad0e="" class="actions-block"><div data-v-af68ad0e="" class="notifications icon"><!----></div> <div data-v-af68ad0e="" class="messages icon"><!----></div> <div data-v-af68ad0e="" class="profile-wrap"><div data-v-af68ad0e="" class="profile icon"></div> <span data-v-af68ad0e="" class="arrow-down"></span> <div data-v-af68ad0e="" class="profile-menu"><div data-v-af68ad0e="" class="profile-menu__link text-primary">Шингелевич Игорь Сергеевич</div> <hr data-v-af68ad0e=""> <a data-v-af68ad0e="" href="/profile/edit" class="profile-menu__link">
      Профиль
@@ -317,19 +318,20 @@ public class ClientProfilePage {
      <div id="LI7_zALfh" role="status" aria-live="polite" aria-atomic="false"></div><mytubeelement id="myTubeRelayElementToPage" event="preferencesUpdated" data="{&quot;bundle&quot;:{&quot;label_delimitor&quot;:&quot;:&quot;,&quot;percentage&quot;:&quot;%&quot;,&quot;smart_buffer&quot;:&quot;Smart Buffer&quot;,&quot;start_playing_when_buffered&quot;:&quot;Start playing when buffered&quot;,&quot;sound&quot;:&quot;Sound&quot;,&quot;desktop_notification&quot;:&quot;Desktop Notification&quot;,&quot;continuation_on_next_line&quot;:&quot;-&quot;,&quot;loop&quot;:&quot;Loop&quot;,&quot;only_notify&quot;:&quot;Only Notify&quot;,&quot;estimated_time&quot;:&quot;Estimated Time&quot;,&quot;global_preferences&quot;:&quot;Global Preferences&quot;,&quot;no_notification_supported_on_your_browser&quot;:&quot;No notification style supported on your browser version&quot;,&quot;video_buffered&quot;:&quot;Video Buffered&quot;,&quot;buffered&quot;:&quot;Buffered&quot;,&quot;hyphen&quot;:&quot;-&quot;,&quot;buffered_message&quot;:&quot;The video has been buffered as requested and is ready to play.&quot;,&quot;not_supported&quot;:&quot;Not Supported&quot;,&quot;on&quot;:&quot;On&quot;,&quot;off&quot;:&quot;Off&quot;,&quot;click_to_enable_for_this_site&quot;:&quot;Click to enable for this site&quot;,&quot;desktop_notification_denied&quot;:&quot;You have denied permission for desktop notification for this site&quot;,&quot;notification_status_delimitor&quot;:&quot;;&quot;,&quot;error&quot;:&quot;Error&quot;,&quot;adblock_interferance_message&quot;:&quot;Adblock (or similar extension) is known to interfere with SmartVideo. Please add this url to adblock whitelist.&quot;,&quot;calculating&quot;:&quot;Calculating&quot;,&quot;waiting&quot;:&quot;Waiting&quot;,&quot;will_start_buffering_when_initialized&quot;:&quot;Will start buffering when initialized&quot;,&quot;will_start_playing_when_initialized&quot;:&quot;Will start playing when initialized&quot;,&quot;completed&quot;:&quot;Completed&quot;,&quot;buffering_stalled&quot;:&quot;Buffering is stalled. Will stop.&quot;,&quot;stopped&quot;:&quot;Stopped&quot;,&quot;hr&quot;:&quot;Hr&quot;,&quot;min&quot;:&quot;Min&quot;,&quot;sec&quot;:&quot;Sec&quot;,&quot;any_moment&quot;:&quot;Any Moment&quot;,&quot;popup_donate_to&quot;:&quot;Donate to&quot;,&quot;extension_id&quot;:&quot;lnkdbjbjpnpjeciipoaflmpcddinpjjp&quot;},&quot;prefs&quot;:{&quot;desktopNotification&quot;:true,&quot;soundNotification&quot;:true,&quot;logLevel&quot;:0,&quot;enable&quot;:true,&quot;loop&quot;:false,&quot;hidePopup&quot;:false,&quot;autoPlay&quot;:false,&quot;autoBuffer&quot;:false,&quot;autoPlayOnBuffer&quot;:false,&quot;autoPlayOnBufferPercentage&quot;:42,&quot;autoPlayOnSmartBuffer&quot;:true,&quot;quality&quot;:&quot;default&quot;,&quot;fshd&quot;:true,&quot;onlyNotification&quot;:false,&quot;enableFullScreen&quot;:false,&quot;saveBandwidth&quot;:false,&quot;hideAnnotations&quot;:false,&quot;turnOffPagedBuffering&quot;:false}}"></mytubeelement><mytubeelement id="myTubeRelayElementToTab" event="relayPrefs" data="{&quot;loadBundle&quot;:true}"></mytubeelement><div class="mallbery-caa" style="z-index: 2147483647 !important; text-transform: none !important; position: fixed;"></div><div id="jivo-iframe-container" style="opacity: 0; visibility: hidden; width: 0px; height: 0px; overflow: hidden;"><iframe src="" role="presentation" allow="autoplay" title="Jivochat" name="jivo_container" id="jivo_container" frameborder="no"></iframe></div><jdiv style="display: none;"><jdiv class="globalClass_ec9a"><jdiv class="wrap_b9ad _orientationRight_bcba _hoverMenu_dd21 __jivoDesktopButton"><jdiv class="button_a11d" style="background: linear-gradient(95deg, rgb(0, 85, 201) 20%, rgb(24, 185, 212) 80%); --darkreader-inline-bgimage:linear-gradient(95deg, #124283 20%, #328c9c 80%); --darkreader-inline-bgcolor: initial;" data-darkreader-inline-bgimage="" data-darkreader-inline-bgcolor=""><jdiv class="iconWrap_ea30 _showLogo_ff19"><jdiv class="jivoIcon_d62a icons_bd15" style="background-image: url(&quot;data:image/svg+xml,%3Csvg%20width%3D%2210%22%20height%3D%2235%22%20viewBox%3D%220%200%209%2035%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20fill%3D%22%23fff%22%20d%3D%22M1.31%2034.966H.975c-.295%200-.53-.09-.71-.27C.09%2034.516%200%2034.3%200%2034.05v-2.33c0-.25.097-.465.288-.645.193-.18.42-.27.687-.27H1.3c1.776%200%203.223-1.37%203.238-3.06v-8.94H.975c-.236%200-.458-.09-.665-.27-.206-.18-.31-.395-.31-.645v-2.33c0-.223.104-.43.31-.625.207-.194.43-.292.665-.292h7.019c.266%200%20.494.09.687.27.192.182.29.396.29.646V27.77c0%20.032-.008.058-.01.09-.08%203.937-3.477%207.098-7.65%207.104zM.318%200C-.25%2011.117%208.62%2012.702%208.62%2012.702%208.17.522.318%200%20.318%200z%22%2F%3E%3C%2Fsvg%3E%0A&quot;);"></jdiv><jdiv class="envelopeIcon_ce7a icons_bd15" style="background-image: url(&quot;data:image/svg+xml,%3Csvg%20width%3D%2225%22%20height%3D%2220%22%20viewBox%3D%220%200%2025%2020%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20fill%3D'%23fff'%20d%3D%22M22.5%205l-10%206.25L2.5%205V2.5l10%206.25%2010-6.25V5zm0-5h-20A2.49%202.49%200%200%200%200%202.5v15A2.5%202.5%200%200%200%202.5%2020h20a2.5%202.5%200%200%200%202.5-2.5v-15A2.5%202.5%200%200%200%2022.5%200z%22%2F%3E%3C%2Fsvg%3E%0A&quot;);"></jdiv></jdiv></jdiv><jdiv class="menuWrap_e98a __hover_d36d"></jdiv></jdiv><jdiv id="jivo-player" class="player_edc3"><audio preload="auto" id="jivo-sound-agent_message"><source src="https://code.jivo.ru/sounds/agent_message.mp3" type="audio/mpeg"><source src="https://code.jivo.ru/sounds/agent_message.ogg" type="audio/ogg; codecs=vorbis"><source src="https://code.jivo.ru/sounds/agent_message.wav" type="audio/wav"></audio><audio preload="auto" id="jivo-sound-notification"><source src="https://code.jivo.ru/sounds/notification.mp3" type="audio/mpeg"><source src="https://code.jivo.ru/sounds/notification.ogg" type="audio/ogg; codecs=vorbis"><source src="https://code.jivo.ru/sounds/notification.wav" type="audio/wav"></audio><audio preload="auto" id="jivo-sound-outgoing_message"><source src="https://code.jivo.ru/sounds/outgoing_message.mp3" type="audio/mpeg"><source src="https://code.jivo.ru/sounds/outgoing_message.ogg" type="audio/ogg; codecs=vorbis"><source src="https://code.jivo.ru/sounds/outgoing_message.wav" type="audio/wav"></audio></jdiv><jdiv id="jcont" style="animation: 300ms cubic-bezier(0.39, 0.24, 0.21, 0.99) 0s 1 normal both running WidgetContainer_CLOSE_WIDGET_f8ac; --jright:30px; --jheight:496px; display: block; position: fixed;"><jdiv class="wrap_e4d0" dir="ltr" id="jivo_action"><jdiv class="closeButton_d0f7" id="jivo_close_button"><jdiv class="closeIcon_b81f" style="background-image: url(&quot;data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2228%22%20height%3D%2228%22%20viewBox%3D%220%200%2028%2028%22%3E%0A%20%20%20%20%3Cg%20fill%3D%22none%22%20fill-rule%3D%22evenodd%22%20transform%3D%22translate(2%202)%22%3E%0A%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%2212%22%20fill%3D%22%23FFF%22%20opacity%3D%221%22%2F%3E%0A%20%20%20%20%20%20%20%20%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%2212.75%22%20stroke%3D%22%23222D38%22%20stroke-width%3D%221.5%22%20opacity%3D%221%22%2F%3E%0A%20%20%20%20%20%20%20%20%3Cg%20fill%3D%22%23222D38%22%20opacity%3D%221%22%20transform%3D%22translate(6%206)%22%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Crect%20width%3D%221.611%22%20height%3D%2213.9%22%20x%3D%225.435%22%20y%3D%22-.941%22%20rx%3D%22.806%22%20transform%3D%22rotate(45%206.24%206.01)%22%2F%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%3Crect%20width%3D%221.611%22%20height%3D%2213.9%22%20x%3D%225.435%22%20y%3D%22-.941%22%20rx%3D%22.806%22%20transform%3D%22scale(-1%201)%20rotate(45%200%20-9.058)%22%2F%3E%0A%20%20%20%20%20%20%20%20%3C%2Fg%3E%0A%20%20%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A&quot;);"></jdiv></jdiv></jdiv><jdiv class="contentWrapper_e5c4 notranslate"></jdiv></jdiv><jdiv class="pseudoHeight_da8a"></jdiv><jdiv class="jivoMouseTrack_cc9f"></jdiv></jdiv></jdiv><div class="mallbery-caa" style="z-index: 2147483647 !important; text-transform: none !important; position: fixed;"></div><div class="mallbery-caa" style="z-index: 2147483647 !important; text-transform: none !important; position: fixed;"></div><div class="mallbery-caa" style="z-index: 2147483647 !important; text-transform: none !important; position: fixed;"></div></body>
      * */
 
-
+//new exemplar of pages.components.clientComponents.LastOrderProfileClientComponent
+    LastOrderProfileClientComponent lastOrder = new LastOrderProfileClientComponent();
 
 
      String ClientName = "Шингелевич Игорь Сергеевич";
-    private final String LAST_ORDER_INFO_TITLE = "Информация о последнем заказе";
+
 
     SelenideElement
-            profileClientNameLocator = $(".profile-card .title"),
-            profileClientSinceDateLocator = $(".profile-card").$(".since-date"),
-            profileClientRatingLocator = $(".profile-card").$(".rating-badge"),
-            profileClientReviewsLocator = $(".profile-card").$(".reviews"),
-            profileClientImageLocator = $(".profile-card").$(".profile-image"),
-            lastOrderInfoTitleLocator = $x("//h3"); //$(".title d-flex justify-content-between align-items-center")
+            profileCardNameLocator = $(".profile-card .title"),
+            profileCardSinceDateLocator = $(".profile-card").$(".since-date"),
+            profileCardRatingLocator = $(".profile-card").$(".rating-badge"),
+            profileCardReviewsLocator = $(".profile-card").$(".reviews"),
+            profileCardImageLocator = $(".profile-card").$(".profile-image");
+
 
             ElementsCollection gotoObjectActionButtonLocator = $$(".actions .actions__slot--link");
             ElementsCollection ActionButtonLocator = $$(".actions .actions__btn");
@@ -346,9 +348,9 @@ public class ClientProfilePage {
 
 
     //  open("/profile/client");
-    public ClientProfilePage open() {
+    public ProfileClientPage open() {
         Selenide.open("/profile/client");
-        profileClientNameLocator.shouldBe(visible);
+        profileCardNameLocator.shouldBe(visible);
 
 
 
@@ -359,16 +361,16 @@ public class ClientProfilePage {
 
 
 
-    public ClientProfilePage verifyProfileClientName(String clientName) {
-        profileClientNameLocator.shouldHave(text(clientName)).shouldBe(visible);
+    public ProfileClientPage verifyProfileClientName(String clientName) {
+        profileCardNameLocator.shouldHave(text(clientName)).shouldBe(visible);
         return this;
     }
-    public ClientProfilePage isOpened() {
-        lastOrderInfoTitleLocator.shouldHave(text(LAST_ORDER_INFO_TITLE)).shouldBe(visible);
+    public ProfileClientPage isOpened() {
+        profileCardNameLocator.shouldBe(visible);
         return this;
     }
 
-    public ClientProfilePage goto1thObjectActionButtonLocator() {
+    public ProfileClientPage goto1thObjectActionButtonLocator() {
         ActionButtonLocator.get(3).click();
         gotoObjectActionButtonLocator.get(3).click();
         return this;

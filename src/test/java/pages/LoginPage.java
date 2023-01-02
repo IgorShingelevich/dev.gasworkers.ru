@@ -3,7 +3,7 @@ package pages;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
-import pages.profilePages.clientPages.ClientProfilePage;
+import pages.profilePages.clientPages.ProfileClientPage;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
@@ -18,7 +18,7 @@ public class LoginPage {
      * </button></div></div>*/
 
 
-    ClientProfilePage clientProfilePage = new ClientProfilePage();
+    ProfileClientPage profileClientPage = new ProfileClientPage();
 
 
     private final String LOGIN_PAGE_TITLE_TEXT = "Войдите в личный кабинет";
@@ -61,7 +61,7 @@ public void open() {
 
         loginButtonLocator.shouldNotBe(disabled);
         loginButtonLocator.click();
-        clientProfilePage.isOpened();
+        profileClientPage.isOpened();
 
 
     }

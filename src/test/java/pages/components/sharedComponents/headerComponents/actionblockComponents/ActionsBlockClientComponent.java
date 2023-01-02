@@ -1,4 +1,4 @@
-package pages.components.header.actionblock;
+package pages.components.sharedComponents.headerComponents.actionblockComponents;
 
 import com.codeborne.selenide.SelenideElement;
 

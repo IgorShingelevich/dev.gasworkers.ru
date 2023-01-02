@@ -1,4 +1,4 @@
-package pages.components;
+package pages.components.sharedComponents.sidebarComponents;
 
 import com.codeborne.selenide.SelenideElement;
 

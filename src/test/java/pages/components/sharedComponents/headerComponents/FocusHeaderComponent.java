@@ -1,4 +1,4 @@
-package pages.components.header;
+package pages.components.sharedComponents.headerComponents;
 
 import com.codeborne.selenide.SelenideElement;
 
