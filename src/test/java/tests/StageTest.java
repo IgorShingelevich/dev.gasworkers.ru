@@ -28,9 +28,9 @@ public class StageTest extends TestBase {
 
     ProfileClientPage profileClientPage = new ProfileClientPage();
 
+
     ActionsBlockClientComponent actionsBlockClient = new ActionsBlockClientComponent();
 
-//    EquipmentClientPage equipmentClientPage = new EquipmentClientPage();
     EquipmentClientPage equipmentClientPage = new EquipmentClientPage();
 
     LandingPage landingPage = new LandingPage();
@@ -162,8 +162,20 @@ public class StageTest extends TestBase {
     @Test
     void objectClientPageLocatorsIntegrity() {
         profileClientPage.isOpened();
-        profileClientPage.goto1thObjectActionButtonLocator();
+//        profileClientPage.goto1thObjectActionButtonLocator();
+    }
 
+
+    @DisplayName("typeOrdersLocatorsIntegrityTest")
+    @Test
+    void lastOrderClientPageLocatorsIntegrity() {
+        profileClientPage.isOpened();
+        profileClientPage.lastOrder.clickLastOrderNumberLink();
+//        profileClientPage.sidebar.clickLastOrderNumberLink();
+//        profileMasterPage.sidebar.clickLastOrderNumberLink();
+        back();
+        profileClientPage.clickLastOrderNumberLink();
+        back();
     }
 
 
@@ -208,11 +220,15 @@ public class StageTest extends TestBase {
 
 
 
+
+
 }
 
 
 /**questions
  * flex after html elements. How flex affects the Locators elements
+ * list of devtools shortcuts
+ *
  *
  * */
 

@@ -2,13 +2,16 @@ package pages.components.clientComponents;
 
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.Selenide;
+import pages.profilePages.clientPages.ProfileClientPage;
 
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class LastOrderProfileClientComponent {
+public class LastOrderProfileClientComponent  {
+
 
     private final String
             LAST_ORDER_CARD_TITLE = "Информация о последнем заказе",
@@ -23,7 +26,7 @@ public class LastOrderProfileClientComponent {
 
             lastOrderCardLocator = $(".section .section order"),
             lastOrderCardTitleLocator = $(".section .header .title d-flex justify-content-between"),
-            lastOrderCardOrderNumberLocator = $(".section .content .h5 link-blue text-primary pointer"),
+            lastOrderCardOrderNumberLinkLocator = $(".section .content .h5.link-blue.text-primary.pointer"),
             lastOrderCardActionButtonLocator = $(".section .content .actions .actions__btn"),
             lastOrderCardOrderActionOpenLinkLocator = $(".section .content .actions .actions__slot--link"),
             lastOrderCardServiceTypeTitleCollection = $$(".section__row row").findBy(text(LAST_ORDER_CARD_SERVICE_TYPE_TITLE)),
@@ -32,4 +35,36 @@ public class LastOrderProfileClientComponent {
             lastOrderCardObjectDateTitleLocator = $$(".section__row row").findBy(text(LAST_ORDER_CARD_OBJECT_DATE_TITLE)),
             lastOrderCardObjectTimeTitleLocator = $$(".section__row row").findBy(text(LAST_ORDER_CARD_OBJECT_TIME_TITLE));
 
+
+
+    public LastOrderProfileClientComponent clickLastOrderNumberLink() {
+        lastOrderCardOrderNumberLinkLocator.shouldBe(visible).click();
+        return this;
+    }
+
+    public LastOrderProfileClientComponent hoverOverLastOrderActionButton() {
+        lastOrderCardActionButtonLocator.hover();
+        lastOrderCardOrderActionOpenLinkLocator.shouldBe(visible);
+        return this;
+    }
+    public LastOrderProfileClientComponent clickLastOrderActionButton() {
+        lastOrderCardActionButtonLocator.shouldBe(visible).click();
+        return this;
+    }
+
+
+
+    public LastOrderProfileClientComponent openLastOrder() {
+        lastOrderCardActionButtonLocator.shouldBe(visible).click();
+        lastOrderCardOrderActionOpenLinkLocator.shouldBe(visible).click();
+        return this;
+    }
+
+
+
+
+
+
 }
+
+
