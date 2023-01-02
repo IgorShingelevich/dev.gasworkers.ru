@@ -37,10 +37,11 @@ tasks.withType(JavaCompile) {
 }
 def selenideVersion = '6.10.1',
     junitJupiterVersion = '5.9.0',
-        allureselenide = '2.20.0',
+    allureSelenideVersion = '2.20.0',
     slf4jVersion = '2.0.5',
-    javafaker = '1.0.2',
-    icu4j = '51.1'
+    javafakerVersion = '1.0.2',
+    icu4j = '51.1',
+    SMSActivateApiVersion = '1.5.9'
 
 
 
@@ -49,12 +50,12 @@ dependencies {
 
     testImplementation(
             "com.ibm.icu:icu4j:$icu4j",
-            "com.github.javafaker:javafaker:$javafaker",
+            "com.github.javafaker:javafaker:$javafakerVersion",
             "com.codeborne:selenide:$selenideVersion",
-            "io.qameta.allure:allure-selenide:$allureselenide",
+            "io.qameta.allure:allure-selenide:$allureSelenideVersion",
             "org.junit.jupiter:junit-jupiter:$junitJupiterVersion",
             "org.slf4j:slf4j-simple:$slf4jVersion",
-            "ru.sms-activate:SMSActivateApi:1.5.9"
+            "ru.sms-activate:SMSActivateApi:$SMSActivateApiVersion"
     )
 }
 
