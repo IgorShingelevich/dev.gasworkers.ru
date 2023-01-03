@@ -173,25 +173,17 @@ public class StageTest extends TestBase {
     void lastOrderClientPageLocatorsIntegrity() {
         profileClientPage.isOpened();
         ordersClientPage.openPage();
-//        ordersClientPage.isOpened();
-        back();
-
-
-
-        /*profileClientPage.lastOrder.clickLastOrderNumberLink();
-
-        back();
-        profileClientPage.clickLastOrderNumberLink();
-        back();
+        ordersClientPage.sidebar.clickMain();
         profileClientPage.sidebar.clickOrdersAndInvoicesDropdown();
         profileClientPage.sidebar.clickOrdersList();
         ordersClientPage.clickOrderCardActionButton(1);
         ordersClientPage.openOrder(1);
         back();
-        ordersClientPage.toProfile();
+        ordersClientPage.breadcrumbMain();
         profileClientPage.sidebar.clickOrdersAndInvoicesDropdown();
         profileClientPage.sidebar.clickInvoicesList();
-        back();*/
+        invoicesClientPage.sidebar.clickMain();
+
     }
 
 
@@ -217,7 +209,7 @@ public class StageTest extends TestBase {
 
      @DisplayName("switchToNewTab")
     @Test
-    void openClientTwoTabs() {
+    void switchToNewTab() {
 
         executeJavaScript("window.open('https://dev.gasworkers.ru/','_blank');");
         switchTo().window(1);

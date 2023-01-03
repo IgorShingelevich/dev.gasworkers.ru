@@ -2,6 +2,7 @@ package pages.profilePages.clientPages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -1152,6 +1153,10 @@ public class OrdersClientPage {
      </p></div> <!----></div></div></div></div></div></div></div></div></main></div>
      * */
 
+
+    public SidebarClientComponent sidebar = new SidebarClientComponent();
+
+
 private final String ORDER_PAGE_TITLE = "Список заказов";
 
     SelenideElement
@@ -1193,7 +1198,7 @@ private final String ORDER_PAGE_TITLE = "Список заказов";
         return this;
     }
 
-    public OrdersClientPage toProfile() {
+    public OrdersClientPage breadcrumbMain() {
         breadcrumbProfileClient.shouldBe(visible).click();
         return this;
     }

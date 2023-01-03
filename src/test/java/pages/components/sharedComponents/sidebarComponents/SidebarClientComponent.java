@@ -49,6 +49,12 @@ public class SidebarClientComponent {
         return this;
     }
 
+    public SidebarClientComponent clickMain() {
+        homeButtonLocator.shouldBe(visible).click();
+        return this;
+    }
+
+
     public SidebarClientComponent isVisibleObjectsAndEquipment() {
         objectsAndEquipmentLocator.shouldBe(visible);
         return this;
