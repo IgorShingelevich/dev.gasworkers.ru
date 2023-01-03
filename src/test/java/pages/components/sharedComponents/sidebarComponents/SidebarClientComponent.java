@@ -91,4 +91,15 @@ public class SidebarClientComponent {
     }
 
 
+    public SidebarClientComponent clickOrdersList() {
+        ordersListLocator.shouldBe(visible);
+        ordersListLocator.click();
+        return this;
+    }
+
+    public SidebarClientComponent clickInvoicesList() {
+        invoicesListLocator.shouldBe(visible);
+        invoicesListLocator.click();
+        return this;
+    }
 }

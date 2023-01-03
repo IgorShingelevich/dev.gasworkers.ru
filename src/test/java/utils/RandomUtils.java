@@ -11,19 +11,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class RandomGenerator {
+public class RandomUtils {
 
         static TestData testData = new TestData();
 
         public static  void main (String[] args) {
 
-            RandomGenerator randomGenerator = new RandomGenerator();
+            RandomUtils randomUtils = new RandomUtils();
 
-            System.out.println("randomString " + randomGenerator.randomString(10));
-            System.out.println("randomString2 " + randomGenerator.randomString2(10));
-            System.out.println("randomItemFromArrayRange " + randomGenerator.randomItemFromArrayRange(0, 4));
+            System.out.println("randomString " + randomUtils.randomString(10));
+            System.out.println("randomString2 " + randomUtils.randomString2(10));
+            System.out.println("randomItemFromArrayRange " + randomUtils.randomItemFromArrayRange(0, 4));
             System.out.println("randomItemFromAllArray " + randomItemFromAllArray(someArrayItems));
-            System.out.println("actualTimeStampEmail " + randomGenerator.actualTimeStampEmail(2));
+            System.out.println("actualTimeStampEmail " + randomUtils.actualTimeStampEmail(2));
             System.out.println("randomEmail.toLowerCase() " + randomEmail(10));
             System.out.println("randomIntRange " + randomIntRange(10, 20));
             System.out.println("randomLong " + randomLong(10));

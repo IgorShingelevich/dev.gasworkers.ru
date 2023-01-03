@@ -32,6 +32,8 @@ public class StageTest extends TestBase {
     ActionsBlockClientComponent actionsBlockClient = new ActionsBlockClientComponent();
 
     EquipmentClientPage equipmentClientPage = new EquipmentClientPage();
+    OrdersClientPage ordersClientPage = new OrdersClientPage();
+    InvoicesClientPage invoicesClientPage = new InvoicesClientPage();
 
     LandingPage landingPage = new LandingPage();
 
@@ -170,12 +172,26 @@ public class StageTest extends TestBase {
     @Test
     void lastOrderClientPageLocatorsIntegrity() {
         profileClientPage.isOpened();
-        profileClientPage.lastOrder.clickLastOrderNumberLink();
-//        profileClientPage.sidebar.clickLastOrderNumberLink();
-//        profileMasterPage.sidebar.clickLastOrderNumberLink();
+        ordersClientPage.openPage();
+//        ordersClientPage.isOpened();
+        back();
+
+
+
+        /*profileClientPage.lastOrder.clickLastOrderNumberLink();
+
         back();
         profileClientPage.clickLastOrderNumberLink();
         back();
+        profileClientPage.sidebar.clickOrdersAndInvoicesDropdown();
+        profileClientPage.sidebar.clickOrdersList();
+        ordersClientPage.clickOrderCardActionButton(1);
+        ordersClientPage.openOrder(1);
+        back();
+        ordersClientPage.toProfile();
+        profileClientPage.sidebar.clickOrdersAndInvoicesDropdown();
+        profileClientPage.sidebar.clickInvoicesList();
+        back();*/
     }
 
 
@@ -228,7 +244,9 @@ public class StageTest extends TestBase {
 /**questions
  * flex after html elements. How flex affects the Locators elements
  * list of devtools shortcuts
- *
+ *OrdersClientPage -  look at example of openPage and isOpened methods.
+ * isOpened method should contain all the checks of static information available on the page
+ //$(".breadcrumb li:nth-child(2)"), - learn how to use :nth-child
  *
  * */
 
