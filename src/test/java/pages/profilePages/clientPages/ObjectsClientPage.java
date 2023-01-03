@@ -145,15 +145,14 @@ public class ObjectsClientPage extends BaseClientPage {
 
 
     public ObjectsClientPage open() {
-
         Selenide.open("/equipment");
         checkObjectsPageTitle();
-
         return this;
     }
 
-    public void checkObjectsPageTitle() {
+    public ObjectsClientPage  checkObjectsPageTitle() {
         objectsPageTitleLocator.shouldHave(text(OBJECTS_PAGE_TITLE_TEXT));
+        return this;
     }
 
     public void clickCreateNewObject() {

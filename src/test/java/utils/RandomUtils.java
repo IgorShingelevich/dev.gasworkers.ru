@@ -18,7 +18,7 @@ public class RandomUtils {
         public static  void main (String[] args) {
 
             RandomUtils randomUtils = new RandomUtils();
-
+/*
             System.out.println("randomString " + randomUtils.randomString(10));
             System.out.println("randomString2 " + randomUtils.randomString2(10));
             System.out.println("randomItemFromArrayRange " + randomUtils.randomItemFromArrayRange(0, 4));
@@ -36,14 +36,14 @@ public class RandomUtils {
             System.out.println("getActualDate// " + getActualDate());
             System.out.println(LocalDate.now());
             System.out.println("getActualTime " + getActualTime());// similar to LocalDate.now()
-            System.out.println(LocalTime.now() + " " + LocalDate.now());
-            System.out.println(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+            System.out.println(LocalTime.now() + " " + LocalDate.now());*/
+     /*       System.out.println(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
             System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
-            System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-            System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
-            System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE, d MMMM")));
-            System.out.println(randomDate85to23y());
+            System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));*/
+            System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            /*System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
+            System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE, d MMMM")));*/
+            /*System.out.println(randomDate85to23y());
             System.out.println("randomDob " + randomDob());
             System.out.println("randomDobDay " + randomDobDay());
             System.out.println("randomDobMonth " + randomDobMonth());
@@ -53,7 +53,11 @@ public class RandomUtils {
             System.out.println(("getLastName " + getFakerLastName()));
             System.out.println(("relativeFakerSurname " + fakerRelativeSurname()));
             System.out.println(("relativeFakerName " + fakerRelativeName()));
-            System.out.println(("relativeFakerPatronymic " + relativeFakerPatronymic()));
+            System.out.println(("relativeFakerPatronymic " + relativeFakerPatronymic()));*/
+        }
+
+        public static String getNowDate() {
+            return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         }
 
         public  String randomString(int len) {

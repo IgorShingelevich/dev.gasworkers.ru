@@ -22,16 +22,16 @@ public class LastOrderProfileClientComponent  {
 
    SelenideElement
 
-            lastOrderCardLocator = $(".section .section order"),
-            lastOrderCardTitleLocator = $(".section .header .title d-flex justify-content-between"),
+            lastOrderCardLocator = $(".section .section.order"),
+            lastOrderCardTitleLocator = $(".section .header .title.d-flex.justify-content-between"),
             lastOrderCardOrderNumberLinkLocator = $(".section .content .h5.link-blue.text-primary.pointer"),
             lastOrderCardActionButtonLocator = $(".section .content .actions .actions__btn"),
             lastOrderCardOrderActionOpenLinkLocator = $(".section .content .actions .actions__slot--link"),
-            lastOrderCardServiceTypeTitleCollection = $$(".section__row row").findBy(text(LAST_ORDER_CARD_SERVICE_TYPE_TITLE)),
-            lastOrderCardObjectAddressTitleLocator = $$(".section__row row").findBy(text(LAST_ORDER_CARD_OBJECT_ADDRESS_TITLE)),
-            lastOrderCardObjectEquipmentTitleLocator = $$(".section__row row").findBy(text(LAST_ORDER_CARD_OBJECT_EQUIPMENT_TITLE)),
-            lastOrderCardObjectDateTitleLocator = $$(".section__row row").findBy(text(LAST_ORDER_CARD_OBJECT_DATE_TITLE)),
-            lastOrderCardObjectTimeTitleLocator = $$(".section__row row").findBy(text(LAST_ORDER_CARD_OBJECT_TIME_TITLE));
+            lastOrderCardServiceTypeTitleCollection = $$(".section__row.row").findBy(text(LAST_ORDER_CARD_SERVICE_TYPE_TITLE)),
+            lastOrderCardObjectAddressTitleLocator = $$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_ADDRESS_TITLE)),
+            lastOrderCardObjectEquipmentTitleLocator = $$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_EQUIPMENT_TITLE)),
+            lastOrderCardObjectDateTitleLocator = $$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_DATE_TITLE)),
+            lastOrderCardObjectTimeTitleLocator = $$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_TIME_TITLE));
 
 
 
@@ -55,6 +55,19 @@ public class LastOrderProfileClientComponent  {
     public LastOrderProfileClientComponent openLastOrder() {
         lastOrderCardActionButtonLocator.shouldBe(visible).click();
         lastOrderCardOrderActionOpenLinkLocator.shouldBe(visible).click();
+        return this;
+    }
+
+    public LastOrderProfileClientComponent verifyLastOrderCardInfo() {
+        lastOrderCardLocator.shouldBe(visible);
+        lastOrderCardTitleLocator.shouldBe(visible).shouldHave(text(LAST_ORDER_CARD_TITLE));
+        lastOrderCardOrderNumberLinkLocator.shouldBe(visible);
+        lastOrderCardActionButtonLocator.shouldBe(visible);
+        lastOrderCardServiceTypeTitleCollection.shouldBe(visible);
+        lastOrderCardObjectAddressTitleLocator.shouldBe(visible);
+        lastOrderCardObjectEquipmentTitleLocator.shouldBe(visible);
+        lastOrderCardObjectDateTitleLocator.shouldBe(visible);
+        lastOrderCardObjectTimeTitleLocator.shouldBe(visible);
         return this;
     }
 

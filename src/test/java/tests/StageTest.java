@@ -60,105 +60,31 @@ public class StageTest extends TestBase {
             clientName = "Шингелевич Игорь Сергеевич",
             passwordClient = "123456";
 
-   /* @DisplayName("sidebarClientLocatorsIntegrityTest")
+    @DisplayName("sidebarClientLocatorsIntegrityTest")
     @Test
-    void sidebarClientLocatorsIntegrity() {
-        step("sidebarClient.isVisible", () -> {
-            sidebarClient.isVisibleHomeButton();
+    void homeClientPageLocatorsIntegrity() {
+        step("homeClientPage.sidebar.verifyLocators", () -> {
+            homeClientPage.sidebar.verifyLocators();
         });
-        step("sidebarClient.isVisibleObjectsAndEquipment", () -> {
-            sidebarClient.isVisibleObjectsAndEquipment();
-        });
-        step("sidebarClient.clickOrdersAndInvoicesDropdown", () -> {
-            sidebarClient.clickOrdersAndInvoicesDropdown();
-        });
-        step("sidebarClient.isVisibleOrdersList", () -> {
-            sidebarClient.isVisibleOrdersList();
-        });
-        step(" sidebarClient.isVisibleInvoicesList", () -> {
-            sidebarClient.isVisibleInvoicesList();
-        });
-        step("sidebarClient.isVisibleProfile", () -> {
-            sidebarClient.isVisibleProfile();
-        });
-        step(" sidebarClient.isVisibleSupportServiceHeadline", () -> {
-            sidebarClient.isVisibleSupportServiceHeadline();
-        });
-        step("sidebarClient.isVisibleSupportServicePhone", () -> {
-            sidebarClient.isVisibleSupportServicePhone();
-        });
-        step(" sidebarClient.isVisibleSupportServiceEmail", () -> {
-            sidebarClient.isVisibleSupportServiceEmail();
-        });
-    }*/
-
-
-    @DisplayName("actionsBlockClientComponentLocatorsIntegrityTest")
-//    @Disabled
-    @Test
-     void actionsBlockClientComponentLocatorsIntegrity() {
-        step("actionsBlockClient.isVisible", () -> {
-            actionsBlockClient.isVisible();
-        });
-        step("actionsBlockClient.isVisibleNotificationsButton", () -> {
-            actionsBlockClient.isVisibleNotificationsButton();
-        });
-        step("actionsBlockClient.isVisibleMessagesButton", () -> {
-            actionsBlockClient.isVisibleMessagesButton();
-        });
-        step("actionsBlockClient.isVisibleDropdown", () -> {
-            actionsBlockClient.isVisibleDropdown();
-        });
-       /* step("actionsBlockClient.clickDropdown2", () -> {
-            actionsBlockClient.clickDropdown2();
-        });*/
-        step("actionsBlockClient.isVisibleProfileName", () -> {
-            actionsBlockClient.isVisibleProfileName();
-        });
-        step("actionsBlockClient.isVisibleProfileButton", () -> {
-            actionsBlockClient.isVisibleProfileButton();
-        });
-        step("actionsBlockClient.isVisibleReviewButton", () -> {
-            actionsBlockClient.isVisibleReviewButton();
-        });
-
-        step("actionsBlockClient.isVisibleLogoutButton", () -> {
-            actionsBlockClient.isVisibleLogoutButton();
-        });
-
-
-
-    }
-
-    @DisplayName("clientProfilePageLocatorsIntegrityTest")
-    @Test
-    void clientProfilePageLocatorsIntegrityTest(){
-        step("verifyProfileClientName", () -> {
-            homeClientPage.verifyProfileClientName(clientName);
-        });
-        step("isVisibleLastOrderHeadline", () -> {
-            homeClientPage.isOpened();
+        step("homeClientPage.actionBlock.verifyLocators", () -> {
+            homeClientPage.actionBlock.verifyLocators();
         });
     }
 
-    @DisplayName("equipmentClientPageLocatorsIntegrityTest")
+
+
+    @DisplayName("CreateNewObject")
     @Test
-    void equipmentClientPageLocatorsIntegrity() {
+    void CreateNewObject() {
         homeClientPage.isOpened();
         homeClientPage.sidebar.objects();
         objectsClientPage.checkObjectsPageTitle();
         objectsClientPage.clickCreateNewObject();
         back();
         objectsClientPage.sidebar.home();
-
     }
 
-    @DisplayName("objectClientPageLocatorsIntegrityTest")
-    @Test
-    void objectClientPageLocatorsIntegrity() {
-        homeClientPage.isOpened();
-//        homeClientPage.goto1thObjectActionButtonLocator();
-    }
+
 
 
     @DisplayName("typeOrdersLocatorsIntegrityTest")
@@ -176,7 +102,6 @@ public class StageTest extends TestBase {
         homeClientPage.sidebar.clickOrdersAndInvoicesDropdown();
         homeClientPage.sidebar.invoices();
         invoicesClientPage.sidebar.home();
-
     }
 
 
@@ -195,7 +120,6 @@ public class StageTest extends TestBase {
             focusHeaderComponent.clickLogo();
             landingPage.isOpened();
             landingPage.clickUserProfile();
-
     }
 
 
@@ -208,9 +132,16 @@ public class StageTest extends TestBase {
         switchTo().window(1);
         open("https://dev.gasworkers.ru/profile/edit");
         switchTo().window(0);
-
     }
 
+
+    @DisplayName("ClientSubmitMaintenanceRequest")
+    @Disabled
+    @Test
+    void ClientSubmitMaintenanceRequest() {
+
+
+    }
 
 
 

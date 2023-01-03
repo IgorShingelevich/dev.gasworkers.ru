@@ -10,19 +10,17 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class HomeClientPage extends BaseClientPage {
 
+    public LastOrderProfileClientComponent lastOrder = new LastOrderProfileClientComponent();
 
 
 
 
 
     private final String OBJECTS_TITLE = "Объекты и оборудование";
-    public LastOrderProfileClientComponent lastOrder = new LastOrderProfileClientComponent();
-//    public SidebarClientComponent sidebar = new SidebarClientComponent();
 
 
-    String ClientName = "Шингелевич Игорь Сергеевич";
 
-// profile card
+// clientCardBlock
     SelenideElement
             profileCardNameLocator = $(".profile-card .title"),
             profileCardSinceDateLocator = $(".profile-card .since-date"),
@@ -30,7 +28,7 @@ public class HomeClientPage extends BaseClientPage {
             profileCardReviewsLocator = $(".profile-card .reviews"),
             profileCardImageLocator = $(".profile-card").$(".profile-image");
 
-//objects
+//objectsBlock
     SelenideElement objectsTitleLocator = $(".client-objects .title"),
             objectsPreviousButtonLocator = $(".client-objects .slick-arrow.slick-prev"),
             objectsNextButtonLocator = $(".client-objects .slick-arrow slick-next");
@@ -57,7 +55,6 @@ public class HomeClientPage extends BaseClientPage {
         return this;
     }
 
-
     public HomeClientPage isOpened() {
         profileCardNameLocator.shouldBe(visible);
         return this;
@@ -65,61 +62,37 @@ public class HomeClientPage extends BaseClientPage {
 
     //  profile card
 
-    public HomeClientPage verifyProfileClientName(String clientName) {
+    public HomeClientPage verifyClientCardInfo(String clientName, String sinceDate, String rating, String reviews, String image) {
         profileCardNameLocator.shouldHave(text(clientName)).shouldBe(visible);
-        return this;
-    }
-
-    public HomeClientPage verifyProfileClientSinceDate(String sinceDate) {
         profileCardSinceDateLocator.shouldHave(text(sinceDate)).shouldBe(visible);
-        return this;
-    }
-
-    public HomeClientPage verifyProfileClientRating(String rating) {
         profileCardRatingLocator.shouldHave(text(rating)).shouldBe(visible);
-        return this;
-    }
-
-    public HomeClientPage verifyProfileClientReviews(String reviews) {
         profileCardReviewsLocator.shouldHave(text(reviews)).shouldBe(visible);
-        return this;
-    }
-
-    public HomeClientPage verifyProfileClientImage(String image) {
         profileCardImageLocator.shouldHave(attribute("src", image)).shouldBe(visible);
         return this;
     }
+
+
+
+
+
+
+
+
 
     public HomeClientPage clickLastOrderNumberLink() {
         this.lastOrder.clickLastOrderNumberLink();
         return this;
     }
 
-
-    // last order
-
-/*    public HomeClientPage verifyLastOrderTitle(String title) {
-        lastOrderTitleLocator.shouldHave(text(title)).shouldBe(visible);
-        return this;
-    }*/
-
     //  objects
 
-    public HomeClientPage verifyObjectsTitle(String title) {
-        objectsTitleLocator.shouldHave(text(title)).shouldBe(visible);
-        return this;
-    }
-
-    public HomeClientPage verifyObjectsPreviousButton(String previousButton) {
+    public HomeClientPage verifyObjectsBlockInfo() {
+        objectsTitleLocator.shouldHave(text(OBJECTS_TITLE)).shouldBe(visible);
         objectsPreviousButtonLocator.shouldBe(visible);
-        return this;
-    }
-
-
-    public HomeClientPage verifyObjectsNextButton(String nextButton) {
         objectsNextButtonLocator.shouldBe(visible);
         return this;
     }
+
 
     public HomeClientPage clickObjectsPreviousButton() {
         objectsPreviousButtonLocator.shouldBe(visible).click();

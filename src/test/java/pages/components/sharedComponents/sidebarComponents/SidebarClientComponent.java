@@ -2,7 +2,7 @@ package pages.components.sharedComponents.sidebarComponents;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -74,49 +74,28 @@ public class SidebarClientComponent {
         return this;
     }
 
-    /*public SidebarClientComponent isVisibleHomeButton() {
+    public SidebarClientComponent verifyLocators() {
         homeLinkLocator.shouldBe(visible);
-        return this;
-    }
-
-
-    public SidebarClientComponent isVisibleObjectsAndEquipment() {
         objectsAndEquipmentLinkLocator.shouldBe(visible);
-        return this;
-    }
-
-
-
-    public SidebarClientComponent isVisibleOrdersList() {
+        ordersListLinkLocator.shouldBe(hidden);
+        invoicesListLinkLocator.shouldBe(hidden);
+        ordersAndInvoicesDropdownLocator.shouldBe(visible);
+        ordersAndInvoicesDropdownLocator.click();
         ordersListLinkLocator.shouldBe(visible);
-        return this;
-    }
-
-    public SidebarClientComponent isVisibleInvoicesList() {
         invoicesListLinkLocator.shouldBe(visible);
-        return this;
-    }
-
-    public SidebarClientComponent isVisibleProfile() {
+        ordersAndInvoicesDropdownLocator.click();
         profileLinkLocator.shouldBe(visible);
-        return this;
-    }
-
-    public SidebarClientComponent isVisibleSupportServiceHeadline() {
         supportServiceTitleLocator.shouldBe(visible);
+        supportServicePhoneLocator.shouldBe(visible);
+        supportServicePhoneLocator.shouldHave(text(SUPPORT_SERVICE_PHONE));
+        supportServiceEmailLocator.shouldBe(visible);
+        supportServiceEmailLocator.shouldHave(text(SUPPORT_SERVICE_EMAIL));
         return this;
     }
 
-    public SidebarClientComponent isVisibleSupportServicePhone() {
-        supportServicePhoneLocator.shouldHave(text(SUPPORT_SERVICE_PHONE)).shouldBe(visible);
-        return this;
-    }
 
-    public SidebarClientComponent isVisibleSupportServiceEmail() {
-        supportServiceEmailLocator.shouldHave(text(SUPPORT_SERVICE_EMAIL)).shouldBe(visible);
-        return this;
-    }
-*/
+
+
 
 
 }
