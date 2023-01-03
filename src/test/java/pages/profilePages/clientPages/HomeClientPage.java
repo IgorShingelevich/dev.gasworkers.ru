@@ -18,6 +18,8 @@ public class HomeClientPage extends BaseClientPage {
 
     private final String OBJECTS_TITLE = "Объекты и оборудование";
 
+//topButton
+    SelenideElement placeOrderButtonLocator = $(".btn-block .small.btn.btn-warning.disable-outline");
 
 
 // clientCardBlock
@@ -31,7 +33,7 @@ public class HomeClientPage extends BaseClientPage {
 //objectsBlock
     SelenideElement objectsTitleLocator = $(".client-objects .title"),
             objectsPreviousButtonLocator = $(".client-objects .slick-arrow.slick-prev"),
-            objectsNextButtonLocator = $(".client-objects .slick-arrow slick-next");
+            objectsNextButtonLocator = $(".client-objects .slick-arrow.slick-next");
             ElementsCollection gotoObjectActionCollection = $$(".actions .actions__slot--link");
 //            ElementsCollection actionMenuCollection = $$(".actions .actions__slot right"); //not working - menu collection is not visible
             ElementsCollection actionButtonCollection = $$(".actions .actions__btn");
@@ -57,6 +59,12 @@ public class HomeClientPage extends BaseClientPage {
 
     public HomeClientPage isOpened() {
         profileCardNameLocator.shouldBe(visible);
+        objectsTitleLocator.shouldBe(visible).shouldHave(text(OBJECTS_TITLE));
+        return this;
+    }
+
+    public HomeClientPage placeOrder() {
+        placeOrderButtonLocator.shouldBe(visible).click();
         return this;
     }
 

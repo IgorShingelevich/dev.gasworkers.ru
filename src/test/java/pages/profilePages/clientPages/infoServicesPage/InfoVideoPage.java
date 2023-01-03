@@ -1,4 +1,4 @@
-package pages.profilePages.clientPages.infoServicesPages;
+package pages.profilePages.clientPages.infoServicesPage;
 
 import com.codeborne.selenide.SelenideElement;
 

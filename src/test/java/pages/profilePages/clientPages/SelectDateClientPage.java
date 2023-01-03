@@ -11,14 +11,14 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class SelectDateClientPage {
 
-//    DatePickerOrderComponent datePicker = new DatePickerOrderComponent();
+    DatePickerOrderComponent datePicker = new DatePickerOrderComponent();
     private final String SELECT_DATE_TITLE = "Выберите желаемую дату (диапазон дат) и время приезда мастера";
 
 
-    SelenideElement titleLocator = $(".page-content .text-center"),    //$(".page-content .text-center h4"),
-        submitOrderButtonLocator = $(".page-content .text-center"),
-                    //$(".page-content .text-center h4"),
-                    swapObjectLinkLocator = $x("//a[@href='#']");
+    SelenideElement
+        titleLocator = $(".page-content .text-center"),    //$(".page-content .text-center h4"),
+        submitButtonLocator = $(".w-100.btn.btn-primary.disable-outline"),
+        swapObjectLinkLocator = $x("//a[@href='#']");
 
 
     public SelectDateClientPage isOpened() {
@@ -26,8 +26,8 @@ public class SelectDateClientPage {
         return this;
     }
 
-    public SelectDateClientPage clickSelectDatePagePlaceOrderButton() {
-        submitOrderButtonLocator.shouldBe(visible).click();
+    public SelectDateClientPage submitOrder() {
+        submitButtonLocator.shouldBe(visible).click();
         return this;
     }
 
@@ -35,13 +35,11 @@ public class SelectDateClientPage {
         swapObjectLinkLocator.shouldBe(visible).click();
         return this;
     }
-    // using RandomUtils getNowDate() method to fill argument in pickNewDate() method
-//    public SelectDateClientPage pickNowDateAM() {
-//        datePicker.setDate(RandomUtils.getNowDate());
-//        datePicker.setAMTime();
-//        datePicker.submit();
-//        return this;
-//    }
+    public SelectDateClientPage pickNowDateAM() {
+        datePicker.setDate(RandomUtils.getNowDate());
+        datePicker.setAMTime();
+        return this;
+    }
 
 
 }

@@ -23,7 +23,7 @@ public class SelectMaintenanceObjectPage {
         return this;
     }
 
-    public SelectMaintenanceObjectPage clickObject1thButton() {
+    public SelectMaintenanceObjectPage pick1thObject() {
         Object1ButtonLocator.shouldBe(visible).click();
 //        selectDatePageTitleLocator.shouldBe(visible);
         return this;

@@ -1,4 +1,4 @@
-package pages.profilePages.clientPages.infoServicesPages;
+package pages.profilePages.clientPages.infoServicesPage;
 
 import com.codeborne.selenide.SelenideElement;
 
@@ -31,7 +31,7 @@ public class InfoMaintenancePage {
         return this;
     }
 
-    public InfoMaintenancePage clickMaintenanceButton() {
+    public InfoMaintenancePage nextButton() {
         infoPageMaintenanceButtonLocator.shouldHave(text("Далее")).shouldBe(enabled).click();
         return this;
     }

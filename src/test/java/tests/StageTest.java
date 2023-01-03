@@ -7,9 +7,10 @@ import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 import pages.components.sharedComponents.headerComponents.ProfileHeaderComponent;
 import pages.components.sharedComponents.headerComponents.actionblockComponents.ActionsBlockClientComponent;
 import pages.profilePages.clientPages.*;
-import pages.profilePages.clientPages.infoServicesPages.InfoMaintenancePage;
-import pages.profilePages.clientPages.infoServicesPages.InfoRepairPage;
-import pages.profilePages.clientPages.infoServicesPages.InfoVideoPage;
+import pages.profilePages.clientPages.cancelPage.CancelMaintenancePage;
+import pages.profilePages.clientPages.infoServicesPage.InfoMaintenancePage;
+import pages.profilePages.clientPages.infoServicesPage.InfoRepairPage;
+import pages.profilePages.clientPages.infoServicesPage.InfoVideoPage;
 
 
 import static com.codeborne.selenide.Selenide.*;
@@ -21,7 +22,7 @@ public class StageTest extends TestBase {
 
     SidebarClientComponent sidebarClient = new SidebarClientComponent();
     pages.LoginPage loginPage = new pages.LoginPage();
-    TypeOrders typeOrders = new TypeOrders();
+    TypeOrdersPage typeOrdersPage = new TypeOrdersPage();
     InfoRepairPage infoRepairPage = new InfoRepairPage();
     InfoMaintenancePage infoMaintenancePage = new InfoMaintenancePage();
     InfoVideoPage infoVideoPage = new InfoVideoPage();
@@ -33,6 +34,7 @@ public class StageTest extends TestBase {
 
     ObjectsClientPage objectsClientPage = new ObjectsClientPage();
     OrdersClientPage ordersClientPage = new OrdersClientPage();
+    OrderClientPage orderClientPage = new OrderClientPage();
     InvoicesClientPage invoicesClientPage = new InvoicesClientPage();
 
     LandingPage landingPage = new LandingPage();
@@ -41,6 +43,8 @@ public class StageTest extends TestBase {
     SelectDateClientPage selectDateClientPage = new SelectDateClientPage();
     FocusHeaderComponent focusHeaderComponent = new FocusHeaderComponent();
     ProfileHeaderComponent profileHeaderComponent = new ProfileHeaderComponent();
+    SelectServicePage selectServicePage = new SelectServicePage();
+    CancelMaintenancePage cancelMaintenancePage = new CancelMaintenancePage();
 
 
     @BeforeEach
@@ -76,7 +80,6 @@ public class StageTest extends TestBase {
     @DisplayName("CreateNewObject")
     @Test
     void CreateNewObject() {
-        homeClientPage.isOpened();
         homeClientPage.sidebar.objects();
         objectsClientPage.checkObjectsPageTitle();
         objectsClientPage.clickCreateNewObject();
@@ -90,7 +93,6 @@ public class StageTest extends TestBase {
     @DisplayName("typeOrdersLocatorsIntegrityTest")
     @Test
     void lastOrderClientPageLocatorsIntegrity() {
-        homeClientPage.isOpened();
         ordersClientPage.openPage();
         ordersClientPage.sidebar.home();
         homeClientPage.sidebar.clickOrdersAndInvoicesDropdown();
@@ -113,11 +115,11 @@ public class StageTest extends TestBase {
             landingPage.isOpened();
             landingPage.clickUserMaintenanceButton();
             infoMaintenancePage.isOpened();
-            infoMaintenancePage.clickMaintenanceButton();
+            infoMaintenancePage.nextButton();
             selectMaintenanceObjectPage.isOpened();
-            selectMaintenanceObjectPage.clickObject1thButton();
+            selectMaintenanceObjectPage.pick1thObject();
             selectDateClientPage.isOpened();
-            focusHeaderComponent.clickLogo();
+            focusHeaderComponent.logo();
             landingPage.isOpened();
             landingPage.clickUserProfile();
     }
@@ -135,12 +137,25 @@ public class StageTest extends TestBase {
     }
 
 
-    @DisplayName("ClientSubmitMaintenanceRequest")
-    @Disabled
+    @DisplayName("ClientPlaceMaintenanceRequest and Cancel")
+//    @Disabled
     @Test
-    void ClientSubmitMaintenanceRequest() {
-
-
+    void ClientPlaceAndCancelOrder() {
+        homeClientPage.placeOrder();
+        typeOrdersPage.Maintenance();
+        infoMaintenancePage.nextButton();
+        selectMaintenanceObjectPage.pick1thObject();
+        selectDateClientPage.pickNowDateAM();
+        selectDateClientPage.submitOrder();
+        selectServicePage.isOpened();
+        selectServicePage.toOrder();
+        orderClientPage.toMap();
+        selectServicePage.toOrder();
+        orderClientPage.cancelOrder();
+        cancelMaintenancePage.noButton();
+        orderClientPage.cancelOrder();
+        cancelMaintenancePage.yesButton();
+        homeClientPage.isOpened();
     }
 
 

@@ -25,17 +25,17 @@ public class FocusHeaderComponent {
    linkExitLocator = $x("//a[contains(text(), 'Выйти')]");
 
 
-public FocusHeaderComponent clickLogo() {
+public FocusHeaderComponent logo() {
     logoLocator.shouldBe(visible).click();
     return this;
 }
 
-    public FocusHeaderComponent clickLinkExit() {
+    public FocusHeaderComponent signOut() {
         linkExitLocator.shouldBe(visible).click();
         return this;
     }
 
-    public FocusHeaderComponent clickLinkSupport() {
+    public FocusHeaderComponent support() {
         linkSupportLocator.shouldBe(visible).click();
         return this;
     }
