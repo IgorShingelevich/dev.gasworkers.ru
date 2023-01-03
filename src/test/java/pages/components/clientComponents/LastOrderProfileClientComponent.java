@@ -1,8 +1,6 @@
 package pages.components.clientComponents;
 
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.Selenide;
-import pages.profilePages.clientPages.ProfileClientPage;
 
 
 import static com.codeborne.selenide.Condition.text;

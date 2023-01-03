@@ -2,7 +2,6 @@ package pages.components.sharedComponents.sidebarComponents;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
@@ -34,31 +33,16 @@ public class SidebarClientComponent {
     private final String SUPPORT_SERVICE_PHONE = "8 800 302 89 04";
     private final String SUPPORT_SERVICE_EMAIL = "info@gasworkers.ru";
 
-    SelenideElement homeButtonLocator = $$(".sidebar-nav>li").get(0),
-            objectsAndEquipmentLocator = $$(".sidebar-nav>li").get(1), ordersAndInvoicesDropdownLocator = $$(".sidebar-nav>li").get(2),  //$(By.xpath("//div[@class='link']")).$(byText("Заказы/Счета"));
-            ordersListLocator = $("ul.dropdown-menu").$(byText("Список заказов")),
-            invoicesListLocator = $("ul.dropdown-menu").$(byText("Список счетов")),  //$(By.xpath("//div[@class='link']")).$(byText("Список счетов"));
-            profileLocator = $$(".sidebar-nav>li").get(3), //$(By.xpath("//div[@class='link']")).$(byText("Профиль"));
-            supportServiceHeadlineLocator = $(".support-service"),
+    SelenideElement homeLinkLocator = $$(".sidebar-nav>li").get(0),
+            objectsAndEquipmentLinkLocator = $$(".sidebar-nav>li").get(1),
+            ordersAndInvoicesDropdownLocator = $$(".sidebar-nav>li").get(2),  //$(By.xpath("//div[@class='link']")).$(byText("Заказы/Счета"));
+            ordersListLinkLocator = $("ul.dropdown-menu").$(byText("Список заказов")),
+            invoicesListLinkLocator = $("ul.dropdown-menu").$(byText("Список счетов")),  //$(By.xpath("//div[@class='link']")).$(byText("Список счетов"));
+            profileLinkLocator = $$(".sidebar-nav>li").get(3), //$(By.xpath("//div[@class='link']")).$(byText("Профиль"));
+            supportServiceTitleLocator = $(".support-service"),
             supportServicePhoneLocator = $(".support-service__phone"),
             supportServiceEmailLocator = $(".support-service .link-dark-blue");
 
-
-    public SidebarClientComponent isVisibleHomeButton() {
-        homeButtonLocator.shouldBe(visible);
-        return this;
-    }
-
-    public SidebarClientComponent clickMain() {
-        homeButtonLocator.shouldBe(visible).click();
-        return this;
-    }
-
-
-    public SidebarClientComponent isVisibleObjectsAndEquipment() {
-        objectsAndEquipmentLocator.shouldBe(visible);
-        return this;
-    }
 
     public SidebarClientComponent clickOrdersAndInvoicesDropdown() {
         ordersAndInvoicesDropdownLocator.shouldBe(visible);
@@ -66,23 +50,60 @@ public class SidebarClientComponent {
         return this;
     }
 
+    public SidebarClientComponent home() {
+        homeLinkLocator.shouldBe(visible).click();
+        return this;
+    }
+
+    public SidebarClientComponent objects() {
+        objectsAndEquipmentLinkLocator.shouldBe(visible).click();
+        return this;
+    }
+
+    public SidebarClientComponent orders() {
+        clickOrdersAndInvoicesDropdown();
+        ordersListLinkLocator.shouldBe(visible);
+        ordersListLinkLocator.click();
+        return this;
+    }
+
+    public SidebarClientComponent invoices() {
+        clickOrdersAndInvoicesDropdown();
+        invoicesListLinkLocator.shouldBe(visible);
+        invoicesListLinkLocator.click();
+        return this;
+    }
+
+    /*public SidebarClientComponent isVisibleHomeButton() {
+        homeLinkLocator.shouldBe(visible);
+        return this;
+    }
+
+
+    public SidebarClientComponent isVisibleObjectsAndEquipment() {
+        objectsAndEquipmentLinkLocator.shouldBe(visible);
+        return this;
+    }
+
+
+
     public SidebarClientComponent isVisibleOrdersList() {
-        ordersListLocator.shouldBe(visible);
+        ordersListLinkLocator.shouldBe(visible);
         return this;
     }
 
     public SidebarClientComponent isVisibleInvoicesList() {
-        invoicesListLocator.shouldBe(visible);
+        invoicesListLinkLocator.shouldBe(visible);
         return this;
     }
 
     public SidebarClientComponent isVisibleProfile() {
-        profileLocator.shouldBe(visible);
+        profileLinkLocator.shouldBe(visible);
         return this;
     }
 
     public SidebarClientComponent isVisibleSupportServiceHeadline() {
-        supportServiceHeadlineLocator.shouldBe(visible);
+        supportServiceTitleLocator.shouldBe(visible);
         return this;
     }
 
@@ -95,17 +116,7 @@ public class SidebarClientComponent {
         supportServiceEmailLocator.shouldHave(text(SUPPORT_SERVICE_EMAIL)).shouldBe(visible);
         return this;
     }
+*/
 
 
-    public SidebarClientComponent clickOrdersList() {
-        ordersListLocator.shouldBe(visible);
-        ordersListLocator.click();
-        return this;
-    }
-
-    public SidebarClientComponent clickInvoicesList() {
-        invoicesListLocator.shouldBe(visible);
-        invoicesListLocator.click();
-        return this;
-    }
 }

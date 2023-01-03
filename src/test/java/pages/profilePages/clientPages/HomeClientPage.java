@@ -4,12 +4,11 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.clientComponents.LastOrderProfileClientComponent;
-import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
-public class ProfileClientPage {
+public class HomeClientPage extends BaseClientPage {
 
 
 
@@ -18,7 +17,7 @@ public class ProfileClientPage {
 
     private final String OBJECTS_TITLE = "Объекты и оборудование";
     public LastOrderProfileClientComponent lastOrder = new LastOrderProfileClientComponent();
-    public SidebarClientComponent sidebar = new SidebarClientComponent();
+//    public SidebarClientComponent sidebar = new SidebarClientComponent();
 
 
     String ClientName = "Шингелевич Игорь Сергеевич";
@@ -51,7 +50,7 @@ public class ProfileClientPage {
 
 
     //  open
-    public ProfileClientPage open() {
+    public HomeClientPage open() {
         Selenide.open("/profile/client");
         profileCardNameLocator.shouldBe(visible);
 
@@ -59,39 +58,39 @@ public class ProfileClientPage {
     }
 
 
-    public ProfileClientPage isOpened() {
+    public HomeClientPage isOpened() {
         profileCardNameLocator.shouldBe(visible);
         return this;
     }
 
     //  profile card
 
-    public ProfileClientPage verifyProfileClientName(String clientName) {
+    public HomeClientPage verifyProfileClientName(String clientName) {
         profileCardNameLocator.shouldHave(text(clientName)).shouldBe(visible);
         return this;
     }
 
-    public ProfileClientPage verifyProfileClientSinceDate(String sinceDate) {
+    public HomeClientPage verifyProfileClientSinceDate(String sinceDate) {
         profileCardSinceDateLocator.shouldHave(text(sinceDate)).shouldBe(visible);
         return this;
     }
 
-    public ProfileClientPage verifyProfileClientRating(String rating) {
+    public HomeClientPage verifyProfileClientRating(String rating) {
         profileCardRatingLocator.shouldHave(text(rating)).shouldBe(visible);
         return this;
     }
 
-    public ProfileClientPage verifyProfileClientReviews(String reviews) {
+    public HomeClientPage verifyProfileClientReviews(String reviews) {
         profileCardReviewsLocator.shouldHave(text(reviews)).shouldBe(visible);
         return this;
     }
 
-    public ProfileClientPage verifyProfileClientImage(String image) {
+    public HomeClientPage verifyProfileClientImage(String image) {
         profileCardImageLocator.shouldHave(attribute("src", image)).shouldBe(visible);
         return this;
     }
 
-    public ProfileClientPage clickLastOrderNumberLink() {
+    public HomeClientPage clickLastOrderNumberLink() {
         this.lastOrder.clickLastOrderNumberLink();
         return this;
     }
@@ -99,41 +98,41 @@ public class ProfileClientPage {
 
     // last order
 
-/*    public ProfileClientPage verifyLastOrderTitle(String title) {
+/*    public HomeClientPage verifyLastOrderTitle(String title) {
         lastOrderTitleLocator.shouldHave(text(title)).shouldBe(visible);
         return this;
     }*/
 
     //  objects
 
-    public ProfileClientPage verifyObjectsTitle(String title) {
+    public HomeClientPage verifyObjectsTitle(String title) {
         objectsTitleLocator.shouldHave(text(title)).shouldBe(visible);
         return this;
     }
 
-    public ProfileClientPage verifyObjectsPreviousButton(String previousButton) {
+    public HomeClientPage verifyObjectsPreviousButton(String previousButton) {
         objectsPreviousButtonLocator.shouldBe(visible);
         return this;
     }
 
 
-    public ProfileClientPage verifyObjectsNextButton(String nextButton) {
+    public HomeClientPage verifyObjectsNextButton(String nextButton) {
         objectsNextButtonLocator.shouldBe(visible);
         return this;
     }
 
-    public ProfileClientPage clickObjectsPreviousButton() {
+    public HomeClientPage clickObjectsPreviousButton() {
         objectsPreviousButtonLocator.shouldBe(visible).click();
         return this;
     }
 
-    public ProfileClientPage clickObjectsNextButton() {
+    public HomeClientPage clickObjectsNextButton() {
         objectsNextButtonLocator.shouldBe(visible).click();
         return this;
     }
 
 
-    public ProfileClientPage goto1thObjectActionButtonLocator() {
+    public HomeClientPage goto1thObjectActionButtonLocator() {
         actionButtonCollection.get(3).hover();
 //        actionMenuCollection.get(3).shouldBe(visible); //not working - menu collection is not visible
         actionButtonCollection.get(3).click();

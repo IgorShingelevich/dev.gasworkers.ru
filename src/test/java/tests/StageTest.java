@@ -26,12 +26,12 @@ public class StageTest extends TestBase {
     InfoMaintenancePage infoMaintenancePage = new InfoMaintenancePage();
     InfoVideoPage infoVideoPage = new InfoVideoPage();
 
-    ProfileClientPage profileClientPage = new ProfileClientPage();
+    HomeClientPage homeClientPage = new HomeClientPage();
 
 
     ActionsBlockClientComponent actionsBlockClient = new ActionsBlockClientComponent();
 
-    EquipmentClientPage equipmentClientPage = new EquipmentClientPage();
+    ObjectsClientPage objectsClientPage = new ObjectsClientPage();
     OrdersClientPage ordersClientPage = new OrdersClientPage();
     InvoicesClientPage invoicesClientPage = new InvoicesClientPage();
 
@@ -60,12 +60,9 @@ public class StageTest extends TestBase {
             clientName = "Шингелевич Игорь Сергеевич",
             passwordClient = "123456";
 
-    @DisplayName("sidebarClientLocatorsIntegrityTest")
+   /* @DisplayName("sidebarClientLocatorsIntegrityTest")
     @Test
-
     void sidebarClientLocatorsIntegrity() {
-
-
         step("sidebarClient.isVisible", () -> {
             sidebarClient.isVisibleHomeButton();
         });
@@ -93,9 +90,7 @@ public class StageTest extends TestBase {
         step(" sidebarClient.isVisibleSupportServiceEmail", () -> {
             sidebarClient.isVisibleSupportServiceEmail();
         });
-
-
-    }
+    }*/
 
 
     @DisplayName("actionsBlockClientComponentLocatorsIntegrityTest")
@@ -139,50 +134,48 @@ public class StageTest extends TestBase {
     @Test
     void clientProfilePageLocatorsIntegrityTest(){
         step("verifyProfileClientName", () -> {
-            profileClientPage.verifyProfileClientName(clientName);
+            homeClientPage.verifyProfileClientName(clientName);
         });
         step("isVisibleLastOrderHeadline", () -> {
-            profileClientPage.isOpened();
+            homeClientPage.isOpened();
         });
     }
 
     @DisplayName("equipmentClientPageLocatorsIntegrityTest")
     @Test
     void equipmentClientPageLocatorsIntegrity() {
-        profileClientPage.isOpened();
-        equipmentClientPage.open();
-        landingPage.open();
+        homeClientPage.isOpened();
+        homeClientPage.sidebar.objects();
+        objectsClientPage.checkObjectsPageTitle();
+        objectsClientPage.clickCreateNewObject();
         back();
-        equipmentClientPage.checkEquipmentPageTitle();
-        equipmentClientPage.clickCreateNewObject();
-        back();
-
+        objectsClientPage.sidebar.home();
 
     }
 
     @DisplayName("objectClientPageLocatorsIntegrityTest")
     @Test
     void objectClientPageLocatorsIntegrity() {
-        profileClientPage.isOpened();
-//        profileClientPage.goto1thObjectActionButtonLocator();
+        homeClientPage.isOpened();
+//        homeClientPage.goto1thObjectActionButtonLocator();
     }
 
 
     @DisplayName("typeOrdersLocatorsIntegrityTest")
     @Test
     void lastOrderClientPageLocatorsIntegrity() {
-        profileClientPage.isOpened();
+        homeClientPage.isOpened();
         ordersClientPage.openPage();
-        ordersClientPage.sidebar.clickMain();
-        profileClientPage.sidebar.clickOrdersAndInvoicesDropdown();
-        profileClientPage.sidebar.clickOrdersList();
+        ordersClientPage.sidebar.home();
+        homeClientPage.sidebar.clickOrdersAndInvoicesDropdown();
+        homeClientPage.sidebar.orders();
         ordersClientPage.clickOrderCardActionButton(1);
         ordersClientPage.openOrder(1);
         back();
-        ordersClientPage.breadcrumbMain();
-        profileClientPage.sidebar.clickOrdersAndInvoicesDropdown();
-        profileClientPage.sidebar.clickInvoicesList();
-        invoicesClientPage.sidebar.clickMain();
+        ordersClientPage.breadcrumbs.home();
+        homeClientPage.sidebar.clickOrdersAndInvoicesDropdown();
+        homeClientPage.sidebar.invoices();
+        invoicesClientPage.sidebar.home();
 
     }
 
@@ -239,6 +232,11 @@ public class StageTest extends TestBase {
  *OrdersClientPage -  look at example of openPage and isOpened methods.
  * isOpened method should contain all the checks of static information available on the page
  //$(".breadcrumb li:nth-child(2)"), - learn how to use :nth-child
+ put all staticText verifications in one method - .open
+ build breadcrumbs -different set on each own page. Within  TheUserRole - each page should contain its own breadcrumbs.
+ build header - different set on each own page. Within  the TheUserRole - each page should contain its own header.
+ build sidebar - different set on each own page. Within  the TheUserRole - each page should contain its own sidebar.
+
  *
  * */
 

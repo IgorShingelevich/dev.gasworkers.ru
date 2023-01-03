@@ -2,14 +2,12 @@ package pages.profilePages.clientPages;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
-public class EquipmentClientPage {
-    // exemplar of pages.profile.client.ProfileClientPage
-    ProfileClientPage profileClientPage = new ProfileClientPage();
+public class ObjectsClientPage extends BaseClientPage {
+    // exemplar of pages.profile.client.HomeClientPage
 
 
     /**<div class="page-content" data-v-35550176=""> <button class="mb-4 btn btn-primary disable-outline" data-v-6d08f792="" data-v-ef75ca32="" data-v-35550176="">
@@ -127,11 +125,10 @@ public class EquipmentClientPage {
      </div></div></div> <div class="address" data-v-9e3fa99c=""><div class="title" data-v-9e3fa99c="">Адрес объекта:</div> <div class="address-string" data-v-9e3fa99c="">Россия, Московская область, Люберцы</div></div></div></div></div></div></div>
      * */
 
-    SidebarClientComponent sidebarClientComponent = new SidebarClientComponent();
 
-    private final String EQUIPMENT_PAGE_TITLE_TEXT = "Объекты и оборудование";
+    private final String OBJECTS_PAGE_TITLE_TEXT = "Объекты и оборудование";
 
-    SelenideElement equipmentPageTitleLocator = $(".page-title"),
+    SelenideElement objectsPageTitleLocator = $(".page-title"),
 
     createNewObjectButtonLocator = $x("//button[@class='mb-4 btn btn-primary disable-outline'][contains(.,'Создать объект')]"),
                             //$(".button"),
@@ -147,16 +144,16 @@ public class EquipmentClientPage {
 
 
 
-    public EquipmentClientPage open() {
+    public ObjectsClientPage open() {
 
         Selenide.open("/equipment");
-        checkEquipmentPageTitle();
+        checkObjectsPageTitle();
 
         return this;
     }
 
-    public void checkEquipmentPageTitle() {
-        equipmentPageTitleLocator.shouldHave(text(EQUIPMENT_PAGE_TITLE_TEXT));
+    public void checkObjectsPageTitle() {
+        objectsPageTitleLocator.shouldHave(text(OBJECTS_PAGE_TITLE_TEXT));
     }
 
     public void clickCreateNewObject() {

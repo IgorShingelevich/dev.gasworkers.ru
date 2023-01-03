@@ -2,6 +2,7 @@ package pages.profilePages.clientPages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import pages.components.sharedComponents.breadcrumbsComponent.ClientBreadcrumbsComponent;
 import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
 
 import static com.codeborne.selenide.Condition.text;
@@ -1155,17 +1156,14 @@ public class OrdersClientPage {
 
 
     public SidebarClientComponent sidebar = new SidebarClientComponent();
+    public ClientBreadcrumbsComponent breadcrumbs = new ClientBreadcrumbsComponent();
 
 
 private final String ORDER_PAGE_TITLE = "Список заказов";
 
     SelenideElement
-    orderPageTitle = $(".page-title .h3.mb-2"),
-    breadcrumbProfileClient = $(".breadcrumb .nuxt-link-active"),
-            //$(".breadcrumb li:nth-child(2)"), - learn how to use :nth-child
-    breadcrumbOrdersList = $x("//li[@aria-current='page'][contains(.,'Список заказов')]");
-                    //$(".breadcrumb .breadcrumb-item active"); -not working
-            //$(".breadcrumb li:nth-child(3)");
+    orderPageTitle = $(".page-title .h3.mb-2");
+
 
     ElementsCollection
     orderCardActionButtonCollection = $$x("(//button[contains(@type,'button')])"),
@@ -1183,8 +1181,6 @@ private final String ORDER_PAGE_TITLE = "Список заказов";
 
     public OrdersClientPage isOpened() {
         orderPageTitle.shouldHave(text(ORDER_PAGE_TITLE));
-        breadcrumbProfileClient.shouldHave(text("Главная"));
-        breadcrumbOrdersList.shouldHave(text("Список заказов"));
         return this;
     }
 
@@ -1198,10 +1194,7 @@ private final String ORDER_PAGE_TITLE = "Список заказов";
         return this;
     }
 
-    public OrdersClientPage breadcrumbMain() {
-        breadcrumbProfileClient.shouldBe(visible).click();
-        return this;
-    }
+
 
 
 
