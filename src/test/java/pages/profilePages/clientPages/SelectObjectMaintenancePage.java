@@ -5,7 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
-public class SelectMaintenanceObjectPage {
+public class SelectObjectMaintenancePage {
 
     SelenideElement
             selectObjectTitleLocator = $("p.h3"),
@@ -18,24 +18,24 @@ public class SelectMaintenanceObjectPage {
 
 
 
-    public SelectMaintenanceObjectPage isOpened() {
+    public SelectObjectMaintenancePage isOpened() {
         selectObjectTitleLocator.shouldBe(visible);
         return this;
     }
 
-    public SelectMaintenanceObjectPage pick1thObject() {
+    public SelectObjectMaintenancePage pick1thObject() {
         Object1ButtonLocator.shouldBe(visible).click();
 //        selectDatePageTitleLocator.shouldBe(visible);
         return this;
     }
 
-    public SelectMaintenanceObjectPage clickObject2Button() {
+    public SelectObjectMaintenancePage clickObject2Button() {
         Object2ButtonLocator.shouldBe(visible).click();
 //        selectDatePageTitleLocator.shouldBe(visible);
         return this;
     }
 
-    public SelectMaintenanceObjectPage clickObject3Button() {
+    public SelectObjectMaintenancePage clickObject3Button() {
         Object3ButtonLocator.shouldBe(visible).click();
 //        selectDatePageTitleLocator.shouldBe(visible);
         return this;

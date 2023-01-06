@@ -2,7 +2,6 @@ package pages.components.clientComponents;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import pages.profilePages.clientPages.SelectDateClientPage;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;

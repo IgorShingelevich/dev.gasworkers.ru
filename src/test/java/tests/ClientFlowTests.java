@@ -1,11 +1,14 @@
 package tests;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import pages.LandingPage;
-import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
 import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 import pages.components.sharedComponents.headerComponents.ProfileHeaderComponent;
 import pages.components.sharedComponents.headerComponents.actionblockComponents.ActionsBlockClientComponent;
+import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
 import pages.profilePages.NotificationsPage;
 import pages.profilePages.clientPages.*;
 import pages.profilePages.clientPages.cancelPage.CancelMaintenancePage;
@@ -13,13 +16,9 @@ import pages.profilePages.clientPages.infoServicesPage.InfoMaintenancePage;
 import pages.profilePages.clientPages.infoServicesPage.InfoRepairPage;
 import pages.profilePages.clientPages.infoServicesPage.InfoVideoPage;
 
-
 import static com.codeborne.selenide.Selenide.*;
-import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.switchTo;
-import static io.qameta.allure.Allure.step;
 
-public class StageTest extends TestBase {
+public class ClientFlowTests extends TestBase {
 
     SidebarClientComponent sidebarClient = new SidebarClientComponent();
     pages.LoginPage loginPage = new pages.LoginPage();
@@ -66,6 +65,20 @@ public class StageTest extends TestBase {
             passwordClient = "123456";
 
 
+
+
+
+    @DisplayName("CreateNewObject")
+    @Test
+    void CreateNewObject() {
+        homeClientPage.sidebar.objects();
+        objectsClientPage.checkObjectsPageTitle();
+        objectsClientPage.clickCreateNewObject();
+        back();
+        objectsClientPage.sidebar.home();
+    }
+
+
      @DisplayName("switchToNewTab")
     @Test
     void switchToNewTab() {
@@ -76,31 +89,47 @@ public class StageTest extends TestBase {
         switchTo().window(0);
     }
 
-    @DisplayName("searchByPartialText")
+
+    @DisplayName("ClientPlaceMaintenanceRequestAndCancel")
 //    @Disabled
     @Test
-    void searchByPartialText  (){
-        homeClientPage.newMethod();
+    void ClientPlaceMaintenanceRequestAndCancel() {
+        homeClientPage.placeOrder();
+        typeOrdersPage.Maintenance();
+        infoMaintenancePage.nextButton();
+        selectObjectMaintenancePage.pick1thObject();
+        selectDateMaintenanceClientPage.pickNowDateAM();
+        selectDateMaintenanceClientPage.submitOrder();
+        selectServicePage.isOpened();
+        selectServicePage.toOrder();
+        orderClientPage.toMap();
+        selectServicePage.toOrder();
+        orderClientPage.cancelOrder();
+        cancelMaintenancePage.noButton();
+        orderClientPage.cancelOrder();
+        cancelMaintenancePage.yesButton();
+        homeClientPage.isOpened();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
 }
 
 
-/**questions
- * flex after html elements. How flex affects the Locators elements
- * list of devtools shortcuts
- *OrdersClientPage -  look at example of openPage and isOpened methods.
- * isOpened method should contain all the checks of static information available on the page
- //$(".breadcrumb li:nth-child(2)"), - learn how to use :nth-child
- put all staticText verifications in one method - .open
- build breadcrumbs -different set on each own page. Within  TheUserRole - each page should contain its own breadcrumbs.
- build header - different set on each own page. Within  the TheUserRole - each page should contain its own header.
- build sidebar - different set on each own page. Within  the TheUserRole - each page should contain its own sidebar.
 
- *
- * */
 
 
 

@@ -49,10 +49,12 @@ public void open() {
         emailFieldLocator.shouldBe(interactable);
         emailFieldLocator.shouldBe(visible);
         emailFieldLocator.click();
-        emailFieldLocator.clear();
-        emailFieldLocator.sendKeys(emailClient);
-//        emailFieldLocator.setValue(emailClient);
         emailFieldLocator.pressEnter();
+        emailFieldLocator.sendKeys(emailClient);
+        emailFieldLocator.clear();
+        emailFieldLocator.setValue(emailClient);
+        emailFieldLocator.pressEnter();
+        emailFieldLocator.shouldHave(value(emailClient));
         passwordFieldLocator.shouldBe(interactable);
         passwordFieldLocator.shouldBe(editable);
         passwordFieldLocator.click();

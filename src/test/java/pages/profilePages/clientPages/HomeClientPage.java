@@ -81,12 +81,6 @@ public class HomeClientPage extends BaseClientPage {
 
 
 
-
-
-
-
-
-
     public HomeClientPage clickLastOrderNumberLink() {
         this.lastOrder.clickLastOrderNumberLink();
         return this;
@@ -121,6 +115,12 @@ public class HomeClientPage extends BaseClientPage {
         return this;
     }
 
+
+   // method that verify that locator objectsTitleLocator contains text "Объекты и" anywhere inside
+    public HomeClientPage  newMethod() {
+        objectsTitleLocator.shouldHave(text("Объекты и"));
+        return this;
+    }
 
 
 

@@ -15,81 +15,92 @@ public class ActionsBlockClientComponent {
      Выйти <span data-v-af68ad0e="" class="back-ic"></span></button></div></div></div>
      * */
 
-    SelenideElement actionsBlock = $(".actions-block");
+    SelenideElement
+            mainPageTitleLocator = $(".primary-header"),
 
-    public SelenideElement notificationsLinkLocator = $x("//div[@class='actions-block']//div[@class='notifications icon']");//$(".notifications icon");
+            actionsBlock = $(".actions-block"),
 
-    public SelenideElement messagesLinkLocator = $x("//div[@class='messages icon']"); // $(".messages icon");
+            notificationsButtonLocator = $x("//div[@class='actions-block']//div[@class='notifications icon']"),//$(".notifications icon");
 
-    public SelenideElement dropdownLocator = $(".actions-block .arrow-down");
-    public SelenideElement dropdown2Locator = $(".profile.icon");
+             messagesButtonLocator = $x("//div[@class='messages icon']"), // $(".messages icon");
 
-    public SelenideElement profileNameABLocator = $(".profile-menu .profile-menu__link.text-primary");
+            dropdownArrowLocator = $(".actions-block .arrow-down"),
+             dropdown2Locator = $(".profile.icon"),
+
+             profileNameABLocator = $(".profile-menu .profile-menu__link.text-primary"),
         //$x("//div[contains(@class, 'text-primary')]"); // $(".profile-menu__link text-primary");
 
-    public SelenideElement linkProfileEditABLocator = $x("//a[@href='/profile/edit']"); //
+            linkProfileEditABLocator = $x("//a[@href='/profile/edit']"),
 
-    public SelenideElement linkReviewABLocator = $x("//a[@href='/profile/reviews']");
+            linkReviewABLocator = $x("//a[@href='/profile/reviews']"),
 
-    public SelenideElement linkLogoutABLocator = $$("button.profile-menu__link").findBy(text("Выйти"));
-            // $(".profile-wrap active .back-ic");
-            //$$("button.profile-menu__link").findBy(text("Выйти"));
-    //$x("//button[contains(text(), 'Выйти')]");
-    // $$x(("//button[contains(text(),'Выйти')]")).get(0);
-    //
-        //$x("//button[@class='profile-menu__link'][contains(.,'Выйти')]");
-    //$x("//div[@class='actions-block']
-        // div[@class='profile-menu__link'] //button");
+            linkLogoutABLocator = $$("button.profile-menu__link").findBy(text("Выйти"));
+                    // $(".profile-wrap active .back-ic");
+                    //$$("button.profile-menu__link").findBy(text("Выйти"));
+            //$x("//button[contains(text(), 'Выйти')]");
+            // $$x(("//button[contains(text(),'Выйти')]")).get(0);
+            //
+                //$x("//button[@class='profile-menu__link'][contains(.,'Выйти')]");
+            //$x("//div[@class='actions-block']
+                // div[@class='profile-menu__link'] //button");
 
-    SelenideElement mainPageHeaderLocator = $(".primary-header");
+
+
+
+    public ActionsBlockClientComponent notificationsButton() {
+        notificationsButtonLocator.shouldBe(visible).click();
+        return this;
+    }
+
+    public ActionsBlockClientComponent messagesButton() {
+        messagesButtonLocator.shouldBe(visible).click();
+        return this;
+    }
 
 
 
 
     public ActionsBlockClientComponent clickDropdown() {
-        dropdownLocator.shouldBe(interactable);
-        dropdownLocator.click();
+        dropdownArrowLocator.shouldBe(interactable);
+        dropdownArrowLocator.click();
         return this;
     }
 
-    public ActionsBlockClientComponent clickDropdown2() {
+    /*public ActionsBlockClientComponent clickDropdown2() {
         dropdown2Locator.shouldBe(interactable);
         dropdown2Locator.click();
         return this;
-    }
+    }*/
 
-    /*public ActionsBlockClientComponent isVisibleProfileName(String clientName) {
-        profileNameABLocator.shouldHave(text(clientName)).shouldBe(visible);
-        return this;
-    } */
+
 
     public ActionsBlockClientComponent logout() {
-        dropdownLocator.shouldBe(exist);
-        dropdownLocator.shouldBe(interactable);
-        dropdownLocator.click();
+        dropdownArrowLocator.shouldBe(exist);
+        dropdownArrowLocator.shouldBe(interactable);
+        dropdownArrowLocator.click();
         linkLogoutABLocator.shouldBe(exist);
         linkLogoutABLocator.shouldBe(interactable);
         linkLogoutABLocator.click();
-        mainPageHeaderLocator.shouldBe(visible);
+        mainPageTitleLocator.shouldBe(visible);
 
         return this;
     }
     public ActionsBlockClientComponent verifyLocators() {
         actionsBlock.shouldBe(visible);
-        notificationsLinkLocator.shouldBe(visible);
-        messagesLinkLocator.shouldBe(visible);
+        notificationsButtonLocator.shouldBe(visible);
+        messagesButtonLocator.shouldBe(visible);
         profileNameABLocator.shouldBe(hidden);
         linkProfileEditABLocator.shouldBe(hidden);
         linkReviewABLocator.shouldBe(hidden);
         linkLogoutABLocator.shouldBe(hidden);
-        dropdownLocator.shouldBe(visible);
+        dropdownArrowLocator.shouldBe(visible);
         dropdown2Locator.shouldBe(visible);
-        dropdownLocator.click();
+        dropdownArrowLocator.click();
         profileNameABLocator.shouldBe(visible);
         linkProfileEditABLocator.shouldBe(visible);
         linkReviewABLocator.shouldBe(visible);
         linkLogoutABLocator.shouldBe(visible);
-        dropdownLocator.click();
+        dropdownArrowLocator.click();
         return this;
     }
 

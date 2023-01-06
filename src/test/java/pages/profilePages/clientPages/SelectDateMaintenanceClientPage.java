@@ -2,6 +2,7 @@ package pages.profilePages.clientPages;
 
 import com.codeborne.selenide.SelenideElement;
 import pages.components.clientComponents.DatePickerOrderComponent;
+import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 import utils.RandomUtils;
 
 import static com.codeborne.selenide.Condition.text;
@@ -9,7 +10,9 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
 
-public class SelectDateClientPage {
+public class SelectDateMaintenanceClientPage {
+
+    public FocusHeaderComponent header = new FocusHeaderComponent();
 
     DatePickerOrderComponent datePicker = new DatePickerOrderComponent();
     private final String SELECT_DATE_TITLE = "Выберите желаемую дату (диапазон дат) и время приезда мастера";
@@ -21,21 +24,21 @@ public class SelectDateClientPage {
         swapObjectLinkLocator = $x("//a[@href='#']");
 
 
-    public SelectDateClientPage isOpened() {
+    public SelectDateMaintenanceClientPage isOpened() {
         titleLocator.shouldBe(visible).shouldHave(text(SELECT_DATE_TITLE));
         return this;
     }
 
-    public SelectDateClientPage submitOrder() {
+    public SelectDateMaintenanceClientPage submitOrder() {
         submitButtonLocator.shouldBe(visible).click();
         return this;
     }
 
-    public SelectDateClientPage clickSelectDatePageChangeObjectButton() {
+    public SelectDateMaintenanceClientPage clickSelectDatePageChangeObjectButton() {
         swapObjectLinkLocator.shouldBe(visible).click();
         return this;
     }
-    public SelectDateClientPage pickNowDateAM() {
+    public SelectDateMaintenanceClientPage pickNowDateAM() {
         datePicker.setDate(RandomUtils.getNowDate());
         datePicker.setAMTime();
         return this;

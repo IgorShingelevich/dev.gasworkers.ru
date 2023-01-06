@@ -13,11 +13,11 @@ import ru.sms_activate.*;
 
 public class SMSActivate {
 
-private static final String
+public static final String
         APIKEY =  "7424Adff2b7241e6b15e1cbdfdf25773";
-    private static final String BASEURI = "https://api.sms-activate.org/stubs/handler_api.php";
+public static final String BASEURI = "https://api.sms-activate.org/stubs/handler_api.php";
 
-  private static final int RENTID = 8148860;
+public static final int RENTID = 8148860;
 SMSActivateApi managerSMS = new SMSActivateApi(APIKEY);
 
     public static void main(String[] args) throws SMSActivateBaseException {
@@ -45,21 +45,18 @@ SMSActivateApi managerSMS = new SMSActivateApi(APIKEY);
         System.out.println("REST-ASSURED getActiveActivations ResponseBody is =>  " + responseBodyActiveActivations);
 
 
-        RequestSpecification httpStatusRequest = RestAssured.given()
+        RequestSpecification httpRentStatusRequest = RestAssured.given()
                 .queryParam("api_key", APIKEY)
                 .queryParam("action", "getRentStatus")
                 .queryParam("id", RENTID);
-        Response responseStatus = httpStatusRequest.request(Method.GET, "");
-        int statusCodeStatus = responseStatus.getStatusCode();
-        System.out.println("REST-ASSURED getStatus StatusCode is =>  " + statusCodeStatus);
-        String responseBodyStatus = responseStatus.getBody().asString();
-        System.out.println("REST-ASSURED getStatus ResponseBody is =>  " + responseBodyStatus);
+        Response responseRentStatus = httpRentStatusRequest.request(Method.GET, "");
+        int statusCodeRentStatus = responseRentStatus.getStatusCode();
+        System.out.println("REST-ASSURED getRentStatus StatusCode is =>  " + statusCodeRentStatus);
+        String responseBodyRentStatus = responseRentStatus.getBody().asString();
+        System.out.println("REST-ASSURED getRentStatus ResponseBody is =>  " + responseBodyRentStatus);
 
 
     }
-
-
-
 
     public String getSMSActivateRentList() throws SMSActivateBaseException {
         SMSActivateGetRentListResponse rentListResponse = managerSMS.getRentList();
@@ -68,6 +65,10 @@ SMSActivateApi managerSMS = new SMSActivateApi(APIKEY);
     public BigDecimal getSMSActivateAccountBalance() throws SMSActivateBaseException {
         return managerSMS.getBalance();
     }
+
+
+
+
 
 
 
