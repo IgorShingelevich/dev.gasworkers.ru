@@ -11,7 +11,7 @@ import ru.sms_activate.*;
 
         import java.math.BigDecimal;
 
-public class SMSActivate {
+public class SMSActivateUtil {
 
 public static final String
         APIKEY =  "7424Adff2b7241e6b15e1cbdfdf25773";
@@ -21,9 +21,9 @@ public static final int RENTID = 8148860;
 SMSActivateApi managerSMS = new SMSActivateApi(APIKEY);
 
     public static void main(String[] args) throws SMSActivateBaseException {
-        SMSActivate smsActivate = new SMSActivate();
-        System.out.println("witAPI getRentList " + smsActivate.getSMSActivateRentList());
-        System.out.println("withAPI getBalance " + smsActivate.getSMSActivateAccountBalance());
+        SMSActivateUtil smsActivateUtil = new SMSActivateUtil();
+        System.out.println("witAPI getRentList " + smsActivateUtil.getSMSActivateRentList());
+        System.out.println("withAPI getBalance " + smsActivateUtil.getSMSActivateAccountBalance());
         RestAssured.baseURI = BASEURI;
         RequestSpecification httpBalanceRequest = RestAssured.given()
                 .queryParam("api_key", APIKEY)

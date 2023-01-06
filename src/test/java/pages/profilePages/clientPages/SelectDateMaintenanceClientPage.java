@@ -3,7 +3,7 @@ package pages.profilePages.clientPages;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.clientComponents.DatePickerOrderComponent;
 import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
-import utils.RandomUtils;
+import utils.RandomUtil;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -39,7 +39,7 @@ public class SelectDateMaintenanceClientPage {
         return this;
     }
     public SelectDateMaintenanceClientPage pickNowDateAM() {
-        datePicker.setDate(RandomUtils.getNowDate());
+        datePicker.setDate(RandomUtil.getNowDate());
         datePicker.setAMTime();
         return this;
     }

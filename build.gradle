@@ -42,7 +42,9 @@ def selenideVersion = '6.10.1',
     javafakerVersion = '1.0.2',
     icu4j = '51.1',
     SMSActivateApiVersion = '1.5.9',
-    restassured = '5.3.0'
+    restassured = '5.3.0',
+    jacksonCore ='2.14.1',
+    jacksonDatabind = '2.14.1'
 
 
 
@@ -57,7 +59,10 @@ dependencies {
             "org.junit.jupiter:junit-jupiter:$junitJupiterVersion",
             "org.slf4j:slf4j-simple:$slf4jVersion",
             "ru.sms-activate:SMSActivateApi:$SMSActivateApiVersion",
-            "io.rest-assured:rest-assured:$restassured"
+            "io.rest-assured:rest-assured:$restassured",
+            "com.fasterxml.jackson.core:jackson-core:$jacksonCore",
+            "com.fasterxml.jackson.core:jackson-databind:$jacksonDatabind"
+
     )
 }
 

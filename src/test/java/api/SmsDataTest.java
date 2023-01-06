@@ -6,8 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.RestAssured.when;
-import static utils.SMSActivate.*;
+import static utils.SMSActivateUtil.*;
 
 public class SmsDataTest {
 

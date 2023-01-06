@@ -109,6 +109,8 @@ public class ClientFlowTests extends TestBase {
         orderClientPage.cancelOrder();
         cancelMaintenancePage.yesButton();
         homeClientPage.isOpened();
+        forward();
+        back();
     }
 
 
