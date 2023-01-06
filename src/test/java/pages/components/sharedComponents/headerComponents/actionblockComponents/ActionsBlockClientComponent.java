@@ -7,13 +7,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class ActionsBlockClientComponent {
 
-    /**<div data-v-af68ad0e="" class="actions-block"><div data-v-af68ad0e="" class="notifications icon"><!----></div> <div data-v-af68ad0e="" class="messages icon"><!----></div> <div data-v-af68ad0e="" class="profile-wrap active"><div data-v-af68ad0e="" class="profile icon"></div> <span data-v-af68ad0e="" class="arrow-down"></span> <div data-v-af68ad0e="" class="profile-menu"><div data-v-af68ad0e="" class="profile-menu__link text-primary">Шингелевич Игорь Сергеевич</div> <hr data-v-af68ad0e=""> <a data-v-af68ad0e="" href="/profile/edit" class="profile-menu__link">
-     Профиль
-     </a> <a data-v-af68ad0e="" href="/profile/reviews" class="profile-menu__link">
-     Мои отзывы
-     </a> <!----> <hr data-v-af68ad0e=""> <button data-v-af68ad0e="" class="profile-menu__link">
-     Выйти <span data-v-af68ad0e="" class="back-ic"></span></button></div></div></div>
-     * */
+
 
     SelenideElement
             mainPageTitleLocator = $(".primary-header"),

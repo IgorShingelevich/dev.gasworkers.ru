@@ -12,6 +12,7 @@ public class ValidationCodeExtractor {
     public static void main(String[] args) throws IOException {
         // Read the sms.json file and parse it into a Java object
         ObjectMapper mapper = new ObjectMapper();
+//        Map<String, Object> smsMap = mapper.readValue(new File("src/test/java/resources/sms.json"), new TypeReference<Map<String, Object>>() {});
         Map<String, Object> smsMap = mapper.readValue(new File("src/test/java/resources/sms.json"), new TypeReference<Map<String, Object>>() {});
 
         // Get the list of SMS messages

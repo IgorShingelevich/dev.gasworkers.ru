@@ -106,11 +106,13 @@ public class ClientFlowTests extends TestBase {
         selectServicePage.toOrder();
         orderClientPage.cancelOrder();
         cancelMaintenancePage.noButton();
+        orderClientPage.isOpened();
+        orderClientPage.toMap();
+        selectServicePage.toOrder();
         orderClientPage.cancelOrder();
         cancelMaintenancePage.yesButton();
         homeClientPage.isOpened();
-        forward();
-        back();
+      
     }
 
 

@@ -3,6 +3,7 @@ package pages.profilePages.clientPages.cancelPage;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 
+import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$x;
@@ -26,6 +27,7 @@ public class CancelMaintenancePage {
     }
 
     public CancelMaintenancePage yesButton() {
+        yesButtonLocator.shouldBe(interactable).hover();
         yesButtonLocator.click();
         return this;
     }
