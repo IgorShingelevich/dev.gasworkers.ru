@@ -29,7 +29,7 @@ public class ClientFlowTests extends TestBase {
     ActionsBlockClientComponent actionsBlockClient = new ActionsBlockClientComponent();
     AllObjectsClientPage allObjectsClientPage = new AllObjectsClientPage();
     AllOrdersClientPage allOrdersClientPage = new AllOrdersClientPage();
-    OrderCardClientPage orderCardClientPage = new OrderCardClientPage();
+    LastOrderCardClientPage lastOrderCardClientPage = new LastOrderCardClientPage();
     ObjectCardClientPage objectCardClientPage = new ObjectCardClientPage();
     AllInvoicesClientPage allInvoicesClientPage = new AllInvoicesClientPage();
     LandingPage landingPage = new LandingPage();
@@ -80,16 +80,16 @@ public class ClientFlowTests extends TestBase {
         selectDateMaintenanceClientPage.submitOrder();
         selectServicePage.isOpened();
         selectServicePage.toOrder();
-        orderCardClientPage.toMap();
+        lastOrderCardClientPage.toMap();
         selectServicePage.isOpened();
         selectServicePage.toOrder();
-        orderCardClientPage.cancelOrder();
+        lastOrderCardClientPage.cancelOrder();
         cancelMaintenancePage.noButton();
-        orderCardClientPage.isOpened();
-        orderCardClientPage.toMap();
+        lastOrderCardClientPage.isOpened();
+        lastOrderCardClientPage.toMap();
         selectServicePage.isOpened();
         selectServicePage.toOrder();
-        orderCardClientPage.cancelOrder();
+        lastOrderCardClientPage.cancelOrder();
         cancelMaintenancePage.yesButton();
         homeClientPage.isOpened();
         homeClientPage.actionBlock.allNotifications();
@@ -117,14 +117,28 @@ public class ClientFlowTests extends TestBase {
     }
 
 
-
-
-
-
-
-
-
-
+    @Test
+    void pickFirstObjectMaintenance() {
+        homeClientPage.placeOrder();
+        typeOrdersPage.Maintenance();
+        infoMaintenancePage.nextButton();
+        selectObjectMaintenancePage.pick1thObject();
+        selectDateMaintenanceClientPage.pickNowDateAM();
+        selectDateMaintenanceClientPage.submitOrder();
+        selectServicePage.isOpened();
+        selectServicePage.toOrder();
+        lastOrderCardClientPage.toMap();
+        selectServicePage.isOpened();
+        selectServicePage.toOrder();
+        lastOrderCardClientPage.cancelOrder();
+        cancelMaintenancePage.yesButton();
+        homeClientPage.isOpened();
+        homeClientPage.actionBlock.allNotifications();
+        allNotificationsPage.isOpened();
+        allNotificationsPage.readAll();
+        allNotificationsPage.sidebar.home();
+        homeClientPage.isOpened();
+    }
 
 
 
@@ -133,6 +147,23 @@ public class ClientFlowTests extends TestBase {
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

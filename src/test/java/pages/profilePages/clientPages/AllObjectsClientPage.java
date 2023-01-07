@@ -74,3 +74,8 @@ public class AllObjectsClientPage extends BaseClientPage {
         return this;
     }
 }
+
+
+/*TODO
+*  rewrite random methods and moove from  Math random to ThreadLocalRandom, because Math.random() is not thread safe and can cause problems in parallel tests
+* */

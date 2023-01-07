@@ -81,7 +81,7 @@ public class HomeClientPage extends BaseClientPage {
 
 
 
-    public HomeClientPage clickLastOrderNumberLink() {
+    public HomeClientPage toLastOrder() {
         this.lastOrder.clickLastOrderNumberLink();
         return this;
     }
@@ -121,10 +121,6 @@ public class HomeClientPage extends BaseClientPage {
         objectsTitleLocator.shouldHave(text("Объекты и"));
         return this;
     }
-
-
-
-
 
 
 

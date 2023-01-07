@@ -12,7 +12,8 @@ SelenideElement
             logoLocator = $("#gas__content-header .logo"),
 //          $(".logo-wrap .logo"),
 
-            orderButtonLocator = $(".btn-block .small btn btn-warning disable-outline");
+
+            orderButtonLocator = $(".btn-block .small.btn.btn-warning.disable-outline");
 
 
     public ProfileHeaderComponent clickLogo() {
