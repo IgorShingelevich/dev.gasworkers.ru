@@ -99,9 +99,9 @@ public class ActionsBlockClientComponent {
     }
 
 
-
-
-
-
-
+    public ActionsBlockClientComponent allNotifications() {
+        notificationsButtonLocator.shouldBe(visible);
+        notificationsButtonLocator.click();
+        return this;
+    }
 }

@@ -9,7 +9,7 @@ import pages.LoginPage;
 import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 import pages.components.sharedComponents.headerComponents.actionblockComponents.ActionsBlockClientComponent;
 import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
-import pages.profilePages.NotificationsPage;
+import pages.profilePages.AllNotificationsPage;
 import pages.profilePages.clientPages.*;
 import pages.profilePages.clientPages.infoServicesPage.InfoMaintenancePage;
 import pages.profilePages.clientPages.infoServicesPage.InfoRepairPage;
@@ -24,13 +24,13 @@ public class ClientLocatorsTest extends TestBase {
 
     LandingPage landingPage = new LandingPage();
     HomeClientPage homeClientPage = new HomeClientPage();
-    OrdersClientPage ordersClientPage = new OrdersClientPage();
-    InvoicesClientPage invoicesClientPage = new InvoicesClientPage();
+    AllOrdersClientPage allOrdersClientPage = new AllOrdersClientPage();
+    AllInvoicesClientPage allInvoicesClientPage = new AllInvoicesClientPage();
     SidebarClientComponent sidebarClient = new SidebarClientComponent();
     FocusHeaderComponent focusHeader = new FocusHeaderComponent();
     ActionsBlockClientComponent actionsBlockClient = new ActionsBlockClientComponent();
     LoginPage loginPage = new LoginPage();
-    NotificationsPage notificationsPage = new NotificationsPage();
+    AllNotificationsPage allNotificationsPage = new AllNotificationsPage();
     InfoMaintenancePage infoMaintenancePage = new InfoMaintenancePage();
     InfoRepairPage infoRepairPage = new InfoRepairPage();
     InfoVideoPage infoVideoPage = new InfoVideoPage();
@@ -64,9 +64,9 @@ public class ClientLocatorsTest extends TestBase {
     @Test
     void notificationsPageLocatorIntegrityTest() {
         homeClientPage.actionBlock.notificationsButton();
-        notificationsPage.isOpened();
-        notificationsPage.verifyLocators();
-        notificationsPage.sidebar.home();
+        allNotificationsPage.isOpened();
+        allNotificationsPage.verifyLocators();
+        allNotificationsPage.sidebar.home();
     }
 
     @DisplayName("landingPageLocatorsIntegrityTest")
@@ -95,17 +95,17 @@ public class ClientLocatorsTest extends TestBase {
     @DisplayName("ordersAndInvoicesLocatorsIntegrityTest")
     @Test
     void ordersAndInvoicesLocatorsIntegrityTest() {
-        ordersClientPage.openPage();
-        ordersClientPage.sidebar.home();
+        allOrdersClientPage.openPage();
+        allOrdersClientPage.sidebar.home();
         homeClientPage.sidebar.clickOrdersAndInvoicesDropdown();
         homeClientPage.sidebar.orders();
-        ordersClientPage.clickOrderCardActionButton(1);
-        ordersClientPage.openOrder(1);
+        allOrdersClientPage.clickOrderCardActionButton(1);
+        allOrdersClientPage.openOrder(1);
         back();
-        ordersClientPage.breadcrumbs.home();
+        allOrdersClientPage.breadcrumbs.home();
         homeClientPage.sidebar.clickOrdersAndInvoicesDropdown();
         homeClientPage.sidebar.invoices();
-        invoicesClientPage.sidebar.home();
+        allInvoicesClientPage.sidebar.home();
     }
 
     @DisplayName("sidebarAndActionBlockClientLocatorsIntegrityTest")

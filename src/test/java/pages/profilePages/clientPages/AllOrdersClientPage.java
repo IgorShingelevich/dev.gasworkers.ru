@@ -6,10 +6,9 @@ import pages.components.sharedComponents.breadcrumbsComponent.ClientBreadcrumbsC
 import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
-public class OrdersClientPage {
+public class AllOrdersClientPage {
 
     /**<div data-v-7575453c="" class="content"><main data-v-7575453c=""><div data-v-7575453c="" class="page-content"><div data-v-fa438d6c="" data-v-7575453c="" class="w-100 d-flex justify-content-center flex-wrap"><div data-v-fa438d6c="" class="w-100"><!----></div> <!----> <!----></div> <!----> <div data-v-0e0ed747="" data-v-7575453c="" id="orders"><div data-v-35550176="" data-v-0e0ed747="" class="page-wrapper"><div data-v-35550176="" class="page-title"><div data-v-35550176="" class="row"><div data-v-35550176="" class="col-md-12"></div> <div data-v-35550176="" class="col-md-12"><h1 data-v-35550176="" class="h3 mb-2">Список заказов</h1> <div data-v-35550176="" class="nav"><nav data-v-35550176="" aria-label="breadcrumb"><ol data-v-35550176="" class="breadcrumb"><li data-v-35550176="" class="breadcrumb-item"><a data-v-35550176="" href="/profile/client" class="nuxt-link-active"><span data-v-35550176="" role="link">
      Главная
@@ -1173,23 +1172,23 @@ private final String ORDER_PAGE_TITLE = "Список заказов";
 
 
 
-    public OrdersClientPage openPage() {
+    public AllOrdersClientPage openPage() {
         open("/profile/client/orders");
         isOpened();
         return this;
     }
 
-    public OrdersClientPage isOpened() {
+    public AllOrdersClientPage isOpened() {
         orderPageTitle.shouldHave(text(ORDER_PAGE_TITLE));
         return this;
     }
 
-    public OrdersClientPage clickOrderCardActionButton(int orderCardNumber) {
+    public AllOrdersClientPage clickOrderCardActionButton(int orderCardNumber) {
         orderCardActionButtonCollection.get(orderCardNumber+1).click();
         return this;
     }
 
-    public OrdersClientPage openOrder(int orderCardNumber) {
+    public AllOrdersClientPage openOrder(int orderCardNumber) {
         orderCardOpenCollection.get(orderCardNumber-1).click();
         return this;
     }

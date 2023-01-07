@@ -5,6 +5,7 @@ import io.restassured.RestAssured;
 import io.restassured.http.Method;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import org.jetbrains.annotations.NotNull;
 import ru.sms_activate.*;
         import ru.sms_activate.error.base.SMSActivateBaseException;
         import ru.sms_activate.response.api_rent.SMSActivateGetRentListResponse;
@@ -30,6 +31,7 @@ SMSActivateApi managerSMS = new SMSActivateApi(APIKEY);
         SMSActivateUtil smsActivateUtil = new SMSActivateUtil();
         int rentId = smsActivateUtil.getIDbyPhoneNumber(userPhone);
         System.out.println("getLastSMS = " + smsActivateUtil.getLastSMS(userPhone));
+        smsActivateUtil.waitNewSMS(userPhone, 40);
         System.out.println("witAPI getUserId " + smsActivateUtil.getIDbyPhoneNumber(userPhone));
         System.out.println("withAPI getBalance " + smsActivateUtil.getSMSActivateAccountBalance());
         RestAssured.baseURI = BASEURI;
@@ -83,28 +85,34 @@ SMSActivateApi managerSMS = new SMSActivateApi(APIKEY);
         SMSActivateGetRentStatusResponse rentListResponse = managerSMS.getRentStatus(getIDbyPhoneNumber(phoneNumber));
        return  rentListResponse.getSmsActivateSMSList().get(0).getText();
     }
+    public  String waitNewSMS(long phoneNumber, int timer) throws SMSActivateBaseException {
 
-/*    public String waitNewSMS(long phoneNumber) throws SMSActivateBaseException {
         SMSActivateGetRentStatusResponse rentListResponse = managerSMS.getRentStatus(getIDbyPhoneNumber(phoneNumber));
-//        int startCountSMS = rentListResponse.getSmsActivateSMSList().size();
         int startCountSMS = rentListResponse.getCountSms();
         int currentCountSMS = startCountSMS;
-        // get actual time
-         LocalTime startTime = LocalTime.now();
-         LocalTime actualTime = LocalTime.now();
-        while (currentCountSMS == startCountSMS) {
-
+        LocalTime startTime = LocalTime.now();
+        LocalTime actualTime = LocalTime.now();
+        while (actualTime.isBefore(startTime.plusSeconds(timer))) {
+            if (currentCountSMS != startCountSMS) {
+                return rentListResponse.getSmsActivateSMSList().get(0).getText();
+            }
+            actualTime = LocalTime.now();
+            currentCountSMS = rentListResponse.getCountSms();
+            System.out.println("waitNewSMS method is finished");
+            try {
+                Thread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
+        return null;
+    }
 
-
-    }*/
 
 
     public BigDecimal getSMSActivateAccountBalance() throws SMSActivateBaseException {
         return managerSMS.getBalance();
     }
-
-
 
 
 

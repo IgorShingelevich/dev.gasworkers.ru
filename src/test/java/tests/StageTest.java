@@ -6,7 +6,8 @@ import pages.components.sharedComponents.sidebarComponents.SidebarClientComponen
 import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 import pages.components.sharedComponents.headerComponents.ProfileHeaderComponent;
 import pages.components.sharedComponents.headerComponents.actionblockComponents.ActionsBlockClientComponent;
-import pages.profilePages.NotificationsPage;
+import pages.profilePages.AllNotificationsPage;
+import pages.profilePages.ObjectCardClientPage;
 import pages.profilePages.clientPages.*;
 import pages.profilePages.clientPages.cancelPage.CancelMaintenancePage;
 import pages.profilePages.clientPages.infoServicesPage.InfoMaintenancePage;
@@ -30,13 +31,14 @@ public class StageTest extends TestBase {
 
     HomeClientPage homeClientPage = new HomeClientPage();
 
-    NotificationsPage notificationsPage = new NotificationsPage();
+    AllNotificationsPage allNotificationsPage = new AllNotificationsPage();
     ActionsBlockClientComponent actionsBlockClient = new ActionsBlockClientComponent();
 
-    ObjectsClientPage objectsClientPage = new ObjectsClientPage();
-    OrdersClientPage ordersClientPage = new OrdersClientPage();
-    OrderClientPage orderClientPage = new OrderClientPage();
-    InvoicesClientPage invoicesClientPage = new InvoicesClientPage();
+    AllObjectsClientPage allObjectsClientPage = new AllObjectsClientPage();
+    AllOrdersClientPage allOrdersClientPage = new AllOrdersClientPage();
+    OrderCardClientPage orderCardClientPage = new OrderCardClientPage();
+    ObjectCardClientPage objectCardClientPage = new ObjectCardClientPage();
+    AllInvoicesClientPage allInvoicesClientPage = new AllInvoicesClientPage();
 
     LandingPage landingPage = new LandingPage();
 
@@ -67,6 +69,7 @@ public class StageTest extends TestBase {
 
 
      @DisplayName("switchToNewTab")
+     // @Disabled
     @Test
     void switchToNewTab() {
 
@@ -76,12 +79,15 @@ public class StageTest extends TestBase {
         switchTo().window(0);
     }
 
-    @DisplayName("searchByPartialText")
+    @DisplayName("partialTextSearch")
 //    @Disabled
     @Test
     void searchByPartialText  (){
-        homeClientPage.newMethod();
+        homeClientPage.partialTextSearch();
     }
+
+
+
 
 
 
@@ -91,7 +97,7 @@ public class StageTest extends TestBase {
 /**questions
  * flex after html elements. How flex affects the Locators elements
  * list of devtools shortcuts
- *OrdersClientPage -  look at example of openPage and isOpened methods.
+ *AllOrdersClientPage -  look at example of openPage and isOpened methods.
  * isOpened method should contain all the checks of static information available on the page
  //$(".breadcrumb li:nth-child(2)"), - learn how to use :nth-child
  put all staticText verifications in one method - .open

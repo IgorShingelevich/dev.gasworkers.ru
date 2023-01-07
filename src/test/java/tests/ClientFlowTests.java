@@ -1,15 +1,13 @@
 package tests;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import pages.LandingPage;
 import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 import pages.components.sharedComponents.headerComponents.ProfileHeaderComponent;
 import pages.components.sharedComponents.headerComponents.actionblockComponents.ActionsBlockClientComponent;
 import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
-import pages.profilePages.NotificationsPage;
+import pages.profilePages.AllNotificationsPage;
+import pages.profilePages.ObjectCardClientPage;
 import pages.profilePages.clientPages.*;
 import pages.profilePages.clientPages.cancelPage.CancelMaintenancePage;
 import pages.profilePages.clientPages.infoServicesPage.InfoMaintenancePage;
@@ -26,19 +24,15 @@ public class ClientFlowTests extends TestBase {
     InfoRepairPage infoRepairPage = new InfoRepairPage();
     InfoMaintenancePage infoMaintenancePage = new InfoMaintenancePage();
     InfoVideoPage infoVideoPage = new InfoVideoPage();
-
     HomeClientPage homeClientPage = new HomeClientPage();
-
-    NotificationsPage notificationsPage = new NotificationsPage();
+    AllNotificationsPage allNotificationsPage = new AllNotificationsPage();
     ActionsBlockClientComponent actionsBlockClient = new ActionsBlockClientComponent();
-
-    ObjectsClientPage objectsClientPage = new ObjectsClientPage();
-    OrdersClientPage ordersClientPage = new OrdersClientPage();
-    OrderClientPage orderClientPage = new OrderClientPage();
-    InvoicesClientPage invoicesClientPage = new InvoicesClientPage();
-
+    AllObjectsClientPage allObjectsClientPage = new AllObjectsClientPage();
+    AllOrdersClientPage allOrdersClientPage = new AllOrdersClientPage();
+    OrderCardClientPage orderCardClientPage = new OrderCardClientPage();
+    ObjectCardClientPage objectCardClientPage = new ObjectCardClientPage();
+    AllInvoicesClientPage allInvoicesClientPage = new AllInvoicesClientPage();
     LandingPage landingPage = new LandingPage();
-
     SelectObjectMaintenancePage selectObjectMaintenancePage = new SelectObjectMaintenancePage();
     SelectDateMaintenanceClientPage selectDateMaintenanceClientPage = new SelectDateMaintenanceClientPage();
     FocusHeaderComponent focusHeaderComponent = new FocusHeaderComponent();
@@ -46,14 +40,12 @@ public class ClientFlowTests extends TestBase {
     SelectServicePage selectServicePage = new  SelectServicePage();
     CancelMaintenancePage cancelMaintenancePage = new CancelMaintenancePage();
 
-
     @BeforeEach
     void clientLogin() {
         open("/login");
         loginPage.open();
         loginPage.login(emailClient, passwordClient);
     }
-
 
     @AfterEach
     void clientLogOut() {
@@ -66,29 +58,15 @@ public class ClientFlowTests extends TestBase {
 
 
 
-
-
     @DisplayName("CreateNewObject")
     @Test
     void CreateNewObject() {
-        homeClientPage.sidebar.objects();
-        objectsClientPage.checkObjectsPageTitle();
-        objectsClientPage.clickCreateNewObject();
+        homeClientPage.sidebar.allObjects();
+        allObjectsClientPage.checkObjectsPageTitle();
+        allObjectsClientPage.clickCreateNewObject();
         back();
-        objectsClientPage.sidebar.home();
+        allObjectsClientPage.sidebar.home();
     }
-
-
-     @DisplayName("switchToNewTab")
-    @Test
-    void switchToNewTab() {
-
-        executeJavaScript("window.open('https://dev.gasworkers.ru/','_blank');");
-        switchTo().window(1);
-        open("https://dev.gasworkers.ru/profile/edit");
-        switchTo().window(0);
-    }
-
 
     @DisplayName("ClientPlaceMaintenanceRequestAndCancel")
 //    @Disabled
@@ -102,18 +80,42 @@ public class ClientFlowTests extends TestBase {
         selectDateMaintenanceClientPage.submitOrder();
         selectServicePage.isOpened();
         selectServicePage.toOrder();
-        orderClientPage.toMap();
+        orderCardClientPage.toMap();
+        selectServicePage.isOpened();
         selectServicePage.toOrder();
-        orderClientPage.cancelOrder();
+        orderCardClientPage.cancelOrder();
         cancelMaintenancePage.noButton();
-        orderClientPage.isOpened();
-        orderClientPage.toMap();
+        orderCardClientPage.isOpened();
+        orderCardClientPage.toMap();
+        selectServicePage.isOpened();
         selectServicePage.toOrder();
-        orderClientPage.cancelOrder();
+        orderCardClientPage.cancelOrder();
         cancelMaintenancePage.yesButton();
         homeClientPage.isOpened();
-      
+        homeClientPage.actionBlock.allNotifications();
+        allNotificationsPage.isOpened();
+        allNotificationsPage.readAll();
+        allNotificationsPage.sidebar.home();
+        homeClientPage.isOpened();
     }
+
+    @DisplayName("openRandomObject")
+    @Test
+    void openRandomObject() {
+        homeClientPage.sidebar.allObjects();
+        allObjectsClientPage.openRandomObject();
+        objectCardClientPage.isOpened();
+        objectCardClientPage.sidebar.allObjects();
+        allObjectsClientPage.isOpened();
+        allObjectsClientPage.openRandomObject();
+        objectCardClientPage.isOpened();
+        objectCardClientPage.sidebar.allObjects();
+        allObjectsClientPage.isOpened();
+        allObjectsClientPage.openRandomObject();
+        objectCardClientPage.isOpened();
+        objectCardClientPage.sidebar.home();
+    }
+
 
 
 

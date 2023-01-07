@@ -55,7 +55,7 @@ public class SidebarClientComponent {
         return this;
     }
 
-    public SidebarClientComponent objects() {
+    public SidebarClientComponent allObjects() {
         objectsAndEquipmentLinkLocator.shouldBe(visible).click();
         return this;
     }

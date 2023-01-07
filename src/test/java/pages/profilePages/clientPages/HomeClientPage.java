@@ -117,7 +117,7 @@ public class HomeClientPage extends BaseClientPage {
 
 
    // method that verify that locator objectsTitleLocator contains text "Объекты и" anywhere inside
-    public HomeClientPage  newMethod() {
+    public HomeClientPage partialTextSearch() {
         objectsTitleLocator.shouldHave(text("Объекты и"));
         return this;
     }

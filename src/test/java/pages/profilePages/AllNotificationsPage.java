@@ -1,15 +1,13 @@
 package pages.profilePages;
 
 import com.codeborne.selenide.SelenideElement;
-import pages.components.sharedComponents.headerComponents.actionblockComponents.ActionsBlockClientComponent;
-import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
 import pages.profilePages.clientPages.BaseClientPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
-public class NotificationsPage extends BaseClientPage {
+public class AllNotificationsPage extends BaseClientPage {
 
     private final String NOTIFICATIONS_TITLE = "Уведомления";
 
@@ -22,7 +20,7 @@ public class NotificationsPage extends BaseClientPage {
 
 
 
-    public NotificationsPage verifyLocators() {
+    public AllNotificationsPage verifyLocators() {
         pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
         readAllButtonLocator.shouldBe(visible);
         firstNotificationLinkLocator.shouldBe(visible);
@@ -31,8 +29,17 @@ public class NotificationsPage extends BaseClientPage {
         return this;
     }
 
-    public NotificationsPage isOpened() {
+    public AllNotificationsPage isOpened() {
         pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
         return this;
     }
+
+    public AllNotificationsPage readAll() {
+        readAllButtonLocator.click();
+        return this;
+    }
+
+
+
+
 }
