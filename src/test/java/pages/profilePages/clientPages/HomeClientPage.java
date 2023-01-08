@@ -81,10 +81,7 @@ public class HomeClientPage extends BaseClientPage {
 
 
 
-    public HomeClientPage toLastOrder() {
-        this.lastOrder.clickLastOrderNumberLink();
-        return this;
-    }
+
 
     //  objects
 

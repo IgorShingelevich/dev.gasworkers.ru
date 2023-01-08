@@ -23,20 +23,20 @@ import static io.qameta.allure.Allure.step;
 public class ClientLocatorsTest extends TestBase {
 
     LandingPage landingPage = new LandingPage();
-    HomeClientPage homeClientPage = new HomeClientPage();
-    AllOrdersClientPage allOrdersClientPage = new AllOrdersClientPage();
-    AllInvoicesClientPage allInvoicesClientPage = new AllInvoicesClientPage();
-    SidebarClientComponent sidebarClient = new SidebarClientComponent();
+    HomeClientPage homePage = new HomeClientPage();
+    AllOrdersClientPage allOrdersPage = new AllOrdersClientPage();
+    AllInvoicesClientPage allInvoicesPage = new AllInvoicesClientPage();
+    SidebarClientComponent sidebar = new SidebarClientComponent();
     FocusHeaderComponent focusHeader = new FocusHeaderComponent();
-    ActionsBlockClientComponent actionsBlockClient = new ActionsBlockClientComponent();
+    ActionsBlockClientComponent actionsBlock = new ActionsBlockClientComponent();
     LoginPage loginPage = new LoginPage();
     AllNotificationsPage allNotificationsPage = new AllNotificationsPage();
     InfoMaintenancePage infoMaintenancePage = new InfoMaintenancePage();
     InfoRepairPage infoRepairPage = new InfoRepairPage();
     InfoVideoPage infoVideoPage = new InfoVideoPage();
     SelectObjectMaintenancePage selectObjectMaintenancePage = new SelectObjectMaintenancePage();
-    SelectObjectRepairObjectPage selectObjectRepairObjectPage = new SelectObjectRepairObjectPage();
-    SelectDateMaintenanceClientPage selectDateMaintenanceClientPage = new SelectDateMaintenanceClientPage();
+    SelectObjectRepairPage selectObjectRepairPage = new SelectObjectRepairPage();
+    SelectDateMaintenanceClientPage selectDateMaintenancePage = new SelectDateMaintenanceClientPage();
     SelectDateRepairPage selectDateRepairPage = new SelectDateRepairPage();
 
 
@@ -56,14 +56,14 @@ public class ClientLocatorsTest extends TestBase {
 
     @AfterEach
     void clientLogOut() {
-        actionsBlockClient.logout();
+        actionsBlock.logout();
     }
 
     @DisplayName("notificationsLocatorIntegrityTest")
 //    @Disabled
     @Test
     void notificationsPageLocatorIntegrityTest() {
-        homeClientPage.actionBlock.notificationsButton();
+        homePage.actionBlock.notificationsButton();
         allNotificationsPage.isOpened();
         allNotificationsPage.verifyLocators();
         allNotificationsPage.sidebar.home();
@@ -79,14 +79,14 @@ public class ClientLocatorsTest extends TestBase {
         infoMaintenancePage.nextButton();
         selectObjectMaintenancePage.isOpened();
         selectObjectMaintenancePage.pick1thObject();
-        selectDateMaintenanceClientPage.isOpened();
-        selectDateMaintenanceClientPage.header.logo();
+        selectDateMaintenancePage.isOpened();
+        selectDateMaintenancePage.header.logo();
         landingPage.isOpened();
         landingPage.clickUserRepairButton();
         infoRepairPage.isOpened();
         infoRepairPage.nextButton();
-        selectObjectRepairObjectPage.isOpened();
-        selectObjectRepairObjectPage.pick1thObject1thEquipment();
+        selectObjectRepairPage.isOpened();
+        selectObjectRepairPage.pick1thObject1thEquipment();
         selectDateRepairPage.isOpened();
         selectDateRepairPage.header.logo();
         landingPage.clickUserProfile();
@@ -95,27 +95,27 @@ public class ClientLocatorsTest extends TestBase {
     @DisplayName("ordersAndInvoicesLocatorsIntegrityTest")
     @Test
     void ordersAndInvoicesLocatorsIntegrityTest() {
-        allOrdersClientPage.openPage();
-        allOrdersClientPage.sidebar.home();
-        homeClientPage.sidebar.clickOrdersAndInvoicesDropdown();
-        homeClientPage.sidebar.orders();
-        allOrdersClientPage.clickOrderCardActionButton(1);
-        allOrdersClientPage.openOrder(1);
+        allOrdersPage.openPage();
+        allOrdersPage.sidebar.home();
+        homePage.sidebar.clickOrdersAndInvoicesDropdown();
+        homePage.sidebar.orders();
+        allOrdersPage.clickOrderCardActionButton(1);
+        allOrdersPage.openOrder(1);
         back();
-        allOrdersClientPage.breadcrumbs.home();
-        homeClientPage.sidebar.clickOrdersAndInvoicesDropdown();
-        homeClientPage.sidebar.invoices();
-        allInvoicesClientPage.sidebar.home();
+        allOrdersPage.breadcrumbs.home();
+        homePage.sidebar.clickOrdersAndInvoicesDropdown();
+        homePage.sidebar.invoices();
+        allInvoicesPage.sidebar.home();
     }
 
     @DisplayName("sidebarAndActionBlockClientLocatorsIntegrityTest")
     @Test
     void sidebarAndActionBlockClientLocatorsIntegrityTest() {
         step("homeClientPage.sidebar.verifyLocators", () -> {
-            homeClientPage.sidebar.verifyLocators();
+            homePage.sidebar.verifyLocators();
         });
         step("homeClientPage.actionBlock.verifyLocators", () -> {
-            homeClientPage.actionBlock.verifyLocators();
+            homePage.actionBlock.verifyLocators();
         });
     }
 

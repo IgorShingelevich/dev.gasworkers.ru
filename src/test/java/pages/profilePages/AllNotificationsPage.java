@@ -14,7 +14,7 @@ public class AllNotificationsPage extends BaseClientPage {
     SelenideElement
             pageTitleLocator = $(".page-title"),
 
-            readAllButtonLocator = $(".page-content .btn.btn-primary.disable-outline"),
+            readAllButtonLocator = $(".page-content button.btn"),
 
             firstNotificationLinkLocator = $$(".item.item.notice-large .d-flex.flex-wrap.text-break").first(), firstNotificationTextLocator = $$(".item.item.notice-large .text.w-100.text-left").first(), firstNotificationStatusLocator = $$(".item.item.notice-large .text.w-25").first();
 
@@ -31,6 +31,7 @@ public class AllNotificationsPage extends BaseClientPage {
 
     public AllNotificationsPage isOpened() {
         pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
+        readAllButtonLocator.shouldBe(visible);
         return this;
     }
 

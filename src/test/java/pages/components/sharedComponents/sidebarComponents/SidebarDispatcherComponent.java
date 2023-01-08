@@ -2,6 +2,7 @@ package pages.components.sharedComponents.sidebarComponents;
 
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -14,6 +15,8 @@ public class SidebarDispatcherComponent {
 
 
     SelenideElement
+            dispatcherHomePageTitleLocator = $(".page-title .h3.mb-2"),
+
             homeLinkCollection = $$(".sidebar .link").get(0),
             mastersListLinkLocator = $$(".sidebar .link").get(1),
             profileDispatcherLinkLocator = $$(".sidebar .link").get(2),
@@ -32,6 +35,26 @@ public class SidebarDispatcherComponent {
         supportServiceEmailLocator.shouldBe(visible);
         return this;
     }
+
+    public SidebarDispatcherComponent home() {
+        homeLinkCollection.shouldBe(visible).click();
+        return this;
+    }
+
+    public SidebarDispatcherComponent allMasters() {
+        mastersListLinkLocator.shouldBe(visible).click();
+        return this;
+    }
+
+    public SidebarDispatcherComponent profile() {
+        profileDispatcherLinkLocator.shouldBe(visible).click();
+        return this;
+    }
+
+
+
+
+
 
 
 

@@ -1,5 +1,6 @@
 package tests;
 
+import jdk.jfr.Description;
 import org.junit.jupiter.api.*;
 import pages.LandingPage;
 import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
@@ -18,7 +19,7 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class ClientFlowTest extends TestBase {
 
-    SidebarClientComponent sidebarClient = new SidebarClientComponent();
+    SidebarClientComponent sidebar = new SidebarClientComponent();
     pages.LoginPage loginPage = new pages.LoginPage();
     TypeOrdersPage typeOrdersPage = new TypeOrdersPage();
     InfoRepairPage infoRepairPage = new InfoRepairPage();
@@ -26,7 +27,7 @@ public class ClientFlowTest extends TestBase {
     InfoVideoPage infoVideoPage = new InfoVideoPage();
     HomeClientPage homeClientPage = new HomeClientPage();
     AllNotificationsPage allNotificationsPage = new AllNotificationsPage();
-    ActionsBlockClientComponent actionsBlockClient = new ActionsBlockClientComponent();
+    ActionsBlockClientComponent actionsBlock = new ActionsBlockClientComponent();
     AllObjectsClientPage allObjectsClientPage = new AllObjectsClientPage();
     AllOrdersClientPage allOrdersClientPage = new AllOrdersClientPage();
     LastOrderCardClientPage lastOrderCardClientPage = new LastOrderCardClientPage();
@@ -35,10 +36,14 @@ public class ClientFlowTest extends TestBase {
     LandingPage landingPage = new LandingPage();
     SelectObjectMaintenancePage selectObjectMaintenancePage = new SelectObjectMaintenancePage();
     SelectDateMaintenanceClientPage selectDateMaintenanceClientPage = new SelectDateMaintenanceClientPage();
-    FocusHeaderComponent focusHeaderComponent = new FocusHeaderComponent();
-    ProfileHeaderComponent profileHeaderComponent = new ProfileHeaderComponent();
+    FocusHeaderComponent focusHeader = new FocusHeaderComponent();
+    ProfileHeaderComponent profileHeader = new ProfileHeaderComponent();
     SelectServicePage selectServicePage = new  SelectServicePage();
     CancelMaintenancePage cancelMaintenancePage = new CancelMaintenancePage();
+    SelectInsuranceClientPage selectInsurancePage = new SelectInsuranceClientPage();
+    CheckDocumentsClientPage checkDocumentsClientPage = new CheckDocumentsClientPage();
+    SelectPaymentClientPage selectPaymentClientPage = new SelectPaymentClientPage();
+    SignSMSClientPage signSMSClientPage = new SignSMSClientPage();
 
     @BeforeEach
     void clientLogin() {
@@ -47,10 +52,10 @@ public class ClientFlowTest extends TestBase {
         loginPage.login(emailClient, passwordClient);
     }
 
-    @AfterEach
-    void clientLogOut() {
-        actionsBlockClient.logout();
-    }
+//    @AfterEach
+//    void clientLogOut() {
+//        actionsBlock.logout();
+//    }
 
     String emailClient = "shingelevich@gmail.com",
             clientName = "Шингелевич Игорь Сергеевич",
@@ -71,7 +76,7 @@ public class ClientFlowTest extends TestBase {
     @DisplayName("ClientPlaceMaintenanceRequestAndCancel")
 //    @Disabled
     @Test
-    void ClientPlaceMaintenanceRequestAndCancel() {
+    public void ClientPlaceMaintenanceRequestAndCancel() {
         homeClientPage.placeOrder();
         typeOrdersPage.Maintenance();
         infoMaintenancePage.nextButton();
@@ -116,9 +121,12 @@ public class ClientFlowTest extends TestBase {
         objectCardClientPage.sidebar.home();
     }
 
-
+    @Description("ClientPlaceRepairRequest")
+    //    @Disabled
     @Test
-    void pickFirstObjectMaintenance() {
+    void placeMaintenanceFirstObject() {
+
+        allNotificationsPage.sidebar.home();
         homeClientPage.placeOrder();
         typeOrdersPage.Maintenance();
         infoMaintenancePage.nextButton();
@@ -127,18 +135,67 @@ public class ClientFlowTest extends TestBase {
         selectDateMaintenanceClientPage.submitOrder();
         selectServicePage.isOpened();
         selectServicePage.toOrder();
-        lastOrderCardClientPage.toMap();
-        selectServicePage.isOpened();
-        selectServicePage.toOrder();
-        lastOrderCardClientPage.cancelOrder();
-        cancelMaintenancePage.yesButton();
+        lastOrderCardClientPage.sidebar.home();
         homeClientPage.isOpened();
         homeClientPage.actionBlock.allNotifications();
         allNotificationsPage.isOpened();
         allNotificationsPage.readAll();
         allNotificationsPage.sidebar.home();
-        homeClientPage.isOpened();
     }
+
+    @DisplayName("ClientReviewFirstService")
+    //    @Disabled
+    @Test
+    void ClientReviewFirstService(){
+        homeClientPage.actionBlock.allNotifications();
+        allNotificationsPage.isOpened();
+        allNotificationsPage.readAll();
+        allNotificationsPage.sidebar.home();
+        homeClientPage.lastOrder.open();
+        lastOrderCardClientPage.isOpened();
+        lastOrderCardClientPage.toMap();
+        selectServicePage.isOpened();
+        selectServicePage.reviewFirstService();
+        selectInsurancePage.isOpened();
+        selectInsurancePage.header.back();
+        selectServicePage.isOpened();
+        selectServicePage.toOrder();
+        lastOrderCardClientPage.isOpened();
+    }
+
+
+    public String
+            smsCode = "123456";
+    @DisplayName("ClientAcceptFirstService")
+    //    @Disabled
+    @Test
+    void ClientAcceptFirstService(){
+        homeClientPage.actionBlock.allNotifications();
+        allNotificationsPage.isOpened();
+        allNotificationsPage.readAll();
+        allNotificationsPage.sidebar.home();
+        homeClientPage.lastOrder.open();
+        lastOrderCardClientPage.isOpened();
+        lastOrderCardClientPage.toMap();
+        selectServicePage.isOpened();
+        selectServicePage.reviewFirstService();
+        selectInsurancePage.isOpened();
+        selectInsurancePage.next();
+        checkDocumentsClientPage.isOpened();
+        checkDocumentsClientPage.makeContract();
+        selectPaymentClientPage.isOpened();
+        selectPaymentClientPage.paySPB();
+        signSMSClientPage.isOpened();
+        signSMSClientPage.inputSMSCode(smsCode);
+        int i=0;
+
+
+
+
+
+    }
+
+
 
 
 

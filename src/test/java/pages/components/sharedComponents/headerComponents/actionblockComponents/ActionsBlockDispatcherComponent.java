@@ -14,6 +14,8 @@ public class ActionsBlockDispatcherComponent {
             actionsBlock = $(".actions-block"),
 
             notificationsButtonLocator = $(".actions-block .notifications.icon"),
+            notificationsListLocator = $("div.messages-list"),
+
             dropdownArrowLocator = $(".actions-block .arrow-down"),
             dropdown2Locator = $(".profile.icon"),
 
@@ -28,6 +30,8 @@ public class ActionsBlockDispatcherComponent {
     public ActionsBlockDispatcherComponent allNotifications() {
         notificationsButtonLocator.shouldBe(visible).click();
         allNotificationsPageTitleLocator.shouldHave(text("Уведомления"));
+        notificationsListLocator.shouldBe(visible);
+
         return this;
     }
 

@@ -11,19 +11,19 @@ public class LastOrderCardClientPage extends BaseClientPage{
         toMapButtonLocator = $(".col-md-12.text-right .map-ic.ms-md-auto.btn.btn-outline-primary.disable-outline"),
         cancelOrderLinkLocator = $(".col-md-12.text-right.pt-3 .btn.btn-link-dashed.disable-outline");
 
+    public LastOrderCardClientPage isOpened() {
+        toMapButtonLocator.shouldBe(visible);
+        cancelOrderLinkLocator.shouldBe(visible);
+        return this;
+    }
+
     public LastOrderCardClientPage toMap() {
-        toMapButtonLocator.click();
+        toMapButtonLocator.scrollTo().click();
         return this;
     }
 
     public LastOrderCardClientPage cancelOrder() {
-        cancelOrderLinkLocator.click();
-        return this;
-    }
-
-    public LastOrderCardClientPage isOpened() {
-        toMapButtonLocator.shouldBe(visible);
-        cancelOrderLinkLocator.shouldBe(visible);
+        cancelOrderLinkLocator.scrollTo().click();
         return this;
     }
 }

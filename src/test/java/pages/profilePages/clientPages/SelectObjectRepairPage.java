@@ -6,7 +6,7 @@ import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
-public class SelectObjectRepairObjectPage {
+public class SelectObjectRepairPage {
 
     FocusHeaderComponent header = new FocusHeaderComponent();
 
@@ -25,12 +25,12 @@ public class SelectObjectRepairObjectPage {
             firstObjectOtherEquipmentPlaceholder = $$x("(//div[@class='btn-wrap'][contains(.,'Выбрать')])").get(1).$$x("(//input[contains(@placeholder,'Укажите ваше оборудование')])").first(),
     //(//input[contains(@placeholder,'Укажите ваше оборудование')])[1]
             firstObjectButton = $$x("(//div[@class='btn-wrap'][contains(.,'Выбрать')])").get(0);
-    public SelectObjectRepairObjectPage isOpened() {
+    public SelectObjectRepairPage isOpened() {
         pageTitleLocator.shouldHave(text(SELECT_REPAIR_OBJECT_TITLE));
         return this;
     }
 
-    public SelectObjectRepairObjectPage pick1thObject1thEquipment() {
+    public SelectObjectRepairPage pick1thObject1thEquipment() {
         firstObjectFirstEquipmentCheckbox.click();
         firstObjectSecondEquipmentCheckbox.click();
 //        firstObjectOtherEquipmentPlaceholder.should(appear).sendKeys(OTHER_EQUIPMENT_TEXT);

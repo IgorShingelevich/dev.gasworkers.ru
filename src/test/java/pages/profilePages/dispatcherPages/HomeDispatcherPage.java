@@ -2,8 +2,6 @@ package pages.profilePages.dispatcherPages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.impl.CollectionElement;
-import pages.components.sharedComponents.sidebarComponents.SidebarDispatcherComponent;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
@@ -15,14 +13,16 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         mapViewButtonLocator = $(".action-btn.map-type"),
         cardViewButtonLocator = $(".action-btn.card-type"),
         listViewButtonLocator = $(".action-btn.list-type"),
-        orderCardTitleLocator = $(".order-card__title"),
+        orderCardTitleLocator = $(".page-title .h3.mb-2"),
         map=$(".map-wrap .ymap-container .map-into"),
+        orderCardListLocator =$(".order-cards.list"),
         newOrderStatusButtons= $$("div.top-filter__status--btn").get(0),
         inProgressOrderStatusButton = $$("div.top-filter__status--btn").get(1),
         completedOrderStatusButton =  $$("div.top-filter__status--btn").get(2),
         archivedOrderStatusButton = $$("div.top-filter__status--btn").get(3);
 
     ElementsCollection
+
         ordersNumberLinkCollection = $$(".h5.link-blue.pointer"),
         orderActionDropdownCollection = $$("button.actions__btn"),
         actionsOpenOrderLinkCollection = $$x("//a[@class='actions__slot--link']"),
@@ -31,14 +31,22 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
 
 
 
+    public HomeDispatcherPage isOpened() {
+        dispatcherHomePageTitleLocator.shouldBe(visible);
+        return this;
+    }
+
     public HomeDispatcherPage switchToMapView() {
         mapViewButtonLocator.shouldBe(visible).click();
+//        mapViewButtonLocator.$(".active").shouldBe(visible);
         map.shouldBe(visible);
-        newOrderStatusButtons.shouldBe(visible);
-        inProgressOrderStatusButton.shouldBe(visible);
+        newOrderStatusButtons.shouldBe(visible).click();
+        inProgressOrderStatusButton.shouldBe(visible).click();
         completedOrderStatusButton.shouldNotBe(visible);
         archivedOrderStatusButton.shouldNotBe(visible);
-        mapViewButtonLocator.$(".active").shouldBe(visible);
+        listViewButtonLocator.shouldBe(visible).click();
+        completedOrderStatusButton.shouldBe(visible).click();
+        archivedOrderStatusButton.shouldBe(visible).click();
 
         return this;
     }
@@ -50,6 +58,7 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
 
     public HomeDispatcherPage switchToListView() {
         listViewButtonLocator.shouldBe(visible).click();
+        orderCardListLocator.shouldBe(visible);
         return this;
     }
 
@@ -60,7 +69,7 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         return this;
     }
 
-    public HomeDispatcherPage openFirstOrderAction() {
+    public HomeDispatcherPage openFirstOrder() {
         switchToListView();
         orderActionDropdownCollection.get(0).shouldBe(visible).hover().click();
         actionsOpenOrderLinkCollection.get(0).shouldBe(visible).click();
@@ -68,7 +77,7 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         return this;
     }
 
-    public HomeDispatcherPage archiveFirstOrder() {
+    public HomeDispatcherPage archiveLastOrder() {
         switchToListView();
         orderActionDropdownCollection.get(0).shouldBe(visible).hover().click();
         actionsArchiveOrderLinkCollection.get(0).shouldBe(visible).click();

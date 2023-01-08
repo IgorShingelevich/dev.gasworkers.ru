@@ -35,7 +35,7 @@ public class LastOrderProfileClientComponent  {
 
 
 
-    public LastOrderProfileClientComponent clickLastOrderNumberLink() {
+    public LastOrderProfileClientComponent lastOrderCard() {
         lastOrderCardOrderNumberLinkLocator.shouldBe(visible).click();
         return this;
     }
@@ -52,7 +52,7 @@ public class LastOrderProfileClientComponent  {
 
 
 
-    public LastOrderProfileClientComponent openLastOrder() {
+    public LastOrderProfileClientComponent open() {
         lastOrderCardActionButtonLocator.shouldBe(visible).click();
         lastOrderCardOrderActionOpenLinkLocator.shouldBe(visible).click();
         return this;
