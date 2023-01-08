@@ -37,26 +37,26 @@ public void open() {
         Selenide.open("/login");
     }
 
-    public void login(String emailClient, String passwordClient) {
+    public void login(String email, String password) {
         loginPageTitleLocator.shouldHave(text(LOGIN_PAGE_TITLE_TEXT)).shouldBe(visible);
         emailFieldLocator.shouldBe(interactable);
         emailFieldLocator.shouldBe(visible);
         emailFieldLocator.click();
         emailFieldLocator.pressEnter();
-        emailFieldLocator.sendKeys(emailClient);
+        emailFieldLocator.sendKeys(email);
         emailFieldLocator.clear();
-        emailFieldLocator.setValue(emailClient);
+        emailFieldLocator.setValue(email);
         emailFieldLocator.pressEnter();
-        emailFieldLocator.shouldHave(value(emailClient));
+        emailFieldLocator.shouldHave(value(email));
         passwordFieldLocator.shouldBe(interactable);
         passwordFieldLocator.shouldBe(editable);
         passwordFieldLocator.click();
-        passwordFieldLocator.setValue(passwordClient);
+        passwordFieldLocator.setValue(password);
         passwordFieldLocator.pressEnter();
 
         loginButtonLocator.shouldNotBe(disabled);
         loginButtonLocator.click();
-        homeClientPage.isOpened();
+//        homeClientPage.isOpened();
 
 
     }

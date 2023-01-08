@@ -1,5 +1,7 @@
 package pages.profilePages.dispatcherPages;
 
-public class ProfileDispatcherPage {
+public class ProfileDispatcherPage extends BaseDispatcherPage{
+
+
 
 }

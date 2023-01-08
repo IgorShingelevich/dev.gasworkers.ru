@@ -20,9 +20,9 @@ import static com.codeborne.selenide.Selenide.open;
 import static com.codeborne.selenide.Selenide.switchTo;
 import static io.qameta.allure.Allure.step;
 
-public class StageTest extends TestBase {
+public class StageClientTest extends TestBase {
 
-    SidebarClientComponent sidebarClient = new SidebarClientComponent();
+    SidebarClientComponent sidebar = new SidebarClientComponent();
     pages.LoginPage loginPage = new pages.LoginPage();
     TypeOrdersPage typeOrdersPage = new TypeOrdersPage();
     InfoRepairPage infoRepairPage = new InfoRepairPage();
@@ -32,7 +32,7 @@ public class StageTest extends TestBase {
     HomeClientPage homeClientPage = new HomeClientPage();
 
     AllNotificationsPage allNotificationsPage = new AllNotificationsPage();
-    ActionsBlockClientComponent actionsBlockClient = new ActionsBlockClientComponent();
+    ActionsBlockClientComponent actionsBlock = new ActionsBlockClientComponent();
 
     AllObjectsClientPage allObjectsClientPage = new AllObjectsClientPage();
     AllOrdersClientPage allOrdersClientPage = new AllOrdersClientPage();
@@ -60,12 +60,20 @@ public class StageTest extends TestBase {
 
     @AfterEach
     void clientLogOut() {
-        actionsBlockClient.logout();
+        actionsBlock.logout();
     }
 
-    String emailClient = "shingelevich@gmail.com",
-            clientName = "Шингелевич Игорь Сергеевич",
-            passwordClient = "123456";
+    String
+        emailClient = "shingelevich@gmail.com",
+        clientName = "Шингелевич Игорь Сергеевич",
+        passwordClient = "123456";
+
+    String
+        emailDispatcher = "test_gas_disp9@rambler.ru",
+        passwordDispatcher = "123456";
+
+
+
 
 
      @DisplayName("switchToNewTab")

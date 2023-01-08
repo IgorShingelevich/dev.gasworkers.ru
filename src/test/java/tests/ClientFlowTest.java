@@ -16,7 +16,7 @@ import pages.profilePages.clientPages.infoServicesPage.InfoVideoPage;
 
 import static com.codeborne.selenide.Selenide.*;
 
-public class ClientFlowTests extends TestBase {
+public class ClientFlowTest extends TestBase {
 
     SidebarClientComponent sidebarClient = new SidebarClientComponent();
     pages.LoginPage loginPage = new pages.LoginPage();
