@@ -52,10 +52,10 @@ public class ClientFlowTest extends TestBase {
         loginPage.login(emailClient, passwordClient);
     }
 
-//    @AfterEach
-//    void clientLogOut() {
-//        actionsBlock.logout();
-//    }
+    @AfterEach
+    void clientLogOut() {
+        actionsBlock.logout();
+    }
 
     String emailClient = "shingelevich@gmail.com",
             clientName = "Шингелевич Игорь Сергеевич",
@@ -121,7 +121,7 @@ public class ClientFlowTest extends TestBase {
         objectCardClientPage.sidebar.home();
     }
 
-    @Description("ClientPlaceRepairRequest")
+    @Description("ClientPlaceRequest")
     //    @Disabled
     @Test
     void placeMaintenanceFirstObject() {
