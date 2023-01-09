@@ -16,6 +16,8 @@ import pages.profilePages.clientPages.infoServicesPage.InfoRepairPage;
 import pages.profilePages.clientPages.infoServicesPage.InfoVideoPage;
 import tests.TestBase;
 
+import java.io.FileNotFoundException;
+
 import static com.codeborne.selenide.Selenide.back;
 import static com.codeborne.selenide.Selenide.open;
 import static io.qameta.allure.Allure.step;
@@ -38,6 +40,7 @@ public class ClientLocatorsTest extends TestBase {
     SelectObjectRepairPage selectObjectRepairPage = new SelectObjectRepairPage();
     SelectDateMaintenanceClientPage selectDateMaintenancePage = new SelectDateMaintenanceClientPage();
     SelectDateRepairPage selectDateRepairPage = new SelectDateRepairPage();
+    orderCardClientPage orderCardClientPage = new orderCardClientPage();
 
 
 
@@ -98,14 +101,26 @@ public class ClientLocatorsTest extends TestBase {
         allOrdersPage.openPage();
         allOrdersPage.sidebar.home();
         homePage.sidebar.clickOrdersAndInvoicesDropdown();
-        homePage.sidebar.orders();
-        allOrdersPage.clickOrderCardActionButton(1);
-        allOrdersPage.openOrder(1);
+        homePage.sidebar.allOrders();
+        allOrdersPage.dropdownAction(1);
+        allOrdersPage.openAction(1);
         back();
         allOrdersPage.breadcrumbs.home();
         homePage.sidebar.clickOrdersAndInvoicesDropdown();
         homePage.sidebar.invoices();
         allInvoicesPage.sidebar.home();
+    }
+
+    @DisplayName("openCompletedOrderCard")
+    @Test
+    void openCompletedOrderCard() throws FileNotFoundException {
+        homePage.sidebar.clickOrdersAndInvoicesDropdown();
+        homePage.sidebar.allOrders();
+        allOrdersPage.orderByNumber(2178);
+        orderCardClientPage.isOpened();
+        orderCardClientPage.isCompleteState();
+        orderCardClientPage.docsAgreementDownload();
+        orderCardClientPage.sidebar.home();
     }
 
     @DisplayName("sidebarAndActionBlockClientLocatorsIntegrityTest")

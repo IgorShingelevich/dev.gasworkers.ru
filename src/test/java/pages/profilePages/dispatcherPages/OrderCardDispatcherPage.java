@@ -15,7 +15,10 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage{
         pageTitleLocator = $(".page-title .h3.mb-2"),
         orderBlockLocator = $(".page-content #order"),
         orderNumberLocator = $(".order-number"),
+
         acceptButtonLocator = $(".btn.btn-primary"),
+
+
         alreadyAcceptedButtonLocator = $(".global-btn-wrapper.justify-content-end"),
         declineButtonLocator = $(".btn.btn-outline-primary");
 
@@ -30,6 +33,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage{
 
     public OrderCardDispatcherPage acceptOrder() {
         acceptButtonLocator.shouldBe(visible).scrollTo().click();
+
 //        alreadyAcceptedButtonLocator.should(appear);
 //        acceptButtonLocator.should(disappear);
 //        declineButtonLocator.should(disappear);

@@ -37,7 +37,7 @@ public class SidebarDispatcherComponent {
     }
 
     public SidebarDispatcherComponent home() {
-        homeLinkCollection.shouldBe(visible).click();
+        dispatcherHomePageTitleLocator.shouldBe(visible).click();
         return this;
     }
 

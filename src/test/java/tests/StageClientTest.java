@@ -36,7 +36,7 @@ public class StageClientTest extends TestBase {
 
     AllObjectsClientPage allObjectsClientPage = new AllObjectsClientPage();
     AllOrdersClientPage allOrdersClientPage = new AllOrdersClientPage();
-    LastOrderCardClientPage lastOrderCardClientPage = new LastOrderCardClientPage();
+    orderCardClientPage orderCardClientPage = new orderCardClientPage();
     ObjectCardClientPage objectCardClientPage = new ObjectCardClientPage();
     AllInvoicesClientPage allInvoicesClientPage = new AllInvoicesClientPage();
 

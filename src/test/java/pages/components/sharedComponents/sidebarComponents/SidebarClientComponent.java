@@ -41,7 +41,7 @@ public class SidebarClientComponent {
         return this;
     }
 
-    public SidebarClientComponent orders() {
+    public SidebarClientComponent allOrders() {
         clickOrdersAndInvoicesDropdown();
         ordersListLinkLocator.shouldBe(visible);
         ordersListLinkLocator.click();

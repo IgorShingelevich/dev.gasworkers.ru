@@ -17,17 +17,20 @@ public class SelectPaymentClientPage {
             SELECT_PAYMENT_TITLE = "Заключение договора ТО и оплата выезда мастера";
 
     SelenideElement
-            pageTitleLocator = $(".page-content .h3.mb-40"),
-            pagePaymentWizardTitleLocator = $("span.part"),
+        pageTitleLocator = $(".page-content .h3.mb-40"),
+        pagePaymentWizardTitleLocator = $("span.part"),
+        payImgLocator = $("div.logo-wrap img"),
 
-            docAgreementMaintenanceLocator = $("div .link-pdf");
+
+        docAgreementMaintenanceLocator = $("div .link-pdf");
 
     ElementsCollection
-            paymentMethodsCollection = $$(".d-flex div.col");
+        paymentMethodsCollection = $$(".d-flex div.col");
 
     public SelectPaymentClientPage isOpened() {
         pageTitleLocator.shouldBe(visible);
         docAgreementMaintenanceLocator.shouldBe(visible);
+        payImgLocator.shouldBe(visible);
         return this;
     }
 

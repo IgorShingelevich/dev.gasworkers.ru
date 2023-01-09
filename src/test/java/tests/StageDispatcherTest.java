@@ -14,7 +14,7 @@ ActionsBlockDispatcherComponent actionBlock = new ActionsBlockDispatcherComponen
 SidebarDispatcherComponent sidebar = new SidebarDispatcherComponent();
 LoginPage loginPage = new LoginPage();
 HomeDispatcherPage homeDispatcherPage = new HomeDispatcherPage();
-AllNotificationsDispatcherPage allNotificationsPage = new AllNotificationsDispatcherPage();
+AllNotificationsDispatcherPage allNotificationsDispatcherPage = new AllNotificationsDispatcherPage();
 AllMastersDispatcherPage allMastersPage = new AllMastersDispatcherPage();
 ProfileDispatcherPage profilePage = new ProfileDispatcherPage();
 OrderCardDispatcherPage orderCardPage = new OrderCardDispatcherPage();
@@ -45,14 +45,14 @@ OrderCardDispatcherPage orderCardPage = new OrderCardDispatcherPage();
         homeDispatcherPage.openFirstOrder();
         orderCardPage.sidebar.home();
         homeDispatcherPage.actionBlock.allNotifications();
-        allNotificationsPage.sidebar.home();
+        allNotificationsDispatcherPage.sidebar.home();
         homeDispatcherPage.switchToListView();
         homeDispatcherPage.openFirstOrderByNumber();
         orderCardPage.sidebar.home();
         homeDispatcherPage.openRandomOrder();
         orderCardPage.sidebar.home();
         homeDispatcherPage.actionBlock.allNotifications();
-        allNotificationsPage.openFirstNotification();
+        allNotificationsDispatcherPage.openFirstNotification();
 
 
 
@@ -64,9 +64,9 @@ OrderCardDispatcherPage orderCardPage = new OrderCardDispatcherPage();
     void acceptNewOrder() {
         homeDispatcherPage.isOpened();
         homeDispatcherPage.actionBlock.allNotifications();
-        allNotificationsPage.isOpened();
-        allNotificationsPage.readAllNotifications();
-        allNotificationsPage.openFirstNotification();
+        allNotificationsDispatcherPage.isOpened();
+        allNotificationsDispatcherPage.readAllNotifications();
+        allNotificationsDispatcherPage.openFirstNotification();
         orderCardPage.isOpened();
         orderCardPage.acceptOrder();
         orderCardPage.sidebar.home();

@@ -29,7 +29,8 @@ public class SelectServicePage {
         reviewButtonCollection = $$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline");
 
 
-    public SelectServicePage isOpened() {
+    public SelectServicePage isOpened() throws InterruptedException{
+        titleLocator.wait(3000L);
         titleLocator.shouldHave(text(SELECT_SERVICE_TITLE));
         spinnerScrollbarLocator.should(disappear);
         servicesColumnBLockLocator.shouldBe(appear);

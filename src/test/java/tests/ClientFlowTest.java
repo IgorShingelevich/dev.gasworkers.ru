@@ -30,7 +30,7 @@ public class ClientFlowTest extends TestBase {
     ActionsBlockClientComponent actionsBlock = new ActionsBlockClientComponent();
     AllObjectsClientPage allObjectsClientPage = new AllObjectsClientPage();
     AllOrdersClientPage allOrdersClientPage = new AllOrdersClientPage();
-    LastOrderCardClientPage lastOrderCardClientPage = new LastOrderCardClientPage();
+    orderCardClientPage orderCardClientPage = new orderCardClientPage();
     ObjectCardClientPage objectCardClientPage = new ObjectCardClientPage();
     AllInvoicesClientPage allInvoicesClientPage = new AllInvoicesClientPage();
     LandingPage landingPage = new LandingPage();
@@ -76,7 +76,7 @@ public class ClientFlowTest extends TestBase {
     @DisplayName("ClientPlaceMaintenanceRequestAndCancel")
 //    @Disabled
     @Test
-    public void ClientPlaceMaintenanceRequestAndCancel() {
+    public void ClientPlaceMaintenanceRequestAndCancel() throws InterruptedException{
         homeClientPage.placeOrder();
         typeOrdersPage.Maintenance();
         infoMaintenancePage.nextButton();
@@ -85,16 +85,16 @@ public class ClientFlowTest extends TestBase {
         selectDateMaintenanceClientPage.submitOrder();
         selectServicePage.isOpened();
         selectServicePage.toOrder();
-        lastOrderCardClientPage.toMap();
+        orderCardClientPage.toMap();
         selectServicePage.isOpened();
         selectServicePage.toOrder();
-        lastOrderCardClientPage.cancelOrder();
+        orderCardClientPage.cancelOrder();
         cancelMaintenancePage.noButton();
-        lastOrderCardClientPage.isOpened();
-        lastOrderCardClientPage.toMap();
+        orderCardClientPage.isOpened();
+        orderCardClientPage.toMap();
         selectServicePage.isOpened();
         selectServicePage.toOrder();
-        lastOrderCardClientPage.cancelOrder();
+        orderCardClientPage.cancelOrder();
         cancelMaintenancePage.yesButton();
         homeClientPage.isOpened();
         homeClientPage.actionBlock.allNotifications();
@@ -124,7 +124,7 @@ public class ClientFlowTest extends TestBase {
     @Description("ClientPlaceRequest")
     //    @Disabled
     @Test
-    void placeMaintenanceFirstObject() {
+    void placeMaintenanceFirstObject() throws InterruptedException {
 
         allNotificationsPage.sidebar.home();
         homeClientPage.placeOrder();
@@ -135,7 +135,7 @@ public class ClientFlowTest extends TestBase {
         selectDateMaintenanceClientPage.submitOrder();
         selectServicePage.isOpened();
         selectServicePage.toOrder();
-        lastOrderCardClientPage.sidebar.home();
+        orderCardClientPage.sidebar.home();
         homeClientPage.isOpened();
         homeClientPage.actionBlock.allNotifications();
         allNotificationsPage.isOpened();
@@ -146,21 +146,21 @@ public class ClientFlowTest extends TestBase {
     @DisplayName("ClientReviewFirstService")
     //    @Disabled
     @Test
-    void ClientReviewFirstService(){
+    void ClientReviewFirstService() throws InterruptedException {
         homeClientPage.actionBlock.allNotifications();
         allNotificationsPage.isOpened();
         allNotificationsPage.readAll();
         allNotificationsPage.sidebar.home();
         homeClientPage.lastOrder.open();
-        lastOrderCardClientPage.isOpened();
-        lastOrderCardClientPage.toMap();
+        orderCardClientPage.isOpened();
+        orderCardClientPage.toMap();
         selectServicePage.isOpened();
         selectServicePage.reviewFirstService();
         selectInsurancePage.isOpened();
         selectInsurancePage.header.back();
         selectServicePage.isOpened();
         selectServicePage.toOrder();
-        lastOrderCardClientPage.isOpened();
+        orderCardClientPage.isOpened();
     }
 
 
@@ -169,14 +169,14 @@ public class ClientFlowTest extends TestBase {
     @DisplayName("ClientAcceptFirstService")
     //    @Disabled
     @Test
-    void ClientAcceptFirstService(){
+    void ClientAcceptFirstService() throws InterruptedException {
         homeClientPage.actionBlock.allNotifications();
         allNotificationsPage.isOpened();
         allNotificationsPage.readAll();
         allNotificationsPage.sidebar.home();
         homeClientPage.lastOrder.open();
-        lastOrderCardClientPage.isOpened();
-        lastOrderCardClientPage.toMap();
+        orderCardClientPage.isOpened();
+        orderCardClientPage.toMap();
         selectServicePage.isOpened();
         selectServicePage.reviewFirstService();
         selectInsurancePage.isOpened();

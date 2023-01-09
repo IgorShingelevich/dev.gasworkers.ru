@@ -11,26 +11,32 @@ public class CheckDocumentsClientPage {
     public FocusHeaderComponent header = new FocusHeaderComponent();
 
     private final String
-            CHECK_DOCUMENTS_TITLE = "Для заключения договора ТО заполните недостающие данные";
+        CHECK_DOCUMENTS_TITLE = "Для заключения договора ТО заполните недостающие данные";
 
     SelenideElement
-            pageTitleLocator = $(".h3.mb-32"),
-            pageTitlePaymentPageLocator = $(".page-content .h3.mb-40"),
-            pageSubtitleLocator = $(".h4.mb-32"),
-            inputPassportIssuedByFieldLocator = $("input[placeholder='Кем выдан']"),
-            makeContractButton = $("button.btn.btn-primary");
+        pageTitleLocator = $(".h3.mb-32"),
+        pageTitlePaymentPageLocator = $(".page-content .h3.mb-40"),
+        pageSubtitleLocator = $(".h4.mb-32"),
+        inputPassportIssuedByFieldLocator = $("input[placeholder='Кем выдан']"),
+        makeContractButton = $("button.btn.btn-primary"),
+        spinerLoaderLocator = $("div.gas-loader");
+        // <div data-v-eb791b80="" class="gas-loader"></div>
+
 
     public CheckDocumentsClientPage isOpened() {
         pageTitleLocator.shouldHave(text(CHECK_DOCUMENTS_TITLE));
         return this;
     }
 
-    public CheckDocumentsClientPage makeContract() {
+    public CheckDocumentsClientPage makeContract() throws InterruptedException {
         inputPassportIssuedByFieldLocator.shouldNot(empty);
+        makeContractButton.wait(3000L);
         makeContractButton.click();
-        //wait for spinner to disappear
-        pageTitlePaymentPageLocator.shouldHave(text("Заключение договора ТО и оплата выезда мастера"));
-        pageTitlePaymentPageLocator.shouldBe(visible);
+        makeContractButton.wait(3000L);
+//        pageTitlePaymentPageLocator.shouldHave(text("Заключение договора ТО и оплата выезда мастера"));
+        spinerLoaderLocator.shouldNotBe(visible);
+//        pageTitlePaymentPageLocator.shouldBe(visible);
+//        payImgLocator.shouldBe(visible);
         return this;
     }
 

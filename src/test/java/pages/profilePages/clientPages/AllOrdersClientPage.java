@@ -1165,8 +1165,11 @@ private final String ORDER_PAGE_TITLE = "Список заказов";
 
 
     ElementsCollection
-    orderCardActionButtonCollection = $$x("(//button[contains(@type,'button')])"),
-    orderCardOpenCollection = $$x("(//a[contains(@class,'actions__slot--link')])");
+        listNumberLinkCollection = $$("p.h5.link-blue.pointer"),
+        dropdownActionButtonCollection = $$x("(//button[contains(@type,'button')])"),
+        // div.actions  $$x("(//button[contains(@type,'button')])")
+        openActionLinkCollection = $$x("(//a[contains(@class,'actions__slot--link')])");
+        // div.col-lg-6.mb-30 $$x("(//a[contains(@class,'actions__slot--link')])")
 
 
 
@@ -1183,13 +1186,21 @@ private final String ORDER_PAGE_TITLE = "Список заказов";
         return this;
     }
 
-    public AllOrdersClientPage clickOrderCardActionButton(int orderCardNumber) {
-        orderCardActionButtonCollection.get(orderCardNumber+1).click();
+
+    public AllOrdersClientPage orderByNumber(int orderNumber) {
+        //change int to String
+        String orderNumberString = String.valueOf(orderNumber);
+        listNumberLinkCollection.filter(text(orderNumberString)).first().click();
         return this;
     }
 
-    public AllOrdersClientPage openOrder(int orderCardNumber) {
-        orderCardOpenCollection.get(orderCardNumber-1).click();
+    public AllOrdersClientPage dropdownAction(int listNumber) {
+        dropdownActionButtonCollection.get(listNumber+1).click();
+        return this;
+    }
+
+    public AllOrdersClientPage openAction(int listNumber) {
+        openActionLinkCollection.get(listNumber-1).click();
         return this;
     }
 
