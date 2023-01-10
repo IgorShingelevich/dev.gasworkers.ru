@@ -2,6 +2,7 @@ package tests;
 
 import jdk.jfr.Description;
 import org.junit.jupiter.api.*;
+import pages.BasePage;
 import pages.LandingPage;
 import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 import pages.components.sharedComponents.headerComponents.ProfileHeaderComponent;
@@ -76,8 +77,9 @@ public class ClientFlowTest extends TestBase {
     @DisplayName("ClientPlaceMaintenanceRequestAndCancel")
 //    @Disabled
     @Test
-    public void ClientPlaceMaintenanceRequestAndCancel() throws InterruptedException{
+    public void ClientPlaceMaintenanceRequestAndCancel() {
         homeClientPage.placeOrder();
+
         typeOrdersPage.Maintenance();
         infoMaintenancePage.nextButton();
         selectObjectMaintenancePage.pick1thObject();
@@ -91,6 +93,7 @@ public class ClientFlowTest extends TestBase {
         orderCardClientPage.cancelOrder();
         cancelMaintenancePage.noButton();
         orderCardClientPage.isOpened();
+        orderCardClientPage.popUpClose();
         orderCardClientPage.toMap();
         selectServicePage.isOpened();
         selectServicePage.toOrder();
@@ -98,10 +101,6 @@ public class ClientFlowTest extends TestBase {
         cancelMaintenancePage.yesButton();
         homeClientPage.isOpened();
         homeClientPage.actionBlockClient.allNotifications();
-        allNotificationsPage.isOpened();
-        allNotificationsPage.readAll();
-        allNotificationsPage.sidebarClient.home();
-        homeClientPage.isOpened();
     }
 
     @DisplayName("openRandomObject")

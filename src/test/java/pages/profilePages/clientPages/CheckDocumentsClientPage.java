@@ -4,6 +4,8 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -25,18 +27,18 @@ public class CheckDocumentsClientPage {
 
     public CheckDocumentsClientPage isOpened() {
         pageTitleLocator.shouldHave(text(CHECK_DOCUMENTS_TITLE));
+        String CheckDocumentsClientPageTitle = pageTitleLocator.getText();
+        System.out.println("CheckDocumentsClientPageTitle: " + CheckDocumentsClientPageTitle);
         return this;
     }
 
-    public CheckDocumentsClientPage makeContract() throws InterruptedException {
+    public CheckDocumentsClientPage makeContract()  {
         inputPassportIssuedByFieldLocator.shouldNot(empty);
-        makeContractButton.wait(3000L);
-        makeContractButton.click();
-        makeContractButton.wait(3000L);
-//        pageTitlePaymentPageLocator.shouldHave(text("Заключение договора ТО и оплата выезда мастера"));
-        spinerLoaderLocator.shouldNotBe(visible);
-//        pageTitlePaymentPageLocator.shouldBe(visible);
-//        payImgLocator.shouldBe(visible);
+       makeContractButton.click();
+        spinerLoaderLocator.should(disappear);
+        pageTitlePaymentPageLocator.should(appear, Duration.ofSeconds(10));
+
+
         return this;
     }
 

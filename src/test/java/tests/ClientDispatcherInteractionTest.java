@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LandingPage;
 import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 import pages.components.sharedComponents.headerComponents.ProfileHeaderComponent;
+import pages.components.sharedComponents.headerComponents.actionblockComponents.ActionsBlockDispatcherComponent;
 import pages.profilePages.AllNotificationsPage;
 import pages.profilePages.ObjectCardClientPage;
 import pages.profilePages.clientPages.*;
@@ -35,6 +36,7 @@ public class ClientDispatcherInteractionTest extends TestBase {
     AllObjectsClientPage allObjectsClientPage = new AllObjectsClientPage();
     AllOrdersClientPage allOrdersClientPage = new AllOrdersClientPage();
     AllNotificationsPage allNotificationsPage = new AllNotificationsPage();
+    ActionsBlockDispatcherComponent actionsBlockDispatcher = new ActionsBlockDispatcherComponent();
     AllNotificationsDispatcherPage allNotificationsDispatcherPage = new AllNotificationsDispatcherPage();
     orderCardClientPage orderCardClientPage = new orderCardClientPage();
     ObjectCardClientPage objectCardClientPage = new ObjectCardClientPage();
@@ -49,6 +51,7 @@ public class ClientDispatcherInteractionTest extends TestBase {
     CheckDocumentsClientPage checkDocumentsClientPage = new CheckDocumentsClientPage();
     SelectPaymentClientPage selectPaymentClientPage = new SelectPaymentClientPage();
     SignSMSClientPage signSMSClientPage = new SignSMSClientPage();
+    PaymentWizardClientPage paymentWizardClientPage = new PaymentWizardClientPage();
 
     CancelMaintenancePage cancelMaintenancePage = new CancelMaintenancePage();
 
@@ -115,14 +118,18 @@ public class ClientDispatcherInteractionTest extends TestBase {
 
         WebDriverRunner.setWebDriver(driverClient);
         homeClientPage.placeOrder();
-        homeClientPage.popUpClose();
+//        homeClientPage.popUpClose();
         typeOrdersPage.Maintenance();
         infoMaintenancePage.nextButton();
         selectObjectMaintenancePage.pick1thObject();
         selectDateMaintenanceClientPage.pickNowDateAM();
         selectDateMaintenanceClientPage.submitOrder();
-//        selectServicePage.isOpened();
-//        selectServicePage.toOrder();
+        selectServicePage.isOpened();
+        selectServicePage.toOrder();
+        orderCardClientPage.isOpened();
+        orderCardClientPage.popUpClose();
+        orderCardClientPage.toMap();
+        selectServicePage.isOpened();
 //        orderCardClientPage.sidebar.home();
 //        homeClientPage.isOpened();
 //        homeClientPage.actionBlock.allNotifications();
@@ -133,25 +140,33 @@ public class ClientDispatcherInteractionTest extends TestBase {
         WebDriverRunner.setWebDriver(driverDispatcher);
 
 
-//        homeDispatcherPage.isOpened();
+        homeDispatcherPage.isOpened();
 //        homeDispatcherPage.switchToListView();
-//        homeDispatcherPage.actionBlock.allNotifications();
-//        allNotificationsDispatcherPage.isOpened();
-//        allNotificationsDispatcherPage.readAllNotifications();
-        //fall
+
+
+      /*  homeDispatcherPage.actionBlockDispatcher.allNotifications();
+        allNotificationsDispatcherPage.isOpened();
+        allNotificationsDispatcherPage.openFirstNotification();
+        orderCardPage.isOpened();
+        orderCardPage.actionBlockDispatcher.allNotifications();
+        allNotificationsDispatcherPage.readAllNotifications();
+        allNotificationsDispatcherPage.sidebarDispatcher.home();
+        fall*/
+
+
 //        allNotificationsDispatcherPage.openFirstNotification();
         homeDispatcherPage.switchToListView();
         homeDispatcherPage.popUpClose();
-        homeDispatcherPage.actionBlockDispatcher.allNotifications();
-        allNotificationsDispatcherPage.isOpened();
+//        homeDispatcherPage.actionBlockDispatcher.allNotifications();
+//        allNotificationsDispatcherPage.isOpened();
 //        allNotificationsDispatcherPage.readAllNotifications();
-        allNotificationsDispatcherPage.sidebarDispatcher.home();
-        homeDispatcherPage.isOpened();
-        homeDispatcherPage.switchToListView();
+//        allNotificationsDispatcherPage.sidebarDispatcher.home();
+//        homeDispatcherPage.isOpened();
+//        homeDispatcherPage.switchToListView();
 
         homeDispatcherPage.openFirstOrderByTitleIndex();
 //        orderCardPage.isOpened();
-        homeDispatcherPage.popUpClose();
+//        homeDispatcherPage.popUpClose();
         orderCardPage.acceptOrder();
 //        orderCardPage.sidebar.home();
 
@@ -167,13 +182,15 @@ public class ClientDispatcherInteractionTest extends TestBase {
         selectServicePage.waitForResponses();
 
         selectServicePage.reviewFirstService();
-//        selectInsurancePage.isOpened();
+        selectInsurancePage.isOpened();
         selectInsurancePage.next();
-//        checkDocumentsClientPage.isOpened();
+        checkDocumentsClientPage.isOpened();
         checkDocumentsClientPage.makeContract();
-//        selectPaymentClientPage.isOpened();
+        selectPaymentClientPage.isOpened();
         selectPaymentClientPage.paySPB();
-//        signSMSClientPage.isOpened();
+        paymentWizardClientPage.isOpened();
+        paymentWizardClientPage.getQRCode();
+        signSMSClientPage.isOpened();
         signSMSClientPage.inputSMSCode(smsCode);
 
 

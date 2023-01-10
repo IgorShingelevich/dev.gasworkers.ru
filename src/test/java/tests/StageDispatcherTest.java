@@ -44,7 +44,7 @@ OrderCardDispatcherPage orderCardPage = new OrderCardDispatcherPage();
         homeDispatcherPage.switchToListView();
         homeDispatcherPage.switchToMapView();
         homeDispatcherPage.actionBlockDispatcher.allNotifications();
-//        allNotificationsDispatcherPage.isOpened();
+        allNotificationsDispatcherPage.isOpened();
         allNotificationsDispatcherPage.sidebarDispatcher.home();
 //        back();
         homeDispatcherPage.openFirstOrderByAction();

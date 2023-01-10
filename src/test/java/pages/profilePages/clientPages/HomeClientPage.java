@@ -31,12 +31,14 @@ public class HomeClientPage extends BaseClientPage {
             profileCardImageLocator = $(".profile-card").$(".profile-image");
 
 //objectsBlock
-    SelenideElement objectsTitleLocator = $(".client-objects .title"),
-            objectsPreviousButtonLocator = $(".client-objects .slick-arrow.slick-prev"),
-            objectsNextButtonLocator = $(".client-objects .slick-arrow.slick-next");
-            ElementsCollection gotoObjectActionCollection = $$(".actions .actions__slot--link");
+    SelenideElement
+        objectsTitleLocator = $(".client-objects .title"),
+        firstObjectLinkLocator = $$x("(//div[contains(@class,'title link-blue text-primary pointer')])").get(4), // 0-3 out of visibility
+        objectsPreviousButtonLocator = $(".client-objects .slick-arrow.slick-prev"),
+        objectsNextButtonLocator = $(".client-objects .slick-arrow.slick-next");
+        ElementsCollection gotoObjectActionCollection = $$(".actions .actions__slot--link");
 //            ElementsCollection actionMenuCollection = $$(".actions .actions__slot right"); //not working - menu collection is not visible
-            ElementsCollection actionButtonCollection = $$(".actions .actions__btn");
+        ElementsCollection actionButtonCollection = $$(".actions .actions__btn");
 
 
 
@@ -60,6 +62,8 @@ public class HomeClientPage extends BaseClientPage {
     public HomeClientPage isOpened() {
         profileCardNameLocator.shouldBe(visible);
         objectsTitleLocator.shouldBe(visible).shouldHave(text(OBJECTS_TITLE));
+        firstObjectLinkLocator.shouldBe(visible);
+
         return this;
     }
 

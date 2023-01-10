@@ -14,6 +14,7 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         cardViewButtonLocator = $("div.action-btn.card-type"),
         listViewButtonLocator = $("div.action-btn.list-type"),
         orderCardTitleLocator = $(".page-title .h3.mb-2"),
+        orderCardFirstLocator = $$("div.order-card").first(),
         mapContainerLocator = $("div.map-wrap"),
         map=$(".map-wrap .ymap-container .map-into"),
         newOrderStatusButtons= $$("div.top-filter__status--btn").get(0),
@@ -34,11 +35,6 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
 
     public HomeDispatcherPage isOpened() {
         dispatcherHomePageTitleLocator.shouldBe(visible);
-//        listViewButtonLocator.shouldBe(visible).click();
-        //if mapContainerLocator on the page it should be visible
-//        if (mapContainerLocator.isDisplayed()) {
-//            mapContainerLocator.shouldBe(visible);
-//        }
         return this;
     }
 
@@ -57,12 +53,9 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
 
     public HomeDispatcherPage switchToListView() {
         listViewButtonLocator.shouldBe(visible).click();
-//        try {
-//            orderCardsCollection.last().wait(6000L);
-//        }
-//        catch (Exception e) {
-//            System.out.println("orderCardsCollection.wait(6000L) failed");
-//        }
+        orderCardFirstLocator.shouldBe(visible);
+
+
 
         return this;
     }

@@ -3,6 +3,8 @@ package pages.profilePages.dispatcherPages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -15,7 +17,8 @@ public class AllNotificationsDispatcherPage extends BaseDispatcherPage{
 
         pageTitleLocator = $(".page-title .h3.mb-2"),
         readAllButtonLocator = $(".btn.btn-primary"),
-        notificationsListLocator = $("div.messages-list");
+        notificationsListLocator = $("div.messages-list"),
+        firstNotificationLocator = $$(".item-header.d-flex.justify-content-between.w-100 div.h4").get(0);
 
     ElementsCollection
         notificationsCollection = $$(".item-header.d-flex.justify-content-between.w-100 div.h4"),
@@ -24,18 +27,14 @@ public class AllNotificationsDispatcherPage extends BaseDispatcherPage{
 
 
     public AllNotificationsDispatcherPage isOpened() {
-        try {
-            pageTitleLocator.wait(6000L);
-        }
-        catch (Exception e) {
-            System.out.println("Exception: " + e);
-        }
-        pageTitleLocator.shouldHave(text(PAGE_TITLE));
-        notificationsListLocator.shouldBe(visible);
+        firstNotificationLocator.should(appear, Duration.ofSeconds(10));
         return this;
     }
 
+
     public AllNotificationsDispatcherPage readAllNotifications() {
+        firstNotificationLocator.should(appear, Duration.ofSeconds(10));
+        readAllButtonLocator.should(appear, Duration.ofSeconds(10));
         readAllButtonLocator.shouldBe(visible).click();
 //        try {
 //            notificationsCollection.wait(6000L);

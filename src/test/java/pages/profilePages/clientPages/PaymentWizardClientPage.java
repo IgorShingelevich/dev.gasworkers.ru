@@ -19,6 +19,8 @@ public class PaymentWizardClientPage {
 
     public PaymentWizardClientPage isOpened() {
         pageTitleLocator.shouldHave(text(PAYMENT_WIZARD_TITLE));
+        String pageWizardTitle = pageTitleLocator.getText();
+        System.out.println("pageWizardTitle = " + pageWizardTitle);
         return this;
     }
 

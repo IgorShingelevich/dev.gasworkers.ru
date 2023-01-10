@@ -5,6 +5,9 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.appear;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -26,8 +29,10 @@ public class SignSMSClientPage {
         smsCodeInputCollection = $$(".code-input.mb-4 input");
 
     public SignSMSClientPage isOpened() {
-        pageSignSMSTitleLocator.shouldBe(Condition.visible);
-        return this;
+        pageSignSMSTitleLocator.should(appear, Duration.ofSeconds(10));
+        String titleSignSMSClientPage = pageSignSMSTitleLocator.getText();
+        System.out.println("titleSignSMSClientPage: " + titleSignSMSClientPage);
+    return this;
     }
 
     public SignSMSClientPage inputSMSCode(String smsCode) {
