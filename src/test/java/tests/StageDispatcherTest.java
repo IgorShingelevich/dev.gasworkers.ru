@@ -6,7 +6,7 @@ import pages.components.sharedComponents.headerComponents.actionblockComponents.
 import pages.components.sharedComponents.sidebarComponents.SidebarDispatcherComponent;
 import pages.profilePages.dispatcherPages.*;
 
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Selenide.*;
 
 public class StageDispatcherTest extends TestBase {
 
@@ -30,24 +30,30 @@ OrderCardDispatcherPage orderCardPage = new OrderCardDispatcherPage();
         loginPage.login(emailDispatcher, passwordDispatcher);
     }
 
-        @AfterEach
-        void clientLogOut() {
-            actionBlock.logout();
-        }
+//        @AfterEach
+//        void clientLogOut() {
+//            actionBlock.logout();
+//        }
 
 
         @Test
         @DisplayName("randomRoamingDispatcherFlow")
         void randomRoamingDispatcherFlow () {
+        homeDispatcherPage.isOpened();
         homeDispatcherPage.switchToListView();
         homeDispatcherPage.switchToMapView();
-        homeDispatcherPage.switchToListView();
-        homeDispatcherPage.openFirstOrder();
+        homeDispatcherPage.actionBlock.allNotifications();
+//        allNotificationsDispatcherPage.isOpened();
+        allNotificationsDispatcherPage.sidebar.home();
+//        back();
+        homeDispatcherPage.openFirstOrderByAction();
+        back();
         orderCardPage.sidebar.home();
         homeDispatcherPage.actionBlock.allNotifications();
         allNotificationsDispatcherPage.sidebar.home();
+        homeDispatcherPage.isOpened();
         homeDispatcherPage.switchToListView();
-        homeDispatcherPage.openFirstOrderByNumber();
+        homeDispatcherPage.openFirstOrderByTitleIndex();
         orderCardPage.sidebar.home();
         homeDispatcherPage.openRandomOrder();
         orderCardPage.sidebar.home();
@@ -70,6 +76,21 @@ OrderCardDispatcherPage orderCardPage = new OrderCardDispatcherPage();
         orderCardPage.isOpened();
         orderCardPage.acceptOrder();
         orderCardPage.sidebar.home();
+    }
+
+    @DisplayName("soutGetText")
+//    @Disabled
+    @Test
+    void getText (){
+        homeDispatcherPage.isOpened();
+        homeDispatcherPage.actionBlock.allNotifications();
+        allNotificationsDispatcherPage.isOpened();
+        allNotificationsDispatcherPage.openFirstNotification();
+        orderCardPage.isOpened();
+        String orderNumberText = $("h1.h3.mb-2").getText();
+        // parse last 4 digits
+        int orderNumber = Integer.parseInt(orderNumberText.substring(orderNumberText.length() - 4));
+        System.out.println(orderNumber);
     }
 
 

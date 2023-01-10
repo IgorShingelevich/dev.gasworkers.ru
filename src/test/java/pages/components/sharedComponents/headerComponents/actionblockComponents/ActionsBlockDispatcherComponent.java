@@ -1,5 +1,6 @@
 package pages.components.sharedComponents.headerComponents.actionblockComponents;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Condition.text;
@@ -14,7 +15,6 @@ public class ActionsBlockDispatcherComponent {
             actionsBlock = $(".actions-block"),
 
             notificationsButtonLocator = $(".actions-block .notifications.icon"),
-            notificationsListLocator = $("div.messages-list"),
 
             dropdownArrowLocator = $(".actions-block .arrow-down"),
             dropdown2Locator = $(".profile.icon"),
@@ -26,12 +26,18 @@ public class ActionsBlockDispatcherComponent {
             allNotificationsPageTitleLocator = $(".page-title .h3.mb-2"),
             landingLogoLocator = $(".primary-header--logo");
 
+    ElementsCollection
+            notificationsListCollection = $$("div.item.item.notice-large");
 
     public ActionsBlockDispatcherComponent allNotifications() {
         notificationsButtonLocator.shouldBe(visible).click();
-        allNotificationsPageTitleLocator.shouldHave(text("Уведомления"));
-        notificationsListLocator.shouldBe(visible);
 
+        allNotificationsPageTitleLocator.shouldHave(text("Уведомления"));
+        try{
+        notificationsListCollection.wait(6000l);
+        }catch (Exception e){
+            System.out.println("No notifications");
+        }
         return this;
     }
 

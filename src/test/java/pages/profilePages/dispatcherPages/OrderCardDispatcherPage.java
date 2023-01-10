@@ -26,6 +26,14 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage{
         orderNavigationCollection = $$("#navigation-block li");
 
     public OrderCardDispatcherPage isOpened() {
+
+        // isolate  in pageTitleLocator.wait(6000L) in try-catch block
+        try {
+            pageTitleLocator.wait(6000L);
+        }
+        catch (Exception e) {
+            System.out.println("Exception: " + e);
+        }
         pageTitleLocator.shouldHave(text(PAGE_TITLE));
         orderBlockLocator.shouldBe(visible);
         return this;

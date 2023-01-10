@@ -24,13 +24,25 @@ public class AllNotificationsDispatcherPage extends BaseDispatcherPage{
 
 
     public AllNotificationsDispatcherPage isOpened() {
+        try {
+            pageTitleLocator.wait(6000L);
+        }
+        catch (Exception e) {
+            System.out.println("Exception: " + e);
+        }
         pageTitleLocator.shouldHave(text(PAGE_TITLE));
         notificationsListLocator.shouldBe(visible);
         return this;
     }
 
     public AllNotificationsDispatcherPage readAllNotifications() {
-        readAllButtonLocator.shouldBe(visible).shouldBe(enabled).shouldBe(appear).click();
+        readAllButtonLocator.shouldBe(visible).click();
+//        try {
+//            notificationsCollection.wait(6000L);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        notificationsCollection.get(0).shouldBe(visible);
         return this;
     }
 

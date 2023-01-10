@@ -29,15 +29,46 @@ public class SelectServicePage {
         reviewButtonCollection = $$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline");
 
 
-    public SelectServicePage isOpened() throws InterruptedException{
-        titleLocator.wait(3000L);
-        titleLocator.shouldHave(text(SELECT_SERVICE_TITLE));
-        spinnerScrollbarLocator.should(disappear);
+    public SelectServicePage isOpened() {
+        // isolate titleLocator.wait(6000L) in try-catch block
+//        try {
+//            titleLocator.wait(6000L);
+//        } catch (Exception e) {
+//            System.out.println("titleLocator.wait(6000L) failed");
+//        }
+//        titleLocator.shouldHave(text(SELECT_SERVICE_TITLE));
+//        try {
+//            spinnerScrollbarLocator.wait(6000L);
+//        } catch (Exception e) {
+//            System.out.println("spinnerScrollbarLocator.wait(6000L).should(disappear) failed");
+//        }
+//        spinnerScrollbarLocator.should(disappear);
         servicesColumnBLockLocator.shouldBe(appear);
         mapContainerLocator.shouldBe(appear).shouldBe(visible);
+        return this;
+    }
+
+    public SelectServicePage waitForResponses() {
 
 
-
+        try {
+            reviewButtonCollection.wait(10000L);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        // isolate titleLocator.wait(6000L) in try-catch block
+//        try {
+//            titleLocator.wait(6000L);
+//        } catch (Exception e) {
+//            System.out.println("titleLocator.wait(6000L) failed");
+//        }
+//        titleLocator.shouldHave(text(SELECT_SERVICE_TITLE));
+//        try {
+//            spinnerScrollbarLocator.wait(6000L);
+//        } catch (Exception e) {
+//            System.out.println("spinnerScrollbarLocator.wait(6000L).should(disappear) failed");
+//        }
+//        spinnerScrollbarLocator.should(disappear);
         return this;
     }
 

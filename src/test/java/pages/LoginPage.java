@@ -29,9 +29,7 @@ public class LoginPage {
     /*<button data-v-6d08f792="" data-v-3e43ab48="" class="btn btn-primary disable-outline">
   Далее
 </button>*/
-     loginButtonLocator = $(By.xpath("//button[@class='btn btn-primary disable-outline']"));
-        //$(".form-section center .btn btn-primary disable-outline"); // this is wrong
-        //$(By.xpath("//div[@class='login-form'] //button[@class='btn btn-primary disable-outline']")); // Other element would receive the click: <div class="form-section center"
+     loginButtonLocator = $(".mb-2.btn.btn-primary");
 
 public void open() {
         Selenide.open("/login");

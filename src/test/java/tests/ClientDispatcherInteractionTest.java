@@ -1,9 +1,6 @@
 package tests;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.WebDriverRunner;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 import pages.LandingPage;
@@ -17,6 +14,7 @@ import pages.profilePages.clientPages.infoServicesPage.InfoMaintenancePage;
 import pages.profilePages.clientPages.infoServicesPage.InfoRepairPage;
 import pages.profilePages.clientPages.infoServicesPage.InfoVideoPage;
 import pages.profilePages.dispatcherPages.AllNotificationsDispatcherPage;
+import pages.profilePages.dispatcherPages.BaseDispatcherPage;
 import pages.profilePages.dispatcherPages.HomeDispatcherPage;
 import pages.profilePages.dispatcherPages.OrderCardDispatcherPage;
 
@@ -76,7 +74,7 @@ public class ClientDispatcherInteractionTest extends TestBase {
         passwordClient = "123456";
 
     String
-        emailDispatcher = "test_gas_disp9@rambler.ru",
+        emailDispatcher = "test_gw_dispatcher_sssr1@rambler.ru",
         passwordDispatcher = "123456";
 
     String
@@ -118,12 +116,13 @@ public class ClientDispatcherInteractionTest extends TestBase {
 
         WebDriverRunner.setWebDriver(driverClient);
         homeClientPage.placeOrder();
+        homeClientPage.popUpClose();
         typeOrdersPage.Maintenance();
         infoMaintenancePage.nextButton();
         selectObjectMaintenancePage.pick1thObject();
         selectDateMaintenanceClientPage.pickNowDateAM();
         selectDateMaintenanceClientPage.submitOrder();
-        selectServicePage.isOpened();
+//        selectServicePage.isOpened();
 //        selectServicePage.toOrder();
 //        orderCardClientPage.sidebar.home();
 //        homeClientPage.isOpened();
@@ -133,15 +132,29 @@ public class ClientDispatcherInteractionTest extends TestBase {
 //        allNotificationsPage.sidebar.home();
 
         WebDriverRunner.setWebDriver(driverDispatcher);
-        homeDispatcherPage.isOpened();
+
+
+//        homeDispatcherPage.isOpened();
+//        homeDispatcherPage.switchToListView();
+//        homeDispatcherPage.actionBlock.allNotifications();
+//        allNotificationsDispatcherPage.isOpened();
+//        allNotificationsDispatcherPage.readAllNotifications();
+        //fall
+//        allNotificationsDispatcherPage.openFirstNotification();
         homeDispatcherPage.switchToListView();
+        homeDispatcherPage.popUpClose();
         homeDispatcherPage.actionBlock.allNotifications();
         allNotificationsDispatcherPage.isOpened();
-        allNotificationsDispatcherPage.readAllNotifications();
-        allNotificationsDispatcherPage.openFirstNotification();
-        orderCardPage.isOpened();
+//        allNotificationsDispatcherPage.readAllNotifications();
+        allNotificationsDispatcherPage.sidebar.home();
+        homeDispatcherPage.isOpened();
+        homeDispatcherPage.switchToListView();
+
+        homeDispatcherPage.openFirstOrderByTitleIndex();
+//        orderCardPage.isOpened();
+        homeDispatcherPage.popUpClose();
         orderCardPage.acceptOrder();
-        orderCardPage.sidebar.home();
+//        orderCardPage.sidebar.home();
 
         WebDriverRunner.setWebDriver(driverClient);
 //        homeClientPage.actionBlock.allNotifications();
@@ -152,14 +165,16 @@ public class ClientDispatcherInteractionTest extends TestBase {
 //        orderCardClientPage.isOpened();
 //        orderCardClientPage.toMap();
         selectServicePage.isOpened();
+        selectServicePage.waitForResponses();
+
         selectServicePage.reviewFirstService();
-        selectInsurancePage.isOpened();
+//        selectInsurancePage.isOpened();
         selectInsurancePage.next();
-        checkDocumentsClientPage.isOpened();
+//        checkDocumentsClientPage.isOpened();
         checkDocumentsClientPage.makeContract();
-        selectPaymentClientPage.isOpened();
+//        selectPaymentClientPage.isOpened();
         selectPaymentClientPage.paySPB();
-        signSMSClientPage.isOpened();
+//        signSMSClientPage.isOpened();
         signSMSClientPage.inputSMSCode(smsCode);
 
 

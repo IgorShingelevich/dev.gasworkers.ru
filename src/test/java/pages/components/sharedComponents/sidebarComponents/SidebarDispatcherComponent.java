@@ -2,7 +2,6 @@ package pages.components.sharedComponents.sidebarComponents;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -16,8 +15,10 @@ public class SidebarDispatcherComponent {
 
     SelenideElement
             dispatcherHomePageTitleLocator = $(".page-title .h3.mb-2"),
+            listViewButtonLocator = $("div.action-btn.list-type"),
+            mapContainerLocator = $("div.map-wrap"),
 
-            homeLinkCollection = $$(".sidebar .link").get(0),
+            homeLinkLocator = $$(".sidebar .link").get(0),
             mastersListLinkLocator = $$(".sidebar .link").get(1),
             profileDispatcherLinkLocator = $$(".sidebar .link").get(2),
             supportServiceTitleLocator = $(".support-service"),
@@ -27,7 +28,7 @@ public class SidebarDispatcherComponent {
 
     public SidebarDispatcherComponent verifyLocators() {
 
-        homeLinkCollection.shouldBe(visible);
+        homeLinkLocator.shouldBe(visible);
         mastersListLinkLocator.shouldBe(visible);
         profileDispatcherLinkLocator.shouldBe(visible);
         supportServiceTitleLocator.shouldBe(visible);
@@ -37,7 +38,11 @@ public class SidebarDispatcherComponent {
     }
 
     public SidebarDispatcherComponent home() {
-        dispatcherHomePageTitleLocator.shouldBe(visible).click();
+        homeLinkLocator.shouldBe(visible).click();
+        listViewButtonLocator.shouldBe(visible).click();
+        if (mapContainerLocator.isDisplayed()) {
+            mapContainerLocator.shouldBe(visible);
+        }
         return this;
     }
 
