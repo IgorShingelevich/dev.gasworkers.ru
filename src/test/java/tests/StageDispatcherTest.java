@@ -40,24 +40,25 @@ OrderCardDispatcherPage orderCardPage = new OrderCardDispatcherPage();
         @DisplayName("randomRoamingDispatcherFlow")
         void randomRoamingDispatcherFlow () {
         homeDispatcherPage.isOpened();
+        homeDispatcherPage.popUpClose();
         homeDispatcherPage.switchToListView();
         homeDispatcherPage.switchToMapView();
-        homeDispatcherPage.actionBlock.allNotifications();
+        homeDispatcherPage.actionBlockDispatcher.allNotifications();
 //        allNotificationsDispatcherPage.isOpened();
-        allNotificationsDispatcherPage.sidebar.home();
+        allNotificationsDispatcherPage.sidebarDispatcher.home();
 //        back();
         homeDispatcherPage.openFirstOrderByAction();
         back();
-        orderCardPage.sidebar.home();
-        homeDispatcherPage.actionBlock.allNotifications();
-        allNotificationsDispatcherPage.sidebar.home();
+        orderCardPage.sidebarDispatcher.home();
+        homeDispatcherPage.actionBlockDispatcher.allNotifications();
+        allNotificationsDispatcherPage.sidebarDispatcher.home();
         homeDispatcherPage.isOpened();
         homeDispatcherPage.switchToListView();
         homeDispatcherPage.openFirstOrderByTitleIndex();
-        orderCardPage.sidebar.home();
+        orderCardPage.sidebarDispatcher.home();
         homeDispatcherPage.openRandomOrder();
-        orderCardPage.sidebar.home();
-        homeDispatcherPage.actionBlock.allNotifications();
+        orderCardPage.sidebarDispatcher.home();
+        homeDispatcherPage.actionBlockDispatcher.allNotifications();
         allNotificationsDispatcherPage.openFirstNotification();
 
 
@@ -69,13 +70,13 @@ OrderCardDispatcherPage orderCardPage = new OrderCardDispatcherPage();
     @Test
     void acceptNewOrder() {
         homeDispatcherPage.isOpened();
-        homeDispatcherPage.actionBlock.allNotifications();
+        homeDispatcherPage.actionBlockDispatcher.allNotifications();
         allNotificationsDispatcherPage.isOpened();
         allNotificationsDispatcherPage.readAllNotifications();
         allNotificationsDispatcherPage.openFirstNotification();
         orderCardPage.isOpened();
         orderCardPage.acceptOrder();
-        orderCardPage.sidebar.home();
+        orderCardPage.sidebarDispatcher.home();
     }
 
     @DisplayName("soutGetText")
@@ -83,7 +84,7 @@ OrderCardDispatcherPage orderCardPage = new OrderCardDispatcherPage();
     @Test
     void getText (){
         homeDispatcherPage.isOpened();
-        homeDispatcherPage.actionBlock.allNotifications();
+        homeDispatcherPage.actionBlockDispatcher.allNotifications();
         allNotificationsDispatcherPage.isOpened();
         allNotificationsDispatcherPage.openFirstNotification();
         orderCardPage.isOpened();

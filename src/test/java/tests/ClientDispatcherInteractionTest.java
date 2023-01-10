@@ -14,7 +14,6 @@ import pages.profilePages.clientPages.infoServicesPage.InfoMaintenancePage;
 import pages.profilePages.clientPages.infoServicesPage.InfoRepairPage;
 import pages.profilePages.clientPages.infoServicesPage.InfoVideoPage;
 import pages.profilePages.dispatcherPages.AllNotificationsDispatcherPage;
-import pages.profilePages.dispatcherPages.BaseDispatcherPage;
 import pages.profilePages.dispatcherPages.HomeDispatcherPage;
 import pages.profilePages.dispatcherPages.OrderCardDispatcherPage;
 
@@ -143,10 +142,10 @@ public class ClientDispatcherInteractionTest extends TestBase {
 //        allNotificationsDispatcherPage.openFirstNotification();
         homeDispatcherPage.switchToListView();
         homeDispatcherPage.popUpClose();
-        homeDispatcherPage.actionBlock.allNotifications();
+        homeDispatcherPage.actionBlockDispatcher.allNotifications();
         allNotificationsDispatcherPage.isOpened();
 //        allNotificationsDispatcherPage.readAllNotifications();
-        allNotificationsDispatcherPage.sidebar.home();
+        allNotificationsDispatcherPage.sidebarDispatcher.home();
         homeDispatcherPage.isOpened();
         homeDispatcherPage.switchToListView();
 

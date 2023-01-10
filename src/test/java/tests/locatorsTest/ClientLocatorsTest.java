@@ -66,10 +66,10 @@ public class ClientLocatorsTest extends TestBase {
 //    @Disabled
     @Test
     void notificationsPageLocatorIntegrityTest() {
-        homePage.actionBlock.notificationsButton();
+        homePage.actionBlockClient.notificationsButton();
         allNotificationsPage.isOpened();
         allNotificationsPage.verifyLocators();
-        allNotificationsPage.sidebar.home();
+        allNotificationsPage.sidebarClient.home();
     }
 
     @DisplayName("landingPageLocatorsIntegrityTest")
@@ -100,37 +100,37 @@ public class ClientLocatorsTest extends TestBase {
     void ordersAndInvoicesLocatorsIntegrityTest() {
         allOrdersPage.openPage();
         allOrdersPage.sidebar.home();
-        homePage.sidebar.clickOrdersAndInvoicesDropdown();
-        homePage.sidebar.allOrders();
+        homePage.sidebarClient.clickOrdersAndInvoicesDropdown();
+        homePage.sidebarClient.allOrders();
         allOrdersPage.dropdownAction(1);
         allOrdersPage.openAction(1);
         back();
         allOrdersPage.breadcrumbs.home();
-        homePage.sidebar.clickOrdersAndInvoicesDropdown();
-        homePage.sidebar.invoices();
-        allInvoicesPage.sidebar.home();
+        homePage.sidebarClient.clickOrdersAndInvoicesDropdown();
+        homePage.sidebarClient.invoices();
+        allInvoicesPage.sidebarClient.home();
     }
 
     @DisplayName("openCompletedOrderCard")
     @Test
     void openCompletedOrderCard() throws FileNotFoundException {
-        homePage.sidebar.clickOrdersAndInvoicesDropdown();
-        homePage.sidebar.allOrders();
+        homePage.sidebarClient.clickOrdersAndInvoicesDropdown();
+        homePage.sidebarClient.allOrders();
         allOrdersPage.orderByNumber(2178);
         orderCardClientPage.isOpened();
         orderCardClientPage.isCompleteState();
         orderCardClientPage.docsAgreementDownload();
-        orderCardClientPage.sidebar.home();
+        orderCardClientPage.sidebarClient.home();
     }
 
     @DisplayName("sidebarAndActionBlockClientLocatorsIntegrityTest")
     @Test
     void sidebarAndActionBlockClientLocatorsIntegrityTest() {
         step("homeClientPage.sidebar.verifyLocators", () -> {
-            homePage.sidebar.verifyLocators();
+            homePage.sidebarClient.verifyLocators();
         });
         step("homeClientPage.actionBlock.verifyLocators", () -> {
-            homePage.actionBlock.verifyLocators();
+            homePage.actionBlockClient.verifyLocators();
         });
     }
 

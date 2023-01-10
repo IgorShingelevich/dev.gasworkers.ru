@@ -43,7 +43,8 @@ def selenideVersion = '6.10.1',
     icu4j = '51.1',
     SMSActivateApiVersion = '1.5.9',
     restassured = '5.3.0',
-        pdfbox ='2.0.27',
+    awaitility ='4.2.0',
+    pdfbox ='2.0.27',
     jacksonCore ='2.14.1',
     jacksonDatabind = '2.14.1'
 
@@ -61,6 +62,7 @@ dependencies {
             "org.slf4j:slf4j-simple:$slf4jVersion",
             "ru.sms-activate:SMSActivateApi:$SMSActivateApiVersion",
             "io.rest-assured:rest-assured:$restassured",
+            "org.awaitility:awaitility:$awaitility",
             "org.apache.pdfbox:pdfbox:$pdfbox",
             "com.fasterxml.jackson.core:jackson-core:$jacksonCore",
             "com.fasterxml.jackson.core:jackson-databind:$jacksonDatabind"

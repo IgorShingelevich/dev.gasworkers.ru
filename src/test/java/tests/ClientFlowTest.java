@@ -66,11 +66,11 @@ public class ClientFlowTest extends TestBase {
     @DisplayName("CreateNewObject")
     @Test
     void CreateNewObject() {
-        homeClientPage.sidebar.allObjects();
+        homeClientPage.sidebarClient.allObjects();
         allObjectsClientPage.checkObjectsPageTitle();
         allObjectsClientPage.clickCreateNewObject();
         back();
-        allObjectsClientPage.sidebar.home();
+        allObjectsClientPage.sidebarClient.home();
     }
 
     @DisplayName("ClientPlaceMaintenanceRequestAndCancel")
@@ -97,28 +97,28 @@ public class ClientFlowTest extends TestBase {
         orderCardClientPage.cancelOrder();
         cancelMaintenancePage.yesButton();
         homeClientPage.isOpened();
-        homeClientPage.actionBlock.allNotifications();
+        homeClientPage.actionBlockClient.allNotifications();
         allNotificationsPage.isOpened();
         allNotificationsPage.readAll();
-        allNotificationsPage.sidebar.home();
+        allNotificationsPage.sidebarClient.home();
         homeClientPage.isOpened();
     }
 
     @DisplayName("openRandomObject")
     @Test
     void openRandomObject() {
-        homeClientPage.sidebar.allObjects();
+        homeClientPage.sidebarClient.allObjects();
         allObjectsClientPage.openRandomObject();
         objectCardClientPage.isOpened();
-        objectCardClientPage.sidebar.allObjects();
+        objectCardClientPage.sidebarClient.allObjects();
         allObjectsClientPage.isOpened();
         allObjectsClientPage.openRandomObject();
         objectCardClientPage.isOpened();
-        objectCardClientPage.sidebar.allObjects();
+        objectCardClientPage.sidebarClient.allObjects();
         allObjectsClientPage.isOpened();
         allObjectsClientPage.openRandomObject();
         objectCardClientPage.isOpened();
-        objectCardClientPage.sidebar.home();
+        objectCardClientPage.sidebarClient.home();
     }
 
     @Description("ClientPlaceRequest")
@@ -126,7 +126,7 @@ public class ClientFlowTest extends TestBase {
     @Test
     void placeMaintenanceFirstObject() throws InterruptedException {
 
-        allNotificationsPage.sidebar.home();
+        allNotificationsPage.sidebarClient.home();
         homeClientPage.placeOrder();
         typeOrdersPage.Maintenance();
         infoMaintenancePage.nextButton();
@@ -135,22 +135,22 @@ public class ClientFlowTest extends TestBase {
         selectDateMaintenanceClientPage.submitOrder();
         selectServicePage.isOpened();
         selectServicePage.toOrder();
-        orderCardClientPage.sidebar.home();
+        orderCardClientPage.sidebarClient.home();
         homeClientPage.isOpened();
-        homeClientPage.actionBlock.allNotifications();
+        homeClientPage.actionBlockClient.allNotifications();
         allNotificationsPage.isOpened();
         allNotificationsPage.readAll();
-        allNotificationsPage.sidebar.home();
+        allNotificationsPage.sidebarClient.home();
     }
 
     @DisplayName("ClientReviewFirstService")
     //    @Disabled
     @Test
     void ClientReviewFirstService() throws InterruptedException {
-        homeClientPage.actionBlock.allNotifications();
+        homeClientPage.actionBlockClient.allNotifications();
         allNotificationsPage.isOpened();
         allNotificationsPage.readAll();
-        allNotificationsPage.sidebar.home();
+        allNotificationsPage.sidebarClient.home();
         homeClientPage.lastOrder.open();
         orderCardClientPage.isOpened();
         orderCardClientPage.toMap();
@@ -170,10 +170,10 @@ public class ClientFlowTest extends TestBase {
     //    @Disabled
     @Test
     void ClientAcceptFirstService() throws InterruptedException {
-        homeClientPage.actionBlock.allNotifications();
+        homeClientPage.actionBlockClient.allNotifications();
         allNotificationsPage.isOpened();
         allNotificationsPage.readAll();
-        allNotificationsPage.sidebar.home();
+        allNotificationsPage.sidebarClient.home();
         homeClientPage.lastOrder.open();
         orderCardClientPage.isOpened();
         orderCardClientPage.toMap();
