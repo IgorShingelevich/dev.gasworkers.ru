@@ -81,7 +81,7 @@ public class ClientLocatorsTest extends TestBase {
         infoMaintenancePage.isOpened();
         infoMaintenancePage.nextButton();
         selectObjectMaintenancePage.isOpened();
-        selectObjectMaintenancePage.pick1thObject();
+        selectObjectMaintenancePage.firstObject();
         selectDateMaintenancePage.isOpened();
         selectDateMaintenancePage.header.logo();
         landingPage.isOpened();

@@ -18,7 +18,7 @@ public class orderCardClientPage extends BaseClientPage{
 
 
     SelenideElement
-        titleLocator = $(".h3.mb-2"),
+        titleNumberLocator = $("h1.h3.mb-2"),
         completeOrderInfoLocator = $(".hint-box p"),
         toMapButtonLocator = $(".col-md-12.text-right .map-ic.ms-md-auto.btn.btn-outline-primary.disable-outline"),
         cancelOrderLinkLocator = $(".col-md-12.text-right.pt-3 .btn.btn-link-dashed.disable-outline"),
@@ -32,7 +32,7 @@ public class orderCardClientPage extends BaseClientPage{
 
 
     public orderCardClientPage isOpened() {
-        titleLocator.shouldBe(visible).shouldHave(text(LAST_ORDER_CARD_TITLE));
+        titleNumberLocator.shouldBe(visible).shouldHave(text(LAST_ORDER_CARD_TITLE));
 //        toMapButtonLocator.shouldBe(visible);
 //        cancelOrderLinkLocator.shouldBe(visible);
         return this;
@@ -75,6 +75,13 @@ public class orderCardClientPage extends BaseClientPage{
         toMapButtonLocator.shouldBe(visible);
         cancelOrderLinkLocator.shouldBe(visible);
         return this;
+    }
+
+    public String getOrderNumber() {
+        // get last 4 digits from titleNumberLocator text size - 4
+        return titleNumberLocator.getText().substring(titleNumberLocator.getText().length() - 4);
+
+
     }
 
     public orderCardClientPage isCompleteState() {

@@ -121,13 +121,16 @@ public class ClientDispatcherInteractionTest extends TestBase {
 //        homeClientPage.popUpClose();
         typeOrdersPage.Maintenance();
         infoMaintenancePage.nextButton();
-        selectObjectMaintenancePage.pick1thObject();
+        selectObjectMaintenancePage.firstObject();
         selectDateMaintenanceClientPage.pickNowDateAM();
         selectDateMaintenanceClientPage.submitOrder();
         selectServicePage.isOpened();
         selectServicePage.toOrder();
         orderCardClientPage.isOpened();
         orderCardClientPage.popUpClose();
+        orderCardClientPage.getOrderNumber();
+        System.out.println("currentOrderNumber = " + orderCardClientPage.getOrderNumber());
+        String currentOrderNumber = orderCardClientPage.getOrderNumber();
         orderCardClientPage.toMap();
         selectServicePage.isOpened();
 //        orderCardClientPage.sidebar.home();
@@ -164,10 +167,11 @@ public class ClientDispatcherInteractionTest extends TestBase {
 //        homeDispatcherPage.isOpened();
 //        homeDispatcherPage.switchToListView();
 
-        homeDispatcherPage.openFirstOrderByTitleIndex();
-//        orderCardPage.isOpened();
-//        homeDispatcherPage.popUpClose();
-        orderCardPage.acceptOrder();
+//        homeDispatcherPage.openFirstOrderByTitleIndex();
+        homeDispatcherPage.openOrderByNumber(currentOrderNumber);
+        orderCardPage.isOpened();
+        homeDispatcherPage.popUpClose();
+//        orderCardPage.acceptOrder(); //business logic changed
 //        orderCardPage.sidebar.home();
 
         WebDriverRunner.setWebDriver(driverClient);

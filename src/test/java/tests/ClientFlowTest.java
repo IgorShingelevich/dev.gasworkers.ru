@@ -2,7 +2,6 @@ package tests;
 
 import jdk.jfr.Description;
 import org.junit.jupiter.api.*;
-import pages.BasePage;
 import pages.LandingPage;
 import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 import pages.components.sharedComponents.headerComponents.ProfileHeaderComponent;
@@ -82,7 +81,7 @@ public class ClientFlowTest extends TestBase {
 
         typeOrdersPage.Maintenance();
         infoMaintenancePage.nextButton();
-        selectObjectMaintenancePage.pick1thObject();
+        selectObjectMaintenancePage.firstObject();
         selectDateMaintenanceClientPage.pickNowDateAM();
         selectDateMaintenanceClientPage.submitOrder();
         selectServicePage.isOpened();
@@ -123,13 +122,13 @@ public class ClientFlowTest extends TestBase {
     @Description("ClientPlaceRequest")
     //    @Disabled
     @Test
-    void placeMaintenanceFirstObject() throws InterruptedException {
+    void placeMaintenanceFirstObject()  {
 
         allNotificationsPage.sidebarClient.home();
         homeClientPage.placeOrder();
         typeOrdersPage.Maintenance();
         infoMaintenancePage.nextButton();
-        selectObjectMaintenancePage.pick1thObject();
+        selectObjectMaintenancePage.firstObject();
         selectDateMaintenanceClientPage.pickNowDateAM();
         selectDateMaintenanceClientPage.submitOrder();
         selectServicePage.isOpened();
@@ -138,14 +137,19 @@ public class ClientFlowTest extends TestBase {
         homeClientPage.isOpened();
         homeClientPage.actionBlockClient.allNotifications();
         allNotificationsPage.isOpened();
-        allNotificationsPage.readAll();
+        allNotificationsPage.popUpClose();
         allNotificationsPage.sidebarClient.home();
+        homeClientPage.isOpened();
+        homeClientPage.lastOrder.open();
+        orderCardClientPage.isOpened();
+        orderCardClientPage.getOrderNumber();
+        System.out.println("Order number is " + orderCardClientPage.getOrderNumber());
     }
 
     @DisplayName("ClientReviewFirstService")
     //    @Disabled
     @Test
-    void ClientReviewFirstService() throws InterruptedException {
+    void ClientReviewFirstService() {
         homeClientPage.actionBlockClient.allNotifications();
         allNotificationsPage.isOpened();
         allNotificationsPage.readAll();
@@ -168,7 +172,7 @@ public class ClientFlowTest extends TestBase {
     @DisplayName("ClientAcceptFirstService")
     //    @Disabled
     @Test
-    void ClientAcceptFirstService() throws InterruptedException {
+    void ClientAcceptFirstService()  {
         homeClientPage.actionBlockClient.allNotifications();
         allNotificationsPage.isOpened();
         allNotificationsPage.readAll();
@@ -186,7 +190,6 @@ public class ClientFlowTest extends TestBase {
         selectPaymentClientPage.paySPB();
         signSMSClientPage.isOpened();
         signSMSClientPage.inputSMSCode(smsCode);
-        int i=0;
 
 
 

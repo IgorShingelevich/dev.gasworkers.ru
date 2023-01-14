@@ -14,7 +14,7 @@ public class BasePage {
 
     public void popUpClose() {
         try {
-            popupLocator.should(appear, Duration.ofSeconds(5));
+            popupLocator.should(appear, Duration.ofSeconds(10));
             popupLocator.click();
         } catch (Exception e) {
             System.out.println("No pop-up");

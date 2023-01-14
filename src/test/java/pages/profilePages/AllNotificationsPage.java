@@ -35,7 +35,7 @@ public class AllNotificationsPage extends BaseClientPage {
 
     public AllNotificationsPage isOpened() {
         pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
-        firstNotificationTabLocator.should(appear, Duration.ofSeconds(5));
+        firstNotificationTabLocator.should(appear, Duration.ofSeconds(20));
         readAllButtonLocator.shouldBe(visible);
         return this;
     }

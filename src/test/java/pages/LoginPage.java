@@ -1,5 +1,6 @@
 package pages;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
@@ -7,29 +8,26 @@ import pages.profilePages.clientPages.HomeClientPage;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.$$;
 
 public class LoginPage {
 
 
-    HomeClientPage homeClientPage = new HomeClientPage();
 
 
-    private final String LOGIN_PAGE_TITLE_TEXT = "Войдите в личный кабинет";
+    private final String
+        LOGIN_PAGE_TITLE_TEXT = "Войдите в личный кабинет";
 
-    /*<h3 data-v-3e43ab48="">Войдите в личный кабинет</h3>*/
     SelenideElement
         loginPageTitleLocator = $(".login-form>.title>h3"),
+        emailFieldLocator = $(".gas-input input[placeholder=E-mail]"),
+        passwordFieldLocator = $("div.password-type input"),
+                // $(By.xpath("//div[@class='login-form'] //input[@placeholder='Пароль']")),
 
+        loginButtonLocator = $(".mb-2.btn.btn-primary");
 
-/*<input data-v-9be155e4="" id="94" placeholder="E-mail" type="text">*/
-     emailFieldLocator = $(".gas-input input[placeholder=E-mail]"),
-        //$(By.xpath("//div[@class='login-form'] //input[@placeholder='E-mail']"));
-    /*<input data-v-9be155e4="" id="95" placeholder="Пароль" type="password">*/
-     passwordFieldLocator = $(By.xpath("//div[@class='login-form'] //input[@placeholder='Пароль']")),
-    /*<button data-v-6d08f792="" data-v-3e43ab48="" class="btn btn-primary disable-outline">
-  Далее
-</button>*/
-     loginButtonLocator = $(".mb-2.btn.btn-primary");
+    ElementsCollection
+        inputFieldsCollection = $$("div.gas-input input");
 
 public void open() {
         Selenide.open("/login");

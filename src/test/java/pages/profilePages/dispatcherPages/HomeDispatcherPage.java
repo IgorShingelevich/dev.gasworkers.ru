@@ -3,6 +3,7 @@ package pages.profilePages.dispatcherPages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -54,9 +55,12 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
     public HomeDispatcherPage switchToListView() {
         listViewButtonLocator.shouldBe(visible).click();
         orderCardFirstLocator.shouldBe(visible);
+        return this;
+    }
 
-
-
+    public HomeDispatcherPage openOrderByNumber(String orderNumber) {
+        ordersNumberLinkCollection.findBy(text(orderNumber)).click();
+        orderCardTitleLocator.shouldBe(visible);
         return this;
     }
 

@@ -3,9 +3,6 @@ package pages.profilePages.clientPages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 
-import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
-
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -41,19 +38,19 @@ public SelectObjectMaintenancePage FirstObject() {
         return this;
     }
 
-    public SelectObjectMaintenancePage pick1thObject() {
+    public SelectObjectMaintenancePage firstObject() {
         Object1ButtonLocator.shouldBe(visible).click();
 //        selectDatePageTitleLocator.shouldBe(visible);
         return this;
     }
 
-    public SelectObjectMaintenancePage clickObject2Button() {
+    public SelectObjectMaintenancePage secondObject() {
         Object2ButtonLocator.shouldBe(visible).click();
 //        selectDatePageTitleLocator.shouldBe(visible);
         return this;
     }
 
-    public SelectObjectMaintenancePage clickObject3Button() {
+    public SelectObjectMaintenancePage thirdObject() {
         Object3ButtonLocator.shouldBe(visible).click();
 //        selectDatePageTitleLocator.shouldBe(visible);
         return this;

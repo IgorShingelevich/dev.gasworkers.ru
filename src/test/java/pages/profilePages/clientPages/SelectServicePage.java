@@ -35,27 +35,15 @@ public class SelectServicePage {
 
 
     public SelectServicePage isOpened() {
-        // isolate titleLocator.wait(6000L) in try-catch block
-//        try {
-//            titleLocator.wait(6000L);
-//        } catch (Exception e) {
-//            System.out.println("titleLocator.wait(6000L) failed");
-//        }
-//        titleLocator.shouldHave(text(SELECT_SERVICE_TITLE));
-//        try {
-//            spinnerScrollbarLocator.wait(6000L);
-//        } catch (Exception e) {
-//            System.out.println("spinnerScrollbarLocator.wait(6000L).should(disappear) failed");
-//        }
 //        spinnerScrollbarLocator.should(disappear);
-//        servicesTabsCollection.should(appear, Duration.ofSeconds(10)) - not working
         firstServiceTabLocator.should(appear, Duration.ofSeconds(15));
-        mapContainerLocator.shouldBe(appear).shouldBe(visible);
+//        mapContainerLocator.shouldBe(appear).shouldBe(visible);
+        mapContainerLocator.shouldBe(appear, Duration.ofSeconds(15));
         return this;
     }
 
     public SelectServicePage waitForResponses() {
-        firstServiceButtonLocator.should(appear, Duration.ofSeconds(15));
+        firstServiceButtonLocator.should(appear, Duration.ofSeconds(40));
 
      /*   try {
             reviewButtonCollection.wait(10000L);

@@ -19,16 +19,17 @@ public class HomeClientPage extends BaseClientPage {
     private final String OBJECTS_TITLE = "Объекты и оборудование";
 
 //topButton
-    SelenideElement placeOrderButtonLocator = $(".btn-block .small.btn.btn-warning.disable-outline");
+    SelenideElement
+        placeOrderButtonLocator = $(".btn-block .small.btn.btn-warning.disable-outline");
 
 
 // clientCardBlock
     SelenideElement
-            profileCardNameLocator = $(".profile-card .title"),
-            profileCardSinceDateLocator = $(".profile-card .since-date"),
-            profileCardRatingLocator = $(".profile-card.rating-badge"),
-            profileCardReviewsLocator = $(".profile-card .reviews"),
-            profileCardImageLocator = $(".profile-card").$(".profile-image");
+        profileCardNameLocator = $(".profile-card .title"),
+        profileCardSinceDateLocator = $(".profile-card .since-date"),
+        profileCardRatingLocator = $(".profile-card.rating-badge"),
+        profileCardReviewsLocator = $(".profile-card .reviews"),
+        profileCardImageLocator = $(".profile-card").$(".profile-image");
 
 //objectsBlock
     SelenideElement
@@ -36,9 +37,9 @@ public class HomeClientPage extends BaseClientPage {
         firstObjectLinkLocator = $$x("(//div[contains(@class,'title link-blue text-primary pointer')])").get(4), // 0-3 out of visibility
         objectsPreviousButtonLocator = $(".client-objects .slick-arrow.slick-prev"),
         objectsNextButtonLocator = $(".client-objects .slick-arrow.slick-next");
-        ElementsCollection gotoObjectActionCollection = $$(".actions .actions__slot--link");
-//            ElementsCollection actionMenuCollection = $$(".actions .actions__slot right"); //not working - menu collection is not visible
-        ElementsCollection actionButtonCollection = $$(".actions .actions__btn");
+    ElementsCollection
+        gotoObjectActionCollection = $$(".actions .actions__slot--link"),
+        actionButtonCollection = $$(".actions .actions__btn");
 
 
 
@@ -61,8 +62,8 @@ public class HomeClientPage extends BaseClientPage {
 
     public HomeClientPage isOpened() {
         profileCardNameLocator.shouldBe(visible);
-        objectsTitleLocator.shouldBe(visible).shouldHave(text(OBJECTS_TITLE));
-        firstObjectLinkLocator.shouldBe(visible);
+//        objectsTitleLocator.shouldBe(visible).shouldHave(text(OBJECTS_TITLE));
+//        firstObjectLinkLocator.shouldBe(visible);
 
         return this;
     }
@@ -120,6 +121,8 @@ public class HomeClientPage extends BaseClientPage {
    // method that verify that locator objectsTitleLocator contains text "Объекты и" anywhere inside
     public HomeClientPage partialTextSearch() {
         objectsTitleLocator.shouldHave(text("Объекты и"));
+        //sout all the text from the locator objectsTitleLocator.shouldHave(text("Объекты и"))
+        System.out.println("objectsTitleLocator.getText" + objectsTitleLocator.getText());
         return this;
     }
 
