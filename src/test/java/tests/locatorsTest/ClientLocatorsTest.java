@@ -49,6 +49,7 @@ public class ClientLocatorsTest extends TestBase {
             passwordClient = "123456";
 
 
+
     @BeforeEach
     void clientLogin() {
         open("/login");
