@@ -10,18 +10,6 @@
 //
 //public class StageDispatcherTest extends TestBase {
 //
-//    ActionsBlockDispatcherComponent actionBlock = new ActionsBlockDispatcherComponent();
-//    SidebarDispatcherComponent sidebar = new SidebarDispatcherComponent();
-//    LoginPage loginPage = new LoginPage();
-//    HomeDispatcherPage homeDispatcherPage = new HomeDispatcherPage();
-//    AllNotificationsDispatcherPage allNotificationsDispatcherPage = new AllNotificationsDispatcherPage();
-//    AllMastersDispatcherPage allMastersPage = new AllMastersDispatcherPage();
-//    ProfileDispatcherPage profilePage = new ProfileDispatcherPage();
-//    OrderCardDispatcherPage orderCardPage = new OrderCardDispatcherPage();
-//
-//    String
-//            emailDispatcher = "test_gas_disp9@rambler.ru",
-//            passwordDispatcher = "123456";
 //
 //    @BeforeEach
 //    void clientLogin() {

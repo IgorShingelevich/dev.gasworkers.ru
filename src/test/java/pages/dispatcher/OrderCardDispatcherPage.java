@@ -1,7 +1,8 @@
-package pages.profilePagesTODO.dispatcherPages;
+package pages.dispatcher;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import model.browser.RoleBrowser;
 
 import java.time.Duration;
 
@@ -9,7 +10,11 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class OrderCardDispatcherPage extends BaseDispatcherPage{
+public class OrderCardDispatcherPage extends BaseDispatcherPage {
+
+    public OrderCardDispatcherPage(RoleBrowser browser) {
+        super(browser);
+    }
 
     private final String PAGE_TITLE = "Заказ";
 

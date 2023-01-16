@@ -1,20 +1,23 @@
 package tests.client;
 
 import extension.browser.Browser;
+import model.client.ClientOrderType;
 import org.junit.jupiter.api.*;
 import pages.context.ClientPages;
 import tests.TestBase;
 
+import static io.qameta.allure.Allure.step;
 import static model.Role.*;
 
 class ClientFlowTest extends TestBase {
-
-    private final String emailClient = "shingelevich@gmail.com";
-    private final String clientName = "Шингелевич Игорь Сергеевич";
-    private final String passwordClient = "123456";
-
     @Browser(role = CLIENT)
     ClientPages clientPages;
+
+    private final String
+        emailClient = "shingelevich@gmail.com",
+        clientName = "Шингелевич Игорь Сергеевич",
+        passwordClient = "123456";
+
 
     @BeforeEach
     void clientLogin() {
@@ -25,16 +28,37 @@ class ClientFlowTest extends TestBase {
     @Test
     @DisplayName("Check fio information")
     void checkFioInformation() {
-        clientPages.getHomePage().checkFio(clientName);
+        step("Check fio information", () -> {
+            clientPages.getHomePage().checkFio(clientName);
+        });
+
     }
 
 
-//    @DisplayName("ClientPlaceMaintenanceRequestAndCancel")
-////    @Disabled
-//    @Test
-//    public void ClientPlaceMaintenanceRequestAndCancel() {
+    @DisplayName("ClientPlaceMaintenanceRequestAndCancel")
+//    @Disabled
+    @Test
+    public void ClientPlaceMaintenanceRequestAndCancel() {
+        step("Client steps - place Order", () -> {
+            clientPages.getHomePage()
+                    .checkFinishLoading()
+                    .clickPlaceOrderButton();
+
+            clientPages.getTypeOrdersPage()
+                    .selectOrderType(ClientOrderType.MAINTENANCE);
+            clientPages.getInfoTypeOrderPage()
+//                    .checkTitle("Заказ на ТО")
+//                    .checkStepSequence("Шаг 1 из 3")
+                    .clickNextButton();
+
+            clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0);
+
+            clientPages.getSelectDateMaintenancePage().pickNowDateAM();
+            clientPages.getSelectDateMaintenancePage().submitOrder();
+            clientPages.getSelectServicePage().checkFinishLoading();
+            clientPages.getSelectServicePage().toOrder();
+        });
 //        homeClientPage.placeOrder();
-//
 //        typeOrdersPage.Maintenance();
 //        infoMaintenancePage.nextButton();
 //        selectObjectMaintenancePage.firstObject();
@@ -56,7 +80,7 @@ class ClientFlowTest extends TestBase {
 //        cancelMaintenancePage.yesButton();
 //        homeClientPage.isOpened();
 //        homeClientPage.actionBlockClient.allNotifications();
-//    }
+    }
 //
 //    @DisplayName("openRandomObject")
 //    @Test

@@ -1,6 +1,7 @@
 package pages.common;
 
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import model.browser.RoleBrowser;
 import pages.BasePage;
 
@@ -16,20 +17,24 @@ public final class LoginPage extends BasePage {
         super(browser);
     }
 
+    @Step("Открыть страницу авторизации")
     public LoginPage open() {
         stepWithRole("Открыть страницу авторизации", () ->
                 driver.open("/login"));
         return this;
     }
 
+    @Step("Авторизоваться в системе  почта {email}  пароль {password}")
     public void login(String email, String password) {
-        stepWithRole("Авторизоваться в системе", () -> {
+        stepWithRole("Авторизоваться в системе  почта {email}  пароль {password}", () -> {
             driver.$(".title h3").shouldHave(text("Войдите в личный кабинет"));
+            driver.$("#jivo-iframe-container").shouldBe(exist, Duration.ofSeconds(20));  //reset the form if being loaded after
+            driver.$("input[placeholder=E-mail]").click();
             driver.$("input[placeholder=E-mail]").setValue(email);
+            driver.$("input[placeholder=E-mail]").pressEnter();
+            driver.$("input[type=password]").click();
             driver.$("input[type=password]").setValue(password);
-//            driver.$(".iconWrap_ea30").shouldBe(visible, Duration.ofSeconds(20));  //reset the form if being loaded after
-//            driver.$("input[type=password]").pressTab();
-//            driver.$(".login-form .btn-primary").pressEnter();
+            driver.$("input[type=password]").pressEnter();
             driver.$(".login-form .btn-primary").click();
         });
     }

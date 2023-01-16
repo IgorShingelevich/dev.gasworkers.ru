@@ -1,16 +1,18 @@
 package pages.components.sharedComponents.sidebarComponents;
 
 import com.codeborne.selenide.SelenideElement;
+import model.browser.RoleBrowser;
+import pages.components.BaseComponent;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
-public class SidebarDispatcherComponent {
+public class SidebarDispatcherComponent extends BaseComponent {
 
-    private final String
-         SUPPORT_SERVICE_PHONE = "8 800 302 89 04",
-         SUPPORT_SERVICE_EMAIL = "info@gasworkers.ru",
-            DISPATCHER_HOMEPAGE_TITLE = "Заказы";
+    public SidebarDispatcherComponent(RoleBrowser browser) {
+        super(browser);
+    }
+
 
 
     SelenideElement

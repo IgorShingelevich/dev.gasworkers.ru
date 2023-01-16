@@ -1,7 +1,10 @@
-package pages.profilePagesTODO.dispatcherPages;
+package pages.dispatcher;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import model.browser.RoleBrowser;
+import pages.components.sharedComponents.headerComponents.actionblockComponents.ActionsBlockDispatcherComponent;
+import pages.components.sharedComponents.sidebarComponents.SidebarDispatcherComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -9,19 +12,28 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class HomeDispatcherPage extends BaseDispatcherPage {
 
+    private final SidebarDispatcherComponent sidebarDispatcher;
+    private final ActionsBlockDispatcherComponent actionBlockDispatcher;
+
+    public HomeDispatcherPage(RoleBrowser browser) {
+        super(browser);
+        sidebarDispatcher = new SidebarDispatcherComponent(browser);
+        actionBlockDispatcher = new ActionsBlockDispatcherComponent(browser);
+    }
+
     SelenideElement
-        dispatcherHomePageTitleLocator = $(".page-title .h3.mb-2"),
-        mapViewButtonLocator = $("div.action-btn.map-type"),
-        cardViewButtonLocator = $("div.action-btn.card-type"),
-        listViewButtonLocator = $("div.action-btn.list-type"),
-        orderCardTitleLocator = $(".page-title .h3.mb-2"),
-        orderCardFirstLocator = $$("div.order-card").first(),
-        mapContainerLocator = $("div.map-wrap"),
-        map=$(".map-wrap .ymap-container .map-into"),
-        newOrderStatusButtons= $$("div.top-filter__status--btn").get(0),
-        inProgressOrderStatusButton = $$("div.top-filter__status--btn").get(1),
-        completedOrderStatusButton =  $$("div.top-filter__status--btn").get(2),
-        archivedOrderStatusButton = $$("div.top-filter__status--btn").get(3);
+        dispatcherHomePageTitleLocator = driver.$(".page-title .h3.mb-2"),
+        mapViewButtonLocator = driver.$("div.action-btn.map-type"),
+        cardViewButtonLocator = driver.$("div.action-btn.card-type"),
+        listViewButtonLocator = driver.$("div.action-btn.list-type"),
+        orderCardTitleLocator = driver.$(".page-title .h3.mb-2"),
+        orderCardFirstLocator = driver.$$("div.order-card").first(),
+        mapContainerLocator = driver.$("div.map-wrap"),
+        map=driver.$(".map-wrap .ymap-container .map-into"),
+        newOrderStatusButtons= driver.$$("div.top-filter__status--btn").get(0),
+        inProgressOrderStatusButton = driver.$$("div.top-filter__status--btn").get(1),
+        completedOrderStatusButton =  driver.$$("div.top-filter__status--btn").get(2),
+        archivedOrderStatusButton = driver.$$("div.top-filter__status--btn").get(3);
 
     ElementsCollection
         orderCardsCollection = $$("div.order-card"),

@@ -2,12 +2,18 @@ package pages.components.sharedComponents.headerComponents.actionblockComponents
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import model.browser.RoleBrowser;
+import pages.components.BaseComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
-public class ActionsBlockDispatcherComponent {
+public class ActionsBlockDispatcherComponent extends BaseComponent {
+
+    public ActionsBlockDispatcherComponent(RoleBrowser browser) {
+        super(browser);
+    }
 
 
     SelenideElement

@@ -3,12 +3,14 @@ import model.browser.RoleBrowser;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import org.junit.jupiter.api.DisplayName;
 import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
+import static io.qameta.allure.Allure.step;
 
 public class SelectServicePageClientPage extends BaseClientPage {
 
@@ -27,31 +29,32 @@ public class SelectServicePageClientPage extends BaseClientPage {
 
 
     SelenideElement
-        titleLocator = $(".col-12.col-md-6 .text-center"),
-        toOrderButtonLocator = $(".fix-row.w-100.d-flex.flex-column-reverse.flex-md-row .mb-3.btn-sm.ms-md-auto.btn.btn-primary.disable-outline"),
-        backLinkLocator = $(".col-12.col-md-3 .link-dark-blue.mr-32.medium"),
-        spinnerScrollbarLocator = $(".scrollbar.mb-3.col-lg-5 .d-flex.justify-content-center.pb-5"),
-        firstServiceTabLocator = $$("div.col-xl-6.mb-3").first(),
-        firstServiceButtonLocator = $$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline").get(0),
-        servicesColumnBLockLocator = $(".row.columns-list"),
-        mapContainerLocator = $(".ymap-container div.map-into"),
-        selectInsurancePageTitleLocator = $(".page-content .h2.text-center.mb-4");
+        titleLocator = driver.$(".col-12.col-md-6 .text-center"),
+        toOrderButtonLocator = driver.$(".fix-row.w-100.d-flex.flex-column-reverse.flex-md-row .mb-3.btn-sm.ms-md-auto.btn.btn-primary.disable-outline"),
+        backLinkLocator = driver.$(".col-12.col-md-3 .link-dark-blue.mr-32.medium"),
+        spinnerScrollbarLocator = driver.$(".scrollbar.mb-3.col-lg-5 .d-flex.justify-content-center.pb-5"),
+        firstServiceTabLocator =driver.$$("div.col-xl-6.mb-3").first(),
+        firstServiceButtonLocator = driver.$$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline").get(0),
+        servicesColumnBLockLocator = driver.$(".row.columns-list"),
+        mapContainerLocator = driver.$(".ymap-container div.map-into"),
+        selectInsurancePageTitleLocator = driver.$(".page-content .h2.text-center.mb-4");
 
     ElementsCollection
-        servicesTabsCollection = $$("div.col-xl-6.mb-3"),
-        reviewButtonCollection = $$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline");
+        servicesTabsCollection = driver.$$("div.col-xl-6.mb-3"),
+        reviewButtonCollection = driver.$$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline");
 
-
-    public SelectServicePageClientPage isOpened() {
-//        spinnerScrollbarLocator.should(disappear);
-        firstServiceTabLocator.should(appear, Duration.ofSeconds(15));
+    @DisplayName("Check that Select Service page is loaded")
+    public void checkFinishLoading() {
+        step("Check that Select Service page is loaded", () -> {
+//            spinnerScrollbarLocator.should(disappear);
+            firstServiceTabLocator.should(appear, Duration.ofSeconds(20));
 //        mapContainerLocator.shouldBe(appear).shouldBe(visible);
-        mapContainerLocator.shouldBe(appear, Duration.ofSeconds(15));
-        return this;
+            mapContainerLocator.shouldBe(appear, Duration.ofSeconds(20));
+        });
     }
 
     public SelectServicePageClientPage waitForResponses() {
-        firstServiceButtonLocator.should(appear, Duration.ofSeconds(40));
+        firstServiceButtonLocator.should(appear, Duration.ofSeconds(60));
 
      /*   try {
             reviewButtonCollection.wait(10000L);

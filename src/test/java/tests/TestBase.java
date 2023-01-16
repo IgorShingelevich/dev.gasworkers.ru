@@ -11,14 +11,12 @@ public class TestBase {
     @BeforeAll
     static void setup() {
         Configuration.baseUrl = "https://dev.gasworkers.ru";
-//        Configuration.browserSize = "1280x720";
         Configuration.headless = false;
     }
 
     @AfterAll
     static void tearDown() {
         Configuration.holdBrowserOpen = true;
-//        Configuration.timeout = 6000;
 
     }
 
