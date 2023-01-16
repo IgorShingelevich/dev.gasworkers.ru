@@ -2,23 +2,25 @@ package pages.components.clientComponents;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import model.browser.RoleBrowser;
+import pages.components.BaseComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class DatePickerOrderComponent  {
+public class DatePickerOrderComponent extends BaseComponent {
 
+    public DatePickerOrderComponent(RoleBrowser browser) {
+        super(browser);
+    }
 
+    SelenideElement datePickerLocator = driver.$(".custom-date .custom-date__btn"), // Element should be visible {.custom-date>.custom-date__btn}  $(".custom-date>.custom-date__btn")
+            okDayButtonLocator = driver.$(".daterangepicker.ltr.show-calendar.single.openscenter.linked button"),
+            timeDropdownLocator = driver.$(".gas-select-wrap"),
+            amPlaceholderLocator = driver.$(".gas-select-wrap .gas-select__header .selected-value");
 
-    SelenideElement
-            datePickerLocator = $(".custom-date .custom-date__btn"), // Element should be visible {.custom-date>.custom-date__btn}  $(".custom-date>.custom-date__btn")
-            okDayButtonLocator = $(".daterangepicker.ltr.show-calendar.single.openscenter.linked button"),
-            timeDropdownLocator = $(".gas-select-wrap"),
-            amPlaceholderLocator = $(".gas-select-wrap .gas-select__header .selected-value");
-
-    ElementsCollection
-            dayCalendarLinkLocator = $$(".calendars td");
+    ElementsCollection dayCalendarLinkLocator = driver.$$(".calendars td");
 
 
     public DatePickerOrderComponent setDate(String date) {
@@ -35,12 +37,5 @@ public class DatePickerOrderComponent  {
         amPlaceholderLocator.shouldBe(visible).shouldHave(text("09.00–15.00"));
         return this;
     }
-
-
-
-
-
-
-
 
 }

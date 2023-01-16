@@ -4,11 +4,12 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.By;
+import pages.client.BaseClientPage;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
-public class AllObjectsClientPage extends BaseClientPage {
+public class AllObjectsClientPage {
 
     private final String OBJECTS_PAGE_TITLE_TEXT = "Объекты и оборудование";
 

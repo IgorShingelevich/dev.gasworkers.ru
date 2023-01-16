@@ -1,79 +1,71 @@
-package pages.profilePages.clientPages;
+package pages.client;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
+import model.browser.RoleBrowser;
 import pages.components.clientComponents.LastOrderProfileClientComponent;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
+import java.time.Duration;
 
-public class HomeClientPage extends BaseClientPage {
+import static com.codeborne.selenide.Condition.*;
+
+public final class HomeClientPage extends BaseClientPage {
+
+    public HomeClientPage(RoleBrowser browser) {
+        super(browser);
+    }
 
     public LastOrderProfileClientComponent lastOrder = new LastOrderProfileClientComponent();
 
 
-
-
-
     private final String OBJECTS_TITLE = "Объекты и оборудование";
 
-//topButton
-    SelenideElement
-        placeOrderButtonLocator = $(".btn-block .small.btn.btn-warning.disable-outline");
+    // clientCardBlock
+    SelenideElement profileCardNameLocator = driver.$(".profile-card .title"),
+            profileCardSinceDateLocator = driver.$(".profile-card .since-date"),
+            profileCardRatingLocator = driver.$(".profile-card.rating-badge"),
+            profileCardReviewsLocator = driver.$(".profile-card .reviews"),
+            profileCardImageLocator = driver.$(".profile-card").$(".profile-image");
 
-
-// clientCardBlock
+    //objectsBlock
     SelenideElement
-        profileCardNameLocator = $(".profile-card .title"),
-        profileCardSinceDateLocator = $(".profile-card .since-date"),
-        profileCardRatingLocator = $(".profile-card.rating-badge"),
-        profileCardReviewsLocator = $(".profile-card .reviews"),
-        profileCardImageLocator = $(".profile-card").$(".profile-image");
-
-//objectsBlock
-    SelenideElement
-        objectsTitleLocator = $(".client-objects .title"),
-        firstObjectLinkLocator = $$x("(//div[contains(@class,'title link-blue text-primary pointer')])").get(4), // 0-3 out of visibility
-        objectsPreviousButtonLocator = $(".client-objects .slick-arrow.slick-prev"),
-        objectsNextButtonLocator = $(".client-objects .slick-arrow.slick-next");
+            objectsTitleLocator = driver.$(".client-objects .title"),
+            firstObjectLinkLocator = driver.$$x("(//div[contains(@class,'title link-blue text-primary pointer')])").get(4), // 0-3 out of visibility
+            objectsPreviousButtonLocator = driver.$(".client-objects .slick-arrow.slick-prev"),
+            objectsNextButtonLocator = driver.$(".client-objects .slick-arrow.slick-next");
     ElementsCollection
-        gotoObjectActionCollection = $$(".actions .actions__slot--link"),
-        actionButtonCollection = $$(".actions .actions__btn");
+            gotoObjectActionCollection = driver.$$(".actions .actions__slot--link"),
+            actionButtonCollection = driver.$$(".actions .actions__btn");
 
-
-
-
-
-
-
-
-
-
-
-
-    //  open
+    @Step("Open client home page")
     public HomeClientPage open() {
-        Selenide.open("/profile/client");
+        driver.open("/profile/client");
         profileCardNameLocator.shouldBe(visible);
-
         return this;
     }
 
-    public HomeClientPage isOpened() {
-        profileCardNameLocator.shouldBe(visible);
-//        objectsTitleLocator.shouldBe(visible).shouldHave(text(OBJECTS_TITLE));
-//        firstObjectLinkLocator.shouldBe(visible);
-
+    @Step("Check that page finish loading")
+    public HomeClientPage checkFinishLoading() {
+        driver.$(".client-objects [data-index='0']")
+                .shouldBe(visible, Duration.ofSeconds(10));
         return this;
     }
 
-    public HomeClientPage placeOrder() {
-        placeOrderButtonLocator.shouldBe(visible).click();
+    public HomeClientPage checkFio(String fio) {
+        stepWithRole("check fio", () ->
+                driver.$(".profile-card .title")
+                        .as("fio")
+                        .shouldHave(Condition.text(fio)));
         return this;
     }
 
-    //  profile card
+    @Step("Click [Place order] button")
+    public void clickPlaceOrderButton() {
+        driver.$("#gas__content-header .btn-block")
+                .as("place order button").click();
+    }
 
     public HomeClientPage verifyClientCardInfo(String clientName, String sinceDate, String rating, String reviews, String image) {
         profileCardNameLocator.shouldHave(text(clientName)).shouldBe(visible);
@@ -83,9 +75,6 @@ public class HomeClientPage extends BaseClientPage {
         profileCardImageLocator.shouldHave(attribute("src", image)).shouldBe(visible);
         return this;
     }
-
-
-
 
 
     //  objects
@@ -118,14 +107,12 @@ public class HomeClientPage extends BaseClientPage {
     }
 
 
-   // method that verify that locator objectsTitleLocator contains text "Объекты и" anywhere inside
+    // method that verify that locator objectsTitleLocator contains text "Объекты и" anywhere inside
     public HomeClientPage partialTextSearch() {
         objectsTitleLocator.shouldHave(text("Объекты и"));
         //sout all the text from the locator objectsTitleLocator.shouldHave(text("Объекты и"))
         System.out.println("objectsTitleLocator.getText" + objectsTitleLocator.getText());
         return this;
     }
-
-
 
 }
