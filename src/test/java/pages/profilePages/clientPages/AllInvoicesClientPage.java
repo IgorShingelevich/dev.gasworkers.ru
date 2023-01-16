@@ -1,6 +1,8 @@
 package pages.profilePages.clientPages;
 
-public class AllInvoicesClientPage extends BaseClientPage {
+import pages.client.BaseClientPage;
+
+public class AllInvoicesClientPage {
 
 
 

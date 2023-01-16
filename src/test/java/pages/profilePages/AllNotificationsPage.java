@@ -1,14 +1,14 @@
 package pages.profilePages;
 
 import com.codeborne.selenide.SelenideElement;
-import pages.profilePages.clientPages.BaseClientPage;
+import pages.client.BaseClientPage;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
-public class AllNotificationsPage extends BaseClientPage {
+public class AllNotificationsPage {
 
     private final String
         NOTIFICATIONS_TITLE = "Уведомления";

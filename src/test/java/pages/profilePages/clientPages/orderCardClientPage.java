@@ -2,6 +2,7 @@ package pages.profilePages.clientPages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import pages.client.BaseClientPage;
 
 import java.io.FileNotFoundException;
 
@@ -10,7 +11,7 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class orderCardClientPage extends BaseClientPage{
+public class orderCardClientPage {
 
     private final String
         LAST_ORDER_CARD_TITLE = "Заказ №",

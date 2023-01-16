@@ -1,12 +1,12 @@
 package pages.profilePages;
 
 import com.codeborne.selenide.SelenideElement;
-import pages.profilePages.clientPages.BaseClientPage;
+import pages.client.BaseClientPage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 
-public class ObjectCardClientPage extends BaseClientPage {
+public class ObjectCardClientPage {
 
     private final String OBJECT_CARD_TITLE = "Объекты и оборудование";
 
