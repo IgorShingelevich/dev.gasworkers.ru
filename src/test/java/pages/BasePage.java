@@ -1,36 +1,27 @@
 package pages;
 
-import com.codeborne.selenide.SelenideElement;
+import model.browser.RoleBrowser;
+import pages.components.BaseComponent;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.appear;
-import static com.codeborne.selenide.Selenide.$;
 
-public class BasePage {
+public abstract class BasePage extends BaseComponent {
 
-    SelenideElement
-            popupLocator = $(".notice-list-fixed button.btn.btn-secondary");
+    public BasePage(RoleBrowser browser) {
+        super(browser);
+    }
 
     public void popUpClose() {
         try {
-            popupLocator.should(appear, Duration.ofSeconds(10));
-            popupLocator.click();
+            driver.$(".notice-list-fixed button.btn.btn-secondary")
+                    .as("Close popup button")
+                    .shouldBe(appear, Duration.ofSeconds(10))
+                    .click();
         } catch (Exception e) {
             System.out.println("No pop-up");
         }
-
-        /*if (popupLocator.should(appear, Duration.ofSeconds(2)).isDisplayed()) {
-            popupLocator.click();
-        }
-        // else proceed the test
-        else {
-            System.out.println("No pop-up");
-        }*/
     }
-
-
-
-
 
 }
