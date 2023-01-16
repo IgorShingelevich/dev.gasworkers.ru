@@ -2,11 +2,17 @@ package pages.components.sharedComponents.headerComponents;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import model.browser.RoleBrowser;
+import pages.components.BaseComponent;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
-public class FocusHeaderComponent {
+public class FocusHeaderComponent extends BaseComponent {
+
+    public FocusHeaderComponent (RoleBrowser browser) {
+        super(browser);
+    }
 
 
 

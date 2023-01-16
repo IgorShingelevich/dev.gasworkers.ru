@@ -42,17 +42,17 @@ class ClientFlowTest extends TestBase {
 //        selectDateMaintenanceClientPage.submitOrder();
 //        selectServicePage.isOpened();
 //        selectServicePage.toOrder();
-//        orderCardClientPage.toMap();
+//        OrderCardClientPage.toMap();
 //        selectServicePage.isOpened();
 //        selectServicePage.toOrder();
-//        orderCardClientPage.cancelOrder();
+//        OrderCardClientPage.cancelOrder();
 //        cancelMaintenancePage.noButton();
-//        orderCardClientPage.isOpened();
-//        orderCardClientPage.popUpClose();
-//        orderCardClientPage.toMap();
+//        OrderCardClientPage.isOpened();
+//        OrderCardClientPage.popUpClose();
+//        OrderCardClientPage.toMap();
 //        selectServicePage.isOpened();
 //        selectServicePage.toOrder();
-//        orderCardClientPage.cancelOrder();
+//        OrderCardClientPage.cancelOrder();
 //        cancelMaintenancePage.yesButton();
 //        homeClientPage.isOpened();
 //        homeClientPage.actionBlockClient.allNotifications();
@@ -89,7 +89,7 @@ class ClientFlowTest extends TestBase {
 //        selectDateMaintenanceClientPage.submitOrder();
 //        selectServicePage.isOpened();
 //        selectServicePage.toOrder();
-//        orderCardClientPage.sidebarClient.home();
+//        OrderCardClientPage.sidebarClient.home();
 //        homeClientPage.isOpened();
 //        homeClientPage.actionBlockClient.allNotifications();
 //        allNotificationsPage.isOpened();
@@ -97,9 +97,9 @@ class ClientFlowTest extends TestBase {
 //        allNotificationsPage.sidebarClient.home();
 //        homeClientPage.isOpened();
 //        homeClientPage.lastOrder.open();
-//        orderCardClientPage.isOpened();
-//        orderCardClientPage.getOrderNumber();
-//        System.out.println("Order number is " + orderCardClientPage.getOrderNumber());
+//        OrderCardClientPage.isOpened();
+//        OrderCardClientPage.getOrderNumber();
+//        System.out.println("Order number is " + OrderCardClientPage.getOrderNumber());
 //    }
 //
 //    @DisplayName("ClientReviewFirstService")
@@ -111,15 +111,15 @@ class ClientFlowTest extends TestBase {
 //        allNotificationsPage.readAll();
 //        allNotificationsPage.sidebarClient.home();
 //        homeClientPage.lastOrder.open();
-//        orderCardClientPage.isOpened();
-//        orderCardClientPage.toMap();
+//        OrderCardClientPage.isOpened();
+//        OrderCardClientPage.toMap();
 //        selectServicePage.isOpened();
 //        selectServicePage.reviewFirstService();
 //        selectInsurancePage.isOpened();
 //        selectInsurancePage.header.back();
 //        selectServicePage.isOpened();
 //        selectServicePage.toOrder();
-//        orderCardClientPage.isOpened();
+//        OrderCardClientPage.isOpened();
 //    }
 //
 //
@@ -134,8 +134,8 @@ class ClientFlowTest extends TestBase {
 //        allNotificationsPage.readAll();
 //        allNotificationsPage.sidebarClient.home();
 //        homeClientPage.lastOrder.open();
-//        orderCardClientPage.isOpened();
-//        orderCardClientPage.toMap();
+//        OrderCardClientPage.isOpened();
+//        OrderCardClientPage.toMap();
 //        selectServicePage.isOpened();
 //        selectServicePage.reviewFirstService();
 //        selectInsurancePage.isOpened();

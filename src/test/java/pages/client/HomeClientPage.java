@@ -13,11 +13,13 @@ import static com.codeborne.selenide.Condition.*;
 
 public final class HomeClientPage extends BaseClientPage {
 
+    private final LastOrderProfileClientComponent lastOrderProfileClientComponent;
+
     public HomeClientPage(RoleBrowser browser) {
         super(browser);
+        lastOrderProfileClientComponent = new LastOrderProfileClientComponent(browser);
     }
 
-    public LastOrderProfileClientComponent lastOrder = new LastOrderProfileClientComponent();
 
 
     private final String OBJECTS_TITLE = "Объекты и оборудование";

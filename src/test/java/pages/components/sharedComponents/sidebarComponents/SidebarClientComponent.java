@@ -1,13 +1,19 @@
 package pages.components.sharedComponents.sidebarComponents;
 
 import com.codeborne.selenide.SelenideElement;
+import model.browser.RoleBrowser;
+import pages.components.BaseComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class SidebarClientComponent {
+public class SidebarClientComponent extends BaseComponent {
+
+    public SidebarClientComponent(RoleBrowser browser) {
+        super(browser);
+    }
 
 
 

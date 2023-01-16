@@ -1,13 +1,17 @@
 package pages.components.sharedComponents.headerComponents.actionblockComponents;
 
 import com.codeborne.selenide.SelenideElement;
+import model.browser.RoleBrowser;
+import pages.components.BaseComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 
-public class ActionsBlockClientComponent {
+public class ActionsBlockClientComponent extends BaseComponent {
 
-
+public ActionsBlockClientComponent(RoleBrowser browser) {
+    super(browser);
+}
 
     SelenideElement
             mainPageTitleLocator = $(".primary-header"),

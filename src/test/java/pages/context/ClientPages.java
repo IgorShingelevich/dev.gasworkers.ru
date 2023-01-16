@@ -18,6 +18,7 @@ public final class ClientPages extends BaseRolePages {
     private final InfoTypeOrderClientPage infoTypeOrderPage = new InfoTypeOrderClientPage(browser);
     private final SelectObjectMaintenanceClientPage selectObjectMaintenancePage = new SelectObjectMaintenanceClientPage(browser);
     private final SelectDateMaintenanceClientPage selectDateMaintenancePage = new SelectDateMaintenanceClientPage(browser);
+//    private final SelectServicePageClientPage selectServicePage = new SelectServicePageClientPage(browser);
 
     public ClientPages(SelenideDriver driver) {
         super(CLIENT, driver);

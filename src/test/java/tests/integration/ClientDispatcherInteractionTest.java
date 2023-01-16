@@ -13,10 +13,10 @@ import static io.qameta.allure.Allure.step;
 
 class ClientDispatcherInteractionTest extends TestBase {
 
-    @Browser(role = Role.CLIENT)
+    @Browser(role = Role.CLIENT, browserSize = "900x1000", browserPosition = "0x0")
     ClientPages clientPages;
 
-    @Browser(role = Role.DISPATCHER, browserSize = "800x600", browserPosition = "100x100")
+    @Browser(role = Role.DISPATCHER, browserSize = "900x1000", browserPosition = "900x0")
     DispatcherPages dispatcherPages;
 
     String emailClient = "shingelevich@gmail.com",
@@ -32,7 +32,7 @@ class ClientDispatcherInteractionTest extends TestBase {
 
     @Test
     public void testInteractionTwoRoles() {
-        step("Client steps", () -> {
+        step("Client steps - place Order", () -> {
             clientPages.getLoginPage()
                     .open()
                     .login(emailClient, passwordClient);
@@ -53,9 +53,14 @@ class ClientDispatcherInteractionTest extends TestBase {
             clientPages.getSelectDateMaintenancePage().submitOrder();
         });
 
+
+        step("Dispatcher steps - Accept Order ", () -> {
         dispatcherPages.getLoginPage()
                 .open()
                 .login(emailDispatcher, passwordDispatcher);
+
+        });
+
 
         sleep(5_000);
 
@@ -64,12 +69,12 @@ class ClientDispatcherInteractionTest extends TestBase {
 
 //        selectServicePage.isOpened();
 //        selectServicePage.toOrder();
-//        orderCardClientPage.isOpened();
-//        orderCardClientPage.popUpClose();
-//        orderCardClientPage.getOrderNumber();
-//        System.out.println("currentOrderNumber = " + orderCardClientPage.getOrderNumber());
-//        String currentOrderNumber = orderCardClientPage.getOrderNumber();
-//        orderCardClientPage.toMap();
+//        OrderCardClientPage.isOpened();
+//        OrderCardClientPage.popUpClose();
+//        OrderCardClientPage.getOrderNumber();
+//        System.out.println("currentOrderNumber = " + OrderCardClientPage.getOrderNumber());
+//        String currentOrderNumber = OrderCardClientPage.getOrderNumber();
+//        OrderCardClientPage.toMap();
 //        selectServicePage.isOpened();
 //
 //        WebDriverRunner.setWebDriver(driverDispatcher);

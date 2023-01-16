@@ -1,7 +1,7 @@
 //package tests;
 //
 //import org.junit.jupiter.api.*;
-//import pages.LandingPage;
+//import pages.common.LandingPage;
 //import pages.client.HomeClientPage;
 //import pages.client.TypeOrdersClientPage;
 //import pages.common.LoginPage;
@@ -35,7 +35,7 @@
 //
 //    AllObjectsClientPage allObjectsClientPage = new AllObjectsClientPage();
 //    AllOrdersClientPage allOrdersClientPage = new AllOrdersClientPage();
-//    orderCardClientPage orderCardClientPage = new orderCardClientPage();
+//    OrderCardClientPage OrderCardClientPage = new OrderCardClientPage();
 //    ObjectCardClientPage objectCardClientPage = new ObjectCardClientPage();
 //    AllInvoicesClientPage allInvoicesClientPage = new AllInvoicesClientPage();
 //
@@ -45,7 +45,7 @@
 //    SelectDateMaintenanceClientPage selectDateMaintenanceClientPage = new SelectDateMaintenanceClientPage();
 //    FocusHeaderComponent focusHeaderComponent = new FocusHeaderComponent();
 //    ProfileHeaderComponent profileHeaderComponent = new ProfileHeaderComponent();
-//    SelectServicePage selectServicePage = new  SelectServicePage();
+//    SelectServicePageClientPage selectServicePage = new  SelectServicePageClientPage();
 //    CancelMaintenancePage cancelMaintenancePage = new CancelMaintenancePage();
 //
 //

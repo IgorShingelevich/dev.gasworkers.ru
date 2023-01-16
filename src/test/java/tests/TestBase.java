@@ -11,7 +11,7 @@ public class TestBase {
     @BeforeAll
     static void setup() {
         Configuration.baseUrl = "https://dev.gasworkers.ru";
-        Configuration.browserSize = "1920x1080";
+//        Configuration.browserSize = "1280x720";
         Configuration.headless = false;
     }
 

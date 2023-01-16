@@ -21,13 +21,13 @@ targetCompatibility = '11'
 
 allure {
     report {
-        version.set("2.19.0")
+        version.set("2.20.0")
     }
     adapter {
         aspectjWeaver.set(true)
         frameworks {
             junit5 {
-                adapterVersion.set("2.19.0")
+                adapterVersion.set("2.20.0")
             }
         }
     }
@@ -67,7 +67,6 @@ dependencies {
             "org.apache.pdfbox:pdfbox:$pdfbox",
             "com.fasterxml.jackson.core:jackson-core:$jacksonCore",
             "com.fasterxml.jackson.core:jackson-databind:$jacksonDatabind"
-
     )
 }
 

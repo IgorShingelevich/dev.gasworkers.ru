@@ -1,6 +1,8 @@
 package pages.components.clientComponents;
 
 import com.codeborne.selenide.SelenideElement;
+import model.browser.RoleBrowser;
+import pages.components.BaseComponent;
 
 
 import static com.codeborne.selenide.Condition.text;
@@ -8,7 +10,12 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class LastOrderProfileClientComponent  {
+public class LastOrderProfileClientComponent extends BaseComponent {
+
+    public LastOrderProfileClientComponent(RoleBrowser browser) {
+        super(browser);
+    }
+
 
 
     private final String

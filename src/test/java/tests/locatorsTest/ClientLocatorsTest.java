@@ -4,7 +4,7 @@
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.DisplayName;
 //import org.junit.jupiter.api.Test;
-//import pages.LandingPage;
+//import pages.common.LandingPage;
 //import pages.client.HomeClientPage;
 //import pages.common.LoginPage;
 //import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
@@ -39,7 +39,7 @@
 //    SelectObjectRepairPage selectObjectRepairPage = new SelectObjectRepairPage();
 //    SelectDateMaintenanceClientPage selectDateMaintenancePage = new SelectDateMaintenanceClientPage();
 //    SelectDateRepairPage selectDateRepairPage = new SelectDateRepairPage();
-//    orderCardClientPage orderCardClientPage = new orderCardClientPage();
+//    OrderCardClientPage OrderCardClientPage = new OrderCardClientPage();
 //
 //
 //
@@ -117,10 +117,10 @@
 //        homePage.sidebarClient.clickOrdersAndInvoicesDropdown();
 //        homePage.sidebarClient.allOrders();
 //        allOrdersPage.orderByNumber(2178);
-//        orderCardClientPage.isOpened();
-//        orderCardClientPage.isCompleteState();
-//        orderCardClientPage.docsAgreementDownload();
-//        orderCardClientPage.sidebarClient.home();
+//        OrderCardClientPage.isOpened();
+//        OrderCardClientPage.isCompleteState();
+//        OrderCardClientPage.docsAgreementDownload();
+//        OrderCardClientPage.sidebarClient.home();
 //    }
 //
 //    @DisplayName("sidebarAndActionBlockClientLocatorsIntegrityTest")
