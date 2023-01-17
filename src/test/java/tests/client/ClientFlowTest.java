@@ -1,7 +1,7 @@
 package tests.client;
 
 import extension.browser.Browser;
-import model.client.ClientOrderType;
+import model.client.ClientRequestType;
 import org.junit.jupiter.api.*;
 import pages.context.ClientPages;
 import tests.TestBase;
@@ -47,9 +47,9 @@ class ClientFlowTest extends TestBase {
         step(" Нажать кнопку Создать Заказ", () ->
             clientPages.getHomePage().clickPlaceOrderButton()
         );
-        step("Выбрать тип заказа {ClientOrderType}", () ->
+        step("Выбрать тип заказа {ClientRequestType}", () ->
             clientPages.getTypeOrdersPage()
-                    .selectOrderType(ClientOrderType.MAINTENANCE) //  .toString()
+                    .selectOrderType(ClientRequestType.MAINTENANCE) //  .toString()
         );
         step("Под информацией нажать кнопку Далее", () ->
             clientPages.getInfoTypeOrderPage()
@@ -127,9 +127,9 @@ class ClientFlowTest extends TestBase {
         step(" Нажать кнопку Создать Заказ", () ->
                 clientPages.getHomePage().clickPlaceOrderButton()
         );
-        step("Выбрать тип заказа {ClientOrderType}", () ->
+        step("Выбрать тип заказа {ClientRequestType}", () ->
                 clientPages.getTypeOrdersPage()
-                        .selectOrderType(ClientOrderType.MAINTENANCE) //  .toString()
+                        .selectOrderType(ClientRequestType.MAINTENANCE) //  .toString()
         );
         step("Под информацией нажать кнопку Далее", () ->
                         clientPages.getInfoTypeOrderPage()

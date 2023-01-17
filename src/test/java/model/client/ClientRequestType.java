@@ -6,7 +6,7 @@ import lombok.Getter;
 import java.util.List;
 
 @AllArgsConstructor
-public enum ClientOrderType {
+public enum ClientRequestType {
     MAINTENANCE("Заключение договора на ТО", "Инструкция"),
     REPAIR("Ремонт", "Инструкция по Ремонту"),
     VIDEO("Видеоконсультация", "Инструкция по заказу видеоконсультации");

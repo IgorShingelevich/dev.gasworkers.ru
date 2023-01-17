@@ -2,7 +2,9 @@ package tests.integration;
 
 import extension.browser.Browser;
 import model.Role;
-import model.client.ClientOrderType;
+import model.client.OrderType;
+import model.client.ClientRequestType;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.context.ClientPages;
 import pages.context.DispatcherPages;
@@ -29,28 +31,41 @@ class ClientDispatcherInteractionTest extends TestBase {
         passwordMaster = "123456";
 
     String smsCode = "123456";
-
+    @DisplayName(" Интеграция Диспетчер принимает запрос Клиента на ТО")
     @Test
-    public void testInteractionTwoRoles() {
-        step("Client steps - place Order", () -> {
+    public void IntegrationDispatcherAcceptClientMaintenanceRequest() {
+        step("Клиент создать запрос на ТО", () -> {
             clientPages.getLoginPage()
                     .open()
                     .login(emailClient, passwordClient);
             clientPages.getHomePage()
                     .checkFinishLoading()
                     .clickPlaceOrderButton();
-
-            ClientOrderType orderType = ClientOrderType.MAINTENANCE;
+        });
+        step("Выбрать тип заказа {ClientRequestType}", () -> {
+            ClientRequestType orderType = ClientRequestType.MAINTENANCE;
             clientPages.getTypeOrdersPage().selectOrderType(orderType);
-            clientPages.getInfoTypeOrderPage()
-                    .checkTitle(orderType.getExpectedTitle())
-                    .checkStepSequence(orderType.getExpectedStepSequence())
-                    .clickNextButton();
-
-            clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0);
-
+            clientPages.getInfoTypeOrderPage().checkTitle(orderType.getExpectedTitle()).checkStepSequence(orderType.getExpectedStepSequence()).clickNextButton();
+        });
+        step("Выбрать объект  номер {index} на ТО", () -> {
+                    clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0);
+        });
+        step("Выбрать Сегодня дату и время ТО", () -> {
             clientPages.getSelectDateMaintenancePage().pickNowDateAM();
             clientPages.getSelectDateMaintenancePage().submitOrder();
+        });
+        step("Убедиться, что страница Выбор СК загружена", () -> {
+            clientPages.getSelectServicePage().checkFinishLoading();
+        });
+        step(" Пеерейти в карточку Заказа", () -> {
+            clientPages.getSelectServicePage().toOrder();
+        });
+        step("Убедиться, что страница Заказа загружена", () -> {
+            clientPages.getOrderCardPage().checkFinishLoading();
+        });
+        step("Убедиться, что статус Заказа {orderTypeIs}", () -> {
+             OrderType orderType = OrderType.MAINTENANCE;
+            clientPages.getOrderCardPage().checkOrderType(orderType);
         });
 
 

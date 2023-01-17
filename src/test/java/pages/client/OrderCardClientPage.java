@@ -3,6 +3,7 @@ package pages.client;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
+import model.client.OrderType;
 
 import java.io.FileNotFoundException;
 
@@ -10,6 +11,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static io.qameta.allure.Allure.step;
 
 public class OrderCardClientPage extends BaseClientPage {
 
@@ -32,16 +34,19 @@ public class OrderCardClientPage extends BaseClientPage {
 
     ElementsCollection
         navigationBlockCollection = driver.$$("div.navigation-block li"),
-        docsDownloadCollection = driver.$$(".link-pdf-wrap .ic");
-    // $$("a.link-pdf-download")
+        docsDownloadCollection = driver.$$(".link-pdf-wrap .ic"),
+        orderDetailsCollection = driver.$$("div.order-details-item");
 
 
     public OrderCardClientPage checkFinishLoading() {
-        titleNumberLocator.shouldBe(visible).shouldHave(text(LAST_ORDER_CARD_TITLE));
-//        toMapButtonLocator.shouldBe(visible);
-//        cancelOrderLinkLocator.shouldBe(visible);
+        step("Убедиться, что Карточка Заказа загружена", () -> {
+            titleNumberLocator.shouldBe(visible).shouldHave(text(LAST_ORDER_CARD_TITLE));
+        });
         return this;
     }
+
+
+
 
     public OrderCardClientPage commonNav(){
         navigationBlockCollection.get(0).click();
@@ -58,25 +63,34 @@ public class OrderCardClientPage extends BaseClientPage {
         return this;
     }
 
-    public OrderCardClientPage docsAgreementDownload() throws FileNotFoundException {
-        // href="/docs/Договор ТО ВДГО.pdf"
+    public OrderCardClientPage docsAgreementDownload()  {
         docsDownloadCollection.get(1).$("a.link-pdf-download").attr("href");
         return this;
     }
 
-    public OrderCardClientPage docsCompletionActDownload() throws FileNotFoundException {
+    public OrderCardClientPage docsCompletionActDownload() {
         // no href
         return this;
     }
 
-    public OrderCardClientPage docsInsuranceDownload() throws FileNotFoundException {
+    public OrderCardClientPage docsInsuranceDownload() {
         // no href
         return this;
     }
 
 
 
-    public OrderCardClientPage isNewState() {
+    public void checkOrderType(OrderType orderType) {
+        step("Убедиться, что тип заказа {orderType}", () -> {
+            orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
+        });
+    }
+
+    public OrderCardClientPage checkOrderStatus() {
+        step("Убедиться, что статус заказа {orderStatus)", () -> {
+
+            statusOrderLocator.shouldHave(text("Новый"));
+        });
         toMapButtonLocator.shouldBe(visible);
         cancelOrderLinkLocator.shouldBe(visible);
         return this;
