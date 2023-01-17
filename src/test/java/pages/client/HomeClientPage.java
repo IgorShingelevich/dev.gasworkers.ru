@@ -46,15 +46,19 @@ public final class HomeClientPage extends BaseClientPage {
 
     @Step("Open client home page")
     public HomeClientPage open() {
-        driver.open("/profile/client");
-        profileCardNameLocator.shouldBe(visible);
+        stepWithRole("Открыть домашнюю страницу", () -> {
+            driver.open("/profile/client");
+            profileCardNameLocator.shouldBe(visible);
+        });
         return this;
     }
 
     @Step("Check that page is loaded")
     public HomeClientPage checkFinishLoading() {
-        driver.$(".client-objects [data-index='0']")
-                .shouldBe(visible, Duration.ofSeconds(10));
+        stepWithRole("Проверить, что домашняя страница загрузилась", () -> {
+            driver.$(".client-objects [data-index='0']")
+                    .shouldBe(visible, Duration.ofSeconds(10));
+        });
         return this;
     }
 
@@ -69,8 +73,11 @@ public final class HomeClientPage extends BaseClientPage {
 
     @Step("Click [Place order] button")
     public void clickPlaceOrderButton() {
-        driver.$("#gas__content-header .btn-block")
-                .as("place order button").click();
+        stepWithRole("Нажать кнопку [Создать заказ]", () ->
+                driver.$("#gas__content-header .btn-block")
+                        .as("place order button").click()
+        );
+
     }
 
 //    public HomeClientPage verifyClientCardInfo(String clientName, String sinceDate, String rating, String reviews, String image) {

@@ -23,20 +23,20 @@ public class OrderCardClientPage extends BaseClientPage {
 
 
     SelenideElement
-        titleNumberLocator = $("h1.h3.mb-2"),
-        completeOrderInfoLocator = $(".hint-box p"),
-        toMapButtonLocator = $(".col-md-12.text-right .map-ic.ms-md-auto.btn.btn-outline-primary.disable-outline"),
-        cancelOrderLinkLocator = $(".col-md-12.text-right.pt-3 .btn.btn-link-dashed.disable-outline"),
-        finalPriceLocator = $(".big.bold.d-flex.justify-content-between.w-100.mb-4"),
-        statusOrderLocator = $(".item-flex p.text");
+        titleNumberLocator = driver.$("h1.h3.mb-2"),
+        completeOrderInfoLocator = driver.$(".hint-box p"),
+        toMapButtonLocator = driver.$(".col-md-12.text-right .map-ic.ms-md-auto.btn.btn-outline-primary.disable-outline"),
+        cancelOrderLinkLocator = driver.$(".col-md-12.text-right.pt-3 .btn.btn-link-dashed.disable-outline"),
+        finalPriceLocator = driver.$(".big.bold.d-flex.justify-content-between.w-100.mb-4"),
+        statusOrderLocator = driver.$(".item-flex p.text");
 
     ElementsCollection
-        navigationBlockCollection = $$("div.navigation-block li"),
-        docsDownloadCollection = $$(".link-pdf-wrap .ic");
+        navigationBlockCollection = driver.$$("div.navigation-block li"),
+        docsDownloadCollection = driver.$$(".link-pdf-wrap .ic");
     // $$("a.link-pdf-download")
 
 
-    public OrderCardClientPage isOpened() {
+    public OrderCardClientPage checkFinishLoading() {
         titleNumberLocator.shouldBe(visible).shouldHave(text(LAST_ORDER_CARD_TITLE));
 //        toMapButtonLocator.shouldBe(visible);
 //        cancelOrderLinkLocator.shouldBe(visible);
@@ -102,7 +102,7 @@ public class OrderCardClientPage extends BaseClientPage {
 
 
 
-    public OrderCardClientPage toMap() {
+    public OrderCardClientPage showOnMap() {
         toMapButtonLocator.scrollTo().click();
         return this;
     }

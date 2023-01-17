@@ -29,13 +29,23 @@ public final class LoginPage extends BasePage {
         stepWithRole("Авторизоваться в системе  почта {email}  пароль {password}", () -> {
             driver.$(".title h3").shouldHave(text("Войдите в личный кабинет"));
             driver.$("#jivo-iframe-container").shouldBe(exist, Duration.ofSeconds(20));  //reset the form if being loaded after
-            driver.$("input[placeholder=E-mail]").click();
-            driver.$("input[placeholder=E-mail]").setValue(email);
-            driver.$("input[placeholder=E-mail]").pressEnter();
-            driver.$("input[type=password]").click();
-            driver.$("input[type=password]").setValue(password);
-            driver.$("input[type=password]").pressEnter();
-            driver.$(".login-form .btn-primary").click();
+            stepWithRole("Ввести почту {email}", () -> {
+                driver.$("input[placeholder=E-mail]") .click();
+                driver.$("input[placeholder=E-mail]").setValue(email);
+                driver.$("input[placeholder=E-mail]").pressEnter();
+
+            });
+            stepWithRole("Ввести пароль {password}", () -> {
+                driver.$("input[placeholder=Пароль]").click();
+                driver.$("input[placeholder=Пароль]").setValue(password);
+                driver.$("input[placeholder=Пароль]").pressEnter();
+            });
+            stepWithRole("Нажать кнопку Войти", () -> {
+//                driver.$("button[type=submit]").click();  //Element not found {button[type=submit]}
+                driver.$(".mb-2.btn.btn-primary.disable-outline")
+                        .shouldHave(text("Далее"))
+                        .click();
+            });
         });
     }
 

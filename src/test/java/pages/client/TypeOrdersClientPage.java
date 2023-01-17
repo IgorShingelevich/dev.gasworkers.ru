@@ -12,7 +12,7 @@ public final class TypeOrdersClientPage extends BaseClientPage {
         super(browser);
     }
 
-    @Step("Select order type")
+    @Step("Выберите тип заказа {orderType}")
     public void selectOrderType(ClientOrderType orderType) {
         driver.$(byTagAndText("button", orderType.toString())).click();
     }

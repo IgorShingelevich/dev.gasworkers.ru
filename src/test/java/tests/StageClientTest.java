@@ -12,7 +12,7 @@
 //import pages.profilePages.AllNotificationsPage;
 //import pages.profilePages.ObjectCardClientPage;
 //import pages.profilePages.clientPages.*;
-//import pages.profilePages.clientPages.cancelPage.CancelMaintenancePage;
+//import pages.profilePages.clientPages.cancelPage.CancelOrderPage;
 //import pages.client.InfoTypeOrderClientPage;
 //
 //
@@ -46,7 +46,7 @@
 //    FocusHeaderComponent focusHeaderComponent = new FocusHeaderComponent();
 //    ProfileHeaderComponent profileHeaderComponent = new ProfileHeaderComponent();
 //    SelectServicePageClientPage selectServicePage = new  SelectServicePageClientPage();
-//    CancelMaintenancePage cancelMaintenancePage = new CancelMaintenancePage();
+//    CancelOrderPage cancelMaintenancePage = new CancelOrderPage();
 //
 //
 //    @BeforeEach
