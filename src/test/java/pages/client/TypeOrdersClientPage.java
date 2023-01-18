@@ -12,9 +12,13 @@ public final class TypeOrdersClientPage extends BaseClientPage {
         super(browser);
     }
 
-    @Step("Выберите тип заказа {requestType}")
+//    @Step("Выберите тип заказа {requestType}")
     public void selectOrderType(ClientRequestType requestType) {
-        driver.$(byTagAndText("button", requestType.toString())).click();
+        stepWithRole("Выбрать тип заказа:  " + requestType, () -> {
+            driver.$(byTagAndText("button", requestType.toString())).click();
+            System.out.println("Select requestType: " + requestType);
+        });
+
     }
 
 }

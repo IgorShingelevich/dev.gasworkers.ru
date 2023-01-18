@@ -44,7 +44,7 @@ public final class HomeClientPage extends BaseClientPage {
         gotoObjectActionCollection = driver.$$(".actions .actions__slot--link"),
         actionButtonCollection = driver.$$(".actions .actions__btn");
 
-    @Step("Open client home page")
+//    @Step("Open client home page")
     public HomeClientPage open() {
         stepWithRole("Открыть домашнюю страницу", () -> {
             driver.open("/profile/client");
@@ -53,9 +53,9 @@ public final class HomeClientPage extends BaseClientPage {
         return this;
     }
 
-    @Step("Check that page is loaded")
+//    @Step("Убедиться, что Домашняя страница загружена")
     public HomeClientPage checkFinishLoading() {
-        stepWithRole("Проверить, что домашняя страница загрузилась", () -> {
+        stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
             driver.$(".client-objects [data-index='0']")
                     .shouldBe(visible, Duration.ofSeconds(10));
         });
@@ -71,11 +71,13 @@ public final class HomeClientPage extends BaseClientPage {
         return this;
     }
 
-    @Step("Click [Place order] button")
+//    @Step("Click [Place order] button")
     public void clickPlaceOrderButton() {
-        stepWithRole("Нажать кнопку [Создать заказ]", () ->
+        stepWithRole("Нажать кнопку Создать заказ", () ->
                 driver.$("#gas__content-header .btn-block")
-                        .as("place order button").click()
+                        .as("place order button")
+                        .shouldBe(interactable)
+                        .click()
         );
 
     }

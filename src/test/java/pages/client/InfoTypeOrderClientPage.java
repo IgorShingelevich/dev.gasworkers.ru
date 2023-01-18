@@ -27,10 +27,13 @@ public final class InfoTypeOrderClientPage extends BaseClientPage {
         return this;
     }
 
-    @Step("Нажать на кнопку {buttonName}")
+//    @Step("Нажать на кнопку {buttonName}")
     public void clickNextButton() {
-        String buttonName = driver.$(".btn-wrap button").getText();
-        driver.$(".btn-wrap button").shouldHave(text(buttonName)).click();
+
+        stepWithRole("Нажать на кнопку Далее ", () -> {
+            driver.$(".btn-wrap button").shouldHave(text("Далее")).click();
+        });
+
     }
 
 }

@@ -18,7 +18,7 @@ public abstract class BasePage extends BaseComponent {
         super(browser);
     }
 
-    @DisplayName("Close the popup notifications")
+//    @DisplayName("Close the popup notifications")
 
     public void popUpClose() {
         stepWithRole("Закрыть всплывающие уведомления", () -> {

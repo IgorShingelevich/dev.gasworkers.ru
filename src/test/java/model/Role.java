@@ -13,6 +13,8 @@ public enum Role {
     MASTER("Master", MasterPages.class),
     DISPATCHER("Dispatcher", DispatcherPages.class);
 
+    //todo: Dispatcher2, Master2, Client2, etc.
+
     private final String description;
     @Getter
     private final Class<? extends BaseRolePages> pagesObjectClass;

@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum OrderStatus {
-    NEW_ORDER("Заказ"),
+    NEW_ORDER("Новый заказ"),
     SELECT_MASTER("Выбор мастера"),
     PAY_PRIMARY_VISIT("Оплата первичного выезда"),
     SIGN_MAINTENANCE_ARGEEMENT_SMS("Подписание договора ТО смс"),

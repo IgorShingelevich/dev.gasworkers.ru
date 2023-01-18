@@ -15,11 +15,18 @@ public final class SelectObjectMaintenanceClientPage extends BaseClientPage {
         focusHeaderComponent = new FocusHeaderComponent(browser);
     }
 
-    @Step("Выбрать объект по индексу {index}")
+//    @Step("Выбрать объект по индексу {index}")
     public void selectObjectByIndex(int index) {
-        driver.$$(".card-object button")
-                .shouldHave(CollectionCondition.sizeGreaterThan(index))
-                .get(index).click();
+       String objectName = driver.$$("p.card-object__name ").get(index).getText(); //how to use globally?
+        Integer reportCount = index + 1;
+        stepWithRole("Выбрать: " + reportCount  + " объект по счету: "  + objectName , () -> {
+            driver.$$(".card-object button")
+                    .shouldHave(CollectionCondition.sizeGreaterThan(index))
+                    //difference between .sizeGreaterThan and .sizeGreaterThanOrEqual. Why not to use .get(index) only?
+                    .get(index).click();
+            System.out.println("Select Object index: "+ index + " name: " + objectName);
+        });
+
     }
 
 }

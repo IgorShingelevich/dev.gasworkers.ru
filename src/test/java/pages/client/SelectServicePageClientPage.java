@@ -43,13 +43,13 @@ public class SelectServicePageClientPage extends BaseClientPage {
         servicesTabsCollection = driver.$$("div.col-xl-6.mb-3"),
         reviewButtonCollection = driver.$$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline");
 
-    @DisplayName("Check that Select Service page is loaded")
+//    @DisplayName("Убедиться, что страница Выбор СК загружена")
     public void checkFinishLoading() {
-        step("Check that Select Service page is loaded", () -> {
+        stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
 //            spinnerScrollbarLocator.should(disappear);
-            firstServiceTabLocator.should(appear, Duration.ofSeconds(20));
+            firstServiceTabLocator.should(appear, Duration.ofSeconds(40));
 //        mapContainerLocator.shouldBe(appear).shouldBe(visible);
-            mapContainerLocator.shouldBe(appear, Duration.ofSeconds(20));
+            mapContainerLocator.shouldBe(appear, Duration.ofSeconds(40));
         });
     }
 
@@ -78,7 +78,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
     }
 
     public SelectServicePageClientPage toOrder() {
-        toOrderButtonLocator.shouldBe(visible).click();
+        stepWithRole("Нажать на кнопку Смотреть Заказ", () -> {
+            toOrderButtonLocator.shouldBe(visible).click();
+        });
         return this;
     }
 

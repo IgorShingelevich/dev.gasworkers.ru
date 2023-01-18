@@ -2,6 +2,7 @@ package tests.integration;
 
 import extension.browser.Browser;
 import model.Role;
+import model.client.OrderStatus;
 import model.client.OrderType;
 import model.client.ClientRequestType;
 import org.junit.jupiter.api.DisplayName;
@@ -34,7 +35,7 @@ class ClientDispatcherInteractionTest extends TestBase {
     @DisplayName(" Интеграция Диспетчер принимает запрос Клиента на ТО")
     @Test
     public void IntegrationDispatcherAcceptClientMaintenanceRequest() {
-        step("Клиент создать запрос на ТО", () -> {
+        step("Создать запрос на ТО", () -> {
             clientPages.getLoginPage()
                     .open()
                     .login(emailClient, passwordClient);
@@ -57,15 +58,19 @@ class ClientDispatcherInteractionTest extends TestBase {
         step("Убедиться, что страница Выбор СК загружена", () -> {
             clientPages.getSelectServicePage().checkFinishLoading();
         });
-        step(" Пеерейти в карточку Заказа", () -> {
+        step(" Перейти в карточку Заказа", () -> {
             clientPages.getSelectServicePage().toOrder();
         });
         step("Убедиться, что страница Заказа загружена", () -> {
             clientPages.getOrderCardPage().checkFinishLoading();
         });
-        step("Убедиться, что статус Заказа {orderTypeIs}", () -> {
+        step("Убедиться, что тип Заказа {orderTypeIs}", () -> {
              OrderType orderType = OrderType.MAINTENANCE;
             clientPages.getOrderCardPage().checkOrderType(orderType);
+        });
+
+        step("Убедиться, что статус Заказа {orderStatusIs}", () -> {
+            clientPages.getOrderCardPage().checkOrderStatus(OrderStatus.NEW_ORDER);
         });
 
 

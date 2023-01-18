@@ -3,9 +3,10 @@ package pages.client;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
+import model.client.OrderStatus;
 import model.client.OrderType;
 
-import java.io.FileNotFoundException;
+import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -19,6 +20,7 @@ public class OrderCardClientPage extends BaseClientPage {
         super(browser);
     }
 
+
     private final String
         LAST_ORDER_CARD_TITLE = "Заказ №",
         COMPLETE_ORDER_INFO = "Договор техобслуживания ВДГО необходимо предоставить в вашу газораспределительную компанию. Оставьте отзыв на работу мастера и вы сможете передать договор в вашу газораспределительную компанию";
@@ -30,17 +32,23 @@ public class OrderCardClientPage extends BaseClientPage {
         toMapButtonLocator = driver.$(".col-md-12.text-right .map-ic.ms-md-auto.btn.btn-outline-primary.disable-outline"),
         cancelOrderLinkLocator = driver.$(".col-md-12.text-right.pt-3 .btn.btn-link-dashed.disable-outline"),
         finalPriceLocator = driver.$(".big.bold.d-flex.justify-content-between.w-100.mb-4"),
-        statusOrderLocator = driver.$(".item-flex p.text");
+        orderStatusLocator = driver.$(".item-flex p.text");
 
     ElementsCollection
         navigationBlockCollection = driver.$$("div.navigation-block li"),
         docsDownloadCollection = driver.$$(".link-pdf-wrap .ic"),
         orderDetailsCollection = driver.$$("div.order-details-item");
 
+//    public String orderNumber = titleNumberLocator.getText().substring(LAST_ORDER_CARD_TITLE.length());  // .InvocationTargetException
+
+
 
     public OrderCardClientPage checkFinishLoading() {
-        step("Убедиться, что Карточка Заказа загружена", () -> {
-            titleNumberLocator.shouldBe(visible).shouldHave(text(LAST_ORDER_CARD_TITLE));
+        titleNumberLocator.shouldBe(visible, Duration.ofSeconds(30));
+        String orderNumber = titleNumberLocator.getText().substring(LAST_ORDER_CARD_TITLE.length());
+        stepWithRole("Убедиться, что Карточка Заказа: " + orderNumber + " загружена", () -> {
+            titleNumberLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(LAST_ORDER_CARD_TITLE));
+            System.out.println("Order number: " + orderNumber);
         });
         return this;
     }
@@ -81,19 +89,28 @@ public class OrderCardClientPage extends BaseClientPage {
 
 
     public void checkOrderType(OrderType orderType) {
-        step("Убедиться, что тип заказа {orderType}", () -> {
+        step("Убедиться, что тип заказа: " +orderType, () -> {
             orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
         });
     }
 
-    public OrderCardClientPage checkOrderStatus() {
-        step("Убедиться, что статус заказа {orderStatus)", () -> {
+    public void checkOrderStatus( OrderStatus orderStatus) {
+        step("Убедиться, что статус заказа соответствует его Признакам ", () -> {
+            //how to make this step more flexible?
+           stepWithRole("Убедиться, что статус заказа является: " + orderStatusLocator.getText(), () ->
+                    orderStatusLocator.shouldHave(text(OrderStatus.NEW_ORDER.toString()))
+           );
+           stepWithRole("Убедиться, что в статусе: " + orderStatusLocator.getText() + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
+               // how to avoid hardcode of button names?
+               toMapButtonLocator.shouldBe(visible);
+               cancelOrderLinkLocator.shouldBe(visible);
+               orderStatusLocator.shouldHave(text(OrderStatus.NEW_ORDER.toString()));
+           });
 
-            statusOrderLocator.shouldHave(text("Новый"));
         });
-        toMapButtonLocator.shouldBe(visible);
-        cancelOrderLinkLocator.shouldBe(visible);
-        return this;
+
+
+
     }
 
     public String getOrderNumber() {
@@ -105,7 +122,7 @@ public class OrderCardClientPage extends BaseClientPage {
 
     public OrderCardClientPage isCompleteState() {
         completeOrderInfoLocator.shouldBe(visible).shouldHave(text(COMPLETE_ORDER_INFO));
-        statusOrderLocator.shouldBe(visible).shouldHave(text("Завершен"));
+        orderStatusLocator.shouldBe(visible).shouldHave(text("Завершен"));
 //        finalPriceLocator.shouldBe(visible);
         docsNav();
         docsDownloadCollection.get(0).shouldBe(visible);

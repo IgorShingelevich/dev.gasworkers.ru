@@ -25,7 +25,9 @@ public final class SelectDateMaintenanceClientPage extends BaseClientPage {
 
 
     public SelectDateMaintenanceClientPage submitOrder() {
-        submitButtonLocator.shouldBe(visible).click();
+        stepWithRole(" Нажать на кнопку Разместить Заказ", () -> {
+            submitButtonLocator.shouldBe(visible).click();
+        });
         return this;
     }
 
@@ -35,8 +37,13 @@ public final class SelectDateMaintenanceClientPage extends BaseClientPage {
     }
 
     public SelectDateMaintenanceClientPage pickNowDateAM() {
-        datePicker.setDate(RandomUtil.getNowDate());
-        datePicker.setAMTime();
+        String nowDate = RandomUtil.getNowDate();
+        stepWithRole("Выбрать текущую дату и время: " + nowDate, () -> {
+            datePicker.setDate(nowDate);
+            datePicker.setAMTime();
+            System.out.println("Select date: " + nowDate);
+        });
+
         return this;
     }
 

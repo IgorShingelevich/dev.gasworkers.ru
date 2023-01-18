@@ -2,6 +2,8 @@ package tests.client;
 
 import extension.browser.Browser;
 import model.client.ClientRequestType;
+import model.client.OrderStatus;
+import model.client.OrderType;
 import org.junit.jupiter.api.*;
 import pages.context.ClientPages;
 import tests.TestBase;
@@ -120,44 +122,55 @@ class ClientFlowTest extends TestBase {
 //    @Disabled
     @Test
     public void ClientPlaceMaintenanceRequest() {
-        step("Убедиться, что Домашняя страница загружена", () -> {
+//        step("Убедиться, что Домашняя страница загружена", () -> {
             clientPages.getHomePage()
                     .checkFinishLoading();
-        });
-        step(" Нажать кнопку Создать Заказ", () ->
-                clientPages.getHomePage().clickPlaceOrderButton()
-        );
-        step("Выбрать тип заказа {ClientRequestType}", () ->
+//        });
+//        step(" Нажать кнопку Создать Заказ", () ->
+                clientPages.getHomePage().clickPlaceOrderButton();
+//        );
+//        step("Выбрать тип заказа {ClientRequestType}", () ->
                 clientPages.getTypeOrdersPage()
-                        .selectOrderType(ClientRequestType.MAINTENANCE) //  .toString()
-        );
-        step("Под информацией нажать кнопку Далее", () ->
+                        .selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
+//        );
+//        step("Под информацией нажать кнопку Далее", () ->
                         clientPages.getInfoTypeOrderPage()
 //                    .checkTitle("Заказ на ТО")
 //                    .checkStepSequence("Шаг 1 из 3")
-                                .clickNextButton()
-        );
-        step("Выбрать объект ТО", () ->
-                clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0)
-        );
-        step("Указать Сегодня время и дату", () ->
-                clientPages.getSelectDateMaintenancePage().pickNowDateAM()
-        );
-        step("Нажать кнопку Разместить Заказ", () ->
-                clientPages.getSelectDateMaintenancePage().submitOrder()
-        );
-        step("Убедиться, что страница Выбор СК загружена ", () ->
-                clientPages.getSelectServicePage().checkFinishLoading()
-        );
-        step("Нажать на кнопку Смотреть Заказ", () ->
-                clientPages.getSelectServicePage().toOrder()
-        );
-        step("Убедиться, что страница Заказ загружена", () ->
-                clientPages.getOrderCardPage().checkFinishLoading()
-        );
-        step("Закрыть всплывающие уведомления", () ->
-                clientPages.getSelectServicePage().popUpClose()
-        );
+                                .clickNextButton();
+//        );
+//        step("Выбрать объект ТО", () ->
+                clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0);
+//        );
+//        step("Указать Сегодня время и дату", () ->
+                clientPages.getSelectDateMaintenancePage().pickNowDateAM();
+//        );
+//        step("Нажать кнопку Разместить Заказ", () ->
+                clientPages.getSelectDateMaintenancePage().submitOrder();
+//        );
+//        step("Убедиться, что страница Выбор СК загружена ", () ->
+                clientPages.getSelectServicePage().checkFinishLoading();
+//        );
+//        step("Нажать на кнопку Смотреть Заказ", () ->
+                clientPages.getSelectServicePage().toOrder();
+//        );
+//        step("Убедиться, что страница Карточка Заказ загружена", () ->
+                clientPages.getOrderCardPage().checkFinishLoading();
+//        );
+//        step("Закрыть всплывающие уведомления", () ->
+                clientPages.getSelectServicePage().popUpClose();
+//        );
+        step("Убедиться, что тип Заказа {orderTypeIs}", () -> {
+            OrderType orderType = OrderType.MAINTENANCE;
+            clientPages.getOrderCardPage().checkOrderType(orderType);
+            // compare .checkOrderType and .checkOrderStatus what is better? more universal?
+        });
+
+        step("Убедиться, что статус Заказа {orderStatusIs}", () -> {
+            clientPages.getOrderCardPage().checkOrderStatus(OrderStatus.NEW_ORDER);
+            // how to make .checkOrderStatus  universal and also check corresponded buttons
+        });
+
     }
 
 
