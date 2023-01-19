@@ -9,6 +9,7 @@ import pages.components.sharedComponents.sidebarComponents.SidebarClientComponen
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
@@ -39,8 +40,9 @@ public class OrderCardClientPage extends BaseClientPage {
         offersBlockLocator = driver.$("div.map-sticky__header--offers");
 
     ElementsCollection
-        navigationBlockCollection = driver.$$("div.navigation-block li"),
-        docsDownloadCollection = driver.$$(".link-pdf-wrap .ic"),
+        navButtonsCollection = driver.$$("div.navigation-block li"),
+        docsTitleCollection = driver.$$(".link-pdf span"),
+        docsDownloadCollection = driver.$$(".link-pdf span"),
         orderDetailsCollection = driver.$$("div.order-details-item");
 
 //    public String orderNumber = titleNumberLocator.getText().substring(LAST_ORDER_CARD_TITLE.length());  // .InvocationTargetException
@@ -56,18 +58,18 @@ public class OrderCardClientPage extends BaseClientPage {
         return this;
     }
 
-    public OrderCardClientPage commonNav(){
-        navigationBlockCollection.get(0).click();
+    public OrderCardClientPage navCommon(){
+        navButtonsCollection.get(0).click();
         return this;
     }
 
-    public OrderCardClientPage masterNav(){
-        navigationBlockCollection.get(1).click();
+    public OrderCardClientPage navMaster(){
+        navButtonsCollection.get(1).click();
         return this;
     }
 
-    public OrderCardClientPage docsNav(){
-        navigationBlockCollection.get(2).click();
+    public OrderCardClientPage navDocs(){
+        navButtonsCollection.get(2).click();
         return this;
     }
 
@@ -92,18 +94,45 @@ public class OrderCardClientPage extends BaseClientPage {
         });
     }
 
-    public void checkOrderStatus( OrderStatus orderStatus) {
+    public void checkNewOrderStatus(OrderStatus orderStatus) {
         step("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             //how to make this step more flexible?
-           stepWithRole("Убедиться, что статус заказа является: " + orderStatusLocator.getText(), () ->
-                    orderStatusLocator.shouldHave(text(OrderStatus.NEW_ORDER.toString()))
+           stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () ->
+                    orderStatusLocator.shouldHave(text(orderStatus.toString()))
            );
-           stepWithRole("Убедиться, что в статусе: " + orderStatusLocator.getText() + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
+           stepWithRole("Убедиться, что в статусе: " + orderStatus + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
                // how to avoid hardcode of button names?
                toMapButtonLocator.shouldBe(visible);
                cancelOrderButtonLocator.shouldBe(visible);
-               orderStatusLocator.shouldHave(text(OrderStatus.NEW_ORDER.toString()));
+               orderStatusLocator.shouldHave(text(orderStatus.toString()));
            });
+            stepWithRole("Убедиться, что документы отсутствуют  " , () -> {
+                navDocs();
+                docsTitleCollection.shouldBe(size(0));
+                navCommon();
+            });
+        });
+    }
+
+    public void checkScheduleVisitOrderStatus(OrderStatus orderStatus) {
+        step("Убедиться, что статус заказа соответствует его Признакам ", () -> {
+            //how to make this step more flexible?
+            stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () ->
+                    orderStatusLocator.shouldHave(text(orderStatus.toString()))
+            );
+            stepWithRole("Убедиться, что в статусе: " + orderStatus + " представлена кнопка Отменить заказ " , () -> {
+                // how to avoid hardcode of button names?
+                toMapButtonLocator.shouldNotBe(visible);
+                cancelOrderButtonLocator.shouldBe(visible);
+                orderStatusLocator.shouldHave(text(orderStatus.toString()));
+            });
+            stepWithRole("Убедиться, что в документах присутствует Договор ТО и Страховой полис " + docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText() , () -> {
+               navDocs();
+               docsTitleCollection.get(0).shouldHave(text("Договор ТО"));
+               docsTitleCollection.get(1).shouldHave(text("Страховой полис"));
+               docsTitleCollection.shouldBe(size(2));
+               navCommon();
+            });
         });
     }
 
@@ -119,10 +148,12 @@ public class OrderCardClientPage extends BaseClientPage {
         completeOrderInfoLocator.shouldBe(visible).shouldHave(text(COMPLETE_ORDER_INFO));
         orderStatusLocator.shouldBe(visible).shouldHave(text("Завершен"));
 //        finalPriceLocator.shouldBe(visible);
-        docsNav();
+        navDocs();
         docsDownloadCollection.get(0).shouldBe(visible);
         docsDownloadCollection.get(1).shouldBe(visible);
         docsDownloadCollection.get(2).shouldBe(visible);
+        docsDownloadCollection.shouldBe(size(3));
+        navCommon();
         return this;
     }
 

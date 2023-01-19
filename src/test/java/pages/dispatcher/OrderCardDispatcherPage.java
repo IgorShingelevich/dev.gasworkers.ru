@@ -8,6 +8,7 @@ import model.client.OrderStatus;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static io.qameta.allure.Allure.step;
@@ -27,12 +28,18 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         orderStatusLocator = driver.$(".item-flex p.text"),
         primaryButtonLocator = driver.$(".btn.btn-primary"),
 
+        selectTimeButtonLocator = driver.$(byTagAndText("button", "Назначить время")),
+        selectAnotherTimeButtonLocator = driver.$(byTagAndText("button", "Назначить другое время")),
+        selectMasterButtonLocator = driver.$(byTagAndText("button", "Выбрать мастера")),
+        selectAnotherMasterButtonLocator = driver.$(byTagAndText("button", "Назначить другого мастера")),
+
+        cancelButtonLocator = driver.$(byTagAndText("button", "Отменить заказ")),
 
         alreadyAcceptedButtonLocator = driver.$(".global-btn-wrapper.justify-content-end"),
         outlineButtonLocator = driver.$(".btn.btn-outline-primary");
 
     ElementsCollection
-        orderNavigationCollection = driver.$$("#navigation-block li");
+        navButtonsCollection = driver.$$("#navigation-block li");
 
     public void checkFinishLoading() {
         String factualOrderNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
@@ -54,23 +61,27 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         return this;
     }
 
-    public void checkOrderStatus( OrderStatus orderStatus) {
+    public void checkNewTenderStatus( OrderStatus orderStatus) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
-            stepWithRole("Убедиться, что статус заказа является: " + orderStatusLocator.getText(), () ->
+            stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () ->
 
                     orderStatusLocator.shouldHave(text(orderStatus.toString())));
             stepWithRole("Убедиться, что при участии в Тендере  представлена неактивная кнопка Уже участвуете ", () -> {
-                //        acceptButtonLocator.should(disappear);
-                //        declineButtonLocator.should(disappear);
                 alreadyAcceptedButtonLocator.should(appear, Duration.ofSeconds(40));
+//                        acceptButtonLocator.shouldBe(hidden);
+//                        declineButtonLocator.shouldBe(hidden);
+                //TODO - check price, docs, buttons, info
             });
         });
     }
 
-    public OrderCardDispatcherPage isSelectMasterStatus() {
-        primaryButtonLocator.shouldHave(text("Выбрать мастера")).shouldBe(visible, Duration.ofSeconds(10));
-        outlineButtonLocator.shouldHave(text("Отменить заказ")).shouldBe(visible, Duration.ofSeconds(10));
-        return this;
+    public void checkScheduleVisitStatus(OrderStatus orderStatus) {
+        stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
+            stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () -> orderStatusLocator.shouldHave(text(orderStatus.toString())));
+            });
+            stepWithRole("Убедиться, что представлена кнопка Назначить время ", () -> {
+
+        });
     }
 
     public OrderCardDispatcherPage selectMaster() {
@@ -89,17 +100,17 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
     }
 
     public OrderCardDispatcherPage orderDescription() {
-        orderNavigationCollection.get(0).click();
+        navButtonsCollection.get(0).click();
         return this;
     }
 
     public OrderCardDispatcherPage orderInfo() {
-        orderNavigationCollection.get(1).click();
+        navButtonsCollection.get(1).click();
         return this;
     }
 
     public OrderCardDispatcherPage orderDocuments() {
-        orderNavigationCollection.get(2).click();
+        navButtonsCollection.get(2).click();
         return this;
     }
 

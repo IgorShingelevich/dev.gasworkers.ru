@@ -31,15 +31,11 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         orderCardTitleLocator = driver.$(".page-title .h3.mb-2"),
         orderCardFirstLocator = driver.$$("div.order-card").first(),
         mapContainerLocator = driver.$("div.map-wrap"),
-        map=driver.$(".map-wrap .ymap-container .map-into"),
-        newOrderStatusButtons= driver.$$("div.top-filter__status--btn").get(0),
-        inProgressOrderStatusButton = driver.$$("div.top-filter__status--btn").get(1),
-        completedOrderStatusButton =  driver.$$("div.top-filter__status--btn").get(2),
-        archivedOrderStatusButton = driver.$$("div.top-filter__status--btn").get(3);
+        mapLocator = driver.$(".map-wrap .ymap-container .map-into");
 
     ElementsCollection
+        navButtonsCollection = driver.$$("div.top-filter__status--btn"),
         orderCardsCollection = driver.$$("div.order-card"),
-
         ordersNumberLinkCollection = driver.$$("p.h5.link-blue.pointer"),
         orderActionDropdownCollection = driver.$$("button.actions__btn"),
         actionsOpenOrderLinkCollection = driver.$$x("//a[@class='actions__slot--link']"),
@@ -51,9 +47,42 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
     public HomeDispatcherPage checkFinishLoading() {
         stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
             dispatcherHomePageTitleLocator.shouldBe(visible, Duration.ofSeconds(10));
-            map.shouldBe(visible, Duration.ofSeconds(20));
+            mapLocator.shouldBe(visible, Duration.ofSeconds(20));
         });
         return this;
+    }
+
+    public void navNew () {
+        stepWithRole("Нажать на кнопку Новый", () -> {
+            navButtonsCollection.get(0).shouldHave(text("Новый")).click();
+            ordersNumberLinkCollection.last().scrollIntoView(true);
+            ordersNumberLinkCollection.first().scrollIntoView(true);
+        });
+    }
+
+    public void navInProgress () {
+        stepWithRole("Нажать на кнопку В работе", () -> {
+            navButtonsCollection.get(1).shouldHave(text("В работе")).click();
+            //scrollTo( ordersNumberLinkCollection.last() );
+            ordersNumberLinkCollection.last().scrollIntoView(true);
+            ordersNumberLinkCollection.first().scrollIntoView(true);
+        });
+    }
+
+    public void navCompleted () {
+        stepWithRole("Нажать на кнопку Завершен", () -> {
+            navButtonsCollection.get(2).shouldHave(text("Завершен")).click();
+            ordersNumberLinkCollection.last().scrollIntoView(true);
+            ordersNumberLinkCollection.first().scrollIntoView(true);
+        });
+    }
+
+    public void navArchived () {
+        stepWithRole("Нажать на кнопку В архиве", () -> {
+            navButtonsCollection.get(3).shouldHave(text("В архиве")).click();
+            ordersNumberLinkCollection.last().scrollIntoView(true);
+            ordersNumberLinkCollection.first().scrollIntoView(true);
+        });
     }
 
     public HomeDispatcherPage switchToMapView() {
@@ -98,6 +127,9 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         });
         return this;
     }
+
+
+
 
 
 

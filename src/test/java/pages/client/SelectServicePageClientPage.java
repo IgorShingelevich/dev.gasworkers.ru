@@ -63,7 +63,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
         return this;
     }
 
-    public SelectServicePageClientPage toOrder() {
+    public SelectServicePageClientPage toOrderCard() {
         stepWithRole("Нажать на кнопку Смотреть Заказ", () -> {
             toOrderButtonLocator.shouldBe(visible).click();
         });

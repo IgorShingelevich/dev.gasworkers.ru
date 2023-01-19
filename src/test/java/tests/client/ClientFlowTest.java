@@ -72,7 +72,7 @@ class ClientFlowTest extends TestBase {
             clientPages.getSelectServicePage().checkFinishLoading()
         );
         step("Нажать на кнопку Смотреть Заказ", () ->
-            clientPages.getSelectServicePage().toOrder()
+            clientPages.getSelectServicePage().toOrderCard()
         );
         step("Закрыть всплывающие уведомления", () ->
             clientPages.getSelectServicePage().popUpClose()
@@ -99,7 +99,7 @@ class ClientFlowTest extends TestBase {
             clientPages.getSelectServicePage().checkFinishLoading()
         );
         step("Нажать на кнопку Смотреть Заказ", () ->
-            clientPages.getSelectServicePage().toOrder()
+            clientPages.getSelectServicePage().toOrderCard()
         );
         step("Убедиться, что страница Заказ загружена", () ->
             clientPages.getOrderCardPage().checkFinishLoading()
@@ -133,7 +133,7 @@ class ClientFlowTest extends TestBase {
         clientPages.getSelectDateMaintenancePage().pickNowDateAM();
         clientPages.getSelectDateMaintenancePage().submitOrder();
         clientPages.getSelectServicePage().checkFinishLoading();
-        clientPages.getSelectServicePage().toOrder();
+        clientPages.getSelectServicePage().toOrderCard();
         clientPages.getOrderCardPage().checkFinishLoading();
         clientPages.getSelectServicePage().popUpClose();
         step("Убедиться, что тип Заказа {orderTypeIs}", () -> {
@@ -142,7 +142,7 @@ class ClientFlowTest extends TestBase {
             // compare .checkOrderType and .checkOrderStatus what is better? more universal?
         });
         step("Убедиться, что статус Заказа {orderStatusIs}", () -> {
-        clientPages.getOrderCardPage().checkOrderStatus(OrderStatus.NEW_ORDER);
+        clientPages.getOrderCardPage().checkNewOrderStatus(OrderStatus.NEW_ORDER);
             // how to make .checkOrderStatus  universal and also check corresponded buttons
         });
 

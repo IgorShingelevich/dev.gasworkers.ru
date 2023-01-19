@@ -1,6 +1,5 @@
 package tests.integration;
 
-import com.codeborne.selenide.Selenide;
 import extension.browser.Browser;
 import model.Role;
 import model.client.OrderStatus;
@@ -10,14 +9,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.context.ClientPages;
 import pages.context.DispatcherPages;
-import ru.sms_activate.error.base.SMSActivateBaseException;
 import tests.TestBase;
 import utils.User;
 
 import java.util.NoSuchElementException;
 
 
-import static com.codeborne.selenide.Selenide.back;
 import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
 
@@ -76,7 +73,7 @@ class ClientDispatcherInteractionTest extends TestBase {
             clientPages.getSelectDateMaintenancePage().pickNowDateAM();
             clientPages.getSelectDateMaintenancePage().submitOrder();
             clientPages.getSelectServicePage().checkFinishLoading();
-            clientPages.getSelectServicePage().toOrder();
+            clientPages.getSelectServicePage().toOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
             clientPages.getOrderCardPage().sidebar.home();
             clientPages.getHomePage().checkFinishLoading();
@@ -93,7 +90,8 @@ class ClientDispatcherInteractionTest extends TestBase {
                 // compare .checkOrderType and .checkOrderStatus what is better? more universal?
             });
             step("Убедиться, что статус Заказа {orderStatus}", () -> {
-                clientPages.getOrderCardPage().checkOrderStatus(OrderStatus.NEW_TENDER);
+                OrderStatus orderStatus = OrderStatus.NEW_ORDER;
+                clientPages.getOrderCardPage().checkNewOrderStatus(orderStatus);
                 // how to make .checkOrderStatus  universal and also check corresponded buttons
             });
             clientPages.getOrderCardPage().clickOffersBlock();
@@ -109,17 +107,13 @@ class ClientDispatcherInteractionTest extends TestBase {
         });
 
         step("Клиент принимает предложение диспетчера", () -> {
-            clientPages.getSelectServicePage().waitForResponses();
-            //!! fall when go straight to .proceedWithFirstService() - cannot push button
+            clientPages.getSelectServicePage().waitForResponses();  //!! fall when go straight to .proceedWithFirstService() - cannot push button
             //check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
-            clientPages.getSelectServicePage().toOrder();
+            clientPages.getSelectServicePage().toOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
-            sleep(4000);
             clientPages.getOrderCardPage().popUpClose();
-//            sleep(4000);
             //go back to order card and check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
-            clientPages.getOrderCardPage().clickOffersBlock();
-            //!! fall because .showOnMap button is grayed out - mooved to .clickOffersBlock()
+            clientPages.getOrderCardPage().clickOffersBlock(); //!! fall because .showOnMap button is grayed out - mooved to .clickOffersBlock()
             clientPages.getSelectServicePage().checkFinishLoading();
             // find on the map
             //check Price with Insurance and Primary Visit Price
@@ -131,10 +125,9 @@ class ClientDispatcherInteractionTest extends TestBase {
             //set w Insurance
             clientPages.getSelectInsurancePage().next();
             clientPages.getCheckDocumentsPage().checkFinishLoading();
-//            driver.back();  // not working
+            //driver.back();  // not working
             // check that Filial is not empty or set the Filial if it is empty
             // check that Address fnd Passport is not empty or set the Address and Passport if it is empty
-            sleep(4000);
             clientPages.getCheckDocumentsPage().makeContract();
             clientPages.getSelectPaymentPage().checkFinishLoading();
             clientPages.getSelectPaymentPage().paySPB();
@@ -145,9 +138,23 @@ class ClientDispatcherInteractionTest extends TestBase {
             Integer firstSMSCode = client.getCodeFromNewSMS();
             clientPages.getSignSMSPage().inputSMSCode(firstSMSCode);
             clientPages.getSignSMSPage().sign();
-            sleep(5_000);
+            clientPages.getSignSuccsessPage().checkFinishLoading();
+            clientPages.getSignSuccsessPage().toOrderCard();
+            clientPages.getOrderCardPage().checkFinishLoading();
+            clientPages.getOrderCardPage().popUpClose();
+            clientPages.getOrderCardPage().checkScheduleVisitOrderStatus(OrderStatus.SCHEDULE_VISIT);
+        });
 
+        step("Диспетчер выбирает время и назначает Мастера", () -> {
 
+            dispatcherPages.getHomePage().switchToListView();
+            dispatcherPages.getHomePage().openOrderByIndex(0);
+            dispatcherPages.getOrderCardPage().checkFinishLoading();
+            dispatcherPages.getHomePage().popUpClose();
+            dispatcherPages.getHomePage().navInProgress();
+            dispatcherPages.getHomePage().openOrderByIndex(0);
+            dispatcherPages.getOrderCardPage().checkFinishLoading();
+//            dispatcherPages.getOrderCardPage().checkOrderStatus(OrderStatus.SCHEDULE_VISIT);
 
 
 
@@ -155,6 +162,16 @@ class ClientDispatcherInteractionTest extends TestBase {
 
 
         });
+
+
+
+
+
+
+
+
+
+        sleep(5_000);
 
 
 

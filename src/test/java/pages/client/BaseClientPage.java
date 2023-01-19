@@ -1,6 +1,7 @@
 package pages.client;
 
 import model.browser.RoleBrowser;
+import model.client.OrderStatus;
 import pages.BasePage;
 import pages.components.sharedComponents.breadcrumbsComponent.ClientBreadcrumbsComponent;
 import pages.components.sharedComponents.headerComponents.actionblockComponents.ActionsBlockClientComponent;
@@ -21,9 +22,6 @@ public abstract class BaseClientPage extends BasePage {
         actionBlockClient = new ActionsBlockClientComponent(browser);
         breadcrumbsClient = new ClientBreadcrumbsComponent(browser);
     }
-
-
-
 
 
 
