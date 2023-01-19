@@ -1,7 +1,5 @@
 package utils;
 
-import ru.sms_activate.error.base.SMSActivateBaseException;
-
 public class User {
 
 
@@ -38,7 +36,7 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
-    public void getCodeFromNewSMS() {
+    public Integer getCodeFromNewSMS() {
         try {
             String currentSmsCode = SMSActivateUtil.getLastSMS(this.phoneNumber);
             this.smsCode = Integer.parseInt(currentSmsCode.substring(currentSmsCode.length() - 6));
@@ -46,6 +44,7 @@ public class User {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return this.smsCode;
 
     }
 

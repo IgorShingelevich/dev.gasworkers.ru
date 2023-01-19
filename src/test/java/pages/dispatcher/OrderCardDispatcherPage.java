@@ -48,7 +48,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
     public OrderCardDispatcherPage acceptOrder() {
         String factualOrderNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
         stepWithRole("Принять заказ:" + factualOrderNumber , () -> {
-            primaryButtonLocator.scrollTo().click();
+            primaryButtonLocator.as("Принять").scrollTo().click();
         });
 
         return this;

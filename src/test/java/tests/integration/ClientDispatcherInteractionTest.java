@@ -14,6 +14,9 @@ import ru.sms_activate.error.base.SMSActivateBaseException;
 import tests.TestBase;
 import utils.User;
 
+import java.util.NoSuchElementException;
+
+
 import static com.codeborne.selenide.Selenide.back;
 import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
@@ -45,18 +48,25 @@ class ClientDispatcherInteractionTest extends TestBase {
     String emailMaster = "test_gas_master1@rambler.ru",
         passwordMaster = "123456";
 
-    String
-        smsCode = "123456";
+
 //    String currentOrderNumber = OrderCardClientPage.getTitleNumber();
 
 
 
     @DisplayName(" ТО Интеграция Клиент-Диспетчер-Клиент-Диспетчер")
     @Test
-    public void IntegrationDispatcherAcceptClientMaintenanceRequest()  {
-        step("Клиент размещает заказ на ТО", () -> {
+    public void IntegrationDispatcherAcceptClientMaintenanceRequest() throws NoSuchElementException {
+        step("Авторизация клиента", () -> {
             clientPages.getLoginPage().open().login(client.email, client.password);
             clientPages.getHomePage().checkFinishLoading();
+        });
+
+        step("Авторизация диспетчера", () -> {
+            dispatcherPages.getLoginPage().open().login(emailDispatcher, passwordDispatcher);
+            dispatcherPages.getHomePage().checkFinishLoading();
+        });
+
+        step("Клиент размещает заказ на ТО", () -> {
             clientPages.getHomePage().clickPlaceOrderButton();
             clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
             clientPages.getInfoTypeOrderPage().clickNextButton();
@@ -70,7 +80,7 @@ class ClientDispatcherInteractionTest extends TestBase {
             clientPages.getOrderCardPage().checkFinishLoading();
             clientPages.getOrderCardPage().sidebar.home();
             clientPages.getHomePage().checkFinishLoading();
-//            clientPages.getHomePage().popUpClose();
+            clientPages.getHomePage().popUpClose();
             clientPages.getHomePage().lastOrderProfileClientComponent.lastOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
 //            clientPages.getOrderCardPage().checkFinishLoading();
@@ -90,21 +100,17 @@ class ClientDispatcherInteractionTest extends TestBase {
             clientPages.getSelectServicePage().checkFinishLoading();
         });
 
-
         step("Диспетчер принимает заказ ", () -> {
-            dispatcherPages.getLoginPage().open().login(emailDispatcher, passwordDispatcher);
-            dispatcherPages.getHomePage().checkFinishLoading();
-            dispatcherPages.getHomePage().popUpClose();
             dispatcherPages.getHomePage().switchToListView();
             dispatcherPages.getHomePage().openOrderByIndex(0);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
-
+            dispatcherPages.getHomePage().popUpClose();
             dispatcherPages.getOrderCardPage().acceptOrder();
         });
 
         step("Клиент принимает предложение диспетчера", () -> {
             clientPages.getSelectServicePage().waitForResponses();
-            //!! fall if go straight to .proceedWithFirstService() - cannot push button
+            //!! fall when go straight to .proceedWithFirstService() - cannot push button
             //check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
             clientPages.getSelectServicePage().toOrder();
             clientPages.getOrderCardPage().checkFinishLoading();
@@ -136,7 +142,8 @@ class ClientDispatcherInteractionTest extends TestBase {
             clientPages.getPaymentWizardPage().getQRCode();
             clientPages.getSignSMSPage().checkFinishLoading();
             client.getCodeFromNewSMS();
-            clientPages.getSignSMSPage().inputSMSCode(smsCode);
+            Integer firstSMSCode = client.getCodeFromNewSMS();
+            clientPages.getSignSMSPage().inputSMSCode(firstSMSCode);
             clientPages.getSignSMSPage().sign();
             sleep(5_000);
 

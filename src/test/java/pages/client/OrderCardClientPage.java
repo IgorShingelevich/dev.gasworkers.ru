@@ -30,6 +30,7 @@ public class OrderCardClientPage extends BaseClientPage {
     SelenideElement
         titleNumberLocator = driver.$("h1.h3.mb-2"),
         completeOrderInfoLocator = driver.$(".hint-box p"),
+        orderDetailsBlockLocator = driver.$("div.order-details"),
         toMapButtonLocator = driver.$(byTagAndText("button", "Показать на карте")),  // $("button.map-ic")
         cancelOrderButtonLocator = driver.$(byTagAndText("button", "Отменить заказ")),
         payBillButtonLocator = driver.$(byTagAndText("button", "Оплатить счет")),
@@ -49,6 +50,7 @@ public class OrderCardClientPage extends BaseClientPage {
         String orderNumber = titleNumberLocator.getText().substring(LAST_ORDER_CARD_TITLE.length());
         stepWithRole("Убедиться, что Карточка Заказа: " + orderNumber + " загружена", () -> {
             titleNumberLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(LAST_ORDER_CARD_TITLE));
+            orderDetailsBlockLocator.shouldBe(visible, Duration.ofSeconds(20));
             System.out.println("Order number: " + orderNumber);
         });
         return this;

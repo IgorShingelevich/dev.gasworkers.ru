@@ -59,8 +59,7 @@ public final class HomeClientPage extends BaseClientPage {
 //    @Step("Убедиться, что Домашняя страница загружена")
     public HomeClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
-            driver.$(".client-objects [data-index='0']")
-                    .shouldBe(visible, Duration.ofSeconds(10));
+            driver.$(".client-objects [data-index='0']").shouldBe(visible, Duration.ofSeconds(20));
         });
         return this;
     }

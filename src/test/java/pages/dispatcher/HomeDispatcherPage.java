@@ -76,7 +76,7 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
     public HomeDispatcherPage switchToListView() {
         stepWithRole("Переключиться на список", () -> {
             listViewButtonLocator.click();
-            ordersNumberLinkCollection.last().shouldBe(visible, Duration.ofSeconds(20));
+            ordersNumberLinkCollection.first().shouldBe(visible, Duration.ofSeconds(20));
         });
 //        listViewButtonLocator.shouldBe(visible).click();
 //        orderCardFirstLocator.shouldBe(visible);
