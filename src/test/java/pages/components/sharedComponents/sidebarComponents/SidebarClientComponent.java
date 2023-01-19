@@ -20,15 +20,15 @@ public class SidebarClientComponent extends BaseComponent {
     private final String SUPPORT_SERVICE_PHONE = "8 800 302 89 04";
     private final String SUPPORT_SERVICE_EMAIL = "info@gasworkers.ru";
 
-    SelenideElement homeLinkLocator = $$(".sidebar-nav>li").get(0),
-            objectsAndEquipmentLinkLocator = $$(".sidebar-nav>li").get(1),
-            ordersAndInvoicesDropdownLocator = $$(".sidebar-nav>li").get(2),  //$(By.xpath("//div[@class='link']")).$(byText("Заказы/Счета"));
-            ordersListLinkLocator = $("ul.dropdown-menu").$(byText("Список заказов")),
-            invoicesListLinkLocator = $("ul.dropdown-menu").$(byText("Список счетов")),  //$(By.xpath("//div[@class='link']")).$(byText("Список счетов"));
-            profileLinkLocator = $$(".sidebar-nav>li").get(3), //$(By.xpath("//div[@class='link']")).$(byText("Профиль"));
-            supportServiceTitleLocator = $(".support-service"),
-            supportServicePhoneLocator = $(".support-service__phone"),
-            supportServiceEmailLocator = $(".support-service .link-dark-blue");
+    SelenideElement homeLinkLocator = driver.$$(".sidebar-nav>li").get(0),
+            objectsAndEquipmentLinkLocator = driver.$$(".sidebar-nav>li").get(1),
+            ordersAndInvoicesDropdownLocator = driver.$$(".sidebar-nav>li").get(2),  //$(By.xpath("//div[@class='link']")).$(byText("Заказы/Счета"));
+            ordersListLinkLocator = driver.$("ul.dropdown-menu").$(byText("Список заказов")),
+            invoicesListLinkLocator = driver.$("ul.dropdown-menu").$(byText("Список счетов")),  //$(By.xpath("//div[@class='link']")).$(byText("Список счетов"));
+            profileLinkLocator = driver.$$(".sidebar-nav>li").get(3), //$(By.xpath("//div[@class='link']")).$(byText("Профиль"));
+            supportServiceTitleLocator = driver.$(".support-service"),
+            supportServicePhoneLocator = driver.$(".support-service__phone"),
+            supportServiceEmailLocator = driver.$(".support-service .link-dark-blue");
 
 
     public SidebarClientComponent clickOrdersAndInvoicesDropdown() {
@@ -38,7 +38,9 @@ public class SidebarClientComponent extends BaseComponent {
     }
 
     public SidebarClientComponent home() {
-        homeLinkLocator.shouldBe(visible).click();
+        stepWithRole("Перейти на домашнюю страницу", () -> {
+            homeLinkLocator.click();
+        });
         return this;
     }
 

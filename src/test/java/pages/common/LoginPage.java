@@ -8,6 +8,7 @@ import pages.BasePage;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.sleep;
 
@@ -41,9 +42,8 @@ public final class LoginPage extends BasePage {
         });
         stepWithRole("Нажать кнопку Войти", () -> {
 //                driver.$("button[type=submit]").click();  //Element not found {button[type=submit]}
-            driver.$(".mb-2.btn.btn-primary.disable-outline")
-                    .shouldHave(text("Далее"))
-                    .click();
+            driver.$(byTagAndText("button", "Далее")).click();
+            System.out.println("Login as " + email + " " + password);
         });
     };
 }

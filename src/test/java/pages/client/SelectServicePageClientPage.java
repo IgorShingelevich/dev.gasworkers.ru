@@ -3,13 +3,11 @@ import model.browser.RoleBrowser;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.api.DisplayName;
 import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
 import static io.qameta.allure.Allure.step;
 
 public class SelectServicePageClientPage extends BaseClientPage {
@@ -43,6 +41,11 @@ public class SelectServicePageClientPage extends BaseClientPage {
         servicesTabsCollection = driver.$$("div.col-xl-6.mb-3"),
         reviewButtonCollection = driver.$$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline");
 
+    public SelectServicePageClientPage backLink() {
+        backLinkLocator.click();
+        return this;
+    }
+
 //    @DisplayName("Убедиться, что страница Выбор СК загружена")
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
@@ -54,26 +57,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
     }
 
     public SelectServicePageClientPage waitForResponses() {
-        firstServiceButtonLocator.should(appear, Duration.ofSeconds(60));
-
-     /*   try {
-            reviewButtonCollection.wait(10000L);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-        // isolate titleLocator.wait(6000L) in try-catch block
-//        try {
-//            titleLocator.wait(6000L);
-//        } catch (Exception e) {
-//            System.out.println("titleLocator.wait(6000L) failed");
-//        }
-//        titleLocator.shouldHave(text(SELECT_SERVICE_TITLE));
-//        try {
-//            spinnerScrollbarLocator.wait(6000L);
-//        } catch (Exception e) {
-//            System.out.println("spinnerScrollbarLocator.wait(6000L).should(disappear) failed");
-//        }
-//        spinnerScrollbarLocator.should(disappear);
+        stepWithRole("Ожидание ответов", () -> {
+            firstServiceButtonLocator.should(appear, Duration.ofSeconds(60));
+        });
         return this;
     }
 
@@ -84,14 +70,14 @@ public class SelectServicePageClientPage extends BaseClientPage {
         return this;
     }
 
-    public SelectServicePageClientPage backLink() {
-        backLinkLocator.click();
-        return this;
-    }
 
-    public SelectServicePageClientPage reviewFirstService() {
-        reviewButtonCollection.first().click();
-        selectInsurancePageTitleLocator.shouldBe(visible);
+
+    public SelectServicePageClientPage proceedWithFirstService() {
+        stepWithRole("Нажать на кнопку Выбрать Компанию ", () -> {
+//            reviewButtonCollection.first().shouldBe(visible, Duration.ofSeconds(40)).shouldHave(text("Выбрать")).click();
+            reviewButtonCollection.first().shouldBe(visible, Duration.ofSeconds(40)).click();
+            selectInsurancePageTitleLocator.shouldBe(visible, Duration.ofSeconds(40));
+        });
 
         return this;
     }

@@ -7,6 +7,7 @@ import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.$;
 
 public class CheckDocumentsClientPage  extends BaseClientPage {
@@ -20,29 +21,29 @@ public class CheckDocumentsClientPage  extends BaseClientPage {
         CHECK_DOCUMENTS_TITLE = "Для заключения договора ТО заполните недостающие данные";
 
     SelenideElement
-        pageTitleLocator = $(".h3.mb-32"),
-        pageTitlePaymentPageLocator = $(".page-content .h3.mb-40"),
-        pageSubtitleLocator = $(".h4.mb-32"),
-        inputPassportIssuedByFieldLocator = $("input[placeholder='Кем выдан']"),
-        makeContractButton = $("button.btn.btn-primary"),
-        spinerLoaderLocator = $("div.gas-loader");
-        // <div data-v-eb791b80="" class="gas-loader"></div>
+        pageTitleLocator = driver.$(".h3.mb-32"),
+        pageTitlePaymentPageLocator = driver.$(".page-content .h3.mb-40"),
+        pageSubtitleLocator = driver.$(".h4.mb-32"),
+        inputPassportIssuedByFieldLocator = driver.$("input[placeholder='Кем выдан']"),
+        makeContractButton = driver.$(byTagAndText("button", "Оформить договор")),  // $("button.btn.btn-primary")
+        spinerLoaderLocator = driver.$("div.gas-loader");
 
-
-    public CheckDocumentsClientPage isOpened() {
-        pageTitleLocator.shouldHave(text(CHECK_DOCUMENTS_TITLE));
-        String CheckDocumentsClientPageTitle = pageTitleLocator.getText();
-        System.out.println("CheckDocumentsClientPageTitle: " + CheckDocumentsClientPageTitle);
+    public CheckDocumentsClientPage checkFinishLoading() {
+        stepWithRole("Убедиться, что страница Проверка документов загружена", () -> {
+            pageTitleLocator.shouldHave(text(CHECK_DOCUMENTS_TITLE));
+            String CheckDocumentsClientPageTitle = pageTitleLocator.getText();
+            System.out.println("CheckDocumentsClientPageTitle: " + CheckDocumentsClientPageTitle);
+        });
         return this;
     }
 
     public CheckDocumentsClientPage makeContract()  {
-        inputPassportIssuedByFieldLocator.shouldNot(empty);
-       makeContractButton.click();
-        spinerLoaderLocator.should(disappear);
-        pageTitlePaymentPageLocator.should(appear, Duration.ofSeconds(10));
-
-
+        stepWithRole("Нажать кнопку Заключить договор", () -> {
+            inputPassportIssuedByFieldLocator.shouldNot(empty);
+            makeContractButton.shouldBe(visible, Duration.ofSeconds(60)).hover().click();
+            spinerLoaderLocator.shouldBe(visible, Duration.ofSeconds(60));
+            pageTitlePaymentPageLocator.shouldBe(visible, Duration.ofSeconds(60));
+        });
         return this;
     }
 

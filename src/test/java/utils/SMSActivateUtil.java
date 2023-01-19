@@ -22,8 +22,8 @@ public static final String
         APIKEY =  "7424Adff2b7241e6b15e1cbdfdf25773";
 public static final String BASEURI = "https://api.sms-activate.org/stubs/handler_api.php";
 
-public static final long userPhone = 79033068834L;
-SMSActivateApi managerSMS = new SMSActivateApi(APIKEY);
+public static final long userPhone = 79288010225L;
+public static SMSActivateApi managerSMS = new SMSActivateApi(APIKEY);
     public static String responseBodyRentStatus;
 
 
@@ -67,8 +67,7 @@ SMSActivateApi managerSMS = new SMSActivateApi(APIKEY);
     }
     // put responseBodyRentStatus  in a public variable and use it in the test
 
-
-    public Integer getIDbyPhoneNumber(long phoneNumber) throws SMSActivateBaseException {
+    public static Integer getIDbyPhoneNumber(long phoneNumber) throws SMSActivateBaseException {
         SMSActivateGetRentListResponse rentListResponse = managerSMS.getRentList();
         List<SMSActivateRentNumber> listRentNumbers = rentListResponse.getRentNumberList();
         // search with the cycle for the rentID with the phone number
@@ -81,7 +80,7 @@ SMSActivateApi managerSMS = new SMSActivateApi(APIKEY);
     }
 
 
-    public String getLastSMS(long phoneNumber) throws SMSActivateBaseException {
+    public static String getLastSMS(long phoneNumber) throws SMSActivateBaseException {
         SMSActivateGetRentStatusResponse rentListResponse = managerSMS.getRentStatus(getIDbyPhoneNumber(phoneNumber));
        return  rentListResponse.getSmsActivateSMSList().get(0).getText();
     }

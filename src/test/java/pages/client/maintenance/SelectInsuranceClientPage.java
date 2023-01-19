@@ -18,16 +18,20 @@ public class SelectInsuranceClientPage extends BaseClientPage {
             SELECT_INSURANCE_TITLE = "Выберите договор ТО";
 
     SelenideElement
-        pageTitleLocator = $(".h2.text-center.mb-4"),
-        nextButton = $(".gas-box .btn.btn-primary");
+        pageTitleLocator = driver.$(".h2.text-center.mb-4"),
+        nextButton = driver.$(".gas-box .btn.btn-primary");
 
-    public SelectInsuranceClientPage isOpened() {
-        pageTitleLocator.shouldHave(text(SELECT_INSURANCE_TITLE));
+    public SelectInsuranceClientPage checkFinishLoading() {
+        stepWithRole("Убедиться, что страница Выбор Страховки загружена", () -> {
+            pageTitleLocator.shouldHave(text(SELECT_INSURANCE_TITLE));
+        });
         return this;
     }
 
     public SelectInsuranceClientPage next() {
-        nextButton.click();
+        stepWithRole("Нажать кнопку Выбрать", () -> {
+            nextButton.shouldHave(text("Выбрать")).click();
+        });
         return this;
     }
 

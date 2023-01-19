@@ -3,12 +3,14 @@ package pages.dispatcher;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
+import model.client.OrderStatus;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
+import static io.qameta.allure.Allure.step;
 
 public class OrderCardDispatcherPage extends BaseDispatcherPage {
 
@@ -19,39 +21,50 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
     private final String PAGE_TITLE = "Заказ";
 
     SelenideElement
-        pageTitleLocator = $(".page-title .h3.mb-2"),
-        orderBlockLocator = $(".page-content #order"),
-        orderNumberLocator = $(".order-number"),
+        pageTitleLocator = driver.$(".page-title .h3.mb-2"),
+        orderBlockLocator = driver.$(".page-content #order"),
+        orderNumberLocator = driver.$(".order-number"),
+        orderStatusLocator = driver.$(".item-flex p.text"),
+        primaryButtonLocator = driver.$(".btn.btn-primary"),
 
-        primaryButtonLocator = $(".btn.btn-primary"),
 
-
-        alreadyAcceptedButtonLocator = $(".global-btn-wrapper.justify-content-end"),
-        outlineButtonLocator = $(".btn.btn-outline-primary");
+        alreadyAcceptedButtonLocator = driver.$(".global-btn-wrapper.justify-content-end"),
+        outlineButtonLocator = driver.$(".btn.btn-outline-primary");
 
     ElementsCollection
-        orderNavigationCollection = $$("#navigation-block li");
+        orderNavigationCollection = driver.$$("#navigation-block li");
 
-    public OrderCardDispatcherPage isOpened() {
+    public void checkFinishLoading() {
+        String factualOrderNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
+        stepWithRole("Убедиться, что Карточка Заказа: " + factualOrderNumber + " загружена", () -> {
+            pageTitleLocator.shouldBe(visible, Duration.ofSeconds(40)).shouldHave(text(PAGE_TITLE));
+            orderBlockLocator.shouldBe(visible);
+            System.out.println("Factual Dispatcher Order number: " + factualOrderNumber);
+        });
 
-        // isolate  in pageTitleLocator.wait(6000L) in try-catch block
-        try {
-            pageTitleLocator.wait(6000L);
-        }
-        catch (Exception e) {
-            System.out.println("Exception: " + e);
-        }
-        pageTitleLocator.shouldHave(text(PAGE_TITLE));
-        orderBlockLocator.shouldBe(visible);
-        return this;
+
     }
 
     public OrderCardDispatcherPage acceptOrder() {
-        primaryButtonLocator.shouldBe(visible).scrollTo().click();
-//        alreadyAcceptedButtonLocator.should(appear);
-//        acceptButtonLocator.should(disappear);
-//        declineButtonLocator.should(disappear);
+        String factualOrderNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
+        stepWithRole("Принять заказ:" + factualOrderNumber , () -> {
+            primaryButtonLocator.scrollTo().click();
+        });
+
         return this;
+    }
+
+    public void checkOrderStatus( OrderStatus orderStatus) {
+        stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
+            stepWithRole("Убедиться, что статус заказа является: " + orderStatusLocator.getText(), () ->
+
+                    orderStatusLocator.shouldHave(text(orderStatus.toString())));
+            stepWithRole("Убедиться, что при участии в Тендере  представлена неактивная кнопка Уже участвуете ", () -> {
+                //        acceptButtonLocator.should(disappear);
+                //        declineButtonLocator.should(disappear);
+                alreadyAcceptedButtonLocator.should(appear, Duration.ofSeconds(40));
+            });
+        });
     }
 
     public OrderCardDispatcherPage isSelectMasterStatus() {

@@ -29,21 +29,23 @@ public class LastOrderProfileClientComponent extends BaseComponent {
 
    SelenideElement
 
-            lastOrderCardLocator = $(".section .section.order"),
-            lastOrderCardTitleLocator = $(".section .header .title.d-flex.justify-content-between"),
-            lastOrderCardOrderNumberLinkLocator = $(".section .content .h5.link-blue.text-primary.pointer"),
-            lastOrderCardActionButtonLocator = $(".section .content .actions .actions__btn"),
-            lastOrderCardOrderActionOpenLinkLocator = $(".section .content .actions .actions__slot--link"),
-            lastOrderCardServiceTypeTitleCollection = $$(".section__row.row").findBy(text(LAST_ORDER_CARD_SERVICE_TYPE_TITLE)),
-            lastOrderCardObjectAddressTitleLocator = $$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_ADDRESS_TITLE)),
-            lastOrderCardObjectEquipmentTitleLocator = $$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_EQUIPMENT_TITLE)),
-            lastOrderCardObjectDateTitleLocator = $$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_DATE_TITLE)),
-            lastOrderCardObjectTimeTitleLocator = $$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_TIME_TITLE));
+            lastOrderCardLocator = driver.$(".section .section.order"),
+            lastOrderCardTitleLocator = driver.$(".section .header .title.d-flex.justify-content-between"),
+            lastOrderCardOrderNumberLinkLocator = driver.$(".section .content .h5.link-blue.text-primary.pointer"),
+            lastOrderCardActionButtonLocator = driver.$(".section .content .actions .actions__btn"),
+            lastOrderCardOrderActionOpenLinkLocator = driver.$(".section .content .actions .actions__slot--link"),
+            lastOrderCardServiceTypeTitleCollection = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_SERVICE_TYPE_TITLE)),
+            lastOrderCardObjectAddressTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_ADDRESS_TITLE)),
+            lastOrderCardObjectEquipmentTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_EQUIPMENT_TITLE)),
+            lastOrderCardObjectDateTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_DATE_TITLE)),
+            lastOrderCardObjectTimeTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_TIME_TITLE));
 
 
 
     public LastOrderProfileClientComponent lastOrderCard() {
-        lastOrderCardOrderNumberLinkLocator.shouldBe(visible).click();
+        stepWithRole("Перейти в Карточку последнего заказа", () -> {
+            lastOrderCardOrderNumberLinkLocator.click();
+        });
         return this;
     }
 

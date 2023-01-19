@@ -25,12 +25,12 @@ public class DispatcherFlowTest extends TestBase {
     }
 
     @Test
-    @DisplayName("Dispatcher - Pages Roaming")
+    @DisplayName("Диспетчере посещает разделы Сайта")
      void dispatcherPagesRoaming() {
-        step("Dispatcher -  check the order in the list", () -> {
+        step("Диспетчере посещает разделы Сайта", () -> {
 //            dispatcherPages.getLoginPage().open();
 //            dispatcherPages.getLoginPage().login(emailDispatcher, passwordDispatcher);
-            dispatcherPages.getHomePage().isOpened();
+            dispatcherPages.getHomePage().checkFinishLoading();
 
         });
     }
@@ -39,7 +39,7 @@ public class DispatcherFlowTest extends TestBase {
     @DisplayName("Dispatcher - Open Current Order")
      void openCurrentOrder() {
         step("Dispatcher - Open Current Order", () -> {
-            dispatcherPages.getHomePage().isOpened();
+            dispatcherPages.getHomePage().checkFinishLoading();
         });
     }
 }

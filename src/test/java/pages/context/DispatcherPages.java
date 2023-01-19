@@ -2,10 +2,7 @@ package pages.context;
 
 import com.codeborne.selenide.SelenideDriver;
 import lombok.Getter;
-import pages.dispatcher.HomeDispatcherPage;
-import pages.dispatcher.AllMastersDispatcherPage;
-import pages.dispatcher.AllNotificationsDispatcherPage;
-import pages.dispatcher.ProfileDispatcherPage;
+import pages.dispatcher.*;
 
 import static model.Role.*;
 
@@ -17,6 +14,7 @@ public final class DispatcherPages extends BaseRolePages {
     }
 
     private final HomeDispatcherPage homePage = new HomeDispatcherPage(browser);
+    private final OrderCardDispatcherPage orderCardPage = new OrderCardDispatcherPage(browser);
     private final AllMastersDispatcherPage allMastersPage = new AllMastersDispatcherPage(browser);
     private final AllNotificationsDispatcherPage allNotificationsPage = new AllNotificationsDispatcherPage(browser);
     private final ProfileDispatcherPage profilePage = new ProfileDispatcherPage(browser);

@@ -6,6 +6,8 @@ import model.browser.RoleBrowser;
 import pages.components.sharedComponents.headerComponents.actionblockComponents.ActionsBlockDispatcherComponent;
 import pages.components.sharedComponents.sidebarComponents.SidebarDispatcherComponent;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
@@ -36,52 +38,68 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         archivedOrderStatusButton = driver.$$("div.top-filter__status--btn").get(3);
 
     ElementsCollection
-        orderCardsCollection = $$("div.order-card"),
+        orderCardsCollection = driver.$$("div.order-card"),
 
-        ordersNumberLinkCollection = $$(".h5.link-blue.pointer"),
-        orderActionDropdownCollection = $$("button.actions__btn"),
-        actionsOpenOrderLinkCollection = $$x("//a[@class='actions__slot--link']"),
-        actionsArchiveOrderLinkCollection = $$x("(//button[contains(@class,'actions__slot--btn')])");
-
-
+        ordersNumberLinkCollection = driver.$$("p.h5.link-blue.pointer"),
+        orderActionDropdownCollection = driver.$$("button.actions__btn"),
+        actionsOpenOrderLinkCollection = driver.$$x("//a[@class='actions__slot--link']"),
+        actionsArchiveOrderLinkCollection = driver.$$x("(//button[contains(@class,'actions__slot--btn')])");
 
 
-    public HomeDispatcherPage isOpened() {
-        dispatcherHomePageTitleLocator.shouldBe(visible);
+
+
+    public HomeDispatcherPage checkFinishLoading() {
+        stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
+            dispatcherHomePageTitleLocator.shouldBe(visible, Duration.ofSeconds(10));
+            map.shouldBe(visible, Duration.ofSeconds(20));
+        });
         return this;
     }
 
     public HomeDispatcherPage switchToMapView() {
-        mapViewButtonLocator.shouldBe(visible).click();
-        map.shouldBe(visible);
-
-
+        stepWithRole("Переключиться на карту", () -> {
+            mapViewButtonLocator.click();
+            mapContainerLocator.shouldBe(visible, Duration.ofSeconds(10));
+        });
         return this;
     }
 
     public HomeDispatcherPage switchToCardView() {
-        cardViewButtonLocator.shouldBe(visible).click();
+        stepWithRole("Переключиться на карточки", () -> {
+            cardViewButtonLocator.click();
+            orderCardsCollection.last().shouldBe(visible, Duration.ofSeconds(20));
+            //visibility of the last element in the collection
+        });
         return this;
     }
 
     public HomeDispatcherPage switchToListView() {
-        listViewButtonLocator.shouldBe(visible).click();
-        orderCardFirstLocator.shouldBe(visible);
+        stepWithRole("Переключиться на список", () -> {
+            listViewButtonLocator.click();
+            ordersNumberLinkCollection.last().shouldBe(visible, Duration.ofSeconds(20));
+        });
+//        listViewButtonLocator.shouldBe(visible).click();
+//        orderCardFirstLocator.shouldBe(visible);
         return this;
     }
 
     public HomeDispatcherPage openOrderByNumber(String orderNumber) {
-        ordersNumberLinkCollection.findBy(text(orderNumber)).click();
-        orderCardTitleLocator.shouldBe(visible);
+        stepWithRole("Открыть заказ по номеру", () -> {
+            ordersNumberLinkCollection.findBy(text(orderNumber)).click();
+            orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text(orderNumber));
+        });
         return this;
     }
 
-    public HomeDispatcherPage openFirstOrderByTitleIndex() {
-//        switchToListView();
-        ordersNumberLinkCollection.get(0).shouldBe(visible).click();
-        orderCardTitleLocator.shouldBe(visible);
+    public HomeDispatcherPage openOrderByIndex(int index) {
+        stepWithRole("Открыть  заказ по индексу ", () -> {
+            ordersNumberLinkCollection.get(index).click();
+            orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10));
+        });
         return this;
     }
+
+
 
     public HomeDispatcherPage openFirstOrderByAction() {
 //        switchToListView();

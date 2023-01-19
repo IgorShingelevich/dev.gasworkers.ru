@@ -5,6 +5,9 @@ import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
 import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -20,24 +23,27 @@ public class SelectPaymentClientPage  extends BaseClientPage {
             SELECT_PAYMENT_TITLE = "Заключение договора ТО и оплата выезда мастера";
 
     SelenideElement
-        pageTitleLocator = $(".page-content .h3.mb-40"),
-        secondBankComisionsTextLocator = $$("div.logo-wrap__text").get(1),
-        pagePaymentWizardTitleLocator = $("span.part"),
-        payImgLocator = $("div.logo-wrap img"),
-        docAgreementMaintenanceLocator = $("div .link-pdf");
+        pageTitleLocator = driver.$(".page-content .h3.mb-40"),
+        secondBankComissionsTextLocator = driver.$$("div.logo-wrap__text").get(1),
+        pagePaymentWizardTitleLocator = driver.$("span.part"),
+        payImgLocator = driver.$("div.logo-wrap img"),
+        docAgreementMaintenanceLocator = driver.$("div .link-pdf");
 
     ElementsCollection
-        paymentMethodsCollection = $$("div.logo-wrap"),
-        bankComissionCollection = $$("div.logo-wrap__text");
+        paymentMethodsCollection = driver.$$("div.logo-wrap"),
+        bankComissionCollection = driver.$$("div.logo-wrap__text");
 
-    public SelectPaymentClientPage isOpened() {
-        pageTitleLocator.shouldBe(visible);
-        docAgreementMaintenanceLocator.shouldBe(visible);
-        secondBankComisionsTextLocator.shouldBe(visible);
-        // get text from second bank comission and sout it
-        String secondBankComission = secondBankComisionsTextLocator.getText();
-        System.out.println("secondBankComission = " + secondBankComission);
-        payImgLocator.shouldBe(visible);
+    public SelectPaymentClientPage checkFinishLoading() {
+        stepWithRole("Убедиться, что страница Выбор Способа Оплаты загружена", () -> {
+            pageTitleLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(SELECT_PAYMENT_TITLE));
+            docAgreementMaintenanceLocator.shouldBe(visible);
+            secondBankComissionsTextLocator.shouldBe(visible);
+            // get text from second bank comission and sout it
+            String secondBankComission = secondBankComissionsTextLocator.getText();
+            System.out.println("secondBankComission = " + secondBankComission);
+            payImgLocator.shouldBe(visible, Duration.ofSeconds(20));
+        });
+
         return this;
     }
 
@@ -47,12 +53,10 @@ public class SelectPaymentClientPage  extends BaseClientPage {
     }
 
     public SelectPaymentClientPage paySPB() {
-        paymentMethodsCollection.get(1).click();
+        stepWithRole("Нажать кнопку Оплатить через SPB", () -> {
+            paymentMethodsCollection.get(1).click();
+        });
 //        pagePaymentWizardTitleLocator.shouldBe(visible);
         return this;
     }
-
-
-
-
 }

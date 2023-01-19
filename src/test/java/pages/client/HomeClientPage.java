@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import model.browser.RoleBrowser;
 import pages.components.clientComponents.LastOrderProfileClientComponent;
+import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
 
 import java.time.Duration;
 
@@ -13,12 +14,14 @@ import static com.codeborne.selenide.Condition.*;
 
 public final class HomeClientPage extends BaseClientPage {
 
-    private final LastOrderProfileClientComponent lastOrderProfileClientComponent;
+    public final LastOrderProfileClientComponent lastOrderProfileClientComponent;
+    public final SidebarClientComponent sidebar;
 
 
 
     public HomeClientPage(RoleBrowser browser) {
         super(browser);
+        sidebar = new SidebarClientComponent(browser);
         lastOrderProfileClientComponent = new LastOrderProfileClientComponent(browser);
     }
 
