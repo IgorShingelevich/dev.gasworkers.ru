@@ -43,12 +43,7 @@ public class SignSMSClientPage extends BaseClientPage {
 
     public SignSMSClientPage inputSMSCode(Integer smsCode) {
         stepWithRole("Ввести СМС код: " + smsCode, () -> {
-            smsCodeInputCollection.get(0).setValue(smsCode.toString().substring(0, 1));
-            smsCodeInputCollection.get(1).setValue(smsCode.toString().substring(1,2));
-            smsCodeInputCollection.get(2).setValue(smsCode.toString().substring(2,3));
-            smsCodeInputCollection.get(3).setValue(smsCode.toString().substring(3,4));
-            smsCodeInputCollection.get(4).setValue(smsCode.toString().substring(4,5));
-            smsCodeInputCollection.get(5).setValue(smsCode.toString().substring(5,6));
+            smsCodeInputCollection.get(0).setValue(String.valueOf(smsCode));
         });
         System.out.println("FirstClientSmsCode: " + smsCode);
         return this;

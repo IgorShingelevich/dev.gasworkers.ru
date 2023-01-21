@@ -91,7 +91,7 @@ class ClientDispatcherInteractionTest extends TestBase {
             });
             step("Убедиться, что статус Заказа {orderStatus}", () -> {
                 OrderStatus orderStatus = OrderStatus.NEW_ORDER;
-                clientPages.getOrderCardPage().checkNewOrderStatus(orderStatus);
+                clientPages.getOrderCardPage().checkOrderStatusNew(orderStatus);
                 // how to make .checkOrderStatus  universal and also check corresponded buttons
             });
             clientPages.getOrderCardPage().clickOffersBlock();
@@ -102,18 +102,20 @@ class ClientDispatcherInteractionTest extends TestBase {
             dispatcherPages.getHomePage().switchToListView();
             dispatcherPages.getHomePage().openOrderByIndex(0);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
+            //check OrderStatus NEW_TENDER
             dispatcherPages.getHomePage().popUpClose();
             dispatcherPages.getOrderCardPage().acceptOrder();
         });
 
         step("Клиент принимает предложение диспетчера", () -> {
-            clientPages.getSelectServicePage().waitForResponses();  //!! fall when go straight to .proceedWithFirstService() - cannot push button
+            //start from home page - need OrderNumber
+            clientPages.getSelectServicePage().waitForResponses();
             //check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
             clientPages.getSelectServicePage().toOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
             clientPages.getOrderCardPage().popUpClose();
             //go back to order card and check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
-            clientPages.getOrderCardPage().clickOffersBlock(); //!! fall because .showOnMap button is grayed out - mooved to .clickOffersBlock()
+            clientPages.getOrderCardPage().clickOffersBlock();
             clientPages.getSelectServicePage().checkFinishLoading();
             // find on the map
             //check Price with Insurance and Primary Visit Price
@@ -134,27 +136,30 @@ class ClientDispatcherInteractionTest extends TestBase {
             clientPages.getPaymentWizardPage().checkFinishLoading();
             clientPages.getPaymentWizardPage().getQRCode();
             clientPages.getSignSMSPage().checkFinishLoading();
-            client.getCodeFromNewSMS();
-            Integer firstSMSCode = client.getCodeFromNewSMS();
-            clientPages.getSignSMSPage().inputSMSCode(firstSMSCode);
-            clientPages.getSignSMSPage().sign();
+//            client.getCodeFromNewSMS();
+//            Integer firstSMSCode = client.getCodeFromNewSMS();
+//            System.out.println("firstSMSCode = " + firstSMSCode);
+//            clientPages.getSignSMSPage().inputSMSCode(firstSMSCode);
+//            clientPages.getSignSMSPage().sign();
             clientPages.getSignSuccsessPage().checkFinishLoading();
-            clientPages.getSignSuccsessPage().toOrderCard();
+            clientPages.getSignSuccsessPage().toHomePage();
+            clientPages.getHomePage().checkFinishLoading();
+            clientPages.getHomePage().popUpClose();
+            clientPages.getHomePage().lastOrderProfileClientComponent.lastOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().popUpClose();
-            clientPages.getOrderCardPage().checkScheduleVisitOrderStatus(OrderStatus.SCHEDULE_VISIT);
+            clientPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderStatus.SCHEDULE_VISIT);
         });
 
         step("Диспетчер выбирает время и назначает Мастера", () -> {
-
+            // start section from home page - need OrderNumber
+            dispatcherPages.getOrderCardPage().checkFinishLoading();
+            dispatcherPages.getOrderCardPage().popUpClose();
+            dispatcherPages.getOrderCardPage().sidebar.allOrders();
+            dispatcherPages.getHomePage().checkFinishLoading();
             dispatcherPages.getHomePage().switchToListView();
             dispatcherPages.getHomePage().openOrderByIndex(0);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
-            dispatcherPages.getHomePage().popUpClose();
-            dispatcherPages.getHomePage().navInProgress();
-            dispatcherPages.getHomePage().openOrderByIndex(0);
-            dispatcherPages.getOrderCardPage().checkFinishLoading();
-//            dispatcherPages.getOrderCardPage().checkOrderStatus(OrderStatus.SCHEDULE_VISIT);
+            dispatcherPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderStatus.SCHEDULE_VISIT);
 
 
 

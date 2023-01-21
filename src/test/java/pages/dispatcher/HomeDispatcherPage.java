@@ -41,9 +41,6 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         actionsOpenOrderLinkCollection = driver.$$x("//a[@class='actions__slot--link']"),
         actionsArchiveOrderLinkCollection = driver.$$x("(//button[contains(@class,'actions__slot--btn')])");
 
-
-
-
     public HomeDispatcherPage checkFinishLoading() {
         stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
             dispatcherHomePageTitleLocator.shouldBe(visible, Duration.ofSeconds(10));
@@ -113,17 +110,19 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
     }
 
     public HomeDispatcherPage openOrderByNumber(String orderNumber) {
-        stepWithRole("Открыть заказ по номеру", () -> {
+        stepWithRole("Открыть заказ по номеру:" + orderNumber, () -> {
             ordersNumberLinkCollection.findBy(text(orderNumber)).click();
             orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text(orderNumber));
+            System.out.println("orderNumber: " + orderNumber);
         });
         return this;
     }
 
     public HomeDispatcherPage openOrderByIndex(int index) {
-        stepWithRole("Открыть  заказ по индексу ", () -> {
+        stepWithRole("Открыть  заказ по индексу: {index} номер: " + ordersNumberLinkCollection.get(index).getText(), () -> {
             ordersNumberLinkCollection.get(index).click();
             orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10));
+            System.out.println("orderNumber:  " + orderCardTitleLocator.getText() + " index: " + index);
         });
         return this;
     }

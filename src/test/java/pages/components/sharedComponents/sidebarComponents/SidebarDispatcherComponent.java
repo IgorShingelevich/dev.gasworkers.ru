@@ -13,70 +13,36 @@ public class SidebarDispatcherComponent extends BaseComponent {
         super(browser);
     }
 
-
-
     SelenideElement
-            dispatcherHomePageTitleLocator = $(".page-title .h3.mb-2"),
-            listViewButtonLocator = $("div.action-btn.list-type"),
-            mapContainerLocator = $("div.map-wrap"),
-
-            homeLinkLocator = $$(".sidebar .link").get(0),
-            mastersListLinkLocator = $$(".sidebar .link").get(1),
-            profileDispatcherLinkLocator = $$(".sidebar .link").get(2),
-            supportServiceTitleLocator = $(".support-service"),
-            supportServicePhoneLocator = $(".support-service__phone"),
-            supportServiceEmailLocator = $(".support-service .link-dark-blue");
+            allOrdersLocator = driver.$$(".sidebar .link").get(0),
+            allMastersListLinkLocator = driver.$$(".sidebar .link").get(1),
+            profileDispatcherLinkLocator = driver.$$(".sidebar .link").get(2),
+            supportServiceTitleLocator = driver.$(".support-service"),
+            supportServicePhoneLocator = driver.$(".support-service__phone"),
+            supportServiceEmailLocator = driver.$(".support-service .link-dark-blue");
 
 
-    public SidebarDispatcherComponent verifyLocators() {
-
-        homeLinkLocator.shouldBe(visible);
-        mastersListLinkLocator.shouldBe(visible);
-        profileDispatcherLinkLocator.shouldBe(visible);
-        supportServiceTitleLocator.shouldBe(visible);
-        supportServicePhoneLocator.shouldBe(visible);
-        supportServiceEmailLocator.shouldBe(visible);
-        return this;
-    }
-
-    public SidebarDispatcherComponent home() {
-        homeLinkLocator.shouldBe(visible).click();
-        listViewButtonLocator.shouldBe(visible).click();
-        if (mapContainerLocator.isDisplayed()) {
-            mapContainerLocator.shouldBe(visible);
-        }
+    public SidebarDispatcherComponent allOrders() {
+        stepWithRole("Переход в раздел Заказы", () -> {
+            allOrdersLocator.click();
+        });
         return this;
     }
 
     public SidebarDispatcherComponent allMasters() {
-        mastersListLinkLocator.shouldBe(visible).click();
+        stepWithRole("Переход в раздел Список Мастеров", () -> {
+            allMastersListLinkLocator.click();
+        });
         return this;
     }
 
     public SidebarDispatcherComponent profile() {
-        profileDispatcherLinkLocator.shouldBe(visible).click();
+        stepWithRole("Переход в раздел Профиль", () -> {
+            profileDispatcherLinkLocator.click();
+        });
         return this;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
-
-/*TODO
-     arhive Orders   //check that the order with this number is not visible in the list of orderNumberLinkCollection
-*
-* */
+// TODO arhive Orders   //check that the order with this number is not visible in the list of orderNumberLinkCollection

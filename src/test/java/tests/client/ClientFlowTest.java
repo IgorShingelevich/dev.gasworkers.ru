@@ -24,8 +24,8 @@ class ClientFlowTest extends TestBase {
     @DisplayName("Вход в личный кабинет клиента")
     @BeforeEach
         void clientLogin() {
-        clientPages.getLoginPage().open();
-        clientPages.getLoginPage().login(emailClient, passwordClient);
+            clientPages.getLoginPage().open();
+            clientPages.getLoginPage().login(emailClient, passwordClient);
     }
 
     @Test
@@ -36,7 +36,6 @@ class ClientFlowTest extends TestBase {
         });
 
     }
-
 
     @DisplayName("Клиент создает и отменяет заказ на ТО")
 //    @Disabled
@@ -142,12 +141,31 @@ class ClientFlowTest extends TestBase {
             // compare .checkOrderType and .checkOrderStatus what is better? more universal?
         });
         step("Убедиться, что статус Заказа {orderStatusIs}", () -> {
-        clientPages.getOrderCardPage().checkNewOrderStatus(OrderStatus.NEW_ORDER);
+        clientPages.getOrderCardPage().checkOrderStatusNew(OrderStatus.NEW_ORDER);
             // how to make .checkOrderStatus  universal and also check corresponded buttons
         });
 
     }
 
+    Integer checkedOrderNumber = 3185;
+
+    @DisplayName("Клиент убеждается что заказ из списка заказа номер: {orderNumber} имеет статус {orderStatus}")
+    @Test
+
+    public void clientCheckOrderStatus() {
+        step("Убедиться, что статус Заказа: " + checkedOrderNumber + " является: "  + OrderStatus.SCHEDULE_VISIT, () -> {
+            OrderStatus orderStatus = OrderStatus.SCHEDULE_VISIT;
+            clientPages.getHomePage().checkFinishLoading();
+            clientPages.getHomePage().sidebar.clickOrdersAndInvoicesDropdown();
+            clientPages.getHomePage().sidebar.allOrders();
+            clientPages.getAllOrdersPage().checkFinishLoading();
+            clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
+            clientPages.getOrderCardPage().checkFinishLoading();
+            clientPages.getOrderCardPage().checkOrderStatusScheduleVisit(orderStatus);
+        });
+    }
+
+}
 
 //
 //    @DisplayName("openRandomObject")
@@ -240,4 +258,4 @@ class ClientFlowTest extends TestBase {
 //        signSMSClientPage.inputSMSCode(smsCode);
 //    }
 
-}
+

@@ -41,7 +41,7 @@ public class OrderCardClientPage extends BaseClientPage {
 
     ElementsCollection
         navButtonsCollection = driver.$$("div.navigation-block li"),
-        docsTitleCollection = driver.$$(".link-pdf span"),
+        docsTitleCollection = driver.$$(".link-pdf "),
         docsDownloadCollection = driver.$$(".link-pdf span"),
         orderDetailsCollection = driver.$$("div.order-details-item");
 
@@ -59,17 +59,18 @@ public class OrderCardClientPage extends BaseClientPage {
     }
 
     public OrderCardClientPage navCommon(){
-        navButtonsCollection.get(0).click();
+        navButtonsCollection.get(0).shouldHave(text("Описание заказа")).click();
         return this;
     }
 
-    public OrderCardClientPage navMaster(){
-        navButtonsCollection.get(1).click();
+    public OrderCardClientPage navInfoMaster(){
+        navButtonsCollection.get(1).shouldHave(text("Информация по работам")).click();
         return this;
     }
 
     public OrderCardClientPage navDocs(){
-        navButtonsCollection.get(2).click();
+        navButtonsCollection.get(2).shouldHave(text("Документы")).click();
+//        driver.$( "div.navigation-block li:nth-child(3)" ).shouldHave(text("Документы")).click();
         return this;
     }
 
@@ -92,9 +93,10 @@ public class OrderCardClientPage extends BaseClientPage {
         step("Убедиться, что тип заказа: " +orderType, () -> {
             orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
         });
+        System.out.println("orderType: " + orderType);
     }
 
-    public void checkNewOrderStatus(OrderStatus orderStatus) {
+    public void checkOrderStatusNew(OrderStatus orderStatus) {
         step("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             //how to make this step more flexible?
            stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () ->
@@ -111,10 +113,11 @@ public class OrderCardClientPage extends BaseClientPage {
                 docsTitleCollection.shouldBe(size(0));
                 navCommon();
             });
+            System.out.println("orderStatus: " + orderStatus);
         });
     }
 
-    public void checkScheduleVisitOrderStatus(OrderStatus orderStatus) {
+    public void checkOrderStatusScheduleVisit(OrderStatus orderStatus) {
         step("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             //how to make this step more flexible?
             stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () ->
@@ -126,13 +129,14 @@ public class OrderCardClientPage extends BaseClientPage {
                 cancelOrderButtonLocator.shouldBe(visible);
                 orderStatusLocator.shouldHave(text(orderStatus.toString()));
             });
-            stepWithRole("Убедиться, что в документах присутствует Договор ТО и Страховой полис " + docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText() , () -> {
+            stepWithRole("Убедиться, что в документах присутствует Договор ТО и Страховой полис " /*+ docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText()*/ , () -> {
                navDocs();
                docsTitleCollection.get(0).shouldHave(text("Договор ТО"));
                docsTitleCollection.get(1).shouldHave(text("Страховой полис"));
                docsTitleCollection.shouldBe(size(2));
                navCommon();
             });
+            System.out.println("orderStatus: " + orderStatus);
         });
     }
 
@@ -144,7 +148,7 @@ public class OrderCardClientPage extends BaseClientPage {
         return driver.$("h1.h3.mb-2").getText();
     }
 
-    public OrderCardClientPage isCompleteState() {
+    public OrderCardClientPage checkOrderStatusComplete() {
         completeOrderInfoLocator.shouldBe(visible).shouldHave(text(COMPLETE_ORDER_INFO));
         orderStatusLocator.shouldBe(visible).shouldHave(text("Завершен"));
 //        finalPriceLocator.shouldBe(visible);
