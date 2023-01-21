@@ -28,7 +28,6 @@ public class PaymentWizardClientPage  extends BaseClientPage {
             pageTitleLocator.shouldHave(text(PAYMENT_WIZARD_TITLE)).shouldBe(visible, Duration.ofSeconds(20));
             String pageWizardTitle = pageTitleLocator.getText();
             getQRCode.shouldBe(visible);
-            System.out.println("pageWizardTitle = " + pageWizardTitle);
         });
         return this;
     }

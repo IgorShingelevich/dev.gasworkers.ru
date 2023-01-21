@@ -40,7 +40,6 @@ public class SelectPaymentClientPage  extends BaseClientPage {
             secondBankComissionsTextLocator.shouldBe(visible);
             // get text from second bank comission and sout it
             String secondBankComission = secondBankComissionsTextLocator.getText();
-            System.out.println("secondBankComission = " + secondBankComission);
             payImgLocator.shouldBe(visible, Duration.ofSeconds(20));
         });
 

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Tag;
 import pages.client.SelectPaymentClientPage;
 import pages.components.BaseComponent;
 
+import javax.lang.model.type.ArrayType;
 import java.time.Duration;
 import java.util.NoSuchElementException;
 
@@ -28,18 +29,21 @@ public abstract class BasePage extends BaseComponent {
         popUpCloseButtonLocator = driver.$(byTagAndText("button", "Прочитать все")),
         popUpContainerLocator =  driver.$(".notice-list-fixed-content.gas-scrollbar-inline");
 
-    public void popUpClose() {
+    public void popUpClose() throws NoSuchElementException {
         stepWithRole("Закрыть всплывающие уведомления", () -> {
             try {
-                if ( popUpCloseButtonLocator.isDisplayed() && popUpCloseButtonLocator.isEnabled())
-                {
-                    popUpCloseButtonLocator.as("Close popup button").should(appear, Duration.ofSeconds(20)).hover().click();
-//                    popUpContainerLocator.as("Popup body").shouldNotBe(visible, Duration.ofSeconds(20)).click();
-                }
+                    popUpCloseButtonLocator.as("Close popup button")
+                            .should(appear, Duration.ofSeconds(20)).hover()
+                            .click();
 
             } catch (NoSuchElementException e) {
                 System.out.println("No pop-up");
             }
+//            try{
+//                popUpCloseButtonLocator.as("Close popup button").should(disappear, Duration.ofSeconds(20)).click();
+//            } catch (NoSuchElementException e) {
+//                System.out.println("No pop-up");
+//            }
         });
 
     }

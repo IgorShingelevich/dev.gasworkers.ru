@@ -25,14 +25,15 @@ public class DatePickerOrderDispatcherComponent extends BaseComponent {
 
     public void selectNowDateAndTime() {
         stepWithRole("Установить настоящюю дату и время", () -> {
+
             activeDateRangeCollection.get(0).click();
             setButtonLocator.click();
-            activeHourRangeCollection.get(0).click();
+            activeHourRangeCollection.get(1).click();
             activeMinuteRangeCollection.get(0).click();
             setButtonLocator.click();
         });
         String setDataAndTimeDispatcher =  driver.$$("div.order-details__text").get(6).getText();
-        System.out.println("setDataAndTimeDispatcher = " + setDataAndTimeDispatcher);
+        System.out.println("setDataAndTimeDispatcher: " + setDataAndTimeDispatcher);
     }
 
     public void setDateHourMinute(String date, String hour, String minute) {

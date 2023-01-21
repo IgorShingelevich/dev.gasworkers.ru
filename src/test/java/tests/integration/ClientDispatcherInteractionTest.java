@@ -53,12 +53,12 @@ class ClientDispatcherInteractionTest extends TestBase {
     @DisplayName(" ТО Интеграция Клиент-Диспетчер-Клиент-Диспетчер")
     @Test
     public void IntegrationDispatcherAcceptClientMaintenanceRequest() throws NoSuchElementException {
-        step("Авторизация клиента", () -> {
+        step("авторизация Клиента", () -> {
             clientPages.getLoginPage().open().login(client.email, client.password);
             clientPages.getHomePage().checkFinishLoading();
         });
 
-        step("Авторизация диспетчера", () -> {
+        step("авторизация Диспетчера", () -> {
             dispatcherPages.getLoginPage().open().login(emailDispatcher, passwordDispatcher);
             dispatcherPages.getHomePage().checkFinishLoading();
         });
@@ -84,12 +84,12 @@ class ClientDispatcherInteractionTest extends TestBase {
             //get order number from order card to check it in dispatcher
 
 //            clientPages.getSelectServicePage().popUpClose();
-            step("Убедиться, что тип Заказа {orderType}", () -> {
+            step("Убедиться, что тип Заказа: ", () -> {
                 OrderType orderType = OrderType.MAINTENANCE;
                 clientPages.getOrderCardPage().checkOrderType(orderType);
                 // compare .checkOrderType and .checkOrderStatus what is better? more universal?
             });
-            step("Убедиться, что статус Заказа {orderStatus}", () -> {
+            step("Убедиться, что статус Заказа: ", () -> {
                 OrderStatus orderStatus = OrderStatus.NEW_ORDER;
                 clientPages.getOrderCardPage().checkOrderStatusNew(orderStatus);
                 // how to make .checkOrderStatus  universal and also check corresponded buttons
@@ -98,16 +98,18 @@ class ClientDispatcherInteractionTest extends TestBase {
             clientPages.getSelectServicePage().checkFinishLoading();
         });
 
-        step("Диспетчер принимает заказ ", () -> {
+        step("Диспетчер принимает заказ на ТО ", () -> {
             dispatcherPages.getHomePage().switchToListView();
             dispatcherPages.getHomePage().openOrderByIndex(0);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             //check OrderStatus NEW_TENDER
             dispatcherPages.getHomePage().popUpClose();
             dispatcherPages.getOrderCardPage().acceptOrder();
+            dispatcherPages.getOrderCardPage().checkParticipateTheTenderStatus(OrderStatus.NEW_TENDER);
+            // check OrderStatus gray button- Уже участвуете
         });
 
-        step("Клиент принимает предложение диспетчера", () -> {
+        step("Клиент принимает предложение Диспетчера", () -> {
             //start from home page - need OrderNumber
             clientPages.getSelectServicePage().waitForResponses();
             //check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
@@ -160,6 +162,15 @@ class ClientDispatcherInteractionTest extends TestBase {
             dispatcherPages.getHomePage().openOrderByIndex(0);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             dispatcherPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderStatus.SCHEDULE_VISIT);
+            dispatcherPages.getOrderCardPage().selectTimeButton();
+            dispatcherPages.getOrderCardPage().datePicker.selectNowDateAndTime();
+            dispatcherPages.getOrderCardPage().selectMaster();
+            dispatcherPages.getSelectMasterPage().checkFinishLoading();
+            dispatcherPages.getSelectMasterPage().selectNewMasterByIndex(0);
+            dispatcherPages.getOrderCardPage().checkFinishLoading();
+            dispatcherPages.getOrderCardPage().checkMasterDispatchedStatus(OrderStatus.MASTER_DISPATCHED);
+
+
 
 
         });

@@ -118,7 +118,7 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
     }
 
     public HomeDispatcherPage openOrderByIndex(int index) {
-        stepWithRole("Открыть  заказ по индексу: {index} номер: " + ordersNumberLinkCollection.get(index).getText(), () -> {
+        stepWithRole("Открыть  заказ по индексу: "+ index + ", номер: " + ordersNumberLinkCollection.get(index).getText(), () -> {
             ordersNumberLinkCollection.get(index).click();
             orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10));
             System.out.println("orderNumber:  " + orderCardTitleLocator.getText() + " index: " + index);

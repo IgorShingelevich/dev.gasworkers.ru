@@ -41,6 +41,19 @@ public class SelectMasterDispatcherPage extends BaseDispatcherPage {
         });
     }
 
+    public void selectNewMasterByIndex(int selectNewMasterByIndex) {
+        String masterName = driver.$("li button").closest("li").$(".name a").text();
+        selectAvailableMasterButtonCollection.get(selectNewMasterByIndex).click();
+//                    .$$("button.btn:not([disabled='disabled'])")
+//                    .ancestor("div .name")
+        Integer masterNumericalOrder = selectNewMasterByIndex + 1;
+        stepWithRole("Выбрать:" + masterNumericalOrder + "-го свободного мастера: " + masterName, () -> {
+            //how to warp up with  stepWith role the whole medhod with the description?
+            System.out.println("selectedAvailableMasterByIndex: "+ selectNewMasterByIndex + " name: " + masterName);
+
+        });
+    }
+
     public void selectAvailableMasterByIndex(int availableMasterIndex) {
             String masterName = driver.$("li button[disabled='disabled']").closest("li").$(".name a").text();
         selectAvailableMasterButtonCollection.get(availableMasterIndex).click();
