@@ -3,18 +3,18 @@ package pages.client.maintenance;
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
 import pages.client.BaseClientPage;
-import pages.components.clientComponents.DatePickerOrderComponent;
+import pages.components.clientComponent.DatePickerOrderClientComponent;
 import utils.RandomUtil;
 
 import static com.codeborne.selenide.Condition.visible;
 
 public final class SelectDateMaintenanceClientPage extends BaseClientPage {
 
-    private final DatePickerOrderComponent datePicker;
+    private final DatePickerOrderClientComponent datePicker;
 
     public SelectDateMaintenanceClientPage(RoleBrowser browser) {
         super(browser);
-        datePicker = new DatePickerOrderComponent(browser);
+        datePicker = new DatePickerOrderClientComponent(browser);
     }
 
     private final String SELECT_DATE_TITLE = "Выберите желаемую дату (диапазон дат) и время приезда мастера";

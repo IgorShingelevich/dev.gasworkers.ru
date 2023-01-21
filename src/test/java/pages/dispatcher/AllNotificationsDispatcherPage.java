@@ -3,6 +3,8 @@ package pages.dispatcher;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
+import pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockDispatcherComponent;
+import pages.components.sharedComponent.sidebarComponent.SidebarDispatcherComponent;
 
 import java.time.Duration;
 
@@ -12,8 +14,13 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class AllNotificationsDispatcherPage extends BaseDispatcherPage {
 
+    private final SidebarDispatcherComponent sidebarDispatcher;
+    private final ActionsBlockDispatcherComponent actionBlockDispatcher;
+
     public AllNotificationsDispatcherPage (RoleBrowser browser) {
         super(browser);
+        sidebarDispatcher = new SidebarDispatcherComponent(browser);
+        actionBlockDispatcher = new ActionsBlockDispatcherComponent(browser);
     }
     private final String PAGE_TITLE = "Уведомления";
 

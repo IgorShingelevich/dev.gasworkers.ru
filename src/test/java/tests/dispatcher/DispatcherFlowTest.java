@@ -1,6 +1,7 @@
 package tests.dispatcher;
 
 import extension.browser.Browser;
+import model.client.OrderStatus;
 import org.junit.jupiter.api.*;
 import pages.context.DispatcherPages;
 import tests.TestBase;
@@ -37,9 +38,27 @@ public class DispatcherFlowTest extends TestBase {
 
     @Test
     @DisplayName("Dispatcher - Open Current Order")
-     void openCurrentOrder() {
+     void openInProgressOrder() {
         step("Dispatcher - Open Current Order", () -> {
             dispatcherPages.getHomePage().checkFinishLoading();
+            dispatcherPages.getHomePage().switchToListView();
+            dispatcherPages.getHomePage().navInProgress();
+            dispatcherPages.getHomePage().openOrderByNumber(3192);
+            dispatcherPages.getOrderCardPage().checkFinishLoading();
+            dispatcherPages.getOrderCardPage().checkMasterDispatchedStatus(OrderStatus.MASTER_DISPATCHED);
+            dispatcherPages.getOrderCardPage().selectAnotherTime();
+            dispatcherPages.getOrderCardPage().datePicker.selectNowDateAndTime();
+            dispatcherPages.getOrderCardPage().selectAnotherMaster();
+            dispatcherPages.getSelectMasterPage().checkFinishLoading();
+            dispatcherPages.getSelectMasterPage().selectAvailableMasterByIndex(0);
+            dispatcherPages.getOrderCardPage().checkFinishLoading();
+
+
+
+
+
+
+
         });
     }
 }

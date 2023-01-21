@@ -1,11 +1,10 @@
 package pages.client;
 
 import model.browser.RoleBrowser;
-import model.client.OrderStatus;
 import pages.BasePage;
-import pages.components.sharedComponents.breadcrumbsComponent.ClientBreadcrumbsComponent;
-import pages.components.sharedComponents.headerComponents.actionblockComponents.ActionsBlockClientComponent;
-import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
+import pages.components.sharedComponent.breadcrumbsComponent.ClientBreadcrumbsComponent;
+import pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockClientComponent;
+import pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
 
 public abstract class BaseClientPage extends BasePage {
 

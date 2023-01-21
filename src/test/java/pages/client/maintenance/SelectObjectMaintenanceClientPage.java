@@ -1,10 +1,9 @@
 package pages.client.maintenance;
 
 import com.codeborne.selenide.CollectionCondition;
-import io.qameta.allure.Step;
 import model.browser.RoleBrowser;
 import pages.client.BaseClientPage;
-import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
+import pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 
 public final class SelectObjectMaintenanceClientPage extends BaseClientPage {
 

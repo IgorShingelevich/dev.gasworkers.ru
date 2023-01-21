@@ -2,9 +2,12 @@ package pages.dispatcher;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.netty.handler.codec.spdy.SpdyWindowUpdateFrame;
 import model.browser.RoleBrowser;
 import model.client.OrderStatus;
-import pages.components.sharedComponents.sidebarComponents.SidebarDispatcherComponent;
+import pages.components.dispatcherComponent.DatePickerOrderDispatcherComponent;
+import pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockDispatcherComponent;
+import pages.components.sharedComponent.sidebarComponent.SidebarDispatcherComponent;
 
 import java.time.Duration;
 
@@ -17,10 +20,14 @@ import static io.qameta.allure.Allure.step;
 public class OrderCardDispatcherPage extends BaseDispatcherPage {
 
 public final SidebarDispatcherComponent sidebar;
+public final DatePickerOrderDispatcherComponent datePicker;
+    private final ActionsBlockDispatcherComponent actionBlockDispatcher;
 
     public OrderCardDispatcherPage(RoleBrowser browser) {
         super(browser);
         sidebar = new SidebarDispatcherComponent(browser);
+        datePicker = new DatePickerOrderDispatcherComponent(browser);
+        actionBlockDispatcher = new ActionsBlockDispatcherComponent(browser);
     }
 
     private final String PAGE_TITLE = "Заказ";
@@ -31,24 +38,27 @@ public final SidebarDispatcherComponent sidebar;
         orderNumberLocator = driver.$(".order-number"),
         orderStatusLocator = driver.$(".item-flex p.text"),
         primaryButtonLocator = driver.$(".btn.btn-primary"),
-
+        acceptRequestButtonLocator = driver.$(byTagAndText("button", "Принять")),
+        declineRequestButtonLocator = driver.$(byTagAndText("button", "Отказаться")),
         selectTimeButtonLocator = driver.$(byTagAndText("button", "Назначить время")),
-        selectAnotherTimeButtonLocator = driver.$(byTagAndText("button", "Назначить другое время")),
+        selectAnotherTimeButtonLocator = driver.$(byTagAndText("button", "Назначить новое время")),
         selectMasterButtonLocator = driver.$(byTagAndText("button", "Выбрать мастера")),
         selectAnotherMasterButtonLocator = driver.$(byTagAndText("button", "Назначить другого мастера")),
 
         cancelButtonLocator = driver.$(byTagAndText("button", "Отменить заказ")),
 
         alreadyAcceptedButtonLocator = driver.$(".global-btn-wrapper.justify-content-end"),
+        cancelOrderLocator = driver.$(byTagAndText("button", "Отменить заказ")),
         outlineButtonLocator = driver.$(".btn.btn-outline-primary");
 
     ElementsCollection
         navButtonsCollection = driver.$$("#navigation-block li");
 
     public void checkFinishLoading() {
+        pageTitleLocator.as("Заголовок страницы").shouldBe(visible, Duration.ofSeconds(40)).shouldHave(text(PAGE_TITLE));
         String orderCardNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
         stepWithRole("Убедиться, что Карточка Заказа: " + orderCardNumber + " загружена", () -> {
-            pageTitleLocator.shouldBe(visible, Duration.ofSeconds(40)).shouldHave(text(PAGE_TITLE));
+            //how to warp up the whole method in the stepWithRole?
             orderBlockLocator.shouldBe(visible);
             System.out.println("orderCardNumber: " + orderCardNumber);
         });
@@ -59,7 +69,7 @@ public final SidebarDispatcherComponent sidebar;
     public OrderCardDispatcherPage acceptOrder() {
         String factualOrderNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
         stepWithRole("Принять заказ:" + factualOrderNumber , () -> {
-            primaryButtonLocator.as("Принять").scrollTo().click();
+            acceptRequestButtonLocator.as("Принять").scrollTo().click();
         });
 
         return this;
@@ -69,7 +79,7 @@ public final SidebarDispatcherComponent sidebar;
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () ->
 
-                    orderStatusLocator.shouldHave(text(orderStatus.toString())));
+                    orderStatusLocator.as("Статус заказа").shouldHave(text(orderStatus.toString())));
             stepWithRole("Убедиться, что при участии в Тендере  представлена кнопка Прнять и кнопка Отказаться ", () -> {
 //
                 //TODO - check price, docs, buttons, info
@@ -82,9 +92,9 @@ public final SidebarDispatcherComponent sidebar;
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () ->
 
-                    orderStatusLocator.shouldHave(text(orderStatus.toString())));
+                    orderStatusLocator.as("Статус заказа").shouldHave(text(orderStatus.toString())));
             stepWithRole("Убедиться, что при участии в Тендере  представлена неактивная кнопка Уже участвуете ", () -> {
-                alreadyAcceptedButtonLocator.should(appear, Duration.ofSeconds(40));
+                alreadyAcceptedButtonLocator.as("Уже участвуете").should(appear, Duration.ofSeconds(40));
 //                acceptButtonLocator.shouldBe(hidden);
 //                        declineButtonLocator.shouldBe(hidden);
             });
@@ -104,10 +114,35 @@ public final SidebarDispatcherComponent sidebar;
         System.out.println("orderStatus + " + orderStatus);
     }
 
-    public OrderCardDispatcherPage selectMaster() {
-          outlineButtonLocator.shouldHave(text("Отменить заказ")).shouldBe(visible, Duration.ofSeconds(10));
-        primaryButtonLocator.shouldHave(text("Выбрать мастера")).shouldBe(visible, Duration.ofSeconds(10)).click();
+    public void checkMasterDispatchedStatus(OrderStatus orderStatus) {
+        stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
+            stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () -> orderStatusLocator.shouldHave(text(orderStatus.toString())));
+            stepWithRole("Убедиться, что представлена кнопка Назначить Другого Мастера и Назанчить Новое Время ", () -> {
+                selectAnotherTimeButtonLocator.as("Назначить Новое Время").shouldBe(visible, Duration.ofSeconds(10));
+                selectAnotherMasterButtonLocator.as("Назначить Другого Мастера").shouldBe(visible, Duration.ofSeconds(10));
+                //TODO - check price, docs, buttons, info
+            });
+        });
+        System.out.println("orderStatus: " + orderStatus);
+    }
 
+    public OrderCardDispatcherPage selectMaster() {
+        stepWithRole("Выбрать мастера", () -> {
+            selectMasterButtonLocator.as("Выбрать мастера").click();
+        });
+        return this;
+    }
+    public OrderCardDispatcherPage selectAnotherMaster() {
+        stepWithRole("Выбрать другого мастера", () -> {
+            selectAnotherMasterButtonLocator.as("Выбрать другого мастера").click();
+        });
+        return this;
+    }
+
+    public OrderCardDispatcherPage selectAnotherTime() {
+        stepWithRole("Выбрать новое время", () -> {
+            selectAnotherTimeButtonLocator.as("Выбрать новое время").click();
+        });
         return this;
     }
 
@@ -115,7 +150,7 @@ public final SidebarDispatcherComponent sidebar;
 
 
     public OrderCardDispatcherPage declineOrder() {
-        outlineButtonLocator.shouldBe(visible).shouldHave(text("Отказаться")).click();
+        declineRequestButtonLocator.click();
         return this;
     }
 
@@ -133,8 +168,5 @@ public final SidebarDispatcherComponent sidebar;
         navButtonsCollection.get(2).click();
         return this;
     }
-
-
-
 
 }

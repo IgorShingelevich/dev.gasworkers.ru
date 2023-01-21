@@ -43,7 +43,7 @@ public final class LoginPage extends BasePage {
         stepWithRole("Нажать кнопку Войти", () -> {
 //                driver.$("button[type=submit]").click();  //Element not found {button[type=submit]}
             driver.$(byTagAndText("button", "Далее")).click();
-            System.out.println("Login as " + email + " " + password);
+            System.out.println("login as " + email + " " + password);
         });
     };
 }

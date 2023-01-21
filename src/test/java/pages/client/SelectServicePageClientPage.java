@@ -3,7 +3,7 @@ import model.browser.RoleBrowser;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
+import pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 
 import java.time.Duration;
 

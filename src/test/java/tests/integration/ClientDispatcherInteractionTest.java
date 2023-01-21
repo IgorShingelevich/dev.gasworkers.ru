@@ -162,41 +162,14 @@ class ClientDispatcherInteractionTest extends TestBase {
             dispatcherPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderStatus.SCHEDULE_VISIT);
 
 
-
-
-
-
         });
 
-
-
-
-
-
-
-
-
         sleep(5_000);
+    }
 
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//        selectServicePage.isOpened();
+//    selectServicePage.isOpened();
 //        selectServicePage.toOrder();
 //        OrderCardClientPage.isOpened();
 //        OrderCardClientPage.popUpClose();
@@ -234,6 +207,3 @@ class ClientDispatcherInteractionTest extends TestBase {
 
 //        signSMSClientPage.inputSMSCode (client.smsCode);
 
-    }
-
-}

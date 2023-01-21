@@ -3,13 +3,12 @@ package pages.client;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
-import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
+import pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
 
 public class AllOrdersClientPage extends BaseClientPage {
 

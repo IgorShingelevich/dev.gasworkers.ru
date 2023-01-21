@@ -2,8 +2,8 @@ package pages.dispatcher;
 
 import model.browser.RoleBrowser;
 import pages.BasePage;
-import pages.components.sharedComponents.headerComponents.actionblockComponents.ActionsBlockDispatcherComponent;
-import pages.components.sharedComponents.sidebarComponents.SidebarDispatcherComponent;
+import pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockDispatcherComponent;
+import pages.components.sharedComponent.sidebarComponent.SidebarDispatcherComponent;
 
 
 public class BaseDispatcherPage extends BasePage {

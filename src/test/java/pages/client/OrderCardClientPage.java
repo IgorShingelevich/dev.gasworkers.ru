@@ -5,7 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
 import model.client.OrderStatus;
 import model.client.OrderType;
-import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
+import pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
 
 import java.time.Duration;
 

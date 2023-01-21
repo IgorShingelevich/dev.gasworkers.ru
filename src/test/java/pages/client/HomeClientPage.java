@@ -5,8 +5,8 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import model.browser.RoleBrowser;
-import pages.components.clientComponents.LastOrderProfileClientComponent;
-import pages.components.sharedComponents.sidebarComponents.SidebarClientComponent;
+import pages.components.clientComponent.LastOrderProfileClientComponent;
+import pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
 
 import java.time.Duration;
 

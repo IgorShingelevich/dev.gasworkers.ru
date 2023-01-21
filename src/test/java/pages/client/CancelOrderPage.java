@@ -2,7 +2,7 @@ package pages.client;
 
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
-import pages.components.sharedComponents.headerComponents.FocusHeaderComponent;
+import pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 
 import static com.codeborne.selenide.Condition.interactable;
 import static com.codeborne.selenide.Condition.text;

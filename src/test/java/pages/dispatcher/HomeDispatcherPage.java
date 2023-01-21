@@ -3,14 +3,13 @@ package pages.dispatcher;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
-import pages.components.sharedComponents.headerComponents.actionblockComponents.ActionsBlockDispatcherComponent;
-import pages.components.sharedComponents.sidebarComponents.SidebarDispatcherComponent;
+import pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockDispatcherComponent;
+import pages.components.sharedComponent.sidebarComponent.SidebarDispatcherComponent;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static com.codeborne.selenide.Selenide.*;
 
 public class HomeDispatcherPage extends BaseDispatcherPage {
 
@@ -109,11 +108,11 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         return this;
     }
 
-    public HomeDispatcherPage openOrderByNumber(String orderNumber) {
-        stepWithRole("Открыть заказ по номеру:" + orderNumber, () -> {
-            ordersNumberLinkCollection.findBy(text(orderNumber)).click();
-            orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text(orderNumber));
-            System.out.println("orderNumber: " + orderNumber);
+    public HomeDispatcherPage openOrderByNumber(Integer orderNumber) {
+        stepWithRole("Открыть заказ по номеру: " + orderNumber, () -> {
+            ordersNumberLinkCollection.findBy(text(orderNumber.toString())).click();
+            orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text(orderNumber.toString()));
+            System.out.println("givenOrderNumber: " + orderNumber);
         });
         return this;
     }

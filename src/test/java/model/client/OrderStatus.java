@@ -8,6 +8,7 @@ public enum OrderStatus {
     NEW_ORDER("Новый заказ"),
     SCHEDULE_VISIT("Согласование даты заказа"),
     SELECT_MASTER("Выбор мастера"),
+    MASTER_DISPATCHED("Мастер в пути"),
     PAY_PRIMARY_VISIT("Оплата первичного выезда"),
     SIGN_MAINTENANCE_ARGEEMENT_SMS("Подписание договора ТО смс"),
     START_MAINTENANCE_WORK("Приезд мастера и проведение ТО"),
