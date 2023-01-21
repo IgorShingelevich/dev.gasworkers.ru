@@ -22,23 +22,27 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         actionBlockDispatcher = new ActionsBlockDispatcherComponent(browser);
     }
 
+    ElementsCollection
+        navButtonsCollection = driver.$$("div.top-filter__status--btn"),
+        orderCardsCollection = driver.$$("div.order-card"),
+        orderNumberLinkCollection = driver.$$("p.h5.link-blue.pointer"),
+        orderActionDropdownCollection = driver.$$("button.actions__btn"),
+        actionsOpenOrderLinkCollection = driver.$$x("//a[@class='actions__slot--link']"),
+        actionsArchiveOrderLinkCollection = driver.$$x("(//button[contains(@class,'actions__slot--btn')])");
+
     SelenideElement
-        dispatcherHomePageTitleLocator = driver.$(".page-title .h3.mb-2"),
+        dispatcherHomePageTitleLocator = driver.$(".page-title .h3.mb-2").as("Заголовок страницы"),
+        navNewButtonLocator = navButtonsCollection.get(0).as("Новый"),
+        navInProgressButtonLocator = navButtonsCollection.get(1).as("В работе"),
+        navCompletedButtonLocator = navButtonsCollection.get(2).as("Выполнен"),
+        navArchiveButtonLocator = navButtonsCollection.get(3).as("В архиве"),
         mapViewButtonLocator = driver.$("div.action-btn.map-type"),
         cardViewButtonLocator = driver.$("div.action-btn.card-type"),
         listViewButtonLocator = driver.$("div.action-btn.list-type"),
         orderCardTitleLocator = driver.$(".page-title .h3.mb-2"),
-        orderCardFirstLocator = driver.$$("div.order-card").first(),
         mapContainerLocator = driver.$("div.map-wrap"),
         mapLocator = driver.$(".map-wrap .ymap-container .map-into");
 
-    ElementsCollection
-        navButtonsCollection = driver.$$("div.top-filter__status--btn"),
-        orderCardsCollection = driver.$$("div.order-card"),
-        ordersNumberLinkCollection = driver.$$("p.h5.link-blue.pointer"),
-        orderActionDropdownCollection = driver.$$("button.actions__btn"),
-        actionsOpenOrderLinkCollection = driver.$$x("//a[@class='actions__slot--link']"),
-        actionsArchiveOrderLinkCollection = driver.$$x("(//button[contains(@class,'actions__slot--btn')])");
 
     public HomeDispatcherPage checkFinishLoading() {
         stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
@@ -50,34 +54,33 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
 
     public void navNew () {
         stepWithRole("Нажать на кнопку Новый", () -> {
-            navButtonsCollection.get(0).shouldHave(text("Новый")).click();
-            ordersNumberLinkCollection.last().scrollIntoView(true);
-            ordersNumberLinkCollection.first().scrollIntoView(true);
+            navNewButtonLocator.shouldHave(text("Новый")).click();
+            orderNumberLinkCollection.last().scrollIntoView(true);
+            orderNumberLinkCollection.first().scrollIntoView(true);
         });
     }
 
     public void navInProgress () {
         stepWithRole("Нажать на кнопку В работе", () -> {
-            navButtonsCollection.get(1).shouldHave(text("В работе")).click();
+            navInProgressButtonLocator.shouldHave(text("В работе")).click();
             //scrollTo( ordersNumberLinkCollection.last() );
-            ordersNumberLinkCollection.last().scrollIntoView(true);
-            ordersNumberLinkCollection.first().scrollIntoView(true);
+            orderNumberLinkCollection.last().scrollIntoView(true);
+            orderNumberLinkCollection.first().scrollIntoView(true);
         });
     }
 
     public void navCompleted () {
         stepWithRole("Нажать на кнопку Завершен", () -> {
-            navButtonsCollection.get(2).shouldHave(text("Завершен")).click();
-            ordersNumberLinkCollection.last().scrollIntoView(true);
-            ordersNumberLinkCollection.first().scrollIntoView(true);
+            navCompletedButtonLocator.shouldHave(text("Выполнен")).click();
+            orderNumberLinkCollection.last().scrollIntoView(true);
+            orderNumberLinkCollection.first().scrollIntoView(true);
         });
     }
-
     public void navArchived () {
         stepWithRole("Нажать на кнопку В архиве", () -> {
-            navButtonsCollection.get(3).shouldHave(text("В архиве")).click();
-            ordersNumberLinkCollection.last().scrollIntoView(true);
-            ordersNumberLinkCollection.first().scrollIntoView(true);
+            navArchiveButtonLocator.shouldHave(text("В архиве")).click();
+            orderNumberLinkCollection.last().scrollIntoView(true);
+            orderNumberLinkCollection.first().scrollIntoView(true);
         });
     }
 
@@ -101,7 +104,7 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
     public HomeDispatcherPage switchToListView() {
         stepWithRole("Переключиться на список", () -> {
             listViewButtonLocator.click();
-            ordersNumberLinkCollection.first().shouldBe(visible, Duration.ofSeconds(20));
+            orderNumberLinkCollection.first().shouldBe(visible, Duration.ofSeconds(20));
         });
 //        listViewButtonLocator.shouldBe(visible).click();
 //        orderCardFirstLocator.shouldBe(visible);
@@ -110,7 +113,7 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
 
     public HomeDispatcherPage openOrderByNumber(Integer orderNumber) {
         stepWithRole("Открыть заказ по номеру: " + orderNumber, () -> {
-            ordersNumberLinkCollection.findBy(text(orderNumber.toString())).click();
+            orderNumberLinkCollection.findBy(text(orderNumber.toString())).click();
             orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text(orderNumber.toString()));
             System.out.println("givenOrderNumber: " + orderNumber);
         });
@@ -118,8 +121,8 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
     }
 
     public HomeDispatcherPage openOrderByIndex(int index) {
-        stepWithRole("Открыть  заказ по индексу: "+ index + ", номер: " + ordersNumberLinkCollection.get(index).getText(), () -> {
-            ordersNumberLinkCollection.get(index).click();
+        stepWithRole("Открыть  заказ по индексу: "+ index + ", номер: " + orderNumberLinkCollection.get(index).getText(), () -> {
+            orderNumberLinkCollection.get(index).click();
             orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10));
             System.out.println("orderNumber:  " + orderCardTitleLocator.getText() + " index: " + index);
         });
@@ -157,8 +160,8 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
 
     public HomeDispatcherPage openRandomOrder() {
         switchToListView();
-        int randomOrderNumber = (int) (Math.random() * ordersNumberLinkCollection.size()+1);
-        ordersNumberLinkCollection.get(randomOrderNumber).shouldBe(visible).click();
+        int randomOrderNumber = (int) (Math.random() * orderNumberLinkCollection.size()+1);
+        orderNumberLinkCollection.get(randomOrderNumber).shouldBe(visible).click();
         orderCardTitleLocator.shouldBe(visible);
         return this;
     }

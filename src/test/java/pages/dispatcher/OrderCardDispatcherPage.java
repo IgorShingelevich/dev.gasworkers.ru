@@ -20,41 +20,40 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
 
 public final SidebarDispatcherComponent sidebar;
 public final DatePickerOrderDispatcherComponent datePicker;
-    private final ActionsBlockDispatcherComponent actionBlockDispatcher;
+    private final ActionsBlockDispatcherComponent actionBlock;
 
     public OrderCardDispatcherPage(RoleBrowser browser) {
         super(browser);
         sidebar = new SidebarDispatcherComponent(browser);
         datePicker = new DatePickerOrderDispatcherComponent(browser);
-        actionBlockDispatcher = new ActionsBlockDispatcherComponent(browser);
+        actionBlock = new ActionsBlockDispatcherComponent(browser);
     }
 
     private final String PAGE_TITLE = "Заказ";
 
-    SelenideElement
-        pageTitleLocator = driver.$(".page-title .h3.mb-2"),
-        orderBlockLocator = driver.$(".page-content #order"),
-        orderNumberLocator = driver.$(".order-number"),
-        orderStatusLocator = driver.$(".item-flex p.text"),
-        primaryButtonLocator = driver.$(".btn.btn-primary"),
-        acceptRequestButtonLocator = driver.$(byTagAndText("button", "Принять заказ")),
-        declineRequestButtonLocator = driver.$(byTagAndText("button", "Отказаться")),
-        selectTimeButtonLocator = driver.$(byTagAndText("button", "Назначить время")),
-        selectAnotherTimeButtonLocator = driver.$(byTagAndText("button", "Назначить новое время")),
-        selectMasterButtonLocator = driver.$(byTagAndText("button", "Выбрать мастера")),
-        selectAnotherMasterButtonLocator = driver.$(byTagAndText("button", "Назначить другого мастера")),
-
-        cancelButtonLocator = driver.$(byTagAndText("button", "Отменить заказ")),
-
-        alreadyAcceptedButtonLocator = driver.$(".global-btn-wrapper.justify-content-end"),
-        cancelOrderLocator = driver.$(byTagAndText("button", "Отменить заказ")),
-        outlineButtonLocator = driver.$(".btn.btn-outline-primary");
-
     ElementsCollection
-        navButtonsCollection = driver.$$("#navigation-block li");
+            navButtonsCollection = driver.$$("div.navigation-block ul li");
+
+    SelenideElement
+    pageTitleLocator = driver.$(".page-title .h3.mb-2").as("Заголовок страницы"),
+    orderDescriptionButtonLocator = navButtonsCollection.get(0).as("Описание заказа"),
+    orderInfoButtonLocator = navButtonsCollection.get(1).as("Информация по работам"),
+    orderDocumentsButtonLocator = navButtonsCollection.get(2).as("Документы"),
+    orderBlockLocator = driver.$(".page-content #order").as("Блок заказа"),
+    orderStatusLocator = driver.$(".item-flex p.text").as("Статус заказа"),
+    acceptRequestButtonLocator = driver.$(byTagAndText("button", "Принять заказ")).as("Принять заказ"),
+    declineRequestButtonLocator = driver.$(byTagAndText("button", "Отказаться")).as("Отказаться"),
+    selectTimeButtonLocator = driver.$(byTagAndText("button", "Назначить время")).as("Назначить время"),
+    selectAnotherTimeButtonLocator = driver.$(byTagAndText("button", "Назначить новое время")).as("Назначить новое время"),
+    selectMasterButtonLocator = driver.$(byTagAndText("button", "Выбрать мастера")).as("Выбрать мастера"),
+    selectAnotherMasterButtonLocator = driver.$(byTagAndText("button", "Назначить другого мастера")).as("Назначить другого мастера"),
+    cancelButtonLocator = driver.$(byTagAndText("button", "Отменить заказ")).as("Отменить заказ"),
+    alreadyAcceptedButtonLocator = driver.$(".global-btn-wrapper.justify-content-end").as("Уже принят'"),
+    cancelOrderLocator = driver.$(byTagAndText("button", "Отменить заказ")).as("Отменить заказ");
+
 
     public void checkFinishLoading() {
-        pageTitleLocator.as("Заголовок страницы").shouldBe(visible, Duration.ofSeconds(40)).shouldHave(text(PAGE_TITLE));
+        pageTitleLocator.shouldBe(visible, Duration.ofSeconds(40)).shouldHave(text(PAGE_TITLE));
         String orderCardNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
         stepWithRole("Убедиться, что Карточка Заказа: " + orderCardNumber + " загружена", () -> {
             //how to war p up the whole method in the stepWithRole?
@@ -62,13 +61,12 @@ public final DatePickerOrderDispatcherComponent datePicker;
             System.out.println("orderCardNumber: " + orderCardNumber);
         });
 
-
     }
 
     public OrderCardDispatcherPage acceptOrder() {
         String factualOrderNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
         stepWithRole("Принять заказ: " + factualOrderNumber , () -> {
-            acceptRequestButtonLocator.as("Принять").scrollTo().click();
+            acceptRequestButtonLocator.scrollTo().click();
         });
 
         return this;
@@ -78,7 +76,7 @@ public final DatePickerOrderDispatcherComponent datePicker;
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () ->
 
-                    orderStatusLocator.as("Статус заказа").shouldHave(text(orderStatus.toString())));
+                    orderStatusLocator.shouldHave(text(orderStatus.toString())));
             stepWithRole("Убедиться, что при рассмотрении Тендера  представлена кнопка Прнять и кнопка Отказаться ", () -> {
 //
                 //TODO - check price, docs, buttons, info
@@ -91,7 +89,7 @@ public final DatePickerOrderDispatcherComponent datePicker;
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () ->
 
-                    orderStatusLocator.as("Статус заказа").shouldHave(text(orderStatus.toString())));
+                    orderStatusLocator.shouldHave(text(orderStatus.toString())));
             stepWithRole("Убедиться, что при участии в Тендере  представлена неактивная серая кнопка Уже участвуете ", () -> {
                 alreadyAcceptedButtonLocator.as("Уже участвуете").should(appear, Duration.ofSeconds(40));
 //                acceptButtonLocator.shouldBe(hidden);
@@ -131,51 +129,54 @@ public final DatePickerOrderDispatcherComponent datePicker;
 
     public OrderCardDispatcherPage selectMaster() {
         stepWithRole("Нажать на кнопку Выбрать мастера", () -> {
-            selectMasterButtonLocator.as("Выбрать мастера").click();
+            selectMasterButtonLocator.click();
         });
         return this;
     }
     public OrderCardDispatcherPage selectAnotherMaster() {
         stepWithRole("Нажать на кнопку Выбрать другого мастера", () -> {
-            selectAnotherMasterButtonLocator.as("Выбрать другого мастера").click();
+            selectAnotherMasterButtonLocator.click();
         });
         return this;
     }
 
     public OrderCardDispatcherPage selectTimeButton() {
         stepWithRole("Нажать на кнопку Выбрать время", () -> {
-            selectTimeButtonLocator.as("Выбрать время").click();
+            selectTimeButtonLocator.click();
         });
         return this;
     }
 
     public OrderCardDispatcherPage selectAnotherTime() {
         stepWithRole("Нажать на кнопку Выбрать новое время", () -> {
-            selectAnotherTimeButtonLocator.as("Выбрать новое время").click();
+            selectAnotherTimeButtonLocator.click();
         });
         return this;
     }
-
-
-
 
     public OrderCardDispatcherPage declineOrder() {
         declineRequestButtonLocator.click();
         return this;
     }
 
-    public OrderCardDispatcherPage orderDescription() {
-        navButtonsCollection.get(0).click();
+    public OrderCardDispatcherPage navOrderDescription() {
+        stepWithRole("Нажать на кнопку Описание заказа", () -> {
+            orderDescriptionButtonLocator.shouldHave(text("Описание заказа")).click();
+        });
         return this;
     }
 
-    public OrderCardDispatcherPage orderInfo() {
-        navButtonsCollection.get(1).click();
+    public OrderCardDispatcherPage navOrderInfo() {
+        stepWithRole("Нажать на кнопку Информация по работам", () -> {
+            orderInfoButtonLocator.shouldHave(text("Информация по работам")).click();
+        });
         return this;
     }
 
-    public OrderCardDispatcherPage orderDocuments() {
-        navButtonsCollection.get(2).click();
+    public OrderCardDispatcherPage navOrderDocuments() {
+        stepWithRole("Нажать на кнопку Документы", () -> {
+            orderDocumentsButtonLocator.shouldHave(text("Документы")).click();
+        });
         return this;
     }
 

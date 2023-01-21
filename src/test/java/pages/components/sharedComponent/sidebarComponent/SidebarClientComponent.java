@@ -15,20 +15,15 @@ public class SidebarClientComponent extends BaseComponent {
         super(browser);
     }
 
-
-
-    private final String SUPPORT_SERVICE_PHONE = "8 800 302 89 04";
-    private final String SUPPORT_SERVICE_EMAIL = "info@gasworkers.ru";
-
     SelenideElement homeLinkLocator = driver.$$(".sidebar-nav>li").get(0),
             objectsAndEquipmentLinkLocator = driver.$$(".sidebar-nav>li").get(1),
             ordersAndInvoicesDropdownLocator = driver.$$(".sidebar-nav>li").get(2),  //$(By.xpath("//div[@class='link']")).$(byText("Заказы/Счета"));
             ordersListLinkLocator = driver.$("ul.dropdown-menu").$(byText("Список заказов")),
             invoicesListLinkLocator = driver.$("ul.dropdown-menu").$(byText("Список счетов")),  //$(By.xpath("//div[@class='link']")).$(byText("Список счетов"));
             profileLinkLocator = driver.$$(".sidebar-nav>li").get(3), //$(By.xpath("//div[@class='link']")).$(byText("Профиль"));
-            supportServiceTitleLocator = driver.$(".support-service"),
-            supportServicePhoneLocator = driver.$(".support-service__phone"),
-            supportServiceEmailLocator = driver.$(".support-service .link-dark-blue");
+            supportServiceTitleLocator = driver.$(".support-service").shouldHave(text("Служба поддержки")),
+            supportServicePhoneLocator = driver.$(".support-service__phone").shouldHave(text("8 800 302 89 04")),
+            supportServiceEmailLocator = driver.$(".support-service .link-dark-blue").shouldHave(text("info@gasworkers.ru"));
 
 
     public SidebarClientComponent clickOrdersAndInvoicesDropdown() {
@@ -62,29 +57,5 @@ public class SidebarClientComponent extends BaseComponent {
         invoicesListLinkLocator.click();
         return this;
     }
-
-    public SidebarClientComponent verifyLocators() {
-        homeLinkLocator.shouldBe(visible);
-        objectsAndEquipmentLinkLocator.shouldBe(visible);
-        ordersListLinkLocator.shouldBe(hidden);
-        invoicesListLinkLocator.shouldBe(hidden);
-        ordersAndInvoicesDropdownLocator.shouldBe(visible);
-        ordersAndInvoicesDropdownLocator.click();
-        ordersListLinkLocator.shouldBe(visible);
-        invoicesListLinkLocator.shouldBe(visible);
-        ordersAndInvoicesDropdownLocator.click();
-        profileLinkLocator.shouldBe(visible);
-        supportServiceTitleLocator.shouldBe(visible);
-        supportServicePhoneLocator.shouldBe(visible);
-        supportServicePhoneLocator.shouldHave(text(SUPPORT_SERVICE_PHONE));
-        supportServiceEmailLocator.shouldBe(visible);
-        supportServiceEmailLocator.shouldHave(text(SUPPORT_SERVICE_EMAIL));
-        return this;
-    }
-
-
-
-
-
 
 }

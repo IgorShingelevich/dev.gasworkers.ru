@@ -1,6 +1,7 @@
 package tests.dispatcher;
 
 import extension.browser.Browser;
+import io.qameta.allure.Step;
 import model.client.OrderStatus;
 import org.junit.jupiter.api.*;
 import pages.context.DispatcherPages;
@@ -35,11 +36,10 @@ public class DispatcherFlowTest extends TestBase {
 
         });
     }
-
+    @Step("Диспетчер открывает заказ в статусе: ")
     @Test
-    @DisplayName("Dispatcher - Open Current Order")
      void openInProgressOrder() {
-        step("Dispatcher - Open Current Order", () -> {
+        step("Диспетчер открывает заказ в статусе: " + OrderStatus.MASTER_DISPATCHED, () -> {
             dispatcherPages.getHomePage().checkFinishLoading();
             dispatcherPages.getHomePage().switchToListView();
             dispatcherPages.getHomePage().navInProgress();

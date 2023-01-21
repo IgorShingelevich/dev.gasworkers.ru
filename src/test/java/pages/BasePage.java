@@ -23,8 +23,6 @@ public abstract class BasePage extends BaseComponent {
         super(browser);
     }
 
-//    @DisplayName("Close the popup notifications")
-
     SelenideElement
         popUpCloseButtonLocator = driver.$(byTagAndText("button", "Прочитать все")),
         popUpContainerLocator =  driver.$(".notice-list-fixed-content.gas-scrollbar-inline");
@@ -44,6 +42,14 @@ public abstract class BasePage extends BaseComponent {
 //            } catch (NoSuchElementException e) {
 //                System.out.println("No pop-up");
 //            }
+
+//            try{
+//                popUpCloseButtonLocator.wait(6000l);
+//            }catch (Exception e){
+//                System.out.println("No pop-up");
+//            }
+
+
         });
 
     }

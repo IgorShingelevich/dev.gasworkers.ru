@@ -4,6 +4,8 @@ import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
 import pages.components.BaseComponent;
 
+import static com.codeborne.selenide.Condition.text;
+
 public class SidebarDispatcherComponent extends BaseComponent {
 
     public SidebarDispatcherComponent(RoleBrowser browser) {
