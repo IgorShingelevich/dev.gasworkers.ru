@@ -9,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.context.ClientPages;
 import pages.context.DispatcherPages;
+import pages.context.MasterPages;
 import tests.BaseTest;
 import utils.User;
 
@@ -26,6 +27,9 @@ class ClientDispatcherInteractionTest extends BaseTest {
     @Browser(role = Role.DISPATCHER, browserSize = "800x1000", browserPosition = "850x0")
     DispatcherPages dispatcherPages;
 
+    @Browser(role = Role.MASTER, browserSize = "800x1000", browserPosition = "1700x0")
+    MasterPages masterPages;
+
      User client = new User(
          "Игорь",
          "Сергеевич",
@@ -36,14 +40,32 @@ class ClientDispatcherInteractionTest extends BaseTest {
          79288010225L
     );
 
-    /*String emailClient = "shingelevich@gmail.com",
-        passwordClient = "123456";
-*/
-    String emailDispatcher = "test_gw_dispatcher_sssr1@rambler.ru",
+     User dispatcher = new User(
+        "ДиспетчерСССР1",
+        "ДиспетчеровичСССР1",
+        "ДиспетчеровСССР1",
+        "test_gw_dispatcher_sssr1@rambler.ru",
+        "123456",
+        null,
+        79288010225L
+    );
+
+     User master = new User(
+         "Мастер1СССР",
+         "Мастерович1СССР",
+         "Мастеров1СССР",
+         " test_gas_master_sssr1@rambler.ru",
+         "123456",
+         null,
+         79917644241L
+    );
+
+
+   /* String emailDispatcher = "test_gw_dispatcher_sssr1@rambler.ru",
         passwordDispatcher = "123456";
 
     String emailMaster = "test_gas_master1@rambler.ru",
-        passwordMaster = "123456";
+        passwordMaster = "123456";*/
 
 
 //    String currentOrderNumber = OrderCardClientPage.getTitleNumber();
@@ -59,8 +81,13 @@ class ClientDispatcherInteractionTest extends BaseTest {
         });
 
         step("авторизация Диспетчера", () -> {
-            dispatcherPages.getLoginPage().open().login(emailDispatcher, passwordDispatcher);
+            dispatcherPages.getLoginPage().open().login(dispatcher.email, dispatcher.password);
             dispatcherPages.getHomePage().checkFinishLoading();
+        });
+
+        step("авторизация Мастера", () -> {
+            masterPages.getLoginPage().open().login(master.email, master.password);
+            masterPages.getHomePage().checkFinishLoading();
         });
 
         step("Клиент размещает заказ на ТО", () -> {
