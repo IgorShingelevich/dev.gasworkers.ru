@@ -9,13 +9,17 @@ import pages.context.MasterPages;
 
 @AllArgsConstructor
 public enum Role {
-    CLIENT("Client", ClientPages.class),
-    MASTER("Master", MasterPages.class),
-    DISPATCHER("Dispatcher", DispatcherPages.class);
+    CLIENT("Client", 79288010225L, ClientPages.class),
+    MASTER("Master", 79917644241L, MasterPages.class),
+    DISPATCHER("Dispatcher", null, DispatcherPages.class);
 
     //todo: Dispatcher2, Master2, Client2, etc.
 
     private final String description;
+
+    @Getter
+    private final Long phoneNumber;
+
     @Getter
     private final Class<? extends BaseRolePages> pagesObjectClass;
 

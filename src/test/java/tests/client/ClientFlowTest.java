@@ -24,13 +24,12 @@ class ClientFlowTest extends BaseTest {
             "shingelevich@gmail.com",
             "123456",
             null,
-            79288010225L
-    );
+            79288010225L);
 
     @BeforeEach
-        void clientLogin() {
-            clientPages.getLoginPage().open();
-            clientPages.getLoginPage().login(client.email, client.password);
+    void clientLogin() {
+        clientPages.getLoginPage().open();
+        clientPages.getLoginPage().login(client.email, client.password);
     }
 
     @Test
@@ -38,96 +37,95 @@ class ClientFlowTest extends BaseTest {
         step("Проверка ФИО", () -> {
             clientPages.getHomePage().checkFio("Шингелевич Игорь Сергеевич");
         });
-
     }
 
     @Test
-    public void ClientPlaceMaintenanceRequestAndCancel() {
+    public void clientPlaceMaintenanceRequestAndCancel() {
         step("Убедиться, что Домашняя страница загружена", () -> {
             clientPages.getHomePage()
                     .checkFinishLoading();
         });
         step(" Нажать кнопку Создать Заказ", () ->
-            clientPages.getHomePage().clickPlaceOrderButton()
+                clientPages.getHomePage().clickPlaceOrderButton()
         );
         step("Выбрать тип заказа {ClientRequestType}", () ->
-            clientPages.getTypeOrdersPage()
-                    .selectOrderType(ClientRequestType.MAINTENANCE) //  .toString()
+                clientPages.getTypeOrdersPage()
+                        .selectOrderType(ClientRequestType.MAINTENANCE) //  .toString()
         );
         step("Под информацией нажать кнопку Далее", () ->
-            clientPages.getInfoTypeOrderPage()
+                        clientPages.getInfoTypeOrderPage()
 //                    .checkTitle("Заказ на ТО")
 //                    .checkStepSequence("Шаг 1 из 3")
-                    .clickNextButton()
+                                .clickNextButton()
         );
         step("Выбрать объект ТО", () ->
-            clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0)
+                clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0)
         );
         step("Указать Сегодня время и дату", () ->
-            clientPages.getSelectDateMaintenancePage().pickNowDateAM()
+                clientPages.getSelectDateMaintenancePage().pickNowDateAM()
         );
         step("Нажать кнопку Разместить Заказ", () ->
-            clientPages.getSelectDateMaintenancePage().submitOrder()
+                clientPages.getSelectDateMaintenancePage().submitOrder()
         );
         step("Убедиться, что страница Выбор СК загружена ", () ->
-            clientPages.getSelectServicePage().checkFinishLoading()
+                clientPages.getSelectServicePage().checkFinishLoading()
         );
         step("Нажать на кнопку Смотреть Заказ", () ->
-            clientPages.getSelectServicePage().toOrderCard()
+                clientPages.getSelectServicePage().toOrderCard()
         );
         step("Закрыть всплывающие уведомления", () ->
-            clientPages.getSelectServicePage().popUpClose()
+                clientPages.getSelectServicePage().popUpClose()
         );
         step("Убедиться, что страница Заказ загружена", () ->
-            clientPages.getOrderCardPage().checkFinishLoading()
+                clientPages.getOrderCardPage().checkFinishLoading()
         );
         step("Нажать на кнопку Отменить Заказ", () ->
-            clientPages.getOrderCardPage().cancelOrder()
+                clientPages.getOrderCardPage().cancelOrder()
         );
         step("Убедиться, что страница Отмена Заказа загружена", () ->
-            clientPages.getCancelOrderPage().checkFinishLoading()
+                clientPages.getCancelOrderPage().checkFinishLoading()
         );
         step("Нажать на кнопку Назад", () ->
-            clientPages.getCancelOrderPage().backButton()
+                clientPages.getCancelOrderPage().backButton()
         );
         step("Убедиться, что страница Заказ загружена", () ->
-            clientPages.getOrderCardPage().checkFinishLoading()
+                clientPages.getOrderCardPage().checkFinishLoading()
         );
         step("Нажать на  кнопку Показать на карте", () ->
-            clientPages.getOrderCardPage().showOnMap()
+                clientPages.getOrderCardPage().showOnMap()
         );
         step("Убедиться, что страница страница Выбор СК загружена", () ->
-            clientPages.getSelectServicePage().checkFinishLoading()
+                clientPages.getSelectServicePage().checkFinishLoading()
         );
         step("Нажать на кнопку Смотреть Заказ", () ->
-            clientPages.getSelectServicePage().toOrderCard()
+                clientPages.getSelectServicePage().toOrderCard()
         );
         step("Убедиться, что страница Заказ загружена", () ->
-            clientPages.getOrderCardPage().checkFinishLoading()
+                clientPages.getOrderCardPage().checkFinishLoading()
         );
         step("Нажать на кнопку Отменить Заказ", () ->
-            clientPages.getOrderCardPage().cancelOrder()
+                clientPages.getOrderCardPage().cancelOrder()
         );
         step("Убедиться, что страница Отмена Заказа загружена", () ->
-            clientPages.getCancelOrderPage().checkFinishLoading()
+                clientPages.getCancelOrderPage().checkFinishLoading()
         );
         step("Нажать на кнопку Да, Отменить", () ->
-            clientPages.getCancelOrderPage().yesButton()
+                clientPages.getCancelOrderPage().yesButton()
         );
         step("Убедиться, что Домашняя страница загружена", () ->
-            clientPages.getHomePage().checkFinishLoading()
+                clientPages.getHomePage().checkFinishLoading()
         );
     }
 
     @Test
-    public void ClientPlaceMaintenanceRequest() {
+    public void clientPlaceMaintenanceRequest() {
         clientPages.getHomePage().checkFinishLoading();
         clientPages.getHomePage().clickPlaceOrderButton();
         clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
         clientPages.getInfoTypeOrderPage()
 //                    .checkTitle("Заказ на ТО")
 //                    .checkStepSequence("Шаг 1 из 3")
-                        .clickNextButton();
+                .clickNextButton();
         clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0);
         clientPages.getSelectDateMaintenancePage().pickNowDateAM();
         clientPages.getSelectDateMaintenancePage().submitOrder();
@@ -137,21 +135,20 @@ class ClientFlowTest extends BaseTest {
         clientPages.getSelectServicePage().popUpClose();
         step("Убедиться, что тип Заказа {orderTypeIs}", () -> {
             OrderType orderType = OrderType.MAINTENANCE;
-        clientPages.getOrderCardPage().checkOrderType(orderType);
+            clientPages.getOrderCardPage().checkOrderType(orderType);
             // compare .checkOrderType and .checkOrderStatus what is better? more universal?
         });
         step("Убедиться, что статус Заказа {orderStatusIs}", () -> {
-        clientPages.getOrderCardPage().checkOrderStatusNew(OrderStatus.NEW_ORDER);
+            clientPages.getOrderCardPage().checkOrderStatusNew(OrderStatus.NEW_ORDER);
             // how to make .checkOrderStatus  universal and also check corresponded buttons
         });
 
     }
 
-
     @Test
     public void clientCheckOrderStatus() {
         Integer checkedOrderNumber = 3185;
-        step("Убедиться, что статус Заказа: " + checkedOrderNumber + " является: "  + OrderStatus.SCHEDULE_VISIT, () -> {
+        step("Убедиться, что статус Заказа: " + checkedOrderNumber + " является: " + OrderStatus.SCHEDULE_VISIT, () -> {
             OrderStatus orderStatus = OrderStatus.SCHEDULE_VISIT;
             clientPages.getHomePage().checkFinishLoading();
             clientPages.getHomePage().sidebar.clickOrdersAndInvoicesDropdown();
@@ -165,13 +162,8 @@ class ClientFlowTest extends BaseTest {
 
     @Test
     public void checkNewSms() {
-        step("Проверить, что появилось новое сообщение", () -> {
-            client.firstCodeFromNewSMS();
-
-        });
+        step("Проверить, что появилось новое сообщение", () ->
+                client.firstCodeFromNewSMS());
     }
 
-
 }
-
-

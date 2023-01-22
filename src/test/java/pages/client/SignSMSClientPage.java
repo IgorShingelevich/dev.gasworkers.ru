@@ -14,23 +14,21 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class SignSMSClientPage extends BaseClientPage {
     private final FocusHeaderComponent header;
+
     public SignSMSClientPage(RoleBrowser browser) {
         super(browser);
         header = new FocusHeaderComponent(browser);
     }
+
     private final String
-        SIGN_SMS_TITLE = "Подписание договора ТО ВДГО";
-
-
-
+            SIGN_SMS_TITLE = "Подписание договора ТО ВДГО";
 
     SelenideElement
-        pageSignSMSTitleLocator = driver.$(".h3.mb-40"),
-        smsCodeInput = driver.$("input[name='smsCode']"),
-        signButton = driver.$("button.btn.btn-primary");
+            pageSignSMSTitleLocator = driver.$(".h3.mb-40"),
+            smsCodeInput = driver.$("input[name='smsCode']"),
+            signButton = driver.$("button.btn.btn-primary");
 
-    ElementsCollection
-        smsCodeInputCollection = driver.$$(".code-input.mb-4 input");
+    ElementsCollection smsCodeInputCollection = driver.$$(".code-input.mb-4 input");
 
     public SignSMSClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что страница Подписание СМС загружена", () -> {
@@ -38,13 +36,12 @@ public class SignSMSClientPage extends BaseClientPage {
             String titleSignSMSClientPage = pageSignSMSTitleLocator.getText();
             System.out.println("titleSignSMSClientPage: " + titleSignSMSClientPage);
         });
-    return this;
+        return this;
     }
 
-    public SignSMSClientPage inputSMSCode(Integer smsCode) {
-        stepWithRole("Ввести СМС код: " + smsCode, () -> {
-            smsCodeInputCollection.get(0).setValue(String.valueOf(smsCode));
-        });
+    public SignSMSClientPage inputSMSCode(String smsCode) {
+        stepWithRole("Ввести СМС код: " + smsCode, () ->
+                smsCodeInputCollection.get(0).setValue(smsCode));
         System.out.println("FirstClientSmsCode: " + smsCode);
         return this;
     }
@@ -55,8 +52,6 @@ public class SignSMSClientPage extends BaseClientPage {
         });
         return this;
     }
-
-
 
 
 }

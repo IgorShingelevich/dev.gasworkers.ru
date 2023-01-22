@@ -8,6 +8,7 @@ import pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
 
 public class SelectServicePageClientPage extends BaseClientPage {
@@ -31,10 +32,10 @@ public class SelectServicePageClientPage extends BaseClientPage {
         toOrderButtonLocator = driver.$(".fix-row.w-100.d-flex.flex-column-reverse.flex-md-row .mb-3.btn-sm.ms-md-auto.btn.btn-primary.disable-outline"),
         backLinkLocator = driver.$(".col-12.col-md-3 .link-dark-blue.mr-32.medium"),
         spinnerScrollbarLocator = driver.$(".scrollbar.mb-3.col-lg-5 .d-flex.justify-content-center.pb-5"),
-        firstServiceTabLocator =driver.$$("div.col-xl-6.mb-3").first(),
-        firstServiceButtonLocator = driver.$$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline").get(0),
+        firstServiceTabLocator = driver.$("[id^=company-item]"),
+        firstServiceButtonLocator = driver.$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline"),
         servicesColumnBLockLocator = driver.$(".row.columns-list"),
-        mapContainerLocator = driver.$(".ymap-container div.map-into"),
+        mapContainerLocator = driver.$("[id^=yandexMap]"),
         selectInsurancePageTitleLocator = driver.$(".page-content .h2.text-center.mb-4");
 
     ElementsCollection
@@ -50,9 +51,11 @@ public class SelectServicePageClientPage extends BaseClientPage {
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
 //            spinnerScrollbarLocator.should(disappear);
-            firstServiceTabLocator.should(appear, Duration.ofSeconds(40));
+            firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
 //        mapContainerLocator.shouldBe(appear).shouldBe(visible);
-            mapContainerLocator.shouldBe(appear, Duration.ofSeconds(40));
+            driver.$("[class*=zoom__plus]").shouldBe(visible, Duration.ofSeconds(40));
+            sleep(3_000);
+//            mapContainerLocator.shouldBe(appear, Duration.ofSeconds(40));
         });
     }
 

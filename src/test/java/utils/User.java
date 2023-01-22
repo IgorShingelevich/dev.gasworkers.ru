@@ -2,31 +2,20 @@ package utils;
 
 public class User {
 
+    public String name,
+            patronymic,
+            surname,
+            email,
+            password,
+            address;
 
-
-
-     public String
-        name,
-        patronymic,
-        surname,
-        email,
-        password,
-        address;
-
-    public Integer
-        firstSmsCode,
-        secondSmsCode,
-        thirdSmsCode,
-        orderNumber;
-    public Long
-        phoneNumber;
-
-
+    public Integer firstSmsCode,
+            secondSmsCode,
+            thirdSmsCode,
+            orderNumber;
+    public Long phoneNumber;
 
     //make a builder
-
-
-
 
     public User(String name, String patronymic, String surname, String email, String password, String address, Long phoneNumber) {
         this.name = name;
@@ -36,10 +25,6 @@ public class User {
         this.password = password;
         this.address = address;
         this.phoneNumber = phoneNumber;
-        this.orderNumber = null;
-        this.firstSmsCode = null;
-        this.secondSmsCode = null;
-        this.thirdSmsCode = null;
     }
 
     public Integer firstCodeFromNewSMS() {
@@ -52,8 +37,6 @@ public class User {
             e.printStackTrace();
         }
         return this.firstSmsCode;
-
     }
-
 
 }

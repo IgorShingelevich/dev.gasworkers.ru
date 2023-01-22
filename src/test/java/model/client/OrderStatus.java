@@ -17,13 +17,11 @@ public enum OrderStatus {
     TRANSFER_AGREEMENT_MOSOBLGAS("Передача договора d Мособлгаз"),
     COMPLETE("Завершен");
 
-
     private final String description;
 
     @Override
     public String toString() {
         return description;
     }
-
 
 }

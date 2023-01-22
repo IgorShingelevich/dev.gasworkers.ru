@@ -111,10 +111,10 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         return this;
     }
 
-    public HomeDispatcherPage openOrderByNumber(Integer orderNumber) {
+    public HomeDispatcherPage openOrderByNumber(String orderNumber) {
         stepWithRole("Открыть заказ по номеру: " + orderNumber, () -> {
-            orderNumberLinkCollection.findBy(text(orderNumber.toString())).click();
-            orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text(orderNumber.toString()));
+            orderNumberLinkCollection.findBy(text(orderNumber)).click();
+            orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text(orderNumber));
             System.out.println("givenOrderNumber: " + orderNumber);
         });
         return this;

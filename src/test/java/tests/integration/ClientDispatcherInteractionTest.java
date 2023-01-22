@@ -1,5 +1,7 @@
 package tests.integration;
 
+import api.sms.SmsApi;
+import com.codeborne.selenide.Selenide;
 import extension.browser.Browser;
 import model.Role;
 import model.client.OrderStatus;
@@ -10,11 +12,9 @@ import org.junit.jupiter.api.Test;
 import pages.context.ClientPages;
 import pages.context.DispatcherPages;
 import pages.context.MasterPages;
+import ru.sms_activate.response.api_rent.extra.SMSActivateSMS;
 import tests.BaseTest;
 import utils.User;
-
-import java.util.NoSuchElementException;
-
 
 import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
@@ -30,36 +30,32 @@ class ClientDispatcherInteractionTest extends BaseTest {
     @Browser(role = Role.MASTER, browserSize = "800x1000", browserPosition = "1700x0")
     MasterPages masterPages;
 
-     User client = new User(
-         "Игорь",
-         "Сергеевич",
-         "Шингелевич",
-         "shingelevich@gmail.com",
-         "123456",
-         null,
-         79288010225L
+    User client = new User(
+            "Игорь",
+            "Сергеевич",
+            "Шингелевич",
+            "shingelevich@gmail.com",
+            "123456",
+            null,
+            79288010225L);
 
-    );
+    User dispatcher = new User(
+            "ДиспетчерСССР1",
+            "ДиспетчеровичСССР1",
+            "ДиспетчеровСССР1",
+            "test_gw_dispatcher_sssr1@rambler.ru",
+            "123456",
+            null,
+            79288010225L);
 
-     User dispatcher = new User(
-        "ДиспетчерСССР1",
-        "ДиспетчеровичСССР1",
-        "ДиспетчеровСССР1",
-        "test_gw_dispatcher_sssr1@rambler.ru",
-        "123456",
-        null,
-        79288010225L
-    );
-
-     User master = new User(
-         "Мастер1СССР",
-         "Мастерович1СССР",
-         "Мастеров1СССР",
-         " test_gas_master_sssr1@rambler.ru",
-         "123456",
-         null,
-         79917644241L
-    );
+    User master = new User(
+            "Мастер1СССР",
+            "Мастерович1СССР",
+            "Мастеров1СССР",
+            " test_gas_master_sssr1@rambler.ru",
+            "123456",
+            null,
+            79917644241L);
 
 
    /* String emailDispatcher = "test_gw_dispatcher_sssr1@rambler.ru",
@@ -71,11 +67,9 @@ class ClientDispatcherInteractionTest extends BaseTest {
 
 //    String currentOrderNumber = OrderCardClientPage.getTitleNumber();
 
-
-
-    @DisplayName(" ТО Интеграция Клиент-Диспетчер-Клиент-Диспетчер")
     @Test
-    public void IntegrationDispatcherAcceptClientMaintenanceRequest() throws NoSuchElementException {
+    @DisplayName(" ТО Интеграция Клиент-Диспетчер-Клиент-Диспетчер")
+    void integrationDispatcherAcceptClientMaintenanceRequest() {
         step("авторизация Клиента", () -> {
             clientPages.getLoginPage().open().login(client.email, client.password);
             clientPages.getHomePage().checkFinishLoading();
@@ -91,7 +85,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             masterPages.getHomePage().checkFinishLoading();
         });
 
-        step("Клиент размещает заказ на ТО", () -> {
+        String orderNumber = step("Клиент размещает заказ на ТО", () -> {
             clientPages.getHomePage().clickPlaceOrderButton();
             clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
             clientPages.getInfoTypeOrderPage().clickNextButton();
@@ -108,6 +102,9 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getHomePage().popUpClose();
             clientPages.getHomePage().lastOrderProfileClientComponent.lastOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
+
+            String orderNumberQ = clientPages.getOrderCardPage().getOrderNumber();
+
 //            clientPages.getOrderCardPage().checkFinishLoading();
             //get order number from order card to check it in dispatcher
 
@@ -124,11 +121,13 @@ class ClientDispatcherInteractionTest extends BaseTest {
             });
             clientPages.getOrderCardPage().clickOffersBlock();
             clientPages.getSelectServicePage().checkFinishLoading();
+
+            return orderNumberQ;
         });
 
         step("Диспетчер принимает заказ на ТО ", () -> {
             dispatcherPages.getHomePage().switchToListView();
-            dispatcherPages.getHomePage().openOrderByIndex(0);
+            dispatcherPages.getHomePage().openOrderByNumber(orderNumber);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             //check OrderStatus NEW_TENDER
             dispatcherPages.getHomePage().popUpClose();
@@ -157,19 +156,27 @@ class ClientDispatcherInteractionTest extends BaseTest {
             //set w Insurance
             clientPages.getSelectInsurancePage().next();
             clientPages.getCheckDocumentsPage().checkFinishLoading();
-            //driver.back();  // not working
+//            driver.back();  // not working
             // check that Filial is not empty or set the Filial if it is empty
             // check that Address fnd Passport is not empty or set the Address and Passport if it is empty
+            SmsApi clientSmsApi1 = SmsApi.instance(Role.CLIENT);
+
             clientPages.getCheckDocumentsPage().makeContract();
             clientPages.getSelectPaymentPage().checkFinishLoading();
             clientPages.getSelectPaymentPage().paySPB();
             clientPages.getPaymentWizardPage().checkFinishLoading();
             clientPages.getPaymentWizardPage().getQRCode();
             clientPages.getSignSMSPage().checkFinishLoading();
-//            client.getCodeFromNewSMS();
-//            Integer firstSMSCode = client.getCodeFromNewSMS();
-//            clientPages.getSignSMSPage().inputSMSCode(firstSMSCode);
-//            clientPages.getSignSMSPage().sign();
+
+            String sms = clientSmsApi1.waitReceiveNewSms().getText();
+            String code = sms.substring(0, 5);
+
+            clientPages.getSignSMSPage().inputSMSCode(code);
+            clientPages.getSignSMSPage().sign();
+
+
+
+
             clientPages.getSignSuccsessPage().checkFinishLoading();
             clientPages.getSignSuccsessPage().toHomePage();
             clientPages.getHomePage().checkFinishLoading();
