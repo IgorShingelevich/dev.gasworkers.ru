@@ -14,7 +14,10 @@ public class User {
         address;
 
     public Integer
-        smsCode;
+        firstSmsCode,
+        secondSmsCode,
+        thirdSmsCode,
+        orderNumber;
     public Long
         phoneNumber;
 
@@ -32,20 +35,23 @@ public class User {
         this.email = email;
         this.password = password;
         this.address = address;
-        this.smsCode = null;
         this.phoneNumber = phoneNumber;
+        this.orderNumber = null;
+        this.firstSmsCode = null;
+        this.secondSmsCode = null;
+        this.thirdSmsCode = null;
     }
 
-    public Integer getCodeFromNewSMS() {
+    public Integer firstCodeFromNewSMS() {
         try {
             String currentSms = SMSActivateUtil.getLastSms(this.phoneNumber);
-            this.smsCode = Integer.parseInt(currentSms.substring(currentSms.length() - 6));
-            System.out.println("SMS code: " + this.smsCode);
+            this.firstSmsCode = Integer.parseInt(currentSms.substring(currentSms.length() - 6));
+            System.out.println("SMS code: " + this.firstSmsCode);
             System.out.println("currentSms: " + currentSms);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return this.smsCode;
+        return this.firstSmsCode;
 
     }
 

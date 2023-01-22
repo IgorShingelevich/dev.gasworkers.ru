@@ -166,7 +166,7 @@ class ClientFlowTest extends BaseTest {
     @Test
     public void checkNewSms() {
         step("Проверить, что появилось новое сообщение", () -> {
-            client.getCodeFromNewSMS();
+            client.firstCodeFromNewSMS();
 
         });
     }

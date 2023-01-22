@@ -38,6 +38,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
          "123456",
          null,
          79288010225L
+
     );
 
      User dispatcher = new User(

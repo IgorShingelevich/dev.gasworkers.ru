@@ -50,7 +50,7 @@ public class MasterFlowTest extends BaseTest {
     @Test
     public void checkNewSms() {
         step("Проверить, что появилось новое сообщение", () -> {
-            master.getCodeFromNewSMS();
+            master.firstCodeFromNewSMS();
 
         });
     }
