@@ -1,7 +1,9 @@
 package pages;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideDriver;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.ex.ElementShould;
 import io.qameta.allure.Allure;
 import model.Role;
 import model.browser.RoleBrowser;
@@ -24,43 +26,52 @@ public abstract class BasePage extends BaseComponent {
         super(browser);
     }
 
-    SelenideElement
-        popUpCloseButtonLocator = driver.$(byTagAndText("button", "Прочитать все")),
-        popUpContainerLocator =  driver.$(".notice-list-fixed-content.gas-scrollbar-inline");
+    SelenideElement popUpCloseButtonLocator = driver.$(byTagAndText("button", "Прочитать все")), popUpContainerLocator = driver.$(".notice-list-fixed-content.gas-scrollbar-inline");
 
-    public void popUpClose()  {
+    public void popUpClose3() {
         stepWithRole("Закрыть всплывающие уведомления", () -> {
             try {
-                    popUpCloseButtonLocator.as("Close popup button")
-                            .should(appear, Duration.ofSeconds(20)).hover()
-                            .click();
+                popUpCloseButtonLocator.as("Close popup button").should(appear, Duration.ofSeconds(20)).hover().click();
 
             } catch (NoSuchElementException e) {
                 System.out.println("No pop-up");
             }
-        /*    try{
-                popUpCloseButtonLocator.as("Close popup button").should(disappear, Duration.ofSeconds(20)).click();
-            } catch (NoSuchElementException e) {
-                System.out.println("No pop-up");
-            }
-            try{
-                popUpCloseButtonLocator.wait(6000l);
-            }catch (Exception e){
-                System.out.println("No pop-up");
-            }*/
         });
     }
 
-    public void popUpClose2()  throws TimeoutException {  {
-        stepWithRole("Закрыть всплывающие уведомления", () -> {
-            try {
-                popUpCloseButtonLocator.as("Close popup button").waitUntil(appears, 10000);
-                popUpCloseButtonLocator.click();
-            } catch (TimeoutException e) {
-                System.out.println("No pop-up");
-            }
-        });
+    public void popUpClose2() {
+        {
+            stepWithRole("Закрыть всплывающие уведомления", () -> {
+                try {
+                    popUpCloseButtonLocator.as("Close popup button").shouldBe(visible, enabled).hover().click();
+                } catch (ElementShould e) {
+                    System.out.println("No pop-up");
+                    e.printStackTrace();
+                }
+            });
+        }
     }
+
+    public void popUpClose() {
+        {
+            stepWithRole("Закрыть всплывающие уведомления", () -> {
+                try {
+                    if (popUpCloseButtonLocator.exists()) {
+                        popUpCloseButtonLocator.shouldBe(enabled, visible);
+                        Selenide.sleep(10000);
+                        popUpCloseButtonLocator.click();
+                    } else {
+                        System.out.println("No pop-up");
+                    }
+                } catch (ElementShould e) {
+                    // Log the exception and proceed with the test
+                    System.out.println("Element pop-up was not found or not enabled or not visible.");
+                    e.printStackTrace();
+                }
+            });
+        }
+    }
+
 
 
 

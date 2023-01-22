@@ -196,10 +196,6 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getSelectMasterPage().selectNewMasterByIndex(0);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             dispatcherPages.getOrderCardPage().checkMasterDispatchedStatus(OrderStatus.MASTER_DISPATCHED);
-
-
-
-
         });
 
         sleep(5_000);

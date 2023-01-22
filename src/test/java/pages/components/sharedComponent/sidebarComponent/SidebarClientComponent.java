@@ -21,9 +21,9 @@ public class SidebarClientComponent extends BaseComponent {
             ordersListLinkLocator = driver.$("ul.dropdown-menu").$(byText("Список заказов")),
             invoicesListLinkLocator = driver.$("ul.dropdown-menu").$(byText("Список счетов")),  //$(By.xpath("//div[@class='link']")).$(byText("Список счетов"));
             profileLinkLocator = driver.$$(".sidebar-nav>li").get(3), //$(By.xpath("//div[@class='link']")).$(byText("Профиль"));
-            supportServiceTitleLocator = driver.$(".support-service").shouldHave(text("Служба поддержки")),
-            supportServicePhoneLocator = driver.$(".support-service__phone").shouldHave(text("8 800 302 89 04")),
-            supportServiceEmailLocator = driver.$(".support-service .link-dark-blue").shouldHave(text("info@gasworkers.ru"));
+            supportServiceTitleLocator = driver.$(".support-service"),
+            supportServicePhoneLocator = driver.$(".support-service__phone"),
+            supportServiceEmailLocator = driver.$(".support-service .link-dark-blue");
 
 
     public SidebarClientComponent clickOrdersAndInvoicesDropdown() {

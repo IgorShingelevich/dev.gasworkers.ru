@@ -110,7 +110,7 @@ public final DatePickerOrderDispatcherComponent datePicker;
             selectTimeButtonLocator.shouldBe(visible);
             cancelButtonLocator.shouldBe(visible);
         });
-        System.out.println("orderStatus + " + orderStatus);
+        System.out.println("orderStatus: " + orderStatus);
             //TODO - check price, docs, buttons, info
 
     }

@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.context.MasterPages;
 import tests.BaseTest;
+import utils.User;
 
 import static io.qameta.allure.Allure.step;
 import static model.Role.*;
@@ -16,14 +17,22 @@ public class MasterFlowTest extends BaseTest {
     @Browser(role = MASTER)
     MasterPages masterPages;
 
-    private final String
-            emailDispatcher = "test_gas_master_sssr1@rambler.ru",
-            passwordDispatcher = "123456";
+    User master = new User(
+            "Мастер1СССР",
+            "Мастерович1СССР",
+            "Мастеров1СССР",
+            " test_gas_master_sssr1@rambler.ru",
+            "123456",
+            null,
+            79917644241L
+    );
+
+
 
     @BeforeEach
     void masterLogin() {
         masterPages.getLoginPage().open();
-        masterPages.getLoginPage().login(emailDispatcher, passwordDispatcher);
+        masterPages.getLoginPage().login(master.email, master.password);
     }
 
     @DisplayName("Мастер открывает заказ: ")
