@@ -15,21 +15,25 @@ public final class InfoTypeOrderClientPage extends BaseClientPage {
         super(browser);
     }
 
-    @Step("Check type order title")
+    @Step("Проверить заголовок страницы {expectedTitle}")
     public InfoTypeOrderClientPage checkTitle(String expectedTitle) {
         driver.$("p.h4").shouldHave(Condition.text(expectedTitle));
         return this;
     }
 
-    @Step("Check step sequence")
+    @Step("Проверить, что на странице есть {expectedCount} шаги")
     public InfoTypeOrderClientPage checkStepSequence(List<String> expectedSteps) {
         driver.$$(".gas-box li").shouldHave(CollectionCondition.texts(expectedSteps));
         return this;
     }
 
-    @Step("Click next button")
+//    @Step("Нажать на кнопку {buttonName}")
     public void clickNextButton() {
-        driver.$(".btn-wrap button").shouldHave(text("Далее")).click();
+
+        stepWithRole("Нажать на кнопку Далее ", () -> {
+            driver.$(".btn-wrap button").shouldHave(text("Далее")).click();
+        });
+
     }
 
 }

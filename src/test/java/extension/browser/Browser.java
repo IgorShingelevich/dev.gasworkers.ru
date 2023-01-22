@@ -13,6 +13,6 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 public @interface Browser {
     Role role();
-    String browserSize() default "1366x768";
+    String browserSize() default "800x1000";
     String browserPosition() default "0x0";
 }

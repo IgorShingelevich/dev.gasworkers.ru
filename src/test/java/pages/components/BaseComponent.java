@@ -7,8 +7,10 @@ import model.browser.RoleBrowser;
 
 public abstract class BaseComponent {
 
-    protected final SelenideDriver driver;
+    protected final SelenideDriver   driver;
     protected final Role role;
+
+
 
     public BaseComponent(RoleBrowser browser) {
         role = browser.getRole();

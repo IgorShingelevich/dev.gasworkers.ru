@@ -1,9 +1,16 @@
 package pages.common;
 
+import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
 import model.browser.RoleBrowser;
 import pages.BasePage;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byTagAndText;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public final class LoginPage extends BasePage {
 
@@ -11,19 +18,34 @@ public final class LoginPage extends BasePage {
         super(browser);
     }
 
+//    @Step("Открыть страницу авторизации")
     public LoginPage open() {
         stepWithRole("Открыть страницу авторизации", () ->
                 driver.open("/login"));
         return this;
     }
 
+//    @Step("Авторизоваться в системе  почта {email}  пароль {password}")
     public void login(String email, String password) {
-        stepWithRole("Авторизоваться в системе", () -> {
-            driver.$(".title h3").shouldHave(text("Войдите в личный кабинет"));
+        driver.$(".title h3").shouldHave(text("Войдите в личный кабинет"));
+        driver.$("#jivo-iframe-container").shouldBe(exist, Duration.ofSeconds(20));  //reset the form if being loaded after
+        stepWithRole("Ввести почту: " + email, () -> {
+            driver.$("input[placeholder=E-mail]") .click();
             driver.$("input[placeholder=E-mail]").setValue(email);
-            driver.$("input[type=password]").setValue(password);
-            driver.$(".login-form .btn-primary").click();
-        });
-    }
+            driver.$("input[placeholder=E-mail]").pressEnter();
 
+        });
+        stepWithRole("Ввести пароль: " + password, () -> {
+            driver.$("input[placeholder=Пароль]").click();
+            driver.$("input[placeholder=Пароль]").setValue(password);
+            driver.$("input[placeholder=Пароль]").pressEnter();
+        });
+        stepWithRole("Нажать кнопку Войти", () -> {
+//                driver.$("button[type=submit]").click();  //Element not found {button[type=submit]}
+            driver.$(byTagAndText("button", "Далее")).click();
+            System.out.println("login as " + email + " " + password);
+        });
+    };
 }
+
+

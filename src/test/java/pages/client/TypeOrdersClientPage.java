@@ -2,7 +2,7 @@ package pages.client;
 
 import io.qameta.allure.Step;
 import model.browser.RoleBrowser;
-import model.client.ClientOrderType;
+import model.client.ClientRequestType;
 
 import static com.codeborne.selenide.Selectors.byTagAndText;
 
@@ -12,9 +12,13 @@ public final class TypeOrdersClientPage extends BaseClientPage {
         super(browser);
     }
 
-    @Step("Select order type")
-    public void selectOrderType(ClientOrderType orderType) {
-        driver.$(byTagAndText("button", orderType.toString())).click();
+//    @Step("Выберите тип заказа {requestType}")
+    public void selectOrderType(ClientRequestType requestType) {
+        stepWithRole("Выбрать тип заказа:  " + requestType, () -> {
+            driver.$(byTagAndText("button", requestType.toString())).click();
+            System.out.println("Select requestType: " + requestType);
+        });
+
     }
 
 }
