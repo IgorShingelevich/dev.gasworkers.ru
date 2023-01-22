@@ -2,7 +2,7 @@ package utils;
 
 import com.github.javafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;
-import tests.TestData;
+import tests.DataTest;
 
 import java.security.SecureRandom;
 import java.time.LocalDate;
@@ -13,7 +13,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomUtil {
 
-        static TestData testData = new TestData();
+        static DataTest dataTest = new DataTest();
 
         public static  void main (String[] args) {
 
@@ -114,8 +114,8 @@ public class RandomUtil {
             return randomString2(len).toLowerCase() + "@some.com";
         }
 
-        static String [] month  = testData.month;
-        String [] randomDomainArray = testData.randomDomainArray;
+        static String [] month  = dataTest.month;
+        String [] randomDomainArray = dataTest.randomDomainArray;
 
 
         public static   String actualTimeStampEmail(int len) {

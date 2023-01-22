@@ -2,7 +2,7 @@ package tests;
 
 
 
-    public  class TestData {
+    public  class DataTest {
 
         public  String
                 firstName,

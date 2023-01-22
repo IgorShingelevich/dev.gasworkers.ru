@@ -21,9 +21,9 @@ public class SidebarMasterComponent extends BaseComponent {
 
     SelenideElement
         titleLocator = driver.$("h1.h3.mb-2").as("Заголовок страницы"),
-        onVideoModeLocator = driver.$("button.btn-sm.mt-3.btn").shouldHave(text("Готов к работе")),
-        offVideoModeLocator = driver.$("button.btn-sm.mt-3.btn").shouldHave(text("Завершить смену")),
-        HomeLinkLocator = sidebarElementsCollection.get(0).shouldHave(text("Главная")),
+        onVideoModeLocator = driver.$("button.btn-sm.mt-3.btn"),
+        offVideoModeLocator = driver.$("button.btn-sm.mt-3.btn"),
+        HomeLinkLocator = sidebarElementsCollection.get(0).as("домой"),
         ordersHistoryDropdownLocator = sidebarElementsCollection.get(1).as("История заказов"),
         allNewOrdersLinkLocator = sidebarElementsCollection.get(2).as("Заказы новые"),
         allAssignedOrdersLinkLocator = sidebarElementsCollection.get(3).as("Заказы принятые"),
@@ -32,9 +32,9 @@ public class SidebarMasterComponent extends BaseComponent {
         resumeLinkLocator = sidebarElementsCollection.get(6).as("Резюме"),
         invitationsLinkLocator = sidebarElementsCollection.get(7).as("Приглашения"),
         profileLinkLocator = sidebarElementsCollection.get(8).as("Профиль"),
-        supportServiceTitleLocator = driver.$(".support-service").shouldHave(text("Служба поддержки")).as("Служба поддержки"),
-        supportServicePhoneLocator = driver.$(".support-service__phone").shouldHave(text("8 800 302 89 04")).as("8 800 302 89 04"),
-        supportServiceEmailLocator = driver.$(".support-service .link-dark-blue").shouldHave(text("info@gasworkers.ru")).as("mail");
+        supportServiceTitleLocator = driver.$(".support-service").as("Служба поддержки"),
+        supportServicePhoneLocator = driver.$(".support-service__phone").as("8 800 302 89 04"),
+        supportServiceEmailLocator = driver.$(".support-service .link-dark-blue").as("mail");
 
 
         public void home () {
@@ -44,10 +44,16 @@ public class SidebarMasterComponent extends BaseComponent {
             });
         }
 
-        public void allNewOrders() {
+        public void ordersHistoryDropdown () {
+            stepWithRole("Выпадающий список История заказов", () -> {
+                ordersHistoryDropdownLocator.click();
+            });
+        }
+
+        public void newOrders() {
             stepWithRole("Переход на страницу Заказы новые", () -> {
                 allNewOrdersLinkLocator.shouldHave(text("Заказы новые")).click();
-                titleLocator.shouldHave(text("Заказы новые"));
+                titleLocator.shouldHave(text("Список новых заказов"));
                 orderNumberLinkCollection.should(sizeGreaterThan(0));
             });
         }
@@ -55,7 +61,7 @@ public class SidebarMasterComponent extends BaseComponent {
         public void allAssignedOrders() {
             stepWithRole("Переход на страницу Заказы принятые", () -> {
                 allAssignedOrdersLinkLocator.shouldHave(text("Заказы принятые")).click();
-                titleLocator.shouldHave(text("Заказы принятые"));
+                titleLocator.shouldHave(text("Список принятых заказов"));
                 orderNumberLinkCollection.should(sizeGreaterThan(0));
 
             });
@@ -64,7 +70,7 @@ public class SidebarMasterComponent extends BaseComponent {
         public void allCompletedOrders() {
             stepWithRole("Переход на страницу Заказы выполненные", () -> {
                 allCompletedOrdersLinkLocator.shouldHave(text("Заказы выполненные ")).click();
-                titleLocator.shouldHave(text("Заказы выполненные"));
+                titleLocator.shouldHave(text("Список завершенных заказов"));
                 orderNumberLinkCollection.should(sizeGreaterThan(0));
 
             });

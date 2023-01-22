@@ -6,13 +6,13 @@ import model.client.OrderStatus;
 import model.client.OrderType;
 import org.junit.jupiter.api.*;
 import pages.context.ClientPages;
-import tests.TestBase;
+import tests.BaseTest;
 
 import static io.qameta.allure.Allure.step;
 
 import static model.Role.*;
 
-class ClientFlowTest extends TestBase {
+class ClientFlowTest extends BaseTest {
     @Browser(role = CLIENT)
     ClientPages clientPages;
 

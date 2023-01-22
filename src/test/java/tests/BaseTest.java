@@ -1,13 +1,11 @@
 package tests;
 
 import com.codeborne.selenide.Configuration;
-import model.browser.RoleBrowser;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 
-public class TestBase {
+public class BaseTest {
 
 
 

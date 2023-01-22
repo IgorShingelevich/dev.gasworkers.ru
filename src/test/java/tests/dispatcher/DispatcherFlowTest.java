@@ -5,13 +5,13 @@ import io.qameta.allure.Step;
 import model.client.OrderStatus;
 import org.junit.jupiter.api.*;
 import pages.context.DispatcherPages;
-import tests.TestBase;
+import tests.BaseTest;
 
 import static model.Role.*;
 
 import static io.qameta.allure.Allure.step;
 
-public class DispatcherFlowTest extends TestBase {
+public class DispatcherFlowTest extends BaseTest {
 
     @Browser(role = DISPATCHER)
     DispatcherPages dispatcherPages;
@@ -38,7 +38,7 @@ public class DispatcherFlowTest extends TestBase {
     }
     @Step("Диспетчер открывает заказ в статусе: ")
     @Test
-     void openInProgressOrder() {
+     void checkMasterDispatchedOrderStatus() {
         step("Диспетчер открывает заказ в статусе: " + OrderStatus.MASTER_DISPATCHED, () -> {
             dispatcherPages.getHomePage().checkFinishLoading();
             dispatcherPages.getHomePage().switchToListView();

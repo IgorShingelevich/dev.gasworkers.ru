@@ -9,7 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pages.context.ClientPages;
 import pages.context.DispatcherPages;
-import tests.TestBase;
+import tests.BaseTest;
 import utils.User;
 
 import java.util.NoSuchElementException;
@@ -18,7 +18,7 @@ import java.util.NoSuchElementException;
 import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
 
-class ClientDispatcherInteractionTest extends TestBase {
+class ClientDispatcherInteractionTest extends BaseTest {
 
     @Browser(role = Role.CLIENT, browserSize = "800x1000", browserPosition = "0x0")
     ClientPages clientPages;

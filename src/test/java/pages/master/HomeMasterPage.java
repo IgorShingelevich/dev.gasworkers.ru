@@ -6,10 +6,11 @@ import model.browser.RoleBrowser;
 import pages.components.sharedComponent.sidebarComponent.SidebarMasterComponent;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 
 public class HomeMasterPage extends BaseMasterPage{
 
-    private final SidebarMasterComponent sidebar;
+    public final SidebarMasterComponent sidebar;
 
     public HomeMasterPage(RoleBrowser browser) {
         super(browser);
@@ -18,6 +19,7 @@ public class HomeMasterPage extends BaseMasterPage{
 
     SelenideElement
         titleLocator = driver.$("h1.h3.mb-2").as("Заголовок страницы"),
+        timeTableLocator = driver.$("div.timetable").as("Расписание"),
         switchToListViewLocator = driver.$("div.action-btn.list-type"),
         switchToTabViewLocator = driver.$("div.action-btn.card-type");
 
@@ -29,6 +31,11 @@ public class HomeMasterPage extends BaseMasterPage{
         actionsArchiveOrderLinkCollection = driver.$$x("(//button[contains(@class,'actions__slot--btn')])");
 
 
+    public void checkFinishLoading() {
+        stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
+            timeTableLocator.shouldBe(visible);
+        });
+    }
 
 
 

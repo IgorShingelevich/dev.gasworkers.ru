@@ -93,7 +93,7 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
     }
 
     public HomeDispatcherPage switchToCardView() {
-        stepWithRole("Переключиться на карточки", () -> {
+        stepWithRole("Переключиться на вид карточек", () -> {
             cardViewButtonLocator.click();
             orderCardsCollection.last().shouldBe(visible, Duration.ofSeconds(20));
             //visibility of the last element in the collection
@@ -102,7 +102,7 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
     }
 
     public HomeDispatcherPage switchToListView() {
-        stepWithRole("Переключиться на список", () -> {
+        stepWithRole("Переключиться на вид списка", () -> {
             listViewButtonLocator.click();
             orderNumberLinkCollection.first().shouldBe(visible, Duration.ofSeconds(20));
         });
