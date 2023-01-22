@@ -38,9 +38,10 @@ public class User {
 
     public Integer getCodeFromNewSMS() {
         try {
-            String currentSmsCode = SMSActivateUtil.getLastSms(this.phoneNumber);
-            this.smsCode = Integer.parseInt(currentSmsCode.substring(currentSmsCode.length() - 6));
+            String currentSms = SMSActivateUtil.getLastSms(this.phoneNumber);
+            this.smsCode = Integer.parseInt(currentSms.substring(currentSms.length() - 6));
             System.out.println("SMS code: " + this.smsCode);
+            System.out.println("currentSms: " + currentSms);
         } catch (Exception e) {
             e.printStackTrace();
         }

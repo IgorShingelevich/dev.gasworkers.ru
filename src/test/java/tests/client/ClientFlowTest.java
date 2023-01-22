@@ -7,6 +7,7 @@ import model.client.OrderType;
 import org.junit.jupiter.api.*;
 import pages.context.ClientPages;
 import tests.BaseTest;
+import utils.User;
 
 import static io.qameta.allure.Allure.step;
 
@@ -16,29 +17,30 @@ class ClientFlowTest extends BaseTest {
     @Browser(role = CLIENT)
     ClientPages clientPages;
 
-    private final String
-        emailClient = "shingelevich@gmail.com",
-        clientName = "Шингелевич Игорь Сергеевич",
-        passwordClient = "123456";
+    User client = new User(
+            "Игорь",
+            "Сергеевич",
+            "Шингелевич",
+            "shingelevich@gmail.com",
+            "123456",
+            null,
+            79288010225L
+    );
 
-    @DisplayName("Вход в личный кабинет клиента")
     @BeforeEach
         void clientLogin() {
             clientPages.getLoginPage().open();
-            clientPages.getLoginPage().login(emailClient, passwordClient);
+            clientPages.getLoginPage().login(client.email, client.password);
     }
 
     @Test
-    @DisplayName( "Проверка ФИO")
     void checkFioInformation() {
         step("Проверка ФИО", () -> {
-            clientPages.getHomePage().checkFio(clientName);
+            clientPages.getHomePage().checkFio("Шингелевич Игорь Сергеевич");
         });
 
     }
 
-    @DisplayName("Клиент создает и отменяет заказ на ТО")
-//    @Disabled
     @Test
     public void ClientPlaceMaintenanceRequestAndCancel() {
         step("Убедиться, что Домашняя страница загружена", () -> {
@@ -117,8 +119,6 @@ class ClientFlowTest extends BaseTest {
         );
     }
 
-    @DisplayName("Клиент создает и  заказ на ТО")
-//    @Disabled
     @Test
     public void ClientPlaceMaintenanceRequest() {
         clientPages.getHomePage().checkFinishLoading();
@@ -147,12 +147,10 @@ class ClientFlowTest extends BaseTest {
 
     }
 
-    Integer checkedOrderNumber = 3185;
 
-    @DisplayName("Клиент убеждается что заказ из списка заказа номер: {orderNumber} имеет статус {orderStatus}")
     @Test
-
     public void clientCheckOrderStatus() {
+        Integer checkedOrderNumber = 3185;
         step("Убедиться, что статус Заказа: " + checkedOrderNumber + " является: "  + OrderStatus.SCHEDULE_VISIT, () -> {
             OrderStatus orderStatus = OrderStatus.SCHEDULE_VISIT;
             clientPages.getHomePage().checkFinishLoading();
@@ -165,97 +163,15 @@ class ClientFlowTest extends BaseTest {
         });
     }
 
-}
+    @Test
+    public void checkNewSms() {
+        step("Проверить, что появилось новое сообщение", () -> {
+            client.getCodeFromNewSMS();
 
-//
-//    @DisplayName("openRandomObject")
-//    @Test
-//    void openRandomObject() {
-//        homeClientPage.sidebarClient.allObjects();
-//        allObjectsClientPage.openRandomObject();
-//        objectCardClientPage.isOpened();
-//        objectCardClientPage.sidebarClient.allObjects();
-//        allObjectsClientPage.isOpened();
-//        allObjectsClientPage.openRandomObject();
-//        objectCardClientPage.isOpened();
-//        objectCardClientPage.sidebarClient.allObjects();
-//        allObjectsClientPage.isOpened();
-//        allObjectsClientPage.openRandomObject();
-//        objectCardClientPage.isOpened();
-//        objectCardClientPage.sidebarClient.home();
-//    }
-//
-//    @Description("ClientPlaceRequest")
-//    //    @Disabled
-//    @Test
-//    void placeMaintenanceFirstObject()  {
-//
-//        allNotificationsPage.sidebarClient.home();
-//        homeClientPage.placeOrder();
-//        typeOrdersPage.Maintenance();
-//        infoMaintenancePage.nextButton();
-//        selectObjectMaintenancePage.firstObject();
-//        selectDateMaintenanceClientPage.pickNowDateAM();
-//        selectDateMaintenanceClientPage.submitOrder();
-//        selectServicePage.isOpened();
-//        selectServicePage.toOrder();
-//        OrderCardClientPage.sidebarClient.home();
-//        homeClientPage.isOpened();
-//        homeClientPage.actionBlockClient.allNotifications();
-//        allNotificationsPage.isOpened();
-//        allNotificationsPage.popUpClose();
-//        allNotificationsPage.sidebarClient.home();
-//        homeClientPage.isOpened();
-//        homeClientPage.lastOrder.open();
-//        OrderCardClientPage.isOpened();
-//        OrderCardClientPage.getOrderNumber();
-//        System.out.println("Order number is " + OrderCardClientPage.getOrderNumber());
-//    }
-//
-//    @DisplayName("ClientReviewFirstService")
-//    //    @Disabled
-//    @Test
-//    void ClientReviewFirstService() {
-//        homeClientPage.actionBlockClient.allNotifications();
-//        allNotificationsPage.isOpened();
-//        allNotificationsPage.readAll();
-//        allNotificationsPage.sidebarClient.home();
-//        homeClientPage.lastOrder.open();
-//        OrderCardClientPage.isOpened();
-//        OrderCardClientPage.toMap();
-//        selectServicePage.isOpened();
-//        selectServicePage.reviewFirstService();
-//        selectInsurancePage.isOpened();
-//        selectInsurancePage.header.back();
-//        selectServicePage.isOpened();
-//        selectServicePage.toOrder();
-//        OrderCardClientPage.isOpened();
-//    }
-//
-//
-//    public String
-//            smsCode = "123456";
-//    @DisplayName("ClientAcceptFirstService")
-//    //    @Disabled
-//    @Test
-//    void ClientAcceptFirstService()  {
-//        homeClientPage.actionBlockClient.allNotifications();
-//        allNotificationsPage.isOpened();
-//        allNotificationsPage.readAll();
-//        allNotificationsPage.sidebarClient.home();
-//        homeClientPage.lastOrder.open();
-//        OrderCardClientPage.isOpened();
-//        OrderCardClientPage.toMap();
-//        selectServicePage.isOpened();
-//        selectServicePage.reviewFirstService();
-//        selectInsurancePage.isOpened();
-//        selectInsurancePage.next();
-//        checkDocumentsClientPage.isOpened();
-//        checkDocumentsClientPage.makeContract();
-//        selectPaymentClientPage.isOpened();
-//        selectPaymentClientPage.paySPB();
-//        signSMSClientPage.isOpened();
-//        signSMSClientPage.inputSMSCode(smsCode);
-//    }
+        });
+    }
+
+
+}
 
 

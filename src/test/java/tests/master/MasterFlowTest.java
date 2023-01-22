@@ -47,6 +47,13 @@ public class MasterFlowTest extends BaseTest {
             masterPages.getOrderCardPage().checkFinishLoading();
         });
     }
+    @Test
+    public void checkNewSms() {
+        step("Проверить, что появилось новое сообщение", () -> {
+            master.getCodeFromNewSMS();
+
+        });
+    }
 
 
 }

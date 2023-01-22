@@ -77,10 +77,13 @@ public static SMSActivateApi managerSMS = new SMSActivateApi(APIKEY);
         String responseBodyRentStatus = responseRentMasterStatus.getBody().asString();
         System.out.println("REST-ASSURED getRentStatusMasterPhone  =>  " + responseBodyRentStatus);
 
-//        smsActivateUtil.waitNewSMS(clientPhone, 2);
-//        smsActivateUtil.waitNewSMS(masterPhone, 2);
+        smsActivateUtil.waitNewSMS(clientPhone, 2);
+        smsActivateUtil.waitNewSMS(masterPhone, 2);
     }
-    // put responseBodyRentStatus  in a public variable and use it in the test
+
+    public BigDecimal getSMSActivateAccountBalance() throws SMSActivateBaseException {
+        return managerSMS.getBalance();
+    }
 
     public static Integer getIDbyPhoneNumber(long phoneNumber) throws SMSActivateBaseException {
         SMSActivateGetRentListResponse rentListResponse = managerSMS.getRentList();
@@ -94,11 +97,11 @@ public static SMSActivateApi managerSMS = new SMSActivateApi(APIKEY);
         return null;
     }
 
-
     public static String getLastSms(long phoneNumber) throws SMSActivateBaseException {
         SMSActivateGetRentStatusResponse rentListResponse = managerSMS.getRentStatus(getIDbyPhoneNumber(phoneNumber));
        return  rentListResponse.getSmsActivateSMSList().get(0).getText();
     }
+
     public  String waitNewSMS(long phoneNumber, int timer) throws SMSActivateBaseException {
 
         SMSActivateGetRentStatusResponse rentListResponse = managerSMS.getRentStatus(getIDbyPhoneNumber(phoneNumber));
@@ -123,10 +126,6 @@ public static SMSActivateApi managerSMS = new SMSActivateApi(APIKEY);
     }
 
 
-
-    public BigDecimal getSMSActivateAccountBalance() throws SMSActivateBaseException {
-        return managerSMS.getBalance();
-    }
 
 
 

@@ -167,7 +167,6 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getSignSMSPage().checkFinishLoading();
 //            client.getCodeFromNewSMS();
 //            Integer firstSMSCode = client.getCodeFromNewSMS();
-//            System.out.println("firstSMSCode = " + firstSMSCode);
 //            clientPages.getSignSMSPage().inputSMSCode(firstSMSCode);
 //            clientPages.getSignSMSPage().sign();
             clientPages.getSignSuccsessPage().checkFinishLoading();
@@ -202,42 +201,3 @@ class ClientDispatcherInteractionTest extends BaseTest {
     }
 
 }
-
-//    selectServicePage.isOpened();
-//        selectServicePage.toOrder();
-//        OrderCardClientPage.isOpened();
-//        OrderCardClientPage.popUpClose();
-//        OrderCardClientPage.getOrderNumber();
-//        System.out.println("currentOrderNumber = " + OrderCardClientPage.getOrderNumber());
-//        String currentOrderNumber = OrderCardClientPage.getOrderNumber();
-//        OrderCardClientPage.toMap();
-//        selectServicePage.isOpened();
-//
-//        WebDriverRunner.setWebDriver(driverDispatcher);
-//
-//        homeDispatcherPage.isOpened();
-//        homeDispatcherPage.switchToListView();
-//        homeDispatcherPage.popUpClose();
-//
-//        homeDispatcherPage.openOrderByNumber(currentOrderNumber);
-//        orderCardPage.isOpened();
-//        homeDispatcherPage.popUpClose();
-//
-//        WebDriverRunner.setWebDriver(driverClient);
-//        selectServicePage.isOpened();
-//        selectServicePage.waitForResponses();
-//
-//        selectServicePage.reviewFirstService();
-//        selectInsurancePage.isOpened();
-//        selectInsurancePage.next();
-//        checkDocumentsClientPage.isOpened();
-//        checkDocumentsClientPage.makeContract();
-//        selectPaymentClientPage.isOpened();
-//        selectPaymentClientPage.paySPB();
-//        paymentWizardClientPage.isOpened();
-//        paymentWizardClientPage.getQRCode();
-//        signSMSClientPage.isOpened();
-//        client.getCodeFromNewSMS();
-
-//        signSMSClientPage.inputSMSCode (client.smsCode);
-
