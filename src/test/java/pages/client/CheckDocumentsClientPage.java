@@ -31,8 +31,6 @@ public class CheckDocumentsClientPage  extends BaseClientPage {
     public CheckDocumentsClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что страница Проверка документов загружена", () -> {
             pageTitleLocator.shouldHave(text(CHECK_DOCUMENTS_TITLE));
-            String CheckDocumentsClientPageTitle = pageTitleLocator.getText();
-            System.out.println("CheckDocumentsClientPageTitle: " + CheckDocumentsClientPageTitle);
         });
         return this;
     }

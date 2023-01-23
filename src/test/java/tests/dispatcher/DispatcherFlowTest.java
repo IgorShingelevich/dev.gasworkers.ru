@@ -43,7 +43,7 @@ public class DispatcherFlowTest extends BaseTest {
             dispatcherPages.getHomePage().checkFinishLoading();
             dispatcherPages.getHomePage().switchToListView();
             dispatcherPages.getHomePage().navInProgress();
-            dispatcherPages.getHomePage().openOrderByNumber(3192);
+            dispatcherPages.getHomePage().openOrderByNumber("3192");
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             dispatcherPages.getOrderCardPage().checkMasterDispatchedStatus(OrderStatus.MASTER_DISPATCHED);
             dispatcherPages.getOrderCardPage().selectAnotherTime();

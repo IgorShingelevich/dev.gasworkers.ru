@@ -82,7 +82,7 @@ public final DatePickerOrderDispatcherComponent datePicker;
                 //TODO - check price, docs, buttons, info
             });
         });
-        System.out.println("orderStatus + " + orderStatus);
+        System.out.println("orderStatus: " + orderStatus);
     }
 
     public void checkParticipateTheTenderStatus( OrderStatus orderStatus) {
@@ -97,7 +97,7 @@ public final DatePickerOrderDispatcherComponent datePicker;
             });
             //TODO - check price, docs, buttons, info
         });
-        System.out.println("orderStatus + " + orderStatus);
+        System.out.println("orderStatus: " + orderStatus);
     }
 
 

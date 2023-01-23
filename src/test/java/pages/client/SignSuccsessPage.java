@@ -4,7 +4,10 @@ import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
 import pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public class SignSuccsessPage extends BaseClientPage {
@@ -30,7 +33,7 @@ public class SignSuccsessPage extends BaseClientPage {
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что страница Подписание СМС загружена", () -> {
-            titleLocator.shouldHave(text(TITLE_TEXT));
+            titleLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(TITLE_TEXT));
             toOrderCardButtonLocator.shouldHave(text("К заказу"));
             toHomePageButtonLocator.shouldHave(text("На главную"));
         });

@@ -60,30 +60,11 @@ public class LastOrderProfileClientComponent extends BaseComponent {
     }
 
 
-
     public LastOrderProfileClientComponent open() {
         lastOrderCardActionButtonLocator.shouldBe(visible).click();
         lastOrderCardOrderActionOpenLinkLocator.shouldBe(visible).click();
         return this;
     }
-
-    public LastOrderProfileClientComponent verifyLastOrderCardInfo() {
-        lastOrderCardLocator.shouldBe(visible);
-        lastOrderCardTitleLocator.shouldBe(visible).shouldHave(text(LAST_ORDER_CARD_TITLE));
-        lastOrderCardOrderNumberLinkLocator.shouldBe(visible);
-        lastOrderCardActionButtonLocator.shouldBe(visible);
-        lastOrderCardServiceTypeTitleCollection.shouldBe(visible);
-        lastOrderCardObjectAddressTitleLocator.shouldBe(visible);
-        lastOrderCardObjectEquipmentTitleLocator.shouldBe(visible);
-        lastOrderCardObjectDateTitleLocator.shouldBe(visible);
-        lastOrderCardObjectTimeTitleLocator.shouldBe(visible);
-        return this;
-    }
-
-
-
-
-
 
 }
 

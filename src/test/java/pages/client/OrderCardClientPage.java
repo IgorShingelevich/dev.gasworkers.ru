@@ -53,7 +53,7 @@ public class OrderCardClientPage extends BaseClientPage {
         stepWithRole("Убедиться, что Карточка Заказа: " + orderNumber + " загружена", () -> {
             titleNumberLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(LAST_ORDER_CARD_TITLE));
             orderDetailsBlockLocator.shouldBe(visible, Duration.ofSeconds(20));
-            System.out.println("Order number: " + orderNumber);
+            System.out.println("orderNumber: " + orderNumber);
         });
         return this;
     }

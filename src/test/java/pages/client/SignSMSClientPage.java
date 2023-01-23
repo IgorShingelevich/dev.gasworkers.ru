@@ -7,10 +7,8 @@ import pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.appear;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.*;
 
 public class SignSMSClientPage extends BaseClientPage {
     private final FocusHeaderComponent header;
@@ -32,18 +30,16 @@ public class SignSMSClientPage extends BaseClientPage {
 
     public SignSMSClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что страница Подписание СМС загружена", () -> {
-            pageSignSMSTitleLocator.should(appear, Duration.ofSeconds(20)).shouldHave(text(SIGN_SMS_TITLE));
-            String titleSignSMSClientPage = pageSignSMSTitleLocator.getText();
-            System.out.println("titleSignSMSClientPage: " + titleSignSMSClientPage);
+            pageSignSMSTitleLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(SIGN_SMS_TITLE));
         });
         return this;
     }
 
     public SignSMSClientPage inputSMSCode(String smsCode) {
-        stepWithRole("Ввести СМС код: " + smsCode, () ->
-                smsCodeInputCollection.get(0).setValue(smsCode));
-        System.out.println("FirstClientSmsCode: " + smsCode);
-        return this;
+        stepWithRole("Ввести СМС код: " + smsCode, () -> {
+            smsCodeInputCollection.get(0).setValue(smsCode);
+        });
+        return null;
     }
 
     public SignSMSClientPage sign() {

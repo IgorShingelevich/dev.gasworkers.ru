@@ -16,6 +16,10 @@ import ru.sms_activate.response.api_rent.extra.SMSActivateSMS;
 import tests.BaseTest;
 import utils.User;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
 
@@ -85,6 +89,15 @@ class ClientDispatcherInteractionTest extends BaseTest {
             masterPages.getHomePage().checkFinishLoading();
         });
 
+        step("test run credentials ", () -> {
+            System.out.println("test run credentials: ");
+            System.out.println("client: " + client.email+ " "  + client.password);
+            System.out.println("dispatcher: " + dispatcher.email + " " + dispatcher.password);
+            System.out.println("master: " + master.email + " " + master.password);
+            System.out.println("run start time: " + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
+        });
+
+
         String orderNumber = step("Клиент размещает заказ на ТО", () -> {
             clientPages.getHomePage().clickPlaceOrderButton();
             clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
@@ -97,18 +110,12 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getSelectServicePage().checkFinishLoading();
             clientPages.getSelectServicePage().toOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
+            String currentOrderNumber = clientPages.getOrderCardPage().getOrderNumber();
             clientPages.getOrderCardPage().sidebar.home();
             clientPages.getHomePage().checkFinishLoading();
             clientPages.getHomePage().popUpClose();
             clientPages.getHomePage().lastOrderProfileClientComponent.lastOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
-
-            String orderNumberQ = clientPages.getOrderCardPage().getOrderNumber();
-
-//            clientPages.getOrderCardPage().checkFinishLoading();
-            //get order number from order card to check it in dispatcher
-
-//            clientPages.getSelectServicePage().popUpClose();
             step("Убедиться, что тип Заказа: ", () -> {
                 OrderType orderType = OrderType.MAINTENANCE;
                 clientPages.getOrderCardPage().checkOrderType(orderType);
@@ -121,8 +128,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             });
             clientPages.getOrderCardPage().clickOffersBlock();
             clientPages.getSelectServicePage().checkFinishLoading();
-
-            return orderNumberQ;
+            return currentOrderNumber;
         });
 
         step("Диспетчер принимает заказ на ТО ", () -> {
@@ -169,14 +175,10 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getSignSMSPage().checkFinishLoading();
 
             String sms = clientSmsApi1.waitReceiveNewSms().getText();
-            String code = sms.substring(0, 5);
+            String code = sms.substring(0, 6);
 
             clientPages.getSignSMSPage().inputSMSCode(code);
-            clientPages.getSignSMSPage().sign();
-
-
-
-
+//            clientPages.getSignSMSPage().sign();
             clientPages.getSignSuccsessPage().checkFinishLoading();
             clientPages.getSignSuccsessPage().toHomePage();
             clientPages.getHomePage().checkFinishLoading();
@@ -204,6 +206,8 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             dispatcherPages.getOrderCardPage().checkMasterDispatchedStatus(OrderStatus.MASTER_DISPATCHED);
         });
+
+
 
         sleep(5_000);
     }
