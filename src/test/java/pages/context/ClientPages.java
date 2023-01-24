@@ -7,6 +7,7 @@ import pages.client.maintenance.SelectDateMaintenanceClientPage;
 import pages.client.maintenance.SelectInsuranceClientPage;
 import pages.client.maintenance.SelectObjectMaintenanceClientPage;
 import pages.client.RegistrationClientPage;
+import pages.common.LandingPage;
 
 import static model.Role.*;
 
@@ -17,7 +18,7 @@ public final class ClientPages extends BaseRolePages {
         super(CLIENT, driver);
     }
 
-
+    private final LandingPage landingPage = new LandingPage(browser);
     private final RegistrationClientPage registrationPage = new RegistrationClientPage(browser);
     private final HomeClientPage homePage = new HomeClientPage(browser);
     private final TypeOrdersClientPage typeOrdersPage = new TypeOrdersClientPage(browser);

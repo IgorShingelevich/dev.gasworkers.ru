@@ -7,6 +7,7 @@ import model.browser.RoleBrowser;
 import pages.BasePage;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class LandingPage extends BasePage {
@@ -17,35 +18,43 @@ public LandingPage(RoleBrowser browser) {
     }
 
     ElementsCollection
-        signUpProleMenuLocator = $$("div.dropdown-wrapper__menu a");
+        signUpRoleMenuLocator =driver.$$("div.dropdown-wrapper__menu a");
 
     SelenideElement
-        primaryHeaderLocator = $(".primary-header"),
-        repairButtonLocator = $$(".main-block__btns--item").findBy(text("Ремонт")),
-        maintenanceButtonLocator = $$(".main-block__btns--item").findBy(text("Техобслуживание")),
-        mainBlockTitleLocator = $(".main-block__title"),
-        signInButtonLocator = $(".primary-header .link"),
-        userProfileButtonLocator = $(".primary-header--nav .link"),
-        signUpDropdownLocator = $(".dropdown-title .arrow-down"),
-        signUpClientButtonLocator = signUpProleMenuLocator.findBy(text("Для клиента")),
-        signUpCompanyButtonLocator = signUpProleMenuLocator.findBy(text("Для сервисной компании")),
-        signUpMasterButtonLocator = signUpProleMenuLocator.findBy(text("Для мастера"));
+        primaryHeaderLocator = driver.$(".primary-header"),
+        repairButtonLocator = driver.$(byTagAndText("button", "Ремонт")),
+        maintenanceButtonLocator = driver.$(byTagAndText("button", "Техобслуживание")),
+        videoButtonLocator = driver.$(byTagAndText("button", "Видеоконсультация")),
+
+        mainBlockTitleLocator = driver.$(".main-block__title"),
+        signInButtonLocator = driver.$(".primary-header .link"),
+        userProfileButtonLocator = driver.$(".primary-header--nav .link"),
+        signUpDropdownLocator = driver.$("span.dropdown-title"),
+        signUpClientButtonLocator = signUpRoleMenuLocator.findBy(text("Для клиента")),
+        signUpCompanyButtonLocator = signUpRoleMenuLocator.findBy(text("Для сервисной компании")),
+        signUpMasterButtonLocator = signUpRoleMenuLocator.findBy(text("Для мастера"));
 
 public LandingPage open() {
-    Selenide.open("https://dev.gasworkers.ru/");
+    driver.open("https://dev.gasworkers.ru/");
     primaryHeaderLocator.shouldBe(visible);
         return this;
     }
 
-    public LandingPage isOpened() {
-        primaryHeaderLocator.shouldBe(appear);
+    public LandingPage checkFinishLoading() {
         primaryHeaderLocator.shouldBe(visible);
-        userProfileButtonLocator.shouldBe(appear);
+        primaryHeaderLocator.shouldBe(visible);
+        userProfileButtonLocator.shouldBe(visible);
+        signInButtonLocator.shouldBe(visible);
+        signUpDropdownLocator.shouldBe(visible);
+        repairButtonLocator.shouldBe(visible);
+        maintenanceButtonLocator.shouldBe(visible);
+        videoButtonLocator.shouldBe(visible);
+
         return this;
     }
 
     //  clickSignInButton
-    public LandingPage clickUserProfile() {
+    public LandingPage clickUserProfileSignIn() {
         userProfileButtonLocator.click();
         return this;
     }
@@ -68,12 +77,17 @@ public LandingPage open() {
 
         public LandingPage clickUserRepairButton() {
 
-        repairButtonLocator.shouldHave(text("Ремонт")).shouldBe(visible).click();
+        repairButtonLocator.shouldHave(text("Ремонт")).click();
         return this;
     }
 
     public LandingPage clickUserMaintenanceButton() {
-        maintenanceButtonLocator.shouldHave(text("Техобслуживание")).shouldBe(visible).click();
+        maintenanceButtonLocator.shouldHave(text("Техобслуживание")).click();
+        return this;
+    }
+
+    public LandingPage clickUserVideoButton() {
+        videoButtonLocator.shouldHave(text("Видеоконсультация")).click();
         return this;
     }
 

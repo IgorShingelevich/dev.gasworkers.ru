@@ -1,5 +1,8 @@
 package utils;
 import com.github.javafaker.Faker;
+
+import static org.apache.commons.lang3.RegExUtils.replaceFirst;
+
 public class UserRandom {
 
     private String name;
@@ -15,7 +18,7 @@ public class UserRandom {
         this.surname = faker.name().lastName();
         this.patronicName = faker.name().nameWithMiddle();
         this.email = faker.internet().emailAddress();
-        this.phoneNumber = faker.phoneNumber().cellPhone();
+        this.phoneNumber = faker.phoneNumber().subscriberNumber(11).replaceFirst("^[^7]", "7");
     }
 
     public String getName() {
