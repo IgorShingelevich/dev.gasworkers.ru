@@ -99,16 +99,16 @@ public class OrderCardClientPage extends BaseClientPage {
     public void checkOrderStatusNew(OrderStatus orderStatus) {
         step("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             //how to make this step more flexible?
-           stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () ->
+           stepWithRole("Убедиться, что заказа статус заказа является: " + orderStatus, () ->
                     orderStatusLocator.shouldHave(text(orderStatus.toString()))
            );
-           stepWithRole("Убедиться, что в статусе: " + orderStatus + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
+           stepWithRole("Убедиться, что  в Карточке заказа: " + orderStatus + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
                // how to avoid hardcode of button names?
                toMapButtonLocator.shouldBe(visible);
                cancelOrderButtonLocator.shouldBe(visible);
                orderStatusLocator.shouldHave(text(orderStatus.toString()));
            });
-            stepWithRole("Убедиться, что документы отсутствуют  " , () -> {
+            stepWithRole("Убедиться, что  в Карточке заказа документы отсутствуют  " , () -> {
                 navDocs();
                 docsTitleCollection.shouldBe(size(0));
                 navCommon();
@@ -123,13 +123,13 @@ public class OrderCardClientPage extends BaseClientPage {
             stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () ->
                     orderStatusLocator.shouldHave(text(orderStatus.toString()))
             );
-            stepWithRole("Убедиться, что в статусе: " + orderStatus + " представлена кнопка Отменить заказ " , () -> {
+            stepWithRole("Убедиться, что в Карточке заказа: " + orderStatus + " представлена кнопка Отменить заказ " , () -> {
                 // how to avoid hardcode of button names?
                 toMapButtonLocator.shouldNotBe(visible);
                 cancelOrderButtonLocator.shouldBe(visible);
                 orderStatusLocator.shouldHave(text(orderStatus.toString()));
             });
-            stepWithRole("Убедиться, что в документах присутствует Договор ТО и Страховой полис " /*+ docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText()*/ , () -> {
+            stepWithRole("Убедиться, что  в Карточке заказа в документах присутствует Договор ТО и Страховой полис " /*+ docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText()*/ , () -> {
                navDocs();
                docsTitleCollection.get(0).shouldHave(text("Договор ТО"));
                docsTitleCollection.get(1).shouldHave(text("Страховой полис"));

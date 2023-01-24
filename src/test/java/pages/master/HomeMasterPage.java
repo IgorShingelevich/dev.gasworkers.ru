@@ -5,6 +5,8 @@ import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
 import pages.components.sharedComponent.sidebarComponent.SidebarMasterComponent;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 
@@ -33,7 +35,7 @@ public class HomeMasterPage extends BaseMasterPage{
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
-            timeTableLocator.shouldBe(visible);
+            timeTableLocator.shouldBe(visible, Duration.ofSeconds(10));
         });
     }
 

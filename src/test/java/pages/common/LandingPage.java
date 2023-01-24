@@ -1,5 +1,6 @@
 package pages.common;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
@@ -15,28 +16,20 @@ public LandingPage(RoleBrowser browser) {
         super(browser);
     }
 
-    SelenideElement primaryHeaderLocator = $(".primary-header");
-    SelenideElement repairButtonLocator = $$(".main-block__btns--item").findBy(text("Ремонт"));
-            //$x("//button[@class='btn btn-primary disable-outline'][contains(.,'Ремонт')]");
-            // $(".main-block__btns .btn btn-primary disable-outline"),
-    SelenideElement maintenanceButtonLocator = $$(".main-block__btns--item").findBy(text("Техобслуживание")),
-            //$x("//button[@class='btn btn-primary disable-outline'][contains(.,'Техобслуживание')]");
-            // $(".main-block__btns .btn btn-primary disable-outline"),
-    //$(".main-block__btns .btn btn-primary disable-outline"),
-    mainBlockTitleLocator = $(".main-block__title"),
-    signInButtonLocator = $(".primary-header .link"),
-    userProfileButtonLocator = $(".primary-header--nav .link"),
-    //$(".primary-header .link"),
-    signUpDropdownLocator = $(".dropdown-title .arrow-down");
+    ElementsCollection
+        signUpProleMenuLocator = $$("div.dropdown-wrapper__menu a");
 
-
-
-
-
-//    ElementsCollection primeButtonCollection = $$(".btn btn-primary disable-outline");
-//    ElementsCollection signUpRolesCollection = (ElementsCollection) $$(".dropdown-wrapper__menu a");
-
-
+    SelenideElement
+        primaryHeaderLocator = $(".primary-header"),
+        repairButtonLocator = $$(".main-block__btns--item").findBy(text("Ремонт")),
+        maintenanceButtonLocator = $$(".main-block__btns--item").findBy(text("Техобслуживание")),
+        mainBlockTitleLocator = $(".main-block__title"),
+        signInButtonLocator = $(".primary-header .link"),
+        userProfileButtonLocator = $(".primary-header--nav .link"),
+        signUpDropdownLocator = $(".dropdown-title .arrow-down"),
+        signUpClientButtonLocator = signUpProleMenuLocator.findBy(text("Для клиента")),
+        signUpCompanyButtonLocator = signUpProleMenuLocator.findBy(text("Для сервисной компании")),
+        signUpMasterButtonLocator = signUpProleMenuLocator.findBy(text("Для мастера"));
 
 public LandingPage open() {
     Selenide.open("https://dev.gasworkers.ru/");
@@ -48,15 +41,28 @@ public LandingPage open() {
         primaryHeaderLocator.shouldBe(appear);
         primaryHeaderLocator.shouldBe(visible);
         userProfileButtonLocator.shouldBe(appear);
-
-
         return this;
     }
 
     //  clickSignInButton
     public LandingPage clickUserProfile() {
-        userProfileButtonLocator.shouldBe(appear).click();
+        userProfileButtonLocator.click();
         return this;
+    }
+
+    public void signUpClient() {
+        signUpDropdownLocator.click();
+        signUpClientButtonLocator.click();
+    }
+
+    public void signUpCompany() {
+        signUpDropdownLocator.click();
+        signUpCompanyButtonLocator.click();
+    }
+
+    public void signUpMaster() {
+        signUpDropdownLocator.click();
+        signUpMasterButtonLocator.click();
     }
 
 

@@ -1,12 +1,12 @@
 package pages.context;
 
 import com.codeborne.selenide.SelenideDriver;
-import com.google.gson.internal.bind.util.ISO8601Utils;
 import lombok.Getter;
 import pages.client.*;
 import pages.client.maintenance.SelectDateMaintenanceClientPage;
 import pages.client.maintenance.SelectInsuranceClientPage;
 import pages.client.maintenance.SelectObjectMaintenanceClientPage;
+import pages.client.RegistrationClientPage;
 
 import static model.Role.*;
 
@@ -17,6 +17,8 @@ public final class ClientPages extends BaseRolePages {
         super(CLIENT, driver);
     }
 
+
+    private final RegistrationClientPage registrationPage = new RegistrationClientPage(browser);
     private final HomeClientPage homePage = new HomeClientPage(browser);
     private final TypeOrdersClientPage typeOrdersPage = new TypeOrdersClientPage(browser);
     private final InfoTypeOrderClientPage infoTypeOrderPage = new InfoTypeOrderClientPage(browser);

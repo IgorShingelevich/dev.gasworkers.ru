@@ -28,7 +28,7 @@ public final class LoginPage extends BasePage {
 //    @Step("Авторизоваться в системе  почта {email}  пароль {password}")
     public void login(String email, String password) {
         driver.$(".title h3").shouldHave(text("Войдите в личный кабинет"));
-        driver.$("#jivo-iframe-container").shouldBe(exist, Duration.ofSeconds(20));  //reset the form if being loaded after
+//        driver.$("#jivo-iframe-container").shouldBe(exist, Duration.ofSeconds(40));  //reset the form if being loaded after
         stepWithRole("Ввести почту: " + email, () -> {
             driver.$("input[placeholder=E-mail]") .click();
             driver.$("input[placeholder=E-mail]").setValue(email);

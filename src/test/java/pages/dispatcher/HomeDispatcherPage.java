@@ -1,5 +1,6 @@
 package pages.dispatcher;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
@@ -23,6 +24,7 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
     }
 
     ElementsCollection
+        mapOrderTabsCollection = driver.$$("[id*=order-item]").as("Коллекция табов заказов на карте"),
         navButtonsCollection = driver.$$("div.top-filter__status--btn"),
         orderCardsCollection = driver.$$("div.order-card"),
         orderNumberLinkCollection = driver.$$("p.h5.link-blue.pointer"),
@@ -41,13 +43,14 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         listViewButtonLocator = driver.$("div.action-btn.list-type"),
         orderCardTitleLocator = driver.$(".page-title .h3.mb-2"),
         mapContainerLocator = driver.$("div.map-wrap"),
-        mapLocator = driver.$(".map-wrap .ymap-container .map-into");
+        mapElemetLocator =   driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты");
 
 
     public HomeDispatcherPage checkFinishLoading() {
         stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
-            dispatcherHomePageTitleLocator.shouldBe(visible, Duration.ofSeconds(10));
-            mapLocator.shouldBe(visible, Duration.ofSeconds(20));
+            //CollectionCondition.sizeGreaterThan
+            mapOrderTabsCollection.shouldHave(CollectionCondition.sizeGreaterThan(0 ), Duration.ofSeconds(30));
+            mapElemetLocator.shouldBe(visible, Duration.ofSeconds(20));
         });
         return this;
     }

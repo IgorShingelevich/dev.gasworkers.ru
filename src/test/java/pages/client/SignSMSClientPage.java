@@ -2,6 +2,7 @@ package pages.client;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverRunner;
 import model.browser.RoleBrowser;
 import pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 
@@ -30,6 +31,8 @@ public class SignSMSClientPage extends BaseClientPage {
 
     public SignSMSClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что страница Подписание СМС загружена", () -> {
+            String currentUrl = WebDriverRunner.url();
+            System.out.println("currentUrl = " + currentUrl);
             pageSignSMSTitleLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(SIGN_SMS_TITLE));
         });
         return this;

@@ -52,10 +52,8 @@ public class SelectServicePageClientPage extends BaseClientPage {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
 //            spinnerScrollbarLocator.should(disappear);
             firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
-//        mapContainerLocator.shouldBe(appear).shouldBe(visible);
-            driver.$("[class*=zoom__plus]").shouldBe(visible, Duration.ofSeconds(40));
+            driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
             sleep(3_000);
-//            mapContainerLocator.shouldBe(appear, Duration.ofSeconds(40));
         });
     }
 
@@ -78,7 +76,8 @@ public class SelectServicePageClientPage extends BaseClientPage {
     public SelectServicePageClientPage proceedWithFirstService() {
         stepWithRole("Нажать на кнопку Выбрать Компанию ", () -> {
 //            reviewButtonCollection.first().shouldBe(visible, Duration.ofSeconds(40)).shouldHave(text("Выбрать")).click();
-            reviewButtonCollection.first().shouldBe(visible, Duration.ofSeconds(40)).click();
+            reviewButtonCollection.first().shouldBe(visible, Duration.ofSeconds(40))
+                    .shouldHave(text("Выбрать")).click();
             selectInsurancePageTitleLocator.shouldBe(visible, Duration.ofSeconds(40));
         });
 

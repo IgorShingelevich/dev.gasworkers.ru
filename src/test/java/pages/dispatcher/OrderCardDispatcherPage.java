@@ -72,15 +72,19 @@ public final DatePickerOrderDispatcherComponent datePicker;
         return this;
     }
 
-    public void checkReviewTheTenderStatus(OrderStatus orderStatus) {
+    public void checkReviewNewTheTenderStatus(OrderStatus orderStatus) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () ->
 
                     orderStatusLocator.shouldHave(text(orderStatus.toString())));
-            stepWithRole("Убедиться, что при рассмотрении Тендера  представлена кнопка Прнять и кнопка Отказаться ", () -> {
-//
-                //TODO - check price, docs, buttons, info
+            stepWithRole("Убедиться, что в Карточке заказа  представлена кнопка Принять Заказ и Отказаться ", () -> {
+                alreadyAcceptedButtonLocator.as("Уже участвуете").should(appear, Duration.ofSeconds(40));
+                acceptRequestButtonLocator.scrollTo()
+                        .shouldBe(visible);
+                declineRequestButtonLocator.shouldBe(visible);
+//                alreadyAcceptedButtonLocator.shouldNot(visible, Duration.ofSeconds(10)); // fall
             });
+            //TODO - check price, docs, buttons, info
         });
         System.out.println("orderStatus: " + orderStatus);
     }
@@ -90,10 +94,10 @@ public final DatePickerOrderDispatcherComponent datePicker;
             stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () ->
 
                     orderStatusLocator.shouldHave(text(orderStatus.toString())));
-            stepWithRole("Убедиться, что при участии в Тендере  представлена неактивная серая кнопка Уже участвуете ", () -> {
+            stepWithRole("Убедиться, что в Карточке заказа  представлена неактивная серая кнопка Уже участвуете ", () -> {
                 alreadyAcceptedButtonLocator.as("Уже участвуете").should(appear, Duration.ofSeconds(40));
-//                acceptButtonLocator.shouldBe(hidden);
-//                        declineButtonLocator.shouldBe(hidden);
+                acceptRequestButtonLocator.shouldNot(visible);
+                declineRequestButtonLocator.shouldNot(visible);
             });
             //TODO - check price, docs, buttons, info
         });
@@ -106,7 +110,7 @@ public final DatePickerOrderDispatcherComponent datePicker;
             stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () -> orderStatusLocator.shouldHave(text(orderStatus.toString())));
         });
 
-        stepWithRole("Убедиться, что представлена кнопка Назначить время и Отменить заказ ", () -> {
+        stepWithRole("Убедиться, что  в Карточке заказа представлена кнопка Назначить время и Отменить заказ ", () -> {
             selectTimeButtonLocator.shouldBe(visible);
             cancelButtonLocator.shouldBe(visible);
         });
@@ -118,7 +122,7 @@ public final DatePickerOrderDispatcherComponent datePicker;
     public void checkMasterDispatchedStatus(OrderStatus orderStatus) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () -> orderStatusLocator.shouldHave(text(orderStatus.toString())));
-            stepWithRole("Убедиться, что представлена кнопка Назначить Другого Мастера и Назанчить Новое Время ", () -> {
+            stepWithRole("Убедиться, что  в Карточке заказа представлена кнопка Назначить Другого Мастера и Назанчить Новое Время ", () -> {
                 selectAnotherTimeButtonLocator.as("Назначить Новое Время").shouldBe(visible, Duration.ofSeconds(10));
                 selectAnotherMasterButtonLocator.as("Назначить Другого Мастера").shouldBe(visible, Duration.ofSeconds(10));
                 //TODO - check price, docs, buttons, info

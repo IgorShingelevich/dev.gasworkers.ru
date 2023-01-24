@@ -1,7 +1,6 @@
 package tests.integration;
 
 import api.sms.SmsApi;
-import com.codeborne.selenide.Selenide;
 import extension.browser.Browser;
 import model.Role;
 import model.client.OrderStatus;
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import pages.context.ClientPages;
 import pages.context.DispatcherPages;
 import pages.context.MasterPages;
-import ru.sms_activate.response.api_rent.extra.SMSActivateSMS;
 import tests.BaseTest;
 import utils.User;
 
@@ -94,7 +92,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             System.out.println("client: " + client.email+ " "  + client.password);
             System.out.println("dispatcher: " + dispatcher.email + " " + dispatcher.password);
             System.out.println("master: " + master.email + " " + master.password);
-            System.out.println("run start time: " + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
+            System.out.println("runStartTime: " + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
         });
 
 
@@ -136,9 +134,10 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getHomePage().openOrderByNumber(orderNumber);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             //check OrderStatus NEW_TENDER
-            dispatcherPages.getHomePage().popUpClose();
+            dispatcherPages.getOrderCardPage().popUpClose();
+            dispatcherPages.getOrderCardPage().checkReviewNewTheTenderStatus(OrderStatus.NEW_TENDER);
             dispatcherPages.getOrderCardPage().acceptOrder();
-            dispatcherPages.getOrderCardPage().checkParticipateTheTenderStatus(OrderStatus.NEW_TENDER);
+            dispatcherPages.getOrderCardPage().checkParticipateTheTenderStatus(OrderStatus.PARTICIPATE_TENDER);
             // check OrderStatus gray button- Уже участвуете
         });
 
