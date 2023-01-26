@@ -9,35 +9,40 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-import static org.apache.commons.lang3.RegExUtils.replaceFirst;
+import static utils.RandomUtil.*;
+
 
 public class UserRandom {
 
     private String name;
     private String surname;
     private String patronymicName;
+    private String gender;
     private String fullName;
     private String email;
     private String phoneNumber;
     private String sinceDate;
     private  String password = "123456";
 
-    public UserRandom() {
+    public  UserRandom() {
         Faker faker = new Faker(new Locale("ru"));
         String emailPrefixMock = "gwtest";
         String prefixDateTime =  LocalDate.now().format(DateTimeFormatter.ofPattern("ddMM"))+ "_" + LocalTime.now().format(DateTimeFormatter.ofPattern("HHmm"))+"_";
-        String nameTestPrefix = "gwtest_";
-        String fullName = faker.name().fullName().toString();
-        System.out.println("fullName: " + fullName);
-        List<String> fakerFullNameList = Arrays.asList(fullName.split(" "));
-        this.fullName = this.surname + " " + this.name + " " + this.patronymicName;
-        this.name =  fakerFullNameList.get(1);
-        this.surname = fakerFullNameList.get(0);
+
+
+        this.name = faker.name().firstName();
+                //fakerRelativeName();
+        this.surname = faker.name().lastName();
+                //fakerRelativeSurname();
         this.patronymicName = "Автотестович";
+                //relativeFakerPatronymic();
+        this.gender = null;
+                //fakerRelativeGender();
+        this.fullName = this.surname.toString() + " " + this.name.toString() + " " + this.patronymicName.toString();
         Transliterator cyrillicToLatin = Transliterator.getInstance("Cyrillic-Latin");
         String latinSurname = cyrillicToLatin.transliterate(surname);
 
-        String email = emailPrefixMock + prefixDateTime + latinSurname + "@rambler.ru";
+        String email = emailPrefixMock + prefixDateTime + latinSurname.toLowerCase() + "@rambler.ru";
 // TODO  different  random email domains for test
         this.email = email;
         this.phoneNumber =faker.regexify("7777[0-9]{7}");
@@ -55,6 +60,10 @@ public class UserRandom {
 
     public String getPatronymicName() {
         return patronymicName;
+    }
+
+    public String getGender(){
+        return gender;
     }
 
     public String getFullName() {

@@ -4,6 +4,8 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -86,8 +88,9 @@ public class RegistrationClientPage extends BaseClientPage {
     }
 
     public void byPhone (String phone) {
-        stepWithRole("Регистрация по номеру телефона: " + phone, () -> {
-            stepWithRole("Ввести номер телефона" , () -> {
+        String formatPhoneNumber = phone.substring(0, 1) + "(" + phone.substring(1, 4) + ")-" + phone.substring(4, 7) + "-" + phone.substring(7, 11);
+stepWithRole("Регистрация по номеру телефона: " + formatPhoneNumber  , () -> {
+            stepWithRole("Ввести номер телефона: " + formatPhoneNumber , () -> {
                 inputPhoneLocator.setValue(phone);
                 System.out.println("phone: " + phone);
             });
@@ -254,7 +257,7 @@ public class RegistrationClientPage extends BaseClientPage {
                 stepWithRole("Плейсхолдер ввода отчества" , () -> {
                     driver.$("input[placeholder*=Отчество]").shouldBe(visible).as("Отчество");
                 });
-                stepWithRole("Подзаголовок и телефон: " + phone , () -> {
+                stepWithRole("Подзаголовок и телефон: " + formatPhoneNumber , () -> {
                     driver.$("div.d-flex.justify-content-between.mb-20").$$("div").get(0).shouldHave(text("Ваш номер телефона")).as("Ваш номер телефона");
 
                     driver.$("div.d-flex.justify-content-between.mb-20").$$("div").get(1).shouldHave(text(formatPhoneNumber)).as("formatPhoneNumber");
@@ -302,6 +305,7 @@ public class RegistrationClientPage extends BaseClientPage {
     }
 
     public void checkFinishState() {
+        driver.$("div.logo-small img").should(appear);
         stepWithRole("Убедиться что представлены компоненты Успешная регистрации" , () -> {
             stepWithRole("Убедиться что отображается заголовок", () -> {
                 driver.$("div.page-content h3").shouldHave(text("Поздравляем!"));
@@ -310,6 +314,7 @@ public class RegistrationClientPage extends BaseClientPage {
                 driver.$("div.page-content").$$("p").get(0).shouldHave(text("Вы успешно зарегистрировались в сервисе Gasworkers."));
                 driver.$("div.page-content").$$("p").get(1).shouldHave(text("Через 5 секунд вы будете автоматически перенаправлены в личный кабинет"));
             });
+            driver.$("div.logo-small img").should(disappear, Duration.ofSeconds(20));
         });
     }
 }

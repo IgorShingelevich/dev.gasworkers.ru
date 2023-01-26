@@ -35,20 +35,24 @@ public LandingPage(RoleBrowser browser) {
         signUpMasterButtonLocator = signUpRoleMenuLocator.findBy(text("Для мастера"));
 
 public LandingPage open() {
-    driver.open("https://dev.gasworkers.ru/");
-    primaryHeaderLocator.shouldBe(visible);
+    stepWithRole("Открыть главную страницу", () -> {
+        driver.open("https://dev.gasworkers.ru/");
+        primaryHeaderLocator.shouldBe(visible);
+    });
         return this;
     }
 
     public LandingPage checkFinishLoading() {
-        primaryHeaderLocator.shouldBe(visible);
-        primaryHeaderLocator.shouldBe(visible);
-        userProfileButtonLocator.shouldBe(visible);
-        signInButtonLocator.shouldBe(visible);
-        signUpDropdownLocator.shouldBe(visible);
-        repairButtonLocator.shouldBe(visible);
-        maintenanceButtonLocator.shouldBe(visible);
-        videoButtonLocator.shouldBe(visible);
+        stepWithRole("Убедиться, что главная страница загружена", () -> {
+            primaryHeaderLocator.shouldBe(visible);
+            primaryHeaderLocator.shouldBe(visible);
+            userProfileButtonLocator.shouldBe(visible);
+            signInButtonLocator.shouldBe(visible);
+            signUpDropdownLocator.shouldBe(visible);
+            repairButtonLocator.shouldBe(visible);
+            maintenanceButtonLocator.shouldBe(visible);
+            videoButtonLocator.shouldBe(visible);
+        });
 
         return this;
     }

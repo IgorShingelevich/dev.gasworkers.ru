@@ -222,6 +222,16 @@ public class RandomUtil {
             String patronymic = SNPList.get(2);
             return  patronymic.toString();
         }
+    public static String fakerRelativeGender() {
+        String name = SNPList.get(1);
+        String surname = SNPList.get(0);
+        if ( surname.endsWith("а") ||  surname.endsWith("я")) {
+            //then return String "Female"
+            return "Female";
+        } else {
+            return "Male";
+        }
+    }
 
 
 

@@ -42,7 +42,7 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().byPhone(randomClient.getPhoneNumber());
         clientPages.getRegistrationPage().checkSecondStepFinishLoading();
 //        clientPages.getRegistrationPage().fillCode("");
-        clientPages.getRegistrationPage().clickNext();
+        clientPages.getRegistrationPage().clickNext();  //manual code input
         clientPages.getRegistrationPage().checkThirdStepFinishLoading();
         clientPages.getRegistrationPage().fillPassword(randomClient.getPassword());
         clientPages.getRegistrationPage().fillPasswordConfirmation(randomClient.getPassword());
@@ -57,7 +57,9 @@ public class RegistrationTest extends BaseTest {
         clientPages.getHomePage().checkInitialModal();
         // InitialModal - put in another component?
         clientPages.getHomePage().clickLaterInitialModal();
-        clientPages.getHomePage().checkInitialState(randomClient.getFullName());
+        clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
+        clientPages.getHomePage().sidebar.allObjects();
+        clientPages.getAllObjectsPage().checkInitialState();
 
 
 

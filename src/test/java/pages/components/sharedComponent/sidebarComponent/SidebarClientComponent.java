@@ -27,7 +27,6 @@ public class SidebarClientComponent extends BaseComponent {
 
 
     public SidebarClientComponent clickOrdersAndInvoicesDropdown() {
-        ordersAndInvoicesDropdownLocator.shouldBe(visible);
         ordersAndInvoicesDropdownLocator.click();
         return this;
     }
@@ -40,21 +39,27 @@ public class SidebarClientComponent extends BaseComponent {
     }
 
     public SidebarClientComponent allObjects() {
-        objectsAndEquipmentLinkLocator.shouldBe(visible).click();
+        stepWithRole("Перейти на страницу  Объекты и оборудование", () -> {
+            objectsAndEquipmentLinkLocator.click();
+        });
         return this;
     }
 
     public SidebarClientComponent allOrders() {
-        clickOrdersAndInvoicesDropdown();
-        ordersListLinkLocator.shouldBe(visible);
-        ordersListLinkLocator.click();
+        stepWithRole("Перейти на страницу Список заказов", () -> {
+            clickOrdersAndInvoicesDropdown();
+            ordersListLinkLocator.shouldBe(visible);
+            ordersListLinkLocator.click();
+        });
         return this;
     }
 
-    public SidebarClientComponent invoices() {
-        clickOrdersAndInvoicesDropdown();
-        invoicesListLinkLocator.shouldBe(visible);
-        invoicesListLinkLocator.click();
+    public SidebarClientComponent allInvoices() {
+        stepWithRole("Перейти на страницу Список счетов", () -> {
+            clickOrdersAndInvoicesDropdown();
+            invoicesListLinkLocator.shouldBe(visible);
+            invoicesListLinkLocator.click();
+        });
         return this;
     }
 

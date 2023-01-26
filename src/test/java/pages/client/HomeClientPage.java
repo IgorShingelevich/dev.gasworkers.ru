@@ -85,28 +85,20 @@ public final class HomeClientPage extends BaseClientPage {
         });
     }
 
-    public void checkInitialState( String fullName) {
-        String sinceProfileDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy"));
-        stepWithRole("Проверить начальное состояние", () -> {
+    public void checkInitialState( String fullName, String sinceProfileDate) {
+        stepWithRole("Убедиться, что страница в  начальном состоянии", () -> {
             stepWithRole("Убедиться, что  кнопки начальнгого состояния Заполнить профиль, Добавить оборудование и Создать Заказ присутствуют", () -> {
-                driver.$(byTagAndText("button", "Заполнить профиль")).shouldBe(visible).as("FillProfile button");
+                driver.$(byTagAndText("button", "Заполнить профиль")).shouldBe(visible, Duration.ofSeconds(30)).as("FillProfile button");
                 driver.$(byTagAndText("button", "Добавить оборудование")).shouldBe(visible).as("AddEquipment button");
                 driver.$(byTagAndText("button", "Создать заказ")).shouldBe(visible).as("CreateOrder button");
             });
             stepWithRole("Убедиться, секция персональных данных содержит: ", () -> {
-                stepWithRole("ФИО клиента: " + fullName, () -> {
-                    checkFullName(fullName);
-                });
-                stepWithRole("Дату регистрации: " + sinceProfileDate, () -> {
+                checkFullName(fullName);
+                stepWithRole("Дата регистрации: " + sinceProfileDate, () -> {
                     profileBlockSinceDateLocator.as("Profile since date").shouldHave(text("Зарегистрирован с " +sinceProfileDate));
                 });
-                stepWithRole("Начальный рейтинг клиента 5.00: ", () -> {
-                    checkRating("5.00");
-                });
-                stepWithRole("Ноль отзывов ", () -> {
-                    // TODO registration date
-                });
-
+                checkRating("5.00");
+                checkReviewsCount("0");
             });
             stepWithRole("Убедиться, что отсутствует Информация о последнем заказе и карусель Объекты и оборудование", () -> {
                 driver.$("div.section .card-wrapper").shouldNotBe(visible).as("Last order info");
@@ -135,13 +127,13 @@ public final class HomeClientPage extends BaseClientPage {
     }
 
     public void checkRating(String rating) {
-        stepWithRole("Проверка рейтинга {rating}", () ->
+        stepWithRole("Убедиться, что рейтинг: " + rating, () ->
                 profileBlockRatingLocator.shouldHave(Condition.text(rating))
         );
     }
 
     public void checkReviewsCount(String reviewsCount) {
-        stepWithRole("Проверка количества отзывов {reviewsCount}", () ->
+        stepWithRole("Убедиться, что количество отзывов: " + reviewsCount, () ->
                 profileBlockReviewsCountLocator.shouldHave(Condition.text(reviewsCount))
         );
     }
