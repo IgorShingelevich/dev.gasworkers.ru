@@ -1,13 +1,11 @@
 package tests.registration;
 
-import com.codeborne.selenide.Selenide;
 import extension.browser.Browser;
 import model.Role;
 
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.common.LandingPage;
 import pages.context.ClientPages;
 import pages.context.DispatcherPages;
 import pages.context.MasterPages;
@@ -30,6 +28,10 @@ public class RegistrationTest extends BaseTest {
     UserRandom randomDispatcher = new UserRandom();
     UserRandom randomMaster = new UserRandom();
 
+
+
+
+
     @Test
     @DisplayName("Регистрация клиента по телефону")
     void registrationClientByPhone() {
@@ -39,6 +41,25 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().checkFirstStepFinishLoading();
         clientPages.getRegistrationPage().byPhone(randomClient.getPhoneNumber());
         clientPages.getRegistrationPage().checkSecondStepFinishLoading();
+//        clientPages.getRegistrationPage().fillCode("");
+        clientPages.getRegistrationPage().clickNext();
+        clientPages.getRegistrationPage().checkThirdStepFinishLoading();
+        clientPages.getRegistrationPage().fillPassword(randomClient.getPassword());
+        clientPages.getRegistrationPage().fillPasswordConfirmation(randomClient.getPassword());
+        clientPages.getRegistrationPage().clickNext();
+        clientPages.getRegistrationPage().checkFourthStepFinishLoading(randomClient.getPhoneNumber());
+        clientPages.getRegistrationPage().fillName(randomClient.getName());
+        clientPages.getRegistrationPage().fillSurname(randomClient.getSurname());
+        clientPages.getRegistrationPage().fillPatronymicName(randomClient.getPatronymicName());
+        clientPages.getRegistrationPage().fillEmail(randomClient.getEmail());
+        clientPages.getRegistrationPage().clickNext();
+        clientPages.getHomePage().checkInitialModal();
+        // InitialModal - put in another component?
+        clientPages.getHomePage().laterInitialModal();
+        clientPages.getHomePage().checkInitialState();
+
+
+
 
     }
 
@@ -51,6 +72,7 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().checkFirstStepFinishLoading();
         clientPages.getRegistrationPage().byEmail(randomClient.getEmail());
         clientPages.getRegistrationPage().checkSecondStepFinishLoading();
+
 
 //        Selenide.sleep(20000);
     }
