@@ -3,19 +3,23 @@ package pages.client;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import io.qameta.allure.Step;
 import model.browser.RoleBrowser;
 import pages.components.clientComponent.LastOrderProfileClientComponent;
 import pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public final class HomeClientPage extends BaseClientPage {
 
     public final LastOrderProfileClientComponent lastOrderProfileClientComponent;
     public final SidebarClientComponent sidebar;
+
+
 
 
 
@@ -29,16 +33,15 @@ public final class HomeClientPage extends BaseClientPage {
 
     private final String OBJECTS_TITLE = "Объекты и оборудование";
 
-    // clientCardBlock
-    SelenideElement
-        profileCardNameLocator = driver.$(".profile-card .title"),
-        profileCardSinceDateLocator = driver.$(".profile-card .since-date"),
-        profileCardRatingLocator = driver.$(".profile-card.rating-badge"),
-        profileCardReviewsLocator = driver.$(".profile-card .reviews"),
-        profileCardImageLocator = driver.$(".profile-card").$(".profile-image");
 
-    //objectsBlock
     SelenideElement
+    // clientBlock
+        profileBlockFullNameLocator = driver.$(".profile-card .title").as("Full name"),
+        profileBlockSinceDateLocator = driver.$(".profile-card .since-date").as("Registration date"),
+        profileBlockRatingLocator = driver.$("span.rating-badge").as("Rating"),
+        profileBlockReviewsCountLocator = driver.$(".profile-card .reviews").as("Reviews count"),
+        profileBlockImageLocator = driver.$(".profile-card").$(".profile-image"),
+    //objectsBlock
         objectsTitleLocator = driver.$(".client-objects .title"),
         firstObjectLinkLocator = driver.$$x("(//div[contains(@class,'title link-blue text-primary pointer')])").get(4), // 0-3 out of visibility
         objectsPreviousButtonLocator = driver.$(".client-objects .slick-arrow.slick-prev"),
@@ -51,29 +54,98 @@ public final class HomeClientPage extends BaseClientPage {
     public HomeClientPage open() {
         stepWithRole("Открыть домашнюю страницу", () -> {
             driver.open("/profile/client");
-            profileCardNameLocator.shouldBe(visible);
+            profileBlockFullNameLocator.shouldBe(visible);
         });
         return this;
     }
 
-//    @Step("Убедиться, что Домашняя страница загружена")
+    public HomeClientPage checkInitialModal() {
+        stepWithRole("Проверить начальное модальное окно", () -> {
+            stepWithRole(" Убедиться что текст заголовка и подзаголовка правильный", () -> {
+                driver.$("div.completed-block h3").shouldBe(visible, Duration.ofSeconds(30)).shouldHave(text("Укажите Ваш объект и оборудование")).as("Initial title");
+                driver.$("div.completed-block p").shouldHave(text("Заполните все данные по газовому оборудованию и мы сможем точнее и быстрее найти вам нужного мастера")).as("Initial subtitle");
+            });
+            stepWithRole("Убедиться, что присутствуют  кнопки Приступить и Позже", () -> {
+                driver.$(byTagAndText("button", "Приступить")).shouldBe(visible).as("StartNow button");
+                driver.$(byTagAndText("button", "Позже")).shouldBe(visible).as("Later button");
+            });
+        });
+        return this;
+    }
+
+    public void clickStartNowInitialModal() {
+        stepWithRole("Нажать кнопку Приступить", () -> {
+            driver.$(byTagAndText("button", "Приступить")).click();
+        });
+    }
+
+    public void clickLaterInitialModal() {
+        stepWithRole("Нажать кнопку Позже", () -> {
+            driver.$(byTagAndText("button", "Позже")).click();
+        });
+    }
+
+    public void checkInitialState( String fullName) {
+        String sinceProfileDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy"));
+        stepWithRole("Проверить начальное состояние", () -> {
+            stepWithRole("Убедиться, что  кнопки начальнгого состояния Заполнить профиль, Добавить оборудование и Создать Заказ присутствуют", () -> {
+                driver.$(byTagAndText("button", "Заполнить профиль")).shouldBe(visible).as("FillProfile button");
+                driver.$(byTagAndText("button", "Добавить оборудование")).shouldBe(visible).as("AddEquipment button");
+                driver.$(byTagAndText("button", "Создать заказ")).shouldBe(visible).as("CreateOrder button");
+            });
+            stepWithRole("Убедиться, секция персональных данных содержит: ", () -> {
+                stepWithRole("ФИО клиента: " + fullName, () -> {
+                    checkFullName(fullName);
+                });
+                stepWithRole("Дату регистрации: " + sinceProfileDate, () -> {
+                    profileBlockSinceDateLocator.as("Profile since date").shouldHave(text("Зарегистрирован с " +sinceProfileDate));
+                });
+                stepWithRole("Начальный рейтинг клиента 5.00: ", () -> {
+                    checkRating("5.00");
+                });
+                stepWithRole("Ноль отзывов ", () -> {
+                    // TODO registration date
+                });
+
+            });
+            stepWithRole("Убедиться, что отсутствует Информация о последнем заказе и карусель Объекты и оборудование", () -> {
+                driver.$("div.section .card-wrapper").shouldNotBe(visible).as("Last order info");
+                objectsTitleLocator.shouldNotBe(visible).as("Objects and equipment Title");
+                firstObjectLinkLocator.shouldNotBe(visible).as("First object link");
+
+
+            });
+        });
+    }
+
     public HomeClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
+            profileBlockFullNameLocator.shouldBe(visible);
+            // TODO add fullName check
             driver.$(".client-objects [data-index='0']").shouldBe(visible, Duration.ofSeconds(20));
         });
         return this;
     }
 
-    @Step("Check that client name is {fio}")
-    public HomeClientPage checkFio(String fio) {
-        stepWithRole("Проверка  ФИО {fio}", () ->
-                driver.$(".profile-card .title")
-                        .as("fio")
-                        .shouldHave(Condition.text(fio)));
+    public  HomeClientPage checkFullName(String fullName) {
+        stepWithRole("Убедиться, что  полное имя: " + fullName, () -> {
+            profileBlockFullNameLocator.shouldHave(Condition.text(fullName));
+        });
         return this;
     }
 
-//    @Step("Click [Place order] button")
+    public void checkRating(String rating) {
+        stepWithRole("Проверка рейтинга {rating}", () ->
+                profileBlockRatingLocator.shouldHave(Condition.text(rating))
+        );
+    }
+
+    public void checkReviewsCount(String reviewsCount) {
+        stepWithRole("Проверка количества отзывов {reviewsCount}", () ->
+                profileBlockReviewsCountLocator.shouldHave(Condition.text(reviewsCount))
+        );
+    }
+
     public void clickPlaceOrderButton() {
         stepWithRole("Нажать кнопку Создать заказ", () ->
                 driver.$("#gas__content-header .btn-block")
@@ -81,27 +153,8 @@ public final class HomeClientPage extends BaseClientPage {
                         .shouldBe(interactable)
                         .click()
         );
-
     }
 
-//    public HomeClientPage verifyClientCardInfo(String clientName, String sinceDate, String rating, String reviews, String image) {
-//        profileCardNameLocator.shouldHave(text(clientName)).shouldBe(visible);
-//        profileCardSinceDateLocator.shouldHave(text(sinceDate)).shouldBe(visible);
-//        profileCardRatingLocator.shouldHave(text(rating)).shouldBe(visible);
-//        profileCardReviewsLocator.shouldHave(text(reviews)).shouldBe(visible);
-//        profileCardImageLocator.shouldHave(attribute("src", image)).shouldBe(visible);
-//        return this;
-//    }
-
-
-    //  objects
-
-//    public HomeClientPage verifyObjectsBlockInfo() {
-//        objectsTitleLocator.shouldHave(text(OBJECTS_TITLE)).shouldBe(visible);
-//        objectsPreviousButtonLocator.shouldBe(visible);
-//        objectsNextButtonLocator.shouldBe(visible);
-//        return this;
-//    }
 
 
 //    public HomeClientPage clickObjectsPreviousButton() {

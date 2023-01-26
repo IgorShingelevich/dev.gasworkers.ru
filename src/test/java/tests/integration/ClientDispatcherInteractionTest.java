@@ -40,7 +40,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             "shingelevich@gmail.com",
             "123456",
             null,
-            79288010225L);
+            79312534936L);
 
     User dispatcher = new User(
             "ДиспетчерСССР1",
@@ -91,9 +91,9 @@ class ClientDispatcherInteractionTest extends BaseTest {
 
         step("test run credentials ", () -> {
             System.out.println("test run credentials: ");
-            System.out.println("client: " + client.email+ " "  + client.password);
-            System.out.println("dispatcher: " + dispatcher.email + " " + dispatcher.password);
-            System.out.println("master: " + master.email + " " + master.password);
+            System.out.println("client: " + client.email+ " "  + client.password + " " + client.fullName);
+            System.out.println("dispatcher: " + dispatcher.email + " " + dispatcher.password + " " + dispatcher.fullName);
+            System.out.println("master: " + master.email + " " + master.password + " " + master.fullName);
             System.out.println("runStartTime: " + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
         });
 
