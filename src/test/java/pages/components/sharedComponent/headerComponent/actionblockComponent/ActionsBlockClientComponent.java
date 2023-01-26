@@ -14,15 +14,15 @@ public ActionsBlockClientComponent(RoleBrowser browser) {
 }
 
     SelenideElement
-        mainPageTitleLocator = $(".primary-header"),
-        actionsBlock = $(".actions-block"),
-        notificationsButtonLocator = $x("//div[@class='actions-block']//div[@class='notifications icon']"),//$(".notifications icon");
-         messagesButtonLocator = $x("//div[@class='messages icon']"), // $(".messages icon");
-        dropdownArrowLocator = $(".actions-block .arrow-down"),
-         profileNameABLocator = $(".profile-menu .profile-menu__link.text-primary"),
-        linkProfileEditABLocator = $x("//a[@href='/profile/edit']"),
-        linkReviewABLocator = $x("//a[@href='/profile/reviews']"),
-        linkLogoutABLocator = $$("button.profile-menu__link").findBy(text("Выйти"));
+        mainPageTitleLocator = driver.$(".primary-header"),
+        actionsBlock = driver.$(".actions-block"),
+        notificationsButtonLocator = driver.$x("//div[@class='actions-block']//div[@class='notifications icon']"),//$(".notifications icon");
+         messagesButtonLocator = driver.$x("//div[@class='messages icon']"), // $(".messages icon");
+        dropdownArrowLocator = driver.$(".actions-block .arrow-down"),
+         profileNameABLocator = driver.$(".profile-menu .profile-menu__link.text-primary"),
+        linkProfileEditABLocator = driver.$x("//a[@href='/profile/edit']"),
+        linkReviewABLocator = driver.$x("//a[@href='/profile/reviews']"),
+        linkLogoutABLocator = driver.$$("button.profile-menu__link").findBy(text("Выйти"));
 
     public ActionsBlockClientComponent notificationsButton() {
         notificationsButtonLocator.shouldBe(visible).click();
@@ -52,8 +52,9 @@ public ActionsBlockClientComponent(RoleBrowser browser) {
     }
 
     public ActionsBlockClientComponent allNotifications() {
-        notificationsButtonLocator.shouldBe(visible);
-        notificationsButtonLocator.click();
+        stepWithRole("Перейти на страницу Уведомления", () -> {
+            notificationsButtonLocator.click();
+        });
         return this;
     }
 }

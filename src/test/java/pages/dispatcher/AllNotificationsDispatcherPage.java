@@ -9,6 +9,7 @@ import pages.components.sharedComponent.sidebarComponent.SidebarDispatcherCompon
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -26,14 +27,14 @@ public class AllNotificationsDispatcherPage extends BaseDispatcherPage {
 
     SelenideElement
 
-        pageTitleLocator = $(".page-title .h3.mb-2"),
-        readAllButtonLocator = $(".btn.btn-primary"),
-        notificationsListLocator = $("div.messages-list"),
-        firstNotificationLocator = $$(".item-header.d-flex.justify-content-between.w-100 div.h4").get(0);
+        pageTitleLocator = driver.$(".page-title .h3.mb-2"),
+        readAllButtonLocator = driver.$(byTagAndText("button", "Прочитать все")),
+        notificationsListLocator = driver.$("div.messages-list"),
+        firstNotificationLocator = driver.$$(".item-header.d-flex.justify-content-between.w-100 div.h4").get(0);
 
     ElementsCollection
-        notificationsCollection = $$(".item-header.d-flex.justify-content-between.w-100 div.h4"),
-        statusNewNotificationLinkCollection = $$(".item-header.d-flex.justify-content-between.w-100 div.h4");
+        notificationsCollection = driver.$$(".item-header.d-flex.justify-content-between.w-100 div.h4"),
+        statusNewNotificationLinkCollection = driver.$$(".item-header.d-flex.justify-content-between.w-100 div.h4");
 
 
 

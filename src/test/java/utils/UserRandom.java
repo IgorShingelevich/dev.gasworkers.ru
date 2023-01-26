@@ -42,6 +42,8 @@ public class UserRandom {
         Transliterator cyrillicToLatin = Transliterator.getInstance("Cyrillic-Latin");
         String latinSurname = cyrillicToLatin.transliterate(surname);
 
+
+
         String email = emailPrefixMock + prefixDateTime + latinSurname.toLowerCase() + "@rambler.ru";
 // TODO  different  random email domains for test
         this.email = email;
@@ -87,4 +89,7 @@ public class UserRandom {
     }
 
 
+
 }
+
+

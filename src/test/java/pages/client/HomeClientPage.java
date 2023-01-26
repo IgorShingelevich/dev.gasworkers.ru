@@ -8,8 +8,6 @@ import pages.components.clientComponent.LastOrderProfileClientComponent;
 import pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
 
 import java.time.Duration;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
@@ -59,8 +57,8 @@ public final class HomeClientPage extends BaseClientPage {
         return this;
     }
 
-    public HomeClientPage checkInitialModal() {
-        stepWithRole("Проверить начальное модальное окно", () -> {
+    public HomeClientPage checkInitialGuide() {
+        stepWithRole("Убедиться, что представлены компоненты страницы Вводного гида: ", () -> {
             stepWithRole(" Убедиться что текст заголовка и подзаголовка правильный", () -> {
                 driver.$("div.completed-block h3").shouldBe(visible, Duration.ofSeconds(30)).shouldHave(text("Укажите Ваш объект и оборудование")).as("Initial title");
                 driver.$("div.completed-block p").shouldHave(text("Заполните все данные по газовому оборудованию и мы сможем точнее и быстрее найти вам нужного мастера")).as("Initial subtitle");
@@ -111,7 +109,7 @@ public final class HomeClientPage extends BaseClientPage {
     }
 
     public HomeClientPage checkFinishLoading() {
-        stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
+        stepWithRole("Убедиться, что загружена Домашняя страница", () -> {
             profileBlockFullNameLocator.shouldBe(visible);
             // TODO add fullName check
             driver.$(".client-objects [data-index='0']").shouldBe(visible, Duration.ofSeconds(20));

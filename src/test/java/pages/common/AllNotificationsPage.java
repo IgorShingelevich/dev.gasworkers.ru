@@ -1,12 +1,17 @@
 package pages.common;
 
+import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
 import pages.BasePage;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.*;
 
 public class AllNotificationsPage extends BasePage {
@@ -19,41 +24,49 @@ public class AllNotificationsPage extends BasePage {
         NOTIFICATIONS_TITLE = "Уведомления";
 
     SelenideElement
-        pageTitleLocator = $(".page-title"),
-        firstNotificationTabLocator = $$(".messages-list div.item.item.notice-large").first(),
-        readAllButtonLocator = $(".page-content button.btn"),
-
-        firstNotificationLinkLocator = $$(".messages-list div.item.item.notice-large .h4").first(),
-        firstNotificationTextLocator = $$(".item.item.notice-large .text.w-100.text-left").first(),
-        firstNotificationStatusLocator = $$(".item.item.notice-large .text.w-25").first();
+        pageTitleLocator = driver.$(".page-title"),
+        readAllButtonLocator = driver.$(byTagAndText("button", "Прочитать все"));
+    ElementsCollection
+        notificationTitleCollection = driver.$$(".messages-list div.d-flex .flex-wrap.text-break").as("Notification title collection"),
+        unreadStatusCollection = driver.$$("div.gas-box a").as("unread status");
 
 
-
-    public AllNotificationsPage verifyLocators() {
-        pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
-        readAllButtonLocator.shouldBe(visible);
-        firstNotificationLinkLocator.shouldBe(visible);
-        firstNotificationTextLocator.shouldBe(visible);
-        firstNotificationStatusLocator.shouldBe(visible);
-        return this;
+    public void checkInitialState() {
+        stepWithRole("Убедиться, что страница в  начальном состоянии", () -> {
+            pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
+            driver.$(byTagAndText("button", "Все уведомления прочитаны")).shouldBe(visible);
+            notificationTitleCollection.shouldHave(size(0));
+        });
     }
 
-    public AllNotificationsPage isOpened() {
-        pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
-        firstNotificationTabLocator.should(appear, Duration.ofSeconds(20));
-        readAllButtonLocator.shouldBe(visible);
-        return this;
+    public void checkFinishLoading() {
+        stepWithRole("Убедиться, что загрузилась страница Уведомления", () -> {
+            pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
+            readAllButtonLocator.shouldBe(visible);
+            notificationTitleCollection.shouldHave(CollectionCondition.sizeGreaterThan(0));
+        });
     }
 
     public AllNotificationsPage readAll() {
-        //clic the button readAllButtonLocator if readAllButtonLocator is not clicable - proceed the test
-        if (readAllButtonLocator.isDisplayed()) {
-            readAllButtonLocator.click();
-        }
-        else {
-            System.out.println("No unread notifications");
-        }
+        stepWithRole("Прочитать все уведомления", () -> {
+            if (readAllButtonLocator.isDisplayed()) {
+                readAllButtonLocator.click();
+            }
+            else {
+                System.out.println("No unread notifications");
+            }
+            unreadStatusCollection.shouldHave(size(0));
+            stepWithRole("Убедиться, что неактивная кнопка Все уведомления прочитаны", () -> {
+                driver.$(byTagAndText("button", "Все уведомления прочитаны")).shouldBe(visible);
+            });
+        });
         return this;
+    }
+
+    public void openNotificationByTitle(String notificationTitle) {
+        stepWithRole("Открыть уведомление с заголовком: " + notificationTitle, () -> {
+            notificationTitleCollection.findBy(text(notificationTitle)).click();
+        });
     }
 
 

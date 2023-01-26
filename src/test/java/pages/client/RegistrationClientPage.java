@@ -47,40 +47,40 @@ public class RegistrationClientPage extends BaseClientPage {
         backButtonLocator = driver.$("div button.btn.btn-outline-primary").as("Back button");
 
     public void checkFirstStepFinishLoading () {
-        stepWithRole("Убедиться что представлены компоненты первого шага регистрации" , () -> {
-            stepWithRole("Убедиться что на таймлайне выделен первый шаг" , () -> {
+        stepWithRole("Убедиться, что представлены компоненты первого шага регистрации: " , () -> {
+            stepWithRole("Убедиться, что на таймлайне выделен первый шаг" , () -> {
                 stageStepsCollection.get(0).shouldHave(cssClass("active"));
             });
-            stepWithRole("Убедиться что отображается заголовок" , () -> {
+            stepWithRole("Убедиться, что отображается заголовок" , () -> {
                 titleLocator.shouldHave(text(FIRST_TITLE));
             });
-            stepWithRole("Убедиться что отображается ссылка на страницу входа зарегистрированного пользователя" , () -> {
+            stepWithRole("Убедиться, что отображается ссылка на страницу входа зарегистрированного пользователя" , () -> {
                 alreadyRegisteredLocator.shouldHave(text("Уже зарегистрированы?"));
             });
-            stepWithRole("Убедиться что отображается описание" , () -> {
+            stepWithRole("Убедиться, что отображается описание" , () -> {
                 descriptionLocator.shouldHave(text(FIRST_DESCRIPTION));
             });
-            stepWithRole("Убедиться что отображается плейсхолдер в поле ввода номера телефона" , () -> {
+            stepWithRole("Убедиться, что отображается плейсхолдер в поле ввода номера телефона" , () -> {
                 inputPhoneLocator.shouldBe(visible);
                 // TODO placeholder
             });
-            stepWithRole("Убедиться что отображается плейсхолдер в поле ввода электронной почты" , () -> {
+            stepWithRole("Убедиться, что отображается плейсхолдер в поле ввода электронной почты" , () -> {
                 inputEmailLocator.shouldBe(visible);
                 // TODO placeholder
             });
-            stepWithRole("Убедиться что чекбокс не отмечен" , () -> {
+            stepWithRole("Убедиться, что чекбокс не отмечен" , () -> {
                 checkboxLocator.shouldNotBe(checked);
             });
-            stepWithRole("Убедиться что отображается текст чекбокса" , () -> {
+            stepWithRole("Убедиться, что отображается текст чекбокса" , () -> {
                 driver.$$("div span").get(5).shouldHave(text(CHECKBOX_TEXT));
             });
-            stepWithRole("Убедиться что отображается ссылка на пользовательское соглашение" , () -> {
+            stepWithRole("Убедиться, что отображается ссылка на пользовательское соглашение" , () -> {
                 userAgreementLinkLocator.shouldHave(text("Пользовательского соглашения"));
             });
-            stepWithRole("Убедиться что отображается кнопка Далее" , () -> {
+            stepWithRole("Убедиться, что отображается кнопка Далее" , () -> {
                 forwardButtonLocator.shouldHave(text("Далее"));
             });
-            stepWithRole("Убедиться что отображается кнопка Отменить" , () -> {
+            stepWithRole("Убедиться, что отображается кнопка Отменить" , () -> {
                 backButtonLocator.shouldHave(text("Отменить"));
             });
 
@@ -98,7 +98,7 @@ stepWithRole("Регистрация по номеру телефона: " + for
                 checkboxLocator.shouldNotBe(checked);
                 checkboxLocator.click();
             });
-            stepWithRole("Убедиться что чекбокс отмечен" , () -> {
+            stepWithRole("Убедиться, что чекбокс отмечен" , () -> {
                 checkboxLocator.shouldBe(checked);
             });
             stepWithRole("Нажать на кнопку Далее" , () -> {
@@ -117,7 +117,7 @@ stepWithRole("Регистрация по номеру телефона: " + for
                 checkboxLocator.shouldNotBe(checked);
                 checkboxLocator.click();
             });
-            stepWithRole("Убедиться что чекбокс отмечен" , () -> {
+            stepWithRole("Убедиться, что чекбокс отмечен" , () -> {
                 checkboxLocator.shouldBe(checked);
             });
             stepWithRole("Нажать на кнопку Далее" , () -> {
@@ -128,26 +128,26 @@ stepWithRole("Регистрация по номеру телефона: " + for
     }
 
     public void checkSecondStepFinishLoading () {
-        stepWithRole("Убедиться что представлены компоненты второго шага регистрации" , () -> {
-            stepWithRole("Убедиться что на таймлайне выделен второй шаг" , () -> {
+        stepWithRole("Убедиться, что представлены компоненты второго шага регистрации: " , () -> {
+            stepWithRole("Убедиться, что на таймлайне выделен второй шаг" , () -> {
                 stageStepsCollection.get(1).shouldHave(cssClass("active"));
             });
-            stepWithRole("Убедиться что отображается ссылка на страницу входа зарегистрированного пользователя" , () -> {
+            stepWithRole("Убедиться, что отображается ссылка на страницу входа зарегистрированного пользователя" , () -> {
                 alreadyRegisteredLocator.shouldHave(text("Уже зарегистрированы?"));
             });
-            stepWithRole("Убедиться что отображается заголовок" , () -> {
+            stepWithRole("Убедиться, что отображается заголовок" , () -> {
                 titleLocator.shouldHave(text(SECOND_TITLE));
             });
-            stepWithRole("Убедиться что отображается описание" , () -> {
+            stepWithRole("Убедиться, что отображается описание" , () -> {
                 descriptionLocator.shouldHave(text(SECOND_DESCRIPTION));
             });
     //        TODO sendAgainPassiveLinkLocator
     //        driver.$("div.mb-3").shouldHave(text(REPEAT_TEXT));
     //         sendAgainActiveLinkLocator.shouldBe(visible);
-            stepWithRole("Убедиться что отображается неактивная кнопка Далее" , () -> {
+            stepWithRole("Убедиться, что отображается неактивная кнопка Далее" , () -> {
                 forwardButtonLocator.shouldHave(text("Далее")).shouldHave(attribute("disabled"));
             });
-            stepWithRole("Убедиться что отображается кнопка Назад" , () -> {
+            stepWithRole("Убедиться, что отображается кнопка Назад" , () -> {
                 backButtonLocator.shouldHave(text("Назад"));
             });
         });
@@ -193,7 +193,7 @@ stepWithRole("Регистрация по номеру телефона: " + for
 
 
     public void clickNext () {
-        stepWithRole("Нажать на кнопку Далее, кнопка активна" , () -> {
+        stepWithRole("Нажать на кнопку Далее" , () -> {
             forwardButtonLocator.shouldHave(text("Далее")).shouldNotHave(attribute("disabled"));
             forwardButtonLocator.click();
         });
@@ -205,29 +205,29 @@ stepWithRole("Регистрация по номеру телефона: " + for
 
 
     public void checkThirdStepFinishLoading() {
-        stepWithRole("Убедиться что представлены компоненты третьего шага регистрации" , () -> {
-            stepWithRole("Убедиться что на таймлайне выделен третий шаг" , () -> {
+        stepWithRole("Убедиться, что представлены компоненты третьего шага регистрации: " , () -> {
+            stepWithRole("Убедиться, что на таймлайне выделен третий шаг" , () -> {
                 stageStepsCollection.get(2).shouldHave(cssClass("active"));
             });
-            stepWithRole("Убедиться что отображается заголовок" , () -> {
+            stepWithRole("Убедиться, что отображается заголовок" , () -> {
                 titleLocator.shouldHave(text(THIRD_TITLE));
             });
-            stepWithRole("Убедиться что отображается подсказка к паролю" , () -> {
+            stepWithRole("Убедиться, что отображается подсказка к паролю" , () -> {
                 driver.$("div span.text").shouldHave(text("Минимум 4 символа")).as("Подсказка к паролю");
             });
-            stepWithRole("Убедиться что отображается плейсхолдер в поле ввода пароля" , () -> {
+            stepWithRole("Убедиться, что отображается плейсхолдер в поле ввода пароля" , () -> {
                 passwordInputLocator.shouldBe(visible);
             });
-            stepWithRole("Убедиться что отображается плейсхолдер в поле ввода подтверждения пароля" , () -> {
+            stepWithRole("Убедиться, что отображается плейсхолдер в поле ввода подтверждения пароля" , () -> {
                 confirmPasswordInputLocator.shouldBe(visible);
             });
-            stepWithRole("Убедиться что отображается кнопка Сгенерировать надежный пароль" , () -> {
+            stepWithRole("Убедиться, что отображается кнопка Сгенерировать надежный пароль" , () -> {
                 generateCodeButtonLocator.shouldBe(visible).shouldHave(text("Сгенерировать надежный пароль"));
             });
-            stepWithRole("Убедиться что отображается кнопка Далее" , () -> {
+            stepWithRole("Убедиться, что отображается кнопка Далее" , () -> {
                 forwardButtonLocator.shouldHave(text("Далее"));
             });
-            stepWithRole("Убедиться что отображается кнопка Назад" , () -> {
+            stepWithRole("Убедиться, что отображается кнопка Назад" , () -> {
                 backButtonLocator.shouldHave(text("Назад"));
             });
         });
@@ -237,14 +237,14 @@ stepWithRole("Регистрация по номеру телефона: " + for
     public void checkFourthStepFinishLoading(String phone) {
         // turn 77778711855 to "+7(777)-871-1855"
         String formatPhoneNumber = phone.substring(0, 1) + "(" + phone.substring(1, 4) + ")-" + phone.substring(4, 7) + "-" + phone.substring(7, 11);
-        stepWithRole("Убедиться что представлены компоненты четвертого шага регистрации" , () -> {
-            stepWithRole("Убедиться что на таймлайне выделен четвертый шаг" , () -> {
+        stepWithRole("Убедиться, что представлены компоненты четвертого шага регистрации: " , () -> {
+            stepWithRole("Убедиться, что на таймлайне выделен четвертый шаг" , () -> {
                 stageStepsCollection.get(3).shouldHave(cssClass("active"));
             });
-            stepWithRole("Убедиться что отображается заголовок" , () -> {
+            stepWithRole("Убедиться, что отображается заголовок" , () -> {
                 titleLocator.shouldHave(text(FOURTH_TITLE));
             });
-            stepWithRole("Убедиться что отображается описание" , () -> {
+            stepWithRole("Убедиться, что отображается описание: " , () -> {
                 stepWithRole("Подзаголовок" , () -> {
                     driver.$("div p.small.mb-20").shouldHave(text("Общие данные")).as("Общие данные");
                 });
@@ -267,10 +267,10 @@ stepWithRole("Регистрация по номеру телефона: " + for
                     driver.$("input[placeholder*=почта]").shouldBe(visible).as("Электронная почта");
                 });
             });
-            stepWithRole("Убедиться что отображается неактивная кнопка Далее" , () -> {
+            stepWithRole("Убедиться, что отображается неактивная кнопка Далее" , () -> {
                 forwardButtonLocator.shouldHave(text("Далее")).shouldHave(attribute("disabled"));
             });
-            stepWithRole("Убедиться что отображается кнопка Назад" , () -> {
+            stepWithRole("Убедиться, что отображается кнопка Назад" , () -> {
                 backButtonLocator.shouldHave(text("Назад"));
             });
         });
@@ -306,11 +306,11 @@ stepWithRole("Регистрация по номеру телефона: " + for
 
     public void checkFinishState() {
         driver.$("div.logo-small img").should(appear);
-        stepWithRole("Убедиться что представлены компоненты Успешная регистрации" , () -> {
-            stepWithRole("Убедиться что отображается заголовок", () -> {
+        stepWithRole("Убедиться, что представлены компоненты страницы Успешная регистрация: " , () -> {
+            stepWithRole("Убедиться, что отображается заголовок", () -> {
                 driver.$("div.page-content h3").shouldHave(text("Поздравляем!"));
             });
-            stepWithRole("Убедиться что отображается информационный текст ", () -> {
+            stepWithRole("Убедиться, что отображается информационный текст ", () -> {
                 driver.$("div.page-content").$$("p").get(0).shouldHave(text("Вы успешно зарегистрировались в сервисе Gasworkers."));
                 driver.$("div.page-content").$$("p").get(1).shouldHave(text("Через 5 секунд вы будете автоматически перенаправлены в личный кабинет"));
             });

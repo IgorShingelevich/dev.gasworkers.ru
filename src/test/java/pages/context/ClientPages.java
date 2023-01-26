@@ -7,6 +7,7 @@ import pages.client.maintenance.SelectDateMaintenanceClientPage;
 import pages.client.maintenance.SelectInsuranceClientPage;
 import pages.client.maintenance.SelectObjectMaintenanceClientPage;
 import pages.client.RegistrationClientPage;
+import pages.common.AllNotificationsPage;
 import pages.common.LandingPage;
 
 import static model.Role.*;
@@ -38,4 +39,5 @@ public final class ClientPages extends BaseRolePages {
     private final AllInvoicesClientPage allInvoicesPage = new AllInvoicesClientPage(browser);
     private final AllObjectsClientPage allObjectsPage = new AllObjectsClientPage(browser);
     private final AllOrdersClientPage allOrdersPage = new AllOrdersClientPage(browser);
+    private final AllNotificationsPage allNotificationsPage = new AllNotificationsPage(browser);
 }

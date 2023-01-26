@@ -54,12 +54,19 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().fillEmail(randomClient.getEmail());
         clientPages.getRegistrationPage().clickNext();
         clientPages.getRegistrationPage().checkFinishState();  //no buttons
-        clientPages.getHomePage().checkInitialModal();
+        clientPages.getHomePage().checkInitialGuide();
         // InitialModal - put in another component?
         clientPages.getHomePage().clickLaterInitialModal();
         clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
         clientPages.getHomePage().sidebar.allObjects();
         clientPages.getAllObjectsPage().checkInitialState();
+        clientPages.getAllObjectsPage().sidebar.allOrders();
+        clientPages.getAllOrdersPage().checkInitialState();
+        clientPages.getAllOrdersPage().sidebar.allInvoices();
+        clientPages.getAllInvoicesPage().checkInitialState();
+        clientPages.getAllInvoicesPage().actionsBlock.allNotifications();
+        clientPages.getAllNotificationsPage().checkInitialState();
+
 
 
 
