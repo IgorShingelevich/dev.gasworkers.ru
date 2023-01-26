@@ -37,9 +37,9 @@ public class RandomUtil {
             System.out.println(LocalDate.now());
             System.out.println("getActualTime " + getActualTime());// similar to LocalDate.now()
             System.out.println(LocalTime.now() + " " + LocalDate.now());*/
-     /*       System.out.println(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
-            System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));*/
+            System.out.println(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+            System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
+            System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
             System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")));
             /*System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy")));
             System.out.println(LocalDate.now().format(DateTimeFormatter.ofPattern("EEEE, d MMMM")));*/

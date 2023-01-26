@@ -19,6 +19,7 @@ public class UserRandom {
     private String fullName;
     private String email;
     private String phoneNumber;
+    private String sinceDate;
     private  String password = "123456";
 
     public UserRandom() {
@@ -28,10 +29,10 @@ public class UserRandom {
         String nameTestPrefix = "gwtest_";
         String fullName = faker.name().fullName().toString();
         System.out.println("fullName: " + fullName);
-        List<String> fullNameList = Arrays.asList(fullName.split(" "));
-        this.fullName = fullName;
-        this.name =  nameTestPrefix +fullNameList.get(1);
-        this.surname = fullNameList.get(0);
+        List<String> fakerFullNameList = Arrays.asList(fullName.split(" "));
+        this.fullName = this.surname + " " + this.name + " " + this.patronymicName;
+        this.name =  fakerFullNameList.get(1);
+        this.surname = fakerFullNameList.get(0);
         this.patronymicName = "Автотестович";
         Transliterator cyrillicToLatin = Transliterator.getInstance("Cyrillic-Latin");
         String latinSurname = cyrillicToLatin.transliterate(surname);
@@ -41,6 +42,7 @@ public class UserRandom {
         this.email = email;
         this.phoneNumber =faker.regexify("7777[0-9]{7}");
 //        this.phoneNumber = faker.phoneNumber().subscriberNumber(11).replaceFirst("^[^7]", "7");
+        this.sinceDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy"));
     }
 
     public String getName() {
@@ -65,6 +67,10 @@ public class UserRandom {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+
+    public String getSinceDate() {
+        return sinceDate;
     }
 
     public String getPassword() {

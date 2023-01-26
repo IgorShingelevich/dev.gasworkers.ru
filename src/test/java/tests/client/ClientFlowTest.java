@@ -32,12 +32,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getLoginPage().login(client.email, client.password);
     }
 
-    @Test
-    void checkFioInformation() {
-        step("Проверка ФИО", () -> {
-            clientPages.getHomePage().checkFio("Шингелевич Игорь Сергеевич");
-        });
-    }
+
 
     @Test
     public void clientPlaceMaintenanceRequestAndCancel() {

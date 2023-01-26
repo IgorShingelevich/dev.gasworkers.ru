@@ -5,6 +5,7 @@ public class User {
     public String name,
             patronymic,
             surname,
+            fullName,
             email,
             password,
             address;
@@ -21,6 +22,7 @@ public class User {
         this.name = name;
         this.patronymic = patronymic;
         this.surname = surname;
+        this.fullName = surname + " " + name + " " + patronymic;
         this.email = email;
         this.password = password;
         this.address = address;

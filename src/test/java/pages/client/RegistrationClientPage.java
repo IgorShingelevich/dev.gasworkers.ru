@@ -301,4 +301,15 @@ public class RegistrationClientPage extends BaseClientPage {
         });
     }
 
+    public void checkFinishState() {
+        stepWithRole("Убедиться что представлены компоненты Успешная регистрации" , () -> {
+            stepWithRole("Убедиться что отображается заголовок", () -> {
+                driver.$("div.page-content h3").shouldHave(text("Поздравляем!"));
+            });
+            stepWithRole("Убедиться что отображается информационный текст ", () -> {
+                driver.$("div.page-content").$$("p").get(0).shouldHave(text("Вы успешно зарегистрировались в сервисе Gasworkers."));
+                driver.$("div.page-content").$$("p").get(1).shouldHave(text("Через 5 секунд вы будете автоматически перенаправлены в личный кабинет"));
+            });
+        });
+    }
 }

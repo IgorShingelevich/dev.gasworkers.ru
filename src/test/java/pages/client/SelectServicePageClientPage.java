@@ -53,7 +53,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
 //            spinnerScrollbarLocator.should(disappear);
             firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
             driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
-//            sleep(3_000);
+            sleep(3_000);
         });
     }
 
