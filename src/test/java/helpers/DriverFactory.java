@@ -11,7 +11,8 @@ public final class DriverFactory {
         config.baseUrl("https://dev.gasworkers.ru"); // ToDo вынести в конфиг
         config.browserSize(annotation.browserSize());
         config.browserPosition(annotation.browserPosition());
-        config.holdBrowserOpen();
+//        config.holdBrowserOpen();
+         config.headless(true);
         return new SelenideDriver(config);
     }
 

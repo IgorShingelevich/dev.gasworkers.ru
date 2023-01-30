@@ -1,0 +1,36 @@
+invalidEmail| errorText|errorDescription
+user| Поле E-Mail должно быть действительным электронным адресом.| email without @
+user@| Поле E-Mail должно быть действительным электронным адресом.| email without domain
+user@example| Поле E-Mail   должно быть действительным электронным адресом.| email without domain extension
+user@example.| Поле E-Mail должно быть действительным электронным адресом.| email without domain extension
+user@-example.| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain
+user@example-.| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain
+user@example..| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain
+user@example.c| Поле E-Mail должно быть действительным электронным адресом.| email with missing top-level domain
+user@.com.c| Поле E-Mail должно быть действительным электронным адресом.| email with missing top-level domain
+user@.com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name
+user@example-.com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name
+user@-example.com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name
+user@example..com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name
+user@example.toolongtld| Поле E-Mail должно быть действительным электронным адресом.| email with top-level domain too long
+user@sub.sub." | Поле E-Mail должно быть действительным электронным адресом.| email with multiple consecutive periods in the domain name
+user@sub..sub.com"| Поле E-Mail должно быть действительным электронным адресом.| email with multiple consecutive periods in the domain name
+user@sub-.com | Поле E-Mail должно быть действительным электронным адресом.| email with invalid character in the domain name
+user@sub_sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub.sub.sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name,""
+user@sub;sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub:sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub'sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub?sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub*sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub(sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub)sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub[sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub]sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub{sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub}sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub=sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub+sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub$sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name
+user@sub!sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name

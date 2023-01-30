@@ -77,8 +77,8 @@ public class RegistrationClientPage extends BaseClientPage {
             stepWithRole("Убедиться, что отображается ссылка на пользовательское соглашение" , () -> {
                 userAgreementLinkLocator.shouldHave(text("Пользовательского соглашения"));
             });
-            stepWithRole("Убедиться, что отображается кнопка Далее" , () -> {
-                forwardButtonLocator.shouldHave(text("Далее"));
+            stepWithRole("Убедиться, что отображается неактивная кнопка Далее" , () -> {
+                forwardButtonLocator.shouldHave(text("Далее")).shouldBe(disabled);
             });
             stepWithRole("Убедиться, что отображается кнопка Отменить" , () -> {
                 backButtonLocator.shouldHave(text("Отменить"));
@@ -87,45 +87,39 @@ public class RegistrationClientPage extends BaseClientPage {
         });
     }
 
+    public void checkboxNotCheckedCState () {
+        stepWithRole("Убедиться, что чекбокс не отмечен" , () -> {
+            checkboxLocator.shouldNotBe(checked);
+        });
+    }
+    public void clickCheckbox () {
+        stepWithRole("Нажать на чекбокс" , () -> {
+            checkboxLocator.click();
+        });
+    }
+    public void checkboxCheckedCState () {
+        stepWithRole("Убедиться, что чекбокс отмечен" , () -> {
+            checkboxLocator.shouldBe(checked);
+        });
+    }
+
     public void byPhone (String phone) {
-        String formatPhoneNumber = phone.substring(0, 1) + "(" + phone.substring(1, 4) + ")-" + phone.substring(4, 7) + "-" + phone.substring(7, 11);
-stepWithRole("Регистрация по номеру телефона: " + formatPhoneNumber  , () -> {
+        String formatPhoneNumber ="+ " + phone.substring(0, 1) + "(" + phone.substring(1, 4) + ")-" + phone.substring(4, 7) + "-" + phone.substring(7, 11);
             stepWithRole("Ввести номер телефона: " + formatPhoneNumber , () -> {
                 inputPhoneLocator.setValue(phone);
-                System.out.println("phone: " + phone);
+                System.out.println("phone: " + formatPhoneNumber + " " + phone);
             });
-            stepWithRole("Нажать на незаполненный чекбокс" , () -> {
-                checkboxLocator.shouldNotBe(checked);
-                checkboxLocator.click();
-            });
-            stepWithRole("Убедиться, что чекбокс отмечен" , () -> {
-                checkboxLocator.shouldBe(checked);
-            });
-            stepWithRole("Нажать на кнопку Далее" , () -> {
-                forwardButtonLocator.click();
-            });
-        });
     }
 
     public void byEmail (String email) {
-        stepWithRole("Регистрация по электронной почте: " + email, () -> {
-            stepWithRole("Ввести электронную почту" , () -> {
-                inputEmailLocator.setValue(email);
-                System.out.println("email: " + email);
-            });
-            stepWithRole("Нажать на незаполненный чекбокс" , () -> {
-                checkboxLocator.shouldNotBe(checked);
-                checkboxLocator.click();
-            });
-            stepWithRole("Убедиться, что чекбокс отмечен" , () -> {
-                checkboxLocator.shouldBe(checked);
-            });
-            stepWithRole("Нажать на кнопку Далее" , () -> {
-                forwardButtonLocator.click();
-            });
+        stepWithRole("Ввести электронную почту: " + email, () -> {
+            inputEmailLocator.setValue(email);
+            System.out.println("email: " + email);
         });
-
     }
+
+
+
 
     public void checkSecondStepFinishLoading () {
         stepWithRole("Убедиться, что представлены компоненты второго шага регистрации: " , () -> {
@@ -157,10 +151,7 @@ stepWithRole("Регистрация по номеру телефона: " + for
         alreadyRegisteredLocator.click();
     }
 
-    public void clickCheckbox () {
 
-        checkboxLocator.click();
-    }
 
     public void clickSendAgain () {
         sendAgainActiveLinkLocator.shouldHave(text("код подтверждения")).click();
@@ -179,7 +170,6 @@ stepWithRole("Регистрация по номеру телефона: " + for
         stepWithRole("Ввести пароль: " + password, () -> {
             //TODO
             passwordInputLocator.setValue(password);
-            System.out.println("password: " + password);
         });
     }
 
@@ -261,7 +251,6 @@ stepWithRole("Регистрация по номеру телефона: " + for
                     driver.$("div.d-flex.justify-content-between.mb-20").$$("div").get(0).shouldHave(text("Ваш номер телефона")).as("Ваш номер телефона");
 
                     driver.$("div.d-flex.justify-content-between.mb-20").$$("div").get(1).shouldHave(text(formatPhoneNumber)).as("formatPhoneNumber");
-                    System.out.println("formatPhoneNumber = " + formatPhoneNumber);
                 });
                 stepWithRole("Плейсхолдер ввода Электронная почта" , () -> {
                     driver.$("input[placeholder*=почта]").shouldBe(visible).as("Электронная почта");
@@ -304,6 +293,13 @@ stepWithRole("Регистрация по номеру телефона: " + for
         });
     }
 
+    public void fillPhoneNumber(String phoneNumber) {
+        stepWithRole("Ввести номер телефона: " + phoneNumber , () -> {
+            driver.$("input[placeholder*=Номер]").setValue(phoneNumber);
+            System.out.println("phoneNumber = " + phoneNumber);
+        });
+    }
+
     public void checkFinishState() {
         driver.$("div.logo-small img").should(appear);
         stepWithRole("Убедиться, что представлены компоненты страницы Успешная регистрация: " , () -> {
@@ -315,6 +311,20 @@ stepWithRole("Регистрация по номеру телефона: " + for
                 driver.$("div.page-content").$$("p").get(1).shouldHave(text("Через 5 секунд вы будете автоматически перенаправлены в личный кабинет"));
             });
             driver.$("div.logo-small img").should(disappear, Duration.ofSeconds(20));
+        });
+    }
+
+    public void checkInvalidEmailError(String invalidEmail, String errorText) {
+        stepWithRole("Убедиться, что при вводе некорректного email: " + invalidEmail + " отображается ошибка: " + errorText , () -> {
+           driver.$("div.gas-input__error").shouldHave(text(errorText));
+        });
+    }
+
+    public void checkInvalidPhoneNumberError(String invalidPhoneNumber, String errorText, String errorDescription) {
+        stepWithRole("Убедиться, что при вводе некорректного номера телефона: " + invalidPhoneNumber + " отображается ошибка: " + errorText , () -> {
+            if (!driver.$("div.gas-input__error").isDisplayed()) {
+                throw new AssertionError(errorDescription);
+            }
         });
     }
 }
