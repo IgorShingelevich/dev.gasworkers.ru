@@ -22,6 +22,7 @@ public final class ClientPages extends BaseRolePages {
     private final LandingPage landingPage = new LandingPage(browser);
     private final RegistrationClientPage registrationPage = new RegistrationClientPage(browser);
     private final HomeClientPage homePage = new HomeClientPage(browser);
+    private final ProfileClientPage profilePage = new ProfileClientPage(browser);
     private final TypeOrdersClientPage typeOrdersPage = new TypeOrdersClientPage(browser);
     private final InfoTypeOrderClientPage infoTypeOrderPage = new InfoTypeOrderClientPage(browser);
     private final SelectObjectMaintenanceClientPage selectObjectMaintenancePage = new SelectObjectMaintenanceClientPage(browser);

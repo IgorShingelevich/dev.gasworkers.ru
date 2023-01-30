@@ -183,7 +183,7 @@ public class RegistrationClientPage extends BaseClientPage {
 
 
     public void clickNext () {
-        stepWithRole("Нажать на кнопку Далее" , () -> {
+        stepWithRole("Нажать на активную кнопку Далее" , () -> {
             forwardButtonLocator.shouldHave(text("Далее")).shouldNotHave(attribute("disabled"));
             forwardButtonLocator.click();
         });
@@ -214,8 +214,8 @@ public class RegistrationClientPage extends BaseClientPage {
             stepWithRole("Убедиться, что отображается кнопка Сгенерировать надежный пароль" , () -> {
                 generateCodeButtonLocator.shouldBe(visible).shouldHave(text("Сгенерировать надежный пароль"));
             });
-            stepWithRole("Убедиться, что отображается кнопка Далее" , () -> {
-                forwardButtonLocator.shouldHave(text("Далее"));
+            stepWithRole("Убедиться, что отображается активная кнопка Далее" , () -> {
+                forwardButtonLocator.shouldHave(text("Далее")).shouldBe(enabled);
             });
             stepWithRole("Убедиться, что отображается кнопка Назад" , () -> {
                 backButtonLocator.shouldHave(text("Назад"));
@@ -224,7 +224,7 @@ public class RegistrationClientPage extends BaseClientPage {
 
     }
 
-    public void checkFourthStepFinishLoading(String phone) {
+    public void checkFourthStepByPhoneFinishLoading(String phone) {
         // turn 77778711855 to "+7(777)-871-1855"
         String formatPhoneNumber = phone.substring(0, 1) + "(" + phone.substring(1, 4) + ")-" + phone.substring(4, 7) + "-" + phone.substring(7, 11);
         stepWithRole("Убедиться, что представлены компоненты четвертого шага регистрации: " , () -> {
@@ -254,6 +254,44 @@ public class RegistrationClientPage extends BaseClientPage {
                 });
                 stepWithRole("Плейсхолдер ввода Электронная почта" , () -> {
                     driver.$("input[placeholder*=почта]").shouldBe(visible).as("Электронная почта");
+                });
+            });
+            stepWithRole("Убедиться, что отображается неактивная кнопка Далее" , () -> {
+                forwardButtonLocator.shouldHave(text("Далее")).shouldHave(attribute("disabled"));
+            });
+            stepWithRole("Убедиться, что отображается кнопка Назад" , () -> {
+                backButtonLocator.shouldHave(text("Назад"));
+            });
+        });
+    }  public void checkFourthStepByEmailFinishLoading(String email) {
+        // turn 77778711855 to "+7(777)-871-1855"
+        stepWithRole("Убедиться, что представлены компоненты четвертого шага регистрации: " , () -> {
+            stepWithRole("Убедиться, что на таймлайне выделен четвертый шаг" , () -> {
+                stageStepsCollection.get(3).shouldHave(cssClass("active"));
+            });
+            stepWithRole("Убедиться, что отображается заголовок" , () -> {
+                titleLocator.shouldHave(text(FOURTH_TITLE));
+            });
+            stepWithRole("Убедиться, что отображается описание: " , () -> {
+                stepWithRole("Подзаголовок" , () -> {
+                    driver.$("div p.small.mb-20").shouldHave(text("Общие данные")).as("Общие данные");
+                });
+                stepWithRole("Плейсхолдер ввода имени" , () -> {
+                    driver.$("input[placeholder*=Имя]").shouldBe(visible).as("Имя");
+                });
+                stepWithRole("Плейсхолдер ввода фамилии" , () -> {
+                    driver.$("input[placeholder*=Фамилия]").shouldBe(visible).as("Фамилия");
+                });
+                stepWithRole("Плейсхолдер ввода отчества" , () -> {
+                    driver.$("input[placeholder*=Отчество]").shouldBe(visible).as("Отчество");
+                });
+                stepWithRole("Подзаголовок и почта: " + email , () -> {
+                    driver.$("div.d-flex.justify-content-between.mb-20").$$("div").get(0).shouldHave(text("Электронная почта")).as("Электронная почта");
+
+                    driver.$("div.d-flex.justify-content-between.mb-20").$$("div").get(1).shouldHave(text(email)).as("email");
+                });
+                stepWithRole("Плейсхолдер ввода Номер телефона" , () -> {
+                    driver.$("input[placeholder*=Номер]").shouldBe(visible).as("Номер телефона");
                 });
             });
             stepWithRole("Убедиться, что отображается неактивная кнопка Далее" , () -> {

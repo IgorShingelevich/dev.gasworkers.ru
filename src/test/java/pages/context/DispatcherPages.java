@@ -14,11 +14,11 @@ public final class DispatcherPages extends BaseRolePages {
     }
 
     private final HomeDispatcherPage homePage = new HomeDispatcherPage(browser);
+    private final ProfileDispatcherPage profilePage = new ProfileDispatcherPage(browser);
     private final OrderCardDispatcherPage orderCardPage = new OrderCardDispatcherPage(browser);
     private final SelectMasterDispatcherPage selectMasterPage = new SelectMasterDispatcherPage(browser);
     private final AllMastersDispatcherPage allMastersPage = new AllMastersDispatcherPage(browser);
     private final AllNotificationsDispatcherPage allNotificationsPage = new AllNotificationsDispatcherPage(browser);
-    private final ProfileDispatcherPage profilePage = new ProfileDispatcherPage(browser);
 
 
 

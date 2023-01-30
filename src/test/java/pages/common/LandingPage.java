@@ -6,6 +6,8 @@ import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
 import pages.BasePage;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.*;
@@ -52,6 +54,8 @@ public LandingPage open() {
             repairButtonLocator.shouldBe(visible);
             maintenanceButtonLocator.shouldBe(visible);
             videoButtonLocator.shouldBe(visible);
+            driver.$("#jivo-iframe-container").shouldBe(exist, Duration.ofSeconds(40));  //reset the form if being loaded after
+
         });
 
         return this;
@@ -65,7 +69,7 @@ public LandingPage open() {
 
     public void signUpClient() {
         signUpDropdownLocator.click();
-        signUpClientButtonLocator.click();
+        signUpClientButtonLocator.shouldBe(visible, Duration.ofSeconds(10)).click();
     }
 
     public void signUpCompany() {

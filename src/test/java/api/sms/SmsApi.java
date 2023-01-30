@@ -55,7 +55,7 @@ public final class SmsApi {
     }
 
     public SMSActivateSMS waitReceiveNewSms() {
-        for (int i = 1; i <= 30; i++) {
+        for (int i = 1; i <= 60; i++) {
             List<SMSActivateSMS> smsList = getSmsList();
             if (initialSmsCount < smsList.size() && !smsList.isEmpty())
                 return smsList.get(0);

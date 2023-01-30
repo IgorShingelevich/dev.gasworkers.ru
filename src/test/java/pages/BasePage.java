@@ -26,7 +26,8 @@ public abstract class BasePage extends BaseComponent {
         super(browser);
     }
 
-    SelenideElement popUpCloseButtonLocator = driver.$(byTagAndText("button", "Прочитать все")), popUpContainerLocator = driver.$(".notice-list-fixed-content.gas-scrollbar-inline");
+    SelenideElement popUpCloseButtonLocator = driver.$(byTagAndText("button", "Прочитать все")),
+            popUpContainerLocator = driver.$(".notice-list-fixed-content.gas-scrollbar-inline");
 
     public void popUpClose3() {
         stepWithRole("Закрыть всплывающие уведомления", () -> {

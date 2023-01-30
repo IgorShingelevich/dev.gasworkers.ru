@@ -25,11 +25,11 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
 
     ElementsCollection
         mapOrderTabsCollection = driver.$$("[id*=order-item]").as("Коллекция табов заказов на карте"),
-        navButtonsCollection = driver.$$("div.top-filter__status--btn"),
-        orderCardsCollection = driver.$$("div.order-card"),
-        orderNumberLinkCollection = driver.$$("p.h5.link-blue.pointer"),
-        orderActionDropdownCollection = driver.$$("button.actions__btn"),
-        actionsOpenOrderLinkCollection = driver.$$x("//a[@class='actions__slot--link']"),
+        navButtonsCollection = driver.$$("div.top-filter__status--btn").as("Коллекция кнопок навигации"),
+        orderCardsCollection = driver.$$("div.order-card").as("Коллекция карточек заказов"),
+        orderNumberLinkCollection = driver.$$("p.h5.link-blue.pointer").as("Коллекция номеров заказов"),
+        orderActionDropdownCollection = driver.$$("button.actions__btn").as("Коллекция выападающих действий"),
+        actionsOpenOrderLinkCollection = driver.$$x("//a[@class='actions__slot--link']").as("Коллекция  выпадающих ссылок открытия заказа"),
         actionsArchiveOrderLinkCollection = driver.$$x("(//button[contains(@class,'actions__slot--btn')])");
 
     SelenideElement
@@ -38,11 +38,13 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         navInProgressButtonLocator = navButtonsCollection.get(1).as("В работе"),
         navCompletedButtonLocator = navButtonsCollection.get(2).as("Выполнен"),
         navArchiveButtonLocator = navButtonsCollection.get(3).as("В архиве"),
-        mapViewButtonLocator = driver.$("div.action-btn.map-type"),
-        cardViewButtonLocator = driver.$("div.action-btn.card-type"),
-        listViewButtonLocator = driver.$("div.action-btn.list-type"),
-        orderCardTitleLocator = driver.$(".page-title .h3.mb-2"),
-        mapContainerLocator = driver.$("div.map-wrap"),
+        searchInputLocator = driver.$("input[placeholder*=номер]").as("Поле поиска"),
+        searchButtonLocator = driver.$("button[type=button].btn-search").as("Кнопка поиска"),
+        mapViewButtonLocator = driver.$("div.action-btn.map-type").as("Кнопка переключения вида карта"),
+        cardViewButtonLocator = driver.$("div.action-btn.card-type").as("Кнопка переключения вида карточки"),
+        listViewButtonLocator = driver.$("div.action-btn.list-type").as("Кнопка переключения вида список"),
+        orderCardTitleLocator = driver.$(".page-title .h3.mb-2").as("Заголовок карточки заказа"),
+        mapContainerLocator = driver.$("div.map-wrap").as("Контейнер карты"),
         mapElemetLocator =   driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты");
 
 
@@ -111,6 +113,15 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         });
 //        listViewButtonLocator.shouldBe(visible).click();
 //        orderCardFirstLocator.shouldBe(visible);
+        return this;
+    }
+
+    public HomeDispatcherPage searchByNumber(String orderNumber) {
+        stepWithRole("Поиск заказа по номеру: " + orderNumber, () -> {
+            searchInputLocator.setValue(orderNumber);
+            searchButtonLocator.click();
+            orderNumberLinkCollection.findBy(text(orderNumber)).shouldBe(visible, Duration.ofSeconds(20));
+        });
         return this;
     }
 

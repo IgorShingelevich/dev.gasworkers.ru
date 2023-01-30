@@ -22,10 +22,10 @@ public final class MasterPages extends BaseRolePages {
 
     private final RegistrationMasterPage registrationPage = new RegistrationMasterPage(browser);
     private final HomeMasterPage homePage = new HomeMasterPage(browser);
+    private final ProfileMasterPage profilePage = new ProfileMasterPage(browser);
     private final OrderCardMasterPage orderCardPage = new OrderCardMasterPage(browser);
     private final NewOrdersMasterPage newOrdersPage = new NewOrdersMasterPage(browser);
     private final InProgressOrdersMasterPage inProgressOrdersPage = new InProgressOrdersMasterPage(browser);
     private final CompletedOrdersMasterPage completedOrdersPage = new CompletedOrdersMasterPage(browser);
-    private final ProfileMasterPage profilePage = new ProfileMasterPage(browser);
 
 }

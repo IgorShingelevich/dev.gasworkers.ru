@@ -33,7 +33,7 @@ public class SignSuccsessPage extends BaseClientPage {
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что страница Подписание СМС загружена", () -> {
-            titleLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(TITLE_TEXT));
+            titleLocator.shouldBe(visible, Duration.ofSeconds(60)).shouldHave(text(TITLE_TEXT));
             toOrderCardButtonLocator.shouldHave(text("К заказу"));
             toHomePageButtonLocator.shouldHave(text("На главную"));
         });

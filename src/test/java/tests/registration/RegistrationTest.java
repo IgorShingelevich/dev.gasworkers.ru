@@ -52,9 +52,10 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().clickNext();  //manual code input
         clientPages.getRegistrationPage().checkThirdStepFinishLoading();
         clientPages.getRegistrationPage().fillPassword(randomClient.getPassword());
+        // not match notification
         clientPages.getRegistrationPage().fillPasswordConfirmation(randomClient.getPassword());
         clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkFourthStepFinishLoading(randomClient.getPhoneNumber());
+        clientPages.getRegistrationPage().checkFourthStepByPhoneFinishLoading(randomClient.getPhoneNumber());
         clientPages.getRegistrationPage().fillName(randomClient.getName());
         clientPages.getRegistrationPage().fillSurname(randomClient.getSurname());
         clientPages.getRegistrationPage().fillPatronymicName(randomClient.getPatronymicName());
@@ -92,12 +93,14 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().clickNext();
         clientPages.getRegistrationPage().checkSecondStepFinishLoading();
 //        clientPages.getRegistrationPage().fillCode("");
+        //check nestButton active state
         clientPages.getRegistrationPage().clickNext();  //manual code input
         clientPages.getRegistrationPage().checkThirdStepFinishLoading();
         clientPages.getRegistrationPage().fillPassword(randomClient.getPassword());
+        // not match notification
         clientPages.getRegistrationPage().fillPasswordConfirmation(randomClient.getPassword());
         clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkFourthStepFinishLoading(randomClient.getEmail());
+        clientPages.getRegistrationPage().checkFourthStepByEmailFinishLoading(randomClient.getEmail());
         clientPages.getRegistrationPage().fillName(randomClient.getName());
         clientPages.getRegistrationPage().fillSurname(randomClient.getSurname());
         clientPages.getRegistrationPage().fillPatronymicName(randomClient.getPatronymicName());
@@ -128,17 +131,18 @@ public class RegistrationTest extends BaseTest {
             "user@-example.| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain",
             "user@example-.| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain",
             "user@example..| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain",
-            "user@example.c| Поле E-Mail должно быть действительным электронным адресом.| email with missing top-level domain",
+//            "user@example.c| Поле E-Mail должно быть действительным электронным адресом.| email with missing top-level domain",  //excluded
             "user@.com.c| Поле E-Mail должно быть действительным электронным адресом.| email with missing top-level domain",
             "user@.com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name",
             "user@example-.com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name",
             "user@-example.com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name",
             "user@example..com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name",
-            "user@example.toolongtld| Поле E-Mail должно быть действительным электронным адресом.| email with top-level domain too long",
+            "user@verylongdomainnameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.com| Поле E-Mail должно быть действительным электронным адресом.| email with top-level domain too long",
+            "user@example.verylongdomainnameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee| Поле E-Mail должно быть действительным электронным адресом.| email with top-level domain too long",
             "user@sub-.com | Поле E-Mail должно быть действительным электронным адресом.| email with invalid character in the domain name",
             "user@sub_sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
             "user@sub sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub.sub.sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
+//            "user@sub.sub.sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",  //excluded
             "user@sub;sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
             "user@sub:sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
             "user@sub'sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",

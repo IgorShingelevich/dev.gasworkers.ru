@@ -8,7 +8,6 @@ import model.client.OrderType;
 import model.client.ClientRequestType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import pages.BasePage;
 import pages.context.ClientPages;
 import pages.context.DispatcherPages;
 import pages.context.MasterPages;
@@ -192,12 +191,15 @@ class ClientDispatcherInteractionTest extends BaseTest {
         step("Диспетчер выбирает время и назначает Мастера", () -> {
             // start section from home page - need OrderNumber
             dispatcherPages.getOrderCardPage().checkFinishLoading();
-            dispatcherPages.getOrderCardPage().popUpClose();
-            dispatcherPages.getOrderCardPage().sidebar.allOrders();
+            dispatcherPages.getOrderCardPage().popUpClose(); // too long
+            dispatcherPages.getOrderCardPage().sidebar.generalMap();
             dispatcherPages.getHomePage().checkFinishLoading();
             dispatcherPages.getHomePage().switchToListView();
-            dispatcherPages.getHomePage().openOrderByIndex(0);
+            dispatcherPages.getHomePage().navNew();
+            dispatcherPages.getHomePage().searchByNumber(orderNumber);
+            dispatcherPages.getHomePage().openOrderByNumber(orderNumber);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
+            dispatcherPages.getOrderCardPage().popUpClose();
             dispatcherPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderStatus.SCHEDULE_VISIT);
             dispatcherPages.getOrderCardPage().selectTimeButton();
             dispatcherPages.getOrderCardPage().datePicker.selectNowDateAndTime();
