@@ -63,4 +63,11 @@ public class SidebarClientComponent extends BaseComponent {
         return this;
     }
 
+    public SidebarClientComponent profile() {
+        stepWithRole("Перейти на страницу Профиль", () -> {
+            profileLinkLocator.click();
+        });
+        return this;
+    }
+
 }

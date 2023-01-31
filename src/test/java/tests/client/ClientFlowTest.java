@@ -8,6 +8,7 @@ import org.junit.jupiter.api.*;
 import pages.context.ClientPages;
 import tests.BaseTest;
 import utils.User;
+import utils.UserRandom;
 
 import static io.qameta.allure.Allure.step;
 
@@ -25,6 +26,8 @@ class ClientFlowTest extends BaseTest {
             "123456",
             null,
             79288010225L);
+
+    UserRandom userRandom = new UserRandom();
 
     @BeforeEach
     void clientLogin() {
@@ -159,6 +162,34 @@ class ClientFlowTest extends BaseTest {
     public void checkNewSms() {
         step("Проверить, что появилось новое сообщение", () ->
                 client.firstCodeFromNewSMS());
+    }
+
+    @Test
+    public void checkInitialClientCabinetState(){
+        clientPages.getHomePage().checkFinishLoading();
+        clientPages.getHomePage().sidebar.profile();
+        clientPages.getProfilePage().checkFinishLoading();
+        clientPages.getProfilePage().navCommon();
+        clientPages.getProfilePage().commonTab.checkFinishLoading();
+        clientPages.getProfilePage().commonTab.checkInitialStatus(userRandom.getName(), userRandom.getPatronymicName(), userRandom.getSurname());
+        clientPages.getProfilePage().navContacts();
+        clientPages.getProfilePage().contactsTab.checkFinishLoading();
+        clientPages.getProfilePage().contactsTab.checkFilledStatus(userRandom.getEmail(), userRandom.getPhone());
+        //TODO password and Notifications
+    }
+
+    @Test
+    public void fillingUpInitialClientProfilePage() {
+        clientPages.getHomePage().sidebar.profile();
+        clientPages.getProfilePage().checkFinishLoading();
+        clientPages.getProfilePage().navCommon();
+        clientPages.getProfilePage().commonTab.checkFinishLoading();
+        //TODO check  fullName fill up address and passport
+        clientPages.getProfilePage().navContacts();
+        clientPages.getProfilePage().contactsTab.checkFinishLoading();
+        clientPages.getProfilePage().contactsTab.checkFilledStatus(userRandom.getEmail(), userRandom.getPhone());
+        //TODO password and Notifications
+
     }
 
 }

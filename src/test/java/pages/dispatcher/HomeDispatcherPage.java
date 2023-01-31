@@ -25,7 +25,7 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
 
     ElementsCollection
         mapOrderTabsCollection = driver.$$("[id*=order-item]").as("Коллекция табов заказов на карте"),
-        navButtonsCollection = driver.$$("div.top-filter__status--btn").as("Коллекция кнопок навигации"),
+        navTabsCollection = driver.$$("div.top-filter__status--btn").as("Коллекция кнопок навигации"),
         orderCardsCollection = driver.$$("div.order-card").as("Коллекция карточек заказов"),
         orderNumberLinkCollection = driver.$$("p.h5.link-blue.pointer").as("Коллекция номеров заказов"),
         orderActionDropdownCollection = driver.$$("button.actions__btn").as("Коллекция выападающих действий"),
@@ -34,10 +34,10 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
 
     SelenideElement
         dispatcherHomePageTitleLocator = driver.$(".page-title .h3.mb-2").as("Заголовок страницы"),
-        navNewButtonLocator = navButtonsCollection.get(0).as("Новый"),
-        navInProgressButtonLocator = navButtonsCollection.get(1).as("В работе"),
-        navCompletedButtonLocator = navButtonsCollection.get(2).as("Выполнен"),
-        navArchiveButtonLocator = navButtonsCollection.get(3).as("В архиве"),
+        navNewTabLocator = navTabsCollection.get(0).as("Новый"),
+        navInProgressTabLocator = navTabsCollection.get(1).as("В работе"),
+        navCompletedTabLocator = navTabsCollection.get(2).as("Выполнен"),
+        navArchiveTabLocator = navTabsCollection.get(3).as("В архиве"),
         searchInputLocator = driver.$("input[placeholder*=номер]").as("Поле поиска"),
         searchButtonLocator = driver.$("button[type=button].btn-search").as("Кнопка поиска"),
         mapViewButtonLocator = driver.$("div.action-btn.map-type").as("Кнопка переключения вида карта"),
@@ -58,16 +58,16 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
     }
 
     public void navNew () {
-        stepWithRole("Нажать на кнопку Новый", () -> {
-            navNewButtonLocator.shouldHave(text("Новый")).click();
+        stepWithRole("Нажать на вкладку Новый", () -> {
+            navNewTabLocator.shouldHave(text("Новый")).click();
             orderNumberLinkCollection.last().scrollIntoView(true);
             orderNumberLinkCollection.first().scrollIntoView(true);
         });
     }
 
     public void navInProgress () {
-        stepWithRole("Нажать на кнопку В работе", () -> {
-            navInProgressButtonLocator.shouldHave(text("В работе")).click();
+        stepWithRole("Нажать на вкладку В работе", () -> {
+            navInProgressTabLocator.shouldHave(text("В работе")).click();
             //scrollTo( ordersNumberLinkCollection.last() );
             orderNumberLinkCollection.last().scrollIntoView(true);
             orderNumberLinkCollection.first().scrollIntoView(true);
@@ -75,15 +75,15 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
     }
 
     public void navCompleted () {
-        stepWithRole("Нажать на кнопку Завершен", () -> {
-            navCompletedButtonLocator.shouldHave(text("Выполнен")).click();
+        stepWithRole("Нажать на вкладку Завершен", () -> {
+            navCompletedTabLocator.shouldHave(text("Выполнен")).click();
             orderNumberLinkCollection.last().scrollIntoView(true);
             orderNumberLinkCollection.first().scrollIntoView(true);
         });
     }
     public void navArchived () {
-        stepWithRole("Нажать на кнопку В архиве", () -> {
-            navArchiveButtonLocator.shouldHave(text("В архиве")).click();
+        stepWithRole("Нажать на вкладку В архиве", () -> {
+            navArchiveTabLocator.shouldHave(text("В архиве")).click();
             orderNumberLinkCollection.last().scrollIntoView(true);
             orderNumberLinkCollection.first().scrollIntoView(true);
         });

@@ -88,6 +88,10 @@ public class UserRandom {
         return password;
     }
 
+    public String getPhone() {
+        return phoneNumber;
+    }
+
 
 
 }
