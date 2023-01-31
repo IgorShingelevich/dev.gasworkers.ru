@@ -1,7 +1,6 @@
 package pages.common;
 
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
 import pages.BasePage;
@@ -10,31 +9,32 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
-import static com.codeborne.selenide.Selenide.*;
 
 public class LandingPage extends BasePage {
-
 
 public LandingPage(RoleBrowser browser) {
         super(browser);
     }
 
+    private final String
+        TITLE_TEXT = "Ремонт и техобслуживание газового оборудования от 499 ₽",
+        SUBTITLE_TEXT = "Выезд мастера по Московской области в день обращения от 30 минут";
+
     ElementsCollection
         signUpRoleMenuLocator =driver.$$("div.dropdown-wrapper__menu a");
 
     SelenideElement
-        primaryHeaderLocator = driver.$(".primary-header"),
-        repairButtonLocator = driver.$(byTagAndText("button", "Ремонт")),
-        maintenanceButtonLocator = driver.$(byTagAndText("button", "Техобслуживание")),
-        videoButtonLocator = driver.$(byTagAndText("button", "Видеоконсультация")),
-
-        mainBlockTitleLocator = driver.$(".main-block__title"),
-        signInButtonLocator = driver.$(".primary-header .link"),
-        userProfileButtonLocator = driver.$(".primary-header--nav .link"),
-        signUpDropdownLocator = driver.$("span.dropdown-title"),
-        signUpClientButtonLocator = signUpRoleMenuLocator.findBy(text("Для клиента")),
-        signUpCompanyButtonLocator = signUpRoleMenuLocator.findBy(text("Для сервисной компании")),
-        signUpMasterButtonLocator = signUpRoleMenuLocator.findBy(text("Для мастера"));
+        primaryHeaderLocator = driver.$(".primary-header").as("Шапка сайта"),
+        repairButtonLocator = driver.$(byTagAndText("button", "Ремонт")).as("Кнопка Ремонт"),
+        maintenanceButtonLocator = driver.$(byTagAndText("button", "Техобслуживание")).as("Кнопка Техобслуживание"),
+        videoButtonLocator = driver.$(byTagAndText("button", "Видеоконсультация")).as("Кнопка Видеоконсультация"),
+        mainBlockTitleLocator = driver.$("p.main-block__title").as("Заголовок главной страницы"),
+        mainBlockSubtitleLocator = driver.$("p.main-block__text").as("Подзаголовок главной страницы"),
+        signInButtonLocator = driver.$(".primary-header .link").as("Кнопка Личный кабинет"),
+        signUpDropdownLocator = driver.$("span.dropdown-title").as("Выпадающее меню Регистрация"),
+        signUpClientButtonLocator = signUpRoleMenuLocator.findBy(text("Для клиента")).as("Кнопка Для клиента"),
+        signUpCompanyButtonLocator = signUpRoleMenuLocator.findBy(text("Для сервисной компании")).as("Кнопка Для сервисной компании"),
+        signUpMasterButtonLocator = signUpRoleMenuLocator.findBy(text("Для мастера")).as("Кнопка Для мастера");
 
 public LandingPage open() {
     stepWithRole("Открыть главную страницу", () -> {
@@ -46,48 +46,64 @@ public LandingPage open() {
 
     public LandingPage checkFinishLoading() {
         stepWithRole("Убедиться, что главная страница загружена", () -> {
-            primaryHeaderLocator.shouldBe(visible);
-            primaryHeaderLocator.shouldBe(visible);
-            userProfileButtonLocator.shouldBe(visible);
-            signInButtonLocator.shouldBe(visible);
-            signUpDropdownLocator.shouldBe(visible);
-            repairButtonLocator.shouldBe(visible);
-            maintenanceButtonLocator.shouldBe(visible);
-            videoButtonLocator.shouldBe(visible);
-            driver.$("#jivo-iframe-container").shouldBe(exist, Duration.ofSeconds(40));  //reset the form if being loaded after
-
+            stepWithRole("Убедиться, что заголовок и подзаголовок Главной страницы отображается", () -> {
+                stepWithRole("Заголовок: " + TITLE_TEXT, () -> {
+                    mainBlockTitleLocator.shouldBe(visible).shouldHave(text(TITLE_TEXT));
+                });
+                stepWithRole("Подзаголовок: " + SUBTITLE_TEXT, () -> {
+                    mainBlockSubtitleLocator.shouldBe(visible).shouldHave(text(SUBTITLE_TEXT));
+                });
+            });
+            stepWithRole("Убедиться, что кнопка Личный кабинет отображается", () -> {
+                signInButtonLocator.shouldBe(visible);
+            });
+            stepWithRole("Убедиться, что выпадающее меню Регистрация отображается", () -> {
+                signUpDropdownLocator.shouldBe(visible);
+            });
+            stepWithRole("Убедиться, что кнопка Ремонт отображается", () -> {
+                repairButtonLocator.shouldBe(visible);
+            });
+            stepWithRole("Убедиться, что кнопка Техобслуживание отображается", () -> {
+                maintenanceButtonLocator.shouldBe(visible);
+            });
+            stepWithRole("Убедиться, что кнопка Видеоконсультация отображается", () -> {
+                videoButtonLocator.shouldBe(visible);
+            });
+            stepWithRole("Убедиться, что виджет Живой чат отображается", () -> {
+                driver.$("#jivo-iframe-container").shouldBe(visible);
+            });
+            // TODO add the rest  components checks
         });
-
         return this;
     }
 
-    //  clickSignInButton
     public LandingPage clickUserProfileSignIn() {
-        userProfileButtonLocator.click();
+        stepWithRole("Нажать кнопку Личный кабинет", () -> {
+            signInButtonLocator.click();
+        });
         return this;
     }
 
     public void signUpClient() {
-    stepWithRole("Нажать ссылку Зарегистрироваться и выбрать Для клиента", () -> {
+    stepWithRole("Нажать кнопку Зарегистрироваться и выбрать Для клиента", () -> {
         signUpDropdownLocator.click();
         signUpClientButtonLocator.shouldBe(visible, Duration.ofSeconds(10)).click();
     });
     }
 
     public void signUpCompany() {
-    stepWithRole("Нажать ссылку Зарегистрироваться и выбрать Для сервисной компании", () -> {
+    stepWithRole("Нажать кнопку Зарегистрироваться и выбрать Для сервисной компании", () -> {
         signUpDropdownLocator.click();
         signUpCompanyButtonLocator.click();
     });
     }
 
     public void signUpMaster() {
-    stepWithRole("Нажать ссылку Зарегистрироваться и выбрать Для мастера", () -> {
+    stepWithRole("Нажать кнопку Зарегистрироваться и выбрать Для мастера", () -> {
         signUpDropdownLocator.click();
         signUpMasterButtonLocator.click();
     });
     }
-
 
     public LandingPage clickUserRepairButton() {
     stepWithRole("Нажать кнопку Ремонт", () -> {
@@ -100,19 +116,13 @@ public LandingPage open() {
     stepWithRole("Нажать кнопку Техобслуживание", () -> {
         maintenanceButtonLocator.shouldHave(text("Техобслуживание")).click();
     });
-        return this;
+    return this;
     }
 
     public LandingPage clickUserVideoButton() {
     stepWithRole("Нажать кнопку Видеоконсультация", () -> {
         videoButtonLocator.shouldHave(text("Видеоконсультация")).click();
     });
-        return this;
+    return this;
     }
-
-
-
-
-
-
 }
