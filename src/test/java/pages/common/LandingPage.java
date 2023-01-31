@@ -68,34 +68,45 @@ public LandingPage open() {
     }
 
     public void signUpClient() {
+    stepWithRole("Нажать ссылку Зарегистрироваться и выбрать Для клиента", () -> {
         signUpDropdownLocator.click();
         signUpClientButtonLocator.shouldBe(visible, Duration.ofSeconds(10)).click();
+    });
     }
 
     public void signUpCompany() {
+    stepWithRole("Нажать ссылку Зарегистрироваться и выбрать Для сервисной компании", () -> {
         signUpDropdownLocator.click();
         signUpCompanyButtonLocator.click();
+    });
     }
 
     public void signUpMaster() {
+    stepWithRole("Нажать ссылку Зарегистрироваться и выбрать Для мастера", () -> {
         signUpDropdownLocator.click();
         signUpMasterButtonLocator.click();
+    });
     }
 
 
-        public LandingPage clickUserRepairButton() {
-
-        repairButtonLocator.shouldHave(text("Ремонт")).click();
-        return this;
+    public LandingPage clickUserRepairButton() {
+    stepWithRole("Нажать кнопку Ремонт", () -> {
+    repairButtonLocator.shouldHave(text("Ремонт")).click();
+    });
+    return this;
     }
 
     public LandingPage clickUserMaintenanceButton() {
+    stepWithRole("Нажать кнопку Техобслуживание", () -> {
         maintenanceButtonLocator.shouldHave(text("Техобслуживание")).click();
+    });
         return this;
     }
 
     public LandingPage clickUserVideoButton() {
+    stepWithRole("Нажать кнопку Видеоконсультация", () -> {
         videoButtonLocator.shouldHave(text("Видеоконсультация")).click();
+    });
         return this;
     }
 
