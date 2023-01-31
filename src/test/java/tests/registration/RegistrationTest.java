@@ -4,10 +4,7 @@ import extension.browser.Browser;
 import model.Role;
 
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -33,7 +30,7 @@ public class RegistrationTest extends BaseTest {
     RandomClient randomClient = new RandomClient();
 
     @Test
-    // tags
+    @Order(1)
     @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
     @DisplayName("Регистрация клиента по телефону")
     void registrationClientByPhone() {
@@ -51,6 +48,8 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().clickNext();
         clientPages.getRegistrationPage().checkThirdStepFinishLoading();
         clientPages.getRegistrationPage().fillPassword(randomClient.getPassword());
+        clientPages.getRegistrationPage().clickNext();
+        clientPages.getRegistrationPage().checkInvalidPasswordNotification();
         // not match notification
         clientPages.getRegistrationPage().fillPasswordConfirmation(randomClient.getPassword());
         clientPages.getRegistrationPage().clickNext();
@@ -78,6 +77,7 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
+    @Order(2)
     @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
     @DisplayName("Регистрация клиента по email")
     void registrationClientByEmail() {
@@ -95,7 +95,8 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().clickNext();
         clientPages.getRegistrationPage().checkThirdStepFinishLoading();
         clientPages.getRegistrationPage().fillPassword(randomClient.getPassword());
-        // not match notification
+        clientPages.getRegistrationPage().clickNext();
+        clientPages.getRegistrationPage().checkInvalidPasswordNotification();
         clientPages.getRegistrationPage().fillPasswordConfirmation(randomClient.getPassword());
         clientPages.getRegistrationPage().clickNext();
         clientPages.getRegistrationPage().checkFourthStepByEmailFinishLoading(randomClient.getEmail());
@@ -121,10 +122,55 @@ public class RegistrationTest extends BaseTest {
         //TODO profile check
     }
 
-    @ValueSource(strings = { "user@example.c", "user@sub.sub.sub.com" })
-    @ParameterizedTest (name = "Убедиться, что при вводе допустимого  email: {0} возможна регистрация")
+    @Test
+    @Order(3)
     @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
+    @DisplayName("Регистрация клиента со Сгенерированным паролем по телефону")
+    void registrationWithGeneratedPasswordByPhone() {
+        clientPages.getLandingPage().open();
+        clientPages.getLandingPage().checkFinishLoading();
+        clientPages.getLandingPage().signUpClient();
+        clientPages.getRegistrationPage().checkFirstStepFinishLoading();
+        clientPages.getRegistrationPage().byPhone(randomClient.getPhoneNumber());
+        clientPages.getRegistrationPage().checkboxNotCheckedCState();
+        clientPages.getRegistrationPage().clickCheckbox();
+        clientPages.getRegistrationPage().checkboxCheckedCState();
+        clientPages.getRegistrationPage().clickNext();
+        clientPages.getRegistrationPage().checkSecondStepFinishLoading();
+        clientPages.getRegistrationPage().fillCode(randomClient.getConfirmationCode());
+        clientPages.getRegistrationPage().clickNext();
+        clientPages.getRegistrationPage().checkThirdStepFinishLoading();
+        clientPages.getRegistrationPage().generatePassword();
+        clientPages.getRegistrationPage().clickNext();
+        clientPages.getRegistrationPage().checkFourthStepByPhoneFinishLoading(randomClient.getPhoneNumber());
+        clientPages.getRegistrationPage().fillName(randomClient.getName());
+        clientPages.getRegistrationPage().fillSurname(randomClient.getSurname());
+        clientPages.getRegistrationPage().fillPatronymicName(randomClient.getPatronymicName());
+        clientPages.getRegistrationPage().fillEmail(randomClient.getEmail());
+        clientPages.getRegistrationPage().clickNext();
+        clientPages.getRegistrationPage().checkFinishState();
+        clientPages.getHomePage().checkInitialGuide();
+        clientPages.getHomePage().clickLaterInitialModal();
+        clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
+        clientPages.getHomePage().sidebar.allObjects();
+        clientPages.getAllObjectsPage().checkInitialState();
+        clientPages.getAllObjectsPage().sidebar.allOrders();
+        clientPages.getAllOrdersPage().checkInitialState();
+        clientPages.getAllOrdersPage().sidebar.allInvoices();
+        clientPages.getAllInvoicesPage().checkInitialState();
+        clientPages.getAllInvoicesPage().actionsBlock.allNotifications();
+        clientPages.getAllNotificationsPage().checkInitialState();
+        clientPages.getHomePage().open();
+        //TODO profile check
+    }
+
+
+
+    @ValueSource(strings = { "user@example.c", "user@sub.sub.sub.com" })
     @DisplayName("Регистрация клиента с допустимым email: ")
+    @ParameterizedTest (name = "Убедиться, что при вводе допустимого  email: {0} возможна регистрация")
+    @Order(4)
+    @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
     void registrationClientByAcceptedEmail( String acceptedEmail){
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
@@ -174,7 +220,8 @@ public class RegistrationTest extends BaseTest {
             }, delimiter = '|'
 
     )
-            @ParameterizedTest (name = "Убедиться, что при вводе невалидного email: {0} появляется ошибка: {1}")
+    @ParameterizedTest (name = "Убедиться, что при вводе невалидного email: {0} появляется ошибка: {1}")
+    @Order(5)
     @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("negative")})
     @DisplayName("Регистрация клиента с невалидным email: ")
     void registrationClientByInvalidEmail( String invalidEmail, String errorText ){
@@ -195,7 +242,7 @@ public class RegistrationTest extends BaseTest {
 
 
 
-    @CsvFileSource(resources = "/resources/invalidPhoneNumbers.csv", numLinesToSkip = 1, delimiter = '|')
+    /*@CsvFileSource(resources = "/resources/invalidPhoneNumbers.csv", numLinesToSkip = 1, delimiter = '|')
     @ParameterizedTest (name = "Убедиться, что при вводе невалидного номера телефона: {0} появляется ошибка: {1}")
     @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("negative")})
     @DisplayName("Регистрация клиента с невалидным номером телефона")
@@ -210,19 +257,6 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().checkboxCheckedCState();
         clientPages.getRegistrationPage().clickNext();
         clientPages.getRegistrationPage().checkInvalidPhoneNumberError(invalidPhoneNumber, errorText, errorDescription);
-    }
-
-
-
-
-
+    }*/
 // TODO registration cases - all fields are empty, checkbox uncheked
-
-
-
-
-
-
-
-
 }

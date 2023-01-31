@@ -30,7 +30,8 @@ public class RegistrationClientPage extends BaseClientPage {
 
     ElementsCollection
         stepsCollection = driver.$$("div.stage").as("Коллекция шагов регистрации"),
-        confirmationCodeCollection = driver.$$("div.code-input input").as("Коллекция цифр кода подтверждения");
+        confirmationCodeCollection = driver.$$("div.code-input input").as("Коллекция цифр кода подтверждения"),
+        eyeIconCollection = driver.$$("div.eye-icon").as("Коллекция иконок отображения пароля");
     SelenideElement
         titleLocator = driver.$("div h4").as("Заголовок"),
         subtitleLocator = driver.$("div.description").as("Подзаголовок"),
@@ -40,9 +41,11 @@ public class RegistrationClientPage extends BaseClientPage {
         checkboxLocator = driver.$("div input[type=checkbox]").as("Чекбокс"),
         userAgreementLinkLocator = driver.$("a[href*=user_agreement]").as("Ссылка на пользовательское соглашение"),
         sendAgainActiveLinkLocator = driver.$("a.link-dark-blue").as("Ссылка на повторную отправку кода"),
-        generateCodeButtonLocator =  driver.$("div button.lock-icon.btn.btn-link.disable-outline").as("Кнопка генерации кода"),
+        generatePasswordButtonLocator =  driver.$("div button.lock-icon.btn.btn-link.disable-outline").as("Кнопка генерации кода"),
         passwordInputLocator = driver.$("input[placeholder*=Пароль]").as("Поле ввода пароля"),
         confirmPasswordInputLocator = driver.$("input[placeholder*=Подтвердить]").as("Поле ввода подтверждения пароля"),
+        suggestedPasswordLocator = driver.$("input[readonly=readonly]").as("Предложенный пароль"),
+        errorMessageLocator = driver.$("div.gas-input__error").as("Сообщение об ошибке"),
         forwardButtonLocator = driver.$("div button.btn.btn-primary").as("Кнопка перехода к следующему шагу"),
         backButtonLocator = driver.$("div button.btn.btn-outline-primary").as("Кнопка перехода к предыдущему шагу");
 
@@ -212,7 +215,7 @@ public class RegistrationClientPage extends BaseClientPage {
                 confirmPasswordInputLocator.shouldBe(visible);
             });
             stepWithRole("Убедиться, что отображается кнопка Сгенерировать надежный пароль" , () -> {
-                generateCodeButtonLocator.shouldBe(visible).shouldHave(text("Сгенерировать надежный пароль"));
+                generatePasswordButtonLocator.shouldBe(visible).shouldHave(text("Сгенерировать надежный пароль"));
             });
             stepWithRole("Убедиться, что отображается активная кнопка Далее" , () -> {
                 forwardButtonLocator.shouldHave(text("Далее")).shouldBe(enabled);
@@ -354,15 +357,60 @@ public class RegistrationClientPage extends BaseClientPage {
 
     public void checkInvalidEmailError(String invalidEmail, String errorText) {
         stepWithRole("Убедиться, что при вводе некорректного email: " + invalidEmail + " отображается ошибка: " + errorText , () -> {
-           driver.$("div.gas-input__error").shouldHave(text(errorText));
+            errorMessageLocator.shouldHave(text(errorText));
         });
     }
 
     public void checkInvalidPhoneNumberError(String invalidPhoneNumber, String errorText, String errorDescription) {
         stepWithRole("Убедиться, что при вводе некорректного номера телефона: " + invalidPhoneNumber + " отображается ошибка: " + errorText , () -> {
-            if (!driver.$("div.gas-input__error").isDisplayed()) {
+            if (!errorMessageLocator.isDisplayed()) {
                 throw new AssertionError(errorDescription);
             }
         });
+    }
+
+    public void checkInvalidPasswordNotification() {
+            stepWithRole("Убедиться, что при несоответствии пароля и подтверждения пароля отображается уведомление: " + errorMessageLocator.getText() , () -> {
+                errorMessageLocator.shouldHave(text("Пароли не совпадают"));
+            });
+    }
+
+    public void generatePassword() {
+        stepWithRole("Сгенерировать пароль" , () -> {
+            stepWithRole("Нажать на кнопку Сгенерировать пароль" , () -> {
+                generatePasswordButtonLocator.click();
+            });
+            stepWithRole("Убедиться, что сгенерирован Надежный  пароль: " + suggestedPasswordLocator.getText() , () -> {
+                suggestedPasswordLocator.shouldBe(visible);
+                System.out.println("suggestedPassword: " + suggestedPasswordLocator.getText());
+            });
+            stepWithRole("Убедиться что появился подзаголовок поля Надежный пароль " + driver.$$("p.small").get(0).getText() , () -> {
+                driver.$$("p.small").get(0).as("подзаголовок поля Надежный пароль").shouldHave(text("Мы сгенерировали вам пароль"));
+            });
+            stepWithRole("Убедиться что появилось описание поля Надежный пароль " + driver.$$("p.small").get(1).getText() , () -> {
+                driver.$$("p.small").get(1).as("описание поля Надежный пароль").shouldHave(text("Пароль должен содержать не менее 4 знаков"));
+            });
+            stepWithRole("Убедиться, что поле Пароль и Подтверждение пароля заполнены сгенерированным паролем: " + suggestedPasswordLocator.getText() , () -> {
+                stepWithRole("Нажать на иконку Показать  скрытый пароль в поле Пароль и Подтверждение Пароля" , () -> {
+                    stepWithRole("Убедиться, что иконки переходят из состояния Скрытый пароль в состояние Пароль Отображается" , () -> {
+                        eyeIconCollection.get(0).shouldNotHave(cssClass("visible")).click();
+                        eyeIconCollection.get(0).shouldHave(cssClass("visible"));
+                        eyeIconCollection.get(1).shouldNotHave(cssClass("visible")).click();
+                        eyeIconCollection.get(1).shouldHave(cssClass("visible"));
+                    });
+                });
+                stepWithRole("Убедиться, что в поле Пароль и Подтверждение Пароля отображается сгенерированный пароль: " + suggestedPasswordLocator.getText() , () -> {
+                    passwordInputLocator.shouldHave(value(suggestedPasswordLocator.getText()));
+                    confirmPasswordInputLocator.shouldHave(value(suggestedPasswordLocator.getText()));
+                });
+                stepWithRole("Нажать на иконку Скрыть пароль в поле Пароль и Подтверждение Пароля" , () -> {
+                    eyeIconCollection.get(0).shouldHave(cssClass("visible")).click();
+                    eyeIconCollection.get(0).shouldNotHave(cssClass("visible"));
+                    eyeIconCollection.get(1).shouldHave(cssClass("visible")).click();
+                    eyeIconCollection.get(1).shouldNotHave(cssClass("visible"));
+                });
+            });
+        });
+
     }
 }
