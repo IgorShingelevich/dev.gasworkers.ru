@@ -11,11 +11,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import pages.context.ClientPages;
 import pages.context.DispatcherPages;
 import pages.context.MasterPages;
 import tests.BaseTest;
-import utils.UserRandom;
+import utils.RandomClient;
 
 
 public class RegistrationTest extends BaseTest {
@@ -29,9 +30,7 @@ public class RegistrationTest extends BaseTest {
     @Browser(role = Role.MASTER, browserSize = "800x1000", browserPosition = "1700x0")
     MasterPages masterPages;
 
-    UserRandom randomClient = new UserRandom();
-    UserRandom randomDispatcher = new UserRandom();
-    UserRandom randomMaster = new UserRandom();
+    RandomClient randomClient = new RandomClient();
 
     @Test
     // tags
@@ -48,8 +47,8 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().checkboxCheckedCState();
         clientPages.getRegistrationPage().clickNext();
         clientPages.getRegistrationPage().checkSecondStepFinishLoading();
-//        clientPages.getRegistrationPage().fillCode("");
-        clientPages.getRegistrationPage().clickNext();  //manual code input
+        clientPages.getRegistrationPage().fillCode(randomClient.getConfirmationCode());
+        clientPages.getRegistrationPage().clickNext();
         clientPages.getRegistrationPage().checkThirdStepFinishLoading();
         clientPages.getRegistrationPage().fillPassword(randomClient.getPassword());
         // not match notification
@@ -92,9 +91,8 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().checkboxCheckedCState();
         clientPages.getRegistrationPage().clickNext();
         clientPages.getRegistrationPage().checkSecondStepFinishLoading();
-//        clientPages.getRegistrationPage().fillCode("");
-        //check nestButton active state
-        clientPages.getRegistrationPage().clickNext();  //manual code input
+        clientPages.getRegistrationPage().fillCode(randomClient.getConfirmationCode());
+        clientPages.getRegistrationPage().clickNext();
         clientPages.getRegistrationPage().checkThirdStepFinishLoading();
         clientPages.getRegistrationPage().fillPassword(randomClient.getPassword());
         // not match notification
@@ -106,7 +104,7 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().fillPatronymicName(randomClient.getPatronymicName());
         clientPages.getRegistrationPage().fillPhoneNumber(randomClient.getPhoneNumber());
         clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkFinishState();  //no buttons
+        clientPages.getRegistrationPage().checkFinishState();
         clientPages.getHomePage().checkInitialGuide();
         // InitialModal - put in another component?
         clientPages.getHomePage().clickLaterInitialModal();
@@ -123,6 +121,23 @@ public class RegistrationTest extends BaseTest {
         //TODO profile check
     }
 
+    @ValueSource(strings = { "user@example.c", "user@sub.sub.sub.com" })
+    @ParameterizedTest (name = "Убедиться, что при вводе допустимого  email: {0} возможна регистрация")
+    @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
+    @DisplayName("Регистрация клиента с допустимым email: ")
+    void registrationClientByAcceptedEmail( String acceptedEmail){
+        clientPages.getLandingPage().open();
+        clientPages.getLandingPage().checkFinishLoading();
+        clientPages.getLandingPage().signUpClient();
+        clientPages.getRegistrationPage().checkFirstStepFinishLoading();
+        clientPages.getRegistrationPage().byEmail(acceptedEmail);
+        clientPages.getRegistrationPage().checkboxNotCheckedCState();
+        clientPages.getRegistrationPage().clickCheckbox();
+        clientPages.getRegistrationPage().checkboxCheckedCState();
+        clientPages.getRegistrationPage().clickNext();
+        clientPages.getRegistrationPage().checkSecondStepFinishLoading();
+    }
+
     @CsvSource(value = {
             "user| Поле E-Mail должно быть действительным электронным адресом.| email without @",
             "user@| Поле E-Mail должно быть действительным электронным адресом.| email without domain",
@@ -131,7 +146,6 @@ public class RegistrationTest extends BaseTest {
             "user@-example.| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain",
             "user@example-.| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain",
             "user@example..| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain",
-//            "user@example.c| Поле E-Mail должно быть действительным электронным адресом.| email with missing top-level domain",  //excluded
             "user@.com.c| Поле E-Mail должно быть действительным электронным адресом.| email with missing top-level domain",
             "user@.com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name",
             "user@example-.com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name",
@@ -142,7 +156,6 @@ public class RegistrationTest extends BaseTest {
             "user@sub-.com | Поле E-Mail должно быть действительным электронным адресом.| email with invalid character in the domain name",
             "user@sub_sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
             "user@sub sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-//            "user@sub.sub.sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",  //excluded
             "user@sub;sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
             "user@sub:sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
             "user@sub'sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
@@ -159,7 +172,6 @@ public class RegistrationTest extends BaseTest {
             "user@sub$sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
             "user@sub!sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name"
             }, delimiter = '|'
-            //ignore line 1
 
     )
             @ParameterizedTest (name = "Убедиться, что при вводе невалидного email: {0} появляется ошибка: {1}")
@@ -178,6 +190,10 @@ public class RegistrationTest extends BaseTest {
 //        clientPages.getRegistrationPage().checkInvalidEmailError(invalidEmail, errorText, errorDescription);
         clientPages.getRegistrationPage().checkInvalidEmailError(invalidEmail, errorText);
     }
+
+
+
+
 
     @CsvFileSource(resources = "/resources/invalidPhoneNumbers.csv", numLinesToSkip = 1, delimiter = '|')
     @ParameterizedTest (name = "Убедиться, что при вводе невалидного номера телефона: {0} появляется ошибка: {1}")

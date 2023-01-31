@@ -29,7 +29,8 @@ public class RegistrationClientPage extends BaseClientPage {
     FOURTH_TITLE = "Заполните личные данные";
 
     ElementsCollection
-        stepsCollection = driver.$$("div.stage").as("Коллекция шагов регистрации");
+        stepsCollection = driver.$$("div.stage").as("Коллекция шагов регистрации"),
+        confirmationCodeCollection = driver.$$("div.code-input input").as("Коллекция цифр кода подтверждения");
     SelenideElement
         titleLocator = driver.$("div h4").as("Заголовок"),
         subtitleLocator = driver.$("div.description").as("Подзаголовок"),
@@ -160,7 +161,7 @@ public class RegistrationClientPage extends BaseClientPage {
 
     public void fillCode (String code) {
         stepWithRole("Ввести код подтверждения: " + code, () -> {
-            //TODO
+            confirmationCodeCollection.get(0).setValue(code);
             System.out.println("code: " + code);
         });
     }
@@ -169,6 +170,7 @@ public class RegistrationClientPage extends BaseClientPage {
         stepWithRole("Ввести пароль: " + password, () -> {
             //TODO
             passwordInputLocator.setValue(password);
+            System.out.println("password: " + password);
         });
     }
 
@@ -176,7 +178,6 @@ public class RegistrationClientPage extends BaseClientPage {
         stepWithRole("Ввести подтверждение пароля: " + password, () -> {
             //TODO
             confirmPasswordInputLocator.setValue(password);
-            System.out.println("passwordConfirm: " + password);
         });
     }
 

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.*;
 import pages.context.ClientPages;
 import tests.BaseTest;
 import utils.User;
-import utils.UserRandom;
+import utils.RandomClient;
 
 import static io.qameta.allure.Allure.step;
 
@@ -27,7 +27,7 @@ class ClientFlowTest extends BaseTest {
             null,
             79288010225L);
 
-    UserRandom userRandom = new UserRandom();
+    RandomClient randomClient = new RandomClient();
 
     @BeforeEach
     void clientLogin() {
@@ -171,10 +171,10 @@ class ClientFlowTest extends BaseTest {
         clientPages.getProfilePage().checkFinishLoading();
         clientPages.getProfilePage().navCommon();
         clientPages.getProfilePage().commonTab.checkFinishLoading();
-        clientPages.getProfilePage().commonTab.checkInitialStatus(userRandom.getName(), userRandom.getPatronymicName(), userRandom.getSurname());
+        clientPages.getProfilePage().commonTab.checkInitialStatus(randomClient.getName(), randomClient.getPatronymicName(), randomClient.getSurname());
         clientPages.getProfilePage().navContacts();
         clientPages.getProfilePage().contactsTab.checkFinishLoading();
-        clientPages.getProfilePage().contactsTab.checkFilledStatus(userRandom.getEmail(), userRandom.getPhone());
+        clientPages.getProfilePage().contactsTab.checkFilledStatus(randomClient.getEmail(), randomClient.getPhone());
         //TODO password and Notifications
     }
 
@@ -187,7 +187,7 @@ class ClientFlowTest extends BaseTest {
         //TODO check  fullName fill up address and passport
         clientPages.getProfilePage().navContacts();
         clientPages.getProfilePage().contactsTab.checkFinishLoading();
-        clientPages.getProfilePage().contactsTab.checkFilledStatus(userRandom.getEmail(), userRandom.getPhone());
+        clientPages.getProfilePage().contactsTab.checkFilledStatus(randomClient.getEmail(), randomClient.getPhone());
         //TODO password and Notifications
 
     }

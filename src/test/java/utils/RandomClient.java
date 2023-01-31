@@ -5,14 +5,10 @@ import com.ibm.icu.text.Transliterator;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Locale;
 
-import static utils.RandomUtil.*;
 
-
-public class UserRandom {
+public class RandomClient {
 
     private String name;
     private String surname;
@@ -23,10 +19,14 @@ public class UserRandom {
     private String phoneNumber;
     private String sinceDate;
     private  String password = "123456";
+    private String confirmationCode = "111111";
 
-    public  UserRandom() {
+    public RandomClient() {
         Faker faker = new Faker(new Locale("ru"));
-        String emailPrefixMock = "gwtest";
+        String
+            emailPrefixMock = "gwtest",
+            emailClientDomainMock = "client.001",
+            phoneClientPrefixMock = "7001";
         String prefixDateTime =  LocalDate.now().format(DateTimeFormatter.ofPattern("ddMM"))+ "_" + LocalTime.now().format(DateTimeFormatter.ofPattern("HHmm"))+"_";
 
 
@@ -44,10 +44,10 @@ public class UserRandom {
 
 
 
-        String email = emailPrefixMock + prefixDateTime + latinSurname.toLowerCase() + "@rambler.ru";
+        String email = emailPrefixMock + prefixDateTime + latinSurname.toLowerCase() + "@" + emailClientDomainMock;
 // TODO  different  random email domains for test
         this.email = email;
-        this.phoneNumber =faker.regexify("7777[0-9]{7}");
+        this.phoneNumber =phoneClientPrefixMock + faker.regexify("[0-9]{7}");
 //        this.phoneNumber = faker.phoneNumber().subscriberNumber(11).replaceFirst("^[^7]", "7");
         this.sinceDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy"));
     }
@@ -91,7 +91,9 @@ public class UserRandom {
     public String getPhone() {
         return phoneNumber;
     }
-
+    public String getConfirmationCode() {
+        return confirmationCode;
+    }
 
 
 }
