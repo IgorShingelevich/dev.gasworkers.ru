@@ -71,7 +71,12 @@ class ClientDispatcherInteractionTest extends BaseTest {
 
 
 //    String currentOrderNumber = OrderCardClientPage.getTitleNumber();
-
+@Test
+public void  test(){
+    step("111", () -> {
+        System.out.println("111");
+    });
+}
     @Test
     @Feature("Интерграция ролей")
     @Story("Интерграция Путь ТО")
