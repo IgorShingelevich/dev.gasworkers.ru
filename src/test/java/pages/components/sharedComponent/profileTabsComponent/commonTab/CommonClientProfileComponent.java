@@ -70,13 +70,13 @@ public class CommonClientProfileComponent extends BaseComponent {
 
     public void checkInitialStatus(String name, String patronymicName, String surname) {
         stepWithRole("Убедиться, что поля Фамилия, Имя, Отчество заполнены: ", () -> {
-            stepWithRole("Фамилия: ", () ->
+            stepWithRole("Фамилия: " + surnameLocator.getValue(), () ->
                 surnameLocator.shouldHave(value(surname))
             );
-            stepWithRole("Имя: ", () ->
+            stepWithRole("Имя: " + nameLocator.getValue(), () ->
                 nameLocator.shouldHave(value(name))
             );
-            stepWithRole("Отчество: ", () ->
+            stepWithRole("Отчество: " + patronymicLocator.getValue(), () ->
                     patronymicLocator.shouldHave(value(patronymicName))
             );
             stepWithRole("Убедиться, что остальные поля вкладки Общие данные пустые", () -> {

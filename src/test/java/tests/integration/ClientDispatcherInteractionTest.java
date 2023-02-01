@@ -72,8 +72,8 @@ class ClientDispatcherInteractionTest extends BaseTest {
 //    String currentOrderNumber = OrderCardClientPage.getTitleNumber();
 
     @Test
-    @Feature("Путь ТО")
-    @Story("Интерграция ролей")
+    @Feature("Интерграция ролей")
+    @Story("Интерграция Путь ТО")
     @DisplayName(" ТО Интеграция Клиент-Диспетчер-Клиент-Диспетчер")  // whu name 2 times in Allure?
     void integrationDispatcherAcceptClientMaintenanceRequest() {
         step("авторизация Клиента", () -> {

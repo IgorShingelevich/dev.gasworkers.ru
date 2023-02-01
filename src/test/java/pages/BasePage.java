@@ -29,38 +29,15 @@ public abstract class BasePage extends BaseComponent {
     SelenideElement popUpCloseButtonLocator = driver.$(byTagAndText("button", "Прочитать все")).as("Close popup button"),
             popUpContainerLocator = driver.$(".notice-list-fixed-content.gas-scrollbar-inline").as("Pop-up container");
 
-    public void popUpClose3() {
-        stepWithRole("Закрыть всплывающие уведомления", () -> {
-            try {
-                popUpCloseButtonLocator.as("Close popup button").should(appear, Duration.ofSeconds(20)).hover().click();
-
-            } catch (NoSuchElementException e) {
-                System.out.println("No pop-up");
-            }
-        });
-    }
-
-    public void popUpClose2() {
-        {
-            stepWithRole("Закрыть всплывающие уведомления", () -> {
-                try {
-                    popUpCloseButtonLocator.as("Close popup button").shouldBe(visible, enabled).hover().click();
-                } catch (ElementShould e) {
-                    System.out.println("No pop-up");
-                    e.printStackTrace();
-                }
-            });
-        }
-    }
-
     public void popUpClose() {
         {
             stepWithRole("Закрыть всплывающие уведомления", () -> {
                 try {
                     if (popUpCloseButtonLocator.exists()) {
-                        popUpCloseButtonLocator.shouldBe(enabled, visible);
+                        popUpCloseButtonLocator.shouldBe(visible);
                         Selenide.sleep(10000);
                         popUpCloseButtonLocator.click();
+                        popUpContainerLocator.shouldNotBe(visible, Duration.ofSeconds(20));
                     } else {
                         System.out.println("No pop-up");
                     }

@@ -75,7 +75,7 @@ class ClientFlowTest extends BaseTest {
     }
 
     @Test
-    @Feature("Новый заказ на ТО ")
+    @Feature("Новый заказ ТО")
     @Story("Создание заказа")
     @DisplayName("Клиент создает заказ")
     public void clientPlaceMaintenanceRequest() {
@@ -94,15 +94,8 @@ class ClientFlowTest extends BaseTest {
         clientPages.getSelectServicePage().toOrderCard();
         clientPages.getOrderCardPage().checkFinishLoading();
         clientPages.getSelectServicePage().popUpClose();
-        step("Убедиться, что тип Заказа {orderTypeIs}", () -> {
-            OrderType orderType = OrderType.MAINTENANCE;
-            clientPages.getOrderCardPage().checkOrderType(orderType);
-            // compare .checkOrderType and .checkOrderStatus what is better? more universal?
-        });
-        step("Убедиться, что статус Заказа {orderStatusIs}", () -> {
-            clientPages.getOrderCardPage().checkOrderStatusNew(OrderStatus.NEW_ORDER);
-            // how to make .checkOrderStatus  universal and also check corresponded buttons
-        });
+        clientPages.getOrderCardPage().checkOrderType(OrderType.MAINTENANCE);
+        clientPages.getOrderCardPage().checkOrderStatusNew(OrderStatus.NEW_ORDER);
 
     }
 

@@ -18,7 +18,7 @@ import pages.context.MasterPages;
 import tests.BaseTest;
 import utils.RandomClient;
 
-
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class RegistrationTest extends BaseTest {
 
 //    SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
@@ -115,7 +115,6 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().clickNext();
         clientPages.getRegistrationPage().checkFinishState();
         clientPages.getHomePage().checkInitialGuide();
-        // InitialModal - put in another component?
         clientPages.getHomePage().clickLaterInitialModal();
         clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
         clientPages.getHomePage().sidebar.allObjects();
