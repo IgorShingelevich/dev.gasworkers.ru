@@ -1,5 +1,8 @@
 package tests.registration;
-
+import com.codeborne.selenide.logevents.SelenideLogger;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
+import io.qameta.allure.selenide.AllureSelenide;
 import extension.browser.Browser;
 import model.Role;
 
@@ -18,6 +21,9 @@ import utils.RandomClient;
 
 public class RegistrationTest extends BaseTest {
 
+//    SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
+
+
     @Browser(role = Role.CLIENT, browserSize = "800x1000", browserPosition = "0x0")
     ClientPages clientPages;
 
@@ -31,6 +37,8 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @Order(1)
+    @Feature("Регистрация")
+    @Story("Регистрация клиента")
     @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
     @DisplayName("Регистрация клиента по телефону")
     void registrationClientByPhone() {
@@ -50,7 +58,6 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().fillPassword(randomClient.getPassword());
         clientPages.getRegistrationPage().clickNext();
         clientPages.getRegistrationPage().checkInvalidPasswordNotification();
-        // not match notification
         clientPages.getRegistrationPage().fillPasswordConfirmation(randomClient.getPassword());
         clientPages.getRegistrationPage().clickNext();
         clientPages.getRegistrationPage().checkFourthStepByPhoneFinishLoading(randomClient.getPhoneNumber());
@@ -61,7 +68,6 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().clickNext();
         clientPages.getRegistrationPage().checkFinishState();  //no buttons
         clientPages.getHomePage().checkInitialGuide();
-        // InitialModal - put in another component?
         clientPages.getHomePage().clickLaterInitialModal();
         clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
         clientPages.getHomePage().sidebar.allObjects();
@@ -78,6 +84,8 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @Order(2)
+    @Feature("Регистрация")
+    @Story("Регистрация клиента")
     @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
     @DisplayName("Регистрация клиента по email")
     void registrationClientByEmail() {
@@ -124,6 +132,8 @@ public class RegistrationTest extends BaseTest {
 
     @Test
     @Order(3)
+    @Feature("Регистрация")
+    @Story("Генерация Надежного пароля")
     @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
     @DisplayName("Регистрация клиента со Сгенерированным паролем по телефону")
     void registrationWithGeneratedPasswordByPhone() {
@@ -164,13 +174,13 @@ public class RegistrationTest extends BaseTest {
         //TODO profile check
     }
 
-
-
     @ValueSource(strings = { "user@example.c", "user@sub.sub.sub.com" })
-    @DisplayName("Регистрация клиента с допустимым email: ")
     @ParameterizedTest (name = "Убедиться, что при вводе допустимого  email: {0} возможна регистрация")
     @Order(4)
+    @Feature("Регистрация")
+    @Story("Регистрация с допустимыми параметрами")
     @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
+    @DisplayName("Регистрация клиента с допустимым email: ")
     void registrationClientByAcceptedEmail( String acceptedEmail){
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
@@ -184,6 +194,8 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().checkSecondStepFinishLoading();
     }
 
+
+//    @CsvFileSource(resources = "resources/invalidEmails.csv", numLinesToSkip = 1, delimiter = '|')
     @CsvSource(value = {
             "user| Поле E-Mail должно быть действительным электронным адресом.| email without @",
             "user@| Поле E-Mail должно быть действительным электронным адресом.| email without domain",
@@ -222,6 +234,8 @@ public class RegistrationTest extends BaseTest {
     )
     @ParameterizedTest (name = "Убедиться, что при вводе невалидного email: {0} появляется ошибка: {1}")
     @Order(5)
+    @Feature("Регистрация")
+    @Story("Регистрация с недопустимыми параметрами")
     @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("negative")})
     @DisplayName("Регистрация клиента с невалидным email: ")
     void registrationClientByInvalidEmail( String invalidEmail, String errorText ){
@@ -238,13 +252,12 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().checkInvalidEmailError(invalidEmail, errorText);
     }
 
-
-
-
-
     /*@CsvFileSource(resources = "/resources/invalidPhoneNumbers.csv", numLinesToSkip = 1, delimiter = '|')
     @ParameterizedTest (name = "Убедиться, что при вводе невалидного номера телефона: {0} появляется ошибка: {1}")
+    @Order(6)
     @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("negative")})
+     @Feature("Регистрация")
+    @Story("Регистрация с недопустимыми параметрами")
     @DisplayName("Регистрация клиента с невалидным номером телефона")
     void registrationClientByInvalidPhoneNumber( String invalidPhoneNumber, String errorText, String errorDescription){
         clientPages.getLandingPage().open();

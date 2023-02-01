@@ -309,35 +309,35 @@ public class RegistrationClientPage extends BaseClientPage {
     public void fillName(String name) {
         stepWithRole("Ввести имя: " + name , () -> {
             driver.$("input[placeholder*=Имя]").setValue(name);
-            System.out.println("name = " + name);
+            System.out.println("name: " + name);
         });
     }
 
     public void fillSurname(String surname) {
         stepWithRole("Ввести фамилию: " + surname , () -> {
             driver.$("input[placeholder*=Фамилия]").setValue(surname);
-            System.out.println("surname = " + surname);
+            System.out.println("surname: " + surname);
         });
     }
 
     public void fillPatronymicName(String patronymicName) {
         stepWithRole("Ввести отчество: " + patronymicName , () -> {
             driver.$("input[placeholder*=Отчество]").setValue(patronymicName);
-            System.out.println("patronymicName = " + patronymicName);
+            System.out.println("patronymicName: " + patronymicName);
         });
     }
 
     public void fillEmail(String email) {
         stepWithRole("Ввести email: " + email , () -> {
             driver.$("input[placeholder*=почта]").setValue(email);
-            System.out.println("email = " + email);
+            System.out.println("email: " + email);
         });
     }
 
     public void fillPhoneNumber(String phoneNumber) {
         stepWithRole("Ввести номер телефона: " + phoneNumber , () -> {
             driver.$("input[placeholder*=Номер]").setValue(phoneNumber);
-            System.out.println("phoneNumber = " + phoneNumber);
+            System.out.println("phoneNumber: " + phoneNumber);
         });
     }
 

@@ -149,15 +149,19 @@ public class OrderCardClientPage extends BaseClientPage {
     }
 
     public OrderCardClientPage checkOrderStatusComplete() {
-        completeOrderInfoLocator.shouldBe(visible).shouldHave(text(COMPLETE_ORDER_INFO));
-        orderStatusLocator.shouldBe(visible).shouldHave(text("Завершен"));
-//        finalPriceLocator.shouldBe(visible);
-        navDocs();
-        docsDownloadCollection.get(0).shouldBe(visible);
-        docsDownloadCollection.get(1).shouldBe(visible);
-        docsDownloadCollection.get(2).shouldBe(visible);
-        docsDownloadCollection.shouldBe(size(3));
-        navCommon();
+        stepWithRole("Убедиться, что статус заказа является: " + OrderStatus.COMPLETE, () -> {
+            orderStatusLocator.shouldHave(text(OrderStatus.COMPLETE.toString()));
+            completeOrderInfoLocator.shouldBe(visible).shouldHave(text(COMPLETE_ORDER_INFO));
+            orderStatusLocator.shouldBe(visible).shouldHave(text("Завершен"));
+//          finalPriceLocator.shouldBe(visible);
+            navDocs();
+            docsDownloadCollection.get(0).shouldBe(visible);
+            docsDownloadCollection.get(1).shouldBe(visible);
+            docsDownloadCollection.get(2).shouldBe(visible);
+            docsDownloadCollection.shouldBe(size(3));
+            navCommon();
+        });
+
         return this;
     }
 
@@ -175,7 +179,9 @@ public class OrderCardClientPage extends BaseClientPage {
     }
 
     public OrderCardClientPage cancelOrder() {
-        cancelOrderButtonLocator.scrollTo().click();
+        stepWithRole("Нажать на кнопку Отменить заказ", () -> {
+            cancelOrderButtonLocator.shouldBe(visible, Duration.ofSeconds(30)).click();
+        });
         return this;
     }
 }

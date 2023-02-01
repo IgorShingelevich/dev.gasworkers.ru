@@ -1,6 +1,8 @@
 package tests.client;
 
 import extension.browser.Browser;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import model.client.ClientRequestType;
 import model.client.OrderStatus;
 import model.client.OrderType;
@@ -18,106 +20,67 @@ class ClientFlowTest extends BaseTest {
     @Browser(role = CLIENT)
     ClientPages clientPages;
 
-    User client = new User(
+    User client00 = new User(
             "Игорь",
             "Сергеевич",
             "Шингелевич",
             "shingelevich@gmail.com",
             "123456",
             null,
-            79288010225L);
+            70012223344L);
 
     RandomClient randomClient = new RandomClient();
 
     @BeforeEach
     void clientLogin() {
         clientPages.getLoginPage().open();
-        clientPages.getLoginPage().login(client.email, client.password);
+        clientPages.getLoginPage().login(client00.email, client00.password);
     }
 
 
 
     @Test
+    @Feature("Новый заказ ТО")
+    @Story("Создание заказа и его отмена")
+    @DisplayName("Клиент создает заказ и отменяет его")
     public void clientPlaceMaintenanceRequestAndCancel() {
-        step("Убедиться, что Домашняя страница загружена", () -> {
-            clientPages.getHomePage()
-                    .checkFinishLoading();
-        });
-        step(" Нажать кнопку Создать Заказ", () ->
-                clientPages.getHomePage().clickPlaceOrderButton()
-        );
-        step("Выбрать тип заказа {ClientRequestType}", () ->
-                clientPages.getTypeOrdersPage()
-                        .selectOrderType(ClientRequestType.MAINTENANCE) //  .toString()
-        );
-        step("Под информацией нажать кнопку Далее", () ->
-                        clientPages.getInfoTypeOrderPage()
-//                    .checkTitle("Заказ на ТО")
-//                    .checkStepSequence("Шаг 1 из 3")
-                                .clickNextButton()
-        );
-        step("Выбрать объект ТО", () ->
-                clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0)
-        );
-        step("Указать Сегодня время и дату", () ->
-                clientPages.getSelectDateMaintenancePage().pickNowDateAM()
-        );
-        step("Нажать кнопку Разместить Заказ", () ->
-                clientPages.getSelectDateMaintenancePage().submitOrder()
-        );
-        step("Убедиться, что страница Выбор СК загружена ", () ->
-                clientPages.getSelectServicePage().checkFinishLoading()
-        );
-        step("Нажать на кнопку Смотреть Заказ", () ->
-                clientPages.getSelectServicePage().toOrderCard()
-        );
-        step("Закрыть всплывающие уведомления", () ->
-                clientPages.getSelectServicePage().popUpClose()
-        );
-        step("Убедиться, что страница Заказ загружена", () ->
-                clientPages.getOrderCardPage().checkFinishLoading()
-        );
-        step("Нажать на кнопку Отменить Заказ", () ->
-                clientPages.getOrderCardPage().cancelOrder()
-        );
-        step("Убедиться, что страница Отмена Заказа загружена", () ->
-                clientPages.getCancelOrderPage().checkFinishLoading()
-        );
-        step("Нажать на кнопку Назад", () ->
-                clientPages.getCancelOrderPage().backButton()
-        );
-        step("Убедиться, что страница Заказ загружена", () ->
-                clientPages.getOrderCardPage().checkFinishLoading()
-        );
-        step("Нажать на  кнопку Показать на карте", () ->
-                clientPages.getOrderCardPage().showOnMap()
-        );
-        step("Убедиться, что страница страница Выбор СК загружена", () ->
-                clientPages.getSelectServicePage().checkFinishLoading()
-        );
-        step("Нажать на кнопку Смотреть Заказ", () ->
-                clientPages.getSelectServicePage().toOrderCard()
-        );
-        step("Убедиться, что страница Заказ загружена", () ->
-                clientPages.getOrderCardPage().checkFinishLoading()
-        );
-        step("Нажать на кнопку Отменить Заказ", () ->
-                clientPages.getOrderCardPage().cancelOrder()
-        );
-        step("Убедиться, что страница Отмена Заказа загружена", () ->
-                clientPages.getCancelOrderPage().checkFinishLoading()
-        );
-        step("Нажать на кнопку Да, Отменить", () ->
-                clientPages.getCancelOrderPage().yesButton()
-        );
-        step("Убедиться, что Домашняя страница загружена", () ->
-                clientPages.getHomePage().checkFinishLoading()
-        );
+        clientPages.getHomePage().checkFinishLoading();
+        clientPages.getHomePage().popUpClose();
+        clientPages.getHomePage().clickPlaceOrderButton();
+        clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
+        clientPages.getInfoTypeOrderPage()
+//                  .checkTitle("Заказ на ТО")
+//                  .checkStepSequence("Шаг 1 из 3")
+                        .clickNextButton();
+        clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0);
+        clientPages.getSelectDateMaintenancePage().pickNowDateAM();
+        clientPages.getSelectDateMaintenancePage().submitOrder();
+        clientPages.getSelectServicePage().checkFinishLoading();
+        clientPages.getSelectServicePage().toOrderCard();
+        clientPages.getSelectServicePage().popUpClose();
+        clientPages.getOrderCardPage().checkFinishLoading();
+        clientPages.getOrderCardPage().popUpClose();
+        clientPages.getOrderCardPage().cancelOrder();
+        clientPages.getCancelOrderPage().checkFinishLoading();
+        clientPages.getCancelOrderPage().backButton();
+        clientPages.getOrderCardPage().checkFinishLoading();
+        clientPages.getOrderCardPage().showOnMap();
+        clientPages.getSelectServicePage().checkFinishLoading();
+        clientPages.getSelectServicePage().toOrderCard();
+        clientPages.getOrderCardPage().checkFinishLoading();
+        clientPages.getOrderCardPage().cancelOrder();
+        clientPages.getCancelOrderPage().checkFinishLoading();
+        clientPages.getCancelOrderPage().yesButton();
+        clientPages.getHomePage().checkFinishLoading();
     }
 
     @Test
+    @Feature("Новый заказ на ТО ")
+    @Story("Создание заказа")
+    @DisplayName("Клиент создает заказ")
     public void clientPlaceMaintenanceRequest() {
         clientPages.getHomePage().checkFinishLoading();
+        clientPages.getHomePage().popUpClose();
         clientPages.getHomePage().clickPlaceOrderButton();
         clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
         clientPages.getInfoTypeOrderPage()
@@ -144,6 +107,9 @@ class ClientFlowTest extends BaseTest {
     }
 
     @Test
+    @Feature("Кабинет клиента")
+    @Story("Просмотр заказа")
+    @DisplayName("Клиент просматривает заказ в кабинете")
     public void clientCheckOrderStatus() {
         Integer checkedOrderNumber = 3185;
         step("Убедиться, что статус Заказа: " + checkedOrderNumber + " является: " + OrderStatus.SCHEDULE_VISIT, () -> {
@@ -158,32 +124,38 @@ class ClientFlowTest extends BaseTest {
         });
     }
 
-    @Test
+   /* @Test
     public void checkNewSms() {
         step("Проверить, что появилось новое сообщение", () ->
                 client.firstCodeFromNewSMS());
-    }
+    }*/
 
     @Test
-    public void checkInitialClientCabinetState(){
+    @Feature("Кабинет клиента")
+    @Story("Заполненный кабинет ")
+    @DisplayName("Выбранный клиент просматривает заполненный кабинет")
+    public void checkFilledCabinetState(){
         clientPages.getHomePage().checkFinishLoading();
         clientPages.getHomePage().sidebar.profile();
         clientPages.getProfilePage().checkFinishLoading();
         clientPages.getProfilePage().navCommon();
-        clientPages.getProfilePage().commonTab.checkFinishLoading();
-        clientPages.getProfilePage().commonTab.checkInitialStatus(randomClient.getName(), randomClient.getPatronymicName(), randomClient.getSurname());
+        clientPages.getProfilePage().commonTab.checkFilledCabinetState();
+        clientPages.getProfilePage().commonTab.checkInitialStatus(client00.name, client00.patronymic, client00.surname);
         clientPages.getProfilePage().navContacts();
         clientPages.getProfilePage().contactsTab.checkFinishLoading();
-        clientPages.getProfilePage().contactsTab.checkFilledStatus(randomClient.getEmail(), randomClient.getPhone());
+        clientPages.getProfilePage().contactsTab.checkFilledStatus(client00.email, String.valueOf(client00.phoneNumber));
         //TODO password and Notifications
     }
 
     @Test
+    @Feature("Кабинет клиента")
+    @Story("Незаполненный ( начальное состояние) кабинет")
+    @DisplayName("Клиент наполняет свой Профиль в первый раз")
     public void fillingUpInitialClientProfilePage() {
         clientPages.getHomePage().sidebar.profile();
         clientPages.getProfilePage().checkFinishLoading();
         clientPages.getProfilePage().navCommon();
-        clientPages.getProfilePage().commonTab.checkFinishLoading();
+        clientPages.getProfilePage().commonTab.checkInitialCabinetState();
         //TODO check  fullName fill up address and passport
         clientPages.getProfilePage().navContacts();
         clientPages.getProfilePage().contactsTab.checkFinishLoading();

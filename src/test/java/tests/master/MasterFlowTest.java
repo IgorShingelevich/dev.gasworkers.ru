@@ -1,5 +1,6 @@
 package tests.master;
 
+import com.codeborne.selenide.logevents.SelenideLogger;
 import extension.browser.Browser;
 import model.client.OrderStatus;
 import org.junit.jupiter.api.BeforeEach;
@@ -39,10 +40,9 @@ public class MasterFlowTest extends BaseTest {
     @Test
     void checkMasterDispatchedOrderStatus(){
         step("Мастер открывает заказ в статусе: " + OrderStatus.MASTER_DISPATCHED, () -> {
-            masterPages.getHomePage().checkFinishLoading();
-            masterPages.getHomePage().sidebar.ordersHistoryDropdown();
-            masterPages.getHomePage().sidebar.newOrders();
+//    @CsvFileSource(resources = "resources/invalidEmails.csv", numLinesToSkip = 1, delimiter = '|')
             masterPages.getNewOrdersPage().checkFinishLoading();
+            // TODO new orders sorting
             masterPages.getNewOrdersPage().openOrderByNumber(3215);
             masterPages.getOrderCardPage().checkFinishLoading();
         });

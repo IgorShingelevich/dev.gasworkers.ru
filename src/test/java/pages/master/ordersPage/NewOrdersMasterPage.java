@@ -20,7 +20,7 @@ public class NewOrdersMasterPage extends BaseMasterPage {
         sidebar = new SidebarMasterComponent(browser);
     }
 
-    ElementsCollection orderNumberLinkCollection = driver.$$("p.h5.link-blue.pointer");
+    ElementsCollection orderNumberLinkCollection = driver.$$("p.h5.link-blue.pointer").as("Номер заказа");
     SelenideElement
         titleLocator = driver.$("h1.h3.mb-2").as("Заголовок страницы"),
         orderCardTitleLocator = driver.$(".page-title .h3.mb-2"),

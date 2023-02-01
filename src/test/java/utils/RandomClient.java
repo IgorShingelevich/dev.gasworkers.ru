@@ -49,7 +49,7 @@ public class RandomClient {
         this.email = email;
         this.phoneNumber =phoneClientPrefixMock + faker.regexify("[0-9]{7}");
 //        this.phoneNumber = faker.phoneNumber().subscriberNumber(11).replaceFirst("^[^7]", "7");
-        this.sinceDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy"));
+        this.sinceDate = LocalDate.now().format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
     }
 
     public String getName() {
