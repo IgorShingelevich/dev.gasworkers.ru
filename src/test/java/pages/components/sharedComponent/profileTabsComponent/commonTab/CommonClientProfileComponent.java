@@ -25,13 +25,13 @@ public class CommonClientProfileComponent extends BaseComponent {
              numberPassportLocator = driver.$("input[placeholder*=Номер]").as("Номер паспорта"),
              datePassportLocator = driver.$("input[placeholder*=Дата]").as("Дата выдачи паспорта"),
              whoPassportLocator = driver.$("input[placeholder*=выдан]").as("Кем выдан паспорт"),
-             registrationAddressLocator = driver.$("input[placeholder*=Адрес]").as("Адрес регистрации"),
-             apartmentLocator = driver.$("input[placeholder*=квартиры]").as("Номер квартиры"),
+             registrationAddressLocator = driver.$("textarea[placeholder*=Адрес]").as("Адрес регистрации"),
+             apartmentLocator = driver.$("textarea[placeholder*=квартиры]").as("Номер квартиры"),
              saveButtonLocator = driver.$(byTagAndText("button", "Сохранить")).as("Кнопка Сохранить");
 
 
-    public void checkFinishLoading () {
-        stepWithRole("Убедиться, что вкладка Общие данные загружена", () -> {
+    public void checkInitialCabinetState() {
+        stepWithRole("Убедиться, что вкладка Общие в начальном состоянии", () -> {
             // TODO implement CommonDataPickerComponent. Upload photo.
             nameSubTitleLocator.shouldHave(visible, text("Личные данные"));
             passportSubTitleLocator.shouldHave(visible, text("Паспортные данные"));
@@ -47,6 +47,26 @@ public class CommonClientProfileComponent extends BaseComponent {
             saveButtonLocator.shouldBe(enabled);
         });
     }
+
+    public void checkFilledCabinetState () {
+        stepWithRole("Убедиться, что вкладка Общие данные заполнена", () -> {
+            // TODO implement CommonDataPickerComponent. Upload photo.
+            nameSubTitleLocator.shouldHave(visible, text("Личные данные"));
+            passportSubTitleLocator.shouldHave(visible, text("Паспортные данные"));
+            surnameLocator.shouldBe(visible);
+            nameLocator.shouldBe(visible);
+            patronymicLocator.shouldBe(visible);
+            seriesPassportLocator.shouldBe(visible);
+            numberPassportLocator.shouldBe(visible);
+            datePassportLocator.shouldBe(visible);
+            whoPassportLocator.shouldBe(visible);
+            registrationAddressLocator.shouldBe(visible);
+            apartmentLocator.shouldBe(visible);
+            saveButtonLocator.shouldBe(disabled);
+        });
+    }
+
+
 
     public void checkInitialStatus(String name, String patronymicName, String surname) {
         stepWithRole("Убедиться, что поля Фамилия, Имя, Отчество заполнены: ", () -> {

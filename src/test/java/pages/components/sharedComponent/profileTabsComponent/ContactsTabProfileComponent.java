@@ -13,10 +13,10 @@ public class ContactsTabProfileComponent extends BaseComponent {
         super(browser);
     }
     SelenideElement
-    subtitleLocator = $("div .title").as("Подзаголовок Контактные данные"),
-    emailLocator = $("input[placeholder*=почта]").as("Email"),
-    phoneLocator = $("input[placeholder*=номер]").as("Телефон"),
-    saveButtonLocator = $(byTagAndText("button", "Сохранить")).as("Кнопка Сохранить");
+    subtitleLocator = driver.$("div .title").as("Подзаголовок Контактные данные"),
+    emailLocator = driver.$("input[placeholder*=почта]").as("Email"),
+    phoneLocator = driver.$("input[placeholder*=Номер]").as("Телефон"),
+    saveButtonLocator = driver.$(byTagAndText("button", "Сохранить")).as("Кнопка Сохранить");
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что вкладка Контакты загружена", () -> {
@@ -33,8 +33,9 @@ public class ContactsTabProfileComponent extends BaseComponent {
             stepWithRole("Email: " + email, () ->
                 emailLocator.shouldBe(visible).shouldHave(value(email))
             );
-            stepWithRole("Телефон: " + phone, () ->
-                phoneLocator.shouldBe(visible).shouldHave(value(phone))
+            String formattedPhone = "+7(" + phone.toString().substring(1, 4) + ")-" + phone.toString().substring(4, 7) + "-" + phone.toString().substring(7);
+            stepWithRole("Телефон: " + formattedPhone, () ->
+                phoneLocator.shouldBe(visible).shouldHave(value(formattedPhone))
             );
             stepWithRole("Кнопка Сохранить неактивна", () ->
                 saveButtonLocator.shouldBe(disabled)

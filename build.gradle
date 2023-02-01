@@ -1,6 +1,6 @@
 plugins {
     id 'java'
-    id 'io.qameta.allure' version '2.10.0'
+    id 'io.qameta.allure' version '2.11.2'
     id "io.freefair.lombok" version "6.4.2"
 }
 
@@ -23,11 +23,11 @@ allure {
     report {
         version.set("2.20.0")
     }
-    adapter {
+    adapter { // отвечает за появление папочки build/allure-results
         aspectjWeaver.set(true)
         frameworks {
-            junit5 {
-                adapterVersion.set("2.20.0")
+            junit5 { //название фреймворка
+                adapterVersion.set("2.20.0") //версия интеграции фреймворка и Allure
             }
         }
     }

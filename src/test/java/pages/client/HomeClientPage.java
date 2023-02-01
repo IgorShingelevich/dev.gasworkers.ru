@@ -3,6 +3,7 @@ package pages.client;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Attachment;
 import model.browser.RoleBrowser;
 import pages.components.clientComponent.LastOrderProfileClientComponent;
 import pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
@@ -110,6 +111,7 @@ public final class HomeClientPage extends BaseClientPage {
 
     public HomeClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что загружена Домашняя страница", () -> {
+
             profileBlockFullNameLocator.shouldBe(visible);
             // TODO add fullName check
             driver.$(".client-objects [data-index='0']").shouldBe(visible, Duration.ofSeconds(20));

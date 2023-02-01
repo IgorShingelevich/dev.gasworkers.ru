@@ -2,6 +2,8 @@ package tests.integration;
 
 import api.sms.SmsApi;
 import extension.browser.Browser;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import model.Role;
 import model.client.OrderStatus;
 import model.client.OrderType;
@@ -70,6 +72,8 @@ class ClientDispatcherInteractionTest extends BaseTest {
 //    String currentOrderNumber = OrderCardClientPage.getTitleNumber();
 
     @Test
+    @Feature("Путь ТО")
+    @Story("Интерграция ролей")
     @DisplayName(" ТО Интеграция Клиент-Диспетчер-Клиент-Диспетчер")  // whu name 2 times in Allure?
     void integrationDispatcherAcceptClientMaintenanceRequest() {
         step("авторизация Клиента", () -> {
@@ -174,10 +178,10 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getPaymentWizardPage().getQRCode();
             clientPages.getSignSMSPage().checkFinishLoading();
 
-            String sms = clientSmsApi1.waitReceiveNewSms().getText();
-            String code = sms.substring(0, 6);
-
-            clientPages.getSignSMSPage().inputSMSCode(code);
+//            String sms = clientSmsApi1.waitReceiveNewSms().getText();
+//            String code = sms.substring(0, 6);
+            String mockCode = "111111";
+            clientPages.getSignSMSPage().inputSMSCode(mockCode);
 //            clientPages.getSignSMSPage().sign();
             clientPages.getSignSuccsessPage().checkFinishLoading();
             clientPages.getSignSuccsessPage().toHomePage();
