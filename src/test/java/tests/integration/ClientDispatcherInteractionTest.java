@@ -2,6 +2,7 @@ package tests.integration;
 
 import api.sms.SmsApi;
 import extension.browser.Browser;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import model.Role;
@@ -92,12 +93,14 @@ class ClientDispatcherInteractionTest extends BaseTest {
             masterPages.getHomePage().checkFinishLoading();
         });
 
-        step("test run credentials ", () -> {
-            System.out.println("test run credentials: ");
-            System.out.println("client: " + client.email+ " "  + client.password + " " + client.fullName);
-            System.out.println("dispatcher: " + dispatcher.email + " " + dispatcher.password + " " + dispatcher.fullName);
-            System.out.println("master: " + master.email + " " + master.password + " " + master.fullName);
-            System.out.println("runStartTime: " + LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")));
+        step("Test run credentials ", () -> {
+            Allure.addAttachment("Client creds", client.fullName + ": " + client.email + "/" + client.password);
+            Allure.addAttachment("Dispatcher creds", dispatcher.fullName + ": " + dispatcher.email + "/" + dispatcher.password);
+            Allure.addAttachment("Master creds", master.fullName + ": " + master.email + "/" + master.password);
+
+            String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                    + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+            Allure.addAttachment("RunStartTime", date);
         });
 
 
