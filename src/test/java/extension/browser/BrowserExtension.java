@@ -1,6 +1,7 @@
 package extension.browser;
 
 import com.codeborne.selenide.SelenideDriver;
+import helpers.Attach;
 import helpers.DriverFactory;
 import io.qameta.allure.Allure;
 import lombok.SneakyThrows;
@@ -85,7 +86,11 @@ public class BrowserExtension implements BeforeEachCallback, ParameterResolver, 
 
         for (SelenideDriver driver : browsers.getDrivers()) {
             if (driver.hasWebDriverStarted()) {
-                // ToDo Здесь будет добавление аттачей
+                Allure.step("Attachments", () -> {
+                    Attach.screenshotAs(driver, "Last screenshot");
+                    Attach.browserConsoleLogs(driver);
+                    Attach.pageSource(driver);
+                });
                 driver.close();
             }
         }

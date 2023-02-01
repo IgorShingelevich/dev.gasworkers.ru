@@ -27,4 +27,9 @@ public final class DriverManager {
                 roleBrowser.getDriver().forward());
     }
 
+    public void zoom(double factor) {
+        step(roleBrowser.getRole() + ": forward", () ->
+                roleBrowser.getDriver().zoom(factor));
+    }
+
 }
