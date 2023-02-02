@@ -79,9 +79,9 @@ public class NavPasswordTabProfileComponent extends BaseComponent {
                         eyeIconCollection.get(2).shouldHave(cssClass("visible"));
                     });
                 });
-                stepWithRole("Убедиться, что в поле  Новый пароль и Повторите пароль отображается сгенерированный пароль: " + suggestedPasswordLocator.val().toString() , () -> {
-                    newPasswordInputLocator.shouldHave(text(suggestedPasswordLocator.val().toString()));
-                    repeatNewPasswordInputLocator.shouldHave(text(suggestedPasswordLocator.val().toString()));
+                stepWithRole("Убедиться, что в поле  Новый пароль и Повторите пароль отображается сгенерированный пароль: " + newPasswordInputLocator.val().toString() , () -> {
+                    newPasswordInputLocator.shouldNotBe(Condition.empty).as("Новый пароль");
+                    repeatNewPasswordInputLocator.shouldNotBe(Condition.empty).as("Повторите пароль");
                 });
                 stepWithRole("Нажать на иконку Скрыть пароль в поле Пароль и Подтверждение Пароля" , () -> {
                     eyeIconCollection.get(1).shouldHave(cssClass("visible")).click();

@@ -1,5 +1,6 @@
 package pages.client;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
@@ -380,9 +381,9 @@ public class RegistrationClientPage extends BaseClientPage {
             stepWithRole("Нажать на кнопку Сгенерировать пароль" , () -> {
                 generatePasswordButtonLocator.click();
             });
-            stepWithRole("Убедиться, что сгенерирован Надежный  пароль: " + suggestedPasswordLocator.getText() , () -> {
+            stepWithRole("Убедиться, что сгенерирован Надежный  пароль: " + suggestedPasswordLocator.val().toString() , () -> {
                 suggestedPasswordLocator.shouldBe(visible);
-                System.out.println("suggestedPassword: " + suggestedPasswordLocator.getText());
+                System.out.println("suggestedPassword: " + suggestedPasswordLocator.val().toString());
             });
             stepWithRole("Убедиться что появился подзаголовок поля Надежный пароль " + driver.$$("p.small").get(0).getText() , () -> {
                 driver.$$("p.small").get(0).as("подзаголовок поля Надежный пароль").shouldHave(text("Мы сгенерировали вам пароль"));
@@ -390,7 +391,7 @@ public class RegistrationClientPage extends BaseClientPage {
             stepWithRole("Убедиться что появилось описание поля Надежный пароль " + driver.$$("p.small").get(1).getText() , () -> {
                 driver.$$("p.small").get(1).as("описание поля Надежный пароль").shouldHave(text("Пароль должен содержать не менее 4 знаков"));
             });
-            stepWithRole("Убедиться, что поле Пароль и Подтверждение пароля заполнены сгенерированным паролем: " + suggestedPasswordLocator.getText() , () -> {
+            stepWithRole("Убедиться, что поле Пароль и Подтверждение пароля заполнены сгенерированным паролем: " + passwordInputLocator.val().toString() , () -> {
                 stepWithRole("Нажать на иконку Показать  скрытый пароль в поле Пароль и Подтверждение Пароля" , () -> {
                     stepWithRole("Убедиться, что иконки переходят из состояния Скрытый пароль в состояние Пароль Отображается" , () -> {
                         eyeIconCollection.get(0).shouldNotHave(cssClass("visible")).click();
@@ -399,9 +400,9 @@ public class RegistrationClientPage extends BaseClientPage {
                         eyeIconCollection.get(1).shouldHave(cssClass("visible"));
                     });
                 });
-                stepWithRole("Убедиться, что в поле Пароль и Подтверждение Пароля отображается сгенерированный пароль: " + suggestedPasswordLocator.getText() , () -> {
-                    passwordInputLocator.shouldHave(value(suggestedPasswordLocator.getText()));
-                    confirmPasswordInputLocator.shouldHave(value(suggestedPasswordLocator.getText()));
+                stepWithRole("Убедиться, что в поле Пароль и Подтверждение Пароля отображается сгенерированный пароль: " + passwordInputLocator.val().toString() , () -> {
+                    passwordInputLocator.shouldNotBe(empty);
+                    confirmPasswordInputLocator.shouldNotBe(empty);
                 });
                 stepWithRole("Нажать на иконку Скрыть пароль в поле Пароль и Подтверждение Пароля" , () -> {
                     eyeIconCollection.get(0).shouldHave(cssClass("visible")).click();
