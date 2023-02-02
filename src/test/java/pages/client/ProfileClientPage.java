@@ -4,14 +4,13 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
 import pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockClientComponent;
-import pages.components.sharedComponent.profileTabsComponent.ContactsTabProfileComponent;
-import pages.components.sharedComponent.profileTabsComponent.NotificationsTabProfileComponent;
-import pages.components.sharedComponent.profileTabsComponent.PasswordTabProfileComponent;
-import pages.components.sharedComponent.profileTabsComponent.commonTab.CommonClientProfileComponent;
+import pages.components.sharedComponent.profileTabsComponent.NavContactsTabProfileComponent;
+import pages.components.sharedComponent.profileTabsComponent.NavNotificationsTabProfileComponent;
+import pages.components.sharedComponent.profileTabsComponent.NavPasswordTabProfileComponent;
+import pages.components.sharedComponent.profileTabsComponent.navCommonTab.NavCommonClientTabProfileComponent;
 import pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
@@ -19,19 +18,19 @@ public class ProfileClientPage extends BaseClientPage{
 
     public final SidebarClientComponent sidebar;
     public final ActionsBlockClientComponent actionsBlock;
-    public final CommonClientProfileComponent commonTab;
-    public final ContactsTabProfileComponent contactsTab;
-    public final PasswordTabProfileComponent passwordTab;
-    public final NotificationsTabProfileComponent notificationsTab;
+    public final NavCommonClientTabProfileComponent navCommonTab;
+    public final NavContactsTabProfileComponent navContactsTab;
+    public final NavPasswordTabProfileComponent navPasswordTab;
+    public final NavNotificationsTabProfileComponent navNotificationsTab;
 
     public ProfileClientPage(RoleBrowser browser) {
         super(browser);
         sidebar = new SidebarClientComponent(browser);
         actionsBlock = new ActionsBlockClientComponent(browser);
-        commonTab = new CommonClientProfileComponent(browser);
-        contactsTab = new ContactsTabProfileComponent(browser);
-        passwordTab = new PasswordTabProfileComponent(browser);
-        notificationsTab = new NotificationsTabProfileComponent(browser);
+        navCommonTab = new NavCommonClientTabProfileComponent(browser);
+        navContactsTab = new NavContactsTabProfileComponent(browser);
+        navPasswordTab = new NavPasswordTabProfileComponent(browser);
+        navNotificationsTab = new NavNotificationsTabProfileComponent(browser);
     }
     ElementsCollection
         navTabsCollection = driver.$$(".navigation-block li").as("Вкладки профиля");

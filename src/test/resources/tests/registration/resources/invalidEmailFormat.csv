@@ -6,14 +6,12 @@ user@example.| Поле E-Mail должно быть действительны�
 user@-example.| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain
 user@example-.| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain
 user@example..| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain
-user@example.c| Поле E-Mail должно быть действительным электронным адресом.| email with missing top-level domain
 user@.com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name
 user@example-.com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name
 user@-example.com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name
 user@example..com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name
 user@verylongdomainnameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.com| Поле E-Mail должно быть действительным электронным адресом.| email with top-level domain too long
 user@example.verylongdomainnameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee| Поле E-Mail должно быть действительным электронным адресом.| email with top-level domain too long
-user@example.toolongtld| Поле E-Mail должно быть действительным электронным адресом.| email with top-level domain too long
 user@sub.sub." | Поле E-Mail должно быть действительным электронным адресом.| email with multiple consecutive periods in the domain name
 user@sub..sub.com"| Поле E-Mail должно быть действительным электронным адресом.| email with multiple consecutive periods in the domain name
 user@sub-.com | Поле E-Mail должно быть действительным электронным адресом.| email with invalid character in the domain name

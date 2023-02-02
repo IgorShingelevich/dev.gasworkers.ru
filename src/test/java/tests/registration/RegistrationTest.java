@@ -1,6 +1,7 @@
 package tests.registration;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import io.qameta.allure.selenide.AllureSelenide;
 import extension.browser.Browser;
@@ -17,6 +18,10 @@ import pages.context.DispatcherPages;
 import pages.context.MasterPages;
 import tests.BaseTest;
 import utils.RandomClient;
+
+import static io.qameta.allure.Allure.step;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class RegistrationTest extends BaseTest {
@@ -36,149 +41,212 @@ public class RegistrationTest extends BaseTest {
     RandomClient randomClient = new RandomClient();
 
     @Test
+    @Owner("Igor Shingelevich")
     @Order(1)
     @Feature("Регистрация")
     @Story("Регистрация клиента")
     @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
-    @DisplayName("Регистрация клиента по телефону")
+    @DisplayName("Регистрация клиента по телефону и проверка состояния кабинета")
     void registrationClientByPhone() {
-        clientPages.getLandingPage().open();
-        clientPages.getLandingPage().checkFinishLoading();
-        clientPages.getLandingPage().signUpClient();
-        clientPages.getRegistrationPage().checkFirstStepFinishLoading();
-        clientPages.getRegistrationPage().byPhone(randomClient.getPhoneNumber());
-        clientPages.getRegistrationPage().checkboxNotCheckedCState();
-        clientPages.getRegistrationPage().clickCheckbox();
-        clientPages.getRegistrationPage().checkboxCheckedCState();
-        clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkSecondStepFinishLoading();
-        clientPages.getRegistrationPage().fillCode(randomClient.getConfirmationCode());
-        clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkThirdStepFinishLoading();
-        clientPages.getRegistrationPage().fillPassword(randomClient.getPassword());
-        clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkInvalidPasswordNotification();
-        clientPages.getRegistrationPage().fillPasswordConfirmation(randomClient.getPassword());
-        clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkFourthStepByPhoneFinishLoading(randomClient.getPhoneNumber());
-        clientPages.getRegistrationPage().fillName(randomClient.getName());
-        clientPages.getRegistrationPage().fillSurname(randomClient.getSurname());
-        clientPages.getRegistrationPage().fillPatronymicName(randomClient.getPatronymicName());
-        clientPages.getRegistrationPage().fillEmail(randomClient.getEmail());
-        clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkFinishState();  //no buttons
-        clientPages.getHomePage().checkInitialGuide();
-        clientPages.getHomePage().clickLaterInitialModal();
-        clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
-        clientPages.getHomePage().sidebar.allObjects();
-        clientPages.getAllObjectsPage().checkInitialState();
-        clientPages.getAllObjectsPage().sidebar.allOrders();
-        clientPages.getAllOrdersPage().checkInitialState();
-        clientPages.getAllOrdersPage().sidebar.allInvoices();
-        clientPages.getAllInvoicesPage().checkInitialState();
-        clientPages.getAllInvoicesPage().actionsBlock.allNotifications();
-        clientPages.getAllNotificationsPage().checkInitialState();
-        clientPages.getHomePage().open();
+        step("Страница лендинга", () -> {
+            clientPages.getLandingPage().open();
+            clientPages.getLandingPage().checkFinishLoading();
+            clientPages.getLandingPage().signUpClient();
+        });
+        step("Страница первого шага регистрации", () -> {
+            clientPages.getRegistrationPage().checkFirstStepFinishLoading();
+            clientPages.getRegistrationPage().byPhone(randomClient.getPhoneNumber());
+            clientPages.getRegistrationPage().checkboxNotCheckedCState();
+            clientPages.getRegistrationPage().clickCheckbox();
+            clientPages.getRegistrationPage().checkboxCheckedCState();
+            clientPages.getRegistrationPage().clickNext();
+        });
+        step("Страница второго шага регистрации", () -> {
+            clientPages.getRegistrationPage().checkSecondStepFinishLoading();
+            clientPages.getRegistrationPage().fillCode(randomClient.getConfirmationCode());
+            clientPages.getRegistrationPage().clickNext();
+        });
+        step("Страница третьего шага регистрации", () -> {
+            clientPages.getRegistrationPage().checkThirdStepFinishLoading();
+            clientPages.getRegistrationPage().fillPassword(randomClient.getPassword());
+            clientPages.getRegistrationPage().clickNext();
+            clientPages.getRegistrationPage().checkInvalidPasswordNotification();
+            clientPages.getRegistrationPage().fillPasswordConfirmation(randomClient.getPassword());
+            clientPages.getRegistrationPage().clickNext();
+        });
+        step("Страница четвертого шага регистрации", () -> {
+            clientPages.getRegistrationPage().checkFourthStepByPhoneFinishLoading(randomClient.getPhoneNumber());
+            clientPages.getRegistrationPage().fillName(randomClient.getName());
+            clientPages.getRegistrationPage().fillSurname(randomClient.getSurname());
+            clientPages.getRegistrationPage().fillPatronymicName(randomClient.getPatronymicName());
+            clientPages.getRegistrationPage().fillEmail(randomClient.getEmail());
+            clientPages.getRegistrationPage().clickNext();
+        });
+        step("Страница успешная регистрация", () -> {
+            clientPages.getRegistrationPage().checkFinishState();  //no buttons
+        });
+        step(("Страница начальный гид"), () -> {
+            clientPages.getHomePage().checkInitialGuide();
+            clientPages.getHomePage().clickLaterInitialModal();
+        });
+        step("Кабинет клиента - начальное состояние", () -> {
+            clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
+            clientPages.getHomePage().sidebar.allObjects();
+            clientPages.getAllObjectsPage().checkInitialState();
+            clientPages.getAllObjectsPage().sidebar.allOrders();
+            clientPages.getAllOrdersPage().checkInitialState();
+            clientPages.getAllOrdersPage().sidebar.allInvoices();
+            clientPages.getAllInvoicesPage().checkInitialState();
+            clientPages.getAllInvoicesPage().actionsBlock.allNotifications();
+            clientPages.getAllNotificationsPage().checkInitialState();
+            clientPages.getHomePage().open();
+        });
         //TODO profile check
     }
 
     @Test
+    @Owner("Igor Shingelevich")
     @Order(2)
     @Feature("Регистрация")
     @Story("Регистрация клиента")
     @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
     @DisplayName("Регистрация клиента по email")
     void registrationClientByEmail() {
-        clientPages.getLandingPage().open();
-        clientPages.getLandingPage().checkFinishLoading();
-        clientPages.getLandingPage().signUpClient();
-        clientPages.getRegistrationPage().checkFirstStepFinishLoading();
-        clientPages.getRegistrationPage().byEmail(randomClient.getEmail());
-        clientPages.getRegistrationPage().checkboxNotCheckedCState();
-        clientPages.getRegistrationPage().clickCheckbox();
-        clientPages.getRegistrationPage().checkboxCheckedCState();
-        clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkSecondStepFinishLoading();
-        clientPages.getRegistrationPage().fillCode(randomClient.getConfirmationCode());
-        clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkThirdStepFinishLoading();
-        clientPages.getRegistrationPage().fillPassword(randomClient.getPassword());
-        clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkInvalidPasswordNotification();
-        clientPages.getRegistrationPage().fillPasswordConfirmation(randomClient.getPassword());
-        clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkFourthStepByEmailFinishLoading(randomClient.getEmail());
-        clientPages.getRegistrationPage().fillName(randomClient.getName());
-        clientPages.getRegistrationPage().fillSurname(randomClient.getSurname());
-        clientPages.getRegistrationPage().fillPatronymicName(randomClient.getPatronymicName());
-        clientPages.getRegistrationPage().fillPhoneNumber(randomClient.getPhoneNumber());
-        clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkFinishState();
-        clientPages.getHomePage().checkInitialGuide();
-        clientPages.getHomePage().clickLaterInitialModal();
-        clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
-        clientPages.getHomePage().sidebar.allObjects();
-        clientPages.getAllObjectsPage().checkInitialState();
-        clientPages.getAllObjectsPage().sidebar.allOrders();
-        clientPages.getAllOrdersPage().checkInitialState();
-        clientPages.getAllOrdersPage().sidebar.allInvoices();
-        clientPages.getAllInvoicesPage().checkInitialState();
-        clientPages.getAllInvoicesPage().actionsBlock.allNotifications();
-        clientPages.getAllNotificationsPage().checkInitialState();
-        clientPages.getHomePage().open();
+        step("Страница лендинга", () -> {
+            clientPages.getLandingPage().open();
+            clientPages.getLandingPage().checkFinishLoading();
+            clientPages.getLandingPage().signUpClient();
+        });
+        step("Страница первого шага регистрации", () -> {
+            clientPages.getRegistrationPage().checkFirstStepFinishLoading();
+            clientPages.getRegistrationPage().byEmail(randomClient.getEmail());
+            clientPages.getRegistrationPage().checkboxNotCheckedCState();
+            clientPages.getRegistrationPage().clickCheckbox();
+            clientPages.getRegistrationPage().checkboxCheckedCState();
+            clientPages.getRegistrationPage().clickNext();
+        });
+        step("Страница второго шага регистрации", () -> {
+            clientPages.getRegistrationPage().checkSecondStepFinishLoading();
+            clientPages.getRegistrationPage().fillCode(randomClient.getConfirmationCode());
+            clientPages.getRegistrationPage().clickNext();
+        });
+        step("Страница третьего шага регистрации", () -> {
+            clientPages.getRegistrationPage().checkThirdStepFinishLoading();
+            clientPages.getRegistrationPage().fillPassword(randomClient.getPassword());
+            clientPages.getRegistrationPage().clickNext();
+            clientPages.getRegistrationPage().checkInvalidPasswordNotification();
+            clientPages.getRegistrationPage().fillPasswordConfirmation(randomClient.getPassword());
+            clientPages.getRegistrationPage().clickNext();
+        });
+        step("Страница четвертого шага регистрации", () -> {
+            clientPages.getRegistrationPage().checkFourthStepByEmailFinishLoading(randomClient.getEmail());
+            clientPages.getRegistrationPage().fillName(randomClient.getName());
+            clientPages.getRegistrationPage().fillSurname(randomClient.getSurname());
+            clientPages.getRegistrationPage().fillPatronymicName(randomClient.getPatronymicName());
+            clientPages.getRegistrationPage().fillPhoneNumber(randomClient.getPhoneNumber());
+            clientPages.getRegistrationPage().clickNext();
+        });
+        step("Страница успешная регистрация", () -> {
+            clientPages.getRegistrationPage().checkFinishState();  //no buttons
+        });
+        step(("Страница начальный гид"), () -> {
+            clientPages.getHomePage().checkInitialGuide();
+            clientPages.getHomePage().clickLaterInitialModal();
+        });
+        step("Кабинет клиента - начальное состояние", () -> {
+            clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
+            clientPages.getHomePage().sidebar.allObjects();
+            clientPages.getAllObjectsPage().checkInitialState();
+            clientPages.getAllObjectsPage().sidebar.allOrders();
+            clientPages.getAllOrdersPage().checkInitialState();
+            clientPages.getAllOrdersPage().sidebar.allInvoices();
+            clientPages.getAllInvoicesPage().checkInitialState();
+            clientPages.getAllInvoicesPage().actionsBlock.allNotifications();
+            clientPages.getAllNotificationsPage().checkInitialState();
+            clientPages.getHomePage().open();
+        });
         //TODO profile check
     }
 
     @Test
+    @Owner("Igor Shingelevich")
     @Order(3)
     @Feature("Регистрация")
     @Story("Генерация Надежного пароля")
     @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
-    @DisplayName("Регистрация клиента со Сгенерированным паролем по телефону")
-    void registrationWithGeneratedPasswordByPhone() {
-        clientPages.getLandingPage().open();
-        clientPages.getLandingPage().checkFinishLoading();
-        clientPages.getLandingPage().signUpClient();
-        clientPages.getRegistrationPage().checkFirstStepFinishLoading();
-        clientPages.getRegistrationPage().byPhone(randomClient.getPhoneNumber());
-        clientPages.getRegistrationPage().checkboxNotCheckedCState();
-        clientPages.getRegistrationPage().clickCheckbox();
-        clientPages.getRegistrationPage().checkboxCheckedCState();
-        clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkSecondStepFinishLoading();
-        clientPages.getRegistrationPage().fillCode(randomClient.getConfirmationCode());
-        clientPages.getRegistrationPage().clickNext();
+    @DisplayName("Регистрация со Сгенерированным паролем")
+    void registrationClientWithGeneratedPasswordByPhone() {
+        step("Страница лендинга", () -> {
+            clientPages.getLandingPage().open();
+            clientPages.getLandingPage().checkFinishLoading();
+            clientPages.getLandingPage().signUpClient();
+        });
+        step("Страница первого шага регистрации", () -> {
+            clientPages.getRegistrationPage().checkFirstStepFinishLoading();
+            clientPages.getRegistrationPage().byPhone(randomClient.getPhoneNumber());
+            clientPages.getRegistrationPage().checkboxNotCheckedCState();
+            clientPages.getRegistrationPage().clickCheckbox();
+            clientPages.getRegistrationPage().checkboxCheckedCState();
+            clientPages.getRegistrationPage().clickNext();
+        });
+        step("Страница второго шага регистрации", () -> {
+            clientPages.getRegistrationPage().checkSecondStepFinishLoading();
+            clientPages.getRegistrationPage().fillCode(randomClient.getConfirmationCode());
+            clientPages.getRegistrationPage().clickNext();
+        });
+        step("Страница третьего шага регистрации", () -> {
         clientPages.getRegistrationPage().checkThirdStepFinishLoading();
         clientPages.getRegistrationPage().generatePassword();
         clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkFourthStepByPhoneFinishLoading(randomClient.getPhoneNumber());
-        clientPages.getRegistrationPage().fillName(randomClient.getName());
-        clientPages.getRegistrationPage().fillSurname(randomClient.getSurname());
-        clientPages.getRegistrationPage().fillPatronymicName(randomClient.getPatronymicName());
-        clientPages.getRegistrationPage().fillEmail(randomClient.getEmail());
-        clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkFinishState();
-        clientPages.getHomePage().checkInitialGuide();
-        clientPages.getHomePage().clickLaterInitialModal();
-        clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
-        clientPages.getHomePage().sidebar.allObjects();
-        clientPages.getAllObjectsPage().checkInitialState();
-        clientPages.getAllObjectsPage().sidebar.allOrders();
-        clientPages.getAllOrdersPage().checkInitialState();
-        clientPages.getAllOrdersPage().sidebar.allInvoices();
-        clientPages.getAllInvoicesPage().checkInitialState();
-        clientPages.getAllInvoicesPage().actionsBlock.allNotifications();
-        clientPages.getAllNotificationsPage().checkInitialState();
-        clientPages.getHomePage().open();
+        });
+        step("Страница четвертого шага регистрации", () -> {
+            clientPages.getRegistrationPage().checkFourthStepByPhoneFinishLoading(randomClient.getPhoneNumber());
+            clientPages.getRegistrationPage().fillName(randomClient.getName());
+            clientPages.getRegistrationPage().fillSurname(randomClient.getSurname());
+            clientPages.getRegistrationPage().fillPatronymicName(randomClient.getPatronymicName());
+            clientPages.getRegistrationPage().fillEmail(randomClient.getEmail());
+            clientPages.getRegistrationPage().clickNext();
+        });
+        step("Страница успешная регистрация", () -> {
+            clientPages.getRegistrationPage().checkFinishState();  //no buttons
+        });
+        step(("Страница начальный гид"), () -> {
+            clientPages.getHomePage().checkInitialGuide();
+            clientPages.getHomePage().clickLaterInitialModal();
+        });
+        step("Кабинет клиента - начальное состояние", () -> {
+            clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
+            clientPages.getHomePage().sidebar.allObjects();
+            clientPages.getAllObjectsPage().checkInitialState();
+            clientPages.getAllObjectsPage().sidebar.allOrders();
+            clientPages.getAllOrdersPage().checkInitialState();
+            clientPages.getAllOrdersPage().sidebar.allInvoices();
+            clientPages.getAllInvoicesPage().checkInitialState();
+            clientPages.getAllInvoicesPage().actionsBlock.allNotifications();
+            clientPages.getAllNotificationsPage().checkInitialState();
+            clientPages.getHomePage().open();
+        });
         //TODO profile check
+    }
+
+    @Test
+    @Owner("Igor Shingelevich")
+    @Order(1)
+    @Feature("Регистрация")
+    @Story("Регистрация клиента с перехожом  на страницу создания объекта")
+    @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
+    @DisplayName("Начальный гид -  создание объекта")
+    void registrationClientInitialGuideDialogCreate() {
+        //TODO check initial guide leading to create an object
     }
 
     @ValueSource(strings = { "user@example.c", "user@sub.sub.sub.com" })
     @ParameterizedTest (name = "Убедиться, что при вводе допустимого  email: {0} возможна регистрация")
+    @Owner("Igor Shingelevich")
     @Order(4)
     @Feature("Регистрация")
     @Story("Регистрация с допустимыми параметрами")
-    @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
+    @Tags({@Tag("regression"), @Tag("client"),@Tag("registration"), @Tag("positive")})
     @DisplayName("Регистрация клиента с допустимым email: ")
     void registrationClientByAcceptedEmail( String acceptedEmail){
         clientPages.getLandingPage().open();
@@ -193,82 +261,91 @@ public class RegistrationTest extends BaseTest {
         clientPages.getRegistrationPage().checkSecondStepFinishLoading();
     }
 
-
-//    @CsvFileSource(resources = "resources/invalidEmails.csv", numLinesToSkip = 1, delimiter = '|')
-    @CsvSource(value = {
-            "user| Поле E-Mail должно быть действительным электронным адресом.| email without @",
-            "user@| Поле E-Mail должно быть действительным электронным адресом.| email without domain",
-            "user@example| Поле E-Mail   должно быть действительным электронным адресом.| email without domain extension",
-            "user@example.| Поле E-Mail должно быть действительным электронным адресом.| email without domain extension",
-            "user@-example.| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain",
-            "user@example-.| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain",
-            "user@example..| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain",
-            "user@.com.c| Поле E-Mail должно быть действительным электронным адресом.| email with missing top-level domain",
-            "user@.com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name",
-            "user@example-.com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name",
-            "user@-example.com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name",
-            "user@example..com| Поле E-Mail должно быть действительным электронным адресом.| email with invalid domain name",
-            "user@verylongdomainnameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee.com| Поле E-Mail должно быть действительным электронным адресом.| email with top-level domain too long",
-            "user@example.verylongdomainnameeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee| Поле E-Mail должно быть действительным электронным адресом.| email with top-level domain too long",
-            "user@sub-.com | Поле E-Mail должно быть действительным электронным адресом.| email with invalid character in the domain name",
-            "user@sub_sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub;sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub:sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub'sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub?sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub*sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub(sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub)sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub[sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub]sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub{sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub}sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub=sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub+sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub$sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name",
-            "user@sub!sub.com | Поле E-Mail должно быть действительным электронным адресом.|email with invalid character in the domain name"
-            }, delimiter = '|'
-
-    )
+    @CsvFileSource(resources = "resources/invalidEmailFormat.csv", numLinesToSkip = 1, delimiter = '|')
+    //    @CsvSource(value = {}) // poccible with implementation in the code
     @ParameterizedTest (name = "Убедиться, что при вводе невалидного email: {0} появляется ошибка: {1}")
+    @Owner("Igor Shingelevich")
     @Order(5)
     @Feature("Регистрация")
     @Story("Регистрация с недопустимыми параметрами")
-    @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("negative")})
+    @Tags({@Tag("regression"), @Tag("registration"), @Tag("negative")})
     @DisplayName("Регистрация клиента с невалидным email: ")
     void registrationClientByInvalidEmail( String invalidEmail, String errorText ){
-        clientPages.getLandingPage().open();
-        clientPages.getLandingPage().checkFinishLoading();
-        clientPages.getLandingPage().signUpClient();
-        clientPages.getRegistrationPage().checkFirstStepFinishLoading();
-        clientPages.getRegistrationPage().byEmail(invalidEmail);
-        clientPages.getRegistrationPage().checkboxNotCheckedCState();
-        clientPages.getRegistrationPage().clickCheckbox();
-        clientPages.getRegistrationPage().checkboxCheckedCState();
-        clientPages.getRegistrationPage().clickNext();
-//        clientPages.getRegistrationPage().checkInvalidEmailError(invalidEmail, errorText, errorDescription);
-        clientPages.getRegistrationPage().checkInvalidEmailError(invalidEmail, errorText);
+        step("Страница лендинга", () -> {
+            clientPages.getLandingPage().open();
+            clientPages.getLandingPage().checkFinishLoading();
+            clientPages.getLandingPage().signUpClient();
+        });
+        step("Страница первого шага регистрации", () -> {
+            clientPages.getRegistrationPage().checkFirstStepFinishLoading();
+            clientPages.getRegistrationPage().byEmail(invalidEmail);
+            clientPages.getRegistrationPage().checkboxNotCheckedCState();
+            clientPages.getRegistrationPage().clickCheckbox();
+            clientPages.getRegistrationPage().checkboxCheckedCState();
+            clientPages.getRegistrationPage().clickNext();
+        });
+        step("Убедиться, что при вводе невалидного email: " + invalidEmail + " появляется ошибка: " + errorText, () -> {
+            clientPages.getRegistrationPage().checkInvalidEmailError(invalidEmail, errorText);
+            //        clientPages.getRegistrationPage().checkInvalidEmailError(invalidEmail, errorText, errorDescription);
+        });
     }
 
-    /*@CsvFileSource(resources = "/resources/invalidPhoneNumbers.csv", numLinesToSkip = 1, delimiter = '|')
+    // handling various results of the test vith invalid phone numbers
+    @Disabled
+    @CsvFileSource(resources = "resources/invalidPhoneNumbers.csv", numLinesToSkip = 1, delimiter = '|')
     @ParameterizedTest (name = "Убедиться, что при вводе невалидного номера телефона: {0} появляется ошибка: {1}")
+    @Owner("Igor Shingelevich")
     @Order(6)
-    @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("negative")})
+    @Tags({@Tag("regression"), @Tag("registration"), @Tag("negative")})
      @Feature("Регистрация")
     @Story("Регистрация с недопустимыми параметрами")
     @DisplayName("Регистрация клиента с невалидным номером телефона")
     void registrationClientByInvalidPhoneNumber( String invalidPhoneNumber, String errorText, String errorDescription){
-        clientPages.getLandingPage().open();
-        clientPages.getLandingPage().checkFinishLoading();
-        clientPages.getLandingPage().signUpClient();
-        clientPages.getRegistrationPage().checkFirstStepFinishLoading();
-        clientPages.getRegistrationPage().byPhone(invalidPhoneNumber);
-        clientPages.getRegistrationPage().checkboxNotCheckedCState();
-        clientPages.getRegistrationPage().clickCheckbox();
-        clientPages.getRegistrationPage().checkboxCheckedCState();
-        clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkInvalidPhoneNumberError(invalidPhoneNumber, errorText, errorDescription);
-    }*/
+        step("Страница лендинга", () -> {
+            clientPages.getLandingPage().open();
+            clientPages.getLandingPage().checkFinishLoading();
+            clientPages.getLandingPage().signUpClient();
+        });
+        step("Страница первого шага регистрации", () -> {
+            clientPages.getRegistrationPage().checkFirstStepFinishLoading();
+            clientPages.getRegistrationPage().byPhone(invalidPhoneNumber);
+            clientPages.getRegistrationPage().checkboxNotCheckedCState();
+            clientPages.getRegistrationPage().clickCheckbox();
+            clientPages.getRegistrationPage().checkboxCheckedCState();
+            clientPages.getRegistrationPage().clickNext();
+        });
+        step("Убедиться, что при вводе невалидного номера телефона: " + invalidPhoneNumber + " появляется ошибка: " + errorText, () -> {
+            clientPages.getRegistrationPage().checkInvalidPhoneNumberError(invalidPhoneNumber, errorText, errorDescription);
+        });
+    }
+
+    @Disabled
+    // handling expected exceptions as a test case
+    @Owner("Igor Shingelevich")
+    @Order(7)
+    @Tags({@Tag("regression"), @Tag("registration"), @Tag("negative")})
+    @Feature("Регистрация")
+    @Story("Регистрация с недопустимыми параметрами")
+    @DisplayName("Регистрация клиента с невалидным номером телефона")
+    @Test
+    void testPhoneNumberTooLong() {
+        try {
+            step("Страница лендинга", () -> {
+                clientPages.getLandingPage().open();
+                clientPages.getLandingPage().checkFinishLoading();
+                clientPages.getLandingPage().signUpClient();
+            });
+            step("Страница первого шага регистрации", () -> {
+                clientPages.getRegistrationPage().checkFirstStepFinishLoading();
+                clientPages.getRegistrationPage().byPhone( "1234567890123456789");
+            });
+            fail("Expected IllegalArgumentException with message too long");
+        } catch (IllegalArgumentException e) {
+            assertEquals("too long", e.getMessage());
+        }
+    }
+
+
+
 // TODO registration cases - all fields are empty, checkbox uncheked
 }

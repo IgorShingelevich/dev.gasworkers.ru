@@ -8,8 +8,8 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.$;
 
-public class ContactsTabProfileComponent extends BaseComponent {
-    public ContactsTabProfileComponent(RoleBrowser browser) {
+public class NavContactsTabProfileComponent extends BaseComponent {
+    public NavContactsTabProfileComponent(RoleBrowser browser) {
         super(browser);
     }
     SelenideElement

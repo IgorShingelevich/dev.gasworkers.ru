@@ -132,11 +132,11 @@ class ClientFlowTest extends BaseTest {
         clientPages.getHomePage().sidebar.profile();
         clientPages.getProfilePage().checkFinishLoading();
         clientPages.getProfilePage().navCommon();
-        clientPages.getProfilePage().commonTab.checkFilledCabinetState();
-        clientPages.getProfilePage().commonTab.checkInitialStatus(client00.name, client00.patronymic, client00.surname);
+        clientPages.getProfilePage().navCommonTab.checkFilledCabinetState();
+        clientPages.getProfilePage().navCommonTab.checkInitialStatus(client00.name, client00.patronymic, client00.surname);
         clientPages.getProfilePage().navContacts();
-        clientPages.getProfilePage().contactsTab.checkFinishLoading();
-        clientPages.getProfilePage().contactsTab.checkFilledStatus(client00.email, String.valueOf(client00.phoneNumber));
+        clientPages.getProfilePage().navContactsTab.checkFinishLoading();
+        clientPages.getProfilePage().navContactsTab.checkFilledStatus(client00.email, String.valueOf(client00.phoneNumber));
         //TODO password and Notifications
     }
 
@@ -148,13 +148,27 @@ class ClientFlowTest extends BaseTest {
         clientPages.getHomePage().sidebar.profile();
         clientPages.getProfilePage().checkFinishLoading();
         clientPages.getProfilePage().navCommon();
-        clientPages.getProfilePage().commonTab.checkInitialCabinetState();
+        clientPages.getProfilePage().navCommonTab.checkInitialCabinetState();
         //TODO check  fullName fill up address and passport
         clientPages.getProfilePage().navContacts();
-        clientPages.getProfilePage().contactsTab.checkFinishLoading();
-        clientPages.getProfilePage().contactsTab.checkFilledStatus(randomClient.getEmail(), randomClient.getPhone());
+        clientPages.getProfilePage().navContactsTab.checkFinishLoading();
+        clientPages.getProfilePage().navContactsTab.checkFilledStatus(randomClient.getEmail(), randomClient.getPhone());
         //TODO password and Notifications
+    }
 
+    @Test
+    @Feature("Кабинет клиента")
+    @Story("Смена пароля")
+    @DisplayName("Клиент изменяет свой пароль")
+    public void changePasswordClientProfilePage() {
+        step("Клиент изменяет свой пароль", () -> {
+            clientPages.getHomePage().sidebar.profile();
+            clientPages.getProfilePage().checkFinishLoading();
+            clientPages.getProfilePage().navPassword();
+            clientPages.getProfilePage().navPasswordTab.checkFinishLoading();
+            clientPages.getProfilePage().navPasswordTab.checkInitialState();
+            clientPages.getProfilePage().navPasswordTab.generatePassword();
+        });
     }
 
 }

@@ -1,30 +1,28 @@
 package pages.master;
 
 import model.browser.RoleBrowser;
-import pages.components.sharedComponent.profileTabsComponent.ContactsTabProfileComponent;
-import pages.components.sharedComponent.profileTabsComponent.EquipmentTabProfileComponent;
-import pages.components.sharedComponent.profileTabsComponent.NotificationsTabProfileComponent;
-import pages.components.sharedComponent.profileTabsComponent.PasswordTabProfileComponent;
-import pages.components.sharedComponent.profileTabsComponent.commonTab.CommonMasterProfileComponent;
-import pages.components.sharedComponent.profileTabsComponent.profileTab.ProfileMasterProfileComponent;
-
-import java.io.ObjectOutputStream;
+import pages.components.sharedComponent.profileTabsComponent.NavContactsTabProfileComponent;
+import pages.components.sharedComponent.profileTabsComponent.NavEquipmentTabProfileComponent;
+import pages.components.sharedComponent.profileTabsComponent.NavNotificationsTabProfileComponent;
+import pages.components.sharedComponent.profileTabsComponent.NavPasswordTabProfileComponent;
+import pages.components.sharedComponent.profileTabsComponent.navCommonTab.NavCommonMasterTabProfileComponent;
+import pages.components.sharedComponent.profileTabsComponent.navProfileTab.NavProfileMasterTabProfileComponent;
 
 public class ProfileMasterPage extends BaseMasterPage{
-    public final ProfileMasterProfileComponent profileTab;
-    public final CommonMasterProfileComponent commonTab;
-    public final ContactsTabProfileComponent contactsTab;
-    public final EquipmentTabProfileComponent equipmentTab;
-    public final PasswordTabProfileComponent passwordTab;
-    public final NotificationsTabProfileComponent notificationsTab;
+    public final NavProfileMasterTabProfileComponent profileTab;
+    public final NavCommonMasterTabProfileComponent commonTab;
+    public final NavContactsTabProfileComponent contactsTab;
+    public final NavEquipmentTabProfileComponent equipmentTab;
+    public final NavPasswordTabProfileComponent passwordTab;
+    public final NavNotificationsTabProfileComponent notificationsTab;
     public ProfileMasterPage(RoleBrowser browser) {
         super(browser);
-        profileTab = new ProfileMasterProfileComponent(browser);
-        commonTab = new CommonMasterProfileComponent(browser);
-        contactsTab = new ContactsTabProfileComponent(browser);
-        equipmentTab = new EquipmentTabProfileComponent(browser);
-        passwordTab = new PasswordTabProfileComponent(browser);
-        notificationsTab = new NotificationsTabProfileComponent(browser);
+        profileTab = new NavProfileMasterTabProfileComponent(browser);
+        commonTab = new NavCommonMasterTabProfileComponent(browser);
+        contactsTab = new NavContactsTabProfileComponent(browser);
+        equipmentTab = new NavEquipmentTabProfileComponent(browser);
+        passwordTab = new NavPasswordTabProfileComponent(browser);
+        notificationsTab = new NavNotificationsTabProfileComponent(browser);
     }
 
 }

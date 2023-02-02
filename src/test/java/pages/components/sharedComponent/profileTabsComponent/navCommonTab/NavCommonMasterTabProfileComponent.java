@@ -1,13 +1,13 @@
-package pages.components.sharedComponent.profileTabsComponent.commonTab;
+package pages.components.sharedComponent.profileTabsComponent.navCommonTab;
 
 import model.browser.RoleBrowser;
 import pages.components.BaseComponent;
 import pages.components.sharedComponent.CommonDatePickerComponent;
 
-public class CommonMasterProfileComponent extends BaseComponent {
+public class NavCommonMasterTabProfileComponent extends BaseComponent {
     public final CommonDatePickerComponent datePicker;
 
-    public CommonMasterProfileComponent(RoleBrowser browser) {
+    public NavCommonMasterTabProfileComponent(RoleBrowser browser) {
         super(browser);
         datePicker = new CommonDatePickerComponent(browser);
     }

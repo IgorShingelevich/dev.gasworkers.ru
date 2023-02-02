@@ -1,4 +1,4 @@
-package pages.components.sharedComponent.profileTabsComponent.commonTab;
+package pages.components.sharedComponent.profileTabsComponent.navCommonTab;
 
 import com.codeborne.selenide.SelenideElement;
 import model.browser.RoleBrowser;
@@ -8,10 +8,10 @@ import pages.components.sharedComponent.CommonDatePickerComponent;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 
-public class CommonClientProfileComponent extends BaseComponent {
+public class NavCommonClientTabProfileComponent extends BaseComponent {
 
     public final CommonDatePickerComponent datePicker;
-     public CommonClientProfileComponent(RoleBrowser browser) {
+     public NavCommonClientTabProfileComponent(RoleBrowser browser) {
          super(browser);
             datePicker = new CommonDatePickerComponent(browser);
      }

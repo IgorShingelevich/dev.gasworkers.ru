@@ -40,7 +40,7 @@ public class MasterFlowTest extends BaseTest {
     @Test
     void checkMasterDispatchedOrderStatus(){
         step("Мастер открывает заказ в статусе: " + OrderStatus.MASTER_DISPATCHED, () -> {
-//    @CsvFileSource(resources = "resources/invalidEmails.csv", numLinesToSkip = 1, delimiter = '|')
+//    @CsvFileSource(resources = "resources/invalidEmailFormat.csv", numLinesToSkip = 1, delimiter = '|')
             masterPages.getNewOrdersPage().checkFinishLoading();
             // TODO new orders sorting
             masterPages.getNewOrdersPage().openOrderByNumber(3215);
