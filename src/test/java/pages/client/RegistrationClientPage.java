@@ -81,8 +81,8 @@ public class RegistrationClientPage extends BaseClientPage {
             stepWithRole("Убедиться, что отображается ссылка на пользовательское соглашение" , () -> {
                 userAgreementLinkLocator.shouldHave(text("Пользовательского соглашения"));
             });
-            stepWithRole("Убедиться, что отображается неактивная кнопка Далее" , () -> {
-                forwardButtonLocator.shouldHave(text("Далее")).shouldBe(disabled);
+            stepWithRole("Убедиться, что отображается активная кнопка Далее" , () -> {
+                forwardButtonLocator.shouldHave(text("Далее")).shouldBe(enabled);
             });
             stepWithRole("Убедиться, что отображается кнопка Отменить" , () -> {
                 backButtonLocator.shouldHave(text("Отменить"));
@@ -113,6 +113,12 @@ public class RegistrationClientPage extends BaseClientPage {
                 inputPhoneLocator.setValue(phone);
                 System.out.println("phone: " + formatPhoneNumber + " " + phone);
             });
+    }
+    public void byWrongFormatPhone (String phone) {
+        stepWithRole("Ввести невалидный номер телефона: " + phone , () -> {
+            inputPhoneLocator.setValue(phone);
+            System.out.println("phone: " + phone);
+        });
     }
 
     public void byEmail (String email) {
@@ -362,11 +368,9 @@ public class RegistrationClientPage extends BaseClientPage {
         });
     }
 
-    public void checkInvalidPhoneNumberError(String invalidPhoneNumber, String errorText, String errorDescription) {
+    public void checkInvalidPhoneNumberError(String invalidPhoneNumber, String errorText) {
         stepWithRole("Убедиться, что при вводе некорректного номера телефона: " + invalidPhoneNumber + " отображается ошибка: " + errorText , () -> {
-            if (!errorMessageLocator.isDisplayed()) {
-                throw new AssertionError(errorDescription);
-            }
+            errorMessageLocator.shouldHave(text(errorText));
         });
     }
 

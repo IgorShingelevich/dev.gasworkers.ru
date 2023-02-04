@@ -313,7 +313,7 @@ public class RegistrationTest extends BaseTest {
     @Owner("Igor Shingelevich")
     @Order(5)
     @Feature("Регистрация")
-    @Story("Регистрация с недопустимыми параметрами")
+    @Story("Регистрация с недопустимымой почтой")
     @Tags({@Tag("regression"), @Tag("registration"), @Tag("negative")})
     @DisplayName("Регистрация клиента с невалидным email: ")
     void registrationClientByInvalidEmail( String invalidEmail, String errorText ){
@@ -336,17 +336,15 @@ public class RegistrationTest extends BaseTest {
         });
     }
 
-    // handling various results of the test vith invalid phone numbers
-    @Disabled
     @CsvFileSource(resources = "resources/invalidPhoneNumbers.csv", numLinesToSkip = 1, delimiter = '|')
     @ParameterizedTest (name = "Убедиться, что при вводе невалидного номера телефона: {0} появляется ошибка: {1}")
     @Owner("Igor Shingelevich")
     @Order(6)
     @Tags({@Tag("regression"), @Tag("registration"), @Tag("negative")})
      @Feature("Регистрация")
-    @Story("Регистрация с недопустимыми параметрами")
+    @Story("Регистрация с недопустимыми номером телефона")
     @DisplayName("Регистрация клиента с невалидным номером телефона")
-    void registrationClientByInvalidPhoneNumber( String invalidPhoneNumber, String errorText, String errorDescription){
+    void registrationClientByInvalidPhoneNumber( String invalidPhoneNumber, String errorText){
         step("Страница лендинга", () -> {
             clientPages.getLandingPage().open();
             clientPages.getLandingPage().checkFinishLoading();
@@ -354,44 +352,17 @@ public class RegistrationTest extends BaseTest {
         });
         step("Страница первого шага регистрации", () -> {
             clientPages.getRegistrationPage().checkFirstStepFinishLoading();
-            clientPages.getRegistrationPage().byPhone(invalidPhoneNumber);
+            clientPages.getRegistrationPage().byWrongFormatPhone(invalidPhoneNumber);
             clientPages.getRegistrationPage().checkboxNotCheckedCState();
             clientPages.getRegistrationPage().clickCheckbox();
             clientPages.getRegistrationPage().checkboxCheckedCState();
             clientPages.getRegistrationPage().clickNext();
         });
         step("Убедиться, что при вводе невалидного номера телефона: " + invalidPhoneNumber + " появляется ошибка: " + errorText, () -> {
-            clientPages.getRegistrationPage().checkInvalidPhoneNumberError(invalidPhoneNumber, errorText, errorDescription);
+            clientPages.getRegistrationPage().checkInvalidPhoneNumberError(invalidPhoneNumber, errorText);
         });
     }
 
-    @Disabled
-    // handling expected exceptions as a test case
-    @Owner("Igor Shingelevich")
-    @Order(7)
-    @Tags({@Tag("regression"), @Tag("registration"), @Tag("negative")})
-    @Feature("Регистрация")
-    @Story("Регистрация с недопустимыми параметрами")
-    @DisplayName("Регистрация клиента с невалидным номером телефона")
-    @Test
-    void testPhoneNumberTooLong() {
-        try {
-            step("Страница лендинга", () -> {
-                clientPages.getLandingPage().open();
-                clientPages.getLandingPage().checkFinishLoading();
-                clientPages.getLandingPage().signUpClient();
-            });
-            step("Страница первого шага регистрации", () -> {
-                clientPages.getRegistrationPage().checkFirstStepFinishLoading();
-                clientPages.getRegistrationPage().byPhone( "1234567890123456789");
-            });
-            fail("Expected IllegalArgumentException with message too long");
-        } catch (IllegalArgumentException e) {
-            assertEquals("too long", e.getMessage());
-        }
-    }
 
-
-
-// TODO registration cases - all fields are empty, checkbox uncheked
+// TODO registration cases - all fields are empty, checkbox unchecked
 }
