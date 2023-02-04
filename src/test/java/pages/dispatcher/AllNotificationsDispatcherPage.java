@@ -28,7 +28,7 @@ public class AllNotificationsDispatcherPage extends BaseDispatcherPage {
     SelenideElement
 
         pageTitleLocator = driver.$(".page-title .h3.mb-2"),
-        readAllButtonLocator = driver.$(byTagAndText("button", "Прочитать все")),
+        readAllButtonLocator = driver.$(byTagAndText("span", "Прочитать все")),
         notificationsListLocator = driver.$("div.messages-list"),
         firstNotificationLocator = driver.$$(".item-header.d-flex.justify-content-between.w-100 div.h4").get(0);
 

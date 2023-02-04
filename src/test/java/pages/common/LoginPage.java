@@ -18,31 +18,32 @@ public final class LoginPage extends BasePage {
         super(browser);
     }
 
-//    @Step("Открыть страницу авторизации")
     public LoginPage open() {
-        stepWithRole("Открыть страницу авторизации", () ->
-                driver.open("/login"));
+        stepWithRole("Открыть страницу авторизации", () -> {
+            driver.open("/login");
+            stepWithRole("Виджет JivoSite должен быть загружен", () -> {
+                driver.$(".iconWrap_f10e._showLogo_d56c").shouldBe(visible, Duration.ofSeconds(10));
+            });
+        });
+
         return this;
     }
 
-//    @Step("Авторизоваться в системе  почта {email}  пароль {password}")
     public void login(String email, String password) {
         driver.$(".title h3").shouldHave(text("Войдите в личный кабинет"));
-        driver.$("#jivo-iframe-container").shouldBe(exist, Duration.ofSeconds(40));  //reset the form if being loaded after
         stepWithRole("Ввести почту: " + email, () -> {
             driver.$("input[placeholder=E-mail]") .click();
             driver.$("input[placeholder=E-mail]").setValue(email);
             driver.$("input[placeholder=E-mail]").pressEnter();
-
         });
         stepWithRole("Ввести пароль: " + password, () -> {
             driver.$("input[placeholder=Пароль]").click();
             driver.$("input[placeholder=Пароль]").setValue(password);
             driver.$("input[placeholder=Пароль]").pressEnter();
         });
-        stepWithRole("Нажать кнопку Войти", () -> {
-//                driver.$("button[type=submit]").click();  //Element not found {button[type=submit]}
-            driver.$(byTagAndText("button", "Далее")).click();
+        stepWithRole("Нажать активную кнопку Войти", () -> {
+            driver.$("button.mb-2.btn").shouldNotBe(disabled);
+            driver.$(byTagAndText("span", "Далее")).click();
             System.out.println("login as " + email + " " + password);
         });
     };

@@ -32,9 +32,9 @@ public class OrderCardClientPage extends BaseClientPage {
         titleNumberLocator = driver.$("h1.h3.mb-2"),
         completeOrderInfoLocator = driver.$(".hint-box p"),
         orderDetailsBlockLocator = driver.$("div.order-details"),
-        toMapButtonLocator = driver.$(byTagAndText("button", "Показать на карте")),  // $("button.map-ic")
-        cancelOrderButtonLocator = driver.$(byTagAndText("button", "Отменить заказ")),
-        payBillButtonLocator = driver.$(byTagAndText("button", "Оплатить счет")),
+        toMapButtonLocator = driver.$(byTagAndText("span", "Показать на карте")),  // $("button.map-ic")
+        cancelOrderButtonLocator = driver.$(byTagAndText("span", "Отменить заказ")),
+        payBillButtonLocator = driver.$(byTagAndText("span", "Оплатить счет")),
         finalPriceLocator = driver.$(".big.bold.d-flex.justify-content-between.w-100.mb-4"),
         orderStatusLocator = driver.$(".item-flex p.text"),
         offersBlockLocator = driver.$("div.map-sticky__header--offers");

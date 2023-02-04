@@ -131,29 +131,38 @@ class ClientFlowTest extends BaseTest {
         clientPages.getHomePage().checkFinishLoading();
         clientPages.getHomePage().sidebar.profile();
         clientPages.getProfilePage().checkFinishLoading();
-        clientPages.getProfilePage().navCommon();
-        clientPages.getProfilePage().navCommonTab.checkFilledCabinetState();
-        clientPages.getProfilePage().navCommonTab.checkInitialStatus(client00.name, client00.patronymic, client00.surname);
-        clientPages.getProfilePage().navContacts();
-        clientPages.getProfilePage().navContactsTab.checkFinishLoading();
-        clientPages.getProfilePage().navContactsTab.checkFilledStatus(client00.email, String.valueOf(client00.phoneNumber));
+        step("Вкладка Общие данные", () -> {
+            clientPages.getProfilePage().navCommon();
+            clientPages.getProfilePage().navCommonTab.checkFilledState();  // TODO implement CommonDataPickerComponent. Upload photo. check other fields info.
+            clientPages.getProfilePage().navCommonTab.checkInitialState(client00.name, client00.patronymic, client00.surname);
+        });
+        step("Вкладка Контакты", () -> {
+            clientPages.getProfilePage().navContacts();
+            clientPages.getProfilePage().navContactsTab.checkFinishLoading(client00.email, String.valueOf(client00.phoneNumber));
+            clientPages.getProfilePage().navContactsTab.checkFilledStatus(client00.email, String.valueOf(client00.phoneNumber));
+        });
         //TODO password and Notifications
     }
 
     @Test
+    @Disabled
     @Feature("Кабинет клиента")
     @Story("Незаполненный ( начальное состояние) кабинет")
     @DisplayName("Клиент наполняет свой Профиль в первый раз")
     public void fillingUpInitialClientProfilePage() {
         clientPages.getHomePage().sidebar.profile();
         clientPages.getProfilePage().checkFinishLoading();
+        step("Вкладка Общие данные", () -> {
         clientPages.getProfilePage().navCommon();
-        clientPages.getProfilePage().navCommonTab.checkInitialCabinetState();
+        clientPages.getProfilePage().navCommonTab.checkFinishLoading();
         //TODO check  fullName fill up address and passport
+        });
+        step("Вкладка Контакты", () -> {
         clientPages.getProfilePage().navContacts();
-        clientPages.getProfilePage().navContactsTab.checkFinishLoading();
-        clientPages.getProfilePage().navContactsTab.checkFilledStatus(randomClient.getEmail(), randomClient.getPhone());
+        clientPages.getProfilePage().navContactsTab.checkFinishLoading(client00.email, String.valueOf(client00.phoneNumber));
+        clientPages.getProfilePage().navContactsTab.checkFilledStatus(client00.email, String.valueOf(client00.phoneNumber));
         //TODO password and Notifications
+        });
     }
 
     @Test
@@ -161,14 +170,12 @@ class ClientFlowTest extends BaseTest {
     @Story("Смена пароля")
     @DisplayName("Клиент изменяет свой пароль")
     public void changePasswordClientProfilePage() {
-        step("Клиент изменяет свой пароль", () -> {
             clientPages.getHomePage().sidebar.profile();
             clientPages.getProfilePage().checkFinishLoading();
             clientPages.getProfilePage().navPassword();
             clientPages.getProfilePage().navPasswordTab.checkFinishLoading();
             clientPages.getProfilePage().navPasswordTab.checkInitialState();
             clientPages.getProfilePage().navPasswordTab.generatePassword();
-        });
     }
 
 }

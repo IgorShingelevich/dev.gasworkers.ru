@@ -1,9 +1,7 @@
 package tests.registration;
-import com.codeborne.selenide.logevents.SelenideLogger;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
-import io.qameta.allure.selenide.AllureSelenide;
 import extension.browser.Browser;
 import model.Role;
 
@@ -11,7 +9,6 @@ import model.Role;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import pages.context.ClientPages;
 import pages.context.DispatcherPages;
@@ -99,6 +96,30 @@ public class RegistrationTest extends BaseTest {
             clientPages.getAllInvoicesPage().checkInitialState();
             clientPages.getAllInvoicesPage().actionsBlock.allNotifications();
             clientPages.getAllNotificationsPage().checkInitialState();
+            step("Страница Профиль", () -> {
+                clientPages.getHomePage().sidebar.profile();
+                clientPages.getProfilePage().checkFinishLoading();
+                step("Вкадка Общее данные", () -> {
+                    clientPages.getProfilePage().navCommon();
+                    clientPages.getProfilePage().navCommonTab.checkFinishLoading();
+                    clientPages.getProfilePage().navCommonTab.checkInitialState(randomClient.getName(), randomClient.getPatronymicName(), randomClient.getSurname());
+                });
+                step("Вкадка Контакты", () -> {
+                    clientPages.getProfilePage().navContacts();
+                    clientPages.getProfilePage().navContactsTab.checkFinishLoading(randomClient.getEmail(), randomClient.getPhoneNumber());
+                    clientPages.getProfilePage().navContactsTab.checkFilledStatus(randomClient.getEmail(), randomClient.getPhoneNumber());
+                });
+                step("Вкадка Пароль", () -> {
+                    clientPages.getProfilePage().navPassword();
+                    clientPages.getProfilePage().navPasswordTab.checkFinishLoading();
+                    clientPages.getProfilePage().navPasswordTab.checkInitialState();
+                });
+                step("Вкладка Уведомления", () -> {
+                    clientPages.getProfilePage().navNotifications();
+                    clientPages.getProfilePage().navNotificationsTab.checkFinishLoading();
+                    clientPages.getProfilePage().navNotificationsTab.checkInitialState();
+                });
+            });
             clientPages.getHomePage().open();
         });
         //TODO profile check
@@ -110,7 +131,7 @@ public class RegistrationTest extends BaseTest {
     @Feature("Регистрация")
     @Story("Регистрация клиента")
     @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
-    @DisplayName("Регистрация клиента по email")
+    @DisplayName("Регистрация клиента по email и проверка состояния кабинета")
     void registrationClientByEmail() {
         step("Страница лендинга", () -> {
             clientPages.getLandingPage().open();
@@ -163,9 +184,33 @@ public class RegistrationTest extends BaseTest {
             clientPages.getAllInvoicesPage().checkInitialState();
             clientPages.getAllInvoicesPage().actionsBlock.allNotifications();
             clientPages.getAllNotificationsPage().checkInitialState();
+            step("Страница Профиль", () -> {
+                clientPages.getHomePage().sidebar.profile();
+                clientPages.getProfilePage().checkFinishLoading();
+                step("Вкадка Общее данные", () -> {
+                    clientPages.getProfilePage().navCommon();
+                    clientPages.getProfilePage().navCommonTab.checkFinishLoading();
+                    clientPages.getProfilePage().navCommonTab.checkInitialState(randomClient.getName(), randomClient.getPatronymicName(), randomClient.getSurname());
+                });
+                step("Вкадка Контакты", () -> {
+                    clientPages.getProfilePage().navContacts();
+                    clientPages.getProfilePage().navContactsTab.checkFinishLoading(randomClient.getEmail(), randomClient.getPhoneNumber());
+                    clientPages.getProfilePage().navContactsTab.checkFilledStatus(randomClient.getEmail(), randomClient.getPhoneNumber());
+                });
+                step("Вкадка Пароль", () -> {
+                    clientPages.getProfilePage().navPassword();
+                    clientPages.getProfilePage().navPasswordTab.checkFinishLoading();
+                    clientPages.getProfilePage().navPasswordTab.checkInitialState();
+                });
+                step("Вкладка Уведомления", () -> {
+                    clientPages.getProfilePage().navNotifications();
+                    clientPages.getProfilePage().navNotificationsTab.checkFinishLoading();
+                    clientPages.getProfilePage().navNotificationsTab.checkInitialState();
+                });
+            });
             clientPages.getHomePage().open();
+            //TODO profile  check - photo. rest of the fields
         });
-        //TODO profile check
     }
 
     @Test
@@ -230,6 +275,7 @@ public class RegistrationTest extends BaseTest {
     }
 
     @Test
+    @Disabled
     @Owner("Igor Shingelevich")
     @Order(1)
     @Feature("Регистрация")

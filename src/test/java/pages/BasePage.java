@@ -26,7 +26,7 @@ public abstract class BasePage extends BaseComponent {
         super(browser);
     }
 
-    SelenideElement popUpCloseButtonLocator = driver.$(byTagAndText("button", "Прочитать все")).as("Close popup button"),
+    SelenideElement popUpCloseButtonLocator = driver.$(byTagAndText("span", "Прочитать все")).as("Close popup button"),
             popUpContainerLocator = driver.$(".notice-list-fixed-content.gas-scrollbar-inline").as("Pop-up container");
 
     public void popUpClose() {

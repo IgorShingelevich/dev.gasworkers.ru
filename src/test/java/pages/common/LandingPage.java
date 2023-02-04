@@ -25,9 +25,9 @@ public LandingPage(RoleBrowser browser) {
 
     SelenideElement
         primaryHeaderLocator = driver.$(".primary-header").as("Шапка сайта"),
-        repairButtonLocator = driver.$(byTagAndText("button", "Ремонт")).as("Кнопка Ремонт"),
-        maintenanceButtonLocator = driver.$(byTagAndText("button", "Техобслуживание")).as("Кнопка Техобслуживание"),
-        videoButtonLocator = driver.$(byTagAndText("button", "Видеоконсультация")).as("Кнопка Видеоконсультация"),
+        repairButtonLocator = driver.$(byTagAndText("span", "Ремонт")).as("Кнопка Ремонт"),
+        maintenanceButtonLocator = driver.$(byTagAndText("span", "Техобслуживание")).as("Кнопка Техобслуживание"),
+        videoButtonLocator = driver.$(byTagAndText("span", "Видеоконсультация")).as("Кнопка Видеоконсультация"),
         mainBlockTitleLocator = driver.$("p.main-block__title").as("Заголовок главной страницы"),
         mainBlockSubtitleLocator = driver.$("p.main-block__text").as("Подзаголовок главной страницы"),
         signInButtonLocator = driver.$(".primary-header .link").as("Кнопка Личный кабинет"),
@@ -70,7 +70,7 @@ public LandingPage open() {
                 videoButtonLocator.shouldBe(visible);
             });
             stepWithRole("Убедиться, что виджет Живой чат отображается", () -> {
-//                driver.$("#jivo-iframe-container").shouldBe(exist, Duration.ofSeconds(10));
+                driver.$("#jivo-iframe-container").shouldBe(exist, Duration.ofSeconds(10));
             });
             // TODO add the rest  components checks
         });

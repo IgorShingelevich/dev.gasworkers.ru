@@ -41,15 +41,15 @@ public final DatePickerOrderDispatcherComponent datePicker;
     orderDocumentsButtonLocator = navButtonsCollection.get(2).as("Документы"),
     orderBlockLocator = driver.$(".page-content #order").as("Блок заказа"),
     orderStatusLocator = driver.$(".item-flex p.text").as("Статус заказа"),
-    acceptRequestButtonLocator = driver.$(byTagAndText("button", "Принять заказ")).as("Принять заказ"),
-    declineRequestButtonLocator = driver.$(byTagAndText("button", "Отказаться")).as("Отказаться"),
-    selectTimeButtonLocator = driver.$(byTagAndText("button", "Назначить время")).as("Назначить время"),
-    selectAnotherTimeButtonLocator = driver.$(byTagAndText("button", "Назначить новое время")).as("Назначить новое время"),
-    selectMasterButtonLocator = driver.$(byTagAndText("button", "Выбрать мастера")).as("Выбрать мастера"),
-    selectAnotherMasterButtonLocator = driver.$(byTagAndText("button", "Назначить другого мастера")).as("Назначить другого мастера"),
-    cancelButtonLocator = driver.$(byTagAndText("button", "Отменить заказ")).as("Отменить заказ"),
+    acceptRequestButtonLocator = driver.$(byTagAndText("span", "Принять заказ")).as("Принять заказ"),
+    declineRequestButtonLocator = driver.$(byTagAndText("span", "Отказаться")).as("Отказаться"),
+    selectTimeButtonLocator = driver.$(byTagAndText("span", "Назначить время")).as("Назначить время"),
+    selectAnotherTimeButtonLocator = driver.$(byTagAndText("span", "Назначить новое время")).as("Назначить новое время"),
+    selectMasterButtonLocator = driver.$(byTagAndText("span", "Выбрать мастера")).as("Выбрать мастера"),
+    selectAnotherMasterButtonLocator = driver.$(byTagAndText("span", "Назначить другого мастера")).as("Назначить другого мастера"),
+    cancelButtonLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Отменить заказ"),
     alreadyAcceptedButtonLocator = driver.$(".global-btn-wrapper.justify-content-end").as("Уже принят'"),
-    cancelOrderLocator = driver.$(byTagAndText("button", "Отменить заказ")).as("Отменить заказ");
+    cancelOrderLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Отменить заказ");
 
 
     public void checkFinishLoading() {

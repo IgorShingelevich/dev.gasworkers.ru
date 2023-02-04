@@ -32,8 +32,8 @@ public class OrderCardMasterPage extends BaseMasterPage {
         navCheckListButtonLocator = navButtonsCollection.get(1).as("Чек лист"),
         navInfoButtonLocator = navButtonsCollection.get(2).as("Информация по работам"),
         navDocumentsButtonLocator = navButtonsCollection.get(3).as("Документы"),
-        editObjectButtonLocator = driver.$(byTagAndText("button", "Редактировать объект/оборудование")).as("Редактировать объект/оборудование"),
-        startWorkingButtonLocator = driver.$(byTagAndText("button", "Приступить к работе")).as("Приступить к работе");
+        editObjectButtonLocator = driver.$(byTagAndText("span", "Редактировать объект/оборудование")).as("Редактировать объект/оборудование"),
+        startWorkingButtonLocator = driver.$(byTagAndText("span", "Приступить к работе")).as("Приступить к работе");
 
     public void checkFinishLoading() {
         titleLocator.shouldBe(visible, Duration.ofSeconds(40)).shouldHave(text(PAGE_TITLE));

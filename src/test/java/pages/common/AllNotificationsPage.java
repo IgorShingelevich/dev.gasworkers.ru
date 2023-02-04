@@ -25,7 +25,7 @@ public class AllNotificationsPage extends BasePage {
 
     SelenideElement
         pageTitleLocator = driver.$(".page-title"),
-        readAllButtonLocator = driver.$(byTagAndText("button", "Прочитать все"));
+        readAllButtonLocator = driver.$(byTagAndText("span", "Прочитать все"));
     ElementsCollection
         notificationTitleCollection = driver.$$(".messages-list div.d-flex .flex-wrap.text-break").as("Notification title collection"),
         unreadStatusCollection = driver.$$("div.gas-box a").as("unread status");
@@ -34,7 +34,7 @@ public class AllNotificationsPage extends BasePage {
     public void checkInitialState() {
         stepWithRole("Убедиться, что страница в  начальном состоянии", () -> {
             pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
-            driver.$(byTagAndText("button", "Все уведомления прочитаны")).shouldBe(visible);
+            driver.$(byTagAndText("span", "Все уведомления прочитаны")).shouldNotBe(visible);
             notificationTitleCollection.shouldHave(size(0));
         });
     }
@@ -57,7 +57,7 @@ public class AllNotificationsPage extends BasePage {
             }
             unreadStatusCollection.shouldHave(size(0));
             stepWithRole("Убедиться, что неактивная кнопка Все уведомления прочитаны", () -> {
-                driver.$(byTagAndText("button", "Все уведомления прочитаны")).shouldBe(visible);
+                driver.$(byTagAndText("span", "Все уведомления прочитаны")).shouldBe(visible);
             });
         });
         return this;

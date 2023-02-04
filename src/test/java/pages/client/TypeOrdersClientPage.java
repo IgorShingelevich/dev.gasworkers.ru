@@ -15,7 +15,7 @@ public final class TypeOrdersClientPage extends BaseClientPage {
 //    @Step("Выберите тип заказа {requestType}")
     public void selectOrderType(ClientRequestType requestType) {
         stepWithRole("Выбрать тип заказа:  " + requestType, () -> {
-            driver.$(byTagAndText("button", requestType.toString())).click();
+            driver.$(byTagAndText("span", requestType.toString())).click();
             System.out.println("Select requestType: " + requestType);
         });
 

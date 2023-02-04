@@ -20,9 +20,9 @@ public class NavPasswordTabProfileComponent extends BaseComponent {
         currentPasswordInputLocator = driver.$("input[placeholder*=Текущий]").as("Текущий пароль"),
         newPasswordInputLocator = driver.$("input[placeholder*=Новый]").as("Новый пароль"),
         repeatNewPasswordInputLocator = driver.$("input[placeholder*=еще]").as("Повторите новый пароль"),
-        generatePasswordButtonLocator = driver.$(byTagAndText("button", "Сгенерировать надежный пароль")).as("Сгенерировать пароль"),
+        generatePasswordButtonLocator = driver.$(byTagAndText("span", "Сгенерировать надежный пароль")).as("Сгенерировать пароль"),
         suggestedPasswordLocator = driver.$("input[readonly=readonly]").as("Предложенный пароль"),
-        saveButtonLocator = driver.$(byTagAndText("button", "Сохранить")).as("Сохранить");
+        saveButtonLocator = driver.$("button.mb-3.btn.btn-primary.disable-outline").as("Кнопка Сохранить");
 
     ElementsCollection
     interractionElementsCollection = driver.$$("div.item").as("Элементы взаимодействия"),
@@ -39,18 +39,23 @@ public class NavPasswordTabProfileComponent extends BaseComponent {
             newPasswordInputLocator.shouldBe(Condition.visible);
             repeatNewPasswordInputLocator.shouldBe(Condition.visible);
             generatePasswordButtonLocator.shouldBe(Condition.visible);
+            saveButtonLocator.shouldHave(text("Сохранить"));
+        });
+        stepWithRole("Убедиться, что кнопка Сохранить не активна", () -> {
             saveButtonLocator.shouldBe(disabled);
         });
     }
 
     public void checkInitialState() {
-        stepWithRole("Убедиться, что вкладка Пароль в начальном состоянии", () -> {
+        stepWithRole("Убедиться, что вкладка Пароль не содержит пароль в форме на вкладке Пароль", () -> {
             driver.$$("div.title").get(0).shouldHave(text("Смена пароля")).as("Заголовок вкладки Смена пароля");
             driver.$("div.description").shouldHave(text("Пароль должен содержать не менее 4 знаков")).as("Описание вкладки Смена пароля");
             driver.$$("div.title").get(1).shouldHave(text("Подтвердите свой текущий пароль")).as("Подтвердите свой текущий пароль");
             driver.$$("div.title").get(2).shouldHave(text("Введите свой новый пароль")).as("Введите свой новый пароль");
             newPasswordInputLocator.shouldBe(Condition.empty);
             repeatNewPasswordInputLocator.shouldBe(Condition.empty);
+        });
+        stepWithRole("Убедиться, что кнопка Сохранить неактивна", () -> {
             saveButtonLocator.shouldBe(disabled);
         });
     }
@@ -94,7 +99,10 @@ public class NavPasswordTabProfileComponent extends BaseComponent {
                 saveButtonLocator.shouldBe(enabled);
             });
         });
+    }
 
+    public void applyNewPassword (String currentPassword){
+        //TODO applyNewPassword
     }
 
 }

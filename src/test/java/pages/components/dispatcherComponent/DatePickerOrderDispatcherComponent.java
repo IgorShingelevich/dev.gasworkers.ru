@@ -15,7 +15,7 @@ public class DatePickerOrderDispatcherComponent extends BaseComponent {
     }
 
     SelenideElement
-        setButtonLocator = driver.$(byTagAndText("button", "Назначить"));
+        setButtonLocator = driver.$(byTagAndText("span", "Назначить"));
 
 
     ElementsCollection

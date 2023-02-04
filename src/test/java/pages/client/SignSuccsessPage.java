@@ -28,8 +28,8 @@ public class SignSuccsessPage extends BaseClientPage {
         titleLocator = driver.$(byTagAndText("h3", TITLE_TEXT)),
         subtitleFirstLocator = driver.$$(".recovery-box p").get(0),
         subtitleSecondLocator = driver.$$(".recovery-box p").get(1),
-        toOrderCardButtonLocator = driver.$(byTagAndText("button", "К заказу")),
-        toHomePageButtonLocator = driver.$(byTagAndText("button", "На главную"));
+        toOrderCardButtonLocator = driver.$(byTagAndText("span", "К заказу")),
+        toHomePageButtonLocator = driver.$(byTagAndText("span", "На главную"));
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что страница Подписание СМС загружена", () -> {

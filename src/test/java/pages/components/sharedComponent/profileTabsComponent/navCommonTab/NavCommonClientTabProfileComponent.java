@@ -27,10 +27,10 @@ public class NavCommonClientTabProfileComponent extends BaseComponent {
              whoPassportLocator = driver.$("input[placeholder*=выдан]").as("Кем выдан паспорт"),
              registrationAddressLocator = driver.$("textarea[placeholder*=Адрес]").as("Адрес регистрации"),
              apartmentLocator = driver.$("textarea[placeholder*=квартиры]").as("Номер квартиры"),
-             saveButtonLocator = driver.$(byTagAndText("button", "Сохранить")).as("Кнопка Сохранить");
+             saveButtonLocator = driver.$(byTagAndText("span", "Сохранить")).as("Кнопка Сохранить");
 
 
-    public void checkInitialCabinetState() {
+    public void checkFinishLoading() {
         stepWithRole("Убедиться, что вкладка Общие в начальном состоянии", () -> {
             // TODO implement CommonDataPickerComponent. Upload photo.
             nameSubTitleLocator.shouldHave(visible, text("Личные данные"));
@@ -44,13 +44,40 @@ public class NavCommonClientTabProfileComponent extends BaseComponent {
             whoPassportLocator.shouldBe(visible);
             registrationAddressLocator.shouldBe(visible);
             apartmentLocator.shouldBe(visible);
-            saveButtonLocator.shouldBe(enabled);
+            saveButtonLocator.shouldBe(visible);
+        });
+
+
+    }
+
+    public void checkInitialState(String name, String patronymicName, String surname) {
+        stepWithRole("Убедиться, что поля Фамилия, Имя, Отчество заполнены: ", () -> {
+            stepWithRole("Фамилия: " + surnameLocator.getValue(), () ->
+                    surnameLocator.shouldHave(value(surname))
+            );
+            stepWithRole("Имя: " + nameLocator.getValue(), () ->
+                    nameLocator.shouldHave(value(name))
+            );
+            stepWithRole("Отчество: " + patronymicLocator.getValue(), () ->
+                    patronymicLocator.shouldHave(value(patronymicName))
+            );
+            stepWithRole("Убедиться, что остальные поля вкладки Общие данные пустые", () -> {
+                seriesPassportLocator.shouldBe(empty);
+                numberPassportLocator.shouldBe(empty);
+                datePassportLocator.shouldBe(empty);
+                whoPassportLocator.shouldBe(empty);
+                registrationAddressLocator.shouldBe(empty);
+                apartmentLocator.shouldBe(empty);
+            });
+            stepWithRole("Убедиться, что кнопка Сохранить актива", () -> {
+                saveButtonLocator.shouldBe(enabled);
+            });
         });
     }
 
-    public void checkFilledCabinetState () {
+    public void checkFilledState() {
         stepWithRole("Убедиться, что вкладка Общие данные заполнена", () -> {
-            // TODO implement CommonDataPickerComponent. Upload photo.
+            // TODO implement CommonDataPickerComponent. Upload photo. check other fields info.
             nameSubTitleLocator.shouldHave(visible, text("Личные данные"));
             passportSubTitleLocator.shouldHave(visible, text("Паспортные данные"));
             surnameLocator.shouldBe(visible);
@@ -62,31 +89,11 @@ public class NavCommonClientTabProfileComponent extends BaseComponent {
             whoPassportLocator.shouldBe(visible);
             registrationAddressLocator.shouldBe(visible);
             apartmentLocator.shouldBe(visible);
+        });
+        stepWithRole("Убедиться, что кнопка Сохранить неактивна", () -> {
             saveButtonLocator.shouldBe(disabled);
         });
     }
 
 
-
-    public void checkInitialStatus(String name, String patronymicName, String surname) {
-        stepWithRole("Убедиться, что поля Фамилия, Имя, Отчество заполнены: ", () -> {
-            stepWithRole("Фамилия: " + surnameLocator.getValue(), () ->
-                surnameLocator.shouldHave(value(surname))
-            );
-            stepWithRole("Имя: " + nameLocator.getValue(), () ->
-                nameLocator.shouldHave(value(name))
-            );
-            stepWithRole("Отчество: " + patronymicLocator.getValue(), () ->
-                    patronymicLocator.shouldHave(value(patronymicName))
-            );
-            stepWithRole("Убедиться, что остальные поля вкладки Общие данные пустые", () -> {
-                seriesPassportLocator.shouldHave(value(""));
-                numberPassportLocator.shouldHave(value(""));
-                datePassportLocator.shouldHave(value(""));
-                whoPassportLocator.shouldHave(value(""));
-                registrationAddressLocator.shouldHave(value(""));
-                apartmentLocator.shouldHave(value(""));
-            });
-        });
-    }
 }

@@ -10,6 +10,8 @@ import pages.components.sharedComponent.profileTabsComponent.NavPasswordTabProfi
 import pages.components.sharedComponent.profileTabsComponent.navCommonTab.NavCommonClientTabProfileComponent;
 import pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -35,7 +37,7 @@ public class ProfileClientPage extends BaseClientPage{
     ElementsCollection
         navTabsCollection = driver.$$(".navigation-block li").as("Вкладки профиля");
     SelenideElement
-        pageTitileLocator = driver.$("div h1").as("Заголовок страницы"),
+        pageTitleLocator = driver.$("div h1").as("Заголовок страницы"),
         navCommonTabLocator = navTabsCollection.get(0).as("Общие данные"),
         navContactsTabLocator = navTabsCollection.get(1).as("Контактные данные"),
         navPasswordTabLocator = navTabsCollection.get(2).as("Пароль"),
@@ -43,11 +45,14 @@ public class ProfileClientPage extends BaseClientPage{
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что страница Профиля загружена", () -> {
-            pageTitileLocator.shouldHave(text("Профиль"));
+            pageTitleLocator.shouldHave(text("Профиль"));
             navCommonTabLocator.shouldHave(text("Общие данные"));
             navContactsTabLocator.shouldHave(text("Контактные данные"));
             navPasswordTabLocator.shouldHave(text("Пароль"));
             navNotificationsTabLocator.shouldHave(text("Уведомления"));
+        });
+        stepWithRole("Убедиться, что виджет Живой чат не отображается", () -> {
+            driver.$("#jivo-iframe-container").shouldNotBe(visible, Duration.ofSeconds(10));
         });
     }
 

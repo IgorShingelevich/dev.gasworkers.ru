@@ -16,14 +16,26 @@ public class NavContactsTabProfileComponent extends BaseComponent {
     subtitleLocator = driver.$("div .title").as("Подзаголовок Контактные данные"),
     emailLocator = driver.$("input[placeholder*=почта]").as("Email"),
     phoneLocator = driver.$("input[placeholder*=Номер]").as("Телефон"),
-    saveButtonLocator = driver.$(byTagAndText("button", "Сохранить")).as("Кнопка Сохранить");
+    saveButtonLocator = driver.$("button.mb-3.btn.btn-primary.disable-outline").as("Кнопка Сохранить");
 
-    public void checkFinishLoading() {
+    public void checkFinishLoading(String email, String phone) {
         stepWithRole("Убедиться, что вкладка Контакты загружена", () -> {
             subtitleLocator.shouldHave(visible, text("Контактные данные"));
             emailLocator.shouldBe(visible);
             phoneLocator.shouldBe(visible);
-            saveButtonLocator.shouldBe(visible);
+            saveButtonLocator.shouldHave(visible, text("Сохранить"));
+        });
+        stepWithRole("Убедиться, что поля Email и Телефон содержат регистрационные данные", () -> {
+            stepWithRole("Email: " + email, () -> {
+                emailLocator.shouldHave(value(email));
+            });
+            String formattedPhone = "+7(" + phone.toString().substring(1, 4) + ")-" + phone.toString().substring(4, 7) + "-" + phone.toString().substring(7);
+            stepWithRole("Телефон: " + formattedPhone, () ->{
+                phoneLocator.shouldHave(value(formattedPhone));
+             });
+        });
+        stepWithRole("Убедиться, что кнопка Сохранить неактивна", () -> {
+            saveButtonLocator.shouldBe(disabled);
         });
     }
 

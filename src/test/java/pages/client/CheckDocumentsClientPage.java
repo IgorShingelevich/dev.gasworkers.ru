@@ -25,7 +25,7 @@ public class CheckDocumentsClientPage  extends BaseClientPage {
         pageTitlePaymentPageLocator = driver.$(".page-content .h3.mb-40"),
         pageSubtitleLocator = driver.$(".h4.mb-32"),
         inputPassportIssuedByFieldLocator = driver.$("input[placeholder='Кем выдан']"),
-        makeContractButton = driver.$(byTagAndText("button", "Оформить договор")),  // $("button.btn.btn-primary")
+        makeContractButton = driver.$(byTagAndText("span", "Оформить договор")),  // $("button.btn.btn-primary")
         spinerLoaderLocator = driver.$("div.gas-loader");
 
     public CheckDocumentsClientPage checkFinishLoading() {

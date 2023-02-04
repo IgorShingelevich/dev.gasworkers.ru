@@ -28,7 +28,7 @@ public class AllObjectsClientPage extends BaseClientPage {
 
     SelenideElement
         pageTitleLocator = driver.$(".page-title"),
-        createNewObjectButtonLocator = driver.$(byTagAndText("button", "Создать объект")),
+        createNewObjectButtonLocator = driver.$(byTagAndText("span", "Создать объект")),
         objectActionsDropdownLocator = driver.$(".actions"),
         pickGasDistributorDropdownLocator = driver.$(".gas-select .gas-select__header");
     ElementsCollection

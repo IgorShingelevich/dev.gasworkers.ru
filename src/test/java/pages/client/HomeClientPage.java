@@ -65,8 +65,8 @@ public final class HomeClientPage extends BaseClientPage {
                 driver.$("div.completed-block p").shouldHave(text("Заполните все данные по газовому оборудованию и мы сможем точнее и быстрее найти вам нужного мастера")).as("Initial subtitle");
             });
             stepWithRole("Убедиться, что присутствуют  кнопки Приступить и Позже", () -> {
-                driver.$(byTagAndText("button", "Приступить")).shouldBe(visible).as("StartNow button");
-                driver.$(byTagAndText("button", "Позже")).shouldBe(visible).as("Later button");
+                driver.$(byTagAndText("span", "Приступить")).shouldBe(visible).as("StartNow button");
+                driver.$(byTagAndText("span", "Позже")).shouldBe(visible).as("Later button");
             });
         });
         return this;
@@ -74,22 +74,22 @@ public final class HomeClientPage extends BaseClientPage {
 
     public void clickStartNowInitialModal() {
         stepWithRole("Нажать кнопку Приступить", () -> {
-            driver.$(byTagAndText("button", "Приступить")).click();
+            driver.$(byTagAndText("span", "Приступить")).click();
         });
     }
 
     public void clickLaterInitialModal() {
         stepWithRole("Нажать кнопку Позже", () -> {
-            driver.$(byTagAndText("button", "Позже")).click();
+            driver.$(byTagAndText("span", "Позже")).click();
         });
     }
 
     public void checkInitialState( String fullName, String sinceProfileDate) {
         stepWithRole("Убедиться, что страница в  начальном состоянии", () -> {
             stepWithRole("Убедиться, что  кнопки начальнгого состояния Заполнить профиль, Добавить оборудование и Создать Заказ присутствуют", () -> {
-                driver.$(byTagAndText("button", "Заполнить профиль")).shouldBe(visible, Duration.ofSeconds(30)).as("FillProfile button");
-                driver.$(byTagAndText("button", "Добавить оборудование")).shouldBe(visible).as("AddEquipment button");
-                driver.$(byTagAndText("button", "Создать заказ")).shouldBe(visible).as("CreateOrder button");
+                driver.$(byTagAndText("span", "Заполнить профиль")).shouldBe(visible, Duration.ofSeconds(30)).as("FillProfile button");
+                driver.$(byTagAndText("span", "Добавить оборудование")).shouldBe(visible).as("AddEquipment button");
+                driver.$(byTagAndText("span", "Создать заказ")).shouldBe(visible).as("CreateOrder button");
             });
             stepWithRole("Убедиться, секция персональных данных содержит: ", () -> {
                 checkFullName(fullName);
