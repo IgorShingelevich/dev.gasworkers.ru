@@ -23,11 +23,10 @@ public class SignSMSClientPage extends BaseClientPage {
             SIGN_SMS_TITLE = "Подписание договора ТО ВДГО";
 
     SelenideElement
-            pageSignSMSTitleLocator = driver.$(".h3.mb-40"),
-            smsCodeInput = driver.$("input[name='smsCode']"),
-            signButton = driver.$("button.btn.btn-primary");
+            pageSignSMSTitleLocator = driver.$(".h3.mb-40").as("Заголовок страницы Подписание СМС"),
+            signButton = driver.$("button.btn.btn-primary").as("Кнопка Подписать");
 
-    ElementsCollection smsCodeInputCollection = driver.$$(".code-input.mb-4 input");
+    ElementsCollection smsCodeInputCollection = driver.$$("div.code-input input").as("Коллекция полей ввода СМС кода");
 
     public SignSMSClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что страница Подписание СМС загружена", () -> {
@@ -41,6 +40,7 @@ public class SignSMSClientPage extends BaseClientPage {
     public SignSMSClientPage inputSMSCode(String smsCode) {
         stepWithRole("Ввести СМС код: " + smsCode, () -> {
             smsCodeInputCollection.get(0).setValue(smsCode);
+            System.out.println("smsCode: " + smsCode);
         });
         return null;
     }
@@ -51,6 +51,4 @@ public class SignSMSClientPage extends BaseClientPage {
         });
         return this;
     }
-
-
 }

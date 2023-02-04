@@ -129,7 +129,7 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         stepWithRole("Открыть заказ по номеру: " + orderNumber, () -> {
             orderNumberLinkCollection.findBy(text(orderNumber)).click();
             orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text(orderNumber));
-            System.out.println("givenOrderNumber: " + orderNumber);
+            System.out.println("dispatcherOrderNumber: " + orderNumber);
         });
         return this;
     }
@@ -138,15 +138,10 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         stepWithRole("Открыть  заказ по индексу: "+ index + ", номер: " + orderNumberLinkCollection.get(index).getText(), () -> {
             orderNumberLinkCollection.get(index).click();
             orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10));
-            System.out.println("orderNumber:  " + orderCardTitleLocator.getText() + " index: " + index);
+            System.out.println("dispatcherOrderNumber:  " + orderCardTitleLocator.getText() + " index: " + index);
         });
         return this;
     }
-
-
-
-
-
 
     public HomeDispatcherPage openFirstOrderByAction() {
 //        switchToListView();
@@ -161,14 +156,6 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         orderActionDropdownCollection.last().shouldBe(visible).hover().click();
         actionsOpenOrderLinkCollection.last().shouldBe(visible).click();
         orderCardTitleLocator.shouldBe(visible);
-        return this;
-    }
-
-    public HomeDispatcherPage archiveLastOrder() {
-        switchToListView();
-        orderActionDropdownCollection.get(0).shouldBe(visible).hover().click();
-        actionsArchiveOrderLinkCollection.get(0).shouldBe(visible).click();
-        //check that the order with this number is not visible in the list of orderNumberLinkCollection
         return this;
     }
 

@@ -173,7 +173,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
 //            driver.back();  // not working
             // check that Filial is not empty or set the Filial if it is empty
             // check that Address fnd Passport is not empty or set the Address and Passport if it is empty
-            SmsApi clientSmsApi1 = SmsApi.instance(Role.CLIENT);
+//            SmsApi clientSmsApi1 = SmsApi.instance(Role.CLIENT); // for real number
 
             clientPages.getCheckDocumentsPage().makeContract();
             clientPages.getSelectPaymentPage().checkFinishLoading();
@@ -182,8 +182,8 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getPaymentWizardPage().getQRCode();
             clientPages.getSignSMSPage().checkFinishLoading();
 
-//            String sms = clientSmsApi1.waitReceiveNewSms().getText();
-//            String code = sms.substring(0, 6);
+//            String sms = clientSmsApi1.waitReceiveNewSms().getText(); // for real number
+//            String code = sms.substring(0, 6); // for real number
             String mockCode = "111111";
             clientPages.getSignSMSPage().inputSMSCode(mockCode);
 //            clientPages.getSignSMSPage().sign();
