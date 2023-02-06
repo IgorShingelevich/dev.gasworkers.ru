@@ -102,18 +102,17 @@ class ClientFlowTest extends BaseTest {
     @Test
     @Feature("Кабинет клиента")
     @Story("Просмотр заказа")
-    @DisplayName("Клиент просматривает заказ в кабинете")
+    @DisplayName("Клиент просматривает заказ в состоянии Согласование даты заказа")
     public void clientCheckOrderStatus() {
-        Integer checkedOrderNumber = 3185;
+        String checkedOrderNumber = "3532";
         step("Убедиться, что статус Заказа: " + checkedOrderNumber + " является: " + OrderState.SCHEDULE_VISIT, () -> {
-            OrderState orderState = OrderState.SCHEDULE_VISIT;
             clientPages.getHomePage().checkFinishLoading();
             clientPages.getHomePage().sidebar.clickOrdersAndInvoicesDropdown();
             clientPages.getHomePage().sidebar.allOrders();
             clientPages.getAllOrdersPage().checkFinishLoading();
             clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkOrderStatusScheduleVisit(orderState);
+            clientPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderState.SCHEDULE_VISIT);
         });
     }
 

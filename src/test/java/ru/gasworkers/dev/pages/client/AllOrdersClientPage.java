@@ -54,11 +54,9 @@ private final String ORDER_PAGE_TITLE = "Список заказов";
         return this;
     }
 
-    public AllOrdersClientPage orderByNumber(int orderNumber) {
-        String orderNumberString = String.valueOf(orderNumber);
-        listNumberLinkCollection.filter(text(orderNumberString)).first().click(); //is it good way?
+    public AllOrdersClientPage orderByNumber(String orderNumber) {
         stepWithRole("Открыть заказ № " + orderNumber, () -> {
-            listNumberLinkCollection.get(orderNumber).click();
+            listNumberLinkCollection.findBy(text(orderNumber)).click();
         });
         return this;
     }

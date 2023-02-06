@@ -22,15 +22,18 @@ public class SignSMSClientPage extends BaseClientPage {
 
     SelenideElement
             pageSignSMSTitleLocator = driver.$(".h3.mb-40").as("Заголовок страницы Подписание СМС"),
+            sendAgainButton = driver.$(".gas-sign a.link-dark-blue").as("Запросить повторно код подтверждения"),
             signButton = driver.$("button.btn.btn-primary").as("Кнопка Подписать");
 
     ElementsCollection smsCodeInputCollection = driver.$$("div.code-input input").as("Коллекция полей ввода СМС кода");
 
     public SignSMSClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что страница Подписание СМС загружена", () -> {
-            String currentUrl = driver.url();
-            System.out.println("currentUrl = " + currentUrl);
+            System.out.println("currentUrl = " + driver.url().toString());
             pageSignSMSTitleLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(SIGN_SMS_TITLE));
+            smsCodeInputCollection.get(0).shouldBe(visible, Duration.ofSeconds(20));
+            sendAgainButton.shouldHave(text("код подтверждения")).shouldBe(visible, Duration.ofSeconds(20));
+            signButton.shouldHave(text("Подписать")).shouldBe(disabled);
         });
         return this;
     }

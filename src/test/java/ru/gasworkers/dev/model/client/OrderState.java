@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 public enum OrderState {
     NEW_TENDER("Тендер", "dispatcher"),
     PARTICIPATE_TENDER("Тендер", "dispatcher"),
-    NEW_ORDER("Новый заказ", "dispatcher"),
+    NEW_ORDER("Новый заказ", "dispatcher, client"),
     SCHEDULE_VISIT("Согласование даты заказа", "dispatcher"),
     SELECT_MASTER("Выбор мастера", "dispatcher"),
     MASTER_DISPATCHED("Мастер в пути", "dispatcher, master"),

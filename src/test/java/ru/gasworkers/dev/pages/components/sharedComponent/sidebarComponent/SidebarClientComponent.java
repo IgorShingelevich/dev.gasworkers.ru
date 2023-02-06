@@ -27,7 +27,9 @@ public class SidebarClientComponent extends BaseComponent {
 
 
     public SidebarClientComponent clickOrdersAndInvoicesDropdown() {
-        ordersAndInvoicesDropdownLocator.click();
+        stepWithRole("Открыть выпадающий список Заказы/Счета", () -> {
+            ordersAndInvoicesDropdownLocator.click();
+        });
         return this;
     }
 
