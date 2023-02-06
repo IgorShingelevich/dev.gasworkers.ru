@@ -38,7 +38,6 @@ tasks.withType(JavaCompile) {
 }
 def selenideVersion = '6.11.1',
     pdfTest = '1.8.0',
-    xlsTest = '1.7.0',
     assertjVersion = '3.24.2',
     junitJupiterVersion = '5.9.0',
     allureSelenideVersion = '2.20.0',
@@ -62,7 +61,6 @@ dependencies {
             "com.github.javafaker:javafaker:$javafakerVersion",
             "com.codeborne:selenide:$selenideVersion",
             "com.codeborne:pdf-test:$pdfTest",
-            "com.codeborne:xls-test:$xlsTest",
             "org.assertj:assertj-core:$assertjVersion",
             "io.qameta.allure:allure-selenide:$allureSelenideVersion",
             "org.junit.jupiter:junit-jupiter:$junitJupiterVersion",
