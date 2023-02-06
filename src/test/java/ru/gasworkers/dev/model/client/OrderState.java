@@ -3,7 +3,7 @@ package ru.gasworkers.dev.model.client;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum OrderStatus {
+public enum OrderState {
     NEW_TENDER("Тендер", "dispatcher"),
     PARTICIPATE_TENDER("Тендер", "dispatcher"),
     NEW_ORDER("Новый заказ", "dispatcher"),

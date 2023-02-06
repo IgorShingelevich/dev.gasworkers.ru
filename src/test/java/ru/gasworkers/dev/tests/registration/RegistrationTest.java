@@ -107,7 +107,7 @@ public class RegistrationTest extends BaseTest {
                 step("Вкадка Контакты", () -> {
                     clientPages.getProfilePage().navContacts();
                     clientPages.getProfilePage().navContactsTab.checkFinishLoading(randomClient.getEmail(), randomClient.getPhoneNumber());
-                    clientPages.getProfilePage().navContactsTab.checkFilledStatus(randomClient.getEmail(), randomClient.getPhoneNumber());
+                    clientPages.getProfilePage().navContactsTab.checkFilledState(randomClient.getEmail(), randomClient.getPhoneNumber());
                 });
                 step("Вкадка Пароль", () -> {
                     clientPages.getProfilePage().navPassword();
@@ -195,7 +195,7 @@ public class RegistrationTest extends BaseTest {
                 step("Вкадка Контакты", () -> {
                     clientPages.getProfilePage().navContacts();
                     clientPages.getProfilePage().navContactsTab.checkFinishLoading(randomClient.getEmail(), randomClient.getPhoneNumber());
-                    clientPages.getProfilePage().navContactsTab.checkFilledStatus(randomClient.getEmail(), randomClient.getPhoneNumber());
+                    clientPages.getProfilePage().navContactsTab.checkFilledState(randomClient.getEmail(), randomClient.getPhoneNumber());
                 });
                 step("Вкадка Пароль", () -> {
                     clientPages.getProfilePage().navPassword();

@@ -3,7 +3,7 @@ package ru.gasworkers.dev.pages.client;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.model.client.OrderStatus;
+import ru.gasworkers.dev.model.client.OrderState;
 import ru.gasworkers.dev.model.client.OrderType;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
 
@@ -96,38 +96,38 @@ public class OrderCardClientPage extends BaseClientPage {
         System.out.println("orderType: " + orderType);
     }
 
-    public void checkOrderStatusNew(OrderStatus orderStatus) {
+    public void checkOrderStateNew(OrderState orderState) {
         step("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             //how to make this step more flexible?
-           stepWithRole("Убедиться, что заказа статус заказа является: " + orderStatus, () ->
-                    orderStatusLocator.shouldHave(text(orderStatus.toString()))
+           stepWithRole("Убедиться, что заказа статус заказа является: " + orderState, () ->
+                    orderStatusLocator.shouldHave(text(orderState.toString()))
            );
-           stepWithRole("Убедиться, что  в Карточке заказа: " + orderStatus + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
+           stepWithRole("Убедиться, что  в Карточке заказа: " + orderState + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
                // how to avoid hardcode of button names?
                toMapButtonLocator.shouldBe(visible);
                cancelOrderButtonLocator.shouldBe(visible);
-               orderStatusLocator.shouldHave(text(orderStatus.toString()));
+               orderStatusLocator.shouldHave(text(orderState.toString()));
            });
             stepWithRole("Убедиться, что  в Карточке заказа документы отсутствуют  " , () -> {
                 navDocs();
                 docsTitleCollection.shouldBe(size(0));
                 navCommon();
             });
-            System.out.println("orderStatus: " + orderStatus);
+            System.out.println("orderStatus: " + orderState);
         });
     }
 
-    public void checkOrderStatusScheduleVisit(OrderStatus orderStatus) {
+    public void checkOrderStatusScheduleVisit(OrderState orderState) {
         step("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             //how to make this step more flexible?
-            stepWithRole("Убедиться, что статус заказа является: " + orderStatus, () ->
-                    orderStatusLocator.shouldHave(text(orderStatus.toString()))
+            stepWithRole("Убедиться, что статус заказа является: " + orderState, () ->
+                    orderStatusLocator.shouldHave(text(orderState.toString()))
             );
-            stepWithRole("Убедиться, что в Карточке заказа: " + orderStatus + " представлена кнопка Отменить заказ " , () -> {
+            stepWithRole("Убедиться, что в Карточке заказа: " + orderState + " представлена кнопка Отменить заказ " , () -> {
                 // how to avoid hardcode of button names?
                 toMapButtonLocator.shouldNotBe(visible);
                 cancelOrderButtonLocator.shouldBe(visible);
-                orderStatusLocator.shouldHave(text(orderStatus.toString()));
+                orderStatusLocator.shouldHave(text(orderState.toString()));
             });
             stepWithRole("Убедиться, что  в Карточке заказа в документах присутствует Договор ТО и Страховой полис " /*+ docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText()*/ , () -> {
                navDocs();
@@ -136,7 +136,7 @@ public class OrderCardClientPage extends BaseClientPage {
                docsTitleCollection.shouldBe(size(2));
                navCommon();
             });
-            System.out.println("orderStatus: " + orderStatus);
+            System.out.println("orderStatus: " + orderState);
         });
     }
 
@@ -149,8 +149,8 @@ public class OrderCardClientPage extends BaseClientPage {
     }
 
     public OrderCardClientPage checkOrderStatusComplete() {
-        stepWithRole("Убедиться, что статус заказа является: " + OrderStatus.COMPLETE, () -> {
-            orderStatusLocator.shouldHave(text(OrderStatus.COMPLETE.toString()));
+        stepWithRole("Убедиться, что статус заказа является: " + OrderState.COMPLETE, () -> {
+            orderStatusLocator.shouldHave(text(OrderState.COMPLETE.toString()));
             completeOrderInfoLocator.shouldBe(visible).shouldHave(text(COMPLETE_ORDER_INFO));
             orderStatusLocator.shouldBe(visible).shouldHave(text("Завершен"));
 //          finalPriceLocator.shouldBe(visible);

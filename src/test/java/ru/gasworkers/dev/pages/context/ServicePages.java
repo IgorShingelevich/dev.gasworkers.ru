@@ -5,7 +5,7 @@ import com.codeborne.selenide.SelenideDriver;
 import static ru.gasworkers.dev.model.Role.SERVICE;
 
 
-public class ServicePages extends BaseRolePages {
+public final class ServicePages extends BaseRolePages {
     public ServicePages(SelenideDriver driver) {
         super(SERVICE, driver);
     }

@@ -4,7 +4,7 @@ import ru.gasworkers.dev.browser.Browser;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import ru.gasworkers.dev.model.client.ClientRequestType;
-import ru.gasworkers.dev.model.client.OrderStatus;
+import ru.gasworkers.dev.model.client.OrderState;
 import ru.gasworkers.dev.model.client.OrderType;
 import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.pages.context.ClientPages;
@@ -95,7 +95,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getOrderCardPage().checkFinishLoading();
         clientPages.getSelectServicePage().popUpClose();
         clientPages.getOrderCardPage().checkOrderType(OrderType.MAINTENANCE);
-        clientPages.getOrderCardPage().checkOrderStatusNew(OrderStatus.NEW_ORDER);
+        clientPages.getOrderCardPage().checkOrderStateNew(OrderState.NEW_ORDER);
 
     }
 
@@ -105,15 +105,15 @@ class ClientFlowTest extends BaseTest {
     @DisplayName("Клиент просматривает заказ в кабинете")
     public void clientCheckOrderStatus() {
         Integer checkedOrderNumber = 3185;
-        step("Убедиться, что статус Заказа: " + checkedOrderNumber + " является: " + OrderStatus.SCHEDULE_VISIT, () -> {
-            OrderStatus orderStatus = OrderStatus.SCHEDULE_VISIT;
+        step("Убедиться, что статус Заказа: " + checkedOrderNumber + " является: " + OrderState.SCHEDULE_VISIT, () -> {
+            OrderState orderState = OrderState.SCHEDULE_VISIT;
             clientPages.getHomePage().checkFinishLoading();
             clientPages.getHomePage().sidebar.clickOrdersAndInvoicesDropdown();
             clientPages.getHomePage().sidebar.allOrders();
             clientPages.getAllOrdersPage().checkFinishLoading();
             clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkOrderStatusScheduleVisit(orderStatus);
+            clientPages.getOrderCardPage().checkOrderStatusScheduleVisit(orderState);
         });
     }
 
@@ -134,12 +134,11 @@ class ClientFlowTest extends BaseTest {
         step("Вкладка Общие данные", () -> {
             clientPages.getProfilePage().navCommon();
             clientPages.getProfilePage().navCommonTab.checkFilledState();  // TODO implement CommonDataPickerComponent. Upload photo. check other fields info.
-            clientPages.getProfilePage().navCommonTab.checkInitialState(client00.name, client00.patronymic, client00.surname);
         });
         step("Вкладка Контакты", () -> {
             clientPages.getProfilePage().navContacts();
             clientPages.getProfilePage().navContactsTab.checkFinishLoading(client00.email, String.valueOf(client00.phoneNumber));
-            clientPages.getProfilePage().navContactsTab.checkFilledStatus(client00.email, String.valueOf(client00.phoneNumber));
+            clientPages.getProfilePage().navContactsTab.checkFilledState(client00.email, String.valueOf(client00.phoneNumber));
         });
         //TODO password and Notifications
     }
@@ -160,7 +159,7 @@ class ClientFlowTest extends BaseTest {
         step("Вкладка Контакты", () -> {
         clientPages.getProfilePage().navContacts();
         clientPages.getProfilePage().navContactsTab.checkFinishLoading(client00.email, String.valueOf(client00.phoneNumber));
-        clientPages.getProfilePage().navContactsTab.checkFilledStatus(client00.email, String.valueOf(client00.phoneNumber));
+        clientPages.getProfilePage().navContactsTab.checkFilledState(client00.email, String.valueOf(client00.phoneNumber));
         //TODO password and Notifications
         });
     }

@@ -5,7 +5,7 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import ru.gasworkers.dev.model.Role;
-import ru.gasworkers.dev.model.client.OrderStatus;
+import ru.gasworkers.dev.model.client.OrderState;
 import ru.gasworkers.dev.model.client.OrderType;
 import ru.gasworkers.dev.model.client.ClientRequestType;
 import org.junit.jupiter.api.DisplayName;
@@ -128,8 +128,8 @@ class ClientDispatcherInteractionTest extends BaseTest {
                 // compare .checkOrderType and .checkOrderStatus what is better? more universal?
             });
             step("Убедиться, что статус Заказа: ", () -> {
-                OrderStatus orderStatus = OrderStatus.NEW_ORDER;
-                clientPages.getOrderCardPage().checkOrderStatusNew(orderStatus);
+                OrderState orderState = OrderState.NEW_ORDER;
+                clientPages.getOrderCardPage().checkOrderStateNew(orderState);
                 // how to make .checkOrderStatus  universal and also check corresponded buttons
             });
             clientPages.getOrderCardPage().clickOffersBlock();
@@ -143,9 +143,9 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             //check OrderStatus NEW_TENDER
             dispatcherPages.getOrderCardPage().popUpClose();
-            dispatcherPages.getOrderCardPage().checkReviewNewTheTenderStatus(OrderStatus.NEW_TENDER);
+            dispatcherPages.getOrderCardPage().checkReviewNewTheTenderStatus(OrderState.NEW_TENDER);
             dispatcherPages.getOrderCardPage().acceptOrder();
-            dispatcherPages.getOrderCardPage().checkParticipateTheTenderStatus(OrderStatus.PARTICIPATE_TENDER);
+            dispatcherPages.getOrderCardPage().checkParticipateTheTenderStatus(OrderState.PARTICIPATE_TENDER);
             // check OrderStatus gray button- Уже участвуете
         });
 
@@ -192,7 +192,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getHomePage().popUpClose();
             clientPages.getHomePage().lastOrderProfileClientComponent.lastOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderStatus.SCHEDULE_VISIT);
+            clientPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderState.SCHEDULE_VISIT);
         });
 
         step("Диспетчер выбирает время и назначает Мастера", () -> {
@@ -207,14 +207,14 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getHomePage().openOrderByNumber(orderNumber);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             dispatcherPages.getOrderCardPage().popUpClose();
-            dispatcherPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderStatus.SCHEDULE_VISIT);
+            dispatcherPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderState.SCHEDULE_VISIT);
             dispatcherPages.getOrderCardPage().selectTimeButton();
             dispatcherPages.getOrderCardPage().datePicker.selectNowDateAndTime();
             dispatcherPages.getOrderCardPage().selectMaster();
             dispatcherPages.getSelectMasterPage().checkFinishLoading();
             dispatcherPages.getSelectMasterPage().selectNewMasterByIndex(0);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
-            dispatcherPages.getOrderCardPage().checkMasterDispatchedStatus(OrderStatus.MASTER_DISPATCHED);
+            dispatcherPages.getOrderCardPage().checkMasterDispatchedStatus(OrderState.MASTER_DISPATCHED);
         });
 
 

@@ -13,12 +13,13 @@ import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public abstract class BasePage extends BaseComponent {
 
+
     public BasePage(RoleBrowser browser) {
         super(browser);
     }
-
     SelenideElement popUpCloseButtonLocator = driver.$(byTagAndText("span", "Прочитать все")).as("Close popup button"),
-            popUpContainerLocator = driver.$(".notice-list-fixed-content.gas-scrollbar-inline").as("Pop-up container");
+    popUpContainerLocator = driver.$(".notice-list-fixed-content.gas-scrollbar-inline").as("Pop-up container");
+    SelenideElement mainButtonLocator = driver.$("button.mb-3.btn.btn-primary").as("Main button");
 
     public void popUpClose() {
         {

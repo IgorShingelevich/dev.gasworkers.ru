@@ -1,7 +1,7 @@
 package ru.gasworkers.dev.tests.master;
 
 import ru.gasworkers.dev.browser.Browser;
-import ru.gasworkers.dev.model.client.OrderStatus;
+import ru.gasworkers.dev.model.client.OrderState;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,7 +38,7 @@ public class MasterFlowTest extends BaseTest {
     @DisplayName("Мастер открывает заказ: ")
     @Test
     void checkMasterDispatchedOrderStatus(){
-        step("Мастер открывает заказ в статусе: " + OrderStatus.MASTER_DISPATCHED, () -> {
+        step("Мастер открывает заказ в статусе: " + OrderState.MASTER_DISPATCHED, () -> {
 //    @CsvFileSource(resources = "resources/invalidEmailFormat.csv", numLinesToSkip = 1, delimiter = '|')
             masterPages.getNewOrdersPage().checkFinishLoading();
             // TODO new orders sorting

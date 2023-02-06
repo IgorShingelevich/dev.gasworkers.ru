@@ -38,7 +38,7 @@ public class NavContactsTabProfileComponent extends BaseComponent {
         });
     }
 
-    public void checkFilledStatus(String email, String phone) {
+    public void checkFilledState(String email, String phone) {
         stepWithRole("Убедиться, что вкладка Контакты заполнена: ", () -> {
             subtitleLocator.shouldHave(visible, text("Контактные данные"));
             stepWithRole("Email: " + email, () ->

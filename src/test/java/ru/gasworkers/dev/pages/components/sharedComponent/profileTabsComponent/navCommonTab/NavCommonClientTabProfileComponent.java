@@ -27,7 +27,7 @@ public class NavCommonClientTabProfileComponent extends BaseComponent {
              whoPassportLocator = driver.$("input[placeholder*=выдан]").as("Кем выдан паспорт"),
              registrationAddressLocator = driver.$("textarea[placeholder*=Адрес]").as("Адрес регистрации"),
              apartmentLocator = driver.$("textarea[placeholder*=квартиры]").as("Номер квартиры"),
-             saveButtonLocator = driver.$(byTagAndText("span", "Сохранить")).as("Кнопка Сохранить");
+             saveButtonLocator = driver.$("button.mb-3.btn.btn-primary ").as("Кнопка Сохранить");
 
 
     public void checkFinishLoading() {
@@ -44,7 +44,7 @@ public class NavCommonClientTabProfileComponent extends BaseComponent {
             whoPassportLocator.shouldBe(visible);
             registrationAddressLocator.shouldBe(visible);
             apartmentLocator.shouldBe(visible);
-            saveButtonLocator.shouldBe(visible);
+            saveButtonLocator.shouldBe(visible).shouldHave(text("Сохранить"));
         });
 
 
