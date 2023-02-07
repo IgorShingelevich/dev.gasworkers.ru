@@ -10,12 +10,10 @@ public class SidebarDispatcherComponent extends BaseComponent {
         super(browser);
     }
 
-    SelenideElement generalMapLocator = driver.$$(".sidebar .link").get(0),
-            allMastersListLinkLocator = driver.$$(".sidebar .link").get(1),
-            profileDispatcherLinkLocator = driver.$$(".sidebar .link").get(2),
-            supportServiceTitleLocator = driver.$(".support-service"),
-            supportServicePhoneLocator = driver.$(".support-service__phone"),
-            supportServiceEmailLocator = driver.$(".support-service .link-dark-blue");
+    SelenideElement generalMapLocator = driver.$$(".sidebar .link").get(0).as("Карта Диспетчера"),
+            allMastersListLinkLocator = driver.$$(".sidebar .link").get(1).as("Список Мастеров"),
+            profileDispatcherLinkLocator = driver.$$(".sidebar .link").get(2).as("Профиль");
+
 
 
     public SidebarDispatcherComponent generalMap() {

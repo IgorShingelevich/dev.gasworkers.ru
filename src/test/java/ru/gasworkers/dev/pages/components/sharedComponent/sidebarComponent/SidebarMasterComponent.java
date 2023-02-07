@@ -20,10 +20,10 @@ public class SidebarMasterComponent extends BaseComponent {
         sidebarElementsCollection = driver.$$(".sidebar .link");
 
     SelenideElement
-        titleLocator = driver.$("h1.h3.mb-2").as("Заголовок страницы"),
-        onVideoModeLocator = driver.$("button.btn-sm.mt-3.btn"),
-        offVideoModeLocator = driver.$("button.btn-sm.mt-3.btn"),
-        HomeLinkLocator = sidebarElementsCollection.get(0).as("домой"),
+        titleLocator = driver.$("h1.h3.mb-2").as("Заголовок страницы").as("Заголовок страницы"),
+        toggleReadyToVideoStateButtonLocator = driver.$("button.btn-sm.mt-3.btn").as("Переключатель готовности к видео"),
+
+        HomeLinkLocator = sidebarElementsCollection.get(0).as("Домашняя страница"),
         ordersHistoryDropdownLocator = sidebarElementsCollection.get(1).as("История заказов"),
         allNewOrdersLinkLocator = sidebarElementsCollection.get(2).as("Заказы новые"),
         allAssignedOrdersLinkLocator = sidebarElementsCollection.get(3).as("Заказы принятые"),
@@ -31,10 +31,8 @@ public class SidebarMasterComponent extends BaseComponent {
         recruitingDropdownLocator = sidebarElementsCollection.get(5).as("Рекрутинг"),
         resumeLinkLocator = sidebarElementsCollection.get(6).as("Резюме"),
         invitationsLinkLocator = sidebarElementsCollection.get(7).as("Приглашения"),
-        profileLinkLocator = sidebarElementsCollection.get(8).as("Профиль"),
-        supportServiceTitleLocator = driver.$(".support-service").as("Служба поддержки"),
-        supportServicePhoneLocator = driver.$(".support-service__phone").as("8 800 302 89 04"),
-        supportServiceEmailLocator = driver.$(".support-service .link-dark-blue").as("mail");
+        profileLinkLocator = sidebarElementsCollection.get(8).as("Профиль");
+
 
 
         public void home () {

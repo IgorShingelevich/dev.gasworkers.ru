@@ -19,17 +19,17 @@ public class HomeMasterPage extends BaseMasterPage{
     }
 
     SelenideElement
-        titleLocator = driver.$("h1.h3.mb-2").as("Заголовок страницы"),
+        titleLocator = driver.$("h1.h3.mb-2").as("Заголовок страницы").as("Заголовок страницы"),
         timeTableLocator = driver.$("div.timetable").as("Расписание"),
-        switchToListViewLocator = driver.$("div.action-btn.list-type"),
-        switchToTabViewLocator = driver.$("div.action-btn.card-type");
+        toggleTimeTableModeButtonLocator = driver.$("div.p-default").as("Переключатель режима расписания"),
+        listViewButtonLocator = driver.$("div.action-btn.list-type").as("Переключатель вида расписания (список)"),
+        tabViewButtonLocator = driver.$("div.action-btn.card-type");
 
     ElementsCollection
-        orderCardsCollection = driver.$$("div.order-card"),
-        orderNumberLinkCollection = driver.$$("p.h5.link-blue.pointer"),
-        orderActionDropdownCollection = driver.$$("button.actions__btn"),
-        actionsOpenOrderLinkCollection = driver.$$x("//a[@class='actions__slot--link']"),
-        actionsArchiveOrderLinkCollection = driver.$$x("(//button[contains(@class,'actions__slot--btn')])");
+        todayOrderNumberLinkCollection = driver.$$(".gas-box .item-flex a").as("Номера заказов на сегодня"),
+        orderNumberLinkCollection = driver.$$("p.h5.link-blue.pointer").as("Номера заказов в истории заказов"),
+        orderActionDropdownButtonCollection = driver.$$("button.actions__btn").as("Дропдаун кнопка  действия над заказом в истории заказов"),
+        actionsOpenOrderLinkCollection = driver.$$("a.actions__slot--link").as("Ссылка открыть заказ в дропдауне действия над заказом в истории заказов");
 
 
     public void checkFinishLoading() {
