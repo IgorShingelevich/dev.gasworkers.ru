@@ -48,8 +48,8 @@ def selenideVersion = '6.11.1',
     restassured = '5.3.0',
     awaitility ='4.2.0',
     pdfbox ='2.0.27',
-    jacksonCore ='2.14.1',
-    jacksonDatabind = '2.14.1'
+    jacksonCore ='2.14.1'
+
 
 
 
@@ -69,8 +69,7 @@ dependencies {
             "io.rest-assured:rest-assured:$restassured",
             "org.awaitility:awaitility:$awaitility",
             "org.apache.pdfbox:pdfbox:$pdfbox",
-            "com.fasterxml.jackson.core:jackson-core:$jacksonCore",
-            "com.fasterxml.jackson.core:jackson-databind:$jacksonDatabind"
+            "com.fasterxml.jackson.core:jackson-core:$jacksonCore"
     )
 }
 
