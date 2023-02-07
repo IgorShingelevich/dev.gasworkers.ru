@@ -122,7 +122,7 @@ public class OrderCardClientPage extends BaseClientPage {
         });
     }
 
-    public void checkOrderStatusScheduleVisit(OrderState orderState) {
+    public void checkOrderStateScheduleVisit(OrderState orderState) {
         step("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             //how to make this step more flexible?
             stepWithRole("Убедиться, что статус заказа является: " + orderState, () ->

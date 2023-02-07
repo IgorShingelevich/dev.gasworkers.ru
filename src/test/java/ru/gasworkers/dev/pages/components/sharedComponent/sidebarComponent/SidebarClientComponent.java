@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class SidebarClientComponent extends BaseComponent {
+public class SidebarClientComponent extends BaseSidebarComponent {
 
     public SidebarClientComponent(RoleBrowser browser) {
         super(browser);

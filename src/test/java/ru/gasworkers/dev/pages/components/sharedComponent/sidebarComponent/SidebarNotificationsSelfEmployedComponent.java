@@ -1,4 +1,9 @@
 package ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent;
 
-public class SidebarNotificationsSelfEmployedComponent {
+import ru.gasworkers.dev.model.browser.RoleBrowser;
+
+public class SidebarNotificationsSelfEmployedComponent extends SidebarSelfEmployedComponent {
+    public SidebarNotificationsSelfEmployedComponent(RoleBrowser browser) {
+        super(browser);
+    }
 }

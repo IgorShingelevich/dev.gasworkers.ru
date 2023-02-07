@@ -1,8 +1,9 @@
-package ru.gasworkers.dev.pages.master.ordersPage;
+package ru.gasworkers.dev.pages.master.ordersHystoryMasterPage;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarMasterComponent;
 import ru.gasworkers.dev.pages.master.BaseMasterPage;
 
@@ -11,13 +12,15 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 
-public class InProgressOrdersMasterPage extends BaseMasterPage {
+public class AllCompletedOrdersHistoryMasterPage extends BaseMasterPage {
 
     public final SidebarMasterComponent sidebar;
+    public final ActionsBlockMasterComponent actionsBlock;
 
-    public InProgressOrdersMasterPage(RoleBrowser browser) {
+    public AllCompletedOrdersHistoryMasterPage(RoleBrowser browser) {
         super(browser);
         sidebar = new SidebarMasterComponent(browser);
+        actionsBlock = new ActionsBlockMasterComponent(browser);
     }
 
     ElementsCollection orderNumberLinkCollection = driver.$$("p.h5.link-blue.pointer");
@@ -28,8 +31,8 @@ public class InProgressOrdersMasterPage extends BaseMasterPage {
             switchToTabViewLocator = driver.$("div.action-btn.card-type");
 
     public void checkFinishLoading() {
-        stepWithRole("Убедиться, что страница Заказы принятые загружена", () -> {
-            titleLocator.shouldHave(text("Список принятых заказов"));
+        stepWithRole("Убедиться, что страница Заказы выполненные загружена", () -> {
+            titleLocator.shouldHave(text("Список завершенных заказов"));
             //greatherThan(0)
         });
     }

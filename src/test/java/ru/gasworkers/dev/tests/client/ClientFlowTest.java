@@ -111,7 +111,7 @@ class ClientFlowTest extends BaseTest {
             clientPages.getAllOrdersPage().checkFinishLoading();
             clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderState.SCHEDULE_VISIT);
+            clientPages.getOrderCardPage().checkOrderStateScheduleVisit(OrderState.SCHEDULE_VISIT);
     }
 
     @Test
@@ -126,7 +126,7 @@ class ClientFlowTest extends BaseTest {
             clientPages.getAllOrdersPage().checkFinishLoading();
             clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderState.MASTER_DISPATCHED);
+            clientPages.getOrderCardPage().checkOrderStateScheduleVisit(OrderState.MASTER_DISPATCHED);
     }
 
 

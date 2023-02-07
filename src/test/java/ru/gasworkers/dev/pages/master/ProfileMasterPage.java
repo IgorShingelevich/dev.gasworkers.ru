@@ -1,12 +1,14 @@
 package ru.gasworkers.dev.pages.master;
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.NavContactsTabProfileComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.NavEquipmentTabProfileComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.NavNotificationsTabProfileComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.NavPasswordTabProfileComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.navCommonTab.NavCommonMasterTabProfileComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.navProfileTab.NavProfileMasterTabProfileComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarMasterComponent;
 
 public class ProfileMasterPage extends BaseMasterPage{
     public final NavProfileMasterTabProfileComponent profileTab;
@@ -15,8 +17,13 @@ public class ProfileMasterPage extends BaseMasterPage{
     public final NavEquipmentTabProfileComponent equipmentTab;
     public final NavPasswordTabProfileComponent passwordTab;
     public final NavNotificationsTabProfileComponent notificationsTab;
+    public final SidebarMasterComponent sidebar;
+    public final ActionsBlockMasterComponent actionsBlock;
+
     public ProfileMasterPage(RoleBrowser browser) {
         super(browser);
+        sidebar = new SidebarMasterComponent(browser);
+        actionsBlock = new ActionsBlockMasterComponent(browser);
         profileTab = new NavProfileMasterTabProfileComponent(browser);
         commonTab = new NavCommonMasterTabProfileComponent(browser);
         contactsTab = new NavContactsTabProfileComponent(browser);

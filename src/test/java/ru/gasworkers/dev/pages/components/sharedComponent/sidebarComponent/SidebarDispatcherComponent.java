@@ -4,7 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
-public class SidebarDispatcherComponent extends BaseComponent {
+public class SidebarDispatcherComponent extends BaseSidebarComponent {
 
     public SidebarDispatcherComponent(RoleBrowser browser) {
         super(browser);

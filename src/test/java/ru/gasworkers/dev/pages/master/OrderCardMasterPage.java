@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pages.master;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarMasterComponent;
 
 import java.time.Duration;
@@ -13,11 +14,14 @@ import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public class OrderCardMasterPage extends BaseMasterPage {
 
-    private final SidebarMasterComponent sidebar;
+    public final SidebarMasterComponent sidebar;
+    public final ActionsBlockMasterComponent actionsBlock;
+
 
     public  OrderCardMasterPage(RoleBrowser browser) {
         super(browser);
         sidebar = new SidebarMasterComponent(browser);
+        actionsBlock = new ActionsBlockMasterComponent(browser);
     }
 
     private final String PAGE_TITLE = "Заказ";

@@ -1,10 +1,13 @@
 package ru.gasworkers.dev.tests.master;
 
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Story;
+import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.browser.Browser;
 import ru.gasworkers.dev.model.client.OrderState;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import ru.gasworkers.dev.model.client.OrderType;
+import ru.gasworkers.dev.model.master.ReadyForVideoState;
 import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.User;
@@ -35,24 +38,55 @@ public class MasterFlowTest extends BaseTest {
         masterPages.getLoginPage().login(master.email, master.password);
     }
 
-    @DisplayName("Мастер открывает заказ: ")
+
+    @Owner("Igor Shingelevich")
+    @Feature("Кабинет мастера")
+    @Story("Просмотр заказа")
+    @Tags({@Tag("regression"), @Tag("master"), @Tag("cabinet"), @Tag("positive")})
+    @DisplayName("Мастер открывает заказ в статусе Мастер в пути")
     @Test
     void checkMasterDispatchedOrderStatus(){
-        step("Мастер открывает заказ в статусе: " + OrderState.MASTER_DISPATCHED, () -> {
-//    @CsvFileSource(resources = "resources/invalidEmailFormat.csv", numLinesToSkip = 1, delimiter = '|')
-            masterPages.getNewOrdersPage().checkFinishLoading();
-            // TODO new orders sorting
-            masterPages.getNewOrdersPage().openOrderByNumber(3215);
-            masterPages.getOrderCardPage().checkFinishLoading();
-        });
-    }
-    @Test
-    public void checkNewSms() {
-        step("Проверить, что появилось новое сообщение", () -> {
-            master.firstCodeFromNewSMS();
+        int orderNumber = 3215;
+        OrderType orderType = OrderType.MAINTENANCE;
 
-        });
+        masterPages.getHomePage().checkFinishLoading();
+        masterPages.getHomePage().sidebar.checkReadyForVideoState(ReadyForVideoState.READY);
+        masterPages.getHomePage().sidebar.allNewOrders();
+        masterPages.getAllNewOrdersPage().checkFinishLoading();
+        masterPages.getAllNewOrdersPage().switchToListView();
+        masterPages.getAllNewOrdersPage().openOrderByNumber(orderNumber);
+        masterPages.getOrderCardPage().checkFinishLoading();
+//        TODO masterPages.getOrderCardPage().checkOrderState(OrderState.MASTER_DISPATCHED);
+//        TODO masterPages.getOrderCardPage().checkOrderType(OrderType.MAINTENANCE);
+        // TODO checkFinishLoading - expand  docs check, order properties check, price check
     }
+
+    @Owner("Igor Shingelevich")
+    @Disabled
+    @Feature("Кабинет мастера")
+    @Story("Незаполненный ( начальное состояние) кабинет")
+    @Tags({@Tag("regression"), @Tag("master"), @Tag("cabinet"), @Tag("positive")})
+    @DisplayName("Мастер открывает кабинет в первый раз")
+    @Test
+    void checkInitialCabinetState(){
+//       TODO masterPages.getHomePage().checkInitialState();
+        masterPages.getHomePage().sidebar.checkReadyForVideoState(ReadyForVideoState.READY);
+        masterPages.getHomePage().sidebar.allNewOrders();
+//        TODO masterPages.getAllNewOrdersPage().checkInitialState();
+        masterPages.getHomePage().sidebar.allScheduledOrders();
+//        TODO masterPages.getAllScheduledOrdersPage().checkInitialState();
+        masterPages.getHomePage().sidebar.allCompletedOrders();
+//        TODO masterPages.getAllCompletedOrdersPage().checkInitialState();
+        masterPages.getHomePage().sidebar.resume();
+//        TODO masterPages.getResumePage().checkInitialState();
+        masterPages.getHomePage().sidebar.invitations();
+//        TODO masterPages.getInvitationsPage().checkInitialState();
+        masterPages.getHomePage().sidebar.profile();
+//        TODO masterPages.getProfilePage().checkInitialState();
+    }
+
+
+
 
 
 }

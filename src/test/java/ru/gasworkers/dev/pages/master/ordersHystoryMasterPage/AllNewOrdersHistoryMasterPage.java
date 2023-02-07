@@ -1,8 +1,10 @@
-package ru.gasworkers.dev.pages.master.ordersPage;
+package ru.gasworkers.dev.pages.master.ordersHystoryMasterPage;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarMasterComponent;
 import ru.gasworkers.dev.pages.master.BaseMasterPage;
 
@@ -11,13 +13,15 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 
-public class NewOrdersMasterPage extends BaseMasterPage {
+public class AllNewOrdersHistoryMasterPage extends BaseMasterPage {
 
     public final SidebarMasterComponent sidebar;
+    public final ActionsBlockMasterComponent actionsBlock;
 
-    public NewOrdersMasterPage(RoleBrowser browser) {
+    public AllNewOrdersHistoryMasterPage(RoleBrowser browser) {
         super(browser);
         sidebar = new SidebarMasterComponent(browser);
+        actionsBlock = new ActionsBlockMasterComponent(browser);
     }
 
     ElementsCollection orderNumberLinkCollection = driver.$$("p.h5.link-blue.pointer").as("Номер заказа");
@@ -30,7 +34,7 @@ public class NewOrdersMasterPage extends BaseMasterPage {
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что страница Заказы новые загружена", () -> {
             titleLocator.shouldHave(text("Список новых заказов"));
-            //greatherThan(0)
+            orderNumberLinkCollection.shouldHave(CollectionCondition.sizeGreaterThan(0));
         });
     }
 

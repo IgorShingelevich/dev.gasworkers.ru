@@ -194,7 +194,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getHomePage().popUpClose();
             clientPages.getHomePage().lastOrderProfileClientComponent.lastOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderState.SCHEDULE_VISIT);
+            clientPages.getOrderCardPage().checkOrderStateScheduleVisit(OrderState.SCHEDULE_VISIT);
         });
 
         step("Диспетчер выбирает время и назначает Мастера", () -> {

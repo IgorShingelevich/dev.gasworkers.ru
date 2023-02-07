@@ -1,25 +1,30 @@
 package ru.gasworkers.dev.pages.master;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarMasterComponent;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.visible;
 
 public class HomeMasterPage extends BaseMasterPage{
 
     public final SidebarMasterComponent sidebar;
+    public final ActionsBlockMasterComponent actionsBlock;
+
 
     public HomeMasterPage(RoleBrowser browser) {
         super(browser);
         sidebar = new SidebarMasterComponent(browser);
+        actionsBlock = new ActionsBlockMasterComponent(browser);
     }
 
     SelenideElement
-        titleLocator = driver.$("h1.h3.mb-2").as("Заголовок страницы").as("Заголовок страницы"),
         timeTableLocator = driver.$("div.timetable").as("Расписание"),
         toggleTimeTableModeButtonLocator = driver.$("div.p-default").as("Переключатель режима расписания"),
         listViewButtonLocator = driver.$("div.action-btn.list-type").as("Переключатель вида расписания (список)"),
@@ -34,7 +39,16 @@ public class HomeMasterPage extends BaseMasterPage{
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
-            timeTableLocator.shouldBe(visible, Duration.ofSeconds(10));
+            stepWithRole("Убедиться, что переключатель режима расписания отображается", () -> {
+                toggleTimeTableModeButtonLocator.shouldBe(visible);
+            });
+            stepWithRole("Убедиться, что расписание отображается", () -> {
+                timeTableLocator.shouldBe(visible);
+            });
+            stepWithRole("Убедиться, что список заказов на сегодня отображается", () -> {
+                todayOrderNumberLinkCollection.shouldHave(CollectionCondition.sizeGreaterThan(0));
+            });
+            sidebar.
         });
     }
 

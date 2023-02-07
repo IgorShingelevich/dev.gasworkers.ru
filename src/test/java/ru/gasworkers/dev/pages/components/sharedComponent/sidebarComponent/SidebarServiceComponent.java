@@ -1,4 +1,10 @@
 package ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent;
 
-public class SidebarServiceComponent {
+import ru.gasworkers.dev.model.browser.RoleBrowser;
+
+public class SidebarServiceComponent extends BaseSidebarComponent{
+    public SidebarServiceComponent(RoleBrowser browser){
+    super(browser);
+    }
+
 }
