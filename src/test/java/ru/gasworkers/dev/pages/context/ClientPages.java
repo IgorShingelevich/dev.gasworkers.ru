@@ -35,7 +35,7 @@ public final class ClientPages extends BaseRolePages {
     private final SelectPaymentClientPage selectPaymentPage = new SelectPaymentClientPage(browser);
     private final PaymentWizardClientPage paymentWizardPage = new PaymentWizardClientPage(browser);
     private final SignSMSClientPage signSMSPage = new SignSMSClientPage(browser);
-    private final SignSuccsessPage signSuccsessPage = new SignSuccsessPage(browser);
+    private final SignSuccessPage signSuccessPage = new SignSuccessPage(browser);
 
     private final AllInvoicesClientPage allInvoicesPage = new AllInvoicesClientPage(browser);
     private final AllObjectsClientPage allObjectsPage = new AllObjectsClientPage(browser);

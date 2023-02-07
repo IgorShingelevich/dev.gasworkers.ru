@@ -7,6 +7,9 @@ import ru.gasworkers.dev.model.client.OrderState;
 import ru.gasworkers.dev.model.client.OrderType;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.time.Duration;
 
 import static com.codeborne.selenide.CollectionCondition.size;
@@ -29,23 +32,22 @@ public class OrderCardClientPage extends BaseClientPage {
         COMPLETE_ORDER_INFO = "Договор техобслуживания ВДГО необходимо предоставить в вашу газораспределительную компанию. Оставьте отзыв на работу мастера и вы сможете передать договор в вашу газораспределительную компанию";
 
     SelenideElement
-        titleNumberLocator = driver.$("h1.h3.mb-2"),
-        completeOrderInfoLocator = driver.$(".hint-box p"),
-        orderDetailsBlockLocator = driver.$("div.order-details"),
-        toMapButtonLocator = driver.$(byTagAndText("span", "Показать на карте")),  // $("button.map-ic")
-        cancelOrderButtonLocator = driver.$(byTagAndText("span", "Отменить заказ")),
-        payBillButtonLocator = driver.$(byTagAndText("span", "Оплатить счет")),
-        finalPriceLocator = driver.$(".big.bold.d-flex.justify-content-between.w-100.mb-4"),
-        orderStatusLocator = driver.$(".item-flex p.text"),
-        offersBlockLocator = driver.$("div.map-sticky__header--offers");
+        titleNumberLocator = driver.$("h1.h3.mb-2").as(" Заголовок Карточки заказа"),
+        completeOrderInfoLocator = driver.$(".hint-box p").as("Информация о завершении заказа"),
+        orderDetailsBlockLocator = driver.$("div.order-details").as("Блок с информацией о заказе"),
+        toMapButtonLocator = driver.$(byTagAndText("span", "Показать на карте")).as("Кнопка Показать на карте"),
+        cancelOrderButtonLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Кнопка Отменить заказ"),
+        payBillButtonLocator = driver.$(byTagAndText("span", "Оплатить счет")).as("Кнопка Оплатить счет"),
+        finalPriceLocator = driver.$(".big.bold.d-flex.justify-content-between.w-100.mb-4").as("Итоговая цена"),
+        orderStatusLocator = driver.$(".item-flex p.text").as("Статус заказа"),
+        offersBlockLocator = driver.$("div.map-sticky__header--offers").as("Блок с предложениями");
 
     ElementsCollection
-        navButtonsCollection = driver.$$("div.navigation-block li"),
-        docsTitleCollection = driver.$$(".link-pdf "),
-        docsDownloadCollection = driver.$$(".link-pdf span"),
-        orderDetailsCollection = driver.$$("div.order-details-item");
+        navButtonsCollection = driver.$$("div.navigation-block li").as("Навигационные кнопки"),
+        docsTitleCollection = driver.$$(".link-pdf ").as("Названия документов"),
+        docsDownloadCollection = driver.$$(".link-pdf span").as("Кнопки скачать документы"),
+        orderDetailsCollection = driver.$$("div.order-details-item").as("Информация о заказе");
 
-//    public String orderNumber = titleNumberLocator.getText().substring(LAST_ORDER_CARD_TITLE.length());  // .InvocationTargetException
 
     public OrderCardClientPage checkFinishLoading() {
         titleNumberLocator.shouldBe(visible, Duration.ofSeconds(30));
@@ -74,18 +76,21 @@ public class OrderCardClientPage extends BaseClientPage {
         return this;
     }
 
-    public OrderCardClientPage docsAgreementDownload()  {
-        docsDownloadCollection.get(1).$("a.link-pdf-download").attr("href");
+    public OrderCardClientPage downloadAgreement()  throws Exception {
+        File agreement = docsTitleCollection.findBy(text("Договор ТО")).download();
+        InputStream is = new FileInputStream(agreement);
         return this;
     }
 
-    public OrderCardClientPage docsCompletionActDownload() {
-        // no href
+    public OrderCardClientPage downloadCompletionAct() throws Exception {
+        File completionAct = docsTitleCollection.findBy(text("Акт выполненных работ")).download();
+        InputStream is = new FileInputStream(completionAct);
         return this;
     }
 
-    public OrderCardClientPage docsInsuranceDownload() {
-        // no href
+    public OrderCardClientPage downloadInsurance() throws Exception {
+        File insurance = docsTitleCollection.findBy(text("Страховой полис")).download();
+        InputStream is = new FileInputStream(insurance);
         return this;
     }
 
@@ -134,8 +139,15 @@ public class OrderCardClientPage extends BaseClientPage {
                docsTitleCollection.get(0).shouldHave(text("Договор ТО"));
                docsTitleCollection.get(1).shouldHave(text("Страховой полис"));
                docsTitleCollection.shouldBe(size(2));
-               navCommon();
             });
+            navCommon();
+
+            //TODO get href from element
+            stepWithRole("TODO Скачать документы: Договор ТО и Страховой полис " , () -> {
+//                downloadAgreement();
+//                downloadInsurance();
+            });
+
             System.out.println("orderStatus: " + orderState);
         });
     }
@@ -155,9 +167,9 @@ public class OrderCardClientPage extends BaseClientPage {
             orderStatusLocator.shouldBe(visible).shouldHave(text("Завершен"));
 //          finalPriceLocator.shouldBe(visible);
             navDocs();
-            docsDownloadCollection.get(0).shouldBe(visible);
-            docsDownloadCollection.get(1).shouldBe(visible);
-            docsDownloadCollection.get(2).shouldBe(visible);
+            docsDownloadCollection.get(0).shouldHave(text("Договор ТО"));
+            docsDownloadCollection.get(1).shouldHave(text("Акт выполненных работ"));
+            docsDownloadCollection.get(2).shouldHave(text("Страховой полис"));
             docsDownloadCollection.shouldBe(size(3));
             navCommon();
         });

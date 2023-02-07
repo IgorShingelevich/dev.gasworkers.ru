@@ -103,9 +103,8 @@ class ClientFlowTest extends BaseTest {
     @Feature("Кабинет клиента")
     @Story("Просмотр заказа")
     @DisplayName("Клиент просматривает заказ в состоянии Согласование даты заказа")
-    public void clientCheckOrderStatus() {
+    public void clientCheckScheduleVisitOrderSate () {
         String checkedOrderNumber = "3532";
-        step("Убедиться, что статус Заказа: " + checkedOrderNumber + " является: " + OrderState.SCHEDULE_VISIT, () -> {
             clientPages.getHomePage().checkFinishLoading();
             clientPages.getHomePage().sidebar.clickOrdersAndInvoicesDropdown();
             clientPages.getHomePage().sidebar.allOrders();
@@ -113,14 +112,24 @@ class ClientFlowTest extends BaseTest {
             clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
             clientPages.getOrderCardPage().checkFinishLoading();
             clientPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderState.SCHEDULE_VISIT);
-        });
     }
 
-   /* @Test
-    public void checkNewSms() {
-        step("Проверить, что появилось новое сообщение", () ->
-                client.firstCodeFromNewSMS());
-    }*/
+    @Test
+    @Feature("Кабинет клиента")
+    @Story("Просмотр заказа")
+    @DisplayName("Клиент просматривает заказ в состоянии Мастер в пути")
+    public void clientCheckMasterDispatchedOrderSate () {
+        String checkedOrderNumber = "3535";
+            clientPages.getHomePage().checkFinishLoading();
+            clientPages.getHomePage().sidebar.clickOrdersAndInvoicesDropdown();
+            clientPages.getHomePage().sidebar.allOrders();
+            clientPages.getAllOrdersPage().checkFinishLoading();
+            clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
+            clientPages.getOrderCardPage().checkFinishLoading();
+            clientPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderState.MASTER_DISPATCHED);
+    }
+
+
 
     @Test
     @Feature("Кабинет клиента")

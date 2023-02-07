@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pages.client;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
 import java.time.Duration;
 
@@ -10,13 +11,15 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 
-public class SignSuccsessPage extends BaseClientPage {
+public class SignSuccessPage extends BaseClientPage {
 
-    private final FocusHeaderComponent header;
+    public final FocusHeaderComponent header;
+    public final StepperComponent stepper;
 
-    public SignSuccsessPage(RoleBrowser browser) {
+    public SignSuccessPage(RoleBrowser browser) {
         super(browser);
         header = new FocusHeaderComponent(browser);
+        stepper = new StepperComponent(browser);
     }
     private final String
         TITLE_TEXT = "Поздравляем!",

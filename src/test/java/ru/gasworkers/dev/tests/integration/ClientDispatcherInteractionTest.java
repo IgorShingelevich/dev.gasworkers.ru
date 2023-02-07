@@ -180,14 +180,16 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getPaymentWizardPage().checkFinishLoading();
             clientPages.getPaymentWizardPage().getQRCode();
             clientPages.getSignSMSPage().checkFinishLoading();
+            clientPages.getSignSMSPage().stepper.checkFinishLoading();
+            sleep(1_000);
 
 //            String sms = clientSmsApi1.waitReceiveNewSms().getText(); // for real number
 //            String code = sms.substring(0, 6); // for real number
             String mockCode = "111111";
             clientPages.getSignSMSPage().inputSMSCode(mockCode);
 //            clientPages.getSignSMSPage().sign();
-            clientPages.getSignSuccsessPage().checkFinishLoading();
-            clientPages.getSignSuccsessPage().toHomePage();
+            clientPages.getSignSuccessPage().checkFinishLoading();
+            clientPages.getSignSuccessPage().toHomePage();
             clientPages.getHomePage().checkFinishLoading();
             clientPages.getHomePage().popUpClose();
             clientPages.getHomePage().lastOrderProfileClientComponent.lastOrderCard();
