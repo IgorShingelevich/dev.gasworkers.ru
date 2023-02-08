@@ -9,8 +9,9 @@ import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.Sideb
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 
 public class HomeMasterPage extends BaseMasterPage{
 
@@ -26,7 +27,8 @@ public class HomeMasterPage extends BaseMasterPage{
 
     SelenideElement
         timeTableLocator = driver.$("div.timetable").as("Расписание"),
-        toggleTimeTableModeButtonLocator = driver.$("div.p-default").as("Переключатель режима расписания"),
+        toggleTimeTableModeButtonLocator = driver.$("div.p-default input").as("Переключатель режима расписания"),
+        toggleTodayAllViewButtonLocator = driver.$("a.link-arr").as("Переключатель вида расписания (сегодня/все)"),
         listViewButtonLocator = driver.$("div.action-btn.list-type").as("Переключатель вида расписания (список)"),
         tabViewButtonLocator = driver.$("div.action-btn.card-type");
 
@@ -39,18 +41,40 @@ public class HomeMasterPage extends BaseMasterPage{
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
-            stepWithRole("Убедиться, что переключатель режима расписания отображается", () -> {
-                toggleTimeTableModeButtonLocator.shouldBe(visible);
+            stepWithRole("Убедиться, что переключатель режима расписания  в положении по умолчанию - Заказы", () -> {
+                toggleTimeTableModeButtonLocator.shouldHave(attribute("value", "true"));
             });
             stepWithRole("Убедиться, что расписание отображается", () -> {
                 timeTableLocator.shouldBe(visible);
             });
-            stepWithRole("Убедиться, что список заказов на сегодня отображается", () -> {
-                todayOrderNumberLinkCollection.shouldHave(CollectionCondition.sizeGreaterThan(0));
+            stepWithRole("Убедиться, что переключатель вида расписания (сегодня/все) в положении по умолчанию содержит текст: смотреть все", () -> {
+                toggleTodayAllViewButtonLocator.shouldHave(text("смотреть все"));
             });
-            sidebar.
         });
     }
+
+    public void checkTodayOrderNotEmpty() {
+        stepWithRole("Убедиться, что список заказов на сегодня не пустой", () -> {
+            todayOrderNumberLinkCollection.shouldHave(sizeGreaterThan(0));
+        });
+    }
+
+    public void checkTodayOrderEmpty() {
+        stepWithRole("Убедиться, что список заказов на сегодня пустой", () -> {
+            todayOrderNumberLinkCollection.shouldHave(size(0));
+        });
+    }
+
+    public void checkTodayOrderNotEmpty(Boolean state) { // do not understand how it works
+        stepWithRole("Убедиться, что список заказов на сегодня  в состоянии: ", () -> {
+            if (state) {
+                todayOrderNumberLinkCollection.shouldHave(sizeGreaterThan(0));
+            } else {
+                todayOrderNumberLinkCollection.shouldHave(sizeGreaterThan(0));
+            }
+        });
+    }
+
 
 
 

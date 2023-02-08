@@ -39,12 +39,12 @@ public class OrderCardClientPage extends BaseClientPage {
         cancelOrderButtonLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Кнопка Отменить заказ"),
         payBillButtonLocator = driver.$(byTagAndText("span", "Оплатить счет")).as("Кнопка Оплатить счет"),
         finalPriceLocator = driver.$(".big.bold.d-flex.justify-content-between.w-100.mb-4").as("Итоговая цена"),
-        orderStatusLocator = driver.$(".item-flex p.text").as("Статус заказа"),
+        orderStateLocator = driver.$(".item-flex p.text").as("Статус заказа"),
         offersBlockLocator = driver.$("div.map-sticky__header--offers").as("Блок с предложениями");
 
     ElementsCollection
         navButtonsCollection = driver.$$("div.navigation-block li").as("Навигационные кнопки"),
-        docsTitleCollection = driver.$$(".link-pdf ").as("Названия документов"),
+        docsTitleCollection = driver.$$("div .link-pdf ").as("Названия документов"),
         docsDownloadCollection = driver.$$(".link-pdf span").as("Кнопки скачать документы"),
         orderDetailsCollection = driver.$$("div.order-details-item").as("Информация о заказе");
 
@@ -61,18 +61,23 @@ public class OrderCardClientPage extends BaseClientPage {
     }
 
     public OrderCardClientPage navCommon(){
-        navButtonsCollection.get(0).shouldHave(text("Описание заказа")).click();
+        stepWithRole("Перейти на вкладку Описание заказа", () -> {
+            navButtonsCollection.get(0).shouldHave(text("Описание заказа")).click();
+        });
         return this;
     }
 
     public OrderCardClientPage navInfoMaster(){
-        navButtonsCollection.get(1).shouldHave(text("Информация по работам")).click();
+        stepWithRole("Перейти на вкладку Информация по работам", () -> {
+            navButtonsCollection.get(1).shouldHave(text("Информация по работам")).click();
+        });
         return this;
     }
 
     public OrderCardClientPage navDocs(){
-        navButtonsCollection.get(2).shouldHave(text("Документы")).click();
-//        driver.$( "div.navigation-block li:nth-child(3)" ).shouldHave(text("Документы")).click();
+        stepWithRole("Перейти на вкладку Документы", () -> {
+            navButtonsCollection.get(2).shouldHave(text("Документы")).click();
+        });
         return this;
     }
 
@@ -105,13 +110,13 @@ public class OrderCardClientPage extends BaseClientPage {
         step("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             //how to make this step more flexible?
            stepWithRole("Убедиться, что заказа статус заказа является: " + orderState, () ->
-                    orderStatusLocator.shouldHave(text(orderState.toString()))
+                    orderStateLocator.shouldHave(text(orderState.toString()))
            );
            stepWithRole("Убедиться, что  в Карточке заказа: " + orderState + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
                // how to avoid hardcode of button names?
                toMapButtonLocator.shouldBe(visible);
                cancelOrderButtonLocator.shouldBe(visible);
-               orderStatusLocator.shouldHave(text(orderState.toString()));
+               orderStateLocator.shouldHave(text(orderState.toString()));
            });
             stepWithRole("Убедиться, что  в Карточке заказа документы отсутствуют  " , () -> {
                 navDocs();
@@ -123,16 +128,15 @@ public class OrderCardClientPage extends BaseClientPage {
     }
 
     public void checkOrderStateScheduleVisit(OrderState orderState) {
-        step("Убедиться, что статус заказа соответствует его Признакам ", () -> {
+        stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             //how to make this step more flexible?
             stepWithRole("Убедиться, что статус заказа является: " + orderState, () ->
-                    orderStatusLocator.shouldHave(text(orderState.toString()))
+                    orderStateLocator.shouldHave(text(orderState.toString()))
             );
             stepWithRole("Убедиться, что в Карточке заказа: " + orderState + " представлена кнопка Отменить заказ " , () -> {
                 // how to avoid hardcode of button names?
                 toMapButtonLocator.shouldNotBe(visible);
                 cancelOrderButtonLocator.shouldBe(visible);
-                orderStatusLocator.shouldHave(text(orderState.toString()));
             });
             stepWithRole("Убедиться, что  в Карточке заказа в документах присутствует Договор ТО и Страховой полис " /*+ docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText()*/ , () -> {
                navDocs();
@@ -162,9 +166,9 @@ public class OrderCardClientPage extends BaseClientPage {
 
     public OrderCardClientPage checkOrderStatusComplete() {
         stepWithRole("Убедиться, что статус заказа является: " + OrderState.COMPLETE, () -> {
-            orderStatusLocator.shouldHave(text(OrderState.COMPLETE.toString()));
+            orderStateLocator.shouldHave(text(OrderState.COMPLETE.toString()));
             completeOrderInfoLocator.shouldBe(visible).shouldHave(text(COMPLETE_ORDER_INFO));
-            orderStatusLocator.shouldBe(visible).shouldHave(text("Завершен"));
+            orderStateLocator.shouldBe(visible).shouldHave(text("Завершен"));
 //          finalPriceLocator.shouldBe(visible);
             navDocs();
             docsDownloadCollection.get(0).shouldHave(text("Договор ТО"));
