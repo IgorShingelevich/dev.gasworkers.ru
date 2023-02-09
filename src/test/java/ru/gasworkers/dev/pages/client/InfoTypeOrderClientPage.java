@@ -31,7 +31,7 @@ public final class InfoTypeOrderClientPage extends BaseClientPage {
     public void clickNextButton() {
 
         stepWithRole("Нажать на кнопку Далее ", () -> {
-            driver.$(".btn-wrap button").shouldHave(text("Далее")).click();
+            driver.$(".btn.btn-primary span").shouldHave(text("Далее")).click();
         });
 
     }

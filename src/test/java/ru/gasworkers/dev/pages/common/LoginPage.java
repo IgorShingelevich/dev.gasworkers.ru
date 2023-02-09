@@ -20,7 +20,7 @@ public final class LoginPage extends BasePage {
             driver.open("/login");
             stepWithRole("Виджет JivoSite должен быть загружен", () -> {
 //                driver.$(".iconWrap_f10e._showLogo_d56c").shouldBe(visible, Duration.ofSeconds(10));
-                driver.$(".envelopeIcon_dbf1.icons_f28b").shouldBe(visible, Duration.ofSeconds(10)).as("Виджет JivoSite");
+                driver.$(".logoIconCloud_dbc3.icons_f28b").shouldBe(visible, Duration.ofSeconds(10)).as("Виджет JivoSite");
             });
         });
 

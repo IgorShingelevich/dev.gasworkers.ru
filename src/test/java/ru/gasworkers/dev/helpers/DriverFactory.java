@@ -12,7 +12,7 @@ public final class DriverFactory {
         config.browserSize(annotation.browserSize());
         config.browserPosition(annotation.browserPosition());
 //         config.headless(true);
-//        config.reportsFolder("target/selenide");
+//        config.reportsFolder("t  arget/selenide");
         config.holdBrowserOpen(true);
 
         return new SelenideDriver(config);

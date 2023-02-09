@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.client.OrderState;
+import ru.gasworkers.dev.model.client.OrderType;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarMasterComponent;
 
@@ -13,6 +14,7 @@ import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
+import static io.qameta.allure.Allure.step;
 
 public class OrderCardMasterPage extends BaseMasterPage {
 
@@ -29,8 +31,9 @@ public class OrderCardMasterPage extends BaseMasterPage {
     private final String PAGE_TITLE = "Заказ";
 
     ElementsCollection
-            navButtonsCollection = driver.$$("div.navigation-block li").as("Навигационные кнопки"),
-            docsTitleCollection = driver.$$("div .link-pdf ").as("Названия документов");
+        navButtonsCollection = driver.$$("div.navigation-block li").as("Навигационные кнопки"),
+        orderDetailsCollection = driver.$$("div.order-details-item").as("Информация о заказе"),
+        docsTitleCollection = driver.$$("div .link-pdf ").as("Названия документов");
 
 
     SelenideElement
@@ -53,16 +56,19 @@ public class OrderCardMasterPage extends BaseMasterPage {
             System.out.println("orderCardNumber: " + orderCardNumber);
         });
     }
+
     public void navCommon(){
      stepWithRole("Перейти на вкладку Описание заказа", () -> {
         navButtonsCollection.get(0).shouldHave(text("Описание заказа")).click();
     });
     }
+
     public void navCheckList(){
         stepWithRole("Перейти на вкладку Чек лист", () -> {
             navButtonsCollection.get(1).shouldHave(text("Чек лист")).click();
         });
     }
+
     public void navInfo(){
         stepWithRole("Перейти на вкладку Информация по работам", () -> {
             navButtonsCollection.get(2).shouldHave(text("Информация по работам")).click();
@@ -73,7 +79,6 @@ public class OrderCardMasterPage extends BaseMasterPage {
             navButtonsCollection.get(3).shouldHave(text("Документы")).click();
         });
     }
-
 
     public void checkOrderStateMasterDispatched(OrderState orderState) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
@@ -96,5 +101,12 @@ public class OrderCardMasterPage extends BaseMasterPage {
                 navCommon();
             });
         });
+    }
+
+    public void checkOrderType(OrderType orderType) {
+        step("Убедиться, что тип заказа: " +orderType, () -> {
+            orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
+        });
+        System.out.println("orderType: " + orderType);
     }
 }
