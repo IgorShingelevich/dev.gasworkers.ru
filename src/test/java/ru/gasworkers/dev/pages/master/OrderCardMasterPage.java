@@ -3,9 +3,8 @@ package ru.gasworkers.dev.pages.master;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.model.client.OrderState;
-import ru.gasworkers.dev.model.client.OrderType;
-import ru.gasworkers.dev.pages.components.masterComponent.FillUpCheckListBannerComponent;
+import ru.gasworkers.dev.model.OrderState;
+import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavCheckListTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavCommonTabOrderCardComponent;
@@ -15,7 +14,6 @@ import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.Sideb
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
@@ -57,7 +55,6 @@ public class OrderCardMasterPage extends BaseMasterPage {
         navCheckListButtonLocator = navButtonsCollection.get(1).as("Чек лист"),
         navInfoButtonLocator = navButtonsCollection.get(2).as("Информация по работам"),
         navDocumentsButtonLocator = navButtonsCollection.get(3).as("Документы"),
-        orderStateLocator = driver.$(".item-flex p.text").as("Статус заказа"),
         editObjectButtonLocator = driver.$(byTagAndText("span", "Редактировать объект/оборудование")).as("Редактировать объект/оборудование"),
         startWorkingButtonLocator = driver.$(byTagAndText("span", "Приступить к работе")).as("Приступить к работе");
 

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.model.client;
+package ru.gasworkers.dev.model;
 
 import lombok.AllArgsConstructor;
 
@@ -14,8 +14,7 @@ public enum OrderState {
     SIGN_MAINTENANCE_ARGEEMENT_SMS("Подписание договора ТО смс", "client"),
     START_MAINTENANCE_WORK("Приезд мастера и проведение ТО", "master"),
     PAY_MAINTENANCE_WORK("Оплата ТО", "client"),
-    SIGN_WORK_CERTIFICATE("Подписание договора ТО", "client"),
-    TRANSFER_AGREEMENT_MOSOBLGAS("Передача договора в Мособлгаз", "client"),
+    SIGN_COMPLETION_ACT("Подписание Акта выполненных работ", "client"),
     COMPLETE("Завершен", "all");
 
     private final String description;

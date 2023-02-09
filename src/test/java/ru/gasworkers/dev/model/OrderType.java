@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.model.client;
+package ru.gasworkers.dev.model;
 
 import lombok.AllArgsConstructor;
 

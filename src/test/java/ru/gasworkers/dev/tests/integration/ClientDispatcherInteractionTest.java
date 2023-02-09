@@ -5,8 +5,8 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import ru.gasworkers.dev.model.Role;
-import ru.gasworkers.dev.model.client.OrderState;
-import ru.gasworkers.dev.model.client.OrderType;
+import ru.gasworkers.dev.model.OrderState;
+import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.client.ClientRequestType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -122,15 +122,8 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getHomePage().popUpClose();
             clientPages.getHomePage().lastOrderProfileClientComponent.lastOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
-            step("Убедиться, что тип Заказа: ", () -> {
-                OrderType orderType = OrderType.MAINTENANCE;
-                clientPages.getOrderCardPage().checkOrderType(orderType);
-                // compare .checkOrderType and .checkOrderStatus what is better? more universal?
-            });
             step("Убедиться, что статус Заказа: ", () -> {
-                OrderState orderState = OrderState.NEW_ORDER;
-                clientPages.getOrderCardPage().checkOrderStateNew(orderState);
-                // how to make .checkOrderStatus  universal and also check corresponded buttons
+                clientPages.getOrderCardPage().checkNewOrderState(OrderState.NEW_ORDER, OrderType.MAINTENANCE);
             });
             clientPages.getOrderCardPage().clickOffersBlock();
             clientPages.getSelectServicePage().checkFinishLoading();
@@ -194,7 +187,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getHomePage().popUpClose();
             clientPages.getHomePage().lastOrderProfileClientComponent.lastOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkOrderStateScheduleVisit(OrderState.SCHEDULE_VISIT);
+            clientPages.getOrderCardPage().checkScheduleVisitOrderState(OrderState.SCHEDULE_VISIT, OrderType.MAINTENANCE);
         });
 
         step("Диспетчер выбирает время и назначает Мастера", () -> {

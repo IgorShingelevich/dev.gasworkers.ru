@@ -4,8 +4,8 @@ import ru.gasworkers.dev.browser.Browser;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import ru.gasworkers.dev.model.client.ClientRequestType;
-import ru.gasworkers.dev.model.client.OrderState;
-import ru.gasworkers.dev.model.client.OrderType;
+import ru.gasworkers.dev.model.OrderState;
+import ru.gasworkers.dev.model.OrderType;
 import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.BaseTest;
@@ -94,14 +94,13 @@ class ClientFlowTest extends BaseTest {
         clientPages.getSelectServicePage().toOrderCard();
         clientPages.getOrderCardPage().checkFinishLoading();
         clientPages.getSelectServicePage().popUpClose();
-        clientPages.getOrderCardPage().checkOrderType(OrderType.MAINTENANCE);
-        clientPages.getOrderCardPage().checkOrderStateNew(OrderState.NEW_ORDER);
+        clientPages.getOrderCardPage().checkNewOrderState(OrderState.NEW_ORDER, OrderType.MAINTENANCE);
 
     }
 
     @Test
     @Feature("Кабинет клиента")
-    @Story("Просмотр заказа")
+    @Story("Просмотр заказа на ТО")
     @DisplayName("Клиент просматривает заказ в состоянии Согласование даты заказа")
     public void clientCheckScheduleVisitOrderSate () {
         String checkedOrderNumber = "3532";
@@ -111,12 +110,12 @@ class ClientFlowTest extends BaseTest {
             clientPages.getAllOrdersPage().checkFinishLoading();
             clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkOrderStateScheduleVisit(OrderState.SCHEDULE_VISIT);
+            clientPages.getOrderCardPage().checkScheduleVisitOrderState(OrderState.SCHEDULE_VISIT, OrderType.MAINTENANCE);
     }
 
     @Test
     @Feature("Кабинет клиента")
-    @Story("Просмотр заказа")
+    @Story("Просмотр заказа на ТО")
     @DisplayName("Клиент просматривает заказ в состоянии Мастер в пути")
     public void clientCheckMasterDispatchedOrderSate () {
         String checkedOrderNumber = "3535";
@@ -126,7 +125,7 @@ class ClientFlowTest extends BaseTest {
             clientPages.getAllOrdersPage().checkFinishLoading();
             clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkOrderStateScheduleVisit(OrderState.MASTER_DISPATCHED);
+            clientPages.getOrderCardPage().checkScheduleVisitOrderState(OrderState.MASTER_DISPATCHED, OrderType.MAINTENANCE);
     }
 
 
