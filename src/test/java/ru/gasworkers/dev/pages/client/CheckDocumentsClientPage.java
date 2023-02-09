@@ -21,12 +21,11 @@ public class CheckDocumentsClientPage  extends BaseClientPage {
         CHECK_DOCUMENTS_TITLE = "Для заключения договора ТО заполните недостающие данные";
 
     SelenideElement
-        pageTitleLocator = driver.$(".h3.mb-32"),
-        pageTitlePaymentPageLocator = driver.$(".page-content .h3.mb-40"),
+        pageTitleLocator = driver.$("div p.h3").as("Заголовок страницы Проверка документов"),
         pageSubtitleLocator = driver.$(".h4.mb-32"),
-        inputPassportIssuedByFieldLocator = driver.$("input[placeholder='Кем выдан']"),
-        makeContractButton = driver.$(byTagAndText("span", "Оформить договор")),  // $("button.btn.btn-primary")
-        spinerLoaderLocator = driver.$("div.gas-loader");
+        inputPassportIssuedByFieldLocator = driver.$("input[placeholder='Кем выдан']").as("Поле Кем выдан"),
+        makeContractButton = driver.$(byTagAndText("span", "Оформить договор")).as("Кнопка Оформить договор"),
+        spinnerLoaderLocator = driver.$("div.gas-loader").as("Спинер загрузки");
 
     public CheckDocumentsClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что страница Проверка документов загружена", () -> {
@@ -39,8 +38,7 @@ public class CheckDocumentsClientPage  extends BaseClientPage {
         stepWithRole("Нажать кнопку Заключить договор", () -> {
             inputPassportIssuedByFieldLocator.shouldNot(empty);
             makeContractButton.shouldBe(visible, Duration.ofSeconds(60)).hover().click();
-            spinerLoaderLocator.shouldBe(visible, Duration.ofSeconds(60));
-            pageTitlePaymentPageLocator.shouldBe(visible, Duration.ofSeconds(60));
+            spinnerLoaderLocator.shouldBe(visible, Duration.ofSeconds(60));
         });
         return this;
     }

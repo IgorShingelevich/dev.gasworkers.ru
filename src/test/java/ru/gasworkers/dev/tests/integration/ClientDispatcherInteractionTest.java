@@ -100,7 +100,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
 
             String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                     + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-            Allure.addAttachment("RunStartTime", date);
+            Allure.addAttachment("RunStartTime: ", date);
         });
 
 
@@ -218,6 +218,29 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             dispatcherPages.getOrderCardPage().checkMasterDispatchedStatus(OrderState.MASTER_DISPATCHED);
         });
+
+        step("Мастер в Пути", () -> {
+        });
+
+        step("Мастер открывает заказ", () -> {
+        });
+
+        step("Мастер открывает объект Климента", () -> {
+        });
+
+        step("Мастер приступает к работе", () -> {
+        });
+
+        step("Мастер добавляет позицию в  таблицу Оборудования ТО", () -> {
+        });
+
+        step("Мастер подтверждает выполненную работу", () -> {
+        });
+
+
+
+
+
 
 
 

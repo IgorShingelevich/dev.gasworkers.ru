@@ -25,7 +25,7 @@ public class SignSMSClientPage extends BaseClientPage {
             SIGN_SMS_TITLE = "Подписание договора ТО ВДГО";
 
     SelenideElement
-            pageSignSMSTitleLocator = driver.$(".h3.mb-40").as("Заголовок страницы Подписание СМС"),
+            pageSignSMSTitleLocator = driver.$("div p.h3").as("Заголовок страницы Подписание СМС"),
             sendAgainButton = driver.$(".gas-sign a.link-dark-blue").as("Запросить повторно код подтверждения"),
             signButton = driver.$("button.btn.btn-primary").as("Кнопка Подписать");
 

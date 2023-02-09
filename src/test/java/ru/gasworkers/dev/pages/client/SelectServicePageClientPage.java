@@ -19,30 +19,27 @@ public class SelectServicePageClientPage extends BaseClientPage {
         header = new FocusHeaderComponent(browser);
     }
 
-
-
-
     private final String
         SELECT_SERVICE_TITLE = "Спасибо! Ваш заказ принят и обрабатывается диспетчерами";
 
 
     SelenideElement
-        titleLocator = driver.$(".col-12.col-md-6 .text-center"),
-        toOrderButtonLocator = driver.$(".fix-row.w-100.d-flex.flex-column-reverse.flex-md-row .mb-3.btn-sm.ms-md-auto.btn.btn-primary.disable-outline"),
-        backLinkLocator = driver.$(".col-12.col-md-3 .link-dark-blue.mr-32.medium"),
-        spinnerScrollbarLocator = driver.$(".scrollbar.mb-3.col-lg-5 .d-flex.justify-content-center.pb-5"),
-        firstServiceTabLocator = driver.$("[id^=company-item]"),
-        firstServiceButtonLocator = driver.$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline"),
-        servicesColumnBLockLocator = driver.$(".row.columns-list"),
-        mapContainerLocator = driver.$("[id^=yandexMap]"),
-        selectInsurancePageTitleLocator = driver.$(".page-content .h2.text-center.mb-4");
+        titleLocator = driver.$("div h4.text-center").as("Заголовок страницы Выбор СК"),
+        toOrderButtonLocator = driver.$("button.mb-3.me-sm-3 span").as("Кнопка Смотреть  заказ"),
+        backButtonLocator = driver.$(".col-12.col-md-3 .link-dark-blue.mr-32.medium").as("Кнопка Назад"),
+        spinnerScrollbarLocator = driver.$(".scrollbar.mb-3.col-lg-5 .d-flex.justify-content-center.pb-5").as("Спиннер загрузки"),
+        firstServiceTabLocator = driver.$("[id^=company-item]").as("Первая вкладка Сервисного предложения"),
+        firstServiceButtonLocator = driver.$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline").as("Кнопка Выбрать первой вкладки Сервисного предложения"),
+        servicesColumnBLockLocator = driver.$(".row.columns-list").as("Левый блок Сервисных предложений"),
+        mapContainerLocator = driver.$("[id^=yandexMap]").as("Контейнер карты"),
+        mapZoomPlusButtonLocator =  driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты");
 
     ElementsCollection
         servicesTabsCollection = driver.$$("div.col-xl-6.mb-3"),
-        reviewButtonCollection = driver.$$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline");
+        reviewButtonCollection = driver.$$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline").as("Кнопки Выбрать Сервисное предложение");
 
     public SelectServicePageClientPage backLink() {
-        backLinkLocator.click();
+        backButtonLocator.click();
         return this;
     }
 
@@ -50,6 +47,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
 //            spinnerScrollbarLocator.should(disappear);
+            titleLocator.shouldHave(text(SELECT_SERVICE_TITLE));
             firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
             driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
 //            sleep(3_000);
@@ -70,24 +68,12 @@ public class SelectServicePageClientPage extends BaseClientPage {
         return this;
     }
 
-
-
     public SelectServicePageClientPage proceedWithFirstService() {
         stepWithRole("Нажать на кнопку Выбрать Компанию ", () -> {
 //            reviewButtonCollection.first().shouldBe(visible, Duration.ofSeconds(40)).shouldHave(text("Выбрать")).click();
             reviewButtonCollection.first().shouldBe(visible, Duration.ofSeconds(40))
                     .shouldHave(text("Выбрать")).click();
-            selectInsurancePageTitleLocator.shouldBe(visible, Duration.ofSeconds(40));
         });
-
         return this;
     }
-
-    public SelectServicePageClientPage reviewSecondService() {
-        reviewButtonCollection.get(1).click();
-        selectInsurancePageTitleLocator.shouldBe(visible);
-        return this;
-    }
-
-
 }

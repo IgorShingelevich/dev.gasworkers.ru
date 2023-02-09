@@ -18,9 +18,9 @@ public class PaymentWizardClientPage  extends BaseClientPage {
         PAYMENT_WIZARD_TITLE = "Система быстрых платежей";
 
     SelenideElement
-        pageTitleLocator = driver.$("span.part"),
-        pageSignSMSTitleLocator = driver.$(".h3.mb-40"),
-        getQRCode = driver.$(".form_button.default");
+        pageTitleLocator = driver.$("div h3 span").as("Заголовок страницы Система быстрых платежей"),
+        totalAmountLocator = driver.$("dl.field-totalAmount").as("Сумма к оплате"),
+        getQRCode = driver.$(".form_button.default").as("Кнопка Получить QR-код");
 
 
     public PaymentWizardClientPage checkFinishLoading() {
@@ -34,8 +34,8 @@ public class PaymentWizardClientPage  extends BaseClientPage {
 
     public PaymentWizardClientPage getQRCode() {
         stepWithRole("Нажать кнопку Получить QR-код", () -> {
+            totalAmountLocator.shouldBe(visible, Duration.ofSeconds(20));
             getQRCode.click();
-            pageSignSMSTitleLocator.shouldBe(visible, Duration.ofSeconds(20));
         });
         return this;
     }

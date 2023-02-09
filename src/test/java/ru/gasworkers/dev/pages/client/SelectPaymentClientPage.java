@@ -23,15 +23,15 @@ public class SelectPaymentClientPage  extends BaseClientPage {
             SELECT_PAYMENT_TITLE = "Заключение договора ТО и оплата выезда мастера";
 
     SelenideElement
-        pageTitleLocator = driver.$(".page-content .h3.mb-40"),
-        secondBankComissionsTextLocator = driver.$$("div.logo-wrap__text").get(1),
+        pageTitleLocator = driver.$("div p.h3").as("Заголовок страницы Выбор Способа Оплаты"),
+        secondBankComissionsTextLocator = driver.$$("div.logo-wrap__text").get(1).as("Текст второго банковского комиссионного сбора"),
         pagePaymentWizardTitleLocator = driver.$("span.part"),
-        payImgLocator = driver.$("div.logo-wrap img"),
-        docAgreementMaintenanceLocator = driver.$("div .link-pdf");
+        payImgLocator = driver.$("div.logo-wrap img").as("Картинка оплаты"),
+        docAgreementMaintenanceLocator = driver.$("div .link-pdf").as("Ссылка на договор ТО");
 
     ElementsCollection
-        paymentMethodsCollection = driver.$$("div.logo-wrap"),
-        bankComissionCollection = driver.$$("div.logo-wrap__text");
+        paymentMethodsCollection = driver.$$("div.logo-wrap").as("Способы оплаты"),
+        bankComissionCollection = driver.$$("div.logo-wrap__text").as("Комиссионные сборы банков");
 
     public SelectPaymentClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что страница Выбор Способа Оплаты загружена", () -> {
