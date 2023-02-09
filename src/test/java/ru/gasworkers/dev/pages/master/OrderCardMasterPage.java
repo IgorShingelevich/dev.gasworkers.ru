@@ -5,7 +5,12 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.client.OrderState;
 import ru.gasworkers.dev.model.client.OrderType;
+import ru.gasworkers.dev.pages.components.masterComponent.FillUpCheckListBannerComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavCheckListTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavCommonTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavDocsTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavInfoMasterTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarMasterComponent;
 
 import java.time.Duration;
@@ -20,12 +25,21 @@ public class OrderCardMasterPage extends BaseMasterPage {
 
     public final SidebarMasterComponent sidebar;
     public final ActionsBlockMasterComponent actionsBlock;
+    private final NavCommonTabOrderCardComponent navCommonTab;
+    private final NavCheckListTabOrderCardComponent navCheckListTab;
+    private final NavInfoMasterTabOrderCardComponent navInfoMasterTab;
+    private final NavDocsTabOrderCardComponent navDocsTab;
+
 
 
     public  OrderCardMasterPage(RoleBrowser browser) {
         super(browser);
         sidebar = new SidebarMasterComponent(browser);
         actionsBlock = new ActionsBlockMasterComponent(browser);
+        navCommonTab = new NavCommonTabOrderCardComponent(browser);
+        navCheckListTab = new NavCheckListTabOrderCardComponent(browser);
+        navInfoMasterTab = new NavInfoMasterTabOrderCardComponent(browser);
+        navDocsTab = new NavDocsTabOrderCardComponent(browser);
     }
 
     private final String PAGE_TITLE = "Заказ";
@@ -53,7 +67,7 @@ public class OrderCardMasterPage extends BaseMasterPage {
         stepWithRole("Убедиться, что Карточка Заказа: " + orderCardNumber + " загружена", () -> {
             //how to war p up the whole method in the stepWithRole?
             orderBlockLocator.shouldBe(visible);
-            System.out.println("orderCardNumber: " + orderCardNumber);
+            System.out.println("master orderCardNumber: " + orderCardNumber);
         });
     }
 
@@ -81,10 +95,17 @@ public class OrderCardMasterPage extends BaseMasterPage {
     }
 
     public void checkOrderStateMasterDispatched(OrderState orderState) {
+        //TODO check current nav tab is navCommon
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Убедиться, что статус заказа является: " + orderState, () ->
                     orderStateLocator.shouldHave(text(orderState.toString()))
             );
+            stepWithRole("Убедиться, что в Карточке заказа: " + orderState + " представлен баннер Заполните чек лист", () -> {
+                navCommonTab.fillUpBanner.checkBannerDetails();
+            });
+            stepWithRole("Перейти из баннера Заполните чек лист на вкладку Чек лист", () -> {
+               navCommonTab.fillUpBanner.clickOnCheckListLink();
+            });
             stepWithRole("Убедиться, что в Карточке заказа: " + orderState + " представлена кнопка Приступить к работе", () ->
                     startWorkingButtonLocator.shouldBe(visible)
             );
@@ -107,6 +128,6 @@ public class OrderCardMasterPage extends BaseMasterPage {
         step("Убедиться, что тип заказа: " +orderType, () -> {
             orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
         });
-        System.out.println("orderType: " + orderType);
+        System.out.println("master orderType: " + orderType);
     }
 }

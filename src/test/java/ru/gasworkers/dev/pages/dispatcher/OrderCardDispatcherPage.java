@@ -6,6 +6,9 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.client.OrderState;
 import ru.gasworkers.dev.pages.components.dispatcherComponent.DatePickerOrderDispatcherComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockDispatcherComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavCommonTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavDocsTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavInfoMasterTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarDispatcherComponent;
 
 import java.time.Duration;
@@ -21,12 +24,18 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
 public final SidebarDispatcherComponent sidebar;
 public final DatePickerOrderDispatcherComponent datePicker;
     private final ActionsBlockDispatcherComponent actionBlock;
+    private final NavCommonTabOrderCardComponent navCommonTab;
+    private final NavInfoMasterTabOrderCardComponent navInfoMasterTab;
+    private final NavDocsTabOrderCardComponent navDocsTab;
 
     public OrderCardDispatcherPage(RoleBrowser browser) {
         super(browser);
         sidebar = new SidebarDispatcherComponent(browser);
         datePicker = new DatePickerOrderDispatcherComponent(browser);
         actionBlock = new ActionsBlockDispatcherComponent(browser);
+        navCommonTab = new NavCommonTabOrderCardComponent(browser);
+        navInfoMasterTab = new NavInfoMasterTabOrderCardComponent(browser);
+        navDocsTab = new NavDocsTabOrderCardComponent(browser);
     }
 
     private final String PAGE_TITLE = "Заказ";

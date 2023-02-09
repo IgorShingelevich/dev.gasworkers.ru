@@ -54,7 +54,7 @@ public class AllNewOrdersHistoryMasterPage extends BaseMasterPage {
         stepWithRole("Открыть заказ по номеру: " + orderNumber, () -> {
             orderNumberLinkCollection.findBy(text(orderNumber.toString())).click();
             orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text(orderNumber.toString()));
-            System.out.println("givenOrderNumber: " + orderNumber);
+            System.out.println("master givenOrderNumber: " + orderNumber);
         });
     }
 
@@ -62,7 +62,7 @@ public class AllNewOrdersHistoryMasterPage extends BaseMasterPage {
         stepWithRole("Открыть  заказ по индексу: "+ index + ", номер: " + orderNumberLinkCollection.get(index).getText(), () -> {
             orderNumberLinkCollection.get(index).click();
             orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10));
-            System.out.println("orderNumber:  " + orderCardTitleLocator.getText() + " index: " + index);
+            System.out.println("master orderNumber:  " + orderCardTitleLocator.getText() + " index: " + index);
         });
     }
 

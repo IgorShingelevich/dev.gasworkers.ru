@@ -5,6 +5,9 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.client.OrderState;
 import ru.gasworkers.dev.model.client.OrderType;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavCommonTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavDocsTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavInfoMasterTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
 
 import java.io.File;
@@ -22,9 +25,15 @@ import static io.qameta.allure.Allure.step;
 
 public class OrderCardClientPage extends BaseClientPage {
     public final SidebarClientComponent sidebar;
+    private final NavCommonTabOrderCardComponent navCommonTab;
+    private final NavInfoMasterTabOrderCardComponent navInfoMasterTab;
+    private final NavDocsTabOrderCardComponent navDocsTab;
     public OrderCardClientPage (RoleBrowser browser) {
         super(browser);
         sidebar = new SidebarClientComponent(browser);
+        navCommonTab = new NavCommonTabOrderCardComponent(browser);
+        navInfoMasterTab = new NavInfoMasterTabOrderCardComponent(browser);
+        navDocsTab = new NavDocsTabOrderCardComponent(browser);
     }
 
     private final String

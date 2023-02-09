@@ -219,10 +219,18 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getOrderCardPage().checkMasterDispatchedStatus(OrderState.MASTER_DISPATCHED);
         });
 
-        step("Мастер в Пути", () -> {
-        });
 
         step("Мастер открывает заказ", () -> {
+            masterPages.getHomePage().checkFinishLoading();
+            masterPages.getHomePage().popUpClose();
+            masterPages.getHomePage().sidebar.allNewOrders();
+            masterPages.getAllNewOrdersPage().checkFinishLoading();
+            masterPages.getAllNewOrdersPage().switchToTabView();
+            masterPages.getAllNewOrdersPage().openOrderByNumber(Integer.valueOf(orderNumber));
+            masterPages.getOrderCardPage().checkFinishLoading();
+            masterPages.getOrderCardPage().checkOrderStateMasterDispatched(OrderState.MASTER_DISPATCHED);
+
+
         });
 
         step("Мастер открывает объект Климента", () -> {
