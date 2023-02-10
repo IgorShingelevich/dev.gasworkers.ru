@@ -38,7 +38,7 @@ public class FillUpCheckListBannerComponent extends BaseTabOrderCardComponent {
     }
 
     public void clickOnCheckListLink() {
-        stepWithRole("Нажать на ссылку на Чек-лист", () -> {
+        stepWithRole("Нажать на ссылку на Чек-лист в Описании заказа", () -> {
             checkListLinkLocator.click();
         });
     }

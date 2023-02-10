@@ -19,7 +19,7 @@ public abstract class BasePage extends BaseComponent {
     }
     SelenideElement popUpCloseButtonLocator = driver.$(byTagAndText("span", "Прочитать все")).as("Close popup button"),
     popUpContainerLocator = driver.$(".notice-list-fixed-content.gas-scrollbar-inline").as("Pop-up container");
-    SelenideElement mainButtonLocator = driver.$("button.mb-3.btn.btn-primary").as("Main button");
+//    public SelenideElement mainButtonLocator = driver.$("button.mb-3.btn.btn-primary").as("Main button"); - how to make th button available for all pages?
 
     public void popUpClose() {
         {

@@ -2,7 +2,7 @@ package ru.gasworkers.dev.tests.dispatcher;
 
 import ru.gasworkers.dev.browser.Browser;
 import io.qameta.allure.Step;
-import ru.gasworkers.dev.model.OrderState;
+import ru.gasworkers.dev.model.OrderStatus;
 import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.tests.BaseTest;
@@ -39,13 +39,13 @@ public class DispatcherFlowTest extends BaseTest {
     @Step("Диспетчер открывает заказ в статусе: ")
     @Test
      void checkMasterDispatchedOrderStatus() {
-        step("Диспетчер открывает заказ в статусе: " + OrderState.MASTER_DISPATCHED, () -> {
+        step("Диспетчер открывает заказ в статусе: " + OrderStatus.MASTER_DISPATCHED, () -> {
             dispatcherPages.getHomePage().checkFinishLoading();
             dispatcherPages.getHomePage().switchToListView();
             dispatcherPages.getHomePage().navInProgress();
             dispatcherPages.getHomePage().openOrderByNumber("3192");
             dispatcherPages.getOrderCardPage().checkFinishLoading();
-            dispatcherPages.getOrderCardPage().checkMasterDispatchedStatus(OrderState.MASTER_DISPATCHED);
+            dispatcherPages.getOrderCardPage().checkMasterDispatchedStatus(OrderStatus.MASTER_DISPATCHED);
             dispatcherPages.getOrderCardPage().selectAnotherTime();
             dispatcherPages.getOrderCardPage().datePicker.selectNowDateAndTime();
             dispatcherPages.getOrderCardPage().selectAnotherMaster();

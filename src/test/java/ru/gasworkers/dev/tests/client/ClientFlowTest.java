@@ -4,7 +4,7 @@ import ru.gasworkers.dev.browser.Browser;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import ru.gasworkers.dev.model.client.ClientRequestType;
-import ru.gasworkers.dev.model.OrderState;
+import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.OrderType;
 import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.pages.context.ClientPages;
@@ -38,6 +38,83 @@ class ClientFlowTest extends BaseTest {
     }
 
 
+
+    @Test
+    @Feature("Кабинет клиента")
+    @Story("Смена пароля")
+    @DisplayName("Клиент изменяет свой пароль")
+    public void changePasswordClientProfilePage() {
+        clientPages.getHomePage().sidebar.profile();
+        clientPages.getProfilePage().checkFinishLoading();
+        clientPages.getProfilePage().navPassword();
+        clientPages.getProfilePage().navPasswordTab.checkFinishLoading();
+        clientPages.getProfilePage().navPasswordTab.checkInitialState();
+        clientPages.getProfilePage().navPasswordTab.generatePassword();
+    }
+
+    @Test
+    @Disabled
+    @Feature("Кабинет клиента")
+    @Story("Незаполненный ( начальное состояние) кабинет")
+    @DisplayName("Клиент наполняет свой Профиль в первый раз")
+    public void fillingUpInitialClientProfilePage() {
+        clientPages.getHomePage().sidebar.profile();
+        clientPages.getProfilePage().checkFinishLoading();
+        step("Вкладка Общие данные", () -> {
+            clientPages.getProfilePage().navCommon();
+            clientPages.getProfilePage().navCommonTab.checkFinishLoading();
+            //TODO check  fullName fill up address and passport
+        });
+        step("Вкладка Контакты", () -> {
+            clientPages.getProfilePage().navContacts();
+            clientPages.getProfilePage().navContactsTab.checkFinishLoading(client00.email, String.valueOf(client00.phoneNumber));
+            clientPages.getProfilePage().navContactsTab.checkFilledState(client00.email, String.valueOf(client00.phoneNumber));
+            //TODO password and Notifications
+        });
+    }
+
+    @Test
+    @Feature("Кабинет клиента")
+    @Story("Заполненный кабинет ")
+    @DisplayName("Выбранный клиент просматривает заполненный кабинет")
+    public void checkFilledCabinetState(){
+        clientPages.getHomePage().checkFinishLoading();
+        clientPages.getHomePage().sidebar.profile();
+        clientPages.getProfilePage().checkFinishLoading();
+        step("Вкладка Общие данные", () -> {
+            clientPages.getProfilePage().navCommon();
+            clientPages.getProfilePage().navCommonTab.checkFilledState();  // TODO implement CommonDataPickerComponent. Upload photo. check other fields info.
+        });
+        step("Вкладка Контакты", () -> {
+            clientPages.getProfilePage().navContacts();
+            clientPages.getProfilePage().navContactsTab.checkFinishLoading(client00.email, String.valueOf(client00.phoneNumber));
+            clientPages.getProfilePage().navContactsTab.checkFilledState(client00.email, String.valueOf(client00.phoneNumber));
+        });
+        //TODO password and Notifications
+    }
+
+    @Test
+    @Feature("Новый заказ ТО")
+    @Story("Создание заказа")
+    @DisplayName("Клиент создает заказ")
+    public void clientPlaceMaintenanceRequest() {
+        clientPages.getHomePage().checkFinishLoading();
+        clientPages.getHomePage().popUpClose();
+        clientPages.getHomePage().clickPlaceOrderButton();
+        clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
+        clientPages.getInfoTypeOrderPage()
+//                    .checkTitle("Заказ на ТО")
+//                    .checkStepSequence("Шаг 1 из 3")
+                .clickNextButton();
+        clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0);
+        clientPages.getSelectDateMaintenancePage().pickNowDateAM();
+        clientPages.getSelectDateMaintenancePage().submitOrder();
+        clientPages.getSelectServicePage().checkFinishLoading();
+        clientPages.getSelectServicePage().toOrderCard();
+        clientPages.getOrderCardPage().checkFinishLoading();
+        clientPages.getSelectServicePage().popUpClose();
+        clientPages.getOrderCardPage().checkNewOrderState(OrderStatus.NEW_ORDER, OrderType.MAINTENANCE);
+    }
 
     @Test
     @Feature("Новый заказ ТО")
@@ -75,113 +152,68 @@ class ClientFlowTest extends BaseTest {
     }
 
     @Test
-    @Feature("Новый заказ ТО")
-    @Story("Создание заказа")
-    @DisplayName("Клиент создает заказ")
-    public void clientPlaceMaintenanceRequest() {
-        clientPages.getHomePage().checkFinishLoading();
-        clientPages.getHomePage().popUpClose();
-        clientPages.getHomePage().clickPlaceOrderButton();
-        clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
-        clientPages.getInfoTypeOrderPage()
-//                    .checkTitle("Заказ на ТО")
-//                    .checkStepSequence("Шаг 1 из 3")
-                .clickNextButton();
-        clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0);
-        clientPages.getSelectDateMaintenancePage().pickNowDateAM();
-        clientPages.getSelectDateMaintenancePage().submitOrder();
-        clientPages.getSelectServicePage().checkFinishLoading();
-        clientPages.getSelectServicePage().toOrderCard();
-        clientPages.getOrderCardPage().checkFinishLoading();
-        clientPages.getSelectServicePage().popUpClose();
-        clientPages.getOrderCardPage().checkNewOrderState(OrderState.NEW_ORDER, OrderType.MAINTENANCE);
-
-    }
-
-    @Test
     @Feature("Кабинет клиента")
     @Story("Просмотр заказа на ТО")
-    @DisplayName("Клиент просматривает заказ в состоянии Согласование даты заказа")
+    @DisplayName("Клиент открывает заказ в состоянии Согласование даты заказа")
     public void clientCheckScheduleVisitOrderSate () {
         String checkedOrderNumber = "3532";
             clientPages.getHomePage().checkFinishLoading();
-            clientPages.getHomePage().sidebar.clickOrdersAndInvoicesDropdown();
+            clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
             clientPages.getHomePage().sidebar.allOrders();
             clientPages.getAllOrdersPage().checkFinishLoading();
             clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkScheduleVisitOrderState(OrderState.SCHEDULE_VISIT, OrderType.MAINTENANCE);
+            clientPages.getOrderCardPage().checkScheduleVisitOrderState(OrderStatus.SCHEDULE_VISIT, OrderType.MAINTENANCE);
     }
 
     @Test
     @Feature("Кабинет клиента")
     @Story("Просмотр заказа на ТО")
-    @DisplayName("Клиент просматривает заказ в состоянии Мастер в пути")
+    @DisplayName("Клиент открывает заказ в состоянии Мастер в пути")
     public void clientCheckMasterDispatchedOrderSate () {
-        String checkedOrderNumber = "3535";
-            clientPages.getHomePage().checkFinishLoading();
-            clientPages.getHomePage().sidebar.clickOrdersAndInvoicesDropdown();
-            clientPages.getHomePage().sidebar.allOrders();
-            clientPages.getAllOrdersPage().checkFinishLoading();
-            clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
-            clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkScheduleVisitOrderState(OrderState.MASTER_DISPATCHED, OrderType.MAINTENANCE);
-    }
-
-
-
-    @Test
-    @Feature("Кабинет клиента")
-    @Story("Заполненный кабинет ")
-    @DisplayName("Выбранный клиент просматривает заполненный кабинет")
-    public void checkFilledCabinetState(){
+        String checkedOrderNumber = "3675";
         clientPages.getHomePage().checkFinishLoading();
-        clientPages.getHomePage().sidebar.profile();
-        clientPages.getProfilePage().checkFinishLoading();
-        step("Вкладка Общие данные", () -> {
-            clientPages.getProfilePage().navCommon();
-            clientPages.getProfilePage().navCommonTab.checkFilledState();  // TODO implement CommonDataPickerComponent. Upload photo. check other fields info.
-        });
-        step("Вкладка Контакты", () -> {
-            clientPages.getProfilePage().navContacts();
-            clientPages.getProfilePage().navContactsTab.checkFinishLoading(client00.email, String.valueOf(client00.phoneNumber));
-            clientPages.getProfilePage().navContactsTab.checkFilledState(client00.email, String.valueOf(client00.phoneNumber));
-        });
-        //TODO password and Notifications
-    }
-
-    @Test
-    @Disabled
-    @Feature("Кабинет клиента")
-    @Story("Незаполненный ( начальное состояние) кабинет")
-    @DisplayName("Клиент наполняет свой Профиль в первый раз")
-    public void fillingUpInitialClientProfilePage() {
-        clientPages.getHomePage().sidebar.profile();
-        clientPages.getProfilePage().checkFinishLoading();
-        step("Вкладка Общие данные", () -> {
-        clientPages.getProfilePage().navCommon();
-        clientPages.getProfilePage().navCommonTab.checkFinishLoading();
-        //TODO check  fullName fill up address and passport
-        });
-        step("Вкладка Контакты", () -> {
-        clientPages.getProfilePage().navContacts();
-        clientPages.getProfilePage().navContactsTab.checkFinishLoading(client00.email, String.valueOf(client00.phoneNumber));
-        clientPages.getProfilePage().navContactsTab.checkFilledState(client00.email, String.valueOf(client00.phoneNumber));
-        //TODO password and Notifications
-        });
+        clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
+        clientPages.getHomePage().sidebar.allOrders();
+        clientPages.getAllOrdersPage().checkFinishLoading();
+        clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
+        clientPages.getOrderCardPage().checkFinishLoading();
+        clientPages.getOrderCardPage().checkScheduleVisitOrderState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
     }
 
     @Test
     @Feature("Кабинет клиента")
-    @Story("Смена пароля")
-    @DisplayName("Клиент изменяет свой пароль")
-    public void changePasswordClientProfilePage() {
-            clientPages.getHomePage().sidebar.profile();
-            clientPages.getProfilePage().checkFinishLoading();
-            clientPages.getProfilePage().navPassword();
-            clientPages.getProfilePage().navPasswordTab.checkFinishLoading();
-            clientPages.getProfilePage().navPasswordTab.checkInitialState();
-            clientPages.getProfilePage().navPasswordTab.generatePassword();
+    @Story("Просмотр заказа на ТО")
+    @DisplayName("Клиент открывает заказ ТО в статусе без Отзыва Завершен")
+    public void checkNotReviewedCompletedOrderState() {
+//        String checkedOrderNumber = "3620";
+        String checkedOrderNumber = "3674";
+        clientPages.getHomePage().checkFinishLoading();
+        clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
+        clientPages.getHomePage().sidebar.allOrders();
+        clientPages.getAllOrdersPage().checkFinishLoading();
+        clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
+        clientPages.getOrderCardPage().checkFinishLoading();
+        clientPages.getOrderCardPage().checkNotReviewedCompletedOrderState(OrderStatus.COMPLETED, OrderType.MAINTENANCE);
+//        clientPages.getOrderCardPage().navDocsTab.downloadAgreement()
+    }
+
+    @Test
+    @Feature("Кабинет клиента")
+    @Story("Просмотр заказа на ТО")
+    @DisplayName("Клиент открывает заказ в состоянии с Отзывом Завершен")
+    public void clientSubmittedReviewOrderState() {
+//        String checkedOrderNumber = "3620";
+        String checkedOrderNumber = "3674";
+        clientPages.getHomePage().checkFinishLoading();
+        clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
+        clientPages.getHomePage().sidebar.allOrders();
+        clientPages.getAllOrdersPage().checkFinishLoading();
+        clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
+        clientPages.getOrderCardPage().checkFinishLoading();
+        clientPages.getOrderCardPage().checkReviewedCompletedOrderState(OrderStatus.COMPLETED, OrderType.MAINTENANCE);
+//        clientPages.getOrderCardPage().navDocsTab.downloadAgreement()
     }
 
 }
+// TODO client submitReview

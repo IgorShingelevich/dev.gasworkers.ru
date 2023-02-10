@@ -50,15 +50,15 @@ public class AllNewOrdersHistoryMasterPage extends BaseMasterPage {
         });
     }
 
-    public void openOrderByNumber(Integer orderNumber) {
+    public void openByNumber(String orderNumber) {
         stepWithRole("Открыть заказ по номеру: " + orderNumber, () -> {
-            orderNumberLinkCollection.findBy(text(orderNumber.toString())).click();
-            orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text(orderNumber.toString()));
+            orderNumberLinkCollection.findBy(text(orderNumber)).click();
+            orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text(orderNumber));
             System.out.println("master givenOrderNumber: " + orderNumber);
         });
     }
 
-    public void openOrderByIndex(int index) {
+    public void openByIndex(int index) {
         stepWithRole("Открыть  заказ по индексу: "+ index + ", номер: " + orderNumberLinkCollection.get(index).getText(), () -> {
             orderNumberLinkCollection.get(index).click();
             orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10));

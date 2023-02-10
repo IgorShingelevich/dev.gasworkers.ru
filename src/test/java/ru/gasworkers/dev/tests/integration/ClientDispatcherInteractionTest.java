@@ -4,8 +4,8 @@ import ru.gasworkers.dev.browser.Browser;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
+import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.Role;
-import ru.gasworkers.dev.model.OrderState;
 import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.client.ClientRequestType;
 import org.junit.jupiter.api.DisplayName;
@@ -123,7 +123,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getHomePage().lastOrderProfileClientComponent.lastOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
             step("Убедиться, что статус Заказа: ", () -> {
-                clientPages.getOrderCardPage().checkNewOrderState(OrderState.NEW_ORDER, OrderType.MAINTENANCE);
+                clientPages.getOrderCardPage().checkNewOrderState(OrderStatus.NEW_ORDER, OrderType.MAINTENANCE);
             });
             clientPages.getOrderCardPage().clickOffersBlock();
             clientPages.getSelectServicePage().checkFinishLoading();
@@ -136,9 +136,9 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             //check OrderStatus NEW_TENDER
             dispatcherPages.getOrderCardPage().popUpClose();
-            dispatcherPages.getOrderCardPage().checkReviewNewTheTenderStatus(OrderState.NEW_TENDER);
+            dispatcherPages.getOrderCardPage().checkReviewNewTheTenderStatus(OrderStatus.NEW_TENDER);
             dispatcherPages.getOrderCardPage().acceptOrder();
-            dispatcherPages.getOrderCardPage().checkParticipateTheTenderStatus(OrderState.PARTICIPATE_TENDER);
+            dispatcherPages.getOrderCardPage().checkParticipateTheTenderStatus(OrderStatus.PARTICIPATE_TENDER);
             // check OrderStatus gray button- Уже участвуете
         });
 
@@ -187,7 +187,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getHomePage().popUpClose();
             clientPages.getHomePage().lastOrderProfileClientComponent.lastOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkScheduleVisitOrderState(OrderState.SCHEDULE_VISIT, OrderType.MAINTENANCE);
+            clientPages.getOrderCardPage().checkScheduleVisitOrderState(OrderStatus.SCHEDULE_VISIT, OrderType.MAINTENANCE);
         });
 
         step("Диспетчер выбирает время и назначает Мастера", () -> {
@@ -202,26 +202,27 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getHomePage().openOrderByNumber(orderNumber);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             dispatcherPages.getOrderCardPage().popUpClose();
-            dispatcherPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderState.SCHEDULE_VISIT);
+            dispatcherPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderStatus.SCHEDULE_VISIT);
             dispatcherPages.getOrderCardPage().selectTimeButton();
             dispatcherPages.getOrderCardPage().datePicker.selectNowDateAndTime();
             dispatcherPages.getOrderCardPage().selectMaster();
             dispatcherPages.getSelectMasterPage().checkFinishLoading();
             dispatcherPages.getSelectMasterPage().selectNewMasterByIndex(0);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
-            dispatcherPages.getOrderCardPage().checkMasterDispatchedStatus(OrderState.MASTER_DISPATCHED);
+            dispatcherPages.getOrderCardPage().checkMasterDispatchedStatus(OrderStatus.MASTER_DISPATCHED);
         });
 
 
         step("Мастер открывает заказ", () -> {
             masterPages.getHomePage().checkFinishLoading();
             masterPages.getHomePage().popUpClose();
+            masterPages.getHomePage().sidebar.allOrdersHistoryDropdown();
             masterPages.getHomePage().sidebar.allNewOrders();
             masterPages.getAllNewOrdersPage().checkFinishLoading();
             masterPages.getAllNewOrdersPage().switchToTabView();
-            masterPages.getAllNewOrdersPage().openOrderByNumber(Integer.valueOf(orderNumber));
+            masterPages.getAllNewOrdersPage().openByNumber(orderNumber);
             masterPages.getOrderCardPage().checkFinishLoading();
-            masterPages.getOrderCardPage().checkOrderStateMasterDispatched(OrderState.MASTER_DISPATCHED);
+            masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
 
 
         });
@@ -238,6 +239,11 @@ class ClientDispatcherInteractionTest extends BaseTest {
         step("Мастер подтверждает выполненную работу", () -> {
         });
 
+        step("Клиент оставляет отзыв", () -> {
+        });
+
+        step("Мастер оставляет отзыв", () -> {
+        });
 
 
 

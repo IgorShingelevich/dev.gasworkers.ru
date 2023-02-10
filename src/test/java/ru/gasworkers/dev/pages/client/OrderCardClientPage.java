@@ -3,8 +3,8 @@ package ru.gasworkers.dev.pages.client;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.Doc;
+import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.model.OrderState;
 import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavCommonTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavDocsTabOrderCardComponent;
@@ -13,9 +13,7 @@ import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.Sideb
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.CollectionCondition.size;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -23,9 +21,9 @@ import static io.qameta.allure.Allure.step;
 
 public class OrderCardClientPage extends BaseClientPage {
     public final SidebarClientComponent sidebar;
-    private final NavCommonTabOrderCardComponent navCommonTab;
-    private final NavInfoMasterTabOrderCardComponent navInfoMasterTab;
-    private final NavDocsTabOrderCardComponent navDocsTab;
+    public final NavCommonTabOrderCardComponent navCommonTab;
+    public final NavInfoMasterTabOrderCardComponent navInfoMasterTab;
+    public final NavDocsTabOrderCardComponent navDocsTab;
 
     public OrderCardClientPage (RoleBrowser browser) {
         super(browser);
@@ -51,8 +49,10 @@ public class OrderCardClientPage extends BaseClientPage {
         payBillButtonLocator = driver.$(byTagAndText("span", "Оплатить счет")).as("Кнопка Оплатить счет"),
         signButtonLocator = driver.$(byTagAndText("span", "Подписать")).as("Кнопка Подписать"),
         submitAgreementButtonLocator = driver.$("div a.btn-link-custom").as("Кнопка Передать договор"),
-        toHomeButtonLocator = driver.$("div button.btn.btn-primary span").as("Кнопка На главную"),
+        mainButtonLocator = driver.$("div button.btn.btn-primary").as("Главная кнопка"),
+        submitReviewButtonLocator = mainButtonLocator.$(byTagAndText("span", "Оставить отзыв")).as("Кнопка Оставить отзыв"),
         offersBlockLocator = driver.$("div.map-sticky__header--offers").as("Блок с предложениями");
+    // TODO upd buttons to implement mainButtonLocator and be able to check enabled/disabled state
 
     ElementsCollection
         navButtonsCollection = driver.$$("div.navigation-block li").as("Навигационные кнопки"),
@@ -91,16 +91,16 @@ public class OrderCardClientPage extends BaseClientPage {
         return this;
     }
 
-    public void checkNewOrderState(OrderState orderState, OrderType orderType) {
+    public void checkNewOrderState(OrderStatus orderStatus, OrderType orderType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                stepWithRole("Убедиться, что заказа статус заказа является: " + orderState, () -> {
-                    navCommonTab.orderState.currentState(orderState);
+                stepWithRole("Убедиться, что заказа статус заказа является: " + orderStatus, () -> {
+                    navCommonTab.orderState.currentState(orderStatus);
                 });
                 step("Убедиться, что тип заказа: " +orderType, () -> {
                     orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
                 });
-                stepWithRole("Убедиться, что  в Карточке заказа: " + orderState + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
+                stepWithRole("Убедиться, что  в Карточке заказа: " + orderStatus + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
                     toMapButtonLocator.shouldBe(visible);
                     cancelOrderButtonLocator.shouldBe(visible);
 //TODO buttons for this order state
@@ -116,24 +116,24 @@ public class OrderCardClientPage extends BaseClientPage {
                     navDocsTab.noDocs();
                 });
             });
-            System.out.println("client orderType: " + orderType + "client orderState: " + orderState);
+            System.out.println("client orderType: " + orderType + ", client orderStatus: " + orderStatus);
         });
     }
 
-    public void checkScheduleVisitOrderState(OrderState orderState, OrderType orderType) {
+    public void checkScheduleVisitOrderState(OrderStatus orderStatus, OrderType orderType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                stepWithRole("Убедиться, что заказа статус заказа является: " + orderState, () -> {
-                    navCommonTab.orderState.currentState(orderState);
+                stepWithRole("Убедиться, что заказа статус заказа является: " + orderStatus, () -> {
+                    navCommonTab.orderState.currentState(orderStatus);
                 });
                 stepWithRole("Убедиться, что тип заказа: " + orderType, () -> {
                     orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
                 });
-                stepWithRole("Убедиться, что в Карточке заказа: " + orderState + " представлена кнопка Отменить заказ ", () -> {
+                stepWithRole("Убедиться, что в Карточке заказа: " + orderStatus + " представлена кнопка Отменить заказ ", () -> {
                     toMapButtonLocator.shouldNotBe(visible);
                     cancelOrderButtonLocator.shouldBe(visible);
                     submitAgreementButtonLocator.shouldNotBe(visible);
-                    toHomeButtonLocator.shouldNotBe(visible);
+                    mainButtonLocator.shouldNotBe(visible);
 //TODO buttons for this order state
                 });
             });
@@ -143,7 +143,7 @@ public class OrderCardClientPage extends BaseClientPage {
             stepWithRole("Вкладка Документы", () -> {
                 navDocs();
                 stepWithRole("Убедиться, что  в Карточке заказа в документах присутствует Договор ТО и Страховой полис " /*+ docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText()*/ , () -> {
-                 navDocsTab.presentedDocs(Doc.valueOf("AGREEMENT"), Doc.valueOf("INSURANCE"));
+                 navDocsTab.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
                 });
                 stepWithRole("TODO Скачать документы: Договор ТО и Страховой полис " , () -> {
                     //TODO get href from element
@@ -152,7 +152,7 @@ public class OrderCardClientPage extends BaseClientPage {
                 });
             });
                 navCommon();
-            System.out.println("client orderType: " + orderType + "client orderState: " + orderState);
+            System.out.println("client orderType: " + orderType + ", client orderStatus: " + orderStatus);
         });
     }
 
@@ -164,28 +164,28 @@ public class OrderCardClientPage extends BaseClientPage {
         return driver.$("h1.h3.mb-2").getText();
     }
 
-    public OrderCardClientPage checkOrderStatusComplete(OrderState orderState, OrderType orderType) {
+    public OrderCardClientPage checkNotReviewedCompletedOrderState(OrderStatus orderStatus, OrderType orderType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
                 stepWithRole("Убедиться что баннер с информацией о завершении заказа присутствует", () -> {
                     completeOrderInfoBannerLocator.shouldHave(text(COMPLETE_ORDER_INFO));
                 });
-                stepWithRole("Убедиться, что статус заказа  заказа является: " + orderState, () -> {
-                    navCommonTab.orderState.currentState(orderState);
+                stepWithRole("Убедиться, что статус заказа  заказа является: " + orderStatus, () -> {
+                    navCommonTab.orderState.currentState(orderStatus);
                 });
                 stepWithRole("Убедиться, что тип заказа: " +orderType, () -> {
                     orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
                 });
-                stepWithRole("Убедиться, что в Карточке заказа: " + orderState + " представлена кнопка Передать договор с описанием и кнопка На главную", () -> {
-                submitAgreementButtonLocator.shouldHave(text("Передать договор"));
+                stepWithRole("Убедиться, что в Карточке заказа: " + orderStatus + " представлена кнопка Передать договор с описанием и кнопка На главную", () -> {
+                submitAgreementButtonLocator.shouldHave(text("Передать договор")).shouldBe(disabled);
                 submitAgreementSubtitleLocator.shouldHave(text(SUBMIT_AGREEMENT_SUBTITLE));
-                toHomeButtonLocator.shouldHave(text("На главную"));
+                submitReviewButtonLocator.shouldBe(visible);
+//                toHomeButtonLocator.shouldHave(text("На главную")); - -after review
                 toMapButtonLocator.shouldNotBe(visible);
                 cancelOrderButtonLocator.shouldNotBe(visible);
                 payBillButtonLocator.shouldNotBe(visible);
                 signButtonLocator.shouldNotBe(visible);
 //TODO buttons for this order state
-
                 });
             });
             stepWithRole("Вкладка Документы", () -> {
@@ -201,7 +201,49 @@ public class OrderCardClientPage extends BaseClientPage {
             });
                 navCommon();
     });
-        System.out.println("client orderType: " + orderType + "client orderState: " + orderState);
+        System.out.println("client orderType: " + orderType + "client orderStatus: " + orderStatus);
+        return this;
+    }
+
+    public OrderCardClientPage checkReviewedCompletedOrderState(OrderStatus orderStatus, OrderType orderType) {
+        stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
+            stepWithRole("Вкладка Описание заказа", () -> {
+                stepWithRole("Убедиться что баннер с информацией о завершении заказа присутствует", () -> {
+                    completeOrderInfoBannerLocator.shouldHave(text(COMPLETE_ORDER_INFO));
+                });
+                stepWithRole("Убедиться, что статус заказа  заказа является: " + orderStatus, () -> {
+                    navCommonTab.orderState.currentState(orderStatus);
+                });
+                stepWithRole("Убедиться, что тип заказа: " +orderType, () -> {
+                    orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
+                });
+                stepWithRole("Убедиться, что в Карточке заказа: " + orderStatus + " представлена кнопка Передать договор с описанием и кнопка На главную", () -> {
+                    submitAgreementButtonLocator.shouldBe(enabled).shouldHave(text("Передать договор"));
+                    submitAgreementSubtitleLocator.shouldHave(text(SUBMIT_AGREEMENT_SUBTITLE));
+                    submitReviewButtonLocator.shouldBe(visible);
+                    mainButtonLocator.shouldHave(text("На главную")).as("На главную");
+                    toMapButtonLocator.shouldNotBe(visible);
+                    cancelOrderButtonLocator.shouldNotBe(visible);
+                    payBillButtonLocator.shouldNotBe(visible);
+                    signButtonLocator.shouldNotBe(visible);
+//TODO buttons for this order state
+
+                });
+            });
+            stepWithRole("Вкладка Документы", () -> {
+                navDocs();
+                stepWithRole("Убедиться, что  в Карточке заказа в документах присутствует: " + Doc.AGREEMENT + ",  " + Doc.COMPLETION_ACT + " и " + Doc.INSURANCE, () -> {
+                    navDocsTab.presentedDocs(Doc.valueOf("AGREEMENT"), Doc.valueOf("COMPLETION_ACT"), Doc.valueOf("INSURANCE"));
+                });
+                stepWithRole("TODO Скачать документы: Договор ТО и Страховой полис " , () -> {
+                    //TODO get href from element
+//                downloadAgreement();
+//                downloadInsurance();
+                });
+            });
+            navCommon();
+        });
+        System.out.println("client orderType: " + orderType + "client orderStatus: " + orderStatus);
         return this;
     }
 

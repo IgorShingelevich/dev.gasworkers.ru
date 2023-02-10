@@ -2,7 +2,6 @@ package ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent;
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.BaseComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -24,7 +23,7 @@ public class SidebarClientComponent extends BaseSidebarComponent {
 
 
 
-    public SidebarClientComponent clickOrdersAndInvoicesDropdown() {
+    public SidebarClientComponent allOrdersAndInvoicesDropdown() {
         stepWithRole("Открыть выпадающий список Заказы/Счета", () -> {
             ordersAndInvoicesDropdownLocator.click();
         });
@@ -47,7 +46,7 @@ public class SidebarClientComponent extends BaseSidebarComponent {
 
     public SidebarClientComponent allOrders() {
         stepWithRole("Перейти на страницу Список заказов", () -> {
-            clickOrdersAndInvoicesDropdown();
+            allOrdersAndInvoicesDropdown();
             ordersListLinkLocator.shouldBe(visible);
             ordersListLinkLocator.click();
         });
@@ -56,7 +55,7 @@ public class SidebarClientComponent extends BaseSidebarComponent {
 
     public SidebarClientComponent allInvoices() {
         stepWithRole("Перейти на страницу Список счетов", () -> {
-            clickOrdersAndInvoicesDropdown();
+            allOrdersAndInvoicesDropdown();
             invoicesListLinkLocator.shouldBe(visible);
             invoicesListLinkLocator.click();
         });

@@ -3,7 +3,7 @@ package ru.gasworkers.dev.model;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum OrderState {
+public enum OrderStatus {
     NEW_TENDER("Тендер", "dispatcher"),
     PARTICIPATE_TENDER("Тендер", "dispatcher"),
     NEW_ORDER("Новый заказ", "dispatcher, client"),
@@ -15,7 +15,7 @@ public enum OrderState {
     START_MAINTENANCE_WORK("Приезд мастера и проведение ТО", "master"),
     PAY_MAINTENANCE_WORK("Оплата ТО", "client"),
     SIGN_COMPLETION_ACT("Подписание Акта выполненных работ", "client"),
-    COMPLETE("Завершен", "all");
+    COMPLETED("Завершен", "all");
 
     private final String description;
 

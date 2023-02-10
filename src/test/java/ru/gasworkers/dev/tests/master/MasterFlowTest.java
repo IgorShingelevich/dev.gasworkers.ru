@@ -5,7 +5,7 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.browser.Browser;
-import ru.gasworkers.dev.model.OrderState;
+import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.master.ReadyForVideoState;
 import ru.gasworkers.dev.pages.context.MasterPages;
@@ -30,35 +30,10 @@ public class MasterFlowTest extends BaseTest {
             79917644241L
     );
 
-
-
     @BeforeEach
     void masterLogin() {
         masterPages.getLoginPage().open();
         masterPages.getLoginPage().login(master.email, master.password);
-    }
-
-
-    @Owner("Igor Shingelevich")
-    @Feature("Кабинет мастера")
-    @Story("Просмотр заказа")
-    @Tags({@Tag("regression"), @Tag("master"), @Tag("cabinet"), @Tag("positive")})
-    @DisplayName("Мастер открывает заказ в статусе Мастер в пути")
-    @Test
-    void checkMasterDispatchedOrderStatus(){
-        int orderNumber = 3215;
-        OrderType orderType = OrderType.MAINTENANCE;
-
-        masterPages.getHomePage().checkFinishLoading();
-        masterPages.getHomePage().sidebar.checkReadyForVideoState(ReadyForVideoState.READY);
-        masterPages.getHomePage().sidebar.allNewOrders();
-        masterPages.getAllNewOrdersPage().checkFinishLoading();
-        masterPages.getAllNewOrdersPage().switchToListView();
-        masterPages.getAllNewOrdersPage().openOrderByNumber(orderNumber);
-        masterPages.getOrderCardPage().checkFinishLoading();
-         masterPages.getOrderCardPage().checkOrderStateMasterDispatched(OrderState.MASTER_DISPATCHED);
-         masterPages.getOrderCardPage().checkOrderType(orderType);
-        // TODO checkFinishLoading - expand  docs check, order properties check, price check
     }
 
     @Owner("Igor Shingelevich")
@@ -85,8 +60,45 @@ public class MasterFlowTest extends BaseTest {
 //        TODO masterPages.getProfilePage().checkInitialState();
     }
 
+    @Test
+    @Feature("Кабинет мастера")
+    @Story("Просмотр заказа на ТО")
+    @Tags({@Tag("regression"), @Tag("master"), @Tag("cabinet"), @Tag("positive")})
+    @DisplayName("Мастер открывает заказ в состоянии Мастер в пути")
+    public void clientCheckMasterDispatchedOrderSate () {
+        String checkedOrderNumber = "3675";
+        masterPages.getHomePage().checkFinishLoading();
+        masterPages.getHomePage().sidebar.checkReadyForVideoState(ReadyForVideoState.READY);
+        masterPages.getHomePage().sidebar.allOrdersHistoryDropdown();
+        masterPages.getHomePage().sidebar.allNewOrders();
+        masterPages.getAllNewOrdersPage().checkFinishLoading();
+        masterPages.getAllNewOrdersPage().switchToListView();
+        masterPages.getAllNewOrdersPage().openByNumber(checkedOrderNumber);
+        masterPages.getOrderCardPage().checkFinishLoading();
+        masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+        // TODO checkFinishLoading - expand  docs check, order properties check, price check
 
+    }
 
-
+    @Owner("Igor Shingelevich")
+    @Feature("Кабинет мастера")
+    @Story("Просмотр заказа ТО")
+    @Tags({@Tag("regression"), @Tag("master"), @Tag("cabinet"), @Tag("positive")})
+    @DisplayName("Мастер открывает заказ в состоянии без Отзыва Завершен")
+    @Test
+    void checkNotReviewedCompletedOrderState(){
+        String orderNumber = "3620";
+        masterPages.getHomePage().checkFinishLoading();
+        masterPages.getHomePage().sidebar.checkReadyForVideoState(ReadyForVideoState.READY);
+        masterPages.getHomePage().sidebar.allNewOrders();
+        masterPages.getAllNewOrdersPage().checkFinishLoading();
+        masterPages.getAllNewOrdersPage().switchToListView();
+        masterPages.getAllNewOrdersPage().openByNumber(orderNumber);
+        masterPages.getOrderCardPage().checkFinishLoading();
+        masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+        masterPages.getOrderCardPage().checkOrderType(OrderType.MAINTENANCE);
+        // TODO checkFinishLoading - expand  docs check, order properties check, price check
+    }
 
 }
+// TODO submitReview flow

@@ -70,7 +70,7 @@ public LandingPage open() {
                 videoButtonLocator.shouldBe(visible);
             });
             stepWithRole("Убедиться, что виджет Живой чат отображается", () -> {
-                driver.$("#jivo-iframe-container").shouldBe(exist, Duration.ofSeconds(10));
+                driver.$("#jivo-iframe-container").shouldBe(exist, Duration.ofSeconds(15));
             });
 
             // TODO add the rest  components checks
