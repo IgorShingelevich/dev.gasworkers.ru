@@ -174,7 +174,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getPaymentWizardPage().getQRCode();
             clientPages.getSignSMSPage().checkFinishLoading();
             clientPages.getSignSMSPage().stepper.checkFinishLoading();
-            sleep(1_000);
+            sleep(500);
 
 //            String sms = clientSmsApi1.waitReceiveNewSms().getText(); // for real number
 //            String code = sms.substring(0, 6); // for real number
@@ -227,7 +227,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
 
         });
 
-        step("Мастер открывает объект Климента", () -> {
+        step("Мастер открывает объект Клиента", () -> {
         });
 
         step("Мастер приступает к работе", () -> {

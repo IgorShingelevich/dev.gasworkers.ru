@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.pages.client;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.Doc;
@@ -18,6 +19,7 @@ import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static io.qameta.allure.Allure.step;
+import static org.assertj.core.error.ShouldHave.shouldHave;
 
 public class OrderCardClientPage extends BaseClientPage {
     public final SidebarClientComponent sidebar;
@@ -177,7 +179,8 @@ public class OrderCardClientPage extends BaseClientPage {
                     orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
                 });
                 stepWithRole("Убедиться, что в Карточке заказа: " + orderStatus + " представлена кнопка Передать договор с описанием и кнопка На главную", () -> {
-                submitAgreementButtonLocator.shouldHave(text("Передать договор")).shouldBe(disabled);
+//                submitAgreementButtonLocator.shouldHave(text("Передать договор")).shouldHave(Condition.cssClass("disabled");
+                submitAgreementButtonLocator.shouldHave(Condition.cssClass("disabled")).shouldHave(text("Передать договор"));
                 submitAgreementSubtitleLocator.shouldHave(text(SUBMIT_AGREEMENT_SUBTITLE));
                 submitReviewButtonLocator.shouldBe(visible);
 //                toHomeButtonLocator.shouldHave(text("На главную")); - -after review

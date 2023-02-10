@@ -156,7 +156,7 @@ class ClientFlowTest extends BaseTest {
     @Story("Просмотр заказа на ТО")
     @DisplayName("Клиент открывает заказ в состоянии Согласование даты заказа")
     public void clientCheckScheduleVisitOrderSate () {
-        String checkedOrderNumber = "3532";
+        String checkedOrderNumber = "3659";
             clientPages.getHomePage().checkFinishLoading();
             clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
             clientPages.getHomePage().sidebar.allOrders();
@@ -172,6 +172,7 @@ class ClientFlowTest extends BaseTest {
     @DisplayName("Клиент открывает заказ в состоянии Мастер в пути")
     public void clientCheckMasterDispatchedOrderSate () {
         String checkedOrderNumber = "3675";
+        clientPages.getHomePage().popUpClose();
         clientPages.getHomePage().checkFinishLoading();
         clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
         clientPages.getHomePage().sidebar.allOrders();
@@ -186,8 +187,8 @@ class ClientFlowTest extends BaseTest {
     @Story("Просмотр заказа на ТО")
     @DisplayName("Клиент открывает заказ ТО в статусе без Отзыва Завершен")
     public void checkNotReviewedCompletedOrderState() {
-//        String checkedOrderNumber = "3620";
         String checkedOrderNumber = "3674";
+        clientPages.getHomePage().popUpClose();
         clientPages.getHomePage().checkFinishLoading();
         clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
         clientPages.getHomePage().sidebar.allOrders();

@@ -27,7 +27,7 @@ public abstract class BasePage extends BaseComponent {
                 try {
                     if (popUpCloseButtonLocator.exists()) {
                         popUpCloseButtonLocator.shouldBe(visible);
-                        Selenide.sleep(10000);
+                        Selenide.sleep(1000);
                         popUpCloseButtonLocator.click();
                         popUpContainerLocator.shouldNotBe(visible, Duration.ofSeconds(20));
                     } else {
