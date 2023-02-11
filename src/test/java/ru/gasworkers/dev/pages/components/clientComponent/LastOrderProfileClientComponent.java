@@ -59,13 +59,17 @@ public class LastOrderProfileClientComponent extends BaseComponent {
         return this;
     }
 
-
     public LastOrderProfileClientComponent open() {
         lastOrderCardActionButtonLocator.shouldBe(visible).click();
         lastOrderCardOrderActionOpenLinkLocator.shouldBe(visible).click();
         return this;
     }
 
+    public void checkFinishLoading() {
+        stepWithRole("Убедиться, что секция Карточка последнего заказа отображается", () -> {
+            lastOrderCardLocator.shouldBe(visible);
+        });
+    }
 }
 
 

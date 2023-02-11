@@ -99,12 +99,8 @@ public class OrderCardMasterPage extends BaseMasterPage {
         //TODO check current nav tab is navCommon
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                stepWithRole("Убедиться, что статус заказа  заказа является: " + orderStatus, () -> {
                     navCommonTab.orderState.currentState(orderStatus);
-                });
-                stepWithRole("Убедиться, что в Карточке заказа: " + orderStatus + " представлен баннер Заполните чек лист", () -> {
                     navCommonTab.fillUpBanner.checkBannerDetails();
-                });
                 stepWithRole("Убедиться, что тип заказа: " + orderType, () -> {
                     orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
                 });

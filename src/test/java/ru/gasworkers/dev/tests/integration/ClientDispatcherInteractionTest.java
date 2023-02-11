@@ -38,6 +38,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             "Игорь",
             "Сергеевич",
             "Шингелевич",
+            "Зарегистрирован с 15 ноября 2022 года",
             "shingelevich@gmail.com",
             "123456",
             null,
@@ -47,6 +48,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             "ДиспетчерСССР1",
             "ДиспетчеровичСССР1",
             "ДиспетчеровСССР1",
+            "не указано для данной роли",
             "test_gw_dispatcher_sssr1@rambler.ru",
             "123456",
             null,
@@ -56,6 +58,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             "Мастер1СССР",
             "Мастерович1СССР",
             "Мастеров1СССР",
+            "Зарегистрирован с 11 января 2023 года",
             " test_gas_master_sssr1@rambler.ru",
             "123456",
             null,
@@ -79,7 +82,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
     void integrationDispatcherAcceptClientMaintenanceRequest() {
         step("авторизация Клиента", () -> {
             clientPages.getLoginPage().open().login(client.email, client.password);
-            clientPages.getHomePage().checkFinishLoading();
+            clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
 
         });
 
@@ -118,13 +121,11 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getOrderCardPage().checkFinishLoading();
             String currentOrderNumber = clientPages.getOrderCardPage().getOrderNumber();
             clientPages.getOrderCardPage().sidebar.home();
-            clientPages.getHomePage().checkFinishLoading();
+            clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
             clientPages.getHomePage().popUpClose();
-            clientPages.getHomePage().lastOrderProfileClientComponent.lastOrderCard();
+            clientPages.getHomePage().lastOrderComponent.lastOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
-            step("Убедиться, что статус Заказа: ", () -> {
-                clientPages.getOrderCardPage().checkNewOrderState(OrderStatus.NEW_ORDER, OrderType.MAINTENANCE);
-            });
+            clientPages.getOrderCardPage().checkNewOrderState(OrderStatus.NEW_ORDER, OrderType.MAINTENANCE);
             clientPages.getOrderCardPage().clickOffersBlock();
             clientPages.getSelectServicePage().checkFinishLoading();
             return currentOrderNumber;
@@ -174,7 +175,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getPaymentWizardPage().getQRCode();
             clientPages.getSignSMSPage().checkFinishLoading();
             clientPages.getSignSMSPage().stepper.checkFinishLoading();
-            sleep(500);
+            sleep(300);
 
 //            String sms = clientSmsApi1.waitReceiveNewSms().getText(); // for real number
 //            String code = sms.substring(0, 6); // for real number
@@ -183,9 +184,9 @@ class ClientDispatcherInteractionTest extends BaseTest {
 //            clientPages.getSignSMSPage().sign();
             clientPages.getSignSuccessPage().checkFinishLoading();
             clientPages.getSignSuccessPage().toHomePage();
-            clientPages.getHomePage().checkFinishLoading();
+            clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
             clientPages.getHomePage().popUpClose();
-            clientPages.getHomePage().lastOrderProfileClientComponent.lastOrderCard();
+            clientPages.getHomePage().lastOrderComponent.lastOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
             clientPages.getOrderCardPage().checkScheduleVisitOrderState(OrderStatus.SCHEDULE_VISIT, OrderType.MAINTENANCE);
         });

@@ -24,6 +24,7 @@ class ClientFlowTest extends BaseTest {
             "Игорь",
             "Сергеевич",
             "Шингелевич",
+            "Зарегистрирован с 15 ноября 2022 года",
             "shingelevich@gmail.com",
             "123456",
             null,
@@ -78,7 +79,7 @@ class ClientFlowTest extends BaseTest {
     @Story("Заполненный кабинет ")
     @DisplayName("Выбранный клиент просматривает заполненный кабинет")
     public void checkFilledCabinetState(){
-        clientPages.getHomePage().checkFinishLoading();
+        clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
         clientPages.getHomePage().sidebar.profile();
         clientPages.getProfilePage().checkFinishLoading();
         step("Вкладка Общие данные", () -> {
@@ -98,7 +99,7 @@ class ClientFlowTest extends BaseTest {
     @Story("Создание заказа")
     @DisplayName("Клиент создает заказ")
     public void clientPlaceMaintenanceRequest() {
-        clientPages.getHomePage().checkFinishLoading();
+        clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
         clientPages.getHomePage().popUpClose();
         clientPages.getHomePage().clickPlaceOrderButton();
         clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
@@ -121,7 +122,7 @@ class ClientFlowTest extends BaseTest {
     @Story("Создание заказа и его отмена")
     @DisplayName("Клиент создает заказ и отменяет его")
     public void clientPlaceMaintenanceRequestAndCancel() {
-        clientPages.getHomePage().checkFinishLoading();
+        clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
         clientPages.getHomePage().popUpClose();
         clientPages.getHomePage().clickPlaceOrderButton();
         clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
@@ -148,7 +149,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getOrderCardPage().cancelOrder();
         clientPages.getCancelOrderPage().checkFinishLoading();
         clientPages.getCancelOrderPage().yesButton();
-        clientPages.getHomePage().checkFinishLoading();
+        clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
     }
 
     @Test
@@ -157,7 +158,7 @@ class ClientFlowTest extends BaseTest {
     @DisplayName("Клиент открывает заказ в состоянии Согласование даты заказа")
     public void clientCheckScheduleVisitOrderSate () {
         String checkedOrderNumber = "3659";
-            clientPages.getHomePage().checkFinishLoading();
+            clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
             clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
             clientPages.getHomePage().sidebar.allOrders();
             clientPages.getAllOrdersPage().checkFinishLoading();
@@ -173,7 +174,7 @@ class ClientFlowTest extends BaseTest {
     public void clientCheckMasterDispatchedOrderSate () {
         String checkedOrderNumber = "3675";
         clientPages.getHomePage().popUpClose();
-        clientPages.getHomePage().checkFinishLoading();
+        clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
         clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
         clientPages.getHomePage().sidebar.allOrders();
         clientPages.getAllOrdersPage().checkFinishLoading();
@@ -189,7 +190,7 @@ class ClientFlowTest extends BaseTest {
     public void checkNotReviewedCompletedOrderState() {
         String checkedOrderNumber = "3674";
         clientPages.getHomePage().popUpClose();
-        clientPages.getHomePage().checkFinishLoading();
+        clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
         clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
         clientPages.getHomePage().sidebar.allOrders();
         clientPages.getAllOrdersPage().checkFinishLoading();
@@ -206,7 +207,7 @@ class ClientFlowTest extends BaseTest {
     public void clientSubmittedReviewOrderState() {
 //        String checkedOrderNumber = "3620";
         String checkedOrderNumber = "3674";
-        clientPages.getHomePage().checkFinishLoading();
+        clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
         clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
         clientPages.getHomePage().sidebar.allOrders();
         clientPages.getAllOrdersPage().checkFinishLoading();

@@ -87,7 +87,8 @@ public class RegistrationTest extends BaseTest {
             clientPages.getHomePage().clickLaterInitialModal();
         });
         step("Кабинет клиента - начальное состояние", () -> {
-            clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
+            clientPages.getHomePage().personSummaryComponent.checkFinishLoading(randomClient.getFullName(), randomClient.getSinceDate());
+            clientPages.getHomePage().personSummaryComponent.checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
             clientPages.getHomePage().sidebar.allObjects();
             clientPages.getAllObjectsPage().checkInitialState();
             clientPages.getAllObjectsPage().sidebar.allOrders();
@@ -175,7 +176,8 @@ public class RegistrationTest extends BaseTest {
             clientPages.getHomePage().clickLaterInitialModal();
         });
         step("Кабинет клиента - начальное состояние", () -> {
-            clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
+            clientPages.getHomePage().personSummaryComponent.checkFinishLoading(randomClient.getFullName(), randomClient.getSinceDate());
+            clientPages.getHomePage().personSummaryComponent.checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
             clientPages.getHomePage().sidebar.allObjects();
             clientPages.getAllObjectsPage().checkInitialState();
             clientPages.getAllObjectsPage().sidebar.allOrders();
@@ -260,7 +262,8 @@ public class RegistrationTest extends BaseTest {
             clientPages.getHomePage().clickLaterInitialModal();
         });
         step("Кабинет клиента - начальное состояние", () -> {
-            clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
+            clientPages.getHomePage().personSummaryComponent.checkFinishLoading(randomClient.getFullName(), randomClient.getSinceDate());
+            clientPages.getHomePage().personSummaryComponent.checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
             clientPages.getHomePage().sidebar.allObjects();
             clientPages.getAllObjectsPage().checkInitialState();
             clientPages.getAllObjectsPage().sidebar.allOrders();

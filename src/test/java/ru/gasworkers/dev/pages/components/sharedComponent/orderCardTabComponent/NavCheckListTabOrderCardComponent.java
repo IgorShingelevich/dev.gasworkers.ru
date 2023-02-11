@@ -16,9 +16,7 @@ public class NavCheckListTabOrderCardComponent extends BaseTabOrderCardComponent
             checklistRadioButtonItemCollection = driver.$$("div.item-flex .row").as("Радио кнопки чек листа");
 
     public void checkFinishLoading(OrderStatus orderStatus) {
-        stepWithRole("Убедиться, что статус заказа  заказа является: " + orderStatus, () -> {
             orderState.currentState(orderStatus);
-        });
         stepWithRole("Убедиться, что чек лист загрузился", () -> {
             checklistRadioButtonItemCollection.should(CollectionCondition.sizeGreaterThan(0));
         });

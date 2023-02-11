@@ -24,6 +24,7 @@ public final class LoginPage extends BasePage {
     public LoginPage open() {
         stepWithRole("Открыть страницу авторизации", () -> {
             driver.open("/login");
+//          TODO   driver.zoom(0.5);
             stepWithRole("Виджет Jivo должен быть загружен", () -> {
                 try {
                     if (jivoWidgetLocator.exists()) {

@@ -24,6 +24,7 @@ public class MasterFlowTest extends BaseTest {
             "Мастер1СССР",
             "Мастерович1СССР",
             "Мастеров1СССР",
+            "Зарегистрирован с 11 января 2023 года",
             " test_gas_master_sssr1@rambler.ru",
             "123456",
             null,

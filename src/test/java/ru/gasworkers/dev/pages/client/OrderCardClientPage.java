@@ -96,9 +96,7 @@ public class OrderCardClientPage extends BaseClientPage {
     public void checkNewOrderState(OrderStatus orderStatus, OrderType orderType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                stepWithRole("Убедиться, что заказа статус заказа является: " + orderStatus, () -> {
                     navCommonTab.orderState.currentState(orderStatus);
-                });
                 step("Убедиться, что тип заказа: " +orderType, () -> {
                     orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
                 });
@@ -113,10 +111,8 @@ public class OrderCardClientPage extends BaseClientPage {
                 //TODO: add steps for this tab
             });
             stepWithRole("Вкладка Документы", () -> {
-                stepWithRole("Убедиться, что  в Карточке заказа документы отсутствуют  " , () -> {
-                    navDocs();
-                    navDocsTab.noDocs();
-                });
+                navDocs();
+                navDocsTab.noDocs();
             });
             System.out.println("client orderType: " + orderType + ", client orderStatus: " + orderStatus);
         });
@@ -125,9 +121,7 @@ public class OrderCardClientPage extends BaseClientPage {
     public void checkScheduleVisitOrderState(OrderStatus orderStatus, OrderType orderType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                stepWithRole("Убедиться, что заказа статус заказа является: " + orderStatus, () -> {
                     navCommonTab.orderState.currentState(orderStatus);
-                });
                 stepWithRole("Убедиться, что тип заказа: " + orderType, () -> {
                     orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
                 });

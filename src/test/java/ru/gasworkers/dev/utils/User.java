@@ -2,13 +2,15 @@ package ru.gasworkers.dev.utils;
 
 public class User {
 
-    public String name,
-            patronymic,
-            surname,
-            fullName,
-            email,
-            password,
-            address;
+    public String
+        name,
+        patronymic,
+        surname,
+        fullName,
+        sinceDate,
+        email,
+        password,
+        address;
 
     public Integer firstSmsCode,
             secondSmsCode,
@@ -18,11 +20,12 @@ public class User {
 
     //make a builder
 
-    public User(String name, String patronymic, String surname, String email, String password, String address, Long phoneNumber) {
+    public User(String name, String patronymic, String surname, String sinceDate, String email, String password, String address, Long phoneNumber) {
         this.name = name;
         this.patronymic = patronymic;
         this.surname = surname;
         this.fullName = surname + " " + name + " " + patronymic;
+        this.sinceDate = sinceDate;
         this.email = email;
         this.password = password;
         this.address = address;
