@@ -30,7 +30,7 @@ public class NavDocsTabOrderCardComponent extends BaseTabOrderCardComponent {
         docsDownloadButtonCollection = driver.$$(".link-pdf").as("Кнопки скачать документы");
 
     public void checkFinishLoading(OrderStatus orderStatus) {
-        orderState.currentState(orderStatus);
+        orderState.currentStatus(orderStatus);
     }
 
     public void noDocs() {

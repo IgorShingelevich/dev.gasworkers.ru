@@ -114,7 +114,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getSelectServicePage().toOrderCard();
         clientPages.getOrderCardPage().checkFinishLoading();
         clientPages.getSelectServicePage().popUpClose();
-        clientPages.getOrderCardPage().checkNewOrderState(OrderStatus.NEW_ORDER, OrderType.MAINTENANCE);
+        clientPages.getOrderCardPage().checkPublishedState(OrderStatus.NEW_ORDER, OrderType.MAINTENANCE);
     }
 
     @Test

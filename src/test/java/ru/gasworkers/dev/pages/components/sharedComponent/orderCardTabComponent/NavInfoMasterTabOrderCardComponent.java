@@ -12,6 +12,6 @@ public class NavInfoMasterTabOrderCardComponent extends BaseTabOrderCardComponen
     }
 
     public void checkFinishLoading(OrderStatus orderStatus) {
-        orderState.currentState(orderStatus);
+        orderState.currentStatus(orderStatus);
     }
 }

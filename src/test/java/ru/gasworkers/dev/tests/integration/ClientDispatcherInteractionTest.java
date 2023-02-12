@@ -125,7 +125,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getHomePage().popUpClose();
             clientPages.getHomePage().lastOrderComponent.lastOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkNewOrderState(OrderStatus.NEW_ORDER, OrderType.MAINTENANCE);
+            clientPages.getOrderCardPage().checkPublishedState(OrderStatus.PUBLISHED, OrderType.MAINTENANCE);
             clientPages.getOrderCardPage().clickOffersBlock();
             clientPages.getSelectServicePage().checkFinishLoading();
             return currentOrderNumber;
@@ -137,9 +137,9 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             //check OrderStatus NEW_TENDER
             dispatcherPages.getOrderCardPage().popUpClose();
-            dispatcherPages.getOrderCardPage().checkReviewNewTheTenderStatus(OrderStatus.NEW_TENDER);
+            dispatcherPages.getOrderCardPage().checkNewTenderState(OrderStatus.NEW_TENDER, OrderType.MAINTENANCE);
             dispatcherPages.getOrderCardPage().acceptOrder();
-            dispatcherPages.getOrderCardPage().checkParticipateTheTenderStatus(OrderStatus.PARTICIPATE_TENDER);
+            dispatcherPages.getOrderCardPage().checkParticipateTenderState(OrderStatus.PARTICIPATE_TENDER, OrderType.MAINTENANCE);
             // check OrderStatus gray button- Уже участвуете
         });
 
@@ -175,7 +175,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getPaymentWizardPage().getQRCode();
             clientPages.getSignSMSPage().checkFinishLoading();
             clientPages.getSignSMSPage().stepper.checkFinishLoading();
-            sleep(300);
+            sleep(600);
 
 //            String sms = clientSmsApi1.waitReceiveNewSms().getText(); // for real number
 //            String code = sms.substring(0, 6); // for real number
@@ -203,14 +203,14 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getHomePage().openOrderByNumber(orderNumber);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             dispatcherPages.getOrderCardPage().popUpClose();
-            dispatcherPages.getOrderCardPage().checkOrderStatusScheduleVisit(OrderStatus.SCHEDULE_VISIT);
+            dispatcherPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_VISIT, OrderType.MAINTENANCE);
             dispatcherPages.getOrderCardPage().selectTimeButton();
             dispatcherPages.getOrderCardPage().datePicker.selectNowDateAndTime();
             dispatcherPages.getOrderCardPage().selectMaster();
             dispatcherPages.getSelectMasterPage().checkFinishLoading();
             dispatcherPages.getSelectMasterPage().selectNewMasterByIndex(0);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
-            dispatcherPages.getOrderCardPage().checkMasterDispatchedStatus(OrderStatus.MASTER_DISPATCHED);
+            dispatcherPages.getOrderCardPage().checkMasterDispatchedState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
         });
 
 

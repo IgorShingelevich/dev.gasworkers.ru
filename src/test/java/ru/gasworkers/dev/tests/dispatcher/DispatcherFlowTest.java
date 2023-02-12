@@ -4,6 +4,7 @@ import ru.gasworkers.dev.browser.Browser;
 import io.qameta.allure.Step;
 import ru.gasworkers.dev.model.OrderStatus;
 import org.junit.jupiter.api.*;
+import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.tests.BaseTest;
 
@@ -45,7 +46,7 @@ public class DispatcherFlowTest extends BaseTest {
             dispatcherPages.getHomePage().navInProgress();
             dispatcherPages.getHomePage().openOrderByNumber("3192");
             dispatcherPages.getOrderCardPage().checkFinishLoading();
-            dispatcherPages.getOrderCardPage().checkMasterDispatchedStatus(OrderStatus.MASTER_DISPATCHED);
+            dispatcherPages.getOrderCardPage().checkMasterDispatchedState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
             dispatcherPages.getOrderCardPage().selectAnotherTime();
             dispatcherPages.getOrderCardPage().datePicker.selectNowDateAndTime();
             dispatcherPages.getOrderCardPage().selectAnotherMaster();

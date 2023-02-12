@@ -19,7 +19,6 @@ import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static io.qameta.allure.Allure.step;
-import static org.assertj.core.error.ShouldHave.shouldHave;
 
 public class OrderCardClientPage extends BaseClientPage {
     public final SidebarClientComponent sidebar;
@@ -93,13 +92,11 @@ public class OrderCardClientPage extends BaseClientPage {
         return this;
     }
 
-    public void checkNewOrderState(OrderStatus orderStatus, OrderType orderType) {
+    public void checkPublishedState(OrderStatus orderStatus, OrderType orderType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                    navCommonTab.orderState.currentState(orderStatus);
-                step("Убедиться, что тип заказа: " +orderType, () -> {
-                    orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
-                });
+                navCommonTab.orderStatus.currentStatus(orderStatus);
+                navCommonTab.orderDetails.currentType(orderType);
                 stepWithRole("Убедиться, что  в Карточке заказа: " + orderStatus + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
                     toMapButtonLocator.shouldBe(visible);
                     cancelOrderButtonLocator.shouldBe(visible);
@@ -121,10 +118,8 @@ public class OrderCardClientPage extends BaseClientPage {
     public void checkScheduleVisitOrderState(OrderStatus orderStatus, OrderType orderType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                    navCommonTab.orderState.currentState(orderStatus);
-                stepWithRole("Убедиться, что тип заказа: " + orderType, () -> {
-                    orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
-                });
+                    navCommonTab.orderStatus.currentStatus(orderStatus);
+                    navCommonTab.orderDetails.currentType(orderType);
                 stepWithRole("Убедиться, что в Карточке заказа: " + orderStatus + " представлена кнопка Отменить заказ ", () -> {
                     toMapButtonLocator.shouldNotBe(visible);
                     cancelOrderButtonLocator.shouldBe(visible);
@@ -166,12 +161,8 @@ public class OrderCardClientPage extends BaseClientPage {
                 stepWithRole("Убедиться что баннер с информацией о завершении заказа присутствует", () -> {
                     completeOrderInfoBannerLocator.shouldHave(text(COMPLETE_ORDER_INFO));
                 });
-                stepWithRole("Убедиться, что статус заказа  заказа является: " + orderStatus, () -> {
-                    navCommonTab.orderState.currentState(orderStatus);
-                });
-                stepWithRole("Убедиться, что тип заказа: " +orderType, () -> {
-                    orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
-                });
+                navCommonTab.orderStatus.currentStatus(orderStatus);
+                navCommonTab.orderDetails.currentType(orderType);
                 stepWithRole("Убедиться, что в Карточке заказа: " + orderStatus + " представлена кнопка Передать договор с описанием и кнопка На главную", () -> {
 //                submitAgreementButtonLocator.shouldHave(text("Передать договор")).shouldHave(Condition.cssClass("disabled");
                 submitAgreementButtonLocator.shouldHave(Condition.cssClass("disabled")).shouldHave(text("Передать договор"));
@@ -208,12 +199,8 @@ public class OrderCardClientPage extends BaseClientPage {
                 stepWithRole("Убедиться что баннер с информацией о завершении заказа присутствует", () -> {
                     completeOrderInfoBannerLocator.shouldHave(text(COMPLETE_ORDER_INFO));
                 });
-                stepWithRole("Убедиться, что статус заказа  заказа является: " + orderStatus, () -> {
-                    navCommonTab.orderState.currentState(orderStatus);
-                });
-                stepWithRole("Убедиться, что тип заказа: " +orderType, () -> {
-                    orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
-                });
+                navCommonTab.orderStatus.currentStatus(orderStatus);
+                navCommonTab.orderDetails.currentType(orderType);
                 stepWithRole("Убедиться, что в Карточке заказа: " + orderStatus + " представлена кнопка Передать договор с описанием и кнопка На главную", () -> {
                     submitAgreementButtonLocator.shouldBe(enabled).shouldHave(text("Передать договор"));
                     submitAgreementSubtitleLocator.shouldHave(text(SUBMIT_AGREEMENT_SUBTITLE));

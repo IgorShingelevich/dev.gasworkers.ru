@@ -55,6 +55,7 @@ def selenideVersion = '6.11.1',
 
 
 dependencies {
+    implementation'com.codeborne:selenide-proxy:6.11.2'
 
     testImplementation(
             "com.ibm.icu:icu4j:$icu4j",

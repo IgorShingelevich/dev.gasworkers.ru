@@ -97,7 +97,6 @@ public class MasterFlowTest extends BaseTest {
         masterPages.getAllNewOrdersPage().openByNumber(orderNumber);
         masterPages.getOrderCardPage().checkFinishLoading();
         masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
-        masterPages.getOrderCardPage().checkOrderType(OrderType.MAINTENANCE);
         // TODO checkFinishLoading - expand  docs check, order properties check, price check
     }
 

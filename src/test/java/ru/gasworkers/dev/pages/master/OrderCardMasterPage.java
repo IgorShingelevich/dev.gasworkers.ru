@@ -99,11 +99,9 @@ public class OrderCardMasterPage extends BaseMasterPage {
         //TODO check current nav tab is navCommon
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                    navCommonTab.orderState.currentState(orderStatus);
-                    navCommonTab.fillUpBanner.checkBannerDetails();
-                stepWithRole("Убедиться, что тип заказа: " + orderType, () -> {
-                    orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
-                });
+                navCommonTab.fillUpBanner.checkBannerDetails();
+                navCommonTab.orderStatus.currentStatus(orderStatus);
+                navCommonTab.orderDetails.currentType(orderType);
                 stepWithRole("Убедиться, что  представлены кнопки  Редактировать объект/оборудование, кнопка Приступить к работе и кнопка Заказ на ремонт", () -> {
                     startWorkingButtonLocator.shouldBe(visible);
                     editObjectButtonLocator.shouldBe(visible);
@@ -144,10 +142,4 @@ public class OrderCardMasterPage extends BaseMasterPage {
         });
     }
 
-    public void checkOrderType(OrderType orderType) {
-        step("Убедиться, что тип заказа: " +orderType, () -> {
-            orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
-        });
-        System.out.println("master orderType: " + orderType);
-    }
 }

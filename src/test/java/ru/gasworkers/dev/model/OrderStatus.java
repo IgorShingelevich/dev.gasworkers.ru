@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum OrderStatus {
+    PUBLISHED("Новый заказ", "client"),
     NEW_TENDER("Тендер", "dispatcher"),
     PARTICIPATE_TENDER("Тендер", "dispatcher"),
     NEW_ORDER("Новый заказ", "dispatcher, client"),
