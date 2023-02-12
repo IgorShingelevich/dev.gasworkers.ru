@@ -64,17 +64,6 @@ class ClientDispatcherInteractionTest extends BaseTest {
             null,
             79917644241L);
 
-
-   /* String emailDispatcher = "test_gw_dispatcher_sssr1@rambler.ru",
-        passwordDispatcher = "123456";
-
-    String emailMaster = "test_gas_master1@rambler.ru",
-        passwordMaster = "123456";*/
-
-
-//    String currentOrderNumber = OrderCardClientPage.getTitleNumber();
-
-
     @Test
     @Feature("Интерграция ролей")
     @Story("Интерграция Путь ТО")
@@ -83,7 +72,6 @@ class ClientDispatcherInteractionTest extends BaseTest {
         step("авторизация Клиента", () -> {
             clientPages.getLoginPage().open().login(client.email, client.password);
             clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
-
         });
 
         step("авторизация Диспетчера", () -> {
@@ -100,7 +88,6 @@ class ClientDispatcherInteractionTest extends BaseTest {
             Allure.addAttachment("Client creds", client.fullName + ": " + client.email + "/" + client.password);
             Allure.addAttachment("Dispatcher creds", dispatcher.fullName + ": " + dispatcher.email + "/" + dispatcher.password);
             Allure.addAttachment("Master creds", master.fullName + ": " + master.email + "/" + master.password);
-
             String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                     + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
             Allure.addAttachment("RunStartTime: ", date);
@@ -126,6 +113,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getHomePage().lastOrderComponent.lastOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
             clientPages.getOrderCardPage().checkPublishedState(OrderStatus.PUBLISHED, OrderType.MAINTENANCE);
+            //check notification - orderPublished
             clientPages.getOrderCardPage().clickOffersBlock();
             clientPages.getSelectServicePage().checkFinishLoading();
             return currentOrderNumber;
@@ -135,16 +123,14 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getHomePage().switchToListView();
             dispatcherPages.getHomePage().openOrderByNumber(orderNumber);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
-            //check OrderStatus NEW_TENDER
             dispatcherPages.getOrderCardPage().popUpClose();
             dispatcherPages.getOrderCardPage().checkNewTenderState(OrderStatus.NEW_TENDER, OrderType.MAINTENANCE);
             dispatcherPages.getOrderCardPage().acceptOrder();
             dispatcherPages.getOrderCardPage().checkParticipateTenderState(OrderStatus.PARTICIPATE_TENDER, OrderType.MAINTENANCE);
-            // check OrderStatus gray button- Уже участвуете
         });
 
         step("Клиент принимает предложение Диспетчера", () -> {
-            //start from home page - need OrderNumber
+            //check notification - ServiceReady
             clientPages.getSelectServicePage().waitForResponses();
             //check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
             clientPages.getSelectServicePage().toOrderCard();
@@ -163,7 +149,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             //set w Insurance
             clientPages.getSelectInsurancePage().next();
             clientPages.getCheckDocumentsPage().checkFinishLoading();
-//            driver.back();  // not working
+//            driver.back();
             // check that Filial is not empty or set the Filial if it is empty
             // check that Address fnd Passport is not empty or set the Address and Passport if it is empty
 //            SmsApi clientSmsApi1 = SmsApi.instance(Role.CLIENT); // for real number
@@ -174,8 +160,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getPaymentWizardPage().checkFinishLoading();
             clientPages.getPaymentWizardPage().getQRCode();
             clientPages.getSignSMSPage().checkFinishLoading();
-            clientPages.getSignSMSPage().stepper.checkFinishLoading();
-            sleep(600);
+            sleep(600);  //without  this cannot paste the code
 
 //            String sms = clientSmsApi1.waitReceiveNewSms().getText(); // for real number
 //            String code = sms.substring(0, 6); // for real number
@@ -213,7 +198,6 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getOrderCardPage().checkMasterDispatchedState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
         });
 
-
         step("Мастер открывает заказ", () -> {
             masterPages.getHomePage().checkFinishLoading();
             masterPages.getHomePage().popUpClose();
@@ -246,15 +230,6 @@ class ClientDispatcherInteractionTest extends BaseTest {
         step("Мастер оставляет отзыв", () -> {
         });
 
-
-
-
-
-
-
-
-
-//        sleep(5_000);
     }
 
 }

@@ -22,12 +22,12 @@ import static io.qameta.allure.Allure.step;
 
 public class OrderCardDispatcherPage extends BaseDispatcherPage {
 
-public final SidebarDispatcherComponent sidebar;
-public final DatePickerOrderDispatcherComponent datePicker;
-    private final ActionsBlockDispatcherComponent actionBlock;
-    private final NavCommonTabOrderCardComponent navCommonTab;
-    private final NavInfoMasterTabOrderCardComponent navInfoMasterTab;
-    private final NavDocsTabOrderCardComponent navDocsTab;
+    public final SidebarDispatcherComponent sidebar;
+    public final DatePickerOrderDispatcherComponent datePicker;
+    public final ActionsBlockDispatcherComponent actionBlock;
+    public final NavCommonTabOrderCardComponent navCommonTab;
+    public final NavInfoMasterTabOrderCardComponent navInfoMasterTab;
+    public final NavDocsTabOrderCardComponent navDocsTab;
 
     public OrderCardDispatcherPage(RoleBrowser browser) {
         super(browser);
@@ -42,44 +42,35 @@ public final DatePickerOrderDispatcherComponent datePicker;
     private final String PAGE_TITLE = "Заказ";
 
     ElementsCollection
-            navButtonsCollection = driver.$$("div.navigation-block ul li");
+        navButtonsCollection = driver.$$("div.navigation-block ul li");
 
     SelenideElement
-    pageTitleLocator = driver.$(".page-title .h3.mb-2").as("Заголовок страницы"),
-    orderDescriptionButtonLocator = navButtonsCollection.get(0).as("Описание заказа"),
-    orderInfoButtonLocator = navButtonsCollection.get(1).as("Информация по работам"),
-    orderDocumentsButtonLocator = navButtonsCollection.get(2).as("Документы"),
-    orderBlockLocator = driver.$(".page-content #order").as("Блок заказа"),
-    orderStatusLocator = driver.$(".item-flex p.text").as("Статус заказа"),
-    acceptRequestButtonLocator = driver.$(byTagAndText("span", "Принять заказ")).as("Принять заказ"),
-    declineRequestButtonLocator = driver.$(byTagAndText("span", "Отказаться")).as("Отказаться"),
-    selectTimeButtonLocator = driver.$(byTagAndText("span", "Назначить время")).as("Назначить время"),
-    selectAnotherTimeButtonLocator = driver.$(byTagAndText("span", "Назначить новое время")).as("Назначить новое время"),
-    selectMasterButtonLocator = driver.$(byTagAndText("span", "Выбрать мастера")).as("Выбрать мастера"),
-    selectAnotherMasterButtonLocator = driver.$(byTagAndText("span", "Назначить другого мастера")).as("Назначить другого мастера"),
-    cancelButtonLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Отменить заказ"),
-    alreadyAcceptedButtonLocator = driver.$(".global-btn-wrapper.justify-content-end").as("Уже принят'"),
-    cancelOrderLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Отменить заказ");
+        pageTitleLocator = driver.$(".page-title .h3.mb-2").as("Заголовок страницы"),
+        orderDescriptionButtonLocator = navButtonsCollection.get(0).as("Описание заказа"),
+        orderInfoButtonLocator = navButtonsCollection.get(1).as("Информация по работам"),
+        orderDocumentsButtonLocator = navButtonsCollection.get(2).as("Документы"),
+        orderBlockLocator = driver.$(".page-content #order").as("Блок заказа"),
+        orderStatusLocator = driver.$(".item-flex p.text").as("Статус заказа"),
+        mainButtonLocator = driver.$("button.btn.btn-primary").as("Основная кнопка"),
+        acceptRequestButtonLocator = driver.$(byTagAndText("span", "Принять заказ")).as("Принять заказ"),
+        declineRequestButtonLocator = driver.$(byTagAndText("span", "Отказаться")).as("Отказаться"),
+        selectTimeButtonLocator = driver.$(byTagAndText("span", "Назначить время")).as("Назначить время"),
+        selectAnotherTimeButtonLocator = driver.$(byTagAndText("span", "Назначить новое время")).as("Назначить новое время"),
+        selectMasterButtonLocator = driver.$(byTagAndText("span", "Выбрать мастера")).as("Выбрать мастера"),
+        selectAnotherMasterButtonLocator = driver.$(byTagAndText("span", "Назначить другого мастера")).as("Назначить другого мастера"),
+        cancelButtonLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Отменить заказ"),
+        alreadyAcceptedButtonLocator = mainButtonLocator.$(byTagAndText("span", "Уже участвуете")).as("Уже участвуете"),
+        cancelOrderLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Отменить заказ");
 
 
     public void checkFinishLoading() {
         pageTitleLocator.shouldBe(visible, Duration.ofSeconds(40)).shouldHave(text(PAGE_TITLE));
         String orderCardNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
         stepWithRole("Убедиться, что Карточка Заказа: " + orderCardNumber + " загружена", () -> {
-            //how to war p up the whole method in the stepWithRole?
             orderBlockLocator.shouldBe(visible);
-            System.out.println("orderCardNumber: " + orderCardNumber);
+            System.out.println("dispatcher orderCardNumber: " + orderCardNumber);
         });
 
-    }
-
-    public OrderCardDispatcherPage acceptOrder() {
-        String factualOrderNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
-        stepWithRole("Принять заказ: " + factualOrderNumber , () -> {
-            acceptRequestButtonLocator.scrollTo().click();
-        });
-
-        return this;
     }
 
     public void checkNewTenderState(OrderStatus orderStatus, OrderType orderType) {
@@ -88,14 +79,27 @@ public final DatePickerOrderDispatcherComponent datePicker;
                 navCommonTab.orderStatus.currentStatus(orderStatus);
                 navCommonTab.orderDetails.currentType(orderType);
                 stepWithRole("Убедиться, что в Карточке заказа  представлена кнопка Принять Заказ и Отказаться ", () -> {
-                    alreadyAcceptedButtonLocator.as("Уже участвуете").should(appear, Duration.ofSeconds(40));
                     acceptRequestButtonLocator.scrollTo().shouldBe(visible);
                     declineRequestButtonLocator.shouldBe(visible);
+                    alreadyAcceptedButtonLocator.shouldNotBe(visible);
                 });
         });
-            //TODO - check price, docs, buttons, info
         });
-        System.out.println("orderStatus: " + orderStatus);
+        //TODO - check price, docs, buttons, info
+        System.out.println("dispatcher orderStatus: " + orderStatus);
+    }
+
+    public OrderCardDispatcherPage acceptOrder() {
+        String factualOrderNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
+        stepWithRole("Принять заказ: " + factualOrderNumber , () -> {
+            acceptRequestButtonLocator.scrollTo().click();
+            stepWithRole("Убедиться, что в Карточке заказа  представлена неактивная кнопка Уже участвуете ", () -> {
+                alreadyAcceptedButtonLocator.shouldBe(visible);
+                acceptRequestButtonLocator.shouldNotBe(visible);
+                declineRequestButtonLocator.shouldNotBe(visible);
+            });
+        });
+        return this;
     }
 
     public void checkParticipateTenderState(OrderStatus orderStatus, OrderType orderType) {
@@ -103,29 +107,31 @@ public final DatePickerOrderDispatcherComponent datePicker;
             stepWithRole("Вкладка Описание заказа", () -> {
                 navCommonTab.orderStatus.currentStatus(orderStatus);
                 navCommonTab.orderDetails.currentType(orderType);
-//TODO buttons for this order state
-                stepWithRole("Убедиться, что в Карточке заказа  представлена неактивная серая кнопка Уже участвуете ", () -> {
-                    alreadyAcceptedButtonLocator.as("Уже участвуете").should(appear, Duration.ofSeconds(40));
+                stepWithRole("Убедиться, что в Карточке заказа  представлена неактивная  кнопка Уже участвуете ", () -> {
+                    alreadyAcceptedButtonLocator.shouldBe(visible);
                     acceptRequestButtonLocator.shouldNot(visible);
                     declineRequestButtonLocator.shouldNot(visible);
                 });
             });
-            //TODO - check price, docs, buttons, info
         });
-        System.out.println("orderStatus: " + orderStatus);
+        //TODO - check price, docs, buttons, info
+        System.out.println("dispatcher orderStatus: " + orderStatus);
     }
 
 
     public void checkScheduleVisitState(OrderStatus orderStatus, OrderType orderType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
-            navCommonTab.orderStatus.currentStatus(orderStatus);
-            stepWithRole("Убедиться, что  в Карточке заказа представлена кнопка Назначить время и Отменить заказ ", () -> {
-                selectTimeButtonLocator.shouldBe(visible);
-                cancelButtonLocator.shouldBe(visible);
-            });
-            System.out.println("orderStatus: " + orderStatus);
-            //TODO - check price, docs, buttons, info
+            stepWithRole("Вкладка Описание заказа", () -> {
+                navCommonTab.orderStatus.currentStatus(orderStatus);
+                navCommonTab.orderDetails.currentType(orderType);
+                stepWithRole("Убедиться, что  в Карточке заказа представлена кнопка Назначить время и Отменить заказ ", () -> {
+                    selectTimeButtonLocator.shouldBe(visible);
+                    cancelButtonLocator.shouldBe(visible);
+                });
+             });
         });
+        //TODO - check price, docs, buttons, info
+        System.out.println("dispatcher orderStatus: " + orderStatus);
     }
 
     public void checkMasterDispatchedState(OrderStatus orderStatus, OrderType orderType) {
@@ -136,11 +142,11 @@ public final DatePickerOrderDispatcherComponent datePicker;
                 stepWithRole("Убедиться, что  в Карточке заказа представлена кнопка Назначить Другого Мастера и Назанчить Новое Время ", () -> {
                     selectAnotherTimeButtonLocator.as("Назначить Новое Время").shouldBe(visible, Duration.ofSeconds(10));
                     selectAnotherMasterButtonLocator.as("Назначить Другого Мастера").shouldBe(visible, Duration.ofSeconds(10));
-                    //TODO - check price, docs, buttons, info
                 });
             });
         });
-        System.out.println("orderStatus: " + orderStatus);
+        //TODO - check price, docs, buttons, info
+        System.out.println("dispatcher orderStatus: " + orderStatus);
     }
 
     public OrderCardDispatcherPage selectMaster() {

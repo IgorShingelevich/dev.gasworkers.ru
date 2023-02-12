@@ -7,11 +7,11 @@ public enum Doc {
     AGREEMENT("Договор ТО"),
     COMPLETION_ACT("Акт выполненных работ"),
     INSURANCE("Страховой полис");
-    private final String description;
+    private final String title;
 
     @Override
     public String toString() {
-        return description;
+        return title;
     }
 
 }
