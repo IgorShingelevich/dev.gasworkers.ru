@@ -30,6 +30,10 @@ public final class DriverManager {
     public void zoom(double factor) {
         step(roleBrowser.getRole() + ": zoom", () ->
                 roleBrowser.getDriver().zoom(factor));
+//            executeJavaScript("document.body.style.zoom='50%'");
+//            executeJavaScript("window.devicePixelRatio = 0.5");
+//            executeJavaScript("window.resizeBy(50, 50)");
+//            executeJavaScript("window.resizeTo(50, 50)");
     }
 
 }

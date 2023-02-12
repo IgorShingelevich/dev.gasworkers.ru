@@ -15,6 +15,5 @@ public @interface Browser {
     Role role();
     String browserSize() default "1000x1000";
     String browserPosition() default "0x0";
-//    String zoom() default "0.6";
 
 }

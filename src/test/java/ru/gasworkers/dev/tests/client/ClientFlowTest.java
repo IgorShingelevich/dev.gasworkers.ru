@@ -38,8 +38,6 @@ class ClientFlowTest extends BaseTest {
         clientPages.getLoginPage().login(client00.email, client00.password);
     }
 
-
-
     @Test
     @Feature("Кабинет клиента")
     @Story("Смена пароля")
@@ -164,7 +162,7 @@ class ClientFlowTest extends BaseTest {
             clientPages.getAllOrdersPage().checkFinishLoading();
             clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkScheduleVisitOrderState(OrderStatus.SCHEDULE_VISIT, OrderType.MAINTENANCE);
+            clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_VISIT, OrderType.MAINTENANCE);
     }
 
     @Test
@@ -172,7 +170,7 @@ class ClientFlowTest extends BaseTest {
     @Story("Просмотр заказа на ТО")
     @DisplayName("Клиент открывает заказ в состоянии Мастер в пути")
     public void clientCheckMasterDispatchedOrderSate () {
-        String checkedOrderNumber = "3675";
+        String checkedOrderNumber = "3695";
         clientPages.getHomePage().popUpClose();
         clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
         clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
@@ -180,7 +178,28 @@ class ClientFlowTest extends BaseTest {
         clientPages.getAllOrdersPage().checkFinishLoading();
         clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
         clientPages.getOrderCardPage().checkFinishLoading();
-        clientPages.getOrderCardPage().checkScheduleVisitOrderState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+        clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+    }
+
+    @Test
+    @Feature("Кабинет клиента")
+    @Story("Просмотр заказа на ТО")
+    @DisplayName("Клиент открывает заказ в состоянии Мастер в пути  и скачивает документы")
+    public void clientDownloadDocsMasterDispatchedOrderSate () throws Exception {
+        String checkedOrderNumber = "3695";
+        clientPages.getHomePage().popUpClose();
+        clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
+        clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
+        clientPages.getHomePage().sidebar.allOrders();
+        clientPages.getAllOrdersPage().checkFinishLoading();
+        clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
+        clientPages.getOrderCardPage().checkFinishLoading();
+        clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+        clientPages.getOrderCardPage().navDocs();
+        clientPages.getOrderCardPage().docsTab.downloadAgreement();
+        clientPages.getOrderCardPage().docsTab.downloadAgreement();
+        clientPages.getOrderCardPage().docsTab.downloadInsurance();
+
     }
 
     @Test

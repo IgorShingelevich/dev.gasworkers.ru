@@ -45,35 +45,39 @@ public class NavDocsTabOrderCardComponent extends BaseTabOrderCardComponent {
                 switch (doc) {
                     case AGREEMENT:
                         docsTitleCollection.findBy(text("Договор ТО")).shouldBe(visible);
-//                        docsDownloadButtonCollection.get(0).shouldBe(visible);
                         break;
                     case COMPLETION_ACT:
                         docsTitleCollection.findBy(text("Акт выполненных работ")).shouldBe(visible);
-//                        docsDownloadButtonCollection.get(1).shouldBe(visible);
                         break;
                     case INSURANCE:
                         docsTitleCollection.findBy(text("Страховой полис")).shouldBe(visible);
-//                        docsDownloadButtonCollection.get(2).shouldBe(visible);
                         break;
                 }
             }
+            System.out.println("Документы: " + docs + " присутствуют");
         });
     }
 
     public NavDocsTabOrderCardComponent downloadAgreement()  throws Exception {
-        File agreement = docsTitleCollection.findBy(text("Договор ТО")).download();
-        InputStream is = new FileInputStream(agreement);
+        stepWithRole("Скачать договор ТО", () -> {
+            File agreement = docsTitleCollection.findBy(text("Договор ТО")).download(1000L);
+            InputStream is = new FileInputStream(agreement);
+        });
         return this;
     }
     public NavDocsTabOrderCardComponent downloadCompletionAct() throws Exception {
-        File completionAct = docsTitleCollection.findBy(text("Акт выполненных работ")).download();
-        InputStream is = new FileInputStream(completionAct);
+        stepWithRole("Скачать акт выполненных работ", () -> {
+            File completionAct = docsTitleCollection.findBy(text("Акт выполненных работ")).download(1000L);
+            InputStream is = new FileInputStream(completionAct);
+        });
         return this;
     }
 
     public NavDocsTabOrderCardComponent downloadInsurance() throws Exception {
-        File insurance = docsTitleCollection.findBy(text("Страховой полис")).download();
-        InputStream is = new FileInputStream(insurance);
+        stepWithRole("Скачать страховой полис", () -> {
+            File insurance = docsTitleCollection.findBy(text("Страховой полис")).download(1000L);
+            InputStream is = new FileInputStream(insurance);
+        });
         return this;
     }
 

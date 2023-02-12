@@ -11,6 +11,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public final class LoginPage extends BasePage {
 
@@ -24,7 +25,6 @@ public final class LoginPage extends BasePage {
     public LoginPage open() {
         stepWithRole("Открыть страницу авторизации", () -> {
             driver.open("/login");
-//          TODO   driver.zoom(0.5);
             stepWithRole("Виджет Jivo должен быть загружен", () -> {
                 try {
                     if (jivoWidgetLocator.exists()) {
@@ -40,28 +40,26 @@ public final class LoginPage extends BasePage {
 //                jivoWidgetLocator.shouldBe(visible, Duration.ofSeconds(10)).as("Виджет JivoSite");
             });
         });
-
         return this;
     }
 
     public void login(String email, String password) {
         driver.$(".title h3").shouldHave(text("Войдите в личный кабинет"));
         stepWithRole("Ввести почту: " + email, () -> {
-            driver.$("input[placeholder=E-mail]") .click();
+            driver.$("input[placeholder=E-mail]").as("Поле ввода почты").click();
             driver.$("input[placeholder=E-mail]").setValue(email);
             driver.$("input[placeholder=E-mail]").pressEnter();
         });
         stepWithRole("Ввести пароль: " + password, () -> {
-            driver.$("input[placeholder=Пароль]").click();
+            driver.$("input[placeholder=Пароль]").as("Поле ввода пароля").click();
             driver.$("input[placeholder=Пароль]").setValue(password);
             driver.$("input[placeholder=Пароль]").pressEnter();
         });
         stepWithRole("Нажать активную кнопку Войти", () -> {
-            driver.$("button.mb-2.btn").shouldNotBe(disabled);
+            driver.$("button.mb-2.btn").shouldNotBe(disabled).as("Кнопка Войти");
+
             driver.$(byTagAndText("span", "Далее")).click();
             System.out.println("login as " + email + " " + password);
         });
     };
 }
-
-

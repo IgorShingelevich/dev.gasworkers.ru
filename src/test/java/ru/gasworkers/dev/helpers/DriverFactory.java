@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideConfig;
 import com.codeborne.selenide.SelenideDriver;
 import ru.gasworkers.dev.browser.Browser;
 
+import static com.codeborne.selenide.FileDownloadMode.FOLDER;
 import static com.codeborne.selenide.FileDownloadMode.PROXY;
 
 public final class DriverFactory {
@@ -19,7 +20,7 @@ public final class DriverFactory {
         config.holdBrowserOpen(true);
 
 //        config.proxyEnabled(true);
-//        config.fileDownload(PROXY);
+        config.fileDownload(FOLDER);
 
 
         return new SelenideDriver(config);

@@ -23,10 +23,10 @@ public class OrderCardMasterPage extends BaseMasterPage {
 
     public final SidebarMasterComponent sidebar;
     public final ActionsBlockMasterComponent actionsBlock;
-    private final NavCommonTabOrderCardComponent navCommonTab;
-    private final NavCheckListTabOrderCardComponent navCheckListTab;
-    private final NavInfoMasterTabOrderCardComponent navInfoMasterTab;
-    private final NavDocsTabOrderCardComponent navDocsTab;
+    private final NavCommonTabOrderCardComponent commonTab;
+    private final NavCheckListTabOrderCardComponent checkListTab;
+    private final NavInfoMasterTabOrderCardComponent infoMasterTab;
+    private final NavDocsTabOrderCardComponent docsTab;
 
 
 
@@ -34,10 +34,10 @@ public class OrderCardMasterPage extends BaseMasterPage {
         super(browser);
         sidebar = new SidebarMasterComponent(browser);
         actionsBlock = new ActionsBlockMasterComponent(browser);
-        navCommonTab = new NavCommonTabOrderCardComponent(browser);
-        navCheckListTab = new NavCheckListTabOrderCardComponent(browser);
-        navInfoMasterTab = new NavInfoMasterTabOrderCardComponent(browser);
-        navDocsTab = new NavDocsTabOrderCardComponent(browser);
+        commonTab = new NavCommonTabOrderCardComponent(browser);
+        checkListTab = new NavCheckListTabOrderCardComponent(browser);
+        infoMasterTab = new NavInfoMasterTabOrderCardComponent(browser);
+        docsTab = new NavDocsTabOrderCardComponent(browser);
     }
 
     private final String PAGE_TITLE = "Заказ";
@@ -56,8 +56,7 @@ public class OrderCardMasterPage extends BaseMasterPage {
         navDescriptionButtonLocator = navButtonsCollection.get(0).as("Описание заказа"),
         navCheckListButtonLocator = navButtonsCollection.get(1).as("Чек лист"),
         navInfoButtonLocator = navButtonsCollection.get(2).as("Информация по работам"),
-        navDocumentsButtonLocator = navButtonsCollection.get(3).as("Документы"),
-            mainButtonLocator = driver.$("button.btn.btn-primary").as("Основная кнопка"),
+        navDocumentsButtonLocator = navButtonsCollection.get(3).as("Документы"), mainButtonLocator = driver.$("button.btn.btn-primary").as("Основная кнопка"),
         saveCheckListButtonLocator = mainButtonLocator.$(byTagAndText("span", "Сохранить")).as("Сохранить"),
         editObjectButtonLocator = driver.$(byTagAndText("span", "Редактировать объект/оборудование")).as("Редактировать объект/оборудование"),
         startWorkingButtonLocator = driver.$(byTagAndText("span", "Приступить к работе")).as("Приступить к работе");
@@ -99,9 +98,9 @@ public class OrderCardMasterPage extends BaseMasterPage {
         //TODO check current nav tab is navCommon
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                navCommonTab.fillUpBanner.checkBannerDetails();
-                navCommonTab.orderStatus.currentStatus(orderStatus);
-                navCommonTab.orderDetails.currentType(orderType);
+                commonTab.fillUpBanner.checkBannerDetails();
+                commonTab.orderStatus.currentStatus(orderStatus);
+                commonTab.orderDetails.currentType(orderType);
                 stepWithRole("Убедиться, что  представлены кнопки  Редактировать объект/оборудование, кнопка Приступить к работе и кнопка Заказ на ремонт", () -> {
                     startWorkingButtonLocator.shouldBe(visible);
                     editObjectButtonLocator.shouldBe(visible);
@@ -109,8 +108,8 @@ public class OrderCardMasterPage extends BaseMasterPage {
                 });
             });
             stepWithRole("Вкладка Чек лист", () -> {
-                navCommonTab.fillUpBanner.clickOnCheckListLink();
-                navCheckListTab.checkFinishLoading(orderStatus);
+                commonTab.fillUpBanner.clickOnCheckListLink();
+                checkListTab.checkFinishLoading(orderStatus);
                 stepWithRole("Убедиться, представлена кнопки  Редактировать объект/оборудование, кнопка Кнопка Сохранить неактивная и кнопка Заказ на ремонт", () -> {
                     mainButtonLocator.shouldBe(disabled).shouldHave(text("Сохранить")).as("Кнопка Сохранить неактивная");
                     editObjectButtonLocator.shouldBe(visible);
@@ -119,7 +118,7 @@ public class OrderCardMasterPage extends BaseMasterPage {
             });
             stepWithRole("Вкладка Информация по работам", () -> {
                 navInfoMaster();
-                navInfoMasterTab.checkFinishLoading(orderStatus);
+                infoMasterTab.checkFinishLoading(orderStatus);
                 stepWithRole("Убедиться, что  представлены кнопки  Редактировать объект/оборудование, кнопка Приступить к работе и кнопка Заказ на ремонт", () -> {
                     startWorkingButtonLocator.shouldBe(visible);
                     editObjectButtonLocator.shouldBe(visible);
@@ -129,16 +128,19 @@ public class OrderCardMasterPage extends BaseMasterPage {
             });
             stepWithRole("Вкладка Документы", () -> {
                 navDocs();
-                navDocsTab.checkFinishLoading(orderStatus);
-                navDocsTab.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
+                docsTab.checkFinishLoading(orderStatus);
+                docsTab.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
                 stepWithRole("Убедиться, что  представлены кнопки  Редактировать объект/оборудование, кнопка Приступить к работе и кнопка Заказ на ремонт", () -> {
                     startWorkingButtonLocator.shouldBe(visible);
                     editObjectButtonLocator.shouldBe(visible);
                     repairFromMaintenanceButtonLocator.shouldBe(visible);
                 });
-
+                stepWithRole("Скачать документы: Договор ТО и Страховой полис " , () -> {
+                    docsTab.downloadAgreement();
+                    docsTab.downloadInsurance();
+                });
             });
-        navCommon();
+            navCommon();
         });
     }
 
