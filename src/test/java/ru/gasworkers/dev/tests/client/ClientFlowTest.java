@@ -224,7 +224,6 @@ class ClientFlowTest extends BaseTest {
     @Story("Просмотр заказа на ТО")
     @DisplayName("Клиент открывает заказ в состоянии с Отзывом Завершен")
     public void clientSubmittedReviewOrderState() {
-//        String checkedOrderNumber = "3620";
         String checkedOrderNumber = "3674";
         clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
         clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();

@@ -16,15 +16,20 @@ public class DatePickerOrderClientComponent extends BaseComponent {
     }
 
     SelenideElement
-        datePickerLocator = driver.$(".custom-date .custom-date__btn"), // Element should be visible {.custom-date>.custom-date__btn}  $(".custom-date>.custom-date__btn")
+        componentLocator = driver.$("div.col-lg-9").as("Компонент Выбор Даты и Время"),
+        datePickerLocator = driver.$(".custom-date .custom-date__btn").as("Компонент Выбор Даты"),
         okDayButtonLocator = driver.$x("//button[contains(.,'Ок')]"),
-                //$(byTagAndText("button", "ОК")), // not work also
-                // $(".daterangepicker.ltr.show-calendar.single.openscenter.linked button") - //not work anymore
-        timeDropdownLocator = driver.$(".gas-select-wrap"),
-        amPlaceholderLocator = driver.$(".gas-select-wrap .gas-select__header .selected-value");
+        timeDropdownLocator = driver.$(".gas-select-wrap").as("Компонент Выбор Времени"),
+        amPlaceholderLocator = driver.$(".gas-select-wrap .gas-select__header .selected-value").as("Компонент Выбор Времени");
 
     ElementsCollection
         dayCalendarLinkLocator = driver.$$(".calendars td");
+
+    public void checkFinishLoading() {
+        stepWithRole("Убедиться, что компонент Выбор Даты и Время загружен", () ->
+                componentLocator.shouldBe(visible)
+        );
+    }
 
 
     public DatePickerOrderClientComponent setDate(String date) {

@@ -100,20 +100,30 @@ class ClientDispatcherInteractionTest extends BaseTest {
             clientPages.getInfoTypeOrderPage().clickNextButton();
 //                    .checkTitle("Заказ на ТО")
 //                    .checkStepSequence("Шаг 1 из 3")
-            clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0);
-            clientPages.getSelectDateMaintenancePage().pickNowDateAM();
-            clientPages.getSelectDateMaintenancePage().submitOrder();
+//            step("Клиент выбирает объект", () -> {
+                clientPages.getSelectObjectMaintenancePage().checkFinishLoading();
+                clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0);
+//            });
+//            step("Клиент выбирает дату и время", () -> {
+                clientPages.getSelectDateMaintenancePage().checkFinishLoading();
+                clientPages.getSelectDateMaintenancePage().pickNowDateAM();
+                clientPages.getSelectDateMaintenancePage().submitOrder();
+//            });
             clientPages.getSelectServicePage().checkFinishLoading();
-            clientPages.getSelectServicePage().toOrderCard();
-            clientPages.getOrderCardPage().checkFinishLoading();
-            String currentOrderNumber = clientPages.getOrderCardPage().getOrderNumber();
-            clientPages.getOrderCardPage().sidebar.home();
-            clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
-            clientPages.getHomePage().popUpClose();
+//            String orderNumber = step("Клиент просматривает заказ на домашней странице", () -> {
+                clientPages.getSelectServicePage().toOrderCard();
+                clientPages.getOrderCardPage().checkFinishLoading();
+                String currentOrderNumber = clientPages.getOrderCardPage().getOrderNumber();
+                clientPages.getOrderCardPage().sidebar.home();
+                clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
+                clientPages.getHomePage().popUpClose();
+//            });
+//            step("Клиент просматривает заказа в карточке объекта", () -> {
             clientPages.getHomePage().lastOrderComponent.lastOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
             clientPages.getOrderCardPage().checkPublishedState(OrderStatus.PUBLISHED, OrderType.MAINTENANCE);
             //check notification - orderPublished
+//            });
             clientPages.getOrderCardPage().clickOffersBlock();
             clientPages.getSelectServicePage().checkFinishLoading();
             return currentOrderNumber;
