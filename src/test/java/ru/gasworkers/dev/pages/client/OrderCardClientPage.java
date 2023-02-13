@@ -7,10 +7,13 @@ import ru.gasworkers.dev.model.Doc;
 import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.OrderType;
+import ru.gasworkers.dev.pages.components.clientComponent.OffersClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavCommonTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavDocsTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavInfoMasterTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
 import java.time.Duration;
 
@@ -22,6 +25,9 @@ import static io.qameta.allure.Allure.step;
 
 public class OrderCardClientPage extends BaseClientPage {
     public final SidebarClientComponent sidebar;
+    public final ActionsBlockClientComponent actionsBlock;
+    public final StepperComponent stepper;
+    public final OffersClientComponent offers;
     public final NavCommonTabOrderCardComponent commonTab;
     public final NavInfoMasterTabOrderCardComponent infoMasterTab;
     public final NavDocsTabOrderCardComponent docsTab;
@@ -29,6 +35,9 @@ public class OrderCardClientPage extends BaseClientPage {
     public OrderCardClientPage (RoleBrowser browser) {
         super(browser);
         sidebar = new SidebarClientComponent(browser);
+        actionsBlock = new ActionsBlockClientComponent(browser);
+        stepper = new StepperComponent(browser);
+        offers = new OffersClientComponent(browser);
         commonTab = new NavCommonTabOrderCardComponent(browser);
         infoMasterTab = new NavInfoMasterTabOrderCardComponent(browser);
         docsTab = new NavDocsTabOrderCardComponent(browser);
@@ -51,8 +60,7 @@ public class OrderCardClientPage extends BaseClientPage {
         signButtonLocator = driver.$(byTagAndText("span", "Подписать")).as("Кнопка Подписать"),
         submitAgreementButtonLocator = driver.$("div a.btn-link-custom").as("Кнопка Передать договор"),
         mainButtonLocator = driver.$("div button.btn.btn-primary").as("Главная кнопка"),
-        submitReviewButtonLocator = mainButtonLocator.$(byTagAndText("span", "Оставить отзыв")).as("Кнопка Оставить отзыв"),
-        offersBlockLocator = driver.$("div.map-sticky__header--offers").as("Блок с предложениями");
+        submitReviewButtonLocator = mainButtonLocator.$(byTagAndText("span", "Оставить отзыв")).as("Кнопка Оставить отзыв");
     // TODO upd buttons to implement mainButtonLocator and be able to check enabled/disabled state
 
     ElementsCollection
@@ -97,6 +105,31 @@ public class OrderCardClientPage extends BaseClientPage {
             stepWithRole("Вкладка Описание заказа", () -> {
                 commonTab.orderStatus.currentStatus(orderStatus);
                 commonTab.orderDetails.currentType(orderType);
+                offers.noOffers();
+                stepWithRole("Убедиться, что  в Карточке заказа: " + orderStatus + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
+                    toMapButtonLocator.shouldBe(visible);
+                    cancelOrderButtonLocator.shouldBe(visible);
+//TODO buttons for this order state
+
+                });
+            });
+            stepWithRole("Вкладка Информация по работам", () -> {
+                //TODO: add steps for this tab
+            });
+            stepWithRole("Вкладка Документы", () -> {
+                navDocs();
+                docsTab.noDocs();
+            });
+            System.out.println("client orderType: " + orderType + ", client orderStatus: " + orderStatus);
+        });
+    }
+
+    public void checkReviewOffersState(OrderStatus orderStatus, OrderType orderType, Integer offersCount) {
+        stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
+            stepWithRole("Вкладка Описание заказа", () -> {
+                commonTab.orderStatus.currentStatus(orderStatus);
+                commonTab.orderDetails.currentType(orderType);
+                offers.haveOffers(offersCount);
                 stepWithRole("Убедиться, что  в Карточке заказа: " + orderStatus + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
                     toMapButtonLocator.shouldBe(visible);
                     cancelOrderButtonLocator.shouldBe(visible);
@@ -234,12 +267,6 @@ public class OrderCardClientPage extends BaseClientPage {
             toMapButtonLocator.shouldBe(visible,Duration.ofSeconds(30)).click();  //.scrollTo()
         });
         return this;
-    }
-
-    public void clickOffersBlock() {
-        stepWithRole("Нажать на блок Предложения", () -> {
-            offersBlockLocator.shouldBe(visible, Duration.ofSeconds(30)).click();
-        });
     }
 
     public OrderCardClientPage cancelOrder() {

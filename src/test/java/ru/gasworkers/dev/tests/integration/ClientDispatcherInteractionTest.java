@@ -95,36 +95,41 @@ class ClientDispatcherInteractionTest extends BaseTest {
 
 
         String orderNumber = step("Клиент размещает заказ на ТО", () -> {
-            clientPages.getHomePage().clickPlaceOrderButton();
-            clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
-            clientPages.getInfoTypeOrderPage().clickNextButton();
+            step("Выбирает тип заказа - ТО", () -> {
+                        clientPages.getHomePage().clickPlaceOrderButton();
+                        clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
+                        clientPages.getInfoTypeOrderPage().clickNextButton();
 //                    .checkTitle("Заказ на ТО")
 //                    .checkStepSequence("Шаг 1 из 3")
-//            step("Клиент выбирает объект", () -> {
+            });
+            step("Клиент выбирает объект", () -> {
                 clientPages.getSelectObjectMaintenancePage().checkFinishLoading();
                 clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0);
-//            });
-//            step("Клиент выбирает дату и время", () -> {
+            });
+            step("Клиент выбирает дату и время", () -> {
                 clientPages.getSelectDateMaintenancePage().checkFinishLoading();
                 clientPages.getSelectDateMaintenancePage().pickNowDateAM();
                 clientPages.getSelectDateMaintenancePage().submitOrder();
-//            });
-            clientPages.getSelectServicePage().checkFinishLoading();
-//            String orderNumber = step("Клиент просматривает заказ на домашней странице", () -> {
-                clientPages.getSelectServicePage().toOrderCard();
+            });
+            step("Клиент просматривает карту в состоянии заказ опубликован", () -> {
+                clientPages.getSelectServicePage().checkFinishLoading();
+                clientPages.getSelectServicePage().checkPublishedState();
+            });
+            step("Клиент просматривает заказ на домашней странице", () -> {
+                 clientPages.getSelectServicePage().toOrderCard();
+                 clientPages.getOrderCardPage().checkFinishLoading();
+                 clientPages.getOrderCardPage().sidebar.home();
+                 clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
+                 clientPages.getHomePage().popUpClose();
+            });
+            step("Клиент просматривает заказа в карточке объекта", () -> {
+                clientPages.getHomePage().lastOrderComponent.lastOrderCard();
                 clientPages.getOrderCardPage().checkFinishLoading();
-                String currentOrderNumber = clientPages.getOrderCardPage().getOrderNumber();
-                clientPages.getOrderCardPage().sidebar.home();
-                clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
-                clientPages.getHomePage().popUpClose();
-//            });
-//            step("Клиент просматривает заказа в карточке объекта", () -> {
-            clientPages.getHomePage().lastOrderComponent.lastOrderCard();
-            clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkPublishedState(OrderStatus.PUBLISHED, OrderType.MAINTENANCE);
-            //check notification - orderPublished
-//            });
-            clientPages.getOrderCardPage().clickOffersBlock();
+                clientPages.getOrderCardPage().checkPublishedState(OrderStatus.PUBLISHED, OrderType.MAINTENANCE);
+                //check notification - orderPublished
+            });
+            String currentOrderNumber = clientPages.getOrderCardPage().getOrderNumber();
+            clientPages.getOrderCardPage().offers.clickOffers();
             clientPages.getSelectServicePage().checkFinishLoading();
             return currentOrderNumber;
         });
@@ -139,54 +144,67 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getOrderCardPage().checkParticipateTenderState(OrderStatus.PARTICIPATE_TENDER, OrderType.MAINTENANCE);
         });
 
-        step("Клиент принимает предложение Диспетчера", () -> {
-            //check notification - ServiceReady
-            clientPages.getSelectServicePage().waitForResponses();
-            //check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
-            clientPages.getSelectServicePage().toOrderCard();
-            clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().popUpClose();
-            //go back to order card and check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
-            clientPages.getOrderCardPage().clickOffersBlock();
-            clientPages.getSelectServicePage().checkFinishLoading();
-            // find on the map
-            //check Price with Insurance and Primary Visit Price
-            //review first response Service Company
-            // check first Master info Card
-            clientPages.getSelectServicePage().proceedWithFirstService();
-            clientPages.getSelectInsurancePage().checkFinishLoading();
-            // toggle price - check wo Insurance and w Insurance difference
-            //set w Insurance
-            clientPages.getSelectInsurancePage().next();
-            clientPages.getCheckDocumentsPage().checkFinishLoading();
-//            driver.back();
-            // check that Filial is not empty or set the Filial if it is empty
-            // check that Address fnd Passport is not empty or set the Address and Passport if it is empty
-//            SmsApi clientSmsApi1 = SmsApi.instance(Role.CLIENT); // for real number
-
-            clientPages.getCheckDocumentsPage().makeContract();
-            clientPages.getSelectPaymentPage().checkFinishLoading();
-            clientPages.getSelectPaymentPage().paySPB();
-            clientPages.getPaymentWizardPage().checkFinishLoading();
-            clientPages.getPaymentWizardPage().getQRCode();
-            clientPages.getSignSMSPage().checkFinishLoading();
-            sleep(600);  //without  this cannot paste the code
-
-//            String sms = clientSmsApi1.waitReceiveNewSms().getText(); // for real number
-//            String code = sms.substring(0, 6); // for real number
-            String mockCode = "111111";
-            clientPages.getSignSMSPage().inputSMSCode(mockCode);
-//            clientPages.getSignSMSPage().sign();
-            clientPages.getSignSuccessPage().checkFinishLoading();
-            clientPages.getSignSuccessPage().toHomePage();
-            clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
-            clientPages.getHomePage().popUpClose();
-            clientPages.getHomePage().lastOrderComponent.lastOrderCard();
-            clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_VISIT, OrderType.MAINTENANCE);
+        step("Клиент получает предложение Диспетчера СК", () -> {
+            step("Клиент получает предложение от Диспетчера СК", () -> {
+                //check notification - ServiceReady
+                clientPages.getSelectServicePage().waitForResponses();
+                clientPages.getSelectServicePage().checkResponseState(1);
+                //check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
+                clientPages.getSelectServicePage().toOrderCard();
+                clientPages.getOrderCardPage().checkFinishLoading();
+                clientPages.getOrderCardPage().popUpClose();
+                clientPages.getOrderCardPage().checkReviewOffersState(OrderStatus.PUBLISHED, OrderType.MAINTENANCE, 1);
+                //go back to order card and check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
+                clientPages.getOrderCardPage().offers.clickOffers();
+                clientPages.getSelectServicePage().checkFinishLoading();
+            });
+            step("Клиент рассматривает предложение от Диспетчера СК", () -> {
+                // find on the map
+                //check Price with Insurance and Primary Visit Price
+                //review first response Service Company
+                // check first Master info Card
+                clientPages.getSelectServicePage().proceedWithFirstService();
+                clientPages.getSelectInsurancePage().checkFinishLoading();
+                // toggle price - check wo Insurance and w Insurance difference
+                //set w Insurance
+                clientPages.getSelectInsurancePage().next();
+                clientPages.getCheckDocumentsPage().checkFinishLoading();
+                //driver.back();
+                // check that Filial is not empty or set the Filial if it is empty
+                // check that Address fnd Passport is not empty or set the Address and Passport if it is empty
+                //SmsApi clientSmsApi1 = SmsApi.instance(Role.CLIENT); // for real number
+            });
+            step("Клиент заполняет документы", () -> {
+            });
+            step("Клиент оплачивает предложение от Диспетчера СК", () -> {
+                clientPages.getCheckDocumentsPage().makeContract();
+                clientPages.getSelectPaymentPage().checkFinishLoading();
+                clientPages.getSelectPaymentPage().paySPB();
+                clientPages.getPaymentWizardPage().checkFinishLoading();
+                clientPages.getPaymentWizardPage().getQRCode();
+            });
+            step("Клиент подписывает договор", () -> {
+                clientPages.getSignSMSPage().checkFinishLoading();
+                sleep(600);  //without  this cannot paste the code
+                //String sms = clientSmsApi1.waitReceiveNewSms().getText(); // for real number
+                //String code = sms.substring(0, 6); // for real number
+                String mockCode = "111111";
+                clientPages.getSignSMSPage().inputSMSCode(mockCode);
+                //clientPages.getSignSMSPage().sign();
+                clientPages.getSignSuccessPage().checkFinishLoading();
+                clientPages.getSignSuccessPage().toHomePage();
+            });
+            step("Клиент ожидает согласования даты и времени", () -> {
+                clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
+                clientPages.getHomePage().popUpClose();
+                clientPages.getHomePage().lastOrderComponent.lastOrderCard();
+                clientPages.getOrderCardPage().checkFinishLoading();
+                clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_VISIT, OrderType.MAINTENANCE);
+            });
         });
 
         step("Диспетчер выбирает время и назначает Мастера", () -> {
+            step("Диспетчер ");
             // start section from home page - need OrderNumber
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             dispatcherPages.getOrderCardPage().popUpClose(); // too long

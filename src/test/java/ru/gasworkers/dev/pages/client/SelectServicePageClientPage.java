@@ -1,9 +1,13 @@
 package ru.gasworkers.dev.pages.client;
+import com.codeborne.selenide.CollectionCondition;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import ru.gasworkers.dev.model.stepper.ClientStepper;
+import ru.gasworkers.dev.pages.components.clientComponent.OffersClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
 import java.time.Duration;
 
@@ -12,11 +16,16 @@ import static io.qameta.allure.Allure.step;
 
 public class SelectServicePageClientPage extends BaseClientPage {
 
-    private final FocusHeaderComponent header;
+    public final FocusHeaderComponent header;
+    public final StepperComponent stepper;
+    public final OffersClientComponent offers;
+
 
     public SelectServicePageClientPage(RoleBrowser browser) {
         super(browser);
         header = new FocusHeaderComponent(browser);
+        stepper = new StepperComponent(browser);
+        offers = new OffersClientComponent(browser);
     }
 
     private final String
@@ -50,19 +59,36 @@ public class SelectServicePageClientPage extends BaseClientPage {
             titleLocator.shouldHave(text(SELECT_SERVICE_TITLE));
             firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
             driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
-//            sleep(3_000);
+            offers.checkFinishLoading();
+        });
+    }
+
+    public void checkPublishedState() {
+        stepWithRole("Убедиться, что статус карты - Нет тендеров", () -> {
+            reviewButtonCollection.shouldBe(CollectionCondition.empty);
+            offers.noOffers();
+            //TODO map component behavior
         });
     }
 
     public SelectServicePageClientPage waitForResponses() {
         stepWithRole("Ожидание ответов", () -> {
-            firstServiceButtonLocator.should(appear, Duration.ofSeconds(60));
+            reviewButtonCollection.shouldHave(CollectionCondition.sizeGreaterThan(0), Duration.ofSeconds(60));
+            //TODO map component behavior
         });
         return this;
     }
 
+    public void checkResponseState(Integer count) {
+        stepWithRole("Убедиться, что статус карты - Есть " + count + " тендеров", () -> {
+            reviewButtonCollection.shouldHave(CollectionCondition.size(count));
+            offers.haveOffers(count);
+            //TODO map component behavior
+        });
+    }
+
     public SelectServicePageClientPage toOrderCard() {
-        stepWithRole("Нажать на кнопку Смотреть Заказ", () -> {
+        stepWithRole("Нажать на кнопку Смотреть карточку заказа", () -> {
             toOrderButtonLocator.shouldBe(visible).click();
         });
         return this;
@@ -70,10 +96,10 @@ public class SelectServicePageClientPage extends BaseClientPage {
 
     public SelectServicePageClientPage proceedWithFirstService() {
         stepWithRole("Нажать на кнопку Выбрать Компанию ", () -> {
-//            reviewButtonCollection.first().shouldBe(visible, Duration.ofSeconds(40)).shouldHave(text("Выбрать")).click();
             reviewButtonCollection.first().shouldBe(visible, Duration.ofSeconds(40))
                     .shouldHave(text("Выбрать")).click();
         });
         return this;
     }
 }
+// TODO describe map behavior
