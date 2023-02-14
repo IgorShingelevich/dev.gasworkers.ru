@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
+import ru.gasworkers.dev.pages.components.sharedComponent.backgroundRegistrationComponent.BackgroundRegistrationComponent;
 
 import java.time.Duration;
 
@@ -12,8 +13,11 @@ import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public class LandingPage extends BasePage {
 
+    public final BackgroundRegistrationComponent bgRegistration;
+
 public LandingPage(RoleBrowser browser) {
         super(browser);
+        bgRegistration = new BackgroundRegistrationComponent(browser);
     }
 
     private final String

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.ValueSource;
+import ru.gasworkers.dev.model.equipment.EquipmentType;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.pages.context.MasterPages;
@@ -36,6 +37,22 @@ public class RegistrationTest extends BaseTest {
     MasterPages masterPages;
 
     RandomClient randomClient = new RandomClient();
+
+    @Test
+    @Owner("Igor Shingelevich")
+    @Order(0)
+    @Feature("Фоновая регистрация")
+    @Story("Регистрация ТО")
+    @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
+    @DisplayName("Фоновая Регистрация клиента по телефону на ТО")
+    public void bgRegistrationPhoneMaintenance () {
+        clientPages.getLandingPage().open();
+        clientPages.getLandingPage().checkFinishLoading();
+        clientPages.getLandingPage().bgRegistration.fillBGMaintenanceRequest(randomClient.getObjectAddress(), EquipmentType.GAS_BOILER, 1, 1,20, randomClient.getSinceDate(), randomClient.getPhoneNumber(), randomClient.getEmail());
+        clientPages.getLandingPage().bgRegistration.findOffers();
+        clientPages.getLandingPage().bgRegistration.codeInput.checkFinishLoading();
+        clientPages.getLandingPage().bgRegistration.codeInput.sendCode(randomClient.getConfirmationCode());
+    }
 
     @Test
     @Owner("Igor Shingelevich")

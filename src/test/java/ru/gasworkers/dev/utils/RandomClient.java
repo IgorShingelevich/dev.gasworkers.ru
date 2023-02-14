@@ -20,6 +20,7 @@ public class RandomClient {
     private String sinceDate;
     private  String password = "123456";
     private String confirmationCode = "111111";
+    private String objectAddress = "Московская область, Люберцы";
 
     public RandomClient() {
         Faker faker = new Faker(new Locale("ru"));
@@ -50,6 +51,7 @@ public class RandomClient {
         this.phoneNumber =phoneClientPrefixMock + faker.regexify("[0-9]{7}");
 //        this.phoneNumber = faker.phoneNumber().subscriberNumber(11).replaceFirst("^[^7]", "7");
         this.sinceDate = LocalDate.now().format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
+        this.objectAddress = objectAddress;
     }
 
     public String getName() {
@@ -82,6 +84,9 @@ public class RandomClient {
 
     public String getSinceDate() {
         return sinceDate;
+    }
+    public String getObjectAddress() {
+        return objectAddress;
     }
 
     public String getPassword() {

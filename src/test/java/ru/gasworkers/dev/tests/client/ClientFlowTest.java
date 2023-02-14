@@ -38,6 +38,8 @@ class ClientFlowTest extends BaseTest {
         clientPages.getLoginPage().login(client00.email, client00.password);
     }
 
+
+
     @Test
     @Feature("Кабинет клиента")
     @Story("Смена пароля")
