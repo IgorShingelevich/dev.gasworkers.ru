@@ -60,8 +60,8 @@ public class EquipmentBackgroundPicker extends BaseComponent {
                     powerFieldLocator.clear();
                     powerFieldLocator.setValue(power.toString());
                 });
+            approveEquipmentForm();
         });
-     approveEquipmentForm();
     }
 
     public void approveEquipmentForm() {

@@ -19,6 +19,7 @@ public final class DriverFactory {
 //         config.headless(true);
         config.holdBrowserOpen(true);
 
+
 //        config.proxyEnabled(true);
         config.fileDownload(FOLDER);
 

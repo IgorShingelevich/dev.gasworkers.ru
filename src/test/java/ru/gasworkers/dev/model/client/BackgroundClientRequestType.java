@@ -7,10 +7,9 @@ public enum BackgroundClientRequestType {
     MAINTENANCE("Договор технического обслуживания"),
     REPAIR("Вызвать мастера для ремонта"),
     VIDEO("Получить видеоконсультацию");
-
-    private final String type;
-    @Override
-    public String toString() {
-        return type;
+     private final String title;
+    public String getTitle() {
+        return title;
     }
+
 }

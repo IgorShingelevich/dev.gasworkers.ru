@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pages.components.sharedComponent.backgroundRegistratio
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.model.client.BackgroundClientRequestType;
 import ru.gasworkers.dev.model.equipment.EquipmentType;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.CommonCodeInputModalWindowComponent;
@@ -46,7 +47,6 @@ public class BackgroundRegistrationComponent extends BaseComponent {
 
 
     SelenideElement
-        requestTypeLocator = driver.$("div.gas-tabs-secondary__btn").as("Тип заявки"),
         bgTitleLocator = driver.$("div.h3.text-center.text-white").as("Заголовок"),
         bgSubtitleLocator = driver.$("div.medium.text-center.text-white").as("Подзаголовок"),
         bgSubtitle2Locator = driver.$("div.medium.text-center.text-white span").as("Подзаголовок 2"),
@@ -60,7 +60,40 @@ public class BackgroundRegistrationComponent extends BaseComponent {
         approveCredentialsButtonLocator = credentialsContainerLocator.$("button.btn-fs-sm.btn.btn-primary.disable-outline span").as("Кнопка потвердить контактные данные"),
         findOffersButton = driver.$("button.text-primary-dark.btn.btn-warning.disable-outline").as("Найти предложения");
     ElementsCollection
+        requestTypeLocator = driver.$$("div.gas-tabs-secondary__btn span").as("Тип заявки"),
         addressSuggestionsLocator = driver.$$("div.address-list").as("Подсказки адреса");
+
+
+    public void checkFinishLoading() {
+        stepWithRole("Убедиться, что компонент Фоновая регистрация загружен", () -> {
+            stepWithRole("Убедиться, что отображаются компоненты Фоновой ТО", () -> {
+                requestTypeLocator.findBy(text(BackgroundClientRequestType.MAINTENANCE.getTitle())).click();
+                bgTitleLocator.shouldHave(text(BG_MAINTENANCE_TITLE));
+                bgSubtitleLocator.shouldHave(text(BG_MAINTENANCE_SUBTITLE));
+                bgSubtitle2Locator.shouldHave(text(BG_MAINTENANCE_SUBTITLE_2));
+                bgSubtitle3Locator.shouldHave(text(BG_MAINTENANCE_SUBTITLE_3));
+                findOffersButton.shouldBe(visible);
+            });
+            stepWithRole("Убедиться, что отображаются компоненты Фонового ремонта", () -> {
+                requestTypeLocator.findBy(text(BackgroundClientRequestType.REPAIR.getTitle())).click();
+                bgTitleLocator.shouldHave(text(BG_REPAIR_TITLE));
+                bgSubtitleLocator.shouldHave(text(BG_REPAIR_SUBTITLE));
+                bgSubtitle2Locator.shouldHave(text(BG_REPAIR_SUBTITLE_2));
+                bgSubtitle3Locator.shouldHave(text(BG_REPAIR_SUBTITLE_3));
+                findOffersButton.shouldBe(visible);
+            });
+            stepWithRole("Убедиться, что отображаются компоненты Фоновой видеоконсультации", () -> {
+                requestTypeLocator.findBy(text(BackgroundClientRequestType.VIDEO.getTitle())).click();
+                bgTitleLocator.shouldHave(text(BG_VIDEO_TITLE));
+                bgSubtitleLocator.shouldHave(text(BG_VIDEO_SUBTITLE));
+                bgSubtitle2Locator.shouldHave(text(BG_VIDEO_SUBTITLE_2));
+                bgSubtitle3Locator.shouldHave(text(BG_VIDEO_SUBTITLE_3));
+                findOffersButton.shouldBe(visible);
+            });
+            requestTypeLocator.findBy(text(BackgroundClientRequestType.MAINTENANCE.getTitle())).click();
+            //TODO check form components presence
+        });
+    }
 
     public void fillBGMaintenanceRequest(String objectAddress, EquipmentType type, Integer mark, Integer brand, Integer power, String registrationDate, String phone, String email) {
         stepWithRole("Заполнить заявку на ТО в форме фоновой регистрации", () -> {
@@ -84,7 +117,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 stepWithRole("Нажать на дропдаун контактных данных", () -> {
                     credentialsDropdownLocator.click();
                 });
-                stepWithRole("Проверить, что открылось меню ввода данных", () -> {
+                stepWithRole("Проверить, что открылось меню ввода контактных данных", () -> {
                     credentialsContainerLocator.shouldBe(visible);
                 });
                 stepWithRole("Ввести телефон: " + phone, () -> {

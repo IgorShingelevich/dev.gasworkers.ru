@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pages.client;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.components.clientComponent.GuideFirstComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.PersonSummaryComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
@@ -17,6 +18,7 @@ public final class HomeClientPage extends BaseClientPage {
     public final LastOrderProfileClientComponent lastOrderComponent;
     public final SidebarClientComponent sidebar;
     public final PersonSummaryComponent personSummaryComponent;
+    public final GuideFirstComponent guideFirst;
 
 
 
@@ -27,6 +29,7 @@ public final class HomeClientPage extends BaseClientPage {
         sidebar = new SidebarClientComponent(browser);
         lastOrderComponent = new LastOrderProfileClientComponent(browser);
         personSummaryComponent = new PersonSummaryComponent(browser);
+        guideFirst = new GuideFirstComponent(browser);
     }
 
 

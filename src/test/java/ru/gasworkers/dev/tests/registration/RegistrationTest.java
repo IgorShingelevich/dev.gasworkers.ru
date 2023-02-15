@@ -48,10 +48,12 @@ public class RegistrationTest extends BaseTest {
     public void bgRegistrationPhoneMaintenance () {
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
+        clientPages.getLandingPage().bgRegistration.checkFinishLoading();
         clientPages.getLandingPage().bgRegistration.fillBGMaintenanceRequest(randomClient.getObjectAddress(), EquipmentType.GAS_BOILER, 1, 1,20, randomClient.getSinceDate(), randomClient.getPhoneNumber(), randomClient.getEmail());
         clientPages.getLandingPage().bgRegistration.findOffers();
         clientPages.getLandingPage().bgRegistration.codeInput.checkFinishLoading();
         clientPages.getLandingPage().bgRegistration.codeInput.sendCode(randomClient.getConfirmationCode());
+        clientPages.getHomePage().guideFirst.playGuideSteps();
     }
 
     @Test
