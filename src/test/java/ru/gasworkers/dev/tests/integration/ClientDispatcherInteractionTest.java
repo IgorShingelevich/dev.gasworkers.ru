@@ -69,21 +69,19 @@ class ClientDispatcherInteractionTest extends BaseTest {
     @Story("Интерграция Путь ТО")
     @DisplayName(" ТО Интеграция Клиент-Диспетчер-Клиент-Диспетчер")  // whu name 2 times in Allure?
     void integrationDispatcherAcceptClientMaintenanceRequest() {
+
         step("авторизация Клиента", () -> {
             clientPages.getLoginPage().open().login(client.email, client.password);
-            clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
+//            clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);  // TODO fix fullName order
         });
-
         step("авторизация Диспетчера", () -> {
             dispatcherPages.getLoginPage().open().login(dispatcher.email, dispatcher.password);
             dispatcherPages.getHomePage().checkFinishLoading();
         });
-
         step("авторизация Мастера", () -> {
             masterPages.getLoginPage().open().login(master.email, master.password);
             masterPages.getHomePage().checkFinishLoading();
         });
-
         step("Test run credentials ", () -> {
             Allure.addAttachment("Client creds", client.fullName + ": " + client.email + "/" + client.password);
             Allure.addAttachment("Dispatcher creds", dispatcher.fullName + ": " + dispatcher.email + "/" + dispatcher.password);
@@ -96,6 +94,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
 
         String orderNumber = step("Клиент размещает заказ на ТО", () -> {
             step("Выбирает тип заказа - ТО", () -> {
+                        clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
                         clientPages.getHomePage().clickPlaceOrderButton();
                         clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
                         clientPages.getInfoTypeOrderPage().clickNextButton();
@@ -236,8 +235,6 @@ class ClientDispatcherInteractionTest extends BaseTest {
             masterPages.getAllNewOrdersPage().openByNumber(orderNumber);
             masterPages.getOrderCardPage().checkFinishLoading();
             masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
-
-
         });
 
         step("Мастер открывает объект Клиента", () -> {

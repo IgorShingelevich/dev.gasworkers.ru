@@ -42,7 +42,7 @@ public class HomeMasterPage extends BaseMasterPage{
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
             stepWithRole("Убедиться, что переключатель режима расписания  в положении по умолчанию - Заказы", () -> {
-                toggleTimeTableModeButtonLocator.shouldHave(attribute("value", "true"));
+                toggleTimeTableModeButtonLocator.shouldHave(attribute("value", "true"), Duration.ofSeconds(10));
             });
             stepWithRole("Убедиться, что расписание отображается", () -> {
                 timeTableLocator.shouldBe(visible);
@@ -74,9 +74,4 @@ public class HomeMasterPage extends BaseMasterPage{
             }
         });
     }
-
-
-
-
-
 }

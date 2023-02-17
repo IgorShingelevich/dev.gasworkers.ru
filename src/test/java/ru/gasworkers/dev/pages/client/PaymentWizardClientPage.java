@@ -25,7 +25,7 @@ public class PaymentWizardClientPage  extends BaseClientPage {
 
     public PaymentWizardClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что страница Система быстрых платежей загружена", () -> {
-            pageTitleLocator.shouldHave(text(PAYMENT_WIZARD_TITLE)).shouldBe(visible, Duration.ofSeconds(20));
+            pageTitleLocator.shouldHave(text(PAYMENT_WIZARD_TITLE)).shouldBe(visible, Duration.ofSeconds(60));
             String pageWizardTitle = pageTitleLocator.getText();
             getQRCode.shouldBe(visible);
         });

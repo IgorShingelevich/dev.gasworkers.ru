@@ -68,7 +68,7 @@ class ClientFlowTest extends BaseTest {
         });
         step("Вкладка Контакты", () -> {
             clientPages.getProfilePage().navContacts();
-            clientPages.getProfilePage().navContactsTab.checkFinishLoading(client00.email, String.valueOf(client00.phoneNumber));
+            clientPages.getProfilePage().navContactsTab.checkFinishLoading();
             clientPages.getProfilePage().navContactsTab.checkFilledState(client00.email, String.valueOf(client00.phoneNumber));
             //TODO password and Notifications
         });
@@ -88,7 +88,7 @@ class ClientFlowTest extends BaseTest {
         });
         step("Вкладка Контакты", () -> {
             clientPages.getProfilePage().navContacts();
-            clientPages.getProfilePage().navContactsTab.checkFinishLoading(client00.email, String.valueOf(client00.phoneNumber));
+            clientPages.getProfilePage().navContactsTab.checkFinishLoading();
             clientPages.getProfilePage().navContactsTab.checkFilledState(client00.email, String.valueOf(client00.phoneNumber));
         });
         //TODO password and Notifications

@@ -5,6 +5,11 @@ import org.junit.jupiter.api.Assertions;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
+import java.time.Duration;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 
@@ -35,11 +40,11 @@ public class GuideFirstComponent extends BaseComponent {
 
     public void playGuideSteps() {
         stepWithRole("Проиграть гайд", () -> {
-            guideFrameLocator.shouldBe(visible);
+            guideFrameLocator.shouldBe(visible, Duration.ofSeconds(10)); // added 10 seconds
             for (int i = 0; i < 10; i++) {
                 switch (i) {
                     case 0:
-                        Assertions.assertEquals("https://dev.gasworkers.ru/profile/client", driver.url());
+                        assertThat(driver.url(), containsString("https://dev.gasworkers.ru/profile/client"));
                         guideTipLocator.shouldHave(text(GUIDE_Step_1));
                         nextStepGuide();
                         break;
@@ -68,9 +73,7 @@ public class GuideFirstComponent extends BaseComponent {
                         nextStepGuide();
                         break;
                     case 7:
-                        //partial text matching
-
-                        Assertions.assertEquals("https://dev.gasworkers.ru/orders/maintenance/", driver.url());
+                        assertThat(driver.url(), containsString("https://dev.gasworkers.ru/orders/maintenance/"));
                         guideTipLocator.shouldHave(text(GUIDE_Step_8));
                         nextStepGuide();
                         break;

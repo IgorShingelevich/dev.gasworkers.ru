@@ -51,26 +51,28 @@ public class NavCommonClientTabProfileComponent extends BaseComponent {
     }
 
     public void checkInitialState(String name, String patronymicName, String surname) {
-        stepWithRole("Убедиться, что поля Фамилия, Имя, Отчество заполнены: ", () -> {
-            stepWithRole("Фамилия: " + surnameLocator.getValue(), () ->
-                    surnameLocator.shouldHave(value(surname))
-            );
-            stepWithRole("Имя: " + nameLocator.getValue(), () ->
-                    nameLocator.shouldHave(value(name))
-            );
-            stepWithRole("Отчество: " + patronymicLocator.getValue(), () ->
-                    patronymicLocator.shouldHave(value(patronymicName))
-            );
-            stepWithRole("Убедиться, что остальные поля вкладки Общие данные пустые", () -> {
-                seriesPassportLocator.shouldBe(empty);
-                numberPassportLocator.shouldBe(empty);
-                datePassportLocator.shouldBe(empty);
-                whoPassportLocator.shouldBe(empty);
-                registrationAddressLocator.shouldBe(empty);
-                apartmentLocator.shouldBe(empty);
-            });
-            stepWithRole("Убедиться, что кнопка Сохранить актива", () -> {
-                saveButtonLocator.shouldBe(enabled);
+        stepWithRole("Убедиться, что вкладка Общие данные в состоянии после Регистрации", () -> {
+            stepWithRole("Убедиться, что поля Фамилия, Имя, Отчество заполнены: ", () -> {
+                stepWithRole("Фамилия: " + surnameLocator.getValue(), () ->
+                        surnameLocator.shouldHave(value(surname))
+                );
+                stepWithRole("Имя: " + nameLocator.getValue(), () ->
+                        nameLocator.shouldHave(value(name))
+                );
+                stepWithRole("Отчество: " + patronymicLocator.getValue(), () ->
+                        patronymicLocator.shouldHave(value(patronymicName))
+                );
+                stepWithRole("Убедиться, что остальные поля вкладки Общие данные пустые", () -> {
+                    seriesPassportLocator.shouldBe(empty);
+                    numberPassportLocator.shouldBe(empty);
+                    datePassportLocator.shouldBe(empty);
+                    whoPassportLocator.shouldBe(empty);
+                    registrationAddressLocator.shouldBe(empty);
+                    apartmentLocator.shouldBe(empty);
+                });
+                stepWithRole("Убедиться, что кнопка Сохранить актива", () -> {
+                    saveButtonLocator.shouldBe(enabled);
+                });
             });
         });
     }
@@ -95,5 +97,25 @@ public class NavCommonClientTabProfileComponent extends BaseComponent {
         });
     }
 
-
+    public void checkInitialBGState() {
+        stepWithRole("Убедиться, что вкладка Общие данные в состоянии после Фоновой регистрации", () -> {
+            // TODO implement CommonDataPickerComponent. Upload photo. check other fields info.
+            stepWithRole("Убедиться, что поля Фамилия, Имя, Отчество не заполнены ", () -> {
+                surnameLocator.shouldBe(empty);
+                nameLocator.shouldBe(empty);
+                patronymicLocator.shouldBe(empty);
+            });
+            stepWithRole("Убедиться, что остальные поля вкладки Общие данные пустые", () -> {
+                seriesPassportLocator.shouldBe(empty);
+                numberPassportLocator.shouldBe(empty);
+                datePassportLocator.shouldBe(empty);
+                whoPassportLocator.shouldBe(empty);
+                registrationAddressLocator.shouldBe(empty);
+                apartmentLocator.shouldBe(empty);
+            });
+            stepWithRole("Убедиться, что кнопка Сохранить актива", () -> {
+                saveButtonLocator.shouldBe(enabled);
+            });
+        });
+    }
 }

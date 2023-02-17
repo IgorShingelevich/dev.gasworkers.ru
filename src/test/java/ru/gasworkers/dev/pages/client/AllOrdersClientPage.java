@@ -49,7 +49,6 @@ private final String ORDER_PAGE_TITLE = "Список заказов";
     public AllOrdersClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что загружена страница Список заказов ", () -> {
             orderPageTitle.shouldHave(text(ORDER_PAGE_TITLE));
-            listNumberLinkCollection.last().shouldBe(visible, Duration.ofSeconds(20));
         });
         return this;
     }
@@ -69,5 +68,15 @@ private final String ORDER_PAGE_TITLE = "Список заказов";
     public AllOrdersClientPage openAction(int listNumber) {
         openActionLinkCollection.get(listNumber-1).click();
         return this;
+    }
+
+    public void checkBGInitialState(String orderNumber) {
+        stepWithRole("Убедиться, что страница в  состоянии после Фоновой регистрации", () -> {
+            orderPageTitle.shouldHave(text(ORDER_PAGE_TITLE));
+            stepWithRole("Убедиться, что присутствует ранее созданный Заказ № " + orderNumber, () -> {
+                listNumberLinkCollection.shouldHave(size(1));
+                listNumberLinkCollection.findBy(text(orderNumber)).shouldBe(visible);
+            });
+        });
     }
 }

@@ -81,10 +81,22 @@ public class AllObjectsClientPage extends BaseClientPage {
         return this;
     }
 
+
     public AllObjectsClientPage checkFinishLoading() {
-        stepWithRole("Убедиться, что страница загрузилась", () -> {
-            pageTitleLocator.shouldHave(text(OBJECTS_PAGE_TITLE_TEXT));
-//            nameLinkCollection.shouldHave(sizeGreaterThan(0));  // how to divide emppty users runs and existed ones?
+        stepWithRole("Проверить, что страница Объекты и оборудование загрузилась", () -> {
+            checkObjectsPageTitle();
+            stepWithRole("Убедиться, что присутствует кнопка Создать объект", () -> {
+                createNewObjectButtonLocator.shouldBe(visible);
+            });
+        });
+        return this;
+    }
+
+    public AllObjectsClientPage initialBGState() {
+        stepWithRole("Убедиться, что страница в  состоянии после Фоновой регистрации", () -> {
+            stepWithRole("Убедиться, что присутствует один объект", () -> {
+                nameLinkCollection.shouldBe(size(1));
+            });
         });
         return this;
     }

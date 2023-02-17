@@ -5,6 +5,9 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarDispatcherComponent;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
@@ -12,8 +15,13 @@ import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public class AllNotificationsPage extends BasePage {
 
+    public final ActionsBlockClientComponent actionBlock;
+    public final SidebarClientComponent sidebar;
+
     public AllNotificationsPage(RoleBrowser browser) {
         super(browser);
+        actionBlock = new ActionsBlockClientComponent(browser);
+        sidebar = new SidebarClientComponent(browser);
     }
 
     private final String
@@ -45,14 +53,13 @@ public class AllNotificationsPage extends BasePage {
 
     public AllNotificationsPage readAll() {
         stepWithRole("Прочитать все уведомления", () -> {
-            if (readAllButtonLocator.isDisplayed()) {
+            stepWithRole("Нажать кнопку Прочитать все", () -> {
                 readAllButtonLocator.click();
-            }
-            else {
-                System.out.println("No unread notifications");
-            }
-            unreadStatusCollection.shouldHave(size(0));
-            stepWithRole("Убедиться, что неактивная кнопка Все уведомления прочитаны", () -> {
+            });
+            stepWithRole("Убедиться, что нет непрочитанных уведомлений", () -> {
+                unreadStatusCollection.shouldHave(size(0));
+            });
+            stepWithRole("Убедиться, что присутствует неактивная кнопка Все уведомления прочитаны", () -> {
                 driver.$(byTagAndText("span", "Все уведомления прочитаны")).shouldBe(visible);
             });
         });
@@ -65,7 +72,16 @@ public class AllNotificationsPage extends BasePage {
         });
     }
 
-
-
-
+    public void checkInitialBGState(String orderNumber) {
+        stepWithRole("Убедиться, что на странице в  состоянии после Фоновой регистрации пристутствует увеедомление о заказе: " + orderNumber, () -> {
+            pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
+            stepWithRole("Убедиться, что присутствует кнопка Прочитать все", () -> {
+                readAllButtonLocator.shouldBe(visible);
+            });
+            stepWithRole("Убедиться, что у клиента одно уведомление", () -> {
+                notificationTitleCollection.shouldHave(size(1));
+                notificationTitleCollection.get(0).shouldHave(partialText(orderNumber));
+            });
+        });
+    }
 }

@@ -48,12 +48,82 @@ public class RegistrationTest extends BaseTest {
     public void bgRegistrationPhoneMaintenance () {
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
-        clientPages.getLandingPage().bgRegistration.checkFinishLoading();
-        clientPages.getLandingPage().bgRegistration.fillBGMaintenanceRequest(randomClient.getObjectAddress(), EquipmentType.GAS_BOILER, 1, 1,20, randomClient.getSinceDate(), randomClient.getPhoneNumber(), randomClient.getEmail());
-        clientPages.getLandingPage().bgRegistration.findOffers();
-        clientPages.getLandingPage().bgRegistration.codeInput.checkFinishLoading();
-        clientPages.getLandingPage().bgRegistration.codeInput.sendCode(randomClient.getConfirmationCode());
-        clientPages.getHomePage().guideFirst.playGuideSteps();
+        step("Клиент заполняет форму фоновой регистрации", () -> {
+            clientPages.getLandingPage().bgRegistration.checkFinishLoading();
+            clientPages.getLandingPage().bgRegistration.fillBGMaintenanceRequest(randomClient.getObjectAddress(), EquipmentType.GAS_BOILER, 1, 1, 20, randomClient.getSinceDate(), randomClient.getPhoneNumber(), randomClient.getEmail());
+            clientPages.getLandingPage().bgRegistration.findOffers();
+            clientPages.getLandingPage().bgRegistration.codeInput.checkFinishLoading();
+            clientPages.getLandingPage().bgRegistration.codeInput.sendCode(randomClient.getConfirmationCode());
+        });
+        step("Кабинет клиента - состояние после фоновой регистрации", () -> {
+            step("Гид по кабинету", () -> {
+                clientPages.getHomePage().guideFirst.playGuideSteps();
+            });
+            step("Страница Карта", () -> {
+                clientPages.getSelectServicePage().checkFinishLoading();
+                clientPages.getSelectServicePage().checkPublishedState();
+            });
+            String orderNumber = step("Страница Карточка заказа", () -> {
+                clientPages.getSelectServicePage().toOrderCard();
+                clientPages.getOrderCardPage().checkFinishLoading();
+                String currentNumber = clientPages.getOrderCardPage().getOrderNumber();
+                return currentNumber;
+            });
+            step("Домашняя страница", () -> {
+                clientPages.getOrderCardPage().sidebar.home();
+                clientPages.getHomePage().checkBGInitialState(randomClient.getSinceDate());
+            });
+            step("Страница Уведомления", () -> {
+                clientPages.getHomePage().actionsBlock.allNotifications();
+                // TODO fix  Push notification  - not appear after Guide
+//                clientPages.getAllNotificationsPage().checkInitialBGState(orderNumber);
+//                clientPages.getAllNotificationsPage().readAll();
+
+            });
+            step("Страница Объекты", () -> {
+                clientPages.getAllNotificationsPage().sidebar.allObjects();
+                clientPages.getAllObjectsPage().checkFinishLoading();
+                clientPages.getAllObjectsPage().initialBGState();
+            });
+            step("Страница Заказы", () -> {
+                clientPages.getAllObjectsPage().sidebar.allOrders();
+                clientPages.getAllOrdersPage().checkFinishLoading();
+                clientPages.getAllOrdersPage().checkBGInitialState(orderNumber);
+            });
+            step("Страница Счета", () -> {
+                clientPages.getAllOrdersPage().sidebar.allInvoices();
+                clientPages.getAllInvoicesPage().checkFinishLoading();
+                clientPages.getAllInvoicesPage().checkInitialState();
+            });
+
+            step("Страница Профиль", () -> {
+                clientPages.getAllInvoicesPage().sidebar.profile();
+                clientPages.getProfilePage().checkFinishLoading();
+                step("Вкадка Общее данные", () -> {
+                    clientPages.getProfilePage().navCommon();
+                    clientPages.getProfilePage().navCommonTab.checkFinishLoading();
+                    clientPages.getProfilePage().navCommonTab.checkInitialBGState();
+                });
+                step("Вкадка Контакты", () -> {
+                    clientPages.getProfilePage().navContacts();
+                    clientPages.getProfilePage().navContactsTab.checkFinishLoading();
+                    clientPages.getProfilePage().navContactsTab.checkFilledState(randomClient.getEmail(), randomClient.getPhoneNumber());
+                });
+                step("Вкадка Пароль", () -> {
+                    clientPages.getProfilePage().navPassword();
+                    clientPages.getProfilePage().navPasswordTab.checkFinishLoading();
+                    clientPages.getProfilePage().navPasswordTab.checkInitialState();
+                });
+                step("Вкладка Уведомления", () -> {
+                    clientPages.getProfilePage().navNotifications();
+                    clientPages.getProfilePage().navNotificationsTab.checkFinishLoading();
+                    clientPages.getProfilePage().navNotificationsTab.checkInitialState();
+                });
+                clientPages.getProfilePage().sidebar.home();
+            });
+
+
+        });
     }
 
     @Test
@@ -105,9 +175,8 @@ public class RegistrationTest extends BaseTest {
             clientPages.getHomePage().checkInitialGuide();
             clientPages.getHomePage().clickLaterInitialModal();
         });
-        step("Кабинет клиента - начальное состояние", () -> {
-            clientPages.getHomePage().personSummaryComponent.checkFinishLoading(randomClient.getFullName(), randomClient.getSinceDate());
-            clientPages.getHomePage().personSummaryComponent.checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
+        step("Кабинет клиента - состояние после Регистрации", () -> {
+            clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
             clientPages.getHomePage().sidebar.allObjects();
             clientPages.getAllObjectsPage().checkInitialState();
             clientPages.getAllObjectsPage().sidebar.allOrders();
@@ -126,7 +195,7 @@ public class RegistrationTest extends BaseTest {
                 });
                 step("Вкадка Контакты", () -> {
                     clientPages.getProfilePage().navContacts();
-                    clientPages.getProfilePage().navContactsTab.checkFinishLoading(randomClient.getEmail(), randomClient.getPhoneNumber());
+                    clientPages.getProfilePage().navContactsTab.checkFinishLoading();
                     clientPages.getProfilePage().navContactsTab.checkFilledState(randomClient.getEmail(), randomClient.getPhoneNumber());
                 });
                 step("Вкадка Пароль", () -> {
@@ -194,7 +263,7 @@ public class RegistrationTest extends BaseTest {
             clientPages.getHomePage().checkInitialGuide();
             clientPages.getHomePage().clickLaterInitialModal();
         });
-        step("Кабинет клиента - начальное состояние", () -> {
+        step("Кабинет клиента - состояние после Регистрации", () -> {
             clientPages.getHomePage().personSummaryComponent.checkFinishLoading(randomClient.getFullName(), randomClient.getSinceDate());
             clientPages.getHomePage().personSummaryComponent.checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
             clientPages.getHomePage().sidebar.allObjects();
@@ -215,7 +284,7 @@ public class RegistrationTest extends BaseTest {
                 });
                 step("Вкадка Контакты", () -> {
                     clientPages.getProfilePage().navContacts();
-                    clientPages.getProfilePage().navContactsTab.checkFinishLoading(randomClient.getEmail(), randomClient.getPhoneNumber());
+                    clientPages.getProfilePage().navContactsTab.checkFinishLoading();
                     clientPages.getProfilePage().navContactsTab.checkFilledState(randomClient.getEmail(), randomClient.getPhoneNumber());
                 });
                 step("Вкадка Пароль", () -> {
@@ -280,7 +349,7 @@ public class RegistrationTest extends BaseTest {
             clientPages.getHomePage().checkInitialGuide();
             clientPages.getHomePage().clickLaterInitialModal();
         });
-        step("Кабинет клиента - начальное состояние", () -> {
+        step("Кабинет клиента - состояние после Регистрации", () -> {
             clientPages.getHomePage().personSummaryComponent.checkFinishLoading(randomClient.getFullName(), randomClient.getSinceDate());
             clientPages.getHomePage().personSummaryComponent.checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
             clientPages.getHomePage().sidebar.allObjects();

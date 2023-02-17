@@ -33,7 +33,6 @@ public class AllInvoicesClientPage extends BaseClientPage {
 
     public void checkInitialState() {
         stepWithRole("Убедиться, что страница в  начальном состоянии", () -> {
-            pageTitleLocator.shouldHave(text(PAGE_TITLE));
             stepWithRole("Убедиться, что отсутствуют ранее созданные Счета", () -> {
                 invoicesCollection.shouldHave(size(0));
             });
@@ -46,4 +45,9 @@ public class AllInvoicesClientPage extends BaseClientPage {
         });
     }
 
+    public void checkFinishLoading() {
+        stepWithRole("Убедиться, что страница Список счетов загрузилась", () -> {
+            pageTitleLocator.shouldHave(text(PAGE_TITLE));
+        });
+    }
 }

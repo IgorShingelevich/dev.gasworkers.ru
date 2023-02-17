@@ -38,7 +38,7 @@ public class CheckDocumentsClientPage  extends BaseClientPage {
         stepWithRole("Нажать кнопку Заключить договор", () -> {
             inputPassportIssuedByFieldLocator.shouldNot(empty);
             makeContractButton.shouldBe(visible, Duration.ofSeconds(60)).hover().click();
-            spinnerLoaderLocator.shouldBe(visible, Duration.ofSeconds(60));
+            spinnerLoaderLocator.shouldNotBe(visible, Duration.ofSeconds(60));
         });
         return this;
     }
