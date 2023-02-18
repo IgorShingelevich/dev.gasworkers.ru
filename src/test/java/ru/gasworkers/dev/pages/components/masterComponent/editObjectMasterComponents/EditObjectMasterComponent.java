@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public class EditObjectMasterComponent extends BaseComponent {
@@ -28,12 +29,21 @@ public class EditObjectMasterComponent extends BaseComponent {
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что компонент Редактирование объекта загружен", () -> {
             String urlEditObjectMasterComponent = driver.url();
+            objectNameLocator.shouldBe(visible);
+            toOrderButtonLocator.shouldBe(visible);
+            addressLocator.shouldBe(visible);
         });
     }
 
     public void toOrder () {
         stepWithRole("Нажать кнопку К заказу", () -> {
             toOrderButtonLocator.click();
+        });
+    }
+
+    public void editEquipment ( Integer index ) {
+        stepWithRole("Нажать кнопку Редактировать оборудование", () -> {
+//            equipmentCollection.get(index).$(editButtonLocator).click(); // TODO how to handle those cases
         });
     }
 }

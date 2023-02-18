@@ -9,8 +9,6 @@ import ru.gasworkers.dev.pages.components.masterComponent.editObjectMasterCompon
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarMasterComponent;
 
-import java.time.Duration;
-
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
@@ -19,34 +17,35 @@ public class EditObjectMasterPage extends BaseMasterPage {
 
     public final SidebarMasterComponent sidebar;
     public final ActionsBlockMasterComponent actionsBlock;
-    public final EditDistributorMasterComponent editDistributor;
+    public final EditDistributorMasterComponent editDistributorTab;
     public final EditDistributorModalMasterComponent distributorModal;
-    public final EditObjectMasterComponent editObject;
+    public final EditObjectMasterComponent editObjectTab;
 
     public EditObjectMasterPage(RoleBrowser browser) {
         super(browser);
         sidebar = new SidebarMasterComponent(browser);
         actionsBlock = new ActionsBlockMasterComponent(browser);
-        editDistributor = new EditDistributorMasterComponent(browser);
+        editDistributorTab = new EditDistributorMasterComponent(browser);
         distributorModal = new EditDistributorModalMasterComponent(browser);
-        editObject = new EditObjectMasterComponent(browser);
+        editObjectTab = new EditObjectMasterComponent(browser);
     }
 
     private final String
         EDIT_OBJECT_TITLE = "Объекты и оборудование";
     SelenideElement
-        pageTitleLocator = driver.$("div h1 .h3.mb-2").as("Заголовок страницы Редактирование объекта"),
+        pageTitleLocator = driver.$("div h1.h3.mb-2").as("Заголовок страницы Редактирование объекта"),
         toOrderButtonLocator = driver.$(byTagAndText("span", "К заказу")).as("Кнопка К заказу");
 
     ElementsCollection
-        navCollection = driver.$$("a.nav-primary__link span").as("Навигация");
+        navCollection = driver.$$("a.nav-primary__link").as("Навигация");
 
     public void checkFinishLoading() {
         String urlEditObjectMasterPage = driver.url();
         stepWithRole("Убедиться, что страница Редактирование объекта загружена", () -> {
-            pageTitleLocator.shouldHave(text(EDIT_OBJECT_TITLE)).shouldBe(visible, Duration.ofSeconds(60));
+            pageTitleLocator.shouldHave(text(EDIT_OBJECT_TITLE)).shouldBe(visible);
             navCollection.get(0).shouldHave(text("Объект"));
             navCollection.get(1).shouldHave(text("Филиал газораспределительной компании"));
+            editObjectTab.checkFinishLoading();
             toOrderButtonLocator.shouldBe(visible);
         });
     }
@@ -63,3 +62,4 @@ public class EditObjectMasterPage extends BaseMasterPage {
         });
     }
 }
+//TODO add equipment, edit Object(name, photo and address) - components ModalWindows

@@ -18,12 +18,12 @@ public class EditDistributorModalMasterComponent extends BaseComponent {
         EDIT_DISTRIBUTOR_TITLE = "Редактирование дистрибьютора";
 
     SelenideElement
-        titleLocator = driver.$("div h3 .branch-company-title").as("Заголовок страницы Редактирование дистрибьютора"),
+        titleLocator = driver.$("div h3.branch-company-title").as("Заголовок страницы Редактирование дистрибьютора"),
         companyFieldLocator = driver.$$("div.gas-select__header").get(0).as("Поле Компания"),
         branchFieldLocator = driver.$$("div.gas-select__header").get(1).as("Поле Филиал"),
         accountNumberLocator = driver.$("div.gas-input.primary input").as("Поле Лицевой счет"),
         saveButtonLocator = driver.$(byTagAndText("span", "Сохранить")).as("Кнопка Сохранить"),
-        cancelButtonLocator = driver.$(byTagAndText("span", "Отмена")).as("Кнопка Отмена"),
+        cancelButtonLocator = driver.$(byTagAndText("span", "Отменить")).as("Кнопка Отмена"),
         closeModalButtonLocator = driver.$("div.close-btn").as("Кнопка Закрыть");
     ElementsCollection
         companyCollection = driver.$$("div.gas-select-wrap").get(0).$$(".item").as("Коллекция  имя компаний"),
@@ -32,7 +32,7 @@ public class EditDistributorModalMasterComponent extends BaseComponent {
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что страница Редактирование дистрибьютора загружена", () -> {
             titleLocator.shouldBe(visible);
-            // TODO fix modalTitleLocator
+            // TODO fix modalTitleLocator, Distributor Details
         });
     }
 

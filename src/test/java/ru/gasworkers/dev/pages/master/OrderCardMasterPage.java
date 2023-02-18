@@ -144,4 +144,16 @@ public class OrderCardMasterPage extends BaseMasterPage {
         });
     }
 
+    public void startWork (){
+        stepWithRole("Нажать кнопку Приступить к работе", () -> {
+            startWorkingButtonLocator.shouldBe(visible).click();
+        });
+    }
+
+    public void editObject (){
+        stepWithRole("Нажать кнопку Редактировать объект/оборудование", () -> {
+            editObjectButtonLocator.shouldBe(visible).click();
+        });
+    }
+
 }

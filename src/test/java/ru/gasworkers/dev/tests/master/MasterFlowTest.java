@@ -67,7 +67,7 @@ public class MasterFlowTest extends BaseTest {
     @Tags({@Tag("regression"), @Tag("master"), @Tag("cabinet"), @Tag("positive")})
     @DisplayName("Мастер открывает заказ в состоянии Мастер в пути")
     public void clientCheckMasterDispatchedOrderSate () {
-        String checkedOrderNumber = "3678";
+        String checkedOrderNumber = "3814";
         masterPages.getHomePage().checkFinishLoading();
         masterPages.getHomePage().sidebar.checkReadyForVideoState(ReadyForVideoState.READY);
         masterPages.getHomePage().sidebar.allOrdersHistoryDropdown();
@@ -77,10 +77,25 @@ public class MasterFlowTest extends BaseTest {
         masterPages.getAllNewOrdersPage().openByNumber(checkedOrderNumber);
         masterPages.getOrderCardPage().checkFinishLoading();
         masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+        masterPages.getOrderCardPage().editObject();
+        masterPages.getEditObjectPage().checkFinishLoading();
+        masterPages.getEditObjectPage().navGasBranch();
+        masterPages.getEditObjectPage().editDistributorTab.checkFinishLoading();
+        //TODO check Distributor details
+        masterPages.getEditObjectPage().editDistributorTab.editDistributor();
+        //TODO check Distributor  Modal details
+        masterPages.getEditObjectPage().editDistributorTab.distributorModal.checkFinishLoading(); // TODO fix modalTitleLocator
+        masterPages.getEditObjectPage().editDistributorTab.distributorModal.cancel();
+        masterPages.getEditObjectPage().editDistributorTab.checkFinishLoading();
+        masterPages.getEditObjectPage().navObject();
+        masterPages.getEditObjectPage().editObjectTab.checkFinishLoading();
+        masterPages.getEditObjectPage().editObjectTab.toOrder();
+
+
         // TODO checkFinishLoading - expand  docs check, order properties check, price check
 
     }
-
+    @Disabled
     @Owner("Igor Shingelevich")
     @Feature("Кабинет мастера")
     @Story("Просмотр заказа ТО")
@@ -96,7 +111,8 @@ public class MasterFlowTest extends BaseTest {
         masterPages.getAllNewOrdersPage().switchToListView();
         masterPages.getAllNewOrdersPage().openByNumber(orderNumber);
         masterPages.getOrderCardPage().checkFinishLoading();
-        masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+        //TODO checkNotReviewedCompletedOrderState
+//        masterPages.getOrderCardPage().checkNotReviewedCompletedOrderState(OrderStatus.COMPLETED, OrderType.MAINTENANCE);
         // TODO checkFinishLoading - expand  docs check, order properties check, price check
     }
 

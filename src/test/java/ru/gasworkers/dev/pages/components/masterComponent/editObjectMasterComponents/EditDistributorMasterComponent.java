@@ -24,7 +24,7 @@ public class EditDistributorMasterComponent extends BaseComponent {
         nameLocator = infoCollection.get(0).as("Название компании"),
         branchLocator = infoCollection.get(1).as("Название филиала"),
         accountLocator = infoCollection.get(2).as("Лицевой счет"),
-        editButtonLocator = driver.$(byTagAndText("span", "К заказу")).as("Кнопка Редактировать"),
+        editButtonLocator = driver.$(byTagAndText("span", "Редактировать")).as("Кнопка Редактировать"),
         toOrderButtonLocator = driver.$(byTagAndText("span", "К заказу")).as("Кнопка К заказу");
 
 
@@ -36,6 +36,18 @@ public class EditDistributorMasterComponent extends BaseComponent {
             accountLocator.shouldBe(visible);
             editButtonLocator.shouldBe(visible);
             toOrderButtonLocator.shouldBe(visible);
+        });
+    }
+
+    public void toOrder () {
+        stepWithRole("Нажать кнопку К заказу", () -> {
+            toOrderButtonLocator.click();
+        });
+    }
+
+    public void editDistributor () {
+        stepWithRole("Нажать кнопку Редактировать", () -> {
+            editButtonLocator.click();
         });
     }
 

@@ -3,8 +3,15 @@ package ru.gasworkers.dev.tests;
 public class BaseTest {
 
 }
-// TODO DISCUSS 1  should i include url check to  all .checkFinishLoading() methods?
-// TODO DISCUSS 2 should i follow this  implementation for  validations check
+// TODO DISCUSS  download method FOLDER -  periodically fall download
+// TODO DISCUSS   delete previous Allure run results before new run
+// TODO DISCUSS   managing   attachments in Allure - pics ( only  if fall), open web page from attachments
+// TODO DISCUSS   should i include url check to  all .checkFinishLoading() methods?
+// TODO DISCUSS ru/gasworkers/dev/pages/components/masterComponent/editObjectMasterComponents/EditObjectMasterComponent.java:46 - ElementsCollection.SelenideElement construction
+// TODO DISCUSS   how to handle equipment description. Different amount of equipment in different objects - how to put them in variables?
+//TODO DISCUSS add generated equipment, address ant all generated data to builder
+// TODO DISCUSS   public final  vs private final in PageComponents
+// TODO DISCUSS  should i follow this  implementation for  validations check
  /*implementation in  validations check
         Нужна коллекция элементов с текстами ошибок от инпутов.
 
@@ -16,9 +23,5 @@ public class BaseTest {
         field.$(".controls.input-validation-error").click();
         actualErrorsText.add(field.$(".tooltip-alert.alert-danger").shouldBe(Condition.visible).getText());
         }*/
-// TODO DISCUSS 3  public final  vs private final in PageComponents
-// TODO DISCUSS 4  delete previous Allure run results before new run
-// TODO DISCUSS 5  managing   attachments in Allure - pics ( only  if fall), open web page from attachments
-// TODO DISCUSS 6  download method FOLDER -  periodically fall download
 
 
