@@ -4,7 +4,7 @@ import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
-import ru.gasworkers.dev.browser.Browser;
+import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.master.ReadyForVideoState;

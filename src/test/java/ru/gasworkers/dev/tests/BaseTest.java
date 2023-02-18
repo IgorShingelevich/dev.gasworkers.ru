@@ -1,6 +1,10 @@
 package ru.gasworkers.dev.tests;
 
-public class BaseTest {
+import org.junit.jupiter.api.extension.ExtendWith;
+import ru.gasworkers.dev.extension.browser.ScreenshotExtension;
+
+@ExtendWith(ScreenshotExtension.class)
+public abstract class BaseTest {
 
 }
 // TODO DISCUSS  download method FOLDER -  periodically fall download - Failed to download file in 1000 ms.

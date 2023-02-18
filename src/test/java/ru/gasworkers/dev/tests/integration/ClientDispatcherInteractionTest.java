@@ -1,6 +1,6 @@
 package ru.gasworkers.dev.tests.integration;
 
-import ru.gasworkers.dev.browser.Browser;
+import ru.gasworkers.dev.extension.browser.Browser;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;

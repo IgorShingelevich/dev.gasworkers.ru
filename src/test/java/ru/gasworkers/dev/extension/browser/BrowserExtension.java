@@ -1,10 +1,9 @@
-package ru.gasworkers.dev.browser;
+package ru.gasworkers.dev.extension.browser;
 
 import com.codeborne.selenide.SelenideDriver;
-import ru.gasworkers.dev.helpers.Attach;
 import ru.gasworkers.dev.helpers.DriverFactory;
-import io.qameta.allure.Allure;
 import lombok.SneakyThrows;
+import ru.gasworkers.dev.helpers.TestIdentifierHelper;
 import ru.gasworkers.dev.model.browser.RoleBrowsers;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import org.junit.jupiter.api.extension.*;
@@ -20,8 +19,7 @@ import static org.junit.jupiter.api.extension.ExtensionContext.Namespace.create;
 
 public class BrowserExtension implements BeforeEachCallback, ParameterResolver, AfterEachCallback {
 
-    private static final ExtensionContext.Namespace NAMESPACE = create(BrowserExtension.class);
-    private final String storageKey = "STORAGE KEY " + Thread.currentThread().getId();
+    public static final ExtensionContext.Namespace NAMESPACE = create(BrowserExtension.class);
 
     @Override
     public void beforeEach(ExtensionContext extensionContext) throws Exception {
@@ -79,34 +77,26 @@ public class BrowserExtension implements BeforeEachCallback, ParameterResolver, 
     @Override
     public void afterEach(ExtensionContext extensionContext) throws Exception {
         RoleBrowsers browsers = getFromStore(extensionContext);
-        clearStore(extensionContext);
 
         if (browsers == null)
             return;
 
         for (SelenideDriver driver : browsers.getDrivers()) {
             if (driver.hasWebDriverStarted()) {
-                Allure.step("Attachments", () -> {
-                    Attach.screenshotAs(driver, "Last screenshot");
-                    Attach.browserConsoleLogs(driver);
-                    Attach.pageSource(driver);
-                });
                 driver.close();
             }
         }
     }
 
     private RoleBrowsers getFromStore(ExtensionContext extensionContext) {
-        Object object = extensionContext.getStore(NAMESPACE).get(storageKey);
+        String testIdentifier = TestIdentifierHelper.getTestIdentifier(extensionContext);
+        Object object = extensionContext.getStore(NAMESPACE).get(testIdentifier);
         return object == null ? null : (RoleBrowsers) object;
     }
 
     private void saveToStore(ExtensionContext extensionContext, RoleBrowsers browsers) {
-        extensionContext.getStore(NAMESPACE).put(storageKey, browsers);
-    }
-
-    private void clearStore(ExtensionContext extensionContext) {
-        extensionContext.getStore(NAMESPACE).remove(storageKey);
+        String testIdentifier = TestIdentifierHelper.getTestIdentifier(extensionContext);
+        extensionContext.getStore(NAMESPACE).put(testIdentifier, browsers);
     }
 
 }

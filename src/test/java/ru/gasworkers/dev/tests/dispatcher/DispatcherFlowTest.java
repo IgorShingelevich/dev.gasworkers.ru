@@ -1,6 +1,6 @@
 package ru.gasworkers.dev.tests.dispatcher;
 
-import ru.gasworkers.dev.browser.Browser;
+import ru.gasworkers.dev.extension.browser.Browser;
 import io.qameta.allure.Step;
 import ru.gasworkers.dev.model.OrderStatus;
 import org.junit.jupiter.api.*;

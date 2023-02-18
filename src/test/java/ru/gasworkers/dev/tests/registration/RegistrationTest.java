@@ -5,7 +5,7 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import ru.gasworkers.dev.allure.AllureStory;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.browser.Browser;
+import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.Role;
 
 

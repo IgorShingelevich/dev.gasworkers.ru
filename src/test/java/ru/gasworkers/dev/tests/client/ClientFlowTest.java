@@ -1,6 +1,6 @@
 package ru.gasworkers.dev.tests.client;
 
-import ru.gasworkers.dev.browser.Browser;
+import ru.gasworkers.dev.extension.browser.Browser;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Story;
 import ru.gasworkers.dev.model.client.ClientRequestType;
@@ -187,8 +187,8 @@ class ClientFlowTest extends BaseTest {
     @Feature("Кабинет клиента")
     @Story("Просмотр заказа на ТО")
     @DisplayName("Клиент открывает заказ в состоянии Мастер в пути  и скачивает документы")
-    public void clientDownloadDocsMasterDispatchedOrderSate () throws Exception {
-        String checkedOrderNumber = "3695";
+    public void clientDownloadDocsMasterDispatchedOrderSate() throws Exception {
+        String checkedOrderNumber = "3816";
         clientPages.getHomePage().popUpClose();
         clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
         clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
@@ -201,7 +201,6 @@ class ClientFlowTest extends BaseTest {
         clientPages.getOrderCardPage().docsTab.downloadAgreement();
         clientPages.getOrderCardPage().docsTab.downloadAgreement();
         clientPages.getOrderCardPage().docsTab.downloadInsurance();
-
     }
 
     @Test

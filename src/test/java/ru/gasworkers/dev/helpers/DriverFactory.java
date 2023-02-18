@@ -2,10 +2,9 @@ package ru.gasworkers.dev.helpers;
 
 import com.codeborne.selenide.SelenideConfig;
 import com.codeborne.selenide.SelenideDriver;
-import ru.gasworkers.dev.browser.Browser;
+import ru.gasworkers.dev.extension.browser.Browser;
 
 import static com.codeborne.selenide.FileDownloadMode.FOLDER;
-import static com.codeborne.selenide.FileDownloadMode.PROXY;
 
 public final class DriverFactory {
 

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.browser;
+package ru.gasworkers.dev.extension.browser;
 
 import ru.gasworkers.dev.model.Role;
 import org.junit.jupiter.api.extension.ExtendWith;
