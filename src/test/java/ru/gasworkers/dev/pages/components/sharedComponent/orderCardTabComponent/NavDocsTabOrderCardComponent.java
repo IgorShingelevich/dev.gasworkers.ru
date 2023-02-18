@@ -6,8 +6,6 @@ import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -19,6 +17,7 @@ import static io.qameta.allure.Allure.step;
 
 public class NavDocsTabOrderCardComponent extends BaseTabOrderCardComponent {
     public final OrderStatusCardComponent orderState;
+    private final long downloadTimeout = 3_000L;
 
     public NavDocsTabOrderCardComponent(RoleBrowser browser) {
         super(browser);
@@ -58,27 +57,22 @@ public class NavDocsTabOrderCardComponent extends BaseTabOrderCardComponent {
         });
     }
 
-    public NavDocsTabOrderCardComponent downloadAgreement()  throws Exception {
-        stepWithRole("Скачать договор ТО", () -> {
-            File agreement = docsTitleCollection.findBy(text("Договор ТО")).download(1000L);
-            InputStream is = new FileInputStream(agreement);
+    public File downloadAgreement() {
+        File file = stepWithRole("Скачать договор ТО", () -> {
+            return docsTitleCollection.findBy(text("Договор ТО")).download(downloadTimeout);
         });
-        return this;
-    }
-    public NavDocsTabOrderCardComponent downloadCompletionAct() throws Exception {
-        stepWithRole("Скачать акт выполненных работ", () -> {
-            File completionAct = docsTitleCollection.findBy(text("Акт выполненных работ")).download(1000L);
-            InputStream is = new FileInputStream(completionAct);
-        });
-        return this;
+        return file;
     }
 
-    public NavDocsTabOrderCardComponent downloadInsurance() throws Exception {
-        stepWithRole("Скачать страховой полис", () -> {
-            File insurance = docsTitleCollection.findBy(text("Страховой полис")).download(1000L);
-            InputStream is = new FileInputStream(insurance);
+    public File downloadCompletionAct() throws Exception {
+        return stepWithRole("Скачать акт выполненных работ", () -> {
+            return docsTitleCollection.findBy(text("Акт выполненных работ")).download(downloadTimeout);
         });
-        return this;
+    }
+
+    public File downloadInsurance() throws Exception {
+        return stepWithRole("Скачать страховой полис", () ->
+                docsTitleCollection.findBy(text("Страховой полис")).download(downloadTimeout));
     }
 
 }
