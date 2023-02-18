@@ -69,27 +69,28 @@ class ClientDispatcherInteractionTest extends BaseTest {
     @Story("Интерграция Путь ТО")
     @DisplayName(" ТО Интеграция Клиент-Диспетчер-Клиент-Диспетчер")  // whu name 2 times in Allure?
     void integrationDispatcherAcceptClientMaintenanceRequest() {
-
-        step("авторизация Клиента", () -> {
-            clientPages.getLoginPage().open().login(client.email, client.password);
+        step("авторизация Ролей ", ()-> {
+                    step("авторизация Клиента", () -> {
+                        clientPages.getLoginPage().open().login(client.email, client.password);
 //            clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);  // TODO fix fullName order
-        });
-        step("авторизация Диспетчера", () -> {
-            dispatcherPages.getLoginPage().open().login(dispatcher.email, dispatcher.password);
-            dispatcherPages.getHomePage().checkFinishLoading();
-        });
-        step("авторизация Мастера", () -> {
-            masterPages.getLoginPage().open().login(master.email, master.password);
-            masterPages.getHomePage().checkFinishLoading();
-        });
-        step("Test run credentials ", () -> {
-            Allure.addAttachment("Client creds", client.fullName + ": " + client.email + "/" + client.password);
-            Allure.addAttachment("Dispatcher creds", dispatcher.fullName + ": " + dispatcher.email + "/" + dispatcher.password);
-            Allure.addAttachment("Master creds", master.fullName + ": " + master.email + "/" + master.password);
-            String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-                    + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-            Allure.addAttachment("RunStartTime: ", date);
-        });
+                    });
+                    step("авторизация Диспетчера", () -> {
+                        dispatcherPages.getLoginPage().open().login(dispatcher.email, dispatcher.password);
+                        dispatcherPages.getHomePage().checkFinishLoading();
+                    });
+                    step("авторизация Мастера", () -> {
+                        masterPages.getLoginPage().open().login(master.email, master.password);
+                        masterPages.getHomePage().checkFinishLoading();
+                    });
+                    step("Test run credentials ", () -> {
+                        Allure.addAttachment("Client creds", client.fullName + ": " + client.email + "/" + client.password);
+                        Allure.addAttachment("Dispatcher creds", dispatcher.fullName + ": " + dispatcher.email + "/" + dispatcher.password);
+                        Allure.addAttachment("Master creds", master.fullName + ": " + master.email + "/" + master.password);
+                        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                                + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+                        Allure.addAttachment("RunStartTime: ", date);
+                    });
+                });
 
 
         String orderNumber = step("Клиент размещает заказ на ТО", () -> {

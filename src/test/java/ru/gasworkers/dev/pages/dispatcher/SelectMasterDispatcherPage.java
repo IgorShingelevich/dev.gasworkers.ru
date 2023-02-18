@@ -6,6 +6,8 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarDispatcherComponent;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
@@ -35,7 +37,7 @@ public class SelectMasterDispatcherPage extends BaseDispatcherPage {
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что страница Выбор мастера загружена", () -> {
             pageTitleLocator.shouldHave(text(PAGE_TITLE));
-            selectAvailableMasterButtonCollection.as("Кнопка Выбрать").shouldBe(CollectionCondition.sizeGreaterThan(0));
+            selectAvailableMasterButtonCollection.as("Кнопка Выбрать").shouldBe(CollectionCondition.sizeGreaterThan(0), Duration.ofSeconds(10)); // added 10 sec timeout
             // is CollectionCondition.sizeGreaterThan(0)- good way to check gage is loaded?
         });
     }
