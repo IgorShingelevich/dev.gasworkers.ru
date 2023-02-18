@@ -5,6 +5,8 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
+import java.util.List;
+
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 
@@ -24,7 +26,7 @@ public class EditObjectMasterComponent extends BaseComponent {
         addressLocator = driver.$("div.address .value").as("Адрес объекта");
 
     ElementsCollection
-        equipmentCollection = driver.$$("div.equipment-item ").as("Коллекция  оборудования");
+        equipmentCollection = driver.$$("div.equipment-item").as("Коллекция  оборудования");
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что компонент Редактирование объекта загружен", () -> {
@@ -41,9 +43,28 @@ public class EditObjectMasterComponent extends BaseComponent {
         });
     }
 
-    public void editEquipment ( Integer index ) {
+    public void editEquipment(Integer index) {
         stepWithRole("Нажать кнопку Редактировать оборудование", () -> {
 //            equipmentCollection.get(index).$(editButtonLocator).click(); // TODO how to handle those cases
         });
     }
+
+    public List<String> getEquipmentItemTitles() {
+        // Вариант 1
+//        List<String> texts = new ArrayList<>();
+//        for (SelenideElement element : equipmentCollection) {
+//            String text = element.find(".title-text").text();
+//            texts.add(text);
+//        }
+//        return texts;
+
+        // Вариант 2
+//        return equipmentCollection.stream()
+//                .map(element -> element.find(".title-text").text())
+//                .collect(Collectors.toList());
+
+        // Вариант 3
+        return driver.$$("div.equipment-item .title-text").texts();
+    }
+
 }
