@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.helpers;
 
+import io.qameta.allure.Step;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 
 import static io.qameta.allure.Allure.step;
@@ -34,6 +35,15 @@ public final class DriverManager {
 //            executeJavaScript("window.devicePixelRatio = 0.5");
 //            executeJavaScript("window.resizeBy(50, 50)");
 //            executeJavaScript("window.resizeTo(50, 50)");
+    }
+
+    @Step("Add screenshot to {attachName}")
+    public void screenshot(String attachName) {
+        Attach.screenshotAs(roleBrowser.getDriver(), attachName);
+    }
+
+    public void screenshot() {
+        screenshot("Screenshot page");
     }
 
 }

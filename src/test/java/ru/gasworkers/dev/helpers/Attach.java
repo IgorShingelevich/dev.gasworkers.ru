@@ -16,7 +16,7 @@ public final class Attach {
         return ((TakesScreenshot) driver.getWebDriver()).getScreenshotAs(OutputType.BYTES);
     }
 
-    @Attachment(value = "Page source", type = "text/plain")
+    @Attachment(value = "Page source", type = "text/html")
     public static byte[] pageSource(SelenideDriver driver) {
         return driver.getWebDriver().getPageSource().getBytes(StandardCharsets.UTF_8);
     }
@@ -29,7 +29,7 @@ public final class Attach {
     }
 
     @Attachment(value = "{attachName}", type = "text/plain")
-    public static String attachAsText(String attachName, String message) {
+    private static String attachAsText(String attachName, String message) {
         return message;
     }
 

@@ -38,8 +38,6 @@ class ClientFlowTest extends BaseTest {
         clientPages.getLoginPage().login(client00.email, client00.password);
     }
 
-
-
     @Test
     @Feature("Кабинет клиента")
     @Story("Смена пароля")
@@ -78,7 +76,7 @@ class ClientFlowTest extends BaseTest {
     @Feature("Кабинет клиента")
     @Story("Заполненный кабинет ")
     @DisplayName("Выбранный клиент просматривает заполненный кабинет")
-    public void checkFilledCabinetState(){
+    public void checkFilledCabinetState() {
         clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
         clientPages.getHomePage().sidebar.profile();
         clientPages.getProfilePage().checkFinishLoading();
@@ -129,7 +127,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getInfoTypeOrderPage()
 //                  .checkTitle("Заказ на ТО")
 //                  .checkStepSequence("Шаг 1 из 3")
-                        .clickNextButton();
+                .clickNextButton();
         clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0);
         clientPages.getSelectDateMaintenancePage().pickNowDateAM();
         clientPages.getSelectDateMaintenancePage().submitOrder();
@@ -156,22 +154,22 @@ class ClientFlowTest extends BaseTest {
     @Feature("Кабинет клиента")
     @Story("Просмотр заказа на ТО")
     @DisplayName("Клиент открывает заказ в состоянии Согласование даты заказа")
-    public void clientCheckScheduleVisitOrderSate () {
+    public void clientCheckScheduleVisitOrderSate() {
         String checkedOrderNumber = "3659";
-            clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
-            clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
-            clientPages.getHomePage().sidebar.allOrders();
-            clientPages.getAllOrdersPage().checkFinishLoading();
-            clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
-            clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_VISIT, OrderType.MAINTENANCE);
+        clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
+        clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
+        clientPages.getHomePage().sidebar.allOrders();
+        clientPages.getAllOrdersPage().checkFinishLoading();
+        clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
+        clientPages.getOrderCardPage().checkFinishLoading();
+        clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_VISIT, OrderType.MAINTENANCE);
     }
 
     @Test
     @Feature("Кабинет клиента")
     @Story("Просмотр заказа на ТО")
     @DisplayName("Клиент открывает заказ в состоянии Мастер в пути")
-    public void clientCheckMasterDispatchedOrderSate () {
+    public void clientCheckMasterDispatchedOrderSate() {
         String checkedOrderNumber = "3695";
         clientPages.getHomePage().popUpClose();
         clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
@@ -190,16 +188,21 @@ class ClientFlowTest extends BaseTest {
     public void clientDownloadDocsMasterDispatchedOrderSate() throws Exception {
         String checkedOrderNumber = "3816";
         clientPages.getHomePage().popUpClose();
+        clientPages.getDriverManager().screenshot("Фотка №1");
         clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
         clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
         clientPages.getHomePage().sidebar.allOrders();
+        clientPages.getDriverManager().screenshot("Фотка №2");
         clientPages.getAllOrdersPage().checkFinishLoading();
         clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
         clientPages.getOrderCardPage().checkFinishLoading();
+        clientPages.getDriverManager().screenshot("Фотка №3");
         clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
         clientPages.getOrderCardPage().navDocs();
+        clientPages.getDriverManager().screenshot("Фотка №4");
         clientPages.getOrderCardPage().docsTab.downloadAgreement();
         clientPages.getOrderCardPage().docsTab.downloadAgreement();
+        clientPages.getDriverManager().screenshot("Фотка №5");
         clientPages.getOrderCardPage().docsTab.downloadInsurance();
     }
 
