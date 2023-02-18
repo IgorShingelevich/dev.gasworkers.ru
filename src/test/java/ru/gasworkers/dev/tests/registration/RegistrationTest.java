@@ -1,7 +1,10 @@
 package ru.gasworkers.dev.tests.registration;
+
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
+import ru.gasworkers.dev.allure.AllureStory;
+import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.browser.Browser;
 import ru.gasworkers.dev.model.Role;
 
@@ -18,9 +21,9 @@ import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.RandomClient;
 
 import static io.qameta.allure.Allure.step;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
+@Tag(AllureTag.REGISTRATION)
+@Tag(AllureTag.REGRESSION)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class RegistrationTest extends BaseTest {
 
@@ -42,10 +45,10 @@ public class RegistrationTest extends BaseTest {
     @Owner("Igor Shingelevich")
     @Order(0)
     @Feature("Фоновая регистрация")
-    @Story("Регистрация ТО")
-    @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
+    @Story(AllureStory.REGISTRATION_TO)
+    @Tags({@Tag("client"), @Tag("positive")})
     @DisplayName("Фоновая Регистрация клиента по телефону на ТО")
-    public void bgRegistrationPhoneMaintenance () {
+    public void bgRegistrationPhoneMaintenance() {
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
         step("Клиент заполняет форму фоновой регистрации", () -> {
@@ -330,9 +333,9 @@ public class RegistrationTest extends BaseTest {
             clientPages.getRegistrationPage().clickNext();
         });
         step("Страница третьего шага регистрации", () -> {
-        clientPages.getRegistrationPage().checkThirdStepFinishLoading();
-        clientPages.getRegistrationPage().generatePassword();
-        clientPages.getRegistrationPage().clickNext();
+            clientPages.getRegistrationPage().checkThirdStepFinishLoading();
+            clientPages.getRegistrationPage().generatePassword();
+            clientPages.getRegistrationPage().clickNext();
         });
         step("Страница четвертого шага регистрации", () -> {
             clientPages.getRegistrationPage().checkFourthStepByPhoneFinishLoading(randomClient.getPhoneNumber());
@@ -377,15 +380,15 @@ public class RegistrationTest extends BaseTest {
         //TODO check initial guide leading to create an object
     }
 
-    @ValueSource(strings = { "user@example.c", "user@sub.sub.sub.com" })
-    @ParameterizedTest (name = "Убедиться, что при вводе допустимого  email: {0} возможна регистрация")
+    @ValueSource(strings = {"user@example.c", "user@sub.sub.sub.com"})
+    @ParameterizedTest(name = "Убедиться, что при вводе допустимого  email: {0} возможна регистрация")
     @Owner("Igor Shingelevich")
     @Order(4)
     @Feature("Регистрация")
     @Story("Регистрация с допустимыми параметрами")
-    @Tags({@Tag("regression"), @Tag("client"),@Tag("registration"), @Tag("positive")})
+    @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
     @DisplayName("Регистрация клиента с допустимым email: ")
-    void registrationClientByAcceptedEmail( String acceptedEmail){
+    void registrationClientByAcceptedEmail(String acceptedEmail) {
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
         clientPages.getLandingPage().signUpClient();
@@ -400,14 +403,14 @@ public class RegistrationTest extends BaseTest {
 
     @CsvFileSource(resources = "resources/invalidEmailFormat.csv", numLinesToSkip = 1, delimiter = '|')
     //    @CsvSource(value = {}) // poccible with implementation in the code
-    @ParameterizedTest (name = "Убедиться, что при вводе невалидного email: {0} появляется ошибка: {1}")
+    @ParameterizedTest(name = "Убедиться, что при вводе невалидного email: {0} появляется ошибка: {1}")
     @Owner("Igor Shingelevich")
     @Order(5)
     @Feature("Регистрация")
     @Story("Регистрация с недопустимымой почтой")
     @Tags({@Tag("regression"), @Tag("registration"), @Tag("negative")})
     @DisplayName("Регистрация клиента с невалидным email: ")
-    void registrationClientByInvalidEmail( String invalidEmail, String errorText ){
+    void registrationClientByInvalidEmail(String invalidEmail, String errorText) {
         step("Страница лендинга", () -> {
             clientPages.getLandingPage().open();
             clientPages.getLandingPage().checkFinishLoading();
@@ -428,14 +431,14 @@ public class RegistrationTest extends BaseTest {
     }
 
     @CsvFileSource(resources = "resources/invalidPhoneNumbers.csv", numLinesToSkip = 1, delimiter = '|')
-    @ParameterizedTest (name = "Убедиться, что при вводе невалидного номера телефона: {0} появляется ошибка: {1}")
+    @ParameterizedTest(name = "Убедиться, что при вводе невалидного номера телефона: {0} появляется ошибка: {1}")
     @Owner("Igor Shingelevich")
     @Order(6)
     @Tags({@Tag("regression"), @Tag("registration"), @Tag("negative")})
-     @Feature("Регистрация")
+    @Feature("Регистрация")
     @Story("Регистрация с недопустимыми номером телефона")
     @DisplayName("Регистрация клиента с невалидным номером телефона")
-    void registrationClientByInvalidPhoneNumber( String invalidPhoneNumber, String errorText){
+    void registrationClientByInvalidPhoneNumber(String invalidPhoneNumber, String errorText) {
         step("Страница лендинга", () -> {
             clientPages.getLandingPage().open();
             clientPages.getLandingPage().checkFinishLoading();
