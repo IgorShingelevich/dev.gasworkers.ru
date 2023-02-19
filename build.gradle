@@ -77,8 +77,14 @@ test {
     useJUnitPlatform()
 }
 
-task registrationTest(type: Test) {
+task scope_registrationTest(type: Test) {
     useJUnitPlatform {
         includeTags "registration"
+    }
+
+}
+task scope_clientTest(type: Test) {
+    useJUnitPlatform {
+        includeTags "client"
     }
 }

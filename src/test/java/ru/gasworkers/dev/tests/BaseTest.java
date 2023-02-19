@@ -10,8 +10,8 @@ public abstract class BaseTest {
 // TODO DISCUSS  download method FOLDER -  periodically fall download - Failed to download file in 1000 ms.
 // TODO DISCUSS   delete previous Allure run results before new run - from repo and from local machine - Report successfully generated to C:\Users\V\AppData\Local\Temp\15304290317834521042\allure-report
 // TODO DISCUSS   managing   attachments in Allure - pics ( only  if fall), open web page from attachments
-// TODO DISCUSS   should i include url check to  all .checkFinishLoading() methods?
 // TODO DISCUSS ru/gasworkers/dev/pages/components/masterComponent/editObjectMasterComponents/EditObjectMasterComponent.java:46 - ElementsCollection.SelenideElement construction
+// TODO DISCUSS   should i include url check to  all .checkFinishLoading() methods?
 // TODO DISCUSS   how to handle equipment description. Different amount of equipment in different objects - how to put them in variables?
 //TODO DISCUSS add generated equipment, address ant all generated data to builder
 // TODO DISCUSS   public final  vs private final in PageComponents
