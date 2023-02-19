@@ -4,8 +4,9 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.clientComponent.GuideFirstComponent;
+import ru.gasworkers.dev.pages.components.clientComponent.guideComponent.FirstMaintenanceGuideComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClientComponent;
+import ru.gasworkers.dev.pages.components.clientComponent.guideComponent.FirstRepairGuideComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.PersonSummaryComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
@@ -21,7 +22,8 @@ public final class HomeClientPage extends BaseClientPage {
     public final ActionsBlockClientComponent actionsBlock;
     public final LastOrderProfileClientComponent lastOrderComponent;
     public final PersonSummaryComponent personSummaryComponent;
-    public final GuideFirstComponent guideFirst;
+    public final FirstMaintenanceGuideComponent firstMaintenanceGuide;
+    public final FirstRepairGuideComponent firstRepairGuide;
 
     public HomeClientPage(RoleBrowser browser) {
         super(browser);
@@ -29,7 +31,8 @@ public final class HomeClientPage extends BaseClientPage {
         actionsBlock = new ActionsBlockClientComponent(browser);
         lastOrderComponent = new LastOrderProfileClientComponent(browser);
         personSummaryComponent = new PersonSummaryComponent(browser);
-        guideFirst = new GuideFirstComponent(browser);
+        firstMaintenanceGuide = new FirstMaintenanceGuideComponent(browser);
+        firstRepairGuide = new FirstRepairGuideComponent(browser);
     }
 
     private final String OBJECTS_TITLE = "Объекты и оборудование";

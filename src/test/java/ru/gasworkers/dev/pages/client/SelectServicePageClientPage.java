@@ -4,7 +4,7 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import ru.gasworkers.dev.pages.components.clientComponent.GuideFirstComponent;
+import ru.gasworkers.dev.pages.components.clientComponent.guideComponent.FirstMaintenanceGuideComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.OffersClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
@@ -19,7 +19,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
     public final FocusHeaderComponent header;
     public final StepperComponent stepper;
     public final OffersClientComponent offers;
-    public final GuideFirstComponent guideFirst;
+    public final FirstMaintenanceGuideComponent guideFirst;
 
 
     public SelectServicePageClientPage(RoleBrowser browser) {
@@ -27,7 +27,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
         header = new FocusHeaderComponent(browser);
         stepper = new StepperComponent(browser);
         offers = new OffersClientComponent(browser);
-        guideFirst = new GuideFirstComponent(browser);
+        guideFirst = new FirstMaintenanceGuideComponent(browser);
     }
 
     private final String

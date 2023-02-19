@@ -246,6 +246,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
         });
 
         step("Мастер открывает объект Клиента", () -> {
+            masterPages.getHomePage().popUpClose();
             masterPages.getOrderCardPage().editObject();
             masterPages.getEditObjectPage().checkFinishLoading();
             masterPages.getEditObjectPage().navGasBranch();

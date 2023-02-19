@@ -13,13 +13,14 @@ public class EquipmentBackgroundPicker extends BaseComponent {
     }
 
     SelenideElement
-    equipmentFieldLocator = driver.$("div.search-option__equipment--title.cursor-pointer").as("Поле выбора оборудования"),
+    equipmentFieldLocator = driver.$("div.search-option__equipment--title.cursor-pointer").as("Поле оборудованиe"),
     addAnotherEquipmentButtonLocator = driver.$("div.position-absolute a").as("Кнопка добавить оборудование"),
     equipmentContainerLocator = driver.$("div.search-option__equipment--dropdown").as("Контейнер выбора оборудования"),
-    typeDropdownLocator = driver.$("div.gas-select__header").as("Дропдаун выбора типа оборудования"),
-    brandDropdownLocator = driver.$("input[placeholder='Начните вводить название марки']").as("Дропдаун выбора марки оборудования"),
-    markDropdownLocator = driver.$("input[placeholder='Начните вводить модель']").as("Дропдаун выбора модели оборудования"),
+    typeFieldLocator = driver.$("div.gas-select__header").as("Дропдаун выбора типа оборудования"),
+    brandFieldLocator = driver.$("input[placeholder='Начните вводить название марки']").as("Поле выбора марки оборудования"),
+    markFieldLocator = driver.$("input[placeholder='Начните вводить модель']").as("Поле выбора модели оборудования"),
     powerFieldLocator = driver.$("input[placeholder='Введите мощность']").as("Поле выбора мощности оборудования"),
+    problemTextareaLocator = driver.$("textarea[placeholder='Кратко опишите проблему']").as("Поле Кратко опишите проблему"),
     approveButtonLocator = driver.$("div.search-option__equipment button.btn-fs-sm.btn.btn-primary").as("Кнопка подтвердить выбора оборудования"),
     clearButtonLocator = driver.$("div.search-option__equipment button.btn-fs-sm.mr-2.btn.btn-outline-primary").as("Кнопка очистить выбор оборудования");
 
@@ -40,20 +41,20 @@ public class EquipmentBackgroundPicker extends BaseComponent {
 
 
     }
- public void fillEquipment(EquipmentType type, Integer mark, Integer brand, Integer power) {
+ public void fillMaintenanceEquipment(EquipmentType type, Integer mark, Integer brand, Integer power) {
         stepWithRole("Выбрать оборудование", () -> {
            stepWithRole("Выбрать тип оборудования: " + type.toString(), () -> {
                equipmentFieldLocator.click();
-               typeDropdownLocator.click();
+               typeFieldLocator.click();
                typeCollectionLocator.get(type.ordinal()).click();
               });
               stepWithRole("Выбрать марку оборудования: " , () -> { //+ brandCollectionLocator.get(brand).getText()
-                brandDropdownLocator.click();
-                brandDropdownLocator.shouldHave(Condition.cssClass("has-results"));
+                brandFieldLocator.click();
+                brandFieldLocator.shouldHave(Condition.cssClass("has-results"));
                 brandCollectionLocator.get(brand).click();
               });
                 stepWithRole("Выбрать модель оборудования: " , () -> { // + markCollectionLocator.get(mark).getText()
-                    markDropdownLocator.click();
+                    markFieldLocator.click();
                     markCollectionLocator.get(mark).click();
                 });
                 stepWithRole("Выбрать мощность оборудования: " + power.toString(), () -> {
@@ -61,6 +62,37 @@ public class EquipmentBackgroundPicker extends BaseComponent {
                     powerFieldLocator.setValue(power.toString());
                 });
             approveEquipmentForm();
+            // TODO add photo video
+        });
+    }
+
+    public void fillRepairEquipment(EquipmentType type, Integer mark, Integer brand, Integer power) {
+        stepWithRole("Выбрать оборудование", () -> {
+            stepWithRole("Выбрать тип оборудования: " + type.toString(), () -> {
+                equipmentFieldLocator.click();
+                typeFieldLocator.click();
+                typeCollectionLocator.get(type.ordinal()).click();
+            });
+            stepWithRole("Выбрать марку оборудования: " , () -> { //+ brandCollectionLocator.get(brand).getText()
+                brandFieldLocator.click();
+                brandFieldLocator.shouldHave(Condition.cssClass("has-results"));
+                brandCollectionLocator.get(brand).click();
+            });
+            String errorText = stepWithRole("Выбрать модель оборудования: " , () -> { // + markCollectionLocator.get(mark).getText()
+                markFieldLocator.click();
+                markCollectionLocator.get(mark).click();
+                String markText = markFieldLocator.getValue();
+                return markText;
+            });
+            stepWithRole("Выбрать мощность оборудования: " + power.toString(), () -> {
+                powerFieldLocator.clear();
+                powerFieldLocator.setValue(power.toString());
+            });
+            stepWithRole("Добавить описание неисправности", () -> {
+                problemTextareaLocator.setValue(errorText + " неисправен. Нужен ремонт.");
+            });
+            approveEquipmentForm();
+            // TODO add photo video
         });
     }
 

@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.pages.components.sharedComponent.backgroundRegistrationComponent;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
@@ -10,8 +11,10 @@ import ru.gasworkers.dev.pages.components.sharedComponent.CommonCodeInputModalWi
 import ru.gasworkers.dev.pages.components.sharedComponent.CommonDatePickerComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.equipmentPicker.EquipmentBackgroundPicker;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import static com.codeborne.selenide.Condition.*;
 
 public class BackgroundRegistrationComponent extends BaseComponent {
 
@@ -52,7 +55,8 @@ public class BackgroundRegistrationComponent extends BaseComponent {
         bgSubtitle2Locator = driver.$("div.medium.text-center.text-white span").as("Подзаголовок 2"),
         bgSubtitle3Locator = driver.$("div.h4.text-center.mb-4.text-white").as("Подзаголовок 3"),
         addressFieldLocator = driver.$("div.search-option__address--title.short textarea").as("Поле ввода адреса"),
-        dateDropdownLocator = driver.$("div.search-option__date--title").as("Дропдаун ввода даты"),
+        dateFieldLocator = driver.$("div.search-option__date--title").as("Дропдаун ввода даты"),
+        filledDateFieldLocator = driver.$("div.search-option__date--title-result").as("Поле заполенная  Дата"),
         credentialsDropdownLocator = driver.$("div.search-option__contacts--title").as("Дропдаун ввода данных данных"),
         credentialsContainerLocator = driver.$("div.search-option__contacts--dropdown").as("Меню ввода данных"),
         phoneFieldLocator = driver.$("input[placeholder='Номер телефона*']").as("Поле ввода телефона"),
@@ -60,8 +64,10 @@ public class BackgroundRegistrationComponent extends BaseComponent {
         approveCredentialsButtonLocator = credentialsContainerLocator.$("button.btn-fs-sm.btn.btn-primary.disable-outline span").as("Кнопка потвердить контактные данные"),
         findOffersButton = driver.$("button.text-primary-dark.btn.btn-warning.disable-outline").as("Найти предложения");
     ElementsCollection
-        requestTypeLocator = driver.$$("div.gas-tabs-secondary__btn span").as("Тип заявки"),
-        addressSuggestionsLocator = driver.$$("div.address-list").as("Подсказки адреса");
+        requestTypeLocator = driver.$$("div.gas-tabs-secondary__btn ").as("Тип заявки"),
+        addressSuggestionsLocator = driver.$$("div.address-list li").as("Подсказки адреса"),
+        filledCredentialsFieldLocator = driver.$$("div.search-option__contacts--title-result div").as("Поле заполненные данные");
+
 
 
     public void checkFinishLoading() {
@@ -95,26 +101,37 @@ public class BackgroundRegistrationComponent extends BaseComponent {
         });
     }
 
-    public void fillBGMaintenanceRequest(String objectAddress, EquipmentType type, Integer mark, Integer brand, Integer power, String registrationDate, String phone, String email) {
+    public void fillBGMaintenanceRequest(String objectAddress, EquipmentType type, Integer mark, Integer brand, Integer power, String phone, String email) {
         stepWithRole("Заполнить заявку на ТО в форме фоновой регистрации", () -> {
+            stepWithRole("Выбрать тип заявки: " + BackgroundClientRequestType.MAINTENANCE.getTitle(), () -> {
+                requestTypeLocator.findBy(text(BackgroundClientRequestType.MAINTENANCE.getTitle())).click();
+            });
+            stepWithRole("Проверить, что выбран тип заявки: " + BackgroundClientRequestType.MAINTENANCE.getTitle(), () -> {
+                requestTypeLocator.findBy(text(BackgroundClientRequestType.MAINTENANCE.getTitle())).shouldHave(Condition.cssClass("active"));
+            });
             stepWithRole("Указать адрес", () -> {
                 stepWithRole("начать вводить адрес: " + objectAddress, () -> {
                     addressFieldLocator.setValue(objectAddress);
+                    System.out.println("start input address: " + addressFieldLocator.getValue());
                 });
                 stepWithRole("Выбрать первую подсказку: " + addressSuggestionsLocator.get(0).getText(), () -> {
                     addressSuggestionsLocator.get(0).click();
+                    System.out.println("selected suggestion: " + addressSuggestionsLocator.get(0).getText());
+                });
+                stepWithRole("Проверить, искомый запрос: " + objectAddress + " содержится в выбранном адресе: " + addressFieldLocator.getValue(), () -> {
+                    addressFieldLocator.shouldHave(partialValue(objectAddress));
                 });
             });
-        equipmentPicker.fillEquipment(type, mark, brand, power);
+        equipmentPicker.fillMaintenanceEquipment(type, mark, brand, power);
         stepWithRole("Указать дату регистрации", () -> {
-            stepWithRole("Нажать на дропдаун даты", () -> {
-                dateDropdownLocator.click();
+            stepWithRole("Нажать на поле дата", () -> {
+                dateFieldLocator.click();
             });
             datePicker.checkFinishLoading();
             datePicker.setTodayDate();
         });
         stepWithRole("Указать контактные данные", () -> {
-                stepWithRole("Нажать на дропдаун контактных данных", () -> {
+                stepWithRole("Нажать на поле контактне данне", () -> {
                     credentialsDropdownLocator.click();
                 });
                 stepWithRole("Проверить, что открылось меню ввода контактных данных", () -> {
@@ -131,6 +148,24 @@ public class BackgroundRegistrationComponent extends BaseComponent {
             approveCredentialsButtonLocator.click();
             });
         });
+        stepWithRole("Проверить заполненные данные", () -> {
+            stepWithRole("Проверить, что выбран адрес: " + objectAddress, () -> {
+                addressFieldLocator.shouldHave(value(objectAddress));
+                System.out.println("result address: " + addressFieldLocator.getValue());
+            });
+            stepWithRole("Проверить, что дата сегодняшняя  выбрана: " + filledDateFieldLocator.getValue(), () -> {
+                filledDateFieldLocator.shouldHave(Condition.text(LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy"))));
+                System.out.println("result date: " + filledDateFieldLocator.getText());
+            });
+            String formattedPhone = "+7(" + phone.toString().substring(1, 4) + ")-" + phone.toString().substring(4, 7) + "-" + phone.toString().substring(7);
+            stepWithRole("Проверить, что заполнены  почта: " + filledCredentialsFieldLocator.get(0).getText() + ", и телефон: " + filledCredentialsFieldLocator.get(1).getText(), () -> {
+                filledCredentialsFieldLocator.get(0).shouldHave(text(email));
+                filledCredentialsFieldLocator.get(1).shouldHave(text(formattedPhone));
+                System.out.println("result email: " + filledCredentialsFieldLocator.get(0).getText());
+                System.out.println("result phone: " + filledCredentialsFieldLocator.get(1).getText());
+            });
+        });
+
     }
 
     public void findOffers() {
@@ -140,4 +175,48 @@ public class BackgroundRegistrationComponent extends BaseComponent {
     }
 
 
+    public void fillBGRepairRequest(String objectAddress, EquipmentType type, Integer mark, Integer brand, Integer power, String phone, String email) {
+        stepWithRole("Заполнить заявку на ремонт в форме фоновой регистрации", () -> {
+            stepWithRole("Выбрать тип заявки: " + BackgroundClientRequestType.REPAIR.getTitle(), () -> {
+                requestTypeLocator.findBy(text(BackgroundClientRequestType.REPAIR.getTitle())).click();
+            });
+            stepWithRole("Указать адрес", () -> {
+                stepWithRole("начать вводить адрес: " + objectAddress, () -> {
+                    addressFieldLocator.setValue(objectAddress);
+                });
+                stepWithRole("Выбрать первую подсказку: " + addressSuggestionsLocator.get(0).getText(), () -> {
+                    addressSuggestionsLocator.get(0).click();
+                });
+                stepWithRole("Проверить, искомый запрос: " + objectAddress + " содержится в выбранном адресе: " + addressFieldLocator.getValue(), () -> {
+                    addressFieldLocator.shouldHave(partialValue(objectAddress));
+                });
+            });
+            equipmentPicker.fillRepairEquipment(type, mark, brand, power);
+            stepWithRole("Указать дату регистрации", () -> {
+                stepWithRole("Нажать на дропдаун даты", () -> {
+                    dateFieldLocator.click();
+                });
+                datePicker.checkFinishLoading();
+                datePicker.setTodayDate();
+            });
+            stepWithRole("Указать контактные данные", () -> {
+                stepWithRole("Нажать на дропдаун контактных данных", () -> {
+                    credentialsDropdownLocator.click();
+                });
+                stepWithRole("Проверить, что открылось меню ввода контактных данных", () -> {
+                    credentialsContainerLocator.shouldBe(visible);
+                });
+                stepWithRole("Ввести телефон: " + phone, () -> {
+                    phoneFieldLocator.setValue(phone);
+                });
+                stepWithRole("Ввести email: " + email, () -> {
+                    emailFieldLocator.setValue(email);
+                });
+            });
+            stepWithRole("Подтвердить контактные данные", () -> {
+                approveCredentialsButtonLocator.click();
+            });
+        });
+    }
 }
+// todo pick random address suggestion and equipment

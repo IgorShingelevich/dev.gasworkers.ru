@@ -44,20 +44,21 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
     @Feature("Фоновая регистрация")
     @Story(AllureStory.MAINTENANCE)
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
-    @DisplayName("Фоновая Регистрация на ТО с указанием телефона и почты")
+    @DisplayName("Фоновая Регистрация на ТО с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
     public void bgRegistrationPhoneMaintenance() {
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
         step("Клиент заполняет форму фоновой регистрации", () -> {
             clientPages.getLandingPage().bgRegistration.checkFinishLoading();
-            clientPages.getLandingPage().bgRegistration.fillBGMaintenanceRequest(randomClient.getObjectAddress(), EquipmentType.GAS_BOILER, 1, 1, 20, randomClient.getSinceDate(), randomClient.getPhoneNumber(), randomClient.getEmail());
+            clientPages.getLandingPage().bgRegistration.fillBGMaintenanceRequest(randomClient.getObjectAddress(), EquipmentType.GAS_BOILER, 1, 1, 20, randomClient.getPhoneNumber(), randomClient.getEmail());
+            // TODO add photo video
             clientPages.getLandingPage().bgRegistration.findOffers();
             clientPages.getLandingPage().bgRegistration.codeInput.checkFinishLoading();
             clientPages.getLandingPage().bgRegistration.codeInput.sendCode(randomClient.getConfirmationCode());
         });
         step("Кабинет клиента - состояние после фоновой регистрации", () -> {
-            step("Гид по кабинету", () -> {
-                clientPages.getHomePage().guideFirst.playGuideSteps();
+            step("Гид  ТО по кабинету", () -> {
+                clientPages.getHomePage().firstMaintenanceGuide.playSequence();
             });
             step("Страница Карта", () -> {
                 clientPages.getSelectServicePage().checkFinishLoading();
@@ -127,5 +128,8 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
     }
 
 }
-
+//todo custom equipment brand and model
 //todo only phone, only email
+// TODO registration validation  cases - all fields are empty, checkbox unchecked. existed phone and email
+// todo pick random address suggestion and equipment
+

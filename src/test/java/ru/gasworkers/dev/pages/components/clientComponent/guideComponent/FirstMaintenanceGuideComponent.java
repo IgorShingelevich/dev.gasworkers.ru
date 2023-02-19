@@ -1,7 +1,7 @@
-package ru.gasworkers.dev.pages.components.clientComponent;
+package ru.gasworkers.dev.pages.components.clientComponent.guideComponent;
 
+import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import org.junit.jupiter.api.Assertions;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
@@ -13,8 +13,8 @@ import static org.hamcrest.Matchers.*;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 
-public class GuideFirstComponent extends BaseComponent {
-    public GuideFirstComponent(RoleBrowser browser) {
+public class FirstMaintenanceGuideComponent extends BaseComponent {
+    public FirstMaintenanceGuideComponent(RoleBrowser browser) {
         super(browser);
     }
 
@@ -28,7 +28,9 @@ public class GuideFirstComponent extends BaseComponent {
         GUIDE_Step_7 = "Вы сможете видеть в реальном времени заказы переданные в сервисные компании, посмотреть рейтинг этих компаний, название и увидеть всю актуальную информацию сервисной компании. Также местоположение офиса компании на карте.",
         GUIDE_Step_8 = "Когда сервисная компания сделает вам предложение, вы получите сообщение на почту и личном кабинете на сервисе, это будет выглядеть примерно так",
         GUIDE_Step_9 = "Для перехода в личный кабинет и управления заказами нажмите кнопку “Смотреть заказ”. Вы всегда сможете вернуться на карту и выбрать нужное предложение здесь.",
-        GUIDE_Step_10 = "Возьмите в руки телефон отсканируйте QR чтобы установить наше приложение Gasworkers.Клиент, с которым вы никогда не пропустите новых заказов, сообщения мастера и вся информация о заказе и документах будет всегда с вами.";
+        GUIDE_Step_10 = "Возьмите в руки телефон отсканируйте QR чтобы установить наше приложение Gasworkers.Клиент, с которым вы никогда не пропустите новых заказов, сообщения мастера и вся информация о заказе и документах будет всегда с вами.",
+        TO_IOS_QR_CODE_DESCRIPTION = "Скачать приложение для IOS",
+        TO_ANDROID_QR_CODE_DESCRIPTION = "Скачать приложение для Android";
 
     SelenideElement
         guideFrameLocator = driver.$("div.gas-guide-main").as("Гайд"),
@@ -37,8 +39,11 @@ public class GuideFirstComponent extends BaseComponent {
         guideSkipButtonLocator = driver.$(".gas-guide-footer button.btn.btn-secondary.disable-outline").as("Кнопка баннера Пропустить"),
         guideNavPrevButtonLocator = driver.$("button.gas-screen-toggler__btn.prev").as("Кнопка гида Назад"),
         guideNavNextButtonLocator = driver.$("button.gas-screen-toggler__btn.next").as("Кнопка гида Вперед");
+    ElementsCollection
+        qrCodeDescriptionLocator = driver.$$("div.mt-2.small").as("Коллекция Описание QR кодов");
 
-    public void playGuideSteps() {
+
+    public void playSequence() {
         stepWithRole("Проиграть гайд", () -> {
             guideFrameLocator.shouldBe(visible, Duration.ofSeconds(10)); // added 10 seconds
             for (int i = 0; i < 10; i++) {
@@ -83,6 +88,8 @@ public class GuideFirstComponent extends BaseComponent {
                         break;
                     case 9:
                         guideTipLocator.shouldHave(text(GUIDE_Step_10));
+                        qrCodeDescriptionLocator.get(0).shouldHave(text(TO_IOS_QR_CODE_DESCRIPTION));
+                        qrCodeDescriptionLocator.get(1).shouldHave(text(TO_ANDROID_QR_CODE_DESCRIPTION));
                         nextStepGuide();
                         break;
                 }

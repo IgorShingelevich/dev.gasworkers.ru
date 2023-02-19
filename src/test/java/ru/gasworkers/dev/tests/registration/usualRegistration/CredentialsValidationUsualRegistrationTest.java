@@ -122,4 +122,5 @@ public class CredentialsValidationUsualRegistrationTest extends BaseTest {
     }
 
 }
-// TODO registration cases - all fields are empty, checkbox unchecked
+// TODO registration validation  cases - all fields are empty, checkbox unchecked. existed phone and email
+

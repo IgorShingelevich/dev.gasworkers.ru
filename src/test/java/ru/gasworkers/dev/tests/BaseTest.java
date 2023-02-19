@@ -7,6 +7,8 @@ import ru.gasworkers.dev.extension.browser.ScreenshotExtension;
 public abstract class BaseTest {
 
 }
+
+//TODO DISCUSS   step Проверить заполненные данные - BG Registration addres not refreshing, date - null
 // TODO DISCUSS  download method FOLDER -  periodically fall download - Failed to download file in 1000 ms.
 // TODO DISCUSS   delete previous Allure run results before new run - from repo and from local machine - Report successfully generated to C:\Users\V\AppData\Local\Temp\15304290317834521042\allure-report
 // TODO DISCUSS   managing   attachments in Allure - pics ( only  if fall), open web page from attachments
