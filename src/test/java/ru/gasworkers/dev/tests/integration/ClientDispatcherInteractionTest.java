@@ -1,13 +1,16 @@
 package ru.gasworkers.dev.tests.integration;
 
+import io.qameta.allure.*;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
+import ru.gasworkers.dev.allure.AllureStory;
+import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.OrderType;
-import ru.gasworkers.dev.model.browser.BrowserSize;
+import ru.gasworkers.dev.model.browser.PositionBrowser;
+import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.model.client.ClientRequestType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,13 +29,13 @@ import static io.qameta.allure.Allure.step;
 
 class ClientDispatcherInteractionTest extends BaseTest {
 
-    @Browser(role = Role.CLIENT, browserSize = BrowserSize.DEFAULT, browserPosition = "0x0")
+    @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
 
-    @Browser(role = Role.DISPATCHER, browserSize = BrowserSize.DEFAULT, browserPosition = "850x0")
+    @Browser(role = Role.DISPATCHER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.SECOND_ROLE)
     DispatcherPages dispatcherPages;
 
-    @Browser(role = Role.MASTER, browserSize = BrowserSize.DEFAULT, browserPosition = "1700x0")
+    @Browser(role = Role.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.THIRD_ROLE)
     MasterPages masterPages;
 
     User client = new User(
@@ -66,9 +69,12 @@ class ClientDispatcherInteractionTest extends BaseTest {
             79917644241L);
 
     @Test
-    @Feature("Интерграция ролей")
-    @Story("Интерграция Путь ТО")
-    @DisplayName(" ТО Интеграция Клиент-Диспетчер-Клиент-Диспетчер")  // whu name 2 times in Allure?
+    @Owner("Igor Shingelevich")
+    @Epic("Клиент-Диспетчер-Мастер")
+    @Feature("Минимально позитивный путь")
+    @Story(AllureStory.MAINTENANCE)
+    @Tags({@Tag(AllureTag.REGRESSION),  @Tag(AllureTag.POSITIVE)})
+    @DisplayName(" ТО Интеграция Клиент-Диспетчер-Мастер")
     void integrationDispatcherAcceptClientMaintenanceRequest() {
         step("авторизация Ролей ", ()-> {
                     step("авторизация Клиента", () -> {
@@ -227,7 +233,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getOrderCardPage().checkMasterDispatchedState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
         });
 
-        step("Мастер открывает заказ", () -> {
+        step("Мастер открывает заказ в состоянии Мастер в пути", () -> {
             masterPages.getHomePage().checkFinishLoading();
             masterPages.getHomePage().popUpClose();
             masterPages.getHomePage().sidebar.allOrdersHistoryDropdown();
@@ -240,6 +246,20 @@ class ClientDispatcherInteractionTest extends BaseTest {
         });
 
         step("Мастер открывает объект Клиента", () -> {
+            masterPages.getOrderCardPage().editObject();
+            masterPages.getEditObjectPage().checkFinishLoading();
+            masterPages.getEditObjectPage().navGasBranch();
+            masterPages.getEditObjectPage().editDistributorTab.checkFinishLoading();
+            //TODO check Distributor details
+            masterPages.getEditObjectPage().editDistributorTab.editDistributor();
+            //TODO check Distributor  Modal details
+            masterPages.getEditObjectPage().editDistributorTab.distributorModal.checkFinishLoading(); // TODO fix modalTitleLocator
+            masterPages.getEditObjectPage().editDistributorTab.distributorModal.cancel();
+            masterPages.getEditObjectPage().editDistributorTab.checkFinishLoading();
+            masterPages.getEditObjectPage().navObject();
+            masterPages.getEditObjectPage().editObjectTab.checkFinishLoading();
+            masterPages.getEditObjectPage().editObjectTab.toOrder();
+            // TODO checkFinishLoading - expand  docs check, order properties check, price check
         });
 
         step("Мастер приступает к работе", () -> {

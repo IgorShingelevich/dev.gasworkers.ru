@@ -6,12 +6,13 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
+import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.Role;
 
 
 import org.junit.jupiter.api.*;
-import ru.gasworkers.dev.model.browser.BrowserSize;
+import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.pages.context.MasterPages;
@@ -21,15 +22,15 @@ import ru.gasworkers.dev.utils.RandomClient;
 import static io.qameta.allure.Allure.step;
 
 
-public class PhoneUsualRegistrationTest extends BaseTest {
+public class ByPhoneUsualRegistrationTest extends BaseTest {
 
-    @Browser(role = Role.CLIENT, browserSize = BrowserSize.DEFAULT, browserPosition = "0x0")
+    @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
 
-    @Browser(role = Role.DISPATCHER, browserSize = BrowserSize.DEFAULT, browserPosition = "850x0")
+    @Browser(role = Role.DISPATCHER, browserSize = SizeBrowser.DEFAULT, browserPosition = "850x0")
     DispatcherPages dispatcherPages;
 
-    @Browser(role = Role.MASTER, browserSize = BrowserSize.DEFAULT, browserPosition = "1700x0")
+    @Browser(role = Role.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = "1700x0")
     MasterPages masterPages;
 
     RandomClient randomClient = new RandomClient();
@@ -39,9 +40,9 @@ public class PhoneUsualRegistrationTest extends BaseTest {
     @Test
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
-    @Feature(AllureFeature.BG_REGISTRATION)
+    @Feature(AllureFeature.USUAL_REGISTRATION)
     @Story("По телефону")
-    @Tags({@Tag("regression"), @Tag("client"), @Tag("registration"), @Tag("positive")})
+    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Регистрация клиента по телефону и проверка состояния кабинета")
     void registrationClientByPhone() {
         step("Страница лендинга", () -> {
