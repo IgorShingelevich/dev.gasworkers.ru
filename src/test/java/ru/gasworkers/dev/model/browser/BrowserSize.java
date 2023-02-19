@@ -8,7 +8,7 @@ public enum BrowserSize {
     SECOND_ROLE("360x640"),
     THIRD_ROLE("360x640"),
     FOURTH_ROLE("360x640"),
-    ALL_ROLES("1000x800");
+    DEFAULT("1000x800");
 
     private final String size;
 

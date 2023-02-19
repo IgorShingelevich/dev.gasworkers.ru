@@ -7,6 +7,7 @@ import io.qameta.allure.Story;
 import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.OrderType;
+import ru.gasworkers.dev.model.browser.BrowserSize;
 import ru.gasworkers.dev.model.client.ClientRequestType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,13 +26,13 @@ import static io.qameta.allure.Allure.step;
 
 class ClientDispatcherInteractionTest extends BaseTest {
 
-    @Browser(role = Role.CLIENT, browserSize = "800x1000", browserPosition = "0x0")
+    @Browser(role = Role.CLIENT, browserSize = BrowserSize.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
 
-    @Browser(role = Role.DISPATCHER, browserSize = "800x1000", browserPosition = "850x0")
+    @Browser(role = Role.DISPATCHER, browserSize = BrowserSize.DEFAULT, browserPosition = "850x0")
     DispatcherPages dispatcherPages;
 
-    @Browser(role = Role.MASTER, browserSize = "800x1000", browserPosition = "1700x0")
+    @Browser(role = Role.MASTER, browserSize = BrowserSize.DEFAULT, browserPosition = "1700x0")
     MasterPages masterPages;
 
     User client = new User(

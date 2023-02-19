@@ -6,8 +6,6 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
-import ru.gasworkers.dev.allure.AllureStory;
-import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.Role;
 
@@ -17,7 +15,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import ru.gasworkers.dev.model.browser.BrowserSize;
-import ru.gasworkers.dev.model.equipment.EquipmentType;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.pages.context.MasterPages;
@@ -34,13 +31,13 @@ public class RegistrationTest extends BaseTest {
 //    SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
 
 
-    @Browser(role = Role.CLIENT, browserSize = BrowserSize.ALL_ROLES, browserPosition = "0x0")
+    @Browser(role = Role.CLIENT, browserSize = BrowserSize.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
 
-    @Browser(role = Role.DISPATCHER, browserSize = "800x1000", browserPosition = "850x0")
+    @Browser(role = Role.DISPATCHER, browserSize = BrowserSize.DEFAULT, browserPosition = "850x0")
     DispatcherPages dispatcherPages;
 
-    @Browser(role = Role.MASTER, browserSize = "800x1000", browserPosition = "1700x0")
+    @Browser(role = Role.MASTER, browserSize = BrowserSize.DEFAULT, browserPosition = "1700x0")
     MasterPages masterPages;
 
     RandomClient randomClient = new RandomClient();

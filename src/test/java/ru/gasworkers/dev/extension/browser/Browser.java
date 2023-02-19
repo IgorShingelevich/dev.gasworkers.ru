@@ -2,6 +2,7 @@ package ru.gasworkers.dev.extension.browser;
 
 import ru.gasworkers.dev.model.Role;
 import org.junit.jupiter.api.extension.ExtendWith;
+import ru.gasworkers.dev.model.browser.BrowserSize;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -13,7 +14,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 public @interface Browser {
     Role role();
-    String browserSize() default "1000x1000";
+    BrowserSize browserSize() default BrowserSize.DEFAULT;
     String browserPosition() default "0x0";
 
 }

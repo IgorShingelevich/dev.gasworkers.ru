@@ -12,6 +12,7 @@ import ru.gasworkers.dev.model.Role;
 
 
 import org.junit.jupiter.api.*;
+import ru.gasworkers.dev.model.browser.BrowserSize;
 import ru.gasworkers.dev.model.equipment.EquipmentType;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
@@ -26,13 +27,13 @@ import static io.qameta.allure.Allure.step;
 
 public class MaintenanceBGRegistrationTest extends BaseTest {
 
-    @Browser(role = Role.CLIENT, browserSize = "800x1000", browserPosition = "0x0")
+    @Browser(role = Role.CLIENT, browserSize = BrowserSize.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
 
-    @Browser(role = Role.DISPATCHER, browserSize = "800x1000", browserPosition = "850x0")
+    @Browser(role = Role.DISPATCHER, browserSize = BrowserSize.DEFAULT, browserPosition = "850x0")
     DispatcherPages dispatcherPages;
 
-    @Browser(role = Role.MASTER, browserSize = "800x1000", browserPosition = "1700x0")
+    @Browser(role = Role.MASTER, browserSize = BrowserSize.DEFAULT, browserPosition = "1700x0")
     MasterPages masterPages;
 
     RandomClient randomClient = new RandomClient();
@@ -41,7 +42,7 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
     @Owner("Igor Shingelevich")
     @Epic("Регистрация")
     @Feature("Фоновая регистрация")
-    @Story(AllureStory.REGISTRATION_TO)
+    @Story(AllureStory.MAINTENANCE)
     @Tags({@Tag("client"), @Tag("positive")})
     @DisplayName("Фоновая Регистрация на ТО с указанием телефона и почты")
     public void bgRegistrationPhoneMaintenance() {
