@@ -197,6 +197,8 @@ class ClientDispatcherInteractionTest extends BaseTest {
                 //String code = sms.substring(0, 6); // for real number
                 String mockCode = "111111";
                 clientPages.getSignSMSPage().inputSMSCode(mockCode);
+                //todo: check that sms is inputed
+                //todo check spinner disappear
                 //clientPages.getSignSMSPage().sign();
                 clientPages.getSignSuccessPage().checkFinishLoading();
                 clientPages.getSignSuccessPage().toHomePage();
