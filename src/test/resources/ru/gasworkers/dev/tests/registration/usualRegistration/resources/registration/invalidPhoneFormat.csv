@@ -1,18 +1,18 @@
 invaid phoneNumber |errorText |errorDescription
 77777777777|Такое значение поля Номер телефона уже существует.| already exists
-123456789|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|too short
-+123456789|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|missing country code
-123-456-789|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|invalid format
-123.456.789|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|invalid format
-123/456/789|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|invalid format
-123 456 789|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|space character in the phone number
-123,456,789|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|invalid character in the phone number
-123;456;789|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|invalid character in the phone number
-123:456:789|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|invalid character in the phone number
-(123)456-789|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|missing country code
-12345678A|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|invalid character in the phone number
-A23456789|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|invalid character in the phone number
-12.345.678|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|invalid character in the phone number
-12-345-678|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|invalid character in the phone number
-12/345/678|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|invalid character in the phone number
-+12-345-678|Поле "номер телефона" должно начинаться с +7 и содержать 11 цифр|missing country code
+123456789|Введите корректный номер|too short
++123456789|Введите корректный номер|missing country code
+123-456-789|Введите корректный номер|invalid format
+123.456.789|Введите корректный номер|invalid format
+123/456/789|Введите корректный номер|invalid format
+123 456 789|Введите корректный номер|space character in the phone number
+123,456,789|Введите корректный номер|invalid character in the phone number
+123;456;789|Введите корректный номер|invalid character in the phone number
+123:456:789|Введите корректный номер|invalid character in the phone number
+(123)456-789|Введите корректный номер|missing country code
+12345678A|Введите корректный номер|invalid character in the phone number
+A23456789|Введите корректный номер|invalid character in the phone number
+12.345.678|Введите корректный номер|invalid character in the phone number
+12-345-678|Введите корректный номер|invalid character in the phone number
+12/345/678|Введите корректный номер|invalid character in the phone number
++12-345-678|Введите корректный номер|missing country code
