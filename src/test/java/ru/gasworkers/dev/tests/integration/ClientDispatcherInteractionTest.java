@@ -245,6 +245,9 @@ class ClientDispatcherInteractionTest extends BaseTest {
             masterPages.getAllNewOrdersPage().openByNumber(orderNumber);
             masterPages.getOrderCardPage().checkFinishLoading();
             masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+
+            //todo:default checklist state
+
         });
 
         step("Мастер открывает объект Клиента", () -> {
@@ -256,7 +259,9 @@ class ClientDispatcherInteractionTest extends BaseTest {
             //TODO check Distributor details
             masterPages.getEditObjectPage().editDistributorTab.editDistributor();
             //TODO check Distributor  Modal details
-            masterPages.getEditObjectPage().editDistributorTab.distributorModal.checkFinishLoading(); // TODO fix modalTitleLocator
+            masterPages.getEditObjectPage().editDistributorTab.distributorModal.checkFinishLoading();
+            // TODO fix modalTitleLocator
+
             masterPages.getEditObjectPage().editDistributorTab.distributorModal.cancel();
             masterPages.getEditObjectPage().editDistributorTab.checkFinishLoading();
             masterPages.getEditObjectPage().navObject();
@@ -265,7 +270,16 @@ class ClientDispatcherInteractionTest extends BaseTest {
             // TODO checkFinishLoading - expand  docs check, order properties check, price check
         });
 
-        step("Мастер приступает к работе", () -> {
+        step("Мастер прибывает на обьект", () -> {
+            step("Мастер заполняет чеклист", () -> {
+                masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+                //todo: add test for checklist changes and its affect on order state
+            });
+            step("Мастер заполнил чеклист и приступил к работе", () -> {
+                masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+            });
+
+
         });
 
         step("Мастер добавляет позицию в  таблицу Оборудования ТО", () -> {

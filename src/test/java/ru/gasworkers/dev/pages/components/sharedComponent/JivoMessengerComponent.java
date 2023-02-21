@@ -50,9 +50,9 @@ public class JivoMessengerComponent extends BaseComponent {
 
     public void openJivoWidget() {
         stepWithRole("Открыть виджет мессенджера", () -> {
-            containerLocator.shouldBe(visible, Duration.ofSeconds(10));
+            containerLocator.shouldBe(visible, Duration.ofSeconds(15));
             containerLocator.click();
-            textareaLocator.shouldBe(visible, Duration.ofSeconds(10));
+            textareaLocator.shouldBe(visible, Duration.ofSeconds(15));
         });
     }
 

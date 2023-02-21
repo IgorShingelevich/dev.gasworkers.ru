@@ -31,15 +31,19 @@ public class FillUpCheckListBannerComponent extends BaseTabOrderCardComponent {
             stepWithRole("Нажать на кнопку закрытия баннера", () -> {
                 closeBannerLocator.click();
             });
-            stepWithRole("Убедиться, что баннер Заполните чек лист закрыт", () -> {
-                bannerTextLocator.shouldNotBe(visible);
-            });
+            checkBannerIsNotPresent();
         });
     }
 
     public void clickOnCheckListLink() {
         stepWithRole("Нажать на ссылку на Чек-лист в Описании заказа", () -> {
             checkListLinkLocator.click();
+        });
+    }
+
+    public void checkBannerIsNotPresent() {
+        stepWithRole("Убедиться, что баннер Заполните чек лист отсутствует", () -> {
+            bannerTextLocator.shouldNotBe(visible);
         });
     }
 }

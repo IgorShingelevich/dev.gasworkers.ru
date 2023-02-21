@@ -110,6 +110,7 @@ public class OrderCardMasterPage extends BaseMasterPage {
             stepWithRole("Вкладка Чек лист", () -> {
                 commonTab.fillUpBanner.clickOnCheckListLink();
                 checkListTab.checkFinishLoading(orderStatus);
+                checkListTab.checkListComponent.isDisableRadioButtonsState();
                 stepWithRole("Убедиться, представлена кнопки  Редактировать объект/оборудование, кнопка Кнопка Сохранить неактивная и кнопка Заказ на ремонт", () -> {
                     mainButtonLocator.shouldBe(disabled).shouldHave(text("Сохранить")).as("Кнопка Сохранить неактивная");
                     editObjectButtonLocator.shouldBe(visible);
@@ -119,12 +120,13 @@ public class OrderCardMasterPage extends BaseMasterPage {
             stepWithRole("Вкладка Информация по работам", () -> {
                 navInfoMaster();
                 infoMasterTab.checkFinishLoading(orderStatus);
+                //TODO table, prices
+                //todo check all the equipment of Client is present with numbers and description and mandatory positions are presented
                 stepWithRole("Убедиться, что  представлены кнопки  Редактировать объект/оборудование, кнопка Приступить к работе и кнопка Заказ на ремонт", () -> {
                     startWorkingButtonLocator.shouldBe(visible);
                     editObjectButtonLocator.shouldBe(visible);
                     repairFromMaintenanceButtonLocator.shouldBe(visible);
                 });
-                //TODO table, prices
             });
             stepWithRole("Вкладка Документы", () -> {
                 navDocs();
@@ -147,6 +149,50 @@ public class OrderCardMasterPage extends BaseMasterPage {
     public void startWork (){
         stepWithRole("Нажать кнопку Приступить к работе", () -> {
             startWorkingButtonLocator.shouldBe(visible).click();
+        });
+    }
+
+    public void checkFillingCheckListState(OrderStatus orderStatus, OrderType orderType) {
+        stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
+            checkListTab.checkFinishLoading(orderStatus);
+            commonTab.fillUpBanner.checkBannerIsNotPresent();
+            checkListTab.checkListComponent.isActiveRadioButtonsState();
+
+            stepWithRole("Вкладка Описание заказа", () -> {
+                commonTab.fillUpBanner.checkBannerDetails();
+                commonTab.orderStatus.currentStatus(orderStatus);
+                commonTab.orderDetails.currentType(orderType);
+                stepWithRole("Убедиться, что  представлены кнопки  Редактировать объект/оборудование, кнопка Заказ на ремонт", () -> {
+                    editObjectButtonLocator.shouldBe(visible);
+                    repairFromMaintenanceButtonLocator.shouldBe(visible);
+                });
+            });
+            stepWithRole("Вкладка Чек лист", () -> {
+                commonTab.fillUpBanner.clickOnCheckListLink();
+                checkListTab.checkFinishLoading(orderStatus);
+                checkListTab.checkListComponent.isDisableRadioButtonsState();
+                stepWithRole("Убедиться, представлена кнопки  Редактировать объект/оборудование, кнопка Кнопка Сохранить неактивная и кнопка Заказ на ремонт", () -> {
+                    mainButtonLocator.shouldBe(disabled).shouldHave(text("Сохранить")).as("Кнопка Сохранить неактивная");
+                    editObjectButtonLocator.shouldBe(visible);
+                    repairFromMaintenanceButtonLocator.shouldBe(visible);
+                });
+            });
+            stepWithRole("Вкладка Информация по работам", () -> {
+                navInfoMaster();
+                infoMasterTab.checkFinishLoading(orderStatus);
+                //TODO table, prices
+                //todo check all the equipment of Client is present with numbers and description and mandatory positions are presented
+                stepWithRole("Убедиться, что  представлены кнопки  Редактировать объект/оборудование, кнопка Заказ на ремонт", () -> {
+                    editObjectButtonLocator.shouldBe(visible);
+                    repairFromMaintenanceButtonLocator.shouldBe(visible);
+                });
+            });
+            stepWithRole("Вкладка Документы", () -> {
+                navDocs();
+                docsTab.checkFinishLoading(orderStatus);
+                docsTab.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
+    });
+            navCommon();
         });
     }
 

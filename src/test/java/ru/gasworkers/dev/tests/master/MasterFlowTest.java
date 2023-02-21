@@ -67,7 +67,7 @@ public class MasterFlowTest extends BaseTest {
     @Tags({@Tag("regression"), @Tag("master"), @Tag("cabinet"), @Tag("positive")})
     @DisplayName("Мастер открывает заказ в состоянии Мастер в пути")
     public void clientCheckMasterDispatchedOrderSate () {
-        String checkedOrderNumber = "3814";
+        String checkedOrderNumber = "3890";
         masterPages.getHomePage().checkFinishLoading();
         masterPages.getHomePage().sidebar.checkReadyForVideoState(ReadyForVideoState.READY);
         masterPages.getHomePage().sidebar.allOrdersHistoryDropdown();
