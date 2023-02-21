@@ -5,6 +5,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.ex.ElementShould;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
+import ru.gasworkers.dev.pages.components.sharedComponent.JivoMessengerComponent;
 
 import java.time.Duration;
 
@@ -14,9 +15,11 @@ import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public final class LoginPage extends BasePage {
+    public final JivoMessengerComponent jivoMessengerComponent;
 
     public LoginPage(RoleBrowser browser) {
         super(browser);
+        jivoMessengerComponent = new JivoMessengerComponent(browser);
     }
 
     SelenideElement
@@ -25,20 +28,7 @@ public final class LoginPage extends BasePage {
     public LoginPage open() {
         stepWithRole("Открыть страницу авторизации", () -> {
             driver.open("/login");
-            stepWithRole("Виджет Jivo должен быть загружен", () -> {
-                try {
-                    if (jivoWidgetLocator.exists()) {
-                        jivoWidgetLocator.shouldBe(visible);
-                    } else {
-                        System.out.println("No Jivo widget");
-                    }
-                } catch (ElementShould e) {
-                    // Log the exception and proceed with the test
-                    System.out.println("Element Jivo widget was not found or not enabled or not visible.");
-                    e.printStackTrace();
-                }
-//                jivoWidgetLocator.shouldBe(visible, Duration.ofSeconds(10)).as("Виджет JivoSite");
-            });
+            jivoMessengerComponent.presenceOfJivoIcon();
         });
         return this;
     }

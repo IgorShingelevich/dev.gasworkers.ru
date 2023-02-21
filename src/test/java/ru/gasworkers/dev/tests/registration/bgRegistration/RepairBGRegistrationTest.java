@@ -60,7 +60,7 @@ public class RepairBGRegistrationTest extends BaseTest {
                 clientPages.getHomePage().firstRepairGuide.playSequence();
             });
             step("Страница Карта", () -> {
-                clientPages.getSelectServicePage().checkFinishLoading();
+                clientPages.getSelectServicePage().checkFinishRepairLoading();
                 clientPages.getSelectServicePage().checkPublishedState();
             });
             String orderNumber = step("Страница Карточка заказа", () -> {

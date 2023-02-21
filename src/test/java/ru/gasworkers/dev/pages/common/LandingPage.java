@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
+import ru.gasworkers.dev.pages.components.sharedComponent.JivoMessengerComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.backgroundRegistrationComponent.BackgroundRegistrationComponent;
 
 import java.time.Duration;
@@ -14,10 +15,13 @@ import static com.codeborne.selenide.Selectors.byTagAndText;
 public class LandingPage extends BasePage {
 
     public final BackgroundRegistrationComponent bgRegistration;
+    public final JivoMessengerComponent jivoMessengerComponent;
+
 
 public LandingPage(RoleBrowser browser) {
         super(browser);
         bgRegistration = new BackgroundRegistrationComponent(browser);
+        jivoMessengerComponent = new JivoMessengerComponent(browser);
     }
 
     private final String
@@ -73,9 +77,9 @@ public LandingPage open() {
             stepWithRole("Убедиться, что кнопка Видеоконсультация отображается", () -> {
                 videoButtonLocator.shouldBe(visible);
             });
-            stepWithRole("Убедиться, что виджет Живой чат отображается", () -> {
-                driver.$("#jivo-iframe-container").shouldBe(exist, Duration.ofSeconds(15));
-            });
+            jivoMessengerComponent.checkFinishLoadingAndClose();
+
+
 
             // TODO add the rest  components checks
         });

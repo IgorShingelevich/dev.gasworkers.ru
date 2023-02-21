@@ -18,18 +18,18 @@ public class FirstRepairGuideComponent extends BaseComponent {
     }
 
     private final String
-        GUIDE_Step_1 = "user_guide_screen_0_step_0_top_repair",
-        GUIDE_Step_2 = "user_guide_screen_0_step_1_repair",
-        GUIDE_Step_3 = "user_guide_screen_0_step_2_repair",
-        GUIDE_Step_4 = "user_guide_screen_1_step_0_repair",
-        GUIDE_Step_5 = "user_guide_screen_1_step_1_repair",
-        GUIDE_Step_6 = "user_guide_screen_1_step_2_repair",
-        GUIDE_Step_7 = "user_guide_screen_2_step_0_repair",
-        GUIDE_Step_8 = "user_guide_screen_2_step_1_repair",
-        GUIDE_Step_9 = "user_guide_screen_2_step_2_repair",
-        GUIDE_Step_10 = "user_guide_screen_3_step_0_desktop_repair",
-        TO_IOS_QR_CODE_DESCRIPTION = "user_guide_screen_3_step_0_ios_repair",
-        TO_ANDROID_QR_CODE_DESCRIPTION = "user_guide_screen_3_step_0_android_repair";
+        GUIDE_Step_1 = "Ваш заказ отправлен в сервисные компании, когда они примут его и сделают вам предложение, вы будете получать уведомления на сайте и письма по электронной почте об этом.",
+        GUIDE_Step_2 = "Здесь вы будете получать уведомления. Посмотрите сейчас ваше первое уведомление что ваш заказ размещен на платформе",
+        GUIDE_Step_3 = "Тут будут показано количество откликов. Если нажмете, то сразу попадете на карту с предложениями.",
+        GUIDE_Step_4 = "У вашего заказа есть номер. Подробную информацию по заказу вы всегда можете увидеть на главной странице личного кабинета или в разделе “Заказы/Счета”",
+        GUIDE_Step_5 = "Проверить ваш объект, оборудование, отредактировать его и увидеть документацию по заказу всегда можно в объекте. Эта информация есть и в заказе.",
+        GUIDE_Step_6 = "Заполнив Профиль, вы более легко найдете мастера для ремонта вашего оборудования. Тут же вы сможете изменить пароль и настроить уведомления.",
+        GUIDE_Step_7 = "Вы сможете видеть в реальном времени заказы переданные в сервисные компании, посмотреть рейтинг этих компаний, название и увидеть всю актуальную информацию сервисной компании. Также местоположение офиса компании на карте.",
+        GUIDE_Step_8 = "Когда сервисная компания сделает вам предложение, то вы увидите предложенного мастера и стоимость его первичного выезда, также увидеть предложения мастеров можно из карточки заказа. После приезда, мастер рассчитает стоимость ремонта и составит подробную смету.",
+        GUIDE_Step_9 = "Посмотреть заказ и увидеть предложенных мастеров можно по этой кнопке.",
+        GUIDE_Step_10 = "Возьмите в руки телефон отсканируйте QR чтобы установить наше приложение, с которым вы никогда не пропустите новых заказов, сообщения мастера и вся информация о заказе и документах будет всегда с вами.",
+        TO_IOS_QR_CODE_DESCRIPTION = "Скачать приложение в Apple Store",
+        TO_ANDROID_QR_CODE_DESCRIPTION = "Скачать приложение для Android";
 
     SelenideElement
         guideFrameLocator = driver.$("div.gas-guide-main").as("Гайд"),

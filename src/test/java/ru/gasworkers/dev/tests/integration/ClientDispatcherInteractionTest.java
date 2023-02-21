@@ -119,7 +119,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
                 clientPages.getSelectDateMaintenancePage().submitOrder();
             });
             step("Клиент просматривает карту в состоянии заказ опубликован", () -> {
-                clientPages.getSelectServicePage().checkFinishLoading();
+                clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
                 clientPages.getSelectServicePage().checkPublishedState();
             });
             step("Клиент просматривает заказ на домашней странице", () -> {
@@ -137,7 +137,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             });
             String currentOrderNumber = clientPages.getOrderCardPage().getOrderNumber();
             clientPages.getOrderCardPage().offers.clickOffers();
-            clientPages.getSelectServicePage().checkFinishLoading();
+            clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
             return currentOrderNumber;
         });
 
@@ -163,7 +163,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
                 clientPages.getOrderCardPage().checkReviewOffersState(OrderStatus.PUBLISHED, OrderType.MAINTENANCE, 1);
                 //go back to order card and check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
                 clientPages.getOrderCardPage().offers.clickOffers();
-                clientPages.getSelectServicePage().checkFinishLoading();
+                clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
             });
             step("Клиент рассматривает предложение от Диспетчера СК", () -> {
                 // find on the map

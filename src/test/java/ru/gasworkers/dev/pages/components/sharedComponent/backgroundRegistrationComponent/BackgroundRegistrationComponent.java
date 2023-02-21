@@ -168,13 +168,6 @@ public class BackgroundRegistrationComponent extends BaseComponent {
 
     }
 
-    public void findOffers() {
-        stepWithRole("Нажать кнопку найти предложения", () -> {
-            findOffersButton.shouldHave(text("Найти предложения")).click();
-        });
-    }
-
-
     public void fillBGRepairRequest(String objectAddress, EquipmentType type, Integer mark, Integer brand, Integer power, String phone, String email) {
         stepWithRole("Заполнить заявку на ремонт в форме фоновой регистрации", () -> {
             stepWithRole("Выбрать тип заявки: " + BackgroundClientRequestType.REPAIR.getTitle(), () -> {
@@ -216,6 +209,12 @@ public class BackgroundRegistrationComponent extends BaseComponent {
             stepWithRole("Подтвердить контактные данные", () -> {
                 approveCredentialsButtonLocator.click();
             });
+        });
+    }
+
+    public void findOffers() {
+        stepWithRole("Нажать кнопку найти предложения", () -> {
+            findOffersButton.shouldHave(text("Найти предложения")).click();
         });
     }
 }

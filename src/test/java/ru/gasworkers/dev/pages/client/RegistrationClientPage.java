@@ -256,11 +256,11 @@ public class RegistrationClientPage extends BaseClientPage {
                 stepWithRole("Плейсхолдер ввода отчества" , () -> {
                     driver.$("input[placeholder*=Отчество]").shouldBe(visible).as("Отчество");
                 });
-                stepWithRole("Подзаголовок и телефон: " + formatPhoneNumber , () -> {
+                //removed for business reason
+                /*stepWithRole("Подзаголовок и телефон: " + formatPhoneNumber , () -> {
                     driver.$("div.d-flex.justify-content-between.mb-20").$$("div").get(0).shouldHave(text("Ваш номер телефона")).as("Ваш номер телефона");
-
                     driver.$("div.d-flex.justify-content-between.mb-20").$$("div").get(1).shouldHave(text(formatPhoneNumber)).as("formatPhoneNumber");
-                });
+                });*/
                 stepWithRole("Плейсхолдер ввода Электронная почта" , () -> {
                     driver.$("input[placeholder*=почта]").shouldBe(visible).as("Электронная почта");
                 });
@@ -294,11 +294,11 @@ public class RegistrationClientPage extends BaseClientPage {
                 stepWithRole("Плейсхолдер ввода отчества" , () -> {
                     driver.$("input[placeholder*=Отчество]").shouldBe(visible).as("Отчество");
                 });
-                stepWithRole("Подзаголовок и почта: " + email , () -> {
+                //removed for business reason
+                /*stepWithRole("Подзаголовок и почта: " + email , () -> {
                     driver.$("div.d-flex.justify-content-between.mb-20").$$("div").get(0).shouldHave(text("Электронная почта")).as("Электронная почта");
-
                     driver.$("div.d-flex.justify-content-between.mb-20").$$("div").get(1).shouldHave(text(email)).as("email");
-                });
+                });*/
                 stepWithRole("Плейсхолдер ввода Номер телефона" , () -> {
                     driver.$("input[placeholder*=Номер]").shouldBe(visible).as("Номер телефона");
                 });

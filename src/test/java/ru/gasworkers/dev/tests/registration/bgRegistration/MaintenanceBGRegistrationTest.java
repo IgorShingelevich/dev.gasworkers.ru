@@ -61,7 +61,7 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
                 clientPages.getHomePage().firstMaintenanceGuide.playSequence();
             });
             step("Страница Карта", () -> {
-                clientPages.getSelectServicePage().checkFinishLoading();
+                clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
                 clientPages.getSelectServicePage().checkPublishedState();
             });
             String orderNumber = step("Страница Карточка заказа", () -> {

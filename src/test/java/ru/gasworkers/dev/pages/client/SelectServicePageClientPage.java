@@ -31,7 +31,8 @@ public class SelectServicePageClientPage extends BaseClientPage {
     }
 
     private final String
-        SELECT_SERVICE_TITLE = "Спасибо! Ваш заказ принят и обрабатывается диспетчерами";
+            SELECT_SERVICE_MAINTENANCE_TITLE = "Спасибо! Ваш заказ принят и обрабатывается диспетчерами",
+            SELECT_SERVICE_REPAIR_TITLE = "Ваш заказ принят и обрабатывается диспетчерами";
 
 
     SelenideElement
@@ -55,10 +56,20 @@ public class SelectServicePageClientPage extends BaseClientPage {
     }
 
 //    @DisplayName("Убедиться, что страница Выбор СК загружена")
-    public void checkFinishLoading() {
+    public void checkFinishMaintenanceLoading() {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
 //            spinnerScrollbarLocator.should(disappear);
-            titleLocator.shouldHave(text(SELECT_SERVICE_TITLE));
+            titleLocator.shouldHave(text(SELECT_SERVICE_MAINTENANCE_TITLE));
+            firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
+            driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
+            offers.checkFinishLoading();
+        });
+    }
+
+    public void checkFinishRepairLoading() {
+        stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
+//            spinnerScrollbarLocator.should(disappear);
+            titleLocator.shouldHave(text(SELECT_SERVICE_REPAIR_TITLE));
             firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
             driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
             offers.checkFinishLoading();
