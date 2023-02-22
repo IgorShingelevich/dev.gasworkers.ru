@@ -57,13 +57,13 @@ public class CredentialsValidationUsualRegistrationTest extends BaseTest {
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
         clientPages.getLandingPage().signUpClient();
-        clientPages.getRegistrationPage().checkFirstStepFinishLoading();
-        clientPages.getRegistrationPage().byEmail(acceptedEmail);
-        clientPages.getRegistrationPage().checkboxNotCheckedCState();
-        clientPages.getRegistrationPage().clickCheckbox();
-        clientPages.getRegistrationPage().checkboxCheckedCState();
+        clientPages.getRegistrationPage().firstStep.checkFirstStepFinishLoading();
+        clientPages.getRegistrationPage().firstStep.byEmail(acceptedEmail);
+        clientPages.getRegistrationPage().firstStep.checkboxNotCheckedCState();
+        clientPages.getRegistrationPage().firstStep.clickCheckbox();
+        clientPages.getRegistrationPage().firstStep.checkboxCheckedCState();
         clientPages.getRegistrationPage().clickNext();
-        clientPages.getRegistrationPage().checkSecondStepFinishLoading();
+        clientPages.getRegistrationPage().secondStep.checkSecondStepFinishLoading();
     }
 
     @CsvFileSource(resources = "resources/registration/invalidEmailFormat.csv", numLinesToSkip = 1, delimiter = '|')
@@ -81,15 +81,15 @@ public class CredentialsValidationUsualRegistrationTest extends BaseTest {
             clientPages.getLandingPage().signUpClient();
         });
         step("Страница первого шага регистрации", () -> {
-            clientPages.getRegistrationPage().checkFirstStepFinishLoading();
-            clientPages.getRegistrationPage().byEmail(invalidEmail);
-            clientPages.getRegistrationPage().checkboxNotCheckedCState();
-            clientPages.getRegistrationPage().clickCheckbox();
-            clientPages.getRegistrationPage().checkboxCheckedCState();
+            clientPages.getRegistrationPage().firstStep.checkFirstStepFinishLoading();
+            clientPages.getRegistrationPage().firstStep.byEmail(invalidEmail);
+            clientPages.getRegistrationPage().firstStep.checkboxNotCheckedCState();
+            clientPages.getRegistrationPage().firstStep.clickCheckbox();
+            clientPages.getRegistrationPage().firstStep.checkboxCheckedCState();
             clientPages.getRegistrationPage().clickNext();
         });
         step("Убедиться, что при вводе невалидного email: " + invalidEmail + " появляется ошибка: " + errorText, () -> {
-            clientPages.getRegistrationPage().checkInvalidEmailError(invalidEmail, errorText);
+            clientPages.getRegistrationPage().firstStep.checkInvalidEmailError(invalidEmail, errorText);
             //        clientPages.getRegistrationPage().checkInvalidEmailError(invalidEmail, errorText, errorDescription);
         });
     }
@@ -109,15 +109,15 @@ public class CredentialsValidationUsualRegistrationTest extends BaseTest {
             clientPages.getLandingPage().signUpClient();
         });
         step("Страница первого шага регистрации", () -> {
-            clientPages.getRegistrationPage().checkFirstStepFinishLoading();
-            clientPages.getRegistrationPage().byWrongFormatPhone(invalidPhoneNumber);
-            clientPages.getRegistrationPage().checkboxNotCheckedCState();
-            clientPages.getRegistrationPage().clickCheckbox();
-            clientPages.getRegistrationPage().checkboxCheckedCState();
+            clientPages.getRegistrationPage().firstStep.checkFirstStepFinishLoading();
+            clientPages.getRegistrationPage().firstStep.byWrongFormatPhone(invalidPhoneNumber);
+            clientPages.getRegistrationPage().firstStep.checkboxNotCheckedCState();
+            clientPages.getRegistrationPage().firstStep.clickCheckbox();
+            clientPages.getRegistrationPage().firstStep.checkboxCheckedCState();
             clientPages.getRegistrationPage().clickNext();
         });
         step("Убедиться, что при вводе невалидного номера телефона: " + invalidPhoneNumber + " появляется ошибка: " + errorText, () -> {
-            clientPages.getRegistrationPage().checkInvalidPhoneNumberError(invalidPhoneNumber, errorText);
+            clientPages.getRegistrationPage().firstStep.checkInvalidPhoneNumberError(invalidPhoneNumber, errorText);
         });
     }
 

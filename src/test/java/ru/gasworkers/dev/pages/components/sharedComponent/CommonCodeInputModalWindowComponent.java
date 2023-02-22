@@ -26,7 +26,7 @@ public class CommonCodeInputModalWindowComponent extends BaseComponent {
         closeButtonLocator = driver.$("div.close-btn").as("Кнопка Закрыть");
 
     ElementsCollection
-        codeInputCollectionLocator = driver.$$("div.code-input input").as("Поля ввода кода");
+        codeInputCollectionLocator = driver.$$(".code-input input").as("Поля ввода кода");
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что модальное окно ввода кода загружено", () -> {

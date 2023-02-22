@@ -1,18 +1,13 @@
 package ru.gasworkers.dev.pages.common;
 
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import com.codeborne.selenide.ex.ElementShould;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
 import ru.gasworkers.dev.pages.components.sharedComponent.JivoMessengerComponent;
 
-import java.time.Duration;
-
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
 
 public final class LoginPage extends BasePage {
     public final JivoMessengerComponent jivoMessengerComponent;

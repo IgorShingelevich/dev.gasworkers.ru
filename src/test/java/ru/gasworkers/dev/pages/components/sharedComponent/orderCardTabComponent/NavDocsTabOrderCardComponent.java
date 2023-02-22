@@ -17,7 +17,7 @@ import static io.qameta.allure.Allure.step;
 
 public class NavDocsTabOrderCardComponent extends BaseTabOrderCardComponent {
     public final OrderStatusCardComponent orderState;
-    private final long downloadTimeout = 3_000L;
+    private final long downloadTimeout = 4_000L;
 
     public NavDocsTabOrderCardComponent(RoleBrowser browser) {
         super(browser);

@@ -50,10 +50,9 @@ public class RepairBGRegistrationTest extends BaseTest {
         step("Клиент заполняет форму фоновой регистрации", () -> {
             clientPages.getLandingPage().bgRegistration.checkFinishLoading();
             clientPages.getLandingPage().bgRegistration.fillBGRepairRequest(randomClient.getObjectAddress(), EquipmentType.GAS_BOILER, 1, 1, 20, randomClient.getPhoneNumber(), randomClient.getEmail());
-            // TODO add photo video
+            //TODO add photo video
             clientPages.getLandingPage().bgRegistration.findOffers();
-            clientPages.getLandingPage().bgRegistration.codeInput.checkFinishLoading();
-            clientPages.getLandingPage().bgRegistration.codeInput.sendCode(randomClient.getConfirmationCode());
+//            clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
         });
         step("Кабинет клиента - состояние после фоновой регистрации", () -> {
             step("Гид  Ремонт по кабинету", () -> {

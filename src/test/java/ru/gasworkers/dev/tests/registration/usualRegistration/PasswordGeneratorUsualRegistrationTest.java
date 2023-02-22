@@ -47,29 +47,29 @@ public class PasswordGeneratorUsualRegistrationTest extends BaseTest {
             clientPages.getLandingPage().signUpClient();
         });
         step("Страница первого шага регистрации", () -> {
-            clientPages.getRegistrationPage().checkFirstStepFinishLoading();
-            clientPages.getRegistrationPage().byPhone(randomClient.getPhoneNumber());
-            clientPages.getRegistrationPage().checkboxNotCheckedCState();
-            clientPages.getRegistrationPage().clickCheckbox();
-            clientPages.getRegistrationPage().checkboxCheckedCState();
+            clientPages.getRegistrationPage().firstStep.checkFirstStepFinishLoading();
+            clientPages.getRegistrationPage().firstStep.byPhone(randomClient.getPhoneNumber());
+            clientPages.getRegistrationPage().firstStep.checkboxNotCheckedCState();
+            clientPages.getRegistrationPage().firstStep.clickCheckbox();
+            clientPages.getRegistrationPage().firstStep.checkboxCheckedCState();
             clientPages.getRegistrationPage().clickNext();
         });
         step("Страница второго шага регистрации", () -> {
-            clientPages.getRegistrationPage().checkSecondStepFinishLoading();
-            clientPages.getRegistrationPage().fillCode(randomClient.getConfirmationCode());
+            clientPages.getRegistrationPage().secondStep.checkSecondStepFinishLoading();
+            clientPages.getRegistrationPage().confirmationCode.fillCode(randomClient.getConfirmationCode());
             clientPages.getRegistrationPage().clickNext();
         });
         step("Страница третьего шага регистрации", () -> {
-            clientPages.getRegistrationPage().checkThirdStepFinishLoading();
-            clientPages.getRegistrationPage().generatePassword();
+            clientPages.getRegistrationPage().thirdStep.checkThirdStepFinishLoading();
+            clientPages.getRegistrationPage().thirdStep.generatePassword();
             clientPages.getRegistrationPage().clickNext();
         });
         step("Страница четвертого шага регистрации", () -> {
-            clientPages.getRegistrationPage().checkFourthStepByPhoneFinishLoading(randomClient.getPhoneNumber());
-            clientPages.getRegistrationPage().fillName(randomClient.getName());
-            clientPages.getRegistrationPage().fillSurname(randomClient.getSurname());
-            clientPages.getRegistrationPage().fillPatronymicName(randomClient.getPatronymicName());
-            clientPages.getRegistrationPage().fillEmail(randomClient.getEmail());
+            clientPages.getRegistrationPage().forthStep.checkFourthStepByPhoneFinishLoading(randomClient.getPhoneNumber());
+            clientPages.getRegistrationPage().forthStep.fillName(randomClient.getName());
+            clientPages.getRegistrationPage().forthStep.fillSurname(randomClient.getSurname());
+            clientPages.getRegistrationPage().forthStep.fillPatronymicName(randomClient.getPatronymicName());
+            clientPages.getRegistrationPage().forthStep.fillEmail(randomClient.getEmail());
             clientPages.getRegistrationPage().clickNext();
         });
         step("Страница успешная регистрация", () -> {

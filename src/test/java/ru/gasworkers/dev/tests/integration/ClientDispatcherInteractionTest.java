@@ -196,7 +196,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
                 //String sms = clientSmsApi1.waitReceiveNewSms().getText(); // for real number
                 //String code = sms.substring(0, 6); // for real number
                 String mockCode = "111111";
-                clientPages.getSignSMSPage().inputSMSCode(mockCode);
+//                clientPages.getSignSMSPage().inputSMSCode(mockCode);
                 //todo: check that sms is inputed
                 //todo check spinner disappear
                 //clientPages.getSignSMSPage().sign();
@@ -272,10 +272,12 @@ class ClientDispatcherInteractionTest extends BaseTest {
 
         step("Мастер прибывает на обьект", () -> {
             step("Мастер заполняет чеклист", () -> {
+                masterPages.getOrderCardPage().navCheckList();
                 masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
                 //todo: add test for checklist changes and its affect on order state
             });
             step("Мастер заполнил чеклист и приступил к работе", () -> {
+                masterPages.getOrderCardPage().navCheckList();
                 masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
             });
 

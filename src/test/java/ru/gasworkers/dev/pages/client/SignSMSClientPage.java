@@ -29,7 +29,7 @@ public class SignSMSClientPage extends BaseClientPage {
             sendAgainButton = driver.$(".gas-sign a.link-dark-blue").as("Запросить повторно код подтверждения"),
             signButton = driver.$("button.btn.btn-primary").as("Кнопка Подписать");
 
-    ElementsCollection smsCodeInputCollection = driver.$$("div.code-input input").as("Коллекция полей ввода СМС кода");
+    ElementsCollection smsCodeInputCollection = driver.$$(".code-input input").as("Коллекция полей ввода СМС кода");
 
     public SignSMSClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что страница Подписание СМС загружена", () -> {

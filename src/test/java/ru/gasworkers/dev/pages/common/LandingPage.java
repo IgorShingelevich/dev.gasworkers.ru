@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
+import ru.gasworkers.dev.pages.components.sharedComponent.ConfirmationCodeModalWindowBGComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.JivoMessengerComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.backgroundRegistrationComponent.BackgroundRegistrationComponent;
 
@@ -16,12 +17,14 @@ public class LandingPage extends BasePage {
 
     public final BackgroundRegistrationComponent bgRegistration;
     public final JivoMessengerComponent jivoMessengerComponent;
+    public final ConfirmationCodeModalWindowBGComponent confirmationCodeModalBG;
 
 
 public LandingPage(RoleBrowser browser) {
         super(browser);
         bgRegistration = new BackgroundRegistrationComponent(browser);
         jivoMessengerComponent = new JivoMessengerComponent(browser);
+        confirmationCodeModalBG = new ConfirmationCodeModalWindowBGComponent(browser);
     }
 
     private final String
