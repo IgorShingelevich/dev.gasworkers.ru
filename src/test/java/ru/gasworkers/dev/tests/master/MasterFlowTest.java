@@ -67,7 +67,7 @@ public class MasterFlowTest extends BaseTest {
     @Tags({@Tag("regression"), @Tag("master"), @Tag("cabinet"), @Tag("positive")})
     @DisplayName("Мастер открывает заказ в состоянии Мастер в пути")
     public void clientCheckMasterDispatchedOrderSate () {
-        String checkedOrderNumber = "3890";
+        String checkedOrderNumber = "3911";
         masterPages.getHomePage().checkFinishLoading();
         masterPages.getHomePage().sidebar.checkReadyForVideoState(ReadyForVideoState.READY);
         masterPages.getHomePage().sidebar.allOrdersHistoryDropdown();
@@ -90,11 +90,32 @@ public class MasterFlowTest extends BaseTest {
         masterPages.getEditObjectPage().navObject();
         masterPages.getEditObjectPage().editObjectTab.checkFinishLoading();
         masterPages.getEditObjectPage().editObjectTab.toOrder();
-
-
         // TODO checkFinishLoading - expand  docs check, order properties check, price check
-
     }
+
+    @Test
+    @Feature("Кабинет мастера")
+    @Story("Просмотр заказа на ТО")
+    @Tags({@Tag("regression"), @Tag("master"), @Tag("cabinet"), @Tag("positive")})
+    @DisplayName("Мастер редактирует чеклист")
+    public void clientCheckFillUpCheckListState () {
+        String checkedOrderNumber = "3911";
+        masterPages.getHomePage().checkFinishLoading();
+        masterPages.getHomePage().sidebar.checkReadyForVideoState(ReadyForVideoState.READY);
+        masterPages.getHomePage().sidebar.allOrdersHistoryDropdown();
+        masterPages.getHomePage().sidebar.allNewOrders();
+        masterPages.getAllNewOrdersPage().checkFinishLoading();
+        masterPages.getAllNewOrdersPage().switchToListView();
+        masterPages.getAllNewOrdersPage().openByNumber(checkedOrderNumber);
+        masterPages.getOrderCardPage().checkFinishLoading();
+        masterPages.getOrderCardPage().startWork();
+        masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+        masterPages.getOrderCardPage().navInfoMaster();
+        masterPages.getOrderCardPage().tabInfoMaster.table.checkFinishLoading();
+        //todo implement check checklist not exist
+        // TODO checkFinishLoading - expand  docs check, order properties check, price check
+    }
+
     @Disabled
     @Owner("Igor Shingelevich")
     @Feature("Кабинет мастера")

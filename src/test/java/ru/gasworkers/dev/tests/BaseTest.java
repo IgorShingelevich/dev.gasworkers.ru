@@ -7,6 +7,7 @@ import ru.gasworkers.dev.extension.browser.ScreenshotExtension;
 public abstract class BaseTest {
 
 }
+//TODO DISCUSS why collection stream is not recommended? C:/Users/V/.gradle/caches/modules-2/files-2.1/com.codeborne/selenide-core/6.11.2/dd2c544c99bca19de75c59f09c32c687154786af/selenide-core-6.11.2-sources.jar!/com/codeborne/selenide/ElementsCollection.java:457
 //TODO DISCUSS   pride ru/gasworkers/dev/pages/components/masterComponent/CheckListMasterComponent.java:136 iteration vs single line
 //TODO DISCUSS   step Проверить заполненные данные - BG Registration addres not refreshing, date - null
 // TODO DISCUSS  download method FOLDER -  periodically fall download - Failed to download file in 1000 ms.

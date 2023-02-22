@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import ru.gasworkers.dev.model.Doc;
 import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.components.masterComponent.FillUpCheckListBannerComponent;
 
 import java.io.File;
 
@@ -17,11 +18,14 @@ import static io.qameta.allure.Allure.step;
 
 public class NavDocsTabOrderCardComponent extends BaseTabOrderCardComponent {
     public final OrderStatusCardComponent orderState;
+    public final FillUpCheckListBannerComponent fillUpBanner;
+
     private final long downloadTimeout = 4_000L;
 
     public NavDocsTabOrderCardComponent(RoleBrowser browser) {
         super(browser);
         orderState = new OrderStatusCardComponent(browser);
+        fillUpBanner = new FillUpCheckListBannerComponent(browser);
     }
 
     ElementsCollection

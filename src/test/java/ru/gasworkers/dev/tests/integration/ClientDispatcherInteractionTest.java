@@ -272,20 +272,29 @@ class ClientDispatcherInteractionTest extends BaseTest {
 
         step("Мастер прибывает на обьект", () -> {
             step("Мастер заполняет чеклист", () -> {
-                masterPages.getOrderCardPage().navCheckList();
+                masterPages.getOrderCardPage().startWork();
                 masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+                //todo check checklist default state
                 //todo: add test for checklist changes and its affect on order state
             });
             step("Мастер заполнил чеклист и приступил к работе", () -> {
                 masterPages.getOrderCardPage().navCheckList();
-                masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+                masterPages.getOrderCardPage().saveCheckList();
+            });
+            step("Мастер добавляет позицию в  таблицу Оборудования ТО", () -> {
+                //todo check table state - equipment list and default values
+                //todo add equipment and check buttons behavior
+                //todo add description
+                //todo add media
+                //todo pay cash
+
+                //todo no checkBox - triggering error
             });
 
 
+
         });
 
-        step("Мастер добавляет позицию в  таблицу Оборудования ТО", () -> {
-        });
 
         step("Мастер подтверждает выполненную работу", () -> {
         });

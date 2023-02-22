@@ -160,5 +160,6 @@ public class CheckListMasterComponent extends BaseComponent {
             checklistRadioButtonItemCollection.shouldHave(CollectionCondition.noneMatch("Активные радио кнопки", selenideElement -> driver.$(selenideElement).is(Condition.disabled)));
         });
     }
+
 }
 //todo: add test for checklist changes
