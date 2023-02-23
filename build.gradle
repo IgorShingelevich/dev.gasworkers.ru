@@ -37,7 +37,6 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 def selenideVersion = '6.11.1',
-    pdfTest = '1.8.0',
     assertjVersion = '3.24.2',
     junitJupiterVersion = '5.9.0',
     hamcrest = '2.2',
@@ -48,7 +47,8 @@ def selenideVersion = '6.11.1',
     SMSActivateApiVersion = '1.5.9',
     restassured = '5.3.0',
     awaitility = '4.2.0',
-    pdfbox = '2.0.27',
+    pdfTest = '1.8.0',
+    pdfbox = '3.0.0-RC1',
     jacksonCore = '2.14.1'
 
 
@@ -57,18 +57,18 @@ dependencies {
 
     testImplementation(
             "com.ibm.icu:icu4j:$icu4j",
-            "com.github.javafaker:javafaker:$javafakerVersion",
             "com.codeborne:selenide:$selenideVersion",
-            "com.codeborne:pdf-test:$pdfTest",
-            "org.assertj:assertj-core:$assertjVersion",
             "io.qameta.allure:allure-selenide:$allureSelenideVersion",
             "org.junit.jupiter:junit-jupiter:$junitJupiterVersion",
-            "org.hamcrest:hamcrest:$hamcrest",
             "org.slf4j:slf4j-simple:$slf4jVersion",
             "ru.sms-activate:SMSActivateApi:$SMSActivateApiVersion",
             "io.rest-assured:rest-assured:$restassured",
-            "org.awaitility:awaitility:$awaitility",
+            "com.github.javafaker:javafaker:$javafakerVersion",
+            "com.codeborne:pdf-test:$pdfTest",
             "org.apache.pdfbox:pdfbox:$pdfbox",
+            "org.assertj:assertj-core:$assertjVersion",
+            "org.hamcrest:hamcrest:$hamcrest",
+            "org.awaitility:awaitility:$awaitility",
             "com.fasterxml.jackson.core:jackson-core:$jacksonCore"
     )
 }
