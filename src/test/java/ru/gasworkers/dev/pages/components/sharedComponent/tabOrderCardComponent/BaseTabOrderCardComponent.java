@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent;
+package ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent;
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;

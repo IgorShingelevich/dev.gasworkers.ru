@@ -1,7 +1,6 @@
 package ru.gasworkers.dev.pages.components.masterComponent;
 
 import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
@@ -9,6 +8,7 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeborne.selenide.Condition.*;
 import static io.qameta.allure.Allure.step;
 
 public class CheckListMasterComponent extends BaseComponent {
@@ -150,16 +150,43 @@ public class CheckListMasterComponent extends BaseComponent {
 
         public void isDisableRadioButtonsState(){
             stepWithRole("Убедиться, что все радио кнопки чек листа неактивны", () -> {
-                checklistRadioButtonItemCollection.shouldHave(CollectionCondition.noneMatch("Неактивные радио кнопки", selenideElement -> driver.$(selenideElement).is(Condition.enabled)));
+                checklistRadioButtonItemCollection.shouldHave(CollectionCondition.allMatch("Неактивные радио кнопки", selenideElement -> driver.$(selenideElement).is(disabled)));
             });
 
         }
 
-    public void isActiveRadioButtonsState() {
+    public void isEnableRadioButtonsState() {
         stepWithRole("Убедиться, что все радио кнопки чек листа активны", () -> {
-            checklistRadioButtonItemCollection.shouldHave(CollectionCondition.noneMatch("Активные радио кнопки", selenideElement -> driver.$(selenideElement).is(Condition.disabled)));
+            checklistRadioButtonItemCollection.shouldHave(CollectionCondition.allMatch("Активные радио кнопки", selenideElement -> driver.$(selenideElement).is(enabled)));
         });
     }
+
+    public void checkEnabledDefaultState() {
+        stepWithRole("Убедиться, что чек лист в начальном состоянии ", () -> {
+            checkListSectionCollection.should(CollectionCondition.size(6));
+            checklistRadioButtonItemCollection.should(CollectionCondition.size(48));
+            checkListItemsTitle();
+            isEnableRadioButtonsState();
+//            checklistItemCollection.filterBy(Condition.pseudo(":after")).shouldHave(Colle
+                    /*checklistItemCollection.filterBy(cssClass("state"))
+                            .get(0)
+                        .shouldHave(cssValue("border-color", "transparent"))
+                            .$(".state:after").shouldNotHave(cssValue("border-color", "transparent"));*/
+
+            checklistItemCollection.filterBy(cssClass("state")).get(0).shouldBe(checked);
+         /*   checklistItemCollection.get(0)
+                    .$$("div.col-6")
+                    .shouldHave(Condition.pseudo(":after", "color", "#ff0000"));*/
+
+            //two radio buttons of one element - checklistItemCollection.get(0).$$(".state").size() == 2
+            //xuev checklistItemCollection.get(0).$$(".state").get(0).shouldHave(Condition.pseudo(":after", "color"))
+            // toje xuev checklistItemCollection.get(0).$$(".state").get(0).shouldHave(Condition.pseudo(":after", "color", "#ff0000"))
+
+
+
+        });
+    }
+
 
 }
 //todo: add test for checklist changes

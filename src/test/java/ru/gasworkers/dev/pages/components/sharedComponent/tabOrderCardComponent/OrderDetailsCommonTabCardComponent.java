@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent;
+package ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent;
 
 import com.codeborne.selenide.ElementsCollection;
 import ru.gasworkers.dev.model.OrderType;

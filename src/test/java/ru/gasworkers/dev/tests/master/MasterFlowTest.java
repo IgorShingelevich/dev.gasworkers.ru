@@ -110,8 +110,11 @@ public class MasterFlowTest extends BaseTest {
         masterPages.getOrderCardPage().checkFinishLoading();
         masterPages.getOrderCardPage().startWork();
         masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
-        masterPages.getOrderCardPage().navInfoMaster();
-        masterPages.getOrderCardPage().tabInfoMaster.table.checkFinishLoading();
+//        masterPages.getOrderCardPage().navInfoMaster();
+//        masterPages.getOrderCardPage().tabInfoMaster.table.checkDefaultState();
+        masterPages.getOrderCardPage().navCheckList();
+        masterPages.getOrderCardPage().tabCheckList.checkListComponent.checkEnabledDefaultState();
+
         //todo implement check checklist not exist
         // TODO checkFinishLoading - expand  docs check, order properties check, price check
     }

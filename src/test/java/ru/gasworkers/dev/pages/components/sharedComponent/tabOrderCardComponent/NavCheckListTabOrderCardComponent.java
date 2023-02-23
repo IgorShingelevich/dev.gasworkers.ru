@@ -1,7 +1,5 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent;
+package ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent;
 
-import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.ElementsCollection;
 import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.masterComponent.CheckListMasterComponent;

@@ -7,10 +7,10 @@ import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavCheckListTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavCommonTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavDocsTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent.NavInfoMasterTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCheckListTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCommonTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavDocsTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavInfoMasterTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarMasterComponent;
 
 import java.time.Duration;
@@ -181,7 +181,7 @@ public class OrderCardMasterPage extends BaseMasterPage {
             stepWithRole("Вкладка Чек лист", () -> {
                 navCheckList();
                 tabCheckList.checkFinishLoading(orderStatus);
-                tabCheckList.checkListComponent.isActiveRadioButtonsState();
+                tabCheckList.checkListComponent.isEnableRadioButtonsState();
                 stepWithRole("Убедиться, представлена кнопки  Редактировать объект/оборудование, кнопка Кнопка Сохранить активная и кнопка Заказ на ремонт", () -> {
                     saveButtonLocator.ancestor("button").shouldBe(enabled);
                     editObjectButtonLocator.shouldNotBe(visible);

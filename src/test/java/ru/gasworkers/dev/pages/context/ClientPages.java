@@ -29,6 +29,7 @@ public final class ClientPages extends BaseRolePages {
     private final SelectDateMaintenanceClientPage selectDateMaintenancePage = new SelectDateMaintenanceClientPage(browser);
     private final SelectServicePageClientPage selectServicePage = new SelectServicePageClientPage(browser);
     private  final OrderCardClientPage orderCardPage = new OrderCardClientPage(browser);
+    private final ObjectCardClientPage objectCardPage = new ObjectCardClientPage(browser);
     private final CancelOrderPage cancelOrderPage = new CancelOrderPage(browser);
     private final SelectInsuranceClientPage selectInsurancePage = new SelectInsuranceClientPage(browser);
     private final CheckDocumentsClientPage checkDocumentsPage = new CheckDocumentsClientPage(browser);

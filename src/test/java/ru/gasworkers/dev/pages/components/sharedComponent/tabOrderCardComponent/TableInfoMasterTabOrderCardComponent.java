@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.orderCardTabComponent;
+package ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public class TableInfoMasterTabOrderCardComponent extends BaseComponent {
@@ -48,7 +49,6 @@ public class TableInfoMasterTabOrderCardComponent extends BaseComponent {
     public SelenideElement getDescriptionCell(int row) {
         return getCell(row, 3);
     }
-String brandText = getBrandCell(0).getText();
 
 
 
@@ -69,6 +69,15 @@ String brandText = getBrandCell(0).getText();
         System.out.println("lastItem = " + lastItem);
 
     }
+
+    public void checkDefaultState () {
+        stepWithRole("Проверка состояния  таблицы до начала редактирования", () -> {
+            checkFinishLoading();
+            saveButton.ancestor("button").shouldBe(disabled);
+            addPositionButton.shouldBe(visible);
+        });
+    }
+
 
 
 

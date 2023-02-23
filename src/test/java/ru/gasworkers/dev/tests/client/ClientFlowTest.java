@@ -93,6 +93,32 @@ class ClientFlowTest extends BaseTest {
     }
 
     @Test
+    @Feature("Кабинет клиента")
+    @Story("Заполненный кабинет ")
+    @DisplayName("Клиент просматривает объект с предложениями")
+    public void checkGotOffersStateObject() {
+        clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
+        clientPages.getHomePage().sidebar.allObjects();
+        clientPages.getAllObjectsPage().checkFinishLoading();
+        clientPages.getAllObjectsPage().openObjectByIndex(0);
+        clientPages.getObjectCardPage().checkFinishLoading();
+        step("Убедиться, что баннер Нельзя редактировать присутствует на всех вкладках", () -> {
+            clientPages.getObjectCardPage().tabObject.noEditBanner.isExist();
+            clientPages.getObjectCardPage().navDistributorTab();
+            clientPages.getObjectCardPage().tabDistributor.noEditBanner.isExist();
+            clientPages.getObjectCardPage().navDocsTab();
+            clientPages.getObjectCardPage().tabDocs.noEditBanner.isExist();
+            clientPages.getObjectCardPage().navObjectTab();
+        });
+        clientPages.getObjectCardPage().tabObject.getName();
+        clientPages.getObjectCardPage().tabObject.getEquipmentList();
+
+
+    }
+
+
+
+    @Test
     @Feature("Новый заказ ТО")
     @Story("Создание заказа")
     @DisplayName("Клиент создает заказ")
