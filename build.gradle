@@ -65,7 +65,7 @@ dependencies {
             "io.rest-assured:rest-assured:$restassured",
             "com.github.javafaker:javafaker:$javafakerVersion",
             "com.codeborne:pdf-test:$pdfTest",
-            "org.apache.pdfbox:pdfbox:$pdfbox",
+//            "org.apache.pdfbox:pdfbox:$pdfbox",
             "org.assertj:assertj-core:$assertjVersion",
             "org.hamcrest:hamcrest:$hamcrest",
             "org.awaitility:awaitility:$awaitility",
