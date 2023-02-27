@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pdf;
 import com.codeborne.pdftest.PDF;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
+import ru.gasworkers.dev.utils.SSSRServiceBuilder;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +16,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 public final class AgreementPdfChecker extends AbstractPdfChecker {
+    static SSSRServiceBuilder sssrService = new SSSRServiceBuilder();
+    String serviceNameText = sssrService.name;
+
 
     public static AgreementPdfChecker newInstance(File file) {
         try {
@@ -30,20 +34,25 @@ public final class AgreementPdfChecker extends AbstractPdfChecker {
     }
 
     public enum Section {
-        AGREEMENT_SUBJECT("1. Предмет Договора", "1-agreement-subject.txt"),
-        OBLIGATIONS("2. Обязанности и права Сторон", "2-obligations.txt");
+
+
+        AGREEMENT_SUBJECT("1. Предмет Договора", "1-agreement-subject.txt", sssrService.name),
+        OBLIGATIONS("2. Обязанности и права Сторон", "2-obligations.txt", sssrService.name);
 
         private final String subtitle;
         private final String fileName;
+        private final String expectedText;
 
-        Section(String subtitle, String fileName) {
+        Section(String subtitle, String fileName, String expectedText) {
             this.subtitle = subtitle;
             this.fileName = fileName;
+            this.expectedText = expectedText;
         }
 
         public List<String> getSectionExpectedLines() {
             File file = new File("src/test/resources/pdf/agreement/" + fileName);
             try {
+                // expected lines
                 List<String> lines = new ArrayList<>();
                 String commonLine = Files.readString(file.toPath());
                 Collections.addAll(lines, commonLine.split("\n"));
@@ -113,6 +122,28 @@ public final class AgreementPdfChecker extends AbstractPdfChecker {
         // Проверить блок исполнителя
         List<String> actualExecutor = getSectionDescriptionLines(expectedExecutorLines.size());
         assertThat(actualExecutor).isEqualTo(expectedExecutorLines);
+
+        // Проверить блок заказчика
+        List<String> actualCLient = getSectionDescriptionLines(expectedClientLines.size());
+        assertThat(actualCLient).isEqualTo(expectedClientLines);
+
+        return this;
+    }
+
+    @Step("Check document addresses and bank details (п. 12) v2")
+    // Executor - исполнитель, client - заказчик
+    public AgreementPdfChecker checkAddressesAndBankDetailsV2(List<String> expectedExecutorLines,
+                                                            List<String> expectedClientLines) {
+        setCursorAfterSubtitle("12. Адреса и банковские реквизиты Сторон");
+
+
+
+        // Проверить блок исполнителя
+        List<String> actualExecutor = getSectionDescriptionLines(expectedExecutorLines.size());
+
+        assertThat(actualExecutor).isEqualTo(expectedExecutorLines);
+        assertThat(expectedExecutorLines)
+                                .containsAnyElementsOf(actualExecutor);
 
         // Проверить блок заказчика
         List<String> actualCLient = getSectionDescriptionLines(expectedClientLines.size());

@@ -53,7 +53,7 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
             clientPages.getLandingPage().bgRegistration.fillBGMaintenanceRequest(randomClient.getObjectAddress(), EquipmentType.GAS_BOILER, 1, 1, 20, randomClient.getPhoneNumber(), randomClient.getEmail());
             // TODO add photo video
             clientPages.getLandingPage().bgRegistration.findOffers();
-//            clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
+            clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
         });
         step("Кабинет клиента - состояние после фоновой регистрации", () -> {
             step("Гид  ТО по кабинету", () -> {

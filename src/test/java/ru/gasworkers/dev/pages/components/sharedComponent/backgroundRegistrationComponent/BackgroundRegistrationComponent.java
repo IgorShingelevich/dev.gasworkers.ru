@@ -33,8 +33,8 @@ public class BackgroundRegistrationComponent extends BaseComponent {
 
     private final String
         BG_MAINTENANCE_TITLE = "Заключить договор на техническое обслуживание дёшево и с гарантией",
-        BG_MAINTENANCE_SUBTITLE = "Подбери лучшую компанию для проведения технического обслуживания газового оборудования с гарантией.",
-        BG_MAINTENANCE_SUBTITLE_2 = "Укажите ваше оборудование и получите предложения.",
+        BG_MAINTENANCE_SUBTITLE = "Подберите лучшую компанию для проведения технического обслуживания газового оборудования с гарантией.",
+        BG_MAINTENANCE_SUBTITLE_2 = "",
         BG_MAINTENANCE_SUBTITLE_3 = "Укажите оборудование и параметры поиска",
         BG_REPAIR_TITLE = "Провести ремонт газового оборудования профессиональным мастером",
         BG_REPAIR_SUBTITLE = "Подберем квалифицированного мастера для ремонта газового котла, установки и настройки оборудования.",
@@ -76,7 +76,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.MAINTENANCE.getTitle())).click();
                 bgTitleLocator.shouldHave(text(BG_MAINTENANCE_TITLE));
                 bgSubtitleLocator.shouldHave(text(BG_MAINTENANCE_SUBTITLE));
-                bgSubtitle2Locator.shouldHave(text(BG_MAINTENANCE_SUBTITLE_2));
+                bgSubtitle2Locator.shouldHave(exactText(BG_MAINTENANCE_SUBTITLE_2));
                 bgSubtitle3Locator.shouldHave(text(BG_MAINTENANCE_SUBTITLE_3));
                 findOffersButton.shouldBe(visible);
             });

@@ -51,8 +51,8 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
     public HomeDispatcherPage checkFinishLoading() {
         stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
             //CollectionCondition.sizeGreaterThan
-            mapOrderTabsCollection.shouldHave(CollectionCondition.sizeGreaterThan(0 ), Duration.ofSeconds(30));
-            mapElemetLocator.shouldBe(visible, Duration.ofSeconds(20));
+            mapOrderTabsCollection.shouldHave(CollectionCondition.sizeGreaterThan(0 ), Duration.ofSeconds(10));
+            mapElemetLocator.shouldBe(visible, Duration.ofSeconds(10));
         });
         return this;
     }

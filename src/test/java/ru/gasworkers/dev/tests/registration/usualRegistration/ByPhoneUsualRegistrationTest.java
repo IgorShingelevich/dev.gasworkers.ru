@@ -60,8 +60,8 @@ public class ByPhoneUsualRegistrationTest extends BaseTest {
         });
         step("Страница второго шага регистрации", () -> {
             clientPages.getRegistrationPage().secondStep.checkSecondStepFinishLoading();
-//            clientPages.getRegistrationPage().confirmationCode.fillCode(randomClient.getConfirmationCode());
-//            clientPages.getRegistrationPage().clickNext();
+            clientPages.getRegistrationPage().confirmationCode.fillCode(randomClient.getConfirmationCode());
+            clientPages.getRegistrationPage().clickNext();
         });
         step("Страница третьего шага регистрации", () -> {
             clientPages.getRegistrationPage().thirdStep.checkThirdStepFinishLoading();

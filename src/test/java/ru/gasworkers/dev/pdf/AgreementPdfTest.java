@@ -8,8 +8,9 @@ public class AgreementPdfTest {
 
     @Test
     void checkAgreementPdf() {
-//        pdfChecker.checkSection(AgreementPdfChecker.Section.AGREEMENT_SUBJECT);
-//        pdfChecker.checkSection(AgreementPdfChecker.Section.OBLIGATIONS);
+        pdfChecker.checkSection(AgreementPdfChecker.Section.AGREEMENT_SUBJECT);
+        pdfChecker.checkSection(AgreementPdfChecker.Section.OBLIGATIONS);
+//        pdfChecker.checkAddressesAndBankDetailsV2();
 
         pdfChecker.checkAllSections();
     }

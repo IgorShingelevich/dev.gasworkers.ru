@@ -80,7 +80,7 @@ public LandingPage open() {
             stepWithRole("Убедиться, что кнопка Видеоконсультация отображается", () -> {
                 videoButtonLocator.shouldBe(visible);
             });
-            jivoMessengerComponent.checkFinishLoadingAndClose();
+            jivoMessengerComponent.presenceOfJivoIcon();
 
 
 
@@ -99,7 +99,7 @@ public LandingPage open() {
     public void signUpClient() {
     stepWithRole("Нажать кнопку Зарегистрироваться и выбрать Для клиента", () -> {
         signUpDropdownLocator.click();
-        signUpClientButtonLocator.shouldBe(visible, Duration.ofSeconds(10)).click();
+        signUpClientButtonLocator.shouldBe(visible, Duration.ofSeconds(20)).click();
     });
     }
 

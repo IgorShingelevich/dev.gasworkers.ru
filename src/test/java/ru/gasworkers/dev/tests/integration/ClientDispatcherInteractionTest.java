@@ -18,7 +18,7 @@ import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.BaseTest;
-import ru.gasworkers.dev.utils.User;
+import ru.gasworkers.dev.utils.ClientBuilder;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -38,7 +38,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
     @Browser(role = Role.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.THIRD_ROLE)
     MasterPages masterPages;
 
-    User client = new User(
+    ClientBuilder client = new ClientBuilder(
             "Игорь",
             "Сергеевич",
             "Шингелевич",
@@ -48,7 +48,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             null,
             79312534936L);
 
-    User dispatcher = new User(
+    ClientBuilder dispatcher = new ClientBuilder(
             "ДиспетчерСССР1",
             "ДиспетчеровичСССР1",
             "ДиспетчеровСССР1",
@@ -58,7 +58,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             null,
             79288010225L);
 
-    User master = new User(
+    ClientBuilder master = new ClientBuilder(
             "Мастер1СССР",
             "Мастерович1СССР",
             "Мастеров1СССР",
@@ -142,6 +142,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
         });
 
         step("Диспетчер принимает заказ на ТО ", () -> {
+            dispatcherPages.getHomePage().checkFinishLoading();
             dispatcherPages.getHomePage().switchToListView();
             dispatcherPages.getHomePage().openOrderByNumber(orderNumber);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
@@ -196,7 +197,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
                 //String sms = clientSmsApi1.waitReceiveNewSms().getText(); // for real number
                 //String code = sms.substring(0, 6); // for real number
                 String mockCode = "111111";
-//                clientPages.getSignSMSPage().inputSMSCode(mockCode);
+                clientPages.getSignSMSPage().inputSMSCode(mockCode);
                 //todo: check that sms is inputed
                 //todo check spinner disappear
                 //clientPages.getSignSMSPage().sign();
