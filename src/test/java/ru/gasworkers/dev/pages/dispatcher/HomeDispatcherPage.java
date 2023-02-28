@@ -127,6 +127,7 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
 
     public HomeDispatcherPage openOrderByNumber(String orderNumber) {
         stepWithRole("Открыть заказ по номеру: " + orderNumber, () -> {
+
             orderNumberLinkCollection.findBy(text(orderNumber)).click();
             orderCardTitleLocator.shouldBe(visible, Duration.ofSeconds(10)).shouldHave(text(orderNumber));
             System.out.println("dispatcherOrderNumber: " + orderNumber);

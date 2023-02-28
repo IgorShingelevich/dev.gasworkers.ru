@@ -15,4 +15,9 @@ public class AgreementPdfTest {
         pdfChecker.checkAllSections();
     }
 
+    @Test
+    void checkTitleV2() {
+        pdfChecker.checkTitleV2("45/23/077/003816");
+    }
+
 }
