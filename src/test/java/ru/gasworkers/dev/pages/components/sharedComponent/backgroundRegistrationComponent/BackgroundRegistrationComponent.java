@@ -14,6 +14,7 @@ import ru.gasworkers.dev.pages.components.sharedComponent.equipmentPicker.Equipm
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
 
 public class BackgroundRegistrationComponent extends BaseComponent {
@@ -65,7 +66,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
         findOffersButton = driver.$("button.text-primary-dark.btn.btn-warning.disable-outline").as("Найти предложения");
     ElementsCollection
         requestTypeLocator = driver.$$("div.gas-tabs-secondary__btn ").as("Тип заявки"),
-        addressSuggestionsLocator = driver.$$("div.address-list li").as("Подсказки адреса"),
+        addressSuggestionsCollection = driver.$$("div.address-list li").as("Подсказки адреса"),
         filledCredentialsFieldLocator = driver.$$("div.search-option__contacts--title-result div").as("Поле заполненные данные");
 
 
@@ -106,7 +107,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
             stepWithRole("Выбрать тип заявки: " + BackgroundClientRequestType.MAINTENANCE.getTitle(), () -> {
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.MAINTENANCE.getTitle())).click();
             });
-            stepWithRole("Проверить, что выбран тип заявки: " + BackgroundClientRequestType.MAINTENANCE.getTitle(), () -> {
+            stepWithRole("Убедиться, что выбран тип заявки: " + BackgroundClientRequestType.MAINTENANCE.getTitle(), () -> {
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.MAINTENANCE.getTitle())).shouldHave(Condition.cssClass("active"));
             });
             stepWithRole("Указать адрес", () -> {
@@ -114,11 +115,14 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                     addressFieldLocator.setValue(objectAddress);
                     System.out.println("start input address: " + addressFieldLocator.getValue());
                 });
-                stepWithRole("Выбрать первую подсказку: " + addressSuggestionsLocator.get(0).getText(), () -> {
-                    addressSuggestionsLocator.get(0).click();
-                    System.out.println("selected suggestion: " + addressSuggestionsLocator.get(0).getText());
+                stepWithRole("Выбрать первую подсказку: " + addressSuggestionsCollection.get(0).getText(), () -> {
+                    addressSuggestionsCollection.get(0).click();
+                    System.out.println("selected suggestion: " + addressSuggestionsCollection.get(0).getText());
                 });
-                stepWithRole("Проверить, искомый запрос: " + objectAddress + " содержится в выбранном адресе: " + addressFieldLocator.getValue(), () -> {
+                stepWithRole("Убедиться, что скрыты подсказки адреса", () -> {
+                    addressSuggestionsCollection.shouldHave(size(0));
+                });
+                stepWithRole("Убедиться, что искомый запрос: " + objectAddress + " содержится в выбранном адресе: " + addressFieldLocator.getValue(), () -> {
                     addressFieldLocator.shouldHave(partialValue(objectAddress));
                 });
             });
@@ -149,16 +153,16 @@ public class BackgroundRegistrationComponent extends BaseComponent {
             });
         });
         stepWithRole("Проверить заполненные данные", () -> {
-            stepWithRole("Проверить, что выбран адрес: " + objectAddress, () -> {
+            stepWithRole("Убедиться, что выбран адрес: " + objectAddress, () -> {
                 addressFieldLocator.shouldHave(value(objectAddress));
                 System.out.println("result address: " + addressFieldLocator.getValue());
             });
-            stepWithRole("Проверить, что дата сегодняшняя  выбрана: " + filledDateFieldLocator.getValue(), () -> {
+            stepWithRole("Убедиться, что дата сегодняшняя  выбрана: " + filledDateFieldLocator.getValue(), () -> {
                 filledDateFieldLocator.shouldHave(Condition.text(LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy"))));
                 System.out.println("result date: " + filledDateFieldLocator.getText());
             });
             String formattedPhone = "+7(" + phone.toString().substring(1, 4) + ")-" + phone.toString().substring(4, 7) + "-" + phone.toString().substring(7);
-            stepWithRole("Проверить, что заполнены  почта: " + filledCredentialsFieldLocator.get(0).getText() + ", и телефон: " + filledCredentialsFieldLocator.get(1).getText(), () -> {
+            stepWithRole("Убедиться, что заполнены  почта: " + filledCredentialsFieldLocator.get(0).getText() + ", и телефон: " + filledCredentialsFieldLocator.get(1).getText(), () -> {
                 filledCredentialsFieldLocator.get(0).shouldHave(text(email));
                 filledCredentialsFieldLocator.get(1).shouldHave(text(formattedPhone));
                 System.out.println("result email: " + filledCredentialsFieldLocator.get(0).getText());
@@ -177,10 +181,13 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 stepWithRole("начать вводить адрес: " + objectAddress, () -> {
                     addressFieldLocator.setValue(objectAddress);
                 });
-                stepWithRole("Выбрать первую подсказку: " + addressSuggestionsLocator.get(0).getText(), () -> {
-                    addressSuggestionsLocator.get(0).click();
+                stepWithRole("Выбрать первую подсказку: " + addressSuggestionsCollection.get(0).getText(), () -> {
+                    addressSuggestionsCollection.get(0).click();
                 });
-                stepWithRole("Проверить, искомый запрос: " + objectAddress + " содержится в выбранном адресе: " + addressFieldLocator.getValue(), () -> {
+                stepWithRole("Убедиться, что скрыты подсказки адреса", () -> {
+                    addressSuggestionsCollection.shouldHave(size(0));
+                });
+                stepWithRole("Убедиться, что искомый запрос: " + objectAddress + " содержится в выбранном адресе: " + addressFieldLocator.getValue(), () -> {
                     addressFieldLocator.shouldHave(partialValue(objectAddress));
                 });
             });
@@ -196,7 +203,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 stepWithRole("Нажать на дропдаун контактных данных", () -> {
                     credentialsDropdownLocator.click();
                 });
-                stepWithRole("Проверить, что открылось меню ввода контактных данных", () -> {
+                stepWithRole("Убедиться, что открылось меню ввода контактных данных", () -> {
                     credentialsContainerLocator.shouldBe(visible);
                 });
                 stepWithRole("Ввести телефон: " + phone, () -> {
@@ -208,6 +215,9 @@ public class BackgroundRegistrationComponent extends BaseComponent {
             });
             stepWithRole("Подтвердить контактные данные", () -> {
                 approveCredentialsButtonLocator.click();
+            });
+            stepWithRole("Убедиться, что  меню контактных данных закрылось", () -> {
+                credentialsContainerLocator.shouldNotBe(visible);
             });
         });
     }

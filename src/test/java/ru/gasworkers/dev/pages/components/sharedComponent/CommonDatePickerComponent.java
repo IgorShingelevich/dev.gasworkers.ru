@@ -40,6 +40,9 @@ public class CommonDatePickerComponent extends BaseComponent {
             stepWithRole("Проверить, что дата выбрана: " + LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy")), () -> {
                 filledDateFieldLocator.shouldHave(Condition.text(LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy"))));
             });
+            stepWithRole("Убедиться, что компонент Выбор Даты и Время закрыт", () -> {
+                containerLocator.shouldNotBe(visible);
+            });
         });
     }
 

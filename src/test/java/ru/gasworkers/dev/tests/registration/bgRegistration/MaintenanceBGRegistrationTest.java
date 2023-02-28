@@ -127,6 +127,8 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
     }
 
 }
+// todo bg registration with no email - add email in the profile
+//
 //todo custom equipment brand and model
 //todo only phone, only email
 // TODO registration validation  cases - all fields are empty, checkbox unchecked. existed phone and email

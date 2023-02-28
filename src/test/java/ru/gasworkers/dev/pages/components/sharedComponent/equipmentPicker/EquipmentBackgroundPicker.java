@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.pages.components.sharedComponent.equipmentPicker;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -25,10 +26,10 @@ public class EquipmentBackgroundPicker extends BaseComponent {
     clearButtonLocator = driver.$("div.search-option__equipment button.btn-fs-sm.mr-2.btn.btn-outline-primary").as("Кнопка очистить выбор оборудования");
 
     ElementsCollection
-        typeCollectionLocator = driver.$$("div.gas-select__dropdown .item .text").as("Коллекция типов оборудования"),
+            typeCollection = driver.$$("div.gas-select__dropdown .item .text").as("Коллекция типов оборудования"),
 //        brandCollectionLocator = brandDropdownLocator.$$("div.results .result-item").as("Коллекция марок оборудования"),
-        brandCollectionLocator = driver.$$(".result-item").as("Коллекция марок оборудования"),
-        markCollectionLocator = driver.$$("div.results .result-item").as("Коллекция моделей оборудования");
+        brandCollection = driver.$$(".result-item").as("Коллекция марок оборудования"),
+        markCollection = driver.$$("div.results .result-item").as("Коллекция моделей оборудования");
 
 
     public void checkFinishLoading() {
@@ -46,16 +47,28 @@ public class EquipmentBackgroundPicker extends BaseComponent {
            stepWithRole("Выбрать тип оборудования: " + type.toString(), () -> {
                equipmentFieldLocator.click();
                typeFieldLocator.click();
-               typeCollectionLocator.get(type.ordinal()).click();
+               typeCollection.get(type.ordinal()).click();
+                stepWithRole("Убедиться, что тип оборудования отмечен", () -> {
+                    //find sibling with class="box checked"
+                    typeCollection.get(type.ordinal()).preceding(0).shouldHave(Condition.cssClass("checked"));
+
+                });
               });
               stepWithRole("Выбрать марку оборудования: " , () -> { //+ brandCollectionLocator.get(brand).getText()
                 brandFieldLocator.click();
                 brandFieldLocator.shouldHave(Condition.cssClass("has-results"));
-                brandCollectionLocator.get(brand).click();
+                brandCollection.get(brand).click();
+                  stepWithRole("Убедиться, что список брендов оборудования скрыт", () -> {
+                      brandCollection.shouldHave(CollectionCondition.size(0));
+                  });
               });
+
                 stepWithRole("Выбрать модель оборудования: " , () -> { // + markCollectionLocator.get(mark).getText()
                     markFieldLocator.click();
-                    markCollectionLocator.get(mark).click();
+                    markCollection.get(mark).click();
+                    stepWithRole("Убедиться, что список моделей оборудования скрыт", () -> {
+                        markCollection.shouldHave(CollectionCondition.size(0));
+                    });
                 });
                 stepWithRole("Выбрать мощность оборудования: " + power.toString(), () -> {
                     powerFieldLocator.clear();
@@ -71,16 +84,27 @@ public class EquipmentBackgroundPicker extends BaseComponent {
             stepWithRole("Выбрать тип оборудования: " + type.toString(), () -> {
                 equipmentFieldLocator.click();
                 typeFieldLocator.click();
-                typeCollectionLocator.get(type.ordinal()).click();
+                typeCollection.get(type.ordinal()).click();
+                stepWithRole("Убедиться, что тип оборудования отмечен ", () -> {
+                    //find sibling with class="box checked"
+                    typeCollection.get(type.ordinal()).preceding(0).shouldHave(Condition.cssClass("checked"));
+
+                });
             });
             stepWithRole("Выбрать марку оборудования: " , () -> { //+ brandCollectionLocator.get(brand).getText()
                 brandFieldLocator.click();
                 brandFieldLocator.shouldHave(Condition.cssClass("has-results"));
-                brandCollectionLocator.get(brand).click();
+                brandCollection.get(brand).click();
+                stepWithRole("Убедиться, что список марок оборудования скрыт", () -> {
+                    brandCollection.shouldHave(CollectionCondition.size(0));
+                });
             });
             String errorText = stepWithRole("Выбрать модель оборудования: " , () -> { // + markCollectionLocator.get(mark).getText()
                 markFieldLocator.click();
-                markCollectionLocator.get(mark).click();
+                markCollection.get(mark).click();
+                stepWithRole("Убедиться, что список моделей оборудования скрыт", () -> {
+                    markCollection.shouldHave(CollectionCondition.size(0));
+                });
                 String markText = markFieldLocator.getValue();
                 return markText;
             });
