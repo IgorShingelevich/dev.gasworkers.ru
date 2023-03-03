@@ -22,4 +22,11 @@ public class NavRightNowTabConsultationVideoClientComponent extends BaseComponen
 
         });
     }
+
+    public void checkDefaultState() {
+        stepWithRole("Убедиться, что вкладка Консультация прямо сейчас находится в состоянии по умолчанию", () -> {
+            filter.checkDefaultState();
+            masterList.checkDefaultState();
+        });
+    }
 }

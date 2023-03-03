@@ -13,4 +13,10 @@ public class MasterDatePickerScheduleTimeTabConsultationVideoClientComponent ext
 
         });
     }
+
+    public void checkDefaultState() {
+        stepWithRole("Убедиться, что календарь вкладки Консультация на выбранное время находится в состоянии по умолчанию", () -> {
+
+        });
+    }
 }

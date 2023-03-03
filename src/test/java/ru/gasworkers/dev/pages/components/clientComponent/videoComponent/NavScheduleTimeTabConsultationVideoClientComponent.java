@@ -19,10 +19,18 @@ public class NavScheduleTimeTabConsultationVideoClientComponent extends BaseComp
     }
 
     public void checkFinishLoading() {
-        stepWithRole("Убедиться, что вкладка Консультация на выбранное время загрузилась", () -> {
+        stepWithRole("Убедиться, что вкладка Консультация на выбранное время загрузилась TODO", () -> {
         filter.checkFinishLoading();
         masterList.checkFinishLoading();
         masterDatePicker.checkFinishLoading();
+        });
+    }
+
+    public void checkDefaultState() {
+        stepWithRole("Убедиться, что вкладка Консультация на выбранное время находится в состоянии по умолчанию TODO", () -> {
+        filter.checkDefaultState();
+        masterList.checkDefaultState();
+        masterDatePicker.checkDefaultState();
         });
     }
 }

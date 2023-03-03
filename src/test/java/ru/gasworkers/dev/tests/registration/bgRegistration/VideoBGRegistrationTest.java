@@ -45,8 +45,8 @@ public class VideoBGRegistrationTest extends BaseTest {
     @Feature("Фоновая регистрация")
     @Story(AllureStory.VIDEO)
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
-    @DisplayName("Фоновая Регистрация на Видео с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
-    public void bgRegistrationVideo() {
+    @DisplayName("Фоновая Регистрация на Видео Сейчас с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
+    public void bgRegistrationNowVideo() {
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
         step("Клиент заполняет форму фоновой регистрации", () -> {
@@ -57,12 +57,15 @@ public class VideoBGRegistrationTest extends BaseTest {
             clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
         });
         step("Кабинет клиента - состояние после фоновой регистрации на Видео", () -> {
+            //todo video guide
             /*step("Гид  ТО по кабинету", () -> {
                 clientPages.getHomePage().firstMaintenanceGuide.playSequence();
             });*/
-            step("Страница Консультация", () -> {
+            step("Страница Видеоконсультация", () -> {
                 clientPages.getConsultationVideoPage().checkFinishLoading();
-                clientPages.getSelectServicePage().checkPublishedState();
+                clientPages.getConsultationVideoPage().defaultBGVideoState();
+                clientPages.getConsultationVideoPage().rightNowTab.masterList.selectMasterByName("ИнжТехМастеров3 ИнжТехМастер3 ИнжТехМастерович3");
+
             });
             String orderNumber = step("Страница Карточка заказа", () -> {
                 clientPages.getSelectServicePage().toOrderCard();

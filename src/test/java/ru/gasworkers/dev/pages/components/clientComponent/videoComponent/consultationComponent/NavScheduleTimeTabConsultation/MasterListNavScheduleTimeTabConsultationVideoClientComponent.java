@@ -13,4 +13,10 @@ public class MasterListNavScheduleTimeTabConsultationVideoClientComponent extend
 
         });
     }
+
+    public void checkDefaultState() {
+        stepWithRole("Убедиться, что список мастеров вкладки Консультация на выбранное время находится в состоянии по умолчанию", () -> {
+
+        });
+    }
 }
