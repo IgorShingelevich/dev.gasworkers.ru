@@ -54,7 +54,7 @@ public class RepairBGRegistrationTest extends BaseTest {
             clientPages.getLandingPage().bgRegistration.findOffers();
             clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
         });
-        step("Кабинет клиента - состояние после фоновой регистрации", () -> {
+        step("Кабинет клиента - состояние после фоновой регистрации на Ремонт", () -> {
             step("Гид  Ремонт по кабинету", () -> {
                 clientPages.getHomePage().firstRepairGuide.playSequence();
             });

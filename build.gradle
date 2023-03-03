@@ -36,7 +36,7 @@ allure {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
-def selenideVersion = '6.11.1',
+def selenideVersion = '6.12.0',
     assertjVersion = '3.24.2',
     junitJupiterVersion = '5.9.0',
     hamcrest = '2.2',

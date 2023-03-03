@@ -143,8 +143,8 @@ class ClientDispatcherInteractionTest extends BaseTest {
 
         step("Диспетчер принимает заказ на ТО ", () -> {
             dispatcherPages.getHomePage().checkFinishLoading();
-            dispatcherPages.getHomePage().switchToListView();
             dispatcherPages.getHomePage().popUpClose();
+            dispatcherPages.getHomePage().switchToListView();
             dispatcherPages.getHomePage().openOrderByNumber(orderNumber);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             dispatcherPages.getOrderCardPage().popUpClose();

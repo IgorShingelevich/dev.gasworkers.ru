@@ -17,10 +17,10 @@ public class FocusHeaderComponent extends BaseComponent {
 
 
     SelenideElement
-        logoLocator = $("#gas__header .logo"),
-        linkSupportLocator = $x("//a[contains(text(), 'Служба поддержки')]"),
-        linkExitLocator = $x("//a[contains(text(), 'Выйти')]"),
-        approveCancelPageTitleLocator = $("div.recovery-box");
+        logoLocator =driver.$("#gas__header .logo").as("Логотип"),
+        linkSupportLocator = driver.$x("//a[contains(text(), 'Служба поддержки')]").as("Ссылка на Службу поддержки"),
+        linkExitLocator = driver.$x("//a[contains(text(), 'Выйти')]").as("Ссылка на Выйти"),
+        approveCancelPageTitleLocator = $("div.recovery-box").as("Заголовок страницы подтверждения отмены заказа");
 
     ElementsCollection focusHeaderNavButtonsCollection = $$(".d-flex.justify-content-md-end.mb-4 button.link-dark-blue");
 
@@ -52,5 +52,11 @@ public FocusHeaderComponent logo() {
     }
 
 
-
+    public void checkFinishLoading() {
+        stepWithRole("Убедиться, что страница Фокус Хедера загрузилась", () -> {
+            logoLocator.shouldBe(visible);
+            linkSupportLocator.shouldBe(visible);
+            linkExitLocator.shouldBe(visible);
+        });
+    }
 }

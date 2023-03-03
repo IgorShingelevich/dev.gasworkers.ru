@@ -35,15 +35,15 @@ public class BackgroundRegistrationComponent extends BaseComponent {
     private final String
         BG_MAINTENANCE_TITLE = "Заключить договор на техническое обслуживание дёшево и с гарантией",
         BG_MAINTENANCE_SUBTITLE = "Подберите лучшую компанию для проведения технического обслуживания газового оборудования с гарантией.",
-        BG_MAINTENANCE_SUBTITLE_2 = "",
+//        BG_MAINTENANCE_SUBTITLE_2 = "",
         BG_MAINTENANCE_SUBTITLE_3 = "Укажите оборудование и параметры поиска",
         BG_REPAIR_TITLE = "Провести ремонт газового оборудования профессиональным мастером",
         BG_REPAIR_SUBTITLE = "Подберем квалифицированного мастера для ремонта газового котла, установки и настройки оборудования.",
-        BG_REPAIR_SUBTITLE_2 = "Выезд мастера по Московской области в день обращения от 30 минут.",
+//        BG_REPAIR_SUBTITLE_2 = "Выезд мастера по Московской области в день обращения от 30 минут.",
         BG_REPAIR_SUBTITLE_3 = "Укажите неисправное газовое оборудование и желаемый период проведения ремонта.",
         BG_VIDEO_TITLE = "Видеоконсультации по ремонту газового оборудования от 499 ₽",
         BG_VIDEO_SUBTITLE = "Поможем решить проблемы в удобное время по видеосвязи без выезда мастера.",
-        BG_VIDEO_SUBTITLE_2 = "Вам придет смс со ссылкой на консультацию. Перейдя по ней, вы подлючетесь к видеокоференции со специалистом.",
+//        BG_VIDEO_SUBTITLE_2 = "Вам придет смс со ссылкой на консультацию. Перейдя по ней, вы подлючетесь к видеокоференции со специалистом.",
         BG_VIDEO_SUBTITLE_3 = "Укажите ваше оборудование и найдите своего мастера.";
 
 
@@ -54,7 +54,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
         bgTitleLocator = driver.$("div.h3.text-center.text-white").as("Заголовок"),
         bgSubtitleLocator = driver.$("div.medium.text-center.text-white").as("Подзаголовок"),
         bgSubtitle2Locator = driver.$("div.medium.text-center.text-white span").as("Подзаголовок 2"),
-        bgSubtitle3Locator = driver.$("div.h4.text-center.mb-4.text-white").as("Подзаголовок 3"),
+        bgSubtitle3Locator = driver.$("div.h4.text-center.text-white").as("Подзаголовок 3"),
         addressFieldLocator = driver.$("div.search-option__address--title.short textarea").as("Поле ввода адреса"),
         dateFieldLocator = driver.$("div.search-option__date--title").as("Дропдаун ввода даты"),
         filledDateFieldLocator = driver.$("div.search-option__date--title-result").as("Поле заполенная  Дата"),
@@ -77,7 +77,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.MAINTENANCE.getTitle())).click();
                 bgTitleLocator.shouldHave(text(BG_MAINTENANCE_TITLE));
                 bgSubtitleLocator.shouldHave(text(BG_MAINTENANCE_SUBTITLE));
-                bgSubtitle2Locator.shouldHave(exactText(BG_MAINTENANCE_SUBTITLE_2));
+//                bgSubtitle2Locator.shouldHave(exactText(BG_MAINTENANCE_SUBTITLE_2));
                 bgSubtitle3Locator.shouldHave(text(BG_MAINTENANCE_SUBTITLE_3));
                 findOffersButton.shouldBe(visible);
             });
@@ -85,7 +85,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.REPAIR.getTitle())).click();
                 bgTitleLocator.shouldHave(text(BG_REPAIR_TITLE));
                 bgSubtitleLocator.shouldHave(text(BG_REPAIR_SUBTITLE));
-                bgSubtitle2Locator.shouldHave(text(BG_REPAIR_SUBTITLE_2));
+//                bgSubtitle2Locator.shouldHave(text(BG_REPAIR_SUBTITLE_2));
                 bgSubtitle3Locator.shouldHave(text(BG_REPAIR_SUBTITLE_3));
                 findOffersButton.shouldBe(visible);
             });
@@ -93,7 +93,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.VIDEO.getTitle())).click();
                 bgTitleLocator.shouldHave(text(BG_VIDEO_TITLE));
                 bgSubtitleLocator.shouldHave(text(BG_VIDEO_SUBTITLE));
-                bgSubtitle2Locator.shouldHave(text(BG_VIDEO_SUBTITLE_2));
+//                bgSubtitle2Locator.shouldHave(text(BG_VIDEO_SUBTITLE_2));
                 bgSubtitle3Locator.shouldHave(text(BG_VIDEO_SUBTITLE_3));
                 findOffersButton.shouldBe(visible);
             });
@@ -158,7 +158,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 System.out.println("result address: " + addressFieldLocator.getValue());
             });
             stepWithRole("Убедиться, что дата сегодняшняя  выбрана: " + filledDateFieldLocator.getValue(), () -> {
-                filledDateFieldLocator.shouldHave(Condition.text(LocalDate.now().format(DateTimeFormatter.ofPattern("dd MMMM yyyy"))));
+                filledDateFieldLocator.shouldHave(Condition.text(LocalDate.now().format(DateTimeFormatter.ofPattern("d MMMM yyyy"))));
                 System.out.println("result date: " + filledDateFieldLocator.getText());
             });
             String formattedPhone = "+7(" + phone.toString().substring(1, 4) + ")-" + phone.toString().substring(4, 7) + "-" + phone.toString().substring(7);
@@ -221,6 +221,58 @@ public class BackgroundRegistrationComponent extends BaseComponent {
             });
         });
     }
+
+    public void fillBGVideoRequest(String objectAddress, EquipmentType type, Integer mark, Integer brand, Integer power, String phone, String email) {
+        stepWithRole("Заполнить заявку на Видео в форме фоновой регистрации", () -> {
+            stepWithRole("Выбрать тип заявки: " + BackgroundClientRequestType.VIDEO.getTitle(), () -> {
+                requestTypeLocator.findBy(text(BackgroundClientRequestType.VIDEO.getTitle())).click();
+            });
+            stepWithRole("Указать адрес", () -> {
+                stepWithRole("начать вводить адрес: " + objectAddress, () -> {
+                    addressFieldLocator.setValue(objectAddress);
+                });
+                stepWithRole("Выбрать первую подсказку: " + addressSuggestionsCollection.get(0).getText(), () -> {
+                    addressSuggestionsCollection.get(0).click();
+                });
+                stepWithRole("Убедиться, что скрыты подсказки адреса", () -> {
+                    addressSuggestionsCollection.shouldHave(size(0));
+                });
+                stepWithRole("Убедиться, что искомый запрос: " + objectAddress + " содержится в выбранном адресе: " + addressFieldLocator.getValue(), () -> {
+                    addressFieldLocator.shouldHave(partialValue(objectAddress));
+                });
+            });
+            equipmentPicker.fillVideoEquipment(type, mark, brand, power);
+           /* stepWithRole("Указать дату регистрации", () -> {
+                stepWithRole("Нажать на дропдаун даты", () -> {
+                    dateFieldLocator.click();
+                });
+                datePicker.checkFinishLoading();
+                datePicker.setTodayDate();
+            });*/
+            stepWithRole("Указать контактные данные", () -> {
+                stepWithRole("Нажать на дропдаун контактных данных", () -> {
+                    credentialsDropdownLocator.click();
+                });
+                stepWithRole("Убедиться, что открылось меню ввода контактных данных", () -> {
+                    credentialsContainerLocator.shouldBe(visible);
+                });
+                stepWithRole("Ввести телефон: " + phone, () -> {
+                    phoneFieldLocator.setValue(phone);
+                });
+                stepWithRole("Ввести email: " + email, () -> {
+                    emailFieldLocator.setValue(email);
+                });
+            });
+            stepWithRole("Подтвердить контактные данные", () -> {
+                approveCredentialsButtonLocator.click();
+            });
+            stepWithRole("Убедиться, что  меню контактных данных закрылось", () -> {
+                credentialsContainerLocator.shouldNotBe(visible);
+            });
+        });
+    }
+
+
 
     public void findOffers() {
         stepWithRole("Нажать кнопку найти предложения", () -> {

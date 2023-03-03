@@ -45,7 +45,7 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
     @Story(AllureStory.MAINTENANCE)
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Фоновая Регистрация на ТО с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
-    public void bgRegistrationPhoneMaintenance() {
+    public void  bgRegistrationPhoneMaintenance() {
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
         step("Клиент заполняет форму фоновой регистрации", () -> {
@@ -55,7 +55,7 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
             clientPages.getLandingPage().bgRegistration.findOffers();
             clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
         });
-        step("Кабинет клиента - состояние после фоновой регистрации", () -> {
+        step("Кабинет клиента - состояние после фоновой регистрации на ТО ", () -> {
             step("Гид  ТО по кабинету", () -> {
                 clientPages.getHomePage().firstMaintenanceGuide.playSequence();
             });

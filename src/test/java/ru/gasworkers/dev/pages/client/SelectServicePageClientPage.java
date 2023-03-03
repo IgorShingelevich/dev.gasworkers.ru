@@ -39,7 +39,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
         titleLocator = driver.$("div h4.text-center").as("Заголовок страницы Выбор СК"),
         toOrderButtonLocator = driver.$("button.mb-3.me-sm-3 span").as("Кнопка Смотреть  заказ"),
         backButtonLocator = driver.$(".col-12.col-md-3 .link-dark-blue.mr-32.medium").as("Кнопка Назад"),
-        spinnerScrollbarLocator = driver.$(".scrollbar.mb-3.col-lg-5 .d-flex.justify-content-center.pb-5").as("Спиннер загрузки"),
+        spinnerServicesContainerLocator = driver.$(".scrollbar.mb-3.col-lg-5 .d-flex.justify-content-center.pb-5").as("Спиннер загрузки контейнера с Сервисными компаниями"),
         firstServiceTabLocator = driver.$("[id^=company-item]").as("Первая вкладка Сервисного предложения"),
         firstServiceButtonLocator = driver.$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline").as("Кнопка Выбрать первой вкладки Сервисного предложения"),
         servicesColumnBLockLocator = driver.$(".row.columns-list").as("Левый блок Сервисных предложений"),
@@ -60,8 +60,19 @@ public class SelectServicePageClientPage extends BaseClientPage {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
 //            spinnerScrollbarLocator.should(disappear);
             titleLocator.shouldHave(text(SELECT_SERVICE_MAINTENANCE_TITLE));
-            firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
-            driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
+            stepWithRole("Убедиться что спиннер появился", () -> {
+                spinnerServicesContainerLocator.should(appear);
+            });
+            stepWithRole("Убедиться что спиннер исчез", () -> {
+                spinnerServicesContainerLocator.should(disappear, Duration.ofSeconds(40));
+            });
+            stepWithRole("Убедиться что появился первый таб", () -> {
+                firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
+            });
+            stepWithRole("Убедиться что компонент карты загрузился", () -> {
+                mapContainerLocator.shouldBe(visible, Duration.ofSeconds(40));
+                driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
+            });
             offers.checkFinishLoading();
         });
     }
@@ -70,8 +81,19 @@ public class SelectServicePageClientPage extends BaseClientPage {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
 //            spinnerScrollbarLocator.should(disappear);
             titleLocator.shouldHave(text(SELECT_SERVICE_REPAIR_TITLE));
-            firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
-            driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
+            stepWithRole("Убедиться что спиннер появился", () -> {
+                spinnerServicesContainerLocator.should(appear);
+            });
+            stepWithRole("Убедиться что спиннер исчез", () -> {
+                spinnerServicesContainerLocator.should(disappear, Duration.ofSeconds(40));
+            });
+            stepWithRole("Убедиться что появился первый таб", () -> {
+                firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
+            });
+            stepWithRole("Убедиться что компонент карты загрузился", () -> {
+                mapContainerLocator.shouldBe(visible, Duration.ofSeconds(40));
+                driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
+            });
             offers.checkFinishLoading();
         });
     }

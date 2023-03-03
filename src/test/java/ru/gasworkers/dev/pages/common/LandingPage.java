@@ -35,14 +35,14 @@ public LandingPage(RoleBrowser browser) {
         signUpRoleMenuLocator =driver.$$("div.dropdown-wrapper__menu a");
 
     SelenideElement
-        primaryHeaderLocator = driver.$(".primary-header").as("Шапка сайта"),
-        repairButtonLocator = driver.$(byTagAndText("span", "Ремонт")).as("Кнопка Ремонт"),
-        maintenanceButtonLocator = driver.$(byTagAndText("span", "Техобслуживание")).as("Кнопка Техобслуживание"),
-        videoButtonLocator = driver.$(byTagAndText("span", "Видеоконсультация")).as("Кнопка Видеоконсультация"),
-        mainBlockTitleLocator = driver.$("p.main-block__title").as("Заголовок главной страницы"),
-        mainBlockSubtitleLocator = driver.$("p.main-block__text").as("Подзаголовок главной страницы"),
-        signInButtonLocator = driver.$(".primary-header .link").as("Кнопка Личный кабинет"),
-        signUpDropdownLocator = driver.$("span.dropdown-title").as("Выпадающее меню Регистрация"),
+        primaryHeaderLocator = driver.$("div.primary-header-blue").as("Хедер сайта"),
+//        repairButtonLocator = driver.$(byTagAndText("span", "Ремонт")).as("Кнопка Ремонт"),
+//        maintenanceButtonLocator = driver.$(byTagAndText("span", "Техобслуживание")).as("Кнопка Техобслуживание"),
+//        videoButtonLocator = driver.$(byTagAndText("span", "Видеоконсультация")).as("Кнопка Видеоконсультация"),
+//        mainBlockTitleLocator = driver.$("p.main-block__title").as("Заголовок главной страницы"),
+//        mainBlockSubtitleLocator = driver.$("p.main-block__text").as("Подзаголовок главной страницы"),
+        signInButtonLocator = driver.$("#header-login-icon").as("Кнопка Личный кабинет"),
+        signUpDropdownLocator = driver.$("#type-of-register-dropdown").as("Выпадающее меню Регистрация"),
         signUpClientButtonLocator = signUpRoleMenuLocator.findBy(text("Для клиента")).as("Кнопка Для клиента"),
         signUpCompanyButtonLocator = signUpRoleMenuLocator.findBy(text("Для сервисной компании")).as("Кнопка Для сервисной компании"),
         signUpMasterButtonLocator = signUpRoleMenuLocator.findBy(text("Для мастера")).as("Кнопка Для мастера");
@@ -57,34 +57,20 @@ public LandingPage open() {
 
     public LandingPage checkFinishLoading() {
         stepWithRole("Убедиться, что главная страница загружена", () -> {
-            stepWithRole("Убедиться, что заголовок и подзаголовок Главной страницы отображается", () -> {
-                stepWithRole("Заголовок: " + TITLE_TEXT, () -> {
-                    mainBlockTitleLocator.shouldBe(visible).shouldHave(text(TITLE_TEXT));
-                });
-                stepWithRole("Подзаголовок: " + SUBTITLE_TEXT, () -> {
-                    mainBlockSubtitleLocator.shouldBe(visible).shouldHave(text(SUBTITLE_TEXT));
-                });
-            });
+
             stepWithRole("Убедиться, что кнопка Личный кабинет отображается", () -> {
                 signInButtonLocator.shouldBe(visible);
             });
             stepWithRole("Убедиться, что выпадающее меню Регистрация отображается", () -> {
                 signUpDropdownLocator.shouldBe(visible);
             });
-            stepWithRole("Убедиться, что кнопка Ремонт отображается", () -> {
-                repairButtonLocator.shouldBe(visible);
-            });
-            stepWithRole("Убедиться, что кнопка Техобслуживание отображается", () -> {
-                maintenanceButtonLocator.shouldBe(visible);
-            });
-            stepWithRole("Убедиться, что кнопка Видеоконсультация отображается", () -> {
-                videoButtonLocator.shouldBe(visible);
-            });
-            jivoMessengerComponent.presenceOfJivoIcon();
+            bgRegistration.checkFinishLoading();
+
 
 
 
             // TODO add the rest  components checks
+            // todo footer components checks
         });
         return this;
     }
@@ -117,7 +103,7 @@ public LandingPage open() {
     });
     }
 
-    public LandingPage clickUserRepairButton() {
+    /*public LandingPage clickUserRepairButton() {
     stepWithRole("Нажать кнопку Ремонт", () -> {
     repairButtonLocator.shouldHave(text("Ремонт")).click();
     });
@@ -136,5 +122,5 @@ public LandingPage open() {
         videoButtonLocator.shouldHave(text("Видеоконсультация")).click();
     });
     return this;
-    }
+    }*/
 }

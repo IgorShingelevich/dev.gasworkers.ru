@@ -120,6 +120,47 @@ public class EquipmentBackgroundPicker extends BaseComponent {
         });
     }
 
+    public void fillVideoEquipment(EquipmentType type, Integer mark, Integer brand, Integer power) {
+        stepWithRole("Выбрать оборудование", () -> {
+            stepWithRole("Выбрать тип оборудования: " + type.toString(), () -> {
+                equipmentFieldLocator.click();
+                typeFieldLocator.click();
+                typeCollection.get(type.ordinal()).click();
+                stepWithRole("Убедиться, что тип оборудования отмечен ", () -> {
+                    //find sibling with class="box checked"
+                    typeCollection.get(type.ordinal()).preceding(0).shouldHave(Condition.cssClass("checked"));
+
+                });
+            });
+            stepWithRole("Выбрать марку оборудования: " , () -> { //+ brandCollectionLocator.get(brand).getText()
+                brandFieldLocator.click();
+                brandFieldLocator.shouldHave(Condition.cssClass("has-results"));
+                brandCollection.get(brand).click();
+                stepWithRole("Убедиться, что список марок оборудования скрыт", () -> {
+                    brandCollection.shouldHave(CollectionCondition.size(0));
+                });
+            });
+            String errorText = stepWithRole("Выбрать модель оборудования: " , () -> { // + markCollectionLocator.get(mark).getText()
+                markFieldLocator.click();
+                markCollection.get(mark).click();
+                stepWithRole("Убедиться, что список моделей оборудования скрыт", () -> {
+                    markCollection.shouldHave(CollectionCondition.size(0));
+                });
+                String markText = markFieldLocator.getValue();
+                return markText;
+            });
+            stepWithRole("Выбрать мощность оборудования: " + power.toString(), () -> {
+                powerFieldLocator.clear();
+                powerFieldLocator.setValue(power.toString());
+            });
+            stepWithRole("Добавить описание неисправности", () -> {
+                problemTextareaLocator.setValue(errorText + " неисправен. Нужен ремонт.");
+            });
+            approveEquipmentForm();
+            // TODO add photo video
+        });
+    }
+
     public void approveEquipmentForm() {
         stepWithRole("Подтвердить выбор оборудования", () -> {
             approveButtonLocator.shouldHave(Condition.text("Подтвердить")).click();
