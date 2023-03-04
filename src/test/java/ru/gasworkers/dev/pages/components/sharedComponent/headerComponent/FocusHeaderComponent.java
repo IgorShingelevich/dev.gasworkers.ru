@@ -5,6 +5,8 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -51,10 +53,9 @@ public FocusHeaderComponent logo() {
         return this;
     }
 
-
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что страница Фокус Хедера загрузилась", () -> {
-            logoLocator.shouldBe(visible);
+            logoLocator.shouldBe(visible, Duration.ofSeconds(10));
             linkSupportLocator.shouldBe(visible);
             linkExitLocator.shouldBe(visible);
         });

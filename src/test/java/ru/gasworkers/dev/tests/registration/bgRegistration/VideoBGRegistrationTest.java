@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.tests.registration.bgRegistration;
 
+import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.tests.BaseTest;
 
 import io.qameta.allure.Epic;
@@ -65,9 +66,34 @@ public class VideoBGRegistrationTest extends BaseTest {
                 clientPages.getConsultationVideoPage().checkFinishLoading();
                 clientPages.getConsultationVideoPage().defaultBGVideoState();
                 clientPages.getConsultationVideoPage().rightNowTab.masterList.selectMasterByName("ИнжТехМастеров3 ИнжТехМастер3 ИнжТехМастерович3");
+            });
+
+            step("Страница Подтверждение деталей Видео консультации Сейчас", () -> {
+                clientPages.getApproveMasterVideoPage().checkFinishLoading();
+                clientPages.getApproveMasterVideoPage().attachmentsOrder.checkFinishLoading();
+                clientPages.getApproveMasterVideoPage().detailsOrder.checkFinishLoading();
+//                clientPages.getApproveMasterVideoPage().detailsOrder.checkMasterFullName("ИнжТехМастеров3 ИнжТехМастер3 ИнжТехМастерович3");
+                clientPages.getApproveMasterVideoPage().detailsOrder.checkPlaceWork("ООО \"ИНЖЕНЕРНЫЕ ТЕХНОЛОГИИ\"");
+                clientPages.getApproveMasterVideoPage().detailsOrder.checkQuantityOfCompletedOrders("12");
+                clientPages.getApproveMasterVideoPage().detailsOrder.checkOrderDate(randomClient.getSinceDate());
+                clientPages.getApproveMasterVideoPage().detailsOrder.checkRightNowTimeOrderState();
+                clientPages.getApproveMasterVideoPage().detailsOrder.checkPriceOrder("500");
+                clientPages.getApproveMasterVideoPage().detailsOrder.checkOrderType(OrderType.VIDEO);
+                clientPages.getApproveMasterVideoPage().detailsOrder.checkOrderType(OrderType.VIDEO);
+                clientPages.getApproveMasterVideoPage().detailsOrder.checkEquipment("Газовый котел Chaffoteaux Pigma Ultra 25 FF");
+                clientPages.getApproveMasterVideoPage().detailsOrder.checkClientAddress("Московская область, Люберцы, микрорайон Городок Б, улица 3-е Почтовое Отделение");
+                clientPages.getApproveMasterVideoPage().detailsOrder.checkClientAddress("Московская область, Люберцы, микрорайон Городок Б, улица 3-е Почтовое Отделение");
+
+
+
+
+
+
+
+
 
             });
-            String orderNumber = step("Страница Карточка заказа", () -> {
+            String orderNumber = step("", () -> {
                 clientPages.getSelectServicePage().toOrderCard();
                 clientPages.getOrderCardPage().checkFinishLoading();
                 String currentNumber = clientPages.getOrderCardPage().getOrderNumber();

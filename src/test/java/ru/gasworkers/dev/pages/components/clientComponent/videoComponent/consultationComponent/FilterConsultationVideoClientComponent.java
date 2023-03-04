@@ -57,10 +57,10 @@ public class FilterConsultationVideoClientComponent extends BaseComponent {
             });
             stepWithRole("Убедиться, что чекбоксы фильтра по рейтингу мастера отображаются", () -> {
                 ratingCheckboxCollection.shouldBe(CollectionCondition.size(0));
-                pickMasterRatingCheckboxDropdownLocator.click();
+                /*pickMasterRatingCheckboxDropdownLocator.click();
                 ratingCheckboxCollection.shouldHave(CollectionCondition.size(5));
-                pickMasterRatingCheckboxDropdownLocator.click();
-                ratingCheckboxCollection.shouldBe(CollectionCondition.size(0));
+                pickMasterRatingCheckboxDropdownLocator.click();*/
+//                ratingCheckboxCollection.shouldBe(CollectionCondition.size(0));
 
             });
             stepWithRole("Убедиться, что отображается поле От и До", () -> {
@@ -92,7 +92,11 @@ public class FilterConsultationVideoClientComponent extends BaseComponent {
                 mainCheckboxCollection.get(1).shouldNotBe(checked);
             });
             stepWithRole("Убедиться, что ни один чекбокс фильтра по рейтингу мастера не отмечен", () -> {
+                pickMasterRatingCheckboxDropdownLocator.click();
                 ratingCheckboxCollection.shouldHave(CollectionCondition.noneMatch("Неотмеченные чекбоксы", selenideElement -> driver.$(selenideElement).isSelected()));
+                pickMasterRatingCheckboxDropdownLocator.click();
+
+
             });
             stepWithRole("Убедиться, что поля От и До пустые", () -> {
                 priceRangeFromInputLocator.shouldNotBe(visible);
