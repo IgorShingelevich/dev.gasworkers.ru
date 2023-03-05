@@ -53,10 +53,16 @@ public class VideoBGRegistrationTest extends BaseTest {
         step("Клиент заполняет форму фоновой регистрации", () -> {
             clientPages.getLandingPage().bgRegistration.checkFinishLoading();
             clientPages.getLandingPage().bgRegistration.fillBGVideoRequest(randomClient.getObjectAddress(), EquipmentType.GAS_BOILER, 1, 1, 20, randomClient.getPhoneNumber(), randomClient.getEmail());
-            // TODO add photo video
-            clientPages.getLandingPage().bgRegistration.findOffers();
-            clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
-        });
+           // TODO add photo video
+//            String resultedAddress = clientPages.getLandingPage().bgRegistration.address.getResultedAddress();
+//           return resultedAddress;
+       });
+       String resultedAddress = clientPages.getLandingPage().bgRegistration.address.getResultedAddress();
+       String equipmentName = clientPages.getLandingPage().bgRegistration.equipment.getEquipmentName();
+       String errorText = clientPages.getLandingPage().bgRegistration.equipment.getErrorText();
+        clientPages.getLandingPage().bgRegistration.findOffers();
+          clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
+
         step("Кабинет клиента - состояние после фоновой регистрации на Видео", () -> {
             //todo video guide
             /*step("Гид  ТО по кабинету", () -> {
@@ -70,20 +76,28 @@ public class VideoBGRegistrationTest extends BaseTest {
 
             step("Страница Подтверждение деталей Видео консультации Сейчас", () -> {
                 clientPages.getApproveMasterVideoPage().checkFinishLoading();
-                clientPages.getApproveMasterVideoPage().attachmentsOrder.checkFinishLoading();
-                clientPages.getApproveMasterVideoPage().detailsOrder.checkFinishLoading();
-//                clientPages.getApproveMasterVideoPage().detailsOrder.checkMasterFullName("ИнжТехМастеров3 ИнжТехМастер3 ИнжТехМастерович3");
-                clientPages.getApproveMasterVideoPage().detailsOrder.checkPlaceWork("ООО \"ИНЖЕНЕРНЫЕ ТЕХНОЛОГИИ\"");
-                clientPages.getApproveMasterVideoPage().detailsOrder.checkQuantityOfCompletedOrders("12");
-                clientPages.getApproveMasterVideoPage().detailsOrder.checkOrderDate(randomClient.getSinceDate());
-                clientPages.getApproveMasterVideoPage().detailsOrder.checkRightNowTimeOrderState();
-                clientPages.getApproveMasterVideoPage().detailsOrder.checkPriceOrder("500");
-                clientPages.getApproveMasterVideoPage().detailsOrder.checkOrderType(OrderType.VIDEO);
-                clientPages.getApproveMasterVideoPage().detailsOrder.checkOrderType(OrderType.VIDEO);
-                clientPages.getApproveMasterVideoPage().detailsOrder.checkEquipment("Газовый котел Chaffoteaux Pigma Ultra 25 FF");
-                clientPages.getApproveMasterVideoPage().detailsOrder.checkClientAddress("Московская область, Люберцы, микрорайон Городок Б, улица 3-е Почтовое Отделение");
-                clientPages.getApproveMasterVideoPage().detailsOrder.checkClientAddress("Московская область, Люберцы, микрорайон Городок Б, улица 3-е Почтовое Отделение");
+                step("Компонент прикрепленные данные", () -> {
+                    clientPages.getApproveMasterVideoPage().attachmentsOrder.checkFinishLoading();
+                    clientPages.getApproveMasterVideoPage().attachmentsOrder.checkBGRightNowState(errorText);
+                });
+                step("Компонент детали заказа", () -> {
+                    clientPages.getApproveMasterVideoPage().detailsOrder.checkFinishLoading();
+                    clientPages.getApproveMasterVideoPage().detailsOrder.checkMasterFullName("ИнжТехМастеров3 ИнжТехМастер3 ИнжТехМастерович3");
+                    clientPages.getApproveMasterVideoPage().detailsOrder.checkPlaceWork("ООО \"ИНЖЕНЕРНЫЕ ТЕХНОЛОГИИ\"");
+                    clientPages.getApproveMasterVideoPage().detailsOrder.checkQuantityOfCompletedOrders("12");
+                    clientPages.getApproveMasterVideoPage().detailsOrder.checkOrderDate(randomClient.getSinceDate());
+                    clientPages.getApproveMasterVideoPage().detailsOrder.checkRightNowTimeOrderState();
+                    clientPages.getApproveMasterVideoPage().detailsOrder.checkPriceOrder("500");
+                    clientPages.getApproveMasterVideoPage().detailsOrder.checkOrderType(OrderType.VIDEO);
+                    clientPages.getApproveMasterVideoPage().detailsOrder.checkEquipment(equipmentName);
+                    clientPages.getApproveMasterVideoPage().detailsOrder.checkPersonAddress(resultedAddress);
+                    //todo  video attachments
+                });
 
+
+
+
+                clientPages.getApproveMasterVideoPage().attachmentsOrder.checkFinishLoading();
 
 
 

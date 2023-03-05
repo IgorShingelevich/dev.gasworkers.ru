@@ -12,14 +12,14 @@ public class AttachmentsOrderVideoClientComponent extends BaseComponent {
     }
 
     private final String
-            titleText = "Прикрепите аудио/видео описание вашей проблемы",
-    subtitleText = "Запишите небольшое видео или аудио описание вашей поломки, это поможет нашему мастеру быстрее её устранить.";
+        titleText = "Прикрепите аудио/видео описание вашей проблемы",
+        subtitleText = "Запишите небольшое видео или аудио описание вашей поломки, это поможет нашему мастеру быстрее её устранить.";
 
     SelenideElement
-    titleLocator = driver.$("div.medium.w-100.mb-20.d-flex").as("Заголовок компонента Прикрепленные файлы и описание"),
-    subtitleLocator = driver.$("p.small.mb-0").as("Подзаголовок компонента Прикрепленные файлы и описание"),
-    uploadButtonLocator = driver.$("button.upload-button").as("Кнопка Прикрепить файл"),
-    malfunctionDescriptionInputLocator = driver.$("input[placeholder='Опишите вашу проблему']").as("Поле Описание поломки");
+        titleLocator = driver.$("div.medium.w-100.mb-20.d-flex").as("Заголовок компонента Прикрепленные файлы и описание"),
+        subtitleLocator = driver.$("p.small.mb-0").as("Подзаголовок компонента Прикрепленные файлы и описание"),
+        uploadButtonLocator = driver.$("button.upload-button").as("Кнопка Прикрепить файл"),
+        malfunctionDescriptionInputLocator = driver.$("input[placeholder='Опишите вашу проблему']").as("Поле Описание поломки");
 
 
     public void checkFinishLoading() {

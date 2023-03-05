@@ -20,7 +20,7 @@ public class RandomClient {
     private String sinceDate;
     private  String password = "123456";
     private String confirmationCode = "111111";
-    private String objectAddress = "Люберцы";
+    private String objectAddress = "Московская обл, Одинцово г, г.о. Одинцовский, ул Маршала Неделина, д. 6А";
 
     public RandomClient() {
         Faker faker = new Faker(new Locale("ru"));

@@ -6,6 +6,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.pages.components.clientComponent.guideComponent.FirstMaintenanceGuideComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.OffersClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.SpinnerComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
@@ -18,6 +19,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
 
     public final FocusHeaderComponent header;
     public final StepperComponent stepper;
+    public final SpinnerComponent spinner;
     public final OffersClientComponent offers;
     public final FirstMaintenanceGuideComponent guideFirst;
 
@@ -26,6 +28,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
         super(browser);
         header = new FocusHeaderComponent(browser);
         stepper = new StepperComponent(browser);
+        spinner = new SpinnerComponent(browser);
         offers = new OffersClientComponent(browser);
         guideFirst = new FirstMaintenanceGuideComponent(browser);
     }
@@ -59,6 +62,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
     public void checkFinishMaintenanceLoading() {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
 //            spinnerScrollbarLocator.should(disappear);
+            spinner.checkPresence();
             titleLocator.shouldHave(text(SELECT_SERVICE_MAINTENANCE_TITLE));
             stepWithRole("Убедиться что спиннер появился", () -> {
                 spinnerServicesContainerLocator.should(appear);
@@ -79,14 +83,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
 
     public void checkFinishRepairLoading() {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
+            spinner.checkPresence();
 //            spinnerScrollbarLocator.should(disappear);
             titleLocator.shouldHave(text(SELECT_SERVICE_REPAIR_TITLE));
-            stepWithRole("Убедиться что спиннер появился", () -> {
-                spinnerServicesContainerLocator.should(appear);
-            });
-            stepWithRole("Убедиться что спиннер исчез", () -> {
-                spinnerServicesContainerLocator.should(disappear, Duration.ofSeconds(40));
-            });
             stepWithRole("Убедиться что появился первый таб", () -> {
                 firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
             });

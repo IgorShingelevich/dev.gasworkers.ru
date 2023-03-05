@@ -1,21 +1,19 @@
-package ru.gasworkers.dev.pages.components.sharedComponent;
+package ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationComponent;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
-import ru.gasworkers.dev.utils.RandomUtil;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
-import static org.assertj.core.error.ShouldHave.shouldHave;
 
-public class CommonDatePickerComponent extends BaseComponent {
+public class DateBGRegistrationLandingComponent extends BaseComponent {
 
-    public CommonDatePickerComponent(RoleBrowser browser){
+    public DateBGRegistrationLandingComponent(RoleBrowser browser){
         super(browser);
     }
  SelenideElement
@@ -47,5 +45,5 @@ public class CommonDatePickerComponent extends BaseComponent {
     }
 
 
-    //TODO implement CommonDatePickerComponent in all Profiles CommonTabs. All Masters equipmentDocs forms.
+    //TODO implement DateBGRegistrationLandingComponent in all Profiles CommonTabs. All Masters equipmentDocs forms.
 }

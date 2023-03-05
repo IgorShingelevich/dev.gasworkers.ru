@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.equipmentPicker;
+package ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationComponent;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
@@ -8,8 +8,8 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.equipment.EquipmentType;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
-public class EquipmentBackgroundPicker extends BaseComponent {
-    public EquipmentBackgroundPicker(RoleBrowser browser) {
+public class EquipmentBGRegistrationLandingComponent extends BaseComponent {
+    public EquipmentBGRegistrationLandingComponent(RoleBrowser browser) {
         super(browser);
     }
 
@@ -18,8 +18,8 @@ public class EquipmentBackgroundPicker extends BaseComponent {
     addAnotherEquipmentButtonLocator = driver.$("div.position-absolute a").as("Кнопка добавить оборудование"),
     equipmentContainerLocator = driver.$("div.search-option__equipment--dropdown").as("Контейнер выбора оборудования"),
     typeFieldLocator = driver.$("div.gas-select__header").as("Дропдаун выбора типа оборудования"),
-    brandFieldLocator = driver.$("input[placeholder='Начните вводить название марки']").as("Поле выбора марки оборудования"),
-    markFieldLocator = driver.$("input[placeholder='Начните вводить модель']").as("Поле выбора модели оборудования"),
+    markFieldLocator = driver.$("input[placeholder='Начните вводить название марки']").as("Поле выбора марки оборудования"),
+    modelFieldLocator = driver.$("input[placeholder='Начните вводить модель']").as("Поле выбора модели оборудования"),
     powerFieldLocator = driver.$("input[placeholder='Введите мощность']").as("Поле выбора мощности оборудования"),
     problemTextareaLocator = driver.$("textarea[placeholder='Кратко опишите проблему']").as("Поле Кратко опишите проблему"),
     approveButtonLocator = driver.$("div.search-option__equipment button.btn-fs-sm.btn.btn-primary").as("Кнопка подтвердить выбора оборудования"),
@@ -28,8 +28,8 @@ public class EquipmentBackgroundPicker extends BaseComponent {
     ElementsCollection
             typeCollection = driver.$$("div.gas-select__dropdown .item .text").as("Коллекция типов оборудования"),
 //        brandCollectionLocator = brandDropdownLocator.$$("div.results .result-item").as("Коллекция марок оборудования"),
-        brandCollection = driver.$$(".result-item").as("Коллекция марок оборудования"),
-        markCollection = driver.$$("div.results .result-item").as("Коллекция моделей оборудования");
+markCollection = driver.$$(".result-item").as("Коллекция марок оборудования"),
+        modelCollection = driver.$$("div.results .result-item").as("Коллекция моделей оборудования");
 
 
     public void checkFinishLoading() {
@@ -55,19 +55,19 @@ public class EquipmentBackgroundPicker extends BaseComponent {
                 });
               });
               stepWithRole("Выбрать марку оборудования: " , () -> { //+ brandCollectionLocator.get(brand).getText()
-                brandFieldLocator.click();
-                brandFieldLocator.shouldHave(Condition.cssClass("has-results"));
-                brandCollection.get(brand).click();
+                markFieldLocator.click();
+                markFieldLocator.shouldHave(Condition.cssClass("has-results"));
+                markCollection.get(brand).click();
                   stepWithRole("Убедиться, что список брендов оборудования скрыт", () -> {
-                      brandCollection.shouldHave(CollectionCondition.size(0));
+                      markCollection.shouldHave(CollectionCondition.size(0));
                   });
               });
 
                 stepWithRole("Выбрать модель оборудования: " , () -> { // + markCollectionLocator.get(mark).getText()
-                    markFieldLocator.click();
-                    markCollection.get(mark).click();
+                    modelFieldLocator.click();
+                    modelCollection.get(mark).click();
                     stepWithRole("Убедиться, что список моделей оборудования скрыт", () -> {
-                        markCollection.shouldHave(CollectionCondition.size(0));
+                        modelCollection.shouldHave(CollectionCondition.size(0));
                     });
                 });
                 stepWithRole("Выбрать мощность оборудования: " + power.toString(), () -> {
@@ -92,20 +92,20 @@ public class EquipmentBackgroundPicker extends BaseComponent {
                 });
             });
             stepWithRole("Выбрать марку оборудования: " , () -> { //+ brandCollectionLocator.get(brand).getText()
-                brandFieldLocator.click();
-                brandFieldLocator.shouldHave(Condition.cssClass("has-results"));
-                brandCollection.get(brand).click();
+                markFieldLocator.click();
+                markFieldLocator.shouldHave(Condition.cssClass("has-results"));
+                markCollection.get(brand).click();
                 stepWithRole("Убедиться, что список марок оборудования скрыт", () -> {
-                    brandCollection.shouldHave(CollectionCondition.size(0));
+                    markCollection.shouldHave(CollectionCondition.size(0));
                 });
             });
             String errorText = stepWithRole("Выбрать модель оборудования: " , () -> { // + markCollectionLocator.get(mark).getText()
-                markFieldLocator.click();
-                markCollection.get(mark).click();
+                modelFieldLocator.click();
+                modelCollection.get(mark).click();
                 stepWithRole("Убедиться, что список моделей оборудования скрыт", () -> {
-                    markCollection.shouldHave(CollectionCondition.size(0));
+                    modelCollection.shouldHave(CollectionCondition.size(0));
                 });
-                String markText = markFieldLocator.getValue();
+                String markText = modelFieldLocator.getValue();
                 return markText;
             });
             stepWithRole("Выбрать мощность оборудования: " + power.toString(), () -> {
@@ -114,6 +114,7 @@ public class EquipmentBackgroundPicker extends BaseComponent {
             });
             stepWithRole("Добавить описание неисправности", () -> {
                 problemTextareaLocator.setValue(errorText + " неисправен. Нужен ремонт.");
+                System.out.println("Описание неисправности: " + problemTextareaLocator.getValue());
             });
             approveEquipmentForm();
             // TODO add photo video
@@ -132,29 +133,31 @@ public class EquipmentBackgroundPicker extends BaseComponent {
 
                 });
             });
-            stepWithRole("Выбрать марку оборудования: " , () -> { //+ brandCollectionLocator.get(brand).getText()
-                brandFieldLocator.click();
-                brandFieldLocator.shouldHave(Condition.cssClass("has-results"));
-                brandCollection.get(brand).click();
-                stepWithRole("Убедиться, что список марок оборудования скрыт", () -> {
-                    brandCollection.shouldHave(CollectionCondition.size(0));
-                });
-            });
-            String errorText = stepWithRole("Выбрать модель оборудования: " , () -> { // + markCollectionLocator.get(mark).getText()
+            stepWithRole("Выбрать марку оборудования: " , () -> {
                 markFieldLocator.click();
-                markCollection.get(mark).click();
-                stepWithRole("Убедиться, что список моделей оборудования скрыт", () -> {
+                markFieldLocator.shouldHave(Condition.cssClass("has-results"));
+                markCollection.get(brand).click();
+                stepWithRole("Убедиться, что список марок оборудования скрыт", () -> {
                     markCollection.shouldHave(CollectionCondition.size(0));
                 });
-                String markText = markFieldLocator.getValue();
-                return markText;
+            });
+            String resultedModel = stepWithRole("Выбрать модель оборудования: " , () -> {
+                modelFieldLocator.click();
+                modelCollection.get(mark).click();
+                stepWithRole("Убедиться, что список моделей оборудования скрыт", () -> {
+                    modelCollection.shouldHave(CollectionCondition.size(0));
+                });
+                String modelText = modelFieldLocator.getValue();
+                return modelText;
             });
             stepWithRole("Выбрать мощность оборудования: " + power.toString(), () -> {
                 powerFieldLocator.clear();
                 powerFieldLocator.setValue(power.toString());
+                System.out.println("Мощность оборудования: " + powerFieldLocator.getValue());
             });
             stepWithRole("Добавить описание неисправности", () -> {
-                problemTextareaLocator.setValue(errorText + " неисправен. Нужен ремонт.");
+                problemTextareaLocator.setValue(resultedModel + " неисправен. Нужен ремонт.");
+                System.out.println("Описание неисправности: " + problemTextareaLocator.getValue());
             });
             approveEquipmentForm();
             // TODO add photo video
@@ -169,6 +172,19 @@ public class EquipmentBackgroundPicker extends BaseComponent {
             });
         });
     }
+
+    public String getEquipmentName() {
+        return stepWithRole("Получить название оборудования", () -> {
+            return modelFieldLocator.getValue();
+        });
+    }
+
+    public String getErrorText() {
+        return stepWithRole("Получить описание неисправности", () -> {
+            return problemTextareaLocator.getValue();
+        });
+    }
+
 
     public void clearEquipment() {
         stepWithRole("Очистить выбор оборудования", () -> {

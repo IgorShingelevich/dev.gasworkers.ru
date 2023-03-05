@@ -3,17 +3,16 @@ package ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.CommonDatePickerComponent;
+import ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationComponent.DateBGRegistrationLandingComponent;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public class NavCommonClientTabProfileComponent extends BaseComponent {
 
-    public final CommonDatePickerComponent datePicker;
+    public final DateBGRegistrationLandingComponent datePicker;
      public NavCommonClientTabProfileComponent(RoleBrowser browser) {
          super(browser);
-            datePicker = new CommonDatePickerComponent(browser);
+            datePicker = new DateBGRegistrationLandingComponent(browser);
      }
      SelenideElement
              nameSubTitleLocator = driver.$$("div .title").get(0).as("Подзаголовок Личные данные"),

@@ -6,12 +6,11 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
 import ru.gasworkers.dev.pages.components.sharedComponent.ConfirmationCodeModalWindowBGComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.JivoMessengerComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.backgroundRegistrationComponent.BackgroundRegistrationComponent;
+import ru.gasworkers.dev.pages.components.landingComponent.BackgroundRegistrationComponent;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public class LandingPage extends BasePage {
 

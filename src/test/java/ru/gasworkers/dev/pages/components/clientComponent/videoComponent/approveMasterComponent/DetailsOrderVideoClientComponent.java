@@ -40,10 +40,10 @@ public class DetailsOrderVideoClientComponent extends BaseComponent {
     }
 
     public void checkMasterFullName(String fullName) {
-        stepWithRole("Убедиться, что в компоненте Детали заказа отображается ФИО мастера: " + mediums.findBy(Condition.text("Мастер:")).getText(), () -> {
-            mediums.findBy(Condition.text("Мастер:")).shouldHave(text(fullName));
+        stepWithRole("Убедиться, что в компоненте Детали заказа отображается ФИО мастера: " + masterFullNameLocator.getText(), () -> {
+            masterFullNameLocator.shouldHave(text(fullName));
         });
-        System.out.println("Мастер: " + mediums.findBy(Condition.text("Мастер:")).getText());
+        System.out.println("Мастер: " + masterFullNameLocator.getText());
     }
 
     public void checkPlaceWork(String placeWork) {
@@ -61,46 +61,45 @@ public class DetailsOrderVideoClientComponent extends BaseComponent {
      }
 
         public void checkOrderDate(String orderDate) {
-            stepWithRole("Убедиться, что в компоненте Детали заказа отображается дата заказа: "  + mediums.findBy(Condition.text("Дата заказа:")).getText(), () -> {
-                mediums.findBy(Condition.text("Дата заказа:")).shouldHave(text(orderDate));
+            stepWithRole("Убедиться, что в компоненте Детали заказа отображается Выбранная дата: "  + mediums.findBy(Condition.text("Выбранная дата:")).sibling(0).getText(), () -> {
+                mediums.findBy(Condition.text("Выбранная дата:")).sibling(0).shouldHave(text(orderDate));
             });
-            System.out.println("Дата заказа: " + mediums.findBy(Condition.text("Дата заказа:")).getText());
+            System.out.println("Дата заказа: " + mediums.findBy(Condition.text("Выбранная дата:")).sibling(0).getText());
         }
 
         public void checkRightNowTimeOrderState() {
-            stepWithRole("Убедиться, что в компоненте Детали заказа отображается время заказа: "  + mediums.findBy(Condition.text("Время заказа:")).getText(), () -> {
-                mediums.findBy(Condition.text("Выбранное время:")).shouldHave(text("Прямо сейчас"));
+            stepWithRole("Убедиться, что в компоненте Детали заказа отображается время заказа: "  + mediums.findBy(Condition.text("Выбранное время:")).sibling(0).getText(), () -> {
+                mediums.findBy(Condition.text("Выбранное время:")).sibling(0).shouldHave(text("Прямо сейчас"));
             });
-            System.out.println("Время заказа: " + mediums.findBy(Condition.text("Время заказа:")).getText());
+            System.out.println("Выбранное время:" + mediums.findBy(Condition.text("Выбранное время:")).sibling(0).getText());
         }
 
         public void checkPriceOrder(String priceOrder) {
-            stepWithRole("Убедиться, что в компоненте Детали заказа отображается цена заказа: "  + mediums.findBy(Condition.text("Цена заказа:")).getText(), () -> {
-                mediums.findBy(Condition.text("Стоимость:")).shouldHave(text(priceOrder));
+            stepWithRole("Убедиться, что в компоненте Детали заказа отображается Стоимость: "  + mediums.findBy(Condition.text("Стоимость:")).sibling(0).getText(), () -> {
+                mediums.findBy(Condition.text("Стоимость:")).sibling(0).shouldHave(text(priceOrder));
             });
-            System.out.println("Цена заказа: " + mediums.findBy(Condition.text("Цена заказа:")).getText());
+            System.out.println("Стоимость: " + mediums.findBy(Condition.text("Стоимость:")).sibling(0).getText());
         }
 
     public void checkOrderType(OrderType orderType) {
         stepWithRole("Убедиться, что в компоненте  тип заказа  - Видеоконсультация", () -> {
-            mediums.findBy(Condition.text("Тип заказа:")).shouldHave(text(orderType.toString()));
-            System.out.println("Тип заказа:" + mediums.findBy(Condition.text("Тип заказа:")).text());
+            mediums.findBy(Condition.text("Тип заказа:")).sibling(0).shouldHave(text(orderType.toString()));
         });
-        System.out.println("Тип заказа:" + mediums.findBy(Condition.text("Тип заказа:")).text());
+        System.out.println("Тип заказа:" + mediums.findBy(Condition.text("Тип заказа:")).sibling(0).text());
     }
 
     public void checkEquipment(String equipment) {
-        stepWithRole("Убедиться, что в компоненте Детали заказа отображается оборудование: "  + mediums.findBy(Condition.text("Оборудование:")).getText(), () -> {
-            mediums.findBy(Condition.text("Оборудование:")).shouldHave(text(equipment));
+        stepWithRole("Убедиться, что в компоненте Детали заказа отображается оборудование: "  + mediums.findBy(Condition.text("Оборудование:")).sibling(0).getText(), () -> {
+            mediums.findBy(Condition.text("Оборудование:")).sibling(0).shouldHave(text(equipment));
         });
-        System.out.println("Оборудование: " + mediums.findBy(Condition.text("Оборудование:")).getText());
+        System.out.println("Оборудование: " + mediums.findBy(Condition.text("Оборудование:")).sibling(0).getText());
     }
 
-    public void checkClientAddress(String clientAddress) {
-        stepWithRole("Убедиться, что в компоненте Детали заказа отображается адрес клиента: "  + mediums.findBy(Condition.text("Личные данные:")).getText(), () -> {
-            mediums.findBy(Condition.text("Личные данные:")).shouldHave(text(clientAddress));
+    public void checkPersonAddress(String clientAddress) {
+        stepWithRole("Убедиться, что в компоненте Детали заказа отображается Личные данные: "  + mediums.findBy(Condition.text("Личные данные:")).parent().sibling(0).getText(), () -> {
+            mediums.findBy(Condition.text("Личные данные:")).parent().sibling(0).shouldHave(text(clientAddress));
         });
-        System.out.println("Адрес клиента: " + mediums.findBy(Condition.text("Личные данные:")).getText());
+        System.out.println("Личные данные: " + mediums.findBy(Condition.text("Личные данные:")).parent().sibling(0).getText());
     }
 
 
