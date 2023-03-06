@@ -1,8 +1,9 @@
-package ru.gasworkers.dev.pages.client;
+package ru.gasworkers.dev.pages.client.maintenance;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.client.BaseClientPage;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 
 import java.time.Duration;
@@ -12,10 +13,10 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class SelectPaymentClientPage  extends BaseClientPage {
+public class SelectPaymentMaintenanceClientPage extends BaseClientPage {
 
     private final FocusHeaderComponent header;
-    public SelectPaymentClientPage(RoleBrowser browser) {
+    public SelectPaymentMaintenanceClientPage(RoleBrowser browser) {
         super(browser);
         header = new FocusHeaderComponent(browser);
     }
@@ -33,7 +34,7 @@ public class SelectPaymentClientPage  extends BaseClientPage {
         paymentMethodsCollection = driver.$$("div.logo-wrap").as("Способы оплаты"),
         bankComissionCollection = driver.$$("div.logo-wrap__text").as("Комиссионные сборы банков");
 
-    public SelectPaymentClientPage checkFinishLoading() {
+    public SelectPaymentMaintenanceClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что страница Выбор Способа Оплаты загружена", () -> {
             pageTitleLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(SELECT_PAYMENT_TITLE));
             docAgreementMaintenanceLocator.shouldBe(visible);
@@ -46,12 +47,12 @@ public class SelectPaymentClientPage  extends BaseClientPage {
         return this;
     }
 
-    public SelectPaymentClientPage payMIR() {
+    public SelectPaymentMaintenanceClientPage payMIR() {
         paymentMethodsCollection.get(0).click();
         return this;
     }
 
-    public SelectPaymentClientPage paySPB() {
+    public SelectPaymentMaintenanceClientPage paySPB() {
         stepWithRole("Нажать кнопку Оплатить через SPB", () -> {
             paymentMethodsCollection.get(1).click();
         });

@@ -184,11 +184,12 @@ class ClientDispatcherInteractionTest extends BaseTest {
                 //SmsApi clientSmsApi1 = SmsApi.instance(Role.CLIENT); // for real number
             });
             step("Клиент заполняет документы", () -> {
+                //todo check that all documents are filled up
             });
             step("Клиент оплачивает предложение от Диспетчера СК", () -> {
                 clientPages.getCheckDocumentsPage().makeContract();
-                clientPages.getSelectPaymentPage().checkFinishLoading();
-                clientPages.getSelectPaymentPage().paySPB();
+                clientPages.getSelectPaymentMaintenancePage().checkFinishLoading();
+                clientPages.getSelectPaymentMaintenancePage().paySPB();
                 clientPages.getPaymentWizardPage().checkFinishLoading();
                 clientPages.getPaymentWizardPage().getQRCode();
             });

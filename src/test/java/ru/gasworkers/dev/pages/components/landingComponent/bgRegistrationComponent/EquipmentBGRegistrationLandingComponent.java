@@ -14,22 +14,24 @@ public class EquipmentBGRegistrationLandingComponent extends BaseComponent {
     }
 
     SelenideElement
-    equipmentFieldLocator = driver.$("div.search-option__equipment--title.cursor-pointer").as("Поле оборудованиe"),
-    addAnotherEquipmentButtonLocator = driver.$("div.position-absolute a").as("Кнопка добавить оборудование"),
-    equipmentContainerLocator = driver.$("div.search-option__equipment--dropdown").as("Контейнер выбора оборудования"),
-    typeFieldLocator = driver.$("div.gas-select__header").as("Дропдаун выбора типа оборудования"),
-    markFieldLocator = driver.$("input[placeholder='Начните вводить название марки']").as("Поле выбора марки оборудования"),
-    modelFieldLocator = driver.$("input[placeholder='Начните вводить модель']").as("Поле выбора модели оборудования"),
-    powerFieldLocator = driver.$("input[placeholder='Введите мощность']").as("Поле выбора мощности оборудования"),
-    problemTextareaLocator = driver.$("textarea[placeholder='Кратко опишите проблему']").as("Поле Кратко опишите проблему"),
-    approveButtonLocator = driver.$("div.search-option__equipment button.btn-fs-sm.btn.btn-primary").as("Кнопка подтвердить выбора оборудования"),
-    clearButtonLocator = driver.$("div.search-option__equipment button.btn-fs-sm.mr-2.btn.btn-outline-primary").as("Кнопка очистить выбор оборудования");
+        equipmentFieldLocator = driver.$("div.search-option__equipment--title.cursor-pointer").as("Поле оборудованиe"),
+        addAnotherEquipmentButtonLocator = driver.$("div.position-absolute a").as("Кнопка добавить оборудование"),
+        equipmentContainerLocator = driver.$("div.search-option__equipment--dropdown").as("Контейнер выбора оборудования"),
+        typeFieldLocator = driver.$("div.gas-select__header").as("Дропдаун выбора типа оборудования"),
+        markFieldLocator = driver.$("input[placeholder='Начните вводить название марки']").as("Поле выбора марки оборудования"),
+        modelFieldLocator = driver.$("input[placeholder='Начните вводить модель']").as("Поле выбора модели оборудования"),
+        powerFieldLocator = driver.$("input[placeholder='Введите мощность']").as("Поле выбора мощности оборудования"),
+        problemTextareaLocator = driver.$("textarea[placeholder='Кратко опишите проблему']").as("Поле Кратко опишите проблему"),
+        approveButtonLocator = driver.$("div.search-option__equipment button.btn-fs-sm.btn.btn-primary").as("Кнопка подтвердить выбора оборудования"),
+        clearButtonLocator = driver.$("div.search-option__equipment button.btn-fs-sm.mr-2.btn.btn-outline-primary").as("Кнопка очистить выбор оборудования");
 
     ElementsCollection
-            typeCollection = driver.$$("div.gas-select__dropdown .item .text").as("Коллекция типов оборудования"),
-//        brandCollectionLocator = brandDropdownLocator.$$("div.results .result-item").as("Коллекция марок оборудования"),
-markCollection = driver.$$(".result-item").as("Коллекция марок оборудования"),
-        modelCollection = driver.$$("div.results .result-item").as("Коллекция моделей оборудования");
+        typeCollection = driver.$$("div.gas-select__dropdown .item .text").as("Коллекция типов оборудования"),
+        // brandCollectionLocator = brandDropdownLocator.$$("div.results .result-item").as("Коллекция марок оборудования"),
+        markCollection = driver.$$(".result-item").as("Коллекция марок оборудования"),
+        modelCollection = driver.$$("div.results .result-item").as("Коллекция моделей оборудования"),
+        resultedEquipmentCollection = driver.$$("div.item-name__text").as("Результат выбора оборудования");
+
 
 
     public void checkFinishLoading() {
@@ -79,7 +81,7 @@ markCollection = driver.$$(".result-item").as("Коллекция марок о�
         });
     }
 
-    public void fillRepairEquipment(EquipmentType type, Integer mark, Integer brand, Integer power) {
+    public void fillRepairEquipment(EquipmentType type, Integer model, Integer brand, Integer power) {
         stepWithRole("Выбрать оборудование", () -> {
             stepWithRole("Выбрать тип оборудования: " + type.toString(), () -> {
                 equipmentFieldLocator.click();
@@ -99,14 +101,14 @@ markCollection = driver.$$(".result-item").as("Коллекция марок о�
                     markCollection.shouldHave(CollectionCondition.size(0));
                 });
             });
-            String errorText = stepWithRole("Выбрать модель оборудования: " , () -> { // + markCollectionLocator.get(mark).getText()
+            String errorText = stepWithRole("Выбрать модель оборудования: " , () -> { // + markCollectionLocator.get(model).getText()
                 modelFieldLocator.click();
-                modelCollection.get(mark).click();
+                modelCollection.get(model).click();
                 stepWithRole("Убедиться, что список моделей оборудования скрыт", () -> {
                     modelCollection.shouldHave(CollectionCondition.size(0));
                 });
-                String markText = modelFieldLocator.getValue();
-                return markText;
+                String modelText = modelFieldLocator.getValue();
+                return modelText;
             });
             stepWithRole("Выбрать мощность оборудования: " + power.toString(), () -> {
                 powerFieldLocator.clear();
@@ -122,6 +124,7 @@ markCollection = driver.$$(".result-item").as("Коллекция марок о�
     }
 
     public void fillVideoEquipment(EquipmentType type, Integer mark, Integer brand, Integer power) {
+        //todo  resultedEquipmentCollection should be checked and set as an argument
         stepWithRole("Выбрать оборудование", () -> {
             stepWithRole("Выбрать тип оборудования: " + type.toString(), () -> {
                 equipmentFieldLocator.click();
@@ -141,14 +144,14 @@ markCollection = driver.$$(".result-item").as("Коллекция марок о�
                     markCollection.shouldHave(CollectionCondition.size(0));
                 });
             });
-            String resultedModel = stepWithRole("Выбрать модель оборудования: " , () -> {
+            String modelFieldValue = stepWithRole("Выбрать модель оборудования: " , () -> {
                 modelFieldLocator.click();
                 modelCollection.get(mark).click();
                 stepWithRole("Убедиться, что список моделей оборудования скрыт", () -> {
                     modelCollection.shouldHave(CollectionCondition.size(0));
                 });
-                String modelText = modelFieldLocator.getValue();
-                return modelText;
+                String modelFieldText = modelFieldLocator.getValue();
+                return modelFieldText;
             });
             stepWithRole("Выбрать мощность оборудования: " + power.toString(), () -> {
                 powerFieldLocator.clear();
@@ -156,10 +159,12 @@ markCollection = driver.$$(".result-item").as("Коллекция марок о�
                 System.out.println("Мощность оборудования: " + powerFieldLocator.getValue());
             });
             stepWithRole("Добавить описание неисправности", () -> {
-                problemTextareaLocator.setValue(resultedModel + " неисправен. Нужен ремонт.");
+                problemTextareaLocator.setValue(modelFieldValue + " неисправен. Нужен ремонт.");
                 System.out.println("Описание неисправности: " + problemTextareaLocator.getValue());
             });
             approveEquipmentForm();
+            String modelText = resultedEquipmentCollection.get(0).getValue();
+            return modelText;
             // TODO add photo video
         });
     }
@@ -173,9 +178,9 @@ markCollection = driver.$$(".result-item").as("Коллекция марок о�
         });
     }
 
-    public String getEquipmentName() {
+    public String getEquipmentName(Integer equipmentIndex) {
         return stepWithRole("Получить название оборудования", () -> {
-            return modelFieldLocator.getValue();
+            return resultedEquipmentCollection.get(equipmentIndex).getText();
         });
     }
 

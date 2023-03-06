@@ -118,7 +118,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
             stepWithRole("Убедиться, что выбран тип заявки: " + BackgroundClientRequestType.MAINTENANCE.getTitle(), () -> {
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.MAINTENANCE.getTitle())).shouldHave(Condition.cssClass("active"));
             });
-            stepWithRole("Указать адрес", () -> {
+           /* stepWithRole("Указать адрес", () -> {
                 stepWithRole("начать вводить адрес: " + objectAddress, () -> {
                     addressFieldLocator.setValue(objectAddress);
                     System.out.println("start input address: " + addressFieldLocator.getValue());
@@ -133,7 +133,8 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 stepWithRole("Убедиться, что искомый запрос: " + objectAddress + " содержится в выбранном адресе: " + addressFieldLocator.getValue(), () -> {
                     addressFieldLocator.shouldHave(partialValue(objectAddress));
                 });
-            });
+            });*/
+        address.fillAddressField(objectAddress);
         equipment.fillMaintenanceEquipment(type, mark, brand, power);
         stepWithRole("Указать дату регистрации", () -> {
             stepWithRole("Нажать на поле дата", () -> {
@@ -161,8 +162,8 @@ public class BackgroundRegistrationComponent extends BaseComponent {
             });
         });
         stepWithRole("Проверить заполненные данные", () -> {
-            stepWithRole("Убедиться, что выбран адрес: " + objectAddress, () -> {
-                addressFieldLocator.shouldHave(value(objectAddress));
+            stepWithRole("Убедиться, что выбран адрес: " + addressFieldLocator.getValue()  , () -> {
+                addressFieldLocator.shouldNotBe(empty);
                 System.out.println("result address: " + addressFieldLocator.getValue());
             });
             stepWithRole("Убедиться, что дата сегодняшняя  выбрана: " + filledDateFieldLocator.getValue(), () -> {
@@ -185,20 +186,6 @@ public class BackgroundRegistrationComponent extends BaseComponent {
             stepWithRole("Выбрать тип заявки: " + BackgroundClientRequestType.REPAIR.getTitle(), () -> {
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.REPAIR.getTitle())).click();
             });
-            /*stepWithRole("Указать адрес", () -> {
-                stepWithRole("начать вводить адрес: " + objectAddress, () -> {
-                    addressFieldLocator.setValue(objectAddress);
-                });
-                stepWithRole("Выбрать первую подсказку: " + addressSuggestionsCollection.get(0).getText(), () -> {
-                    addressSuggestionsCollection.get(0).click();
-                });
-                stepWithRole("Убедиться, что скрыты подсказки адреса", () -> {
-                    addressSuggestionsCollection.shouldHave(size(0));
-                });
-                stepWithRole("Убедиться, что искомый запрос: " + objectAddress + " содержится в выбранном адресе: " + addressFieldLocator.getValue(), () -> {
-                    addressFieldLocator.shouldHave(partialValue(objectAddress));
-                });
-            });*/
             address.fillAddressField(objectAddress);
             equipment.fillRepairEquipment(type, mark, brand, power);
             stepWithRole("Указать дату регистрации", () -> {

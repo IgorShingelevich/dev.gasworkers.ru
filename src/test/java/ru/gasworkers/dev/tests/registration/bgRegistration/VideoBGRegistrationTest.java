@@ -58,7 +58,8 @@ public class VideoBGRegistrationTest extends BaseTest {
 //           return resultedAddress;
        });
        String resultedAddress = clientPages.getLandingPage().bgRegistration.address.getResultedAddress();
-       String equipmentName = clientPages.getLandingPage().bgRegistration.equipment.getEquipmentName();
+       String resultedEquipmentCollectionName = clientPages.getLandingPage().bgRegistration.equipment.getEquipmentName(0);
+       //todo modify equipmentCollection index for  different equipment count
        String errorText = clientPages.getLandingPage().bgRegistration.equipment.getErrorText();
         clientPages.getLandingPage().bgRegistration.findOffers();
           clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
@@ -89,15 +90,17 @@ public class VideoBGRegistrationTest extends BaseTest {
                     clientPages.getApproveMasterVideoPage().detailsOrder.checkRightNowTimeOrderState();
                     clientPages.getApproveMasterVideoPage().detailsOrder.checkPriceOrder("500");
                     clientPages.getApproveMasterVideoPage().detailsOrder.checkOrderType(OrderType.VIDEO);
-                    clientPages.getApproveMasterVideoPage().detailsOrder.checkEquipment(equipmentName);
+                    clientPages.getApproveMasterVideoPage().detailsOrder.checkEquipment(resultedEquipmentCollectionName);
                     clientPages.getApproveMasterVideoPage().detailsOrder.checkPersonAddress(resultedAddress);
                     //todo  video attachments
                 });
+                clientPages.getApproveMasterVideoPage().clickPayButton();
+
+                clientPages.getSelectPaymentVideoPage().checkFinishLoading();
+                clientPages.getSelectPaymentVideoPage().payMir();
 
 
 
-
-                clientPages.getApproveMasterVideoPage().attachmentsOrder.checkFinishLoading();
 
 
 

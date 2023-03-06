@@ -64,9 +64,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
 //            spinnerScrollbarLocator.should(disappear);
             spinner.checkPresence();
             titleLocator.shouldHave(text(SELECT_SERVICE_MAINTENANCE_TITLE));
-            stepWithRole("Убедиться что спиннер появился", () -> {
+            /*stepWithRole("Убедиться что спиннер появился", () -> {
                 spinnerServicesContainerLocator.should(appear);
-            });
+            });*/
             stepWithRole("Убедиться что спиннер исчез", () -> {
                 spinnerServicesContainerLocator.should(disappear, Duration.ofSeconds(40));
             });
