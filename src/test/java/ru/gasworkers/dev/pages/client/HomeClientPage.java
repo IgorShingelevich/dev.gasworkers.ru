@@ -7,6 +7,7 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.clientComponent.guideComponent.FirstMaintenanceGuideComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClientComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.guideComponent.FirstRepairGuideComponent;
+import ru.gasworkers.dev.pages.components.clientComponent.videoComponent.videoBannerHomePageClientComponent.AwaitingNowVideoBGBannerHomePageClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.PersonSummaryComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
@@ -24,6 +25,8 @@ public final class HomeClientPage extends BaseClientPage {
     public final PersonSummaryComponent personSummaryComponent;
     public final FirstMaintenanceGuideComponent firstMaintenanceGuide;
     public final FirstRepairGuideComponent firstRepairGuide;
+    public final AwaitingNowVideoBGBannerHomePageClientComponent awaitingVideoBGBanner;
+
 
     public HomeClientPage(RoleBrowser browser) {
         super(browser);
@@ -33,9 +36,12 @@ public final class HomeClientPage extends BaseClientPage {
         personSummaryComponent = new PersonSummaryComponent(browser);
         firstMaintenanceGuide = new FirstMaintenanceGuideComponent(browser);
         firstRepairGuide = new FirstRepairGuideComponent(browser);
+        awaitingVideoBGBanner = new AwaitingNowVideoBGBannerHomePageClientComponent(browser);
     }
 
-    private final String OBJECTS_TITLE = "Объекты и оборудование";
+    private final String
+        OBJECTS_TITLE = "Объекты и оборудование";
+
 
     SelenideElement
             fillProfileButtonLocator = driver.$(byTagAndText("span", "Заполнить профиль")).as("Кнопка Заполнить профиль"),
@@ -132,5 +138,31 @@ public final class HomeClientPage extends BaseClientPage {
                         .shouldBe(interactable)
                         .click()
         );
+    }
+
+    public void checkVideoBGInitialState(String sinceDate, String masterFullName) {
+        stepWithRole("Убедиться, что  Домашняя страница в состоянии после Фоновой регистрации на Видео", () -> {
+            personSummaryComponent.checkBGInitialState(sinceDate);
+           awaitingVideoBGBanner.checkAwaitingNowBGVideoState(masterFullName);
+            stepWithRole("Убедиться, что присутствует баннер Ожидания видеоконсультации", () -> {
+
+            });
+            stepWithRole("Убедиться, что присутствует кнопка Заполнить профиль", () -> {
+                fillProfileButtonLocator.shouldBe(visible);
+            });
+            stepWithRole("Убедиться, что присутствует компонент Информация о последнем заказе", () -> {
+                lastOrderComponent.checkFinishLoading();
+                // TODO check background Address and Equipment and ServiceDate
+            });
+            stepWithRole("Убедиться, что присутствует компонент Объекты и оборудование", () -> {
+                stepWithRole("Убедиться что присутствует только один объект", () -> {
+                    objectTitleCollection.should(CollectionCondition.size(1));
+                });
+                stepWithRole("Убедиться что имя объекта - Мой Дом", () -> {
+                    objectTitleCollection.get(0).shouldHave(text("Мой дом"));
+                });
+                // TODO check background Equipment
+            });
+        });
     }
 }

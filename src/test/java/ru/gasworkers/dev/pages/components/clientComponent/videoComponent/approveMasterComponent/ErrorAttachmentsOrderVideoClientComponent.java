@@ -6,8 +6,8 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 
 import static com.codeborne.selenide.Condition.*;
 
-public class AttachmentsOrderVideoClientComponent extends BaseComponent {
-    public AttachmentsOrderVideoClientComponent(RoleBrowser browser) {
+public class ErrorAttachmentsOrderVideoClientComponent extends BaseComponent {
+    public ErrorAttachmentsOrderVideoClientComponent(RoleBrowser browser) {
         super(browser);
     }
 
@@ -37,8 +37,11 @@ public class AttachmentsOrderVideoClientComponent extends BaseComponent {
         });
     }
 
-    public void checkBGRightNowState(String  descriptionText) {
-        checkDescription(descriptionText);
+    public void checkBGRightNowState(String  errorText) {
+        stepWithRole("Убедиться, что компонент Прикрепленные файлы содержит ошибку  описанную на Лендинге", () -> {
+            checkDescription(errorText);
+
+        });
     }
 
 

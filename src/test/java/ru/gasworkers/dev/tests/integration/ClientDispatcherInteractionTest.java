@@ -191,7 +191,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
                 clientPages.getSelectPaymentMaintenancePage().checkFinishLoading();
                 clientPages.getSelectPaymentMaintenancePage().paySPB();
                 clientPages.getPaymentWizardPage().checkFinishLoading();
-                clientPages.getPaymentWizardPage().getQRCode();
+                clientPages.getPaymentWizardPage().payButton();
             });
             step("Клиент подписывает договор", () -> {
                 clientPages.getSignSMSPage().checkFinishLoading();

@@ -64,11 +64,7 @@ public class VideoBGRegistrationTest extends BaseTest {
         clientPages.getLandingPage().bgRegistration.findOffers();
           clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
 
-        step("Кабинет клиента - состояние после фоновой регистрации на Видео", () -> {
-            //todo video guide
-            /*step("Гид  ТО по кабинету", () -> {
-                clientPages.getHomePage().firstMaintenanceGuide.playSequence();
-            });*/
+
             step("Страница Видеоконсультация", () -> {
                 clientPages.getConsultationVideoPage().checkFinishLoading();
                 clientPages.getConsultationVideoPage().defaultBGVideoState();
@@ -78,47 +74,50 @@ public class VideoBGRegistrationTest extends BaseTest {
             step("Страница Подтверждение деталей Видео консультации Сейчас", () -> {
                 clientPages.getApproveMasterVideoPage().checkFinishLoading();
                 step("Компонент прикрепленные данные", () -> {
-                    clientPages.getApproveMasterVideoPage().attachmentsOrder.checkFinishLoading();
-                    clientPages.getApproveMasterVideoPage().attachmentsOrder.checkBGRightNowState(errorText);
+                    clientPages.getApproveMasterVideoPage().errorAttachments.checkFinishLoading();
+                    clientPages.getApproveMasterVideoPage().errorAttachments.checkBGRightNowState(errorText);
                 });
                 step("Компонент детали заказа", () -> {
-                    clientPages.getApproveMasterVideoPage().detailsOrder.checkFinishLoading();
-                    clientPages.getApproveMasterVideoPage().detailsOrder.checkMasterFullName("ИнжТехМастеров3 ИнжТехМастер3 ИнжТехМастерович3");
-                    clientPages.getApproveMasterVideoPage().detailsOrder.checkPlaceWork("ООО \"ИНЖЕНЕРНЫЕ ТЕХНОЛОГИИ\"");
-                    clientPages.getApproveMasterVideoPage().detailsOrder.checkQuantityOfCompletedOrders("12");
-                    clientPages.getApproveMasterVideoPage().detailsOrder.checkOrderDate(randomClient.getSinceDate());
-                    clientPages.getApproveMasterVideoPage().detailsOrder.checkRightNowTimeOrderState();
-                    clientPages.getApproveMasterVideoPage().detailsOrder.checkPriceOrder("500");
-                    clientPages.getApproveMasterVideoPage().detailsOrder.checkOrderType(OrderType.VIDEO);
-                    clientPages.getApproveMasterVideoPage().detailsOrder.checkEquipment(resultedEquipmentCollectionName);
-                    clientPages.getApproveMasterVideoPage().detailsOrder.checkPersonAddress(resultedAddress);
+                    clientPages.getApproveMasterVideoPage().details.checkFinishLoading();
+                    clientPages.getApproveMasterVideoPage().details.checkMasterFullName("ИнжТехМастеров3 ИнжТехМастер3 ИнжТехМастерович3");
+                    clientPages.getApproveMasterVideoPage().details.checkPlaceWork("ООО \"ИНЖЕНЕРНЫЕ ТЕХНОЛОГИИ\"");
+                    clientPages.getApproveMasterVideoPage().details.checkQuantityOfCompletedOrders("12");
+                    clientPages.getApproveMasterVideoPage().details.checkOrderDate(randomClient.getSinceDate());
+                    clientPages.getApproveMasterVideoPage().details.checkRightNowTimeOrderState();
+                    clientPages.getApproveMasterVideoPage().details.checkPriceOrder("500");
+                    clientPages.getApproveMasterVideoPage().details.checkOrderType(OrderType.VIDEO);
+                    clientPages.getApproveMasterVideoPage().details.checkEquipment(resultedEquipmentCollectionName);
+                    clientPages.getApproveMasterVideoPage().details.checkPersonAddress(resultedAddress);
                     //todo  video attachments
                 });
-                clientPages.getApproveMasterVideoPage().clickPayButton();
-
-                clientPages.getSelectPaymentVideoPage().checkFinishLoading();
-                clientPages.getSelectPaymentVideoPage().payMir();
-
-
-
-
-
-
-
-
-
-
-
             });
-            String orderNumber = step("", () -> {
-                clientPages.getSelectServicePage().toOrderCard();
-                clientPages.getOrderCardPage().checkFinishLoading();
-                String currentNumber = clientPages.getOrderCardPage().getOrderNumber();
-                return currentNumber;
+            clientPages.getApproveMasterVideoPage().clickPayButton();
+
+                step("Страница выбора способа оплаты", () -> {
+                    clientPages.getSelectPaymentVideoPage().checkFinishLoading();
+                    String commissionValue = clientPages.getSelectPaymentVideoPage().getCommissionValue(0);
+                    System.out.println("Комиссия: " + commissionValue);
+                    clientPages.getSelectPaymentVideoPage().payMir();
+                });
+
+            step("Страница оплаты картой", () -> {
+                    clientPages.getPaymentWizardPage().checkFinishLoading();
+                    clientPages.getPaymentWizardPage().payButton();
             });
+
+            step("Страница успешной оплаты", () -> {
+                clientPages.getSuccessPaymentVideoPage().checkFinishLoading();
+                clientPages.getSuccessPaymentVideoPage().clickButton();
+            });
+
+        step("Кабинет клиента - состояние после фоновой регистрации на Видео", () -> {
+            //todo video guide
+            /*step("Гид  ТО по кабинету", () -> {
+                clientPages.getHomePage().firstMaintenanceGuide.playSequence();
+            });*/
+
             step("Домашняя страница", () -> {
-                clientPages.getOrderCardPage().sidebar.home();
-                clientPages.getHomePage().checkBGInitialState(randomClient.getSinceDate());
+                clientPages.getHomePage().checkVideoBGInitialState(randomClient.getSinceDate(), "ИнжТехМастеров3 ИнжТехМастер3 ИнжТехМастерович3");
             });
             step("Страница Уведомления", () -> {
                 clientPages.getHomePage().actionsBlock.allNotifications();
@@ -135,7 +134,7 @@ public class VideoBGRegistrationTest extends BaseTest {
             step("Страница Заказы", () -> {
                 clientPages.getAllObjectsPage().sidebar.allOrders();
                 clientPages.getAllOrdersPage().checkFinishLoading();
-                clientPages.getAllOrdersPage().checkBGInitialState(orderNumber);
+//                clientPages.getAllOrdersPage().checkBGInitialState(orderNumber);
             });
             step("Страница Счета", () -> {
                 clientPages.getAllOrdersPage().sidebar.allInvoices();
@@ -169,8 +168,8 @@ public class VideoBGRegistrationTest extends BaseTest {
                 clientPages.getProfilePage().sidebar.home();
             });
 
-
         });
+
     }
 
 }

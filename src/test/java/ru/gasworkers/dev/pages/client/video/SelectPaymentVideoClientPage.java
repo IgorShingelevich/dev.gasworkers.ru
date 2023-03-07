@@ -8,6 +8,8 @@ import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusH
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
 import java.time.Duration;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -28,7 +30,8 @@ public class SelectPaymentVideoClientPage extends BaseClientPage {
 
     ElementsCollection
         mediumsCollection = driver.$$("p.medium").as("Коллекция детали оплаты"),
-        paymentMethodsCollection = driver.$$("div.logo-wrap").as("Способы оплаты");
+        paymentMethodsCollection = driver.$$("div.logo-wrap").as("Способы оплаты"),
+        feeDetailsCollection = driver.$$("p.small.text-secondary").as("Детали оплаты");
 
 
     SelenideElement
@@ -48,11 +51,28 @@ public class SelectPaymentVideoClientPage extends BaseClientPage {
         payMirButtonLocator.shouldBe(visible);
         paySpbButtonLocator.shouldBe(visible);
         });
+    }
 
+    public String getCommissionValue(Integer indexPaymentMethod) {
+        String feeDetailsText = feeDetailsCollection.get(indexPaymentMethod).getText();
+
+        Pattern pattern = Pattern.compile("(\\d+\\.\\d{2})");
+
+        Matcher matcher = pattern.matcher(feeDetailsText);
+
+        if (matcher.find()) {
+            String price = matcher.group(1);
+            return price;
+        } else {
+            return null;
+        }
     }
 
     public void payMir () {
         stepWithRole("Оплата через МИР", () -> {
+            stepWithRole("Комиссия банка: " + getCommissionValue(0), () -> {
+            getCommissionValue(0);
+            });
             payMirButtonLocator.click();
         });
     }

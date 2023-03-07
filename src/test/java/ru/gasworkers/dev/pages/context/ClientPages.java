@@ -11,6 +11,7 @@ import ru.gasworkers.dev.pages.client.maintenance.SelectPaymentMaintenanceClient
 import ru.gasworkers.dev.pages.client.video.ApproveDetailsVideoClientPage;
 import ru.gasworkers.dev.pages.client.video.ConsultationVideoClientPage;
 import ru.gasworkers.dev.pages.client.video.SelectPaymentVideoClientPage;
+import ru.gasworkers.dev.pages.client.video.SuccessPaymentVideoClientPage;
 import ru.gasworkers.dev.pages.common.AllNotificationsPage;
 import ru.gasworkers.dev.pages.common.LandingPage;
 
@@ -41,6 +42,7 @@ public final class ClientPages extends BaseRolePages {
     private final CheckDocumentsClientPage checkDocumentsPage = new CheckDocumentsClientPage(browser);
     private final SelectPaymentMaintenanceClientPage selectPaymentMaintenancePage = new SelectPaymentMaintenanceClientPage(browser);
     private final SelectPaymentVideoClientPage selectPaymentVideoPage = new SelectPaymentVideoClientPage(browser);
+    private final  SuccessPaymentVideoClientPage successPaymentVideoPage = new SuccessPaymentVideoClientPage(browser);
     private final PaymentWizardClientPage paymentWizardPage = new PaymentWizardClientPage(browser);
     private final SignSMSClientPage signSMSPage = new SignSMSClientPage(browser);
     private final SignSuccessPage signSuccessPage = new SignSuccessPage(browser);
