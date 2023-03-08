@@ -68,15 +68,17 @@ public class VideoBGRegistrationTest extends BaseTest {
     @Story(AllureStory.VIDEO)
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Фоновая Регистрация на Видео Сейчас с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
+
     public void bgRegistrationNowVideo() {
+        Integer masterIndex = 0;
+        Integer power = 20;
+        EquipmentType GAS_BOILER_TYPE = EquipmentType.GAS_BOILER;
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
         step("Клиент заполняет форму фоновой регистрации", () -> {
             clientPages.getLandingPage().bgRegistration.checkFinishLoading();
-            clientPages.getLandingPage().bgRegistration.fillBGVideoRequest(randomClient.getObjectAddress(), EquipmentType.GAS_BOILER, 1, 1, 20, randomClient.getPhoneNumber(), randomClient.getEmail());
+            clientPages.getLandingPage().bgRegistration.fillBGVideoRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhoneNumber(), randomClient.getEmail());
            // TODO add photo video
-//            String resultedAddress = clientPages.getLandingPage().bgRegistration.address.getResultedAddress();
-//           return resultedAddress;
        });
        String resultedAddress = clientPages.getLandingPage().bgRegistration.address.getResultedAddress();
        String resultedEquipmentCollectionName = clientPages.getLandingPage().bgRegistration.equipment.getEquipmentName(0);
@@ -95,8 +97,6 @@ public class VideoBGRegistrationTest extends BaseTest {
         /*step("Выбрать Мастера по имени", () -> {
             String masterFullNameByName = clientPages.getConsultationVideoPage().rightNowTab.masterList.getCurrentMasterByName(masterИнжТехМастер3.fullName);
         });*/
-
-        Integer masterIndex = 0;
         String masterFullNameByIndex = clientPages.getConsultationVideoPage().rightNowTab.masterList.getCurrentMasterByIndex(masterIndex);
         String masterPriceByIndex = clientPages.getConsultationVideoPage().rightNowTab.masterList.getMasterPriceByIndex(masterIndex);
 
@@ -163,7 +163,7 @@ public class VideoBGRegistrationTest extends BaseTest {
             step("Страница Объекты", () -> {
                 clientPages.getAllNotificationsPage().sidebar.allObjects();
                 clientPages.getAllObjectsPage().checkFinishLoading();
-                clientPages.getAllObjectsPage().initialBGState();
+                clientPages.getAllObjectsPage().initialBGState(GAS_BOILER_TYPE, resultedEquipmentCollectionName, power.toString(), resultedAddress);
             });
             step("Страница Заказы", () -> {
                 clientPages.getAllObjectsPage().sidebar.allOrders();

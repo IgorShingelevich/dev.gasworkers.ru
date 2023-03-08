@@ -45,15 +45,20 @@ public class RepairBGRegistrationTest extends BaseTest {
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Фоновая Регистрация на Ремонт с указанием телефона и почты")
     public void bgRegistrationPhoneRepair() {
+        Integer masterIndex = 0;
+        Integer power = 20;
+        EquipmentType GAS_BOILER_TYPE = EquipmentType.GAS_BOILER;
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
         step("Клиент заполняет форму фоновой регистрации", () -> {
             clientPages.getLandingPage().bgRegistration.checkFinishLoading();
-            clientPages.getLandingPage().bgRegistration.fillBGRepairRequest(randomClient.getObjectAddress(), EquipmentType.GAS_BOILER, 1, 1, 20, randomClient.getPhoneNumber(), randomClient.getEmail());
+            clientPages.getLandingPage().bgRegistration.fillBGRepairRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhoneNumber(), randomClient.getEmail());
             //TODO add photo video
-            clientPages.getLandingPage().bgRegistration.findOffers();
-            clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
         });
+        String resultedAddress = clientPages.getLandingPage().bgRegistration.address.getResultedAddress();
+        String resultedEquipmentCollectionName = clientPages.getLandingPage().bgRegistration.equipment.getEquipmentName(0);
+        clientPages.getLandingPage().bgRegistration.findOffers();
+        clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
         step("Кабинет клиента - состояние после фоновой регистрации на Ремонт", () -> {
             step("Гид  Ремонт по кабинету", () -> {
                 clientPages.getHomePage().firstRepairGuide.playSequence();
@@ -82,7 +87,7 @@ public class RepairBGRegistrationTest extends BaseTest {
             step("Страница Объекты", () -> {
                 clientPages.getAllNotificationsPage().sidebar.allObjects();
                 clientPages.getAllObjectsPage().checkFinishLoading();
-                clientPages.getAllObjectsPage().initialBGState();
+                clientPages.getAllObjectsPage().initialBGState(GAS_BOILER_TYPE, resultedEquipmentCollectionName, power.toString(), resultedAddress);
             });
             step("Страница Заказы", () -> {
                 clientPages.getAllObjectsPage().sidebar.allOrders();

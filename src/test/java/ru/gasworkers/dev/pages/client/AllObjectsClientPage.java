@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pages.client;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.model.equipment.EquipmentType;
 import ru.gasworkers.dev.pages.components.clientComponent.ObjectItemClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
@@ -95,11 +96,11 @@ public class AllObjectsClientPage extends BaseClientPage {
         return this;
     }
 
-    public AllObjectsClientPage initialBGState( String equipment, String power, String address) {
+    public AllObjectsClientPage initialBGState(EquipmentType type, String equipment, String power, String address) {
         stepWithRole("Убедиться, что страница в  состоянии после Фоновой регистрации", () -> {
             Integer objectIndex = 0;
             String objectName = "Мой дом";
-            objectItem.checkBGInitialState(objectIndex, objectName, equipment, power, address);
+            objectItem.checkBGInitialState(objectIndex, objectName,type, equipment, power, address);
         });
         return this;
     }
