@@ -15,7 +15,7 @@ public class NavContactsTabProfileComponent extends BaseComponent {
     subtitleLocator = driver.$("div .title").as("Подзаголовок Контактные данные"),
     emailLocator = driver.$("input[placeholder*=почта]").as("Email"),
     phoneLocator = driver.$("input[placeholder*=Номер]").as("Телефон"),
-    saveButtonLocator = driver.$("button.mb-3.btn.btn-primary.disable-outline").as("Кнопка Сохранить");
+    saveButtonLocator = driver.$(".footer button.mb-3.btn.btn-primary").as("Кнопка Сохранить");
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что вкладка Контакты загружена", () -> {

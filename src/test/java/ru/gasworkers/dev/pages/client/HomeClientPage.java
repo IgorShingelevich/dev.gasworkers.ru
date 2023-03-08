@@ -142,8 +142,9 @@ public final class HomeClientPage extends BaseClientPage {
 
     public void checkVideoBGInitialState(String sinceDate, String masterFullName) {
         stepWithRole("Убедиться, что  Домашняя страница в состоянии после Фоновой регистрации на Видео", () -> {
+
+            awaitingVideoBGBanner.checkAwaitingNowBGVideoState(masterFullName);
             personSummaryComponent.checkBGInitialState(sinceDate);
-           awaitingVideoBGBanner.checkAwaitingNowBGVideoState(masterFullName);
             stepWithRole("Убедиться, что присутствует баннер Ожидания видеоконсультации", () -> {
 
             });

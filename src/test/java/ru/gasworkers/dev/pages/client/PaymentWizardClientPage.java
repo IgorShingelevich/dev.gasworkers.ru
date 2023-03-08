@@ -6,8 +6,7 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
 public class PaymentWizardClientPage  extends BaseClientPage {
@@ -30,23 +29,23 @@ public class PaymentWizardClientPage  extends BaseClientPage {
         payButton = driver.$(".form_button.default").as("Кнопка Получить QR-код");
 
 
-    public void checkFinishLoading() {
+    public void checkFinishLoading(String priceWithCommissions) {
         stepWithRole("Убедиться, что страница Система быстрых платежей загружена", () -> {
             pageTitleLocator.shouldHave(text(PAYMENT_WIZARD_TITLE)).shouldBe(visible, Duration.ofSeconds(60));
             payAgreementLinkLocator.shouldBe(visible);
             stepWithRole("Убедиться, что отображается баннер Тестовый режим", () -> {
                 testModeWarningBannerLocator.shouldHave(text(TEST_BANNER_WARNING)).shouldBe(visible);
                 });
-            stepWithRole("Убедиться, что отображается сумма к оплате: " + toPayTextLocator.getText(), () -> {
-                cardAmountValueLocator.shouldBe(visible);
-                cardTotalAmountValueLocator.shouldBe(visible);
-                toPayTextLocator.getValue();
-                toPayTextLocator.shouldBe(visible, Duration.ofSeconds(20));
+            stepWithRole("Убедиться, что отображается сумма к оплате: " + priceWithCommissions, () -> {
+                String formattedPrice = priceWithCommissions.replace(".", ",") + " ₽";
+                cardAmountValueLocator.shouldHave(text(formattedPrice));
+                cardTotalAmountValueLocator.shouldHave(text(formattedPrice));
+                toPayTextLocator.shouldHave(text(formattedPrice));
             });
-            stepWithRole("Убдиться, что фо всех формах одинаковая сумма к оплате", () -> {
+            stepWithRole("Убдиться, что во всех формах одинаковая сумма к оплате" + priceWithCommissions, () -> {
                 Assertions.assertThat(cardAmountValueLocator.getText()).isEqualTo(cardTotalAmountValueLocator.getText());
                 Assertions.assertThat(toPayTextLocator.getText()).isEqualTo(cardTotalAmountValueLocator.getText());
-                System.out.println("Сумма к оплате: " + toPayTextLocator.getText());
+                System.out.println("Сумма к оплате в Монете: " + toPayTextLocator.getText());
             });
             payButton.shouldBe(visible);
         });

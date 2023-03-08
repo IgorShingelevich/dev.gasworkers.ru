@@ -9,7 +9,7 @@ import ru.gasworkers.dev.model.OrderType;
 import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.BaseTest;
-import ru.gasworkers.dev.utils.ClientBuilder;
+import ru.gasworkers.dev.utils.UserBuilder;
 import ru.gasworkers.dev.utils.RandomClient;
 
 import static io.qameta.allure.Allure.step;
@@ -20,7 +20,7 @@ class ClientFlowTest extends BaseTest {
     @Browser(role = CLIENT)
     ClientPages clientPages;
 
-    ClientBuilder client00 = new ClientBuilder(
+    UserBuilder client00 = new UserBuilder(
             "Игорь",
             "Сергеевич",
             "Шингелевич",

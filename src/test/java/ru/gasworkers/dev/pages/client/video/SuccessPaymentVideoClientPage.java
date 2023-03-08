@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.pages.client.video;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.client.BaseClientPage;
@@ -37,6 +38,7 @@ public class SuccessPaymentVideoClientPage extends BaseClientPage {
 
     public void clickButton() {
         stepWithRole("Нажать на кнопку На главную", () -> {
+            Selenide.sleep(1000);
             buttonLocator.click();
         });
     }

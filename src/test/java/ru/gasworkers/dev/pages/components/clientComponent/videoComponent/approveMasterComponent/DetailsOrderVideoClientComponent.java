@@ -7,6 +7,7 @@ import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
+import static com.codeborne.selenide.Condition.partialText;
 import static com.codeborne.selenide.Condition.text;
 
 public class DetailsOrderVideoClientComponent extends BaseComponent {
@@ -76,7 +77,7 @@ public class DetailsOrderVideoClientComponent extends BaseComponent {
 
         public void checkPriceOrder(String priceOrder) {
             stepWithRole("Убедиться, что в компоненте Детали заказа отображается Стоимость: "  + mediums.findBy(Condition.text("Стоимость:")).sibling(0).getText(), () -> {
-                mediums.findBy(Condition.text("Стоимость:")).sibling(0).shouldHave(text(priceOrder));
+                mediums.findBy(Condition.text("Стоимость:")).sibling(0).$("div.bag.bag-success").shouldHave(text(priceOrder));
             });
             System.out.println("Стоимость: " + mediums.findBy(Condition.text("Стоимость:")).sibling(0).getText());
         }

@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pages.client;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.components.clientComponent.ObjectItemClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
 
@@ -13,10 +14,12 @@ import static com.codeborne.selenide.Selectors.byTagAndText;
 public class AllObjectsClientPage extends BaseClientPage {
     public final ActionsBlockClientComponent actionsBlock;
     public final SidebarClientComponent sidebar;
+    public final ObjectItemClientComponent objectItem;
     public AllObjectsClientPage(RoleBrowser browser) {
         super(browser);
         sidebar = new SidebarClientComponent(browser);
         actionsBlock = new ActionsBlockClientComponent(browser);
+        objectItem = new ObjectItemClientComponent(browser);
    }
 
     private final String
@@ -92,11 +95,11 @@ public class AllObjectsClientPage extends BaseClientPage {
         return this;
     }
 
-    public AllObjectsClientPage initialBGState() {
+    public AllObjectsClientPage initialBGState( String equipment, String power, String address) {
         stepWithRole("Убедиться, что страница в  состоянии после Фоновой регистрации", () -> {
-            stepWithRole("Убедиться, что присутствует один объект", () -> {
-                nameLinkCollection.shouldBe(size(1));
-            });
+            Integer objectIndex = 0;
+            String objectName = "Мой дом";
+            objectItem.checkBGInitialState(objectIndex, objectName, equipment, power, address);
         });
         return this;
     }

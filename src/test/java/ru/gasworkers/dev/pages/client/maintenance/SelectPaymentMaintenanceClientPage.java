@@ -7,6 +7,8 @@ import ru.gasworkers.dev.pages.client.BaseClientPage;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 
 import java.time.Duration;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -32,7 +34,7 @@ public class SelectPaymentMaintenanceClientPage extends BaseClientPage {
 
     ElementsCollection
         paymentMethodsCollection = driver.$$("div.logo-wrap").as("Способы оплаты"),
-        bankComissionCollection = driver.$$("div.logo-wrap__text").as("Комиссионные сборы банков");
+        feeDetailsCollection = driver.$$("p.small.text-secondary").as("Детали оплаты");
 
     public SelectPaymentMaintenanceClientPage checkFinishLoading() {
         stepWithRole("Убедиться, что страница Выбор Способа Оплаты загружена", () -> {
@@ -58,5 +60,17 @@ public class SelectPaymentMaintenanceClientPage extends BaseClientPage {
         });
 //        pagePaymentWizardTitleLocator.shouldBe(visible);
         return this;
+    }
+
+    public String getCommissionValue(Integer paymentMethodIndex) {
+        String feeDetailsText = feeDetailsCollection.get(paymentMethodIndex).getText();
+        Pattern pattern = Pattern.compile("(\\d+\\.\\d{2})");
+        Matcher matcher = pattern.matcher(feeDetailsText);
+        if (matcher.find()) {
+            String price = matcher.group(1);
+            return price;
+        } else {
+            return null;
+        }
     }
 }

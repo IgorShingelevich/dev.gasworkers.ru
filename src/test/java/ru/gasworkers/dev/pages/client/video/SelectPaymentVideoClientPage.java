@@ -53,13 +53,10 @@ public class SelectPaymentVideoClientPage extends BaseClientPage {
         });
     }
 
-    public String getCommissionValue(Integer indexPaymentMethod) {
-        String feeDetailsText = feeDetailsCollection.get(indexPaymentMethod).getText();
-
+    public String getCommissionValue(Integer paymentMethodIndex) {
+        String feeDetailsText = feeDetailsCollection.get(paymentMethodIndex).getText();
         Pattern pattern = Pattern.compile("(\\d+\\.\\d{2})");
-
         Matcher matcher = pattern.matcher(feeDetailsText);
-
         if (matcher.find()) {
             String price = matcher.group(1);
             return price;
@@ -74,6 +71,15 @@ public class SelectPaymentVideoClientPage extends BaseClientPage {
             getCommissionValue(0);
             });
             payMirButtonLocator.click();
+        });
+    }
+
+    public void paySpb () {
+        stepWithRole("Оплата через СПБ", () -> {
+            stepWithRole("Комиссия банка: " + getCommissionValue(1), () -> {
+            getCommissionValue(1);
+            });
+            paySpbButtonLocator.click();
         });
     }
 

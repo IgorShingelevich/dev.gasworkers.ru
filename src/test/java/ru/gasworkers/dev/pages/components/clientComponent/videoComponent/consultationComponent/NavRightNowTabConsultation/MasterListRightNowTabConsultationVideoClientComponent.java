@@ -35,9 +35,21 @@ public class MasterListRightNowTabConsultationVideoClientComponent extends BaseC
     }
 
     public void selectMasterByName(String fullName) {
-        stepWithRole("Нажать кнопку Выбрать у мастера: " + fullName, () -> {
+        stepWithRole("Нажать кнопку Выбрать у мастера: " +  masterBoxCollection.findBy(Condition.text(fullName)).$("p.h5").getText(), () -> {
             masterBoxCollection.findBy(Condition.text(fullName)).find("button.btn-primary").click();
         });
+    }
+
+    public String getCurrentMasterByName(String fullName) {
+        return masterBoxCollection.findBy(Condition.text(fullName)).$("p.h5").getText();
+    }
+
+    public String getCurrentMasterByIndex(int index) {
+        return masterBoxCollection.get(index).$("p.h5").getText();
+    }
+
+    public String getMasterPriceByIndex (int index) {
+           return masterBoxCollection.get(index).find("span.bag-success").getText();
     }
 
 

@@ -18,7 +18,7 @@ public class NavNotificationsTabProfileComponent extends BaseComponent {
         pushNotificationCheckboxLocator = notificationsItemCollection.get(0).$(" .p-default").as("Чекбокс 'Push-уведомления'"),
         emailNotificationCheckboxLocator = notificationsItemCollection.get(1).$(" .p-default").as("Чекбокс 'Email-уведомления'"),
         smsNotificationCheckboxLocator = notificationsItemCollection.get(2).$(" .p-default").as("Чекбокс 'SMS-уведомления'"),
-        saveButtonLocator = driver.$("button.mb-3.btn.btn-primary.disable-outline").as("Кнопка Сохранить");
+        saveButtonLocator = driver.$(".footer button.mb-3.btn.btn-primary").as("Кнопка Сохранить");
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что вкладка Уведомления загружена", () -> {

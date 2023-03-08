@@ -40,8 +40,8 @@ public class ErrorAttachmentsOrderVideoClientComponent extends BaseComponent {
     public void checkBGRightNowState(String  errorText) {
         stepWithRole("Убедиться, что компонент Прикрепленные файлы содержит ошибку  описанную на Лендинге", () -> {
             checkDescription(errorText);
-
         });
+        System.out.println("Отображается ошибка: " + errorText);
     }
 
 

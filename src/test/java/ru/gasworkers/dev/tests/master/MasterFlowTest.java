@@ -10,7 +10,7 @@ import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.master.ReadyForVideoState;
 import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.BaseTest;
-import ru.gasworkers.dev.utils.ClientBuilder;
+import ru.gasworkers.dev.utils.UserBuilder;
 
 import static io.qameta.allure.Allure.step;
 import static ru.gasworkers.dev.model.Role.*;
@@ -20,7 +20,7 @@ public class MasterFlowTest extends BaseTest {
     @Browser(role = MASTER)
     MasterPages masterPages;
 
-    ClientBuilder master = new ClientBuilder(
+    UserBuilder master = new UserBuilder(
             "Мастер1СССР",
             "Мастерович1СССР",
             "Мастеров1СССР",

@@ -18,7 +18,7 @@ import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.BaseTest;
-import ru.gasworkers.dev.utils.ClientBuilder;
+import ru.gasworkers.dev.utils.UserBuilder;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -38,7 +38,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
     @Browser(role = Role.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.THIRD_ROLE)
     MasterPages masterPages;
 
-    ClientBuilder client = new ClientBuilder(
+    UserBuilder client = new UserBuilder(
             "Игорь",
             "Сергеевич",
             "Шингелевич",
@@ -48,7 +48,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             null,
             79312534936L);
 
-    ClientBuilder dispatcher = new ClientBuilder(
+    UserBuilder dispatcher = new UserBuilder(
             "ДиспетчерСССР1",
             "ДиспетчеровичСССР1",
             "ДиспетчеровСССР1",
@@ -58,7 +58,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             null,
             79288010225L);
 
-    ClientBuilder master = new ClientBuilder(
+    UserBuilder master = new UserBuilder(
             "Мастер1СССР",
             "Мастерович1СССР",
             "Мастеров1СССР",
@@ -189,8 +189,9 @@ class ClientDispatcherInteractionTest extends BaseTest {
             step("Клиент оплачивает предложение от Диспетчера СК", () -> {
                 clientPages.getCheckDocumentsPage().makeContract();
                 clientPages.getSelectPaymentMaintenancePage().checkFinishLoading();
+                String priceWithCommissions = clientPages.getSelectPaymentMaintenancePage().getCommissionValue(1);
                 clientPages.getSelectPaymentMaintenancePage().paySPB();
-                clientPages.getPaymentWizardPage().checkFinishLoading();
+                clientPages.getPaymentWizardPage().checkFinishLoading(priceWithCommissions);
                 clientPages.getPaymentWizardPage().payButton();
             });
             step("Клиент подписывает договор", () -> {

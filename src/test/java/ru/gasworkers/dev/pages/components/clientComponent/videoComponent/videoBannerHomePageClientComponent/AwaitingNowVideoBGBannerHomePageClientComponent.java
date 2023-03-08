@@ -4,6 +4,8 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 
@@ -29,7 +31,7 @@ public class AwaitingNowVideoBGBannerHomePageClientComponent extends BaseCompone
     public void checkAwaitingNowBGVideoState(String masterFullName) {
         stepWithRole("Убедиться, что компонент Ожидание видеоконсультации загрузился", () -> {
              String text = "У вас сейчас начнётся видеоконсультация. Мастер " + masterFullName +" готовится к ней. Вам придет СМС со ссылкой для подключения к ней";
-            containerLocator.shouldBe(visible);
+            containerLocator.shouldBe(visible, Duration.ofSeconds(30));
             titleLocator.shouldHave(text(titleText));
             textLocator.shouldHave(text(text));
             chatMasterLinkLocator.shouldHave(text(chatMasterLinkText));

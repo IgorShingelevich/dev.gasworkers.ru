@@ -7,7 +7,6 @@ import ru.gasworkers.dev.extension.browser.ScreenshotExtension;
 public abstract class BaseTest {
 
 }
-
 //TODO DISCUSS  how to use sublist like -   ratingCheckboxCollection = checkboxCollection.subList(0, 5).as("Чекбоксы фильтра по рейтингу мастера"),
 //ctrl w for Alex
 // TODO DISCUSS pdf parsing

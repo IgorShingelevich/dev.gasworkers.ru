@@ -1,6 +1,6 @@
 package ru.gasworkers.dev.utils;
 
-public class ClientBuilder {
+public class UserBuilder {
 
     public String
         name,
@@ -20,7 +20,7 @@ public class ClientBuilder {
 
     //make a builder
 
-    public ClientBuilder(String name, String patronymic, String surname, String sinceDate, String email, String password, String address, Long phoneNumber) {
+    public UserBuilder(String name, String patronymic, String surname, String sinceDate, String email, String password, String address, Long phoneNumber) {
         this.name = name;
         this.patronymic = patronymic;
         this.surname = surname;

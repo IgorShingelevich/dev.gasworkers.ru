@@ -71,6 +71,7 @@ dependencies {
             "org.awaitility:awaitility:$awaitility",
             "com.fasterxml.jackson.core:jackson-core:$jacksonCore"
     )
+    testImplementation 'org.jetbrains:annotations:23.0.0'
 }
 
 test {

@@ -8,6 +8,8 @@ import ru.gasworkers.dev.pages.components.clientComponent.videoComponent.approve
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.enabled;
 import static com.codeborne.selenide.Condition.text;
 
@@ -35,7 +37,7 @@ public class ApproveDetailsVideoClientPage extends BaseClientPage {
         stepWithRole("Убедиться, что страница Подтверждение мастера загрузилась", () -> {
             focusHeader.checkFinishLoading();
             stepper.checkFinishLoading();
-            titleLocator.shouldHave(text(titleText));
+            titleLocator.shouldHave(text(titleText), Duration.ofSeconds(10));
             errorAttachments.checkFinishLoading();
             details.checkFinishLoading();
             payButtonLocator.shouldBe(enabled);

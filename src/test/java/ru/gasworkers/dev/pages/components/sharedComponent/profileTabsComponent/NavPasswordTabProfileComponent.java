@@ -22,7 +22,7 @@ public class NavPasswordTabProfileComponent extends BaseComponent {
         repeatNewPasswordInputLocator = driver.$("input[placeholder*=еще]").as("Повторите новый пароль"),
         generatePasswordButtonLocator = driver.$(byTagAndText("span", "Сгенерировать надежный пароль")).as("Сгенерировать пароль"),
         suggestedPasswordLocator = driver.$("input[readonly=readonly]").as("Предложенный пароль"),
-        saveButtonLocator = driver.$("button.mb-3.btn.btn-primary.disable-outline").as("Кнопка Сохранить");
+        saveButtonLocator = driver.$(".footer button.mb-3.btn.btn-primary").as("Кнопка Сохранить");
 
     ElementsCollection
     interractionElementsCollection = driver.$$("div.item").as("Элементы взаимодействия"),
