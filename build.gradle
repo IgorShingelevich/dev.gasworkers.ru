@@ -53,8 +53,8 @@ def selenideVersion = '6.12.0',
 
 
 dependencies {
-    implementation 'com.codeborne:selenide-proxy:6.11.2'
-
+    implementation 'com.codeborne:selenide-proxy:6.11.2',
+            'org.apache.maven.plugins:maven-surefire-plugin:3.0.0-M9'
     testImplementation(
             "com.ibm.icu:icu4j:$icu4j",
             "com.codeborne:selenide:$selenideVersion",
