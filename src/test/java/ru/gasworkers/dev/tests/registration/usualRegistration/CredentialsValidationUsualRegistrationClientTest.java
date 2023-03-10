@@ -11,7 +11,6 @@ import ru.gasworkers.dev.model.Role;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
@@ -25,7 +24,7 @@ import static io.qameta.allure.Allure.step;
 //@Tag(AllureTag.REGISTRATION)
 //@Tag(AllureTag.REGRESSION)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class CredentialsValidationUsualRegistrationTest extends BaseTest {
+public class CredentialsValidationUsualRegistrationClientTest extends BaseTest {
 
 //    SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
 
@@ -52,7 +51,7 @@ public class CredentialsValidationUsualRegistrationTest extends BaseTest {
     @Feature("Валидация учетных данных")
     @Story("Валидация допустимого email")
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
-    @DisplayName("Регистрация клиента с допустимым email: ")
+    @DisplayName("Регистрация клиента с валидным email: ")
     void registrationClientByAcceptedEmail(String acceptedEmail) {
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();

@@ -8,6 +8,7 @@ import ru.gasworkers.dev.pages.context.*;
 public enum Role {
     CLIENT("Client", 79312534936L, ClientPages.class),
     MASTER("Master", 79917644241L, MasterPages.class),
+    SELF_EMPLOYED("Self-employed", null, SelfEmployedPages.class),
     DISPATCHER("Dispatcher", null, DispatcherPages.class),
     SERVICE ("Service", null, ServicePages.class);
 

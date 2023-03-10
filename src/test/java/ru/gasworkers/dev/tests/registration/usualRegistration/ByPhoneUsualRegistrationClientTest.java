@@ -22,7 +22,7 @@ import ru.gasworkers.dev.utils.RandomClient;
 import static io.qameta.allure.Allure.step;
 
 
-public class ByPhoneUsualRegistrationTest extends BaseTest {
+public class ByPhoneUsualRegistrationClientTest extends BaseTest {
 
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;

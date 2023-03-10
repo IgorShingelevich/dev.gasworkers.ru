@@ -4,10 +4,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
@@ -23,7 +20,7 @@ import ru.gasworkers.dev.utils.RandomClient;
 
 import static io.qameta.allure.Allure.step;
 
-public class ByEmailUsualRegistrationTest extends BaseTest {
+public class PasswordGeneratorUsualRegistrationClientTest extends BaseTest {
 
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
@@ -40,10 +37,10 @@ public class ByEmailUsualRegistrationTest extends BaseTest {
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.USUAL_REGISTRATION)
-    @Story("По почте")
+    @Story("Регистрация со Сгенерированным паролем")
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
-    @DisplayName("Регистрация клиента по email и проверка состояния кабинета")
-    void registrationClientByEmail() {
+    @DisplayName("Регистрация со Сгенерированным паролем")
+    void registrationClientWithGeneratedPasswordByPhone() {
         step("Страница лендинга", () -> {
             clientPages.getLandingPage().open();
             clientPages.getLandingPage().checkFinishLoading();
@@ -51,7 +48,7 @@ public class ByEmailUsualRegistrationTest extends BaseTest {
         });
         step("Страница первого шага регистрации", () -> {
             clientPages.getRegistrationPage().firstStep.checkFirstStepFinishLoading();
-            clientPages.getRegistrationPage().firstStep.byEmail(randomClient.getEmail());
+            clientPages.getRegistrationPage().firstStep.byPhone(randomClient.getPhoneNumber());
             clientPages.getRegistrationPage().firstStep.checkboxNotCheckedCState();
             clientPages.getRegistrationPage().firstStep.clickCheckbox();
             clientPages.getRegistrationPage().firstStep.checkboxCheckedCState();
@@ -64,18 +61,15 @@ public class ByEmailUsualRegistrationTest extends BaseTest {
         });
         step("Страница третьего шага регистрации", () -> {
             clientPages.getRegistrationPage().thirdStep.checkThirdStepFinishLoading();
-            clientPages.getRegistrationPage().thirdStep.fillPassword(randomClient.getPassword());
-            clientPages.getRegistrationPage().clickNext();
-            clientPages.getRegistrationPage().thirdStep.checkInvalidPasswordNotification();
-            clientPages.getRegistrationPage().thirdStep.fillPasswordConfirmation(randomClient.getPassword());
+            clientPages.getRegistrationPage().thirdStep.generatePassword();
             clientPages.getRegistrationPage().clickNext();
         });
         step("Страница четвертого шага регистрации", () -> {
-            clientPages.getRegistrationPage().forthStep.checkFourthStepByEmailFinishLoading(randomClient.getEmail());
+            clientPages.getRegistrationPage().forthStep.checkFourthStepByPhoneFinishLoading(randomClient.getPhoneNumber());
             clientPages.getRegistrationPage().forthStep.fillName(randomClient.getName());
             clientPages.getRegistrationPage().forthStep.fillSurname(randomClient.getSurname());
             clientPages.getRegistrationPage().forthStep.fillPatronymicName(randomClient.getPatronymicName());
-            clientPages.getRegistrationPage().forthStep.fillPhoneNumber(randomClient.getPhoneNumber());
+            clientPages.getRegistrationPage().forthStep.fillEmail(randomClient.getEmail());
             clientPages.getRegistrationPage().clickNext();
         });
         step("Страница успешная регистрация", () -> {
@@ -96,33 +90,9 @@ public class ByEmailUsualRegistrationTest extends BaseTest {
             clientPages.getAllInvoicesPage().checkInitialState();
             clientPages.getAllInvoicesPage().actionsBlock.allNotifications();
             clientPages.getAllNotificationsPage().checkInitialState();
-            step("Страница Профиль", () -> {
-                clientPages.getHomePage().sidebar.profile();
-                clientPages.getProfilePage().checkFinishLoading();
-                step("Вкадка Общее данные", () -> {
-                    clientPages.getProfilePage().navCommon();
-                    clientPages.getProfilePage().navCommonTab.checkFinishLoading();
-                    clientPages.getProfilePage().navCommonTab.checkInitialState(randomClient.getName(), randomClient.getPatronymicName(), randomClient.getSurname());
-                });
-                step("Вкадка Контакты", () -> {
-                    clientPages.getProfilePage().navContacts();
-                    clientPages.getProfilePage().navContactsTab.checkFinishLoading();
-                    clientPages.getProfilePage().navContactsTab.checkFilledState(randomClient.getEmail(), randomClient.getPhoneNumber());
-                });
-                step("Вкадка Пароль", () -> {
-                    clientPages.getProfilePage().navPassword();
-                    clientPages.getProfilePage().navPasswordTab.checkFinishLoading();
-                    clientPages.getProfilePage().navPasswordTab.checkInitialState();
-                });
-                step("Вкладка Уведомления", () -> {
-                    clientPages.getProfilePage().navNotifications();
-                    clientPages.getProfilePage().navNotificationsTab.checkFinishLoading();
-                    clientPages.getProfilePage().navNotificationsTab.checkInitialState();
-                });
-            });
             clientPages.getHomePage().open();
-            //TODO profile  check - photo. rest of the fields
         });
+        //TODO profile check
     }
 
 

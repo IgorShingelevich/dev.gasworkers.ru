@@ -9,7 +9,8 @@ public final class AllureTag {
             SMOKE = "smoke";
 
     public static final String CLIENT = "client",
-            MASTER = "master";
+            MASTER = "master",
+            SELF_EMPLOYED = "self-employed";
 
     public static final String REGISTRATION = "registration";
 
