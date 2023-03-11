@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.registration.usualRegistration;
+package ru.gasworkers.dev.tests.registration.usualRegistration.usualClientRegistration;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -15,14 +15,12 @@ import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
-import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.pages.context.SelfEmployedPages;
 import ru.gasworkers.dev.tests.BaseTest;
 
-import static io.qameta.allure.Allure.getLifecycle;
 import static io.qameta.allure.Allure.step;
 
-public class ByPhoneUsualRegistrationSelfEmployedTest extends BaseTest {
+public class ByPhoneUsualSelfEmployedRegistrationTest extends BaseTest {
 
     @Browser(role = Role.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     SelfEmployedPages selfEmployedPages;

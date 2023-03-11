@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.registration.usualRegistration;
+package ru.gasworkers.dev.tests.registration.usualRegistration.usualClientRegistration;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -23,7 +23,7 @@ import ru.gasworkers.dev.utils.RandomClient;
 
 import static io.qameta.allure.Allure.step;
 
-public class ByEmailUsualRegistrationClientTest extends BaseTest {
+public class ByEmailUsualClientRegistrationTest extends BaseTest {
 
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;

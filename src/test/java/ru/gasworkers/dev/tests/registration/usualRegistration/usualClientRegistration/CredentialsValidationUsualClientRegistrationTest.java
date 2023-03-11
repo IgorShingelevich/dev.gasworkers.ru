@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.registration.usualRegistration;
+package ru.gasworkers.dev.tests.registration.usualRegistration.usualClientRegistration;
 
 import io.qameta.allure.*;
 import ru.gasworkers.dev.allure.AllureEpic;
@@ -24,7 +24,7 @@ import static io.qameta.allure.Allure.step;
 //@Tag(AllureTag.REGISTRATION)
 //@Tag(AllureTag.REGRESSION)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class CredentialsValidationUsualRegistrationClientTest extends BaseTest {
+public class CredentialsValidationUsualClientRegistrationTest extends BaseTest {
 
 //    SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
 

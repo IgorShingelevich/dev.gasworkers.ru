@@ -1,5 +1,4 @@
-package ru.gasworkers.dev.tests.registration.bgRegistration;
-
+package ru.gasworkers.dev.tests.registration.bgClientRegistration;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -25,7 +24,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGISTRATION)
 @Tag(AllureTag.REGRESSION)
 
-public class MaintenanceBGRegistrationTest extends BaseTest {
+public class RepairBGRegistrationTest extends BaseTest {
 
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
@@ -42,10 +41,10 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
     @Owner("Igor Shingelevich")
     @Epic("Регистрация")
     @Feature("Фоновая регистрация")
-    @Story(AllureStory.MAINTENANCE)
+    @Story(AllureStory.REPAIR)
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
-    @DisplayName("Фоновая Регистрация на ТО с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
-    public void  bgRegistrationPhoneMaintenance() {
+    @DisplayName("Фоновая Регистрация на Ремонт с указанием телефона и почты")
+    public void bgRegistrationPhoneRepair() {
         Integer masterIndex = 0;
         Integer power = 20;
         EquipmentType GAS_BOILER_TYPE = EquipmentType.GAS_BOILER;
@@ -53,20 +52,19 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
         clientPages.getLandingPage().checkFinishLoading();
         step("Клиент заполняет форму фоновой регистрации", () -> {
             clientPages.getLandingPage().bgRegistration.checkFinishLoading();
-            clientPages.getLandingPage().bgRegistration.fillBGMaintenanceRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhoneNumber(), randomClient.getEmail());
-            // TODO add photo video
+            clientPages.getLandingPage().bgRegistration.fillBGRepairRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhoneNumber(), randomClient.getEmail());
+            //TODO add photo video
         });
         String resultedAddress = clientPages.getLandingPage().bgRegistration.address.getResultedAddress();
         String resultedEquipmentCollectionName = clientPages.getLandingPage().bgRegistration.equipment.getEquipmentName(0);
-
         clientPages.getLandingPage().bgRegistration.findOffers();
         clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
-        step("Кабинет клиента - состояние после фоновой регистрации на ТО ", () -> {
-            step("Гид  ТО по кабинету", () -> {
-                clientPages.getHomePage().firstMaintenanceGuide.playSequence();
+        step("Кабинет клиента - состояние после фоновой регистрации на Ремонт", () -> {
+            step("Гид  Ремонт по кабинету", () -> {
+                clientPages.getHomePage().firstRepairGuide.playSequence();
             });
             step("Страница Карта", () -> {
-                clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
+                clientPages.getSelectServicePage().checkFinishRepairLoading();
                 clientPages.getSelectServicePage().checkPublishedState();
             });
             String orderNumber = step("Страница Карточка заказа", () -> {
@@ -89,7 +87,7 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
             step("Страница Объекты", () -> {
                 clientPages.getAllNotificationsPage().sidebar.allObjects();
                 clientPages.getAllObjectsPage().checkFinishLoading();
-                clientPages.getAllObjectsPage().initialBGState(GAS_BOILER_TYPE,resultedEquipmentCollectionName, power.toString(), resultedAddress);
+                clientPages.getAllObjectsPage().initialBGState(GAS_BOILER_TYPE, resultedEquipmentCollectionName, power.toString(), resultedAddress);
             });
             step("Страница Заказы", () -> {
                 clientPages.getAllObjectsPage().sidebar.allOrders();
@@ -127,16 +125,19 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
                 });
                 clientPages.getProfilePage().sidebar.home();
             });
-
-
         });
     }
 
 }
 // todo bg registration with no email - add email in the profile
-//
-//todo custom equipment brand and model
-//todo only phone, only email
+//todo custom equipment brand and model input
 // TODO registration validation  cases - all fields are empty, checkbox unchecked. existed phone and email
 // todo pick random address suggestion and equipment
+//todo only phone, only email
+//todo add equipment to request, delete, add two  other random equipments
+// todo form validation no address, no equipment, no equipment brand, no equipment model, no date, no time, no phone, no email
+// todo add delete add  photo video, media types validation
+
+
+
 

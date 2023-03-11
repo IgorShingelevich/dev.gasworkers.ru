@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.registration.bgRegistration;
+package ru.gasworkers.dev.tests.registration.bgClientRegistration;
 
 import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.tests.BaseTest;
