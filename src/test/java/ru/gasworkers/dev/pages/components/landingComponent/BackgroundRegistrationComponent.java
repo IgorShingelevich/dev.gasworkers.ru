@@ -41,18 +41,18 @@ public class BackgroundRegistrationComponent extends BaseComponent {
     }
 
     private final String
-        BG_MAINTENANCE_TITLE = "Заключить договор на техническое обслуживание дёшево и с гарантией",
-        BG_MAINTENANCE_SUBTITLE = "Подберите лучшую компанию для проведения технического обслуживания газового оборудования с гарантией.",
+        BG_MAINTENANCE_TITLE = "Заключите договор на техническое обслуживание газового оборудования и системы отопления с гарантией от поломок",
+        BG_MAINTENANCE_SUBTITLE = "",
 //        BG_MAINTENANCE_SUBTITLE_2 = "",
         BG_MAINTENANCE_SUBTITLE_3 = "Укажите оборудование и параметры поиска",
-        BG_REPAIR_TITLE = "Провести ремонт газового оборудования профессиональным мастером",
-        BG_REPAIR_SUBTITLE = "Подберем квалифицированного мастера для ремонта газового котла, установки и настройки оборудования.",
+        BG_REPAIR_TITLE = "Ремонт газового оборудования и системы отопления от 499 руб",
+        BG_REPAIR_SUBTITLE = "Выезд мастера по Московской области в день обращения от 30 минут",
 //        BG_REPAIR_SUBTITLE_2 = "Выезд мастера по Московской области в день обращения от 30 минут.",
-        BG_REPAIR_SUBTITLE_3 = "Укажите неисправное газовое оборудование и желаемый период проведения ремонта.",
-        BG_VIDEO_TITLE = "Видеоконсультации по ремонту газового оборудования от 499 ₽",
-        BG_VIDEO_SUBTITLE = "Поможем решить проблемы в удобное время по видеосвязи без выезда мастера.",
+        BG_REPAIR_SUBTITLE_3 = "Укажите неисправное газовое оборудование и желаемый период проведения ремонта",
+        BG_VIDEO_TITLE = "Видеоконсультации по ремонту газового оборудования и системы отопления от 499 ₽",
+        BG_VIDEO_SUBTITLE = "Поможем решить проблемы в удобное время по видеосвязи без выезда мастера",
 //        BG_VIDEO_SUBTITLE_2 = "Вам придет смс со ссылкой на консультацию. Перейдя по ней, вы подлючетесь к видеокоференции со специалистом.",
-        BG_VIDEO_SUBTITLE_3 = "Укажите ваше оборудование и найдите своего мастера.";
+        BG_VIDEO_SUBTITLE_3 = "Укажите ваше оборудование и найдите своего мастера";
 
 
 
@@ -84,7 +84,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
             stepWithRole("Убедиться, что отображаются компоненты Фоновой ТО", () -> {
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.MAINTENANCE.getTitle())).click();
                 bgTitleLocator.shouldHave(text(BG_MAINTENANCE_TITLE));
-                bgSubtitleLocator.shouldHave(text(BG_MAINTENANCE_SUBTITLE));
+                bgSubtitleLocator.shouldBe(empty);
 //                bgSubtitle2Locator.shouldHave(exactText(BG_MAINTENANCE_SUBTITLE_2));
                 bgSubtitle3Locator.shouldHave(text(BG_MAINTENANCE_SUBTITLE_3));
                 findOffersButton.shouldBe(visible);

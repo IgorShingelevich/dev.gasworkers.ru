@@ -5,6 +5,8 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
+import ru.gasworkers.dev.allure.AllureEpic;
+import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureStory;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
@@ -40,8 +42,8 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
 
     @Test
     @Owner("Igor Shingelevich")
-    @Epic("Регистрация")
-    @Feature("Фоновая регистрация")
+    @Epic(AllureEpic.REGISTRATION)
+    @Feature(AllureFeature.BG_REGISTRATION)
     @Story(AllureStory.MAINTENANCE)
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Фоновая Регистрация на ТО с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")

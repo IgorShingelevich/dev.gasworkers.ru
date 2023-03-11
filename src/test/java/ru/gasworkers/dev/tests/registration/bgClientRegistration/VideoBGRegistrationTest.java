@@ -1,5 +1,7 @@
 package ru.gasworkers.dev.tests.registration.bgClientRegistration;
 
+import ru.gasworkers.dev.allure.AllureEpic;
+import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.tests.BaseTest;
 
@@ -63,8 +65,8 @@ public class VideoBGRegistrationTest extends BaseTest {
 
     @Test
     @Owner("Igor Shingelevich")
-    @Epic("Регистрация")
-    @Feature("Фоновая регистрация")
+    @Epic(AllureEpic.REGISTRATION)
+    @Feature(AllureFeature.BG_REGISTRATION)
     @Story(AllureStory.VIDEO)
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Фоновая Регистрация на Видео Сейчас с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.clientComponent.registrationStepClientComponent;
+package ru.gasworkers.dev.pages.components.registrationStepComponent.clientRegistrationStepComponent;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -7,8 +7,8 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 
 import static com.codeborne.selenide.Condition.*;
 
-public class ForthStepRegistrationClientComponent extends BaseComponent {
-    public ForthStepRegistrationClientComponent(RoleBrowser browser) {
+public class ForthStepClientRegistrationComponent extends BaseComponent {
+    public ForthStepClientRegistrationComponent(RoleBrowser browser) {
         super(browser);
     }
 

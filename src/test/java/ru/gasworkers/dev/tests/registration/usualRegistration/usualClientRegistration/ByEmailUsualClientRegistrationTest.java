@@ -50,11 +50,11 @@ public class ByEmailUsualClientRegistrationTest extends BaseTest {
             clientPages.getLandingPage().signUpClient();
         });
         step("Страница первого шага регистрации", () -> {
-            clientPages.getRegistrationPage().firstStep.checkFirstStepFinishLoading();
-            clientPages.getRegistrationPage().firstStep.byEmail(randomClient.getEmail());
-            clientPages.getRegistrationPage().firstStep.checkboxNotCheckedCState();
-            clientPages.getRegistrationPage().firstStep.clickCheckbox();
-            clientPages.getRegistrationPage().firstStep.checkboxCheckedCState();
+            clientPages.getRegistrationPage().firstStepClient.checkFirstStepFinishLoading();
+            clientPages.getRegistrationPage().firstStepClient.byEmail(randomClient.getEmail());
+            clientPages.getRegistrationPage().firstStepClient.checkboxNotCheckedCState();
+            clientPages.getRegistrationPage().firstStepClient.clickCheckbox();
+            clientPages.getRegistrationPage().firstStepClient.checkboxCheckedCState();
             clientPages.getRegistrationPage().clickNext();
         });
         step("Страница второго шага регистрации", () -> {

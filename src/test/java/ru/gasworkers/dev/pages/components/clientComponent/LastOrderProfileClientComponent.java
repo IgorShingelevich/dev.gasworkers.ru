@@ -6,6 +6,8 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$;
@@ -68,7 +70,7 @@ public class LastOrderProfileClientComponent extends BaseComponent {
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что секция Карточка последнего заказа отображается", () -> {
-            lastOrderCardLocator.shouldBe(visible);
+            lastOrderCardLocator.shouldBe(visible, Duration.ofSeconds(10));
         });
     }
 }

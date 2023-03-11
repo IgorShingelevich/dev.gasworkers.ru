@@ -1,12 +1,11 @@
 package ru.gasworkers.dev.pages.client;
 
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.clientComponent.registrationStepClientComponent.FirstStepRegistrationClientComponent;
-import ru.gasworkers.dev.pages.components.clientComponent.registrationStepClientComponent.ForthStepRegistrationClientComponent;
-import ru.gasworkers.dev.pages.components.clientComponent.registrationStepClientComponent.SecondStepRegistrationClientComponent;
-import ru.gasworkers.dev.pages.components.clientComponent.registrationStepClientComponent.ThirdStepRegistrationClientComponent;
+import ru.gasworkers.dev.pages.components.registrationStepComponent.clientRegistrationStepComponent.FirstStepClientRegistrationComponent;
+import ru.gasworkers.dev.pages.components.registrationStepComponent.clientRegistrationStepComponent.ForthStepClientRegistrationComponent;
+import ru.gasworkers.dev.pages.components.registrationStepComponent.clientRegistrationStepComponent.SecondStepClientRegistrationComponent;
+import ru.gasworkers.dev.pages.components.registrationStepComponent.clientRegistrationStepComponent.ThirdStepClientRegistrationComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.RegularRegistrationConfirmationCodeComponent;
 
 import java.time.Duration;
@@ -19,18 +18,18 @@ public class RegistrationClientPage extends BaseClientPage {
 
     public final RegularRegistrationConfirmationCodeComponent confirmationCode;
     
-    public final FirstStepRegistrationClientComponent firstStep;
-    public final SecondStepRegistrationClientComponent secondStep;
-    public final ThirdStepRegistrationClientComponent thirdStep;
-    public final ForthStepRegistrationClientComponent forthStep;
+    public final FirstStepClientRegistrationComponent firstStepClient;
+    public final SecondStepClientRegistrationComponent secondStep;
+    public final ThirdStepClientRegistrationComponent thirdStep;
+    public final ForthStepClientRegistrationComponent forthStep;
 
     public RegistrationClientPage(RoleBrowser browser) {
         super(browser);
         confirmationCode = new RegularRegistrationConfirmationCodeComponent(browser);
-        firstStep = new FirstStepRegistrationClientComponent(browser);
-        secondStep = new SecondStepRegistrationClientComponent(browser);
-        thirdStep = new ThirdStepRegistrationClientComponent(browser);
-        forthStep = new ForthStepRegistrationClientComponent(browser);
+        firstStepClient = new FirstStepClientRegistrationComponent(browser);
+        secondStep = new SecondStepClientRegistrationComponent(browser);
+        thirdStep = new ThirdStepClientRegistrationComponent(browser);
+        forthStep = new ForthStepClientRegistrationComponent(browser);
     }
 
     SelenideElement

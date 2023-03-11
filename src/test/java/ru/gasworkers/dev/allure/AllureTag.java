@@ -10,7 +10,8 @@ public final class AllureTag {
 
     public static final String CLIENT = "client",
             MASTER = "master",
-            SELF_EMPLOYED = "self-employed";
+            SE_MEMBER = "self-employed-member ",
+            SE_INDIVIDUAL = "self-employed-individual";
 
     public static final String REGISTRATION = "registration";
 
