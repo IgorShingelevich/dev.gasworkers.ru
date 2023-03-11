@@ -5,13 +5,20 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
+import ru.gasworkers.dev.pages.components.registrationStepComponent.HeaderRegistrationComponent;
+import ru.gasworkers.dev.pages.components.registrationStepComponent.StepNumberRegistrationComponent;
 
 import static com.codeborne.selenide.Condition.*;
 
 
 public class FirstStepSelfEmployedRegistrationComponent  extends BaseComponent {
+
+    public final HeaderRegistrationComponent header;
+    public final StepNumberRegistrationComponent stepNumber;
     public FirstStepSelfEmployedRegistrationComponent(RoleBrowser browser) {
         super(browser);
+        header = new HeaderRegistrationComponent(browser);
+        stepNumber = new StepNumberRegistrationComponent(browser);
     }
     private final String
         alreadyRegisteredText = "Уже зарегистрированы?",
@@ -43,12 +50,8 @@ public class FirstStepSelfEmployedRegistrationComponent  extends BaseComponent {
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что представлены компоненты первого шага регистрации: ", () -> {
-            stepWithRole("Убедиться, что на таймлайне выделен первый шаг", () -> {
-                stepsCollection.get(0).shouldHave(cssClass("active"));
-            });
-            stepWithRole("Убедиться, что ссылка уже зарегистрированы отображается", () -> {
-                alreadyRegisteredLinkLocator.shouldHave(text(alreadyRegisteredText));
-            });
+            header.checkFinishLoading();
+            stepNumber.checkStepNumber(1);
             stepWithRole("Убедиться, что заголовок отображается", () -> {
                 titleLocator.shouldHave(text(titleText));
             });

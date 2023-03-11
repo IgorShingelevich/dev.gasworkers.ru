@@ -18,7 +18,7 @@ import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.BaseTest;
-import ru.gasworkers.dev.utils.UserBuilder;
+import ru.gasworkers.dev.utils.userBuilder.UserBuilder;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

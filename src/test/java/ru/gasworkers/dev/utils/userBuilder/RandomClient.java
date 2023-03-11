@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.utils;
+package ru.gasworkers.dev.utils.userBuilder;
 import com.github.javafaker.Faker;
 import com.ibm.icu.text.Transliterator;
 

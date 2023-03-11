@@ -9,8 +9,8 @@ import ru.gasworkers.dev.model.OrderType;
 import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.BaseTest;
-import ru.gasworkers.dev.utils.UserBuilder;
-import ru.gasworkers.dev.utils.RandomClient;
+import ru.gasworkers.dev.utils.userBuilder.UserBuilder;
+import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
 import static io.qameta.allure.Allure.step;
 

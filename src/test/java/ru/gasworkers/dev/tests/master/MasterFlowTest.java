@@ -10,7 +10,7 @@ import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.master.ReadyForVideoState;
 import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.BaseTest;
-import ru.gasworkers.dev.utils.UserBuilder;
+import ru.gasworkers.dev.utils.userBuilder.UserBuilder;
 
 import static io.qameta.allure.Allure.step;
 import static ru.gasworkers.dev.model.Role.*;

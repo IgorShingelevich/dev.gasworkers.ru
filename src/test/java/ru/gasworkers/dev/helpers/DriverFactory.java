@@ -15,8 +15,8 @@ public final class DriverFactory {
         config.browserPosition(annotation.browserPosition());
         config.reportsFolder("target/selenide");
 
-         config.headless(true);
-//        config.holdBrowserOpen(true);
+//         config.headless(true);
+        config.holdBrowserOpen(true);
 
 
 //        config.proxyEnabled(true);

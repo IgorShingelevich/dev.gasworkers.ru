@@ -15,10 +15,13 @@ import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.SelfEmployedPages;
 import ru.gasworkers.dev.tests.BaseTest;
+import ru.gasworkers.dev.utils.userBuilder.RandomMaster;
 
 import static io.qameta.allure.Allure.step;
 
 public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
+    RandomMaster randomMaster = new RandomMaster();
+
 
     @Browser(role = Role.SELF_EMPLOYED, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     SelfEmployedPages selfEmployedPages;
@@ -40,6 +43,16 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
             selfEmployedPages.getRegistrationPage().firstStep.selectSE();
             selfEmployedPages.getRegistrationPage().firstStep.nextButton();
         });
+        step("Страница второго шага регистрации СМЗ", () -> {
+            selfEmployedPages.getRegistrationPage().secondStep.checkFinishLoading();
+            selfEmployedPages.getRegistrationPage().secondStep.byPhone(randomMaster.getPhone());
+            selfEmployedPages.getRegistrationPage().secondStep.nextButton();
+        });
+        step("Страница третьего шага регистрации СМЗ", () -> {
+            selfEmployedPages.getRegistrationPage().thirdStep.checkFinishLoading();
+            selfEmployedPages.getRegistrationPage().thirdStep.codeConfirmation.fillCode(randomMaster.getConfirmationCode());
+        });
+
 
     }
 

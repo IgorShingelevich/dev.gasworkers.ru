@@ -4,13 +4,21 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
+import ru.gasworkers.dev.pages.components.registrationStepComponent.HeaderRegistrationComponent;
+import ru.gasworkers.dev.pages.components.registrationStepComponent.StepNumberRegistrationComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.text;
 
 public class ThirdStepClientRegistrationComponent extends BaseComponent {
+    public final HeaderRegistrationComponent header;
+
+    public final StepNumberRegistrationComponent stepNumber;
+
     public ThirdStepClientRegistrationComponent(RoleBrowser browser) {
         super(browser);
+        header = new HeaderRegistrationComponent(browser);
+        stepNumber = new StepNumberRegistrationComponent(browser);
     }
 
     private final String
@@ -32,9 +40,8 @@ public class ThirdStepClientRegistrationComponent extends BaseComponent {
 
     public void checkThirdStepFinishLoading() {
         stepWithRole("Убедиться, что представлены компоненты третьего шага регистрации: " , () -> {
-            stepWithRole("Убедиться, что на таймлайне выделен третий шаг" , () -> {
-                stepsCollection.get(2).shouldHave(cssClass("active"));
-            });
+            stepNumber.checkStepNumber(3);
+            header.checkFinishLoading();
             stepWithRole("Убедиться, что отображается заголовок: " + THIRD_TITLE , () -> {
                 titleLocator.shouldHave(text(THIRD_TITLE));
             });

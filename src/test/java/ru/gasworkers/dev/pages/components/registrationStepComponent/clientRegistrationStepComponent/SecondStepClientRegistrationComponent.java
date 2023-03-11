@@ -4,13 +4,22 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
+import ru.gasworkers.dev.pages.components.registrationStepComponent.HeaderRegistrationComponent;
+import ru.gasworkers.dev.pages.components.registrationStepComponent.StepNumberRegistrationComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.text;
 
 public class SecondStepClientRegistrationComponent extends BaseComponent {
+
+    public final HeaderRegistrationComponent header;
+
+    public final StepNumberRegistrationComponent stepNumber;
+
     public SecondStepClientRegistrationComponent(RoleBrowser browser) {
         super(browser);
+        header = new HeaderRegistrationComponent(browser);
+        stepNumber = new StepNumberRegistrationComponent(browser);
     }
 
     private final String
@@ -18,24 +27,18 @@ public class SecondStepClientRegistrationComponent extends BaseComponent {
             SECOND_TITLE = "Введите код подтверждения",
             SECOND_SUBTITLE = "Введите код подтверждения из SMS или письма пришедшего к вам на электронную почту. Пожалуйста, проверьте папку СПАМ в почте";
 
-    ElementsCollection
-            stepsCollection = driver.$$("div.stage").as("Коллекция шагов регистрации");
     SelenideElement
             titleLocator = driver.$("div h4").as("Заголовок"),
             subtitleLocator = driver.$("div.description").as("Подзаголовок"),
-            alreadyRegisteredLocator = driver.$("a.link-gray").as("Ссылка на страницу входа зарегистрированного пользователя"),
+            alreadyRegisteredLinkLocator = driver.$("a.link-gray").as("Ссылка на страницу входа зарегистрированного пользователя"),
             forwardButtonLocator = driver.$("div button.btn.btn-primary").as("Кнопка перехода к следующему шагу"),
             backButtonLocator = driver.$("div button.btn.btn-outline-primary").as("Кнопка перехода к предыдущему шагу");
 
 
     public void checkSecondStepFinishLoading () {
         stepWithRole("Убедиться, что представлены компоненты второго шага регистрации: " , () -> {
-            stepWithRole("Убедиться, что на таймлайне выделен второй шаг" , () -> {
-                stepsCollection.get(1).shouldHave(cssClass("active"));
-            });
-            stepWithRole("Убедиться, что отображается ссылка на страницу входа зарегистрированного пользователя: " + ALREADY_REGISTERED_TEXT , () -> {
-                alreadyRegisteredLocator.shouldHave(text(ALREADY_REGISTERED_TEXT));
-            });
+           stepNumber.checkStepNumber(2);
+            header.checkFinishLoading();
             stepWithRole("Убедиться, что отображается заголовок: " + SECOND_TITLE , () -> {
                 titleLocator.shouldHave(text(SECOND_TITLE));
             });
@@ -53,7 +56,7 @@ public class SecondStepClientRegistrationComponent extends BaseComponent {
     }
 
     public void clickAlreadyRegistered () {
-        alreadyRegisteredLocator.click();
+        alreadyRegisteredLinkLocator.click();
     }
 
 

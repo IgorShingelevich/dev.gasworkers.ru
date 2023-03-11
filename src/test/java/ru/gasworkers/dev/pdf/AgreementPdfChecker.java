@@ -3,7 +3,7 @@ package ru.gasworkers.dev.pdf;
 import com.codeborne.pdftest.PDF;
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.Assertions;
-import ru.gasworkers.dev.utils.SSSRServiceBuilder;
+import ru.gasworkers.dev.utils.userBuilder.SSSRServiceBuilder;
 
 import java.io.File;
 import java.io.IOException;

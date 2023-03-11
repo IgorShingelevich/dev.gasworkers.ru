@@ -21,8 +21,8 @@ import ru.gasworkers.dev.model.equipment.EquipmentType;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.pages.context.MasterPages;
-import ru.gasworkers.dev.utils.RandomClient;
-import ru.gasworkers.dev.utils.UserBuilder;
+import ru.gasworkers.dev.utils.userBuilder.RandomClient;
+import ru.gasworkers.dev.utils.userBuilder.UserBuilder;
 
 import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.CLIENT)
