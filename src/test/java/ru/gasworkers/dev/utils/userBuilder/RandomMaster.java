@@ -47,7 +47,7 @@ public class RandomMaster {
         Faker faker = new Faker(new Locale("ru"));
         String
             emailPrefixMock = "gwtest",
-            emailMasterDomainMock = "client.002",
+            emailMasterDomainMock = "master.002",
             phoneMasterPrefixMock = "7002";
         String prefixDateTime =  LocalDate.now().format(DateTimeFormatter.ofPattern("ddMM"))+ "_" + LocalTime.now().format(DateTimeFormatter.ofPattern("HHmm"))+"_";
 

@@ -12,8 +12,8 @@ import ru.gasworkers.dev.pages.client.video.ApproveDetailsVideoClientPage;
 import ru.gasworkers.dev.pages.client.video.ConsultationVideoClientPage;
 import ru.gasworkers.dev.pages.client.video.SelectPaymentVideoClientPage;
 import ru.gasworkers.dev.pages.client.video.SuccessPaymentVideoClientPage;
-import ru.gasworkers.dev.pages.common.AllNotificationsPage;
-import ru.gasworkers.dev.pages.common.LandingPage;
+import ru.gasworkers.dev.pages.sharedPages.AllNotificationsPage;
+import ru.gasworkers.dev.pages.sharedPages.LandingPage;
 
 import static ru.gasworkers.dev.model.Role.*;
 

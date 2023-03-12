@@ -1,11 +1,10 @@
-package ru.gasworkers.dev.pages.components.registrationStepComponent.clientRegistrationStepComponent;
+package ru.gasworkers.dev.pages.components.registrationComponent.clientRegistrationStepComponent;
 
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
-import ru.gasworkers.dev.pages.components.registrationStepComponent.HeaderRegistrationComponent;
-import ru.gasworkers.dev.pages.components.registrationStepComponent.StepNumberRegistrationComponent;
+import ru.gasworkers.dev.pages.components.registrationComponent.HeaderRegistrationComponent;
+import ru.gasworkers.dev.pages.components.registrationComponent.StepNumberRegistrationComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.checked;
@@ -23,13 +22,9 @@ public class FirstStepClientRegistrationComponent extends BaseComponent {
 
     private final String
             FIRST_TITLE = "Регистрация пользователя",
-            ALREADY_REGISTERED_TEXT = "Уже зарегистрированы?",
             FIRST_SUBTITLE = "Для регистрации",
             CHECKBOX_TEXT = "Я даю согласие на обработку персональных данных и принимаю условия";
 
-
-    ElementsCollection
-            stepsCollection = driver.$$("div.stage").as("Коллекция шагов регистрации");
     SelenideElement
             titleLocator = driver.$("div h4").as("Заголовок"),
             subtitleLocator = driver.$("div.description").as("Подзаголовок"),
@@ -127,8 +122,5 @@ public class FirstStepClientRegistrationComponent extends BaseComponent {
             errorMessageLocator.shouldHave(text(errorText));
         });
     }
-
-
-
 
 }

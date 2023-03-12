@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.registrationStepComponent;
+package ru.gasworkers.dev.pages.components.registrationComponent;
 
 import com.codeborne.selenide.ElementsCollection;
 import ru.gasworkers.dev.model.browser.RoleBrowser;

@@ -1,11 +1,10 @@
-package ru.gasworkers.dev.pages.components.registrationStepComponent.clientRegistrationStepComponent;
+package ru.gasworkers.dev.pages.components.registrationComponent.clientRegistrationStepComponent;
 
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
-import ru.gasworkers.dev.pages.components.registrationStepComponent.HeaderRegistrationComponent;
-import ru.gasworkers.dev.pages.components.registrationStepComponent.StepNumberRegistrationComponent;
+import ru.gasworkers.dev.pages.components.registrationComponent.HeaderRegistrationComponent;
+import ru.gasworkers.dev.pages.components.registrationComponent.StepNumberRegistrationComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.text;
@@ -23,14 +22,12 @@ public class SecondStepClientRegistrationComponent extends BaseComponent {
     }
 
     private final String
-            ALREADY_REGISTERED_TEXT = "Уже зарегистрированы?",
             SECOND_TITLE = "Введите код подтверждения",
             SECOND_SUBTITLE = "Введите код подтверждения из SMS или письма пришедшего к вам на электронную почту. Пожалуйста, проверьте папку СПАМ в почте";
 
     SelenideElement
             titleLocator = driver.$("div h4").as("Заголовок"),
             subtitleLocator = driver.$("div.description").as("Подзаголовок"),
-            alreadyRegisteredLinkLocator = driver.$("a.link-gray").as("Ссылка на страницу входа зарегистрированного пользователя"),
             forwardButtonLocator = driver.$("div button.btn.btn-primary").as("Кнопка перехода к следующему шагу"),
             backButtonLocator = driver.$("div button.btn.btn-outline-primary").as("Кнопка перехода к предыдущему шагу");
 
@@ -54,11 +51,5 @@ public class SecondStepClientRegistrationComponent extends BaseComponent {
             });
         });
     }
-
-    public void clickAlreadyRegistered () {
-        alreadyRegisteredLinkLocator.click();
-    }
-
-
 
 }

@@ -64,7 +64,7 @@ public class ByPhoneUsualClientRegistrationTest extends BaseTest {
             clientPages.getRegistrationPage().clickNext();
         });
         step("Страница третьего шага регистрации", () -> {
-            clientPages.getRegistrationPage().thirdStep.checkThirdStepFinishLoading();
+            clientPages.getRegistrationPage().thirdStep.checkFinishLoading(3);
             clientPages.getRegistrationPage().thirdStep.fillPassword(randomClient.getPassword());
             clientPages.getRegistrationPage().clickNext();
             clientPages.getRegistrationPage().thirdStep.checkInvalidPasswordNotification();
@@ -80,7 +80,7 @@ public class ByPhoneUsualClientRegistrationTest extends BaseTest {
             clientPages.getRegistrationPage().clickNext();
         });
         step("Страница успешная регистрация", () -> {
-            clientPages.getRegistrationPage().checkFinishState();  //no buttons
+            clientPages.getRegistrationPage().successRegistrationStep.checkFinishLoading();
         });
         step(("Страница начальный гид"), () -> {
             clientPages.getHomePage().checkInitialGuide();

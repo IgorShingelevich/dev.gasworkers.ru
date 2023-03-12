@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.registrationStepComponent;
+package ru.gasworkers.dev.pages.components.registrationComponent;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -15,29 +15,29 @@ public class CodeConfirmationRegistrationComponent extends BaseComponent {
     }
 
     private final String
-       titleText = "Введите код подтверждения",
-       subtitleText = "Введите код подтверждения из SMS или письма пришедшего к вам на электронную почту. Пожалуйста, проверьте папку СПАМ в почте",
-        newCodeSendPeriodText = "Повторный код можно выслать через",
-        requestNewCodeText = "Запросить повторно",
-        requestNewCodeSendLinkText = "код подтверждения",
-        errorMessageText = "Неверный код проверки";
+            titleText = "Введите код подтверждения",
+            subtitleText = "Введите код подтверждения из SMS или письма пришедшего к вам на электронную почту. Пожалуйста, проверьте папку СПАМ в почте",
+            newCodeSendPeriodText = "Повторный код можно выслать через",
+            requestNewCodeText = "Запросить повторно",
+            requestNewCodeSendLinkText = "код подтверждения",
+            errorMessageText = "Неверный код проверки";
 
     ElementsCollection
             codeInputCollection = driver.$$("form.code-input input").as("Поля ввода кода");
 
     SelenideElement
-        titleLocator = driver.$("div h4").as("Заголовок"),
-        subtitleLocator = driver.$("div.description").as("Подзаголовок"),
-        newCodeSendPeriodTextLocator = driver.$("p.small.text-secondary").as("Текст отправки нового кода"),
-        requestNewCodeTextLocator = driver.$("div.description a").as("Текст повторная отправка кода"),
-        requestNewCodeSendLinkLocator = driver.$("div.description a").as("Ссылка повторная отправка кода"),
-        codeInputFirstDigitLocator = codeInputCollection.get(0).as("Первый символ кода"),
-        errorMessageLocator = driver.$("div.gas-input__error").as("Ошибка ввода кода"),
-        forwardButtonLocator = driver.$("div button.btn.btn-primary").as("Кнопка перехода к следующему шагу"),
-        backButtonLocator = driver.$("div button.btn.btn-outline-primary").as("Кнопка перехода к предыдущему шагу");
+            titleLocator = driver.$("div h4").as("Заголовок"),
+            subtitleLocator = driver.$("div.description").as("Подзаголовок"),
+            newCodeSendPeriodTextLocator = driver.$("p.small.text-secondary").as("Текст отправки нового кода"),
+            requestNewCodeTextLocator = driver.$("div.description a").as("Текст повторная отправка кода"),
+            requestNewCodeSendLinkLocator = driver.$("div.description a").as("Ссылка повторная отправка кода"),
+            codeInputFirstDigitLocator = codeInputCollection.get(0).as("Первый символ кода"),
+            errorMessageLocator = driver.$("div.gas-input__error").as("Ошибка ввода кода"),
+            forwardButtonLocator = driver.$("div button.btn.btn-primary").as("Кнопка перехода к следующему шагу"),
+            backButtonLocator = driver.$("div button.btn.btn-outline-primary").as("Кнопка перехода к предыдущему шагу");
 
-    public void checkFinishLoading () {
-        stepWithRole("Убедиться, что отображаются все элементы компонента ввода кода подтверждения: " , () -> {
+    public void checkFinishLoading() {
+        stepWithRole("Убедиться, что отображаются все элементы компонента ввода кода подтверждения: ", () -> {
             stepWithRole("Убедиться, что отображается заголовок", () -> {
                 titleLocator.shouldHave(text(titleText));
             });
@@ -67,11 +67,14 @@ public class CodeConfirmationRegistrationComponent extends BaseComponent {
             stepWithRole("Убедиться, что  кнопка перехода к предыдущему шагу отображается", () -> {
                 backButtonLocator.shouldHave(text("Назад"));
             });
+            stepWithRole("Убедиться, что нет ошибки ввода кода", () -> {
+                errorMessageLocator.shouldNotBe(visible);
+            });
         });
     }
 
-    public void fillCode (String code) {
-       stepWithRole("Ввести код подтверждения: " + code, () -> {
+    public void fillCode(String code) {
+        stepWithRole("Ввести код подтверждения: " + code, () -> {
             stepWithRole("Заполнить поля ввода кода подтверждения", () -> {
                 for (int i = 0; i < code.length(); i++) {
                     codeInputCollection.get(i).setValue(String.valueOf(code.charAt(i)));
@@ -83,9 +86,24 @@ public class CodeConfirmationRegistrationComponent extends BaseComponent {
             stepWithRole("Убедиться, что нет ошибки ввода кода", () -> {
                 errorMessageLocator.shouldNotBe(visible);
             });
-       });
+        });
+        System.out.println("Code: " + code);
     }
 
-
+    public void check60secPastStatus() {
+        stepWithRole("Убедиться, что   новый код можно выслать", () -> {
+            stepWithRole("Убедиться, что  текст  новый код можно выслать через не отображается", () -> {
+                newCodeSendPeriodTextLocator.shouldNotBe(visible);
+            });
+            stepWithRole("Убедиться, что  текст запросить повторно код подтверждения отображается", () -> {
+                requestNewCodeTextLocator.shouldHave(text(requestNewCodeText));
+            });
+            stepWithRole("Убедиться, что  ссылка запросить повторно код подтверждения отображается", () -> {
+                requestNewCodeSendLinkLocator.shouldHave(text(requestNewCodeSendLinkText));
+            });
+        });
+    }
 
 }
+
+//todo wait for 60 sec

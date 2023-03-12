@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.common;
+package ru.gasworkers.dev.pages.sharedPages;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;

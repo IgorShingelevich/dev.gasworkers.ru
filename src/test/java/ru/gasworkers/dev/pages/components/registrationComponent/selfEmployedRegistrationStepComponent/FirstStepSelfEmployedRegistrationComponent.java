@@ -1,12 +1,12 @@
-package ru.gasworkers.dev.pages.components.registrationStepComponent.selfEmployedRegistrationStepComponent;
+package ru.gasworkers.dev.pages.components.registrationComponent.selfEmployedRegistrationStepComponent;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
-import ru.gasworkers.dev.pages.components.registrationStepComponent.HeaderRegistrationComponent;
-import ru.gasworkers.dev.pages.components.registrationStepComponent.StepNumberRegistrationComponent;
+import ru.gasworkers.dev.pages.components.registrationComponent.HeaderRegistrationComponent;
+import ru.gasworkers.dev.pages.components.registrationComponent.StepNumberRegistrationComponent;
 
 import static com.codeborne.selenide.Condition.*;
 
@@ -21,7 +21,6 @@ public class FirstStepSelfEmployedRegistrationComponent  extends BaseComponent {
         stepNumber = new StepNumberRegistrationComponent(browser);
     }
     private final String
-        alreadyRegisteredText = "Уже зарегистрированы?",
         titleText = "Выберете подходящий для Вас вариант.",
         seSubtitleText = "Я хочу работать на себя",
         seDescriptionText = "Вам будет открыт доступ к заказам по ТО, ремонту ВДГО и видеоконсультациям.",
@@ -37,7 +36,6 @@ public class FirstStepSelfEmployedRegistrationComponent  extends BaseComponent {
         buttonCollection = driver.$$("button").as("Кнопки"),
         selectOptionButtonCollection = driver.$$("div.section.mb-3 button.btn-sm.mt-2.btn").as("Кнопки выбора варианта");
     SelenideElement
-        alreadyRegisteredLinkLocator = driver.$("a.link-gray").as("Ссылка уже зарегистрированы"),
         titleLocator = driver.$("p.mb-20.medium").as("Заголовок"),
         seSubtitleLocator = subtitleCollection.get(0).as("Подзаголовок для смз"),
         seDescriptionLocator = descriptionCollection.get(0).as("Описание для смз"),
@@ -146,7 +144,7 @@ public class FirstStepSelfEmployedRegistrationComponent  extends BaseComponent {
         });
     }
 
-    public void nextButton () {
+    public void forwardButton() {
         stepWithRole("Нажать кнопку Далее", () -> {
             nextButtonLocator.click();
         });

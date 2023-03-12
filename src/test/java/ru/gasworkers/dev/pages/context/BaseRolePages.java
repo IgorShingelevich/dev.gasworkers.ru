@@ -5,7 +5,7 @@ import ru.gasworkers.dev.helpers.DriverManager;
 import lombok.Getter;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.common.LoginPage;
+import ru.gasworkers.dev.pages.sharedPages.LoginPage;
 
 public abstract class BaseRolePages {
 

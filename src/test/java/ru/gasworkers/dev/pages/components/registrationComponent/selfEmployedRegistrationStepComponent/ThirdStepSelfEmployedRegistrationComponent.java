@@ -1,10 +1,10 @@
-package ru.gasworkers.dev.pages.components.registrationStepComponent.selfEmployedRegistrationStepComponent;
+package ru.gasworkers.dev.pages.components.registrationComponent.selfEmployedRegistrationStepComponent;
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
-import ru.gasworkers.dev.pages.components.registrationStepComponent.CodeConfirmationRegistrationComponent;
-import ru.gasworkers.dev.pages.components.registrationStepComponent.HeaderRegistrationComponent;
-import ru.gasworkers.dev.pages.components.registrationStepComponent.StepNumberRegistrationComponent;
+import ru.gasworkers.dev.pages.components.registrationComponent.CodeConfirmationRegistrationComponent;
+import ru.gasworkers.dev.pages.components.registrationComponent.HeaderRegistrationComponent;
+import ru.gasworkers.dev.pages.components.registrationComponent.StepNumberRegistrationComponent;
 
 public class ThirdStepSelfEmployedRegistrationComponent extends BaseComponent {
 
@@ -28,8 +28,8 @@ public class ThirdStepSelfEmployedRegistrationComponent extends BaseComponent {
         });
     }
 
-
-
-
+    public void fillCode (String code) {
+            codeConfirmation.fillCode(code);
+    }
 
 }
