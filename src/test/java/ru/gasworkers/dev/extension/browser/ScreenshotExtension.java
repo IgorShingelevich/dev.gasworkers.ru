@@ -36,6 +36,10 @@ public final class ScreenshotExtension implements TestExecutionExceptionHandler 
             Attach.screenshotAs(driver, "Last screenshot");
             Attach.browserConsoleLogs(driver);
             Attach.pageSource(driver);
+
+            if (driver.config().remote() != null && !driver.config().remote().isEmpty()) {
+                Attach.addVideo(driver);
+            }
         });
     }
 
