@@ -20,7 +20,7 @@ node {
         }
 
         try {
-            parallel getTestStages(["apiTests", "uiTests"])
+            parallel getTestStages(["taskProvider_registrationTest", "taskProvider_clientTest"])
         } finally {
             stage ("Allure") {
                 generateAllure()

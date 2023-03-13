@@ -88,4 +88,18 @@ task scope_clientTest(type: Test) {
     useJUnitPlatform {
         includeTags "client"
     }
+
+    def taskProvider_registrationTest = tasks.register("taskProvider_registrationTest", Test) {
+        useJUnitPlatform {
+            includeTags "registration"
+        }
+    }
+
+    def taskProvider_clientTest = tasks.register("taskProvider_clientTest", Test) {
+        useJUnitPlatform {
+            includeTags "client"
+        }
+    }
+
+
 }
