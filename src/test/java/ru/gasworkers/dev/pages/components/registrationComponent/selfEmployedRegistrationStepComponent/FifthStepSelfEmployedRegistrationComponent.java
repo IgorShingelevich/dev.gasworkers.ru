@@ -39,8 +39,8 @@ public class FifthStepSelfEmployedRegistrationComponent extends BaseComponent {
             stepWithRole("Убедиться, что отображается поле ввода", () -> {
                 inputFieldLocator.shouldBe(visible);
             });
-            stepWithRole("Убедиться, что  кнопка перехода к следующему шагу неактивна", () -> {
-                forwardButtonLocator.shouldBe(disabled);
+            stepWithRole("Убедиться, что  кнопка перехода к следующему шагу активна", () -> {
+                forwardButtonLocator.shouldBe(enabled);
             });
             stepWithRole("Убедиться, что отображается кнопка перехода к предыдущему шагу", () -> {
                 backButtonLocator.shouldBe(visible);

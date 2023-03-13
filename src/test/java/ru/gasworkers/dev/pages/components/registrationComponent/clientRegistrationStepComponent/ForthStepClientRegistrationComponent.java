@@ -67,8 +67,8 @@ public class ForthStepClientRegistrationComponent extends BaseComponent {
                     inputEmailLocator.shouldBe(visible).as("Электронная почта");
                 });
             });
-            stepWithRole("Убедиться, что отображается неактивная кнопка Далее", () -> {
-                forwardButtonLocator.shouldHave(text("Далее")).shouldHave(attribute("disabled"));
+            stepWithRole("Убедиться, что отображается активная кнопка Далее", () -> {
+                forwardButtonLocator.shouldBe(enabled);
             });
             stepWithRole("Убедиться, что отображается кнопка Назад", () -> {
                 backButtonLocator.shouldHave(text("Назад"));
@@ -106,8 +106,9 @@ public class ForthStepClientRegistrationComponent extends BaseComponent {
                     inputPhoneLocator.shouldBe(visible).as("Номер телефона");
                 });
             });
-            stepWithRole("Убедиться, что отображается неактивная кнопка Далее", () -> {
-                forwardButtonLocator.shouldHave(text("Далее")).shouldHave(attribute("disabled"));
+            stepWithRole("Убедиться, что отображается активная кнопка Далее", () -> {
+//                forwardButtonLocator.shouldHave(text("Далее")).shouldHave(attribute("disabled"));
+                forwardButtonLocator.shouldBe(enabled);
             });
             stepWithRole("Убедиться, что отображается кнопка Назад", () -> {
                 backButtonLocator.shouldHave(text("Назад"));
