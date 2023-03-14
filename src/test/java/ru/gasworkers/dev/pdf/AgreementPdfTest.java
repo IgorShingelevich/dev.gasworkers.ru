@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 public class AgreementPdfTest {
 
-    private final AgreementPdfChecker pdfChecker = AgreementPdfChecker.newInstance("src/test/resources/pdf.pdf");
+    private final AgreementPdfChecker pdfChecker = AgreementPdfChecker.newInstance("src/test/resources/test_pdf.pdf");
 
     @Test
     void checkAgreementPdf() {

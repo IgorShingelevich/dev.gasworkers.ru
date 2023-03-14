@@ -2,6 +2,7 @@ package ru.gasworkers.dev.pages.components.selfEmployedComponent;
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarSelfEmployedComponent;
 
 public class MasterModeHomeSelfEmployedComponent extends BaseComponent {
     public final SidebarSelfEmployedComponent sidebar;

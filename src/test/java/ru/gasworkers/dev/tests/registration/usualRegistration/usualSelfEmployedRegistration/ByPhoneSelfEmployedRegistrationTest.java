@@ -78,8 +78,11 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
             selfEmployedPages.getSuccessfulRegistrationSelfEmployedPage().checkFinishLoading();
             selfEmployedPages.getSuccessfulRegistrationSelfEmployedPage().clickForwardButton();
         });
-        step("Страница профиля СМЗ", () -> {
-//            selfEmployedPages.getProfileSelfEmployedPage().checkFinishLoading();
+        step("Страница профиля СМЗ - первый гид", () -> {
+                    selfEmployedPages.getHomeSelfEmployedPage().firstGuide.playSequence();
+        });
+        step("Начальное состотояние кабинета СМЗ - модальное окно - расценить  тендер ", () -> {
+            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.checkInitialState();
         });
 
 

@@ -6,6 +6,7 @@ import ru.gasworkers.dev.model.Doc;
 import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.OrderType;
+import ru.gasworkers.dev.pages.components.sharedComponent.StatusBoxOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCheckListTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCommonTabOrderCardComponent;
@@ -23,6 +24,7 @@ public class OrderCardMasterPage extends BaseMasterPage {
 
     public final SidebarMasterComponent sidebar;
     public final ActionsBlockMasterComponent actionsBlock;
+    public final StatusBoxOrderCardComponent statusBox;
     public final NavCommonTabOrderCardComponent commonTab;
     public final NavCheckListTabOrderCardComponent tabCheckList;
     public final NavInfoMasterTabOrderCardComponent tabInfoMaster;
@@ -34,6 +36,7 @@ public class OrderCardMasterPage extends BaseMasterPage {
         super(browser);
         sidebar = new SidebarMasterComponent(browser);
         actionsBlock = new ActionsBlockMasterComponent(browser);
+        statusBox = new StatusBoxOrderCardComponent(browser);
         commonTab = new NavCommonTabOrderCardComponent(browser);
         tabCheckList = new NavCheckListTabOrderCardComponent(browser);
         tabInfoMaster = new NavInfoMasterTabOrderCardComponent(browser);

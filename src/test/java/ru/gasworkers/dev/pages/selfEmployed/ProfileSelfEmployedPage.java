@@ -3,7 +3,7 @@ package ru.gasworkers.dev.pages.selfEmployed;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.FillProfileBannerSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.HeaderSelfEmployedComponent;
-import ru.gasworkers.dev.pages.components.selfEmployedComponent.SidebarSelfEmployedComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarSelfEmployedComponent;
 
 public class ProfileSelfEmployedPage  extends BaseSelfEmployedPage{
     public final HeaderSelfEmployedComponent header;

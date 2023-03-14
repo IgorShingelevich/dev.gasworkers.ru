@@ -25,6 +25,7 @@ public final class SelfEmployedPages extends BaseRolePages {
     private final NewOrderSelfEmployedPage newOrderSelfEmployedPage = new NewOrderSelfEmployedPage(browser);
     private final AcceptedOrderSelfEmployedPage acceptedOrderSelfEmployedPage = new AcceptedOrderSelfEmployedPage(browser);
     private final CompletedOrderSelfEmployedPage completedOrderSelfEmployedPage = new CompletedOrderSelfEmployedPage(browser);
+    private final OrderCardSelfEmployedPage orderCardSelfEmployedPage = new OrderCardSelfEmployedPage(browser);
 
 
 }

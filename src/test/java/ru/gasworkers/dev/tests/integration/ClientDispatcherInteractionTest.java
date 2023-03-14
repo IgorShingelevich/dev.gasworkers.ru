@@ -249,7 +249,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             masterPages.getAllNewOrdersPage().openByNumber(orderNumber);
             masterPages.getOrderCardPage().checkFinishLoading();
             masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
-
+            // todo add OrderStatusBoxComponent to  OrderCardPage
             //todo:default checklist state
 
         });
