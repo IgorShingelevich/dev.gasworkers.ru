@@ -17,26 +17,29 @@ public final class DriverFactory {
         config.browserPosition(annotation.browserPosition());
         config.reportsFolder("target/selenide");
 
-         config.headless(true);
+//         config.headless(true);
         // С удаленным запуском нельзя ставить в true!
 //        config.holdBrowserOpen(true);
+
 
 
 //        config.proxyEnabled(true);
         config.fileDownload(FOLDER);
 
-        step("Запускаем тесты удаленно", () -> {
-            config.remote("http://5.161.120.34:4444/wd/hub");
-            config.browser("chrome");
-            config.browserVersion("109.0");
+//        step("Запускаем тесты удаленно", () -> {
+//            config.remote("http://5.161.120.34:4444/wd/hub");
+//            config.browser("chrome");
+//            config.browserVersion("109.0");
+//
+//            DesiredCapabilities capabilities = new DesiredCapabilities();
+//            capabilities.setCapability("enableVNC", true);
+//            capabilities.setCapability("enableVideo", true);
+//            config.browserCapabilities(capabilities);
+//        });
 
-            DesiredCapabilities capabilities = new DesiredCapabilities();
-            capabilities.setCapability("enableVNC", true);
-            capabilities.setCapability("enableVideo", true);
-            config.browserCapabilities(capabilities);
-        });
 
         return new SelenideDriver(config);
     }
+
 
 }
