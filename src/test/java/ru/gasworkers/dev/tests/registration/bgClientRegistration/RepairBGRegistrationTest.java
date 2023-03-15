@@ -9,6 +9,8 @@ import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureStory;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
+import ru.gasworkers.dev.model.OrderStatus;
+import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.Role;
 
 
@@ -54,11 +56,13 @@ public class RepairBGRegistrationTest extends BaseTest {
         clientPages.getLandingPage().checkFinishLoading();
         step("Клиент заполняет форму фоновой регистрации", () -> {
             clientPages.getLandingPage().bgRegistration.checkFinishLoading();
-            clientPages.getLandingPage().bgRegistration.fillBGRepairRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhoneNumber(), randomClient.getEmail());
+            clientPages.getLandingPage().bgRegistration.fillBGRepairRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhoneNumber(), randomClient.getEmail(), randomClient.getEquipmentRandomPhotoFile());
             //TODO add photo video
         });
         String resultedAddress = clientPages.getLandingPage().bgRegistration.address.getResultedAddress();
         String resultedEquipmentCollectionName = clientPages.getLandingPage().bgRegistration.equipment.getEquipmentName(0);
+        String errorText = clientPages.getLandingPage().bgRegistration.equipment.getErrorText();
+
         clientPages.getLandingPage().bgRegistration.findOffers();
         clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
         step("Кабинет клиента - состояние после фоновой регистрации на Ремонт", () -> {
@@ -69,9 +73,11 @@ public class RepairBGRegistrationTest extends BaseTest {
                 clientPages.getSelectServicePage().checkFinishRepairLoading();
                 clientPages.getSelectServicePage().checkPublishedState();
             });
+            // todo OrderCardPage
             String orderNumber = step("Страница Карточка заказа", () -> {
                 clientPages.getSelectServicePage().toOrderCard();
                 clientPages.getOrderCardPage().checkFinishLoading();
+//                clientPages.getOrderCardPage().checkRepairBGInitialState(resultedAddress, resultedEquipmentCollectionName, desiredDate, desiredTime, errorText);
                 String currentNumber = clientPages.getOrderCardPage().getOrderNumber();
                 return currentNumber;
             });
@@ -95,7 +101,9 @@ public class RepairBGRegistrationTest extends BaseTest {
                 clientPages.getAllObjectsPage().sidebar.allOrders();
                 clientPages.getAllOrdersPage().checkFinishLoading();
                 clientPages.getAllOrdersPage().checkBGInitialState(orderNumber);
+                // todo orderBoxDetails
             });
+
             step("Страница Счета", () -> {
                 clientPages.getAllOrdersPage().sidebar.allInvoices();
                 clientPages.getAllInvoicesPage().checkFinishLoading();
@@ -109,6 +117,7 @@ public class RepairBGRegistrationTest extends BaseTest {
                     clientPages.getProfilePage().navCommon();
                     clientPages.getProfilePage().navCommonTab.checkFinishLoading();
                     clientPages.getProfilePage().navCommonTab.checkInitialBGState();
+                    clientPages.getProfilePage().navCommonTab.uploadPhoto(randomClient.getAvatarRandomPhotoFile());
                 });
                 step("Вкадка Контакты", () -> {
                     clientPages.getProfilePage().navContacts();

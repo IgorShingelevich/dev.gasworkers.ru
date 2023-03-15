@@ -4,29 +4,38 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationComponent.DateBGRegistrationLandingComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.UploadPhotoCutterModalWindowComponent;
+
+import java.io.File;
 
 import static com.codeborne.selenide.Condition.*;
 
 public class NavCommonClientTabProfileComponent extends BaseComponent {
 
     public final DateBGRegistrationLandingComponent datePicker;
-     public NavCommonClientTabProfileComponent(RoleBrowser browser) {
-         super(browser);
-            datePicker = new DateBGRegistrationLandingComponent(browser);
-     }
-     SelenideElement
-             nameSubTitleLocator = driver.$$("div .title").get(0).as("Подзаголовок Личные данные"),
+    public final UploadPhotoCutterModalWindowComponent uploadPhotoModalWindow;
+
+    public NavCommonClientTabProfileComponent(RoleBrowser browser) {
+        super(browser);
+        datePicker = new DateBGRegistrationLandingComponent(browser);
+        uploadPhotoModalWindow = new UploadPhotoCutterModalWindowComponent(browser);
+    }
+
+    SelenideElement
+            nameSubTitleLocator = driver.$$("div .title").get(0).as("Подзаголовок Личные данные"),
             passportSubTitleLocator = driver.$$("div .title").get(1).as("Подзаголовок Паспортные данные"),
-             surnameLocator = driver.$("input[placeholder*=Фамилия]").as("Фамилия"),
-             nameLocator = driver.$("input[placeholder*=Имя]").as("Имя"),
-             patronymicLocator = driver.$("input[placeholder*=Отчество]").as("Отчество"),
-             seriesPassportLocator = driver.$("input[placeholder*=Серия]").as("Серия паспорта"),
-             numberPassportLocator = driver.$("input[placeholder*=Номер]").as("Номер паспорта"),
-             datePassportLocator = driver.$("input[placeholder*=Дата]").as("Дата выдачи паспорта"),
-             whoPassportLocator = driver.$("input[placeholder*=выдан]").as("Кем выдан паспорт"),
-             registrationAddressLocator = driver.$("textarea[placeholder*=Адрес]").as("Адрес регистрации"),
-             apartmentLocator = driver.$("textarea[placeholder*=квартиры]").as("Номер квартиры"),
-             saveButtonLocator = driver.$(".footer button.mb-3.btn.btn-primary ").as("Кнопка Сохранить");
+            surnameLocator = driver.$("input[placeholder*=Фамилия]").as("Фамилия"),
+            nameLocator = driver.$("input[placeholder*=Имя]").as("Имя"),
+            patronymicLocator = driver.$("input[placeholder*=Отчество]").as("Отчество"),
+            photoLocator = driver.$("div.avatar-update-block img").as("Фото"),
+            uploadPhotoButtonLocator = driver.$("div.photo-uploader input").as("Кнопка Загрузить фото"),
+            seriesPassportLocator = driver.$("input[placeholder*=Серия]").as("Серия паспорта"),
+            numberPassportLocator = driver.$("input[placeholder*=Номер]").as("Номер паспорта"),
+            datePassportLocator = driver.$("input[placeholder*=Дата]").as("Дата выдачи паспорта"),
+            whoPassportLocator = driver.$("input[placeholder*=выдан]").as("Кем выдан паспорт"),
+            registrationAddressLocator = driver.$("textarea[placeholder*=Адрес]").as("Адрес регистрации"),
+            apartmentLocator = driver.$("textarea[placeholder*=квартиры]").as("Номер квартиры"),
+            saveButtonLocator = driver.$(".footer button.mb-3.btn.btn-primary ").as("Кнопка Сохранить");
 
 
     public void checkFinishLoading() {
@@ -45,8 +54,6 @@ public class NavCommonClientTabProfileComponent extends BaseComponent {
             apartmentLocator.shouldBe(visible);
             saveButtonLocator.shouldBe(visible).shouldHave(text("Сохранить"));
         });
-
-
 
 
     }
@@ -120,7 +127,15 @@ public class NavCommonClientTabProfileComponent extends BaseComponent {
         });
     }
 
+    public void uploadPhoto(File path) {
+        stepWithRole("Загрузить фото", () -> {
+            uploadPhotoButtonLocator.uploadFile(path);
+            uploadPhotoModalWindow.checkFinishLoading();
+            uploadPhotoModalWindow.clickApproveButton();
+            stepWithRole("Убедиться, что фото загружено", () -> {
+                photoLocator.shouldBe(visible);
+            });
+        });
 
-
-
+    }
 }

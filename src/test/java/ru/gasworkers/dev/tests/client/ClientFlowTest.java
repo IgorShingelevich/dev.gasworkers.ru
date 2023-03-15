@@ -12,6 +12,8 @@ import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.UserBuilder;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
+import java.io.File;
+
 import static io.qameta.allure.Allure.step;
 
 import static ru.gasworkers.dev.model.Role.*;
@@ -83,6 +85,9 @@ class ClientFlowTest extends BaseTest {
         step("Вкладка Общие данные", () -> {
             clientPages.getProfilePage().navCommon();
             clientPages.getProfilePage().navCommonTab.checkFilledState();  // TODO implement CommonDataPickerComponent. Upload photo. check other fields info.
+            File photoPath = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\person\\test_person1.jpg");
+            clientPages.getProfilePage().navCommonTab.uploadPhoto(photoPath);
+
         });
         step("Вкладка Контакты", () -> {
             clientPages.getProfilePage().navContacts();

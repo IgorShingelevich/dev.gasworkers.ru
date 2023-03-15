@@ -33,6 +33,8 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.SE_MEMBER),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Регистрация СМЗ в СК")
     public void  ByPhoneSEMemberRegistrationTest() {
+        String equipmentWorkPrice ="4000";
+        String primaryVisitPrice = "3000";
         step("Страница лендинга", () -> {
             //todo RegistrationPage header
             selfEmployedPages.getLandingPage().open();
@@ -78,11 +80,22 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
             selfEmployedPages.getSuccessfulRegistrationSelfEmployedPage().checkFinishLoading();
             selfEmployedPages.getSuccessfulRegistrationSelfEmployedPage().clickForwardButton();
         });
-        step("Страница профиля СМЗ - первый гид", () -> {
-                    selfEmployedPages.getHomeSelfEmployedPage().firstGuide.playSequence();
+//        step("Страница профиля СМЗ - первый гид", () -> {
+//                    selfEmployedPages.getHomeSelfEmployedPage().firstGuide.playSequence();
+//        });
+        step("Домашняя страница  СМЗ - пропустить гид", () -> {
+            selfEmployedPages.getHomeSelfEmployedPage().firstGuide.skipGuide();
         });
+        step("Карта СМЗ после гида", () -> {
+            selfEmployedPages.getHomeSelfEmployedPage().checkInitialState();
+        });
+
+
+
         step("Начальное состотояние кабинета СМЗ - модальное окно - расценить  тендер ", () -> {
             selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.checkInitialState();
+            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.fillOffer(randomMaster.getMasterIDFile(), randomMaster.getMasterIDValidTillDatePicker(), randomMaster.getEquipmentCertificateFile(), randomMaster.getEquipmentCertificateValidTillDatePicker(), equipmentWorkPrice, primaryVisitPrice);
+
         });
 
 

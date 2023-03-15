@@ -23,4 +23,10 @@ public class HomeSelfEmployedPage extends BaseSelfEmployedPage{
     }
 
 
+    public void checkInitialState() {
+        stepWithRole("Проверить начальное состояние страницы", () -> {
+            mapMode.checkInitialState();
+            masterMode.checkInitialState();
+        });
+    }
 }

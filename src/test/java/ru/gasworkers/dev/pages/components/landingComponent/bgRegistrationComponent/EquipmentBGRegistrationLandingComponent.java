@@ -8,6 +8,10 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.equipment.EquipmentType;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
+import java.io.File;
+
+import static com.codeborne.selenide.Condition.visible;
+
 public class EquipmentBGRegistrationLandingComponent extends BaseComponent {
     public EquipmentBGRegistrationLandingComponent(RoleBrowser browser) {
         super(browser);
@@ -21,6 +25,8 @@ public class EquipmentBGRegistrationLandingComponent extends BaseComponent {
         markFieldLocator = driver.$("input[placeholder='Начните вводить название марки']").as("Поле выбора марки оборудования"),
         modelFieldLocator = driver.$("input[placeholder='Начните вводить модель']").as("Поле выбора модели оборудования"),
         powerFieldLocator = driver.$("input[placeholder='Введите мощность']").as("Поле выбора мощности оборудования"),
+        uploadFileLinkLocator = driver.$("div.photo-uploader input").as("Ссылка загрузить файл"),
+        attachedFileLocator = driver.$("div.photo-uploader img").as("Прикрепленный файл"),
         problemTextareaLocator = driver.$("textarea[placeholder='Кратко опишите проблему']").as("Поле Кратко опишите проблему"),
         approveButtonLocator = driver.$("div.search-option__equipment button.btn-fs-sm.btn.btn-primary").as("Кнопка подтвердить выбора оборудования"),
         clearButtonLocator = driver.$("div.search-option__equipment button.btn-fs-sm.mr-2.btn.btn-outline-primary").as("Кнопка очистить выбор оборудования");
@@ -36,9 +42,9 @@ public class EquipmentBGRegistrationLandingComponent extends BaseComponent {
 
     public void checkFinishLoading() {
         stepWithRole(" Убедиться, что форма выбора оборудования отображается", () -> {
-            equipmentFieldLocator.shouldBe(Condition.visible);
+            equipmentFieldLocator.shouldBe(visible);
             equipmentFieldLocator.click();
-            equipmentContainerLocator.shouldBe(Condition.visible);
+            equipmentContainerLocator.shouldBe(visible);
             equipmentFieldLocator.click();
         });
 
@@ -81,7 +87,7 @@ public class EquipmentBGRegistrationLandingComponent extends BaseComponent {
         });
     }
 
-    public void fillRepairEquipment(EquipmentType type, Integer model, Integer brand, Integer power) {
+    public void fillRepairEquipment(EquipmentType type, Integer model, Integer brand, Integer power, File photoOrVideo) {
         stepWithRole("Выбрать оборудование", () -> {
             stepWithRole("Выбрать тип оборудования: " + type.toString(), () -> {
                 equipmentFieldLocator.click();
@@ -118,12 +124,17 @@ public class EquipmentBGRegistrationLandingComponent extends BaseComponent {
                 problemTextareaLocator.setValue(errorText + " неисправен. Нужен ремонт.");
                 System.out.println("Описание неисправности: " + problemTextareaLocator.getValue());
             });
+            stepWithRole("Прикрепить фото или видео", () -> {
+                attachedFileLocator.shouldNotBe(visible);
+                uploadFileLinkLocator.uploadFile(photoOrVideo);
+                attachedFileLocator.shouldBe(visible);
+            });
             approveEquipmentForm();
             // TODO add photo video
         });
     }
 
-    public void fillVideoEquipment(EquipmentType type, Integer mark, Integer brand, Integer power) {
+    public void fillVideoEquipment(EquipmentType type, Integer mark, Integer brand, Integer power, File equipmentVideoFile) {
         //todo  resultedEquipmentCollection should be checked and set as an argument
         stepWithRole("Выбрать оборудование", () -> {
             stepWithRole("Выбрать тип оборудования: " + type.toString(), () -> {
@@ -161,6 +172,11 @@ public class EquipmentBGRegistrationLandingComponent extends BaseComponent {
             stepWithRole("Добавить описание неисправности", () -> {
                 problemTextareaLocator.setValue(modelFieldValue + " неисправен. Нужен ремонт.");
                 System.out.println("Описание неисправности: " + problemTextareaLocator.getValue());
+            });
+            stepWithRole("Прикрепить фото или видео", () -> {
+                attachedFileLocator.shouldNotBe(visible);
+                uploadFileLinkLocator.uploadFile(equipmentVideoFile);
+                attachedFileLocator.shouldBe(visible);
             });
             approveEquipmentForm();
             String modelText = resultedEquipmentCollection.get(0).getValue();

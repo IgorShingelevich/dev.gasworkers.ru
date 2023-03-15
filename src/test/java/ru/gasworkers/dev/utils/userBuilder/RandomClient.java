@@ -2,6 +2,7 @@ package ru.gasworkers.dev.utils.userBuilder;
 import com.github.javafaker.Faker;
 import com.ibm.icu.text.Transliterator;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -21,6 +22,13 @@ public class RandomClient {
     private  String password = "123456";
     private String confirmationCode = "111111";
     private String objectAddress = "Московская обл, Одинцово г, г.о. Одинцовский, ул Маршала Неделина, д. 6А";
+    private File avatarRandomPhotoFile,
+    equipmentRandomPhotoFile,
+    equipmentVideoFile,
+    pdfFile,
+    xlsxFile,
+    rarFile;
+
 
     public RandomClient() {
         Faker faker = new Faker(new Locale("ru"));
@@ -42,6 +50,12 @@ public class RandomClient {
         this.fullName = this.surname.toString() + " " + this.name.toString() + " " + this.patronymicName.toString();
         Transliterator cyrillicToLatin = Transliterator.getInstance("Cyrillic-Latin");
         String latinSurname = cyrillicToLatin.transliterate(surname);
+        this.avatarRandomPhotoFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\person\\test_person" + faker.random().nextInt(1,9) + ".jpg");
+        this.equipmentRandomPhotoFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\equipment\\test_equipment" + faker.random().nextInt(1,4) + ".jpg");
+        this.equipmentVideoFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\video\\test_equipment_video1.mp4");
+        this.pdfFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\otherFormats\\test_pdf.pdf");
+        this.xlsxFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\otherFormats\\test_xlsx.xlsx");
+        this.rarFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\otherFormats\\test_rar.rar");
 
 
 
@@ -98,6 +112,24 @@ public class RandomClient {
     }
     public String getConfirmationCode() {
         return confirmationCode;
+    }
+    public File getAvatarRandomPhotoFile() {
+        return avatarRandomPhotoFile;
+    }
+    public File getEquipmentRandomPhotoFile() {
+        return equipmentRandomPhotoFile;
+    }
+    public File getEquipmentVideoFile() {
+        return equipmentVideoFile;
+    }
+    public File getPdfFile() {
+        return pdfFile;
+    }
+    public File getXlsxFile() {
+        return xlsxFile;
+    }
+    public File getRarFile() {
+        return rarFile;
     }
 
 

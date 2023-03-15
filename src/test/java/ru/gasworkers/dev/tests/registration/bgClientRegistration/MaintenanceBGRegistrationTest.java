@@ -98,6 +98,15 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
                 clientPages.getAllOrdersPage().checkFinishLoading();
                 clientPages.getAllOrdersPage().checkBGInitialState(orderNumber);
             });
+            // todo OrderCardPage
+            /*String orderNumber = step("Страница Карточка заказа", () -> {
+                clientPages.getSelectServicePage().toOrderCard();
+                clientPages.getOrderCardPage().checkFinishLoading();
+//                clientPages.getOrderCardPage().checkRepairBGInitialState(resultedAddress, resultedEquipmentCollectionName, desiredDate, desiredTime, errorText);
+                String currentNumber = clientPages.getOrderCardPage().getOrderNumber();
+                return currentNumber;
+            });*/
+
             step("Страница Счета", () -> {
                 clientPages.getAllOrdersPage().sidebar.allInvoices();
                 clientPages.getAllInvoicesPage().checkFinishLoading();
@@ -111,6 +120,7 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
                     clientPages.getProfilePage().navCommon();
                     clientPages.getProfilePage().navCommonTab.checkFinishLoading();
                     clientPages.getProfilePage().navCommonTab.checkInitialBGState();
+                    clientPages.getProfilePage().navCommonTab.uploadPhoto(randomClient.getAvatarRandomPhotoFile());
                 });
                 step("Вкадка Контакты", () -> {
                     clientPages.getProfilePage().navContacts();

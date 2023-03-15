@@ -79,11 +79,13 @@ public class VideoBGRegistrationTest extends BaseTest {
         clientPages.getLandingPage().checkFinishLoading();
         step("Клиент заполняет форму фоновой регистрации", () -> {
             clientPages.getLandingPage().bgRegistration.checkFinishLoading();
-            clientPages.getLandingPage().bgRegistration.fillBGVideoRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhoneNumber(), randomClient.getEmail());
+            clientPages.getLandingPage().bgRegistration.fillBGVideoRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhoneNumber(), randomClient.getEmail(), randomClient.getEquipmentVideoFile());
            // TODO add photo video
        });
        String resultedAddress = clientPages.getLandingPage().bgRegistration.address.getResultedAddress();
        String resultedEquipmentCollectionName = clientPages.getLandingPage().bgRegistration.equipment.getEquipmentName(0);
+       // todo String desiredDate =
+         // todo String desiredTime =
        //todo modify equipmentCollection index for  different equipment count
        String errorText = clientPages.getLandingPage().bgRegistration.equipment.getErrorText();
         clientPages.getLandingPage().bgRegistration.findOffers();
@@ -172,6 +174,15 @@ public class VideoBGRegistrationTest extends BaseTest {
                 clientPages.getAllOrdersPage().checkFinishLoading();
 //                clientPages.getAllOrdersPage().checkBGInitialState(orderNumber);
             });
+            //todo OrderCardPage
+            /*String orderNumber = step("Страница Карточка заказа", () -> {
+                clientPages.getAllOrdersPage().toOrderCard();
+                clientPages.getOrderCardPage().checkFinishLoading();
+                clientPages.getOrderCardPage().checkRepairBGInitialState(resultedAddress, resultedEquipmentCollectionName, desiredDate, desiredTime, errorText);
+                String currentNumber = clientPages.getOrderCardPage().getOrderNumber();
+                return currentNumber;
+            });*/
+
             step("Страница Счета", () -> {
                 clientPages.getAllOrdersPage().sidebar.allInvoices();
                 clientPages.getAllInvoicesPage().checkFinishLoading();
@@ -185,6 +196,7 @@ public class VideoBGRegistrationTest extends BaseTest {
                     clientPages.getProfilePage().navCommon();
                     clientPages.getProfilePage().navCommonTab.checkFinishLoading();
                     clientPages.getProfilePage().navCommonTab.checkInitialBGState();
+                    clientPages.getProfilePage().navCommonTab.uploadPhoto(randomClient.getAvatarRandomPhotoFile());
                 });
                 step("Вкадка Контакты", () -> {
                     clientPages.getProfilePage().navContacts();

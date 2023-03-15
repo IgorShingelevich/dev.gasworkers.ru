@@ -62,7 +62,7 @@ public class FirstSelfEmployedGuideComponent extends BaseComponent {
                         nextStepGuide();
                         break;
                     case 1:
-                        guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_2));
+                       guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_2));
                         nextStepGuide();
                         break;
                     case 2:

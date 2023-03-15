@@ -23,13 +23,13 @@ public class RandomMaster {
     private String confirmationCode = "222222";
     private String passportSeries;
     private String passportNumber;
-    private String passportIssuedDate;
+    private String passportIssuedDatePicker;
     private String passportIssuedBy = "ОВД Одинцовского района г. Одинцово";
     private String registrationAddress = "Московская обл, Одинцово г, г.о. Одинцовский, ул Маршала Неделина, д. 6А"; 
     private String registrationAddressNumber;
     private String bik = "044525225";
     private String checkingAccount;
-    private String masterIDValidTillNextYearDate;
+    private String masterIDValidTillNextYearDatePicker;
     private File masterIDPhoto;
     private File taxpayerCertificatePhoto;
     private File masterPhoto;
@@ -38,9 +38,20 @@ public class RandomMaster {
     private File certificatePhoto;
     private String workAddress = "улица Северная 5 Одинцово";
     private String workAddressNumber;
+    private String masterIDValidTillDatePicker;
+    private String equipmentCertificateValidTillDatePicker;
 
     private String workRadius = "10";
     private String videoPrice = "3000";
+    private File avatarRandomPhotoFile,
+            equipmentRandomPhotoFile,
+            equipmentVideoFile,
+            pdfFile,
+            xlsxFile,
+            rarFile,
+    masterIDFile,
+    taxpayerCertificateFile,
+    equipmentCertificateFile;
 
 
     public RandomMaster() {
@@ -67,11 +78,22 @@ public class RandomMaster {
         this.sinceDate = LocalDate.now().format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
         this.passportSeries = faker.regexify("[0-9]{4}");
         this.passportNumber = faker.regexify("[0-9]{6}");
-        this.passportIssuedDate = LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
+        this.passportIssuedDatePicker = LocalDate.now().minusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         this.checkingAccount = faker.regexify("[0-9]{20}");
         this.registrationAddressNumber = faker.regexify("[0-9]{1,3}");
-        this.masterIDValidTillNextYearDate = LocalDate.now().plusYears(1).format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
+        this.masterIDValidTillNextYearDatePicker = LocalDate.now().plusYears(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.masterIDValidTillDatePicker = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        this.equipmentCertificateValidTillDatePicker = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         this.workAddressNumber = faker.regexify("[0-9]{1,3}");
+        this.avatarRandomPhotoFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\person\\test_person" + faker.random().nextInt(1,9) + ".jpg");
+        this.masterIDFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\diploma\\test_diploma" + faker.random().nextInt(1,3) + ".jpg");
+        this.equipmentCertificateFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\diploma\\test_diploma" + faker.random().nextInt(1,3) + ".jpg");
+        this.taxpayerCertificateFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\diploma\\test_diploma" + faker.random().nextInt(1,3) + ".jpg");
+        this.equipmentRandomPhotoFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\equipment\\test_equipment" + faker.random().nextInt(1,4) + ".jpg");
+        this.equipmentVideoFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\video\\test_equipment_video1.mp4");
+        this.pdfFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\otherFormats\\test_pdf.pdf");
+        this.xlsxFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\otherFormats\\test_xlsx.xlsx");
+        this.rarFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\otherFormats\\test_rar.rar");
 
     }
 
@@ -126,8 +148,8 @@ public class RandomMaster {
     public String getPassportNumber() {
         return passportNumber;
     }
-    public String getPassportIssuedDate() {
-        return passportIssuedDate;
+    public String getPassportIssuedDatePicker() {
+        return passportIssuedDatePicker;
     }
     public String getPassportIssuedBy() {
         return passportIssuedBy;
@@ -144,11 +166,8 @@ public class RandomMaster {
     public String getCheckingAccount() {
         return checkingAccount;
     }
-    public String getMasterIDValidTillNextYearDate() {
-        return masterIDValidTillNextYearDate;
-    }
-    public File getMasterIDPhoto() {
-        return masterIDPhoto;
+    public String getMasterIDValidTillNextYearDatePicker() {
+        return masterIDValidTillNextYearDatePicker;
     }
     public File getTaxpayerCertificatePhoto() {
         return taxpayerCertificatePhoto;
@@ -162,9 +181,7 @@ public class RandomMaster {
     public String getSkills() {
         return skills;
     }
-    public File getCertificatePhoto() {
-        return certificatePhoto;
-    }
+
     public String getWorkAddress() {
         return workAddress;
     }
@@ -175,7 +192,39 @@ public class RandomMaster {
     public String getVideoPrice() {
         return videoPrice;
     }
-
+    public String getMasterIDValidTillDatePicker() {
+        return masterIDValidTillDatePicker;
+    }
+    public String getEquipmentCertificateValidTillDatePicker() {
+        return equipmentCertificateValidTillDatePicker;
+    }
+    public File getAvatarRandomPhotoFile() {
+        return avatarRandomPhotoFile;
+    }
+    public File getEquipmentRandomPhotoFile() {
+        return equipmentRandomPhotoFile;
+    }
+    public File getEquipmentVideoFile() {
+        return equipmentVideoFile;
+    }
+    public File getPdfFile() {
+        return pdfFile;
+    }
+    public File getXlsxFile() {
+        return xlsxFile;
+    }
+    public File getRarFile() {
+        return rarFile;
+    }
+    public File getMasterIDFile() {
+        return masterIDFile;
+    }
+    public File getTaxpayerCertificateFile() {
+        return taxpayerCertificateFile;
+    }
+    public File getEquipmentCertificateFile() {
+        return equipmentCertificateFile;
+    }
 
 
 }

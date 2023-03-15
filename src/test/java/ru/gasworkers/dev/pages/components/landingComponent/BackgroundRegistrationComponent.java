@@ -13,10 +13,10 @@ import ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationCompone
 import ru.gasworkers.dev.pages.components.sharedComponent.CommonCodeInputModalWindowComponent;
 import ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationComponent.EquipmentBGRegistrationLandingComponent;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
 
 public class BackgroundRegistrationComponent extends BaseComponent {
@@ -181,13 +181,13 @@ public class BackgroundRegistrationComponent extends BaseComponent {
 
     }
 
-    public void fillBGRepairRequest(String objectAddress, EquipmentType type, Integer mark, Integer brand, Integer power, String phone, String email) {
+    public void fillBGRepairRequest(String objectAddress, EquipmentType type, Integer mark, Integer brand, Integer power, String phone, String email, File equipmentRandomPhotoFile) {
         stepWithRole("Заполнить заявку на ремонт в форме фоновой регистрации", () -> {
             stepWithRole("Выбрать тип заявки: " + BackgroundClientRequestType.REPAIR.getTitle(), () -> {
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.REPAIR.getTitle())).click();
             });
             address.fillAddressField(objectAddress);
-            equipment.fillRepairEquipment(type, mark, brand, power);
+            equipment.fillRepairEquipment(type, mark, brand, power, equipmentRandomPhotoFile);
             stepWithRole("Указать дату регистрации", () -> {
                 stepWithRole("Нажать на дропдаун даты", () -> {
                     dateFieldLocator.click();
@@ -218,13 +218,13 @@ public class BackgroundRegistrationComponent extends BaseComponent {
         });
     }
 
-    public void fillBGVideoRequest(String objectAddress, EquipmentType type, Integer mark, Integer brand, Integer power, String phone, String email) {
+    public void fillBGVideoRequest(String objectAddress, EquipmentType type, Integer mark, Integer brand, Integer power, String phone, String email, File equipmentVideoFile) {
         stepWithRole("Заполнить заявку на Видео в форме фоновой регистрации", () -> {
             stepWithRole("Выбрать тип заявки: " + BackgroundClientRequestType.VIDEO.getTitle(), () -> {
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.VIDEO.getTitle())).click();
             });
             address.fillAddressField(objectAddress);
-            equipment.fillVideoEquipment(type, mark, brand, power);
+            equipment.fillVideoEquipment(type, mark, brand, power, equipmentVideoFile);
             stepWithRole("Указать контактные данные", () -> {
                 stepWithRole("Нажать на дропдаун контактных данных", () -> {
                     credentialsDropdownLocator.click();
