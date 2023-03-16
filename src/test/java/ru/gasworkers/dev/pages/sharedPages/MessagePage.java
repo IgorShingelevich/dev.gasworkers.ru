@@ -4,29 +4,29 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
-import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockDispatcherComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarDispatcherComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarMasterComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.DispatcherSidebarComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.MasterSidebarComponent;
 
 public class MessagePage extends BasePage {
 
-    public final SidebarClientComponent sidebarClient;
-    public final SidebarMasterComponent sidebarMaster;
-    public final SidebarDispatcherComponent sidebarDispatcher;
+    public final ClientSidebarComponent sidebarClient;
+    public final MasterSidebarComponent sidebarMaster;
+    public final DispatcherSidebarComponent sidebarDispatcher;
     public final ActionsBlockMasterComponent actionsBlockMaster;
-    public final ActionsBlockClientComponent actionsBlockClient;
+    public final ClientActionsBlockComponent actionsBlockClient;
     public final ActionsBlockDispatcherComponent actionsBlockDispatcher;
     // TODO public final Breadctumbs for all roles
     public MessagePage(RoleBrowser browser) {
         super(browser);
-        sidebarClient = new SidebarClientComponent(browser);
-        sidebarMaster = new SidebarMasterComponent(browser);
-        sidebarDispatcher = new SidebarDispatcherComponent(browser);
+        sidebarClient = new ClientSidebarComponent(browser);
+        sidebarMaster = new MasterSidebarComponent(browser);
+        sidebarDispatcher = new DispatcherSidebarComponent(browser);
         actionsBlockMaster = new ActionsBlockMasterComponent(browser);
-        actionsBlockClient = new ActionsBlockClientComponent(browser);
+        actionsBlockClient = new ClientActionsBlockComponent(browser);
         actionsBlockDispatcher = new ActionsBlockDispatcherComponent(browser);
     }
 

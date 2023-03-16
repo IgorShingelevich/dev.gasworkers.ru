@@ -6,8 +6,8 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.clientComponent.tabObjectCardClientComponent.DistributorTabObjectCardClientComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.tabObjectCardClientComponent.DocsTabObjectCardClientComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.tabObjectCardClientComponent.ObjectTabObjectCardClientComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockClientComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.text;
@@ -18,16 +18,16 @@ public class ObjectCardClientPage extends BaseClientPage {
     public final DistributorTabObjectCardClientComponent tabDistributor;
     public final DocsTabObjectCardClientComponent tabDocs;
     public final ObjectTabObjectCardClientComponent tabObject;
-    public final SidebarClientComponent sidebar;
-    public final ActionsBlockClientComponent actionBlock;
+    public final ClientSidebarComponent sidebar;
+    public final ClientActionsBlockComponent actionBlock;
 
     public ObjectCardClientPage(RoleBrowser browser) {
         super(browser);
         tabDistributor = new DistributorTabObjectCardClientComponent(browser);
         tabDocs = new DocsTabObjectCardClientComponent(browser);
         tabObject = new ObjectTabObjectCardClientComponent(browser);
-        sidebar = new SidebarClientComponent(browser);
-        actionBlock = new ActionsBlockClientComponent(browser);
+        sidebar = new ClientSidebarComponent(browser);
+        actionBlock = new ClientActionsBlockComponent(browser);
     }
 
     private final String OBJECT_CARD_TITLE = "Объекты и оборудование";

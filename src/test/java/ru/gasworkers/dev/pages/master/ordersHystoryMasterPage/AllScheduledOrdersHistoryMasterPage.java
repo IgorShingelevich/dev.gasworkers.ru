@@ -4,7 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarMasterComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.MasterSidebarComponent;
 import ru.gasworkers.dev.pages.master.BaseMasterPage;
 
 import java.time.Duration;
@@ -14,13 +14,13 @@ import static com.codeborne.selenide.Condition.visible;
 
 public class AllScheduledOrdersHistoryMasterPage extends BaseMasterPage {
 
-    public final SidebarMasterComponent sidebar;
+    public final MasterSidebarComponent sidebar;
     public final ActionsBlockMasterComponent actionsBlock;
 
 
     public AllScheduledOrdersHistoryMasterPage(RoleBrowser browser) {
         super(browser);
-        sidebar = new SidebarMasterComponent(browser);
+        sidebar = new MasterSidebarComponent(browser);
         actionsBlock = new ActionsBlockMasterComponent(browser);
     }
 

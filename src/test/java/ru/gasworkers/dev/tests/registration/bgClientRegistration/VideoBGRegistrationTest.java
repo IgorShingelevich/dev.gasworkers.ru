@@ -158,7 +158,7 @@ public class VideoBGRegistrationTest extends BaseTest {
                clientPages.getHomePage().checkVideoBGInitialState(randomClient.getSinceDate(), masterFullNameByIndex);
             });
             step("Страница Уведомления", () -> {
-                clientPages.getHomePage().actionsBlock.allNotifications();
+                clientPages.getHomePage().actionsBlock.notifications();
                 // TODO fix  Push notification  - not appear after Guide
 //                clientPages.getAllNotificationsPage().checkInitialBGState(orderNumber);
 //                clientPages.getAllNotificationsPage().readAll();

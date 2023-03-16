@@ -8,11 +8,11 @@ import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.pages.components.clientComponent.OffersClientComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCommonTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavDocsTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavInfoMasterTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
 import java.time.Duration;
@@ -24,8 +24,8 @@ import static com.codeborne.selenide.Selenide.$$;
 import static io.qameta.allure.Allure.step;
 
 public class OrderCardClientPage extends BaseClientPage {
-    public final SidebarClientComponent sidebar;
-    public final ActionsBlockClientComponent actionsBlock;
+    public final ClientSidebarComponent sidebar;
+    public final ClientActionsBlockComponent actionsBlock;
     public final StepperComponent stepper;
     public final OffersClientComponent offers;
     public final NavCommonTabOrderCardComponent commonTab;
@@ -34,8 +34,8 @@ public class OrderCardClientPage extends BaseClientPage {
 
     public OrderCardClientPage (RoleBrowser browser) {
         super(browser);
-        sidebar = new SidebarClientComponent(browser);
-        actionsBlock = new ActionsBlockClientComponent(browser);
+        sidebar = new ClientSidebarComponent(browser);
+        actionsBlock = new ClientActionsBlockComponent(browser);
         stepper = new StepperComponent(browser);
         offers = new OffersClientComponent(browser);
         commonTab = new NavCommonTabOrderCardComponent(browser);

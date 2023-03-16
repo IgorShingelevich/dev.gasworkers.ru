@@ -5,8 +5,8 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
-import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockClientComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
@@ -14,13 +14,13 @@ import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public class AllNotificationsPage extends BasePage {
 
-    public final ActionsBlockClientComponent actionBlock;
-    public final SidebarClientComponent sidebar;
+    public final ClientActionsBlockComponent actionBlock;
+    public final ClientSidebarComponent sidebar;
 
     public AllNotificationsPage(RoleBrowser browser) {
         super(browser);
-        actionBlock = new ActionsBlockClientComponent(browser);
-        sidebar = new SidebarClientComponent(browser);
+        actionBlock = new ClientActionsBlockComponent(browser);
+        sidebar = new ClientSidebarComponent(browser);
     }
 
     private final String

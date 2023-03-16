@@ -9,10 +9,13 @@ import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class SidebarMasterComponent extends BaseSidebarComponent {
+public class MasterSidebarComponent extends BaseSidebarComponent {
+    public final SupportServiceSidebarComponent support;
 
-    public SidebarMasterComponent(RoleBrowser browser) {
+
+    public MasterSidebarComponent(RoleBrowser browser) {
             super(browser);
+            support = new SupportServiceSidebarComponent(browser);
         }
 
     ElementsCollection

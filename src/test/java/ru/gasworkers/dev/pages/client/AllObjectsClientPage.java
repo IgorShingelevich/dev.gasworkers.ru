@@ -5,21 +5,21 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.equipment.EquipmentType;
 import ru.gasworkers.dev.pages.components.clientComponent.ObjectItemClientComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockClientComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public class AllObjectsClientPage extends BaseClientPage {
-    public final ActionsBlockClientComponent actionsBlock;
-    public final SidebarClientComponent sidebar;
+    public final ClientActionsBlockComponent actionsBlock;
+    public final ClientSidebarComponent sidebar;
     public final ObjectItemClientComponent objectItem;
     public AllObjectsClientPage(RoleBrowser browser) {
         super(browser);
-        sidebar = new SidebarClientComponent(browser);
-        actionsBlock = new ActionsBlockClientComponent(browser);
+        sidebar = new ClientSidebarComponent(browser);
+        actionsBlock = new ClientActionsBlockComponent(browser);
         objectItem = new ObjectItemClientComponent(browser);
    }
 

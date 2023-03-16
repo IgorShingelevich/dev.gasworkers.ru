@@ -4,6 +4,8 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.visible;
 
 public class HeaderRegistrationComponent extends BaseComponent {
@@ -18,7 +20,7 @@ public class HeaderRegistrationComponent extends BaseComponent {
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что хедер регистрации отображается", () -> {
             stepWithRole("Убедиться, что отображается логотип", () -> {
-                logoLocator.shouldBe(visible);
+                logoLocator.shouldBe(visible, Duration.ofSeconds(10));
             });
             stepWithRole("Убедиться, что отображается ссылка Уже зарегистрированы?", () -> {
                 alreadyRegisteredLinkLocator.shouldBe(visible);

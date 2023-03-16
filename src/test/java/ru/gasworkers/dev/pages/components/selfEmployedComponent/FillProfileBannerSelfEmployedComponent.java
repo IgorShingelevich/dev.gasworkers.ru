@@ -21,7 +21,7 @@ public class FillProfileBannerSelfEmployedComponent extends BaseComponent {
     SelenideElement
             bannerLocator = driver.$("div.notification-wrapper").as("Баннер заполнения профиля"),
             bannerTitle = bannerLocator.$("div.bold.mb-3 span").as("Заголовок баннера"),
-            bannerContentText = bannerLocator.$$("div").get(1).as("Текст баннера"),
+            bannerContentText = bannerLocator.$$("div").get(4).as("Текст баннера"),
             bannerButton = bannerLocator.$("a.gas-box-move-link").as("Кнопка баннера"),
             bannerCloseButton = bannerLocator.$("div.close-btn").as("Кнопка закрытия баннера");
 

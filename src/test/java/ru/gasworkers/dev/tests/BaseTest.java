@@ -7,7 +7,7 @@ import ru.gasworkers.dev.extension.browser.ScreenshotExtension;
 public abstract class BaseTest {
 
 }
-
+// todo  if Client and SelfEmployed ActionBlock differs only in reviewLink - how to reuse it?
 // todo reuse master and self-employed OrderCardPage
 //TODO DISCUSS  how to use sublist like -   ratingCheckboxCollection = checkboxCollection.subList(0, 5).as("Чекбоксы фильтра по рейтингу мастера"),
 //ctrl w for Alex

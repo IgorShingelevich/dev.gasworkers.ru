@@ -7,10 +7,10 @@ import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.N
 import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.NavPasswordTabProfileComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.navCommonTab.NavCommonDispatcherTabProfileComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.navProfileTab.NavProfileDispatcherTabProfileComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarDispatcherComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.DispatcherSidebarComponent;
 
 public class ProfileDispatcherPage extends BaseDispatcherPage {
-    public final SidebarDispatcherComponent sidebar;
+    public final DispatcherSidebarComponent sidebar;
     public final ActionsBlockDispatcherComponent actionsBlock;
     public final NavProfileDispatcherTabProfileComponent profileTab;
     public final NavCommonDispatcherTabProfileComponent commonTab;
@@ -20,7 +20,7 @@ public class ProfileDispatcherPage extends BaseDispatcherPage {
 
     public ProfileDispatcherPage(RoleBrowser browser) {
         super(browser);
-        sidebar = new SidebarDispatcherComponent(browser);
+        sidebar = new DispatcherSidebarComponent(browser);
         actionsBlock = new ActionsBlockDispatcherComponent(browser);
         profileTab = new NavProfileDispatcherTabProfileComponent(browser);
         commonTab = new NavCommonDispatcherTabProfileComponent(browser);

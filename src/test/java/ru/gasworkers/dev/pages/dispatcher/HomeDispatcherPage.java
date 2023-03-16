@@ -5,7 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockDispatcherComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarDispatcherComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.DispatcherSidebarComponent;
 
 import java.time.Duration;
 
@@ -14,12 +14,12 @@ import static com.codeborne.selenide.Condition.visible;
 
 public class HomeDispatcherPage extends BaseDispatcherPage {
 
-    private final SidebarDispatcherComponent sidebarDispatcher;
+    private final DispatcherSidebarComponent sidebarDispatcher;
     private final ActionsBlockDispatcherComponent actionBlockDispatcher;
 
     public HomeDispatcherPage(RoleBrowser browser) {
         super(browser);
-        sidebarDispatcher = new SidebarDispatcherComponent(browser);
+        sidebarDispatcher = new DispatcherSidebarComponent(browser);
         actionBlockDispatcher = new ActionsBlockDispatcherComponent(browser);
     }
 

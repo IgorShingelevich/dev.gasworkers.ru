@@ -9,8 +9,6 @@ import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureStory;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
-import ru.gasworkers.dev.model.OrderStatus;
-import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.Role;
 
 
@@ -86,7 +84,7 @@ public class RepairBGRegistrationTest extends BaseTest {
                 clientPages.getHomePage().checkBGInitialState(randomClient.getSinceDate());
             });
             step("Страница Уведомления", () -> {
-                clientPages.getHomePage().actionsBlock.allNotifications();
+                clientPages.getHomePage().actionsBlock.notifications();
                 // TODO fix  Push notification  - not appear after Guide
 //                clientPages.getAllNotificationsPage().checkInitialBGState(orderNumber);
 //                clientPages.getAllNotificationsPage().readAll();

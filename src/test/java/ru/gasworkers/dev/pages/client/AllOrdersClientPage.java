@@ -3,10 +3,8 @@ package ru.gasworkers.dev.pages.client;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockClientComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
-
-import java.time.Duration;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.text;
@@ -15,12 +13,12 @@ import static com.codeborne.selenide.Condition.visible;
 public class AllOrdersClientPage extends BaseClientPage {
 
 
-    public final ActionsBlockClientComponent actionsBlock;
-    public final  SidebarClientComponent sidebar;
+    public final ClientActionsBlockComponent actionsBlock;
+    public final ClientSidebarComponent sidebar;
     public  AllOrdersClientPage (RoleBrowser browser) {
         super(browser);
-        sidebar = new SidebarClientComponent(browser);
-        actionsBlock = new ActionsBlockClientComponent(browser);
+        sidebar = new ClientSidebarComponent(browser);
+        actionsBlock = new ClientActionsBlockComponent(browser);
     }
 
 //    public ClientBreadcrumbsComponent breadcrumbs = new ClientBreadcrumbsComponent();

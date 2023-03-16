@@ -94,7 +94,7 @@ public class ByPhoneUsualClientRegistrationTest extends BaseTest {
             clientPages.getAllOrdersPage().checkInitialState();
             clientPages.getAllOrdersPage().sidebar.allInvoices();
             clientPages.getAllInvoicesPage().checkInitialState();
-            clientPages.getAllInvoicesPage().actionsBlock.allNotifications();
+            clientPages.getAllInvoicesPage().actionsBlock.notifications();
             clientPages.getAllNotificationsPage().checkInitialState();
             step("Страница Профиль", () -> {
                 clientPages.getHomePage().sidebar.profile();

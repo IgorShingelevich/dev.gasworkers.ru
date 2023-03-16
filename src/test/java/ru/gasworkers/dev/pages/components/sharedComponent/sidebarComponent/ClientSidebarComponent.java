@@ -8,10 +8,13 @@ import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class SidebarClientComponent extends BaseSidebarComponent {
+public class ClientSidebarComponent extends BaseSidebarComponent {
+    public final SupportServiceSidebarComponent support;
 
-    public SidebarClientComponent(RoleBrowser browser) {
+
+    public ClientSidebarComponent(RoleBrowser browser) {
         super(browser);
+        support = new SupportServiceSidebarComponent(browser);
     }
 
     SelenideElement homeLinkLocator = driver.$$(".sidebar-nav>li").get(0),
@@ -23,28 +26,28 @@ public class SidebarClientComponent extends BaseSidebarComponent {
 
 
 
-    public SidebarClientComponent allOrdersAndInvoicesDropdown() {
+    public ClientSidebarComponent allOrdersAndInvoicesDropdown() {
         stepWithRole("Открыть выпадающий список Заказы/Счета", () -> {
             ordersAndInvoicesDropdownLocator.click();
         });
         return this;
     }
 
-    public SidebarClientComponent home() {
+    public ClientSidebarComponent home() {
         stepWithRole("Перейти на домашнюю страницу", () -> {
             homeLinkLocator.click();
         });
         return this;
     }
 
-    public SidebarClientComponent allObjects() {
+    public ClientSidebarComponent allObjects() {
         stepWithRole("Перейти на страницу  Объекты и оборудование", () -> {
             objectsAndEquipmentLinkLocator.click();
         });
         return this;
     }
 
-    public SidebarClientComponent allOrders() {
+    public ClientSidebarComponent allOrders() {
         stepWithRole("Перейти на страницу Список заказов", () -> {
             allOrdersAndInvoicesDropdown();
             ordersListLinkLocator.shouldBe(visible);
@@ -53,7 +56,7 @@ public class SidebarClientComponent extends BaseSidebarComponent {
         return this;
     }
 
-    public SidebarClientComponent allInvoices() {
+    public ClientSidebarComponent allInvoices() {
         stepWithRole("Перейти на страницу Список счетов", () -> {
             allOrdersAndInvoicesDropdown();
             invoicesListLinkLocator.shouldBe(visible);
@@ -62,7 +65,7 @@ public class SidebarClientComponent extends BaseSidebarComponent {
         return this;
     }
 
-    public SidebarClientComponent profile() {
+    public ClientSidebarComponent profile() {
         stepWithRole("Перейти на страницу Профиль", () -> {
             profileLinkLocator.click();
         });

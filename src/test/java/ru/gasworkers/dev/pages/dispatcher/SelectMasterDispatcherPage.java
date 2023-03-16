@@ -4,7 +4,7 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarDispatcherComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.DispatcherSidebarComponent;
 
 import java.time.Duration;
 
@@ -14,11 +14,11 @@ import static com.codeborne.selenide.Selenide.$$;
 
 public class SelectMasterDispatcherPage extends BaseDispatcherPage {
 
-    private final SidebarDispatcherComponent sidebarDispatcher;
+    private final DispatcherSidebarComponent sidebarDispatcher;
 
     public SelectMasterDispatcherPage(RoleBrowser browser) {
         super(browser);
-        sidebarDispatcher = new SidebarDispatcherComponent(browser);
+        sidebarDispatcher = new DispatcherSidebarComponent(browser);
     }
 
     private final String

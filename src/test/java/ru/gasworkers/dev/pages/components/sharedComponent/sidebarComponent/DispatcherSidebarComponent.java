@@ -2,12 +2,14 @@ package ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent;
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.BaseComponent;
 
-public class SidebarDispatcherComponent extends BaseSidebarComponent {
+public class DispatcherSidebarComponent extends BaseSidebarComponent {
+    public final SupportServiceSidebarComponent support;
 
-    public SidebarDispatcherComponent(RoleBrowser browser) {
+
+    public DispatcherSidebarComponent(RoleBrowser browser) {
         super(browser);
+        support = new SupportServiceSidebarComponent(browser);
     }
 
     SelenideElement generalMapLocator = driver.$$(".sidebar .link").get(0).as("Карта Диспетчера"),
@@ -16,21 +18,21 @@ public class SidebarDispatcherComponent extends BaseSidebarComponent {
 
 
 
-    public SidebarDispatcherComponent generalMap() {
+    public DispatcherSidebarComponent generalMap() {
         stepWithRole("Переход на Крату Диспетчера", () -> {
             generalMapLocator.click();
         });
         return this;
     }
 
-    public SidebarDispatcherComponent allMasters() {
+    public DispatcherSidebarComponent allMasters() {
         stepWithRole("Переход в раздел Список Мастеров", () -> {
             allMastersListLinkLocator.click();
         });
         return this;
     }
 
-    public SidebarDispatcherComponent profile() {
+    public DispatcherSidebarComponent profile() {
         stepWithRole("Переход в раздел Профиль", () -> {
             profileDispatcherLinkLocator.click();
         });

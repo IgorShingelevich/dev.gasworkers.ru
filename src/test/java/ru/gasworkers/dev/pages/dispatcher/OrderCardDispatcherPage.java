@@ -11,7 +11,7 @@ import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.action
 import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCommonTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavDocsTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavInfoMasterTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarDispatcherComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.DispatcherSidebarComponent;
 
 import java.time.Duration;
 
@@ -23,7 +23,7 @@ import static io.qameta.allure.Allure.step;
 
 public class OrderCardDispatcherPage extends BaseDispatcherPage {
 
-    public final SidebarDispatcherComponent sidebar;
+    public final DispatcherSidebarComponent sidebar;
     public final DatePickerOrderDispatcherComponent datePicker;
     public final ActionsBlockDispatcherComponent actionBlock;
     public final NavCommonTabOrderCardComponent commonTab;
@@ -32,7 +32,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
 
     public OrderCardDispatcherPage(RoleBrowser browser) {
         super(browser);
-        sidebar = new SidebarDispatcherComponent(browser);
+        sidebar = new DispatcherSidebarComponent(browser);
         datePicker = new DatePickerOrderDispatcherComponent(browser);
         actionBlock = new ActionsBlockDispatcherComponent(browser);
         commonTab = new NavCommonTabOrderCardComponent(browser);

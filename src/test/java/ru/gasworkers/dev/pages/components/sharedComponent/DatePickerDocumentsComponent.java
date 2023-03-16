@@ -41,6 +41,7 @@ public class DatePickerDocumentsComponent extends BaseComponent {
                 LocalDate localDate = LocalDate.parse(date);
                 String formattedDate = localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 calendarLocator.shouldHave(value(formattedDate));
+                System.out.println("Установлена дата: " + formattedDate);
             });
         });
     }

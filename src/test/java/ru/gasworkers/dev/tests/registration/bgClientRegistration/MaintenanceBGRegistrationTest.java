@@ -82,7 +82,7 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
                 clientPages.getHomePage().checkBGInitialState(randomClient.getSinceDate());
             });
             step("Страница Уведомления", () -> {
-                clientPages.getHomePage().actionsBlock.allNotifications();
+                clientPages.getHomePage().actionsBlock.notifications();
                 // TODO fix  Push notification  - not appear after Guide
 //                clientPages.getAllNotificationsPage().checkInitialBGState(orderNumber);
 //                clientPages.getAllNotificationsPage().readAll();

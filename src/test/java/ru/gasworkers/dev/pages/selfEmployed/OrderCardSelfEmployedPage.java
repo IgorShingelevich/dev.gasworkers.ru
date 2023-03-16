@@ -4,10 +4,10 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.FillProfileBannerSelfEmployedComponent;
-import ru.gasworkers.dev.pages.components.selfEmployedComponent.HeaderSelfEmployedComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.HeaderSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.OfferPriceModalWindowSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.StatusBoxOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarSelfEmployedComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SelfEmployedSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCheckListTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCommonTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavDocsTabOrderCardComponent;
@@ -23,7 +23,7 @@ import static com.codeborne.selenide.Selectors.byTagAndText;
 public class OrderCardSelfEmployedPage  extends BaseSelfEmployedPage{
 
     public final HeaderSelfEmployedComponent header;
-    public final SidebarSelfEmployedComponent sidebar;
+    public final SelfEmployedSidebarComponent sidebar;
     public final FillProfileBannerSelfEmployedComponent fillProfileBanner;
     public final OfferPriceModalWindowSelfEmployedComponent offerPriceModalWindow;
     public final StatusBoxOrderCardComponent statusBox;
@@ -38,7 +38,7 @@ public class OrderCardSelfEmployedPage  extends BaseSelfEmployedPage{
     public OrderCardSelfEmployedPage(RoleBrowser browser) {
         super(browser);
         header = new HeaderSelfEmployedComponent(browser);
-        sidebar = new SidebarSelfEmployedComponent(browser);
+        sidebar = new SelfEmployedSidebarComponent(browser);
         fillProfileBanner = new FillProfileBannerSelfEmployedComponent(browser);
         offerPriceModalWindow = new OfferPriceModalWindowSelfEmployedComponent(browser);
         statusBox = new StatusBoxOrderCardComponent(browser);

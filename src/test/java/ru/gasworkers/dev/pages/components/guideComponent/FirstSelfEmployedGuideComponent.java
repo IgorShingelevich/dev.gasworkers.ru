@@ -41,7 +41,7 @@ public class FirstSelfEmployedGuideComponent extends BaseComponent {
     SelenideElement
             guideFrameLocator = driver.$("div.gas-guide-main").as("Гайд"),
             guideTipTextBoxLocator = driver.$("div.gas-guide-tip-light").as("Баннер с информацией"),
-            guideButtonLocator = driver.$("button.btn.btn-secondary.disable-outline.small").as("Кнопка Ok баннера"),
+            guideOKButtonLocator = driver.$("button.btn.btn-secondary.disable-outline.small").as("Кнопка Ok баннера"),
             guideSkipButtonLocator = driver.$(".gas-guide-footer button.btn.btn-secondary.disable-outline").as("Кнопка баннера Пропустить"),
             guideNavPrevButtonLocator = driver.$("button.gas-screen-toggler__btn.prev").as("Кнопка гида Назад"),
             guideNavNextButtonLocator = driver.$("button.gas-screen-toggler__btn.next").as("Кнопка гида Вперед"),
@@ -51,10 +51,10 @@ public class FirstSelfEmployedGuideComponent extends BaseComponent {
 //            qrCodeDescriptionLocator = driver.$$("div.mt-2.small").as("Коллекция Описание QR кодов");
 
 
-    public void playSequence() {
+    public void playSequence(Integer maxStep14) {
         stepWithRole("Проиграть гайд", () -> {
             guideFrameLocator.shouldBe(visible, Duration.ofSeconds(10)); // added 10 seconds
-            for (int i = 0; i < 14; i++) {
+            for (int i = 0; i < maxStep14; i++) {
                 switch (i) {
                     case 0:
                         assertThat(driver.url(), containsString("https://dev.gasworkers.ru/profile/dispatcher"));
@@ -120,15 +120,16 @@ public class FirstSelfEmployedGuideComponent extends BaseComponent {
                         break;
                 }
             }
-            guideFrameLocator.shouldNotBe(visible);
+            System.out.println("Гайд проигран" + " " + maxStep14);
         });
     }
 
     public void skipGuide() {
         stepWithRole("Пропустить гид", () -> {
-            guideButtonLocator.click();
+            guideSkipButtonLocator.click();
             guideFrameLocator.shouldNotBe(visible);
         });
+        System.out.println("skipGuide");
     }
 
     public void nextStepGuide() {
@@ -145,7 +146,7 @@ public class FirstSelfEmployedGuideComponent extends BaseComponent {
 
     public void okButton() {
         stepWithRole("Нажать кнопку гида  Ok", () -> {
-            guideButtonLocator.click();
+            guideOKButtonLocator.click();
         });
     }
 

@@ -9,8 +9,8 @@ import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClient
 import ru.gasworkers.dev.pages.components.clientComponent.guideComponent.FirstRepairGuideComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.videoComponent.videoBannerHomePageClientComponent.AwaitingNowVideoBGBannerHomePageClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.PersonSummaryComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockClientComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 
 import java.time.Duration;
 
@@ -19,8 +19,8 @@ import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public final class HomeClientPage extends BaseClientPage {
 
-    public final SidebarClientComponent sidebar;
-    public final ActionsBlockClientComponent actionsBlock;
+    public final ClientSidebarComponent sidebar;
+    public final ClientActionsBlockComponent actionsBlock;
     public final LastOrderProfileClientComponent lastOrderComponent;
     public final PersonSummaryComponent personSummaryComponent;
     public final FirstMaintenanceGuideComponent firstMaintenanceGuide;
@@ -30,8 +30,8 @@ public final class HomeClientPage extends BaseClientPage {
 
     public HomeClientPage(RoleBrowser browser) {
         super(browser);
-        sidebar = new SidebarClientComponent(browser);
-        actionsBlock = new ActionsBlockClientComponent(browser);
+        sidebar = new ClientSidebarComponent(browser);
+        actionsBlock = new ClientActionsBlockComponent(browser);
         lastOrderComponent = new LastOrderProfileClientComponent(browser);
         personSummaryComponent = new PersonSummaryComponent(browser);
         firstMaintenanceGuide = new FirstMaintenanceGuideComponent(browser);

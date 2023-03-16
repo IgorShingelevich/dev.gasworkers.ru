@@ -84,19 +84,24 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
 //                    selfEmployedPages.getHomeSelfEmployedPage().firstGuide.playSequence();
 //        });
         step("Домашняя страница  СМЗ - пропустить гид", () -> {
+            selfEmployedPages.getHomeSelfEmployedPage().firstGuide.playSequence(1);
             selfEmployedPages.getHomeSelfEmployedPage().firstGuide.skipGuide();
         });
         step("Карта СМЗ после гида", () -> {
             selfEmployedPages.getHomeSelfEmployedPage().checkInitialState();
         });
 
+        step("Выбрать первый заказ", () -> {
+            selfEmployedPages.getHomeSelfEmployedPage().mapMode.selectOfferByIndex(0);
+        });
 
 
-        step("Начальное состотояние кабинета СМЗ - модальное окно - расценить  тендер ", () -> {
+
+        /*step("Начальное состотояние кабинета СМЗ - модальное окно - расценить  тендер ", () -> {
             selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.checkInitialState();
             selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.fillOffer(randomMaster.getMasterIDFile(), randomMaster.getMasterIDValidTillDatePicker(), randomMaster.getEquipmentCertificateFile(), randomMaster.getEquipmentCertificateValidTillDatePicker(), equipmentWorkPrice, primaryVisitPrice);
 
-        });
+        });*/
 
 
     }

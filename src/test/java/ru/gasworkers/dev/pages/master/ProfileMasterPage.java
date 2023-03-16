@@ -8,7 +8,7 @@ import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.N
 import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.NavPasswordTabProfileComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.navCommonTab.NavCommonMasterTabProfileComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.navProfileTab.NavProfileMasterTabProfileComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarMasterComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.MasterSidebarComponent;
 
 public class ProfileMasterPage extends BaseMasterPage{
     public final NavProfileMasterTabProfileComponent profileTab;
@@ -17,12 +17,12 @@ public class ProfileMasterPage extends BaseMasterPage{
     public final NavEquipmentTabProfileComponent equipmentTab;
     public final NavPasswordTabProfileComponent passwordTab;
     public final NavNotificationsTabProfileComponent notificationsTab;
-    public final SidebarMasterComponent sidebar;
+    public final MasterSidebarComponent sidebar;
     public final ActionsBlockMasterComponent actionsBlock;
 
     public ProfileMasterPage(RoleBrowser browser) {
         super(browser);
-        sidebar = new SidebarMasterComponent(browser);
+        sidebar = new MasterSidebarComponent(browser);
         actionsBlock = new ActionsBlockMasterComponent(browser);
         profileTab = new NavProfileMasterTabProfileComponent(browser);
         commonTab = new NavCommonMasterTabProfileComponent(browser);

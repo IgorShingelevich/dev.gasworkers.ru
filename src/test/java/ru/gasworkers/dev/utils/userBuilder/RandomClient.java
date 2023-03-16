@@ -114,12 +114,15 @@ public class RandomClient {
         return confirmationCode;
     }
     public File getAvatarRandomPhotoFile() {
+        System.out.println("Client_avatarRandomPhotoFile = " + avatarRandomPhotoFile);
         return avatarRandomPhotoFile;
     }
     public File getEquipmentRandomPhotoFile() {
+        System.out.println("Client_equipmentRandomPhotoFile = " + equipmentRandomPhotoFile);
         return equipmentRandomPhotoFile;
     }
     public File getEquipmentVideoFile() {
+        System.out.println("Client_equipmentVideoFile = " + equipmentVideoFile);
         return equipmentVideoFile;
     }
     public File getPdfFile() {

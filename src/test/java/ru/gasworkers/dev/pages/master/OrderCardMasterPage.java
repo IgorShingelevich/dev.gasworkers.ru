@@ -12,7 +12,7 @@ import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.
 import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCommonTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavDocsTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavInfoMasterTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SidebarMasterComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.MasterSidebarComponent;
 
 import java.time.Duration;
 
@@ -22,7 +22,7 @@ import static io.qameta.allure.Allure.step;
 
 public class OrderCardMasterPage extends BaseMasterPage {
 
-    public final SidebarMasterComponent sidebar;
+    public final MasterSidebarComponent sidebar;
     public final ActionsBlockMasterComponent actionsBlock;
     public final StatusBoxOrderCardComponent statusBox;
     public final NavCommonTabOrderCardComponent commonTab;
@@ -34,7 +34,7 @@ public class OrderCardMasterPage extends BaseMasterPage {
 
     public  OrderCardMasterPage(RoleBrowser browser) {
         super(browser);
-        sidebar = new SidebarMasterComponent(browser);
+        sidebar = new MasterSidebarComponent(browser);
         actionsBlock = new ActionsBlockMasterComponent(browser);
         statusBox = new StatusBoxOrderCardComponent(browser);
         commonTab = new NavCommonTabOrderCardComponent(browser);
