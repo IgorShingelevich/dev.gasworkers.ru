@@ -27,7 +27,7 @@ public class SuccessfulRegistrationSelfEmployedPage extends BaseSelfEmployedPage
             cancelButtonLocator = driver.$("button.btn-outline-primary").as("Кнопка отмены");
 
     public void checkFinishLoading() {
-        stepWithRole("Убедиться, что все элементы страницы отображаются", () -> {
+        stepWithRole("Убедиться, что представлены все  компоненты страницы  успешной регистрации", () -> {
             stepWithRole("Убедиться, что отображается заголовок: " + titleText, () -> {
                 titleLocator.shouldHave(text(titleText));
             });

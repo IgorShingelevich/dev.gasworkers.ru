@@ -26,7 +26,7 @@ public class MasterModeHomeSelfEmployedComponent extends BaseComponent {
         }
 
     public void checkInitialState() {
-        stepWithRole("Проверить начальное состояние страницы", () -> {
+        stepWithRole("Убедиться, что режим мастера домашней страницы СМЗ в начальном состоянии", () -> {
             fillProfileBanner.checkFinishLoading();
             mode.checkMasterMode();
             timetable.checkInitialState();

@@ -4,8 +4,9 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.FillProfileBannerSelfEmployedComponent;
+import ru.gasworkers.dev.pages.components.selfEmployedComponent.orderPageComponent.FillUpOfferBannerOrderPageSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.HeaderSelfEmployedComponent;
-import ru.gasworkers.dev.pages.components.selfEmployedComponent.OfferPriceModalWindowSelfEmployedComponent;
+import ru.gasworkers.dev.pages.components.selfEmployedComponent.orderPageComponent.OfferPriceModalWindowSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.StatusBoxOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SelfEmployedSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCheckListTabOrderCardComponent;
@@ -20,11 +21,12 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 
-public class OrderCardSelfEmployedPage  extends BaseSelfEmployedPage{
+public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
 
     public final HeaderSelfEmployedComponent header;
     public final SelfEmployedSidebarComponent sidebar;
     public final FillProfileBannerSelfEmployedComponent fillProfileBanner;
+    public final FillUpOfferBannerOrderPageSelfEmployedComponent fillUpOfferPriceBanner;
     public final OfferPriceModalWindowSelfEmployedComponent offerPriceModalWindow;
     public final StatusBoxOrderCardComponent statusBox;
 
@@ -34,12 +36,12 @@ public class OrderCardSelfEmployedPage  extends BaseSelfEmployedPage{
     public final NavDocsTabOrderCardComponent tabDocs;
 
 
-
     public OrderCardSelfEmployedPage(RoleBrowser browser) {
         super(browser);
         header = new HeaderSelfEmployedComponent(browser);
         sidebar = new SelfEmployedSidebarComponent(browser);
         fillProfileBanner = new FillProfileBannerSelfEmployedComponent(browser);
+        fillUpOfferPriceBanner = new FillUpOfferBannerOrderPageSelfEmployedComponent(browser);
         offerPriceModalWindow = new OfferPriceModalWindowSelfEmployedComponent(browser);
         statusBox = new StatusBoxOrderCardComponent(browser);
         commonTab = new NavCommonTabOrderCardComponent(browser);
@@ -51,42 +53,55 @@ public class OrderCardSelfEmployedPage  extends BaseSelfEmployedPage{
     }
 
     private final String
-            pageTitleText = "Заказ";
+            pageTitleText = "Заказ",
+            offerPriceButtonText = "Предложить свою цену";
 
     SelenideElement
             titleLocator = driver.$("div.page-title .h3").as("Заголовок страницы"),
             orderBlockLocator = driver.$(".page-content #order").as("Блок заказа"),
             editObjectButtonLocator = driver.$(byTagAndText("span", "Редактировать объект/оборудование")).as("Редактировать объект/оборудование"),
             startWorkingButtonLocator = driver.$(byTagAndText("span", "Приступить к работе")).as("Приступить к работе"),
-            saveButtonLocator = driver.$(byTagAndText("span", "Сохранить")).as("Сохранить");
+            offerPriceButtonLocator = driver.$("button[data-guide='order-pricing']").as("Предложить свою цену"),
+            refuseOrderButtonLocator = driver.$(byTagAndText("span", "Отказаться")).as("Отказаться от заказа");
 
     ElementsCollection
 
             navButtonsCollection = driver.$$("div.navigation-block li").as("Навигационные кнопки");
 
 
-
-
-    public void navCommon(){
+    public void navCommon() {
         stepWithRole("Перейти на вкладку Описание заказа", () -> {
             navButtonsCollection.get(0).shouldHave(text("Описание заказа")).click();
         });
     }
 
-    public void navCheckList(){
+    public void navCheckList() {
         stepWithRole("Перейти на вкладку Чек лист", () -> {
             navButtonsCollection.get(1).shouldHave(text("Чек лист")).click();
         });
     }
 
-    public void navInfoMaster(){
+    public void navInfoMaster() {
         stepWithRole("Перейти на вкладку Информация по работам", () -> {
             navButtonsCollection.get(2).shouldHave(text("Информация по работам")).click();
         });
     }
-    public void navDocs(){
+
+    public void navDocs() {
         stepWithRole("Перейти на вкладку Документы", () -> {
             navButtonsCollection.get(3).shouldHave(text("Документы")).click();
+        });
+    }
+
+    public void offerPriceButton () {
+        stepWithRole("Нажать на кнопку Предложить свою цену", () -> {
+            offerPriceButtonLocator.click();
+        });
+    }
+
+    public void refuseOrderButton () {
+        stepWithRole("Нажать на кнопку Отказаться от заказа", () -> {
+            refuseOrderButtonLocator.click();
         });
     }
 
@@ -100,27 +115,23 @@ public class OrderCardSelfEmployedPage  extends BaseSelfEmployedPage{
         });
     }
 
-    public void checkInitialState(){
+    public void checkInitialState() {
         stepWithRole("Убедиться. что страница находится в состоянии послке регистрации", () -> {
             stepWithRole("Убедиться, что 3  вкладки отображаются", () -> {
-                navButtonsCollection.shouldHave(size(3));
+                navButtonsCollection.shouldHave(size(3), Duration.ofSeconds(10));
             });
         });
         stepWithRole("Убедиться что в карточке заказа отсутствует вкладка чеклист", () -> {
             navButtonsCollection.shouldHave(size(3));
-            navButtonsCollection.get(3).shouldHave(text("Документы"));
+            navButtonsCollection.get(2).shouldHave(text("Документы"));
         });
         stepWithRole("Убедиться что отображается блок заказа", () -> {
             orderBlockLocator.shouldBe(visible);
         });
         stepWithRole("Убедиться что отображается блок статуса заказа", () -> {
-            statusBox.checkInitialState();
+            statusBox.newTenderState();
         });
-
-
-
     }
-
 
 
 }

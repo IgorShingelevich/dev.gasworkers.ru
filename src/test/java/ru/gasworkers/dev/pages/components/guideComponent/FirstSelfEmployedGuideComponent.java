@@ -51,10 +51,10 @@ public class FirstSelfEmployedGuideComponent extends BaseComponent {
 //            qrCodeDescriptionLocator = driver.$$("div.mt-2.small").as("Коллекция Описание QR кодов");
 
 
-    public void playSequence(Integer maxStep14) {
-        stepWithRole("Проиграть гайд", () -> {
+    public void playSequence(Integer maxStepInd14) {
+        stepWithRole("Проиграть гид: " + maxStepInd14+1 + " шагов", () -> {
             guideFrameLocator.shouldBe(visible, Duration.ofSeconds(10)); // added 10 seconds
-            for (int i = 0; i < maxStep14; i++) {
+            for (int i = 0; i < maxStepInd14; i++) {
                 switch (i) {
                     case 0:
                         assertThat(driver.url(), containsString("https://dev.gasworkers.ru/profile/dispatcher"));
@@ -120,14 +120,14 @@ public class FirstSelfEmployedGuideComponent extends BaseComponent {
                         break;
                 }
             }
-            System.out.println("Гайд проигран" + " " + maxStep14);
+            System.out.println("guide played: " + " " + maxStepInd14+1 + " steps");
         });
     }
 
     public void skipGuide() {
         stepWithRole("Пропустить гид", () -> {
             guideSkipButtonLocator.click();
-            guideFrameLocator.shouldNotBe(visible);
+            guideFrameLocator.shouldNotBe(visible, Duration.ofSeconds(10));
         });
         System.out.println("skipGuide");
     }

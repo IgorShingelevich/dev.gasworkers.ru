@@ -9,6 +9,7 @@ import ru.gasworkers.dev.model.equipment.EquipmentType;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
 import java.io.File;
+import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 
@@ -109,7 +110,12 @@ public class EquipmentBGRegistrationLandingComponent extends BaseComponent {
             });
             String errorText = stepWithRole("Выбрать модель оборудования: " , () -> { // + markCollectionLocator.get(model).getText()
                 modelFieldLocator.click();
-                modelCollection.get(model).click();
+                stepWithRole("Убедиться, что список моделей оборудования отображается", () -> {
+                    modelCollection.shouldHave(CollectionCondition.sizeGreaterThan(1));
+                });
+                stepWithRole("Выбрать: " + model + " модель оборудования", () -> {
+                    modelCollection.get(model).click();
+                });
                 stepWithRole("Убедиться, что список моделей оборудования скрыт", () -> {
                     modelCollection.shouldHave(CollectionCondition.size(0));
                 });

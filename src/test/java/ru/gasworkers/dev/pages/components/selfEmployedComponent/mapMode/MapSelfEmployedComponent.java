@@ -35,8 +35,8 @@ public class MapSelfEmployedComponent extends BaseComponent {
             mapSizeToggleButtonLocator = driver.$("div.map-sticky__header--full").as("Кнопка переключения размера карты");
 
     public void checkFinishLoading() {
-        stepWithRole("Проверить, что карта загрузилась", () -> {
-            stepWithRole("Проверить, что кнопки плюс и переключения размера карты отображаются", () -> {
+        stepWithRole("Убедиться, что все элементы карты загрузились", () -> {
+            stepWithRole("Убедиться, что кнопки плюс и переключения размера карты отображаются", () -> {
                 mapPlusButton.shouldBe(visible, Duration.ofSeconds(20));
                 mapSizeToggleButtonLocator.shouldBe(visible);
             });
@@ -55,12 +55,12 @@ public class MapSelfEmployedComponent extends BaseComponent {
     }
 
     public void checkMapLegend() {
-        stepWithRole("Проверить, что легенда карты отображается", () -> {
-            stepWithRole("Проверить, что элементы легенды скрыты", () -> {
+        stepWithRole("Убедиться, что легенда карты отображается", () -> {
+            stepWithRole("Убедиться, что элементы легенды скрыты", () -> {
                 mapLegendItemsCollection.shouldBe(CollectionCondition.size(0));
             });
             clickDropdown();
-            stepWithRole("Проверить, что элементы легенды отображаются", () -> {
+            stepWithRole("Убедиться, что элементы легенды отображаются", () -> {
                 mapLegendItemsCollection.shouldBe(CollectionCondition.size(4));
                 mapLegendItemsCollection.get(0).shouldHave(text(mapLegendItem1Text));
                 mapLegendItemsCollection.get(1).shouldHave(text(mapLegendItem2Text));
@@ -68,7 +68,7 @@ public class MapSelfEmployedComponent extends BaseComponent {
                 mapLegendItemsCollection.get(3).shouldHave(text(mapLegendItem4Text));
             });
             clickDropdown();
-            stepWithRole("Проверить, что элементы легенды скрыты", () -> {
+            stepWithRole("Убедиться, что элементы легенды скрыты", () -> {
                 mapLegendItemsCollection.shouldBe(CollectionCondition.size(0));
             });
         });

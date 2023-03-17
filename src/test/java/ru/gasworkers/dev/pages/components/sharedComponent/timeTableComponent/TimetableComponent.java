@@ -19,9 +19,19 @@ public class TimetableComponent extends BaseComponent {
             timetableLocator = driver.$("div.timetable").as("Расписание");
 
     public void checkInitialState() {
-        stepWithRole("Проверить начальное состояние расписания", () -> {
+        stepWithRole("Убедиться, что компонент расписание в начальном состоянии", () -> {
             modeToggler.checkInitialState();
             timetableLocator.shouldBe(visible, Duration.ofSeconds(10));
+            // todo check that timetable is empty
         });
     }
+    public void checkFinishLoading() {
+        stepWithRole("Убедиться, что компонент расписание загрузился", () -> {
+            modeToggler.checkInitialState();
+            timetableLocator.shouldBe(visible, Duration.ofSeconds(10));
+            //todo add check timetable elements
+        });
+    }
+
+
 }

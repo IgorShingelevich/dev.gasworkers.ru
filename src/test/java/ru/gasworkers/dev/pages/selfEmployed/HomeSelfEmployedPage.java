@@ -27,7 +27,7 @@ public class HomeSelfEmployedPage extends BaseSelfEmployedPage{
 
 
     public void checkInitialState() {
-        stepWithRole("Проверить начальное состояние страницы", () -> {
+        stepWithRole("Убедиться, что все домашняя страница в начальном состоянии ", () -> {
             modeSwitcher.checkDispatcherMode();
             header.checkFinishLoading(); //todo add messagesButtonLocator
             mapMode.checkInitialState();

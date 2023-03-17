@@ -35,7 +35,7 @@ public class MapModeHomeSelfEmployedComponent extends BaseComponent {
 
 
     public void checkInitialState() {
-        stepWithRole("Проверить начальное состояние режима карты", () -> {
+        stepWithRole("Убедиться, что режим карты СМЗ в начальном состоянии", () -> {
             map.checkFinishLoading();
             fillProfileBanner.checkFinishLoading();
             stepWithRole("Убедиться что количестов блоков с предложениями совпадает с количеством предложений на карте", () -> {
@@ -49,14 +49,14 @@ public class MapModeHomeSelfEmployedComponent extends BaseComponent {
         });
     }
 
-    public void selectOfferByNumber(String number) {
-        stepWithRole("Выбрать предложение по номеру", () -> {
-            offersBoxCollection.findBy(text(number)).find("button.btn-primary").click();
+    public void selectOfferByNumber(String orderNumber) {
+        stepWithRole("Выбрать по номеру: " + orderNumber + " предложение", () -> {
+            offersBoxCollection.findBy(text(orderNumber)).find("button.btn-primary").click();
         });
     }
 
     public void  selectOfferByIndex(int index) {
-        stepWithRole("Выбрать предложение по индексу", () -> {
+        stepWithRole("Выбрать  по списку: " + index+1 + " предложение", () -> {
             offersBoxCollection.get(index).find("button.btn-primary").click();
         });
     }

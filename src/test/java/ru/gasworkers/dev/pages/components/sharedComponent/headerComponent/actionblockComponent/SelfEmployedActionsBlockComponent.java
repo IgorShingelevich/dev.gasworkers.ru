@@ -25,7 +25,7 @@ public class SelfEmployedActionsBlockComponent extends BaseComponent {
             logoutLinkABLocator = driver.$$("button.profile-menu__link").findBy(text("Выйти")).as("Ссылка на выход");
 
     public SelfEmployedActionsBlockComponent checkFinishLoading () {
-        stepWithRole("Убедиться что все компоненты загрузились", () -> {
+        stepWithRole("Убедиться, что все элементы блока действий хедера загрузились", () -> {
             actionsBlock.shouldBe(visible);
             //todo add messagesButtonLocator
             notificationsButtonLocator.shouldBe(visible);

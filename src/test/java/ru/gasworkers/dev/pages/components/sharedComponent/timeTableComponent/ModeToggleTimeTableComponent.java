@@ -28,7 +28,7 @@ public class ModeToggleTimeTableComponent extends BaseComponent {
             offersPositionLocator = togglePositionCollection.get(1).as("Позиция переключателя режима расписания: заказы");
 
     public void checkInitialState() {
-        stepWithRole("Проверить начальное состояние компонента переключателя режима расписания", () -> {
+        stepWithRole("Убедиться, что  компонент переключателя режима расписания в начальном состоянии", () -> {
             stepWithRole("Убедиться, что компонент переключателя режима расписания виден", () -> {
                 toggleBoxLocator.shouldBe(visible);
             });

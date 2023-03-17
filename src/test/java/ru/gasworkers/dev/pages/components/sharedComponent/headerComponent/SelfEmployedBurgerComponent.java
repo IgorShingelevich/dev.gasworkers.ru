@@ -35,7 +35,7 @@ public class SelfEmployedBurgerComponent extends BaseComponent {
             profileLinkLocator = linkCollection.get(1).as("Ссылка на профиль");
 
     public void checkFinishLoading() {
-        stepWithRole("Убедиться, что бургер загрузился", () -> {
+        stepWithRole("Убедиться, что все элементы бургера загрузились", () -> {
             openBurgerButtonLocator.shouldBe(visible);
             openBurger();
             closeBurgerButtonLocator.shouldBe(visible);
@@ -50,13 +50,13 @@ public class SelfEmployedBurgerComponent extends BaseComponent {
     }
 
     public void openBurger() {
-        stepWithRole("Кликнуть на кнопку Открыть Бургер", () -> {
+        stepWithRole("Кликнуть на кнопку открыть бургер", () -> {
             openBurgerButtonLocator.click();
         });
     }
 
     public void closeBurger() {
-        stepWithRole("Кликнуть на кнопку Закрыть Бургер", () -> {
+        stepWithRole("Кликнуть на кнопку закрыть бургер", () -> {
             closeBurgerButtonLocator.click();
         });
     }

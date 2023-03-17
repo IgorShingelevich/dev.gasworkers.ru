@@ -51,7 +51,7 @@ public class TypeSelfEmployedPage extends BaseSelfEmployedPage {
             backButtonLocator = driver.$("button.btn.btn-outline-primary").as("Кнопка перехода к предыдущему шагу");
 
     public void checkFinishLoading() {
-        stepWithRole("Убедиться, что все компоненты страницы загрузились", () -> {
+        stepWithRole("Убедиться, что представлены все компоненты  страницы выбора типа смз", () -> {
             header.checkFinishLoading();
             banner.checkFinishLoading();
             stepWithRole("Убедиться, что заголовок страницы загрузился", () -> {

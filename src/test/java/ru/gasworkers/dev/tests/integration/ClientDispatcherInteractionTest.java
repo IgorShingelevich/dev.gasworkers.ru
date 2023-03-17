@@ -122,14 +122,14 @@ class ClientDispatcherInteractionTest extends BaseTest {
                 clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
                 clientPages.getSelectServicePage().checkPublishedState();
             });
-            step("Клиент просматривает заказ на домашней странице", () -> {
+            step("Клиент просматривает опубликованный заказ на домашней странице", () -> {
                  clientPages.getSelectServicePage().toOrderCard();
                  clientPages.getOrderCardPage().checkFinishLoading();
                  clientPages.getOrderCardPage().sidebar.home();
                  clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
                  clientPages.getHomePage().popUpClose();
             });
-            step("Клиент просматривает заказа в карточке объекта", () -> {
+            step("Клиент просматривает опубликованный заказа в карточке объекта", () -> {
                 clientPages.getHomePage().lastOrderComponent.lastOrderCard();
                 clientPages.getOrderCardPage().checkFinishLoading();
                 clientPages.getOrderCardPage().checkPublishedState(OrderStatus.PUBLISHED, OrderType.MAINTENANCE);
@@ -141,7 +141,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             return currentOrderNumber;
         });
 
-        step("Диспетчер принимает заказ на ТО ", () -> {
+        step("Диспетчер принимает опубликованный заказ на ТО ", () -> {
             dispatcherPages.getHomePage().checkFinishLoading();
             dispatcherPages.getHomePage().popUpClose();
             dispatcherPages.getHomePage().switchToListView();

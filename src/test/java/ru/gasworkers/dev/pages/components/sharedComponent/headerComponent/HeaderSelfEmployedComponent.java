@@ -29,7 +29,7 @@ public class HeaderSelfEmployedComponent extends BaseComponent {
     }
 
     public void checkFinishLoading() {
-        stepWithRole("Убедиться что все компоненты загрузились", () -> {
+        stepWithRole("Убедиться, что все элементы хедера загрузились", () -> {
             burger.checkFinishLoading();
             actionsBlock.checkFinishLoading(); //todo add messagesButtonLocator
             stepWithRole("Убедиться что логотип загрузился", () -> {

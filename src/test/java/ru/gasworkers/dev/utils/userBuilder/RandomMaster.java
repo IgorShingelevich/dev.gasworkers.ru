@@ -195,7 +195,7 @@ public class RandomMaster {
     public String getMasterIDValidTillDatePicker() {
         return masterIDValidTillDatePicker;
     }
-    public String getEquipmentCertificateValidTillDatePicker() {
+    public String getBoilerEquipmentCertificateValidTillDatePicker() {
         return equipmentCertificateValidTillDatePicker;
     }
     public File getAvatarRandomPhotoFile() {
@@ -222,7 +222,7 @@ public class RandomMaster {
     public File getTaxpayerCertificateFile() {
         return taxpayerCertificateFile;
     }
-    public File getEquipmentCertificateFile() {
+    public File getBoilerEquipmentCertificateFile() {
         return equipmentCertificateFile;
     }
 

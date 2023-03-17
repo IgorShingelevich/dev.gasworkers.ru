@@ -87,13 +87,37 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
             selfEmployedPages.getHomeSelfEmployedPage().firstGuide.playSequence(1);
             selfEmployedPages.getHomeSelfEmployedPage().firstGuide.skipGuide();
         });
-        step("Карта СМЗ после гида", () -> {
+        step("Домашняя СМЗ после гида", () -> {
             selfEmployedPages.getHomeSelfEmployedPage().checkInitialState();
         });
 
         step("Выбрать первый заказ", () -> {
-            selfEmployedPages.getHomeSelfEmployedPage().mapMode.selectOfferByIndex(0);
+//            selfEmployedPages.getHomeSelfEmployedPage().mapMode.selectOfferByIndex(0);
+            selfEmployedPages.getHomeSelfEmployedPage().mapMode.selectOfferByNumber("4556");
         });
+
+        step("Страница карточки заказа", () -> {
+            selfEmployedPages.getOrderCardSelfEmployedPage().checkInitialState();
+//            selfEmployedPages.getOrderCardSelfEmployedPage().checkNotEvaluatedOfferButtonState();
+        });
+        step("Модальное окно Расценить заказ", () -> {
+            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceButton();
+            selfEmployedPages.getOrderCardSelfEmployedPage().fillUpOfferPriceBanner.checkFinishLoading();
+            selfEmployedPages.getOrderCardSelfEmployedPage().fillUpOfferPriceBanner.clickForwardButton();
+            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.checkInitialState();
+            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.checkOfferPriceEquipmentCount();
+            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.fillCollectionPrices("4010", "4100", primaryVisitPrice);
+            int currentOfferEquipmentPrice = selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.allEquipmentCurrentPrice();
+            int totalOfferPrice = selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.totalOfferPrice();
+            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.fillMasterIdDocuments(randomMaster.getMasterIDFile(), randomMaster.getMasterIDValidTillDatePicker());
+            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.uploadAllBoilerEquipmentCertificateFileAndDate(randomMaster.getBoilerEquipmentCertificateFile(), randomMaster.getBoilerEquipmentCertificateValidTillDatePicker());
+            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.saveButton();
+        });
+        step("Страница карточки  расцененного заказа", () -> {
+//            selfEmployedPages.getOrderCardSelfEmployedPage().checkNewTenderState();
+//            selfEmployedPages.getOrderCardSelfEmployedPage().checkEvaluatedOfferButtonsState();
+        });
+
 
 
 
@@ -105,6 +129,5 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
 
 
     }
-
 
 }
