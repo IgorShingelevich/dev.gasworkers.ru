@@ -32,7 +32,7 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
     @Feature(AllureFeature.USUAL_REGISTRATION)
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.SE_MEMBER),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Регистрация СМЗ в СК")
-    public void  ByPhoneSEMemberRegistrationTest() {
+    public void byPhoneSEMemberRegistrationTest() {
         String equipmentWorkPrice ="4000";
         String primaryVisitPrice = "3000";
         step("Страница лендинга", () -> {
@@ -93,7 +93,7 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
 
         step("Выбрать первый заказ", () -> {
 //            selfEmployedPages.getHomeSelfEmployedPage().mapMode.selectOfferByIndex(0);
-            selfEmployedPages.getHomeSelfEmployedPage().mapMode.selectOfferByNumber("4556");
+            selfEmployedPages.getHomeSelfEmployedPage().mapMode.selectOfferByNumber("4561");
         });
 
         step("Страница карточки заказа", () -> {

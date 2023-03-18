@@ -86,8 +86,10 @@ public class RandomMaster {
         this.equipmentCertificateValidTillDatePicker = LocalDate.now().plusDays(1).format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
         this.workAddressNumber = faker.regexify("[0-9]{1,3}");
         this.avatarRandomPhotoFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\person\\test_person" + faker.random().nextInt(1,9) + ".jpg");
-        this.masterIDFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\diploma\\test_diploma" + faker.random().nextInt(1,3) + ".jpg");
-        this.equipmentCertificateFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\diploma\\test_diploma" + faker.random().nextInt(1,3) + ".jpg");
+        this.masterIDFile = new File("src/test/resources/uploadFiles/diploma/test_diploma" + faker.random().nextInt(1, 3) + ".jpg");
+//                this.masterIDFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\diploma\\test_diploma" + faker.random().nextInt(1,3) + ".jpg");
+        this.equipmentCertificateFile = new File("src/test/resources/uploadFiles/diploma/test_diploma" + faker.random().nextInt(1, 3) + ".jpg");
+//        this.equipmentCertificateFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\diploma\\test_diploma" + faker.random().nextInt(1,3) + ".jpg");
         this.taxpayerCertificateFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\diploma\\test_diploma" + faker.random().nextInt(1,3) + ".jpg");
         this.equipmentRandomPhotoFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\equipment\\test_equipment" + faker.random().nextInt(1,4) + ".jpg");
         this.equipmentVideoFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\video\\test_equipment_video1.mp4");

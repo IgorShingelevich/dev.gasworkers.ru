@@ -12,6 +12,7 @@ import java.io.File;
 import static com.codeborne.selenide.Condition.*;
 
 public class OfferPriceModalWindowSelfEmployedComponent extends BaseComponent {
+
     public final DatePickerDocumentsComponent datePicker;
 
     public OfferPriceModalWindowSelfEmployedComponent(RoleBrowser browser) {
@@ -19,8 +20,7 @@ public class OfferPriceModalWindowSelfEmployedComponent extends BaseComponent {
         datePicker = new DatePickerDocumentsComponent(browser);
     }
 
-    private final String
-            titleText = "Оборудование",
+    private final String titleText = "Оборудование",
             howToGetCertificateText = "«Как получить сертификат»",
             masterIDSubtitleText = "Действующее удостоверение о квалификации",
             masterIDAttachFileDescriptionText = "Прикрепить удостоверение мастера (jpeg, pdf)",
@@ -29,48 +29,45 @@ public class OfferPriceModalWindowSelfEmployedComponent extends BaseComponent {
             attachLinkText = "Прикрепить файл",
             primaryVisitSubtitleText = "Первичный выезд мастера";
 
+    private final SelenideElement self = driver.$("div.modal-content-wrapper").as("Модальное окно");
 
-    SelenideElement
-            modalWindowLocator = driver.$("div.modal-content-wrapper").as("Модальное окно");
+    private final ElementsCollection allEquipmentCollection = self.$$(".w-100.hr.mt-0.mb-3")
+            .as("Коллекция  всего оборудования");
+    private final ElementsCollection equipmentWithCertificateCollection = allEquipmentCollection
+            .filter(Condition.text("котел"))
+            .as("Коллекция оборудования с сертификатами");
+    private final ElementsCollection equipmentWithoutCertificateCollection = allEquipmentCollection
+            .filter(Condition.not(text("котел"))) // exclude(Condition.text("котел"))
+            .as("Коллекция оборудования без сертификатов");
 
+    ElementsCollection deleteUploadedEquipmentCertificateFileButtonCollection = self.$$("div.w-100.mb-3.mb-sm-0.pe-md-5.pe-3.d-flex .close").as("Коллекция кнопок удалить сертификат"),
 
-    ElementsCollection
-            allEquipmentCollection = modalWindowLocator.$$(".w-100.hr.mt-0.mb-3").as("Коллекция  всего оборудования"),
-            equipmentWithCertificateCollection = allEquipmentCollection.filterBy(Condition.text("котел")).as("Коллекция оборудования с сертификатами"),
-            equipmentCertificateAttachFileBellCollection = modalWindowLocator.$$("div div.w-100.mb-2 img").as("Коллекция значков Прикрепить сертификат"),
-            equipmentCertificateDatePickerComponentCollection = driver.$$("div.equipment-price.d-flex  .mx-input.mx-input").as("Коллекция Календарей Дата окончания действия сертификата газового котла"),
+    uploadFileLinkCollection = self.$$("div.photo-uploader input").as("Коллекция загрузчиков файлов"),
+            uploadFileLinkTextCollection = self.$$("button.upload-button").as("Коллекция текстов загрузчиков файлов");
 
-            deleteUploadedEquipmentCertificateFileButtonCollection = modalWindowLocator.$$("div.w-100.mb-3.mb-sm-0.pe-md-5.pe-3.d-flex .close").as("Коллекция кнопок удалить сертификат"),
-
-
-    equipmentWithoutCertificateCollection = allEquipmentCollection.exclude(Condition.text("котел")).as("Коллекция оборудования без сертификатов"),
-            uploadFileLinkCollection = modalWindowLocator.$$("div.photo-uploader input").as("Коллекция загрузчиков файлов"),
-            uploadFileLinkTextCollection = modalWindowLocator.$$("button.upload-button").as("Коллекция текстов загрузчиков файлов");
-
-    SelenideElement
-            titleLocator = modalWindowLocator.$("span.text.bold").as("Заголовок"),
-            howToGetCertificateLocator = modalWindowLocator.$("div.order-price-title.d-flex.justify-content-between a span").as("Ссылка Как получить сертификат"),
-            masterIDSubtitleLocator = modalWindowLocator.$("div.w-100.text-center.h4").as("Подзаголовок Действующее удостоверение о квалификации"),
-            masterIDAttachFileDescriptionLocator = modalWindowLocator.$("div.d-flex.justify-content-between.flex-wrap.flex-sm-nowrap.p-2 span").as("Описание Прикрепить удостоверение мастера (jpeg, pdf)"),
-            masterIDAttachFileBellLocator = modalWindowLocator.$$("div[data-guide='certificate-notification'] img").filterBy(Condition.attributeMatching("src", ".*notification.*")).get(0).as("Значок Прикрепить удостоверение мастера"),
+    SelenideElement titleLocator = self.$("span.text.bold").as("Заголовок"),
+            howToGetCertificateLocator = self.$("div.order-price-title.d-flex.justify-content-between a span").as("Ссылка Как получить сертификат"),
+            masterIDSubtitleLocator = self.$("div.w-100.text-center.h4").as("Подзаголовок Действующее удостоверение о квалификации"),
+            masterIDAttachFileDescriptionLocator = self.$("div.d-flex.justify-content-between.flex-wrap.flex-sm-nowrap.p-2 span").as("Описание Прикрепить удостоверение мастера (jpeg, pdf)"),
+            masterIDAttachFileBellLocator = self.$$("div[data-guide='certificate-notification'] img").filterBy(Condition.attributeMatching("src", ".*notification.*")).get(0).as("Значок Прикрепить удостоверение мастера"),
             uploadMasterIDFileLinkLocator = uploadFileLinkCollection.get(0).as("Ссылка Прикрепить удостоверение мастера"),
             uploadMasterIDFileLinkTextLocator = uploadFileLinkTextCollection.get(0).as("Текст ссылки Прикрепить удостоверение мастера"),
-            deleteUploadedMasterIDFileLinkLocator = modalWindowLocator.$("div[data-guide='certificate-notification'] .close").as("Ссылка удалить удостоверение мастера "),
-            masterIDDatePickerComponentLocator = modalWindowLocator.$("div.p-3.mb-32.notice-blue-light .mx-input.mx-input").as("Календарь Дата окончания действия удостоверения"),
-            equipmentSubtitleLocator = modalWindowLocator.$("div.order-details__title.medium.small.mb-20").as("Подзаголовок Оборудование:"),
-            equipmentCertificateAttachFileDescriptionLocator = modalWindowLocator.$("div div.w-100.mb-2 span.bold").as("Описание Прикрепить сертификат (jpeg, pdf)"),
-            equipmentWorkPriceInputLocator = modalWindowLocator.$("input[placeholder='Стоимость']").as("Поле Цена оборудования"),
+            deleteUploadedMasterIDFileLinkLocator = self.$("div[data-guide='certificate-notification'] .close").as("Ссылка удалить удостоверение мастера "),
+            masterIDDatePickerComponentLocator = self.$("div.p-3.mb-32.notice-blue-light .mx-input.mx-input").as("Календарь Дата окончания действия удостоверения"),
+            equipmentSubtitleLocator = self.$("div.order-details__title.medium.small.mb-20").as("Подзаголовок Оборудование:"),
+            equipmentCertificateAttachFileDescriptionLocator = self.$("div div.w-100.mb-2 span.bold").as("Описание Прикрепить сертификат (jpeg, pdf)"),
+            equipmentWorkPriceInputLocator = self.$("input[placeholder='Стоимость']").as("Поле Цена оборудования"),
             uploadEquipmentCertificateFileLinkLocator = uploadFileLinkCollection.get(1).as("Ссылка Прикрепить сертификат"),
             uploadEquipmentCertificateFileLinkTextLocator = uploadFileLinkTextCollection.get(1).as("Текст ссылки Прикрепить сертификат"),
-            primaryVisitSubtitleLocator = modalWindowLocator.$("div.w-100.hr-blue  .w-100.mb-3.mb-sm-0.pe-md-5.pe-3").as("Подзаголовок Первичный выезд мастера"),
-            primaryVisitPriceInputLocator = modalWindowLocator.$("input[placeholder*='от']").as("Поле Цена первичного выезда"),
-            cancelButtonLocator = modalWindowLocator.$("button.btn.btn-outline-primary").as("Кнопка Отмена"),
-            saveButtonLocator = modalWindowLocator.$("button.btn.btn-primary").as("Кнопка Сохранить");
+            primaryVisitSubtitleLocator = self.$("div.w-100.hr-blue  .w-100.mb-3.mb-sm-0.pe-md-5.pe-3").as("Подзаголовок Первичный выезд мастера"),
+            primaryVisitPriceInputLocator = self.$("input[placeholder*='от']").as("Поле Цена первичного выезда"),
+            cancelButtonLocator = self.$("button.btn.btn-outline-primary").as("Кнопка Отмена"),
+            saveButtonLocator = self.$("button.btn.btn-primary").as("Кнопка Сохранить");
 
     public void checkInitialState() {
         stepWithRole("Убедиться, что модальное окно в состоянии после регистрации", () -> {
             stepWithRole("Убедиться что модальное окно отображается", () -> {
-                modalWindowLocator.shouldBe(visible);
+                self.shouldBe(visible);
             });
             stepWithRole("Убедиться, что заголовок модального окна отображается", () -> {
                 titleLocator.shouldHave(text(titleText));
@@ -148,24 +145,26 @@ public class OfferPriceModalWindowSelfEmployedComponent extends BaseComponent {
 
 
     public void fillCollectionPrices(String priceWOCertText, String priceWCertText, String pricePrimaryVisitText) {
-        Integer equipmentWithCertificateCount = equipmentWithCertificateCollection.size();
-        Integer equipmentWithoutCertificateCount = equipmentWithoutCertificateCollection.size();
-        Integer allEquipmentCount = allEquipmentCollection.size();
-
-        stepWithRole("Заполнить цены ", () -> {
+        stepWithRole("Заполнить цены", () -> {
             stepWithRole("Заполнить цены сертифицированного  оборудования", () -> {
-                fillCollectionPrices(equipmentWithCertificateCollection, equipmentWithCertificateCount, priceWCertText);
+                for (SelenideElement equipment : equipmentWithCertificateCollection) {
+                    fillPriceForEquipment(equipment, priceWCertText);
+                }
             });
+
             stepWithRole("Заполнить цены не сертифицированного  оборудования", () -> {
-                fillCollectionPrices(equipmentWithoutCertificateCollection, equipmentWithoutCertificateCount, priceWOCertText);
+                for (SelenideElement equipment : equipmentWithoutCertificateCollection) {
+                    fillPriceForEquipment(equipment, priceWOCertText);
+                }
             });
+
             stepWithRole("Заполнить цену первичного выезда", () -> {
                 primaryVisitPriceInputLocator.setValue(pricePrimaryVisitText);
             });
         });
-        System.out.println("Fill: " + equipmentWithCertificateCount + " cert items with price: " + priceWCertText);
-        System.out.println("Fill: " + equipmentWithoutCertificateCount + " uncert items with price: " + priceWOCertText);
 
+        System.out.println("Fill: " + equipmentWithCertificateCollection.size() + " cert items with price: " + priceWCertText);
+        System.out.println("Fill: " + equipmentWithoutCertificateCollection.size() + " uncert items with price: " + priceWOCertText);
     }
 
     public int allEquipmentCurrentPrice() {
@@ -205,15 +204,6 @@ public class OfferPriceModalWindowSelfEmployedComponent extends BaseComponent {
         });
     }
 
-    public static void fillCollectionPrices(ElementsCollection collection, Integer elementsCount, String priceText) {
-
-        for (int i = 0; i < elementsCount; i++) {
-            collection.get(i)
-                    .find("input[type='number']").setValue(priceText);
-        }
-
-    }
-
     public void uploadMasterIDFile(File masterIDFile) {
         stepWithRole("Загрузить файл удостоверения мастера", () -> {
             uploadFileLinkCollection.get(0).uploadFile(masterIDFile);
@@ -228,27 +218,24 @@ public class OfferPriceModalWindowSelfEmployedComponent extends BaseComponent {
 
     public void uploadAllBoilerEquipmentCertificateFileAndDate(File equipmentCertificateFile, String equipmentCertificateValidTillDate) {
         stepWithRole("Загрузка сертификата для каждого газового котла(анимации колокольчика, кнопка удалить) и установка даты действия сертификата", () -> {
-            int count = equipmentWithCertificateCollection.size();
-            stepWithRole("Прикрепить сертификат для каждого газового котла", () -> {
-                for (int i = 0; i < count; i++) {
-                    equipmentWithCertificateCollection.get(i).find("input[type='file']").uploadFile(equipmentCertificateFile);
-                    int j = i; // create a new variable j inside the loop
-                    stepWithRole("Убедиться, что значок Прикрепить сертификат изменился на синий", () -> {
-                        equipmentCertificateAttachFileBellCollection.get(j).shouldHave(attribute("src", "https://dev.gasworkers.ru/images/notification-blue.svg"));
-                    });
-                    stepWithRole("Убедиться, что ссылка удалить сертификат оборудования отображается", () -> {
-                        deleteUploadedEquipmentCertificateFileButtonCollection.get(j).shouldBe(visible);
-                    });
-                    stepWithRole("Установить дату окончания действия сертификата оборудования", () -> {
-                        datePicker.setDate(equipmentCertificateDatePickerComponentCollection.get(j), equipmentCertificateValidTillDate);
-                    });
+            for (int i = 0; i < equipmentWithCertificateCollection.size(); i++) {
+                SelenideElement card = equipmentWithCertificateCollection.get(i);
+                stepWithRole("Карточка № " + i + 1 + ". Прикрепить сертификат для каждого газового котла", () -> {
+                    card.find("input[type='file']").uploadFile(equipmentCertificateFile);
 
-                }
-            });
+                    stepWithRole("Убедиться, что значок Прикрепить сертификат изменился на синий", () ->
+                            card.find("div.w-100.mb-2 img").shouldHave(
+                                    attribute("src", "https://dev.gasworkers.ru/images/notification-blue.svg")));
+
+                    stepWithRole("Убедиться, что ссылка удалить сертификат оборудования отображается", () ->
+                            card.find(".close").shouldBe(visible));
+
+                    stepWithRole("Установить дату окончания действия сертификата оборудования", () ->
+                            datePicker.setDate(card.find(".mx-input"), equipmentCertificateValidTillDate));
+                });
+            }
         });
     }
-
-
 
     public void deleteMasterId() {
         stepWithRole("Удалить файл удостоверения мастера", () -> {
@@ -338,5 +325,8 @@ public class OfferPriceModalWindowSelfEmployedComponent extends BaseComponent {
         });
     }
 
+    private void fillPriceForEquipment(SelenideElement equipment, String price) {
+        equipment.find("input[type=number]").setValue(price);
+    }
 
 }

@@ -23,7 +23,7 @@ import static io.qameta.allure.Allure.step;
 
 //@Tag(AllureTag.REGISTRATION)
 //@Tag(AllureTag.REGRESSION)
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+//@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class CredentialsValidationUsualClientRegistrationTest extends BaseTest {
 
 //    SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));

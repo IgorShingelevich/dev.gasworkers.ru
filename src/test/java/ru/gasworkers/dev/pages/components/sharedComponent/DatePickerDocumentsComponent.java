@@ -27,7 +27,7 @@ public class DatePickerDocumentsComponent extends BaseComponent {
         ElementsCollection
     allDateCollection = driver.$$("table.mx-table td").as("Все даты");
 
-    public void setDate (SelenideElement calendarLocator, String date) {
+    public void setDate(SelenideElement calendarLocator, String date) {
         stepWithRole("Установить дату: " + date, () -> {
             stepWithRole("Кликнуть по полю с календварем", () -> {
                 calendarLocator.click();
