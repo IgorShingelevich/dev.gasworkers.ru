@@ -25,12 +25,6 @@ public class PasswordGeneratorUsualClientRegistrationTest extends BaseTest {
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
 
-    @Browser(role = Role.DISPATCHER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.SECOND_ROLE)
-    DispatcherPages dispatcherPages;
-
-    @Browser(role = Role.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.THIRD_ROLE)
-    MasterPages masterPages;
-
     RandomClient randomClient = new RandomClient();
 
     @Test

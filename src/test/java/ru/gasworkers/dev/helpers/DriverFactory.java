@@ -17,9 +17,9 @@ public final class DriverFactory {
         config.browserPosition(annotation.browserPosition());
         config.reportsFolder("target/selenide");
 
-//         config.headless(true);
+         config.headless(true);
         // С удаленным запуском нельзя ставить в true!
-        config.holdBrowserOpen(true);
+//        config.holdBrowserOpen(true);
 
 
 

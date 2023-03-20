@@ -93,7 +93,7 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
 
         step("Выбрать первый заказ", () -> {
 //            selfEmployedPages.getHomeSelfEmployedPage().mapMode.selectOfferByIndex(0);
-            selfEmployedPages.getHomeSelfEmployedPage().mapMode.selectOfferByNumber("4561");
+            selfEmployedPages.getHomeSelfEmployedPage().mapMode.selectOfferByNumber("4547");
         });
 
         step("Страница карточки заказа", () -> {

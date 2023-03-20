@@ -27,12 +27,6 @@ public class ByPhoneUsualClientRegistrationTest extends BaseTest {
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
 
-    @Browser(role = Role.DISPATCHER, browserSize = SizeBrowser.DEFAULT, browserPosition = "850x0")
-    DispatcherPages dispatcherPages;
-
-    @Browser(role = Role.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = "1700x0")
-    MasterPages masterPages;
-
     RandomClient randomClient = new RandomClient();
 
 

@@ -36,7 +36,8 @@ allure {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
-def selenideVersion = '6.12.2',
+def selenideVersion = '6.12.3',
+        selenideProxy = '6.12.3',
     assertjVersion = '3.24.2',
     junitJupiterVersion = '5.9.0',
     hamcrest = '2.2',
@@ -53,7 +54,7 @@ def selenideVersion = '6.12.2',
 
 
 dependencies {
-    implementation 'com.codeborne:selenide-proxy:6.12.2'
+    implementation "com.codeborne:selenide-proxy:$selenideProxy"
 
     testImplementation(
             "com.ibm.icu:icu4j:$icu4j",
@@ -89,7 +90,7 @@ task scope_clientTest(type: Test) {
         includeTags "client"
     }
 
-    def taskProvider_registrationTest = tasks.register("taskProvider_registrationTest", Test) {
+    def taskProvider_registrationTest = tasks.register("При", Test) {
         useJUnitPlatform {
             includeTags "registration"
         }
