@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent;
+package ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
@@ -10,8 +10,8 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 
-public class NavPasswordTabProfileComponent extends BaseComponent {
-    public NavPasswordTabProfileComponent(RoleBrowser browser) {
+public class NavPasswordTabProfilePageComponent extends BaseComponent {
+    public NavPasswordTabProfilePageComponent(RoleBrowser browser) {
         super(browser);
     }
 

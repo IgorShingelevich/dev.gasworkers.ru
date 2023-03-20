@@ -9,9 +9,9 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.pages.components.clientComponent.OffersClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCommonTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavDocsTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavInfoMasterTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCommonTabOrderCardPageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavDocsTabOrderCardPageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavInfoMasterTabOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
@@ -28,9 +28,9 @@ public class OrderCardClientPage extends BaseClientPage {
     public final ClientActionsBlockComponent actionsBlock;
     public final StepperComponent stepper;
     public final OffersClientComponent offers;
-    public final NavCommonTabOrderCardComponent commonTab;
-    public final NavInfoMasterTabOrderCardComponent infoMasterTab;
-    public final NavDocsTabOrderCardComponent docsTab;
+    public final NavCommonTabOrderCardPageComponent commonTab;
+    public final NavInfoMasterTabOrderCardPageComponent infoMasterTab;
+    public final NavDocsTabOrderCardPageComponent docsTab;
 
     public OrderCardClientPage (RoleBrowser browser) {
         super(browser);
@@ -38,9 +38,9 @@ public class OrderCardClientPage extends BaseClientPage {
         actionsBlock = new ClientActionsBlockComponent(browser);
         stepper = new StepperComponent(browser);
         offers = new OffersClientComponent(browser);
-        commonTab = new NavCommonTabOrderCardComponent(browser);
-        infoMasterTab = new NavInfoMasterTabOrderCardComponent(browser);
-        docsTab = new NavDocsTabOrderCardComponent(browser);
+        commonTab = new NavCommonTabOrderCardPageComponent(browser);
+        infoMasterTab = new NavInfoMasterTabOrderCardPageComponent(browser);
+        docsTab = new NavDocsTabOrderCardPageComponent(browser);
     }
 
     private final String

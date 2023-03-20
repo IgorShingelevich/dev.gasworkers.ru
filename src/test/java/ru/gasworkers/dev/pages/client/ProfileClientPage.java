@@ -4,10 +4,10 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.NavContactsTabProfileComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.NavNotificationsTabProfileComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.NavPasswordTabProfileComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.navCommonTab.NavCommonClientTabProfileComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.NavContactsTabProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.NavNotificationsTabProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.NavPasswordTabProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navCommon.NavCommonTabClientProfilePageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 
 import java.time.Duration;
@@ -20,19 +20,19 @@ public class ProfileClientPage extends BaseClientPage{
 
     public final ClientSidebarComponent sidebar;
     public final ClientActionsBlockComponent actionsBlock;
-    public final NavCommonClientTabProfileComponent navCommonTab;
-    public final NavContactsTabProfileComponent navContactsTab;
-    public final NavPasswordTabProfileComponent navPasswordTab;
-    public final NavNotificationsTabProfileComponent navNotificationsTab;
+    public final NavCommonTabClientProfilePageComponent navCommonTab;
+    public final NavContactsTabProfilePageComponent navContactsTab;
+    public final NavPasswordTabProfilePageComponent navPasswordTab;
+    public final NavNotificationsTabProfilePageComponent navNotificationsTab;
 
     public ProfileClientPage(RoleBrowser browser) {
         super(browser);
         sidebar = new ClientSidebarComponent(browser);
         actionsBlock = new ClientActionsBlockComponent(browser);
-        navCommonTab = new NavCommonClientTabProfileComponent(browser);
-        navContactsTab = new NavContactsTabProfileComponent(browser);
-        navPasswordTab = new NavPasswordTabProfileComponent(browser);
-        navNotificationsTab = new NavNotificationsTabProfileComponent(browser);
+        navCommonTab = new NavCommonTabClientProfilePageComponent(browser);
+        navContactsTab = new NavContactsTabProfilePageComponent(browser);
+        navPasswordTab = new NavPasswordTabProfilePageComponent(browser);
+        navNotificationsTab = new NavNotificationsTabProfilePageComponent(browser);
     }
     ElementsCollection
         navTabsCollection = driver.$$(".navigation-block li").as("Вкладки профиля");

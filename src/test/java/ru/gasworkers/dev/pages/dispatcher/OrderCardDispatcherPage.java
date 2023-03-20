@@ -8,9 +8,9 @@ import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.dispatcherComponent.DatePickerOrderDispatcherComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockDispatcherComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCommonTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavDocsTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavInfoMasterTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCommonTabOrderCardPageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavDocsTabOrderCardPageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavInfoMasterTabOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.DispatcherSidebarComponent;
 
 import java.time.Duration;
@@ -26,21 +26,21 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
     public final DispatcherSidebarComponent sidebar;
     public final DatePickerOrderDispatcherComponent datePicker;
     public final ActionsBlockDispatcherComponent actionBlock;
-    public final NavCommonTabOrderCardComponent commonTab;
-    public final NavInfoMasterTabOrderCardComponent infoMasterTab;
-    public final NavDocsTabOrderCardComponent docsTab;
+    public final NavCommonTabOrderCardPageComponent tabCommon;
+    public final NavInfoMasterTabOrderCardPageComponent tabInfoMaster;
+    public final NavDocsTabOrderCardPageComponent tabDocs;
 
     public OrderCardDispatcherPage(RoleBrowser browser) {
         super(browser);
         sidebar = new DispatcherSidebarComponent(browser);
         datePicker = new DatePickerOrderDispatcherComponent(browser);
         actionBlock = new ActionsBlockDispatcherComponent(browser);
-        commonTab = new NavCommonTabOrderCardComponent(browser);
-        infoMasterTab = new NavInfoMasterTabOrderCardComponent(browser);
-        docsTab = new NavDocsTabOrderCardComponent(browser);
+        tabCommon = new NavCommonTabOrderCardPageComponent(browser);
+        tabInfoMaster = new NavInfoMasterTabOrderCardPageComponent(browser);
+        tabDocs = new NavDocsTabOrderCardPageComponent(browser);
     }
 
-    private final String PAGE_TITLE = "Заказ";
+    private final String pageTitleText = "Заказ";
 
     ElementsCollection
         navButtonsCollection = driver.$$("div.navigation-block ul li");
@@ -65,7 +65,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
 
 
     public void checkFinishLoading() {
-        pageTitleLocator.shouldBe(visible, Duration.ofSeconds(40)).shouldHave(text(PAGE_TITLE));
+        pageTitleLocator.shouldBe(visible, Duration.ofSeconds(40)).shouldHave(text(pageTitleText));
         String orderCardNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
         stepWithRole("Убедиться, что Карточка Заказа: " + orderCardNumber + " загружена", () -> {
             orderBlockLocator.shouldBe(visible);
@@ -94,8 +94,8 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
     public void checkNewTenderState(OrderStatus orderStatus, OrderType orderType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                commonTab.orderStatus.currentStatus(orderStatus);
-                commonTab.orderDetails.currentType(orderType);
+                tabCommon.orderStatus.currentStatus(orderStatus);
+                tabCommon.orderDetails.currentType(orderType);
                 stepWithRole("Убедиться, что в Карточке заказа  представлена кнопка Принять Заказ и Отказаться ", () -> {
                     acceptRequestButtonLocator.scrollTo().shouldBe(visible);
                     declineRequestButtonLocator.shouldBe(visible);
@@ -107,7 +107,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
             });
             stepWithRole("Вкладка Документы", () -> {
                 navDocs();
-                docsTab.noDocs();
+                tabDocs.noDocs();
             });
             navCommon();
         });
@@ -115,7 +115,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         System.out.println("dispatcher orderStatus: " + orderStatus);
     }
 
-    public OrderCardDispatcherPage acceptOrder() {
+    public void acceptOrder() {
         String factualOrderNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
         stepWithRole("Принять заказ: " + factualOrderNumber , () -> {
             acceptRequestButtonLocator.scrollTo().click();
@@ -125,14 +125,13 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
                 declineRequestButtonLocator.shouldNotBe(visible);
             });
         });
-        return this;
     }
 
     public void checkParticipateTenderState(OrderStatus orderStatus, OrderType orderType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                commonTab.orderStatus.currentStatus(orderStatus);
-                commonTab.orderDetails.currentType(orderType);
+                tabCommon.orderStatus.currentStatus(orderStatus);
+                tabCommon.orderDetails.currentType(orderType);
                 stepWithRole("Убедиться, что в Карточке заказа  представлена неактивная  кнопка Уже участвуете ", () -> {
                     alreadyAcceptedButtonLocator.shouldBe(visible);
                     acceptRequestButtonLocator.shouldNot(visible);
@@ -144,7 +143,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
             });
             stepWithRole("Вкладка Документы", () -> {
                 navDocs();
-                docsTab.noDocs();
+                tabDocs.noDocs();
             });
             navCommon();
         });
@@ -155,8 +154,8 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
     public void checkScheduleVisitState(OrderStatus orderStatus, OrderType orderType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                commonTab.orderStatus.currentStatus(orderStatus);
-                commonTab.orderDetails.currentType(orderType);
+                tabCommon.orderStatus.currentStatus(orderStatus);
+                tabCommon.orderDetails.currentType(orderType);
                 stepWithRole("Убедиться, что  в Карточке заказа представлена кнопка Назначить время и Отменить заказ ", () -> {
                     selectTimeButtonLocator.shouldBe(visible);
                     cancelButtonLocator.shouldBe(visible);
@@ -168,11 +167,11 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
             stepWithRole("Вкладка Документы", () -> {
                 navDocs();
                 stepWithRole("Убедиться, что  в Карточке заказа в документах присутствует Договор ТО и Страховой полис " /*+ docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText()*/ , () -> {
-                    docsTab.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
+                    tabDocs.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
                 });
                 stepWithRole("Скачать документы: Договор ТО и Страховой полис " , () -> {
-                    docsTab.downloadAgreement();
-                    docsTab.downloadInsurance();
+                    tabDocs.downloadAgreement();
+                    tabDocs.downloadInsurance();
                 });
             });
             navCommon();
@@ -184,8 +183,8 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
     public void checkMasterDispatchedState(OrderStatus orderStatus, OrderType orderType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                commonTab.orderStatus.currentStatus(orderStatus);
-                commonTab.orderDetails.currentType(orderType);
+                tabCommon.orderStatus.currentStatus(orderStatus);
+                tabCommon.orderDetails.currentType(orderType);
                 stepWithRole("Убедиться, что  в Карточке заказа представлена кнопка Назначить Другого Мастера и Назанчить Новое Время ", () -> {
                     selectAnotherTimeButtonLocator.as("Назначить Новое Время").shouldBe(visible, Duration.ofSeconds(10));
                     selectAnotherMasterButtonLocator.as("Назначить Другого Мастера").shouldBe(visible, Duration.ofSeconds(10));
@@ -197,11 +196,11 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
             stepWithRole("Вкладка Документы", () -> {
                 navDocs();
                 stepWithRole("Убедиться, что  в Карточке заказа в документах присутствует Договор ТО и Страховой полис " /*+ docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText()*/ , () -> {
-                    docsTab.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
+                    tabDocs.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
                 });
                 stepWithRole("Скачать документы: Договор ТО и Страховой полис " , () -> {
-                    docsTab.downloadAgreement();
-                    docsTab.downloadInsurance();
+                    tabDocs.downloadAgreement();
+                    tabDocs.downloadInsurance();
                 });
             });
             navCommon();

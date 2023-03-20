@@ -2,6 +2,8 @@ package ru.gasworkers.dev.pages.selfEmployed;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import ru.gasworkers.dev.model.OrderStatus;
+import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.FillProfileBannerSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.orderPageComponent.FillUpOfferBannerOrderPageSelfEmployedComponent;
@@ -9,10 +11,10 @@ import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.Header
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.orderPageComponent.OfferPriceModalWindowSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.StatusBoxOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SelfEmployedSidebarComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCheckListTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCommonTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavDocsTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavInfoMasterTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCheckListTabOrderCardPageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCommonTabOrderCardPageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavDocsTabOrderCardPageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavInfoMasterTabOrderCardPageComponent;
 
 import java.time.Duration;
 
@@ -30,10 +32,10 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
     public final OfferPriceModalWindowSelfEmployedComponent offerPriceModalWindow;
     public final StatusBoxOrderCardComponent statusBox;
 
-    public final NavCommonTabOrderCardComponent commonTab;
-    public final NavCheckListTabOrderCardComponent tabCheckList;
-    public final NavInfoMasterTabOrderCardComponent tabInfoMaster;
-    public final NavDocsTabOrderCardComponent tabDocs;
+    public final NavCommonTabOrderCardPageComponent commonTab;
+    public final NavCheckListTabOrderCardPageComponent tabCheckList;
+    public final NavInfoMasterTabOrderCardPageComponent tabInfoMaster;
+    public final NavDocsTabOrderCardPageComponent tabDocs;
 
 
     public OrderCardSelfEmployedPage(RoleBrowser browser) {
@@ -44,10 +46,10 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
         fillUpOfferPriceBanner = new FillUpOfferBannerOrderPageSelfEmployedComponent(browser);
         offerPriceModalWindow = new OfferPriceModalWindowSelfEmployedComponent(browser);
         statusBox = new StatusBoxOrderCardComponent(browser);
-        commonTab = new NavCommonTabOrderCardComponent(browser);
-        tabCheckList = new NavCheckListTabOrderCardComponent(browser);
-        tabInfoMaster = new NavInfoMasterTabOrderCardComponent(browser);
-        tabDocs = new NavDocsTabOrderCardComponent(browser);
+        commonTab = new NavCommonTabOrderCardPageComponent(browser);
+        tabCheckList = new NavCheckListTabOrderCardPageComponent(browser);
+        tabInfoMaster = new NavInfoMasterTabOrderCardPageComponent(browser);
+        tabDocs = new NavDocsTabOrderCardPageComponent(browser);
 
 
     }
@@ -56,17 +58,38 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
             pageTitleText = "Заказ",
             offerPriceButtonText = "Предложить свою цену";
 
+    ElementsCollection
+
+            navButtonsCollection = driver.$$("div.navigation-block li").as("Навигационные кнопки");
+
     SelenideElement
             titleLocator = driver.$("div.page-title .h3").as("Заголовок страницы"),
-            orderBlockLocator = driver.$(".page-content #order").as("Блок заказа"),
             editObjectButtonLocator = driver.$(byTagAndText("span", "Редактировать объект/оборудование")).as("Редактировать объект/оборудование"),
             startWorkingButtonLocator = driver.$(byTagAndText("span", "Приступить к работе")).as("Приступить к работе"),
             offerPriceButtonLocator = driver.$("button[data-guide='order-pricing']").as("Предложить свою цену"),
             refuseOrderButtonLocator = driver.$(byTagAndText("span", "Отказаться")).as("Отказаться от заказа");
 
-    ElementsCollection
+//    dispatcher SelenideElements
 
-            navButtonsCollection = driver.$$("div.navigation-block li").as("Навигационные кнопки");
+    SelenideElement
+            pageTitleLocator = driver.$(".page-title .h3.mb-2").as("Заголовок страницы"),
+            orderDescriptionButtonLocator = navButtonsCollection.get(0).as("Описание заказа"),
+            orderInfoButtonLocator = navButtonsCollection.get(1).as("Информация по работам"),
+            orderDocumentsButtonLocator = navButtonsCollection.get(2).as("Документы"),
+            orderBlockLocator = driver.$(".page-content #order").as("Блок заказа"),
+            orderStatusLocator = driver.$(".item-flex p.text").as("Статус заказа"),
+            mainButtonLocator = driver.$("button.btn.btn-primary").as("Основная кнопка"),
+            acceptRequestButtonLocator = driver.$(byTagAndText("span", "Принять заказ")).as("Принять заказ"),
+            declineRequestButtonLocator = driver.$(byTagAndText("span", "Отказаться от заказа")).as("Отказаться от заказа"),
+            selectTimeButtonLocator = driver.$(byTagAndText("span", "Назначить время")).as("Назначить время"),
+            selectAnotherTimeButtonLocator = driver.$(byTagAndText("span", "Назначить новое время")).as("Назначить новое время"),
+            selectMasterButtonLocator = driver.$(byTagAndText("span", "Выбрать мастера")).as("Выбрать мастера"),
+            selectAnotherMasterButtonLocator = driver.$(byTagAndText("span", "Назначить другого мастера")).as("Назначить другого мастера"),
+            cancelButtonLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Отменить заказ"),
+            alreadyAcceptedButtonLocator = mainButtonLocator.$(byTagAndText("span", "Уже участвуете")).as("Уже участвуете"),
+            cancelOrderLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Отменить заказ");
+
+
 
 
     public void navCommon() {
@@ -132,6 +155,42 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
             statusBox.newTenderState();
         });
     }
+
+    public void checkNewTenderState(OrderStatus orderStatus, OrderType orderType) {
+        stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
+            stepWithRole("Убедиться что вкладок заказа - 3", () -> {
+                navButtonsCollection.shouldHave(size(3));
+            });
+            stepWithRole("Вкладка Описание заказа", () -> {
+                commonTab.orderStatus.currentStatus(orderStatus);
+                commonTab.orderDetails.currentType(orderType);
+                stepWithRole("Убедиться, что в Карточке заказа  представлена кнопка Принять Заказ и Отказаться ", () -> {
+                    acceptRequestButtonLocator.scrollTo().shouldBe(visible);
+                    declineRequestButtonLocator.shouldBe(visible);
+                    alreadyAcceptedButtonLocator.shouldNotBe(visible);
+                });
+            });
+            stepWithRole("Вкладка Информация по работам", () -> {
+                //TODO: add steps for this tab
+            });
+            stepWithRole("Вкладка Документы", () -> {
+                navButtonsCollection.get(2).shouldHave(text("Документы"));
+                tabDocs.noDocs();
+            });
+            navCommon();
+        });
+        //TODO - check price, docs, buttons, info
+        System.out.println("dispatcher orderStatus: " + orderStatus);
+    }
+
+    public void acceptOrderInitialState() {
+        String factualOrderNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
+        stepWithRole("Принять заказ: " + factualOrderNumber , () -> {
+            acceptRequestButtonLocator.scrollTo().click();
+        });
+    }
+
+
 
 
 }

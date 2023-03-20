@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 
-public class RandomMaster {
+public class RandomSelfEmployed {
 
     private String name;
     private String surname;
@@ -54,7 +54,7 @@ public class RandomMaster {
     equipmentCertificateFile;
 
 
-    public RandomMaster() {
+    public RandomSelfEmployed() {
         Faker faker = new Faker(new Locale("ru"));
         String
             emailPrefixMock = "gwtest",

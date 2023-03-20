@@ -11,16 +11,18 @@ import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
+import ru.gasworkers.dev.model.OrderStatus;
+import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.SelfEmployedPages;
 import ru.gasworkers.dev.tests.BaseTest;
-import ru.gasworkers.dev.utils.userBuilder.RandomMaster;
+import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployed;
 
 import static io.qameta.allure.Allure.step;
 
 public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
-    RandomMaster randomMaster = new RandomMaster();
+    RandomSelfEmployed randomSelfEmployed = new RandomSelfEmployed();
 
 
     @Browser(role = Role.SELF_EMPLOYED, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
@@ -48,21 +50,21 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
         });
         step("Страница второго шага регистрации СМЗ", () -> {
             selfEmployedPages.getRegistrationPage().secondStep.checkFinishLoading();
-            selfEmployedPages.getRegistrationPage().secondStep.byPhone(randomMaster.getPhone());
+            selfEmployedPages.getRegistrationPage().secondStep.byPhone(randomSelfEmployed.getPhone());
             selfEmployedPages.getRegistrationPage().secondStep.forwardButton();
         });
         step("Страница третьего шага регистрации СМЗ", () -> {
             selfEmployedPages.getRegistrationPage().thirdStep.checkFinishLoading();
-            selfEmployedPages.getRegistrationPage().thirdStep.fillCode(randomMaster.getConfirmationCode());
+            selfEmployedPages.getRegistrationPage().thirdStep.fillCode(randomSelfEmployed.getConfirmationCode());
         });
         step("Страница ввода пароля", () -> {
             selfEmployedPages.getRegistrationPage().forthStep.checkFinishLoading(4);
-            selfEmployedPages.getRegistrationPage().forthStep.setPassword(randomMaster.getPassword());
+            selfEmployedPages.getRegistrationPage().forthStep.setPassword(randomSelfEmployed.getPassword());
             selfEmployedPages.getRegistrationPage().forthStep.forwardButton();
         });
         step("Страница пятого шага регистрации СМЗ", () -> {
             selfEmployedPages.getRegistrationPage().fifthStep.checkFinishLoading(5);
-            selfEmployedPages.getRegistrationPage().fifthStep.setEmail(randomMaster.getEmail());
+            selfEmployedPages.getRegistrationPage().fifthStep.setEmail(randomSelfEmployed.getEmail());
             selfEmployedPages.getRegistrationPage().fifthStep.forwardButton();
         });
         step("Страница успешной регистрации", () -> {
@@ -97,25 +99,34 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
         });
 
         step("Страница карточки заказа", () -> {
-            selfEmployedPages.getOrderCardSelfEmployedPage().checkInitialState();
+            selfEmployedPages.getOrderCardPage().checkInitialState();
 //            selfEmployedPages.getOrderCardSelfEmployedPage().checkNotEvaluatedOfferButtonState();
         });
         step("Модальное окно Расценить заказ", () -> {
-            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceButton();
-            selfEmployedPages.getOrderCardSelfEmployedPage().fillUpOfferPriceBanner.checkFinishLoading();
-            selfEmployedPages.getOrderCardSelfEmployedPage().fillUpOfferPriceBanner.clickForwardButton();
-            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.checkInitialState();
-            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.checkOfferPriceEquipmentCount();
-            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.fillCollectionPrices("4010", "4100", primaryVisitPrice);
-            int currentOfferEquipmentPrice = selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.allEquipmentCurrentPrice();
-            int totalOfferPrice = selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.totalOfferPrice();
-            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.fillMasterIdDocuments(randomMaster.getMasterIDFile(), randomMaster.getMasterIDValidTillDatePicker());
-            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.uploadAllBoilerEquipmentCertificateFileAndDate(randomMaster.getBoilerEquipmentCertificateFile(), randomMaster.getBoilerEquipmentCertificateValidTillDatePicker());
-            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.saveButton();
+            selfEmployedPages.getOrderCardPage().offerPriceButton();
+            selfEmployedPages.getOrderCardPage().fillUpOfferPriceBanner.checkFinishLoading();
+            selfEmployedPages.getOrderCardPage().fillUpOfferPriceBanner.clickForwardButton();
+            selfEmployedPages.getOrderCardPage().offerPriceModalWindow.checkInitialState();
+            selfEmployedPages.getOrderCardPage().offerPriceModalWindow.checkOfferPriceEquipmentCount();
+            selfEmployedPages.getOrderCardPage().offerPriceModalWindow.fillCollectionPrices("4010", "4100", primaryVisitPrice);
+            int currentOfferEquipmentPrice = selfEmployedPages.getOrderCardPage().offerPriceModalWindow.allEquipmentCurrentPrice();
+            int totalOfferPrice = selfEmployedPages.getOrderCardPage().offerPriceModalWindow.totalOfferPrice();
+            selfEmployedPages.getOrderCardPage().offerPriceModalWindow.fillMasterIdDocuments(randomSelfEmployed.getMasterIDFile(), randomSelfEmployed.getMasterIDValidTillDatePicker());
+            selfEmployedPages.getOrderCardPage().offerPriceModalWindow.uploadAllBoilerEquipmentCertificateFileAndDate(randomSelfEmployed.getBoilerEquipmentCertificateFile(), randomSelfEmployed.getBoilerEquipmentCertificateValidTillDatePicker());
+            selfEmployedPages.getOrderCardPage().offerPriceModalWindow.saveButton();
         });
-        step("Страница карточки  расцененного заказа", () -> {
-//            selfEmployedPages.getOrderCardSelfEmployedPage().checkNewTenderState();
-//            selfEmployedPages.getOrderCardSelfEmployedPage().checkEvaluatedOfferButtonsState();
+        step("Страница карточки  расцененного заказа - первый заказ незаполненный профиль", () -> {
+            selfEmployedPages.getOrderCardPage().checkNewTenderState(OrderStatus.NEW_TENDER, OrderType.MAINTENANCE);
+            selfEmployedPages.getOrderCardPage().acceptOrderInitialState();
+        });
+
+        step("Страница информации о заполнении профиля", () -> {
+            selfEmployedPages.getFillProfileInfo().checkFinishLoading();
+            selfEmployedPages.getFillProfileInfo().toProfileButton();
+        });
+
+        step("Страница профиля СМЗ в начальном состоянии", () -> {
+            selfEmployedPages.getProfileSelfEmployedPage().checkInitialState(randomSelfEmployed.getEmail(), randomSelfEmployed.getPhone());
         });
 
 
@@ -123,7 +134,7 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
 
         /*step("Начальное состотояние кабинета СМЗ - модальное окно - расценить  тендер ", () -> {
             selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.checkInitialState();
-            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.fillOffer(randomMaster.getMasterIDFile(), randomMaster.getMasterIDValidTillDatePicker(), randomMaster.getEquipmentCertificateFile(), randomMaster.getEquipmentCertificateValidTillDatePicker(), equipmentWorkPrice, primaryVisitPrice);
+            selfEmployedPages.getOrderCardSelfEmployedPage().offerPriceModalWindow.fillOffer(randomSelfEmployed.getMasterIDFile(), randomSelfEmployed.getMasterIDValidTillDatePicker(), randomSelfEmployed.getEquipmentCertificateFile(), randomSelfEmployed.getEquipmentCertificateValidTillDatePicker(), equipmentWorkPrice, primaryVisitPrice);
 
         });*/
 

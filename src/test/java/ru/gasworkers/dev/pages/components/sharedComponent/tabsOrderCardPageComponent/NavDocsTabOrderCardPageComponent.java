@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent;
+package ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent;
 
 import com.codeborne.selenide.ElementsCollection;
 import ru.gasworkers.dev.model.Doc;
@@ -16,15 +16,15 @@ import static com.codeborne.selenide.CollectionCondition.size;
 import static io.qameta.allure.Allure.step;
 
 
-public class NavDocsTabOrderCardComponent extends BaseTabOrderCardComponent {
-    public final OrderStatusCardComponent orderState;
+public class NavDocsTabOrderCardPageComponent extends BaseTabOrderCardComponent {
+    public final OrderStatusOrderCardPageComponent orderState;
     public final FillUpCheckListBannerComponent fillUpBanner;
 
     private final long downloadTimeout = 4_000L;
 
-    public NavDocsTabOrderCardComponent(RoleBrowser browser) {
+    public NavDocsTabOrderCardPageComponent(RoleBrowser browser) {
         super(browser);
-        orderState = new OrderStatusCardComponent(browser);
+        orderState = new OrderStatusOrderCardPageComponent(browser);
         fillUpBanner = new FillUpCheckListBannerComponent(browser);
     }
 

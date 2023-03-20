@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent;
+package ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
@@ -9,8 +9,8 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 
-public class TableInfoMasterTabOrderCardComponent extends BaseComponent {
-    public TableInfoMasterTabOrderCardComponent(RoleBrowser browser) {
+public class TableInfoMasterTabComponent extends BaseComponent {
+    public TableInfoMasterTabComponent(RoleBrowser browser) {
         super(browser);
     }
 

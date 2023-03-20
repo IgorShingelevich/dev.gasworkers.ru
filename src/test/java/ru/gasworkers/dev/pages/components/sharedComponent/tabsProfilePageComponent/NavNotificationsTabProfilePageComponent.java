@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent;
+package ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -7,8 +7,8 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 
 import static com.codeborne.selenide.Condition.*;
 
-public class NavNotificationsTabProfileComponent extends BaseComponent {
-    public NavNotificationsTabProfileComponent(RoleBrowser browser) {
+public class NavNotificationsTabProfilePageComponent extends BaseComponent {
+    public NavNotificationsTabProfilePageComponent(RoleBrowser browser) {
         super(browser);
     }
 

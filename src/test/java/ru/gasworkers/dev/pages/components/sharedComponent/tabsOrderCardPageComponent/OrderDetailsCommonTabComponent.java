@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent;
+package ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent;
 
 import com.codeborne.selenide.ElementsCollection;
 import ru.gasworkers.dev.model.OrderType;
@@ -6,8 +6,8 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 
 import static com.codeborne.selenide.Condition.text;
 
-public class OrderDetailsCommonTabCardComponent extends BaseTabOrderCardComponent {
-    public OrderDetailsCommonTabCardComponent(RoleBrowser browser) {
+public class OrderDetailsCommonTabComponent extends BaseTabOrderCardComponent {
+    public OrderDetailsCommonTabComponent(RoleBrowser browser) {
         super(browser);
     }
 

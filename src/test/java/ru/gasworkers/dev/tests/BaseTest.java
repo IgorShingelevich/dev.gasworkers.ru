@@ -7,7 +7,7 @@ import ru.gasworkers.dev.extension.browser.ScreenshotExtension;
 public abstract class BaseTest {
 
 }
-
+// .checkState(); for all Roles
 //todo rerun failed tests after run all tests
 // todo  if Client and SelfEmployed ActionBlock differs only in reviewLink - how to reuse it?
 // todo reuse master and self-employed OrderCardPage

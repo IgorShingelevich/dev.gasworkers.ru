@@ -3,9 +3,9 @@ package ru.gasworkers.dev.pages.context;
 import com.codeborne.selenide.SelenideDriver;
 import lombok.Getter;
 import ru.gasworkers.dev.pages.selfEmployed.*;
-import ru.gasworkers.dev.pages.selfEmployed.orderPage.AcceptedOrderSelfEmployedPage;
-import ru.gasworkers.dev.pages.selfEmployed.orderPage.CompletedOrderSelfEmployedPage;
-import ru.gasworkers.dev.pages.selfEmployed.orderPage.NewOrderSelfEmployedPage;
+import ru.gasworkers.dev.pages.selfEmployed.allOrders.AllAcceptedOrderSelfEmployedPage;
+import ru.gasworkers.dev.pages.selfEmployed.allOrders.AllCompletedOrderSelfEmployedPage;
+import ru.gasworkers.dev.pages.selfEmployed.allOrders.AllNewOrderSelfEmployedPage;
 import ru.gasworkers.dev.pages.sharedPages.LandingPage;
 
 import static ru.gasworkers.dev.model.Role.SELF_EMPLOYED;
@@ -22,10 +22,11 @@ public final class SelfEmployedPages extends BaseRolePages {
     private final SuccessfulRegistrationSelfEmployedPage successfulRegistrationSelfEmployedPage = new SuccessfulRegistrationSelfEmployedPage(browser);
     private final HomeSelfEmployedPage homeSelfEmployedPage = new HomeSelfEmployedPage(browser);
     private final ProfileSelfEmployedPage profileSelfEmployedPage = new ProfileSelfEmployedPage(browser);
-    private final NewOrderSelfEmployedPage newOrderSelfEmployedPage = new NewOrderSelfEmployedPage(browser);
-    private final AcceptedOrderSelfEmployedPage acceptedOrderSelfEmployedPage = new AcceptedOrderSelfEmployedPage(browser);
-    private final CompletedOrderSelfEmployedPage completedOrderSelfEmployedPage = new CompletedOrderSelfEmployedPage(browser);
-    private final OrderCardSelfEmployedPage orderCardSelfEmployedPage = new OrderCardSelfEmployedPage(browser);
+    private final AllNewOrderSelfEmployedPage allNewOrderSelfEmployedPage = new AllNewOrderSelfEmployedPage(browser);
+    private final AllAcceptedOrderSelfEmployedPage allAcceptedOrderSelfEmployedPage = new AllAcceptedOrderSelfEmployedPage(browser);
+    private final AllCompletedOrderSelfEmployedPage allCompletedOrderSelfEmployedPage = new AllCompletedOrderSelfEmployedPage(browser);
+    private final OrderCardSelfEmployedPage orderCardPage = new OrderCardSelfEmployedPage(browser);
+    private final FillProfileInfoSelfEmployedPage fillProfileInfo = new FillProfileInfoSelfEmployedPage(browser);
 
 
 }

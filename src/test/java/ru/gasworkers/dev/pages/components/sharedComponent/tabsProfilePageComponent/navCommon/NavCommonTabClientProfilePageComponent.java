@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.profileTabsComponent.navCommonTab;
+package ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navCommon;
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
@@ -10,12 +10,12 @@ import java.io.File;
 
 import static com.codeborne.selenide.Condition.*;
 
-public class NavCommonClientTabProfileComponent extends BaseComponent {
+public class NavCommonTabClientProfilePageComponent extends BaseComponent {
 
     public final DateBGRegistrationLandingComponent datePicker;
     public final UploadPhotoCutterModalWindowComponent uploadPhotoModalWindow;
 
-    public NavCommonClientTabProfileComponent(RoleBrowser browser) {
+    public NavCommonTabClientProfilePageComponent(RoleBrowser browser) {
         super(browser);
         datePicker = new DateBGRegistrationLandingComponent(browser);
         uploadPhotoModalWindow = new UploadPhotoCutterModalWindowComponent(browser);

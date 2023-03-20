@@ -8,10 +8,10 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.pages.components.sharedComponent.StatusBoxOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCheckListTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavCommonTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavDocsTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabOrderCardComponent.NavInfoMasterTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCheckListTabOrderCardPageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCommonTabOrderCardPageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavDocsTabOrderCardPageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavInfoMasterTabOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.MasterSidebarComponent;
 
 import java.time.Duration;
@@ -25,10 +25,10 @@ public class OrderCardMasterPage extends BaseMasterPage {
     public final MasterSidebarComponent sidebar;
     public final ActionsBlockMasterComponent actionsBlock;
     public final StatusBoxOrderCardComponent statusBox;
-    public final NavCommonTabOrderCardComponent commonTab;
-    public final NavCheckListTabOrderCardComponent tabCheckList;
-    public final NavInfoMasterTabOrderCardComponent tabInfoMaster;
-    public final NavDocsTabOrderCardComponent tabDocs;
+    public final NavCommonTabOrderCardPageComponent commonTab;
+    public final NavCheckListTabOrderCardPageComponent tabCheckList;
+    public final NavInfoMasterTabOrderCardPageComponent tabInfoMaster;
+    public final NavDocsTabOrderCardPageComponent tabDocs;
 
 
 
@@ -37,10 +37,10 @@ public class OrderCardMasterPage extends BaseMasterPage {
         sidebar = new MasterSidebarComponent(browser);
         actionsBlock = new ActionsBlockMasterComponent(browser);
         statusBox = new StatusBoxOrderCardComponent(browser);
-        commonTab = new NavCommonTabOrderCardComponent(browser);
-        tabCheckList = new NavCheckListTabOrderCardComponent(browser);
-        tabInfoMaster = new NavInfoMasterTabOrderCardComponent(browser);
-        tabDocs = new NavDocsTabOrderCardComponent(browser);
+        commonTab = new NavCommonTabOrderCardPageComponent(browser);
+        tabCheckList = new NavCheckListTabOrderCardPageComponent(browser);
+        tabInfoMaster = new NavInfoMasterTabOrderCardPageComponent(browser);
+        tabDocs = new NavDocsTabOrderCardPageComponent(browser);
     }
 
     private final String PAGE_TITLE = "Заказ";
