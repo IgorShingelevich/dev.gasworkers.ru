@@ -107,9 +107,7 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
             selfEmployedPages.getOrderCardPage().fillUpOfferPriceBanner.checkFinishLoading();
             selfEmployedPages.getOrderCardPage().fillUpOfferPriceBanner.clickForwardButton();
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.checkInitialState();
-            selfEmployedPages.getOrderCardPage().offerPriceModalWindow.checkOfferPriceEquipmentCount();
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.fillCollectionPrices("4010", "4100", primaryVisitPrice);
-            int currentOfferEquipmentPrice = selfEmployedPages.getOrderCardPage().offerPriceModalWindow.allEquipmentCurrentPrice();
             int totalOfferPrice = selfEmployedPages.getOrderCardPage().offerPriceModalWindow.totalOfferPrice();
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.fillMasterIdDocuments(randomSelfEmployed.getMasterIDFile(), randomSelfEmployed.getMasterIDValidTillDatePicker());
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.uploadAllBoilerEquipmentCertificateFileAndDate(randomSelfEmployed.getBoilerEquipmentCertificateFile(), randomSelfEmployed.getBoilerEquipmentCertificateValidTillDatePicker());

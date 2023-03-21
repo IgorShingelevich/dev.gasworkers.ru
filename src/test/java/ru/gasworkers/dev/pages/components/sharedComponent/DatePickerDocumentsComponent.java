@@ -10,43 +10,73 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import static com.codeborne.selenide.Condition.value;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 
 public class DatePickerDocumentsComponent extends BaseComponent {
 
-        public DatePickerDocumentsComponent(RoleBrowser browser) {
-            super(browser);
-        }
+    public DatePickerDocumentsComponent(RoleBrowser browser) {
+        super(browser);
+    }
 
 
-        SelenideElement
-    datepickerBoxLocator = driver.$("div.datepicker-automation").as("Блок выбора даты"),
-    calendarContentLocator = driver.$("div.mx-calendar-content").as("Контент календаря");
+    SelenideElement
+            datepickerBoxLocator = driver.$("div.datepicker-automation").as("Блок выбора даты"),
+            calendarBlockLocator = driver.$("div.mx-calendar-content").as("Календарь");
 
-        ElementsCollection
-    allDateCollection = driver.$$("table.mx-table td").as("Все даты");
+    ElementsCollection
+            allDateCollection = driver.$$("table.mx-table td").as("Все даты");
 
-    public void setDate(SelenideElement calendarLocator, String date) {
+    public void setDate(SelenideElement closestBox, String date) {
         stepWithRole("Установить дату: " + date, () -> {
-            stepWithRole("Кликнуть по полю с календварем", () -> {
-                calendarLocator.click();
+            stepWithRole("Убедиться, что календарь закрыт", () -> {
+                calendarBlockLocator.shouldNotBe(visible);
+            });
+            stepWithRole("Кликнуть по полю с календарем", () -> {
+                closestBox.$(".datepicker-automation").click();
             });
             stepWithRole("Выбрать дату: " + date, () -> {
-                calendarContentLocator.shouldBe(visible);
+                calendarBlockLocator.shouldBe(visible);
                 allDateCollection.shouldBe(CollectionCondition.sizeGreaterThanOrEqual(2));
                 allDateCollection.findBy(Condition.attribute("title", date)).click();  //.$("div")
             });
             stepWithRole("Убедиться, что дата установлена: " + date, () -> {
                 LocalDate localDate = LocalDate.parse(date);
                 String formattedDate = localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-                calendarLocator.shouldHave(value(formattedDate));
+                closestBox.$("input").shouldHave(value(formattedDate));
                 System.out.println("Установлена дата: " + formattedDate);
             });
+            stepWithRole("Убедиться, что календарь закрыт", () -> {
+                calendarBlockLocator.shouldNotBe(visible);
+            });
+            checkNoErrorMsg(closestBox);
         });
     }
 
+    public void checkErrorMsg(SelenideElement closestBox) {
+        stepWithRole("Убедиться, что присутствует ошибка в календаре - укажите дату", () -> {
+            closestBox.$(".gas-input__error").shouldBe(visible);
+//                    .shouldHave(Condition.text("Укажите дату"));
+            //todo universal  error msg to the calendar - by checking  the text of the error
+        });
+        stepWithRole("Убедиться, что поле календаря пустое", () -> {
+            closestBox.$("input").shouldBe(empty);
+        });
+    }
 
+    public void checkNoErrorMsg(SelenideElement closestBox) {
+        stepWithRole("Убедиться, что отсутствует ошибка в календаре - укажите дату", () -> {
+            closestBox.$(".gas-input__error").shouldNotBe(visible);
+        });
+    }
+
+    public void checkInitialState(SelenideElement closestBox) {
+        stepWithRole("Убедиться, что поле календаря пустое", () -> {
+            closestBox.$("input").shouldBe(empty);
+            stepWithRole("Убедиться, что календарь закрыт", () -> {
+                calendarBlockLocator.shouldNotBe(visible);
+            });
+        });
+    }
 }
 
 

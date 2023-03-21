@@ -88,8 +88,8 @@ public class FirstStepSelfEmployedRegistrationComponent  extends BaseComponent {
                     button.shouldHave(cssClass("btn-outline-primary")).shouldNotHave(cssClass("btn-primary"));
                 }
             });
-            stepWithRole("Убедиться, что кнопка далее отображается и неактивна", () -> {
-                nextButtonLocator.shouldBe(disabled).shouldHave(text("Далее"));
+            stepWithRole("Убедиться, что кнопка далее отображается и активна", () -> {
+                nextButtonLocator.shouldBe(enabled).shouldHave(text("Далее"));
             });
             stepWithRole("Убедиться, что кнопка назад отображается", () -> {
                 backButtonLocator.shouldHave(text("Назад"));

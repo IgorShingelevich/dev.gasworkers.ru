@@ -52,7 +52,8 @@ public class ProfileSelfEmployedPage  extends BaseSelfEmployedPage{
 //            fillProfileBanner.checkInitialState();
             nav.profile();
             tabProfile.checkInitialState();
-//             tabCommon.checkInitialState();
+            nav.common();
+             tabCommon.checkInitialState();
             nav.contacts();
             tabContacts.checkFilledState(email, phone);
 //             tabEquipment.checkInitialState();
@@ -61,6 +62,15 @@ public class ProfileSelfEmployedPage  extends BaseSelfEmployedPage{
             nav.notifications();
             tabNotifications.checkInitialState();
             nav.profile();
+        });
+    }
+
+    public void checkNoError(){
+        stepWithRole("Убедиться, что нет ошибок", () -> {
+//            tabProfile.checkNoError();
+//            tabContacts.checkNoError();
+//            tabPassword.checkNoError();
+//            tabNotifications.checkNoError();
         });
     }
 }
