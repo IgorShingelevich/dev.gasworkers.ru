@@ -38,7 +38,7 @@ public class NavProfileTabSelfEmployedProfilePageComponent extends BaseComponent
             toOrderBottomButtonLocator = driver.$("button.mr-2.mb-3.btn.btn-warning").as("Нижняя кнопка К заказу"),
             toOrderTopButtonLocator = driver.$(".w-100 button.btn.btn-warning.disable-outline").as("Верхняя кнопка К заказу");
 
-    public void checkInitialState() {
+    public void checkFirsOfferEvaluatedInitialState() {
         stepWithRole("Убедиться, что вкладка профиль в начальном состоянии", () -> {
             addPhoto.checkInitialState();
             addDiploma.checkInitialState();

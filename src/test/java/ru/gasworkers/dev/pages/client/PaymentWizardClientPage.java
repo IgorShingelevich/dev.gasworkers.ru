@@ -17,7 +17,7 @@ public class PaymentWizardClientPage  extends BaseClientPage {
         super(browser);
     }
     private final String
-        PAYMENT_WIZARD_TITLE = "Система быстрых платежей",
+        PAYMENT_WIZARD_TITLE ="QR", // "Система быстрых платежей",
         TEST_BANNER_WARNING = "Тестовый режим, реального перечисления средств не производится";
 
 

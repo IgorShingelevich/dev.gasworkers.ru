@@ -14,8 +14,11 @@ public abstract class BaseTabOrderCardComponent extends BaseComponent {
 
 
     public void checkErrorMsg(SelenideElement element){
+        // todo list of text in the placeholder - to specify the error message
         stepWithRole("Убедиться, что присутствует сообщение об ошибке у поля: " + element.getAlias(), () -> {
-            element.parent().sibling(0).shouldHave(text("Поле не заполнено"));
+            String attributeValue = element.getAttribute("placeholder");
+            Integer siblingIndex = attributeValue.equals("Адрес регистрации") || attributeValue.equals("Номер квартиры") ? 1 : 0;
+            element.parent().sibling(siblingIndex).shouldHave(text("Поле не заполнено"));
         });
     }
 

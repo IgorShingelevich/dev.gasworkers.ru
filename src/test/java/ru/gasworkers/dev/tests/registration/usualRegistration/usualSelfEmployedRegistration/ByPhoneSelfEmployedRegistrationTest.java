@@ -107,7 +107,7 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
             selfEmployedPages.getOrderCardPage().fillUpOfferPriceBanner.checkFinishLoading();
             selfEmployedPages.getOrderCardPage().fillUpOfferPriceBanner.clickForwardButton();
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.checkInitialState();
-            selfEmployedPages.getOrderCardPage().offerPriceModalWindow.fillCollectionPrices("4010", "4100", primaryVisitPrice);
+            selfEmployedPages.getOrderCardPage().offerPriceModalWindow.fillCollectionPrices("5010", "5100", primaryVisitPrice);
             int totalOfferPrice = selfEmployedPages.getOrderCardPage().offerPriceModalWindow.totalOfferPrice();
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.fillMasterIdDocuments(randomSelfEmployed.getMasterIDFile(), randomSelfEmployed.getMasterIDValidTillDatePicker());
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.uploadAllBoilerEquipmentCertificateFileAndDate(randomSelfEmployed.getBoilerEquipmentCertificateFile(), randomSelfEmployed.getBoilerEquipmentCertificateValidTillDatePicker());
@@ -123,8 +123,8 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
             selfEmployedPages.getFillProfileInfo().toProfileButton();
         });
 
-        step("Страница профиля СМЗ в начальном состоянии", () -> {
-            selfEmployedPages.getProfileSelfEmployedPage().checkInitialState(randomSelfEmployed.getEmail(), randomSelfEmployed.getPhone());
+        step("Страница профиля СМЗ после перехода из первого расцененного заказа ", () -> {
+            selfEmployedPages.getProfileSelfEmployedPage().checkFirsOfferEvaluatedInitialState(randomSelfEmployed.getEmail(), randomSelfEmployed.getPhone());
         });
 
 

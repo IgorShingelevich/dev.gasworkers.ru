@@ -46,6 +46,16 @@ public class NavCommonTabSelfEmployedProfilePageComponent extends BaseComponent 
         });
     }
 
+    public void checkFirsOfferEvaluatedInitialState () {
+        stepWithRole("Проверить начальное состояние", () -> {
+            diplomaBannerLocator.shouldHave(text(diplomaBannerText));
+            fillNameBlock.checkInitialState();
+            fillPassportBlock.checkInitialState();
+            fillMasterIDBlock.checkFilledState();
+//            fillBankAccountBlock.checkInitialState();
+            fillTaxpayerCertificateBlock.checkInitialState();
+        });
+    }
 
 }
 // TODO implement CommonDataPickerComponent. Upload photo.

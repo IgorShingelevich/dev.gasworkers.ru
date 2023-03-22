@@ -90,6 +90,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 findOffersButton.shouldBe(visible);
             });
             stepWithRole("Убедиться, что отображаются компоненты Фонового ремонта", () -> {
+                //todo tab change check - fall
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.REPAIR.getTitle())).click();
                 bgTitleLocator.shouldHave(text(BG_REPAIR_TITLE));
                 bgSubtitleLocator.shouldHave(text(BG_REPAIR_SUBTITLE));

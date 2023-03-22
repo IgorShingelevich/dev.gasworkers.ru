@@ -16,8 +16,6 @@ import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.model.equipment.EquipmentType;
 import ru.gasworkers.dev.pages.context.ClientPages;
-import ru.gasworkers.dev.pages.context.DispatcherPages;
-import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
@@ -114,17 +112,17 @@ public class RepairBGRegistrationTest extends BaseTest {
                 step("Вкадка Контакты", () -> {
                     clientPages.getProfilePage().navContacts();
                     clientPages.getProfilePage().navContactsTab.checkFinishLoading();
-                    clientPages.getProfilePage().navContactsTab.checkFilledState(randomClient.getEmail(), randomClient.getPhoneNumber());
+                    clientPages.getProfilePage().navContactsTab.checkFirsOfferEvaluatedInitialState(randomClient.getEmail(), randomClient.getPhoneNumber());
                 });
                 step("Вкадка Пароль", () -> {
                     clientPages.getProfilePage().navPassword();
                     clientPages.getProfilePage().navPasswordTab.checkFinishLoading();
-                    clientPages.getProfilePage().navPasswordTab.checkInitialState();
+                    clientPages.getProfilePage().navPasswordTab.checkFirsOfferEvaluatedInitialState();
                 });
                 step("Вкладка Уведомления", () -> {
                     clientPages.getProfilePage().navNotifications();
                     clientPages.getProfilePage().navNotificationsTab.checkFinishLoading();
-                    clientPages.getProfilePage().navNotificationsTab.checkInitialState();
+                    clientPages.getProfilePage().navNotificationsTab.checkFirsOfferEvaluatedInitialState();
                 });
                 clientPages.getProfilePage().sidebar.home();
             });

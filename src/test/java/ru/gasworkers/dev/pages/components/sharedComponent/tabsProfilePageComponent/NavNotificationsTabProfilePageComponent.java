@@ -35,7 +35,7 @@ public class NavNotificationsTabProfilePageComponent extends BaseComponent {
         });
     }
 
-    public void checkInitialState() {
+    public void checkFirsOfferEvaluatedInitialState() {
         stepWithRole("Убедиться, что все чекбоксы выбраны на вкладке Уведомления ", () -> {
             pushNotificationCheckboxLocator.$("input").shouldHave(attribute("value", "true"));
             emailNotificationCheckboxLocator.$("input").shouldHave(attribute("value", "true"));

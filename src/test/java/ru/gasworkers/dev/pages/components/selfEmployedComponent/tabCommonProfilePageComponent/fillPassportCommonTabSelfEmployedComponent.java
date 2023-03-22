@@ -21,8 +21,8 @@ public class fillPassportCommonTabSelfEmployedComponent extends BaseTabOrderCard
             seriesPassportInputLocator = driver.$("input[placeholder='Серия']").as("Серия паспорта"),
             passportDateComponentLocator = driver.$("div[placeholder='Дата выдачи паспорта']").as("Дата выдачи паспорта"),
             issuedByPassportInputLocator = driver.$("input[placeholder='Кем выдан']").as("Кем выдан паспорт"),
-            addressPassportInputLocator = driver.$("input[placeholder='Адрес регистрации']").as("Адрес регистрации"),
-            apartmentNumberInputLocator = driver.$("input[placeholder='Номер квартиры']").as("Номер квартиры");
+            addressPassportInputLocator = driver.$("textarea[placeholder='Адрес регистрации']").as("Адрес регистрации"),
+            apartmentNumberInputLocator = driver.$("textarea[placeholder='Номер квартиры']").as("Номер квартиры");
 
     public void fillPassport(String seriesPassport, String numberPassport, String passportDate, String issuedByPassport, String addressPassport, String apartmentNumber) {
         stepWithRole("Заполнить поля паспорта", () -> {
@@ -80,12 +80,10 @@ public class fillPassportCommonTabSelfEmployedComponent extends BaseTabOrderCard
         stepWithRole("Убедиться, что все поля паспорта пустые", () -> {
             numberPassportInputLocator.shouldBe(empty);
             seriesPassportInputLocator.shouldBe(empty);
-            datePicker.checkInitialState(passportDateComponentLocator);
+            datePicker.checkInitialState(passportBoxLocator);
             issuedByPassportInputLocator.shouldBe(empty);
             addressPassportInputLocator.shouldBe(empty);
             apartmentNumberInputLocator.shouldBe(empty);
-
-
         });
         stepWithRole("Убедиться, что присутствует сообщение об ошибке в полях паспорта", () -> {
             checkErrorMsg(numberPassportInputLocator);

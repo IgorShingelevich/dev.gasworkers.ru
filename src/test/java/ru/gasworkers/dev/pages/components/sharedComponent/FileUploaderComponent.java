@@ -40,15 +40,32 @@ public class FileUploaderComponent extends BaseComponent {
         stepWithRole("Убедиться, что файл не загружен  в боксе: " + closestBox.getAlias(), () -> {
             closestBox.$$("img.files-list__logo.pointer").shouldHave(size(0));
             stepWithRole("Убедиться, что файл не загружен признак 2", () -> {
-                closestBox.$(" img[src*='https']").shouldNotBe(visible);
+                closestBox.$$(" img[src*='https']").shouldHave(size(0));
             });
             stepWithRole("Убедиться, что кнопка закрыть картинку не  отображается", () -> {
-                closestBox.$(".close").shouldNotBe(visible);
+                closestBox.$$(".close").shouldHave(size(0));
             });
             stepWithRole("Убедиться, что текст ссылки отображается", () -> {
                 closestBox.$("button.upload-button").shouldHave(text(uploadLinkText));
             });
         });
+    }
+
+    public void checkFilledState(SelenideElement masterIDBoxLocator, int filesCount) {
+        stepWithRole("Убедиться, что файл: " + filesCount + "  загружен в боксе: " + masterIDBoxLocator.getAlias(), () -> {
+            masterIDBoxLocator.$$("img.files-list__logo.pointer").shouldHave(size(filesCount));
+            stepWithRole("Убедиться, что файл: " + filesCount + "  загружен признак 2", () -> {
+                masterIDBoxLocator.$$(" img[src*='https']").shouldHave(size(filesCount));
+            });
+            stepWithRole("Убедиться, что кнопка закрыть картинку у файла: " + filesCount + "  отображается", () -> {
+                masterIDBoxLocator.$$(".close").shouldHave(size(filesCount));
+            });
+            stepWithRole("Убедиться, что текст ссылки не отображается", () -> {
+                masterIDBoxLocator.$("button.upload-button").shouldHave(text(uploadLinkText));
+                masterIDBoxLocator.$("button.upload-button").shouldHave(attribute("disabled", "true"));
+            });
+        });
+
     }
 
     // todo delete file method

@@ -41,4 +41,14 @@ public class fillMasterIDCommonTabSelfEmployedComponent extends BaseTabOrderCard
         });
     }
 
+    public void checkFilledState() {
+        stepWithRole("Убедиться, что удостоверение мастера заполнено", () -> {
+            boxValidation.checkFilledState(masterIDBoxLocator);
+            descriptionLocator.shouldHave(Condition.text(descriptionText));
+            bell.checkBlueBellState(masterIDBoxLocator);
+            uploader.checkFilledState(masterIDBoxLocator, 1);
+            datePicker.checkFilledState(masterIDBoxLocator);
+        });
+    }
+
 }

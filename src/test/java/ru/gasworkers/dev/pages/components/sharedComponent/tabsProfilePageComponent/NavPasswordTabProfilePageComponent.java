@@ -46,7 +46,7 @@ public class NavPasswordTabProfilePageComponent extends BaseComponent {
         });
     }
 
-    public void checkInitialState() {
+    public void checkFirsOfferEvaluatedInitialState() {
         stepWithRole("Убедиться, что вкладка Пароль не содержит пароль в форме на вкладке Пароль", () -> {
             driver.$$("div.title").get(0).shouldHave(text("Смена пароля")).as("Заголовок вкладки Смена пароля");
             driver.$("div.description").shouldHave(text("Пароль должен содержать не менее 4 знаков")).as("Описание вкладки Смена пароля");

@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.pages.selfEmployed;
 
+import com.codeborne.selenide.Selenide;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.FillProfileBannerSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.ModeSwitcherSelfEmployedComponent;
@@ -45,23 +46,54 @@ public class ProfileSelfEmployedPage  extends BaseSelfEmployedPage{
 
     public void checkInitialState(String email, String phone) {
         stepWithRole("Убедиться, что страница профиля в начальном состоянии", () -> {
+            tabCommon.checkInitialState();
 //            header.checkInitialState();
 //            sidebar.checkInitialState();
 //            modeSwitcher.checkInitialState();
 //            mosOblGasBanner.checkInitialState();
 //            fillProfileBanner.checkInitialState();
             nav.profile();
-            tabProfile.checkInitialState();
-            nav.common();
-             tabCommon.checkInitialState();
+            tabProfile.checkFirsOfferEvaluatedInitialState();
             nav.contacts();
-            tabContacts.checkFilledState(email, phone);
+            tabContacts.checkFirsOfferEvaluatedInitialState(email, phone);
 //             tabEquipment.checkInitialState();
             nav.password();
-            tabPassword.checkInitialState();
+            tabPassword.checkFirsOfferEvaluatedInitialState();
             nav.notifications();
-            tabNotifications.checkInitialState();
+            tabNotifications.checkFirsOfferEvaluatedInitialState();
             nav.profile();
+        });
+    }
+
+    public void checkFirsOfferEvaluatedInitialState(String email, String phone) {
+        stepWithRole("Убедиться, что страница профиля в начальном состоянии", () -> {
+            tabCommon.checkFirsOfferEvaluatedInitialState();
+//            header.checkInitialState();
+//            sidebar.checkInitialState();
+//            modeSwitcher.checkInitialState();
+//            mosOblGasBanner.checkInitialState();
+//            fillProfileBanner.checkInitialState();
+            nav.profile();
+            tabProfile.checkFirsOfferEvaluatedInitialState();
+            nav.contacts();
+            tabContacts.checkFirsOfferEvaluatedInitialState(email, phone);
+//             tabEquipment.checkInitialState();
+            nav.password();
+            tabPassword.checkFirsOfferEvaluatedInitialState();
+            nav.notifications();
+            tabNotifications.checkFirsOfferEvaluatedInitialState();
+            stepWithRole("Убедиться, что паннель анимация паннели навигации срабатывает", () -> {
+                nav.password();
+                Selenide.sleep(100);
+                nav.equipment();
+                Selenide.sleep(100);
+                nav.contacts();
+                Selenide.sleep(100);
+                nav.common();
+                Selenide.sleep(100);
+                //  todo animation handling
+                nav.profile();
+            });
         });
     }
 
