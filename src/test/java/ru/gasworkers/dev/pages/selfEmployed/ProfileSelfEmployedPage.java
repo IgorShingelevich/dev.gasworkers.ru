@@ -11,10 +11,10 @@ import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageCompone
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navCommon.NavCommonTabSelfEmployedProfilePageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navProfile.NavProfileTabSelfEmployedProfilePageComponent;
 
-public class ProfileSelfEmployedPage  extends BaseSelfEmployedPage{
+public class ProfileSelfEmployedPage extends BaseSelfEmployedPage {
     public final HeaderSelfEmployedComponent header;
     public final SelfEmployedSidebarComponent sidebar;
-    public final  ModeSwitcherSelfEmployedComponent modeSwitcher;
+    public final ModeSwitcherSelfEmployedComponent modeSwitcher;
     public final MosOblGasBannerSelfEmployedSideBarComponent mosOblGasBanner;
     public final FillProfileBannerSelfEmployedComponent fillProfileBanner;
     public final NavigationProfilePageComponent nav;
@@ -25,64 +25,81 @@ public class ProfileSelfEmployedPage  extends BaseSelfEmployedPage{
     public final NavNotificationsTabProfilePageComponent tabNotifications;
     public final NavPasswordTabProfilePageComponent tabPassword;
 
-        public ProfileSelfEmployedPage(RoleBrowser browser) {
-            super(browser);
-            header = new HeaderSelfEmployedComponent(browser);
-            sidebar = new SelfEmployedSidebarComponent(browser);
-            modeSwitcher = new ModeSwitcherSelfEmployedComponent(browser);
-            mosOblGasBanner = new MosOblGasBannerSelfEmployedSideBarComponent(browser);
-            fillProfileBanner = new FillProfileBannerSelfEmployedComponent(browser);
-            nav = new NavigationProfilePageComponent(browser);
-            tabProfile = new NavProfileTabSelfEmployedProfilePageComponent(browser);
-            tabCommon = new NavCommonTabSelfEmployedProfilePageComponent(browser);
-            tabContacts = new NavContactsTabProfilePageComponent(browser);
-            tabEquipment = new NavEquipmentTabProfilePageComponent(browser);
-            tabNotifications = new NavNotificationsTabProfilePageComponent(browser);
-            tabPassword = new NavPasswordTabProfilePageComponent(browser);
+    public ProfileSelfEmployedPage(RoleBrowser browser) {
+        super(browser);
+        header = new HeaderSelfEmployedComponent(browser);
+        sidebar = new SelfEmployedSidebarComponent(browser);
+        modeSwitcher = new ModeSwitcherSelfEmployedComponent(browser);
+        mosOblGasBanner = new MosOblGasBannerSelfEmployedSideBarComponent(browser);
+        fillProfileBanner = new FillProfileBannerSelfEmployedComponent(browser);
+        nav = new NavigationProfilePageComponent(browser);
+        tabProfile = new NavProfileTabSelfEmployedProfilePageComponent(browser);
+        tabCommon = new NavCommonTabSelfEmployedProfilePageComponent(browser);
+        tabContacts = new NavContactsTabProfilePageComponent(browser);
+        tabEquipment = new NavEquipmentTabProfilePageComponent(browser);
+        tabNotifications = new NavNotificationsTabProfilePageComponent(browser);
+        tabPassword = new NavPasswordTabProfilePageComponent(browser);
 
-        }
-
+    }
 
 
     public void checkInitialState(String email, String phone) {
         stepWithRole("Убедиться, что страница профиля в начальном состоянии", () -> {
-            tabCommon.checkInitialState();
-//            header.checkInitialState();
-//            sidebar.checkInitialState();
-//            modeSwitcher.checkInitialState();
-//            mosOblGasBanner.checkInitialState();
-//            fillProfileBanner.checkInitialState();
-            nav.profile();
-            tabProfile.checkFirsOfferEvaluatedInitialState();
-            nav.contacts();
-            tabContacts.checkFirsOfferEvaluatedInitialState(email, phone);
-//             tabEquipment.checkInitialState();
-            nav.password();
-            tabPassword.checkFirsOfferEvaluatedInitialState();
-            nav.notifications();
-            tabNotifications.checkFirsOfferEvaluatedInitialState();
-            nav.profile();
+            stepWithRole("Убедиться, что элементы страницы профиля в начальном состоянии", () -> {
+                modeSwitcher.checkDispatcherMode();
+                modeSwitcher.switchMaster();
+                modeSwitcher.checkMasterMode();
+                //todo add message icon
+                header.checkFinishLoading();
+//                sidebar.checkFinishLoading();
+                // todo sidebar unification
+                //todo sidebar notifications block
+                mosOblGasBanner.checkFinishLoading();
+                fillProfileBanner.checkFinishLoading();
+                modeSwitcher.switchDispatcher();
+                modeSwitcher.checkDispatcherMode();
+            });
+            stepWithRole("Убедиться, что вкладки в начальном состоянии", () -> {
+                tabCommon.checkInitialState();
+                nav.profile();
+                tabProfile.checkInitialState();
+                nav.contacts();
+                tabContacts.checkInitialState(email, phone);
+                nav.equipment();
+                tabEquipment.checkInitialState();
+                nav.password();
+                tabPassword.checkInitialState();
+                nav.notifications();
+                tabNotifications.checkInitialState();
+                nav.profile();
+            });
         });
     }
 
     public void checkFirsOfferEvaluatedInitialState(String email, String phone) {
-        stepWithRole("Убедиться, что страница профиля в начальном состоянии", () -> {
-            tabCommon.checkFirsOfferEvaluatedInitialState();
-//            header.checkInitialState();
-//            sidebar.checkInitialState();
-//            modeSwitcher.checkInitialState();
-//            mosOblGasBanner.checkInitialState();
-//            fillProfileBanner.checkInitialState();
-            nav.profile();
-            tabProfile.checkFirsOfferEvaluatedInitialState();
-            nav.contacts();
-            tabContacts.checkFirsOfferEvaluatedInitialState(email, phone);
-//             tabEquipment.checkInitialState();
-            nav.password();
-            tabPassword.checkFirsOfferEvaluatedInitialState();
-            nav.notifications();
-            tabNotifications.checkFirsOfferEvaluatedInitialState();
-            stepWithRole("Убедиться, что паннель анимация паннели навигации срабатывает", () -> {
+        stepWithRole("Убедиться, что страница профиля в состоянии после расценки первого заказа", () -> {
+            stepWithRole("Убедиться, что элементы страницы профиля в состоянии после расценки первого заказа", () -> {
+                header.checkFinishLoading();
+                sidebar.checkFinishLoading();
+//            modeSwitcher.
+                //todo sidebar notifications block
+                mosOblGasBanner.checkFinishLoading();
+                fillProfileBanner.checkFinishLoading();
+            });
+            stepWithRole("Убедиться, что вкладки в состоянии после расценки первого заказа", () -> {
+                tabCommon.checkFirsOfferEvaluatedInitialState();
+                nav.profile();
+                tabProfile.checkFirsOfferEvaluatedInitialState();
+                nav.contacts();
+                tabContacts.checkFirsOfferEvaluatedSEInitialState(email, phone);
+                nav.equipment();
+                tabEquipment.checkInitialState();
+                nav.password();
+                tabPassword.checkInitialState();
+                nav.notifications();
+                tabNotifications.checkFirsOfferEvaluatedSEInitialState();
+            });
+            stepWithRole("Убедиться, что  анимация паннели навигации срабатывает", () -> {
                 nav.password();
                 Selenide.sleep(100);
                 nav.equipment();
@@ -97,12 +114,10 @@ public class ProfileSelfEmployedPage  extends BaseSelfEmployedPage{
         });
     }
 
-    public void checkNoError(){
+    public void checkFilledProfileState() {
         stepWithRole("Убедиться, что нет ошибок", () -> {
-//            tabProfile.checkNoError();
-//            tabContacts.checkNoError();
-//            tabPassword.checkNoError();
-//            tabNotifications.checkNoError();
+            // todo se checkFilledProfileState
         });
     }
 }
+//todo conditions modeSwitcher for all states

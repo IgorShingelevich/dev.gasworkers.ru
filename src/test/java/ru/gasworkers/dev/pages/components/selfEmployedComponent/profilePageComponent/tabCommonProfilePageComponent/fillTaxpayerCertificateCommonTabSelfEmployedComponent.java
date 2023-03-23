@@ -1,12 +1,12 @@
-package ru.gasworkers.dev.pages.components.selfEmployedComponent.tabCommonProfilePageComponent;
+package ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.tabCommonProfilePageComponent;
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.components.selfEmployedComponent.BoxValidationTabCommonSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.ValidationBellSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.DatePickerDocumentsComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.FileUploaderComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.BaseTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navCommon.NavCommonTabSelfEmployedProfilePageComponent;
 
 public class fillTaxpayerCertificateCommonTabSelfEmployedComponent extends BaseTabOrderCardComponent {
     public final ValidationBellSelfEmployedComponent bell;

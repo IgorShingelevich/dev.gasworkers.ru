@@ -38,7 +38,7 @@ public class MapModeHomeSelfEmployedComponent extends BaseComponent {
         stepWithRole("Убедиться, что режим карты СМЗ в начальном состоянии", () -> {
             map.checkFinishLoading();
             fillProfileBanner.checkFinishLoading();
-            stepWithRole("Убедиться что количестов блоков с предложениями совпадает с количеством предложений на карте", () -> {
+            stepWithRole("Убедиться что количестов блоков с предложениями совпадает с количеством предложений в боксе на карте", () -> {
                 offersBoxCollection.first().shouldBe(visible, Duration.ofSeconds(20));
                 Integer currentOffersMapCount = map.offersCount();
                Integer currentOffersBoxCount = offersBoxCollection.size();
@@ -58,6 +58,11 @@ public class MapModeHomeSelfEmployedComponent extends BaseComponent {
     public void  selectOfferByIndex(int index) {
         stepWithRole("Выбрать  по списку: " + index+1 + " предложение", () -> {
             offersBoxCollection.get(index).find("button.btn-primary").click();
+        });
+    }
+    public void selectFirstMaintenanceOffer() {
+        stepWithRole("Выбрать первое предложение по обслуживанию", () -> {
+            offersBoxCollection.findBy(text("Договор ТО")).find("button.btn-primary").click();
         });
     }
 }

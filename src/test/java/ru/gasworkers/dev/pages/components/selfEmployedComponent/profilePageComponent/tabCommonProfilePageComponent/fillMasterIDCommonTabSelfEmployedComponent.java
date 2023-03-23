@@ -1,13 +1,13 @@
-package ru.gasworkers.dev.pages.components.selfEmployedComponent.tabCommonProfilePageComponent;
+package ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.tabCommonProfilePageComponent;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.components.selfEmployedComponent.BoxValidationTabCommonSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.ValidationBellSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.DatePickerDocumentsComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.FileUploaderComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.BaseTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navCommon.NavCommonTabSelfEmployedProfilePageComponent;
 
 public class fillMasterIDCommonTabSelfEmployedComponent extends BaseTabOrderCardComponent {
     public final ValidationBellSelfEmployedComponent bell;
@@ -33,7 +33,17 @@ public class fillMasterIDCommonTabSelfEmployedComponent extends BaseTabOrderCard
 
     public void checkInitialState() {
         stepWithRole("Убедиться, что удостоверение мастера не заполнено", () -> {
-            boxValidation.checkRedState(masterIDBoxLocator);
+            boxValidation.checkNoRedState(masterIDBoxLocator);
+            descriptionLocator.shouldHave(Condition.text(descriptionText));
+            bell.checkRedBellState(masterIDBoxLocator);
+            uploader.checkInitialState(masterIDBoxLocator);
+            datePicker.checkInitialState(dateBoxLocator);
+        });
+    }
+
+    public void checkValidationTriggeredState() {
+        stepWithRole("Убедиться, что удостоверение мастера не заполнено", () -> {
+            boxValidation.checkRedBoxState(masterIDBoxLocator);
             descriptionLocator.shouldHave(Condition.text(descriptionText));
             bell.checkRedBellState(masterIDBoxLocator);
             uploader.checkInitialState(masterIDBoxLocator);
@@ -43,7 +53,7 @@ public class fillMasterIDCommonTabSelfEmployedComponent extends BaseTabOrderCard
 
     public void checkFilledState() {
         stepWithRole("Убедиться, что удостоверение мастера заполнено", () -> {
-            boxValidation.checkFilledState(masterIDBoxLocator);
+            boxValidation.checkNoRedState(masterIDBoxLocator);
             descriptionLocator.shouldHave(Condition.text(descriptionText));
             bell.checkBlueBellState(masterIDBoxLocator);
             uploader.checkFilledState(masterIDBoxLocator, 1);

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.selfEmployedComponent.tabCommonProfilePageComponent;
+package ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.tabCommonProfilePageComponent;
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
@@ -12,13 +12,21 @@ public class fillNameCommonTabSelfEmployedComponent extends BaseTabOrderCardComp
     }
 
     SelenideElement
-    surnameInputLocator = driver.$("input[placeholder='Фамилия*']").as("Фамилия"),
-    nameInputLocator = driver.$("input[placeholder='Имя*']").as("Имя"),
-    patronymicInputLocator = driver.$("input[placeholder='Отчество']").as("Отчество");
+            surnameInputLocator = driver.$("input[placeholder='Фамилия*']").as("Фамилия"),
+            nameInputLocator = driver.$("input[placeholder='Имя*']").as("Имя"),
+            patronymicInputLocator = driver.$("input[placeholder='Отчество']").as("Отчество");
 
 
     public void checkInitialState() {
-        stepWithRole("Проверить начальное состояние блока с именем", () -> {
+        stepWithRole("Убедиться, что поля ФИО пустые", () -> {
+            surnameInputLocator.shouldBe(empty);
+            nameInputLocator.shouldBe(empty);
+            patronymicInputLocator.shouldBe(empty);
+        });
+    }
+
+    public void checkValidationTriggeredState() {
+        stepWithRole("Убедиться, что присутствует сообщение об ошибке у полей  блока с именем", () -> {
             stepWithRole("Убедиться, что поля ФИО пустые", () -> {
                 surnameInputLocator.shouldBe(empty);
                 nameInputLocator.shouldBe(empty);
@@ -46,7 +54,7 @@ public class fillNameCommonTabSelfEmployedComponent extends BaseTabOrderCardComp
         });
     }
 
-    public void checkFilledState(){
+    public void checkFilledState() {
         stepWithRole("Проверить состояние блока с ФИО после заполнения", () -> {
             stepWithRole("Убедиться, что  поля ФИО заполнены", () -> {
                 stepWithRole("Поле Фамилия: " + surnameInputLocator.getValue(), () -> {

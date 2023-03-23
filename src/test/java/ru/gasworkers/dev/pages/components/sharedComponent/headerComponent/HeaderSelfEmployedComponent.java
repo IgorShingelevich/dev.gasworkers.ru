@@ -3,9 +3,9 @@ package ru.gasworkers.dev.pages.components.sharedComponent.headerComponent;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.SelfEmployedActionsBlockComponent;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 
 public class HeaderSelfEmployedComponent extends BaseComponent {
@@ -20,7 +20,7 @@ public class HeaderSelfEmployedComponent extends BaseComponent {
 
     SelenideElement
     logoLocator = driver.$("img[src*='/images/logo']").as("Логотип"),
-    profileButtonLocator = driver.$("button[data-guide='profile-header-button']").as("Кнопка Профиль");
+    profileSettingsButtonLocator = driver.$("button.btn.btn-warning").as("Кнопка  Настройки профиля");  //button[data-guide='profile-header-button']
 
     public void clickLogo() {
         stepWithRole("Кликнуть на логотип", () -> {
@@ -30,13 +30,14 @@ public class HeaderSelfEmployedComponent extends BaseComponent {
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что все элементы хедера загрузились", () -> {
-            burger.checkFinishLoading();
-            actionsBlock.checkFinishLoading(); //todo add messagesButtonLocator
+//            burger.checkFinishLoading();
+            actionsBlock.checkFinishLoading();
+            //todo add messagesButtonLocator
             stepWithRole("Убедиться что логотип загрузился", () -> {
                 logoLocator.shouldBe(visible);
             });
-            stepWithRole("Убедиться что кнопка Профиль загрузилась", () -> {
-                profileButtonLocator.shouldBe(visible);
+            stepWithRole("Убедиться что кнопка  Настройки профиля загрузилась", () -> {
+                profileSettingsButtonLocator.shouldHave(text(" Настройки профиля"));
             });
         });
     }

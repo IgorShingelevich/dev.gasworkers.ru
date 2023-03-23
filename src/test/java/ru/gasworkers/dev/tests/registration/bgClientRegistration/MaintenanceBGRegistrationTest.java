@@ -117,17 +117,17 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
                 step("Вкадка Контакты", () -> {
                     clientPages.getProfilePage().navContacts();
                     clientPages.getProfilePage().navContactsTab.checkFinishLoading();
-                    clientPages.getProfilePage().navContactsTab.checkFirsOfferEvaluatedInitialState(randomClient.getEmail(), randomClient.getPhoneNumber());
+                    clientPages.getProfilePage().navContactsTab.checkInitialState(randomClient.getEmail(), randomClient.getPhoneNumber());
                 });
                 step("Вкадка Пароль", () -> {
                     clientPages.getProfilePage().navPassword();
                     clientPages.getProfilePage().navPasswordTab.checkFinishLoading();
-                    clientPages.getProfilePage().navPasswordTab.checkFirsOfferEvaluatedInitialState();
+                    clientPages.getProfilePage().navPasswordTab.checkInitialState();
                 });
                 step("Вкладка Уведомления", () -> {
                     clientPages.getProfilePage().navNotifications();
                     clientPages.getProfilePage().navNotificationsTab.checkFinishLoading();
-                    clientPages.getProfilePage().navNotificationsTab.checkFirsOfferEvaluatedInitialState();
+                    clientPages.getProfilePage().navNotificationsTab.checkInitialState();
                 });
                 clientPages.getProfilePage().sidebar.home();
             });

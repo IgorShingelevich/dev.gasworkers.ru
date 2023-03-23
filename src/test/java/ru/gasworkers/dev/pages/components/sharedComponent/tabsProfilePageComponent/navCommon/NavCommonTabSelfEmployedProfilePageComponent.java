@@ -4,11 +4,13 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationComponent.DateBGRegistrationLandingComponent;
-import ru.gasworkers.dev.pages.components.selfEmployedComponent.tabCommonProfilePageComponent.*;
+import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.BaseProfileSelfEmployedComponent;
+import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.tabCommonProfilePageComponent.*;
 
 import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 
-public class NavCommonTabSelfEmployedProfilePageComponent extends BaseComponent {
+public class NavCommonTabSelfEmployedProfilePageComponent extends BaseProfileSelfEmployedComponent {
     public final DateBGRegistrationLandingComponent datePickerBlock;
     public final fillNameCommonTabSelfEmployedComponent fillNameBlock;
     public final fillPassportCommonTabSelfEmployedComponent fillPassportBlock;
@@ -16,7 +18,7 @@ public class NavCommonTabSelfEmployedProfilePageComponent extends BaseComponent 
     public final fillBankAccountCommonTabSelfEmployedComponent fillBankAccountBlock;
     public final fillTaxpayerCertificateCommonTabSelfEmployedComponent fillTaxpayerCertificateBlock;
 
-    public NavCommonTabSelfEmployedProfilePageComponent(RoleBrowser browser){
+    public NavCommonTabSelfEmployedProfilePageComponent(RoleBrowser browser) {
         super(browser);
         datePickerBlock = new DateBGRegistrationLandingComponent(browser);
         fillNameBlock = new fillNameCommonTabSelfEmployedComponent(browser);
@@ -31,11 +33,9 @@ public class NavCommonTabSelfEmployedProfilePageComponent extends BaseComponent 
 
     SelenideElement
             diplomaBannerLocator = driver.$("div.diploma.diploma-blue").as("Баннер Диплом"),
-            saveButtonLocator = driver.$("button.btn.btn-primary").as("Кнопка Сохранить"),
-            toOrderBottomButtonLocator = driver.$("button.mr-2.mb-3.btn.btn-warning").as("Нижняя кнопка К заказу"),
-            toOrderTopButtonLocator = driver.$(".w-100 button.btn.btn-warning.disable-outline").as("Верхняя кнопка К заказу");
+            saveButtonLocator = driver.$("button.btn.btn-primary").as("Кнопка Сохранить");
 
-    public void checkInitialState () {
+    public void checkInitialState() {
         stepWithRole("Проверить начальное состояние", () -> {
             diplomaBannerLocator.shouldHave(text(diplomaBannerText));
             fillNameBlock.checkInitialState();
@@ -43,10 +43,11 @@ public class NavCommonTabSelfEmployedProfilePageComponent extends BaseComponent 
             fillMasterIDBlock.checkInitialState();
 //            fillBankAccountBlock.checkInitialState();
             fillTaxpayerCertificateBlock.checkInitialState();
+            checkNoOrderContextState();
         });
     }
 
-    public void checkFirsOfferEvaluatedInitialState () {
+    public void checkFirsOfferEvaluatedInitialState() {
         stepWithRole("Проверить начальное состояние", () -> {
             diplomaBannerLocator.shouldHave(text(diplomaBannerText));
             fillNameBlock.checkInitialState();
@@ -55,6 +56,7 @@ public class NavCommonTabSelfEmployedProfilePageComponent extends BaseComponent 
 //            fillBankAccountBlock.checkInitialState();
             fillTaxpayerCertificateBlock.checkInitialState();
         });
+        checkOrderContextState();
     }
 
 }

@@ -82,25 +82,30 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
             selfEmployedPages.getSuccessfulRegistrationSelfEmployedPage().checkFinishLoading();
             selfEmployedPages.getSuccessfulRegistrationSelfEmployedPage().clickForwardButton();
         });
-//        step("Страница профиля СМЗ - первый гид", () -> {
-//                    selfEmployedPages.getHomeSelfEmployedPage().firstGuide.playSequence();
-//        });
-        step("Домашняя страница  СМЗ - пропустить гид", () -> {
-            selfEmployedPages.getHomeSelfEmployedPage().firstGuide.playSequence(1);
-            selfEmployedPages.getHomeSelfEmployedPage().firstGuide.skipGuide();
+        step("Гид СМЗ", () -> {
+            selfEmployedPages.getHomeSelfEmployedPage().firstGuide.playSequence(15);
         });
-        step("Домашняя СМЗ после гида", () -> {
+        step("Домашняя СМЗ после гида - режим карта и режим мастер", () -> {
             selfEmployedPages.getHomeSelfEmployedPage().checkInitialState();
+        });
+        step("Профиль СМЗ после гида", () -> {
+            selfEmployedPages.getHomeSelfEmployedPage().header.burger.openBurger();
+            selfEmployedPages.getHomeSelfEmployedPage().header.burger.profile();
+            selfEmployedPages.getProfileSelfEmployedPage().checkInitialState(randomSelfEmployed.getEmail(), randomSelfEmployed.getPhone());
+            // todo sidebar unification
+            //todo sidebar notifications block
         });
 
         step("Выбрать первый заказ", () -> {
-//            selfEmployedPages.getHomeSelfEmployedPage().mapMode.selectOfferByIndex(0);
-            selfEmployedPages.getHomeSelfEmployedPage().mapMode.selectOfferByNumber("4547");
+            selfEmployedPages.getProfileSelfEmployedPage().sidebar.home();
+            selfEmployedPages.getProfileSelfEmployedPage().modeSwitcher.checkMasterMode();
+            selfEmployedPages.getProfileSelfEmployedPage().modeSwitcher.checkDispatcherMode();
+            selfEmployedPages.getProfileSelfEmployedPage().modeSwitcher.checkDispatcherMode();
+            selfEmployedPages.getHomeSelfEmployedPage().mapMode.selectFirstMaintenanceOffer();
         });
 
         step("Страница карточки заказа", () -> {
             selfEmployedPages.getOrderCardPage().checkInitialState();
-//            selfEmployedPages.getOrderCardSelfEmployedPage().checkNotEvaluatedOfferButtonState();
         });
         step("Модальное окно Расценить заказ", () -> {
             selfEmployedPages.getOrderCardPage().offerPriceButton();
@@ -117,12 +122,10 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
             selfEmployedPages.getOrderCardPage().checkNewTenderState(OrderStatus.NEW_TENDER, OrderType.MAINTENANCE);
             selfEmployedPages.getOrderCardPage().acceptOrderInitialState();
         });
-
         step("Страница информации о заполнении профиля", () -> {
             selfEmployedPages.getFillProfileInfo().checkFinishLoading();
             selfEmployedPages.getFillProfileInfo().toProfileButton();
         });
-
         step("Страница профиля СМЗ после перехода из первого расцененного заказа ", () -> {
             selfEmployedPages.getProfileSelfEmployedPage().checkFirsOfferEvaluatedInitialState(randomSelfEmployed.getEmail(), randomSelfEmployed.getPhone());
         });

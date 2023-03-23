@@ -49,7 +49,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getProfilePage().checkFinishLoading();
         clientPages.getProfilePage().navPassword();
         clientPages.getProfilePage().navPasswordTab.checkFinishLoading();
-        clientPages.getProfilePage().navPasswordTab.checkFirsOfferEvaluatedInitialState();
+        clientPages.getProfilePage().navPasswordTab.checkInitialState();
         clientPages.getProfilePage().navPasswordTab.generatePassword();
     }
 
@@ -69,7 +69,7 @@ class ClientFlowTest extends BaseTest {
         step("Вкладка Контакты", () -> {
             clientPages.getProfilePage().navContacts();
             clientPages.getProfilePage().navContactsTab.checkFinishLoading();
-            clientPages.getProfilePage().navContactsTab.checkFirsOfferEvaluatedInitialState(client00.email, String.valueOf(client00.phoneNumber));
+            clientPages.getProfilePage().navContactsTab.checkInitialState(client00.email, String.valueOf(client00.phoneNumber));
             //TODO password and Notifications
         });
     }
@@ -92,7 +92,7 @@ class ClientFlowTest extends BaseTest {
         step("Вкладка Контакты", () -> {
             clientPages.getProfilePage().navContacts();
             clientPages.getProfilePage().navContactsTab.checkFinishLoading();
-            clientPages.getProfilePage().navContactsTab.checkFirsOfferEvaluatedInitialState(client00.email, String.valueOf(client00.phoneNumber));
+            clientPages.getProfilePage().navContactsTab.checkInitialState(client00.email, String.valueOf(client00.phoneNumber));
         });
         //TODO password and Notifications
     }
@@ -117,11 +117,7 @@ class ClientFlowTest extends BaseTest {
         });
         clientPages.getObjectCardPage().tabObject.getName();
         clientPages.getObjectCardPage().tabObject.getEquipmentList();
-
-
     }
-
-
 
     @Test
     @Feature("Новый заказ ТО")

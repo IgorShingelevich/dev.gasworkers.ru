@@ -29,7 +29,7 @@ public class MosOblGasBannerSelfEmployedSideBarComponent extends BaseComponent {
             bannerTitle = bannerBoxLocator.$("span.text").as("Заголовок баннера"),
             bannerDescription1 = descriptionTextCollection.get(0).as("Описание баннера 1"),
             bannerDescription2 = descriptionTextCollection.get(1).as("Описание баннера 2"),
-            bannerMoreButton = bannerBoxLocator.$("mosoblgaz-block__btn").as("Кнопка  еще");
+            bannerMoreButton = bannerBoxLocator.$("span.mosoblgaz-block__btn").as("Кнопка  еще");
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что баннер отображается", () -> {

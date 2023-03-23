@@ -2,6 +2,7 @@ package ru.gasworkers.dev.pages.components.landingComponent;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.client.BackgroundClientRequestType;
@@ -89,6 +90,8 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 bgSubtitle3Locator.shouldHave(text(BG_MAINTENANCE_SUBTITLE_3));
                 findOffersButton.shouldBe(visible);
             });
+            //todo handle fail to switch between tabs - multiple falls
+            Selenide.sleep(100);
             stepWithRole("Убедиться, что отображаются компоненты Фонового ремонта", () -> {
                 //todo tab change check - fall
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.REPAIR.getTitle())).click();
@@ -98,6 +101,8 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 bgSubtitle3Locator.shouldHave(text(BG_REPAIR_SUBTITLE_3));
                 findOffersButton.shouldBe(visible);
             });
+            Selenide.sleep(100);
+
             stepWithRole("Убедиться, что отображаются компоненты Фоновой видеоконсультации", () -> {
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.VIDEO.getTitle())).click();
                 bgTitleLocator.shouldHave(text(BG_VIDEO_TITLE));
@@ -106,6 +111,8 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 bgSubtitle3Locator.shouldHave(text(BG_VIDEO_SUBTITLE_3));
                 findOffersButton.shouldBe(visible);
             });
+            Selenide.sleep(100);
+
             requestTypeLocator.findBy(text(BackgroundClientRequestType.MAINTENANCE.getTitle())).click();
             //TODO check form components presence
         });

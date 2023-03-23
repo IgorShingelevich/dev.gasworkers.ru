@@ -61,5 +61,22 @@ public class SelfEmployedBurgerComponent extends BaseComponent {
         });
     }
 
+    public void home() {
+        stepWithRole("Кликнуть на ссылку на домашнюю страницу", () -> {
+            homeLinkLocator.click();
+        });
+    }
+
+    public void certificatesAndEquipment() {
+        stepWithRole("Кликнуть на ссылку на сертификаты и оборудование", () -> {
+            certificatesAndEquipmentLinkLocator.click();
+        });
+    }
+
+    public void profile() {
+        stepWithRole("Кликнуть на ссылку на профиль", () -> {
+            profileLinkLocator.click();
+        });
+    }
 
 }

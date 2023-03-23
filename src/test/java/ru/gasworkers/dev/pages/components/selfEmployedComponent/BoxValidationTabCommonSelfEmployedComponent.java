@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.selfEmployedComponent.tabCommonProfilePageComponent;
+package ru.gasworkers.dev.pages.components.selfEmployedComponent;
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
@@ -11,13 +11,13 @@ public class BoxValidationTabCommonSelfEmployedComponent extends BaseComponent {
         super(browser);
     }
 
-    public void checkRedState (SelenideElement closestBox) {
+    public void checkRedBoxState(SelenideElement closestBox) {
         stepWithRole("Проверить  состояние анезаполненного бокса", () -> {
             closestBox.shouldHave(cssClass("diploma-danger"));
         });
     }
 
-    public void checkFilledState (SelenideElement closestBox) {
+    public void checkNoRedState(SelenideElement closestBox) {
         stepWithRole("Проверить  состояние заполненного бокса", () -> {
             closestBox.shouldNotHave(cssClass("diploma-danger"));
         });

@@ -46,7 +46,7 @@ public class SelfEmployedSidebarComponent extends BaseComponent {
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что боковая панель загрузилась", () -> {
-            //todo service and scroll notifications
+            //todo service and scroll notifications block
             linkBoxContainer.shouldBe(visible);
             ordersHistoryDropdownLocator.shouldHave(text(ordersHistoryDropdownText));
             homeLinkLocator.shouldHave(text(homeLinkText));

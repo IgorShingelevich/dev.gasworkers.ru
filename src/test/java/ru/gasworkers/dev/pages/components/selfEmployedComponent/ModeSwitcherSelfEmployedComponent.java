@@ -38,13 +38,13 @@ public class ModeSwitcherSelfEmployedComponent extends BaseComponent {
 
         public void checkMasterMode(){
             stepWithRole("Убедиться, что переключатель в положении мастер", () -> {
-                switcherItemCollection.filterBy(Condition.text(masterSwitcherItemText)).first().shouldHave(Condition.cssClass("active"));
+                switcherItemCollection.get(0).shouldHave(Condition.cssClass("active"));
             });
         }
 
         public void checkDispatcherMode () {
             stepWithRole("Убедиться, что переключатель в положении диспетчер", () -> {
-                switcherItemCollection.filterBy(Condition.text(dispatcherSwitcherItemText)).first().shouldHave(Condition.cssClass("active"));
+                switcherItemCollection.get(1).shouldHave(Condition.cssClass("active"));
             });
         }
 

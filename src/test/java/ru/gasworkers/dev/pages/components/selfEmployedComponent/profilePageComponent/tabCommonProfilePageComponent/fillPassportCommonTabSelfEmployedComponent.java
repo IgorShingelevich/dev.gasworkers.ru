@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.selfEmployedComponent.tabCommonProfilePageComponent;
+package ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.tabCommonProfilePageComponent;
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
@@ -44,7 +44,6 @@ public class fillPassportCommonTabSelfEmployedComponent extends BaseTabOrderCard
         });
     }
 
-
     public void fillNumberPassport(String numberPassport) {
         stepWithRole("Заполнить поле номер пасспорта", () -> {
             numberPassportInputLocator.setValue(numberPassport);
@@ -75,7 +74,6 @@ public class fillPassportCommonTabSelfEmployedComponent extends BaseTabOrderCard
         });
     }
 
-
     public void checkInitialState() {
         stepWithRole("Убедиться, что все поля паспорта пустые", () -> {
             numberPassportInputLocator.shouldBe(empty);
@@ -85,12 +83,25 @@ public class fillPassportCommonTabSelfEmployedComponent extends BaseTabOrderCard
             addressPassportInputLocator.shouldBe(empty);
             apartmentNumberInputLocator.shouldBe(empty);
         });
-        stepWithRole("Убедиться, что присутствует сообщение об ошибке в полях паспорта", () -> {
-            checkErrorMsg(numberPassportInputLocator);
-            checkErrorMsg(seriesPassportInputLocator);
-            checkErrorMsg(issuedByPassportInputLocator);
-            checkErrorMsg(addressPassportInputLocator);
-            checkErrorMsg(apartmentNumberInputLocator);
+    }
+
+    public void checkValidationTriggeredState() {
+        stepWithRole("Убедиться, что присутствует сообщение об ошибке у полей деталей пасспорта", () -> {
+            stepWithRole("Убедиться, что все поля паспорта пустые", () -> {
+                numberPassportInputLocator.shouldBe(empty);
+                seriesPassportInputLocator.shouldBe(empty);
+                datePicker.checkInitialState(passportBoxLocator);
+                issuedByPassportInputLocator.shouldBe(empty);
+                addressPassportInputLocator.shouldBe(empty);
+                apartmentNumberInputLocator.shouldBe(empty);
+            });
+            stepWithRole("Убедиться, что присутствует сообщение об ошибке в полях паспорта", () -> {
+                checkErrorMsg(numberPassportInputLocator);
+                checkErrorMsg(seriesPassportInputLocator);
+                checkErrorMsg(issuedByPassportInputLocator);
+                checkErrorMsg(addressPassportInputLocator);
+                checkErrorMsg(apartmentNumberInputLocator);
+            });
         });
     }
 }

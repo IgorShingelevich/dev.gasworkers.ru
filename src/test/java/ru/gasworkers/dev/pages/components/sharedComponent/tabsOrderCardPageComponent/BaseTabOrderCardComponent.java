@@ -12,7 +12,6 @@ public abstract class BaseTabOrderCardComponent extends BaseComponent {
         super(browser);
     }
 
-
     public void checkErrorMsg(SelenideElement element){
         // todo list of text in the placeholder - to specify the error message
         stepWithRole("Убедиться, что присутствует сообщение об ошибке у поля: " + element.getAlias(), () -> {

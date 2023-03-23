@@ -3,10 +3,11 @@ package ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageCompon
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
+import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.BaseProfileSelfEmployedComponent;
 
 import static com.codeborne.selenide.Condition.*;
 
-public class NavProfileTabSelfEmployedProfilePageComponent extends BaseComponent {
+public class NavProfileTabSelfEmployedProfilePageComponent extends BaseProfileSelfEmployedComponent {
     public final AddPhotoProfileTabComponent addPhoto;
     public final AddDiplomaProfileTabComponent addDiploma;
 
@@ -34,9 +35,7 @@ public class NavProfileTabSelfEmployedProfilePageComponent extends BaseComponent
             radiusOfWorkInputLocator = driver.$("input[placeholder='км']").as("Радиус работы"),
             doVideoCheckboxLocator = driver.$("input[type='checkbox']").as("Чекбокс провожу видеоконсультации"),
             videoPriceInputLocator = driver.$("input[placeholder='минимум 500 рублей']").as("Цена на видеоконсультацию"),
-            saveButtonLocator = driver.$("button.btn.btn-primary").as("Кнопка Сохранить"),
-            toOrderBottomButtonLocator = driver.$("button.mr-2.mb-3.btn.btn-warning").as("Нижняя кнопка К заказу"),
-            toOrderTopButtonLocator = driver.$(".w-100 button.btn.btn-warning.disable-outline").as("Верхняя кнопка К заказу");
+            saveButtonLocator = driver.$("button.btn.btn-primary").as("Кнопка Сохранить");
 
     public void checkFirsOfferEvaluatedInitialState() {
         stepWithRole("Убедиться, что вкладка профиль в начальном состоянии", () -> {
@@ -52,11 +51,28 @@ public class NavProfileTabSelfEmployedProfilePageComponent extends BaseComponent
             radiusOfWorkInputLocator.shouldBe(empty);
             doVideoCheckboxLocator.shouldNotBe(checked);
             videoPriceInputLocator.shouldBe(empty);
-            toOrderTopButtonLocator.shouldBe(visible);
-            toOrderBottomButtonLocator.shouldBe(visible);
+            saveButtonLocator.shouldBe(enabled);
+            checkOrderContextState();
+        });
+    }
+
+    public void checkInitialState() {
+        stepWithRole("Убедиться, что вкладка профиль в начальном состоянии", () -> {
+            addPhoto.checkInitialState();
+            addDiploma.checkInitialState();
+            specialityInputLocator.shouldBe(empty);
+            specialitySymbolCounterLocator.shouldHave(text(specialityCounterDefaultText));
+            skillsInputLocator.shouldBe(empty);
+            skillsSymbolCounterLocator.shouldHave(text(skillsCounterDefaultText));
+            addressInputLocator.shouldBe(empty);
+            apartmentNumberLocator.shouldBe(empty);
+            radiusOfWorkTitleLocator.shouldHave(text(radiusOfWorkTitleText));
+            radiusOfWorkInputLocator.shouldBe(empty);
+            doVideoCheckboxLocator.shouldNotBe(checked);
+            videoPriceInputLocator.shouldBe(empty);
             saveButtonLocator.shouldBe(enabled);
         });
-
+       checkNoOrderContextState();
     }
 }
 

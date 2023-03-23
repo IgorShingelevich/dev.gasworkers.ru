@@ -3,11 +3,12 @@ package ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageCompon
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
+import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.BaseProfileSelfEmployedComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 
-public class NavContactsTabProfilePageComponent extends BaseComponent {
+public class NavContactsTabProfilePageComponent extends BaseProfileSelfEmployedComponent {
     public NavContactsTabProfilePageComponent(RoleBrowser browser) {
         super(browser);
     }
@@ -24,12 +25,26 @@ public class NavContactsTabProfilePageComponent extends BaseComponent {
             phoneLocator.shouldBe(visible);
             saveButtonLocator.shouldHave(visible, text("Сохранить"));
         });
-        stepWithRole("Убедиться, что кнопка Сохранить неактивна", () -> {
-            saveButtonLocator.shouldBe(disabled);
+    }
+
+    public void checkInitialState(String email, String phone) {
+        stepWithRole("Убедиться, что вкладка Контакты заполнена: ", () -> {
+            subtitleLocator.shouldHave(visible, text("Контактные данные"));
+            stepWithRole("Email: " + email, () ->
+                    emailLocator.shouldBe(visible).shouldHave(value(email))
+            );
+            String formattedPhone = "+7(" + phone.toString().substring(1, 4) + ")-" + phone.toString().substring(4, 7) + "-" + phone.toString().substring(7);
+            stepWithRole("Телефон: " + formattedPhone, () ->
+                    phoneLocator.shouldBe(visible).shouldHave(value(formattedPhone))
+            );
+            stepWithRole("Кнопка Сохранить неактивна", () ->
+                    saveButtonLocator.shouldBe(disabled)
+            );
+           checkNoOrderContextState();
         });
     }
 
-    public void checkFirsOfferEvaluatedInitialState(String email, String phone) {
+    public void checkFirsOfferEvaluatedSEInitialState(String email, String phone) {
         stepWithRole("Убедиться, что вкладка Контакты заполнена: ", () -> {
             subtitleLocator.shouldHave(visible, text("Контактные данные"));
             stepWithRole("Email: " + email, () ->
@@ -42,6 +57,7 @@ public class NavContactsTabProfilePageComponent extends BaseComponent {
             stepWithRole("Кнопка Сохранить неактивна", () ->
                 saveButtonLocator.shouldBe(disabled)
             );
+           checkOrderContextState();
         });
     }
 }
