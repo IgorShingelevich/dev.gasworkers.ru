@@ -37,7 +37,7 @@ public class fillMasterIDCommonTabSelfEmployedComponent extends BaseTabOrderCard
             descriptionLocator.shouldHave(Condition.text(descriptionText));
             bell.checkRedBellState(masterIDBoxLocator);
             uploader.checkInitialState(masterIDBoxLocator);
-            datePicker.checkInitialState(dateBoxLocator);
+            datePicker.checkInitialState(masterIDBoxLocator);
         });
     }
 
@@ -47,7 +47,7 @@ public class fillMasterIDCommonTabSelfEmployedComponent extends BaseTabOrderCard
             descriptionLocator.shouldHave(Condition.text(descriptionText));
             bell.checkRedBellState(masterIDBoxLocator);
             uploader.checkInitialState(masterIDBoxLocator);
-            datePicker.checkInitialState(dateBoxLocator);
+            datePicker.checkInitialState(masterIDBoxLocator);
         });
     }
 

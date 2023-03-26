@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.pages.components.selfEmployedComponent;
 
+import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
@@ -49,5 +50,10 @@ public class ModeSwitcherSelfEmployedComponent extends BaseComponent {
         }
 
 
-
+    public void checkFinishLoading() {
+        stepWithRole("Убедиться, что компонент переключатель режимов загрузился", () -> {
+            modeSwitcherLocator.shouldBe(Condition.visible);
+            switcherItemCollection.shouldHave(CollectionCondition.size( 2));
+        });
+    }
 }

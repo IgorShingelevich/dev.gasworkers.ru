@@ -2,6 +2,7 @@ package ru.gasworkers.dev.pages.components.selfEmployedComponent.orderPageCompon
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import groovyjarjarantlr4.v4.codegen.model.AddToLabelList;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
@@ -49,29 +50,26 @@ public class OfferPriceModalWindowSelfEmployedComponent extends BaseComponent {
             .as("Коллекция оборудования без сертификатов");
 
     ElementsCollection
-            deleteUploadedEquipmentCertificateFileButtonCollection = self.$$("div.w-100.mb-3.mb-sm-0.pe-md-5.pe-3.d-flex .close").as("Коллекция кнопок удалить сертификат"),
             uploadFileLinkCollection = self.$$("div.photo-uploader input").as("Коллекция загрузчиков файлов"),
             uploadFileLinkTextCollection = self.$$("button.upload-button").as("Коллекция текстов загрузчиков файлов");
 
-    SelenideElement titleLocator = self.$("span.text.bold").as("Заголовок"),
+    SelenideElement
+            titleLocator = self.$("span.text.bold").as("Заголовок"),
             howToGetCertificateLocator = self.$("div.order-price-title.d-flex.justify-content-between a span").as("Ссылка Как получить сертификат"),
             masterIDSubtitleLocator = self.$("div.w-100.text-center.h4").as("Подзаголовок Действующее удостоверение о квалификации"),
             masterIDAttachFileDescriptionLocator = self.$("div.d-flex.justify-content-between.flex-wrap.flex-sm-nowrap.p-2 span").as("Описание Прикрепить удостоверение мастера (jpeg, pdf)"),
             masterIDAttachFileBellLocator = self.$$("div[data-guide='certificate-notification'] img").filterBy(Condition.attributeMatching("src", ".*notification.*")).get(0).as("Значок Прикрепить удостоверение мастера"),
-            masterIDBoxLocator = self.$("div[data-guide='certificate-notification']").as("Контейнер Прикрепить удостоверение мастера"),
-            uploadMasterIDFileLinkLocator = uploadFileLinkCollection.get(0).as("Ссылка Прикрепить удостоверение мастера"),
-            uploadMasterIDFileLinkTextLocator = uploadFileLinkTextCollection.get(0).as("Текст ссылки Прикрепить удостоверение мастера"),
+            masterIDBoxLocator = self.$("div[data-guide='certificate-notification']").as("Бокс Прикрепить удостоверение мастера"),
+//            masterIDBoxLocator = self.$("div[data-guide='profile-common-bottom']").as("Бокс Прикрепить удостоверение мастера"),
             deleteUploadedMasterIDFileLinkLocator = self.$("div[data-guide='certificate-notification'] .close").as("Ссылка удалить удостоверение мастера "),
             masterIDDatePickerComponentLocator = self.$("div.p-3.mb-32.notice-blue-light .mx-input.mx-input").as("Календарь Дата окончания действия удостоверения"),
             equipmentSubtitleLocator = self.$("div.order-details__title.medium.small.mb-20").as("Подзаголовок Оборудование:"),
-            equipmentCertificateAttachFileDescriptionLocator = self.$("div div.w-100.mb-2 span.bold").as("Описание Прикрепить сертификат (jpeg, pdf)"),
             equipmentWorkPriceInputLocator = self.$("input[placeholder='Стоимость']").as("Поле Цена оборудования"),
-            uploadEquipmentCertificateFileLinkLocator = uploadFileLinkCollection.get(1).as("Ссылка Прикрепить сертификат"),
-            uploadEquipmentCertificateFileLinkTextLocator = uploadFileLinkTextCollection.get(1).as("Текст ссылки Прикрепить сертификат"),
             primaryVisitSubtitleLocator = self.$("div.w-100.hr-blue  .w-100.mb-3.mb-sm-0.pe-md-5.pe-3").as("Подзаголовок Первичный выезд мастера"),
             primaryVisitPriceInputLocator = self.$("input[placeholder*='от']").as("Поле Цена первичного выезда"),
             cancelButtonLocator = self.$("button.btn.btn-outline-primary").as("Кнопка Отмена"),
-            saveButtonLocator = self.$("button.btn.btn-primary").as("Кнопка Сохранить");
+            saveButtonLocator = self.$("button.btn.btn-primary").as("Кнопка Сохранить"),
+            closeButtonLocator = self.$(".close-btn").as("Значок закрытия модального окна");
 
     public void checkInitialState() {
         stepWithRole("Убедиться, что модальное окно в состоянии после регистрации", () -> {
@@ -191,14 +189,14 @@ public class OfferPriceModalWindowSelfEmployedComponent extends BaseComponent {
 
     public void deleteEquipmentCertificate() {
         stepWithRole("Удалить файл сертификата оборудования", () -> {
-           // todo closestBox and pic index uploader.deletePic(closestBoxLocator, 0);
+            // todo closestBox and pic index uploader.deletePic(closestBoxLocator, 0);
         });
     }
 
-    public void fillMasterIdDocuments( File masterIDFile, String masterIDValidTillDatePicker) {
+    public void fillMasterIdDocuments(File masterIDFile, String masterIDValidTillDatePicker) {
         stepWithRole("Заполнить удостоверение мастера", () -> {
-                uploader.uploadFile(masterIDBoxLocator, masterIDFile);
-                datePicker.setDate(masterIDBoxLocator, masterIDValidTillDatePicker);
+            uploader.uploadFile(masterIDBoxLocator, masterIDFile);
+            datePicker.setDate(masterIDBoxLocator, masterIDValidTillDatePicker);
         });
     }
 
@@ -286,6 +284,13 @@ public class OfferPriceModalWindowSelfEmployedComponent extends BaseComponent {
             );
             System.out.println("Сумма цен всех оборудований: " + sumCert + " + " + sumUncert + " = " + (sumCert + sumUncert));
             return sumCert + sumUncert;
+        });
+    }
+
+    public void close() {
+        stepWithRole("Закрыть модальное окно предложения цены", () -> {
+            Selenide.sleep(3000);
+            closeButtonLocator.click();
         });
     }
 }

@@ -3,13 +3,9 @@ package ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageCompon
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import io.netty.handler.codec.spdy.SpdyRstStreamFrame;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.equipment.EquipmentType;
-import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.BaseProfileSelfEmployedComponent;
-
-import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 
@@ -53,7 +49,7 @@ public class NavEquipmentTabProfilePageComponent extends BaseProfileSelfEmployed
             stepWithRole("Убедиться, что кнопка Сохранить неактивна", () -> {
                 saveButtonLocator.shouldBe(disabled);
             });
-           checkNoOrderContextState();
+           checkNoOrderContextButtonsState();
         });
     }
 
@@ -82,7 +78,7 @@ public class NavEquipmentTabProfilePageComponent extends BaseProfileSelfEmployed
             stepWithRole("Убедиться, что кнопка Сохранить неактивна", () -> {
                 saveButtonLocator.shouldBe(disabled);
             });
-            checkOrderContextState();
+            checkOrderContextButtonsState();
         });
     }
 }

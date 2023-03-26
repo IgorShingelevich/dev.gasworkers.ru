@@ -2,7 +2,6 @@ package ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageCompon
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.BaseProfileSelfEmployedComponent;
 
 import static com.codeborne.selenide.Condition.*;
@@ -40,7 +39,7 @@ public class NavContactsTabProfilePageComponent extends BaseProfileSelfEmployedC
             stepWithRole("Кнопка Сохранить неактивна", () ->
                     saveButtonLocator.shouldBe(disabled)
             );
-           checkNoOrderContextState();
+           checkNoOrderContextButtonsState();
         });
     }
 
@@ -57,7 +56,7 @@ public class NavContactsTabProfilePageComponent extends BaseProfileSelfEmployedC
             stepWithRole("Кнопка Сохранить неактивна", () ->
                 saveButtonLocator.shouldBe(disabled)
             );
-           checkOrderContextState();
+           checkOrderContextButtonsState();
         });
     }
 }

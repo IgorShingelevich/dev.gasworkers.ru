@@ -32,10 +32,10 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.USUAL_REGISTRATION)
-    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.SE_MEMBER),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
+    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.SE_MEMBER), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Регистрация СМЗ в СК")
     public void byPhoneSEMemberRegistrationTest() {
-        String equipmentWorkPrice ="4000";
+        String equipmentWorkPrice = "4000";
         String primaryVisitPrice = "3000";
         step("Страница лендинга", () -> {
             //todo RegistrationPage header
@@ -71,39 +71,67 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
             selfEmployedPages.getRegistrationPage().successRegistration.checkFinishLoading();
         });
         step("Страница выбора типа самозанятого", () -> {
-            selfEmployedPages.getTypeSelfEmployedPage().checkFinishLoading();
+            selfEmployedPages.getAccountTypePage().checkFinishLoading();
             //todo radioDefaultState :after
-            selfEmployedPages.getTypeSelfEmployedPage().selectAlreadySE();
-            selfEmployedPages.getTypeSelfEmployedPage().selectIndividualEntrepreneurSE();
-            selfEmployedPages.getTypeSelfEmployedPage().selectAlreadySE();
-            selfEmployedPages.getTypeSelfEmployedPage().forwardButton();
+            selfEmployedPages.getAccountTypePage().selectAlreadySE();
+            selfEmployedPages.getAccountTypePage().selectIndividualEntrepreneurSE();
+            selfEmployedPages.getAccountTypePage().selectAlreadySE();
+            selfEmployedPages.getAccountTypePage().forwardButton();
         });
         step("Страница успешной регистрации", () -> {
-            selfEmployedPages.getSuccessfulRegistrationSelfEmployedPage().checkFinishLoading();
-            selfEmployedPages.getSuccessfulRegistrationSelfEmployedPage().clickForwardButton();
+            selfEmployedPages.getSuccessfulRegistrationPage().checkFinishLoading();
+            selfEmployedPages.getSuccessfulRegistrationPage().clickForwardButton();
         });
         step("Гид СМЗ", () -> {
-            selfEmployedPages.getHomeSelfEmployedPage().firstGuide.playSequence(15);
+            selfEmployedPages.getHomePage().firstGuide.playSequence(15);
         });
         step("Домашняя СМЗ после гида - режим карта и режим мастер", () -> {
-            selfEmployedPages.getHomeSelfEmployedPage().checkInitialState();
+            selfEmployedPages.getHomePage().checkInitialState();
         });
         step("Профиль СМЗ после гида", () -> {
-            selfEmployedPages.getHomeSelfEmployedPage().header.burger.openBurger();
-            selfEmployedPages.getHomeSelfEmployedPage().header.burger.profile();
-            selfEmployedPages.getProfileSelfEmployedPage().checkInitialState(randomSelfEmployed.getEmail(), randomSelfEmployed.getPhone());
+            selfEmployedPages.getHomePage().header.burger.openBurger();
+            selfEmployedPages.getHomePage().header.burger.profile();
+            selfEmployedPages.getProfilePage().checkInitialState(randomSelfEmployed.getEmail(), randomSelfEmployed.getPhone());
+            //todo mode switcher
             // todo sidebar unification
             //todo sidebar notifications block
         });
-
-        step("Выбрать первый заказ", () -> {
-            selfEmployedPages.getProfileSelfEmployedPage().sidebar.home();
-            selfEmployedPages.getProfileSelfEmployedPage().modeSwitcher.checkMasterMode();
-            selfEmployedPages.getProfileSelfEmployedPage().modeSwitcher.checkDispatcherMode();
-            selfEmployedPages.getProfileSelfEmployedPage().modeSwitcher.checkDispatcherMode();
-            selfEmployedPages.getHomeSelfEmployedPage().mapMode.selectFirstMaintenanceOffer();
+        step("Кабинет СМЗ в начальном состоянии после гида - режим мастера", () -> {
+            selfEmployedPages.getProfilePage().modeSwitcher.switchMaster();
+            selfEmployedPages.getProfilePage().sidebarMaster.home();
+            selfEmployedPages.getHomePage().masterMode.checkInitialState();
         });
-
+        step("Убедиться, что отсутствуют заказы в истории заказов", () -> {
+            selfEmployedPages.getHomePage().masterMode.sidebarMaster.expandHistoryDropdown();
+            step("новые заказы", () -> {
+                selfEmployedPages.getHomePage().masterMode.sidebarMaster.allNewOrders();
+                selfEmployedPages.getAllNewOrderHistoryPage().checkInitialState();
+            });
+            step("принятые заказы", () -> {
+                selfEmployedPages.getHomePage().masterMode.sidebarMaster.allScheduledOrders();
+                selfEmployedPages.getAllScheduledOrderHistoryPage().checkInitialState();
+            });
+            step("выполненные заказы", () -> {
+                selfEmployedPages.getHomePage().masterMode.sidebarMaster.allCompletedOrders();
+                selfEmployedPages.getAllCompletedOrderHistoryPage().checkInitialState();
+            });
+            selfEmployedPages.getAllCompletedOrderHistoryPage().sidebarMaster.closeHistoryDropdown();
+//            selfEmployedPages.getAllCompletedOrderHistorySelfEmployedPage().sidebarMaster.home();
+//            selfEmployedPages.getHomeSelfEmployedPage().masterMode.mode.switchDispatcher();
+        });
+        step("Убедиться, что страница сертификаты и оборудование в начальном состоянии", () -> {
+            selfEmployedPages.getAllCompletedOrderHistoryPage().sidebarMaster.certificatesAndEquipment();
+            selfEmployedPages.getCertificatesAndEquipmentPage().checkInitialState();
+        });
+        step("Выбрать первый заказ", () -> {
+//            selfEmployedPages.getProfileSelfEmployedPage().sidebarDispatcher.home();
+//            selfEmployedPages.getProfileSelfEmployedPage().modeSwitcher.checkDispatcherMode();
+            selfEmployedPages.getHomePage().mapMode.selectFirstMaintenanceOffer();
+        });
+        step("Модальное окно Предложить цену -появление сразу при незаполненном профиле при переходе в карточку заказа", () -> {
+            selfEmployedPages.getOrderCardPage().offerPriceModalWindow.checkInitialState();
+            selfEmployedPages.getOrderCardPage().offerPriceModalWindow.close();
+        });
         step("Страница карточки заказа", () -> {
             selfEmployedPages.getOrderCardPage().checkInitialState();
         });
@@ -118,16 +146,26 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.uploadAllBoilerEquipmentCertificateFileAndDate(randomSelfEmployed.getBoilerEquipmentCertificateFile(), randomSelfEmployed.getBoilerEquipmentCertificateValidTillDatePicker());
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.saveButton();
         });
+        step(" убрать баг - Дублированное модальное окно Расценить заказ", () -> {
+            selfEmployedPages.getOrderCardPage().offerPriceModalWindow.close();
+        });
         step("Страница карточки  расцененного заказа - первый заказ незаполненный профиль", () -> {
             selfEmployedPages.getOrderCardPage().checkNewTenderState(OrderStatus.NEW_TENDER, OrderType.MAINTENANCE);
-            selfEmployedPages.getOrderCardPage().acceptOrderInitialState();
+            selfEmployedPages.getOrderCardPage().initialStateAcceptOrder();
         });
         step("Страница информации о заполнении профиля", () -> {
-            selfEmployedPages.getFillProfileInfo().checkFinishLoading();
-            selfEmployedPages.getFillProfileInfo().toProfileButton();
+            selfEmployedPages.getFillProfileInfoPage().checkFinishLoading();
+            selfEmployedPages.getFillProfileInfoPage().toProfileButton();
         });
         step("Страница профиля СМЗ после перехода из первого расцененного заказа ", () -> {
-            selfEmployedPages.getProfileSelfEmployedPage().checkFirsOfferEvaluatedInitialState(randomSelfEmployed.getEmail(), randomSelfEmployed.getPhone());
+            selfEmployedPages.getProfilePage().checkFirsOfferEvaluatedInitialState(randomSelfEmployed.getEmail(), randomSelfEmployed.getPhone());
+            //todo sidebar unification in two modes
+        });
+        step(" История заказов -  СМЗ  сайдбар - после после первого расцененного заказа", () -> {
+
+        });
+        step("Сертификаты и оборудование - СМЗ  сайдбар - после первого расцененного заказа", () -> {
+
         });
 
 
@@ -143,3 +181,4 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
     }
 
 }
+//todo addPagination check for  appropriate pages

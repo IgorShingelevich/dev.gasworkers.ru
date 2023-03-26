@@ -56,7 +56,7 @@ public class DatePickerDocumentsComponent extends BaseComponent {
             //todo universal  error msg to the calendar - by checking  the text of the error
         });
         stepWithRole("Убедиться, что поле календаря пустое", () -> {
-            closestBox.$("input").shouldBe(empty);
+            closestBox.$(".mx-input").shouldBe(empty);
         });
     }
 
@@ -68,7 +68,7 @@ public class DatePickerDocumentsComponent extends BaseComponent {
 
     public void checkInitialState(SelenideElement closestBox) {
         stepWithRole("Убедиться, что поле календаря пустое", () -> {
-            closestBox.$("input").shouldBe(empty);
+            closestBox.$(".mx-input").shouldBe(empty);
             stepWithRole("Убедиться, что календарь закрыт", () -> {
                 calendarBlockLocator.shouldNotBe(visible);
             });

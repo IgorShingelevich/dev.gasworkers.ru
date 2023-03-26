@@ -4,7 +4,6 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.BaseProfileSelfEmployedComponent;
 
 import static com.codeborne.selenide.Condition.*;
@@ -58,7 +57,7 @@ public class NavPasswordTabProfilePageComponent extends BaseProfileSelfEmployedC
         stepWithRole("Убедиться, что кнопка Сохранить неактивна", () -> {
             saveButtonLocator.shouldBe(disabled);
         });
-       checkOrderContextState();
+       checkOrderContextButtonsState();
     }
 
     public void checkInitialState() {
@@ -73,7 +72,7 @@ public class NavPasswordTabProfilePageComponent extends BaseProfileSelfEmployedC
         stepWithRole("Убедиться, что кнопка Сохранить неактивна", () -> {
             saveButtonLocator.shouldBe(disabled);
         });
-        checkNoOrderContextState();
+        checkNoOrderContextButtonsState();
     }
 
     public void generatePassword() {
@@ -119,6 +118,23 @@ public class NavPasswordTabProfilePageComponent extends BaseProfileSelfEmployedC
 
     public void applyNewPassword(String currentPassword) {
         //TODO applyNewPassword
+    }
+
+    public void checkFirsOfferEvaluatedSEInitialState() {
+        stepWithRole("Убедиться, что вкладка  праоля в состоянии после расценки первого оффера", () -> {
+            stepWithRole("Убедиться, что вкладка Пароль не содержит пароль в форме на вкладке Пароль", () -> {
+                driver.$$("div.title").get(0).shouldHave(text("Смена пароля")).as("Заголовок вкладки Смена пароля");
+                driver.$("div.description").shouldHave(text("Пароль должен содержать не менее 4 знаков")).as("Описание вкладки Смена пароля");
+                driver.$$("div.title").get(1).shouldHave(text("Подтвердите свой текущий пароль")).as("Подтвердите свой текущий пароль");
+                driver.$$("div.title").get(2).shouldHave(text("Введите свой новый пароль")).as("Введите свой новый пароль");
+                newPasswordInputLocator.shouldBe(Condition.empty);
+                repeatNewPasswordInputLocator.shouldBe(Condition.empty);
+            });
+            stepWithRole("Убедиться, что кнопка Сохранить неактивна", () -> {
+                saveButtonLocator.shouldBe(disabled);
+            });
+            checkOrderContextButtonsState();
+        });
     }
 
 }

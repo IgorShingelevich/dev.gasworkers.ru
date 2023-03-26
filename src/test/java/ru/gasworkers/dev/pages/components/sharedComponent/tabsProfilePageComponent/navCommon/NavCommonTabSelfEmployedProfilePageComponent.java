@@ -2,13 +2,11 @@ package ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageCompon
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationComponent.DateBGRegistrationLandingComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.BaseProfileSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.tabCommonProfilePageComponent.*;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
 
 public class NavCommonTabSelfEmployedProfilePageComponent extends BaseProfileSelfEmployedComponent {
     public final DateBGRegistrationLandingComponent datePickerBlock;
@@ -43,7 +41,7 @@ public class NavCommonTabSelfEmployedProfilePageComponent extends BaseProfileSel
             fillMasterIDBlock.checkInitialState();
 //            fillBankAccountBlock.checkInitialState();
             fillTaxpayerCertificateBlock.checkInitialState();
-            checkNoOrderContextState();
+            checkNoOrderContextButtonsState();
         });
     }
 
@@ -56,7 +54,7 @@ public class NavCommonTabSelfEmployedProfilePageComponent extends BaseProfileSel
 //            fillBankAccountBlock.checkInitialState();
             fillTaxpayerCertificateBlock.checkInitialState();
         });
-        checkOrderContextState();
+        checkOrderContextButtonsState();
     }
 
 }

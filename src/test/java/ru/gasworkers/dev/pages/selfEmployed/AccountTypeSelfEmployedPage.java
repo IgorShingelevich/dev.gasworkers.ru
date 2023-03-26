@@ -11,11 +11,11 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class TypeSelfEmployedPage extends BaseSelfEmployedPage {
+public class AccountTypeSelfEmployedPage extends BaseSelfEmployedPage {
     public final FocusHeaderComponent header;
     public final BannerTypeSelfEmployedComponent banner;
 
-    public TypeSelfEmployedPage(RoleBrowser browser) {
+    public AccountTypeSelfEmployedPage(RoleBrowser browser) {
         super(browser);
         header = new FocusHeaderComponent(browser);
         banner = new BannerTypeSelfEmployedComponent(browser);

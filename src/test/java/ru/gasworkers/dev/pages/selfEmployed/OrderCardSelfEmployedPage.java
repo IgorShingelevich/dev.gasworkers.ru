@@ -10,7 +10,7 @@ import ru.gasworkers.dev.pages.components.selfEmployedComponent.orderPageCompone
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.HeaderSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.orderPageComponent.OfferPriceModalWindowSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.StatusBoxOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SelfEmployedSidebarComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.modesSidebarSelfEmployedComponent.DispatcherModeSelfEmployedSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCheckListTabOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCommonTabOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavDocsTabOrderCardPageComponent;
@@ -26,7 +26,7 @@ import static com.codeborne.selenide.Selectors.byTagAndText;
 public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
 
     public final HeaderSelfEmployedComponent header;
-    public final SelfEmployedSidebarComponent sidebar;
+    public final DispatcherModeSelfEmployedSidebarComponent sidebar;
     public final FillProfileBannerSelfEmployedComponent fillProfileBanner;
     public final FillUpOfferBannerOrderPageSelfEmployedComponent fillUpOfferPriceBanner;
     public final OfferPriceModalWindowSelfEmployedComponent offerPriceModalWindow;
@@ -41,7 +41,7 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
     public OrderCardSelfEmployedPage(RoleBrowser browser) {
         super(browser);
         header = new HeaderSelfEmployedComponent(browser);
-        sidebar = new SelfEmployedSidebarComponent(browser);
+        sidebar = new DispatcherModeSelfEmployedSidebarComponent(browser);
         fillProfileBanner = new FillProfileBannerSelfEmployedComponent(browser);
         fillUpOfferPriceBanner = new FillUpOfferBannerOrderPageSelfEmployedComponent(browser);
         offerPriceModalWindow = new OfferPriceModalWindowSelfEmployedComponent(browser);
@@ -90,8 +90,6 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
             cancelOrderLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Отменить заказ");
 
 
-
-
     public void navCommon() {
         stepWithRole("Перейти на вкладку Описание заказа", () -> {
             navButtonsCollection.get(0).shouldHave(text("Описание заказа")).click();
@@ -116,13 +114,13 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
         });
     }
 
-    public void offerPriceButton () {
+    public void offerPriceButton() {
         stepWithRole("Нажать на кнопку Предложить свою цену", () -> {
             offerPriceButtonLocator.click();
         });
     }
 
-    public void refuseOrderButton () {
+    public void refuseOrderButton() {
         stepWithRole("Нажать на кнопку Отказаться от заказа", () -> {
             refuseOrderButtonLocator.click();
         });
@@ -144,20 +142,30 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
                 navButtonsCollection.shouldHave(size(3), Duration.ofSeconds(10));
             });
         });
-        stepWithRole("Убедиться что в карточке заказа отсутствует вкладка чеклист", () -> {
+        stepWithRole("Убедиться, что в карточке заказа отсутствует вкладка чеклист", () -> {
             navButtonsCollection.shouldHave(size(3));
             navButtonsCollection.get(2).shouldHave(text("Документы"));
         });
-        stepWithRole("Убедиться что отображается блок заказа", () -> {
+        stepWithRole("Убедиться, что отображается блок заказа", () -> {
             orderBlockLocator.shouldBe(visible);
         });
-        stepWithRole("Убедиться что отображается блок статуса заказа", () -> {
+        stepWithRole("Убедиться, что статуса заказа Тендер ", () -> {
             statusBox.newTenderState();
+        });
+        stepWithRole("Убедиться, что отображается кнопка Предложить свою цену", () -> {
+            offerPriceButtonLocator.shouldBe(visible);
+        });
+        stepWithRole("Убедиться, что отображается кнопка Отказаться", () -> {
+            refuseOrderButtonLocator.shouldBe(visible);
+        });
+        stepWithRole("Убедиться, что  кнопка Принять заказ и Отказаться от заказа отсутствует", () -> {
+            acceptRequestButtonLocator.shouldNotBe(visible);
+            declineRequestButtonLocator.shouldNotBe(visible);
         });
     }
 
     public void checkNewTenderState(OrderStatus orderStatus, OrderType orderType) {
-        stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
+        stepWithRole("Убедиться, что статус заказа Тендер ", () -> {
             stepWithRole("Убедиться что вкладок заказа - 3", () -> {
                 navButtonsCollection.shouldHave(size(3));
             });
@@ -168,6 +176,12 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
                     acceptRequestButtonLocator.scrollTo().shouldBe(visible);
                     declineRequestButtonLocator.shouldBe(visible);
                     alreadyAcceptedButtonLocator.shouldNotBe(visible);
+                    stepWithRole("Убедиться, что  кнопка Предложить свою цену ", () -> {
+                        offerPriceButtonLocator.shouldNotBe(visible);
+                    });
+                    stepWithRole("Убедиться, что  кнопка Отказаться от заказа отсутствует", () -> {
+                        refuseOrderButtonLocator.shouldNotBe(visible);
+                    });
                 });
             });
             stepWithRole("Вкладка Информация по работам", () -> {
@@ -183,14 +197,12 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
         System.out.println("dispatcher orderStatus: " + orderStatus);
     }
 
-    public void acceptOrderInitialState() {
+    public void initialStateAcceptOrder() {
         String factualOrderNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
-        stepWithRole("Принять заказ: " + factualOrderNumber , () -> {
+        stepWithRole("Принять заказ: " + factualOrderNumber, () -> {
             acceptRequestButtonLocator.scrollTo().click();
         });
     }
-
-
 
 
 }

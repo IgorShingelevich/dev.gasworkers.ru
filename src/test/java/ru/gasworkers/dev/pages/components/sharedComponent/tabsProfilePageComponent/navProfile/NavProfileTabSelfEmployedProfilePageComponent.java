@@ -2,7 +2,6 @@ package ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageCompon
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.BaseProfileSelfEmployedComponent;
 
 import static com.codeborne.selenide.Condition.*;
@@ -52,7 +51,7 @@ public class NavProfileTabSelfEmployedProfilePageComponent extends BaseProfileSe
             doVideoCheckboxLocator.shouldNotBe(checked);
             videoPriceInputLocator.shouldBe(empty);
             saveButtonLocator.shouldBe(enabled);
-            checkOrderContextState();
+            checkOrderContextButtonsState();
         });
     }
 
@@ -72,7 +71,7 @@ public class NavProfileTabSelfEmployedProfilePageComponent extends BaseProfileSe
             videoPriceInputLocator.shouldBe(empty);
             saveButtonLocator.shouldBe(enabled);
         });
-       checkNoOrderContextState();
+       checkNoOrderContextButtonsState();
     }
 }
 

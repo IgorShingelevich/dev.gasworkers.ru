@@ -3,7 +3,6 @@ package ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageCompon
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.BaseProfileSelfEmployedComponent;
 
 import static com.codeborne.selenide.Condition.*;
@@ -42,7 +41,7 @@ public class NavNotificationsTabProfilePageComponent extends BaseProfileSelfEmpl
             emailNotificationCheckboxLocator.$("input").shouldHave(attribute("value", "true"));
             smsNotificationCheckboxLocator.$("input").shouldHave(attribute("value", "true"));
         });
-        checkNoOrderContextState();
+        checkNoOrderContextButtonsState();
     }
 
     public void checkFirsOfferEvaluatedSEInitialState() {
@@ -51,7 +50,7 @@ public class NavNotificationsTabProfilePageComponent extends BaseProfileSelfEmpl
             emailNotificationCheckboxLocator.$("input").shouldHave(attribute("value", "true"));
             smsNotificationCheckboxLocator.$("input").shouldHave(attribute("value", "true"));
         });
-        checkOrderContextState();
+        checkOrderContextButtonsState();
     }
 
 

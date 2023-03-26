@@ -6,14 +6,16 @@ import ru.gasworkers.dev.pages.components.selfEmployedComponent.FillProfileBanne
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.ModeSwitcherSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.MosOblGasBannerSelfEmployedSideBarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.HeaderSelfEmployedComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.SelfEmployedSidebarComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.modesSidebarSelfEmployedComponent.DispatcherModeSelfEmployedSidebarComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.modesSidebarSelfEmployedComponent.MasterModeSelfEmployedSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.*;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navCommon.NavCommonTabSelfEmployedProfilePageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navProfile.NavProfileTabSelfEmployedProfilePageComponent;
 
 public class ProfileSelfEmployedPage extends BaseSelfEmployedPage {
     public final HeaderSelfEmployedComponent header;
-    public final SelfEmployedSidebarComponent sidebar;
+    public final DispatcherModeSelfEmployedSidebarComponent sidebarDispatcher;
+    public final MasterModeSelfEmployedSidebarComponent sidebarMaster;
     public final ModeSwitcherSelfEmployedComponent modeSwitcher;
     public final MosOblGasBannerSelfEmployedSideBarComponent mosOblGasBanner;
     public final FillProfileBannerSelfEmployedComponent fillProfileBanner;
@@ -28,7 +30,8 @@ public class ProfileSelfEmployedPage extends BaseSelfEmployedPage {
     public ProfileSelfEmployedPage(RoleBrowser browser) {
         super(browser);
         header = new HeaderSelfEmployedComponent(browser);
-        sidebar = new SelfEmployedSidebarComponent(browser);
+        sidebarDispatcher = new DispatcherModeSelfEmployedSidebarComponent(browser);
+        sidebarMaster = new MasterModeSelfEmployedSidebarComponent(browser);
         modeSwitcher = new ModeSwitcherSelfEmployedComponent(browser);
         mosOblGasBanner = new MosOblGasBannerSelfEmployedSideBarComponent(browser);
         fillProfileBanner = new FillProfileBannerSelfEmployedComponent(browser);
@@ -49,8 +52,9 @@ public class ProfileSelfEmployedPage extends BaseSelfEmployedPage {
                 modeSwitcher.checkDispatcherMode();
                 modeSwitcher.switchMaster();
                 modeSwitcher.checkMasterMode();
-                //todo add message icon
                 header.checkFinishLoading();
+                sidebarMaster.checkFinishLoading();
+                //todo add message icon
 //                sidebar.checkFinishLoading();
                 // todo sidebar unification
                 //todo sidebar notifications block
@@ -59,7 +63,7 @@ public class ProfileSelfEmployedPage extends BaseSelfEmployedPage {
                 modeSwitcher.switchDispatcher();
                 modeSwitcher.checkDispatcherMode();
             });
-            stepWithRole("Убедиться, что вкладки в начальном состоянии", () -> {
+            stepWithRole("Убедиться, что вкладки профиля в начальном состоянии", () -> {
                 tabCommon.checkInitialState();
                 nav.profile();
                 tabProfile.checkInitialState();
@@ -71,6 +75,10 @@ public class ProfileSelfEmployedPage extends BaseSelfEmployedPage {
                 tabPassword.checkInitialState();
                 nav.notifications();
                 tabNotifications.checkInitialState();
+                nav.contacts();
+                Selenide.sleep(100);
+                nav.common();
+                Selenide.sleep(100);
                 nav.profile();
             });
         });
@@ -80,8 +88,9 @@ public class ProfileSelfEmployedPage extends BaseSelfEmployedPage {
         stepWithRole("Убедиться, что страница профиля в состоянии после расценки первого заказа", () -> {
             stepWithRole("Убедиться, что элементы страницы профиля в состоянии после расценки первого заказа", () -> {
                 header.checkFinishLoading();
-                sidebar.checkFinishLoading();
-//            modeSwitcher.
+//            modeSwitcher.checkDispatcherMode();
+                //todo sidebar unification
+//                sidebar.checkFinishLoading();
                 //todo sidebar notifications block
                 mosOblGasBanner.checkFinishLoading();
                 fillProfileBanner.checkFinishLoading();
@@ -93,9 +102,9 @@ public class ProfileSelfEmployedPage extends BaseSelfEmployedPage {
                 nav.contacts();
                 tabContacts.checkFirsOfferEvaluatedSEInitialState(email, phone);
                 nav.equipment();
-                tabEquipment.checkInitialState();
+                tabEquipment.checkFirsOfferEvaluatedSEInitialState();
                 nav.password();
-                tabPassword.checkInitialState();
+                tabPassword.checkFirsOfferEvaluatedSEInitialState();
                 nav.notifications();
                 tabNotifications.checkFirsOfferEvaluatedSEInitialState();
             });
