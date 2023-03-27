@@ -97,7 +97,7 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
             //todo sidebar notifications block
         });
         step("Кабинет СМЗ в начальном состоянии после гида - режим мастера", () -> {
-            selfEmployedPages.getProfilePage().modeSwitcher.switchMaster();
+            selfEmployedPages.getProfilePage().mode.switchMaster();
             selfEmployedPages.getProfilePage().sidebarMaster.home();
             selfEmployedPages.getHomePage().masterMode.checkInitialState();
         });
@@ -121,11 +121,13 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
         });
         step("Убедиться, что страница сертификаты и оборудование в начальном состоянии", () -> {
             selfEmployedPages.getAllCompletedOrderHistoryPage().sidebarMaster.certificatesAndEquipment();
-            selfEmployedPages.getCertificatesAndEquipmentPage().checkInitialState();
+//            selfEmployedPages.getCertificatesAndEquipmentPage().checkInitialState();
         });
         step("Выбрать первый заказ", () -> {
 //            selfEmployedPages.getProfileSelfEmployedPage().sidebarDispatcher.home();
-//            selfEmployedPages.getProfileSelfEmployedPage().modeSwitcher.checkDispatcherMode();
+//            selfEmployedPages.getProfileSelfEmployedPage().mode.checkDispatcherMode();
+            selfEmployedPages.getAllCompletedOrderHistoryPage().sidebarMaster.home();
+            selfEmployedPages.getHomePage().mode.switchDispatcher();
             selfEmployedPages.getHomePage().mapMode.selectFirstMaintenanceOffer();
         });
         step("Модальное окно Предложить цену -появление сразу при незаполненном профиле при переходе в карточку заказа", () -> {

@@ -195,7 +195,7 @@ public class EquipmentBGRegistrationLandingComponent extends BaseComponent {
         stepWithRole("Подтвердить выбор оборудования", () -> {
             approveButtonLocator.shouldHave(Condition.text("Подтвердить")).click();
             stepWithRole("Убедиться, что появилась кнопка добавить еще одно оборудование", () -> {
-                addAnotherEquipmentButtonLocator.shouldHave(Condition.text("+добавить еще одно оборудование"));
+                addAnotherEquipmentButtonLocator.shouldHave(Condition.text("+ добавить еще одно оборудование"));
             });
         });
     }

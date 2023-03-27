@@ -60,7 +60,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
 
 
     SelenideElement
-        bgTitleLocator = driver.$("div.h3.text-center.text-white").as("Заголовок"),
+        bgTitleLocator = driver.$("div.h3.order6.text-center.text-white").as("Заголовок"),
         bgSubtitleLocator = driver.$("div.medium.text-center.text-white").as("Подзаголовок"),
         bgSubtitle2Locator = driver.$("div.medium.text-center.text-white span").as("Подзаголовок 2"),
         bgSubtitle3Locator = driver.$("div.h4.text-center.text-white").as("Подзаголовок 3"),

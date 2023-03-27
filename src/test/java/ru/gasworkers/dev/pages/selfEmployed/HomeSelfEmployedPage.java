@@ -12,7 +12,6 @@ public class HomeSelfEmployedPage extends BaseSelfEmployedPage{
     public final MasterModeHomeSelfEmployedComponent masterMode;
     public final HeaderSelfEmployedComponent header;
     public final FirstSelfEmployedGuideComponent firstGuide;
-    public final ModeSwitcherSelfEmployedComponent modeSwitcher;
 
 
 
@@ -22,21 +21,20 @@ public class HomeSelfEmployedPage extends BaseSelfEmployedPage{
         mapMode = new MapModeHomeSelfEmployedComponent(browser);
         masterMode = new MasterModeHomeSelfEmployedComponent(browser);
         firstGuide = new FirstSelfEmployedGuideComponent(browser);
-        modeSwitcher = new ModeSwitcherSelfEmployedComponent(browser);
     }
 
 
     public void checkInitialState() {
         stepWithRole("Убедиться, что все домашняя страница в начальном состоянии ", () -> {
-            modeSwitcher.checkDispatcherMode();
+            mode.checkDispatcherMode();
             header.checkFinishLoading();
             header.burger.checkFinishLoading();
             //todo add messagesButtonLocator
             mapMode.checkInitialState();
-            modeSwitcher.switchMaster();
+            mode.switchMaster();
             masterMode.checkInitialState();
-            modeSwitcher.switchDispatcher();
-            modeSwitcher.checkDispatcherMode();
+            mode.switchDispatcher();
+            mode.checkDispatcherMode();
         });
     }
 }

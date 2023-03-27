@@ -27,9 +27,9 @@ public class SelfEmployedActionsBlockComponent extends BaseComponent {
     public SelfEmployedActionsBlockComponent checkFinishLoading () {
         stepWithRole("Убедиться, что все элементы блока действий хедера загрузились", () -> {
             actionsBlock.shouldBe(visible);
-            //todo add messagesButtonLocator
             notificationsButtonLocator.shouldBe(visible);
-//            messagesButtonLocator.shouldBe(visible);
+            messagesButtonLocator.shouldBe(visible);
+            //todo add messagesButtonLocator - done
             dropdownArrowLocator.shouldBe(visible);
             clickDropdown();
             profileNameABLocator.shouldBe(visible);

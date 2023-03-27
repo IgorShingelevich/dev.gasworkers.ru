@@ -32,7 +32,7 @@ public class HeaderSelfEmployedComponent extends BaseComponent {
         stepWithRole("Убедиться, что все элементы хедера загрузились", () -> {
 //            burger.checkFinishLoading();
             actionsBlock.checkFinishLoading();
-            //todo add messagesButtonLocator
+            //todo add messagesButtonLocator - done
             stepWithRole("Убедиться что логотип загрузился", () -> {
                 logoLocator.shouldBe(visible);
             });

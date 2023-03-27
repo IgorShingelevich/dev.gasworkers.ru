@@ -5,16 +5,11 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.extension.browser.Browser;
-import ru.gasworkers.dev.model.OrderStatus;
-import ru.gasworkers.dev.model.OrderType;
-import ru.gasworkers.dev.model.master.ReadyForVideoState;
-import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.pages.context.SelfEmployedPages;
 import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.UserBuilder;
 
 import static io.qameta.allure.Allure.step;
-import static ru.gasworkers.dev.model.Role.MASTER;
 import static ru.gasworkers.dev.model.Role.SELF_EMPLOYED;
 
 public class SelfEmployedFlowTest extends BaseTest {
@@ -46,13 +41,13 @@ public class SelfEmployedFlowTest extends BaseTest {
     @DisplayName("СМЗ открывает кабинет в первый раз")
     @Test
     void checkInitialCabinetState(){
-
         step("Убедиться, что страница сертификаты и оборудование в начальном состоянии", () -> {
-            selfEmployedPages.getHomePage().modeSwitcher.checkMasterMode();
-            selfEmployedPages.getHomePage().masterMode.sidebarMaster.certificatesAndEquipment();
+            selfEmployedPages.getHomePage().mode.checkDispatcherMode();
+            selfEmployedPages.getHomePage().mode.switchDispatcher();
+            selfEmployedPages.getHomePage().header.burger.openBurger();
+            selfEmployedPages.getHomePage().header.burger.certificatesAndEquipment();
             selfEmployedPages.getCertificatesAndEquipmentPage().checkInitialState();
         });
-
     }
 
     @Test
