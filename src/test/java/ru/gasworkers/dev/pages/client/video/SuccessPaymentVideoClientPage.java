@@ -18,7 +18,7 @@ public class SuccessPaymentVideoClientPage extends BaseClientPage {
 
     private final String
         titleText = "Оплата успешно произведена",
-        subtitleText = "Вы успешно оплатили видеоконсультацию. Мастер получил заказ и начнет ее в течении 30 минут. Ожидайте СМС сообщения со ссылкой на консультацию.";
+        subtitleText = "Вы успешно оплатили видеоконсультацию. Мастер получил заказ и начнет ее в течение 30 минут. Ожидайте СМС сообщения со ссылкой на консультацию.flo";
 
 
     SelenideElement
