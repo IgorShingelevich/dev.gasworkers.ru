@@ -31,7 +31,7 @@ public class AddCertificateAndEquipmentSelfEmployedComponent extends BaseCompone
 
     SelenideElement
             markAndModelBox = driver.$$("div.d-flex.my-3").get(0).as("Компонент добавить оборудование"),
-            addEquipmentButton = driver.$(byTagAndText("button", "Добавить оборудование")).as("Кнопка добавить оборудование");
+            addEquipmentButton = driver.$(byTagAndText("span", "Добавить оборудование")).as("Кнопка добавить оборудование");
 
     ElementsCollection
             descriptionCollection = markAndModelBox.$$("span.bold").as("Коллекция описаний"),

@@ -1,10 +1,12 @@
 package ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navCommon;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationComponent.DateBGRegistrationLandingComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.BaseProfileSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.tabCommonProfilePageComponent.*;
+import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployed;
 
 import static com.codeborne.selenide.Condition.text;
 
@@ -39,7 +41,7 @@ public class NavCommonTabSelfEmployedProfilePageComponent extends BaseProfileSel
             fillNameBlock.checkInitialState();
             fillPassportBlock.checkInitialState();
             fillMasterIDBlock.checkInitialState();
-//            fillBankAccountBlock.checkInitialState();
+            fillBankAccountBlock.checkInitialState();
             fillTaxpayerCertificateBlock.checkInitialState();
             checkNoOrderContextButtonsState();
         });
@@ -51,11 +53,32 @@ public class NavCommonTabSelfEmployedProfilePageComponent extends BaseProfileSel
             fillNameBlock.checkInitialState();
             fillPassportBlock.checkInitialState();
             fillMasterIDBlock.checkFilledState();
-//            fillBankAccountBlock.checkInitialState();
+            fillBankAccountBlock.checkInitialState();
             fillTaxpayerCertificateBlock.checkInitialState();
         });
         checkOrderContextButtonsState();
     }
 
+    public void fillRandomData(RandomSelfEmployed randomSelfEmployed) {
+        stepWithRole("Заполнить случайными данными все элементы вкладки общие данные", () -> {
+//            fillNameBlock.fillRandomData(randomSelfEmployed);
+//            fillPassportBlock.fillRandomData(randomSelfEmployed);
+//            fillMasterIDBlock.fillRandomData(randomSelfEmployed);
+//            fillBankAccountBlock.fillRandomData(randomSelfEmployed);
+//            fillTaxpayerCertificateBlock.fillRandomData(randomSelfEmployed);
+        });
+    }
+
+    public void saveButton() {
+        stepWithRole("Нажать кнопку Сохранить", () -> {
+            saveButtonLocator.click();
+        });
+    }
+
+    private void checkSaveButtonEnabledState() {
+        stepWithRole("Убедиться, что кнопка Сохранить активна", () -> {
+            saveButtonLocator.shouldBe(Condition.enabled);
+        });
+    }
 }
 // TODO implement CommonDataPickerComponent. Upload photo.

@@ -11,6 +11,9 @@ public class fillNameCommonTabSelfEmployedComponent extends BaseTabOrderCardComp
         super(roleBrowser);
     }
 
+    private final String
+            errorMsgEmptyFieldText = "Поле не заполнено";
+
     SelenideElement
             surnameInputLocator = driver.$("input[placeholder='Фамилия*']").as("Фамилия"),
             nameInputLocator = driver.$("input[placeholder='Имя*']").as("Имя"),
@@ -33,9 +36,9 @@ public class fillNameCommonTabSelfEmployedComponent extends BaseTabOrderCardComp
                 patronymicInputLocator.shouldBe(empty);
             });
             stepWithRole("Убедиться, что присутствует сообщение об ошибке в полях ФИО", () -> {
-                checkErrorMsg(surnameInputLocator);
-                checkErrorMsg(nameInputLocator);
-                checkErrorMsg(patronymicInputLocator);
+                checkErrorMsg(surnameInputLocator, errorMsgEmptyFieldText);
+                checkErrorMsg(nameInputLocator, errorMsgEmptyFieldText);
+                checkErrorMsg(patronymicInputLocator, errorMsgEmptyFieldText);
             });
         });
     }

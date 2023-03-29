@@ -63,3 +63,4 @@ public class CertificatesAndEquipmentSelfEmployedPage extends BaseSelfEmployedPa
         });
     }
 }
+//todo validate all the components

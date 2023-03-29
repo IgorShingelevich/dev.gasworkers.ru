@@ -11,6 +11,7 @@ import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.modes
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.*;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navCommon.NavCommonTabSelfEmployedProfilePageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navProfile.NavProfileTabSelfEmployedProfilePageComponent;
+import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployed;
 
 public class ProfileSelfEmployedPage extends BaseSelfEmployedPage {
     public final HeaderSelfEmployedComponent header;
@@ -127,6 +128,13 @@ public class ProfileSelfEmployedPage extends BaseSelfEmployedPage {
         stepWithRole("Убедиться, что нет ошибок", () -> {
             // todo se checkFilledProfileState
         });
+    }
+
+    public void fillCommonTabRandomData(RandomSelfEmployed randomSelfEmployed) {
+        stepWithRole("Заполнить вкладку Общие данные", () -> {
+            tabCommon.fillRandomData(randomSelfEmployed);
+        });
+
     }
 }
 //todo conditions modeSwitcher for all states

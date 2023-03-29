@@ -2,14 +2,14 @@ package ru.gasworkers.dev.pages.selfEmployed;
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.guideComponent.FirstSelfEmployedGuideComponent;
-import ru.gasworkers.dev.pages.components.selfEmployedComponent.ModeSwitcherSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.HeaderSelfEmployedComponent;
-import ru.gasworkers.dev.pages.components.selfEmployedComponent.mapMode.MapModeHomeSelfEmployedComponent;
-import ru.gasworkers.dev.pages.components.selfEmployedComponent.masterMode.MasterModeHomeSelfEmployedComponent;
+import ru.gasworkers.dev.pages.components.selfEmployedComponent.mapMode.ModeDispatcherHomeSelfEmployedComponent;
+import ru.gasworkers.dev.pages.components.selfEmployedComponent.masterMode.ModeMasterHomeSelfEmployedComponent;
 
 public class HomeSelfEmployedPage extends BaseSelfEmployedPage{
-    public final MapModeHomeSelfEmployedComponent mapMode;
-    public final MasterModeHomeSelfEmployedComponent masterMode;
+    public final ModeDispatcherHomeSelfEmployedComponent modeDispatcher;
+            ;
+    public final ModeMasterHomeSelfEmployedComponent modeMaster;
     public final HeaderSelfEmployedComponent header;
     public final FirstSelfEmployedGuideComponent firstGuide;
 
@@ -18,8 +18,8 @@ public class HomeSelfEmployedPage extends BaseSelfEmployedPage{
     public HomeSelfEmployedPage(RoleBrowser browser) {
         super(browser);
         header = new HeaderSelfEmployedComponent(browser);
-        mapMode = new MapModeHomeSelfEmployedComponent(browser);
-        masterMode = new MasterModeHomeSelfEmployedComponent(browser);
+        modeDispatcher = new ModeDispatcherHomeSelfEmployedComponent(browser);
+        modeMaster = new ModeMasterHomeSelfEmployedComponent(browser);
         firstGuide = new FirstSelfEmployedGuideComponent(browser);
     }
 
@@ -30,9 +30,9 @@ public class HomeSelfEmployedPage extends BaseSelfEmployedPage{
             header.checkFinishLoading();
             header.burger.checkFinishLoading();
             //todo add messagesButtonLocator
-            mapMode.checkInitialState();
+            modeDispatcher.checkInitialState();
             mode.switchMaster();
-            masterMode.checkInitialState();
+            modeMaster.checkInitialState();
             mode.switchDispatcher();
             mode.checkDispatcherMode();
         });

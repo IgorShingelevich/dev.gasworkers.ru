@@ -15,6 +15,9 @@ public class fillPassportCommonTabSelfEmployedComponent extends BaseTabOrderCard
         datePicker = new DatePickerDocumentsComponent(roleBrowser);
     }
 
+    private final String
+            errorMsgEmptyFieldText = "Поле не заполнено";
+
     SelenideElement
             passportBoxLocator = driver.$("div[data-guide='passport-data']").as("Бокс Паспорт"),
             numberPassportInputLocator = driver.$("input[placeholder='Номер паспорта']").as("Номер паспорта"),
@@ -38,8 +41,8 @@ public class fillPassportCommonTabSelfEmployedComponent extends BaseTabOrderCard
 
     public void checkPassportError() {
         stepWithRole("Убедиться, что присутствует сообщение об ошибке в полях паспорта", () -> {
-            checkErrorMsg(seriesPassportInputLocator);
-            checkErrorMsg(numberPassportInputLocator);
+            checkErrorMsg(seriesPassportInputLocator, errorMsgEmptyFieldText);
+            checkErrorMsg(numberPassportInputLocator, errorMsgEmptyFieldText);
             datePicker.checkErrorMsg(passportBoxLocator);
         });
     }
@@ -96,11 +99,11 @@ public class fillPassportCommonTabSelfEmployedComponent extends BaseTabOrderCard
                 apartmentNumberInputLocator.shouldBe(empty);
             });
             stepWithRole("Убедиться, что присутствует сообщение об ошибке в полях паспорта", () -> {
-                checkErrorMsg(numberPassportInputLocator);
-                checkErrorMsg(seriesPassportInputLocator);
-                checkErrorMsg(issuedByPassportInputLocator);
-                checkErrorMsg(addressPassportInputLocator);
-                checkErrorMsg(apartmentNumberInputLocator);
+                checkErrorMsg(numberPassportInputLocator, errorMsgEmptyFieldText);
+                checkErrorMsg(seriesPassportInputLocator, errorMsgEmptyFieldText);
+                checkErrorMsg(issuedByPassportInputLocator, errorMsgEmptyFieldText);
+                checkErrorMsg(addressPassportInputLocator, errorMsgEmptyFieldText);
+                checkErrorMsg(apartmentNumberInputLocator, errorMsgEmptyFieldText);
             });
         });
     }

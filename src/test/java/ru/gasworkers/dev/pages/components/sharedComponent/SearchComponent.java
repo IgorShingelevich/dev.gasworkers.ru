@@ -13,19 +13,25 @@ public class SearchComponent extends BaseComponent {
     }
 
     SelenideElement
-    self =driver.$("div.gas-search-box").as("Строка поиска"),
-    searchButtonLocator = self.$("button.search-btn").as("Кнопка поиска"),
-    inputLocator = self.$("input[placeholder]").as("Поле ввода");
+            box = driver.$("div.gas-search-box").as("Строка поиска"),
+            searchButtonLocator = box.$("button.search-btn").as("Кнопка поиска"),
+            inputLocator = box.$("input[placeholder]").as("Поле ввода");
 
 
     public void checkInitialState(String placeholder) {
         stepWithRole("Убедиться, что строка поиска: " + placeholder + " в начальном состоянии", () -> {
-            SelenideElement closestSearchComponent = self.find("input[placeholder='" + placeholder + "']").closest("div.gas-search-box");
+//            SelenideElement closestSearchComponent = box.find("input[placeholder='" + placeholder + "']").closest("div.gas-search-box");
+            SelenideElement
+                    searchField = driver.$("input[placeholder='" + placeholder + "']"),
+                    closestSearchComponent = searchField.ancestor(".gas-search-box"),
+                    searchButton = closestSearchComponent.$("button.search-btn");
+
+
             stepWithRole("Убедиться, что поле ввода пустое", () -> {
-                closestSearchComponent.$("input[placeholder]").shouldHave(empty);
+               searchField.shouldBe(empty);
             });
             stepWithRole("Убедиться, что кнопка поиска отображается", () -> {
-                closestSearchComponent.$("button.search-btn").shouldBe(Condition.visible);
+                searchButton.shouldBe(Condition.visible);
             });
         });
     }

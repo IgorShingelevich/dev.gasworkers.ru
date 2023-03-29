@@ -14,7 +14,7 @@ public class SearchCertificateAndEquipmentSelfEmployedComponent extends BaseComp
     }
 
     private final String
-            placeholderText = "Введите модель оборудования";
+            placeholderText = "Введите модель данного оборудования";
 
 
     public void checkInitialState() {

@@ -35,11 +35,10 @@ public class SelectCertificateAndEquipmentSelfEmployedComponent extends BaseComp
             });
             stepWithRole("Убедиться, что  оба дропдауна содержат списки  оборудования", () -> {
                 typeListCollection.shouldHave(CollectionCondition.size(11), Duration.ofSeconds(10));
-                int markSize = markListCollection.size();
+                markListCollection.shouldHave(CollectionCondition.size(165), Duration.ofSeconds(10));
                 //todo greater than ...
-                System.out.println(markSize);
-            });
 
+            });
         });
     }
 

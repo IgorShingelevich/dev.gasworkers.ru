@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pages.components.selfEmployedComponent.mapMode;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Allure;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
@@ -29,6 +30,7 @@ public class MapSelfEmployedComponent extends BaseComponent {
             mapLegendItemsCollection = driver.$$("div.map-sticky__header--legend li").as("Элементы легенды карты");
 
     SelenideElement
+            mapSpinner = driver.$("img[src = '/_ipx/_/images/logo-blue-loader.svg']").as("Спиннер карты"),
             mapPlusButton = driver.$(".ymaps-2-1-79-zoom__icon.ymaps-2-1-79-float-button-icon").as("Кнопка плюс карты"),
             mapOffersBox = driver.$("div.map-sticky__header--offers").as("Блок с предложениями карты"),
             mapOrdersLegendDropdown = driver.$("div[data-guide = 'orders-legend']").as("Дропдаун легенда заказов"),
@@ -40,10 +42,11 @@ public class MapSelfEmployedComponent extends BaseComponent {
                 mapPlusButton.shouldBe(visible, Duration.ofSeconds(20));
                 mapSizeToggleButtonLocator.shouldBe(visible);
             });
-                stepWithRole("Убедиться, что  блок с предложениями карты отображается", () -> {
-                    mapOffersBox.shouldBe(visible);
-                });
-                checkMapLegend();
+            stepWithRole("Убедиться, что  блок с предложениями карты отображается", () -> {
+                mapOffersBox.shouldBe(visible);
+            });
+            checkMapLegend();
+            checkNoSpinner();
         });
         System.out.println("mapOffersBlock: " + mapOffersBox.getText());
     }
@@ -116,6 +119,12 @@ public class MapSelfEmployedComponent extends BaseComponent {
         }
 
         return count; // return the extracted count value (or null if parsing failed)
+    }
+
+    private void checkNoSpinner() {
+        stepWithRole("Убедиться, что спиннер карты не отображается", () -> {
+            mapSpinner.shouldNotBe(visible);
+        });
     }
 }
 //todo check toggle fullScreenMapMode

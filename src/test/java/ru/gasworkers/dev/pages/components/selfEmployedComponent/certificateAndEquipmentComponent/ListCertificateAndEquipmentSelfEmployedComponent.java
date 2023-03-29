@@ -12,7 +12,7 @@ public class ListCertificateAndEquipmentSelfEmployedComponent extends BaseCompon
     }
 
     ElementsCollection
-            selfCollection = driver.$$("div").as("Коллекция карточек оборудования");
+            selfCollection = driver.$$("div.equipment-card").as("Коллекция карточек оборудования");
 
     public void checkInitialState() {
         stepWithRole("Убедиться, что в списке нет карточек оборудования", () -> {

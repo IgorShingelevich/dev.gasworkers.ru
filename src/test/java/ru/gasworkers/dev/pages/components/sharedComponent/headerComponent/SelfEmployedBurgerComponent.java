@@ -26,6 +26,7 @@ public class SelfEmployedBurgerComponent extends BaseComponent {
 
 
     SelenideElement
+            burgerSelf = driver.$("div.fix-left-menu").as("Бургер"),
             openBurgerButtonLocator = driver.$("button.burger-h").as("Кнопка Открыть Бургер"),
             closeBurgerButtonLocator = driver.$("button.fix-left-menu__close").as("Кнопка Закрыть Бургер"),
             serviceLinkLocator = driver.$("div.fix-left-menu__support span").as("Текст Служба поддержки"),
@@ -52,12 +53,14 @@ public class SelfEmployedBurgerComponent extends BaseComponent {
     public void openBurger() {
         stepWithRole("Кликнуть на кнопку открыть бургер", () -> {
             openBurgerButtonLocator.click();
+            burgerSelf.shouldBe(visible);
         });
     }
 
     public void closeBurger() {
         stepWithRole("Кликнуть на кнопку закрыть бургер", () -> {
             closeBurgerButtonLocator.click();
+            burgerSelf.shouldNotBe(visible);
         });
     }
 

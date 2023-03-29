@@ -27,7 +27,7 @@ public class DateBGRegistrationLandingComponent extends BaseComponent {
         stepWithRole("Убедиться, что компонент Выбор Даты и Время загружен", () -> {
             containerLocator.shouldBe(visible);
             okButtonLocator.$("span").shouldHave(text("Ок"));
-            cancelButtonLocator.shouldHave(text("Отмена"));
+            cancelButtonLocator.shouldHave(text("Отменить"));
         });
     }
 

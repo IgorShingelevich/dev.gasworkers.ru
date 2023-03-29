@@ -99,36 +99,32 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
         step("Кабинет СМЗ в начальном состоянии после гида - режим мастера", () -> {
             selfEmployedPages.getProfilePage().mode.switchMaster();
             selfEmployedPages.getProfilePage().sidebarMaster.home();
-            selfEmployedPages.getHomePage().masterMode.checkInitialState();
+            selfEmployedPages.getHomePage().modeMaster.checkInitialState();
         });
         step("Убедиться, что отсутствуют заказы в истории заказов", () -> {
-            selfEmployedPages.getHomePage().masterMode.sidebarMaster.expandHistoryDropdown();
+            selfEmployedPages.getHomePage().modeMaster.sidebarMaster.expandHistoryDropdown();
             step("новые заказы", () -> {
-                selfEmployedPages.getHomePage().masterMode.sidebarMaster.allNewOrders();
+                selfEmployedPages.getHomePage().modeMaster.sidebarMaster.allNewOrders();
                 selfEmployedPages.getAllNewOrderHistoryPage().checkInitialState();
             });
             step("принятые заказы", () -> {
-                selfEmployedPages.getHomePage().masterMode.sidebarMaster.allScheduledOrders();
+                selfEmployedPages.getHomePage().modeMaster.sidebarMaster.allScheduledOrders();
                 selfEmployedPages.getAllScheduledOrderHistoryPage().checkInitialState();
             });
             step("выполненные заказы", () -> {
-                selfEmployedPages.getHomePage().masterMode.sidebarMaster.allCompletedOrders();
+                selfEmployedPages.getHomePage().modeMaster.sidebarMaster.allCompletedOrders();
                 selfEmployedPages.getAllCompletedOrderHistoryPage().checkInitialState();
             });
             selfEmployedPages.getAllCompletedOrderHistoryPage().sidebarMaster.closeHistoryDropdown();
-//            selfEmployedPages.getAllCompletedOrderHistorySelfEmployedPage().sidebarMaster.home();
-//            selfEmployedPages.getHomeSelfEmployedPage().masterMode.mode.switchDispatcher();
         });
         step("Убедиться, что страница сертификаты и оборудование в начальном состоянии", () -> {
             selfEmployedPages.getAllCompletedOrderHistoryPage().sidebarMaster.certificatesAndEquipment();
-//            selfEmployedPages.getCertificatesAndEquipmentPage().checkInitialState();
+            selfEmployedPages.getCertificatesAndEquipmentPage().checkInitialState();
         });
         step("Выбрать первый заказ", () -> {
-//            selfEmployedPages.getProfileSelfEmployedPage().sidebarDispatcher.home();
-//            selfEmployedPages.getProfileSelfEmployedPage().mode.checkDispatcherMode();
-            selfEmployedPages.getAllCompletedOrderHistoryPage().sidebarMaster.home();
+            selfEmployedPages.getCertificatesAndEquipmentPage().sidebarMaster.home();
             selfEmployedPages.getHomePage().mode.switchDispatcher();
-            selfEmployedPages.getHomePage().mapMode.selectFirstMaintenanceOffer();
+            selfEmployedPages.getHomePage().modeDispatcher.selectFirstMaintenanceOffer();
         });
         step("Модальное окно Предложить цену -появление сразу при незаполненном профиле при переходе в карточку заказа", () -> {
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.checkInitialState();
@@ -148,7 +144,7 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.uploadAllBoilerEquipmentCertificateFileAndDate(randomSelfEmployed.getBoilerEquipmentCertificateFile(), randomSelfEmployed.getBoilerEquipmentCertificateValidTillDatePicker());
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.saveButton();
         });
-        step(" убрать баг - Дублированное модальное окно Расценить заказ", () -> {
+        step(" !убрать баг - Дублированное модальное окно Расценить заказ", () -> {
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.close();
         });
         step("Страница карточки  расцененного заказа - первый заказ незаполненный профиль", () -> {
@@ -162,6 +158,9 @@ public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
         step("Страница профиля СМЗ после перехода из первого расцененного заказа ", () -> {
             selfEmployedPages.getProfilePage().checkFirsOfferEvaluatedInitialState(randomSelfEmployed.getEmail(), randomSelfEmployed.getPhone());
             //todo sidebar unification in two modes
+        });
+        step("Заполнение вкладку общих данных профиля нового смз", () -> {
+            selfEmployedPages.getProfilePage().fillCommonTabRandomData(randomSelfEmployed);
         });
         step(" История заказов -  СМЗ  сайдбар - после после первого расцененного заказа", () -> {
 

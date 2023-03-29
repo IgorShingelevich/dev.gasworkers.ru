@@ -9,7 +9,7 @@ import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.modes
 import ru.gasworkers.dev.pages.components.sharedComponent.timeTableComponent.TimetableComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.modesSidebarSelfEmployedComponent.DispatcherModeSelfEmployedSidebarComponent;
 
-public class MasterModeHomeSelfEmployedComponent extends BaseComponent {
+public class ModeMasterHomeSelfEmployedComponent extends BaseComponent {
     public final ModeSwitcherSelfEmployedComponent mode;
     public final DispatcherModeSelfEmployedSidebarComponent sidebarDispatcher;
     public final MasterModeSelfEmployedSidebarComponent sidebarMaster;
@@ -18,7 +18,7 @@ public class MasterModeHomeSelfEmployedComponent extends BaseComponent {
     public final TimetableComponent timetable;
 
 
-    public MasterModeHomeSelfEmployedComponent(RoleBrowser browser) {
+    public ModeMasterHomeSelfEmployedComponent(RoleBrowser browser) {
         super(browser);
         mode = new ModeSwitcherSelfEmployedComponent(browser);
         sidebarDispatcher = new DispatcherModeSelfEmployedSidebarComponent(browser);

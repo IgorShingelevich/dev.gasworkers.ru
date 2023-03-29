@@ -22,10 +22,10 @@ public class SelfEmployedFlowTest extends BaseTest {
             "Мастерович1СССР",
             "Мастеров1СССР",
             "Зарегистрирован с 11 января 2023 года",
-            "gwtest2603_2314_rožkova@master.002",
+            "gwtest2903_2124_konovalova@master.002",
             "1234",
             null,
-            79917644241L
+            70021613581L
     );
 
     @BeforeEach
@@ -40,14 +40,21 @@ public class SelfEmployedFlowTest extends BaseTest {
     @Tags({@Tag("regression"), @Tag("СМЗ"), @Tag("cabinet"), @Tag("positive")})
     @DisplayName("СМЗ открывает кабинет в первый раз")
     @Test
-    void checkInitialCabinetState(){
+    void checkInitialCabinetState() {
         step("Убедиться, что страница сертификаты и оборудование в начальном состоянии", () -> {
             selfEmployedPages.getHomePage().mode.checkDispatcherMode();
             selfEmployedPages.getHomePage().mode.switchDispatcher();
+            selfEmployedPages.getHomePage().modeDispatcher.checkFinishLoading();
             selfEmployedPages.getHomePage().header.burger.openBurger();
             selfEmployedPages.getHomePage().header.burger.certificatesAndEquipment();
             selfEmployedPages.getCertificatesAndEquipmentPage().checkInitialState();
         });
+        selfEmployedPages.getCertificatesAndEquipmentPage().sidebarDispatcher.profile();
+        selfEmployedPages.getProfilePage().nav.common();
+        selfEmployedPages.getProfilePage().tabCommon.saveButton();
+        selfEmployedPages.getProfilePage().tabCommon.fillBankAccountBlock.checkInitialState();
+
+
     }
 
     @Test
@@ -56,7 +63,7 @@ public class SelfEmployedFlowTest extends BaseTest {
     @Story("Просмотр заказа на ТО")
     @Tags({@Tag("regression"), @Tag("СМЗ"), @Tag("cabinet"), @Tag("positive")})
     @DisplayName("СМЗ открывает заказ в состоянии Мастер в пути")
-    public void clientCheckMasterDispatchedOrderSate () {
+    public void clientCheckMasterDispatchedOrderSate() {
 
     }
 
@@ -66,7 +73,7 @@ public class SelfEmployedFlowTest extends BaseTest {
     @Story("Просмотр заказа на ТО")
     @Tags({@Tag("regression"), @Tag("СМЗ"), @Tag("cabinet"), @Tag("positive")})
     @DisplayName("СМЗ редактирует чеклист")
-    public void clientCheckFillUpCheckListState () {
+    public void clientCheckFillUpCheckListState() {
 
     }
 
@@ -77,7 +84,7 @@ public class SelfEmployedFlowTest extends BaseTest {
     @Tags({@Tag("regression"), @Tag("СМЗ"), @Tag("cabinet"), @Tag("positive")})
     @DisplayName("СМЗ открывает заказ в состоянии без Отзыва Завершен")
     @Test
-    void checkNotReviewedCompletedOrderState(){
+    void checkNotReviewedCompletedOrderState() {
 
     }
 
