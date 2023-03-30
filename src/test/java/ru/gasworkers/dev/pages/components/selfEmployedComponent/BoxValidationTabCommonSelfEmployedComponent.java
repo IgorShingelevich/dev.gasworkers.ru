@@ -11,15 +11,45 @@ public class BoxValidationTabCommonSelfEmployedComponent extends BaseComponent {
         super(browser);
     }
 
-    public void checkRedBoxState(SelenideElement closestBox) {
-        stepWithRole("Проверить  состояние анезаполненного бокса", () -> {
-            closestBox.shouldHave(cssClass("diploma-danger"));
+    public void checkRedBoxState(SelenideElement boxLocator) {
+        stepWithRole("Убедиться что ", () -> {
+            boolean isBoxLocatorHasDangerTest = false;
+            boolean isFirstDivHasDangerTest = false;
+            try {
+                // Check if boxLocator has .danger-test class
+                boxLocator.shouldHave(cssClass("danger-test"));
+                isBoxLocatorHasDangerTest = true;
+            } catch (AssertionError ignored) {
+                // Error message not found in element, ignore and move on to next variation
+            }
+
+            // Check if the first div inside the boxLocator has .danger-test class
+            if (!isBoxLocatorHasDangerTest) {
+                try {
+                    boxLocator.find("div").shouldHave(cssClass("danger-test"));
+                    isFirstDivHasDangerTest = true;
+                } catch (AssertionError ignored) {
+                    // Error message not found in element, ignore and move on to next variation
+                }
+            }
+
+            // Throw an exception if both checks fail
+            if (!isBoxLocatorHasDangerTest && !isFirstDivHasDangerTest) {
+                throw new AssertionError("Neither the boxLocator nor its  div has .danger-test class");
+            }
+        });
+    }
+
+
+    public void checkRedBoxState2(SelenideElement boxLocator) {
+        stepWithRole("Проверить  состояние незаполненного бокса", () -> {
+            boxLocator.shouldHave(cssClass("danger-test"));
         });
     }
 
     public void checkNoRedState(SelenideElement closestBox) {
         stepWithRole("Проверить  состояние заполненного бокса", () -> {
-            closestBox.shouldNotHave(cssClass("diploma-danger"));
+            closestBox.shouldNotHave(cssClass("danger-test"));
         });
     }
 

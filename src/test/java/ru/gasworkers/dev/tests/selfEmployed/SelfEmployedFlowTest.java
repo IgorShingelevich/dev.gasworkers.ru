@@ -52,7 +52,8 @@ public class SelfEmployedFlowTest extends BaseTest {
         selfEmployedPages.getCertificatesAndEquipmentPage().sidebarDispatcher.profile();
         selfEmployedPages.getProfilePage().nav.common();
         selfEmployedPages.getProfilePage().tabCommon.saveButton();
-        selfEmployedPages.getProfilePage().tabCommon.fillBankAccountBlock.checkInitialState();
+        selfEmployedPages.getProfilePage().tabCommon.checkEmptyFormValidationTriggeredState();
+        selfEmployedPages.getProfilePage().tabCommon.fillBankAccountBlock.checkValidationTriggeredState();
 
 
     }

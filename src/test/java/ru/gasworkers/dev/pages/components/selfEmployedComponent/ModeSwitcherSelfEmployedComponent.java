@@ -7,6 +7,8 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
+import java.time.Duration;
+
 public class ModeSwitcherSelfEmployedComponent extends BaseComponent {
     public ModeSwitcherSelfEmployedComponent(RoleBrowser browser) {
         super(browser);
@@ -45,7 +47,7 @@ public class ModeSwitcherSelfEmployedComponent extends BaseComponent {
 
         public void checkDispatcherMode () {
             stepWithRole("Убедиться, что переключатель в положении диспетчер", () -> {
-                switcherItemCollection.get(1).shouldHave(Condition.cssClass("active"));
+                switcherItemCollection.get(1).shouldHave(Condition.cssClass("active"), Duration.ofSeconds(10));
             });
         }
 

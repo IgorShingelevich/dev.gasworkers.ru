@@ -42,7 +42,7 @@ public class fillMasterIDCommonTabSelfEmployedComponent extends BaseTabOrderCard
     }
 
     public void checkValidationTriggeredState() {
-        stepWithRole("Убедиться, что удостоверение мастера не заполнено", () -> {
+        stepWithRole("Убедиться, что удостоверение мастера не заполнено и присутсвует сообщение об ошибке", () -> {
             boxValidation.checkRedBoxState(masterIDBoxLocator);
             descriptionLocator.shouldHave(Condition.text(descriptionText));
             bell.checkRedBellState(masterIDBoxLocator);

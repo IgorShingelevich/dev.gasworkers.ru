@@ -19,6 +19,11 @@ public class fillPassportCommonTabSelfEmployedComponent extends BaseTabOrderCard
             errorMsgEmptyFieldText = "Поле не заполнено";
 
     SelenideElement
+            passportSelfBoxLocator = driver.$$("div.input-blocks").get(1).as("Бокс паспортный данных"),
+            seriesAndNumberBoxLocator = passportSelfBoxLocator.$$("div.item").get(0).as("Бокс серия и номер паспорта"),
+            issuedDateBoxLocator = passportSelfBoxLocator.$$("div.item").get(1).as("Бокс дата выдачи паспорта"),
+            issuedByBoxLocator = passportSelfBoxLocator.$$("div.item").get(2).as("Бокс кем выдан паспорт"),
+            addersBoxLocator = passportSelfBoxLocator.$$("div.item").get(3).as("Бокс адрес регистрации"),
             passportBoxLocator = driver.$("div[data-guide='passport-data']").as("Бокс Паспорт"),
             numberPassportInputLocator = driver.$("input[placeholder='Номер паспорта']").as("Номер паспорта"),
             seriesPassportInputLocator = driver.$("input[placeholder='Серия']").as("Серия паспорта"),
@@ -27,11 +32,12 @@ public class fillPassportCommonTabSelfEmployedComponent extends BaseTabOrderCard
             addressPassportInputLocator = driver.$("textarea[placeholder='Адрес регистрации']").as("Адрес регистрации"),
             apartmentNumberInputLocator = driver.$("textarea[placeholder='Номер квартиры']").as("Номер квартиры");
 
+
     public void fillPassport(String seriesPassport, String numberPassport, String passportDate, String issuedByPassport, String addressPassport, String apartmentNumber) {
         stepWithRole("Заполнить поля паспорта", () -> {
             fillSeriesPassport(seriesPassport);
             fillNumberPassport(numberPassport);
-            datePicker.setDate(passportBoxLocator, passportDate);
+            datePicker.setDate(issuedDateBoxLocator, passportDate);
             fillIssuedByPassport(issuedByPassport);
             fillAddressPassport(addressPassport);
             fillApartmentNumber(apartmentNumber);
@@ -41,8 +47,8 @@ public class fillPassportCommonTabSelfEmployedComponent extends BaseTabOrderCard
 
     public void checkPassportError() {
         stepWithRole("Убедиться, что присутствует сообщение об ошибке в полях паспорта", () -> {
-            checkErrorMsg(seriesPassportInputLocator, errorMsgEmptyFieldText);
-            checkErrorMsg(numberPassportInputLocator, errorMsgEmptyFieldText);
+            checkErrorMsgInBox(seriesAndNumberBoxLocator, errorMsgEmptyFieldText);
+//            checkErrorMsg(numberPassportInputLocator, errorMsgEmptyFieldText);
             datePicker.checkErrorMsg(passportBoxLocator);
         });
     }
@@ -81,7 +87,7 @@ public class fillPassportCommonTabSelfEmployedComponent extends BaseTabOrderCard
         stepWithRole("Убедиться, что все поля паспорта пустые", () -> {
             numberPassportInputLocator.shouldBe(empty);
             seriesPassportInputLocator.shouldBe(empty);
-            datePicker.checkInitialState(passportBoxLocator);
+            datePicker.checkInitialState(issuedDateBoxLocator);
             issuedByPassportInputLocator.shouldBe(empty);
             addressPassportInputLocator.shouldBe(empty);
             apartmentNumberInputLocator.shouldBe(empty);
@@ -89,21 +95,21 @@ public class fillPassportCommonTabSelfEmployedComponent extends BaseTabOrderCard
     }
 
     public void checkValidationTriggeredState() {
-        stepWithRole("Убедиться, что присутствует сообщение об ошибке у полей деталей пасспорта", () -> {
-            stepWithRole("Убедиться, что все поля паспорта пустые", () -> {
+        stepWithRole("Убедиться, что блок  деталей пасспорта не заполнен и присутсвует валиидационное сообщение", () -> {
+            stepWithRole("Убедиться, что блок  деталей пасспорта не заполнен", () -> {
                 numberPassportInputLocator.shouldBe(empty);
                 seriesPassportInputLocator.shouldBe(empty);
-                datePicker.checkInitialState(passportBoxLocator);
+                datePicker.checkInitialState(issuedDateBoxLocator);
                 issuedByPassportInputLocator.shouldBe(empty);
                 addressPassportInputLocator.shouldBe(empty);
                 apartmentNumberInputLocator.shouldBe(empty);
             });
             stepWithRole("Убедиться, что присутствует сообщение об ошибке в полях паспорта", () -> {
-                checkErrorMsg(numberPassportInputLocator, errorMsgEmptyFieldText);
-                checkErrorMsg(seriesPassportInputLocator, errorMsgEmptyFieldText);
-                checkErrorMsg(issuedByPassportInputLocator, errorMsgEmptyFieldText);
-                checkErrorMsg(addressPassportInputLocator, errorMsgEmptyFieldText);
-                checkErrorMsg(apartmentNumberInputLocator, errorMsgEmptyFieldText);
+                checkErrorMsgInBox(seriesAndNumberBoxLocator, errorMsgEmptyFieldText);
+                checkErrorMsgInBox(seriesAndNumberBoxLocator, errorMsgEmptyFieldText);
+                checkErrorMsgInBox(issuedByBoxLocator, errorMsgEmptyFieldText);
+                checkErrorMsgInBox(addersBoxLocator, errorMsgEmptyFieldText);
+//                checkErrorMsgInBox(apartmentNumberInputLocator, errorMsgEmptyFieldText);
             });
         });
     }

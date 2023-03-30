@@ -15,6 +15,10 @@ public class fillNameCommonTabSelfEmployedComponent extends BaseTabOrderCardComp
             errorMsgEmptyFieldText = "Поле не заполнено";
 
     SelenideElement
+            fullNameBoxLocator = driver.$$("div.section").get(0).as("Бокс  ФИО"),
+            lastNameBoxLocator = fullNameBoxLocator.$$("div.item").get(0).as("Бокс  Фамилия"),
+            firstNameBoxLocator = fullNameBoxLocator.$$("div.item").get(1).as("Бокс  Имя"),
+            patronymicBoxLocator = fullNameBoxLocator.$$("div.item").get(2).as("Бокс  Отчество"),
             surnameInputLocator = driver.$("input[placeholder='Фамилия*']").as("Фамилия"),
             nameInputLocator = driver.$("input[placeholder='Имя*']").as("Имя"),
             patronymicInputLocator = driver.$("input[placeholder='Отчество']").as("Отчество");
@@ -25,20 +29,21 @@ public class fillNameCommonTabSelfEmployedComponent extends BaseTabOrderCardComp
             surnameInputLocator.shouldBe(empty);
             nameInputLocator.shouldBe(empty);
             patronymicInputLocator.shouldBe(empty);
+            checkNoErrorMsgInBox(surnameInputLocator);
         });
     }
 
     public void checkValidationTriggeredState() {
-        stepWithRole("Убедиться, что присутствует сообщение об ошибке у полей  блока с именем", () -> {
-            stepWithRole("Убедиться, что поля ФИО пустые", () -> {
+        stepWithRole("Убедиться, что блок ФИО не заполнен и присутсвует сообщение об ошибке", () -> {
+            stepWithRole("Убедиться, что  блок ФИО не заполнен", () -> {
                 surnameInputLocator.shouldBe(empty);
                 nameInputLocator.shouldBe(empty);
                 patronymicInputLocator.shouldBe(empty);
             });
             stepWithRole("Убедиться, что присутствует сообщение об ошибке в полях ФИО", () -> {
-                checkErrorMsg(surnameInputLocator, errorMsgEmptyFieldText);
-                checkErrorMsg(nameInputLocator, errorMsgEmptyFieldText);
-                checkErrorMsg(patronymicInputLocator, errorMsgEmptyFieldText);
+                checkErrorMsgInBox(lastNameBoxLocator, errorMsgEmptyFieldText);
+                checkErrorMsgInBox(firstNameBoxLocator, errorMsgEmptyFieldText);
+                checkErrorMsgInBox(patronymicBoxLocator, errorMsgEmptyFieldText);
             });
         });
     }

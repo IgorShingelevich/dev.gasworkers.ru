@@ -13,6 +13,7 @@ public class fillBankAccountCommonTabSelfEmployedComponent extends BaseTabOrderC
     }
 
     private final String
+            bankDescriptionText = "Обратите внимание! Необходимо указать банковские данные карты открытой для приема платежей в качестве самозанятого",
             inputPlaceholderText = "Введите полный БИК банка*",
             bicErrorMsgEmptyFieldText = "БИК не найден. Выберите значение из справочника",
             checkingAccountErrorMsgEmptyFieldText = "Поле не заполнено";
@@ -23,7 +24,8 @@ public class fillBankAccountCommonTabSelfEmployedComponent extends BaseTabOrderC
 
     SelenideElement
             selfLocator = driver.$("div.row.align-items-center.input-block.mt-2").as("Блок Банковские реквизиты"),
-            bicBoxLocator = selfLocator.$("div.row-wrap.align-items-center").as("Блок БИК"),
+            bankDescriptionLocator = driver.$("div.diploma.diploma-blue").as("Описание блока Банковские реквизиты"),
+            bicBoxLocator = rowBankCollectionLocator.get(0).as("Блок БИК"),
             bankNameBoxLocator = rowBankCollectionLocator.get(1).as("Блок Наименование банка"),
             correspondentAccountBoxLocator = rowBankCollectionLocator.get(2).as("Блок Корр. счёт"),
             checkingAccountBoxLocator = rowBankCollectionLocator.get(3).as("Блок Расчётный счёт"),
@@ -34,12 +36,15 @@ public class fillBankAccountCommonTabSelfEmployedComponent extends BaseTabOrderC
 
 
     public void checkInitialState() {
-        stepWithRole("Убедиться, что элемент' 'Банковские реквизиты' в начальном состоянии", () -> {
+        stepWithRole("Убедиться, что элемент банковских данных в начальном состоянии", () -> {
             selfLocator.shouldBe(Condition.visible);
+            stepWithRole("Убедиться, что описание блока Банковские реквизиты в начальном состоянии", () -> {
+                bankDescriptionLocator.shouldHave(Condition.text(bankDescriptionText));
+            });
             stepWithRole("Убедиться, что блок БИК в начальном состоянии", () -> {
                 bicTitleLocator.shouldHave(Condition.text("БИК"));
                 bicInputLocator.shouldHave(Condition.attribute("placeholder", inputPlaceholderText));
-//                bicSuggestionsLocator.shouldNotBe(Condition.visible);
+                bicSuggestionsLocator.shouldNotBe(Condition.visible);
                 bicSuggestionResultLocator.shouldNotBe(Condition.visible);
             });
             stepWithRole("Убедиться, что блок Наименование банка в начальном состоянии", () -> {
@@ -52,13 +57,37 @@ public class fillBankAccountCommonTabSelfEmployedComponent extends BaseTabOrderC
             });
             stepWithRole("Убедиться, что блок Расчетный счет в начальном состоянии", () -> {
                 checkingAccountBoxLocator.$(".title").shouldHave(Condition.text("Расчётный счёт"));
+                checkNoTextDetails(checkingAccountBoxLocator);
+            });
+        });
+    }
+
+    public void checkValidationTriggeredState() {
+        stepWithRole("Убедиться, что блок банковские реквизиты не заполнен и присутсвует  сообщение об ошибке", () -> {
+            selfLocator.shouldBe(Condition.visible);
+            stepWithRole("Убедиться, что блок БИК не заполнен", () -> {
+                bicTitleLocator.shouldHave(Condition.text("БИК"));
+                bicInputLocator.shouldHave(Condition.attribute("placeholder", inputPlaceholderText));
+//                bicSuggestionsLocator.shouldNotBe(Condition.visible);
+                bicSuggestionResultLocator.shouldNotBe(Condition.visible);
+            });
+            stepWithRole("Убедиться, что блок Наименование банка не заполнен", () -> {
+                bankNameBoxLocator.$(".title").shouldHave(Condition.text("Банк"));
+                checkNoTextDetails(bankNameBoxLocator);
+            });
+            stepWithRole("Убедиться, что блок Корр. счёт не заполнен", () -> {
+                correspondentAccountBoxLocator.$(".title").shouldHave(Condition.text("Корр. счёт"));
+                checkNoTextDetails(correspondentAccountBoxLocator);
+            });
+            stepWithRole("Убедиться, что блок Расчетный счет не заполнен", () -> {
+                checkingAccountBoxLocator.$(".title").shouldHave(Condition.text("Расчётный счёт"));
                 //todo: Проверить, что в поле ввода расчетного счета есть placeholder
 //                checkingAccountBoxLocator.$("input").shouldHave(Condition.attribute("placeholder", "Введите расчетный счет*"));
                 checkingAccountBoxLocator.$("input").shouldBe(Condition.empty);
             });
-            stepWithRole("Убедиться, что присутствуют сообщения об ошибках",()->{
-                checkErrorMsg(bicBoxLocator, bicErrorMsgEmptyFieldText);
-                checkErrorMsg(checkingAccountBoxLocator, checkingAccountErrorMsgEmptyFieldText);
+            stepWithRole("Убедиться, что присутствуют сообщения об ошибках", () -> {
+                checkErrorMsgInBox(bicBoxLocator, bicErrorMsgEmptyFieldText);
+                checkErrorMsgInBox(checkingAccountBoxLocator, checkingAccountErrorMsgEmptyFieldText);
             });
         });
     }
@@ -81,7 +110,6 @@ public class fillBankAccountCommonTabSelfEmployedComponent extends BaseTabOrderC
             bicSuggestionsLocator.shouldHave(Condition.cssClass("is-open"));
         });
     }
-
 
 
     private void checkNoTextDetails(SelenideElement boxLocator) {
