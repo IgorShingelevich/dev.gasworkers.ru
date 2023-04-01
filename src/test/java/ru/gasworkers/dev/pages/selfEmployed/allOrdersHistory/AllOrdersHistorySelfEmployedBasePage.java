@@ -7,7 +7,7 @@ import ru.gasworkers.dev.pages.components.selfEmployedComponent.FillProfileBanne
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.ModeSwitcherSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.MosOblGasBannerSelfEmployedSideBarComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.masterMode.ViewSwitcherOrderHistorySelfEmployedComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.PaginationComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.PaginationComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.HeaderSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.modesSidebarSelfEmployedComponent.DispatcherModeSelfEmployedSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.modesSidebarSelfEmployedComponent.MasterModeSelfEmployedSidebarComponent;

@@ -3,7 +3,7 @@ package ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageCompon
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.UploadPhotoCutterModalWindowComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.UploadPhotoCutterModalWindowComponent;
 
 import java.io.File;
 

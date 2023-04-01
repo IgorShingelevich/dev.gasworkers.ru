@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.sharedComponent;
+package ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;

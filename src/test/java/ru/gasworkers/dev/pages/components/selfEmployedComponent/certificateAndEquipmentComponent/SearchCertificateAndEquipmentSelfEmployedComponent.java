@@ -2,7 +2,7 @@ package ru.gasworkers.dev.pages.components.selfEmployedComponent.certificateAndE
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.SearchComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.SearchComponent;
 
 public class SearchCertificateAndEquipmentSelfEmployedComponent extends BaseComponent {
 

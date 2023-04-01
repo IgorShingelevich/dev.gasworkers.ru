@@ -4,12 +4,11 @@ import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
-import groovyjarjarantlr4.v4.codegen.model.AddToLabelList;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.ValidationBellSelfEmployedComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.DatePickerDocumentsComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.FileUploaderComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.DatePickerDocumentsComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.FileUploaderComponent;
 
 import java.io.File;
 

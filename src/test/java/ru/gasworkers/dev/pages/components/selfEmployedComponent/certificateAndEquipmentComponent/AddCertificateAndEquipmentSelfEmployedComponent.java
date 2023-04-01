@@ -5,7 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.SearchComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.SearchComponent;
 
 import java.time.Duration;
 

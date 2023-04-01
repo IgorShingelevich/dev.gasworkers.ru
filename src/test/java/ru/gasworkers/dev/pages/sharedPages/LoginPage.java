@@ -3,7 +3,7 @@ package ru.gasworkers.dev.pages.sharedPages;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
-import ru.gasworkers.dev.pages.components.sharedComponent.JivoMessengerComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.JivoMessengerComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;

@@ -6,7 +6,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.pages.components.clientComponent.guideComponent.FirstMaintenanceGuideComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.OffersClientComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.SpinnerComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.SpinnerComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 

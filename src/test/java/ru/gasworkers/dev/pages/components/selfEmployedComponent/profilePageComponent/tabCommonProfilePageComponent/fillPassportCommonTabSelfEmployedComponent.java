@@ -2,7 +2,7 @@ package ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComp
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.sharedComponent.DatePickerDocumentsComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.DatePickerDocumentsComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.BaseTabOrderCardComponent;
 
 import static com.codeborne.selenide.Condition.empty;
