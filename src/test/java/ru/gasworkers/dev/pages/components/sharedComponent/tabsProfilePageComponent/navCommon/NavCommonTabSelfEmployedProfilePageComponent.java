@@ -1,16 +1,12 @@
 package ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navCommon;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationComponent.DateBGRegistrationLandingComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.BaseProfileSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.tabCommonProfilePageComponent.*;
 import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployed;
-
-import static com.codeborne.selenide.Condition.text;
 
 public class NavCommonTabSelfEmployedProfilePageComponent extends BaseProfileSelfEmployedComponent {
     public final DateBGRegistrationLandingComponent datePickerBlock;
@@ -33,8 +29,7 @@ public class NavCommonTabSelfEmployedProfilePageComponent extends BaseProfileSel
 
     SelenideElement
             saveButtonLocator = driver.$("button.btn.btn-primary").as("Кнопка Сохранить");
-    ElementsCollection
-    totalErrorCollection = driver.$$("div.gas-input__error").as("Все ошибки валидации");
+
 
     public void checkInitialState() {
         stepWithRole("Проверить начальное состояние", () -> {
@@ -43,7 +38,8 @@ public class NavCommonTabSelfEmployedProfilePageComponent extends BaseProfileSel
             fillMasterIDBlock.checkInitialState();
             fillBankAccountBlock.checkInitialState();
             fillTaxpayerCertificateBlock.checkInitialState();
-            checkNoOrderContextButtonsState();
+            validation.checkTotalNoErrors();
+            toOrderContextButtons.checkNoToOrderContextButtonsPresenceState();
         });
     }
 
@@ -55,7 +51,7 @@ public class NavCommonTabSelfEmployedProfilePageComponent extends BaseProfileSel
             fillBankAccountBlock.checkValidationTriggeredState();
             fillTaxpayerCertificateBlock.checkInitialState();
         });
-        checkOrderContextButtonsState();
+        toOrderContextButtons.checkToOrderContextButtonsPresenceState();
     }
 
     public void fillRandomData(RandomSelfEmployed randomSelfEmployed) {
@@ -69,9 +65,7 @@ public class NavCommonTabSelfEmployedProfilePageComponent extends BaseProfileSel
     }
 
     public void saveButton() {
-        stepWithRole("Нажать кнопку Сохранить", () -> {
-            saveButtonLocator.click();
-        });
+        button.main.clickActive("Сохранить");
     }
 
     private void checkSaveButtonEnabledState() {
@@ -87,7 +81,7 @@ public class NavCommonTabSelfEmployedProfilePageComponent extends BaseProfileSel
             fillBankAccountBlock.checkValidationTriggeredState();
             fillMasterIDBlock.checkValidationTriggeredState();
             fillTaxpayerCertificateBlock.checkValidationTriggeredState();
-            totalErrorCollection.shouldHave(CollectionCondition.size(11));
+            validation.checkTotalErrorsCount(12);
             checkSaveButtonEnabledState();
         });
     }

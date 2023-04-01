@@ -4,7 +4,7 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationComponent.DateBGRegistrationLandingComponent;
 
-public class NavCommonTabDispatcherProfilePageComponent extends BaseComponent {
+public class NavCommonTabDispatcherProfilePageComponent extends BaseNavCommonTabProfilePageComponent {
     public final DateBGRegistrationLandingComponent datePicker;
 
     public NavCommonTabDispatcherProfilePageComponent(RoleBrowser browser) {

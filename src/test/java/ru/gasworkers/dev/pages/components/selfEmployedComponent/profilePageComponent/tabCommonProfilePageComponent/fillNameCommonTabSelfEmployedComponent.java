@@ -2,6 +2,7 @@ package ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComp
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.InputValidationSharedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.BaseTabOrderCardComponent;
 
 import static com.codeborne.selenide.Condition.empty;
@@ -29,7 +30,7 @@ public class fillNameCommonTabSelfEmployedComponent extends BaseTabOrderCardComp
             surnameInputLocator.shouldBe(empty);
             nameInputLocator.shouldBe(empty);
             patronymicInputLocator.shouldBe(empty);
-            checkNoErrorMsgInBox(surnameInputLocator);
+            validation.checkNoErrorMsgInBox(surnameInputLocator);
         });
     }
 
@@ -41,9 +42,9 @@ public class fillNameCommonTabSelfEmployedComponent extends BaseTabOrderCardComp
                 patronymicInputLocator.shouldBe(empty);
             });
             stepWithRole("Убедиться, что присутствует сообщение об ошибке в полях ФИО", () -> {
-                checkErrorMsgInBox(lastNameBoxLocator, errorMsgEmptyFieldText);
-                checkErrorMsgInBox(firstNameBoxLocator, errorMsgEmptyFieldText);
-                checkErrorMsgInBox(patronymicBoxLocator, errorMsgEmptyFieldText);
+                validation.checkErrorMsgInBox(lastNameBoxLocator, errorMsgEmptyFieldText);
+                validation.checkErrorMsgInBox(firstNameBoxLocator, errorMsgEmptyFieldText);
+                validation.checkErrorMsgInBox(patronymicBoxLocator, errorMsgEmptyFieldText);
             });
         });
     }

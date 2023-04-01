@@ -7,7 +7,9 @@ import ru.gasworkers.dev.extension.browser.ScreenshotExtension;
 public abstract class BaseTest {
 
 }
-// .checkState(); for all Roles
+// todo DISCUSS buttons implementation  AllButtonSharedComponent class
+// todo DISCUSS shared Components organisation for all Roles - how to share these component given that on each individual page might be available only several of them
+// todo DISCUSS .checkState(); for all Roles
 //todo rerun failed tests after run all tests
 // todo  if Client and SelfEmployed ActionBlock differs only in reviewLink - how to reuse it?
 // todo reuse master and self-employed OrderCardPage

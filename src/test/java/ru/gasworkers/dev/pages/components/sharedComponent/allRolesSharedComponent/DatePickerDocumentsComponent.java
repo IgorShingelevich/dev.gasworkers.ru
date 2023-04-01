@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Condition.*;
 
-public class DatePickerDocumentsComponent extends BaseComponent {
+public class DatePickerDocumentsComponent extends AllRolesSharedComponent {
     public DatePickerDocumentsComponent(RoleBrowser browser) {
         super(browser);
     }

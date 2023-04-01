@@ -57,7 +57,7 @@ public class NavPasswordTabProfilePageComponent extends BaseProfileSelfEmployedC
         stepWithRole("Убедиться, что кнопка Сохранить неактивна", () -> {
             saveButtonLocator.shouldBe(disabled);
         });
-       checkOrderContextButtonsState();
+        toOrderContextButtons.checkToOrderContextButtonsPresenceState();
     }
 
     public void checkInitialState() {
@@ -72,7 +72,7 @@ public class NavPasswordTabProfilePageComponent extends BaseProfileSelfEmployedC
         stepWithRole("Убедиться, что кнопка Сохранить неактивна", () -> {
             saveButtonLocator.shouldBe(disabled);
         });
-        checkNoOrderContextButtonsState();
+        toOrderContextButtons.checkNoToOrderContextButtonsPresenceState();
     }
 
     public void generatePassword() {
@@ -133,7 +133,7 @@ public class NavPasswordTabProfilePageComponent extends BaseProfileSelfEmployedC
             stepWithRole("Убедиться, что кнопка Сохранить неактивна", () -> {
                 saveButtonLocator.shouldBe(disabled);
             });
-            checkOrderContextButtonsState();
+            toOrderContextButtons.checkToOrderContextButtonsPresenceState();
         });
     }
 

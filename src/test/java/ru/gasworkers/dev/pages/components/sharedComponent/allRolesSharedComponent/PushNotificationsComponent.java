@@ -1,8 +1,10 @@
 package ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent;
 
-public class PushNotificationsComponent {
+import ru.gasworkers.dev.model.browser.RoleBrowser;
 
-
-
+public class PushNotificationsComponent extends AllRolesSharedComponent{
+    public PushNotificationsComponent(RoleBrowser browser) {
+        super(browser);
+    }
 
 }

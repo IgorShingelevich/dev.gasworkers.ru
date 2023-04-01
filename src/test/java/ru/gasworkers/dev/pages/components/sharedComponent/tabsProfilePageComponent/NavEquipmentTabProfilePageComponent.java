@@ -49,7 +49,7 @@ public class NavEquipmentTabProfilePageComponent extends BaseProfileSelfEmployed
             stepWithRole("Убедиться, что кнопка Сохранить неактивна", () -> {
                 saveButtonLocator.shouldBe(disabled);
             });
-           checkNoOrderContextButtonsState();
+            toOrderContextButtons.checkNoToOrderContextButtonsPresenceState();
         });
     }
 
@@ -78,7 +78,7 @@ public class NavEquipmentTabProfilePageComponent extends BaseProfileSelfEmployed
             stepWithRole("Убедиться, что кнопка Сохранить неактивна", () -> {
                 saveButtonLocator.shouldBe(disabled);
             });
-            checkOrderContextButtonsState();
+            toOrderContextButtons.checkToOrderContextButtonsPresenceState();
         });
     }
 }

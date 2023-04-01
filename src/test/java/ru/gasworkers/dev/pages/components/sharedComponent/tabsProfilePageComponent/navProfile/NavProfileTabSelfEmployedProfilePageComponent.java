@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageCompon
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.BaseProfileSelfEmployedComponent;
+import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployed;
 
 import static com.codeborne.selenide.Condition.*;
 
@@ -17,6 +18,7 @@ public class NavProfileTabSelfEmployedProfilePageComponent extends BaseProfileSe
     }
 
     private final String
+            mainButtonText = "Сохранить",
             radiusOfWorkTitleText = "Радиус работы, км",
             doVideoTitleText = "Провожу видеоконсультации",
             specialityCounterDefaultText = "0 символов из 50 доступных",
@@ -30,11 +32,18 @@ public class NavProfileTabSelfEmployedProfilePageComponent extends BaseProfileSe
             skillsSymbolCounterLocator = skillsInputLocator.parent().sibling(0).as("Счетчик символов навыков"),
             addressInputLocator = driver.$("input[placeholder*='Адрес']").as("Адрес"),
             apartmentNumberLocator = driver.$("input[placeholder*='Номер квартиры']").as("Номер квартиры"),
+            radiusOfWorkBoxLocator = driver.$$("div.col-md-7.col-lg-4").get(0).as("Бокс радиус работы"),
             radiusOfWorkTitleLocator = driver.$("div.title").as("Заголовок радиус работы"),
             radiusOfWorkInputLocator = driver.$("input[placeholder='км']").as("Радиус работы"),
             doVideoCheckboxLocator = driver.$("input[type='checkbox']").as("Чекбокс провожу видеоконсультации"),
-            videoPriceInputLocator = driver.$("input[placeholder='минимум 500 рублей']").as("Цена на видеоконсультацию"),
-            saveButtonLocator = driver.$("button.btn.btn-primary").as("Кнопка Сохранить");
+            videoPriceBoxLocator = driver.$$("div.col-md-7.col-lg-4").get(1).as("Бокс цена на видеоконсультацию"),
+            videoPriceInputLocator = driver.$("input[placeholder='минимум 500 рублей']").as("Цена на видеоконсультацию");
+
+    public void fillRandomData(RandomSelfEmployed randomSelfEmployed) {
+        stepWithRole("Заполнить случайными данными все элементы вкладки профиль ", () -> {
+//            todo
+        });
+    }
 
     public void checkFirsOfferEvaluatedInitialState() {
         stepWithRole("Убедиться, что вкладка профиль в начальном состоянии", () -> {
@@ -50,8 +59,8 @@ public class NavProfileTabSelfEmployedProfilePageComponent extends BaseProfileSe
             radiusOfWorkInputLocator.shouldBe(empty);
             doVideoCheckboxLocator.shouldNotBe(checked);
             videoPriceInputLocator.shouldBe(empty);
-            saveButtonLocator.shouldBe(enabled);
-            checkOrderContextButtonsState();
+            button.main.isEnabled();
+            toOrderContextButtons.checkToOrderContextButtonsPresenceState();
         });
     }
 
@@ -69,9 +78,20 @@ public class NavProfileTabSelfEmployedProfilePageComponent extends BaseProfileSe
             radiusOfWorkInputLocator.shouldBe(empty);
             doVideoCheckboxLocator.shouldNotBe(checked);
             videoPriceInputLocator.shouldBe(empty);
-            saveButtonLocator.shouldBe(enabled);
+            radiusOfWorkBoxLocator.shouldBe(visible);
+            videoPriceBoxLocator.shouldBe(visible);
+            button.main.isEnabled();
+            validation.checkTotalNoErrors();
         });
-       checkNoOrderContextButtonsState();
+        toOrderContextButtons.checkNoToOrderContextButtonsPresenceState();
+    }
+
+    public void saveButton() {
+        button.main.clickActive(mainButtonText);
+    }
+
+    public void checkEmptyFormValidationTriggeredState() {
+
     }
 }
 

@@ -7,7 +7,7 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 
 import static com.codeborne.selenide.Condition.empty;
 
-public class SearchComponent extends BaseComponent {
+public class SearchComponent extends AllRolesSharedComponent {
     public SearchComponent(RoleBrowser browser) {
         super(browser);
     }

@@ -9,7 +9,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 
-public class JivoMessengerComponent extends BaseComponent {
+public class JivoMessengerComponent extends AllRolesSharedComponent {
     public JivoMessengerComponent(RoleBrowser browser) {
         super(browser);
     }

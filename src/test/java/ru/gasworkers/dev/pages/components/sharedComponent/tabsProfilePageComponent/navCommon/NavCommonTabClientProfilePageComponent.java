@@ -10,7 +10,7 @@ import java.io.File;
 
 import static com.codeborne.selenide.Condition.*;
 
-public class NavCommonTabClientProfilePageComponent extends BaseComponent {
+public class NavCommonTabClientProfilePageComponent extends BaseNavCommonTabProfilePageComponent {
 
     public final DateBGRegistrationLandingComponent datePicker;
     public final UploadPhotoCutterModalWindowComponent uploadPhotoModalWindow;

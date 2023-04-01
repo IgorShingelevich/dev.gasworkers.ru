@@ -12,7 +12,7 @@ import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$$;
 
-public class FileUploaderComponent extends BaseComponent {
+public class FileUploaderComponent extends AllRolesSharedComponent {
     public FileUploaderComponent(RoleBrowser browser) {
         super(browser);
     }

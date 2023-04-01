@@ -47,7 +47,7 @@ public class fillPassportCommonTabSelfEmployedComponent extends BaseTabOrderCard
 
     public void checkPassportError() {
         stepWithRole("Убедиться, что присутствует сообщение об ошибке в полях паспорта", () -> {
-            checkErrorMsgInBox(seriesAndNumberBoxLocator, errorMsgEmptyFieldText);
+            validation.checkErrorMsgInBox(seriesAndNumberBoxLocator, errorMsgEmptyFieldText);
 //            checkErrorMsg(numberPassportInputLocator, errorMsgEmptyFieldText);
             datePicker.checkErrorMsg(passportBoxLocator);
         });
@@ -105,10 +105,10 @@ public class fillPassportCommonTabSelfEmployedComponent extends BaseTabOrderCard
                 apartmentNumberInputLocator.shouldBe(empty);
             });
             stepWithRole("Убедиться, что присутствует сообщение об ошибке в полях паспорта", () -> {
-                checkErrorMsgInBox(seriesAndNumberBoxLocator, errorMsgEmptyFieldText);
-                checkErrorMsgInBox(seriesAndNumberBoxLocator, errorMsgEmptyFieldText);
-                checkErrorMsgInBox(issuedByBoxLocator, errorMsgEmptyFieldText);
-                checkErrorMsgInBox(addersBoxLocator, errorMsgEmptyFieldText);
+                validation.checkErrorMsgInBox(seriesAndNumberBoxLocator, errorMsgEmptyFieldText);
+                validation.checkErrorMsgInBox(seriesAndNumberBoxLocator, errorMsgEmptyFieldText);
+                validation.checkErrorMsgInBox(issuedByBoxLocator, errorMsgEmptyFieldText);
+                validation.checkErrorMsgInBox(addersBoxLocator, errorMsgEmptyFieldText);
 //                checkErrorMsgInBox(apartmentNumberInputLocator, errorMsgEmptyFieldText);
             });
         });

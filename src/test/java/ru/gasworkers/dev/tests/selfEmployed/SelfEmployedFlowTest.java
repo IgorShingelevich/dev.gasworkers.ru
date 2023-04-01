@@ -49,11 +49,12 @@ public class SelfEmployedFlowTest extends BaseTest {
             selfEmployedPages.getHomePage().header.burger.certificatesAndEquipment();
             selfEmployedPages.getCertificatesAndEquipmentPage().checkInitialState();
         });
-        selfEmployedPages.getCertificatesAndEquipmentPage().sidebarDispatcher.profile();
-        selfEmployedPages.getProfilePage().nav.common();
-        selfEmployedPages.getProfilePage().tabCommon.saveButton();
-        selfEmployedPages.getProfilePage().tabCommon.checkEmptyFormValidationTriggeredState();
-        selfEmployedPages.getProfilePage().tabCommon.fillBankAccountBlock.checkValidationTriggeredState();
+        step("Убедиться, что вкладка общиен данные  профиля в начальном состоянии", () -> {
+            selfEmployedPages.getCertificatesAndEquipmentPage().sidebarDispatcher.profile();
+            selfEmployedPages.getProfilePage().nav.common();
+            selfEmployedPages.getProfilePage().tabCommon.saveButton();
+            selfEmployedPages.getProfilePage().tabCommon.checkEmptyFormValidationTriggeredState();
+        });
 
 
     }

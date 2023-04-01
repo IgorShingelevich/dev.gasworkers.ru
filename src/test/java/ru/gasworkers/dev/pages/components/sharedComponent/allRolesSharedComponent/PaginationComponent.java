@@ -8,7 +8,7 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
 
-public class PaginationComponent extends BaseComponent {
+public class PaginationComponent extends AllRolesSharedComponent {
     public PaginationComponent(RoleBrowser browser) {
         super(browser);
     }

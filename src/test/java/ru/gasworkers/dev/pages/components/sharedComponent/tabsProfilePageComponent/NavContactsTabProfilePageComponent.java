@@ -39,7 +39,7 @@ public class NavContactsTabProfilePageComponent extends BaseProfileSelfEmployedC
             stepWithRole("Кнопка Сохранить неактивна", () ->
                     saveButtonLocator.shouldBe(disabled)
             );
-           checkNoOrderContextButtonsState();
+           toOrderContextButtons.checkNoToOrderContextButtonsPresenceState();
         });
     }
 
@@ -56,7 +56,7 @@ public class NavContactsTabProfilePageComponent extends BaseProfileSelfEmployedC
             stepWithRole("Кнопка Сохранить неактивна", () ->
                 saveButtonLocator.shouldBe(disabled)
             );
-           checkOrderContextButtonsState();
+            toOrderContextButtons.checkToOrderContextButtonsPresenceState();
         });
     }
 }

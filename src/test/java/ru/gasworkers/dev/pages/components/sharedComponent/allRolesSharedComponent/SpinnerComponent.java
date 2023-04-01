@@ -9,7 +9,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 
-public class SpinnerComponent extends BaseComponent {
+public class SpinnerComponent extends AllRolesSharedComponent {
 
         public SpinnerComponent(RoleBrowser browser) {
             super(browser);

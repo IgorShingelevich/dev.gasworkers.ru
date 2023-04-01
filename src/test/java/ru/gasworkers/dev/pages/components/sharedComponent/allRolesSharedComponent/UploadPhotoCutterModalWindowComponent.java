@@ -6,7 +6,7 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 
 import static com.codeborne.selenide.Condition.*;
 
-public class UploadPhotoCutterModalWindowComponent extends BaseComponent {
+public class UploadPhotoCutterModalWindowComponent extends AllRolesSharedComponent {
     public UploadPhotoCutterModalWindowComponent(RoleBrowser browser) {
         super(browser);
     }

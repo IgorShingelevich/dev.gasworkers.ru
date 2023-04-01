@@ -41,7 +41,7 @@ public class NavNotificationsTabProfilePageComponent extends BaseProfileSelfEmpl
             emailNotificationCheckboxLocator.$("input").shouldHave(attribute("value", "true"));
             smsNotificationCheckboxLocator.$("input").shouldHave(attribute("value", "true"));
         });
-        checkNoOrderContextButtonsState();
+        toOrderContextButtons.checkNoToOrderContextButtonsPresenceState();
     }
 
     public void checkFirsOfferEvaluatedSEInitialState() {
@@ -50,7 +50,7 @@ public class NavNotificationsTabProfilePageComponent extends BaseProfileSelfEmpl
             emailNotificationCheckboxLocator.$("input").shouldHave(attribute("value", "true"));
             smsNotificationCheckboxLocator.$("input").shouldHave(attribute("value", "true"));
         });
-        checkOrderContextButtonsState();
+        toOrderContextButtons.checkToOrderContextButtonsPresenceState();
     }
 
 

@@ -9,6 +9,7 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.ValidationBellSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.DatePickerDocumentsComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.FileUploaderComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.InputValidationSharedComponent;
 
 import java.io.File;
 
@@ -19,12 +20,14 @@ public class OfferPriceModalWindowSelfEmployedComponent extends BaseComponent {
     public final DatePickerDocumentsComponent datePicker;
     public final FileUploaderComponent uploader;
     public final ValidationBellSelfEmployedComponent bell;
+    public final InputValidationSharedComponent validation;
 
     public OfferPriceModalWindowSelfEmployedComponent(RoleBrowser browser) {
         super(browser);
         datePicker = new DatePickerDocumentsComponent(browser);
         uploader = new FileUploaderComponent(browser);
         bell = new ValidationBellSelfEmployedComponent(browser);
+        validation = new InputValidationSharedComponent(browser);
 
     }
 

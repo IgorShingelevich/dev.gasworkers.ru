@@ -86,8 +86,8 @@ public class fillBankAccountCommonTabSelfEmployedComponent extends BaseTabOrderC
                 checkingAccountBoxLocator.$("input").shouldBe(Condition.empty);
             });
             stepWithRole("Убедиться, что присутствуют сообщения об ошибках", () -> {
-                checkErrorMsgInBox(bicBoxLocator, bicErrorMsgEmptyFieldText);
-                checkErrorMsgInBox(checkingAccountBoxLocator, checkingAccountErrorMsgEmptyFieldText);
+               validation.checkErrorMsgInBox(bicBoxLocator, bicErrorMsgEmptyFieldText);
+               validation.checkErrorMsgInBox(checkingAccountBoxLocator, checkingAccountErrorMsgEmptyFieldText);
             });
         });
     }
