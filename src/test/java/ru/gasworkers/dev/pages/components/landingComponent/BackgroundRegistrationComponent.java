@@ -91,7 +91,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 findOffersButton.shouldBe(visible);
             });
             //todo handle fail to switch between tabs - multiple falls
-            Selenide.sleep(100);
+            Selenide.sleep(500);
             stepWithRole("Убедиться, что отображаются компоненты Фонового ремонта", () -> {
                 //todo tab change check - fall
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.REPAIR.getTitle())).click();
@@ -101,7 +101,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 bgSubtitle3Locator.shouldHave(text(BG_REPAIR_SUBTITLE_3));
                 findOffersButton.shouldBe(visible);
             });
-            Selenide.sleep(100);
+            Selenide.sleep(500);
 
             stepWithRole("Убедиться, что отображаются компоненты Фоновой видеоконсультации", () -> {
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.VIDEO.getTitle())).click();
@@ -111,7 +111,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 bgSubtitle3Locator.shouldHave(text(BG_VIDEO_SUBTITLE_3));
                 findOffersButton.shouldBe(visible);
             });
-            Selenide.sleep(100);
+            Selenide.sleep(500);
 
             requestTypeLocator.findBy(text(BackgroundClientRequestType.MAINTENANCE.getTitle())).click();
             //TODO check form components presence

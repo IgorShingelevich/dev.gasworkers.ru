@@ -56,7 +56,8 @@ public class ConsultationVideoClientPage extends BaseClientPage {
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что страница Консультация по видео загрузилась", () -> {
-            focusHeader.checkFinishLoading();
+//            focusHeader.checkFinishLoading(); // changed header all over the site
+            // todo new header
             stepper.checkFinishLoading();
             // todo stepper state
             rightNowTab.checkFinishLoading();

@@ -44,7 +44,8 @@ public class fillBankAccountCommonTabSelfEmployedComponent extends BaseTabOrderC
             stepWithRole("Убедиться, что блок БИК в начальном состоянии", () -> {
                 bicTitleLocator.shouldHave(Condition.text("БИК"));
                 bicInputLocator.shouldHave(Condition.attribute("placeholder", inputPlaceholderText));
-                bicSuggestionsLocator.shouldNotBe(Condition.visible);
+                bicInputLocator.shouldBe(Condition.empty);
+                bicSuggestionsLocator.shouldBe(Condition.visible);
                 bicSuggestionResultLocator.shouldNotBe(Condition.visible);
             });
             stepWithRole("Убедиться, что блок Наименование банка в начальном состоянии", () -> {

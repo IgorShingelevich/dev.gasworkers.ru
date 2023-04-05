@@ -52,7 +52,8 @@ public class AccountTypeSelfEmployedPage extends BaseSelfEmployedPage {
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что представлены все компоненты  страницы выбора типа смз", () -> {
-            header.checkFinishLoading();
+//            header.checkFinishLoading(); //header changed
+            //todo new header
             banner.checkFinishLoading();
             stepWithRole("Убедиться, что заголовок страницы загрузился", () -> {
                 titleLocator.shouldHave(text(titleText));

@@ -15,6 +15,9 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static io.qameta.allure.Allure.step;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
 public class SelectServicePageClientPage extends BaseClientPage {
 
     public final FocusHeaderComponent header;
@@ -34,13 +37,15 @@ public class SelectServicePageClientPage extends BaseClientPage {
     }
 
     private final String
-            SELECT_SERVICE_MAINTENANCE_TITLE = "Спасибо! Ваш заказ принят и обрабатывается диспетчерами",
+            startPrefixText = "Ваш заказ",
+            endPrefixText = "и обрабатывается диспетчерами",
+//            SELECT_SERVICE_MAINTENANCE_TITLE = "Ваш заказ принят и обрабатывается диспетчерами", // changed title
             SELECT_SERVICE_REPAIR_TITLE = "Ваш заказ принят и обрабатывается диспетчерами";
 
 
     SelenideElement
         titleLocator = driver.$("div h4.text-center").as("Заголовок страницы Выбор СК"),
-        toOrderButtonLocator = driver.$("button.mb-3.me-sm-3 span").as("Кнопка Смотреть  заказ"),
+        toOrderButtonLocator = driver.$("button.btn.btn-primary").as("Кнопка Смотреть  заказ"),
         backButtonLocator = driver.$(".col-12.col-md-3 .link-dark-blue.mr-32.medium").as("Кнопка Назад"),
         spinnerServicesContainerLocator = driver.$(".scrollbar.mb-3.col-lg-5 .d-flex.justify-content-center.pb-5").as("Спиннер загрузки контейнера с Сервисными компаниями"),
         firstServiceTabLocator = driver.$("[id^=company-item]").as("Первая вкладка Сервисного предложения"),
@@ -63,7 +68,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
 //            spinnerScrollbarLocator.should(disappear);
             spinner.checkPresence();
-            titleLocator.shouldHave(text(SELECT_SERVICE_MAINTENANCE_TITLE));
+            assertThat(titleLocator.getText(), startsWith(startPrefixText));
+            assertThat(titleLocator.getText(), endsWith(endPrefixText));
+//            titleLocator.shouldHave(text(SELECT_SERVICE_MAINTENANCE_TITLE)); // title changed
             /*stepWithRole("Убедиться что спиннер появился", () -> {
                 spinnerServicesContainerLocator.should(appear);
             });*/

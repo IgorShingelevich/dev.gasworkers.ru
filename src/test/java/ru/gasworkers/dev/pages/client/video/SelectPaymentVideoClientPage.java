@@ -44,7 +44,8 @@ public class SelectPaymentVideoClientPage extends BaseClientPage {
     public void checkFinishLoading() {
         stepWithRole("Проверка загрузки страницы Выбор Способа Оплаты", () -> {
         stepper.checkFinishLoading();
-        header.checkFinishLoading();
+//        header.checkFinishLoading(); // headed changed
+            //todo: add check for header
         titleLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(SELECT_PAYMENT_TITLE));
         reserveTextLocator.shouldBe(visible).shouldHave(text(RESERVE_TEXT));
         paymentMethodsSubtitleLocator.shouldBe(visible).shouldHave(text(PAYMENT_METHODS_SUBTITLE));

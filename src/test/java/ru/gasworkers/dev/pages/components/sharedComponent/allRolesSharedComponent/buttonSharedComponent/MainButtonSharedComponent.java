@@ -27,11 +27,23 @@ SelenideElement
         });
     }
 
+
+
+    // Overloaded clickActive method without componentBoxLocator
     public void clickActive(String buttonText) {
         stepWithRole("Нажать на активную главную кнопку: " + buttonText, () -> {
             isEnabled();
             checkButtonText(buttonText);
-            click();
+            click1();
+        });
+    }
+
+    // Overloaded clickActive method with componentBoxLocator
+    public void clickActive(String buttonText, SelenideElement componentBoxLocator) {
+        stepWithRole("Нажать на активную главную кнопку: " + buttonText, () -> {
+            isEnabled();
+            checkButtonText(buttonText);
+            click2(componentBoxLocator);
         });
     }
 
@@ -40,11 +52,20 @@ SelenideElement
             buttonTextLocator.shouldHave(Condition.text(text));
         });
     }
-
-    private void click() {
+// first click implementation
+    private void click1() {
         stepWithRole("Нажать на главную кнопку", () -> {
             buttonLocator.click();
         });
     }
+
+    // second click implementation
+    private void click2(SelenideElement componenetBoxLocator) {
+        stepWithRole("Нажать на главную кнопку", () -> {
+            componenetBoxLocator.$("button.btn.btn-primary").click();
+        });
+    }
+
+
 
 }

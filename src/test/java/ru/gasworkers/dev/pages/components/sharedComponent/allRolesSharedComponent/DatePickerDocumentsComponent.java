@@ -68,7 +68,8 @@ public class DatePickerDocumentsComponent extends AllRolesSharedComponent {
 
     public void checkInitialState(SelenideElement closestBox) {
         stepWithRole("Убедиться, что поле календаря пустое", () -> {
-            closestBox.$(".mx-input").shouldBe(empty);
+            SelenideElement closestInput = closestBox.$(".mx-input").as("поле ввода даты");
+            closestInput.shouldBe(empty);
             stepWithRole("Убедиться, что календарь закрыт", () -> {
                 calendarBlockLocator.shouldNotBe(visible);
             });

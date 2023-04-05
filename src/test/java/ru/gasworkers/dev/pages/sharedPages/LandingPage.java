@@ -67,7 +67,6 @@ public LandingPage open() {
 
 
 
-
             // TODO add the rest  components checks
             // todo footer components checks
         });

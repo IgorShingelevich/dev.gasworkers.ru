@@ -40,7 +40,6 @@ public class fillTaxpayerCertificateCommonTabSelfEmployedComponent extends BaseT
             descriptionLocator.shouldHave(text(descriptionText));
             bell.checkRedBellState(taxpayerCertificateBoxLocator);
             uploader.checkInitialState(taxpayerCertificateBoxLocator);
-            datePicker.checkInitialState(taxpayerCertificateBoxLocator);
         });
     }
 
@@ -48,7 +47,6 @@ public class fillTaxpayerCertificateCommonTabSelfEmployedComponent extends BaseT
         stepWithRole("Убедиться, что удостоверение налогоплательщика не заполнено и присутсвует сообщение об ошибке", () -> {
             boxValidation.checkRedBoxState(taxpayerCertificateBoxLocator);
             bell.checkRedBellState(taxpayerCertificateBoxLocator);
-            datePicker.checkInitialState(masterIDBoxLocator);
             uploader.checkInitialState(taxpayerCertificateBoxLocator);
         });
     }

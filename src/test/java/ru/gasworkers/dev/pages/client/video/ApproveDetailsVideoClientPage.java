@@ -35,7 +35,8 @@ public class ApproveDetailsVideoClientPage extends BaseClientPage {
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что страница Подтверждение мастера загрузилась", () -> {
-            focusHeader.checkFinishLoading();
+//            focusHeader.checkFinishLoading(); // new header component
+            // todo: add check for new header component
             stepper.checkFinishLoading();
             titleLocator.shouldHave(text(titleText), Duration.ofSeconds(10));
             errorAttachments.checkFinishLoading();

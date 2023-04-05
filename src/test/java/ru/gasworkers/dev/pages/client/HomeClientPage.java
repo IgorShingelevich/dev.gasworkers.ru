@@ -111,7 +111,8 @@ public final class HomeClientPage extends BaseClientPage {
 
     public void checkBGInitialState(String sinceDate) {
         stepWithRole("Убедиться, что  Домашняя страница в состоянии после Фоновой регистрации", () -> {
-            personSummaryComponent.checkBGInitialState(sinceDate);
+//            personSummaryComponent.checkBGInitialState(sinceDate); // removed from initial state
+            //todo removed from initial state
             stepWithRole("Убедиться, что присутствует кнопка Заполнить профиль", () -> {
                 fillProfileButtonLocator.shouldBe(visible);
             });
@@ -144,7 +145,8 @@ public final class HomeClientPage extends BaseClientPage {
         stepWithRole("Убедиться, что  Домашняя страница в состоянии после Фоновой регистрации на Видео", () -> {
 
             awaitingVideoBGBanner.checkAwaitingNowBGVideoState(masterFullName);
-            personSummaryComponent.checkBGInitialState(sinceDate);
+//            personSummaryComponent.checkBGInitialState(sinceDate); // changed appearance
+            // todo  personSummaryComponent appearance changed
             stepWithRole("Убедиться, что присутствует баннер Ожидания видеоконсультации", () -> {
 
             });

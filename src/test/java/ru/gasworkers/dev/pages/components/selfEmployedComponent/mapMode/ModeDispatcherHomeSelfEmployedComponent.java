@@ -28,7 +28,7 @@ public class ModeDispatcherHomeSelfEmployedComponent extends BaseComponent {
     }
 
     ElementsCollection
-            offersBoxCollection = driver.$$("div.col-xl-6.mb-3").as("Коллекция блоков с предложениями"),
+            offersBoxCollection = driver.$$("div.row.space-3>div").as("Коллекция блоков с предложениями"),
             offersNumberCollection = driver.$$(".small.d-inline-flex.align-items-start.link-dark-blue.mr-1").as("Коллекция номеров предложений");
 
 
