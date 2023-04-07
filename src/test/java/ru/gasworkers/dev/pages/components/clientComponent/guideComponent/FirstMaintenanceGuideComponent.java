@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.pages.components.clientComponent.guideComponent;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
@@ -52,48 +53,59 @@ public class FirstMaintenanceGuideComponent extends BaseComponent {
                         assertThat(driver.url(), containsString("https://dev.gasworkers.ru/profile/client"));
                         guideTipLocator.shouldHave(text(GUIDE_Step_1));
                         nextStepGuide();
+                        Selenide.sleep(500);
                         break;
                     case 1:
                         guideTipLocator.shouldHave(text(GUIDE_Step_2));
                         nextStepGuide();
+                        Selenide.sleep(500);
                         break;
                     case 2:
                         guideTipLocator.shouldHave(text(GUIDE_Step_3));
                         nextStepGuide();
+                        Selenide.sleep(500);
                         break;
                     case 3:
                         guideTipLocator.shouldHave(text(GUIDE_Step_4));
                         nextStepGuide();
+                        Selenide.sleep(500);
                         break;
                     case 4:
                         guideTipLocator.shouldHave(text(GUIDE_Step_5));
                         nextStepGuide();
+                        Selenide.sleep(500);
                         break;
                     case 5:
                         guideTipLocator.shouldHave(text(GUIDE_Step_6));
                         nextStepGuide();
+                        Selenide.sleep(500);
                         break;
                     case 6:
                         guideTipLocator.shouldHave(text(GUIDE_Step_7));
                         nextStepGuide();
+                        Selenide.sleep(500);
                         break;
                     case 7:
                         assertThat(driver.url(), containsString("https://dev.gasworkers.ru/orders/maintenance/"));
                         guideTipLocator.shouldHave(text(GUIDE_Step_8));
                         nextStepGuide();
+                        Selenide.sleep(500);
                         break;
                     case 8:
                         guideTipLocator.shouldHave(text(GUIDE_Step_9));
                         nextStepGuide();
+                        Selenide.sleep(500);
                         break;
                     case 9:
                         guideTipLocator.$(".mb-3").shouldHave(text(GUIDE_Step_10));
                         qrCodeDescriptionLocator.get(0).shouldHave(text(TO_IOS_QR_CODE_DESCRIPTION));
                         qrCodeDescriptionLocator.get(1).shouldHave(text(TO_ANDROID_QR_CODE_DESCRIPTION));
                         nextStepGuide();
+                        Selenide.sleep(500);
                         break;
                 }
             }
+            Selenide.sleep(500);
             guideFrameLocator.shouldNotBe(visible);
         });
     }

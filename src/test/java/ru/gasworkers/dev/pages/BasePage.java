@@ -42,7 +42,28 @@ public abstract class BasePage extends BaseComponent {
         }
     }
 
+    public void checkUrlStartsWith(String url) {
+        stepWithRole("Проверить URL страницы", () -> {
+            driver.Wait().withTimeout(Duration.ofSeconds(20)).until(webDriver -> webDriver.getCurrentUrl().startsWith(url));
+        });
+    }
 
+    public void checkUrlStartsWith(String url, int timeout) {
+        stepWithRole("Проверить URL страницы", () -> {
+            driver.Wait().withTimeout(Duration.ofSeconds(timeout)).until(webDriver -> webDriver.getCurrentUrl().startsWith(url));
+        });
+    }
 
+    public void checkUrlContains(String url) {
+        stepWithRole("Проверить URL страницы", () -> {
+            driver.Wait().withTimeout(Duration.ofSeconds(20)).until(webDriver -> webDriver.getCurrentUrl().contains(url));
+        });
+    }
+
+    public void checkUrlContains(String url, int timeout) {
+        stepWithRole("Проверить URL страницы", () -> {
+            driver.Wait().withTimeout(Duration.ofSeconds(timeout)).until(webDriver -> webDriver.getCurrentUrl().contains(url));
+        });
+    }
 
 }

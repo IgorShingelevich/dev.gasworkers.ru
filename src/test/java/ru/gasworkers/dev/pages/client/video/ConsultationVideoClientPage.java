@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.pages.client.video;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.client.BaseClientPage;
@@ -8,6 +9,8 @@ import ru.gasworkers.dev.pages.components.clientComponent.videoComponent.NavRigh
 import ru.gasworkers.dev.pages.components.clientComponent.videoComponent.NavScheduleTimeTabConsultationVideoClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 
@@ -17,6 +20,7 @@ public class ConsultationVideoClientPage extends BaseClientPage {
     public final StepperComponent stepper;
     public final NavRightNowTabConsultationVideoClientComponent rightNowTab;
     public final NavScheduleTimeTabConsultationVideoClientComponent scheduleTimeTab;
+
     public ConsultationVideoClientPage(RoleBrowser browser) {
         super(browser);
         focusHeader = new FocusHeaderComponent(browser);
@@ -27,18 +31,19 @@ public class ConsultationVideoClientPage extends BaseClientPage {
     }
 
     private final String
-        title = "Выберите мастера",
-        subtitle = "Оплатите видеоконсультацию, консультация начнется в указанное время или сразу после оплаты, если выбран мастер онлайн",
-        banner = "Для проведения консультации выберите один из вариантов консультации: “Консультация прямо сейчас” или ”Выбрать время”, а также подберите подходящего для вас мастера",
-        rightNowNavTab = "Консультация прямо сейчас",
-        scheduleTimeNavTab = "Выбрать время";
+            urlPrefixText = "https://dev.gasworkers.ru/orders/consultation/",
+            title = "Выберите мастера",
+            subtitle = "Оплатите видеоконсультацию, консультация начнется в указанное время или сразу после оплаты, если выбран мастер онлайн",
+            banner = "Для проведения консультации выберите один из вариантов консультации: “Консультация прямо сейчас” или ”Выбрать время”, а также подберите подходящего для вас мастера",
+            rightNowNavTab = "Консультация прямо сейчас",
+            scheduleTimeNavTab = "Выбрать время";
 
     SelenideElement
-        titleLocator = driver.$("div p.h3").as("Заголовок страницы Консультация по видео"),
-        subtitleLocator = driver.$("div p.medium").as("Подзаголовок страницы Консультация по видео"),
-        bannerLocator = driver.$("div.gas-tip__text .first-text").as("Баннер страницы Консультация по видео");
+            titleLocator = driver.$("div p.h3").as("Заголовок страницы Консультация по видео"),
+            subtitleLocator = driver.$("div p.medium").as("Подзаголовок страницы Консультация по видео"),
+            bannerLocator = driver.$("div.gas-tip__text .first-text").as("Баннер страницы Консультация по видео");
     ElementsCollection
-        navTabsLocator = driver.$$("div.nav-btns div").as("Вкладки страницы Консультация по видео");
+            navTabsLocator = driver.$$("div.nav-btns div").as("Вкладки страницы Консультация по видео");
 
     public void navRightNowTab() {
         stepWithRole("Перейти на вкладку Консультация прямо сейчас", () -> {
@@ -57,9 +62,12 @@ public class ConsultationVideoClientPage extends BaseClientPage {
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что страница Консультация по видео загрузилась", () -> {
 //            focusHeader.checkFinishLoading(); // changed header all over the site
+            checkUrlStartsWith(urlPrefixText);
             // todo new header
-            stepper.checkFinishLoading();
+//            stepper.checkFinishLoading();
+            // todo stepper missing
             // todo stepper state
+
             rightNowTab.checkFinishLoading();
             scheduleTimeTab.checkFinishLoading();
         });

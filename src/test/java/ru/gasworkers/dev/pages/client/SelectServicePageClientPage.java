@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.pages.client;
 import com.codeborne.selenide.CollectionCondition;
+import com.codeborne.selenide.Selenide;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 
 import com.codeborne.selenide.ElementsCollection;
@@ -37,9 +38,12 @@ public class SelectServicePageClientPage extends BaseClientPage {
     }
 
     private final String
-            startPrefixText = "Ваш заказ",
-            endPrefixText = "и обрабатывается диспетчерами",
+            startMaintenancePrefixText = "Ваш заказ",
+            endMaintenancePrefixText = "и обрабатывается диспетчерами",
+    startRepairPrefixText = "Ожидайте подтверждение заказа диспетчером. Номер заказа ",
+    endRepairPrefixText = "Ремонтные работы и запчасти оплачиваются дополнительно к указанной стоимости.",
 //            SELECT_SERVICE_MAINTENANCE_TITLE = "Ваш заказ принят и обрабатывается диспетчерами", // changed title
+//            SELECT_SERVICE_REPAIR_TITLE = "Ваш заказ принят и обрабатывается диспетчерами", // changed title
             SELECT_SERVICE_REPAIR_TITLE = "Ваш заказ принят и обрабатывается диспетчерами";
 
 
@@ -68,8 +72,8 @@ public class SelectServicePageClientPage extends BaseClientPage {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
 //            spinnerScrollbarLocator.should(disappear);
             spinner.checkPresence();
-            assertThat(titleLocator.getText(), startsWith(startPrefixText));
-            assertThat(titleLocator.getText(), endsWith(endPrefixText));
+            assertThat(titleLocator.getText(), startsWith(startMaintenancePrefixText));
+            assertThat(titleLocator.getText(), endsWith(endMaintenancePrefixText));
 //            titleLocator.shouldHave(text(SELECT_SERVICE_MAINTENANCE_TITLE)); // title changed
             /*stepWithRole("Убедиться что спиннер появился", () -> {
                 spinnerServicesContainerLocator.should(appear);
@@ -81,6 +85,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
                 firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
             });
             stepWithRole("Убедиться что компонент карты загрузился", () -> {
+                // todo map loading optimization
+                driver.refresh();
+                Selenide.sleep(1000);
                 mapContainerLocator.shouldBe(visible, Duration.ofSeconds(40));
                 driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
             });
@@ -92,11 +99,13 @@ public class SelectServicePageClientPage extends BaseClientPage {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
             spinner.checkPresence();
 //            spinnerScrollbarLocator.should(disappear);
-            titleLocator.shouldHave(text(SELECT_SERVICE_REPAIR_TITLE));
+            assertThat(titleLocator.getText(), startsWith(startRepairPrefixText));
+            assertThat(titleLocator.getText(), endsWith(endRepairPrefixText));
             stepWithRole("Убедиться что появился первый таб", () -> {
                 firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
             });
             stepWithRole("Убедиться что компонент карты загрузился", () -> {
+                driver.refresh();
                 mapContainerLocator.shouldBe(visible, Duration.ofSeconds(40));
                 driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
             });

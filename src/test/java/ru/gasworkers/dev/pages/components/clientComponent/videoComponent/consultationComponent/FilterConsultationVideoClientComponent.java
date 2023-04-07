@@ -6,8 +6,12 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.containsString;
 
 public class FilterConsultationVideoClientComponent extends BaseComponent {
     public FilterConsultationVideoClientComponent(RoleBrowser browser) {
@@ -16,24 +20,24 @@ public class FilterConsultationVideoClientComponent extends BaseComponent {
 
     ElementsCollection
             filterTitleCollection = driver.$$("div.col-md-3 p.mb-4").as("Заголовки фильтров"),
-        radiobuttonTitleCollection = driver.$$("div.gas-radio.round span").as("Заголовки переключателей радиобаттонов фильтров"),
-        radioButtonCollection = driver.$$(".pretty input[type='radio']").as("Переключатели фильтра"),
-        mainCheckboxCollection = driver.$$(".p-default.p-curve.p-smooth.pretty").as("Главные чекбоксы фильтра"),
-//        ratingCheckboxCollection = checkboxCollection.subList(0, 5).as("Чекбоксы фильтра по рейтингу мастера"),
-        ratingCheckboxCollection = driver.$$(".mb-2 .gas-checkbox.medium ").as("Чекбоксы фильтра по рейтингу мастера");
+            radiobuttonTitleCollection = driver.$$("div.gas-radio.round span").as("Заголовки переключателей радиобаттонов фильтров"),
+            radioButtonCollection = driver.$$(".pretty input[type='radio']").as("Переключатели фильтра"),
+            mainCheckboxCollection = driver.$$(".p-default.p-curve.p-smooth.pretty").as("Главные чекбоксы фильтра"),
+    //        ratingCheckboxCollection = checkboxCollection.subList(0, 5).as("Чекбоксы фильтра по рейтингу мастера"),
+    ratingCheckboxCollection = driver.$$(".mb-2 .gas-checkbox.medium ").as("Чекбоксы фильтра по рейтингу мастера");
     SelenideElement
-        titleFirstLocator = filterTitleCollection.get(0).as("Заголовок первого фильтра"),
-        titleSecondLocator = filterTitleCollection.get(1).as("Заголовок второго фильтра"),
-        masterRatingRadioLocator = radioButtonCollection.get(0).as("Переключатель фильтра по рейтингу мастера"),
-        priceRadioLocator = radioButtonCollection.get(1).as("Переключатель фильтра по цене"),
-        nameInputLocator = driver.$("input[placeholder*=имя]").as("Поле Введите имя мастера"),
-        searchNameButtonLocator = driver.$("button.search-btn").as("Кнопка Поиск"),
-        pickMasterRatingCheckboxDropdownLocator = driver.$$("div.medium.d-flex.cursor-pointer.mb-3").get(0).as("Дропдаун фильтра по рейтингу мастера"),
-        pickPriceRangeDropdownLocator = driver.$$("div.medium.d-flex.cursor-pointer.mb-3").get(1).as("Дропдаун фильтра по цене"),
-        priceRangeFirstTitleLocator = driver.$$("div.medium.d-flex.cursor-pointer.mb-3 span").get(0).as("Текст первый фильтра по цене"),
-        priceRangeSecondTitleLocator = driver.$$("div.medium.d-flex.cursor-pointer.mb-3 span").get(1).as("Текст второй фильтра по цене"),
-        priceRangeFromInputLocator = driver.$("input[placeholder=от]").as("Поле От"),
-        priceRangeToInputLocator = driver.$("input[placeholder=до]").as("Поле До");
+            titleFirstLocator = filterTitleCollection.get(0).as("Заголовок первого фильтра"),
+            titleSecondLocator = filterTitleCollection.get(1).as("Заголовок второго фильтра"),
+            masterRatingRadioLocator = radioButtonCollection.get(0).as("Переключатель фильтра по рейтингу мастера"),
+            priceRadioLocator = radioButtonCollection.get(1).as("Переключатель фильтра по цене"),
+            nameInputLocator = driver.$("input[placeholder*=имя]").as("Поле Введите имя мастера"),
+            searchNameButtonLocator = driver.$("button.search-btn").as("Кнопка Поиск"),
+            pickMasterRatingCheckboxDropdownLocator = driver.$$("div.medium.d-flex.cursor-pointer.mb-3").get(0).as("Дропдаун фильтра по рейтингу мастера"),
+            pickPriceRangeDropdownLocator = driver.$$("div.medium.d-flex.cursor-pointer.mb-3").get(1).as("Дропдаун фильтра по цене"),
+            priceRangeFirstTitleLocator = driver.$$("div.medium.d-flex.cursor-pointer.mb-3").get(1).as("Текст первый фильтра по цене"), //driver.$$("div.medium.d-flex.cursor-pointer.mb-3 span").get(0).as("Текст первый фильтра по цене"),
+            priceRangeSecondTitleLocator = driver.$$("div.medium.d-flex.cursor-pointer.mb-3 span").get(1).as("Текст второй фильтра по цене"),
+            priceRangeFromInputLocator = driver.$("input[placeholder=от]").as("Поле От"),
+            priceRangeToInputLocator = driver.$("input[placeholder=до]").as("Поле До");
 
 
     public void checkFinishLoading() {
@@ -70,7 +74,7 @@ public class FilterConsultationVideoClientComponent extends BaseComponent {
                 priceRangeFirstTitleLocator.click();
             });
             stepWithRole("Убедиться, что название  фильтров с радиобаттонами совпадает с ожидаемым", () -> {
-                radiobuttonTitleCollection .get(0).shouldHave(text("Рейтингу мастера"));
+                radiobuttonTitleCollection.get(0).shouldHave(text("Рейтингу мастера"));
                 radiobuttonTitleCollection.get(1).shouldHave(text("Стоимости"));
             });
         });
