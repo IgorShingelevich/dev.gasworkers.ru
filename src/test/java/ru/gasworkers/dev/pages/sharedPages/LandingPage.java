@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.pages.sharedPages;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
@@ -56,13 +57,15 @@ public LandingPage open() {
 
     public LandingPage checkFinishLoading() {
         stepWithRole("Убедиться, что главная страница загружена", () -> {
-
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/");
+            Selenide.sleep(1000);
             stepWithRole("Убедиться, что кнопка Личный кабинет отображается", () -> {
                 signInButtonLocator.shouldBe(visible);
             });
             stepWithRole("Убедиться, что выпадающее меню Регистрация отображается", () -> {
                 signUpDropdownLocator.shouldBe(visible);
             });
+
 //            bgRegistration.checkFinishLoading();
 // todo falls  during tabs switching
 
@@ -83,7 +86,7 @@ public LandingPage open() {
     public void signUpClient() {
     stepWithRole("Нажать кнопку Зарегистрироваться и выбрать Для клиента", () -> {
         signUpDropdownLocator.click();
-        signUpClientButtonLocator.shouldBe(visible, Duration.ofSeconds(20)).click();
+        signUpClientButtonLocator.shouldBe(visible, Duration.ofSeconds(5)).click();
     });
     }
 

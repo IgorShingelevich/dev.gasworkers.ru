@@ -21,15 +21,23 @@ SelenideElement
         });
     }
 
+    public boolean isDisabled(SelenideElement closestBoxLocator) {
+        return stepWithRole("Убедиться, что главная кнопка неактивна в: " + closestBoxLocator.getAlias(), () -> {
+            return closestBoxLocator.$("button.btn.btn-primary").is(Condition.disabled);
+        });
+    }
+
     public boolean isEnabled() {
         return stepWithRole("Убедиться, что главная кнопка активна", () -> {
             return buttonLocator.is(Condition.enabled);
         });
     }
+    public boolean isEnabled(SelenideElement closestBoxLocator) {
+        return stepWithRole("Убедиться, что главная кнопка активна в: " + closestBoxLocator.getAlias(), () -> {
+            return closestBoxLocator.$("button.btn.btn-primary").is(Condition.enabled);
+        });
+    }
 
-
-
-    // Overloaded clickActive method without componentBoxLocator
     public void clickActive(String buttonText) {
         stepWithRole("Нажать на активную главную кнопку: " + buttonText, () -> {
             isEnabled();
@@ -38,34 +46,35 @@ SelenideElement
         });
     }
 
-    // Overloaded clickActive method with componentBoxLocator
-    public void clickActive(String buttonText, SelenideElement componentBoxLocator) {
-        stepWithRole("Нажать на активную главную кнопку: " + buttonText, () -> {
-            isEnabled();
+    public void clickActive(String buttonText, SelenideElement closestBoxLocator) {
+        stepWithRole("Нажать на активную главную кнопку в: " + closestBoxLocator.getAlias() + " : " + buttonText, () -> {
+            isEnabled(closestBoxLocator);
             checkButtonText(buttonText);
-            click2(componentBoxLocator);
+            click2(closestBoxLocator);
         });
     }
 
-    private void checkButtonText(String text) {
-        stepWithRole("Убедиться, что текст главной кнопки равен " + text, () -> {
+    public void checkButtonText(String text) {
+        stepWithRole("Убедиться, что текст главной кнопки " + text, () -> {
             buttonTextLocator.shouldHave(Condition.text(text));
         });
     }
-// first click implementation
+
+    public void checkButtonText(String text, SelenideElement closestBoxLocator) {
+        stepWithRole("Убедиться, что текст главной кнопки в: " + closestBoxLocator.getAlias() + " " + text, () -> {
+            closestBoxLocator.$("button.btn.btn-primary").$("span").shouldHave(Condition.text(text));
+        });
+    }
+
     private void click1() {
         stepWithRole("Нажать на главную кнопку", () -> {
             buttonLocator.click();
         });
     }
-
-    // second click implementation
-    private void click2(SelenideElement componenetBoxLocator) {
-        stepWithRole("Нажать на главную кнопку", () -> {
-            componenetBoxLocator.$("button.btn.btn-primary").click();
+    private void click2(SelenideElement closestBoxLocator) {
+        stepWithRole("Нажать на главную кнопку в: " + closestBoxLocator.getAlias(), () -> {
+            closestBoxLocator.$("button.btn.btn-primary").click();
         });
     }
-
-
 
 }

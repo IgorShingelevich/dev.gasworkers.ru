@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.pages.sharedPages;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
@@ -23,22 +24,26 @@ public final class LoginPage extends BasePage {
     public LoginPage open() {
         stepWithRole("Открыть страницу авторизации", () -> {
             driver.open("/login");
-            jivoMessengerComponent.presenceOfJivoIcon();
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/login");
         });
         return this;
     }
 
-    public void login(String email, String password) {
+    public void loginEmail(String email, String password) {
         driver.$(".title h3").shouldHave(text("Войдите в личный кабинет"));
         stepWithRole("Ввести почту: " + email, () -> {
+            Selenide.sleep(1000);
+            // todo reset all input fields without sleep
             driver.$("input[placeholder=E-mail]").as("Поле ввода почты").click();
             driver.$("input[placeholder=E-mail]").setValue(email);
             driver.$("input[placeholder=E-mail]").pressEnter();
+            driver.$("input[placeholder=E-mail]").shouldHave(value(email));
         });
         stepWithRole("Ввести пароль: " + password, () -> {
             driver.$("input[placeholder=Пароль]").as("Поле ввода пароля").click();
             driver.$("input[placeholder=Пароль]").setValue(password);
             driver.$("input[placeholder=Пароль]").pressEnter();
+            driver.$("input[placeholder=Пароль]").shouldHave(value(password));
         });
         stepWithRole("Нажать активную кнопку Войти", () -> {
             driver.$("button.mb-2.btn").shouldNotBe(disabled).as("Кнопка Войти");

@@ -37,7 +37,7 @@ class ClientFlowTest extends BaseTest {
     @BeforeEach
     void clientLogin() {
         clientPages.getLoginPage().open();
-        clientPages.getLoginPage().login(client00.email, client00.password);
+        clientPages.getLoginPage().loginEmail(client00.email, client00.password);
     }
 
     @Test
@@ -125,7 +125,7 @@ class ClientFlowTest extends BaseTest {
     @DisplayName("Клиент создает заказ")
     public void clientPlaceMaintenanceRequest() {
         clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
-        clientPages.getHomePage().popUpClose();
+        clientPages.getHomePage().popUp.close();
         clientPages.getHomePage().clickPlaceOrderButton();
         clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
         clientPages.getInfoTypeOrderPage()
@@ -138,7 +138,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
         clientPages.getSelectServicePage().toOrderCard();
         clientPages.getOrderCardPage().checkFinishLoading();
-        clientPages.getSelectServicePage().popUpClose();
+        clientPages.getSelectServicePage().popUp.close();
         clientPages.getOrderCardPage().checkPublishedState(OrderStatus.NEW_ORDER, OrderType.MAINTENANCE);
     }
 
@@ -148,7 +148,7 @@ class ClientFlowTest extends BaseTest {
     @DisplayName("Клиент создает заказ и отменяет его")
     public void clientPlaceMaintenanceRequestAndCancel() {
         clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
-        clientPages.getHomePage().popUpClose();
+        clientPages.getHomePage().popUp.close();
         clientPages.getHomePage().clickPlaceOrderButton();
         clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
         clientPages.getInfoTypeOrderPage()
@@ -160,9 +160,9 @@ class ClientFlowTest extends BaseTest {
         clientPages.getSelectDateMaintenancePage().submitOrder();
         clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
         clientPages.getSelectServicePage().toOrderCard();
-        clientPages.getSelectServicePage().popUpClose();
+        clientPages.getSelectServicePage().popUp.close();
         clientPages.getOrderCardPage().checkFinishLoading();
-        clientPages.getOrderCardPage().popUpClose();
+        clientPages.getOrderCardPage().popUp.close();
         clientPages.getOrderCardPage().cancelOrder();
         clientPages.getCancelOrderPage().checkFinishLoading();
         clientPages.getCancelOrderPage().backButton();
@@ -198,7 +198,7 @@ class ClientFlowTest extends BaseTest {
     @DisplayName("Клиент открывает заказ в состоянии Мастер в пути")
     public void clientCheckMasterDispatchedOrderSate() {
         String checkedOrderNumber = "3695";
-        clientPages.getHomePage().popUpClose();
+        clientPages.getHomePage().popUp.close();
         clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
         clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
         clientPages.getHomePage().sidebar.allOrders();
@@ -214,7 +214,7 @@ class ClientFlowTest extends BaseTest {
     @DisplayName("Клиент открывает заказ в состоянии Мастер в пути  и скачивает документы")
     public void clientDownloadDocsMasterDispatchedOrderSate() throws Exception {
         String checkedOrderNumber = "3816";
-        clientPages.getHomePage().popUpClose();
+        clientPages.getHomePage().popUp.close();
         clientPages.getDriverManager().screenshot("Фотка №1");
         clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
         clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
@@ -239,7 +239,7 @@ class ClientFlowTest extends BaseTest {
     @DisplayName("Клиент открывает заказ ТО в статусе без Отзыва Завершен")
     public void checkNotReviewedCompletedOrderState() {
         String checkedOrderNumber = "3674";
-        clientPages.getHomePage().popUpClose();
+        clientPages.getHomePage().popUp.close();
         clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
         clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
         clientPages.getHomePage().sidebar.allOrders();

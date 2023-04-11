@@ -2,7 +2,7 @@ package ru.gasworkers.dev.pages.client;
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
-import ru.gasworkers.dev.pages.components.sharedComponent.breadcrumbsComponent.ClientBreadcrumbsComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.breadcrumbsComponent.ClientBreadcrumbsComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 

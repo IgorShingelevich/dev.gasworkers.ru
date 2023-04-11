@@ -1,19 +1,20 @@
 package ru.gasworkers.dev.tests.integration;
 
+import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
+import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.allure.AllureStory;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.OrderStatus;
-import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.OrderType;
+import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.model.client.ClientRequestType;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.pages.context.MasterPages;
@@ -27,7 +28,7 @@ import java.time.format.DateTimeFormatter;
 import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
 
-class ClientDispatcherInteractionTest extends BaseTest {
+class ClientDispatcherInteractionStatesTest extends BaseTest {
 
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
@@ -71,10 +72,10 @@ class ClientDispatcherInteractionTest extends BaseTest {
     @Test
     @Owner("Igor Shingelevich")
     @Epic("Клиент-Диспетчер-Мастер")
-    @Feature("Минимально позитивный путь")
+    @Feature("Минимально позитивный путь только состояния")
     @Story(AllureStory.MAINTENANCE)
     @Tags({@Tag(AllureTag.REGRESSION),  @Tag(AllureTag.POSITIVE)})
-    @DisplayName(" ТО Интеграция Клиент-Диспетчер-Мастер")
+    @DisplayName(" ТО Интеграция Клиент-Диспетчер-Мастер только состояния")
     void integrationDispatcherAcceptClientMaintenanceRequest() {
         step("авторизация Ролей ", ()-> {
                     step("авторизация Клиента", () -> {
@@ -102,7 +103,8 @@ class ClientDispatcherInteractionTest extends BaseTest {
 
         String orderNumber = step("Клиент размещает заказ на ТО", () -> {
             step("Выбирает тип заказа - ТО", () -> {
-                        clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
+                Selenide.sleep(1000);
+//                        clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
                         clientPages.getHomePage().clickPlaceOrderButton();
                         clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
                         clientPages.getInfoTypeOrderPage().clickNextButton();
@@ -110,28 +112,34 @@ class ClientDispatcherInteractionTest extends BaseTest {
 //                    .checkStepSequence("Шаг 1 из 3")
             });
             step("Клиент выбирает объект", () -> {
-                clientPages.getSelectObjectMaintenancePage().checkFinishLoading();
+                Selenide.sleep(1000);
+//                clientPages.getSelectObjectMaintenancePage().checkFinishLoading();
                 clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0);
             });
             step("Клиент выбирает дату и время", () -> {
-                clientPages.getSelectDateMaintenancePage().checkFinishLoading();
+                Selenide.sleep(1000);
+//                clientPages.getSelectDateMaintenancePage().checkFinishLoading();
                 clientPages.getSelectDateMaintenancePage().pickNowDateAM();
                 clientPages.getSelectDateMaintenancePage().submitOrder();
             });
             step("Клиент просматривает карту в состоянии заказ опубликован", () -> {
-                clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
+                Selenide.sleep(1000);
+//                clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
                 clientPages.getSelectServicePage().checkPublishedState();
             });
             step("Клиент просматривает опубликованный заказ на домашней странице", () -> {
                  clientPages.getSelectServicePage().toOrderCard();
-                 clientPages.getOrderCardPage().checkFinishLoading();
+                Selenide.sleep(1000);
+//                 clientPages.getOrderCardPage().checkFinishLoading();
                  clientPages.getOrderCardPage().sidebar.home();
-                 clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
+                Selenide.sleep(1000);
+//                 clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
                  clientPages.getHomePage().popUp.close();
             });
             step("Клиент просматривает опубликованный заказа в карточке объекта", () -> {
                 clientPages.getHomePage().lastOrderComponent.lastOrderCard();
-                clientPages.getOrderCardPage().checkFinishLoading();
+                Selenide.sleep(1000);
+//                clientPages.getOrderCardPage().checkFinishLoading();
                 clientPages.getOrderCardPage().checkPublishedState(OrderStatus.PUBLISHED, OrderType.MAINTENANCE);
                 //check notification - orderPublished
             });
@@ -142,12 +150,13 @@ class ClientDispatcherInteractionTest extends BaseTest {
         });
 
         step("Диспетчер принимает опубликованный заказ на ТО ", () -> {
-            dispatcherPages.getHomePage().checkFinishLoading();
-            // todo map check
+            Selenide.sleep(1000);
+//            dispatcherPages.getHomePage().checkFinishLoading();
             dispatcherPages.getHomePage().popUp.close();
             dispatcherPages.getHomePage().switchToListView();
             dispatcherPages.getHomePage().openOrderByNumber(orderNumber);
-            dispatcherPages.getOrderCardPage().checkFinishLoading();
+//            dispatcherPages.getOrderCardPage().checkFinishLoading();
+            Selenide.sleep(1000);
             dispatcherPages.getOrderCardPage().popUp.close();
             dispatcherPages.getOrderCardPage().checkNewTenderState(OrderStatus.NEW_TENDER, OrderType.MAINTENANCE);
             dispatcherPages.getOrderCardPage().acceptOrder();

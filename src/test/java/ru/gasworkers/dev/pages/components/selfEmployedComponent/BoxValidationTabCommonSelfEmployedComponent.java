@@ -43,7 +43,7 @@ public class BoxValidationTabCommonSelfEmployedComponent extends BaseComponent {
 
     public void checkRedBoxState2(SelenideElement boxLocator) {
         stepWithRole("Проверить  состояние незаполненного бокса", () -> {
-            boxLocator.shouldHave(cssClass("danger-test"));
+           boxLocator.shouldHave(cssClass("danger-test"));
         });
     }
 

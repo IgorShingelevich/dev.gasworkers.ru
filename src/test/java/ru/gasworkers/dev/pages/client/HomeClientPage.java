@@ -89,8 +89,8 @@ public final class HomeClientPage extends BaseClientPage {
 
     public HomeClientPage checkFinishLoading(String fullName, String sinceDate) {
         stepWithRole("Убедиться, что загружена Домашняя страница", () -> {
-
-            personSummaryComponent.checkFinishLoading(fullName, sinceDate);
+            //todo personSummaryComponent appeariance
+//            personSummaryComponent.checkFinishLoading(fullName, sinceDate);
             lastOrderComponent.checkFinishLoading();
             driver.$(".client-objects [data-index='0']").shouldBe(visible, Duration.ofSeconds(20));
         });

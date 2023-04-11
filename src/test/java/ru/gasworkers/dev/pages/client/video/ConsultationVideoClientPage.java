@@ -1,7 +1,6 @@
 package ru.gasworkers.dev.pages.client.video;
 
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.client.BaseClientPage;
@@ -9,8 +8,6 @@ import ru.gasworkers.dev.pages.components.clientComponent.videoComponent.NavRigh
 import ru.gasworkers.dev.pages.components.clientComponent.videoComponent.NavScheduleTimeTabConsultationVideoClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
-
-import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 
@@ -62,7 +59,7 @@ public class ConsultationVideoClientPage extends BaseClientPage {
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что страница Консультация по видео загрузилась", () -> {
 //            focusHeader.checkFinishLoading(); // changed header all over the site
-            checkUrlStartsWith(urlPrefixText);
+            urlChecker.urlStartsWith(urlPrefixText);
             // todo new header
 //            stepper.checkFinishLoading();
             // todo stepper missing

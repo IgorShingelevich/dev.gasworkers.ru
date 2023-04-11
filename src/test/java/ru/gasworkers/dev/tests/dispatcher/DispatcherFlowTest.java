@@ -24,7 +24,7 @@ public class DispatcherFlowTest extends BaseTest {
     @BeforeEach
     void dispatcherLogin() {
         dispatcherPages.getLoginPage().open();
-        dispatcherPages.getLoginPage().login(emailDispatcher, passwordDispatcher);
+        dispatcherPages.getLoginPage().loginEmail(emailDispatcher, passwordDispatcher);
     }
 
     @Test

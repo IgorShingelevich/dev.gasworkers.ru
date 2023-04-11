@@ -31,7 +31,7 @@ public class SelfEmployedFlowTest extends BaseTest {
     @BeforeEach
     void masterLogin() {
         selfEmployedPages.getLoginPage().open();
-        selfEmployedPages.getLoginPage().login(master.email, master.password);
+        selfEmployedPages.getLoginPage().loginEmail(master.email, master.password);
     }
 
     @Owner("Igor Shingelevich")

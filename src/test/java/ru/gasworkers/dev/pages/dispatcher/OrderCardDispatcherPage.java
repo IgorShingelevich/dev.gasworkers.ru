@@ -7,6 +7,7 @@ import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.dispatcherComponent.DatePickerOrderDispatcherComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.buttonSharedComponent.MainButtonSharedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockDispatcherComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCommonTabOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavDocsTabOrderCardPageComponent;
@@ -29,6 +30,8 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
     public final NavCommonTabOrderCardPageComponent tabCommon;
     public final NavInfoMasterTabOrderCardPageComponent tabInfoMaster;
     public final NavDocsTabOrderCardPageComponent tabDocs;
+    public final MainButtonSharedComponent mainButton;
+
 
     public OrderCardDispatcherPage(RoleBrowser browser) {
         super(browser);
@@ -38,6 +41,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         tabCommon = new NavCommonTabOrderCardPageComponent(browser);
         tabInfoMaster = new NavInfoMasterTabOrderCardPageComponent(browser);
         tabDocs = new NavDocsTabOrderCardPageComponent(browser);
+        mainButton = new MainButtonSharedComponent(browser);
     }
 
     private final String pageTitleText = "Заказ";
@@ -120,7 +124,8 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         stepWithRole("Принять заказ: " + factualOrderNumber , () -> {
             acceptRequestButtonLocator.scrollTo().click();
             stepWithRole("Убедиться, что в Карточке заказа  представлена неактивная кнопка Уже участвуете ", () -> {
-                alreadyAcceptedButtonLocator.shouldBe(visible);
+
+                alreadyAcceptedButtonLocator.shouldBe(visible, Duration.ofSeconds(10));
                 acceptRequestButtonLocator.shouldNotBe(visible);
                 declineRequestButtonLocator.shouldNotBe(visible);
             });

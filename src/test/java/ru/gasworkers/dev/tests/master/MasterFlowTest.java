@@ -34,7 +34,7 @@ public class MasterFlowTest extends BaseTest {
     @BeforeEach
     void masterLogin() {
         masterPages.getLoginPage().open();
-        masterPages.getLoginPage().login(master.email, master.password);
+        masterPages.getLoginPage().loginEmail(master.email, master.password);
     }
 
     @Owner("Igor Shingelevich")

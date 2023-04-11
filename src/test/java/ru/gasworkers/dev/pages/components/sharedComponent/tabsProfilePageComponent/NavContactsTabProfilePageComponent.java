@@ -22,6 +22,7 @@ public class NavContactsTabProfilePageComponent extends BaseProfileSelfEmployedC
             subtitleLocator.shouldHave(visible, text("Контактные данные"));
             emailLocator.shouldBe(visible);
             phoneLocator.shouldBe(visible);
+
             saveButtonLocator.shouldHave(visible, text("Сохранить"));
         });
     }

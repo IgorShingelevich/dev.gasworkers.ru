@@ -28,6 +28,7 @@ public class OffersClientComponent extends BaseComponent {
             offersComponentLocator.shouldHave(partialText(count.toString()), Duration.ofSeconds(10));
         });
     }
+
     public void clickOffers() {
         stepWithRole("Нажать на компонент предложения", () -> {
             offersComponentLocator.shouldBe(visible, Duration.ofSeconds(30)).click();

@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.pages.components.guideComponent;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
@@ -60,69 +61,84 @@ public class FirstSelfEmployedGuideComponent extends BaseComponent {
                     case 0:
                         assertThat(driver.url(), containsString("https://dev.gasworkers.ru/profile/dispatcher"));
                         guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_1));
+                        Selenide.sleep(300);
                         nextStepGuide();
                         break;
                     case 1:
                         guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_2));
                         nextStepGuide();
+                        Selenide.sleep(300);
                         break;
                     case 2:
                         guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_3));
                         nextStepGuide();
+                        Selenide.sleep(300);
                         break;
                     case 3:
                         guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_4));
                         nextStepGuide();
+                        Selenide.sleep(300);
                         break;
                     case 4:
                         guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_5));
                         nextStepGuide();
+                        Selenide.sleep(300);
                         break;
                     case 5:
                         guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_6));
                         assertThat(driver.url(), containsString("https://dev.gasworkers.ru/profile/edit?tab=common"));
                         nextStepGuide();
+                        Selenide.sleep(300);
                         break;
                     case 6:
                         guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_7));
                         nextStepGuide();
+                        Selenide.sleep(300);
                         break;
                     case 7:
                         guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_8));
                         nextStepGuide();
+                        Selenide.sleep(300);
                         break;
                     case 8:
                         guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_9));
                         assertThat(driver.url(), containsString("https://dev.gasworkers.ru/profile/edit?tab=profile"));
                         nextStepGuide();
+                        Selenide.sleep(300);
                         break;
                     case 9:
                         guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_10));
                         nextStepGuide();
+                        Selenide.sleep(300);
                         break;
                     case 10:
                         guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_11));
                         assertThat(driver.url(), containsString("https://dev.gasworkers.ru/profile/dispatcher/orders/"));
                         nextStepGuide();
+                        Selenide.sleep(300);
                         break;
                     case 11:
                         guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_12));
                         nextStepGuide();
+                        Selenide.sleep(300);
                         break;
                     case 12:
                         setPriceModalWindowLocator.shouldBe(visible);
                         guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_13));
                         nextStepGuide();
+                        Selenide.sleep(300);
                         break;
                     case 13:
                         setPriceModalWindowLocator.shouldBe(visible);
                         guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_14));
                         nextStepGuide();
+                        Selenide.sleep(300);
                         break;
                     case 14:
                         guideTipTextBoxLocator.shouldHave(text(GUIDE_Step_15));
                         assertThat(driver.url(), containsString("https://dev.gasworkers.ru/profile/dispatcher"));
                         nextStepGuide();
+                        Selenide.sleep(300);
                         break;
 
                 }

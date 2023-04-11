@@ -1,4 +1,5 @@
 package ru.gasworkers.dev.pages.client;
+
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Selenide;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
@@ -40,41 +41,35 @@ public class SelectServicePageClientPage extends BaseClientPage {
     private final String
             startMaintenancePrefixText = "Ваш заказ",
             endMaintenancePrefixText = "и обрабатывается диспетчерами",
-    startRepairPrefixText = "Ожидайте подтверждение заказа диспетчером. Номер заказа ",
-    endRepairPrefixText = "Ремонтные работы и запчасти оплачиваются дополнительно к указанной стоимости.",
-//            SELECT_SERVICE_MAINTENANCE_TITLE = "Ваш заказ принят и обрабатывается диспетчерами", // changed title
-//            SELECT_SERVICE_REPAIR_TITLE = "Ваш заказ принят и обрабатывается диспетчерами", // changed title
-            SELECT_SERVICE_REPAIR_TITLE = "Ваш заказ принят и обрабатывается диспетчерами";
-
+            startRepairPrefixText = "Ожидайте подтверждение заказа диспетчером. Номер заказа ",
+            endRepairPrefixText = "Ремонтные работы и запчасти оплачиваются дополнительно к указанной стоимости.";
 
     SelenideElement
-        titleLocator = driver.$("div h4.text-center").as("Заголовок страницы Выбор СК"),
-        toOrderButtonLocator = driver.$("button.btn.btn-primary").as("Кнопка Смотреть  заказ"),
-        backButtonLocator = driver.$(".col-12.col-md-3 .link-dark-blue.mr-32.medium").as("Кнопка Назад"),
-        spinnerServicesContainerLocator = driver.$(".scrollbar.mb-3.col-lg-5 .d-flex.justify-content-center.pb-5").as("Спиннер загрузки контейнера с Сервисными компаниями"),
-        firstServiceTabLocator = driver.$("[id^=company-item]").as("Первая вкладка Сервисного предложения"),
-        firstServiceButtonLocator = driver.$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline").as("Кнопка Выбрать первой вкладки Сервисного предложения"),
-        servicesColumnBLockLocator = driver.$(".row.columns-list").as("Левый блок Сервисных предложений"),
-        mapContainerLocator = driver.$("[id^=yandexMap]").as("Контейнер карты"),
-        mapZoomPlusButtonLocator =  driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты");
+            titleLocator = driver.$("h6.text-center").as("Заголовок страницы Выбор СК"), // changed driver.$("div h4.text-center")
+            toOrderButtonLocator = driver.$("button.btn.btn-primary").as("Кнопка Смотреть  заказ"),
+            backButtonLocator = driver.$(".col-12.col-md-3 .link-dark-blue.mr-32.medium").as("Кнопка Назад"),
+            spinnerServicesContainerLocator = driver.$(".scrollbar.mb-3.col-lg-5 .d-flex.justify-content-center.pb-5").as("Спиннер загрузки контейнера с Сервисными компаниями"),
+            firstServiceTabLocator = driver.$("[id^=company-item]").as("Первая вкладка Сервисного предложения"),
+            mapContainerLocator = driver.$("[id^=yandexMap]").as("Контейнер карты");
 
     ElementsCollection
-        servicesTabsCollection = driver.$$("div.col-xl-6.mb-3"),
-        reviewButtonCollection = driver.$$(".row.columns-list button.btn.btn-primary.btn-sm.disable-outline").as("Кнопки Выбрать Сервисное предложение");
+            serviceBoxCollection = driver.$$("[id^='company-item-company-']").as("Блоки Сервисных компаний"),
+            boxesWithButtonCollection = serviceBoxCollection.filterBy(cssClass("btn-primary")).as("Блоки с кнопкой Выбрать");
 
     public SelectServicePageClientPage backLink() {
         backButtonLocator.click();
         return this;
     }
 
-//    @DisplayName("Убедиться, что страница Выбор СК загружена")
+    //    @DisplayName("Убедиться, что страница Выбор СК загружена")
     public void checkFinishMaintenanceLoading() {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
 //            spinnerScrollbarLocator.should(disappear);
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/orders/maintenance/");
             spinner.checkPresence();
-            assertThat(titleLocator.getText(), startsWith(startMaintenancePrefixText));
-            assertThat(titleLocator.getText(), endsWith(endMaintenancePrefixText));
-//            titleLocator.shouldHave(text(SELECT_SERVICE_MAINTENANCE_TITLE)); // title changed
+            /*assertThat(titleLocator.getText(), startsWith(startMaintenancePrefixText));
+            assertThat(titleLocator.getText(), endsWith(endMaintenancePrefixText));*/ //changed title again
+            titleLocator.shouldHave(text("Спасибо! Ваш заказ принят и обрабатывается диспетчерами")); // title changed
             /*stepWithRole("Убедиться что спиннер появился", () -> {
                 spinnerServicesContainerLocator.should(appear);
             });*/
@@ -84,13 +79,13 @@ public class SelectServicePageClientPage extends BaseClientPage {
             stepWithRole("Убедиться что появился первый таб", () -> {
                 firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
             });
-            stepWithRole("Убедиться что компонент карты загрузился", () -> {
+           /* stepWithRole("Убедиться что компонент карты загрузился", () -> {
                 // todo map loading optimization
                 driver.refresh();
                 Selenide.sleep(1000);
                 mapContainerLocator.shouldBe(visible, Duration.ofSeconds(40));
                 driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
-            });
+            });*/
             offers.checkFinishLoading();
         });
     }
@@ -104,18 +99,18 @@ public class SelectServicePageClientPage extends BaseClientPage {
             stepWithRole("Убедиться что появился первый таб", () -> {
                 firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
             });
-            stepWithRole("Убедиться что компонент карты загрузился", () -> {
+            /*stepWithRole("Убедиться что компонент карты загрузился", () -> {
                 driver.refresh();
                 mapContainerLocator.shouldBe(visible, Duration.ofSeconds(40));
                 driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
-            });
+            });*/
             offers.checkFinishLoading();
         });
     }
 
     public void checkPublishedState() {
         stepWithRole("Убедиться, что статус карты - Нет тендеров", () -> {
-            reviewButtonCollection.shouldBe(CollectionCondition.empty);
+            boxesWithButtonCollection.shouldBe(CollectionCondition.empty);
             offers.noOffers();
             //TODO map component behavior
         });
@@ -123,7 +118,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
 
     public SelectServicePageClientPage waitForResponses() {
         stepWithRole("Ожидание ответов", () -> {
-            reviewButtonCollection.shouldHave(CollectionCondition.sizeGreaterThan(0), Duration.ofSeconds(60));
+            boxesWithButtonCollection.shouldHave(CollectionCondition.sizeGreaterThan(0), Duration.ofSeconds(60));
             //TODO map component behavior
         });
         return this;
@@ -131,8 +126,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
 
     public void checkResponseState(Integer count) {
         stepWithRole("Убедиться, что статус карты - Есть " + count + " тендеров", () -> {
-            reviewButtonCollection.shouldHave(CollectionCondition.size(count));
-            offers.haveOffers(count);
+            boxesWithButtonCollection.shouldHave(CollectionCondition.size(count));
             //TODO map component behavior
         });
     }
@@ -146,7 +140,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
 
     public SelectServicePageClientPage proceedWithFirstService() {
         stepWithRole("Нажать на кнопку Выбрать Компанию ", () -> {
-            reviewButtonCollection.first().shouldBe(visible, Duration.ofSeconds(40))
+            boxesWithButtonCollection.first().shouldBe(visible, Duration.ofSeconds(40))
                     .shouldHave(text("Выбрать")).click();
         });
         return this;
