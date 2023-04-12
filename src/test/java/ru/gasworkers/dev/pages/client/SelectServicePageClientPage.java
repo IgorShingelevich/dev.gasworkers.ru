@@ -94,8 +94,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
             spinner.checkPresence();
 //            spinnerScrollbarLocator.should(disappear);
-            assertThat(titleLocator.getText(), startsWith(startRepairPrefixText));
-            assertThat(titleLocator.getText(), endsWith(endRepairPrefixText));
+//            assertThat(titleLocator.getText(), startsWith(startRepairPrefixText));
+//            assertThat(titleLocator.getText(), endsWith(endRepairPrefixText));
+            titleLocator.shouldHave(text("Ваш заказ принят и обрабатывается диспетчерами"));
             stepWithRole("Убедиться что появился первый таб", () -> {
                 firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
             });
@@ -134,6 +135,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
     public SelectServicePageClientPage toOrderCard() {
         stepWithRole("Нажать на кнопку Смотреть карточку заказа", () -> {
             toOrderButtonLocator.shouldBe(visible).click();
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client/orders/");
         });
         return this;
     }

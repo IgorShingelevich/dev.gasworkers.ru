@@ -40,19 +40,19 @@ public final class HomeClientPage extends BaseClientPage {
     }
 
     private final String
-        OBJECTS_TITLE = "Объекты и оборудование";
+            OBJECTS_TITLE = "Объекты и оборудование";
 
 
     SelenideElement
             fillProfileButtonLocator = driver.$(byTagAndText("span", "Заполнить профиль")).as("Кнопка Заполнить профиль"),
             addEquipmentButtonLocator = driver.$(byTagAndText("span", "Добавить оборудование")).as("Кнопка Добавить оборудование"),
     //objectsBlock
-        objectsPreviousButtonLocator = driver.$(".client-objects .slick-arrow.slick-prev"),
-        objectsNextButtonLocator = driver.$(".client-objects .slick-arrow.slick-next");
+    objectsPreviousButtonLocator = driver.$(".client-objects .slick-arrow.slick-prev"),
+            objectsNextButtonLocator = driver.$(".client-objects .slick-arrow.slick-next");
     ElementsCollection
-        objectTitleCollection = driver.$$("div.object .title.link-blue.text-primary.pointer").as("Названия объектов"),
-        gotoObjectActionCollection = driver.$$(".actions .actions__slot--link"),
-        actionButtonCollection = driver.$$(".actions .actions__btn");
+            objectTitleCollection = driver.$$("div.object .title.link-blue.text-primary.pointer").as("Названия объектов"),
+            gotoObjectActionCollection = driver.$$(".actions .actions__slot--link"),
+            actionButtonCollection = driver.$$(".actions .actions__btn");
 
     public HomeClientPage open() {
         stepWithRole("Открыть домашнюю страницу", () -> {
@@ -89,6 +89,7 @@ public final class HomeClientPage extends BaseClientPage {
 
     public HomeClientPage checkFinishLoading(String fullName, String sinceDate) {
         stepWithRole("Убедиться, что загружена Домашняя страница", () -> {
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client");
             //todo personSummaryComponent appeariance
 //            personSummaryComponent.checkFinishLoading(fullName, sinceDate);
             lastOrderComponent.checkFinishLoading();
@@ -99,6 +100,8 @@ public final class HomeClientPage extends BaseClientPage {
 
     public void checkInitialState(String fullName, String sinceDate) {
         stepWithRole("Убедиться, что  Домашняя страница в состоянии после Регистрации", () -> {
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client");
+
             //personSummaryComponent.checkInitialState(fullName, sinceDate);
             // todo appearence of this component
             stepWithRole("Убедиться, что присутствует кнопка Заполнить профиль", () -> {
@@ -112,6 +115,7 @@ public final class HomeClientPage extends BaseClientPage {
 
     public void checkBGInitialState(String sinceDate) {
         stepWithRole("Убедиться, что  Домашняя страница в состоянии после Фоновой регистрации", () -> {
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client");
 //            personSummaryComponent.checkBGInitialState(sinceDate); // removed from initial state
             //todo removed from initial state
             stepWithRole("Убедиться, что присутствует кнопка Заполнить профиль", () -> {
@@ -134,17 +138,18 @@ public final class HomeClientPage extends BaseClientPage {
     }
 
     public void clickPlaceOrderButton() {
-        stepWithRole("Нажать кнопку Создать заказ", () ->
-                driver.$("#gas__content-header .btn-block")
-                        .as("place order button")
-                        .shouldBe(interactable)
-                        .click()
-        );
+        stepWithRole("Нажать кнопку Создать заказ", () -> {
+            driver.$("#gas__content-header .btn-block")
+                    .as("place order button")
+                    .shouldBe(interactable)
+                    .click();
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/orders/type");
+        });
     }
 
     public void checkVideoBGInitialState(String sinceDate, String masterFullName) {
         stepWithRole("Убедиться, что  Домашняя страница в состоянии после Фоновой регистрации на Видео", () -> {
-
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client");
             awaitingVideoBGBanner.checkAwaitingNowBGVideoState(masterFullName);
 //            personSummaryComponent.checkBGInitialState(sinceDate); // changed appearance
             // todo  personSummaryComponent appearance changed

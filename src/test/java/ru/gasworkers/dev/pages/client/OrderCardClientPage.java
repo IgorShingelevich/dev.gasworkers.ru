@@ -82,6 +82,9 @@ public class OrderCardClientPage extends BaseClientPage {
     public OrderCardClientPage navCommon(){
         stepWithRole("Перейти на вкладку Описание заказа", () -> {
             navButtonsCollection.get(0).shouldHave(text("Описание заказа")).click();
+            stepWithRole("Убедиться, что открылась вкладка Описание заказа", () -> {
+                navButtonsCollection.get(0).shouldHave(cssClass("active"));
+            });
         });
         return this;
     }
@@ -89,6 +92,9 @@ public class OrderCardClientPage extends BaseClientPage {
     public OrderCardClientPage navInfoMaster(){
         stepWithRole("Перейти на вкладку Информация по работам", () -> {
             navButtonsCollection.get(1).shouldHave(text("Информация по работам")).click();
+            stepWithRole("Убедиться, что открылась вкладка Информация по работам", () -> {
+                navButtonsCollection.get(1).shouldHave(cssClass("active"));
+            });
         });
         return this;
     }
@@ -96,6 +102,9 @@ public class OrderCardClientPage extends BaseClientPage {
     public OrderCardClientPage navDocs(){
         stepWithRole("Перейти на вкладку Документы", () -> {
             navButtonsCollection.get(2).shouldHave(text("Документы")).click();
+            stepWithRole("Убедиться, что открылась вкладка Документы", () -> {
+                navButtonsCollection.get(2).shouldHave(cssClass("active"));
+            });
         });
         return this;
     }

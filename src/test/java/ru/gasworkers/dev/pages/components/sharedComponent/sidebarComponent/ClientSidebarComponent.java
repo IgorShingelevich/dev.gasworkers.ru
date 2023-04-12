@@ -2,6 +2,7 @@ package ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent;
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.UrlCheckerSharedComponent;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byText;
@@ -26,16 +27,10 @@ public class ClientSidebarComponent extends BaseSidebarComponent {
 
 
 
-    public ClientSidebarComponent allOrdersAndInvoicesDropdown() {
-        stepWithRole("Открыть выпадающий список Заказы/Счета", () -> {
-            ordersAndInvoicesDropdownLocator.click();
-        });
-        return this;
-    }
-
     public ClientSidebarComponent home() {
         stepWithRole("Перейти на домашнюю страницу", () -> {
             homeLinkLocator.click();
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client");
         });
         return this;
     }
@@ -43,6 +38,7 @@ public class ClientSidebarComponent extends BaseSidebarComponent {
     public ClientSidebarComponent allObjects() {
         stepWithRole("Перейти на страницу  Объекты и оборудование", () -> {
             objectsAndEquipmentLinkLocator.click();
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/equipment");
         });
         return this;
     }
@@ -52,6 +48,15 @@ public class ClientSidebarComponent extends BaseSidebarComponent {
             allOrdersAndInvoicesDropdown();
             ordersListLinkLocator.shouldBe(visible);
             ordersListLinkLocator.click();
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client/orders");
+        });
+        return this;
+    }
+
+    public ClientSidebarComponent allOrdersAndInvoicesDropdown() {
+        stepWithRole("Открыть выпадающий список Заказы/Счета", () -> {
+            ordersAndInvoicesDropdownLocator.click();
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client/orders");
         });
         return this;
     }
@@ -61,6 +66,8 @@ public class ClientSidebarComponent extends BaseSidebarComponent {
             allOrdersAndInvoicesDropdown();
             invoicesListLinkLocator.shouldBe(visible);
             invoicesListLinkLocator.click();
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client/invoices");
+
         });
         return this;
     }
@@ -68,6 +75,7 @@ public class ClientSidebarComponent extends BaseSidebarComponent {
     public ClientSidebarComponent profile() {
         stepWithRole("Перейти на страницу Профиль", () -> {
             profileLinkLocator.click();
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/edit");
         });
         return this;
     }

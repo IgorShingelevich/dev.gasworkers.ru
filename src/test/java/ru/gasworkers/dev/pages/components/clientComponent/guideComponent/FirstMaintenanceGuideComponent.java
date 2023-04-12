@@ -105,7 +105,7 @@ public class FirstMaintenanceGuideComponent extends BaseComponent {
                         break;
                 }
             }
-            Selenide.sleep(500);
+            Selenide.sleep(1000);
             guideFrameLocator.shouldNotBe(visible);
         });
     }

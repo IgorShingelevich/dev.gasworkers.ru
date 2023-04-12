@@ -48,6 +48,7 @@ public class LastOrderProfileClientComponent extends BaseComponent {
     public LastOrderProfileClientComponent lastOrderCard() {
         stepWithRole("Перейти в Карточку последнего заказа", () -> {
             lastOrderCardOrderNumberLinkLocator.click();
+//            urlChecker.urlStartsWith("https://gasworkers.ru/client/orders/");
         });
         return this;
     }
