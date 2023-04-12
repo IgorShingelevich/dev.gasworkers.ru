@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pages.components.clientComponent;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.UrlCheckerSharedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
 
@@ -16,10 +17,12 @@ import static com.codeborne.selenide.Selenide.$$;
 public class LastOrderProfileClientComponent extends BaseComponent {
 
     public final StepperComponent stepper;
+    public final UrlCheckerSharedComponent urlChecker;
 
     public LastOrderProfileClientComponent(RoleBrowser browser) {
         super(browser);
         stepper = new StepperComponent(browser);
+        urlChecker = new UrlCheckerSharedComponent(browser);
     }
 
 
@@ -48,7 +51,7 @@ public class LastOrderProfileClientComponent extends BaseComponent {
     public LastOrderProfileClientComponent lastOrderCard() {
         stepWithRole("Перейти в Карточку последнего заказа", () -> {
             lastOrderCardOrderNumberLinkLocator.click();
-//            urlChecker.urlStartsWith("https://gasworkers.ru/client/orders/");
+            urlChecker.urlStartsWith("https://gasworkers.ru/client/orders/");
         });
         return this;
     }

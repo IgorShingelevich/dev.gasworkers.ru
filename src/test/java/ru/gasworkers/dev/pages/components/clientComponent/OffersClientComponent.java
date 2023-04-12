@@ -3,14 +3,17 @@ package ru.gasworkers.dev.pages.components.clientComponent;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.UrlCheckerSharedComponent;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 
 public class OffersClientComponent extends BaseComponent {
+    public final UrlCheckerSharedComponent urlChecker;
     public OffersClientComponent(RoleBrowser browser) {
         super(browser);
+        urlChecker = new UrlCheckerSharedComponent(browser);
     }
 
     SelenideElement
@@ -31,7 +34,8 @@ public class OffersClientComponent extends BaseComponent {
 
     public void clickOffers() {
         stepWithRole("Нажать на компонент предложения", () -> {
-            offersComponentLocator.shouldBe(visible, Duration.ofSeconds(30)).click();
+            offersComponentLocator.shouldBe(visible, Duration.ofSeconds(10)).click();
+            urlChecker.urlContains("select-service");
         });
     }
 

@@ -13,6 +13,8 @@ import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusH
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
 import java.time.Duration;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static com.codeborne.selenide.Condition.*;
 import static io.qameta.allure.Allure.step;
@@ -147,5 +149,20 @@ public class SelectServicePageClientPage extends BaseClientPage {
         });
         return this;
     }
+
+    public String getOrderNumber() {
+        return stepWithRole("Получить номер заказа", () -> {
+            // Get last four digits from titleLocator.getText()
+            Pattern pattern = Pattern.compile("\\d{4}$");
+            Matcher matcher = pattern.matcher(titleLocator.getText());
+            System.out.println("Номер заказа: " + matcher.group());
+            if (matcher.find()) {
+                return matcher.group();
+            } else {
+                throw new RuntimeException("Не удалось получить номер заказа");
+            }
+        });
+    }
+
 }
 // TODO describe map behavior

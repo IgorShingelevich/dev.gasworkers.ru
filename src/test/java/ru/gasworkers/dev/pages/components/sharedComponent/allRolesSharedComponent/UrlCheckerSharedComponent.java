@@ -1,10 +1,11 @@
 package ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent;
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.components.BaseComponent;
 
 import java.time.Duration;
 
-public class UrlCheckerSharedComponent extends AllRolesSharedComponent {
+public class UrlCheckerSharedComponent  extends BaseComponent {
     public UrlCheckerSharedComponent(RoleBrowser browser) {
         super(browser);
     }
