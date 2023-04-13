@@ -8,7 +8,7 @@ import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.SelfEmployedPages;
 import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
-import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployed;
+import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
 
 public class ClientSelfEmployedMaintenanceTest extends BaseTest {
 
@@ -19,7 +19,7 @@ public class ClientSelfEmployedMaintenanceTest extends BaseTest {
     SelfEmployedPages selfEmployedPages;
 
     RandomClient randomClient = new RandomClient();
-    RandomSelfEmployed randomSelfEmployed = new RandomSelfEmployed();
+    RandomSelfEmployedAndMaster randomSelfEmployedAndMaster = new RandomSelfEmployedAndMaster();
 
 
 

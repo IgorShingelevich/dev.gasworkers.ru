@@ -11,7 +11,7 @@ import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.modes
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.*;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navCommon.NavCommonTabSelfEmployedProfilePageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navProfile.NavProfileTabSelfEmployedProfilePageComponent;
-import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployed;
+import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
 
 public class ProfileSelfEmployedPage extends BaseSelfEmployedPage {
     public final HeaderSelfEmployedComponent header;
@@ -130,9 +130,9 @@ public class ProfileSelfEmployedPage extends BaseSelfEmployedPage {
         });
     }
 
-    public void fillCommonTabRandomData(RandomSelfEmployed randomSelfEmployed) {
+    public void fillCommonTabRandomData(RandomSelfEmployedAndMaster randomSelfEmployedAndMaster) {
         stepWithRole("Заполнить вкладку Общие данные", () -> {
-            tabCommon.fillRandomData(randomSelfEmployed);
+            tabCommon.fillRandomData(randomSelfEmployedAndMaster);
         });
 
     }

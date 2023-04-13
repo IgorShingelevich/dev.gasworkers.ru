@@ -36,7 +36,7 @@ public class RepairBGRegistrationTest extends BaseTest {
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.BG_REGISTRATION)
     @Story(AllureStory.REPAIR)
-    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
+    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.BG_REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Фоновая Регистрация на Ремонт с указанием телефона и почты")
     public void bgRegistrationPhoneRepair() {
         Integer masterIndex = 0;

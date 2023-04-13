@@ -131,7 +131,7 @@ class ClientDispatcherInteractionStatesTest extends BaseTest {
                  clientPages.getSelectServicePage().toOrderCard();
                 Selenide.sleep(1000);
 //                 clientPages.getOrderCardPage().checkFinishLoading();
-                 clientPages.getOrderCardPage().sidebar.home();
+                clientPages.getOrderCardPage().sidebar.home();
                 Selenide.sleep(1000);
 //                 clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
                  clientPages.getHomePage().popUp.close();

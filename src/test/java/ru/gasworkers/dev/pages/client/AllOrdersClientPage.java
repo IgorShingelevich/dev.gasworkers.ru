@@ -15,7 +15,8 @@ public class AllOrdersClientPage extends BaseClientPage {
 
     public final ClientActionsBlockComponent actionsBlock;
     public final ClientSidebarComponent sidebar;
-    public  AllOrdersClientPage (RoleBrowser browser) {
+
+    public AllOrdersClientPage(RoleBrowser browser) {
         super(browser);
         sidebar = new ClientSidebarComponent(browser);
         actionsBlock = new ClientActionsBlockComponent(browser);
@@ -24,22 +25,22 @@ public class AllOrdersClientPage extends BaseClientPage {
 //    public ClientBreadcrumbsComponent breadcrumbs = new ClientBreadcrumbsComponent();
 
 
-private final String ORDER_PAGE_TITLE = "Список заказов";
+    private final String ORDER_PAGE_TITLE = "Список заказов";
 
     SelenideElement
-    orderPageTitle = driver.$(".page-title .h3.mb-2");
+            orderPageTitle = driver.$(".page-title .h3.mb-2");
 
     ElementsCollection
-    listNumberLinkCollection = driver.$$("p.h5.link-blue.pointer"),
-    dropdownActionButtonCollection = driver.$$x("(//button[contains(@type,'button')])"),
-        openActionLinkCollection = driver.$$x("(//a[contains(@class,'actions__slot--link')])");
+            itemNumberCollection = driver.$$("p.h5.link-blue.pointer"),
+            dropdownActionButtonCollection = driver.$$x("(//button[contains(@type,'button')])"),
+            openActionLinkCollection = driver.$$x("(//a[contains(@class,'actions__slot--link')])");
 
 
     public void checkInitialState() {
         stepWithRole("Убедиться, что страница в  начальном состоянии", () -> {
             orderPageTitle.shouldHave(text(ORDER_PAGE_TITLE));
             stepWithRole("Убедиться, что отсутствуют ранее созданные Заказы", () -> {
-                listNumberLinkCollection.shouldHave(size(0));
+                itemNumberCollection.shouldHave(size(0));
             });
         });
     }
@@ -53,18 +54,18 @@ private final String ORDER_PAGE_TITLE = "Список заказов";
 
     public AllOrdersClientPage orderByNumber(String orderNumber) {
         stepWithRole("Открыть заказ № " + orderNumber, () -> {
-            listNumberLinkCollection.findBy(text(orderNumber)).click();
+            itemNumberCollection.findBy(text(orderNumber)).click();
         });
         return this;
     }
 
     public AllOrdersClientPage dropdownAction(int listNumber) {
-        dropdownActionButtonCollection.get(listNumber+1).click();
+        dropdownActionButtonCollection.get(listNumber + 1).click();
         return this;
     }
 
     public AllOrdersClientPage openAction(int listNumber) {
-        openActionLinkCollection.get(listNumber-1).click();
+        openActionLinkCollection.get(listNumber - 1).click();
         return this;
     }
 
@@ -72,9 +73,15 @@ private final String ORDER_PAGE_TITLE = "Список заказов";
         stepWithRole("Убедиться, что страница в  состоянии после Фоновой регистрации", () -> {
             orderPageTitle.shouldHave(text(ORDER_PAGE_TITLE));
             stepWithRole("Убедиться, что присутствует ранее созданный Заказ № " + orderNumber, () -> {
-                listNumberLinkCollection.shouldHave(size(1));
-                listNumberLinkCollection.findBy(text(orderNumber)).shouldBe(visible);
+                itemNumberCollection.shouldHave(size(1));
+                itemNumberCollection.findBy(text(orderNumber)).shouldBe(visible);
             });
+        });
+    }
+
+    public void checkItemsAmount(int itemsAmount) {
+        stepWithRole("Убедиться, что количество заказов равно " + itemsAmount, () -> {
+            itemNumberCollection.shouldHave(size(itemsAmount));
         });
     }
 }

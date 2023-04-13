@@ -50,4 +50,10 @@ public class AllInvoicesClientPage extends BaseClientPage {
             pageTitleLocator.shouldHave(text(PAGE_TITLE));
         });
     }
+
+    public void checkItemsAmount(int ItemsAmount) {
+        stepWithRole("Убедиться, что количество счетов равно: " + ItemsAmount, () -> {
+            invoicesCollection.shouldHave(size(ItemsAmount));
+        });
+    }
 }

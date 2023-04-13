@@ -37,7 +37,7 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.BG_REGISTRATION)
     @Story(AllureStory.MAINTENANCE)
-    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
+    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.BG_REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Фоновая Регистрация на ТО с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
     public void  bgRegistrationPhoneMaintenance() {
         Integer masterIndex = 0;
@@ -74,7 +74,7 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
                 clientPages.getHomePage().checkBGInitialState(randomClient.getSinceDate());
             });
             step("Страница Уведомления", () -> {
-                clientPages.getHomePage().actionsBlock.notifications();
+               clientPages.getHomePage().actionsBlock.notifications();
                 // TODO fix  Push notification  - not appear after Guide
 //                clientPages.getAllNotificationsPage().checkInitialBGState(orderNumber);
 //                clientPages.getAllNotificationsPage().readAll();

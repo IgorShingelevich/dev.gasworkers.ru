@@ -51,5 +51,8 @@ public final class LoginPage extends BasePage {
             driver.$(byTagAndText("span", "Далее")).click();
             System.out.println("login as " + email + " " + password);
         });
+        stepWithRole("Убедиться, что Url  кабинета пользователя начинается с  - https://dev.gasworkers.ru/profile", () -> {
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile");
+        });
     };
 }

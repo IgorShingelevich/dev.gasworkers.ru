@@ -6,7 +6,7 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationComponent.DateBGRegistrationLandingComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.BaseProfileSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.tabCommonProfilePageComponent.*;
-import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployed;
+import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
 
 public class NavCommonTabSelfEmployedProfilePageComponent extends BaseProfileSelfEmployedComponent {
     public final DateBGRegistrationLandingComponent datePickerBlock;
@@ -54,13 +54,13 @@ public class NavCommonTabSelfEmployedProfilePageComponent extends BaseProfileSel
         toOrderContextButtons.checkToOrderContextButtonsPresenceState();
     }
 
-    public void fillRandomData(RandomSelfEmployed randomSelfEmployed) {
+    public void fillRandomData(RandomSelfEmployedAndMaster randomSelfEmployedAndMaster) {
         stepWithRole("Заполнить случайными данными все элементы вкладки общие данные", () -> {
-//            fillNameBlock.fillRandomData(randomSelfEmployed);
-//            fillPassportBlock.fillRandomData(randomSelfEmployed);
-//            fillMasterIDBlock.fillRandomData(randomSelfEmployed);
-//            fillBankAccountBlock.fillRandomData(randomSelfEmployed);
-//            fillTaxpayerCertificateBlock.fillRandomData(randomSelfEmployed);
+//            fillNameBlock.fillRandomData(randomSelfEmployedAndMaster);
+//            fillPassportBlock.fillRandomData(randomSelfEmployedAndMaster);
+//            fillMasterIDBlock.fillRandomData(randomSelfEmployedAndMaster);
+//            fillBankAccountBlock.fillRandomData(randomSelfEmployedAndMaster);
+//            fillTaxpayerCertificateBlock.fillRandomData(randomSelfEmployedAndMaster);
         });
     }
 

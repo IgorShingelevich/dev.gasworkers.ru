@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 
-public class RandomSelfEmployed {
+public class RandomSelfEmployedAndMaster {
 
     private String name;
     private String surname;
@@ -56,7 +56,7 @@ public class RandomSelfEmployed {
             equipmentCertificateFile;
 
 
-    public RandomSelfEmployed() {
+    public RandomSelfEmployedAndMaster() {
         Faker faker = new Faker(new Locale("ru"));
         String
                 emailPrefixMock = "gwtest",

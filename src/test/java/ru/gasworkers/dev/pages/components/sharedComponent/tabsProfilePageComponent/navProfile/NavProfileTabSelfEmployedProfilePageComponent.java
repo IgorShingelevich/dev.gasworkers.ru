@@ -3,7 +3,7 @@ package ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageCompon
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.profilePageComponent.BaseProfileSelfEmployedComponent;
-import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployed;
+import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
 
 import static com.codeborne.selenide.Condition.*;
 
@@ -39,7 +39,7 @@ public class NavProfileTabSelfEmployedProfilePageComponent extends BaseProfileSe
             videoPriceBoxLocator = driver.$$("div.col-md-7.col-lg-4").get(1).as("Бокс цена на видеоконсультацию"),
             videoPriceInputLocator = driver.$("input[placeholder='минимум 500 рублей']").as("Цена на видеоконсультацию");
 
-    public void fillRandomData(RandomSelfEmployed randomSelfEmployed) {
+    public void fillRandomData(RandomSelfEmployedAndMaster randomSelfEmployedAndMaster) {
         stepWithRole("Заполнить случайными данными все элементы вкладки профиль ", () -> {
 //            todo
         });

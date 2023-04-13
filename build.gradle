@@ -73,6 +73,7 @@ dependencies {
             "com.fasterxml.jackson.core:jackson-core:$jacksonCore"
     )
     testImplementation 'org.jetbrains:annotations:23.0.0'
+    testImplementation 'junit:junit:4.13.1'
 }
 
 test {
@@ -90,15 +91,28 @@ task scope_clientTest(type: Test) {
         includeTags "client"
     }
 
-    def taskProvider_registrationTest = tasks.register("При", Test) {
+    def taskProvider_registrationTest = tasks.register("taskProvider_registrationTest", Test) {
         useJUnitPlatform {
             includeTags "registration"
         }
     }
 
+    def taskProvider_bg_registrationTest = tasks.register("taskProvider_bg_registrationTest", Test) {
+        useJUnitPlatform {
+            includeTags "bg-registration"
+        }
+    }
+
+
     def taskProvider_clientTest = tasks.register("taskProvider_clientTest", Test) {
         useJUnitPlatform {
             includeTags "client"
+        }
+    }
+
+    def taskProvider_apiTest = tasks.register("taskProvider_apiTest", Test) {
+        useJUnitPlatform {
+            includeTags "api"
         }
     }
 

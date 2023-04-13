@@ -12,6 +12,7 @@ import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponen
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
+import java.sql.SQLOutput;
 import java.time.Duration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,7 +48,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
             endRepairPrefixText = "Ремонтные работы и запчасти оплачиваются дополнительно к указанной стоимости.";
 
     SelenideElement
-            titleLocator = driver.$("h6.text-center").as("Заголовок страницы Выбор СК"), // changed driver.$("div h4.text-center")
+            titleLocator = driver.$("h4.text-center").as("Заголовок страницы Выбор СК"), // changed driver.$("div h4.text-center")
             toOrderButtonLocator = driver.$("button.btn.btn-primary").as("Кнопка Смотреть  заказ"),
             backButtonLocator = driver.$(".col-12.col-md-3 .link-dark-blue.mr-32.medium").as("Кнопка Назад"),
             spinnerServicesContainerLocator = driver.$(".scrollbar.mb-3.col-lg-5 .d-flex.justify-content-center.pb-5").as("Спиннер загрузки контейнера с Сервисными компаниями"),
@@ -69,9 +70,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
 //            spinnerScrollbarLocator.should(disappear);
             urlChecker.urlStartsWith("https://dev.gasworkers.ru/orders/maintenance/");
             spinner.checkPresence();
-            /*assertThat(titleLocator.getText(), startsWith(startMaintenancePrefixText));
-            assertThat(titleLocator.getText(), endsWith(endMaintenancePrefixText));*/ //changed title again
-            titleLocator.shouldHave(text("Спасибо! Ваш заказ принят и обрабатывается диспетчерами")); // title changed
+            assertThat(titleLocator.getText(), startsWith(startMaintenancePrefixText));
+            assertThat(titleLocator.getText(), endsWith(endMaintenancePrefixText)); //changed title again
+//            titleLocator.shouldHave(text("Спасибо! Ваш заказ принят и обрабатывается диспетчерами")); // title changed
             /*stepWithRole("Убедиться что спиннер появился", () -> {
                 spinnerServicesContainerLocator.should(appear);
             });*/
@@ -89,6 +90,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
                 driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
             });*/
             offers.checkFinishLoading();
+            getOrderNumber();
         });
     }
 
@@ -96,9 +98,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
             spinner.checkPresence();
 //            spinnerScrollbarLocator.should(disappear);
-//            assertThat(titleLocator.getText(), startsWith(startRepairPrefixText));
-//            assertThat(titleLocator.getText(), endsWith(endRepairPrefixText));
-            titleLocator.shouldHave(text("Ваш заказ принят и обрабатывается диспетчерами"));
+            assertThat(titleLocator.getText(), startsWith(startRepairPrefixText));
+            assertThat(titleLocator.getText(), endsWith(endRepairPrefixText));
+//            titleLocator.shouldHave(text("Ваш заказ принят и обрабатывается диспетчерами"));
             stepWithRole("Убедиться что появился первый таб", () -> {
                 firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
             });
@@ -108,6 +110,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
                 driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
             });*/
             offers.checkFinishLoading();
+            getOrderNumber();
         });
     }
 
@@ -152,17 +155,19 @@ public class SelectServicePageClientPage extends BaseClientPage {
 
     public String getOrderNumber() {
         return stepWithRole("Получить номер заказа", () -> {
-            // Get last four digits from titleLocator.getText()
-            Pattern pattern = Pattern.compile("\\d{4}$");
-            Matcher matcher = pattern.matcher(titleLocator.getText());
-            System.out.println("Номер заказа: " + matcher.group());
-            if (matcher.find()) {
-                return matcher.group();
-            } else {
-                throw new RuntimeException("Не удалось получить номер заказа");
+            String text = titleLocator.getText();
+            String[] words = text.split("\\s+");
+            for (String word : words) {
+                if (word.matches("\\d{2}/\\d{2}/\\d{3}/\\d{6}")) {
+                    String orderNumber = word.replaceAll("/", "");
+                    System.out.println("Order number on map: " + orderNumber.substring(orderNumber.length() - 4));
+                    return orderNumber.substring(orderNumber.length() - 4);
+                }
             }
+            return null;
         });
     }
-
 }
+
+
 // TODO describe map behavior

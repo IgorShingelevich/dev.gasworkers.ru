@@ -5,7 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.BaseTabOrderCardComponent;
-import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployed;
+import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
 
 public class fillBankAccountCommonTabSelfEmployedComponent extends BaseTabOrderCardComponent {
     public fillBankAccountCommonTabSelfEmployedComponent(RoleBrowser roleBrowser) {
@@ -93,13 +93,13 @@ public class fillBankAccountCommonTabSelfEmployedComponent extends BaseTabOrderC
         });
     }
 
-    public void checkFilledState(RandomSelfEmployed randomSelfEmployed) {
+    public void checkFilledState(RandomSelfEmployedAndMaster randomSelfEmployedAndMaster) {
         stepWithRole("Убедиться, что все поля банковских данных заполнены", () -> {
             //todo add filled atate to bic input
-//            bicInputLocator.shouldHave(Condition.value(randomSelfEmployed.getBic()));
+//            bicInputLocator.shouldHave(Condition.value(randomSelfEmployedAndMaster.getBic()));
             bicSuggestionsLocator.shouldNotBe(Condition.visible);
             bicSuggestionResultLocator.shouldNotBe(Condition.visible);
-            bankNameBoxLocator.$(".text").shouldHave(Condition.text(randomSelfEmployed.getBicResult()));
+            bankNameBoxLocator.$(".text").shouldHave(Condition.text(randomSelfEmployedAndMaster.getBicResult()));
             correspondentAccountBoxLocator.$(".text").shouldHave(Condition.text("30101810400000000225"));
             checkingAccountBoxLocator.$("input").shouldHave(Condition.value("12345678901234567890"));
         });

@@ -31,7 +31,7 @@ public class ByEmailUsualClientRegistrationTest extends BaseTest {
     @Test
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
-    @Feature(AllureFeature.USUAL_REGISTRATION)
+    @Feature(AllureFeature.REGULAR_REGISTRATION)
     @Story("По почте")
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Регистрация клиента по email и проверка состояния кабинета")

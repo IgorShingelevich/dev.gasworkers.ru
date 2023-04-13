@@ -60,7 +60,7 @@ public class VideoBGRegistrationTest extends BaseTest {
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.BG_REGISTRATION)
     @Story(AllureStory.VIDEO)
-    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
+    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.BG_REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Фоновая Регистрация на Видео Сейчас с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
 
     public void bgRegistrationNowVideo() {
@@ -164,7 +164,7 @@ public class VideoBGRegistrationTest extends BaseTest {
             step("Страница Заказы", () -> {
                 clientPages.getAllObjectsPage().sidebar.allOrders();
                 clientPages.getAllOrdersPage().checkFinishLoading();
-//                clientPages.getAllOrdersPage().checkBGInitialState(orderNumber);
+                clientPages.getAllOrdersPage().checkItemsAmount(1);
             });
             //todo OrderCardPage
             /*String orderNumber = step("Страница Карточка заказа", () -> {
@@ -178,7 +178,7 @@ public class VideoBGRegistrationTest extends BaseTest {
             step("Страница Счета", () -> {
                 clientPages.getAllOrdersPage().sidebar.allInvoices();
                 clientPages.getAllInvoicesPage().checkFinishLoading();
-                clientPages.getAllInvoicesPage().checkInitialState();
+                clientPages.getAllInvoicesPage().checkItemsAmount(1);
             });
 
             step("Страница Профиль", () -> {

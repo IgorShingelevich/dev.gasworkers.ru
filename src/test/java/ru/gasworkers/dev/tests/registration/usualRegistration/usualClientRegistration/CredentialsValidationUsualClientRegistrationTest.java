@@ -14,8 +14,6 @@ import org.junit.jupiter.params.provider.CsvFileSource;
 import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
-import ru.gasworkers.dev.pages.context.DispatcherPages;
-import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
@@ -91,7 +89,7 @@ public class CredentialsValidationUsualClientRegistrationTest extends BaseTest {
     @ParameterizedTest(name = "Убедиться, что при вводе невалидного номера телефона: {0} появляется ошибка: {1}")
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
-    @Feature(AllureFeature.USUAL_REGISTRATION)
+    @Feature(AllureFeature.REGULAR_REGISTRATION)
     @Story("Валидация недопустимого номера телефона")
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.NEGATIVE)})
     @DisplayName("Регистрация клиента с невалидным номером телефона")

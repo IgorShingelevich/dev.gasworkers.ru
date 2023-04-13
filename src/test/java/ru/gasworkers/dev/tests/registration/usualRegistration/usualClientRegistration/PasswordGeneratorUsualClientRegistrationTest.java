@@ -13,8 +13,6 @@ import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
-import ru.gasworkers.dev.pages.context.DispatcherPages;
-import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
@@ -30,7 +28,7 @@ public class PasswordGeneratorUsualClientRegistrationTest extends BaseTest {
     @Test
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
-    @Feature(AllureFeature.USUAL_REGISTRATION)
+    @Feature(AllureFeature.REGULAR_REGISTRATION)
     @Story("Регистрация со Сгенерированным паролем")
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Регистрация со Сгенерированным паролем")

@@ -56,7 +56,6 @@ public class ClientSidebarComponent extends BaseSidebarComponent {
     public ClientSidebarComponent allOrdersAndInvoicesDropdown() {
         stepWithRole("Открыть выпадающий список Заказы/Счета", () -> {
             ordersAndInvoicesDropdownLocator.click();
-            urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client/orders");
         });
         return this;
     }
