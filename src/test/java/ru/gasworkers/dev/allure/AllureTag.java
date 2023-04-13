@@ -19,7 +19,8 @@ public final class AllureTag {
 
     public static final String
     UI = "ui",
-    API = "api";
+    API = "api",
+    API_COLLECTION = "api-collection";
 
 
 }

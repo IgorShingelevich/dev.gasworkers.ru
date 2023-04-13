@@ -98,7 +98,7 @@ public class RandomSelfEmployedAndMaster {
         this.pdfFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\otherFormats\\test_pdf.pdf");
         this.xlsxFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\otherFormats\\test_xlsx.xlsx");
         this.rarFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\otherFormats\\test_rar.rar");
-
+//todo  change all the paths to relative
     }
 
     public String getFirstName() {
@@ -260,7 +260,6 @@ public class RandomSelfEmployedAndMaster {
     public File getBoilerEquipmentCertificateFile() {
         return equipmentCertificateFile;
     }
-
 
 
 }

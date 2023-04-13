@@ -70,7 +70,10 @@ dependencies {
             "org.assertj:assertj-core:$assertjVersion",
             "org.hamcrest:hamcrest:$hamcrest",
             "org.awaitility:awaitility:$awaitility",
-            "com.fasterxml.jackson.core:jackson-core:$jacksonCore"
+            "com.fasterxml.jackson.core:jackson-core:$jacksonCore",
+            "com.fasterxml.jackson.core:jackson-databind:2.12.3",
+            "com.jayway.jsonpath:json-path:2.4.0",
+            "com.googlecode.json-simple:json-simple:1.1.1"
     )
     testImplementation 'org.jetbrains:annotations:23.0.0'
     testImplementation 'junit:junit:4.13.1'
@@ -115,6 +118,13 @@ task scope_clientTest(type: Test) {
             includeTags "api"
         }
     }
+
+    def taskProvider_apiCollection = tasks.register("taskProvider_apiCollection", Test) {
+        useJUnitPlatform {
+            includeTags "api-collection"
+        }
+    }
+
 
 
 }

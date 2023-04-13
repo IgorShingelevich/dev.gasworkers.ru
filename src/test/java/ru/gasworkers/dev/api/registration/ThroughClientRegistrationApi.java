@@ -2,9 +2,6 @@ package ru.gasworkers.dev.api.registration;
 
 import io.qameta.allure.Allure;
 import io.restassured.http.ContentType;
-import org.junit.jupiter.api.BeforeEach;
-import ru.gasworkers.dev.tests.apiTest.configApiTest;
-import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
