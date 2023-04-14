@@ -14,13 +14,14 @@ public final class AllureTag {
             SE_INDIVIDUAL = "self-employed-individual";
 
     public static final String
-            BG_REGISTRATION = "bg-registration",
-            REGISTRATION = "registration";
+            REGISTRATION = "registration",
+            AUTHORISATION = "authorisation",
+            BG_REGISTRATION = "bg-registration";
 
     public static final String
-    UI = "ui",
-    API = "api",
-    API_COLLECTION = "api-collection";
+            UI = "ui",
+            API = "api",
+            API_COLLECTION = "api-collection";
 
 
 }

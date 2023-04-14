@@ -10,7 +10,7 @@ public enum Role {
     MASTER("Master", 79917644241L, MasterPages.class),
     SELF_EMPLOYED("Self-employed", null, SelfEmployedPages.class),
     DISPATCHER("Dispatcher", null, DispatcherPages.class),
-    SERVICE ("Service", null, ServicePages.class);
+    SERVICE ("ServiceCompanyStaff", null, ServicePages.class);
 
     //todo: Dispatcher2, Master2, Client2, etc.
 

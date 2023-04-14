@@ -13,7 +13,7 @@ public class ErrorAttachmentsOrderVideoClientComponent extends BaseComponent {
 
     private final String
         titleText = "Прикрепите аудио/видео описание вашей проблемы",
-        subtitleText = "Запишите небольшое видео или аудио описание вашей поломки, это поможет нашему мастеру быстрее её устранить.";
+        subtitleText = "Загрузите небольшое видео или аудио описание вашей поломки, это поможет нашему мастеру быстрее её устранить.";
 
     SelenideElement
         titleLocator = driver.$("div.medium.w-100.mb-20.d-flex").as("Заголовок компонента Прикрепленные файлы и описание"),

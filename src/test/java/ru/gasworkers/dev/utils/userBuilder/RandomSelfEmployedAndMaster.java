@@ -11,7 +11,6 @@ import java.util.Locale;
 
 
 public class RandomSelfEmployedAndMaster {
-
     private String name;
     private String surname;
     private String patronymicName;
@@ -42,7 +41,7 @@ public class RandomSelfEmployedAndMaster {
     private String workAddressNumber;
     private String masterIDValidTillDatePicker;
     private String equipmentCertificateValidTillDatePicker;
-
+    private String code = "222222";
     private String workRadius = "10";
     private String videoPrice = "3000";
     private File avatarRandomPhotoFile,
@@ -262,6 +261,10 @@ public class RandomSelfEmployedAndMaster {
     }
 
 
+    public String getCode() {
+        return code;
+
+    }
 }
 
 

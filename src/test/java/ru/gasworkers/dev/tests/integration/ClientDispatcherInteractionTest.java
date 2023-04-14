@@ -171,7 +171,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             step("Клиент рассматривает предложение от Диспетчера СК", () -> {
                 // find on the map
                 //check Price with Insurance and Primary Visit Price
-                //review first response Service Company
+                //review first response ServiceCompanyStaff Company
                 // check first Master info Card
                 clientPages.getSelectServicePage().proceedWithFirstService();
                 clientPages.getSelectInsurancePage().checkFinishLoading();

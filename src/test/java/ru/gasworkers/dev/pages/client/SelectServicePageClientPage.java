@@ -48,7 +48,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
             endRepairPrefixText = "Ремонтные работы и запчасти оплачиваются дополнительно к указанной стоимости.";
 
     SelenideElement
-            titleLocator = driver.$("h4.text-center").as("Заголовок страницы Выбор СК"), // changed driver.$("div h4.text-center")
+            titleLocator = driver.$(".align-items-center .text-center").as("Заголовок страницы Выбор СК"), // changed driver.$("div h4.text-center")
             toOrderButtonLocator = driver.$("button.btn.btn-primary").as("Кнопка Смотреть  заказ"),
             backButtonLocator = driver.$(".col-12.col-md-3 .link-dark-blue.mr-32.medium").as("Кнопка Назад"),
             spinnerServicesContainerLocator = driver.$(".scrollbar.mb-3.col-lg-5 .d-flex.justify-content-center.pb-5").as("Спиннер загрузки контейнера с Сервисными компаниями"),

@@ -2,19 +2,21 @@ package ru.gasworkers.dev.api.registration;
 
 import io.qameta.allure.Allure;
 import io.restassured.http.ContentType;
+import ru.gasworkers.dev.model.apiModel.Employed_status;
+import ru.gasworkers.dev.model.apiModel.UserType;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 
-public class RegularMasterRegistrationApi {
+public class RegularFinishMasterRegistrationApi {
 
 
-    public void regularMasterRegistration(String masterEmail, String masterPhone, String masterName, String masterSurname, String masterPatronymic, String masterPassword) {
-        Allure.step("Регистрация мастера Api: " + masterEmail + " " + masterPhone, () -> {
+    public void regularFinishMasterRegistration(String masterEmail, String masterPhone, String masterName, String masterSurname, String masterPatronymic, String masterPassword) {
+        Allure.step("Окночание - Регистрация мастера Api: " + masterEmail + " " + masterPhone, () -> {
 
             String requestBody = "{"
-                    + "\"type\": \"master\","
+                    + "\"type\": \"" + UserType.MASTER + "\","
                     + "\"password\": \"" + masterPassword + "\","
                     + "\"email\": \"" + masterEmail + "\","
                     + "\"phone\": " + masterPhone + ","
@@ -24,8 +26,8 @@ public class RegularMasterRegistrationApi {
                     + "\"gender\": \"male\","
                     + "\"is_have_contract\": true,"
                     + "\"is_ip\": true,"
-                    + "\"employed_status\": \"odio\","
-                    + "\"service_id\": 2"
+                    + "\"employed_status\": \"" + Employed_status.ACCEPTED + "\","
+                    + "\"service_id\": 39"
                     + "}";
 
             given()
@@ -40,10 +42,7 @@ public class RegularMasterRegistrationApi {
                     .body("status", equalTo(0))
                     .body("message", equalTo("Регистрация завершена"));
 
-            System.out.println("email: " + masterEmail);
-            System.out.println("phone: " + masterPhone);
-            System.out.println("fullName: " + masterName + " " + masterSurname + " " + masterPatronymic);
-
+            System.out.println("Register finish for master: " + masterEmail + " " + masterPhone + " " + masterName + " " + masterSurname + " " + masterPatronymic);
         });
     }
 

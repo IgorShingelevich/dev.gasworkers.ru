@@ -2,19 +2,19 @@ package ru.gasworkers.dev.api.authorisation;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Test;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-public class ClientAuthorizationApi {
+public class AuthorizationApi {
 
 
-    public void testClientAuthorization() {
+    public void authorization(String email, String phone, String password) {
         String requestBody = "{"
-                + "\"email\": \"shingelevich@gmail.com\","
-                + "\"phone\": 79119129233,"
+                + "\"email\": \"" + email + "\","
+                + "\"phone\": \"" + phone + "\","
                 + "\"login\": \"myLogin\","
-                + "\"password\": \"123456\","
+                + "\"password\": \"" + password + "\","
                 + "\"type\": \"client\""
                 + "}";
 
