@@ -7,6 +7,8 @@ import ru.gasworkers.dev.extension.browser.ScreenshotExtension;
 public abstract class BaseTest {
 
 }
+// todo DISCUSS hierarchy of ui and api tests in allure tags and epics
+// todo DISCUSS validationCheck implementation for data passed to positive api tests
 // todo DISCUSS buttons implementation  AllButtonSharedComponent class
 // todo DISCUSS shared Components organisation for all Roles - how to share these component given that on each individual page might be available only several of them
 // todo DISCUSS .checkState(); for all Roles

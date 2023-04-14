@@ -1,3 +1,7 @@
+/**
+ * The AuthorizationApi class provides methods for user authorization
+ * and obtaining a token for further API usage.
+ */
 package ru.gasworkers.dev.api.authorisation;
 
 import io.restassured.http.ContentType;
@@ -8,14 +12,23 @@ import static org.hamcrest.Matchers.*;
 
 public class AuthorizationApi {
 
-
-    public void authorization(String email, String phone, String password) {
+    /**
+     * Performs user authorization using email, phone, or login and password.
+     * Returns the authorization token.
+     *
+     * @param userType   The type of the application (client/master). Required for mobile.
+     * @param email      The user's email. Required if phone and login are not provided.
+     * @param phone      The user's phone number. Required if email and login are not provided.
+     * @param login      The user's login. Required if email and phone are not provided.
+     * @param password   The user's password. Required.
+     */
+    public void authorization(String userType, String email, String phone, String login, String password) {
         String requestBody = "{"
                 + "\"email\": \"" + email + "\","
                 + "\"phone\": \"" + phone + "\","
-                + "\"login\": \"myLogin\","
+                + "\"login\": \"" + login + "\","
                 + "\"password\": \"" + password + "\","
-                + "\"type\": \"client\""
+                + "\"type\": \"" + userType + "\""
                 + "}";
 
         Response response = given()
@@ -28,7 +41,6 @@ public class AuthorizationApi {
                 .statusCode(200)
                 .contentType(ContentType.JSON)
                 .body("status", equalTo(0))
-//                .body("message", equalTo("Auth success"))
                 .body("message", equalTo("Успешно авторизован"))
                 .body("data.token", notNullValue())
                 .extract()
@@ -37,6 +49,4 @@ public class AuthorizationApi {
         String token = response.path("data.token");
         System.out.println("Token: " + token);
     }
-
-
 }

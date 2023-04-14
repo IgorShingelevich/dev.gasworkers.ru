@@ -8,6 +8,7 @@ import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.ApiTestConfig;
 import ru.gasworkers.dev.api.authorisation.AuthorizationApi;
 import ru.gasworkers.dev.extension.browser.Browser;
+import ru.gasworkers.dev.model.apiModel.UserType;
 import ru.gasworkers.dev.pages.context.ClientPages;
 
 import static ru.gasworkers.dev.model.Role.CLIENT;
@@ -23,6 +24,7 @@ public class AuthorizationApiTest {
 
     public final AuthorizationApi authorizationApi = new AuthorizationApi();
     private final String
+            userType = UserType.CLIENT.toString(),
             email = "shingelevich@gmail.com",
             phone = "79119129233",
             password = "123456";
@@ -32,9 +34,9 @@ public class AuthorizationApiTest {
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.AUTHORIZATION)
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.AUTHORISATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
-    @DisplayName("Авторизация клиента Api( как использоывать на UI ?)")
-    public void clientAuthorization() {
-        authorizationApi.authorization(email, phone, password);
+    @DisplayName("Авторизация клиента  по почте Api")
+    public void clientEmailAuthorization() {
+        authorizationApi.authorization(null, email, null, null, password);
 
     }
 
