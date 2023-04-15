@@ -10,7 +10,7 @@ import static org.hamcrest.Matchers.*;
 /**
  * This class provides the methods for completing the user registration process.
  */
-public class RegularFinishClientRegistrationApi {
+public class RegularFinishRegistrationApi {
 
     /**
      * Completes the registration process for a client or master.
@@ -29,11 +29,11 @@ public class RegularFinishClientRegistrationApi {
      * @param employedStatus   the employment status of the user (pending/accepted/self-employed)
      * @param serviceId        the identifier of the company the user works for (mandatory for master registration)
      */
-    public void regularFinishRegistration(String userType, String email, String phone, String name, String surname, String patronymic, String password, String gender, boolean isHaveContract, boolean isIp, String employedStatus, Integer serviceId) {
+    public void regularFinishRegistration(String userType, String email, String phone, String name, String surname, String patronymic, String password, String gender, Boolean isHaveContract, Boolean isIp, String employedStatus, Integer serviceId) {
         Allure.step("Окночание - Регистрация Api для роли: " + userType + " " + email + " " + phone, () -> {
 
             String requestBody = "{"
-                    + "\"type\": \"" + UserType.CLIENT + "\","
+                    + "\"type\": \"" + userType + "\","
                     + "\"password\": \"" + password + "\","
                     + "\"email\": \"" + email + "\","
                     + "\"phone\": " + phone + ","

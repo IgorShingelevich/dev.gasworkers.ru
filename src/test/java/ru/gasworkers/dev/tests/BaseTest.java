@@ -7,6 +7,7 @@ import ru.gasworkers.dev.extension.browser.ScreenshotExtension;
 public abstract class BaseTest {
 
 }
+//todo DISCUSS  creating the preconditions for the test
 // todo DISCUSS hierarchy of ui and api tests in allure tags and epics
 // todo DISCUSS validationCheck implementation for data passed to positive api tests
 // todo DISCUSS buttons implementation  AllButtonSharedComponent class
@@ -34,16 +35,6 @@ public abstract class BaseTest {
 //TODO DISCUSS add generated equipment, address ant all generated data to builder
 // TODO DISCUSS   public final  vs private final in PageComponents
 // TODO DISCUSS  should i follow this  implementation for  validations check
- /*implementation in  validations check
-        Нужна коллекция элементов с текстами ошибок от инпутов.
 
-        $$(“input > .error-message”).shouldHave(texts(“Требуется поле Адрес электронной почты”, “Требуется поле Имя”, “Требуется поле Пароль”))
-
-        List<String> actualErrorsText = new ArrayList<>();
-        List<SelenideElement> arrOfField = $$(".control-group");
-        for (SelenideElement field : arrOfField) {
-        field.$(".controls.input-validation-error").click();
-        actualErrorsText.add(field.$(".tooltip-alert.alert-danger").shouldBe(Condition.visible).getText());
-        }*/
 
 

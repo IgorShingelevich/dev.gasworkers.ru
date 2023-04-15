@@ -1,15 +1,14 @@
 package ru.gasworkers.dev.api.helperApi;
-import ru.gasworkers.dev.model.apiModel.UserType;
 
 public class InputValidatorApi {
 
-    public static void validateRegistrationCode(String code, UserType userType, String email, String phone) {
+    public static void validateRegistrationCode(String code, String userType, String email, String phone) {
         validateCode(code);
         validateUserType(userType);
         validateEmailOrPhone(email, phone);
     }
 
-    public static void validateRegularStartRegistration(UserType userType, String email, String phone, Boolean isPhoneSend) {
+    public static void validateRegularStartRegistration(String userType, String email, String phone, Boolean isPhoneSend) {
         validateUserType(userType);
         validateEmailOrPhone(email, phone);
         validateIsPhoneSend(isPhoneSend);
@@ -21,7 +20,7 @@ public class InputValidatorApi {
         }
     }
 
-    private static void validateUserType(UserType userType) {
+    private static void validateUserType(String userType) {
         if (userType == null) {
             throw new IllegalArgumentException("UserType cannot be null.");
         }

@@ -18,7 +18,7 @@ public class CheckRegistrationCode {
      * @param email    String email of user being registered (mandatory if phone is not provided). Optional. Example: client@gmail.com
      * @param phone    String phone of user being registered (mandatory if email is not provided). Optional. Example: "79119129233"
      */
-    public void checkRegistrationCode(String code, UserType userType, String email, String phone) {
+    public void checkRegistrationCode(String code, String userType, String email, String phone) {
         InputValidatorApi.validateRegistrationCode(code, userType, email, phone);
 
         Allure.step("Проверка регистрационного кода: " + code + " для роли: " + userType + " " + email + " " + phone, () -> {

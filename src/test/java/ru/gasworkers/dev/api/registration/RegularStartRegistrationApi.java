@@ -20,7 +20,7 @@ public class RegularStartRegistrationApi {
      * @param phone     Phone number of the user being registered (optional, but mandatory if email is not provided).
      * @param isPhoneSend Indicates whether the phone number should be sent or not (optional, default: false).
      */
-    public void regularStartRegistration(UserType userType, String email, String phone, boolean isPhoneSend) {
+    public void regularStartRegistration(String userType, String email, String phone, boolean isPhoneSend) {
         InputValidatorApi.validateRegularStartRegistration(userType, email, phone, isPhoneSend);
 
         Allure.step("Начало - Регистрация  Api: " + email + " " + phone, () -> {

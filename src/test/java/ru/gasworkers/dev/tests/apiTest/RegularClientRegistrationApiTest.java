@@ -9,7 +9,7 @@ import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.ApiTestConfig;
 import ru.gasworkers.dev.api.registration.CheckRegistrationCode;
-import ru.gasworkers.dev.api.registration.RegularFinishClientRegistrationApi;
+import ru.gasworkers.dev.api.registration.RegularFinishRegistrationApi;
 import ru.gasworkers.dev.api.registration.RegularStartRegistrationApi;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.apiModel.Employed_status;
@@ -32,7 +32,7 @@ public class RegularClientRegistrationApiTest extends BaseTest {
 
     public final RegularStartRegistrationApi regularStartRegistrationApi = new RegularStartRegistrationApi();
     public final CheckRegistrationCode checkRegistrationCode = new CheckRegistrationCode();
-    public final RegularFinishClientRegistrationApi regularFinishRegistrationApi = new RegularFinishClientRegistrationApi();
+    public final RegularFinishRegistrationApi regularFinishRegistrationApi = new RegularFinishRegistrationApi();
     private final RandomClient randomClient = new RandomClient();
     private final String
             email = randomClient.getEmail(),
@@ -51,13 +51,13 @@ public class RegularClientRegistrationApiTest extends BaseTest {
     @Feature(AllureFeature.REGULAR_REGISTRATION)
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
     @DisplayName("Регистрация клиента Api")
-    public void shortClientRegistrationApiTest() {
-        regularStartRegistrationApi.regularStartRegistration(UserType.CLIENT, email, phone, false);
-        checkRegistrationCode.checkRegistrationCode(code, UserType.CLIENT, email, phone);
-        regularFinishRegistrationApi.regularFinishRegistration(UserType.CLIENT.toString(), email, phone, firstName, lastName, patronymicName, password, gender, false, false, employedStatus, null);
-
-                clientPages.getLoginPage().open();
+    public void clientRegistrationApiTest() {
+        regularStartRegistrationApi.regularStartRegistration(UserType.CLIENT.toString(), email, phone, false);
+        checkRegistrationCode.checkRegistrationCode(code, UserType.CLIENT.toString(), email, phone);
+        regularFinishRegistrationApi.regularFinishRegistration(UserType.CLIENT.toString(), email, phone, firstName, lastName, patronymicName, password, gender, false, false, null, null);
+        clientPages.getLoginPage().open();
         clientPages.getLoginPage().loginEmail(email, password);
+        clientPages.getHomePage().urlChecker.urlContains("profile/client");
     }
 
 }
