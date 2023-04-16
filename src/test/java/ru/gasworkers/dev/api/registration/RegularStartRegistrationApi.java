@@ -45,6 +45,7 @@ public class RegularStartRegistrationApi {
                     .body("message", equalTo("Успешная регистрация"))
                     .extract()
                     .response();
+            System.out.println("Response: " + response.asString());
             System.out.println("Register start for role: " + userType + " " + email + " " + phone);
         });
     }

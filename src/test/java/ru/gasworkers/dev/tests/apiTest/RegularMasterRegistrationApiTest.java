@@ -8,7 +8,7 @@ import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.ApiTestConfig;
-import ru.gasworkers.dev.api.registration.CheckRegistrationCode;
+import ru.gasworkers.dev.api.registration.CheckRegularRegistrationCodeApi;
 import ru.gasworkers.dev.api.registration.RegularFinishRegistrationApi;
 import ru.gasworkers.dev.api.registration.RegularStartRegistrationApi;
 import ru.gasworkers.dev.extension.browser.Browser;
@@ -32,7 +32,7 @@ public class RegularMasterRegistrationApiTest extends BaseTest {
     }
 
     public final RegularStartRegistrationApi regularStartRegistrationApi = new RegularStartRegistrationApi();
-    public final CheckRegistrationCode checkRegistrationCode = new CheckRegistrationCode();
+    public final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
     public final RegularFinishRegistrationApi regularFinishRegistrationApi = new RegularFinishRegistrationApi();
     public final ServiceCompanyStaff staff = new ServiceCompanyStaff();
 
@@ -58,7 +58,7 @@ public class RegularMasterRegistrationApiTest extends BaseTest {
     public void regularMasterRegistration() {
 
         regularStartRegistrationApi.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
-        checkRegistrationCode.checkRegistrationCode(code, UserType.MASTER.toString(), email, phone);
+        checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.MASTER.toString(), email, phone);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.MASTER.toString(), email, phone, firstName, lastName, patronymicName, password, gender, true, true, Employed_status.ACCEPTED.toString(), serviceId);
         masterPages.getLoginPage().open();
         masterPages.getLoginPage().loginEmail(email, password);

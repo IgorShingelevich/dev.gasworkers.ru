@@ -3,12 +3,12 @@ package ru.gasworkers.dev.api.registration;
 import io.qameta.allure.Allure;
 import io.restassured.http.ContentType;
 import ru.gasworkers.dev.api.helperApi.InputValidatorApi;
-import ru.gasworkers.dev.model.apiModel.UserType;
 
 import static io.restassured.RestAssured.given;
+import static org.assertj.core.groups.FieldsOrPropertiesExtractor.extract;
 import static org.hamcrest.Matchers.*;
 
-public class CheckRegistrationCode {
+public class CheckRegularRegistrationCodeApi {
 
     /**
      * This method checks the registration code and returns a success response if the code is valid.
@@ -18,7 +18,7 @@ public class CheckRegistrationCode {
      * @param email    String email of user being registered (mandatory if phone is not provided). Optional. Example: client@gmail.com
      * @param phone    String phone of user being registered (mandatory if email is not provided). Optional. Example: "79119129233"
      */
-    public void checkRegistrationCode(String code, String userType, String email, String phone) {
+    public void checkRegularRegistrationCode(String code, String userType, String email, String phone) {
         InputValidatorApi.validateRegistrationCode(code, userType, email, phone);
 
         Allure.step("Проверка регистрационного кода: " + code + " для роли: " + userType + " " + email + " " + phone, () -> {
@@ -40,6 +40,9 @@ public class CheckRegistrationCode {
                     .body("status", equalTo(0))
                     .body("message", equalTo("Код успешно проверен"))
                     .body("data", hasSize(0));
+
+            // sout response
+
             System.out.println("Code: " + code + " checked for: " + userType + " " + email + " " + phone);
         });
     }

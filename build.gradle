@@ -73,7 +73,9 @@ dependencies {
             "com.fasterxml.jackson.core:jackson-core:$jacksonCore",
             "com.fasterxml.jackson.core:jackson-databind:2.12.3",
             "com.jayway.jsonpath:json-path:2.4.0",
-            "com.googlecode.json-simple:json-simple:1.1.1"
+            "com.googlecode.json-simple:json-simple:1.1.1",
+            "org.json:json:20210307"
+
     )
     testImplementation 'org.jetbrains:annotations:23.0.0'
     testImplementation 'junit:junit:4.13.1'

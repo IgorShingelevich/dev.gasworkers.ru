@@ -8,7 +8,7 @@ import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.ApiTestConfig;
-import ru.gasworkers.dev.api.registration.CheckRegistrationCode;
+import ru.gasworkers.dev.api.registration.CheckRegularRegistrationCodeApi;
 import ru.gasworkers.dev.api.registration.RegularFinishRegistrationApi;
 import ru.gasworkers.dev.api.registration.RegularStartRegistrationApi;
 import ru.gasworkers.dev.extension.browser.Browser;
@@ -31,7 +31,7 @@ public class RegularClientRegistrationApiTest extends BaseTest {
     }
 
     public final RegularStartRegistrationApi regularStartRegistrationApi = new RegularStartRegistrationApi();
-    public final CheckRegistrationCode checkRegistrationCode = new CheckRegistrationCode();
+    public final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
     public final RegularFinishRegistrationApi regularFinishRegistrationApi = new RegularFinishRegistrationApi();
     private final RandomClient randomClient = new RandomClient();
     private final String
@@ -53,7 +53,7 @@ public class RegularClientRegistrationApiTest extends BaseTest {
     @DisplayName("Регистрация клиента Api")
     public void clientRegistrationApiTest() {
         regularStartRegistrationApi.regularStartRegistration(UserType.CLIENT.toString(), email, phone, false);
-        checkRegistrationCode.checkRegistrationCode(code, UserType.CLIENT.toString(), email, phone);
+        checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), email, phone);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.CLIENT.toString(), email, phone, firstName, lastName, patronymicName, password, gender, false, false, null, null);
         clientPages.getLoginPage().open();
         clientPages.getLoginPage().loginEmail(email, password);
