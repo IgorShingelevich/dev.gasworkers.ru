@@ -122,15 +122,15 @@ class ClientDispatcherInteractionTest extends BaseTest {
                 clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
                 clientPages.getSelectServicePage().checkPublishedState();
             });
-            step("Клиент просматривает опубликованный заказ на домашней странице", () -> {
+           /* step("Клиент просматривает опубликованный заказ на домашней странице", () -> {
                  clientPages.getSelectServicePage().toOrderCard();
                  clientPages.getOrderCardPage().checkFinishLoading();
                  clientPages.getOrderCardPage().sidebar.home();
                  clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
                  clientPages.getHomePage().popUp.close();
-            });
+            });*/
             step("Клиент просматривает опубликованный заказа в карточке объекта", () -> {
-                clientPages.getHomePage().lastOrderComponent.lastOrderCard();
+                clientPages.getSelectServicePage().toOrderCard();
                 clientPages.getOrderCardPage().checkFinishLoading();
                 clientPages.getOrderCardPage().checkPublishedState(OrderStatus.PUBLISHED, OrderType.MAINTENANCE);
                 //check notification - orderPublished

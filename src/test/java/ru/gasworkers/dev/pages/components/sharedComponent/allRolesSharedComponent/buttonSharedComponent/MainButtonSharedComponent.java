@@ -60,9 +60,9 @@ SelenideElement
         });
     }
 
-    public void checkButtonText(String text, SelenideElement closestBoxLocator) {
-        stepWithRole("Убедиться, что текст главной кнопки в: " + closestBoxLocator.getAlias() + " " + text, () -> {
-            closestBoxLocator.$("button.btn.btn-primary").$("span").shouldHave(Condition.text(text));
+    public void checkButtonText(String buttonText, SelenideElement closestBoxLocator) {
+        stepWithRole("Убедиться, что текст главной кнопки в: " + closestBoxLocator.getAlias() + " " + buttonText, () -> {
+            closestBoxLocator.$("button.btn.btn-primary").$("span").shouldHave(Condition.text(buttonText));
         });
     }
 

@@ -19,6 +19,7 @@ public class UrlCheckerSharedComponent  extends BaseComponent {
             } catch (Exception e) {
                 String actualUrl = driver.url();
                 File screenshot = Screenshots.takeScreenShotAsFile();
+                assert screenshot != null;
                 throw new RuntimeException("URL check fail. Url should be " + url + " but actual url is - " + actualUrl + ". Screenshot saved as: " + screenshot.getAbsolutePath(), e);
             }
         });

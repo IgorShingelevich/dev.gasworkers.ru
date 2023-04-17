@@ -126,7 +126,4 @@ task scope_clientTest(type: Test) {
             includeTags "api-collection"
         }
     }
-
-
-
 }

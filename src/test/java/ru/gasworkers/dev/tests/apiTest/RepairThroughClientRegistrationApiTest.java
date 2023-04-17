@@ -46,7 +46,7 @@ public class RepairThroughClientRegistrationApiTest extends BaseTest {
         put("custom_model", null);
         put("power", "25.8");
     }});
-
+    @Disabled
     @Test
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)

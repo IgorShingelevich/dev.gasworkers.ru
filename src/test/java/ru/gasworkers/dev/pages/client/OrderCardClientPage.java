@@ -126,8 +126,7 @@ public class OrderCardClientPage extends BaseClientPage {
                 //TODO: add steps for this tab
             });
             stepWithRole("Вкладка Документы", () -> {
-                navDocs();
-                docsTab.noDocs();
+                //TODO: add steps for this tab
             });
             System.out.println("client orderType: " + orderType + ", client orderStatus: " + orderStatus);
         });

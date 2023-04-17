@@ -30,7 +30,7 @@ public class AddDiplomaProfileTabComponent extends BaseComponent {
 
     public void checkInitialState() {
         stepWithRole("Проверить начальное состояние", () -> {
-            driver.$("div.gas-textarea-wrapper.mb-2").sibling(0).shouldHave(text("Добавить дипломы, сертификаты"));
+            driver.$("div.gas-textarea-wrapper.mb-2").sibling(0).shouldHave(text("Добавить документы о профессиональном обучении")); // changed "Добавить дипломы, сертификаты"
             diplomaPreviewCollection.shouldHave(CollectionCondition.size(0));
             closeButtonsCollection.shouldHave(CollectionCondition.size(0));
         });

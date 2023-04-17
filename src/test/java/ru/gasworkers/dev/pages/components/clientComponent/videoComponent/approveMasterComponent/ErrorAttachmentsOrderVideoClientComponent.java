@@ -17,7 +17,7 @@ public class ErrorAttachmentsOrderVideoClientComponent extends BaseComponent {
 
     SelenideElement
         titleLocator = driver.$("div.medium.w-100.mb-20.d-flex").as("Заголовок компонента Прикрепленные файлы и описание"),
-        subtitleLocator = driver.$("p.small.mb-0").as("Подзаголовок компонента Прикрепленные файлы и описание"),
+        subtitleLocator = driver.$("p.small.mb-md-0").as("Подзаголовок компонента Прикрепленные файлы и описание"), // changed driver.$("p.small.mb-0")
         uploadButtonLocator = driver.$("button.upload-button").as("Кнопка Прикрепить файл"),
         malfunctionDescriptionInputLocator = driver.$("input[placeholder='Опишите вашу проблему']").as("Поле Описание поломки");
 

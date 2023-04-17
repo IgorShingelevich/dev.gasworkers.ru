@@ -21,7 +21,7 @@ import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
 
 import static ru.gasworkers.dev.model.Role.SELF_EMPLOYED;
 
-public class RegularSelfEmployedRegistrationApiTest {
+public class RegularIPSelfEmployedRegistrationApiTest {
     @Browser(role = SELF_EMPLOYED)
     SelfEmployedPages selfEmployedPages;
 
