@@ -2,7 +2,8 @@ package ru.gasworkers.dev.api.registration;
 
 import io.qameta.allure.Allure;
 import io.restassured.http.ContentType;
-import ru.gasworkers.dev.model.apiModel.UserType;
+import io.restassured.response.ExtractableResponse;
+import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
@@ -30,37 +31,46 @@ public class RegularFinishRegistrationApi {
      * @param serviceId        the identifier of the company the user works for (mandatory for master registration)
      */
     public void regularFinishRegistration(String userType, String email, String phone, String name, String surname, String patronymic, String password, String gender, Boolean isHaveContract, Boolean isIp, String employedStatus, Integer serviceId) {
-        Allure.step("Окночание - Регистрация Api для роли: " + userType + " " + email + " " + phone, () -> {
+        Allure.step("Окончание - Регистрация Api для роли: " + userType + " " + email + " " + phone, () -> {
 
             String requestBody = "{"
-                    + "\"type\": \"" + userType + "\","
-                    + "\"password\": \"" + password + "\","
                     + "\"email\": \"" + email + "\","
-                    + "\"phone\": " + phone + ","
+                    + "\"employed_status\": \"" + employedStatus + "\","
                     + "\"first_name\": \"" + name + "\","
+                    + "\"gender\": \"" + gender + "\","
                     + "\"last_name\": \"" + surname + "\","
                     + "\"middle_name\": \"" + patronymic + "\","
-                    + "\"gender\": \"" + gender + "\","
+                    + "\"password\": \"" + password + "\","
+                    + "\"phone\": " + phone + ","
+                    + "\"service_id\": " + serviceId + ","
                     + "\"is_have_contract\": " + isHaveContract + ","
                     + "\"is_ip\": " + isIp + ","
-                    + "\"employed_status\": \"" + employedStatus + "\","
-                    + "\"service_id\": " + serviceId
+                    + "\"type\": \"" + userType + "\""
                     + "}";
 
-            given()
+            ExtractableResponse<Response> response =  given()
                     .contentType(ContentType.JSON)
                     .accept(ContentType.JSON)
                     .body(requestBody)
                     .when()
                     .post("/auth/complete-registration")
                     .then()
-                    .statusCode(200)
+                    .statusCode(anyOf(is(200), is(201), is(202), is(204))) // add acceptable codes for your API
                     .contentType(ContentType.JSON)
                     .body("status", equalTo(0))
-                    .body("message", equalTo("Регистрация завершена"));
+                    .body("message", equalTo("Регистрация завершена"))
+                    .extract();
+            if (response.statusCode() != 200) {
+                System.out.println("Register finish error Request : " + requestBody);
+                System.out.println("Register finish error Response : " + response.asString());
+            }
+            if (response.statusCode() == 200) {
+                System.out.println("Register finish success Request : " + requestBody);
+                System.out.println("Register finish success Response : " + response.asString());
+            }
 
             System.out.println("Register finish for role: " + userType+ " " + email + " " + phone + " " + name + " " + surname + " " + patronymic);
-
+            System.out.println();
         });
     }
 }

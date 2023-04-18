@@ -1,10 +1,10 @@
-package ru.gasworkers.dev.tests.apiTest;
+package ru.gasworkers.dev.tests.apiTest.registration.throughClientRegistration;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.allure.*;
 import ru.gasworkers.dev.api.*;
-import ru.gasworkers.dev.api.registration.*;
+import ru.gasworkers.dev.api.registration.throughClientRegistrationApi.ThroughClientRegistrationApi;
 import ru.gasworkers.dev.extension.browser.*;
 import ru.gasworkers.dev.model.*;
 import ru.gasworkers.dev.pages.context.*;

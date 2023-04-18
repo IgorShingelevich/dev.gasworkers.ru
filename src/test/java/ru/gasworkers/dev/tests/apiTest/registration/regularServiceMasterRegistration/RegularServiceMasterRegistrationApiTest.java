@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.apiTest;
+package ru.gasworkers.dev.tests.apiTest.registration.regularServiceMasterRegistration;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -16,14 +16,15 @@ import ru.gasworkers.dev.model.apiModel.Employed_status;
 import ru.gasworkers.dev.model.apiModel.Gender;
 import ru.gasworkers.dev.model.apiModel.ServiceCompanyStaff;
 import ru.gasworkers.dev.model.apiModel.UserType;
-import ru.gasworkers.dev.pages.context.SelfEmployedPages;
+import ru.gasworkers.dev.pages.context.MasterPages;
+import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
 
-import static ru.gasworkers.dev.model.Role.SELF_EMPLOYED;
+import static ru.gasworkers.dev.model.Role.MASTER;
 
-public class RegularIPSelfEmployedRegistrationApiTest {
-    @Browser(role = SELF_EMPLOYED)
-    SelfEmployedPages selfEmployedPages;
+public class RegularServiceMasterRegistrationApiTest extends BaseTest {
+    @Browser(role = MASTER)
+    MasterPages masterPages;
 
     @BeforeEach
     public void setUpRestAssured() {
@@ -33,9 +34,9 @@ public class RegularIPSelfEmployedRegistrationApiTest {
     public final RegularStartRegistrationApi regularStartRegistrationApi = new RegularStartRegistrationApi();
     public final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
     public final RegularFinishRegistrationApi regularFinishRegistrationApi = new RegularFinishRegistrationApi();
-    private final RandomSelfEmployedAndMaster randomSelfEmployedAndMaster = new RandomSelfEmployedAndMaster();
     public final ServiceCompanyStaff staff = new ServiceCompanyStaff();
 
+    private final RandomSelfEmployedAndMaster randomSelfEmployedAndMaster = new RandomSelfEmployedAndMaster();
     private final String
             email = randomSelfEmployedAndMaster.getEmail(),
             phone = randomSelfEmployedAndMaster.getPhone(),
@@ -52,18 +53,17 @@ public class RegularIPSelfEmployedRegistrationApiTest {
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.REGULAR_REGISTRATION)
-    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.SE_INDIVIDUAL), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
-    @DisplayName(" Регистрация самозанятого Api ")
-    public void regularSelfEmployedRegistration() {
+    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.MASTER), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
+    @DisplayName(" Регистрация мастера Api ")
+    public void regularMasterRegistration() {
+
         regularStartRegistrationApi.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
         checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.MASTER.toString(), email, phone);
-        regularFinishRegistrationApi.regularFinishRegistration(UserType.MASTER.toString(), email, phone, firstName, lastName, patronymicName, password, gender, true, true, Employed_status.SELF_EMPLOYED.toString(), null);
-
-
-        selfEmployedPages.getLoginPage().open();
-        selfEmployedPages.getLoginPage().loginEmail(email, password);
-        selfEmployedPages.getHomePage().urlChecker.urlContains("profile/master");
+        regularFinishRegistrationApi.regularFinishRegistration(UserType.MASTER.toString(), email, phone, firstName, lastName, patronymicName, password, gender, true, true, Employed_status.ACCEPTED.toString(), serviceId);
+        masterPages.getLoginPage().open();
+        masterPages.getLoginPage().loginEmail(email, password);
+        masterPages.getHomePage().urlChecker.urlContains("profile/master");
     }
 
-
 }
+

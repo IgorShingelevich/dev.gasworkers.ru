@@ -74,7 +74,7 @@ public class VideoBGRegistrationTest extends BaseTest {
             clientPages.getLandingPage().bgRegistration.fillBGVideoRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhoneNumber(), randomClient.getEmail(), randomClient.getEquipmentVideoFile());
            // TODO add photo video
        });
-       String resultedAddress = clientPages.getLandingPage().bgRegistration.address.getResultedAddress();
+//       String resultedAddress = clientPages.getLandingPage().bgRegistration.address.getResultedAddress(); // removed
        String resultedEquipmentCollectionName = clientPages.getLandingPage().bgRegistration.equipment.getEquipmentName(0);
        // todo String desiredDate =
          // todo String desiredTime =
@@ -116,7 +116,7 @@ public class VideoBGRegistrationTest extends BaseTest {
                 clientPages.getApproveMasterVideoPage().details.checkPriceOrder(masterPriceByIndex);
                 clientPages.getApproveMasterVideoPage().details.checkOrderType(OrderType.VIDEO);
                 clientPages.getApproveMasterVideoPage().details.checkEquipment(resultedEquipmentCollectionName);
-                clientPages.getApproveMasterVideoPage().details.checkPersonAddress(resultedAddress);
+//                clientPages.getApproveMasterVideoPage().details.checkPersonAddress(resultedAddress); // removed
                 //todo  video attachments
             });
         });
@@ -159,7 +159,8 @@ public class VideoBGRegistrationTest extends BaseTest {
             step("Страница Объекты", () -> {
                 clientPages.getAllNotificationsPage().sidebar.allObjects();
                 clientPages.getAllObjectsPage().checkFinishLoading();
-                clientPages.getAllObjectsPage().initialBGState(GAS_BOILER_TYPE, resultedEquipmentCollectionName, power.toString(), resultedAddress);
+                // todo  through video  initial state - address removed
+//                clientPages.getAllObjectsPage().initialBGState(GAS_BOILER_TYPE, resultedEquipmentCollectionName, power.toString(), resultedAddress);
             });
             step("Страница Заказы", () -> {
                 clientPages.getAllObjectsPage().sidebar.allOrders();

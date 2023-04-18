@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.registration;
+package ru.gasworkers.dev.api.registration.throughClientRegistrationApi;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;

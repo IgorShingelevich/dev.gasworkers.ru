@@ -21,7 +21,7 @@ import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
 
 import static io.qameta.allure.Allure.step;
 
-public class ByPhoneSelfEmployedRegistrationTest extends BaseTest {
+public class SelfEmployedRegistrationApiTest extends BaseTest {
     RandomSelfEmployedAndMaster randomSelfEmployedAndMaster = new RandomSelfEmployedAndMaster();
 
 

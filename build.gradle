@@ -12,22 +12,42 @@ repositories {
 }
 
 ext {
-    junitVersion = '5.9.0'
+    selenideVersion = '6.12.3'
+    selenideProxy = '6.12.3'
+    assertjVersion = '3.24.2'
+    junitJupiterVersion = '5.9.0'
+    hamcrest = '2.2'
+    allureSelenideVersion = '2.20.0'
+    slf4jVersion = '2.0.5'
+    javafakerVersion = '1.0.2'
+    icu4j = '51.1'
+    SMSActivateApiVersion = '1.5.9'
+    restassured = '5.3.0'
+    awaitility = '4.2.0'
+    pdfTest = '1.8.0'
+    pdfbox = '3.0.0-RC1'
+    jacksonCore = '2.14.1'
+    jacksonDatabind = '2.12.3'
+    jsonPath = '2.4.0'
+    jsonSimple = '1.1.1'
+    orgJson = '20210307'
+    junitVersion = '4.13.1'
+    annotationsVersion = '23.0.0'
 }
 
 sourceCompatibility = '11'
 targetCompatibility = '11'
 
-
 allure {
     report {
         version.set("2.20.0")
     }
-    adapter { // отвечает за появление папочки build/allure-results
+
+    adapter {
         aspectjWeaver.set(true)
         frameworks {
-            junit5 { //название фреймворка
-                adapterVersion.set("2.20.0") //версия интеграции фреймворка и Allure
+            junit5 {
+                adapterVersion.set("2.20.0")
             }
         }
     }
@@ -36,94 +56,65 @@ allure {
 tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
-def selenideVersion = '6.12.3',
-        selenideProxy = '6.12.3',
-    assertjVersion = '3.24.2',
-    junitJupiterVersion = '5.9.0',
-    hamcrest = '2.2',
-    allureSelenideVersion = '2.20.0',
-    slf4jVersion = '2.0.5',
-    javafakerVersion = '1.0.2',
-    icu4j = '51.1',
-    SMSActivateApiVersion = '1.5.9',
-    restassured = '5.3.0',
-    awaitility = '4.2.0',
-    pdfTest = '1.8.0',
-    pdfbox = '3.0.0-RC1',
-    jacksonCore = '2.14.1'
-
 
 dependencies {
-    implementation "com.codeborne:selenide-proxy:$selenideProxy"
+    implementation "com.codeborne:selenide-proxy:${selenideProxy}"
 
     testImplementation(
-            "com.ibm.icu:icu4j:$icu4j",
-            "com.codeborne:selenide:$selenideVersion",
-            "io.qameta.allure:allure-selenide:$allureSelenideVersion",
-            "org.junit.jupiter:junit-jupiter:$junitJupiterVersion",
-            "org.slf4j:slf4j-simple:$slf4jVersion",
-            "ru.sms-activate:SMSActivateApi:$SMSActivateApiVersion",
-            "io.rest-assured:rest-assured:$restassured",
-            "com.github.javafaker:javafaker:$javafakerVersion",
-            "com.codeborne:pdf-test:$pdfTest",
-//            "org.apache.pdfbox:pdfbox:$pdfbox",
-            "org.assertj:assertj-core:$assertjVersion",
-            "org.hamcrest:hamcrest:$hamcrest",
-            "org.awaitility:awaitility:$awaitility",
-            "com.fasterxml.jackson.core:jackson-core:$jacksonCore",
-            "com.fasterxml.jackson.core:jackson-databind:2.12.3",
-            "com.jayway.jsonpath:json-path:2.4.0",
-            "com.googlecode.json-simple:json-simple:1.1.1",
-            "org.json:json:20210307"
-
+            "com.ibm.icu:icu4j:${icu4j}",
+            "com.codeborne:selenide:${selenideVersion}",
+            "io.qameta.allure:allure-selenide:${allureSelenideVersion}",
+            "org.junit.jupiter:junit-jupiter:${junitJupiterVersion}",
+            "org.slf4j:slf4j-simple:${slf4jVersion}",
+            "ru.sms-activate:SMSActivateApi:${SMSActivateApiVersion}",
+            "io.rest-assured:rest-assured:${restassured}",
+            "com.github.javafaker:javafaker:${javafakerVersion}",
+            "com.codeborne:pdf-test:${pdfTest}",
+            "org.assertj:assertj-core:${assertjVersion}",
+            "org.hamcrest:hamcrest:${hamcrest}",
+            "org.awaitility:awaitility:${awaitility}",
+            "com.fasterxml.jackson.core:jackson-core:${jacksonCore}",
+            "com.fasterxml.jackson.core:jackson-databind:${jacksonDatabind}",
+            "com.jayway.jsonpath:json-path:${jsonPath}",
+            "com.googlecode.json-simple:json-simple:${jsonSimple}",
+            "org.json:json:${orgJson}",
+            "junit:junit:${junitVersion}",
+            "org.jetbrains:annotations:${annotationsVersion}"
     )
-    testImplementation 'org.jetbrains:annotations:23.0.0'
-    testImplementation 'junit:junit:4.13.1'
 }
 
 test {
     useJUnitPlatform()
 }
 
-task scope_registrationTest(type: Test) {
+// Task providers
+task taskProvider_registrationTest(type: Test) {
     useJUnitPlatform {
         includeTags "registration"
     }
-
 }
-task scope_clientTest(type: Test) {
+
+task taskProvider_clientTest(type: Test) {
     useJUnitPlatform {
         includeTags "client"
     }
+}
 
-    def taskProvider_registrationTest = tasks.register("taskProvider_registrationTest", Test) {
-        useJUnitPlatform {
-            includeTags "registration"
-        }
+task taskProvider_bg_registrationTest(type: Test) {
+    useJUnitPlatform {
+        includeTags "bg-registration"
     }
+}
 
-    def taskProvider_bg_registrationTest = tasks.register("taskProvider_bg_registrationTest", Test) {
-        useJUnitPlatform {
-            includeTags "bg-registration"
-        }
+
+task taskProvider_apiTest(type: Test) {
+    useJUnitPlatform {
+        includeTags "api"
     }
+}
 
-
-    def taskProvider_clientTest = tasks.register("taskProvider_clientTest", Test) {
-        useJUnitPlatform {
-            includeTags "client"
-        }
-    }
-
-    def taskProvider_apiTest = tasks.register("taskProvider_apiTest", Test) {
-        useJUnitPlatform {
-            includeTags "api"
-        }
-    }
-
-    def taskProvider_apiCollection = tasks.register("taskProvider_apiCollection", Test) {
-        useJUnitPlatform {
-            includeTags "api-collection"
-        }
+task taskProvider_apiCollection(type: Test) {
+    useJUnitPlatform {
+        includeTags "api-collection"
     }
 }

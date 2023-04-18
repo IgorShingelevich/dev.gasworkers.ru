@@ -231,7 +231,7 @@ public class BackgroundRegistrationComponent extends BaseComponent {
             stepWithRole("Выбрать тип заявки: " + BackgroundClientRequestType.VIDEO.getTitle(), () -> {
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.VIDEO.getTitle())).click();
             });
-            address.fillAddressField(objectAddress);
+//            address.fillAddressField(objectAddress); // removed
             equipment.fillVideoEquipment(type, mark, brand, power, equipmentVideoFile);
             stepWithRole("Указать контактные данные", () -> {
                 stepWithRole("Нажать на дропдаун контактных данных", () -> {

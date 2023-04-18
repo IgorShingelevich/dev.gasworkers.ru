@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.registration;
+package ru.gasworkers.dev.api.registration.throughClientRegistrationApi;
 
 import io.qameta.allure.Allure;
 import io.restassured.http.ContentType;

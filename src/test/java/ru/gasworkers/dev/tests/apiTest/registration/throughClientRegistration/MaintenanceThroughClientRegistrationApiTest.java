@@ -1,12 +1,12 @@
-package ru.gasworkers.dev.tests.apiTest;
+package ru.gasworkers.dev.tests.apiTest.registration.throughClientRegistration;
 
 import io.qameta.allure.*;
 import org.json.JSONArray;
 import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.allure.*;
 import ru.gasworkers.dev.api.ApiTestConfig;
-import ru.gasworkers.dev.api.registration.CheckThroughRegistrationCodeApi;
-import ru.gasworkers.dev.api.registration.MaintenanceThroughClientRegistrationApi;
+import ru.gasworkers.dev.api.registration.throughClientRegistrationApi.CheckThroughRegistrationCodeApi;
+import ru.gasworkers.dev.api.registration.throughClientRegistrationApi.MaintenanceThroughClientRegistrationApi;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.pages.context.ClientPages;

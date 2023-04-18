@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.apiTest;
+package ru.gasworkers.dev.tests.apiTest.registration.regularSelfEmployedRegistration;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -9,6 +9,7 @@ import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.ApiTestConfig;
 import ru.gasworkers.dev.api.registration.CheckRegularRegistrationCodeApi;
+import ru.gasworkers.dev.api.registration.ConfigureSelfEmployedRegistrationApi;
 import ru.gasworkers.dev.api.registration.RegularFinishRegistrationApi;
 import ru.gasworkers.dev.api.registration.RegularStartRegistrationApi;
 import ru.gasworkers.dev.extension.browser.Browser;
@@ -21,7 +22,7 @@ import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
 
 import static ru.gasworkers.dev.model.Role.SELF_EMPLOYED;
 
-public class RegularNoIPSelfEmployedRegistrationApiTest {
+public class RegularSelfEmployedRegistrationApiTest {
     @Browser(role = SELF_EMPLOYED)
     SelfEmployedPages selfEmployedPages;
 
@@ -33,6 +34,7 @@ public class RegularNoIPSelfEmployedRegistrationApiTest {
     public final RegularStartRegistrationApi regularStartRegistrationApi = new RegularStartRegistrationApi();
     public final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
     public final RegularFinishRegistrationApi regularFinishRegistrationApi = new RegularFinishRegistrationApi();
+    public final ConfigureSelfEmployedRegistrationApi configureSelfEmployedRegistrationApi = new ConfigureSelfEmployedRegistrationApi();
     private final RandomSelfEmployedAndMaster randomSelfEmployedAndMaster = new RandomSelfEmployedAndMaster();
     public final ServiceCompanyStaff staff = new ServiceCompanyStaff();
 
@@ -53,11 +55,27 @@ public class RegularNoIPSelfEmployedRegistrationApiTest {
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.REGULAR_REGISTRATION)
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.SE_INDIVIDUAL), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
-    @DisplayName(" Регистрация самозанятого Api ")
-    public void regularSelfEmployedRegistration() {
+    @DisplayName(" Регистрация самозанятого Api ( без конфигурации) - получается Рекрут? Чем отличается от регистрации мастера в ск? " )
+    public void noConfigSelfEmployedRegistration() {
         regularStartRegistrationApi.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
         checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.MASTER.toString(), email, phone);
-        regularFinishRegistrationApi.regularFinishRegistration(UserType.MASTER.toString(), email, phone, firstName, lastName, patronymicName, password, gender, true, false, Employed_status.SELF_EMPLOYED.toString(), null);
+        regularFinishRegistrationApi.regularFinishRegistration(UserType.MASTER.toString(), email, phone, firstName, lastName, patronymicName, password, gender, true, true, Employed_status.SELF_EMPLOYED.toString(), null);
+
+        selfEmployedPages.getLoginPage().open();
+        selfEmployedPages.getLoginPage().loginEmail(email, password);
+        selfEmployedPages.getHomePage().urlChecker.urlContains("profile/master");
+    }
+    @Test
+    @Owner("Igor Shingelevich")
+    @Epic(AllureEpic.REGISTRATION)
+    @Feature(AllureFeature.REGULAR_REGISTRATION)
+    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.SE_INDIVIDUAL), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
+    @DisplayName(" Регистрация самозанятого Api ( c конфигурацией ")
+    public void configSelfEmployedRegistration() {
+        regularStartRegistrationApi.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
+        checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.MASTER.toString(), email, phone);
+        regularFinishRegistrationApi.regularFinishRegistration(UserType.MASTER.toString(), email, phone, firstName, lastName, patronymicName, password, gender, true, true, Employed_status.SELF_EMPLOYED.toString(), null);
+        configureSelfEmployedRegistrationApi.configureSelfEmployedRegistration(false, true);
 
 
         selfEmployedPages.getLoginPage().open();
