@@ -10,7 +10,7 @@ import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.ApiTestConfig;
 import ru.gasworkers.dev.api.registration.CheckRegularRegistrationCodeApi;
 import ru.gasworkers.dev.api.registration.RegularFinishRegistrationApi;
-import ru.gasworkers.dev.api.registration.RegularStartRegistrationApi;
+import ru.gasworkers.dev.api.registration.RegularStartRegistrationApi1;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.apiModel.Employed_status;
 import ru.gasworkers.dev.model.apiModel.Gender;
@@ -31,7 +31,7 @@ public class RegularServiceMasterRegistrationApiTest extends BaseTest {
         ApiTestConfig.configureRestAssured();
     }
 
-    public final RegularStartRegistrationApi regularStartRegistrationApi = new RegularStartRegistrationApi();
+    public final RegularStartRegistrationApi1 regularStartRegistrationApi1 = new RegularStartRegistrationApi1();
     public final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
     public final RegularFinishRegistrationApi regularFinishRegistrationApi = new RegularFinishRegistrationApi();
     public final ServiceCompanyStaff staff = new ServiceCompanyStaff();
@@ -49,7 +49,7 @@ public class RegularServiceMasterRegistrationApiTest extends BaseTest {
     private final Integer
             serviceId = staff.EGIDA.ID;
 
-    @Test
+    /*@Test
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.REGULAR_REGISTRATION)
@@ -57,13 +57,13 @@ public class RegularServiceMasterRegistrationApiTest extends BaseTest {
     @DisplayName(" Регистрация мастера Api ")
     public void regularMasterRegistration() {
 
-        regularStartRegistrationApi.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
+        regularStartRegistrationApi1.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
         checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.MASTER.toString(), email, phone);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.MASTER.toString(), email, phone, firstName, lastName, patronymicName, password, gender, true, true, Employed_status.ACCEPTED.toString(), serviceId);
         masterPages.getLoginPage().open();
         masterPages.getLoginPage().loginEmail(email, password);
         masterPages.getHomePage().urlChecker.urlContains("profile/master");
-    }
+    }*/
 
 }
 

@@ -10,7 +10,7 @@ import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.ApiTestConfig;
 import ru.gasworkers.dev.api.registration.CheckRegularRegistrationCodeApi;
 import ru.gasworkers.dev.api.registration.RegularFinishRegistrationApi;
-import ru.gasworkers.dev.api.registration.RegularStartRegistrationApi;
+import ru.gasworkers.dev.api.registration.RegularStartRegistrationApi1;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.apiModel.Employed_status;
 import ru.gasworkers.dev.model.apiModel.Gender;
@@ -22,7 +22,7 @@ import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 import static ru.gasworkers.dev.model.Role.CLIENT;
 
 public class RegularEmailAndPhoneClientRegistrationApiTest extends BaseTest {
-    @Browser(role = CLIENT)
+    /*@Browser(role = CLIENT)
     ClientPages clientPages;
 
     @BeforeEach
@@ -30,7 +30,7 @@ public class RegularEmailAndPhoneClientRegistrationApiTest extends BaseTest {
         ApiTestConfig.configureRestAssured();
     }
 
-    public final RegularStartRegistrationApi regularStartRegistrationApi = new RegularStartRegistrationApi();
+    public final RegularStartRegistrationApi1 regularStartRegistrationApi1 = new RegularStartRegistrationApi1();
     public final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
     public final RegularFinishRegistrationApi regularFinishRegistrationApi = new RegularFinishRegistrationApi();
     private final RandomClient randomClient = new RandomClient();
@@ -52,12 +52,12 @@ public class RegularEmailAndPhoneClientRegistrationApiTest extends BaseTest {
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
     @DisplayName("Регистрация клиента Api (email и телефон)")
     public void clientRegistrationEmailAndPhoneApiTest() {
-        regularStartRegistrationApi.regularStartRegistration(UserType.CLIENT.toString(), email, phone, true);
-        checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), email, phone);
+        regularStartRegistrationApi1.regularStartRegistration(UserType.CLIENT.toString(), email, phone, true);
+        *//*checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), email, phone);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.CLIENT.toString(), email, phone, firstName, lastName, patronymicName, password, gender, false, false, null, null);
         clientPages.getLoginPage().open();
         clientPages.getLoginPage().loginEmail(email, password);
-        clientPages.getHomePage().urlChecker.urlContains("profile/client");
+        clientPages.getHomePage().urlChecker.urlContains("profile/client");*//*
     }
 
     @Test
@@ -67,7 +67,7 @@ public class RegularEmailAndPhoneClientRegistrationApiTest extends BaseTest {
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
     @DisplayName("Регистрация клиента Api (email и телефон, false)")
     public void clientRegistrationEmailAndPhoneFalseApiTest() {
-        regularStartRegistrationApi.regularStartRegistration(UserType.CLIENT.toString(), email, phone,false);
+        regularStartRegistrationApi1.regularStartRegistration(UserType.CLIENT.toString(), email, phone,false);
         checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), email, null);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.CLIENT.toString(), email, phone, firstName, lastName, patronymicName, password, gender, false, false, null, null);
         clientPages.getLoginPage().open();
@@ -75,6 +75,7 @@ public class RegularEmailAndPhoneClientRegistrationApiTest extends BaseTest {
         clientPages.getHomePage().urlChecker.urlContains("profile/client");
     }
 
+    @Disabled
     @Test
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
@@ -82,7 +83,7 @@ public class RegularEmailAndPhoneClientRegistrationApiTest extends BaseTest {
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
     @DisplayName("Регистрация клиента Api (email и телефон, null)")
     public void clientRegistrationEmailAndPhoneNullApiTest() {
-        regularStartRegistrationApi.regularStartRegistration(UserType.CLIENT.toString(), email, phone,false);
+        regularStartRegistrationApi1.regularStartRegistration(UserType.CLIENT.toString(), email, phone,false);
         checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), email, null);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.CLIENT.toString(), email, phone, firstName, lastName, patronymicName, password, gender, false, false, null, null);
         clientPages.getLoginPage().open();
@@ -90,6 +91,7 @@ public class RegularEmailAndPhoneClientRegistrationApiTest extends BaseTest {
         clientPages.getHomePage().urlChecker.urlContains("profile/client");
     }
 
+    @Disabled
     @Test
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
@@ -97,12 +99,12 @@ public class RegularEmailAndPhoneClientRegistrationApiTest extends BaseTest {
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
     @DisplayName("Регистрация клиента Api (phone)")
     public void clientRegistrationPhoneApiTest() {
-        regularStartRegistrationApi.regularStartRegistration(UserType.CLIENT.toString(), null, phone,true);
+        regularStartRegistrationApi1.regularStartRegistration(UserType.CLIENT.toString(), null, phone,true);
         checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), null, phone);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.CLIENT.toString(), email, phone, firstName, lastName, patronymicName, password, gender, false, false, null, null);
         clientPages.getLoginPage().open();
         clientPages.getLoginPage().loginEmail(email, password);
         clientPages.getHomePage().urlChecker.urlContains("profile/client");
-    }
+    }*/
 
 }

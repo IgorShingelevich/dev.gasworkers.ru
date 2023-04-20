@@ -2,8 +2,10 @@ package ru.gasworkers.dev.allure;
 
 public final class AllureTag {
 
-    public static final String POSITIVE = "positive",
-            NEGATIVE = "negative";
+    public static final String
+            POSITIVE = "positive",
+            NEGATIVE = "negative",
+            COMBINATORIAL = "combinatorial";
 
     public static final String REGRESSION = "regression",
             SMOKE = "smoke";

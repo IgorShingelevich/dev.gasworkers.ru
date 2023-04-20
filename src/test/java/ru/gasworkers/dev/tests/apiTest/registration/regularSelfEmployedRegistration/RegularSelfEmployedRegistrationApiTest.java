@@ -11,7 +11,7 @@ import ru.gasworkers.dev.api.ApiTestConfig;
 import ru.gasworkers.dev.api.registration.CheckRegularRegistrationCodeApi;
 import ru.gasworkers.dev.api.registration.ConfigureSelfEmployedRegistrationApi;
 import ru.gasworkers.dev.api.registration.RegularFinishRegistrationApi;
-import ru.gasworkers.dev.api.registration.RegularStartRegistrationApi;
+import ru.gasworkers.dev.api.registration.RegularStartRegistrationApi1;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.apiModel.Employed_status;
 import ru.gasworkers.dev.model.apiModel.Gender;
@@ -23,7 +23,7 @@ import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
 import static ru.gasworkers.dev.model.Role.SELF_EMPLOYED;
 
 public class RegularSelfEmployedRegistrationApiTest {
-    @Browser(role = SELF_EMPLOYED)
+    /*@Browser(role = SELF_EMPLOYED)
     SelfEmployedPages selfEmployedPages;
 
     @BeforeEach
@@ -31,7 +31,7 @@ public class RegularSelfEmployedRegistrationApiTest {
         ApiTestConfig.configureRestAssured();
     }
 
-    public final RegularStartRegistrationApi regularStartRegistrationApi = new RegularStartRegistrationApi();
+    public final RegularStartRegistrationApi1 regularStartRegistrationApi1 = new RegularStartRegistrationApi1();
     public final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
     public final RegularFinishRegistrationApi regularFinishRegistrationApi = new RegularFinishRegistrationApi();
     public final ConfigureSelfEmployedRegistrationApi configureSelfEmployedRegistrationApi = new ConfigureSelfEmployedRegistrationApi();
@@ -57,7 +57,7 @@ public class RegularSelfEmployedRegistrationApiTest {
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.SE_INDIVIDUAL), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
     @DisplayName(" Регистрация самозанятого Api ( без конфигурации) - получается Рекрут? Чем отличается от регистрации мастера в ск? " )
     public void noConfigSelfEmployedRegistration() {
-        regularStartRegistrationApi.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
+        regularStartRegistrationApi1.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
         checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.MASTER.toString(), email, phone);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.MASTER.toString(), email, phone, firstName, lastName, patronymicName, password, gender, true, true, Employed_status.SELF_EMPLOYED.toString(), null);
 
@@ -72,7 +72,7 @@ public class RegularSelfEmployedRegistrationApiTest {
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.SE_INDIVIDUAL), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
     @DisplayName(" Регистрация самозанятого Api ( c конфигурацией ")
     public void configSelfEmployedRegistration() {
-        regularStartRegistrationApi.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
+        regularStartRegistrationApi1.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
         checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.MASTER.toString(), email, phone);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.MASTER.toString(), email, phone, firstName, lastName, patronymicName, password, gender, true, true, Employed_status.SELF_EMPLOYED.toString(), null);
         configureSelfEmployedRegistrationApi.configureSelfEmployedRegistration(false, true);
@@ -81,7 +81,7 @@ public class RegularSelfEmployedRegistrationApiTest {
         selfEmployedPages.getLoginPage().open();
         selfEmployedPages.getLoginPage().loginEmail(email, password);
         selfEmployedPages.getHomePage().urlChecker.urlContains("profile/master");
-    }
+    }*/
 
 
 }

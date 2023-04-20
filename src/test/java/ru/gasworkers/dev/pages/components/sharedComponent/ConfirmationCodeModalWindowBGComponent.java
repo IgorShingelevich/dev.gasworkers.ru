@@ -2,15 +2,21 @@ package ru.gasworkers.dev.pages.components.sharedComponent;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.WebDriverConditions;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.UrlCheckerSharedComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Configuration.browser;
+import static com.codeborne.selenide.WebDriverConditions.url;
 
 public class ConfirmationCodeModalWindowBGComponent extends BaseComponent {
+    public final UrlCheckerSharedComponent urlChecker;
     public ConfirmationCodeModalWindowBGComponent(RoleBrowser browser) {
         super(browser);
+        urlChecker = new UrlCheckerSharedComponent(browser);
     }
 
     private final String
@@ -34,6 +40,7 @@ public class ConfirmationCodeModalWindowBGComponent extends BaseComponent {
             modalTextLocator.shouldHave(text(modalText));
             confirmationCodeCollection.get(0).setValue(code);
             System.out.println("code: " + code);
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client");
         });
     }
 
