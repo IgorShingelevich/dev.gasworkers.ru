@@ -98,7 +98,9 @@ public class Parametrized3RegistrationStartApiTest extends BaseTest {
                 Arguments.of(45, "client", null, null),
                 Arguments.of(46, "client", true),
                 Arguments.of(47, "client", false),
-                Arguments.of(48, "client", null)
+                Arguments.of(48, "client", null),
+                Arguments.of(49, "client")
+
         );
     }
 
@@ -154,6 +156,7 @@ public class Parametrized3RegistrationStartApiTest extends BaseTest {
         Optional<Boolean> optionalIsEnabled = Optional.ofNullable(isEnabled);
 
         Response response = regularStartRegistrationApi.regularStartRegistration(userType, optionalEmail.orElse(null), optionalPhone.orElse(null), optionalIsEnabled.orElse(null));
+
         assertEquals(200, response.getStatusCode(), "Failed test case number: " + testCaseNumber);
     }
 

@@ -54,7 +54,7 @@ public class RepairBGRegistrationTest extends BaseTest {
         String errorText = clientPages.getLandingPage().bgRegistration.equipment.getErrorText();
 
         clientPages.getLandingPage().bgRegistration.findOffers();
-        clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
+        clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode(), "https://dev.gasworkers.ru/profile/client");
         step("Кабинет клиента - состояние после фоновой регистрации на Ремонт", () -> {
             step("Гид  Ремонт по кабинету", () -> {
                 clientPages.getHomePage().firstRepairGuide.playSequence();

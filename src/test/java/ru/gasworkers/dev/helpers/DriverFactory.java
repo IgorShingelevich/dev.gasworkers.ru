@@ -16,7 +16,7 @@ public final class DriverFactory {
         config.browserSize(annotation.browserSize());
         config.browserPosition(annotation.browserPosition());
         config.reportsFolder("target/selenide");
-        config.timeout(6000);
+        config.timeout(8000);
 
 //         config.headless(true);
 //         С удаленным запуском нельзя ставить в true!

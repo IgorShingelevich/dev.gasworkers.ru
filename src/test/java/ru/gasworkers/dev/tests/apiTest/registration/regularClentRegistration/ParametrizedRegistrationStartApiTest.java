@@ -163,7 +163,7 @@ public class ParametrizedRegistrationStartApiTest extends BaseTest {
 
 
     /*@ParameterizedTest
-    @ArgumentsSource(RegistrationArgumentsProvider.class)
+    @ArgumentsSource(Set1RegistrationArgumentsProvider.class)
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.REGULAR_REGISTRATION)

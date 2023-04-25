@@ -25,7 +25,7 @@ public class AwaitingNowVideoBGBannerHomePageClientComponent extends BaseCompone
         titleLocator = driver.$("span.gas-notice-primary__text--title").as("Заголовок компонента Ожидание видеоконсультации"),
         textLocator = driver.$("p.gas-notice-primary__text--text").as("Текст компонента Ожидание видеоконсультации"),
         chatMasterLinkLocator = driver.$("a.link-dashed.mb-3.me-4").as("Ссылка Написать мастеру в чат"),
-        cancelConsultationLinkLocator = driver.$("a.link-dashed.ms-auto.mb-3.me-4").as("Ссылка Отменить консультацию"),
+        cancelConsultationLinkLocator = driver.$("a.link-dashed.ms-sm-auto.mb-3").as("Ссылка Отменить консультацию"),
         toOrderButtonLocator = driver.$("button.mb-3.btn.btn-primary.disable-outline").as("Кнопка Перейти к заказу");
 
     public void checkAwaitingNowBGVideoState(String masterFullName) {

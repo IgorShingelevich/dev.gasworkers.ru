@@ -25,7 +25,7 @@ public class DetailsOrderVideoClientComponent extends BaseComponent {
 
     SelenideElement
         titleLocator = driver.$("p.h4.mb-20").as("Заголовок компонента Информация по заказу"),
-        masterFullNameLocator = driver.$("p.h3.link-dark-blue.w-100").as("ФИО мастера"),
+        masterFullNameLocator = driver.$("a.h3.link-dark-blue.w-100").as("ФИО мастера"),
         masterRatingLocator = driver.$("div.rating-badge").as("Рейтинг мастера"),
         quantityOfReviewsLocator = driver.$("div.reviews a").as("Количество отзывов мастера"),
         workPlaceMasterLocator = driver.$("p.medium.w-100 a").as("Место работы мастера"),

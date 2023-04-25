@@ -22,7 +22,7 @@ import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 import static ru.gasworkers.dev.model.Role.CLIENT;
 
 public class RegularEmailAndPhoneClientRegistrationApiTest extends BaseTest {
-    /*@Browser(role = CLIENT)
+    @Browser(role = CLIENT)
     ClientPages clientPages;
 
     @BeforeEach
@@ -44,67 +44,112 @@ public class RegularEmailAndPhoneClientRegistrationApiTest extends BaseTest {
             code = randomClient.getConfirmationCode(),
             gender = Gender.MALE.toString(),
             employedStatus = Employed_status.SELF_EMPLOYED.toString(); // status of employment for client not defined in api
-
+@Order(1)
     @Test
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.REGULAR_REGISTRATION)
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
-    @DisplayName("Регистрация клиента Api (email и телефон)")
+    @DisplayName("Регистрация клиента Api (email, phone, true)")
     public void clientRegistrationEmailAndPhoneApiTest() {
         regularStartRegistrationApi1.regularStartRegistration(UserType.CLIENT.toString(), email, phone, true);
-        *//*checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), email, phone);
+        /*checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), email, phone);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.CLIENT.toString(), email, phone, firstName, lastName, patronymicName, password, gender, false, false, null, null);
         clientPages.getLoginPage().open();
         clientPages.getLoginPage().loginEmail(email, password);
-        clientPages.getHomePage().urlChecker.urlContains("profile/client");*//*
+        clientPages.getHomePage().urlChecker.urlContains("profile/client");*/
     }
 
+    @Order(2)
     @Test
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.REGULAR_REGISTRATION)
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
-    @DisplayName("Регистрация клиента Api (email и телефон, false)")
-    public void clientRegistrationEmailAndPhoneFalseApiTest() {
-        regularStartRegistrationApi1.regularStartRegistration(UserType.CLIENT.toString(), email, phone,false);
-        checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), email, null);
-        regularFinishRegistrationApi.regularFinishRegistration(UserType.CLIENT.toString(), email, phone, firstName, lastName, patronymicName, password, gender, false, false, null, null);
-        clientPages.getLoginPage().open();
-        clientPages.getLoginPage().loginEmail(email, password);
-        clientPages.getHomePage().urlChecker.urlContains("profile/client");
-    }
-
-    @Disabled
-    @Test
-    @Owner("Igor Shingelevich")
-    @Epic(AllureEpic.REGISTRATION)
-    @Feature(AllureFeature.REGULAR_REGISTRATION)
-    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
-    @DisplayName("Регистрация клиента Api (email и телефон, null)")
+    @DisplayName("Регистрация клиента Api ('', phone, true)")
     public void clientRegistrationEmailAndPhoneNullApiTest() {
-        regularStartRegistrationApi1.regularStartRegistration(UserType.CLIENT.toString(), email, phone,false);
-        checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), email, null);
+        regularStartRegistrationApi1.regularStartRegistration(UserType.CLIENT.toString(), null, phone,true);
+        /*checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), email, null);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.CLIENT.toString(), email, phone, firstName, lastName, patronymicName, password, gender, false, false, null, null);
         clientPages.getLoginPage().open();
         clientPages.getLoginPage().loginEmail(email, password);
-        clientPages.getHomePage().urlChecker.urlContains("profile/client");
+        clientPages.getHomePage().urlChecker.urlContains("profile/client");*/
     }
 
-    @Disabled
+    @Order(3)
+    @Test
+    @Owner("Igor Shingelevich")
+    @Epic(AllureEpic.REGISTRATION)
+    @Feature(AllureFeature.REGULAR_REGISTRATION)
+    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
+    @DisplayName("Регистрация клиента Api (null, phone, true)")
+    public void clientRegistrationPhoneApiTest() {
+        regularStartRegistrationApi1.regularStartRegistration(UserType.CLIENT.toString(), null, phone,true);
+        /*checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), null, phone);
+        regularFinishRegistrationApi.regularFinishRegistration(UserType.CLIENT.toString(), email, phone, firstName, lastName, patronymicName, password, gender, false, false, null, null);
+        clientPages.getLoginPage().open();
+        clientPages.getLoginPage().loginEmail(email, password);
+        clientPages.getHomePage().urlChecker.urlContains("profile/client");*/
+    }
+
+    @Test
+    @Owner("Igor Shingelevich")
+    @Epic(AllureEpic.REGISTRATION)
+    @Feature(AllureFeature.REGULAR_REGISTRATION)
+    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
+    @DisplayName("Регистрация клиента Api (email, null, true)")
+    public void clientRegistrationEmailAndPhoneFalseApiTest() {
+        regularStartRegistrationApi1.regularStartRegistration(UserType.CLIENT.toString(), email, null,true);
+       /* checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), email, null);
+        regularFinishRegistrationApi.regularFinishRegistration(UserType.CLIENT.toString(), email, phone, firstName, lastName, patronymicName, password, gender, false, false, null, null);
+        clientPages.getLoginPage().open();
+        clientPages.getLoginPage().loginEmail(email, password);
+        clientPages.getHomePage().urlChecker.urlContains("profile/client");*/
+    }
+
+    @Test
+    @Owner("Igor Shingelevich")
+    @Epic(AllureEpic.REGISTRATION)
+    @Feature(AllureFeature.REGULAR_REGISTRATION)
+    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
+    @DisplayName("Регистрация клиента Api (email, '', true)")
+    public void clientRegistrationEmailApiTest() {
+        regularStartRegistrationApi1.regularStartRegistration(UserType.CLIENT.toString(), email, "", true);
+        /*checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), email, phone);
+        regularFinishRegistrationApi.regularFinishRegistration(UserType.CLIENT.toString(), email, phone, firstName, lastName, patronymicName, password, gender, false, false, null, null);
+        clientPages.getLoginPage().open();
+        clientPages.getLoginPage().loginEmail(email, password);
+        clientPages.getHomePage().urlChecker.urlContains("profile/client");*/
+    }
+
+    @Test
+    @Owner("Igor Shingelevich")
+    @Epic(AllureEpic.REGISTRATION)
+    @Feature(AllureFeature.REGULAR_REGISTRATION)
+    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
+    @DisplayName("Регистрация клиента Api (email, true)")
+    public void clientRegistrationEmailOnlyApiTest() {
+        regularStartRegistrationApi1.regularStartRegistration(UserType.CLIENT.toString(), email, true);
+        /*checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), email, phone);
+        regularFinishRegistrationApi.regularFinishRegistration(UserType.CLIENT.toString(), email, phone, firstName, lastName, patronymicName, password, gender, false, false, null, null);
+        clientPages.getLoginPage().open();
+        clientPages.getLoginPage().loginEmail(email, password);
+        clientPages.getHomePage().urlChecker.urlContains("profile/client");*/
+    }
+
     @Test
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.REGULAR_REGISTRATION)
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
     @DisplayName("Регистрация клиента Api (phone)")
-    public void clientRegistrationPhoneApiTest() {
-        regularStartRegistrationApi1.regularStartRegistration(UserType.CLIENT.toString(), null, phone,true);
-        checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), null, phone);
+    public void clientRegistrationPhoneToEmailApiTest() {
+        regularStartRegistrationApi1.regularStartRegistration(UserType.CLIENT.toString(), phone, true);
+        /*checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.CLIENT.toString(), email, phone);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.CLIENT.toString(), email, phone, firstName, lastName, patronymicName, password, gender, false, false, null, null);
         clientPages.getLoginPage().open();
         clientPages.getLoginPage().loginEmail(email, password);
-        clientPages.getHomePage().urlChecker.urlContains("profile/client");
-    }*/
+        clientPages.getHomePage().urlChecker.urlContains("profile/client");*/
+    }
 
 }

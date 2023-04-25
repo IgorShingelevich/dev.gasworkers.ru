@@ -81,7 +81,7 @@ public class VideoBGRegistrationTest extends BaseTest {
        //todo modify equipmentCollection index for  different equipment count
        String errorText = clientPages.getLandingPage().bgRegistration.equipment.getErrorText();
         clientPages.getLandingPage().bgRegistration.findOffers();
-          clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode());
+          clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode(), "https://dev.gasworkers.ru/orders/consultation");
 
 
         step("Страница Видеоконсультация", () -> {

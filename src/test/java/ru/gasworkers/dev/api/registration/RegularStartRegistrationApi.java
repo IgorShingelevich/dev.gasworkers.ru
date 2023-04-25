@@ -11,9 +11,20 @@ import static io.restassured.RestAssured.given;
 public class RegularStartRegistrationApi {
 
     public Response regularStartRegistration(String userType, Object email, Object phone, Object isPhoneSend) {
-        Allure.step("Начало - Регистрация Api: " + email + " " + phone, () -> {});
+        Allure.step("Начало - Регистрация Api: " + email + " " + phone, () -> {
+        });
 
-        String requestBody = "{\"type\":\"" + userType + "\",\"email\":\"" + (email != null ? email.toString() : "") + "\",\"phone\":\"" + (phone != null ? phone.toString() : "") + "\",\"phone_send\":" + (isPhoneSend != null ? isPhoneSend.toString() : false) + "}";
+        String requestBody = "{" +
+                "\"type\":\"" + userType + "\"," +
+                "\"email\":\"" + (email != null ? email.toString() : "") + "\"," +
+                "\"phone\":\"" + (phone != null ? phone.toString() : "") + "\"," +
+                "\"phone_send\":" + (isPhoneSend != null ? isPhoneSend.toString() : false) + "}";
+
+        /*String requestBody = "{" +
+                "\"type\":\"" + userType + "\"," +
+                "\"email\":\"" + email  + "\"," +
+                "\"phone\":\"" + phone + "\"," +
+                "\"phone_send\":" + isPhoneSend + "}";*/
 
         Response response = given()
                 .contentType(ContentType.JSON)
