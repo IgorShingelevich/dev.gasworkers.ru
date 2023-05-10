@@ -90,13 +90,12 @@ public class RandomSelfEmployedAndMaster {
         this.masterIDFile = new File("src/test/resources/uploadFiles/diploma/test_diploma" + faker.random().nextInt(1, 3) + ".jpg");
 //                this.masterIDFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\diploma\\test_diploma" + faker.random().nextInt(1,3) + ".jpg");
         this.equipmentCertificateFile = new File("src/test/resources/uploadFiles/diploma/test_diploma" + faker.random().nextInt(1, 3) + ".jpg");
-//        this.equipmentCertificateFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\diploma\\test_diploma" + faker.random().nextInt(1,3) + ".jpg");
-        this.taxpayerCertificateFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\diploma\\test_diploma" + faker.random().nextInt(1, 3) + ".jpg");
-        this.equipmentRandomPhotoFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\equipment\\test_equipment" + faker.random().nextInt(1, 4) + ".jpg");
-        this.equipmentVideoFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\video\\test_equipment_video1.mp4");
-        this.pdfFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\otherFormats\\test_pdf.pdf");
-        this.xlsxFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\otherFormats\\test_xlsx.xlsx");
-        this.rarFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\otherFormats\\test_rar.rar");
+        this.taxpayerCertificateFile = new File("src/test/resources/uploadFiles/diploma/test_diploma" + faker.random().nextInt(1, 3) + ".jpg");
+        this.equipmentRandomPhotoFile = new File("src/test/resources/uploadFiles/equipment/test_equipment" + faker.random().nextInt(1, 4) + ".jpg");
+        this.equipmentVideoFile = new File("src/test/resources/uploadFiles/video/test_equipment_video1.mp4");
+        this.pdfFile = new File("src/test/resources/uploadFiles/otherFormats/test_pdf.pdf");
+        this.xlsxFile = new File("src/test/resources/uploadFiles/otherFormats/test_xlsx.xlsx");
+        this.rarFile = new File("src/test/resources/uploadFiles/otherFormats/test_rar.rar");
 //todo  change all the paths to relative
     }
 

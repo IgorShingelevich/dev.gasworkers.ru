@@ -52,12 +52,12 @@ public class RandomClient {
         this.fullName = this.surname.toString() + " " + this.name.toString() + " " + this.patronymicName.toString();
         Transliterator cyrillicToLatin = Transliterator.getInstance("Cyrillic-Latin");
         String latinSurname = cyrillicToLatin.transliterate(surname);
-        this.avatarRandomPhotoFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\person\\test_person" + faker.random().nextInt(1, 9) + ".jpg");
-        this.equipmentRandomPhotoFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\equipment\\test_equipment" + faker.random().nextInt(1, 4) + ".jpg");
-        this.equipmentVideoFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\video\\test_equipment_video1.mp4");
-        this.pdfFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\otherFormats\\test_pdf.pdf");
-        this.xlsxFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\otherFormats\\test_xlsx.xlsx");
-        this.rarFile = new File("D:\\GW\\src\\test\\resources\\uploadFiles\\otherFormats\\test_rar.rar");
+        this.avatarRandomPhotoFile = new File("src/test/resources/uploadFiles/person/test_person" + faker.random().nextInt(1, 9) + ".jpg");
+        this.equipmentRandomPhotoFile = new File("src/test/resources/uploadFiles/equipment/test_equipment" + faker.random().nextInt(1, 4) + ".jpg");
+        this.equipmentVideoFile = new File("src/test/resources/uploadFiles/video/test_equipment_video1.mp4");
+        this.pdfFile = new File("src/test/resources/uploadFiles/otherFormats/test_pdf.pdf");
+        this.xlsxFile = new File("src/test/resources/uploadFiles/otherFormats/test_xlsx.xlsx");
+        this.rarFile = new File("src/test/resources/uploadFiles/otherFormats/test_rar.rar");
 
 
         String email = emailPrefixMock + prefixDateTime + latinSurname.toLowerCase() + "@" + emailClientDomainMock;
