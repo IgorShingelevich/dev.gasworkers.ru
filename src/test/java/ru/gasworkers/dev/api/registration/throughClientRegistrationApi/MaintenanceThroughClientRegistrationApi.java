@@ -48,12 +48,16 @@ public class MaintenanceThroughClientRegistrationApi {
 
         Allure.step("Through client registration API: " + email + " " + phone, () -> {
             Response response = given()
+                    .log().body()
+                    .log().ifValidationFails()
                     .contentType(ContentType.JSON)
                     .accept(ContentType.JSON)
                     .body(requestBody)
                     .when()
                     .post("https://dev.gasworkers.ru/api/auth/register/through")
                     .then()
+                    .log().body()
+                    .log().ifValidationFails()
                     .statusCode(200)
                     .contentType(ContentType.JSON)
                     .body("status", equalTo(0))
@@ -62,7 +66,7 @@ public class MaintenanceThroughClientRegistrationApi {
 
             // sout response
             System.out.println("Started Through client registration API: " + email + " " + phone);
-            System.out.println("Response: " + response.asString());
+//            System.out.println("Response: " + response.asString());
         });
     }
 

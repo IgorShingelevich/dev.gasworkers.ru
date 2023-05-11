@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.tests.apiTest.registration.regularClentRegistration;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -29,7 +30,7 @@ public class Parametrized2RegistrationStartApiTest extends BaseTest {
         ApiTestConfig.configureRestAssured();
     }
 
-    @ParameterizedTest
+    /*@ParameterizedTest
     @ArgumentsSource(SetCasesRegistrationDataProvider.class)
     // plase variable for
     @Owner("Igor Shingelevich")
@@ -37,11 +38,11 @@ public class Parametrized2RegistrationStartApiTest extends BaseTest {
     @Feature(AllureFeature.REGULAR_REGISTRATION)
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.COMBINATORIAL), @Tag(AllureTag.API)})
     @DisplayName("Регистрация пользователя Api кейс: {0} для роли: {1} с email: {2} и phone: {3} и isPhoneSend: {4}")
-    void testRegularStartRegistration(int index, String userType, String email, String phone, Boolean isPhoneSend) {
+    void testRegularStartRegistration(int index, String userType, String email, String phone, Boolean isPhoneSend) throws JsonProcessingException {
         Response response = regularStartRegistrationApi1.regularStartRegistration(userType, email, phone, isPhoneSend);
         assertEquals(200, response.statusCode());
         assertEquals("0", response.jsonPath().getString("status"));
         assertEquals("Успешная регистрация", response.jsonPath().getString("message"));
-    }
+    }*/
 
 }

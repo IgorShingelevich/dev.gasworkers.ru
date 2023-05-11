@@ -16,6 +16,7 @@ public final class AllureTag {
             SE_INDIVIDUAL = "self-employed-individual";
 
     public static final String
+            ADMINISTRATION = "administration",
             REGISTRATION = "registration",
             AUTHORISATION = "authorisation",
             BG_REGISTRATION = "bg-registration";
