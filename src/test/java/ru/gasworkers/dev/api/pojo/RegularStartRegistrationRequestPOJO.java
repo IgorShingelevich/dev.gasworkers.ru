@@ -1,14 +1,10 @@
 package ru.gasworkers.dev.api.pojo;
 
-import ru.gasworkers.dev.model.Role;
-import ru.gasworkers.dev.model.apiModel.UserType;
-import ru.gasworkers.dev.utils.userBuilder.RandomClient;
-
 public class RegularStartRegistrationRequestPOJO {
-    private String type ;
-    private String email ;
-    private  String phone;
-    private  Boolean phone_send ;
+    private String type;
+    private String email;
+    private String phone;
+    private Boolean phone_send;
 
 
     public RegularStartRegistrationRequestPOJO(Builder builder) {

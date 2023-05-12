@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.apiTest.administration;
+package ru.gasworkers.dev.tests.api.administration;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Owner;

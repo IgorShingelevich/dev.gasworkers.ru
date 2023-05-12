@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.apiTest.registration.regularClentRegistration;
+package ru.gasworkers.dev.tests.api.registration.regularClentRegistration;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.qameta.allure.Epic;

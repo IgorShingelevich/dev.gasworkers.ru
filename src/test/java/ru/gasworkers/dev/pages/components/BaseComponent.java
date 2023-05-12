@@ -4,14 +4,11 @@ import com.codeborne.selenide.SelenideDriver;
 import io.qameta.allure.Allure;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.UrlCheckerSharedComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.buttonSharedComponent.AllButtonSharedComponent;
 
 public abstract class BaseComponent {
 
     protected final SelenideDriver driver;
     protected final Role role;
-
 
     public BaseComponent(RoleBrowser browser) {
         role = browser.getRole();

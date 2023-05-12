@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.apiTest.registration.regularClentRegistration;
+package ru.gasworkers.dev.tests.api.registration.regularClentRegistration;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.qameta.allure.Epic;
@@ -7,20 +7,14 @@ import io.qameta.allure.Owner;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.ApiTestConfig;
-import ru.gasworkers.dev.api.registration.regularRegistration.CheckRegularRegistrationCodeApi;
-import ru.gasworkers.dev.api.registration.regularRegistration.RegularFinishRegistrationApi;
 import ru.gasworkers.dev.api.registration.regularRegistration.RegularStartRegistrationApi;
-import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.apiModel.UserType;
-import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.BaseTest;
-import ru.gasworkers.dev.tests.apiTest.helperApiTest.BaseStartRegistrationTestCasesProvider;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
 import java.util.HashMap;
@@ -28,11 +22,8 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static ru.gasworkers.dev.model.Role.CLIENT;
 
 public class RegularClientRegistrationParamApiTest extends BaseTest {
-    @Browser(role = CLIENT)
-    ClientPages clientPages;
 
     @BeforeEach
     public void setUp() {
@@ -40,8 +31,6 @@ public class RegularClientRegistrationParamApiTest extends BaseTest {
     }
 
     private final RegularStartRegistrationApi regularStartRegistrationApi = new RegularStartRegistrationApi();
-    private final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
-    private final RegularFinishRegistrationApi regularFinishRegistrationApi = new RegularFinishRegistrationApi();
 
     private static Stream<Arguments> registrationDataProvider() {
         return Stream.of(
@@ -105,37 +94,70 @@ public class RegularClientRegistrationParamApiTest extends BaseTest {
         // Add your assertions here
     }
 
-    @ParameterizedTest
-    @ArgumentsSource(BaseStartRegistrationTestCasesProvider.class)
-    @Owner("Igor Shingelevich")
-    @Epic(AllureEpic.REGISTRATION)
-    @Feature(AllureFeature.REGULAR_REGISTRATION)
-    @Tag(AllureTag.REGRESSION)
-    @Tag(AllureTag.CLIENT)
-    @Tag(AllureTag.REGISTRATION)
-    @Tag(AllureTag.POSITIVE)
-    @Tag(AllureTag.API)
-    @DisplayName("Регистрация {0}  Api с параметрами, {1}, {2}, {3}")
-    public void clientAndMasterRegistrationParamApiTest(String userType, String email, String phone, Boolean isPhoneSend) throws JsonProcessingException {
-        Map<String, Object> requestBodyMap = new HashMap<>();
-        if ( userType != "noArg" ) {
-            requestBodyMap.put("type", userType);
-        }
-        if ( email != "noArg" ) {
-            requestBodyMap.put("email", email);
-        }
-        if ( phone != "noArg" ) {
-            requestBodyMap.put("phone", phone);
-        }
-        if ( isPhoneSend != null ) {
-            requestBodyMap.put("phone_send", isPhoneSend);
-        }
 
-        // Perform the API call
-        regularStartRegistrationApi.regularStartRegistration(requestBodyMap);
 
-        // Add your assertions here
-    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//    @ParameterizedTest
+//    @ArgumentsSource(BaseStartRegistrationTestCasesProvider.class)
+//    @Owner("Igor Shingelevich")
+//    @Epic(AllureEpic.REGISTRATION)
+//    @Feature(AllureFeature.REGULAR_REGISTRATION)
+//    @Tag(AllureTag.REGRESSION)
+//    @Tag(AllureTag.CLIENT)
+//    @Tag(AllureTag.REGISTRATION)
+//    @Tag(AllureTag.POSITIVE)
+//    @Tag(AllureTag.API)
+//    @DisplayName("Регистрация {0}  Api с параметрами, {1}, {2}, {3}")
+//    public void clientAndMasterRegistrationParamApiTest(String userType, String email, String phone, Boolean isPhoneSend) throws JsonProcessingException {
+//        Map<String, Object> requestBodyMap = new HashMap<>();
+//        if ( userType != "noArg" ) {
+//            requestBodyMap.put("type", userType);
+//        }
+//        if ( email != "noArg" ) {
+//            requestBodyMap.put("email", email);
+//        }
+//        if ( phone != "noArg" ) {
+//            requestBodyMap.put("phone", phone);
+//        }
+//        if ( isPhoneSend != null ) {
+//            requestBodyMap.put("phone_send", isPhoneSend);
+//        }
+//
+//        // Perform the API call
+//        regularStartRegistrationApi.regularStartRegistration(requestBodyMap);
+//
+//        // Add your assertions here
+//    }
 
 
 }

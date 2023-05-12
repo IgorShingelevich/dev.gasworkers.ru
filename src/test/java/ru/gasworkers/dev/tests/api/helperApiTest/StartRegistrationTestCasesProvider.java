@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.apiTest.helperApiTest;
+package ru.gasworkers.dev.tests.api.helperApiTest;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
