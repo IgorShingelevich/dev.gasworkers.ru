@@ -9,9 +9,9 @@ import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.ApiTestConfig;
-import ru.gasworkers.dev.api.registration.CheckRegularRegistrationCodeApi;
-import ru.gasworkers.dev.api.registration.RegularFinishRegistrationApi;
-import ru.gasworkers.dev.api.registration.RegularStartRegistrationApi1;
+import ru.gasworkers.dev.api.registration.regularRegistration.CheckRegularRegistrationCodeApi;
+import ru.gasworkers.dev.api.registration.regularRegistration.RegularFinishRegistrationApi;
+import ru.gasworkers.dev.api.registration.regularRegistration.RegularStartRegistrationApi;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.apiModel.Employed_status;
 import ru.gasworkers.dev.model.apiModel.Gender;
@@ -31,7 +31,7 @@ public class RegularClientRegistrationApiTest extends BaseTest {
         ApiTestConfig.configureRestAssured();
     }
 
-    public final RegularStartRegistrationApi1 regularStartRegistrationApi1 = new RegularStartRegistrationApi1();
+    public final RegularStartRegistrationApi regularStartRegistrationApi = new RegularStartRegistrationApi();
     public final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
     public final RegularFinishRegistrationApi regularFinishRegistrationApi = new RegularFinishRegistrationApi();
 
@@ -55,7 +55,7 @@ public class RegularClientRegistrationApiTest extends BaseTest {
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
     @DisplayName("Регистрация клиента Api ")
     public void clientRegistrationApiTest() throws JsonProcessingException {
-        regularStartRegistrationApi1.regularStartRegistration( userType,  email,  phone,  true);
+        regularStartRegistrationApi.regularStartRegistration( userType,  email,  phone,  true);
     }
 
 

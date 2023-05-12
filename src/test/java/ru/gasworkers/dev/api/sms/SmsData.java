@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api;
+package ru.gasworkers.dev.api.sms;
 
 public class SmsData {
 

@@ -1,21 +1,13 @@
 package ru.gasworkers.dev.tests.apiTest.registration.regularServiceMasterRegistration;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Owner;
 import org.junit.jupiter.api.*;
-import ru.gasworkers.dev.allure.AllureEpic;
-import ru.gasworkers.dev.allure.AllureFeature;
-import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.ApiTestConfig;
-import ru.gasworkers.dev.api.registration.CheckRegularRegistrationCodeApi;
-import ru.gasworkers.dev.api.registration.RegularFinishRegistrationApi;
-import ru.gasworkers.dev.api.registration.RegularStartRegistrationApi1;
+import ru.gasworkers.dev.api.registration.regularRegistration.CheckRegularRegistrationCodeApi;
+import ru.gasworkers.dev.api.registration.regularRegistration.RegularFinishRegistrationApi;
+import ru.gasworkers.dev.api.registration.regularRegistration.RegularStartRegistrationApi;
 import ru.gasworkers.dev.extension.browser.Browser;
-import ru.gasworkers.dev.model.apiModel.Employed_status;
 import ru.gasworkers.dev.model.apiModel.Gender;
 import ru.gasworkers.dev.model.apiModel.ServiceCompanyStaff;
-import ru.gasworkers.dev.model.apiModel.UserType;
 import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
@@ -31,7 +23,7 @@ public class RegularServiceMasterRegistrationApiTest extends BaseTest {
         ApiTestConfig.configureRestAssured();
     }
 
-    public final RegularStartRegistrationApi1 regularStartRegistrationApi1 = new RegularStartRegistrationApi1();
+    public final RegularStartRegistrationApi regularStartRegistrationApi = new RegularStartRegistrationApi();
     public final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
     public final RegularFinishRegistrationApi regularFinishRegistrationApi = new RegularFinishRegistrationApi();
     public final ServiceCompanyStaff staff = new ServiceCompanyStaff();
@@ -57,7 +49,7 @@ public class RegularServiceMasterRegistrationApiTest extends BaseTest {
     @DisplayName(" Регистрация мастера Api ")
     public void regularMasterRegistration() {
 
-        regularStartRegistrationApi1.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
+        regularStartRegistrationApi.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
         checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.MASTER.toString(), email, phone);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.MASTER.toString(), email, phone, firstName, lastName, patronymicName, password, gender, true, true, Employed_status.ACCEPTED.toString(), serviceId);
         masterPages.getLoginPage().open();

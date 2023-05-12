@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
-public class SetCasesRegistrationDataProvider implements ArgumentsProvider  {
+public class Set2RegistrationDataProvider implements ArgumentsProvider  {
     public final Set1RegistrationDataProvider dataProvider = new Set1RegistrationDataProvider();
 
 

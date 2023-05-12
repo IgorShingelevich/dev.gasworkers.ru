@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.registration;
+package ru.gasworkers.dev.api.registration.selfEmployedRegistration;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
@@ -6,7 +6,7 @@ import io.restassured.response.Response;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
-public class ConfigureSelfEmployedRegistrationApi {
+public class SelfEmployedRegistrationApi {
 
     /**
      * Completes the registration process for a self-employed user.
