@@ -13,6 +13,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import org.junit.jupiter.params.provider.ArgumentsSource;
+import org.junit.jupiter.params.provider.MethodSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
@@ -166,7 +167,7 @@ public class RegularRegistrationParamApiTest extends BaseTest {
 
 
     @ParameterizedTest
-    @ArgumentsSource(Set2RegistrationDataProvider.class)
+    @MethodSource("registrationParameters")
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.REGULAR_REGISTRATION)

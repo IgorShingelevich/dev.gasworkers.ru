@@ -4,7 +4,6 @@ import io.qameta.allure.Allure;
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
-import ru.gasworkers.dev.api.helperApi.InputValidatorApi;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
