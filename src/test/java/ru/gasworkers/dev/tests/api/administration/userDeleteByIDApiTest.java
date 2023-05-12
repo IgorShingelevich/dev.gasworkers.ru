@@ -1,11 +1,9 @@
-package ru.gasworkers.dev.tests.apiTest.administration;
+package ru.gasworkers.dev.tests.api.administration;
 
 import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.allure.AllureEpic;
-import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.ApiTestConfig;
 import ru.gasworkers.dev.api.administration.deleteUserByIDApi;

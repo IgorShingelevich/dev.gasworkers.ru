@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.apiTest.registration.regularClentRegistration;
+package ru.gasworkers.dev.tests.api.registration.regularClentRegistration;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.qameta.allure.Epic;
@@ -12,7 +12,6 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
-import org.junit.jupiter.params.provider.ArgumentsSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;

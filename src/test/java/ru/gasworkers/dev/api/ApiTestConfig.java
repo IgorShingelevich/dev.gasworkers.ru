@@ -8,4 +8,5 @@ public class ApiTestConfig {
     public static void configureRestAssured() {
         RestAssured.baseURI = BASE_URL;
     }
+    
 }

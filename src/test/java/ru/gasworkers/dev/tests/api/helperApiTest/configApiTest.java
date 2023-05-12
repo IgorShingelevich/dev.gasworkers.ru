@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.apiTest.helperApiTest;
+package ru.gasworkers.dev.tests.api.helperApiTest;
 
 import io.restassured.RestAssured;
 

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.apiTest.registration.regularServiceMasterRegistration;
+package ru.gasworkers.dev.tests.api.registration.regularServiceMasterRegistration;
 
 import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.api.ApiTestConfig;

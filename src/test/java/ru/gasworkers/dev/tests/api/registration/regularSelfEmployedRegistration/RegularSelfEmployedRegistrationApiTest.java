@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.apiTest.registration.regularSelfEmployedRegistration;
+package ru.gasworkers.dev.tests.api.registration.regularSelfEmployedRegistration;
 
 public class RegularSelfEmployedRegistrationApiTest {
     /*@Browser(role = SELF_EMPLOYED)

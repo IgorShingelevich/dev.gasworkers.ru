@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.apiTest.helperApiTest;
+package ru.gasworkers.dev.tests.api.helperApiTest;
 
 import static io.restassured.RestAssured.given;
 import static org.junit.jupiter.api.Assertions.fail;

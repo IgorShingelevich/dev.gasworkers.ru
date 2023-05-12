@@ -1,6 +1,5 @@
-package ru.gasworkers.dev.tests.apiTest.helperApiTest;
+package ru.gasworkers.dev.tests.api.helperApiTest;
 
-import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
