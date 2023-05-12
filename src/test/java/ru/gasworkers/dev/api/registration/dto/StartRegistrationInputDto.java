@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
+import java.io.File;
+
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 @Data
@@ -13,17 +15,19 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @JsonInclude(NON_NULL)
 public class StartRegistrationInputDto {
 
-    public static StartRegistrationInputDto newInstance(String type, String email, String phone, Boolean isPhoneSend) {
+    public static StartRegistrationInputDto newInstance(String type, String email, String phone, Boolean isPhoneSend, File expectedResponseFile) {
         return StartRegistrationInputDto.builder()
                 .type(type)
                 .email(email)
                 .phone(phone)
                 .isPhoneSend(isPhoneSend)
+                .expectedResponseFile(expectedResponseFile)
                 .build();
     }
 
     private String type, email, phone;
     @JsonProperty("phone_send")
     private Boolean isPhoneSend;
+    private File expectedResponseFile;
 
 }

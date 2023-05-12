@@ -33,6 +33,8 @@ ext {
     orgJson = '20210307'
     junitVersion = '4.13.1'
     annotationsVersion = '23.0.0'
+    jsonassertVersion = '1.5.0'
+    commonsIoVersion = '1.3.2'
 }
 
 sourceCompatibility = '11'
@@ -79,7 +81,9 @@ dependencies {
             "com.googlecode.json-simple:json-simple:${jsonSimple}",
             "org.json:json:${orgJson}",
             "junit:junit:${junitVersion}",
-            "org.jetbrains:annotations:${annotationsVersion}"
+            "org.jetbrains:annotations:${annotationsVersion}",
+            "org.skyscreamer:jsonassert:${jsonassertVersion}",
+            "org.apache.commons:commons-io:${commonsIoVersion}"
     )
 }
 
