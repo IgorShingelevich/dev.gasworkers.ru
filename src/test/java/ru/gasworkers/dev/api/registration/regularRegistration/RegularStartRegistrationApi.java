@@ -15,8 +15,6 @@ public class RegularStartRegistrationApi {
 
     private final ObjectMapper objectJacksonMapper = new ObjectMapper();
 
-
-
     public Response regularStartRegistration(String userType, String email, String phone, boolean isPhoneSend) throws JsonProcessingException {
         Map<String, Object> requestBodyMap = new HashMap<>();
         requestBodyMap.put("type", userType);
@@ -24,36 +22,11 @@ public class RegularStartRegistrationApi {
         requestBodyMap.put("phone", phone);
         requestBodyMap.put("phone_send", isPhoneSend);
 
-        Allure.step("Начало - Регистрация  Api: " + requestBodyMap.get("email") + " " + requestBodyMap.get("phone"), () -> {});
-
-        String requestBody = objectJacksonMapper.writeValueAsString(requestBodyMap);
-
-        given()
-                .log().ifValidationFails()
-                .log().body()
-                .contentType(ContentType.JSON)
-                .accept(ContentType.JSON)
-                .header("accept-language", "en-US,en;q=0.9,ru;q=0.8")
-                .body(requestBody)
-                .when()
-                .post("/auth/register")
-                .then()
-                .log().ifValidationFails()
-                .log().body()
-                .statusCode(200);
-
-
-        System.out.println("Start register for role: " + requestBodyMap.get("type") + " " + requestBodyMap.get("email") + " " + requestBodyMap.get("phone"));
-        System.out.println();
-
-
+        regularStartRegistration(requestBodyMap);
         return null;
     }
 
     public void regularStartRegistration(Map<String, Object> requestBodyMap) throws JsonProcessingException {
-
-        Allure.step("Начало - Регистрация  Api: " + requestBodyMap.get("email") + " " + requestBodyMap.get("phone"), () -> {});
-
         String requestBody = objectJacksonMapper.writeValueAsString(requestBodyMap);
 
         given()
@@ -69,13 +42,6 @@ public class RegularStartRegistrationApi {
                 .log().ifValidationFails()
                 .log().body()
                 .statusCode(200);
-
-
-        System.out.println("Start register for role: " + requestBodyMap.get("type") + " " + requestBodyMap.get("email") + " " + requestBodyMap.get("phone"));
-        System.out.println();
-
-
     }
-
 
 }
