@@ -1,6 +1,5 @@
 package ru.gasworkers.dev.tests.api.registration.regularClentRegistration;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -11,60 +10,41 @@ import org.junit.jupiter.params.provider.MethodSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.ApiTestConfig;
-import ru.gasworkers.dev.api.registration.regularRegistration.RegularStartRegistrationApi;
-import ru.gasworkers.dev.model.apiModel.UserType;
-import ru.gasworkers.dev.tests.BaseTest;
+import ru.gasworkers.dev.api.registration.dto.StartRegistrationInputDto;
+import ru.gasworkers.dev.api.registration.regularRegistration.RegularRegistrationApi;
+import ru.gasworkers.dev.tests.api.BaseApiTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.hamcrest.Matchers.is;
+import static ru.gasworkers.dev.model.apiModel.UserType.CLIENT;
 
-public class RegularClientRegistrationParamApiTest extends BaseTest {
+@Owner("Igor Shingelevich")
+public class RegularClientRegistrationParamApiTest extends BaseApiTest {
 
-    @BeforeEach
-    public void setUp() {
-        ApiTestConfig.configureRestAssured();
-    }
+    private final RegularRegistrationApi registrationApi = new RegularRegistrationApi();
 
-    private final RegularStartRegistrationApi regularStartRegistrationApi = new RegularStartRegistrationApi();
-
-    private static Stream<Arguments> registrationDataProvider() {
+    private static Stream<Arguments> registrationDataProviderPositive() {
         return Stream.of(
-                createArguments(UserType.CLIENT.toString(), generateRandomEmail(), generateRandomPhone(), true),
-                createArguments(UserType.CLIENT.toString(), generateRandomEmail(), generateRandomPhone(), false),
-                createArguments(UserType.CLIENT.toString(), generateRandomEmail(), generateRandomPhone(), null),
-                createArguments(UserType.CLIENT.toString(), generateRandomEmail(), "noArg", true),
-                createArguments(UserType.CLIENT.toString(), "noArg", generateRandomPhone(), true),
-                createArguments("noArg", generateRandomEmail(), generateRandomPhone(), true),
-                createArguments(null, generateRandomEmail(), generateRandomPhone(), true),
-                createArguments(UserType.CLIENT.toString(), generateRandomEmail(), null, true),
-                createArguments(UserType.CLIENT.toString(), null, generateRandomPhone(), true),
-                createArguments(UserType.CLIENT.toString(), null, null, false)
+                Arguments.of(StartRegistrationInputDto.newInstance(
+                        CLIENT.toString(), generateRandomEmail(), generateRandomPhone(), true)),
+                Arguments.of(StartRegistrationInputDto.newInstance(
+                        CLIENT.toString(), generateRandomEmail(), generateRandomPhone(), false)),
+                Arguments.of(StartRegistrationInputDto.newInstance(
+                        CLIENT.toString(), generateRandomEmail(), generateRandomPhone(), null))
+//                createArguments(CLIENT.toString(), generateRandomEmail(), "noArg", true),
+//                createArguments(CLIENT.toString(), "noArg", generateRandomPhone(), true),
+//                createArguments("noArg", generateRandomEmail(), generateRandomPhone(), true),
+//                createArguments(null, generateRandomEmail(), generateRandomPhone(), true),
+//                createArguments(CLIENT.toString(), generateRandomEmail(), null, true),
+//                createArguments(CLIENT.toString(), null, generateRandomPhone(), true),
+//                createArguments(CLIENT.toString(), null, null, false)
         );
     }
 
-    private static Arguments createArguments(String userType, String email, String phone, Boolean isPhoneSend) {
-        return Arguments.of(userType, email, phone, isPhoneSend);
-    }
-
-    private static String generateRandomEmail() {
-        RandomClient randomClient = new RandomClient();
-        return randomClient.getEmail();
-    }
-
-    private static String generateRandomPhone() {
-        RandomClient randomClient = new RandomClient();
-        return randomClient.getPhone();
-    }
-
-
     @ParameterizedTest
-    @MethodSource("registrationDataProvider")
-    @Owner("Igor Shingelevich")
+    @MethodSource("registrationDataProviderPositive")
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.REGULAR_REGISTRATION)
     @Tag(AllureTag.REGRESSION)
@@ -72,62 +52,16 @@ public class RegularClientRegistrationParamApiTest extends BaseTest {
     @Tag(AllureTag.REGISTRATION)
     @Tag(AllureTag.POSITIVE)
     @Tag(AllureTag.API)
-    @DisplayName("Регистрация {0}  Api с параметрами, {1}, {2}, {3}")
-    public void clientRegistrationParamApiTest(String userType, String email, String phone, Boolean isPhoneSend) throws JsonProcessingException {
-        Map<String, Object> requestBodyMap = new HashMap<>();
-        if ( userType != "noArg" ) {
-            requestBodyMap.put("type", userType);
-        }
-        if ( email != "noArg" ) {
-            requestBodyMap.put("email", email);
-        }
-        if ( phone != "noArg" ) {
-            requestBodyMap.put("phone", phone);
-        }
-        if ( isPhoneSend != null ) {
-            requestBodyMap.put("phone_send", isPhoneSend);
-        }
-
-        // Perform the API call
-        regularStartRegistrationApi.regularStartRegistration(requestBodyMap);
-
-        // Add your assertions here
+    @DisplayName("Старт регистрации (позитивный кейс)")
+    public void clientRegistrationParamApiTest(StartRegistrationInputDto inputDto) {
+        registrationApi.startRegistration(inputDto)
+                .statusCode(200)
+                .body("status", is(0))
+                .body("message", is("Успешная регистрация"))
+                .body("data.seconds_left", is("60"));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    @ParameterizedTest
+//     @ParameterizedTest
 //    @ArgumentsSource(BaseStartRegistrationTestCasesProvider.class)
 //    @Owner("Igor Shingelevich")
 //    @Epic(AllureEpic.REGISTRATION)
@@ -159,5 +93,14 @@ public class RegularClientRegistrationParamApiTest extends BaseTest {
 //        // Add your assertions here
 //    }
 
+    private static String generateRandomEmail() {
+        RandomClient randomClient = new RandomClient();
+        return randomClient.getEmail();
+    }
+
+    private static String generateRandomPhone() {
+        RandomClient randomClient = new RandomClient();
+        return randomClient.getPhone();
+    }
 
 }
