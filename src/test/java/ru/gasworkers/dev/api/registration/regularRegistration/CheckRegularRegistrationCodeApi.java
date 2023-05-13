@@ -37,15 +37,6 @@ public class CheckRegularRegistrationCodeApi {
                     .then()
                     .extract();
 
-            if (response.statusCode() != 200) {
-                System.out.println("Checked  != 200 Request: " + requestBody);
-                System.out.println("Checked  !=  Response: " + response.asString());
-            }
-            if (response.statusCode() == 200) {
-                System.out.println("Checked register code Request : " + requestBody);
-                System.out.println("Checked register code Response : " + response.asString());
-            }
-
             response.response().then()
                     .statusCode(200)
                     .contentType(ContentType.JSON)
