@@ -4,7 +4,7 @@ import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.api.ApiTestConfig;
 import ru.gasworkers.dev.api.registration.regularRegistration.CheckRegularRegistrationCodeApi;
 import ru.gasworkers.dev.api.registration.regularRegistration.RegularFinishRegistrationApi;
-import ru.gasworkers.dev.api.registration.regularRegistration.RegularStartRegistrationApi;
+import ru.gasworkers.dev.api.registration.regularRegistration.OLDRegularStartRegistrationApi;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.apiModel.Gender;
 import ru.gasworkers.dev.model.apiModel.ServiceCompanyStaff;
@@ -23,7 +23,7 @@ public class RegularServiceMasterRegistrationApiTest extends BaseTest {
         ApiTestConfig.configureRestAssured();
     }
 
-    public final RegularStartRegistrationApi regularStartRegistrationApi = new RegularStartRegistrationApi();
+    public final OLDRegularStartRegistrationApi OLDRegularStartRegistrationApi = new OLDRegularStartRegistrationApi();
     public final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
     public final RegularFinishRegistrationApi regularFinishRegistrationApi = new RegularFinishRegistrationApi();
     public final ServiceCompanyStaff staff = new ServiceCompanyStaff();
@@ -49,7 +49,7 @@ public class RegularServiceMasterRegistrationApiTest extends BaseTest {
     @DisplayName(" Регистрация мастера Api ")
     public void regularMasterRegistration() {
 
-        regularStartRegistrationApi.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
+        OLDRegularStartRegistrationApi.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
         checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.MASTER.toString(), email, phone);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.MASTER.toString(), email, phone, firstName, lastName, patronymicName, password, gender, true, true, Employed_status.ACCEPTED.toString(), serviceId);
         masterPages.getLoginPage().open();

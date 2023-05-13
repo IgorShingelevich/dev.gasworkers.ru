@@ -9,9 +9,10 @@ import static io.restassured.RestAssured.given;
 
 public class StartRegularRegistrationApi extends BaseApi {
 
-    @Step("API: Начало регистрации")
+    @Step("API: Регулярная регистрация Начало")
     public ValidatableResponse startRegistration(StartRegistrationInputDto inputDto) {
         return given().spec(baseRequestSpec)
+                // do not understand how object is converted to json
                 .body(inputDto)
                 .when()
                 .post("/auth/register")

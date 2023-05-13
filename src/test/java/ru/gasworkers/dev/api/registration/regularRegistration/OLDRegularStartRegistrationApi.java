@@ -2,7 +2,6 @@ package ru.gasworkers.dev.api.registration.regularRegistration;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.qameta.allure.Allure;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 
@@ -11,22 +10,22 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-public class RegularStartRegistrationApi {
+public class OLDRegularStartRegistrationApi {
 
     private final ObjectMapper objectJacksonMapper = new ObjectMapper();
 
-    public Response regularStartRegistration(String userType, String email, String phone, boolean isPhoneSend) throws JsonProcessingException {
+    public Response OLDregularStartRegistration(String userType, String email, String phone, boolean isPhoneSend) throws JsonProcessingException {
         Map<String, Object> requestBodyMap = new HashMap<>();
         requestBodyMap.put("type", userType);
         requestBodyMap.put("email", email);
         requestBodyMap.put("phone", phone);
         requestBodyMap.put("phone_send", isPhoneSend);
 
-        regularStartRegistration(requestBodyMap);
+        OLDregularStartRegistration(requestBodyMap);
         return null;
     }
 
-    public void regularStartRegistration(Map<String, Object> requestBodyMap) throws JsonProcessingException {
+    public void OLDregularStartRegistration(Map<String, Object> requestBodyMap) throws JsonProcessingException {
         String requestBody = objectJacksonMapper.writeValueAsString(requestBodyMap);
 
         given()

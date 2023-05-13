@@ -15,6 +15,11 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @JsonInclude(NON_NULL)
 public class StartRegistrationInputDto {
 
+    private String type, email, phone;
+    @JsonProperty("phone_send")
+    private Boolean isPhoneSend;
+    private File expectedResponseFile;
+
     public static StartRegistrationInputDto newInstance(String type, String email, String phone, Boolean isPhoneSend, File expectedResponseFile) {
         return StartRegistrationInputDto.builder()
                 .type(type)
@@ -24,10 +29,5 @@ public class StartRegistrationInputDto {
                 .expectedResponseFile(expectedResponseFile)
                 .build();
     }
-
-    private String type, email, phone;
-    @JsonProperty("phone_send")
-    private Boolean isPhoneSend;
-    private File expectedResponseFile;
 
 }

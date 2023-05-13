@@ -17,30 +17,35 @@ import static ru.gasworkers.dev.model.apiModel.UserType.CLIENT;
 
 public class RegistrationDataProvider {
 
-    static File expectedResponse = new File("src/test/resources/api/registration/startRegistration200Response.json");
+    static File
+            startRegistration200 = new File("src/test/resources/api/registration/regular/start/startRegistration200.json"),
+            startRegistrationNoEmailOrPhone422 = new File("src/test/resources/api/registration/regular/start/negative/startRegistrationNoEmailOrPhone422.json"),
+            startRegistrationNoUserType422 = new File("src/test/resources/api/registration/regular/start/negative/startRegistrationNoUserType422.json"),
+            startRegistrationEmailValidation422 = new File("src/test/resources/api/registration/regular/start/negative/startRegistrationEmailValidation422.json");
 
-    public static Stream<Arguments> registrationDataProviderPositive() {
+
+    private static Stream<Arguments> registrationDataProviderPositive() {
         List<String> userRoles = new RegistrationDataProvider().getUserRoles();
         List<Arguments> arguments = new ArrayList<>();
         for (String userRole : userRoles) {
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), generateRandomPhone(), true, expectedResponse)));
+                    userRole, generateRandomEmail(), generateRandomPhone(), true, startRegistration200)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), generateRandomPhone(), false, expectedResponse)));
+                    userRole, generateRandomEmail(), generateRandomPhone(), false, startRegistration200)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), generateRandomPhone(), null, expectedResponse)));
+                    userRole, generateRandomEmail(), generateRandomPhone(), null, startRegistration200)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), null, true, expectedResponse)));
+                    userRole, generateRandomEmail(), null, true, startRegistration200)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), null, false, expectedResponse)));
+                    userRole, generateRandomEmail(), null, false, startRegistration200)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), null, null, expectedResponse)));
+                    userRole, generateRandomEmail(), null, null, startRegistration200)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, null, generateRandomPhone(), true, expectedResponse)));
+                    userRole, null, generateRandomPhone(), true, startRegistration200)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, null, generateRandomPhone(), false, expectedResponse)));
+                    userRole, null, generateRandomPhone(), false, startRegistration200)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, null, generateRandomPhone(), null, expectedResponse)));
+                    userRole, null, generateRandomPhone(), null, startRegistration200)));
         }
 
         return arguments.stream();
@@ -50,44 +55,46 @@ public class RegistrationDataProvider {
     private static Stream<Arguments> registrationDataProviderParamSetNegative() {
         return Stream.of(
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        CLIENT.toString(), null, null, true, new File ("src/test/resources/api/registration/negativeResponse/noEmailOrPhone422.json"))),
+                        CLIENT.toString(), null, null, true, startRegistrationNoEmailOrPhone422)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        CLIENT.toString(), null, null, false, new File ("src/test/resources/api/registration/negativeResponse/noEmailOrPhone422.json"))),
+                        CLIENT.toString(), null, null, false, startRegistrationNoEmailOrPhone422)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        CLIENT.toString(), null, null, null, new File ("src/test/resources/api/registration/negativeResponse/noEmailOrPhone422.json"))),
+                        CLIENT.toString(), null, null, null, startRegistrationNoEmailOrPhone422)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, generateRandomEmail(), generateRandomPhone(), true, new File("src/test/resources/api/registration/negativeResponse/noUserType422.json"))),
+                        null, generateRandomEmail(), generateRandomPhone(), true, startRegistrationNoUserType422)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, generateRandomEmail(), generateRandomPhone(), false, new File("src/test/resources/api/registration/negativeResponse/noUserType422.json"))),
+                        null, generateRandomEmail(), generateRandomPhone(), false, startRegistrationNoUserType422)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, generateRandomEmail(), generateRandomPhone(), null, new File("src/test/resources/api/registration/negativeResponse/noUserType422.json"))),
+                        null, generateRandomEmail(), generateRandomPhone(), null, startRegistrationNoUserType422)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, generateRandomEmail(), null, true, new File("src/test/resources/api/registration/negativeResponse/noUserType422.json"))),
+                        null, generateRandomEmail(), null, true, startRegistrationNoUserType422)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, generateRandomEmail(), null, false, new File("src/test/resources/api/registration/negativeResponse/noUserType422.json"))),
+                        null, generateRandomEmail(), null, false, startRegistrationNoUserType422)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, generateRandomEmail(), null, null, new File("src/test/resources/api/registration/negativeResponse/noUserType422.json"))),
+                        null, generateRandomEmail(), null, null, startRegistrationNoUserType422)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, null, generateRandomPhone(), true, new File("src/test/resources/api/registration/negativeResponse/noUserType422.json"))),
+                        null, null, generateRandomPhone(), true, startRegistrationNoUserType422)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, null, generateRandomPhone(), false, new File("src/test/resources/api/registration/negativeResponse/noUserType422.json"))),
+                        null, null, generateRandomPhone(), false, startRegistrationNoUserType422)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, null, generateRandomPhone(), null, new File("src/test/resources/api/registration/negativeResponse/noUserType422.json")))
-        );
+                        null, null, generateRandomPhone(), null, startRegistrationNoUserType422)));
+
     }
 
     private static Stream<Arguments> registrationDataProviderEmailValidationNegative() {
         List<String> invalidEmailList = new RegistrationDataProvider().invalidEmail();
         List<Arguments> argumentsList = new ArrayList<>();
         for (String invalidEmail : invalidEmailList) {
-            File expectedResponseFile = new File("src/test/resources/api/registration/negativeResponse/emailValidation422.json");
             argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    CLIENT.toString(), invalidEmail, null, null, expectedResponseFile)));
+                    CLIENT.toString(), invalidEmail, null, null, startRegistrationEmailValidation422)));
             argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    CLIENT.toString(), invalidEmail, generateRandomPhone(), null, expectedResponseFile)));
+                    CLIENT.toString(), invalidEmail, generateRandomPhone(), null, startRegistrationEmailValidation422)));
         }
         return argumentsList.stream();
     }
+
+//    private static Stream<Arguments> checkCodeDataProviderPositive() {
+//    }
 
     private List<String> getUserRoles() {
         List<String> userRoles = new ArrayList<>();

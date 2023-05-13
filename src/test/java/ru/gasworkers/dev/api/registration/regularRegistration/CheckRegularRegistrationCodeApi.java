@@ -1,16 +1,15 @@
 package ru.gasworkers.dev.api.registration.regularRegistration;
 
-import io.qameta.allure.Allure;
-import io.restassured.http.ContentType;
-import io.restassured.response.ExtractableResponse;
-import io.restassured.response.Response;
+import io.qameta.allure.Step;
+import io.restassured.response.ValidatableResponse;
+import ru.gasworkers.dev.api.BaseApi;
+import ru.gasworkers.dev.api.registration.dto.CheckRegularRegistrationCodeInputDto;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.Matchers.*;
 
-public class CheckRegularRegistrationCodeApi {
+public class CheckRegularRegistrationCodeApi extends BaseApi {
 
-    /**
+    /*
      * This method checks the registration code and returns a success response if the code is valid.
      *
      * @param code     Integer code sent to user's phone or email. Example: 123456
@@ -18,34 +17,18 @@ public class CheckRegularRegistrationCodeApi {
      * @param email    String email of user being registered (mandatory if phone is not provided). Optional. Example: client@gmail.com
      * @param phone    String phone of user being registered (mandatory if email is not provided). Optional. Example: "79119129233"
      */
-    public void checkRegularRegistrationCode(String code, String userType, String email, String phone) {
-//        InputValidatorApi.validateRegistrationCode(code, userType, email, phone);
+    @Step("API: Регулярная регистрация Приверка  кода СМС")
 
-        Allure.step("Проверка регистрационного кода: " + code + " для роли: " + userType + " " + email + " " + phone, () -> {
-            String requestBody = "{"
-                    + "\"code\": " + code + ","
-                    + "\"type\": \"" + userType + "\","
-                    + "\"email\": \"" + email + "\","
-                    + "\"phone\": " + phone + "}";
+    public ValidatableResponse checkRegularRegistrationCode(CheckRegularRegistrationCodeInputDto checkRegularRegistrationCodeInputDTO) {
 
-            ExtractableResponse<Response> response = given()
-                    .contentType(ContentType.JSON)
-                    .accept(ContentType.JSON)
-                    .body(requestBody)
-                    .when()
-                    .post("/auth/check-register-code")
-                    .then()
-                    .extract();
+        return given().spec(baseRequestSpec)
+                .body(checkRegularRegistrationCodeInputDTO)
+                .when()
+                .post("/auth/check-register-code")
+                .then().spec(baseResponseSpec);
 
-            response.response().then()
-                    .statusCode(200)
-                    .contentType(ContentType.JSON)
-                    .body("status", equalTo(0))
-                    .body("message", equalTo("Код успешно проверен"))
-                    .body("data", hasSize(0));
 
-            System.out.println("Checked register code: " + code + " for: " + userType + " " + email + " " + phone);
-            System.out.println();
-        });
     }
+
 }
+

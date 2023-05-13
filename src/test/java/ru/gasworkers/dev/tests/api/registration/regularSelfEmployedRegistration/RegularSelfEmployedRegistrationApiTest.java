@@ -9,7 +9,7 @@ public class RegularSelfEmployedRegistrationApiTest {
         ApiTestConfig.configureRestAssured();
     }
 
-    public final RegularStartRegistrationApi regularStartRegistrationApi = new RegularStartRegistrationApi();
+    public final OLDRegularStartRegistrationApi OLDRegularStartRegistrationApi = new OLDRegularStartRegistrationApi();
     public final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
     public final RegularFinishRegistrationApi regularFinishRegistrationApi = new RegularFinishRegistrationApi();
     public final SelfEmployedRegistrationApi configureSelfEmployedRegistrationApi = new SelfEmployedRegistrationApi();
@@ -35,7 +35,7 @@ public class RegularSelfEmployedRegistrationApiTest {
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.SE_INDIVIDUAL), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
     @DisplayName(" Регистрация самозанятого Api ( без конфигурации) - получается Рекрут? Чем отличается от регистрации мастера в ск? " )
     public void noConfigSelfEmployedRegistration() {
-        regularStartRegistrationApi.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
+        OLDRegularStartRegistrationApi.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
         checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.MASTER.toString(), email, phone);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.MASTER.toString(), email, phone, firstName, lastName, patronymicName, password, gender, true, true, Employed_status.SELF_EMPLOYED.toString(), null);
 
@@ -50,7 +50,7 @@ public class RegularSelfEmployedRegistrationApiTest {
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.SE_INDIVIDUAL), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE), @Tag(AllureTag.API)})
     @DisplayName(" Регистрация самозанятого Api ( c конфигурацией ")
     public void configSelfEmployedRegistration() {
-        regularStartRegistrationApi.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
+        OLDRegularStartRegistrationApi.regularStartRegistration(UserType.MASTER.toString(), email, phone, false);
         checkRegularRegistrationCodeApi.checkRegularRegistrationCode(code, UserType.MASTER.toString(), email, phone);
         regularFinishRegistrationApi.regularFinishRegistration(UserType.MASTER.toString(), email, phone, firstName, lastName, patronymicName, password, gender, true, true, Employed_status.SELF_EMPLOYED.toString(), null);
         configureSelfEmployedRegistrationApi.configureSelfEmployedRegistration(false, true);

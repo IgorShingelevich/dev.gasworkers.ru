@@ -26,7 +26,7 @@ import java.nio.charset.StandardCharsets;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.REGISTRATION)
 @Tag(AllureTag.API)
-public class RegularClientRegistrationParamApiTest extends BaseApiTest {
+public class StartRegularClientRegistrationParamApiTest extends BaseApiTest {
     private final StartRegularRegistrationApi registrationApi = new StartRegularRegistrationApi();
 
     @ParameterizedTest
@@ -34,7 +34,7 @@ public class RegularClientRegistrationParamApiTest extends BaseApiTest {
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Старт регулярной регистрации client master service (позитивный кейс)")
-    public void clientRegularRegistrationPositiveApiTest(StartRegistrationInputDto inputDto) throws IOException {
+    public void clientStartRegularRegistrationPositiveApiTest(StartRegistrationInputDto inputDto) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String expectedResponse = FileUtils.readFileToString(inputDto.getExpectedResponseFile(), String.valueOf(StandardCharsets.UTF_8));
         inputDto.setExpectedResponseFile(null);
@@ -49,7 +49,7 @@ public class RegularClientRegistrationParamApiTest extends BaseApiTest {
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Старт регулярной регистрации (негативный кейс - валидация почты)")
-    public void clientRegularRegistrationParamNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
+    public void clientStartRegularRegistrationParamNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String expectedResponse = FileUtils.readFileToString(inputDto.getExpectedResponseFile(), String.valueOf(StandardCharsets.UTF_8));
         inputDto.setExpectedResponseFile(null);
@@ -65,7 +65,7 @@ public class RegularClientRegistrationParamApiTest extends BaseApiTest {
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Старт регулярной регистрации (негативный кейс - комбинация параметров запроса)")
-    public void clientRegularRegistrationParamSetNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
+    public void clientStartRegularRegistrationBodyCombinationsParamNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         String expectedResponse = FileUtils.readFileToString(inputDto.getExpectedResponseFile(), String.valueOf(StandardCharsets.UTF_8));
         inputDto.setExpectedResponseFile(null);

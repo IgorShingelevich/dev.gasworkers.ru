@@ -1,7 +1,6 @@
 package ru.gasworkers.dev.api.registration.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import java.io.File;
@@ -11,16 +10,15 @@ import java.io.File;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CheckRegularRegistrationCodeDTO {
+public class CheckRegularRegistrationCodeInputDto {
+
     private Integer code;
-    private String type;
-    private String email;
-    private String phone;
-    @JsonProperty("expectedResponseFile")
+    private String type, email, phone;
+//    @JsonProperty("expectedResponseFile")
     private File expectedResponseFile;
 
-    public static CheckRegularRegistrationCodeDTO newInstance(Integer code, String type, String email, String phone, File expectedResponseFile) {
-        return CheckRegularRegistrationCodeDTO.builder()
+    public static CheckRegularRegistrationCodeInputDto newInstance(Integer code, String type, String email, String phone, File expectedResponseFile) {
+        return CheckRegularRegistrationCodeInputDto.builder()
                 .code(code)
                 .type(type)
                 .email(email)
@@ -28,4 +26,5 @@ public class CheckRegularRegistrationCodeDTO {
                 .expectedResponseFile(expectedResponseFile)
                 .build();
     }
+
 }
