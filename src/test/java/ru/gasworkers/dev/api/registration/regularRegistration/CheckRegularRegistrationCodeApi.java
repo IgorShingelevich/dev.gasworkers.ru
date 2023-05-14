@@ -17,7 +17,7 @@ public class CheckRegularRegistrationCodeApi extends BaseApi {
      * @param email    String email of user being registered (mandatory if phone is not provided). Optional. Example: client@gmail.com
      * @param phone    String phone of user being registered (mandatory if email is not provided). Optional. Example: "79119129233"
      */
-    @Step("API: Регулярная регистрация Приверка  кода СМС")
+    @Step("API: Регулярная регистрация Проверка  кода СМС")
 
     public ValidatableResponse checkRegularRegistrationCode(CheckRegularRegistrationCodeInputDto checkRegularRegistrationCodeInputDTO) {
 
@@ -26,7 +26,18 @@ public class CheckRegularRegistrationCodeApi extends BaseApi {
                 .when()
                 .post("/auth/check-register-code")
                 .then().spec(baseResponseSpec);
+    }
 
+    @Step("API: Регулярная регистрация Проверка  кода СМС")
+
+    public ValidatableResponse checkRegularRegistrationCode(Integer code, String type, String email, String phone) {
+        CheckRegularRegistrationCodeInputDto checkRegularRegistrationCodeInputDTO = CheckRegularRegistrationCodeInputDto.builder()
+                .code(code)
+                .type(type)
+                .email(email)
+                .phone(phone)
+                .build();
+        return checkRegularRegistrationCode(checkRegularRegistrationCodeInputDTO);
 
     }
 

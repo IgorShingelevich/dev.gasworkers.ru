@@ -13,10 +13,12 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
+import ru.gasworkers.dev.api.registration.dto.CheckRegularRegistrationCodeInputDto;
 import ru.gasworkers.dev.api.registration.dto.StartRegistrationInputDto;
 import ru.gasworkers.dev.api.registration.regularRegistration.StartRegularRegistrationApi;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
@@ -30,7 +32,22 @@ public class StartRegularClientRegistrationParamApiTest extends BaseApiTest {
     private final StartRegularRegistrationApi registrationApi = new StartRegularRegistrationApi();
 
     @ParameterizedTest
-    @MethodSource("ru.gasworkers.dev.tests.api.registration.regularClentRegistration.RegistrationDataProvider#registrationDataProviderPositive")
+    @MethodSource("ru.gasworkers.dev.tests.api.registration.regularClentRegistration.RegistrationDataProvider#startRegistrationDataProviderPositive")
+    @Tag(AllureTag.CLIENT)
+    @Tag(AllureTag.POSITIVE)
+    @DisplayName("Старт регулярной регистрации client master service (позитивный кейс)")
+    public void fromCheckClientStartRegularRegistrationPositiveApiTest(StartRegistrationInputDto inputDto) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        String expectedResponse = FileUtils.readFileToString(inputDto.getExpectedResponseFile(), String.valueOf(StandardCharsets.UTF_8));
+//        inputDto.getExpectedStartResponseFile(null);
+        String actualResponse = registrationApi.startRegistration(inputDto)
+                .statusCode(200)
+                .extract().body().asString();
+        JSONAssert.assertEquals(expectedResponse, actualResponse, false);
+    }
+
+    @ParameterizedTest
+    @MethodSource("ru.gasworkers.dev.tests.api.registration.regularClentRegistration.RegistrationDataProvider#startRegistrationDataProviderPositive")
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Старт регулярной регистрации client master service (позитивный кейс)")
@@ -45,7 +62,7 @@ public class StartRegularClientRegistrationParamApiTest extends BaseApiTest {
     }
 
     @ParameterizedTest
-    @MethodSource("ru.gasworkers.dev.tests.api.registration.regularClentRegistration.RegistrationDataProvider#registrationDataProviderEmailValidationNegative")
+    @MethodSource("ru.gasworkers.dev.tests.api.registration.regularClentRegistration.RegistrationDataProvider#startRegistrationDataProviderEmailValidationNegative")
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Старт регулярной регистрации (негативный кейс - валидация почты)")
@@ -61,7 +78,7 @@ public class StartRegularClientRegistrationParamApiTest extends BaseApiTest {
 
 
     @ParameterizedTest
-    @MethodSource("ru.gasworkers.dev.tests.api.registration.regularClentRegistration.RegistrationDataProvider#registrationDataProviderParamSetNegative")
+    @MethodSource("ru.gasworkers.dev.tests.api.registration.regularClentRegistration.RegistrationDataProvider#startRegistrationDataProviderParamSetNegative")
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Старт регулярной регистрации (негативный кейс - комбинация параметров запроса)")

@@ -15,15 +15,17 @@ public class CheckRegularRegistrationCodeInputDto {
     private Integer code;
     private String type, email, phone;
 //    @JsonProperty("expectedResponseFile")
-    private File expectedResponseFile;
+    private File expectedStartResponseFile,
+        expectedCheckResponseFile;
 
-    public static CheckRegularRegistrationCodeInputDto newInstance(Integer code, String type, String email, String phone, File expectedResponseFile) {
+    public static CheckRegularRegistrationCodeInputDto newInstance(Integer code, String type, String email, String phone, File expectedStartResponseFile, File expectedCheckResponseFile) {
         return CheckRegularRegistrationCodeInputDto.builder()
-                .code(code)
                 .type(type)
                 .email(email)
                 .phone(phone)
-                .expectedResponseFile(expectedResponseFile)
+                .code(code)
+                .expectedStartResponseFile(expectedStartResponseFile)
+                .expectedCheckResponseFile(expectedCheckResponseFile)
                 .build();
     }
 

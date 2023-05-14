@@ -21,10 +21,23 @@ public class RegistrationDataProvider {
             startRegistration200 = new File("src/test/resources/api/registration/regular/start/startRegistration200.json"),
             startRegistrationNoEmailOrPhone422 = new File("src/test/resources/api/registration/regular/start/negative/startRegistrationNoEmailOrPhone422.json"),
             startRegistrationNoUserType422 = new File("src/test/resources/api/registration/regular/start/negative/startRegistrationNoUserType422.json"),
-            startRegistrationEmailValidation422 = new File("src/test/resources/api/registration/regular/start/negative/startRegistrationEmailValidation422.json");
+            startRegistrationEmailValidation422 = new File("src/test/resources/api/registration/regular/start/negative/startRegistrationEmailValidation422.json"),
+            checkRegistrationCode200 = new File("src/test/resources/api/registration/regular/check/checkRegistrationCode200.json");
+
+    private static Stream<Arguments> checkRegistrationDataProviderPositive() {
+        Stream<Arguments> startRegistrationData = startRegistrationDataProviderPositive();
+        List<Arguments> arguments = new ArrayList<>();
+
+        startRegistrationData.forEach(startRegistrationArgs -> {
+            arguments.add(Arguments.of(startRegistrationArgs.get()[0], checkRegistrationCode200));
+        });
+        System.out.println("arguments = " + arguments);
+
+        return arguments.stream();
+    }
 
 
-    private static Stream<Arguments> registrationDataProviderPositive() {
+    private static Stream<Arguments> startRegistrationDataProviderPositive() {
         List<String> userRoles = new RegistrationDataProvider().getUserRoles();
         List<Arguments> arguments = new ArrayList<>();
         for (String userRole : userRoles) {
@@ -52,7 +65,7 @@ public class RegistrationDataProvider {
 
     }
 
-    private static Stream<Arguments> registrationDataProviderParamSetNegative() {
+    private static Stream<Arguments> startRegistrationDataProviderParamSetNegative() {
         return Stream.of(
                 Arguments.of(StartRegistrationInputDto.newInstance(
                         CLIENT.toString(), null, null, true, startRegistrationNoEmailOrPhone422)),
@@ -81,7 +94,7 @@ public class RegistrationDataProvider {
 
     }
 
-    private static Stream<Arguments> registrationDataProviderEmailValidationNegative() {
+    private static Stream<Arguments> startRegistrationDataProviderEmailValidationNegative() {
         List<String> invalidEmailList = new RegistrationDataProvider().invalidEmail();
         List<Arguments> argumentsList = new ArrayList<>();
         for (String invalidEmail : invalidEmailList) {
