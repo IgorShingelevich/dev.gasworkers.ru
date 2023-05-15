@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.api.registration.regularClentRegistration;
+package ru.gasworkers.dev.tests.api.registration.regular;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Epic;
@@ -13,14 +13,15 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.registration.dto.CheckRegularRegistrationCodeInputDto;
-import ru.gasworkers.dev.api.registration.dto.StartRegistrationInputDto;
+import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationInputDto;
+import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationResponseDto;
 import ru.gasworkers.dev.api.registration.regularRegistration.StartRegularRegistrationApi;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+
+import static org.junit.Assert.assertEquals;
 
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.REGISTRATION)
@@ -36,10 +37,27 @@ public class StartRegularClientRegistrationParamApiTest extends BaseApiTest {
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Старт регулярной регистрации client master service (позитивный кейс)")
+    public void fromCheckClientStartRegularRegistrationPositiveApiTest2(StartRegistrationInputDto inputDto) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.createSuccessResponse("60");
+        StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(inputDto)
+                .statusCode(200)
+                .extract().as(StartRegistrationResponseDto.class);
+
+        String expectedJson = objectMapper.writeValueAsString(expectedResponse);
+        String actualJson = objectMapper.writeValueAsString(actualResponse);
+
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
+    }
+
+
+    @ParameterizedTest
+    @MethodSource("ru.gasworkers.dev.tests.api.registration.regularClentRegistration.RegistrationDataProvider#startRegistrationDataProviderPositive")
+    @Tag(AllureTag.CLIENT)
+    @Tag(AllureTag.POSITIVE)
+    @DisplayName("Старт регулярной регистрации client master service (позитивный кейс)")
     public void fromCheckClientStartRegularRegistrationPositiveApiTest(StartRegistrationInputDto inputDto) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
         String expectedResponse = FileUtils.readFileToString(inputDto.getExpectedResponseFile(), String.valueOf(StandardCharsets.UTF_8));
-//        inputDto.getExpectedStartResponseFile(null);
         String actualResponse = registrationApi.startRegistration(inputDto)
                 .statusCode(200)
                 .extract().body().asString();

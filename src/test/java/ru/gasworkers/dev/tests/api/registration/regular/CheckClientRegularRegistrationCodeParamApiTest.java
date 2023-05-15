@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.api.registration.regularClentRegistration;
+package ru.gasworkers.dev.tests.api.registration.regular;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -7,14 +7,10 @@ import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.MethodSource;
 import org.skyscreamer.jsonassert.JSONAssert;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.registration.dto.CheckRegularRegistrationCodeInputDto;
-import ru.gasworkers.dev.api.registration.dto.StartRegistrationInputDto;
 import ru.gasworkers.dev.api.registration.regularRegistration.CheckRegularRegistrationCodeApi;
 import ru.gasworkers.dev.api.registration.regularRegistration.StartRegularRegistrationApi;
 import ru.gasworkers.dev.model.apiModel.UserType;

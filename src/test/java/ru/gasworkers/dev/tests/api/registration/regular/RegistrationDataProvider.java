@@ -1,7 +1,7 @@
-package ru.gasworkers.dev.tests.api.registration.regularClentRegistration;
+package ru.gasworkers.dev.tests.api.registration.regular;
 
 import org.junit.jupiter.params.provider.Arguments;
-import ru.gasworkers.dev.api.registration.dto.StartRegistrationInputDto;
+import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationInputDto;
 import ru.gasworkers.dev.model.apiModel.UserType;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
@@ -36,6 +36,34 @@ public class RegistrationDataProvider {
         return arguments.stream();
     }
 
+
+    private static Stream<Arguments> startRegistrationDataProviderPositive1() {
+        List<String> userRoles = new RegistrationDataProvider().getUserRoles();
+        List<Arguments> arguments = new ArrayList<>();
+        for (String userRole : userRoles) {
+            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    userRole, generateRandomEmail(), generateRandomPhone(), true, startRegistration200)));
+            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    userRole, generateRandomEmail(), generateRandomPhone(), false, startRegistration200)));
+            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    userRole, generateRandomEmail(), generateRandomPhone(), null, startRegistration200)));
+            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    userRole, generateRandomEmail(), null, true, startRegistration200)));
+            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    userRole, generateRandomEmail(), null, false, startRegistration200)));
+            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    userRole, generateRandomEmail(), null, null, startRegistration200)));
+            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    userRole, null, generateRandomPhone(), true, startRegistration200)));
+            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    userRole, null, generateRandomPhone(), false, startRegistration200)));
+            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    userRole, null, generateRandomPhone(), null, startRegistration200)));
+        }
+
+        return arguments.stream();
+
+    }
 
     private static Stream<Arguments> startRegistrationDataProviderPositive() {
         List<String> userRoles = new RegistrationDataProvider().getUserRoles();
