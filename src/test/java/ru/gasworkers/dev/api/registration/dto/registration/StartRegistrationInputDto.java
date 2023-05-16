@@ -18,15 +18,13 @@ public class StartRegistrationInputDto {
     private String type, email, phone;
     @JsonProperty("phone_send")
     private Boolean isPhoneSend;
-    private File expectedResponseFile;
 
-    public static StartRegistrationInputDto newInstance(String type, String email, String phone, Boolean isPhoneSend, File expectedResponseFile) {
+    public static StartRegistrationInputDto newInstance(String type, String email, String phone, Boolean isPhoneSend) {
         return StartRegistrationInputDto.builder()
                 .type(type)
                 .email(email)
                 .phone(phone)
                 .isPhoneSend(isPhoneSend)
-                .expectedResponseFile(expectedResponseFile)
                 .build();
     }
 

@@ -37,88 +37,66 @@ public class RegistrationDataProvider {
     }
 
 
-    private static Stream<Arguments> startRegistrationDataProviderPositive1() {
-        List<String> userRoles = new RegistrationDataProvider().getUserRoles();
-        List<Arguments> arguments = new ArrayList<>();
-        for (String userRole : userRoles) {
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), generateRandomPhone(), true, startRegistration200)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), generateRandomPhone(), false, startRegistration200)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), generateRandomPhone(), null, startRegistration200)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), null, true, startRegistration200)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), null, false, startRegistration200)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), null, null, startRegistration200)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, null, generateRandomPhone(), true, startRegistration200)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, null, generateRandomPhone(), false, startRegistration200)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, null, generateRandomPhone(), null, startRegistration200)));
-        }
-
-        return arguments.stream();
-
-    }
 
     private static Stream<Arguments> startRegistrationDataProviderPositive() {
         List<String> userRoles = new RegistrationDataProvider().getUserRoles();
         List<Arguments> arguments = new ArrayList<>();
         for (String userRole : userRoles) {
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), generateRandomPhone(), true, startRegistration200)));
+                    userRole, generateRandomEmail(), generateRandomPhone(), true)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), generateRandomPhone(), false, startRegistration200)));
+                    userRole, generateRandomEmail(), generateRandomPhone(), false)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), generateRandomPhone(), null, startRegistration200)));
+                    userRole, generateRandomEmail(), generateRandomPhone(), null)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), null, true, startRegistration200)));
+                    userRole, generateRandomEmail(), null, true)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), null, false, startRegistration200)));
+                    userRole, generateRandomEmail(), null, false)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, generateRandomEmail(), null, null, startRegistration200)));
+                    userRole, generateRandomEmail(), null, null)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, null, generateRandomPhone(), true, startRegistration200)));
+                    userRole, null, generateRandomPhone(), true)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, null, generateRandomPhone(), false, startRegistration200)));
+                    userRole, null, generateRandomPhone(), false)));
             arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    userRole, null, generateRandomPhone(), null, startRegistration200)));
+                    userRole, null, generateRandomPhone(), null)));
         }
 
         return arguments.stream();
 
     }
 
-    private static Stream<Arguments> startRegistrationDataProviderParamSetNegative() {
+    private static Stream<Arguments> startRegistrationDataProviderTypeParamMissingNegative() {
         return Stream.of(
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        CLIENT.toString(), null, null, true, startRegistrationNoEmailOrPhone422)),
+                        null, generateRandomEmail(), generateRandomPhone(), true)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        CLIENT.toString(), null, null, false, startRegistrationNoEmailOrPhone422)),
+                        null, generateRandomEmail(), generateRandomPhone(), false)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        CLIENT.toString(), null, null, null, startRegistrationNoEmailOrPhone422)),
+                        null, generateRandomEmail(), generateRandomPhone(), null)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, generateRandomEmail(), generateRandomPhone(), true, startRegistrationNoUserType422)),
+                        null, generateRandomEmail(), null, true)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, generateRandomEmail(), generateRandomPhone(), false, startRegistrationNoUserType422)),
+                        null, generateRandomEmail(), null, false)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, generateRandomEmail(), generateRandomPhone(), null, startRegistrationNoUserType422)),
+                        null, generateRandomEmail(), null, null)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, generateRandomEmail(), null, true, startRegistrationNoUserType422)),
+                        null, null, generateRandomPhone(), true)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, generateRandomEmail(), null, false, startRegistrationNoUserType422)),
+                        null, null, generateRandomPhone(), false)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, generateRandomEmail(), null, null, startRegistrationNoUserType422)),
+                        null, null, generateRandomPhone(), null)));
+
+    }
+
+    private static Stream<Arguments> startRegistrationDataProviderEmailAndPhoneParamMissingNegative() {
+        return Stream.of(
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, null, generateRandomPhone(), true, startRegistrationNoUserType422)),
+                        CLIENT.toString(), null, null, true)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, null, generateRandomPhone(), false, startRegistrationNoUserType422)),
+                        CLIENT.toString(), null, null, false)),
                 Arguments.of(StartRegistrationInputDto.newInstance(
-                        null, null, generateRandomPhone(), null, startRegistrationNoUserType422)));
+                        CLIENT.toString(), null, null, null)));
 
     }
 
@@ -127,22 +105,75 @@ public class RegistrationDataProvider {
         List<Arguments> argumentsList = new ArrayList<>();
         for (String invalidEmail : invalidEmailList) {
             argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    CLIENT.toString(), invalidEmail, null, null, startRegistrationEmailValidation422)));
+                    CLIENT.toString(), invalidEmail, null, null)));
             argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
-                    CLIENT.toString(), invalidEmail, generateRandomPhone(), null, startRegistrationEmailValidation422)));
+                    CLIENT.toString(), invalidEmail, generateRandomPhone(), null)));
         }
         return argumentsList.stream();
     }
 
+    private static Stream<Arguments> startRegistrationDataProviderPhoneValidationNegative() {
+        List<String> invalidPhonelList = new RegistrationDataProvider().invalidPhone();
+        List<Arguments> argumentsList = new ArrayList<>();
+        for (String invalidPhone : invalidPhonelList) {
+            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    CLIENT.toString(), generateRandomEmail(), invalidPhone.toString(), null)));
+            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    CLIENT.toString(), null, invalidPhone.toString(), null)));
+        }
+        return argumentsList.stream();
+    }
+
+    private static Stream<Arguments> startRegistrationDataProviderPhoneAlreadyExistNegative() {
+        List<Arguments> argumentsList = new ArrayList<>();
+         {
+            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    CLIENT.toString(), generateRandomEmail(), "77777777777", null)));
+             argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                     CLIENT.toString(), generateRandomEmail(), "77777777777", false)));
+             argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                     CLIENT.toString(), generateRandomEmail(), "77777777777", true)));
+            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    CLIENT.toString(), null, "77777777777", null)));
+                argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                        CLIENT.toString(), null, "77777777777", false)));
+                argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                        CLIENT.toString(), null, "77777777777", true)));
+             argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                     CLIENT.toString(), "&&&&&&&&", "77777777777", true)));
+             argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                     CLIENT.toString(), "shingelevich@gmail.com", "77777777777", true)));
+
+        }
+        return argumentsList.stream();
+    }
+
+
 //    private static Stream<Arguments> checkCodeDataProviderPositive() {
 //    }
-
     private List<String> getUserRoles() {
         List<String> userRoles = new ArrayList<>();
         userRoles.add(UserType.CLIENT.toString());
         userRoles.add(UserType.MASTER.toString());
         userRoles.add(UserType.SERVICE.toString());
         return userRoles;
+    }
+
+    private static List<String> invalidPhone() {
+        List<String> invalidPhone = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader("src/test/resources/ru/gasworkers/dev/tests/registration/usualRegistration/usualClientRegistration/resources/registration/invalidPhoneFormat.csv"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split("\\|");
+                if (data.length >= 3) {
+                    String email = data[0].trim();
+                    invalidPhone.add(email);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return invalidPhone;
     }
 
     private List<String> invalidEmail() {

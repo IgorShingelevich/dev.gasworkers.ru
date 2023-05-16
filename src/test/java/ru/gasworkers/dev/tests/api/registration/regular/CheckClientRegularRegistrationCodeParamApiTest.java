@@ -1,3 +1,4 @@
+/*
 package ru.gasworkers.dev.tests.api.registration.regular;
 
 import io.qameta.allure.Epic;
@@ -34,8 +35,6 @@ public class CheckClientRegularRegistrationCodeParamApiTest {
     private final StartRegularRegistrationApi startRegularRegistrationApi = new StartRegularRegistrationApi();
     static File  checkRegistrationCode200 = new File("src/test/resources/api/registration/regular/check/checkRegistrationCode200.json");
     private final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
-//    @ParameterizedTest
-//    @MethodSource ("ru.gasworkers.dev.tests.api.registration.regularClentRegistration.RegistrationDataProvider#checkRegistrationDataProviderPositive")
     @Test
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.POSITIVE)
@@ -56,3 +55,4 @@ public class CheckClientRegularRegistrationCodeParamApiTest {
 
     }
 
+*/

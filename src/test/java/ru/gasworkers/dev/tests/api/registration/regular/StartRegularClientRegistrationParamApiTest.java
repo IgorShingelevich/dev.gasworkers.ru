@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
-import org.apache.commons.io.FileUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,7 +18,6 @@ import ru.gasworkers.dev.api.registration.regularRegistration.StartRegularRegist
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 import static org.junit.Assert.assertEquals;
 
@@ -33,80 +31,105 @@ public class StartRegularClientRegistrationParamApiTest extends BaseApiTest {
     private final StartRegularRegistrationApi registrationApi = new StartRegularRegistrationApi();
 
     @ParameterizedTest
-    @MethodSource("ru.gasworkers.dev.tests.api.registration.regularClentRegistration.RegistrationDataProvider#startRegistrationDataProviderPositive")
+    @MethodSource("ru.gasworkers.dev.tests.api.registration.regular.RegistrationDataProvider#startRegistrationDataProviderPositive")
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.POSITIVE)
-    @DisplayName("Старт регулярной регистрации client master service (позитивный кейс)")
-    public void fromCheckClientStartRegularRegistrationPositiveApiTest2(StartRegistrationInputDto inputDto) throws IOException {
+    @DisplayName("Старт регулярной регистрации client master service 200 OK")
+    public void fromCheckClientStartRegularRegistrationPositiveApiTest(StartRegistrationInputDto inputDto) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
-        StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.createSuccessResponse("60");
+        StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.successResponse("60");
         StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(inputDto)
                 .statusCode(200)
                 .extract().as(StartRegistrationResponseDto.class);
-
         String expectedJson = objectMapper.writeValueAsString(expectedResponse);
         String actualJson = objectMapper.writeValueAsString(actualResponse);
 
         JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
 
-
     @ParameterizedTest
-    @MethodSource("ru.gasworkers.dev.tests.api.registration.regularClentRegistration.RegistrationDataProvider#startRegistrationDataProviderPositive")
-    @Tag(AllureTag.CLIENT)
-    @Tag(AllureTag.POSITIVE)
-    @DisplayName("Старт регулярной регистрации client master service (позитивный кейс)")
-    public void fromCheckClientStartRegularRegistrationPositiveApiTest(StartRegistrationInputDto inputDto) throws IOException {
-        String expectedResponse = FileUtils.readFileToString(inputDto.getExpectedResponseFile(), String.valueOf(StandardCharsets.UTF_8));
-        String actualResponse = registrationApi.startRegistration(inputDto)
-                .statusCode(200)
-                .extract().body().asString();
-        JSONAssert.assertEquals(expectedResponse, actualResponse, false);
-    }
-
-    @ParameterizedTest
-    @MethodSource("ru.gasworkers.dev.tests.api.registration.regularClentRegistration.RegistrationDataProvider#startRegistrationDataProviderPositive")
-    @Tag(AllureTag.CLIENT)
-    @Tag(AllureTag.POSITIVE)
-    @DisplayName("Старт регулярной регистрации client master service (позитивный кейс)")
-    public void clientStartRegularRegistrationPositiveApiTest(StartRegistrationInputDto inputDto) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String expectedResponse = FileUtils.readFileToString(inputDto.getExpectedResponseFile(), String.valueOf(StandardCharsets.UTF_8));
-        inputDto.setExpectedResponseFile(null);
-        String actualResponse = registrationApi.startRegistration(inputDto)
-                .statusCode(200)
-                .extract().body().asString();
-        JSONAssert.assertEquals(expectedResponse, actualResponse, false);
-    }
-
-    @ParameterizedTest
-    @MethodSource("ru.gasworkers.dev.tests.api.registration.regularClentRegistration.RegistrationDataProvider#startRegistrationDataProviderEmailValidationNegative")
+    @MethodSource("ru.gasworkers.dev.tests.api.registration.regular.RegistrationDataProvider#startRegistrationDataProviderEmailValidationNegative")
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.NEGATIVE)
-    @DisplayName("Старт регулярной регистрации (негативный кейс - валидация почты)")
-    public void clientStartRegularRegistrationParamNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String expectedResponse = FileUtils.readFileToString(inputDto.getExpectedResponseFile(), String.valueOf(StandardCharsets.UTF_8));
-        inputDto.setExpectedResponseFile(null);
-        String actualResponse = registrationApi.startRegistration(inputDto)
+    @DisplayName("Старт регулярной регистрации - 422 валидация почты")
+    public void clientStartRegularRegistrationEmailValidationNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.emailInvalidErrorResponse();
+        StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(inputDto)
                 .statusCode(422)
-                .extract().body().asString();
-        JSONAssert.assertEquals(expectedResponse, actualResponse, false);
-    }
+                .extract().as(StartRegistrationResponseDto.class);
+        String expectedJson = objectMapper.writeValueAsString(expectedResponse);
+        String actualJson = objectMapper.writeValueAsString(actualResponse);
 
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
+    }
 
     @ParameterizedTest
-    @MethodSource("ru.gasworkers.dev.tests.api.registration.regularClentRegistration.RegistrationDataProvider#startRegistrationDataProviderParamSetNegative")
+    @MethodSource("ru.gasworkers.dev.tests.api.registration.regular.RegistrationDataProvider#startRegistrationDataProviderPhoneValidationNegative")
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.NEGATIVE)
-    @DisplayName("Старт регулярной регистрации (негативный кейс - комбинация параметров запроса)")
-    public void clientStartRegularRegistrationBodyCombinationsParamNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        String expectedResponse = FileUtils.readFileToString(inputDto.getExpectedResponseFile(), String.valueOf(StandardCharsets.UTF_8));
-        inputDto.setExpectedResponseFile(null);
-        String actualResponse = registrationApi.startRegistration(inputDto)
+    @DisplayName("Старт регулярной регистрации - 422 валидация телефона")
+    public void clientStartRegularRegistrationPhoneValidationNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.phoneInvalidErrorResponse();
+        StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(inputDto)
                 .statusCode(422)
-                .extract().body().asString();
-        JSONAssert.assertEquals(expectedResponse, actualResponse, false);
+                .extract().as(StartRegistrationResponseDto.class);
+        String expectedJson = objectMapper.writeValueAsString(expectedResponse);
+        String actualJson = objectMapper.writeValueAsString(actualResponse);
+
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
     }
+
+    @ParameterizedTest
+    @MethodSource("ru.gasworkers.dev.tests.api.registration.regular.RegistrationDataProvider#startRegistrationDataProviderPhoneAlreadyExistNegative")
+    @Tag(AllureTag.CLIENT)
+    @Tag(AllureTag.NEGATIVE)
+    @DisplayName("Старт регулярной регистрации - 422  существующий телефон")
+    public void clientStartRegularRegistrationPhoneAlreadyExistNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.phoneAlreadyExistsErrorResponse();
+        StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(inputDto)
+                .statusCode(422)
+                .extract().as(StartRegistrationResponseDto.class);
+        String expectedJson = objectMapper.writeValueAsString(expectedResponse);
+        String actualJson = objectMapper.writeValueAsString(actualResponse);
+
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
+    }
+
+    @ParameterizedTest
+    @MethodSource("ru.gasworkers.dev.tests.api.registration.regular.RegistrationDataProvider#startRegistrationDataProviderTypeParamMissingNegative")
+    @Tag(AllureTag.CLIENT)
+    @Tag(AllureTag.NEGATIVE)
+    @DisplayName("Старт регулярной регистрации -  422 отсутствует тип пользователя")
+    public void clientStartRegularRegistrationMissingTypeNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.typeMissingResponse();
+        StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(inputDto)
+                .statusCode(422)
+                .extract().as(StartRegistrationResponseDto.class);
+        String expectedJson = objectMapper.writeValueAsString(expectedResponse);
+        String actualJson = objectMapper.writeValueAsString(actualResponse);
+
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
+    }
+
+    @ParameterizedTest
+    @MethodSource("ru.gasworkers.dev.tests.api.registration.regular.RegistrationDataProvider#startRegistrationDataProviderEmailAndPhoneParamMissingNegative")
+    @Tag(AllureTag.CLIENT)
+    @Tag(AllureTag.NEGATIVE)
+    @DisplayName("Старт регулярной регистрации -  422  отсутствует  почти или телефон")
+    public void clientStartRegularRegistrationMissingEmailAndPhoneNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.missingEmailOrPhoneResponse();
+        StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(inputDto)
+                .statusCode(422)
+                .extract().as(StartRegistrationResponseDto.class);
+        String expectedJson = objectMapper.writeValueAsString(expectedResponse);
+        String actualJson = objectMapper.writeValueAsString(actualResponse);
+
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
+    }
+
 }

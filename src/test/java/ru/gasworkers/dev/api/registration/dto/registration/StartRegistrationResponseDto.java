@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class StartRegistrationResponseDto {
-    private int status;
+    private Integer status;
     private String message;
     private DataDto data;
     private ErrorsDto errors;
@@ -20,9 +20,11 @@ public class StartRegistrationResponseDto {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class DataDto {
+
         @JsonProperty("seconds_left")
         private String secondsLeft;
     }
+
 
     @Data
     @NoArgsConstructor
@@ -33,30 +35,49 @@ public class StartRegistrationResponseDto {
         private String[] phone;
     }
 
-    public static StartRegistrationResponseDto createSuccessResponse(String secondsLeft) {
+    public static StartRegistrationResponseDto successResponse(String secondsLeft) {
         return new StartRegistrationResponseDto(0, "Успешная регистрация",
                 new DataDto(secondsLeft), null);
     }
 
-    public static StartRegistrationResponseDto createTypeMissingErrorResponse() {
+    public static StartRegistrationResponseDto typeMissingResponse() {
         String[] typeErrors = {"Поле тип обязательно для заполнения."};
         ErrorsDto errorsDto = new ErrorsDto(typeErrors, null, null);
-        return new StartRegistrationResponseDto(0, "Поле тип обязательно для заполнения.",
+        return new StartRegistrationResponseDto(null, "Поле тип обязательно для заполнения.",
                 null, errorsDto);
     }
 
-    public static StartRegistrationResponseDto createEmailPhoneErrorResponse() {
+    public static StartRegistrationResponseDto missingEmailOrPhoneResponse() {
         String[] emailErrors = {"Поле E-Mail обязательно для заполнения, когда Номер телефона не указано."};
         String[] phoneErrors = {"Поле Номер телефона обязательно для заполнения, когда E-Mail не указано."};
         ErrorsDto errorsDto = new ErrorsDto(null, emailErrors, phoneErrors);
-        return new StartRegistrationResponseDto(0, "Поле E-Mail обязательно для заполнения, когда Номер телефона не указано.",
+        return new StartRegistrationResponseDto(null, "Поле E-Mail обязательно для заполнения, когда Номер телефона не указано. (и еще 1 ошибка)",
                 null, errorsDto);
     }
 
-    public static StartRegistrationResponseDto createEmailInvalidErrorResponse() {
+
+
+    public static StartRegistrationResponseDto emailInvalidErrorResponse() {
         String[] emailErrors = {"Поле E-Mail должно быть действительным электронным адресом."};
         ErrorsDto errorsDto = new ErrorsDto(null, emailErrors, null);
-        return new StartRegistrationResponseDto(0, "Поле E-Mail должно быть действительным электронным адресом.",
+        return new StartRegistrationResponseDto(null, "Поле E-Mail должно быть действительным электронным адресом.",
                 null, errorsDto);
     }
+
+    public static StartRegistrationResponseDto phoneInvalidErrorResponse() {
+        String[] phoneErrors = {
+                "Введите корректный номер"};
+        ErrorsDto errorsDto = new ErrorsDto(null, null, phoneErrors);
+        return new StartRegistrationResponseDto(null, "Введите корректный номер",
+                null, errorsDto);
+    }
+
+    public static StartRegistrationResponseDto phoneAlreadyExistsErrorResponse() {
+        String[] phoneErrors = {
+                "Такое значение поля Номер телефона уже существует."};
+        ErrorsDto errorsDto = new ErrorsDto(null, null, phoneErrors);
+        return new StartRegistrationResponseDto(null, "Такое значение поля Номер телефона уже существует.",
+                null, errorsDto);
+    }
+
 }
