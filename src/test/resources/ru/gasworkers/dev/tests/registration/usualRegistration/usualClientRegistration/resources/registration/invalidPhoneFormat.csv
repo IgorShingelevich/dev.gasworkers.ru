@@ -1,5 +1,4 @@
 invaid phoneNumber |errorText |errorDescription
-77777777777|Такое значение поля Номер телефона уже существует.| already exists
 123456789|Введите корректный номер|too short
 +123456789|Введите корректный номер|missing country code
 123-456-789|Введите корректный номер|invalid format

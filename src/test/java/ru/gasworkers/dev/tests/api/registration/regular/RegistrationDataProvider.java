@@ -148,6 +148,32 @@ public class RegistrationDataProvider {
         return argumentsList.stream();
     }
 
+    private static Stream<Arguments> startRegistrationDataProviderExistingEmailAndPhoneNegative() {
+        List<Arguments> argumentsList = new ArrayList<>();
+        {
+            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    CLIENT.toString(), "shingelevich@gmail.com", "77777777777", true)));
+            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    CLIENT.toString(), "shingelevich@gmail.com", "77777777777", false)));
+            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    CLIENT.toString(), "shingelevich@gmail.com", "77777777777", null)));
+        }
+        return argumentsList.stream();
+    }
+
+    private static Stream<Arguments> startRegistrationDataProviderNoTypeExistingEmailAndPhoneNegative() {
+        List<Arguments> argumentsList = new ArrayList<>();
+        {
+            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    null,"shingelevich@gmail.com", "77777777777", null)));
+            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    null,"shingelevich@gmail.com", "77777777777", true)));
+            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                    null,"shingelevich@gmail.com", "77777777777", false)));
+        }
+        return argumentsList.stream();
+    }
+
 
 //    private static Stream<Arguments> checkCodeDataProviderPositive() {
 //    }
