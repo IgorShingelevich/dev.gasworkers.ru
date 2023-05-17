@@ -47,7 +47,7 @@ public class StartRegistrationResponseDto {
                 null, errorsDto);
     }
 
-    public static StartRegistrationResponseDto missingEmailOrPhoneResponse() {
+    public static StartRegistrationResponseDto emailOrPhoneMissingResponse() {
         String[] emailErrors = {"Поле E-Mail обязательно для заполнения, когда Номер телефона не указано."};
         String[] phoneErrors = {"Поле Номер телефона обязательно для заполнения, когда E-Mail не указано."};
         ErrorsDto errorsDto = new ErrorsDto(null, emailErrors, phoneErrors);
@@ -72,7 +72,7 @@ public class StartRegistrationResponseDto {
                 null, errorsDto);
     }
 
-    public static StartRegistrationResponseDto phoneAlreadyExistsErrorResponse() {
+    public static StartRegistrationResponseDto phoneAlreadyExistsResponse() {
         String[] phoneErrors = {
                 "Такое значение поля Номер телефона уже существует."};
         ErrorsDto errorsDto = new ErrorsDto(null, null, phoneErrors);
@@ -80,7 +80,7 @@ public class StartRegistrationResponseDto {
                 null, errorsDto);
     }
 
-    public static StartRegistrationResponseDto emailAndPhoneAlreadyExistsErrorResponse() {
+    public static StartRegistrationResponseDto emailAndPhoneAlreadyExistResponse() {
         String[] emailErrors = {
                 "Такое значение поля E-Mail уже существует."};
         String[] phoneErrors = {
@@ -90,7 +90,7 @@ public class StartRegistrationResponseDto {
                 null, errorsDto);
     }
 
-    public static StartRegistrationResponseDto noTypeEmailAndPhoneAlreadyExistsErrorResponse() {
+    public static StartRegistrationResponseDto noTypeEmailAndPhoneAlreadyExistsResponse() {
         String[] typeErrors = {"Поле тип обязательно для заполнения."};
         String[] emailErrors = {
                 "Такое значение поля E-Mail уже существует."};

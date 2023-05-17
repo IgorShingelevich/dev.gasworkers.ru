@@ -1,6 +1,6 @@
-/*
 package ru.gasworkers.dev.tests.api.registration.regular;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -12,6 +12,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
+import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationResponseDto;
 import ru.gasworkers.dev.api.registration.regularRegistration.CheckRegularRegistrationCodeApi;
 import ru.gasworkers.dev.api.registration.regularRegistration.StartRegularRegistrationApi;
 import ru.gasworkers.dev.model.apiModel.UserType;
@@ -33,20 +34,22 @@ public class CheckClientRegularRegistrationCodeParamApiTest {
     String email = randomClient.getEmail();
     String type = UserType.CLIENT.toString();
     private final StartRegularRegistrationApi startRegularRegistrationApi = new StartRegularRegistrationApi();
-    static File  checkRegistrationCode200 = new File("src/test/resources/api/registration/regular/check/checkRegistrationCode200.json");
     private final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
-    @Test
+   /* @Test
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.POSITIVE)
     @DisplayName(" Проверка кода  регулярной регистрации клиента (позитивный кейс)")
     public void clientCheckRegularRegistrationPositiveApiTest() throws IOException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.successResponse();
         startRegularRegistrationApi.startRegistration(type, email, phone, true);
-        String expectedResponse = FileUtils.readFileToString(checkRegistrationCode200, "UTF-8");
         String actualResponse = checkRegularRegistrationCodeApi.checkRegularRegistrationCode(111111, type, email, phone)
                 .statusCode(200)
                     .extract().body().asString();
-        JSONAssert.assertEquals(expectedResponse, actualResponse, false);
-        }
+        String expectedJson = objectMapper.writeValueAsString(expectedResponse);
+        String actualJson = objectMapper.writeValueAsString(actualResponse);
+        JSONAssert.assertEquals(expectedJson, actualJson, false);
+        }*/
 
 
 
@@ -55,4 +58,3 @@ public class CheckClientRegularRegistrationCodeParamApiTest {
 
     }
 
-*/
