@@ -1,10 +1,10 @@
+/*
 package ru.gasworkers.dev.tests.api.registration.regularServiceMasterRegistration;
 
 import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.api.ApiTestConfig;
 import ru.gasworkers.dev.api.registration.regularRegistration.CheckRegularRegistrationCodeApi;
 import ru.gasworkers.dev.api.registration.regularRegistration.RegularFinishRegistrationApi;
-import ru.gasworkers.dev.api.registration.regularRegistration.OLDRegularStartRegistrationApi;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.apiModel.Gender;
 import ru.gasworkers.dev.model.apiModel.ServiceCompanyStaff;
@@ -23,9 +23,6 @@ public class RegularServiceMasterRegistrationApiTest extends BaseTest {
         ApiTestConfig.configureRestAssured();
     }
 
-    public final OLDRegularStartRegistrationApi OLDRegularStartRegistrationApi = new OLDRegularStartRegistrationApi();
-    public final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
-    public final RegularFinishRegistrationApi regularFinishRegistrationApi = new RegularFinishRegistrationApi();
     public final ServiceCompanyStaff staff = new ServiceCompanyStaff();
 
     private final RandomSelfEmployedAndMaster randomSelfEmployedAndMaster = new RandomSelfEmployedAndMaster();
@@ -41,7 +38,8 @@ public class RegularServiceMasterRegistrationApiTest extends BaseTest {
     private final Integer
             serviceId = staff.EGIDA.ID;
 
-    /*@Test
+    */
+/*@Test
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.REGULAR_REGISTRATION)
@@ -55,7 +53,9 @@ public class RegularServiceMasterRegistrationApiTest extends BaseTest {
         masterPages.getLoginPage().open();
         masterPages.getLoginPage().loginEmail(email, password);
         masterPages.getHomePage().urlChecker.urlContains("profile/master");
-    }*/
+    }*//*
+
 
 }
 
+*/

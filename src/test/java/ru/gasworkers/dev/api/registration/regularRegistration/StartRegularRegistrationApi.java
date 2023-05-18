@@ -3,14 +3,14 @@ package ru.gasworkers.dev.api.registration.regularRegistration;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import ru.gasworkers.dev.api.BaseApi;
-import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationInputDto;
+import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationRequestDto;
 
 import static io.restassured.RestAssured.given;
 
 public class StartRegularRegistrationApi extends BaseApi {
 
     @Step("API: Регулярная регистрация Начало")
-    public ValidatableResponse startRegistration(StartRegistrationInputDto inputDto) {
+    public ValidatableResponse startRegistration(StartRegistrationRequestDto inputDto) {
         return given().spec(baseRequestSpec)
                 // do not understand how object is converted to json
                 .body(inputDto)
@@ -21,7 +21,7 @@ public class StartRegularRegistrationApi extends BaseApi {
 
     @Step("API: Регулярная регистрация Начало")
     public ValidatableResponse startRegistration(String type, String email, String phone, Boolean isPhoneSend) {
-        StartRegistrationInputDto inputDto = StartRegistrationInputDto.builder()
+        StartRegistrationRequestDto inputDto = StartRegistrationRequestDto.builder()
                 .type(type)
                 .email(email)
                 .phone(phone)

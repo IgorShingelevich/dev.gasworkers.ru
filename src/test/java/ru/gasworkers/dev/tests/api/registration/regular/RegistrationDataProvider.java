@@ -1,7 +1,7 @@
 package ru.gasworkers.dev.tests.api.registration.regular;
 
 import org.junit.jupiter.params.provider.Arguments;
-import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationInputDto;
+import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationRequestDto;
 import ru.gasworkers.dev.model.apiModel.UserType;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
@@ -17,48 +17,27 @@ import static ru.gasworkers.dev.model.apiModel.UserType.CLIENT;
 
 public class RegistrationDataProvider {
 
-    static File
-            startRegistration200 = new File("src/test/resources/api/registration/regular/start/startRegistration200.json"),
-            startRegistrationNoEmailOrPhone422 = new File("src/test/resources/api/registration/regular/start/negative/startRegistrationNoEmailOrPhone422.json"),
-            startRegistrationNoUserType422 = new File("src/test/resources/api/registration/regular/start/negative/startRegistrationNoUserType422.json"),
-            startRegistrationEmailValidation422 = new File("src/test/resources/api/registration/regular/start/negative/startRegistrationEmailValidation422.json"),
-            checkRegistrationCode200 = new File("src/test/resources/api/registration/regular/check/checkRegistrationCode200.json");
-
-    private static Stream<Arguments> checkRegistrationDataProviderPositive() {
-        Stream<Arguments> startRegistrationData = startRegistrationDataProviderPositive();
-        List<Arguments> arguments = new ArrayList<>();
-
-        startRegistrationData.forEach(startRegistrationArgs -> {
-            arguments.add(Arguments.of(startRegistrationArgs.get()[0], checkRegistrationCode200));
-        });
-        System.out.println("arguments = " + arguments);
-
-        return arguments.stream();
-    }
-
-
-
     private static Stream<Arguments> startRegistrationDataProviderPositive() {
         List<String> userRoles = new RegistrationDataProvider().getUserRoles();
         List<Arguments> arguments = new ArrayList<>();
         for (String userRole : userRoles) {
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     userRole, generateRandomEmail(), generateRandomPhone(), true)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     userRole, generateRandomEmail(), generateRandomPhone(), false)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     userRole, generateRandomEmail(), generateRandomPhone(), null)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     userRole, generateRandomEmail(), null, true)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     userRole, generateRandomEmail(), null, false)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     userRole, generateRandomEmail(), null, null)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     userRole, null, generateRandomPhone(), true)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     userRole, null, generateRandomPhone(), false)));
-            arguments.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     userRole, null, generateRandomPhone(), null)));
         }
 
@@ -68,34 +47,34 @@ public class RegistrationDataProvider {
 
     private static Stream<Arguments> startRegistrationDataProviderTypeParamMissingNegative() {
         return Stream.of(
-                Arguments.of(StartRegistrationInputDto.newInstance(
+                Arguments.of(StartRegistrationRequestDto.newInstance(
                         null, generateRandomEmail(), generateRandomPhone(), true)),
-                Arguments.of(StartRegistrationInputDto.newInstance(
+                Arguments.of(StartRegistrationRequestDto.newInstance(
                         null, generateRandomEmail(), generateRandomPhone(), false)),
-                Arguments.of(StartRegistrationInputDto.newInstance(
+                Arguments.of(StartRegistrationRequestDto.newInstance(
                         null, generateRandomEmail(), generateRandomPhone(), null)),
-                Arguments.of(StartRegistrationInputDto.newInstance(
+                Arguments.of(StartRegistrationRequestDto.newInstance(
                         null, generateRandomEmail(), null, true)),
-                Arguments.of(StartRegistrationInputDto.newInstance(
+                Arguments.of(StartRegistrationRequestDto.newInstance(
                         null, generateRandomEmail(), null, false)),
-                Arguments.of(StartRegistrationInputDto.newInstance(
+                Arguments.of(StartRegistrationRequestDto.newInstance(
                         null, generateRandomEmail(), null, null)),
-                Arguments.of(StartRegistrationInputDto.newInstance(
+                Arguments.of(StartRegistrationRequestDto.newInstance(
                         null, null, generateRandomPhone(), true)),
-                Arguments.of(StartRegistrationInputDto.newInstance(
+                Arguments.of(StartRegistrationRequestDto.newInstance(
                         null, null, generateRandomPhone(), false)),
-                Arguments.of(StartRegistrationInputDto.newInstance(
+                Arguments.of(StartRegistrationRequestDto.newInstance(
                         null, null, generateRandomPhone(), null)));
 
     }
 
     private static Stream<Arguments> startRegistrationDataProviderEmailAndPhoneParamMissingNegative() {
         return Stream.of(
-                Arguments.of(StartRegistrationInputDto.newInstance(
+                Arguments.of(StartRegistrationRequestDto.newInstance(
                         CLIENT.toString(), null, null, true)),
-                Arguments.of(StartRegistrationInputDto.newInstance(
+                Arguments.of(StartRegistrationRequestDto.newInstance(
                         CLIENT.toString(), null, null, false)),
-                Arguments.of(StartRegistrationInputDto.newInstance(
+                Arguments.of(StartRegistrationRequestDto.newInstance(
                         CLIENT.toString(), null, null, null)));
 
     }
@@ -104,9 +83,9 @@ public class RegistrationDataProvider {
         List<String> invalidEmailList = new RegistrationDataProvider().invalidEmail();
         List<Arguments> argumentsList = new ArrayList<>();
         for (String invalidEmail : invalidEmailList) {
-            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     CLIENT.toString(), invalidEmail, null, null)));
-            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     CLIENT.toString(), invalidEmail, generateRandomPhone(), null)));
         }
         return argumentsList.stream();
@@ -116,9 +95,9 @@ public class RegistrationDataProvider {
         List<String> invalidPhonelList = new RegistrationDataProvider().invalidPhone();
         List<Arguments> argumentsList = new ArrayList<>();
         for (String invalidPhone : invalidPhonelList) {
-            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     CLIENT.toString(), generateRandomEmail(), invalidPhone.toString(), null)));
-            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     CLIENT.toString(), null, invalidPhone.toString(), null)));
         }
         return argumentsList.stream();
@@ -127,21 +106,21 @@ public class RegistrationDataProvider {
     private static Stream<Arguments> startRegistrationDataProviderPhoneAlreadyExistNegative() {
         List<Arguments> argumentsList = new ArrayList<>();
          {
-            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     CLIENT.toString(), generateRandomEmail(), "77777777777", null)));
-             argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+             argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                      CLIENT.toString(), generateRandomEmail(), "77777777777", false)));
-             argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+             argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                      CLIENT.toString(), generateRandomEmail(), "77777777777", true)));
-            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     CLIENT.toString(), null, "77777777777", null)));
-                argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                         CLIENT.toString(), null, "77777777777", false)));
-                argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+                argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                         CLIENT.toString(), null, "77777777777", true)));
-             argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+             argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                      CLIENT.toString(), "&&&&&&&&", "77777777777", true)));
-             argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+             argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                      CLIENT.toString(), "shingelevich@gmail.com", "77777777777", true)));
 
         }
@@ -151,11 +130,11 @@ public class RegistrationDataProvider {
     private static Stream<Arguments> startRegistrationDataProviderExistingEmailAndPhoneNegative() {
         List<Arguments> argumentsList = new ArrayList<>();
         {
-            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     CLIENT.toString(), "shingelevich@gmail.com", "77777777777", true)));
-            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     CLIENT.toString(), "shingelevich@gmail.com", "77777777777", false)));
-            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     CLIENT.toString(), "shingelevich@gmail.com", "77777777777", null)));
         }
         return argumentsList.stream();
@@ -164,11 +143,11 @@ public class RegistrationDataProvider {
     private static Stream<Arguments> startRegistrationDataProviderNoTypeExistingEmailAndPhoneNegative() {
         List<Arguments> argumentsList = new ArrayList<>();
         {
-            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     null,"shingelevich@gmail.com", "77777777777", null)));
-            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     null,"shingelevich@gmail.com", "77777777777", true)));
-            argumentsList.add(Arguments.of(StartRegistrationInputDto.newInstance(
+            argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     null,"shingelevich@gmail.com", "77777777777", false)));
         }
         return argumentsList.stream();

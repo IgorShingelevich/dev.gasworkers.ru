@@ -13,7 +13,7 @@ import org.skyscreamer.jsonassert.JSONAssert;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationInputDto;
+import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationResponseDto;
 import ru.gasworkers.dev.api.registration.regularRegistration.StartRegularRegistrationApi;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
@@ -43,7 +43,7 @@ public class StartRegularClientRegistrationParamApiTest extends BaseApiTest {
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Старт регулярной регистрации client master service 200 OK")
-    public void clientStartRegularRegistrationPositiveApiTest(StartRegistrationInputDto inputDto) throws IOException {
+    public void clientStartRegularRegistrationPositiveApiTest(StartRegistrationRequestDto inputDto) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.successResponse("60");
         StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(inputDto)
                 .statusCode(200)
@@ -57,7 +57,7 @@ public class StartRegularClientRegistrationParamApiTest extends BaseApiTest {
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Старт регулярной регистрации - 422 валидация почты")
-    public void clientStartRegularRegistrationEmailValidationNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
+    public void clientStartRegularRegistrationEmailValidationNegativeApiTest(StartRegistrationRequestDto inputDto) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.emailInvalidErrorResponse();
         StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(inputDto)
                 .statusCode(422)
@@ -71,7 +71,7 @@ public class StartRegularClientRegistrationParamApiTest extends BaseApiTest {
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Старт регулярной регистрации - 422 валидация телефона")
-    public void clientStartRegularRegistrationPhoneValidationNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
+    public void clientStartRegularRegistrationPhoneValidationNegativeApiTest(StartRegistrationRequestDto inputDto) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.phoneInvalidErrorResponse();
         StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(inputDto)
                 .statusCode(422)
@@ -85,7 +85,7 @@ public class StartRegularClientRegistrationParamApiTest extends BaseApiTest {
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Старт регулярной регистрации - 422  существующий телефон")
-    public void clientStartRegularRegistrationPhoneAlreadyExistNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
+    public void clientStartRegularRegistrationPhoneAlreadyExistNegativeApiTest(StartRegistrationRequestDto inputDto) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.phoneAlreadyExistsResponse();
         StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(inputDto)
                 .statusCode(422)
@@ -99,7 +99,7 @@ public class StartRegularClientRegistrationParamApiTest extends BaseApiTest {
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Старт регулярной регистрации -  422 отсутствует тип пользователя")
-    public void clientStartRegularRegistrationMissingTypeNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
+    public void clientStartRegularRegistrationMissingTypeNegativeApiTest(StartRegistrationRequestDto inputDto) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.typeMissingResponse();
         StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(inputDto)
                 .statusCode(422)
@@ -113,7 +113,7 @@ public class StartRegularClientRegistrationParamApiTest extends BaseApiTest {
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Старт регулярной регистрации -  422  отсутствует  почта или телефон")
-    public void clientStartRegularRegistrationMissingEmailAndPhoneNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
+    public void clientStartRegularRegistrationMissingEmailAndPhoneNegativeApiTest(StartRegistrationRequestDto inputDto) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.emailOrPhoneMissingResponse();
         StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(inputDto)
                 .statusCode(422)
@@ -127,7 +127,7 @@ public class StartRegularClientRegistrationParamApiTest extends BaseApiTest {
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Старт регулярной регистрации -  422  существующая почта и телефон")
-    public void clientStartRegularRegistrationExistingEmailAndPhoneNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
+    public void clientStartRegularRegistrationExistingEmailAndPhoneNegativeApiTest(StartRegistrationRequestDto inputDto) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.emailAndPhoneAlreadyExistResponse();
         StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(inputDto)
                 .statusCode(422)
@@ -141,7 +141,7 @@ public class StartRegularClientRegistrationParamApiTest extends BaseApiTest {
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Старт регулярной регистрации -  422  нет типа пользователя, существующая почта и телефон")
-    public void clientStartRegularRegistrationNoTypeExistingEmailAndPhoneNegativeApiTest(StartRegistrationInputDto inputDto) throws IOException {
+    public void clientStartRegularRegistrationNoTypeExistingEmailAndPhoneNegativeApiTest(StartRegistrationRequestDto inputDto) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.noTypeEmailAndPhoneAlreadyExistsResponse();
         StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(inputDto)
                 .statusCode(422)
