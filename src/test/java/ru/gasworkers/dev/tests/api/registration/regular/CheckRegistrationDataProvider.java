@@ -4,12 +4,52 @@ import org.junit.jupiter.params.provider.Arguments;
 import ru.gasworkers.dev.api.registration.dto.registration.CheckRegularRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationRequestDto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class CheckRegistrationDataProvider {
-    static Integer code = 123456;
+    static Integer code = 111111;
 
-    private static Stream<Arguments> checkRegistrationDataProviderPositive(StartRegistrationRequestDto startRequestDto) {
+    public static Stream<Arguments> checkRegistrationDataProviderPositive() {
+        RegistrationDataProvider registrationDataProvider = new RegistrationDataProvider();
+        List<Arguments> arguments = new ArrayList<>();
+
+        String userRole = registrationDataProvider.getUserRoles().get(0);
+        String email = registrationDataProvider.generateRandomEmail();
+        String phone = registrationDataProvider.generateRandomPhone();
+
+        arguments.add(Arguments.of(
+                StartRegistrationRequestDto.newInstance(userRole, email, phone, true)
+        ));
+
+        return arguments.stream();
+    }
+
+
+    public static Stream<Arguments> checkRegistrationDataProviderAllRoles() {
+        RegistrationDataProvider registrationDataProvider = new RegistrationDataProvider();
+        List<String> userRoles = registrationDataProvider.getUserRoles();
+        List<Arguments> arguments = new ArrayList<>();
+
+        for (String userRole : userRoles) {
+            String email = registrationDataProvider.generateRandomEmail();
+            String phone = registrationDataProvider.generateRandomPhone();
+
+            arguments.add(Arguments.of(
+                    StartRegistrationRequestDto.newInstance(userRole, email, phone, true)
+            ));
+        }
+
+        return arguments.stream();
+    }
+
+
+
+    public static Stream<Arguments> checkRegistrationDataProviderPositiveV2() {
+        StartRegistrationRequestDto startRequestDto = new StartRegistrationRequestDto();
+
+
         String type = startRequestDto.getType();
         String email = startRequestDto.getEmail();
         String phone = startRequestDto.getPhone();
@@ -31,17 +71,6 @@ public class CheckRegistrationDataProvider {
                         code, type, null, null)),
                 Arguments.of(CheckRegularRegistrationRequestDto.newInstance(
                         code, null, null, null)));
-
     }
 
-   /* public static Stream<Arguments> checkRegistrationDataProviderPositive() {
-        StartRegistrationRequestDto startRequestDto = StartRegistrationRequestDto.builder()
-                .type("exampleType")
-                .email("exampleEmail")
-                .phone("examplePhone")
-                .isPhoneSend(true)
-                .build();
-
-        return checkRegistrationDataProviderPositive(startRequestDto);
-    }*/
 }

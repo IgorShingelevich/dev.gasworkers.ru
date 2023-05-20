@@ -50,7 +50,7 @@ public class CheckRegularClientRegistrationApiTest {
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.POSITIVE)
     @DisplayName(" Проверка кода  регулярной регистрации клиента - 422 неверный код")
-    public void clientCheckRegularRegistrationPositiveApiTest() throws IOException {
+    public void clientCheckRegularRegistrationWrongCodeNegativeApiTest() throws IOException {
         startRegularRegistrationApi.startRegistration(type, email, phone, true);
         CheckRegularRegistrationResponseDto expectedResponse = CheckRegularRegistrationResponseDto.wrongCodeResponse();
         CheckRegularRegistrationResponseDto actualResponse = checkRegularRegistrationCodeApi.checkRegularRegistrationCode(123456, type, email, phone)
@@ -66,6 +66,7 @@ public class CheckRegularClientRegistrationApiTest {
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Проверка кода регуляроной регистрации -  200 OK")
     public void clientCheckRegularRegistrationPositiveApiTest(StartRegistrationRequestDto inputDto) throws IOException {
+        startRegularRegistrationApi.startRegistration(inputDto);
         CheckRegularRegistrationResponseDto expectedResponse = CheckRegularRegistrationResponseDto.successResponse();
         CheckRegularRegistrationResponseDto actualResponse = checkRegularRegistrationCodeApi.checkRegularRegistrationCode(111111, inputDto.getType(), inputDto.getEmail(), inputDto.getPhone())
                 .statusCode(200)

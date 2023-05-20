@@ -156,7 +156,7 @@ public class RegistrationDataProvider {
 
 //    private static Stream<Arguments> checkCodeDataProviderPositive() {
 //    }
-    private List<String> getUserRoles() {
+public List<String> getUserRoles() {
         List<String> userRoles = new ArrayList<>();
         userRoles.add(UserType.CLIENT.toString());
         userRoles.add(UserType.MASTER.toString());
@@ -200,12 +200,12 @@ public class RegistrationDataProvider {
         return invalidEmail;
     }
 
-    private static String generateRandomEmail() {
+    public static String generateRandomEmail() {
         RandomClient randomClient = new RandomClient();
         return randomClient.getEmail();
     }
 
-    private static String generateRandomPhone() {
+    public static String generateRandomPhone() {
         RandomClient randomClient = new RandomClient();
         return randomClient.getPhone();
     }
