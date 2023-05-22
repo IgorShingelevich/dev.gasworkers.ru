@@ -12,8 +12,8 @@ repositories {
 }
 
 ext {
-    selenideVersion = '6.12.3'
-    selenideProxy = '6.12.3'
+    selenideVersion = '6.14.0'
+    selenideProxy = '6.14.0'
     assertjVersion = '3.24.2'
     junitJupiterVersion = '5.9.0'
     hamcrest = '2.2'

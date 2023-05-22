@@ -53,7 +53,7 @@ public class CheckRegularClientRegistrationApiTest {
     public void clientCheckRegularRegistrationWrongCodeNegativeApiTest() throws IOException {
         startRegularRegistrationApi.startRegistration(type, email, phone, true);
         CheckRegularRegistrationResponseDto expectedResponse = CheckRegularRegistrationResponseDto.wrongCodeResponse();
-        CheckRegularRegistrationResponseDto actualResponse = checkRegularRegistrationCodeApi.checkRegularRegistrationCode(123456, type, email, phone)
+        CheckRegularRegistrationResponseDto actualResponse = checkRegularRegistrationCodeApi.checkRegularRegistrationCode(0, type, email, phone)
                 .statusCode(422)
                 .extract().as(CheckRegularRegistrationResponseDto.class);
 

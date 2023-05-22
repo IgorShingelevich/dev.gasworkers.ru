@@ -6,7 +6,6 @@ import ru.gasworkers.dev.model.apiModel.UserType;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,23 +21,23 @@ public class RegistrationDataProvider {
         List<Arguments> arguments = new ArrayList<>();
         for (String userRole : userRoles) {
             arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, generateRandomEmail(), generateRandomPhone(), true)));
+                    userRole, generateRandomClientEmail(), generateRandomClientPhone(), true)));
             arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, generateRandomEmail(), generateRandomPhone(), false)));
+                    userRole, generateRandomClientEmail(), generateRandomClientPhone(), false)));
             arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, generateRandomEmail(), generateRandomPhone(), null)));
+                    userRole, generateRandomClientEmail(), generateRandomClientPhone(), null)));
             arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, generateRandomEmail(), null, true)));
+                    userRole, generateRandomClientEmail(), null, true)));
             arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, generateRandomEmail(), null, false)));
+                    userRole, generateRandomClientEmail(), null, false)));
             arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, generateRandomEmail(), null, null)));
+                    userRole, generateRandomClientEmail(), null, null)));
             arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, null, generateRandomPhone(), true)));
+                    userRole, null, generateRandomClientPhone(), true)));
             arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, null, generateRandomPhone(), false)));
+                    userRole, null, generateRandomClientPhone(), false)));
             arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, null, generateRandomPhone(), null)));
+                    userRole, null, generateRandomClientPhone(), null)));
         }
 
         return arguments.stream();
@@ -48,23 +47,23 @@ public class RegistrationDataProvider {
     private static Stream<Arguments> startRegistrationDataProviderTypeParamMissingNegative() {
         return Stream.of(
                 Arguments.of(StartRegistrationRequestDto.newInstance(
-                        null, generateRandomEmail(), generateRandomPhone(), true)),
+                        null, generateRandomClientEmail(), generateRandomClientPhone(), true)),
                 Arguments.of(StartRegistrationRequestDto.newInstance(
-                        null, generateRandomEmail(), generateRandomPhone(), false)),
+                        null, generateRandomClientEmail(), generateRandomClientPhone(), false)),
                 Arguments.of(StartRegistrationRequestDto.newInstance(
-                        null, generateRandomEmail(), generateRandomPhone(), null)),
+                        null, generateRandomClientEmail(), generateRandomClientPhone(), null)),
                 Arguments.of(StartRegistrationRequestDto.newInstance(
-                        null, generateRandomEmail(), null, true)),
+                        null, generateRandomClientEmail(), null, true)),
                 Arguments.of(StartRegistrationRequestDto.newInstance(
-                        null, generateRandomEmail(), null, false)),
+                        null, generateRandomClientEmail(), null, false)),
                 Arguments.of(StartRegistrationRequestDto.newInstance(
-                        null, generateRandomEmail(), null, null)),
+                        null, generateRandomClientEmail(), null, null)),
                 Arguments.of(StartRegistrationRequestDto.newInstance(
-                        null, null, generateRandomPhone(), true)),
+                        null, null, generateRandomClientPhone(), true)),
                 Arguments.of(StartRegistrationRequestDto.newInstance(
-                        null, null, generateRandomPhone(), false)),
+                        null, null, generateRandomClientPhone(), false)),
                 Arguments.of(StartRegistrationRequestDto.newInstance(
-                        null, null, generateRandomPhone(), null)));
+                        null, null, generateRandomClientPhone(), null)));
 
     }
 
@@ -80,23 +79,23 @@ public class RegistrationDataProvider {
     }
 
     private static Stream<Arguments> startRegistrationDataProviderEmailValidationNegative() {
-        List<String> invalidEmailList = new RegistrationDataProvider().invalidEmail();
+        List<String> invalidEmailList = new RegistrationDataProvider().invalidEmailValue();
         List<Arguments> argumentsList = new ArrayList<>();
         for (String invalidEmail : invalidEmailList) {
             argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     CLIENT.toString(), invalidEmail, null, null)));
             argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    CLIENT.toString(), invalidEmail, generateRandomPhone(), null)));
+                    CLIENT.toString(), invalidEmail, generateRandomClientPhone(), null)));
         }
         return argumentsList.stream();
     }
 
     private static Stream<Arguments> startRegistrationDataProviderPhoneValidationNegative() {
-        List<String> invalidPhonelList = new RegistrationDataProvider().invalidPhone();
+        List<String> invalidPhonelList = new RegistrationDataProvider().invalidPhoneValue();
         List<Arguments> argumentsList = new ArrayList<>();
         for (String invalidPhone : invalidPhonelList) {
             argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    CLIENT.toString(), generateRandomEmail(), invalidPhone.toString(), null)));
+                    CLIENT.toString(), generateRandomClientEmail(), invalidPhone.toString(), null)));
             argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     CLIENT.toString(), null, invalidPhone.toString(), null)));
         }
@@ -107,11 +106,11 @@ public class RegistrationDataProvider {
         List<Arguments> argumentsList = new ArrayList<>();
          {
             argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    CLIENT.toString(), generateRandomEmail(), "77777777777", null)));
+                    CLIENT.toString(), generateRandomClientEmail(), "77777777777", null)));
              argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                     CLIENT.toString(), generateRandomEmail(), "77777777777", false)));
+                     CLIENT.toString(), generateRandomClientEmail(), "77777777777", false)));
              argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                     CLIENT.toString(), generateRandomEmail(), "77777777777", true)));
+                     CLIENT.toString(), generateRandomClientEmail(), "77777777777", true)));
             argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                     CLIENT.toString(), null, "77777777777", null)));
                 argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
@@ -164,7 +163,7 @@ public List<String> getUserRoles() {
         return userRoles;
     }
 
-    private static List<String> invalidPhone() {
+    private static List<String> invalidPhoneValue() {
         List<String> invalidPhone = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader("src/test/resources/ru/gasworkers/dev/tests/registration/usualRegistration/usualClientRegistration/resources/registration/invalidPhoneFormat.csv"))) {
             String line;
@@ -181,7 +180,7 @@ public List<String> getUserRoles() {
         return invalidPhone;
     }
 
-    private List<String> invalidEmail() {
+    private List<String> invalidEmailValue() {
         List<String> invalidEmail = new ArrayList<>();
 
         try (BufferedReader br = new BufferedReader(new FileReader("src/test/resources/ru/gasworkers/dev/tests/registration/usualRegistration/usualClientRegistration/resources/registration/invalidEmailFormat.csv"))) {
@@ -200,12 +199,12 @@ public List<String> getUserRoles() {
         return invalidEmail;
     }
 
-    public static String generateRandomEmail() {
+    public static String generateRandomClientEmail() {
         RandomClient randomClient = new RandomClient();
         return randomClient.getEmail();
     }
 
-    public static String generateRandomPhone() {
+    public static String generateRandomClientPhone() {
         RandomClient randomClient = new RandomClient();
         return randomClient.getPhone();
     }

@@ -16,8 +16,8 @@ public class CheckRegistrationDataProvider {
         List<Arguments> arguments = new ArrayList<>();
 
         String userRole = registrationDataProvider.getUserRoles().get(0);
-        String email = registrationDataProvider.generateRandomEmail();
-        String phone = registrationDataProvider.generateRandomPhone();
+        String email = registrationDataProvider.generateRandomClientEmail();
+        String phone = registrationDataProvider.generateRandomClientPhone();
 
         arguments.add(Arguments.of(
                 StartRegistrationRequestDto.newInstance(userRole, email, phone, true)
@@ -33,8 +33,8 @@ public class CheckRegistrationDataProvider {
         List<Arguments> arguments = new ArrayList<>();
 
         for (String userRole : userRoles) {
-            String email = registrationDataProvider.generateRandomEmail();
-            String phone = registrationDataProvider.generateRandomPhone();
+            String email = registrationDataProvider.generateRandomClientEmail();
+            String phone = registrationDataProvider.generateRandomClientPhone();
 
             arguments.add(Arguments.of(
                     StartRegistrationRequestDto.newInstance(userRole, email, phone, true)
