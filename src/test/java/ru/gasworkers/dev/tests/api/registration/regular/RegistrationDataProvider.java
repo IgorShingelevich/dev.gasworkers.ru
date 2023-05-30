@@ -1,7 +1,7 @@
 package ru.gasworkers.dev.tests.api.registration.regular;
 
 import org.junit.jupiter.params.provider.Arguments;
-import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationRequestDto;
+import ru.gasworkers.dev.api.registration.dto.registration.regular.start.StartRegistrationRequestDto;
 import ru.gasworkers.dev.model.apiModel.UserType;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
@@ -15,34 +15,6 @@ import java.util.stream.Stream;
 import static ru.gasworkers.dev.model.apiModel.UserType.CLIENT;
 
 public class RegistrationDataProvider {
-
-    private static Stream<Arguments> startRegistrationDataProviderPositive() {
-        List<String> userRoles = new RegistrationDataProvider().getUserRoles();
-        List<Arguments> arguments = new ArrayList<>();
-        for (String userRole : userRoles) {
-            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, generateRandomClientEmail(), generateRandomClientPhone(), true)));
-            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, generateRandomClientEmail(), generateRandomClientPhone(), false)));
-            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, generateRandomClientEmail(), generateRandomClientPhone(), null)));
-            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, generateRandomClientEmail(), null, true)));
-            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, generateRandomClientEmail(), null, false)));
-            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, generateRandomClientEmail(), null, null)));
-            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, null, generateRandomClientPhone(), true)));
-            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, null, generateRandomClientPhone(), false)));
-            arguments.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                    userRole, null, generateRandomClientPhone(), null)));
-        }
-
-        return arguments.stream();
-
-    }
 
     private static Stream<Arguments> startRegistrationDataProviderTypeParamMissingNegative() {
         return Stream.of(

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.registration.dto.registration;
+package ru.gasworkers.dev.api.registration.dto.registration.regular.check;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CheckRegularRegistrationResponseDto {
+public class CheckRegistrationResponseDto {
     private Integer status;
     private String message;
     private ErrorsDto errors;
@@ -25,14 +25,14 @@ public class CheckRegularRegistrationResponseDto {
         private String[] code;
     }
 
-    public static CheckRegularRegistrationResponseDto successResponse() {
+    public static CheckRegistrationResponseDto successResponse() {
         List<String> emptyList = new ArrayList<>();
-        return new CheckRegularRegistrationResponseDto(0, "Код успешно проверен", null, emptyList);
+        return new CheckRegistrationResponseDto(0, "Код успешно проверен", null, emptyList);
     }
 
-    public static CheckRegularRegistrationResponseDto wrongCodeResponse() {
+    public static CheckRegistrationResponseDto wrongCodeResponse() {
         String[] codeErrors = {"Неверный код проверки"};
         ErrorsDto errorsDto = new ErrorsDto(codeErrors);
-        return new CheckRegularRegistrationResponseDto(null, "Неверный код проверки", errorsDto, null);
+        return new CheckRegistrationResponseDto(null, "Неверный код проверки", errorsDto, null);
     }
 }

@@ -1,20 +1,21 @@
-package ru.gasworkers.dev.api.registration.dto.registration;
+package ru.gasworkers.dev.api.registration.dto.registration.regular.check;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+import ru.gasworkers.dev.api.registration.dto.registration.regular.start.StartRegistrationRequestDto;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class CheckRegularRegistrationRequestDto {
+public class CheckRegistrationRequestDto {
 
     private Integer code;
     private String type, email, phone;
 
-    public static CheckRegularRegistrationRequestDto newInstance(Integer code, String type, String email, String phone) {
-        return CheckRegularRegistrationRequestDto.builder()
+    public static CheckRegistrationRequestDto newInstance(Integer code, String type, String email, String phone) {
+        return CheckRegistrationRequestDto.builder()
                 .type(type)
                 .email(email)
                 .phone(phone)
@@ -22,8 +23,8 @@ public class CheckRegularRegistrationRequestDto {
                 .build();
     }
 
-    public static CheckRegularRegistrationRequestDto fromStartRegistration(Integer code, StartRegistrationRequestDto startRegistration) {
-        return CheckRegularRegistrationRequestDto.builder()
+    public static CheckRegistrationRequestDto fromStartRegistration(Integer code, StartRegistrationRequestDto startRegistration) {
+        return CheckRegistrationRequestDto.builder()
                 .code(code)
                 .type(startRegistration.getType())
                 .email(startRegistration.getEmail())

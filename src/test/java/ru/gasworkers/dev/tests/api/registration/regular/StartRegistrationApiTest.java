@@ -4,17 +4,17 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.skyscreamer.jsonassert.JSONAssert;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationResponseDto;
+import ru.gasworkers.dev.api.registration.dto.registration.regular.start.StartRegistrationRequestDto;
+import ru.gasworkers.dev.api.registration.dto.registration.regular.start.StartRegistrationResponseDto;
 import ru.gasworkers.dev.api.registration.regularRegistration.StartRegularRegistrationApi;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
@@ -28,24 +28,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.REGISTRATION)
 @Tag(AllureTag.API)
-public class StartRegularClientRegistrationParamApiTest extends BaseApiTest {
+public class StartRegistrationApiTest extends BaseApiTest {
     //Arrange-Act-Assert (AAA) pattern
     private final StartRegularRegistrationApi startRegularRegistrationApi = new StartRegularRegistrationApi();
-    private ObjectMapper objectMapper;
+    private final ObjectMapper objectMapper = new ObjectMapper();
 
-    @BeforeEach
-    public void setup() {
-        objectMapper = new ObjectMapper();
-    }
-
-    @ParameterizedTest
-    @MethodSource("ru.gasworkers.dev.tests.api.registration.regular.RegistrationDataProvider#startRegistrationDataProviderPositive")
+    @ParameterizedTest(name = "{0}")
+    @EnumSource(ComplexRegistrationCase.class)
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Старт регулярной регистрации client master service 200 OK")
-    public void clientStartRegularRegistrationPositiveApiTest(StartRegistrationRequestDto inputDto) throws IOException {
+    public void clientStartRegistrationPositiveApiTest(ComplexRegistrationCase testCase) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.successResponse("60");
-        StartRegistrationResponseDto actualResponse = startRegularRegistrationApi.startRegistration(inputDto)
+        StartRegistrationResponseDto actualResponse = startRegularRegistrationApi.startRegistration(testCase.getStartRequest())
                 .statusCode(200)
                 .extract().as(StartRegistrationResponseDto.class);
 

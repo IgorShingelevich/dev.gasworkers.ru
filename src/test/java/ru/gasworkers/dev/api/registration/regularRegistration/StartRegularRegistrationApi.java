@@ -3,7 +3,7 @@ package ru.gasworkers.dev.api.registration.regularRegistration;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import ru.gasworkers.dev.api.BaseApi;
-import ru.gasworkers.dev.api.registration.dto.registration.StartRegistrationRequestDto;
+import ru.gasworkers.dev.api.registration.dto.registration.regular.start.StartRegistrationRequestDto;
 
 import static io.restassured.RestAssured.given;
 

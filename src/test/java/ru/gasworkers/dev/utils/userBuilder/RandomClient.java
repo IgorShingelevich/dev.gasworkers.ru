@@ -47,7 +47,7 @@ public class RandomClient {
         //fakerRelativeSurname();
         this.patronymicName = "Автотестович";
         //relativeFakerPatronymic();
-        this.gender = null;
+        this.gender = "Male";
         //fakerRelativeGender();
         this.fullName = this.surname.toString() + " " + this.name.toString() + " " + this.patronymicName.toString();
         Transliterator cyrillicToLatin = Transliterator.getInstance("Cyrillic-Latin");
