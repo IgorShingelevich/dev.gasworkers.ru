@@ -3,7 +3,7 @@ package ru.gasworkers.dev.api.registration.regularRegistration;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import ru.gasworkers.dev.api.BaseApi;
-import ru.gasworkers.dev.api.registration.dto.registration.CheckRegularRegistrationRequestDto;
+import ru.gasworkers.dev.api.registration.dto.registration.regular.check.CheckRegistrationRequestDto;
 
 import static io.restassured.RestAssured.given;
 
@@ -19,7 +19,7 @@ public class CheckRegularRegistrationCodeApi extends BaseApi {
      */
     @Step("API: Регулярная регистрация Проверка  кода СМС")
 
-    public ValidatableResponse checkRegularRegistrationCode(CheckRegularRegistrationRequestDto checkRegularRegistrationRequestDTO) {
+    public ValidatableResponse checkRegularRegistrationCode(CheckRegistrationRequestDto checkRegularRegistrationRequestDTO) {
 
         return given().spec(baseRequestSpec)
                 .body(checkRegularRegistrationRequestDTO)
@@ -31,7 +31,7 @@ public class CheckRegularRegistrationCodeApi extends BaseApi {
     @Step("API: Регулярная регистрация Проверка  кода СМС")
 
     public ValidatableResponse checkRegularRegistrationCode(Integer code, String type, String email, String phone) {
-        CheckRegularRegistrationRequestDto checkRegularRegistrationRequestDTO = CheckRegularRegistrationRequestDto.builder()
+        CheckRegistrationRequestDto checkRegularRegistrationRequestDTO = CheckRegistrationRequestDto.builder()
                 .code(code)
                 .type(type)
                 .email(email)
