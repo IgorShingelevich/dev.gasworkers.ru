@@ -7,7 +7,7 @@ import ru.gasworkers.dev.api.registration.dto.registration.regular.check.CheckRe
 
 import static io.restassured.RestAssured.given;
 
-public class CheckRegularRegistrationCodeApi extends BaseApi {
+public class CheckRegistrationCodeApi extends BaseApi {
 
     /*
      * This method checks the registration code and returns a success response if the code is valid.

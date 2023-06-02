@@ -19,7 +19,7 @@ public class RandomClient {
     private String fullName;
     private String email;
     private String phoneNumber;
-    private String sinceDate;
+    private String sinceTodayDate;
     private String password = "1234";
     private String confirmationCode = "111111";
     private String description = "Не работает -  описание проблемы";
@@ -47,7 +47,7 @@ public class RandomClient {
         //fakerRelativeSurname();
         this.patronymicName = "Автотестович";
         //relativeFakerPatronymic();
-        this.gender = "Male";
+        this.gender = "male";
         //fakerRelativeGender();
         this.fullName = this.surname.toString() + " " + this.name.toString() + " " + this.patronymicName.toString();
         Transliterator cyrillicToLatin = Transliterator.getInstance("Cyrillic-Latin");
@@ -65,7 +65,7 @@ public class RandomClient {
         this.email = email;
         this.phoneNumber = phoneClientPrefixMock + faker.regexify("[0-9]{7}");
 //        this.phoneNumber = faker.phoneNumber().subscriberNumber(11).replaceFirst("^[^7]", "7");
-        this.sinceDate = LocalDate.now().format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
+        this.sinceTodayDate = LocalDate.now().format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
         this.objectAddress = objectAddress;
     }
 
@@ -97,8 +97,8 @@ public class RandomClient {
         return phoneNumber;
     }
 
-    public String getSinceDate() {
-        return sinceDate;
+    public String getSinceTodayDate() {
+        return sinceTodayDate;
     }
 
     public String getObjectAddress() {

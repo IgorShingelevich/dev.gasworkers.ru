@@ -1,9 +1,13 @@
 package ru.gasworkers.dev.api.registration.regularRegistration;
 
 import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
+import ru.gasworkers.dev.api.BaseApi;
+import ru.gasworkers.dev.api.registration.dto.registration.regular.finish.FinishRegistrationRequestDto;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
@@ -11,24 +15,26 @@ import static org.hamcrest.Matchers.*;
 /**
  * This class provides the methods for completing the user registration process.
  */
-public class RegularFinishRegistrationApi {
+public class FinishRegistrationApi extends BaseApi {
+
+
 
     /**
      * Completes the registration process for a client or master.
      * After a successful call to this method, a fully registered user will be created.
      *
-     * @param userType             the type of registering user (client/master/service)
-     * @param email      the email address of the registering user (mandatory if registration is via phone)
-     * @param phone      the phone number of the registering user (mandatory if registration is via email)
-     * @param name       the first name of the registering user
-     * @param surname    the last name of the registering user
-     * @param patronymic the middle name of the registering user (optional)
-     * @param password   the password of the registering user
-     * @param gender           the gender of the registering user (male/female)
-     * @param isHaveContract   whether the user has a contract (optional)
-     * @param isIp             whether the user is an individual entrepreneur (optional)
-     * @param employedStatus   the employment status of the user (pending/accepted/self-employed)
-     * @param serviceId        the identifier of the company the user works for (mandatory for master registration)
+     * @param userType       the type of registering user (client/master/service)
+     * @param email          the email address of the registering user (mandatory if registration is via phone)
+     * @param phone          the phone number of the registering user (mandatory if registration is via email)
+     * @param name           the first name of the registering user
+     * @param surname        the last name of the registering user
+     * @param patronymic     the middle name of the registering user (optional)
+     * @param password       the password of the registering user
+     * @param gender         the gender of the registering user (male/female)
+     * @param isHaveContract whether the user has a contract (optional)
+     * @param isIp           whether the user is an individual entrepreneur (optional)
+     * @param employedStatus the employment status of the user (pending/accepted/self-employed)
+     * @param serviceId      the identifier of the company the user works for (mandatory for master registration)
      */
     public void regularFinishRegistration(String userType, String email, String phone, String name, String surname, String patronymic, String password, String gender, Boolean isHaveContract, Boolean isIp, String employedStatus, Integer serviceId) {
         Allure.step("Окончание - Регистрация Api для роли: " + userType + " " + email + " " + phone, () -> {
@@ -48,7 +54,7 @@ public class RegularFinishRegistrationApi {
                     + "\"type\": \"" + userType + "\""
                     + "}";
 
-            ExtractableResponse<Response> response =  given()
+            ExtractableResponse<Response> response = given()
                     .contentType(ContentType.JSON)
                     .accept(ContentType.JSON)
                     .body(requestBody)
@@ -60,7 +66,7 @@ public class RegularFinishRegistrationApi {
                     .body("status", equalTo(0))
                     .body("message", equalTo("Регистрация завершена"))
                     .extract();
-            if (response.statusCode() != 200) {
+           /* if (response.statusCode() != 200) {
                 System.out.println("Register finish error Request : " + requestBody);
                 System.out.println("Register finish error Response : " + response.asString());
             }
@@ -70,7 +76,20 @@ public class RegularFinishRegistrationApi {
             }
 
             System.out.println("Register finish for role: " + userType+ " " + email + " " + phone + " " + name + " " + surname + " " + patronymic);
-            System.out.println();
+            System.out.println();*/
         });
     }
+
+    @Step("API: Окончание - Регистрация Api для роли: {finishRegistrationRequestDto.type} {finishRegistrationRequestDto.email} {finishRegistrationRequestDto.phone}")
+
+    public ValidatableResponse finishRegularRegistration(FinishRegistrationRequestDto finishRegistrationRequestDto) {
+
+        return given().spec(baseRequestSpec)
+                .body(finishRegistrationRequestDto)
+                .when()
+                .post("/auth/complete-registration")
+                .then().spec(baseResponseSpec);
+
+    }
 }
+

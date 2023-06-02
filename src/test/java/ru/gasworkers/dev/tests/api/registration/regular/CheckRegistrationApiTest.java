@@ -14,8 +14,8 @@ import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.registration.dto.registration.regular.check.CheckRegistrationResponseDto;
-import ru.gasworkers.dev.api.registration.regularRegistration.CheckRegularRegistrationCodeApi;
-import ru.gasworkers.dev.api.registration.regularRegistration.StartRegularRegistrationApi;
+import ru.gasworkers.dev.api.registration.regularRegistration.CheckRegistrationCodeApi;
+import ru.gasworkers.dev.api.registration.regularRegistration.StartRegistrationApi;
 import ru.gasworkers.dev.model.apiModel.UserType;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
@@ -35,8 +35,8 @@ public class CheckRegistrationApiTest {
     String phone = randomClient.getPhone();
     String email = randomClient.getEmail();
     String type = UserType.CLIENT.toString();
-    private final StartRegularRegistrationApi startRegularRegistrationApi = new StartRegularRegistrationApi();
-    private final CheckRegularRegistrationCodeApi checkRegistrationApi = new CheckRegularRegistrationCodeApi();
+    private final StartRegistrationApi startRegistrationApi = new StartRegistrationApi();
+    private final CheckRegistrationCodeApi checkRegistrationApi = new CheckRegistrationCodeApi();
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -47,7 +47,7 @@ public class CheckRegistrationApiTest {
     @DisplayName("Проверка кода регуляроной регистрации -  200 OK")
     public void clientCheckRegistrationPositiveApiTest(ComplexRegistrationCase testCase) {
         step("Start registration", () ->
-                startRegularRegistrationApi.startRegistration(testCase.getStartRequest())
+                startRegistrationApi.startRegistration(testCase.getStartRequest())
                         .statusCode(200));
 
         step("Check registration", () -> {
@@ -65,7 +65,7 @@ public class CheckRegistrationApiTest {
     @Tag(AllureTag.POSITIVE)
     @DisplayName(" Проверка кода  регулярной регистрации клиента - 422 неверный код")
     public void clientCheckRegularRegistrationWrongCodeNegativeApiTest() throws IOException {
-        startRegularRegistrationApi.startRegistration(type, email, phone, true);
+        startRegistrationApi.startRegistration(type, email, phone, true);
         CheckRegistrationResponseDto expectedResponse = CheckRegistrationResponseDto.wrongCodeResponse();
         CheckRegistrationResponseDto actualResponse = checkRegistrationApi.checkRegularRegistrationCode(0, type, email, phone)
                 .statusCode(422)

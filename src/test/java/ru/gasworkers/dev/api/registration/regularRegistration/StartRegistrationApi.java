@@ -7,7 +7,7 @@ import ru.gasworkers.dev.api.registration.dto.registration.regular.start.StartRe
 
 import static io.restassured.RestAssured.given;
 
-public class StartRegularRegistrationApi extends BaseApi {
+public class StartRegistrationApi extends BaseApi {
 
     @Step("API: Регулярная регистрация Начало")
     public ValidatableResponse startRegistration(StartRegistrationRequestDto inputDto) {

@@ -98,12 +98,13 @@ public final class HomeClientPage extends BaseClientPage {
         return this;
     }
 
-    public void checkInitialState(String fullName, String sinceDate) {
+    public void checkInitialState() {
         stepWithRole("Убедиться, что  Домашняя страница в состоянии после Регистрации", () -> {
             urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client");
 
-            //personSummaryComponent.checkInitialState(fullName, sinceDate);
-            // todo appearence of this component
+//            personSummaryComponent.checkInitialState(fullName, sinceDate);
+            //todo person rating anr review count
+            // todo appearence of this component from the header element
             stepWithRole("Убедиться, что присутствует кнопка Заполнить профиль", () -> {
                 fillProfileButtonLocator.shouldBe(visible);
             });

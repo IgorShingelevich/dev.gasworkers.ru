@@ -10,8 +10,8 @@ public class RegularSelfEmployedRegistrationApiTest {
     }
 
     public final OLDRegularStartRegistrationApi OLDRegularStartRegistrationApi = new OLDRegularStartRegistrationApi();
-    public final CheckRegularRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegularRegistrationCodeApi();
-    public final RegularFinishRegistrationApi regularFinishRegistrationApi = new RegularFinishRegistrationApi();
+    public final CheckRegistrationCodeApi checkRegularRegistrationCodeApi = new CheckRegistrationCodeApi();
+    public final FinishRegistrationApi regularFinishRegistrationApi = new FinishRegistrationApi();
     public final SelfEmployedRegistrationApi configureSelfEmployedRegistrationApi = new SelfEmployedRegistrationApi();
     private final RandomSelfEmployedAndMaster randomSelfEmployedAndMaster = new RandomSelfEmployedAndMaster();
     public final ServiceCompanyStaff staff = new ServiceCompanyStaff();

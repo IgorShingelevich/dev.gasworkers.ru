@@ -19,7 +19,7 @@ public final class LoginPage extends BasePage {
     }
 
     SelenideElement
-    jivoWidgetLocator = driver.$("jdiv jdiv jdiv jdiv jdiv jdiv").as("Виджет JivoSite");
+            jivoWidgetLocator = driver.$("jdiv jdiv jdiv jdiv jdiv jdiv").as("Виджет JivoSite");
 
     public LoginPage open() {
         stepWithRole("Открыть страницу авторизации", () -> {
@@ -30,29 +30,34 @@ public final class LoginPage extends BasePage {
     }
 
     public void loginEmail(String email, String password) {
-        driver.$(".title h3").shouldHave(text("Войдите в личный кабинет"));
-        stepWithRole("Ввести почту: " + email, () -> {
-            Selenide.sleep(1000);
-            // todo reset all input fields without sleep
-            driver.$("input[placeholder=E-mail]").as("Поле ввода почты").click();
-            driver.$("input[placeholder=E-mail]").setValue(email);
-            driver.$("input[placeholder=E-mail]").pressEnter();
-            driver.$("input[placeholder=E-mail]").shouldHave(value(email));
-        });
-        stepWithRole("Ввести пароль: " + password, () -> {
-            driver.$("input[placeholder=Пароль]").as("Поле ввода пароля").click();
-            driver.$("input[placeholder=Пароль]").setValue(password);
-            driver.$("input[placeholder=Пароль]").pressEnter();
-            driver.$("input[placeholder=Пароль]").shouldHave(value(password));
-        });
-        stepWithRole("Нажать активную кнопку Войти", () -> {
-            driver.$("button.mb-2.btn").shouldNotBe(disabled).as("Кнопка Войти");
+        stepWithRole("Проверить, что логин произведен успешно ", () -> {
+            driver.$(".title h3").shouldHave(text("Войдите в личный кабинет"));
+            stepWithRole("Ввести почту: " + email, () -> {
+                Selenide.sleep(1000);
+                // todo reset all input fields without sleep
+                driver.$("input[placeholder=E-mail]").as("Поле ввода почты").click();
+                driver.$("input[placeholder=E-mail]").setValue(email);
+                driver.$("input[placeholder=E-mail]").pressEnter();
+                driver.$("input[placeholder=E-mail]").shouldHave(value(email));
+            });
+            stepWithRole("Ввести пароль: " + password, () -> {
+                driver.$("input[placeholder=Пароль]").as("Поле ввода пароля").click();
+                driver.$("input[placeholder=Пароль]").setValue(password);
+                driver.$("input[placeholder=Пароль]").pressEnter();
+                driver.$("input[placeholder=Пароль]").shouldHave(value(password));
+            });
+            stepWithRole("Нажать активную кнопку Войти", () -> {
+                driver.$("button.mb-2.btn").shouldNotBe(disabled).as("Кнопка Войти");
 
-            driver.$(byTagAndText("span", "Далее")).click();
-            System.out.println("login as " + email + " " + password);
+                driver.$(byTagAndText("span", "Далее")).click();
+                System.out.println("login as " + email + " " + password);
+            });
+            stepWithRole("Убедиться, что Url  кабинета пользователя начинается с  - https://dev.gasworkers.ru/profile", () -> {
+                urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile");
+            });
         });
-        stepWithRole("Убедиться, что Url  кабинета пользователя начинается с  - https://dev.gasworkers.ru/profile", () -> {
-            urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile");
-        });
-    };
+
+    }
+
+    ;
 }

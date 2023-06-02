@@ -111,7 +111,7 @@ public class VideoBGRegistrationTest extends BaseTest {
                 clientPages.getApproveMasterVideoPage().details.checkMasterFullName(masterFullNameByIndex);
 //                clientPages.getApproveMasterVideoPage().details.checkPlaceWork("ООО \"ИНЖЕНЕРНЫЕ ТЕХНОЛОГИИ\"");
 //                clientPages.getApproveMasterVideoPage().details.checkQuantityOfCompletedOrders("12");
-                clientPages.getApproveMasterVideoPage().details.checkOrderDate(randomClient.getSinceDate());
+                clientPages.getApproveMasterVideoPage().details.checkOrderDate(randomClient.getSinceTodayDate());
                 clientPages.getApproveMasterVideoPage().details.checkRightNowTimeOrderState();
                 clientPages.getApproveMasterVideoPage().details.checkPriceOrder(masterPriceByIndex);
                 clientPages.getApproveMasterVideoPage().details.checkOrderType(OrderType.VIDEO);
@@ -147,7 +147,7 @@ public class VideoBGRegistrationTest extends BaseTest {
             });*/
 
             step("Домашняя страница", () -> {
-               clientPages.getHomePage().checkVideoBGInitialState(randomClient.getSinceDate(), masterFullNameByIndex);
+               clientPages.getHomePage().checkVideoBGInitialState(randomClient.getSinceTodayDate(), masterFullNameByIndex);
             });
             step("Страница Уведомления", () -> {
                 clientPages.getHomePage().actionsBlock.notifications();

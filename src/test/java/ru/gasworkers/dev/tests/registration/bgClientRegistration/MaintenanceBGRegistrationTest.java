@@ -71,7 +71,7 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
             });
             step("Домашняя страница", () -> {
                 clientPages.getOrderCardPage().sidebar.home();
-                clientPages.getHomePage().checkBGInitialState(randomClient.getSinceDate());
+                clientPages.getHomePage().checkBGInitialState(randomClient.getSinceTodayDate());
             });
             step("Страница Уведомления", () -> {
                clientPages.getHomePage().actionsBlock.notifications();

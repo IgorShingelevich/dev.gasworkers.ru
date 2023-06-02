@@ -24,7 +24,7 @@ public class usersDeleteApiTest {
 
     public final RandomClient randomClient = new RandomClient();
 
-    String sinceDate = randomClient.getSinceDate();
+    String sinceDate = randomClient.getSinceTodayDate();
     // Parse sinceDate into a LocalDate object
     LocalDate localDate = LocalDate.parse(sinceDate, DateTimeFormatter.ofPattern("d MMMM yyyy"));
 

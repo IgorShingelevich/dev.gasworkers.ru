@@ -79,7 +79,8 @@ public class ByPhoneUsualClientRegistrationTest extends BaseTest {
             clientPages.getHomePage().clickLaterInitialModal();
         });
         step("Кабинет клиента - состояние после Регистрации", () -> {
-            clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
+            clientPages.getHomePage().checkInitialState();
+//            clientPages.getHomePage().checkInitialState(randomClient.getFullName(), randomClient.getSinceTodayDate());
             clientPages.getHomePage().sidebar.allObjects();
             clientPages.getAllObjectsPage().checkInitialState();
             clientPages.getAllObjectsPage().sidebar.allOrders();

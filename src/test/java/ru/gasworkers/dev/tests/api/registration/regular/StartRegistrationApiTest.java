@@ -15,7 +15,7 @@ import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.registration.dto.registration.regular.start.StartRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.dto.registration.regular.start.StartRegistrationResponseDto;
-import ru.gasworkers.dev.api.registration.regularRegistration.StartRegularRegistrationApi;
+import ru.gasworkers.dev.api.registration.regularRegistration.StartRegistrationApi;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import java.io.IOException;
@@ -30,8 +30,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @Tag(AllureTag.API)
 public class StartRegistrationApiTest extends BaseApiTest {
     //Arrange-Act-Assert (AAA) pattern
-    private final StartRegularRegistrationApi startRegularRegistrationApi = new StartRegularRegistrationApi();
-    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final StartRegistrationApi startRegistrationApi = new StartRegistrationApi();
 
     @ParameterizedTest(name = "{0}")
     @EnumSource(ComplexRegistrationCase.class)
@@ -40,11 +39,11 @@ public class StartRegistrationApiTest extends BaseApiTest {
     @DisplayName("Старт регулярной регистрации client master service 200 OK")
     public void clientStartRegistrationPositiveApiTest(ComplexRegistrationCase testCase) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.successResponse("60");
-        StartRegistrationResponseDto actualResponse = startRegularRegistrationApi.startRegistration(testCase.getStartRequest())
+        StartRegistrationResponseDto actualResponse = startRegistrationApi.startRegistration(testCase.getStartRequest())
                 .statusCode(200)
                 .extract().as(StartRegistrationResponseDto.class);
 
-        assertStartRegistrationResponse(expectedResponse, actualResponse);
+        assertResponse(expectedResponse, actualResponse);
     }
 
     @ParameterizedTest
@@ -54,11 +53,11 @@ public class StartRegistrationApiTest extends BaseApiTest {
     @DisplayName("Старт регулярной регистрации - 422 валидация почты")
     public void clientStartRegularRegistrationEmailValidationNegativeApiTest(StartRegistrationRequestDto inputDto) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.emailInvalidErrorResponse();
-        StartRegistrationResponseDto actualResponse = startRegularRegistrationApi.startRegistration(inputDto)
+        StartRegistrationResponseDto actualResponse = startRegistrationApi.startRegistration(inputDto)
                 .statusCode(422)
                 .extract().as(StartRegistrationResponseDto.class);
 
-        assertStartRegistrationResponse(expectedResponse, actualResponse);
+        assertResponse(expectedResponse, actualResponse);
     }
 
     @ParameterizedTest
@@ -68,11 +67,11 @@ public class StartRegistrationApiTest extends BaseApiTest {
     @DisplayName("Старт регулярной регистрации - 422 валидация телефона")
     public void clientStartRegularRegistrationPhoneValidationNegativeApiTest(StartRegistrationRequestDto inputDto) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.phoneInvalidErrorResponse();
-        StartRegistrationResponseDto actualResponse = startRegularRegistrationApi.startRegistration(inputDto)
+        StartRegistrationResponseDto actualResponse = startRegistrationApi.startRegistration(inputDto)
                 .statusCode(422)
                 .extract().as(StartRegistrationResponseDto.class);
 
-        assertStartRegistrationResponse(expectedResponse, actualResponse);
+        assertResponse(expectedResponse, actualResponse);
     }
 
     @ParameterizedTest
@@ -82,11 +81,11 @@ public class StartRegistrationApiTest extends BaseApiTest {
     @DisplayName("Старт регулярной регистрации - 422  существующий телефон")
     public void clientStartRegularRegistrationPhoneAlreadyExistNegativeApiTest(StartRegistrationRequestDto inputDto) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.phoneAlreadyExistsResponse();
-        StartRegistrationResponseDto actualResponse = startRegularRegistrationApi.startRegistration(inputDto)
+        StartRegistrationResponseDto actualResponse = startRegistrationApi.startRegistration(inputDto)
                 .statusCode(422)
                 .extract().as(StartRegistrationResponseDto.class);
 
-        assertStartRegistrationResponse(expectedResponse, actualResponse);
+        assertResponse(expectedResponse, actualResponse);
     }
 
     @ParameterizedTest
@@ -96,11 +95,11 @@ public class StartRegistrationApiTest extends BaseApiTest {
     @DisplayName("Старт регулярной регистрации -  422 отсутствует тип пользователя")
     public void clientStartRegularRegistrationMissingTypeNegativeApiTest(StartRegistrationRequestDto inputDto) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.typeMissingResponse();
-        StartRegistrationResponseDto actualResponse = startRegularRegistrationApi.startRegistration(inputDto)
+        StartRegistrationResponseDto actualResponse = startRegistrationApi.startRegistration(inputDto)
                 .statusCode(422)
                 .extract().as(StartRegistrationResponseDto.class);
 
-        assertStartRegistrationResponse(expectedResponse, actualResponse);
+        assertResponse(expectedResponse, actualResponse);
     }
 
     @ParameterizedTest
@@ -110,11 +109,11 @@ public class StartRegistrationApiTest extends BaseApiTest {
     @DisplayName("Старт регулярной регистрации -  422  отсутствует  почта или телефон")
     public void clientStartRegularRegistrationMissingEmailAndPhoneNegativeApiTest(StartRegistrationRequestDto inputDto) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.emailOrPhoneMissingResponse();
-        StartRegistrationResponseDto actualResponse = startRegularRegistrationApi.startRegistration(inputDto)
+        StartRegistrationResponseDto actualResponse = startRegistrationApi.startRegistration(inputDto)
                 .statusCode(422)
                 .extract().as(StartRegistrationResponseDto.class);
 
-        assertStartRegistrationResponse(expectedResponse, actualResponse);
+        assertResponse(expectedResponse, actualResponse);
     }
 
     @ParameterizedTest
@@ -124,11 +123,11 @@ public class StartRegistrationApiTest extends BaseApiTest {
     @DisplayName("Старт регулярной регистрации -  422  существующая почта и телефон")
     public void clientStartRegularRegistrationExistingEmailAndPhoneNegativeApiTest(StartRegistrationRequestDto inputDto) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.emailAndPhoneAlreadyExistResponse();
-        StartRegistrationResponseDto actualResponse = startRegularRegistrationApi.startRegistration(inputDto)
+        StartRegistrationResponseDto actualResponse = startRegistrationApi.startRegistration(inputDto)
                 .statusCode(422)
                 .extract().as(StartRegistrationResponseDto.class);
 
-        assertStartRegistrationResponse(expectedResponse, actualResponse);
+        assertResponse(expectedResponse, actualResponse);
     }
 
     @ParameterizedTest
@@ -138,17 +137,11 @@ public class StartRegistrationApiTest extends BaseApiTest {
     @DisplayName("Старт регулярной регистрации -  422  нет типа пользователя, существующая почта и телефон")
     public void clientStartRegularRegistrationNoTypeExistingEmailAndPhoneNegativeApiTest(StartRegistrationRequestDto inputDto) throws IOException {
         StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.noTypeEmailAndPhoneAlreadyExistsResponse();
-        StartRegistrationResponseDto actualResponse = startRegularRegistrationApi.startRegistration(inputDto)
+        StartRegistrationResponseDto actualResponse = startRegistrationApi.startRegistration(inputDto)
                 .statusCode(422)
                 .extract().as(StartRegistrationResponseDto.class);
 
-        assertStartRegistrationResponse(expectedResponse, actualResponse);
+        assertResponse(expectedResponse, actualResponse);
     }
 
-    private void assertStartRegistrationResponse(StartRegistrationResponseDto expectedResponse, StartRegistrationResponseDto actualResponse) throws IOException {
-        String expectedJson = objectMapper.writeValueAsString(expectedResponse);
-        String actualJson = objectMapper.writeValueAsString(actualResponse);
-
-        JSONAssert.assertEquals(expectedJson, actualJson, false);
-    }
 }
