@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.registration.dto.registration.regular.check;
+package ru.gasworkers.dev.api.registration.regular.dto.check;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

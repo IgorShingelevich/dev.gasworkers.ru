@@ -1,13 +1,15 @@
-package ru.gasworkers.dev.tests.api.registration.regular;
+package ru.gasworkers.dev.tests.api.registration.regular.check;
 
 import org.junit.jupiter.params.provider.Arguments;
-import ru.gasworkers.dev.api.registration.dto.registration.regular.check.CheckRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.dto.registration.regular.start.StartRegistrationRequestDto;
+import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationRequestDto;
+import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
+import ru.gasworkers.dev.tests.api.registration.regular.RegistrationDataProvider;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+@Deprecated
 public class CheckRegistrationDataProvider {
     static Integer code = 111111;
 
@@ -27,8 +29,6 @@ public class CheckRegistrationDataProvider {
 
         return arguments.stream();
     }
-
-
 
     public static Stream<Arguments> checkRegistrationDataProviderPositiveV2() {
         StartRegistrationRequestDto startRequestDto = new StartRegistrationRequestDto();

@@ -1,11 +1,10 @@
-package ru.gasworkers.dev.api.registration.dto.registration.regular.finish;
+package ru.gasworkers.dev.api.registration.regular.dto.finish;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.gasworkers.dev.api.registration.dto.registration.regular.start.StartRegistrationResponseDto;
 
 import java.util.List;
 

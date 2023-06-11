@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.registration.dto.registration.regular.start;
+package ru.gasworkers.dev.api.registration.regular.dto.start;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -54,7 +54,6 @@ public class StartRegistrationResponseDto {
         return new StartRegistrationResponseDto(null, "Поле E-Mail обязательно для заполнения, когда Номер телефона не указано. (и еще 1 ошибка)",
                 null, errorsDto);
     }
-
 
 
     public static StartRegistrationResponseDto emailInvalidErrorResponse() {
