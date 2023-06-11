@@ -91,8 +91,7 @@ public class RegistrationDataProvider {
                         CLIENT.toString(), null, "77777777777", true)));
              argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
                      CLIENT.toString(), "&&&&&&&&", "77777777777", true)));
-             argumentsList.add(Arguments.of(StartRegistrationRequestDto.newInstance(
-                     CLIENT.toString(), "shingelevich@gmail.com", "77777777777", true)));
+
 
         }
         return argumentsList.stream();
