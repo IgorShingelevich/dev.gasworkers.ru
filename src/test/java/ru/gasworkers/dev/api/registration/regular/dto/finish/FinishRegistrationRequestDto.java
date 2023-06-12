@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.registration.dto.registration.regular.finish;
+package ru.gasworkers.dev.api.registration.regular.dto.finish;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
@@ -14,6 +15,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(NON_NULL)
+@Accessors(chain = true)
 public class FinishRegistrationRequestDto {
 
     private String type, password, email, phone, gender;

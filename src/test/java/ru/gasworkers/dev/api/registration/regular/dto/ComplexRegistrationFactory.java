@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.registration.dto.registration.regular;
+package ru.gasworkers.dev.api.registration.regular.dto;
 
 import ru.gasworkers.dev.model.apiModel.UserType;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
