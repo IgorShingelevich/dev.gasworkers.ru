@@ -66,9 +66,14 @@ public class FinishRegistrationApiTest extends BaseApiTest {
                         .statusCode(200));
 
         step("Finish registration", () -> {
-            registrationApi.finishRegistration(testCase.getFinishDto())
-                    .statusCode(422);
-            // ToDo Add verify response body
+            /*registrationApi.finishRegistration(testCase.getFinishDto())
+                    .statusCode(422);*/
+            FinishRegistrationResponseDto expectedResponse = testCase.getExpectedResponse();
+            FinishRegistrationResponseDto actualResponse = registrationApi.finishRegistration(testCase.getFinishDto())
+                    .statusCode(422)
+                    .extract().as(FinishRegistrationResponseDto.class);
+            assertResponse(expectedResponse, actualResponse);
+
         });
     }
 

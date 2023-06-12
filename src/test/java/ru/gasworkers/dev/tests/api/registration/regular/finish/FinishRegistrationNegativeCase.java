@@ -10,36 +10,38 @@ import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationReq
 
 @AllArgsConstructor
 enum FinishRegistrationNegativeCase {
-    // CLIENT
-    CLIENT_WITHOUT_EMAIL(
+    CLIENT_MISSING_EMAIL(
             "Client without email",
-            // ToDo change expected response ---> negative
-            FinishRegistrationResponseDto.successResponse()),
-    CLIENT_WITH_INVALID_EMAIL(
+            FinishRegistrationResponseDto.missingEmailErrorResponse()),
+    CLIENT_INVALID_EMAIL(
             "Client with invalid email",
-            FinishRegistrationResponseDto.successResponse()),
-    CLIENT_WITH_ALREADY_EXIST_EMAIL(
-            "Client with already exist email",
-            FinishRegistrationResponseDto.successResponse()),
-    CLIENT_WITHOUT_FIRST_AND_LASTNAME(
-            "Client without firstname and lastname",
-            FinishRegistrationResponseDto.successResponse()),
-    CLIENT_WITH_INVALID_FIO(
-            "Client with invalid fio",
-            FinishRegistrationResponseDto.successResponse()),
-    CLIENT_WITHOUT_ALL(
+            FinishRegistrationResponseDto.invalidEmailErrorResponse()),
+    CLIENT_DUPLICATE_EMAIL(
+            "Client with already existing email",
+            FinishRegistrationResponseDto.duplicateEmailErrorResponse()),
+    CLIENT_MISSING_NAME(
+            "Client without first and last name",
+            FinishRegistrationResponseDto.missingNameErrorResponse()),
+    CLIENT_INVALID_NAME(
+            "Client with invalid name",
+            FinishRegistrationResponseDto.invalidNameErrorResponse()),
+    CLIENT_MISSING_ALL_FIELDS(
             "Client without all data",
-            FinishRegistrationResponseDto.successResponse()),
-    CLIENT_WITHOUT_PHONE(
+            FinishRegistrationResponseDto.missingAllFieldsErrorResponse()),
+    CLIENT_MISSING_PHONE(
             "Client without phone",
-            FinishRegistrationResponseDto.successResponse()),
-    CLIENT_WITH_ALREADY_EXIST_PHONE(
-            "Client with already exist phone",
-            FinishRegistrationResponseDto.successResponse());
+            FinishRegistrationResponseDto.missingPhoneErrorResponse()),
+    CLIENT_DUPLICATE_PHONE(
+            "Client with already existing phone",
+            FinishRegistrationResponseDto.duplicatePhoneErrorResponse());
 
     private final String description;
     private final FinishRegistrationResponseDto expectedResponse;
     private final ComplexRegistrationRequestDto complexDto = ComplexRegistrationFactory.defaultRandomClient();
+    public FinishRegistrationResponseDto getExpectedResponse() {
+        return expectedResponse;
+    }
+
 
     public StartRegistrationRequestDto getStartDto() {
         return complexDto.toStartRegistration();
@@ -51,35 +53,34 @@ enum FinishRegistrationNegativeCase {
 
     public FinishRegistrationRequestDto getFinishDto() {
         switch (this) {
-            case CLIENT_WITHOUT_EMAIL:
+            case CLIENT_MISSING_EMAIL:
                 return complexDto.toFinishRegistration()
                         .setEmail(null);
-            case CLIENT_WITH_INVALID_EMAIL:
+            case CLIENT_INVALID_EMAIL:
                 return complexDto.toFinishRegistration()
                         .setEmail("lalala.ru");
-            case CLIENT_WITH_ALREADY_EXIST_EMAIL:
+            case CLIENT_DUPLICATE_EMAIL:
                 return complexDto.toFinishRegistration()
                         .setEmail("shingelevich@gmail.com");
-            case CLIENT_WITHOUT_FIRST_AND_LASTNAME:
+            case CLIENT_MISSING_NAME:
                 return complexDto.toFinishRegistration()
                         .setFirstName(null)
                         .setLastName(null);
-            case CLIENT_WITH_INVALID_FIO:
+            case CLIENT_INVALID_NAME:
                 return complexDto.toFinishRegistration()
                         .setFirstName("La la")
                         .setMiddleName("Ла ла")
                         .setLastName("La 123");
-            case CLIENT_WITHOUT_ALL:
+            case CLIENT_MISSING_ALL_FIELDS:
                 return new FinishRegistrationRequestDto();
-            case CLIENT_WITHOUT_PHONE:
+            case CLIENT_MISSING_PHONE:
                 return complexDto.toFinishRegistration()
                         .setPhone(null);
-            case CLIENT_WITH_ALREADY_EXIST_PHONE:
+            case CLIENT_DUPLICATE_PHONE:
                 return complexDto.toFinishRegistration()
-                        .setPhone("89855469239");
+                        .setPhone("70026442413");
             default:
                 throw new RuntimeException("Enum with type " + name() + " not supported");
         }
     }
-
 }
