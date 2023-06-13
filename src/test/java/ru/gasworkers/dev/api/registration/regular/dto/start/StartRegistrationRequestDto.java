@@ -3,6 +3,7 @@ package ru.gasworkers.dev.api.registration.regular.dto.start;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
+import lombok.experimental.Accessors;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
@@ -11,6 +12,7 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(NON_NULL)
+@Accessors(chain = true)
 public class StartRegistrationRequestDto {
 
     private String type, email, phone;

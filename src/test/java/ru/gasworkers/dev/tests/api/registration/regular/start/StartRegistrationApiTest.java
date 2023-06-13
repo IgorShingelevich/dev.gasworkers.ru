@@ -17,6 +17,8 @@ import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import java.io.IOException;
 
+import static io.qameta.allure.Allure.step;
+
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.REGISTRATION)
 @Feature(AllureFeature.REGULAR_REGISTRATION)
@@ -41,19 +43,22 @@ public class StartRegistrationApiTest extends BaseApiTest {
         assertResponse(expectedResponse, actualResponse);
     }
 
-//    @ParameterizedTest
-//    @MethodSource("ru.gasworkers.dev.tests.api.registration.regular.RegistrationDataProvider#startRegistrationDataProviderEmailValidationNegative")
-//    @Tag(AllureTag.CLIENT)
-//    @Tag(AllureTag.NEGATIVE)
-//    @DisplayName("Старт регулярной регистрации - 422 валидация почты")
-//    public void clientStartRegularRegistrationEmailValidationNegativeApiTest(StartRegistrationRequestDto inputDto) throws IOException {
-//        StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.emailInvalidErrorResponse();
-//        StartRegistrationResponseDto actualResponse = startRegistrationApi.startRegistration(inputDto)
-//                .statusCode(422)
-//                .extract().as(StartRegistrationResponseDto.class);
+    @ParameterizedTest
+    @EnumSource(StartRegistrationNegativeCase.class)
+    @Tag(AllureTag.CLIENT)
+    @Tag(AllureTag.NEGATIVE)
+    @DisplayName("Negative case:")
+    public void negativeTestCase(StartRegistrationNegativeCase testCase) throws IOException {
+        step("Start registration", () -> {
+            StartRegistrationResponseDto expectedResponse = testCase.getExpectedResponse();
+            StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(testCase.getStartDto())
+//                    .statusCode(testCase.getStatusCode())
+                    .statusCode(422)
+                    .extract().as(StartRegistrationResponseDto.class);
+            assertResponse(expectedResponse, actualResponse);
+        });
 //
-//        assertResponse(expectedResponse, actualResponse);
-//    }
+    }
 //
 //    @ParameterizedTest
 //    @MethodSource("ru.gasworkers.dev.tests.api.registration.regular.RegistrationDataProvider#startRegistrationDataProviderPhoneValidationNegative")
