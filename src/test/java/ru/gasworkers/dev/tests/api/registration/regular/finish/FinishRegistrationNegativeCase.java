@@ -83,4 +83,10 @@ enum FinishRegistrationNegativeCase {
                 throw new RuntimeException("Enum with type " + name() + " not supported");
         }
     }
+
+    @Override
+    public String toString() {
+        return description;
+    }
+
 }
