@@ -4,6 +4,7 @@ import lombok.Getter;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationRequestDto;
+import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationResponseDto;
 import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
 
 enum CheckRegistrationPositiveCase {
@@ -41,5 +42,6 @@ enum CheckRegistrationPositiveCase {
     public String toString() {
         return description;
     }
+
 
 }

@@ -36,14 +36,15 @@ public class StartRegistrationApiTest extends BaseApiTest {
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Success case:")
     void positiveTestCase(StartRegistrationPositiveCase testCase) throws IOException {
-        StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.successResponse("60");
+        StartRegistrationResponseDto expectedResponse = testCase.getExpectedResponse();
+//        StartRegistrationResponseDto expectedResponse = StartRegistrationResponseDto.successResponse("60");
         StartRegistrationResponseDto actualResponse = registrationApi.startRegistration(testCase.getStartDto())
                 .statusCode(200)
                 .extract().as(StartRegistrationResponseDto.class);
         assertResponse(expectedResponse, actualResponse);
     }
 
-    @ParameterizedTest
+    @ParameterizedTest(name = "{0}")
     @EnumSource(StartRegistrationNegativeCase.class)
     @Tag(AllureTag.CLIENT)
     @Tag(AllureTag.NEGATIVE)

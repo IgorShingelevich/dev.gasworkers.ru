@@ -61,8 +61,8 @@ public class StartRegistrationResponseDto {
         return fieldRequiredErrorResponse("email", "Поле E-Mail должно быть действительным электронным адресом.");
     }
 
-    public static StartRegistrationResponseDto invalidPhoneResponse() {
-        return fieldRequiredErrorResponse("phone", "Введите корректный номер.");
+    public static StartRegistrationResponseDto validEmailWithInvalidPhoneResponse(String secondsLeft) {
+        return new StartRegistrationResponseDto(0, "Успешная регистрация", new DataDto(secondsLeft), null);
     }
 
     public static StartRegistrationResponseDto phoneAlreadyExistsResponse() {

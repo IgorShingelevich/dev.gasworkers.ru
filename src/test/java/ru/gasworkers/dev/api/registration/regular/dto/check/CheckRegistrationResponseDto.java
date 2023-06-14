@@ -18,6 +18,8 @@ public class CheckRegistrationResponseDto {
     private ErrorsDto errors;
     private List<String> data;
 
+
+
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
@@ -35,4 +37,11 @@ public class CheckRegistrationResponseDto {
         ErrorsDto errorsDto = new ErrorsDto(codeErrors);
         return new CheckRegistrationResponseDto(null, "Неверный код проверки", errorsDto, null);
     }
+
+    public static CheckRegistrationResponseDto missingCodeResponse() {
+        String[] codeErrors = {"Поле code обязательно для заполнения."};
+        ErrorsDto errorsDto = new ErrorsDto(codeErrors);
+        return new CheckRegistrationResponseDto(null, "Поле code обязательно для заполнения.", errorsDto, null);
+    }
+
 }

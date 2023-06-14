@@ -6,6 +6,7 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
@@ -40,6 +41,7 @@ public class CheckRegistrationApiTest extends BaseApiTest {
 
         step("Check registration", () -> {
             CheckRegistrationResponseDto expectedResponse = CheckRegistrationResponseDto.successResponse();
+            // or  get the same positive  expectedResponse from testCase?
             CheckRegistrationResponseDto actualResponse = registrationApi
                     .checkRegistration(testCase.getCheckDto())
                     .statusCode(200)
@@ -47,6 +49,44 @@ public class CheckRegistrationApiTest extends BaseApiTest {
             assertResponse(expectedResponse, actualResponse);
         });
     }
+
+    @ParameterizedTest(name = "{0}")
+    @EnumSource(CheckRegistrationNegativeCase.class)
+    @Tag(AllureTag.CLIENT)
+    @Tag(AllureTag.NEGATIVE)
+    @DisplayName("Negative case:")
+    void negativeTestCase(CheckRegistrationNegativeCase testCase) {
+        step("Start registration", () ->
+                registrationApi.startRegistration(testCase.getStartDto())
+                        .statusCode(200));
+
+        step("Check registration", () -> {
+            CheckRegistrationResponseDto expectedResponse = testCase.getExpectedResponse();
+            CheckRegistrationResponseDto actualResponse = registrationApi
+                    .checkRegistration(testCase.getCheckDto())
+                    .statusCode(422)
+                    .extract().as(CheckRegistrationResponseDto.class);
+            assertResponse(expectedResponse, actualResponse);
+        });
+    }
+
+    /*@Test
+    @Tag(AllureTag.CLIENT)
+    @DisplayName("Single case:")
+    void singleTestCase(CheckRegistrationNegativeCase testCase) {
+        step("Start registration", () ->
+                registrationApi.startRegistration(testCase.getStartDto())
+                        .statusCode(200));
+
+        step("Check registration", () -> {
+//            CheckRegistrationResponseDto expectedResponse = CheckRegistrationResponseDto.successResponse();
+             registrationApi
+                    .checkRegistration(111111, "client",
+                    .statusCode(200)
+                    .extract().as(CheckRegistrationResponseDto.class);
+//            assertResponse(expectedResponse, actualResponse);
+        });
+    }*/
 
 }
 

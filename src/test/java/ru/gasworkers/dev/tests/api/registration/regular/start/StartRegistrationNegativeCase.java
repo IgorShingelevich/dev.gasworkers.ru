@@ -3,33 +3,28 @@ package ru.gasworkers.dev.tests.api.registration.regular.start;
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.regular.dto.finish.FinishRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.regular.dto.finish.FinishRegistrationResponseDto;
 import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationResponseDto;
 
 @AllArgsConstructor
 enum StartRegistrationNegativeCase {
-    MISSING_TYPE(
+    CLIENT_MISSING_TYPE(
             "Missing type",
             StartRegistrationResponseDto.missingTypeResponse()),
-    MISSING_EMAIL_OR_PHONE(
+    CLIENT_MISSING_EMAIL_OR_PHONE(
             "Missing email or phone",
             StartRegistrationResponseDto.missingEmailOrPhoneResponse()),
-    INVALID_EMAIL(
+    CLIENT_INVALID_EMAIL(
             "Invalid email",
             StartRegistrationResponseDto.invalidEmailResponse()),
-    INVALID_PHONE(
-            "Invalid phone",
-            StartRegistrationResponseDto.invalidPhoneResponse()),
-    PHONE_ALREADY_EXISTS(
+
+    CLIENT_PHONE_ALREADY_EXISTS(
             "Phone already exists",
             StartRegistrationResponseDto.phoneAlreadyExistsResponse()),
-    EMAIL_AND_PHONE_ALREADY_EXIST(
+    CLIENT_EMAIL_AND_PHONE_ALREADY_EXIST(
             "Email and phone already exist",
             StartRegistrationResponseDto.emailAndPhoneAlreadyExistResponse()),
-    NO_TYPE_EMAIL_AND_PHONE_ALREADY_EXIST(
+    CLIENT_NO_TYPE_EMAIL_AND_PHONE_ALREADY_EXIST(
             "No type, email, and phone already exist",
             StartRegistrationResponseDto.noTypeEmailAndPhoneAlreadyExistResponse());
 
@@ -47,27 +42,24 @@ enum StartRegistrationNegativeCase {
 
     public StartRegistrationRequestDto getStartDto() {
         switch (this) {
-            case MISSING_TYPE:
+            case CLIENT_MISSING_TYPE:
                 return complexDto.toStartRegistration()
                         .setType(null);
-            case MISSING_EMAIL_OR_PHONE:
+            case CLIENT_MISSING_EMAIL_OR_PHONE:
                 return complexDto.toStartRegistration()
                         .setEmail(null)
                         .setPhone(null);
-            case INVALID_EMAIL:
+            case CLIENT_INVALID_EMAIL:
                 return complexDto.toStartRegistration()
                         .setEmail("invalid_email");
-            case INVALID_PHONE:
-                return complexDto.toStartRegistration()
-                        .setPhone("invalid_phone");
-            case PHONE_ALREADY_EXISTS:
+            case CLIENT_PHONE_ALREADY_EXISTS:
                 return complexDto.toStartRegistration()
                         .setPhone("70012223344");
-            case EMAIL_AND_PHONE_ALREADY_EXIST:
+            case CLIENT_EMAIL_AND_PHONE_ALREADY_EXIST:
                 return complexDto.toStartRegistration()
                         .setEmail("shingelevich@gmail.com")
                         .setPhone("70012223344");
-            case NO_TYPE_EMAIL_AND_PHONE_ALREADY_EXIST:
+            case CLIENT_NO_TYPE_EMAIL_AND_PHONE_ALREADY_EXIST:
                 return complexDto.toStartRegistration()
                         .setType(null)
                         .setEmail("shingelevich@gmail.com")

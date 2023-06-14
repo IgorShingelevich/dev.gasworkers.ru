@@ -1,25 +1,42 @@
 package ru.gasworkers.dev.tests.api.registration.regular.start;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
+import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationResponseDto;
 
 @AllArgsConstructor
 enum StartRegistrationPositiveCase {
-    // CLIENT
     CLIENT_WITH_EMAIL_ONLY("Client with email only",
-            ComplexRegistrationFactory.defaultRandomClient().setPhone(null)),
+            StartRegistrationResponseDto.successResponse("60")),
     CLIENT_WITH_PHONE_ONLY("Client with phone only",
-            ComplexRegistrationFactory.defaultRandomClient().setEmail(null)),
+            StartRegistrationResponseDto.successResponse("60")),
     CLIENT_WITH_EMAIL_AND_PHONE("Client with email and phone",
-            ComplexRegistrationFactory.defaultRandomClient());
+            StartRegistrationResponseDto.successResponse("60")),
+    CLIENT_VALID_EMAIL_WITH_INVALID_PHONE(
+            "Client with valid Email invalid Phone",
+            StartRegistrationResponseDto.successResponse("60"));
 
     private final String description;
-    private final ComplexRegistrationRequestDto complexDto;
+    @Getter
+    private final StartRegistrationResponseDto expectedResponse;
+    private final ComplexRegistrationRequestDto complexDto = ComplexRegistrationFactory.defaultRandomClient();
 
     public StartRegistrationRequestDto getStartDto() {
-        return complexDto.toStartRegistration();
+        // Use a switch statement to handle different cases
+        switch (this) {
+            case CLIENT_WITH_EMAIL_ONLY:
+                return complexDto.toStartRegistration().setPhone(null);
+            case CLIENT_WITH_PHONE_ONLY:
+                return complexDto.toStartRegistration().setEmail(null);
+            case CLIENT_WITH_EMAIL_AND_PHONE:
+            case CLIENT_VALID_EMAIL_WITH_INVALID_PHONE:
+                return complexDto.toStartRegistration().setPhone("invalid_phone");
+            default:
+                throw new IllegalArgumentException("Invalid positive case: " + this);
+        }
     }
 
     @Override
