@@ -48,6 +48,9 @@ import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationReq
                 throw new IllegalArgumentException("Unknown case: " + this);
         }
     }
-
+    @Override
+    public String toString() {
+        return description;
+    }
 
 }

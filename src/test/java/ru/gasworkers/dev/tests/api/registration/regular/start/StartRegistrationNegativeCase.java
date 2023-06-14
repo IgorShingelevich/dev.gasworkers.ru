@@ -68,4 +68,9 @@ enum StartRegistrationNegativeCase {
                 throw new IllegalArgumentException("Invalid negative case: " + this);
         }
     }
+
+    @Override
+    public String toString() {
+        return description;
+    }
 }
