@@ -18,30 +18,65 @@ public class CheckRegistrationResponseDto {
     private ErrorsDto errors;
     private List<String> data;
 
-
-
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
     public static class ErrorsDto {
-        private String[] code;
-    }
 
+        private String[] code;
+
+        private String[] type; // Added to handle the 'type' errors
+
+
+
+    }
     public static CheckRegistrationResponseDto successResponse() {
         List<String> emptyList = new ArrayList<>();
         return new CheckRegistrationResponseDto(0, "Код успешно проверен", null, emptyList);
     }
-
     public static CheckRegistrationResponseDto wrongCodeResponse() {
         String[] codeErrors = {"Неверный код проверки"};
-        ErrorsDto errorsDto = new ErrorsDto(codeErrors);
+        ErrorsDto errorsDto = new ErrorsDto(codeErrors, null);
         return new CheckRegistrationResponseDto(null, "Неверный код проверки", errorsDto, null);
     }
-
     public static CheckRegistrationResponseDto missingCodeResponse() {
         String[] codeErrors = {"Поле code обязательно для заполнения."};
-        ErrorsDto errorsDto = new ErrorsDto(codeErrors);
+        ErrorsDto errorsDto = new ErrorsDto(codeErrors, null);
         return new CheckRegistrationResponseDto(null, "Поле code обязательно для заполнения.", errorsDto, null);
     }
+    public static CheckRegistrationResponseDto invalidTypeResponse() {
+        String[] typeErrors = {"Выбранное значение для тип ошибочно."};
+        ErrorsDto errorsDto = new ErrorsDto(null, typeErrors);
+        return new CheckRegistrationResponseDto(null, "Выбранное значение для тип ошибочно.", errorsDto, null);
+    }
+    public static CheckRegistrationResponseDto missingTypeResponse() {
+        String[] typeErrors = {"Поле тип обязательно для заполнения."};
+        ErrorsDto errorsDto = new ErrorsDto(null, typeErrors);
+        return new CheckRegistrationResponseDto(null, "Поле тип обязательно для заполнения.", errorsDto, null);
+    }
 
+    public static CheckRegistrationResponseDto wrongTypeResponse() {
+        String[] typeErrors = {"Неверный тип проверки"};
+        ErrorsDto errorsDto = new ErrorsDto(null, typeErrors);
+        return new CheckRegistrationResponseDto(null, "Неверный тип проверки", errorsDto, null);
+    }
+
+    public static CheckRegistrationResponseDto invalidPhoneResponse() {
+        String[] phoneErrors = {"Неверный формат телефона"};
+        ErrorsDto errorsDto = new ErrorsDto(phoneErrors, null);
+        return new CheckRegistrationResponseDto(null, "Неверный формат телефона", errorsDto, null);
+    }
+
+    public static CheckRegistrationResponseDto duplicatePhoneResponse() {
+        String[] phoneErrors = {"Пользователь с таким телефоном уже существует"};
+        ErrorsDto errorsDto = new ErrorsDto(phoneErrors, null);
+        return new CheckRegistrationResponseDto(null, "Пользователь с таким телефоном уже существует", errorsDto, null);
+    }
+
+    public static CheckRegistrationResponseDto notMatchPhoneResponse() {
+        // указан неверный телефон
+        String[] phoneErrors = {"Указан неверный телефон"};
+        ErrorsDto errorsDto = new ErrorsDto(phoneErrors, null);
+        return new CheckRegistrationResponseDto(null, "Указан неверный телефон", errorsDto, null);
+    }
 }

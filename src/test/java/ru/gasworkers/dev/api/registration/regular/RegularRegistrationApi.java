@@ -31,6 +31,7 @@ public class RegularRegistrationApi extends BaseApi {
     @Step("API: Регулярная регистрация [Проверка кода СМС]")
     public ValidatableResponse checkRegistration(CheckRegistrationRequestDto inputDto) {
         return given().spec(baseRequestSpec)
+                .header("abracadabra", "randomValue")
                 .body(inputDto)
                 .when()
                 .post("/auth/check-register-code")

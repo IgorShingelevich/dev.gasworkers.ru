@@ -28,6 +28,7 @@ enum StartRegistrationNegativeCase {
             "No type, email, and phone already exist",
             StartRegistrationResponseDto.noTypeEmailAndPhoneAlreadyExistResponse());
 
+
     private final String description;
     private final StartRegistrationResponseDto expectedResponse;
     private final ComplexRegistrationRequestDto complexDto = ComplexRegistrationFactory.defaultRandomClient();
