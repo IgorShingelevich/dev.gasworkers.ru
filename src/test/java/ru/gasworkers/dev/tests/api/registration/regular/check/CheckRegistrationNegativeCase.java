@@ -11,22 +11,16 @@ import ru.gasworkers.dev.model.apiModel.UserType;
 @AllArgsConstructor
  enum CheckRegistrationNegativeCase {
     CLIENT_INVALID_CODE_CASE("Invalid code", CheckRegistrationResponseDto.wrongCodeResponse()),
-//    CLIENT_EXPIRED_CODE_CASE("Expired code", CheckRegistrationResponseDto.expiredCodeResponse()), // add test  waiting for one min
+//    CLIENT_EXPIRED_CODE_CASE("Expired code", CheckRegistrationResponseDto.expiredCodeResponse()), // todo add test  waiting for one min
     ClIENT_MISSING_CODE_CASE("Missing code", CheckRegistrationResponseDto.missingCodeResponse()),
     CLIENT_INVALID_TYPE_CASE("Invalid type", CheckRegistrationResponseDto.invalidTypeResponse()),
     CLIENT_MISSING_TYPE_CASE("Missing type", CheckRegistrationResponseDto.missingTypeResponse()),
-    CLIENT_WRONG_TYPE_CASE("Wrong type", CheckRegistrationResponseDto.wrongTypeResponse()),
-    CLIENT_INVALID_PHONE_CASE("Invalid phone", CheckRegistrationResponseDto.invalidPhoneResponse()),
-    CLIENT_DUPLICATE_PHONE_CASE("Duplicate phone", CheckRegistrationResponseDto.duplicatePhoneResponse()),
-    CLIENT_NOT_MATCH_PHONE_CASE("Not match phone", CheckRegistrationResponseDto.notMatchPhoneResponse());
-
-    /*,
-    CLIENT_MISSING_PHONE_CASE("Missing phone", CheckRegistrationResponseDto.missingPhoneResponse()),
-    CLIENT_DUPLICATE_PHONE_CASE("Duplicate phone", CheckRegistrationResponseDto.duplicatePhoneResponse()),
-    CLIENT_MISSING_ALL_FIELDS_CASE("Missing all fields", CheckRegistrationResponseDto.missingAllFieldsResponse())*/
-
-
-
+    CLIENT_WRONG_TYPE_CASE("Wrong type( the response need to be handled properly)", CheckRegistrationResponseDto.wrongCodeResponse()), // todo implement wrong type
+    CLIENT_INVALID_PHONE_CASE("Invalid phone( the response need to be handled properly)", CheckRegistrationResponseDto.wrongCodeResponse()), // todo implement invalid phone
+    CLIENT_DUPLICATE_PHONE_CASE("Duplicate phone( the response need to be handled properly)", CheckRegistrationResponseDto.wrongCodeResponse()), // todo implement duplicate phone
+    CLIENT_NOT_MATCH_PHONE_CASE("Not match phone( the response need to be handled properly)", CheckRegistrationResponseDto.wrongCodeResponse()), // todo implement not match phone
+    CLIENT_MISSING_ALL_FIELDS_CASE("Missing all fields", CheckRegistrationResponseDto.missingAllFieldsResponse()),
+    CLIENT_MISSING_PHONE_CASE("Missing phone( how to change startResponse to exclude email first look at the getStartDto getCheckDto ", CheckRegistrationResponseDto.missingPhoneResponse());
 
     private final String description;
     private final CheckRegistrationResponseDto expectedResponse;
@@ -39,7 +33,19 @@ import ru.gasworkers.dev.model.apiModel.UserType;
         return expectedResponse;
     }
 
+   /* public StartRegistrationRequestDto getStartDto() {
+        return complexDto.toStartRegistration();
+    }*/
+
     public StartRegistrationRequestDto getStartDto() {
+        switch (this) {
+            case CLIENT_MISSING_PHONE_CASE:
+                complexDto.toStartRegistration().setEmail(null);
+                break;
+            // Add other cases here if needed
+            default:
+                break;
+        }
         return complexDto.toStartRegistration();
     }
 
@@ -69,6 +75,16 @@ import ru.gasworkers.dev.model.apiModel.UserType;
             case CLIENT_NOT_MATCH_PHONE_CASE:
                 return complexDto.toCheckRegistration()
                         .setPhone("79992223344"); //not match to start phone but valid and not duplicate
+            case CLIENT_MISSING_ALL_FIELDS_CASE:
+                return complexDto.toCheckRegistration()
+                        .setCode(null)
+                        .setPhone(null)
+                        .setType(null);
+            case CLIENT_MISSING_PHONE_CASE:
+//                complexDto.toStartRegistration().setEmail(null);
+                return complexDto.toCheckRegistration()
+                        .setPhone(null);
+
             default:
                 throw new IllegalArgumentException("Unknown case: " + this);
         }

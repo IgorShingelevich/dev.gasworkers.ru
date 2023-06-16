@@ -70,23 +70,6 @@ public class CheckRegistrationApiTest extends BaseApiTest {
         });
     }
 
-    /*@Test
-    @Tag(AllureTag.CLIENT)
-    @DisplayName("Single case:")
-    void singleTestCase(CheckRegistrationNegativeCase testCase) {
-        step("Start registration", () ->
-                registrationApi.startRegistration(testCase.getStartDto())
-                        .statusCode(200));
-
-        step("Check registration", () -> {
-//            CheckRegistrationResponseDto expectedResponse = CheckRegistrationResponseDto.successResponse();
-             registrationApi
-                    .checkRegistration(111111, "client",
-                    .statusCode(200)
-                    .extract().as(CheckRegistrationResponseDto.class);
-//            assertResponse(expectedResponse, actualResponse);
-        });
-    }*/
 
 }
 
