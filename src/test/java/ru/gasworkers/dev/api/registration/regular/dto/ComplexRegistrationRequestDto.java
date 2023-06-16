@@ -15,7 +15,6 @@ import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationReq
 @AllArgsConstructor
 @Accessors(chain = true)
 public class ComplexRegistrationRequestDto {
-
     private String type, password, email, phone, gender,
             firstName, lastName, middleName, employedStatus;
     private Integer code, serviceId;
@@ -45,5 +44,4 @@ public class ComplexRegistrationRequestDto {
                 .serviceId(serviceId)
                 .build();
     }
-
 }

@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.tests.api.registration.regular.check;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
@@ -19,8 +20,9 @@ import ru.gasworkers.dev.model.apiModel.UserType;
     CLIENT_INVALID_PHONE_CASE("Invalid phone( the response need to be handled properly)", CheckRegistrationResponseDto.wrongCodeResponse()), // todo implement invalid phone
     CLIENT_DUPLICATE_PHONE_CASE("Duplicate phone( the response need to be handled properly)", CheckRegistrationResponseDto.wrongCodeResponse()), // todo implement duplicate phone
     CLIENT_NOT_MATCH_PHONE_CASE("Not match phone( the response need to be handled properly)", CheckRegistrationResponseDto.wrongCodeResponse()), // todo implement not match phone
-    CLIENT_MISSING_ALL_FIELDS_CASE("Missing all fields", CheckRegistrationResponseDto.missingAllFieldsResponse()),
-    CLIENT_MISSING_PHONE_CASE("Missing phone( how to change startResponse to exclude email first look at the getStartDto getCheckDto ", CheckRegistrationResponseDto.missingPhoneResponse());
+    CLIENT_MISSING_ALL_FIELDS_CASE("Missing all fields( the response need to be handled properly- expected description of all the fields)", CheckRegistrationResponseDto.missingAllFieldsResponse()),
+    CLIENT_MISSING_PHONE_CASE("Missing phone( discuss this case)  ", CheckRegistrationResponseDto.missingPhoneResponse()),
+    CLIENT_START_MISSING_TYPE_CASE("Missing type in start", CheckRegistrationResponseDto.missingTypeResponse());
 
     private final String description;
     private final CheckRegistrationResponseDto expectedResponse;
@@ -38,15 +40,26 @@ import ru.gasworkers.dev.model.apiModel.UserType;
     }*/
 
     public StartRegistrationRequestDto getStartDto() {
+        ComplexRegistrationRequestDto copyDto;
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            copyDto = objectMapper.readValue(objectMapper.writeValueAsString(complexDto), ComplexRegistrationRequestDto.class);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create a deep copy of complexDto", e);
+        }
+
         switch (this) {
             case CLIENT_MISSING_PHONE_CASE:
-                complexDto.toStartRegistration().setEmail(null);
+                copyDto.setEmail(null);
+                break;
+            case CLIENT_START_MISSING_TYPE_CASE:
+                copyDto.setType(null);
                 break;
             // Add other cases here if needed
             default:
                 break;
         }
-        return complexDto.toStartRegistration();
+        return copyDto.toStartRegistration();
     }
 
     public CheckRegistrationRequestDto getCheckDto () {
@@ -80,10 +93,14 @@ import ru.gasworkers.dev.model.apiModel.UserType;
                         .setCode(null)
                         .setPhone(null)
                         .setType(null);
+//            complexDto.toStartRegistration().setEmail(null);
             case CLIENT_MISSING_PHONE_CASE:
-//                complexDto.toStartRegistration().setEmail(null);
                 return complexDto.toCheckRegistration()
                         .setPhone(null);
+                case CLIENT_START_MISSING_TYPE_CASE:
+                return complexDto.toCheckRegistration();
+
+
 
             default:
                 throw new IllegalArgumentException("Unknown case: " + this);

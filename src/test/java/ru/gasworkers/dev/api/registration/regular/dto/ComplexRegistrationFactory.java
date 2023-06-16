@@ -4,7 +4,6 @@ import ru.gasworkers.dev.model.apiModel.UserType;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
 public class ComplexRegistrationFactory {
-
     public static ComplexRegistrationRequestDto defaultRandomClient() {
         RandomClient data = new RandomClient();
         return ComplexRegistrationRequestDto.builder()
@@ -24,5 +23,4 @@ public class ComplexRegistrationFactory {
                 .serviceId(null)
                 .build();
     }
-
 }

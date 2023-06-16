@@ -57,8 +57,8 @@ public class CheckRegistrationApiTest extends BaseApiTest {
     @DisplayName("Negative case:")
     void negativeTestCase(CheckRegistrationNegativeCase testCase) {
         step("Start registration", () ->
-                registrationApi.startRegistration(testCase.getStartDto())
-                        .statusCode(200));
+                registrationApi.startRegistration(testCase.getStartDto()));
+//                        .statusCode(200));
 
         step("Check registration", () -> {
             CheckRegistrationResponseDto expectedResponse = testCase.getExpectedResponse();
