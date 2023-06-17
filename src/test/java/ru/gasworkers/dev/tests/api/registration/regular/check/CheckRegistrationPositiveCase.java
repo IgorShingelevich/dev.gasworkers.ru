@@ -4,8 +4,8 @@ import lombok.Getter;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationResponseDto;
 import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
+import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 enum CheckRegistrationPositiveCase {
     // CLIENT
@@ -34,7 +34,7 @@ enum CheckRegistrationPositiveCase {
             case CLIENT_WITH_EMAIL_AND_PHONE:
                 return checkDto;
             default:
-                throw new RuntimeException("Enum with type " + name() + " not supported");
+                throw new EnumNotSupportedException(this);
         }
     }
 
