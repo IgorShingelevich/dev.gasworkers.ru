@@ -6,6 +6,7 @@ import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationResponseDto;
+import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 @AllArgsConstructor
 enum StartRegistrationPositiveCase {
@@ -25,7 +26,6 @@ enum StartRegistrationPositiveCase {
     private final ComplexRegistrationRequestDto complexDto = ComplexRegistrationFactory.defaultRandomClient();
 
     public StartRegistrationRequestDto getStartDto() {
-        // Use a switch statement to handle different cases
         switch (this) {
             case CLIENT_WITH_EMAIL_ONLY:
                 return complexDto.toStartRegistration().setPhone(null);
@@ -35,7 +35,7 @@ enum StartRegistrationPositiveCase {
             case CLIENT_VALID_EMAIL_WITH_INVALID_PHONE:
                 return complexDto.toStartRegistration().setPhone("invalid_phone");
             default:
-                throw new IllegalArgumentException("Invalid positive case: " + this);
+                throw new EnumNotSupportedException(this);
         }
     }
 

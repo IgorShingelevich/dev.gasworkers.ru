@@ -8,6 +8,7 @@ import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationReq
 import ru.gasworkers.dev.api.registration.regular.dto.finish.FinishRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.finish.FinishRegistrationResponseDto;
 import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
+import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 @AllArgsConstructor
 enum FinishRegistrationNegativeCase {
@@ -44,90 +45,58 @@ enum FinishRegistrationNegativeCase {
     }
 
 
-  /*  public StartRegistrationRequestDto getStartDto() {
-        return complexDto.toStartRegistration();
-    }
-
-    public CheckRegistrationRequestDto getCheckDto() {
-        return complexDto.toCheckRegistration();
-    }*/
 
     public StartRegistrationRequestDto getStartDto() {
-        ComplexRegistrationRequestDto copyDto;
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            copyDto = objectMapper.readValue(objectMapper.writeValueAsString(complexDto), ComplexRegistrationRequestDto.class);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to create a deep copy of complexDto", e);
-        }
-
+        StartRegistrationRequestDto startDto = complexDto.toStartRegistration();
         switch (this) {
-
             default:
-                copyDto.setEmail(null);
-                break;
+                return startDto.setEmail(null);
         }
 
-        return copyDto.toStartRegistration();
     }
 
     public CheckRegistrationRequestDto getCheckDto() {
-        ComplexRegistrationRequestDto copyDto;
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            copyDto = objectMapper.readValue(objectMapper.writeValueAsString(complexDto), ComplexRegistrationRequestDto.class);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to create a deep copy of complexDto", e);
-        }
-
+        CheckRegistrationRequestDto checkDto = complexDto.toCheckRegistration();
         switch (this) {
-
             default:
-                copyDto.setEmail(null);
-                break;
+                return checkDto.setEmail(null);
         }
-
-        return copyDto.toCheckRegistration();
     }
 
     public FinishRegistrationRequestDto getFinishDto() {
-        ComplexRegistrationRequestDto copyDto;
-        try {
-            ObjectMapper objectMapper = new ObjectMapper();
-            copyDto = objectMapper.readValue(objectMapper.writeValueAsString(complexDto), ComplexRegistrationRequestDto.class);
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to create a deep copy of complexDto", e);
-        }
+        FinishRegistrationRequestDto finishDto = complexDto.toFinishRegistration();
 
         switch (this) {
             case CLIENT_MISSING_EMAIL:
-                return copyDto.toFinishRegistration()
-                        .setEmail(null);
+                return finishDto.setEmail(null);
             case CLIENT_INVALID_EMAIL:
-                return copyDto.toFinishRegistration()
-                        .setEmail("lalala.ru");
+                return finishDto.setEmail("shingelevichgmail.com");
             case CLIENT_DUPLICATE_EMAIL:
-                return complexDto.toFinishRegistration()
-                        .setEmail("shingelevich@gmail.com");
+                return finishDto.setEmail("shingelevich@gmail.com");
             case CLIENT_MISSING_NAME:
-                return complexDto.toFinishRegistration()
+                return finishDto
                         .setFirstName(null)
                         .setLastName(null);
             case CLIENT_INVALID_NAME:
-                return complexDto.toFinishRegistration()
+                return finishDto
                         .setFirstName("La la")
                         .setMiddleName("Ла ла")
                         .setLastName("La 123");
             case CLIENT_MISSING_ALL_FIELDS:
-                return new FinishRegistrationRequestDto();
+                return finishDto
+                        .setFirstName(null)
+                        .setMiddleName(null)
+                        .setLastName(null)
+                        .setEmail(null)
+                        .setPhone(null);
             case CLIENT_MISSING_PHONE:
-                return complexDto.toFinishRegistration()
+                return finishDto
                         .setPhone(null);
             case CLIENT_DUPLICATE_PHONE:
-                return complexDto.toFinishRegistration()
+                return finishDto
                         .setPhone("70026442413");
             default:
-                throw new RuntimeException("Enum with type " + name() + " not supported");
+                throw new EnumNotSupportedException(this);
         }
     }
 

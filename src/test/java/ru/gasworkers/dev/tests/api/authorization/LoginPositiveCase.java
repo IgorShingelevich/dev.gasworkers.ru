@@ -1,7 +1,7 @@
-package ru.gasworkers.dev.tests.api.registration.regular.finish;
+package ru.gasworkers.dev.tests.api.authorization;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import ru.gasworkers.dev.api.authorisation.LoginRequestDTO;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationRequestDto;
@@ -9,15 +9,13 @@ import ru.gasworkers.dev.api.registration.regular.dto.finish.FinishRegistrationR
 import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
 import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
+
 @AllArgsConstructor
-enum FinishRegistrationPositiveCase {
-    // CLIENT
-    CLIENT_WITH_EMAIL(
-            "Client with email"),
-    CLIENT_WITH_PHONE(
-            "Client with phone");
-
-
+enum LoginPositiveCase {
+    CLIENT_WITH_EMAIL("Client with email"),
+    CLIENT_WITH_PHONE("Client with phone"),
+    CLIENT_WITH_EMAIL_AND_PHONE("Client with email and phone");
+    //todo add  client with nickname
     private final String description;
     private final ComplexRegistrationRequestDto complexDto = ComplexRegistrationFactory.defaultRandomClient();
 
@@ -28,6 +26,8 @@ enum FinishRegistrationPositiveCase {
                 return startDto.setPhone(null);
             case CLIENT_WITH_PHONE:
                 return startDto.setEmail(null);
+                case CLIENT_WITH_EMAIL_AND_PHONE:
+                return startDto.setEmail(null);
             default:
                 return startDto;
         }
@@ -35,33 +35,43 @@ enum FinishRegistrationPositiveCase {
 
     public CheckRegistrationRequestDto getCheckDto() {
         CheckRegistrationRequestDto checkDto = complexDto.toCheckRegistration();
-
-
         switch (this) {
             case CLIENT_WITH_EMAIL:
                 return checkDto.setPhone(null);
             case CLIENT_WITH_PHONE:
-               return checkDto.setEmail(null);
+                return checkDto.setEmail(null);
+            case CLIENT_WITH_EMAIL_AND_PHONE:
+                return checkDto.setEmail(null);
             default:
-              return checkDto;
+                return checkDto;
         }
     }
 
     public FinishRegistrationRequestDto getFinishDto() {
         switch (this) {
+            default:
+                return complexDto.toFinishRegistration();
+        }
+    }
+
+    public LoginRequestDTO getLoginDto() {
+        LoginRequestDTO loginDto = complexDto.toLogin();
+        switch (this) {
             case CLIENT_WITH_EMAIL:
-                return complexDto.toFinishRegistration();
+                return loginDto.setPhone(null);
             case CLIENT_WITH_PHONE:
-                return complexDto.toFinishRegistration();
+                return loginDto.setEmail(null);
+            case CLIENT_WITH_EMAIL_AND_PHONE:
+                return loginDto;
             default:
                 throw new EnumNotSupportedException(this);
         }
     }
 
-
     @Override
     public String toString() {
         return description;
     }
+
 
 }

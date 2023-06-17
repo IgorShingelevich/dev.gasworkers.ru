@@ -5,6 +5,7 @@ import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationResponseDto;
+import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 @AllArgsConstructor
 enum StartRegistrationNegativeCase {
@@ -69,7 +70,7 @@ enum StartRegistrationNegativeCase {
                         .setEmail("shingelevich@gmail.com")
                         .setPhone("70012223344");
             default:
-                throw new IllegalArgumentException("Invalid negative case: " + this);
+                throw new EnumNotSupportedException(this);
         }
     }
 
