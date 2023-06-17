@@ -71,7 +71,7 @@ public class VideoBGRegistrationTest extends BaseTest {
         clientPages.getLandingPage().checkFinishLoading();
         step("Клиент заполняет форму фоновой регистрации", () -> {
             clientPages.getLandingPage().bgRegistration.checkFinishLoading();
-            clientPages.getLandingPage().bgRegistration.fillBGVideoRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhoneNumber(), randomClient.getEmail(), randomClient.getEquipmentVideoFile());
+            clientPages.getLandingPage().bgRegistration.fillBGVideoRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhone(), randomClient.getEmail(), randomClient.getEquipmentVideoFile());
            // TODO add photo video
        });
 //       String resultedAddress = clientPages.getLandingPage().bgRegistration.address.getResultedAddress(); // removed
@@ -194,7 +194,7 @@ public class VideoBGRegistrationTest extends BaseTest {
                 step("Вкадка Контакты", () -> {
                     clientPages.getProfilePage().navContacts();
                     clientPages.getProfilePage().navContactsTab.checkFinishLoading();
-                    clientPages.getProfilePage().navContactsTab.checkInitialState(randomClient.getEmail(), randomClient.getPhoneNumber());
+                    clientPages.getProfilePage().navContactsTab.checkInitialState(randomClient.getEmail(), randomClient.getPhone());
                 });
                 step("Вкадка Пароль", () -> {
                     clientPages.getProfilePage().navPassword();

@@ -17,7 +17,8 @@ public final class AllureTag {
     public static final String ADMINISTRATION = "administration",
             REGISTRATION = "registration",
             AUTHORISATION = "authorisation",
-            BG_REGISTRATION = "bg-registration";
+            BG_REGISTRATION = "bg-registration",
+            OBJECT = "object";
 
     public static final String UI = "ui",
             API = "api",

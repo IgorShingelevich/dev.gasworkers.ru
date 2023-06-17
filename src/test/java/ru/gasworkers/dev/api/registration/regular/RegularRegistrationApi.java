@@ -19,6 +19,8 @@ public class RegularRegistrationApi extends BaseApi {
         finishRegistration(complexDto.toFinishRegistration()).statusCode(200);
     }
 
+
+
     //--------------------------------------------START-----------------------------------------------------------------
     @Step("API: Регулярная регистрация [Начало]")
     public ValidatableResponse startRegistration(StartRegistrationRequestDto inputDto) {
@@ -28,6 +30,7 @@ public class RegularRegistrationApi extends BaseApi {
                 .when()
                 .post("/auth/register")
                 .then().spec(baseResponseSpec);
+
     }
 
     public ValidatableResponse startRegistration(String type, String email, String phone, Boolean isPhoneSend) {

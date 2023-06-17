@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.users.client.object;
+package ru.gasworkers.dev.api.users.client.object.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Accessors(chain = true)
-public class ObjectRequestDTO {
+public class AddObjectRequestDTO {
     @JsonProperty("address_id")
     private Integer addressId;
     @JsonProperty("company_id")
@@ -26,7 +26,14 @@ public class ObjectRequestDTO {
     private Integer[] photos;
     private String title;
 
-    public static ObjectRequestDTO newInstance(Integer addressId, Integer companyId, Integer branchId, Integer accountNumber, Integer[] photos, String title) {
-        return new ObjectRequestDTO(addressId, companyId, branchId, accountNumber, photos, title);
+    public static AddObjectRequestDTO newInstance(Integer addressId, Integer companyId, Integer branchId, Integer accountNumber, Integer[] photos, String title) {
+        return  AddObjectRequestDTO.builder()
+                .addressId(addressId)
+                .companyId(companyId)
+                .branchId(branchId)
+                .accountNumber(accountNumber)
+                .photos(photos)
+                .title(title)
+                .build();
     }
 }

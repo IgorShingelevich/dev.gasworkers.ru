@@ -66,8 +66,8 @@ public class ByEmailUsualClientRegistrationTest extends BaseTest {
             clientPages.getRegistrationPage().forthStep.checkFourthStepByEmailFinishLoading(randomClient.getEmail());
             clientPages.getRegistrationPage().forthStep.fillName(randomClient.getName());
             clientPages.getRegistrationPage().forthStep.fillSurname(randomClient.getSurname());
-            clientPages.getRegistrationPage().forthStep.fillPatronymicName(randomClient.getPatronymicName());
-            clientPages.getRegistrationPage().forthStep.fillPhoneNumber(randomClient.getPhoneNumber());
+            clientPages.getRegistrationPage().forthStep.fillPatronymicName(randomClient.getMiddleName());
+            clientPages.getRegistrationPage().forthStep.fillPhoneNumber(randomClient.getPhone());
             clientPages.getRegistrationPage().clickNext();
         });
         step("Страница успешная регистрация", () -> {
@@ -95,12 +95,12 @@ public class ByEmailUsualClientRegistrationTest extends BaseTest {
                 step("Вкадка Общее данные", () -> {
                     clientPages.getProfilePage().navCommon();
                     clientPages.getProfilePage().navCommonTab.checkFinishLoading();
-                    clientPages.getProfilePage().navCommonTab.checkInitialState(randomClient.getName(), randomClient.getPatronymicName(), randomClient.getSurname());
+                    clientPages.getProfilePage().navCommonTab.checkInitialState(randomClient.getName(), randomClient.getMiddleName(), randomClient.getSurname());
                 });
                 step("Вкадка Контакты", () -> {
                     clientPages.getProfilePage().navContacts();
                     clientPages.getProfilePage().navContactsTab.checkFinishLoading();
-                    clientPages.getProfilePage().navContactsTab.checkInitialState(randomClient.getEmail(), randomClient.getPhoneNumber());
+                    clientPages.getProfilePage().navContactsTab.checkInitialState(randomClient.getEmail(), randomClient.getPhone());
                 });
                 step("Вкадка Пароль", () -> {
                     clientPages.getProfilePage().navPassword();

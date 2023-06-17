@@ -19,8 +19,11 @@ public abstract class BaseApi {
 //            .log(LogDetail.BODY)
             .build()
             .log().ifValidationFails()
+            .log().uri()
             .log().body();
 
-    protected final ResponseSpecification baseResponseSpec = new ResponseSpecBuilder().log(BODY).build();
+    protected final ResponseSpecification baseResponseSpec = new ResponseSpecBuilder()
+            .log(BODY)
+            .build();
 
 }

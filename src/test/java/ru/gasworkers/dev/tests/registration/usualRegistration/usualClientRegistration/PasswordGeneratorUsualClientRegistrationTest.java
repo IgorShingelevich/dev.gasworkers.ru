@@ -40,7 +40,7 @@ public class PasswordGeneratorUsualClientRegistrationTest extends BaseTest {
         });
         step("Страница первого шага регистрации", () -> {
             clientPages.getRegistrationPage().firstStepClient.checkFirstStepFinishLoading();
-            clientPages.getRegistrationPage().firstStepClient.byPhone(randomClient.getPhoneNumber());
+            clientPages.getRegistrationPage().firstStepClient.byPhone(randomClient.getPhone());
             clientPages.getRegistrationPage().firstStepClient.checkboxNotCheckedCState();
             clientPages.getRegistrationPage().firstStepClient.clickCheckbox();
             clientPages.getRegistrationPage().firstStepClient.checkboxCheckedCState();
@@ -57,10 +57,10 @@ public class PasswordGeneratorUsualClientRegistrationTest extends BaseTest {
             clientPages.getRegistrationPage().clickNext();
         });
         step("Страница четвертого шага регистрации", () -> {
-            clientPages.getRegistrationPage().forthStep.checkFourthStepByPhoneFinishLoading(randomClient.getPhoneNumber());
+            clientPages.getRegistrationPage().forthStep.checkFourthStepByPhoneFinishLoading(randomClient.getPhone());
             clientPages.getRegistrationPage().forthStep.fillName(randomClient.getName());
             clientPages.getRegistrationPage().forthStep.fillSurname(randomClient.getSurname());
-            clientPages.getRegistrationPage().forthStep.fillPatronymicName(randomClient.getPatronymicName());
+            clientPages.getRegistrationPage().forthStep.fillPatronymicName(randomClient.getMiddleName());
             clientPages.getRegistrationPage().forthStep.fillEmail(randomClient.getEmail());
             clientPages.getRegistrationPage().clickNext();
         });

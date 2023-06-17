@@ -12,7 +12,9 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ObjectBuilder {
+
+@Deprecated
+public class OLDObjectBuilder {
     private int id;
     private String title;
     private int activeOffersCount;

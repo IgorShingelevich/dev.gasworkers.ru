@@ -15,7 +15,7 @@ public class ComplexRegistrationFactory {
                 .code(111111)
                 .firstName(data.getName())
                 .lastName(data.getSurname())
-                .middleName(data.getPatronymicName())
+                .middleName(data.getMiddleName())
                 .isPhoneSend(null)
                 .isHaveContract(false)
                 .isIp(false)

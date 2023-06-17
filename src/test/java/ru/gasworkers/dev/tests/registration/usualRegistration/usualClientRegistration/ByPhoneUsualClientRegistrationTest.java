@@ -44,7 +44,7 @@ public class ByPhoneUsualClientRegistrationTest extends BaseTest {
         });
         step("Страница первого шага регистрации", () -> {
             clientPages.getRegistrationPage().firstStepClient.checkFirstStepFinishLoading();
-            clientPages.getRegistrationPage().firstStepClient.byPhone(randomClient.getPhoneNumber());
+            clientPages.getRegistrationPage().firstStepClient.byPhone(randomClient.getPhone());
             clientPages.getRegistrationPage().firstStepClient.checkboxNotCheckedCState();
             clientPages.getRegistrationPage().firstStepClient.clickCheckbox();
             clientPages.getRegistrationPage().firstStepClient.checkboxCheckedCState();
@@ -64,10 +64,10 @@ public class ByPhoneUsualClientRegistrationTest extends BaseTest {
             clientPages.getRegistrationPage().clickNext();
         });
         step("Страница четвертого шага регистрации", () -> {
-            clientPages.getRegistrationPage().forthStep.checkFourthStepByPhoneFinishLoading(randomClient.getPhoneNumber());
+            clientPages.getRegistrationPage().forthStep.checkFourthStepByPhoneFinishLoading(randomClient.getPhone());
             clientPages.getRegistrationPage().forthStep.fillName(randomClient.getName());
             clientPages.getRegistrationPage().forthStep.fillSurname(randomClient.getSurname());
-            clientPages.getRegistrationPage().forthStep.fillPatronymicName(randomClient.getPatronymicName());
+            clientPages.getRegistrationPage().forthStep.fillPatronymicName(randomClient.getMiddleName());
             clientPages.getRegistrationPage().forthStep.fillEmail(randomClient.getEmail());
             clientPages.getRegistrationPage().clickNext();
         });
@@ -95,12 +95,12 @@ public class ByPhoneUsualClientRegistrationTest extends BaseTest {
                 step("Вкадка Общее данные", () -> {
                     clientPages.getProfilePage().navCommon();
                     clientPages.getProfilePage().navCommonTab.checkFinishLoading();
-                    clientPages.getProfilePage().navCommonTab.checkInitialState(randomClient.getName(), randomClient.getPatronymicName(), randomClient.getSurname());
+                    clientPages.getProfilePage().navCommonTab.checkInitialState(randomClient.getName(), randomClient.getMiddleName(), randomClient.getSurname());
                 });
                 step("Вкадка Контакты", () -> {
                     clientPages.getProfilePage().navContacts();
                     clientPages.getProfilePage().navContactsTab.checkFinishLoading();
-                    clientPages.getProfilePage().navContactsTab.checkInitialState(randomClient.getEmail(), randomClient.getPhoneNumber());
+                    clientPages.getProfilePage().navContactsTab.checkInitialState(randomClient.getEmail(), randomClient.getPhone());
                 });
                 step("Вкадка Пароль", () -> {
                     clientPages.getProfilePage().navPassword();
