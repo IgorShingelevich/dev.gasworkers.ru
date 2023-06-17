@@ -3,6 +3,7 @@ package ru.gasworkers.dev.api.registration.regular;
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import ru.gasworkers.dev.api.BaseApi;
+import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.finish.FinishRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
@@ -10,6 +11,13 @@ import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationReq
 import static io.restassured.RestAssured.given;
 
 public class RegularRegistrationApi extends BaseApi {
+    //-------------------------------------COMPLEX REGISTRATION---------------------------------------------------------
+    @Step("API: Комплексная регулярная регистрация")
+    public void complexRegistration(ComplexRegistrationRequestDto complexDto) {
+        startRegistration(complexDto.toStartRegistration()).statusCode(200);
+        checkRegistration(complexDto.toCheckRegistration()).statusCode(200);
+        finishRegistration(complexDto.toFinishRegistration()).statusCode(200);
+    }
 
     //--------------------------------------------START-----------------------------------------------------------------
     @Step("API: Регулярная регистрация [Начало]")

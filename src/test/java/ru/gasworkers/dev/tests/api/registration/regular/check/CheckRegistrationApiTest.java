@@ -6,7 +6,6 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
@@ -57,8 +56,8 @@ public class CheckRegistrationApiTest extends BaseApiTest {
     @DisplayName("Negative case:")
     void negativeTestCase(CheckRegistrationNegativeCase testCase) {
         step("Start registration", () ->
-                registrationApi.startRegistration(testCase.getStartDto()));
-//                        .statusCode(200));
+                registrationApi.startRegistration(testCase.getStartDto())
+                        .statusCode(200));
 
         step("Check registration", () -> {
             CheckRegistrationResponseDto expectedResponse = testCase.getExpectedResponse();
@@ -69,7 +68,6 @@ public class CheckRegistrationApiTest extends BaseApiTest {
             assertResponse(expectedResponse, actualResponse);
         });
     }
-
 
 }
 

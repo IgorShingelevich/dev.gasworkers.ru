@@ -18,9 +18,6 @@ public final class LoginPage extends BasePage {
         jivoMessengerComponent = new JivoMessengerComponent(browser);
     }
 
-    SelenideElement
-            jivoWidgetLocator = driver.$("jdiv jdiv jdiv jdiv jdiv jdiv").as("Виджет JivoSite");
-
     public LoginPage open() {
         stepWithRole("Открыть страницу авторизации", () -> {
             driver.open("/login");
@@ -59,5 +56,4 @@ public final class LoginPage extends BasePage {
 
     }
 
-    ;
 }
