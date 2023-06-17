@@ -7,7 +7,7 @@ import static io.restassured.RestAssured.given;
 
 public class LoginApi extends BaseApi {
 
-    public ValidatableResponse authorization(LoginRequestDTO requestDTO) {
+    public ValidatableResponse login(LoginRequestDTO requestDTO) {
         return given().spec(baseRequestSpec)
                 .body(requestDTO)
                 .when()

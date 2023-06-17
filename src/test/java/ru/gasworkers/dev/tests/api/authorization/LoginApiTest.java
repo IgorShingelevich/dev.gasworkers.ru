@@ -5,18 +5,12 @@ import io.qameta.allure.Owner;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.authorisation.LoginApi;
-import ru.gasworkers.dev.api.authorisation.LoginRequestDTO;
 import ru.gasworkers.dev.api.registration.regular.RegularRegistrationApi;
-import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory;
-import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
-import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.extension.user.WithUser;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import static io.qameta.allure.Allure.step;
@@ -44,8 +38,8 @@ public class LoginApiTest extends BaseApiTest {
             registrationApi.finishRegistration(testCase.getFinishDto())
                     .statusCode(200));
 
-        step("Authorization", () ->
-            loginApi.authorization(testCase.getLoginDto())
+        step("Login", () ->
+            loginApi.login(testCase.getLoginDto())
                     .statusCode(200));
     }
 }
