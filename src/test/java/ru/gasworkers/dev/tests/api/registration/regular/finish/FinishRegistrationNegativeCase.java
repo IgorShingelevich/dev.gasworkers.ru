@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.tests.api.registration.regular.finish;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
@@ -43,21 +44,67 @@ enum FinishRegistrationNegativeCase {
     }
 
 
-    public StartRegistrationRequestDto getStartDto() {
+  /*  public StartRegistrationRequestDto getStartDto() {
         return complexDto.toStartRegistration();
     }
 
     public CheckRegistrationRequestDto getCheckDto() {
         return complexDto.toCheckRegistration();
+    }*/
+
+    public StartRegistrationRequestDto getStartDto() {
+        ComplexRegistrationRequestDto copyDto;
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            copyDto = objectMapper.readValue(objectMapper.writeValueAsString(complexDto), ComplexRegistrationRequestDto.class);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create a deep copy of complexDto", e);
+        }
+
+        switch (this) {
+
+            default:
+                copyDto.setEmail(null);
+                break;
+        }
+
+        return copyDto.toStartRegistration();
+    }
+
+    public CheckRegistrationRequestDto getCheckDto() {
+        ComplexRegistrationRequestDto copyDto;
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            copyDto = objectMapper.readValue(objectMapper.writeValueAsString(complexDto), ComplexRegistrationRequestDto.class);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create a deep copy of complexDto", e);
+        }
+
+        switch (this) {
+
+            default:
+                copyDto.setEmail(null);
+                break;
+        }
+
+        return copyDto.toCheckRegistration();
     }
 
     public FinishRegistrationRequestDto getFinishDto() {
+        ComplexRegistrationRequestDto copyDto;
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            copyDto = objectMapper.readValue(objectMapper.writeValueAsString(complexDto), ComplexRegistrationRequestDto.class);
+        } catch (Exception e) {
+            throw new RuntimeException("Failed to create a deep copy of complexDto", e);
+        }
+
         switch (this) {
             case CLIENT_MISSING_EMAIL:
-                return complexDto.toFinishRegistration()
+                return copyDto.toFinishRegistration()
                         .setEmail(null);
             case CLIENT_INVALID_EMAIL:
-                return complexDto.toFinishRegistration()
+                return copyDto.toFinishRegistration()
                         .setEmail("lalala.ru");
             case CLIENT_DUPLICATE_EMAIL:
                 return complexDto.toFinishRegistration()
