@@ -18,7 +18,7 @@ public final class DriverFactory {
         config.reportsFolder("target/selenide");
         config.timeout(8000);
 
-         config.headless(false);
+         config.headless(true);
 //         С удаленным запуском нельзя ставить в true!
 //        config.holdBrowserOpen(true);
 

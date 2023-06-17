@@ -26,7 +26,10 @@ enum StartRegistrationNegativeCase {
             StartRegistrationResponseDto.emailAndPhoneAlreadyExistResponse()),
     CLIENT_NO_TYPE_EMAIL_AND_PHONE_ALREADY_EXIST(
             "No type, email, and phone already exist",
-            StartRegistrationResponseDto.noTypeEmailAndPhoneAlreadyExistResponse());
+            StartRegistrationResponseDto.noTypeEmailAndPhoneAlreadyExistResponse()),
+    CLIENT_INVALID_PHONE(
+            "Invalid phone",
+            StartRegistrationResponseDto.invalidPhoneResponse());
 
 
     private final String description;
