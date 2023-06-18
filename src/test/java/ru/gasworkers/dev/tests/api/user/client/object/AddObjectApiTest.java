@@ -1,50 +1,50 @@
 package ru.gasworkers.dev.tests.api.user.client.object;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Story;
-import io.restassured.response.ValidatableResponse;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
+import ru.gasworkers.dev.api.BaseApi;
 import ru.gasworkers.dev.api.users.client.object.AddObjectApi;
-import ru.gasworkers.dev.api.users.client.object.ObjectFactory;
-import ru.gasworkers.dev.api.users.client.object.dto.AddObjectRequestDTO;
+import ru.gasworkers.dev.api.users.client.object.dto.AddObjectResponseDTO;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithUser;
-import ru.gasworkers.dev.tests.api.user.client.BaseClientApiTest;
+import ru.gasworkers.dev.tests.api.BaseApiTest;
+import ru.gasworkers.dev.tests.api.user.client.object.AddObjectPositiveCase;
+
+import java.util.Arrays;
+import java.util.List;
+
+import static io.qameta.allure.Allure.step;
 
 @Owner("Igor Shingelevich")
-@Epic(AllureEpic.OBJECT)
-@Feature(AllureFeature.ADD_OBJECT)
-@Story("Добавление объекта")
+@Epic(AllureEpic.CLIENT)
+@Feature(AllureFeature.CLIENT_OBJECT)
+@Story("Завершение регистрации")
 @Tag(AllureTag.REGRESSION)
-@Tag(AllureTag.OBJECT)
+@Tag(AllureTag.ADD_CLIENT_OBJECT)
 @Tag(AllureTag.API)
-@Tag(AllureTag.CLIENT)
-
-public class AddObjectApiTest extends BaseClientApiTest {
-// new instance of AddObjectApi
+public class AddObjectApiTest extends BaseApiTest {
     private final AddObjectApi addObjectApi = new AddObjectApi();
 
-    @Test
-    @DisplayName("Succsess case: ")
-    void positiveAddObject(@WithUser User client) {
-        // Create a default AddObjectRequestDTO using the ObjectFactory
-        AddObjectRequestDTO defaultObject = ObjectFactory.createDefaultHouse();
+    @ParameterizedTest(name = "{0}")
+    @EnumSource(AddObjectPositiveCase.class)
+    @DisplayName("Success case:")
+    void positiveTestCase(AddObjectPositiveCase testCase, @WithUser User client) {
+        step("Add object", () -> {
+            AddObjectResponseDTO expectedResponse = AddObjectResponseDTO.successResponse();
 
-        // Send the API request and get the response
-        ValidatableResponse response = addObjectApi.addObject(defaultObject);
+            // Define the excluded fields specific to this test case
+            List<String> excludedFields = Arrays.asList("data.created_at", "data.id");
 
-        // Assert the response
-        response.statusCode(200);
-
-        // Add more assertions if needed
-        // Assertions.assertEquals(expectedValue, actualValue);
+            AddObjectResponseDTO actualResponse = addObjectApi.addObject(testCase.getAddObjectDtoDTO())
+                    .statusCode(200)
+                    .extract().as(AddObjectResponseDTO.class);
+            assertResponsePartial(expectedResponse, actualResponse, excludedFields);
+        });
     }
-
 }

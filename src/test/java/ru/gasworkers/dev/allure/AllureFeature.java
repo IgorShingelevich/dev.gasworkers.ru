@@ -4,5 +4,5 @@ public final class AllureFeature {
     public static final String
         BG_REGISTRATION = "Фоновая регистрация",
         REGULAR_REGISTRATION = "Обычная регистрация",
-    ADD_OBJECT = "Добавление объекта";
+    CLIENT_OBJECT = "Объект клиента";
 }

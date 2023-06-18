@@ -9,7 +9,7 @@ public class ObjectFactory {
                 .companyId(1)
                 .branchId(null)
                 .accountNumber(null)
-                .photos(new Integer[0])
+                .photos(null)
                 .title("my house")
                 .build();
     }

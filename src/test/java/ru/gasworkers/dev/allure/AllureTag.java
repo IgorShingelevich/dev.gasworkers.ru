@@ -24,4 +24,7 @@ public final class AllureTag {
             API = "api",
             API_COLLECTION = "api-collection";
 
+    public static final String ADD_CLIENT_OBJECT = "add-client-object";
+
+
 }
