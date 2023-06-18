@@ -9,7 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.authorisation.LoginApi;
+import ru.gasworkers.dev.api.registration.authorisation.LoginApi;
 import ru.gasworkers.dev.api.registration.regular.RegularRegistrationApi;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithUser;

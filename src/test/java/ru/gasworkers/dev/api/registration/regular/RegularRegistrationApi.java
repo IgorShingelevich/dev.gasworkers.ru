@@ -6,7 +6,7 @@ import io.restassured.response.ValidatableResponse;
 import lombok.Getter;
 import lombok.Setter;
 import ru.gasworkers.dev.api.BaseApi;
-import ru.gasworkers.dev.api.authorisation.LoginRequestDTO;
+import ru.gasworkers.dev.api.registration.authorisation.dto.LoginRequestDTO;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.finish.FinishRegistrationRequestDto;

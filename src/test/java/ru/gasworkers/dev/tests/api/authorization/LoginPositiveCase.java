@@ -1,7 +1,7 @@
 package ru.gasworkers.dev.tests.api.authorization;
 
 import lombok.AllArgsConstructor;
-import ru.gasworkers.dev.api.authorisation.LoginRequestDTO;
+import ru.gasworkers.dev.api.registration.authorisation.dto.LoginRequestDTO;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory;
 import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationRequestDto;

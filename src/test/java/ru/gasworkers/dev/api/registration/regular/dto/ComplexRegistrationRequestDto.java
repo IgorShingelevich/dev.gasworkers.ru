@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import ru.gasworkers.dev.api.authorisation.LoginRequestDTO;
+import ru.gasworkers.dev.api.registration.authorisation.dto.LoginRequestDTO;
 import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.finish.FinishRegistrationRequestDto;
 import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
