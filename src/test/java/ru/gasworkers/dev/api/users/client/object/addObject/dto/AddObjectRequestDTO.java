@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.users.client.object.dto;
+package ru.gasworkers.dev.api.users.client.object.addObject.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.api.user.client.object;
+package ru.gasworkers.dev.tests.api.user.client.object.addObject;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
@@ -8,13 +8,11 @@ import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.BaseApi;
-import ru.gasworkers.dev.api.users.client.object.AddObjectApi;
-import ru.gasworkers.dev.api.users.client.object.dto.AddObjectResponseDTO;
+import ru.gasworkers.dev.api.users.client.object.addObject.AddObjectApi;
+import ru.gasworkers.dev.api.users.client.object.addObject.dto.AddObjectResponseDTO;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithUser;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
-import ru.gasworkers.dev.tests.api.user.client.object.AddObjectPositiveCase;
 
 import java.util.Arrays;
 import java.util.List;

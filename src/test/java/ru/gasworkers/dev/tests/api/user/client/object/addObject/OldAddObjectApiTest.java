@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.api.user.client.object;
+package ru.gasworkers.dev.tests.api.user.client.object.addObject;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -11,9 +11,10 @@ import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.users.client.object.AddObjectApi;
-import ru.gasworkers.dev.api.users.client.object.ObjectFactory;
-import ru.gasworkers.dev.api.users.client.object.dto.AddObjectRequestDTO;
+import ru.gasworkers.dev.api.users.client.object.ObjectModelDto;
+import ru.gasworkers.dev.api.users.client.object.addObject.AddObjectApi;
+import ru.gasworkers.dev.api.users.client.object.ObjectBuilder;
+import ru.gasworkers.dev.api.users.client.object.addObject.dto.AddObjectRequestDTO;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithUser;
 import ru.gasworkers.dev.tests.api.user.client.BaseClientApiTest;
@@ -26,7 +27,7 @@ import ru.gasworkers.dev.tests.api.user.client.BaseClientApiTest;
 @Tag(AllureTag.OBJECT)
 @Tag(AllureTag.API)
 @Tag(AllureTag.CLIENT)
-
+@Deprecated
 public class OldAddObjectApiTest extends BaseClientApiTest {
 // new instance of AddObjectApi
     private final AddObjectApi addObjectApi = new AddObjectApi();
@@ -34,8 +35,9 @@ public class OldAddObjectApiTest extends BaseClientApiTest {
     @Test
     @DisplayName("Succsess case: ")
     void positiveAddObject(@WithUser User client) {
-        // Create a default AddObjectRequestDTO using the ObjectFactory
-        AddObjectRequestDTO defaultObject = ObjectFactory.createDefaultHouse();
+        // Create a default AddObjectRequestDTO using the ObjectBuilder
+//        AddObjectRequestDTO defaultObject = ObjectBuilder.addObjectRequest();
+        ObjectModelDto defaultObject = ObjectBuilder.addObjectRequest2();
 
         // Send the API request and get the response
         ValidatableResponse response = addObjectApi.addObject(defaultObject);
