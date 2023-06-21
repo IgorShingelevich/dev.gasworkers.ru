@@ -4,13 +4,14 @@ import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import ru.gasworkers.dev.api.registration.regular.RegularRegistrationApi;
 import ru.gasworkers.dev.api.users.BaseUserApi;
-import ru.gasworkers.dev.api.users.client.object.ObjectModelDto;
+import ru.gasworkers.dev.api.users.client.object.AddHouseObjectModelDto;
+import ru.gasworkers.dev.api.users.client.object.addObject.dto.AddHouseObjectRequestDTO;
 
 import static io.restassured.RestAssured.given;
 
 public class AddObjectApi extends BaseUserApi {
     @Step("API: Add object")
-    public ValidatableResponse addObject(ObjectModelDto inputDto) {
+    public ValidatableResponse addObject(AddHouseObjectRequestDTO inputDto) {
         String token = RegularRegistrationApi.getLoginToken();
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class AddObjectResponseDTO {
+public class AddHouseObjectResponseDTO {
     private Integer status;
     private String message;
     private DataDto data;
@@ -93,7 +93,7 @@ public class AddObjectResponseDTO {
     }
 
     // Success Response
-    public static AddObjectResponseDTO successResponse() {
+    public static AddHouseObjectResponseDTO successResponse() {
         DataDto data = new DataDto();
         data.setId(null); // Set id field to null
         data.setTitle("my house");
@@ -135,6 +135,6 @@ public class AddObjectResponseDTO {
         data.setVideo_exists(false);
         data.setCreated_at(null); // Set created_at field to null
 
-        return new AddObjectResponseDTO(0, "Объект добавлен", data, null);
+        return new AddHouseObjectResponseDTO(0, "Объект добавлен", data, null);
     }
 }

@@ -16,16 +16,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ObjectModelDto {
-    // Define the fields of the ObjectModelDto class
+public class AddHouseObjectModelDto {
+    // Define the fields of the AddHouseObjectModelDto class
 
     private int id;
     private Address address;
     private String title;
     private Equipment[] equipments;
 
-    public ObjectModelDto(Builder builder) {
-        // Constructor to create an instance of ObjectModelDto from the Builder
+    public AddHouseObjectModelDto(Builder builder) {
+        // Constructor to create an instance of AddHouseObjectModelDto from the Builder
         this.id = builder.id;
         this.address = builder.address;
         this.title = builder.title;
@@ -68,9 +68,9 @@ public class ObjectModelDto {
             return this;
         }
 
-        public ObjectModelDto build() {
-            // Method to construct the final ObjectModelDto instance using the Builder
-            return new ObjectModelDto(this);
+        public AddHouseObjectModelDto build() {
+            // Method to construct the final AddHouseObjectModelDto instance using the Builder
+            return new AddHouseObjectModelDto(this);
         }
     }
 

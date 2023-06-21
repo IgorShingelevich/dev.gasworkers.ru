@@ -1,9 +1,9 @@
 package ru.gasworkers.dev.tests.api.user.client.object.addObject;
 
 import lombok.AllArgsConstructor;
-import ru.gasworkers.dev.api.users.client.object.ObjectBuilder;
-import ru.gasworkers.dev.api.users.client.object.ObjectModelDto;
-import ru.gasworkers.dev.api.users.client.object.addObject.dto.AddObjectRequestDTO;
+import ru.gasworkers.dev.api.users.client.object.AddHouseObjectBuilder;
+import ru.gasworkers.dev.api.users.client.object.AddHouseObjectModelDto;
+import ru.gasworkers.dev.api.users.client.object.addObject.dto.AddHouseObjectRequestDTO;
 
 @AllArgsConstructor
 enum AddObjectPositiveCase {
@@ -11,13 +11,13 @@ enum AddObjectPositiveCase {
             "Добавление объекта с дефолтными данными");
 
     private final String description;
-//    private final AddObjectRequestDTO addObjectDto = ObjectBuilder.addObjectRequest();
-    private final ObjectModelDto addObjectDto2 = ObjectBuilder.addObjectRequest2();
+    private final AddHouseObjectRequestDTO addObjectDto = AddHouseObjectBuilder.addObjectRequest();
+//    private final AddHouseObjectModelDto addObjectDto2 = AddHouseObjectBuilder.addObjectRequest2();
 
-    public ObjectModelDto getAddObjectDtoDTO() {
+    public AddHouseObjectRequestDTO getAddObjectDtoDTO() {
         switch (this) {
             case OBJECT_DEFAULT_HOUSE:
-                return addObjectDto2;
+                return addObjectDto;
             default:
                 throw new EnumConstantNotPresentException(this.getDeclaringClass(), this.name());
         }

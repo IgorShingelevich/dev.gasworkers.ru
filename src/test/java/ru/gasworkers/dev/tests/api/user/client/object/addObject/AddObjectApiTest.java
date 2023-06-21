@@ -9,7 +9,7 @@ import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.users.client.object.addObject.AddObjectApi;
-import ru.gasworkers.dev.api.users.client.object.addObject.dto.AddObjectResponseDTO;
+import ru.gasworkers.dev.api.users.client.object.addObject.dto.AddHouseObjectResponseDTO;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithUser;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
@@ -34,14 +34,14 @@ public class AddObjectApiTest extends BaseApiTest {
     @DisplayName("Success case:")
     void positiveTestCase(AddObjectPositiveCase testCase, @WithUser User client) {
         step("Add object", () -> {
-            AddObjectResponseDTO expectedResponse = AddObjectResponseDTO.successResponse();
-
+            AddHouseObjectResponseDTO expectedResponse = AddHouseObjectResponseDTO.successResponse();
+//            AddHouseObjectRequestDTO expectedResponse = AddHouseObjectBuilder.addObjectRequest();
             // Define the excluded fields specific to this test case
             List<String> excludedFields = Arrays.asList("data.created_at", "data.id");
 
-            AddObjectResponseDTO actualResponse = addObjectApi.addObject(testCase.getAddObjectDtoDTO())
+            AddHouseObjectResponseDTO actualResponse = addObjectApi.addObject(testCase.getAddObjectDtoDTO())
                     .statusCode(200)
-                    .extract().as(AddObjectResponseDTO.class);
+                    .extract().as(AddHouseObjectResponseDTO.class);
             assertResponsePartial(expectedResponse, actualResponse, excludedFields);
         });
     }

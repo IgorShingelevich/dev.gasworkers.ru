@@ -14,7 +14,7 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Accessors(chain = true)
-public class AddObjectRequestDTO {
+public class AddHouseObjectRequestDTO {
     @JsonProperty("address_id")
     private Integer addressId;
     @JsonProperty("company_id")
@@ -26,8 +26,8 @@ public class AddObjectRequestDTO {
     private Integer[] photos;
     private String title;
 
-    public static AddObjectRequestDTO newInstance(Integer addressId, Integer companyId, Integer branchId, Integer accountNumber, Integer[] photos, String title) {
-        return  AddObjectRequestDTO.builder()
+    public static AddHouseObjectRequestDTO newInstance(Integer addressId, Integer companyId, Integer branchId, Integer accountNumber, Integer[] photos, String title) {
+        return  AddHouseObjectRequestDTO.builder()
                 .addressId(addressId)
                 .companyId(companyId)
                 .branchId(branchId)
