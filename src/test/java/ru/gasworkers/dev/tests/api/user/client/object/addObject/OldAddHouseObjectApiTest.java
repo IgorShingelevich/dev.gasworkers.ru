@@ -36,7 +36,7 @@ public class OldAddHouseObjectApiTest extends BaseClientApiTest {
     void positiveAddObject(@WithUser User client) {
         // Create a default AddHouseObjectRequestDTO using the AddHouseObjectBuilder
 //        AddHouseObjectRequestDTO defaultObject = AddHouseObjectBuilder.addObjectRequest();
-        AddHouseObjectRequestDTO defaultObject = AddHouseObjectBuilder.addObjectRequest();
+        AddHouseObjectRequestDTO defaultObject = AddHouseObjectBuilder.addHouseObjectRequest();
 
         // Send the API request and get the response
         ValidatableResponse response = addHouseObjectApi.addObject(defaultObject);

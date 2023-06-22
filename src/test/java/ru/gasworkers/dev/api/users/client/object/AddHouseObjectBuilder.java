@@ -6,7 +6,7 @@ import ru.gasworkers.dev.api.users.client.object.addObject.dto.AddHouseObjectReq
 
 
 public class AddHouseObjectBuilder {
-    public static AddHouseObjectRequestDTO addObjectRequest() {
+    public static AddHouseObjectRequestDTO addHouseObjectRequest() {
         return AddHouseObjectRequestDTO.builder()
                 .addressId(2121)
                 .companyId(1)

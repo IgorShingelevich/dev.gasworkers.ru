@@ -45,4 +45,17 @@ public class AddHouseObjectApiTest extends BaseApiTest {
             assertResponsePartial(expectedResponse, actualResponse, excludedFields);
         });
     }
+
+    @ParameterizedTest(name = "{0}")
+    @EnumSource(AddHouseObjectNegativeCase.class)
+    @DisplayName("Negative case:")
+    void negativeTestCase(AddHouseObjectNegativeCase testCase, @WithUser User client) {
+        step("Add object", () -> {
+            AddHouseObjectResponseDTO expectedResponse = testCase.getExpectedResponse();
+            AddHouseObjectResponseDTO actualResponse = addObjectApi.addObject(testCase.getAddHouseObjectDto())
+                    .statusCode(422)
+                    .extract().as(AddHouseObjectResponseDTO.class);
+            assertResponse(expectedResponse, actualResponse);
+        });
+    }
 }
