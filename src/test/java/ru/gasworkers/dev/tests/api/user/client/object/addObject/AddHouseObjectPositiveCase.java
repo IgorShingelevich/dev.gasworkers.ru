@@ -2,11 +2,10 @@ package ru.gasworkers.dev.tests.api.user.client.object.addObject;
 
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.users.client.object.AddHouseObjectBuilder;
-import ru.gasworkers.dev.api.users.client.object.AddHouseObjectModelDto;
 import ru.gasworkers.dev.api.users.client.object.addObject.dto.AddHouseObjectRequestDTO;
 
 @AllArgsConstructor
-enum AddObjectPositiveCase {
+enum AddHouseObjectPositiveCase {
     OBJECT_DEFAULT_HOUSE(
             "Добавление объекта с дефолтными данными");
 

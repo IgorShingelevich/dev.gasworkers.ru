@@ -12,8 +12,7 @@ import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.users.client.object.AddHouseObjectBuilder;
-import ru.gasworkers.dev.api.users.client.object.AddHouseObjectModelDto;
-import ru.gasworkers.dev.api.users.client.object.addObject.AddObjectApi;
+import ru.gasworkers.dev.api.users.client.object.addObject.AddHouseObjectApi;
 import ru.gasworkers.dev.api.users.client.object.addObject.dto.AddHouseObjectRequestDTO;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithUser;
@@ -28,9 +27,9 @@ import ru.gasworkers.dev.tests.api.user.client.BaseClientApiTest;
 @Tag(AllureTag.API)
 @Tag(AllureTag.CLIENT)
 @Deprecated
-public class OldAddObjectApiTest extends BaseClientApiTest {
-// new instance of AddObjectApi
-    private final AddObjectApi addObjectApi = new AddObjectApi();
+public class OldAddHouseObjectApiTest extends BaseClientApiTest {
+// new instance of AddHouseObjectApi
+    private final AddHouseObjectApi addHouseObjectApi = new AddHouseObjectApi();
 
     @Test
     @DisplayName("Succsess case: ")
@@ -40,7 +39,7 @@ public class OldAddObjectApiTest extends BaseClientApiTest {
         AddHouseObjectRequestDTO defaultObject = AddHouseObjectBuilder.addObjectRequest();
 
         // Send the API request and get the response
-        ValidatableResponse response = addObjectApi.addObject(defaultObject);
+        ValidatableResponse response = addHouseObjectApi.addObject(defaultObject);
 
         // Assert the response
         response.statusCode(200);

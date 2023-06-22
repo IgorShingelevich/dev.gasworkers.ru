@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.users.client.object.addObject.AddObjectApi;
+import ru.gasworkers.dev.api.users.client.object.addObject.AddHouseObjectApi;
 import ru.gasworkers.dev.api.users.client.object.addObject.dto.AddHouseObjectResponseDTO;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithUser;
@@ -26,13 +26,13 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.ADD_CLIENT_OBJECT)
 @Tag(AllureTag.API)
-public class AddObjectApiTest extends BaseApiTest {
-    private final AddObjectApi addObjectApi = new AddObjectApi();
+public class AddHouseObjectApiTest extends BaseApiTest {
+    private final AddHouseObjectApi addObjectApi = new AddHouseObjectApi();
 
     @ParameterizedTest(name = "{0}")
-    @EnumSource(AddObjectPositiveCase.class)
+    @EnumSource(AddHouseObjectPositiveCase.class)
     @DisplayName("Success case:")
-    void positiveTestCase(AddObjectPositiveCase testCase, @WithUser User client) {
+    void positiveTestCase(AddHouseObjectPositiveCase testCase, @WithUser User client) {
         step("Add object", () -> {
             AddHouseObjectResponseDTO expectedResponse = AddHouseObjectResponseDTO.successResponse();
 //            AddHouseObjectRequestDTO expectedResponse = AddHouseObjectBuilder.addObjectRequest();
