@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
 @JsonInclude(JsonInclude.Include.NON_NULL)
+@Deprecated
 public class AddHouseObjectModelDto {
     // Define the fields of the AddHouseObjectModelDto class
 

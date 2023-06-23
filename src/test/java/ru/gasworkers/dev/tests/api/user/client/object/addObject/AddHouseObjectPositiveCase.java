@@ -14,7 +14,6 @@ enum AddHouseObjectPositiveCase {
 
     private final String description;
     private final AddHouseObjectRequestDTO addObjectDto = AddHouseObjectBuilder.addHouseObjectRequest();
-//    private final AddHouseObjectModelDto addObjectDto2 = AddHouseObjectBuilder.addObjectRequest2();
 
     public AddHouseObjectRequestDTO getAddObjectDtoDTO() {
         switch (this) {

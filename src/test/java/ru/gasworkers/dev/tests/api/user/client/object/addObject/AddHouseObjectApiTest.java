@@ -22,9 +22,9 @@ import static io.qameta.allure.Allure.step;
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.CLIENT)
 @Feature(AllureFeature.CLIENT_OBJECT)
-@Story("Завершение регистрации")
+@Story("Добавление объекта")
 @Tag(AllureTag.REGRESSION)
-@Tag(AllureTag.ADD_CLIENT_OBJECT)
+@Tag(AllureTag.HOUSE_OBJECT)
 @Tag(AllureTag.API)
 public class AddHouseObjectApiTest extends BaseApiTest {
     private final AddHouseObjectApi addObjectApi = new AddHouseObjectApi();
