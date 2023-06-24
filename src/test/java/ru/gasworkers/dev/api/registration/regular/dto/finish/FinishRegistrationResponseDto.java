@@ -32,8 +32,6 @@ public class FinishRegistrationResponseDto {
         }
     }
 
-
-    // Case 1
     public static FinishRegistrationResponseDto successResponse() {
         return new FinishRegistrationResponseDto(0, "Регистрация завершена", List.of(), null);
     }

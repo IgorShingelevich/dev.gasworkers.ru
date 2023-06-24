@@ -36,11 +36,12 @@ enum AddEquipmentNegativeCase {
     //    ADD_EQUIPMENT_MISSING_BRAND_ID("Add equipment with missing brandId", AddEquipmentResponseDto.missingBrandIdResponse()),
 //    ADD_EQUIPMENT_MISSING_MODEL_ID("Add equipment with missing modelId", AddEquipmentResponseDto.missingModelIdResponse()),
 //    ADD_EQUIPMENT_MISSING_CUSTOM_BRAND("Add equipment with missing customBrand", AddEquipmentResponseDto.missingCustomBrandResponse()),
-    ADD_EQUIPMENT_MISSING_CUSTOM_MODEL("Add equipment with missing custom model", AddEquipmentResponseDto.successResponse()),
+    ADD_EQUIPMENT_MISSING_CUSTOM_MODEL("Add equipment with missing custom model( 200 fix  doc and test)", AddEquipmentResponseDto.successResponse()),
+    ADD_EQUIPMENT_EMPTY_CUSTOM_BRAND("Add equipment with empty custom brand ( 200 fix  doc and test) ", AddEquipmentResponseDto.successResponse()),
     //    ADD_EQUIPMENT_MISSING_TYPE_ID("Add equipment with missing typeId", AddEquipmentResponseDto.missingTypeIdResponse()),
-//    ADD_EQUIPMENT_MISSING_POWER("Add equipment with missing power", AddEquipmentResponseDto.missingPowerResponse()),
-//    ADD_EQUIPMENT_MISSING_PHOTOS("Add equipment with missing photos", AddEquipmentResponseDto.missingPhotosResponse()),
-//    ADD_EQUIPMENT_MISSING_VIDEOS("Add equipment with missing videos", AddEquipmentResponseDto.missingVideosResponse()),
+    //    ADD_EQUIPMENT_MISSING_POWER("Add equipment with missing power", AddEquipmentResponseDto.missingPowerResponse()),
+    //    ADD_EQUIPMENT_MISSING_PHOTOS("Add equipment with missing photos", AddEquipmentResponseDto.missingPhotosResponse()),
+    //    ADD_EQUIPMENT_MISSING_VIDEOS("Add equipment with missing videos", AddEquipmentResponseDto.missingVideosResponse()),
     ADD_EQUIPMENT_MISSING_PHOTOS_AND_VIDEOS("Add equipment with missing photos and videos( now 200 need to specify doc  or fix api)", AddEquipmentResponseDto.successResponse()),
     ADD_EQUIPMENT_MISSING_ALL_WORKS("Add equipment with missing allWorks value", AddEquipmentResponseDto.missingAllWorksResponse()),
     ADD_EQUIPMENT_MISSING_TYPE("Add equipment with missing type( now 200 need to specify doc  or fix api)", AddEquipmentResponseDto.successResponse()),
@@ -49,9 +50,8 @@ enum AddEquipmentNegativeCase {
     ADD_EQUIPMENT_OVEN_BEON_WITH_POWER("Add equipment oven with power( now 200 need to specify doc  or fix api)", AddEquipmentResponseDto.successResponse()),
     ADD_EQUIPMENT_WRONG_MODEL("Add equipment with wrong model", AddEquipmentResponseDto.wrongModelIdResponse()),
     ADD_EQUIPMENT_MISSING_BRAND("Add equipment with missing brand ( now 200 need to specify doc  or fix api)", AddEquipmentResponseDto.successResponse()),
-    ADD_EQUIPMENT_EMPTY_CUSTOM_BRAND("Add equipment with empty custom brand", AddEquipmentResponseDto.successResponse()),
-    ADD_EQUIPMENT_INVALID_PHOTO("Add equipment with invalid photo", AddEquipmentResponseDto.invalidPhotoResponse()),
-    ADD_EQUIPMENT_INVALID_VIDEO("Add equipment with invalid video", AddEquipmentResponseDto.invalidVideoResponse());
+    ADD_EQUIPMENT_INVALID_PHOTO("Add equipment with invalid photo(how to handle - Поле photos.0 должно быть числом) ", AddEquipmentResponseDto.invalidPhotoResponse()),
+    ADD_EQUIPMENT_INVALID_VIDEO("Add equipment with invalid video ( videos.0  )", AddEquipmentResponseDto.invalidVideoResponse());
 
     private final String description;
     private final AddEquipmentResponseDto expectedResponse;

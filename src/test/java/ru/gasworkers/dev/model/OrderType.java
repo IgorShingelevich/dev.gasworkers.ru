@@ -6,10 +6,11 @@ import lombok.AllArgsConstructor;
 public enum OrderType {
     MAINTENANCE("Техническое обслуживание", "maintenance"),
     REPAIR("Ремонт", "repair"),
-    VIDEO("Видеоконсультация","consultation");
+    VIDEO("Видеоконсультация","consultation"),
+    URGENT("Видеоконсультация сейчас", "urgent");
 
-    private final String description;
-    private final String throughApi;
+     final String description;
+     final String throughApi;
 
     @Override
     public String toString() {
