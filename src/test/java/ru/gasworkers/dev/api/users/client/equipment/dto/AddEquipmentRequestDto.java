@@ -33,7 +33,7 @@ public class AddEquipmentRequestDto {
     @JsonProperty("all_works")
     private Boolean allWorks;
 
-    private Integer power;
+    private Double power;
     private String[] photos;
     private String[] videos;
 }

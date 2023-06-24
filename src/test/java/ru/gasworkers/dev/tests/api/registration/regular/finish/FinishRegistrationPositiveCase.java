@@ -22,6 +22,7 @@ enum FinishRegistrationPositiveCase {
     private final ComplexRegistrationRequestDto complexDto = ComplexRegistrationFactory.defaultRandomClient();
 
     public StartRegistrationRequestDto getStartDto() {
+
         StartRegistrationRequestDto startDto = complexDto.toStartRegistration();
         switch (this) {
             case CLIENT_WITH_EMAIL:

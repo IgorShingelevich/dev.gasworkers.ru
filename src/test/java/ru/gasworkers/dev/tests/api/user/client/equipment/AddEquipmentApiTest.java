@@ -46,7 +46,6 @@ public class AddEquipmentApiTest extends BaseApiTest {
             ).getAsJsonObject();
 
             int objectId = responseObject.getAsJsonObject("data").get("id").getAsInt();
-//            testCase.setObjectId(objectId); // Add the extracted ID to the test case
             return objectId;
         });
         step("Add equipment", () -> {
@@ -54,6 +53,29 @@ public class AddEquipmentApiTest extends BaseApiTest {
 
             AddEquipmentResponseDto actualResponse = addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), addedObjectId)
                     .statusCode(200)
+                    .extract().as(AddEquipmentResponseDto.class);
+            assertResponse(expectedResponse, actualResponse);
+        });
+    }
+
+    @ParameterizedTest(name = "{0}")
+    @EnumSource(AddEquipmentNegativeCase.class)
+    @DisplayName("Negative case:")
+    void negativeTestCase(AddEquipmentNegativeCase testCase, @WithUser User client) {
+        int addedObjectId = step("Add object", () -> {
+            JsonObject responseObject = JsonParser.parseString(
+                    addObjectApi.addObject(AddHouseObjectBuilder.addHouseObjectRequest())
+                            .statusCode(200)
+                            .extract().asString()
+            ).getAsJsonObject();
+
+            int objectId = responseObject.getAsJsonObject("data").get("id").getAsInt();
+            return objectId;
+        });
+        step("Add equipment", () -> {
+            AddEquipmentResponseDto expectedResponse = testCase.getExpectedResponse();
+            AddEquipmentResponseDto actualResponse = addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), addedObjectId)
+                    .statusCode(422)
                     .extract().as(AddEquipmentResponseDto.class);
             assertResponse(expectedResponse, actualResponse);
         });

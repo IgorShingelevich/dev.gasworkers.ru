@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.math.BigInteger;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -22,11 +24,11 @@ public class AddHouseObjectRequestDTO {
     @JsonProperty("branch_id")
     private Integer branchId;
     @JsonProperty("account_number")
-    private Integer accountNumber;
+    private BigInteger accountNumber;
     private Integer[] photos;
     private String title;
 
-    public static AddHouseObjectRequestDTO newInstance(Integer addressId, Integer companyId, Integer branchId, Integer accountNumber, Integer[] photos, String title) {
+    public static AddHouseObjectRequestDTO newInstance(Integer addressId, Integer companyId, Integer branchId, BigInteger accountNumber, Integer[] photos, String title) {
         return  AddHouseObjectRequestDTO.builder()
                 .addressId(addressId)
                 .companyId(companyId)

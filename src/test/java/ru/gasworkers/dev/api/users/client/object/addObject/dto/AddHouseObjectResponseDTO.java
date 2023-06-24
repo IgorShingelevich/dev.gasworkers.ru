@@ -1,6 +1,5 @@
 package ru.gasworkers.dev.api.users.client.object.addObject.dto;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -16,6 +15,136 @@ public class AddHouseObjectResponseDTO {
     private String message;
     private DataDto data;
     private ErrorsDto errors;
+
+    public static AddHouseObjectResponseDTO missingAllFields() {
+        ErrorsDto errors = new ErrorsDto();
+        errors.setAddressIdErrors(new String[]{"Поле address id обязательно для заполнения."});
+        errors.setCompanyIdErrors(new String[]{"Поле company id обязательно для заполнения."});
+        errors.setTitleErrors(new String[]{"Поле Название обязательно для заполнения."});
+        return new AddHouseObjectResponseDTO(null, "Поле address id обязательно для заполнения. (и еще 2 ошибки)", null, errors);
+    }
+
+    public static AddHouseObjectResponseDTO missingAddressId() {
+
+        ErrorsDto errors = new ErrorsDto();
+        errors.setAddressIdErrors(new String[]{"Поле address id обязательно для заполнения."});
+        return new AddHouseObjectResponseDTO(null, "Поле address id обязательно для заполнения.", null, errors);
+    }
+
+    public static AddHouseObjectResponseDTO missingCompanyId() {
+        ErrorsDto errors = new ErrorsDto();
+        errors.setCompanyIdErrors(new String[]{"Поле company id обязательно для заполнения."});
+        return new AddHouseObjectResponseDTO(null, "Поле company id обязательно для заполнения.", null, errors);
+    }
+
+    public static AddHouseObjectResponseDTO missingTitle() {
+        /*{
+    "message": "Поле Название обязательно для заполнения.",
+    "errors": {
+        "title": [
+            "Поле Название обязательно для заполнения."
+        ]
+    }
+}*/
+        ErrorsDto errors = new ErrorsDto();
+        errors.setTitleErrors(new String[]{"Поле Название обязательно для заполнения."});
+        return new AddHouseObjectResponseDTO(null, "Поле Название обязательно для заполнения.", null, errors);
+    }
+
+    public static AddHouseObjectResponseDTO missingBranchId() {
+        return new AddHouseObjectResponseDTO(null, "Не указан филиал", null, null);
+    }
+
+    public static AddHouseObjectResponseDTO missingAccountNumber() {
+        return new AddHouseObjectResponseDTO(null, "Не указан лицевой счет", null, null);
+    }
+
+    public static AddHouseObjectResponseDTO invalidAddressId() {
+        ErrorsDto errors = new ErrorsDto();
+        errors.setAddressIdErrors(new String[]{"Выбранное значение для address id некорректно."});
+        return new AddHouseObjectResponseDTO(null, "Выбранное значение для address id некорректно.", null, errors);
+    }
+
+    public static AddHouseObjectResponseDTO invalidCompanyId() {
+        ErrorsDto errors = new ErrorsDto();
+        errors.setCompanyIdErrors(new String[]{"Выбранное значение для company id некорректно."});
+        return new AddHouseObjectResponseDTO(null, "Выбранное значение для company id некорректно.", null, errors);
+    }
+
+    public static AddHouseObjectResponseDTO invalidBranchId() {
+        ErrorsDto errors = new ErrorsDto();
+        errors.setBranchIdErrors(new String[]{"Выбранное значение для branch id некорректно."});
+        return new AddHouseObjectResponseDTO(null, "Выбранное значение для branch id некорректно.", null, errors);
+    }
+
+    public static AddHouseObjectResponseDTO invalidAccountNumber() {
+        return new AddHouseObjectResponseDTO(null, "Неверный лицевой счет", null, null);
+    }
+
+    public static AddHouseObjectResponseDTO invalidTitle() {
+        /*{
+    "message": "Количество символов в поле Название не может превышать 255.",
+    "errors": {
+        "title": [
+            "Количество символов в поле Название не может превышать 255."
+        ]
+    }
+}*/
+        ErrorsDto errors = new ErrorsDto();
+        errors.setTitleErrors(new String[]{"Поле Название обязательно для заполнения."});
+        return new AddHouseObjectResponseDTO(null, "Поле Название обязательно для заполнения.", null, errors);
+    }
+
+    public static AddHouseObjectResponseDTO successResponse() {
+        DataDto data = new DataDto();
+        data.setId(null);
+        data.setTitle("my house");
+        data.setActiveOffersCount(0);
+        data.setPhotos(new Object[]{});
+
+        AddressDto address = new AddressDto();
+        address.setId(2121);
+        address.setFull("Москва, Московская улица");
+        address.setType("street");
+        address.setFullWithZip("Россия, Москва, Московская улица");
+        address.setZip(null);
+        address.setCountry("Россия");
+        address.setCountryCode("RU");
+        address.setRegion("Москва");
+        address.setRegionType("Москва");
+        address.setLongitude(37.416161);
+        address.setLatitude(55.671229);
+
+        data.setAddress(address);
+        data.setEquipments(new Object[]{});
+
+        CompanyDto company = new CompanyDto();
+        company.setId(1);
+        company.setTitle("МособлГаз");
+
+        BranchDto[] branches = {
+                new BranchDto(1, "Юг"),
+                new BranchDto(2, "Север"),
+                new BranchDto(3, "Восток"),
+                new BranchDto(4, "Запад"),
+                new BranchDto(13, "Юго-Восток"),
+                new BranchDto(14, "Северо-Запад")
+        };
+        company.setBranches(branches);
+
+        data.setCompany(company);
+        data.setAccountNumber(null);
+        data.setVideoExists(false);
+        data.setCreatedAt(null);
+
+        return new AddHouseObjectResponseDTO(0, "Объект добавлен", data, null);
+    }
+
+    public static AddHouseObjectResponseDTO invalidExceedSymbolsLimitTitle() {
+        ErrorsDto errors = new ErrorsDto();
+        errors.setTitleErrors(new String[]{"Количество символов в поле Название не может превышать 255."});
+        return new AddHouseObjectResponseDTO(null, "Количество символов в поле Название не может превышать 255.", null, errors);
+    }
 
     @Data
     @NoArgsConstructor
@@ -112,166 +241,12 @@ public class AddHouseObjectResponseDTO {
     public static class ErrorsDto {
         @JsonProperty("address_id")
         private String[] addressIdErrors;
-        @JsonProperty ("company_id")
+        @JsonProperty("company_id")
         private String[] companyIdErrors;
+        @JsonProperty("title")
         private String[] titleErrors;
         @JsonProperty("branch_id")
         private String[] branchIdErrors;
 
-    }
-
-    @JsonIgnoreProperties(value = {"status"})
-    public static AddHouseObjectResponseDTO missingAddressId() {
-        /*{
-  "message": "Поле address id обязательно для заполнения.",
-  "errors": {
-    "address_id": [
-      "Поле address id обязательно для заполнения."
-    ]
-  }
-}*/
-        ErrorsDto errors = new ErrorsDto();
-        errors.setAddressIdErrors(new String[]{"Поле address id обязательно для заполнения."});
-
-        return new AddHouseObjectResponseDTO(1, "Поле address id обязательно для заполнения.", null, errors);
-    }
-    @JsonIgnoreProperties(value = {"status"})
-
-    public static AddHouseObjectResponseDTO missingCompanyId() {
-        /*{
-            "message": "Поле company id обязательно для заполнения.",
-            "errors": {
-                "company_id": [
-                    "Поле company id обязательно для заполнения."
-                ]
-            }
-        }*/
-        ErrorsDto errors = new ErrorsDto();
-        errors.setCompanyIdErrors(new String[]{"Поле company id обязательно для заполнения."});
-        return new AddHouseObjectResponseDTO(1, "Поле company id обязательно для заполнения.", null, errors);
-    }
-    @JsonIgnoreProperties(value = {"status"})
-    public static AddHouseObjectResponseDTO missingTitle() {
-        /*{
-            "message": "Поле Название обязательно для заполнения.",
-            "errors": {
-                "title": [
-                    "Поле Название обязательно для заполнения."
-                ]
-            }
-        }*/
-        ErrorsDto errors = new ErrorsDto();
-        errors.setTitleErrors(new String[]{"Поле Название обязательно для заполнения."});
-        return new AddHouseObjectResponseDTO(1, "Поле Название обязательно для заполнения.", null, errors);
-    }
-    public static AddHouseObjectResponseDTO missingBranchId() {
-        return new AddHouseObjectResponseDTO(1, "Не указан филиал", null, null);
-    }
-    public static AddHouseObjectResponseDTO missingAccountNumber() {
-        return new AddHouseObjectResponseDTO(1, "Не указан лицевой счет", null, null);
-    }
-    @JsonIgnoreProperties(value = {"status"})
-    public static AddHouseObjectResponseDTO invalidAddressId() {
-        /*{
-            "message": "Выбранное значение для address id некорректно.",
-            "errors": {
-                "address_id": [
-                    "Выбранное значение для address id некорректно."
-                ]
-            }
-        }*/
-        ErrorsDto errors = new ErrorsDto();
-        errors.setAddressIdErrors(new String[]{"Выбранное значение для address id некорректно."});
-        return new AddHouseObjectResponseDTO(1, "Выбранное значение для address id некорректно.", null, errors);
-    }
-    @JsonIgnoreProperties(value = {"status"})
-    public static AddHouseObjectResponseDTO invalidCompanyId() {
-        /*{
-            "message": "Выбранное значение для company id некорректно.",
-            "errors": {
-                "company_id": [
-                    "Выбранное значение для company id некорректно."
-                ]
-            }
-        }*/
-        ErrorsDto errors = new ErrorsDto();
-        errors.setCompanyIdErrors(new String[]{"Выбранное значение для company id некорректно."});
-        return new AddHouseObjectResponseDTO(1, "Выбранное значение для company id некорректно.", null, errors);
-    }
-    @JsonIgnoreProperties(value = {"status"})
-    public static AddHouseObjectResponseDTO invalidBranchId() {
-        /*{
-            "message": "Выбранное значение для branch id некорректно.",
-            "errors": {
-                "branch_id": [
-                    "Выбранное значение для branch id некорректно."
-                ]
-            }
-        }*/
-        ErrorsDto errors = new ErrorsDto();
-        errors.setBranchIdErrors(new String[]{"Выбранное значение для branch id некорректно."});
-        return new AddHouseObjectResponseDTO(1, "Выбранное значение для branch id некорректно.", null, errors);
-    }
-    public static AddHouseObjectResponseDTO invalidAccountNumber() {
-        return new AddHouseObjectResponseDTO(1, "Неверный лицевой счет", null, null);
-    }
-    @JsonIgnoreProperties(value = {"status"})
-    public static AddHouseObjectResponseDTO invalidTitle() {
-        /*{
-            "message": "Поле Название обязательно для заполнения.",
-            "errors": {
-                "title": [
-                    "Поле Название обязательно для заполнения."
-                ]
-            }
-        }*/
-        ErrorsDto errors = new ErrorsDto();
-        errors.setTitleErrors(new String[]{"Поле Название обязательно для заполнения."});
-        return new AddHouseObjectResponseDTO(1, "Поле Название обязательно для заполнения.", null, errors);
-    }
-
-    public static AddHouseObjectResponseDTO successResponse() {
-        DataDto data = new DataDto();
-        data.setId(null);
-        data.setTitle("my house");
-        data.setActiveOffersCount(0);
-        data.setPhotos(new Object[]{});
-
-        AddressDto address = new AddressDto();
-        address.setId(2121);
-        address.setFull("Москва, Московская улица");
-        address.setType("street");
-        address.setFullWithZip("Россия, Москва, Московская улица");
-        address.setZip(null);
-        address.setCountry("Россия");
-        address.setCountryCode("RU");
-        address.setRegion("Москва");
-        address.setRegionType("Москва");
-        address.setLongitude(37.416161);
-        address.setLatitude(55.671229);
-
-        data.setAddress(address);
-        data.setEquipments(new Object[]{});
-
-        CompanyDto company = new CompanyDto();
-        company.setId(1);
-        company.setTitle("МособлГаз");
-
-        BranchDto[] branches = {
-                new BranchDto(1, "Юг"),
-                new BranchDto(2, "Север"),
-                new BranchDto(3, "Восток"),
-                new BranchDto(4, "Запад"),
-                new BranchDto(13, "Юго-Восток"),
-                new BranchDto(14, "Северо-Запад")
-        };
-        company.setBranches(branches);
-
-        data.setCompany(company);
-        data.setAccountNumber(null);
-        data.setVideoExists(false);
-        data.setCreatedAt(null);
-
-        return new AddHouseObjectResponseDTO(0, "Объект добавлен", data, null);
     }
 }
