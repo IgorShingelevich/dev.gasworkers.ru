@@ -40,13 +40,52 @@ public class CreateOrdersApiTest extends BaseApiTest {
                     .statusCode(200)
                     .extract().as(CreateOrdersResponseDto.class);
             Integer orderId = createResponse.getData().getOrderId();
-            Boolean insuranceCase = createResponse.getData().getInsuranceCase();
+            Boolean insuranceCase = createResponse.getData().getIsInsuranceCase();
 
             CreateOrdersResponseDto actualResponse = CreateOrdersResponseDto.successResponse(orderId, insuranceCase);
-//            CreateOrdersResponseDto expectedResponse = CreateOrdersResponseDto.successResponse(orderId, insuranceCase);
             CreateOrdersResponseDto expectedResponse = testCase.getCreateResponseDto(orderId, insuranceCase);
 
             assertResponse(expectedResponse, actualResponse);
         });
     }
+
+    /*@ParameterizedTest(name = "{0}")
+    @EnumSource(CreateOrdersNegativeCase.class)
+    @Tag(AllureTag.NEGATIVE)
+    @DisplayName("Negative case: ")
+    void negativeTestCase(CreateOrdersNegativeCase testCase, @WithUser User client) {
+        step("Create order", () -> {
+            CreateOrdersResponseDto actualResponse = createOrdersApi.create(testCase.getCreateOrdersRequestDto())
+                    .statusCode(422)
+                    .extract().as(CreateOrdersResponseDto.class);
+            Integer orderId = actualResponse.getData().getOrderId();
+            Boolean isInsuranceCase = actualResponse.getData().getIsInsuranceCase();
+
+            CreateOrdersResponseDto expectedResponse = testCase.getExpectedResponse(orderId, isInsuranceCase);
+
+            assertResponse(expectedResponse, actualResponse);
+        });
+    }*/
+
+    @ParameterizedTest(name = "{0}")
+@EnumSource(CreateOrdersNegativeCase.class)
+@Tag(AllureTag.NEGATIVE)
+@DisplayName("Negative case: ")
+void negativeTestCaseV2(CreateOrdersNegativeCase testCase, @WithUser User client) {
+    step("Create order", () -> {
+        CreateOrdersResponseDto actualResponse = createOrdersApi.create(testCase.getCreateOrdersRequestDto())
+                .statusCode(422)
+                .extract().as(CreateOrdersResponseDto.class);
+
+        CreateOrdersResponseDto expectedResponse = testCase.getExpectedResponse(null, null); // Set initial values as null
+
+        if (actualResponse.getData() != null) {
+            Integer orderId = actualResponse.getData().getOrderId();
+            Boolean isInsuranceCase = actualResponse.getData().getIsInsuranceCase();
+            expectedResponse = testCase.getExpectedResponse(orderId, isInsuranceCase);
+        }
+
+        assertResponse(expectedResponse, actualResponse);
+    });
+}
 }

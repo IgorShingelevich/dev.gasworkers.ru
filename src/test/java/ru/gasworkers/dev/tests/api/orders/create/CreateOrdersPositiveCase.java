@@ -7,7 +7,7 @@ import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 @AllArgsConstructor
 enum CreateOrdersPositiveCase {
-    CREATE_ORDERS_MAINTENANCE("maintenance"),
+    CREATE_ORDERS_MAINTENANCE("maintenance(  todo  add optional objectId cases)"),
     CREATE_ORDERS_CONSULTATION("consultation"),
     CREATE_ORDERS_URGENT("urgent"),
     CREATE_ORDERS_REPAIR("repair");
@@ -48,7 +48,7 @@ enum CreateOrdersPositiveCase {
                         .message("Заказ создан")
                         .data(CreateOrdersResponseDto.DataDto.builder()
                                 .orderId(orderId)
-                                .insuranceCase(false)
+                                .isInsuranceCase(false)
                                 .build()
                         )
                         .build();

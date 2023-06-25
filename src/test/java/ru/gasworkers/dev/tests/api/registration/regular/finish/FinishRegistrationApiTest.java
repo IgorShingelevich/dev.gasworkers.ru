@@ -67,10 +67,10 @@ public class FinishRegistrationApiTest extends BaseApiTest {
 
         step("Finish registration", () -> {
 
-            FinishRegistrationResponseDto expectedResponse = testCase.getExpectedResponse();
             FinishRegistrationResponseDto actualResponse = registrationApi.finishRegistration(testCase.getFinishDto())
                     .statusCode(422)
                     .extract().as(FinishRegistrationResponseDto.class);
+            FinishRegistrationResponseDto expectedResponse = testCase.getExpectedResponse();
             assertResponse(expectedResponse, actualResponse);
 
         });

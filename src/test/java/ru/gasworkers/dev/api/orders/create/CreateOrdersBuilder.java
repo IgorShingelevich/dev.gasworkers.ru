@@ -12,7 +12,7 @@ public class CreateOrdersBuilder {
                 .message("Заказ создан")
                 .data(CreateOrdersResponseDto.DataDto.builder()
                         .orderId(orderId)
-                        .insuranceCase(false)
+                        .isInsuranceCase(false)
                         .build()
                 )
                 .build();

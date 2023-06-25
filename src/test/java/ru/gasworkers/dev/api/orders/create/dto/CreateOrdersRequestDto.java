@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.api.orders.create.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,4 +22,6 @@ public class CreateOrdersRequestDto {
     Тип заказа (urgent/repair/maintenance/consultation) Example: maintenance
 }*/
     private String type;
+    @JsonProperty("object_id")
+    private String objectId;
 }
