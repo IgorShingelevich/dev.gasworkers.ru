@@ -24,7 +24,9 @@ public final class AllureTag {
             API = "api",
             API_COLLECTION = "api-collection";
 
-    public static final String HOUSE_OBJECT = "house-object";
+    public static final String
+            ORDERS = "orders",
+            HOUSE_OBJECT = "house-object";
 
 
 }
