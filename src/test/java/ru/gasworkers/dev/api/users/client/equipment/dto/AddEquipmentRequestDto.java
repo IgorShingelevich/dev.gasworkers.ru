@@ -36,4 +36,19 @@ public class AddEquipmentRequestDto {
     private Double power;
     private String[] photos;
     private String[] videos;
+
+    // Add an exemplar of the class to the test case
+    public static AddEquipmentRequestDto defaultBoilerEquipment() {
+        return AddEquipmentRequestDto.builder()
+                .power(Double.valueOf(35))
+                .photos(new String[]{})
+                .videos(new String[]{})
+                .modelId(2199)
+                .customModel(null)
+                .customBrand(null)
+                .allWorks(true)
+                .typeId(1)
+                .brandId(25)
+                .build();
+    }
 }

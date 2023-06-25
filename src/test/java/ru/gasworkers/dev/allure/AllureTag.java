@@ -28,5 +28,9 @@ public final class AllureTag {
             ORDERS = "orders",
             HOUSE_OBJECT = "house-object";
 
+    // order types
+    public static final String
+            CONSULTATION = "consultation",
+            CONSULTATION_NOW = "consultation-now";
 
 }

@@ -7,5 +7,6 @@ public final class AllureFeature {
 
     public static final String
             CLIENT_OBJECT = "Объект клиента",
-            ORDERS = "Заказы";
+            ORDERS = "Заказы",
+            CONSULTATION_NOW = "Консультация сейчас";
 }

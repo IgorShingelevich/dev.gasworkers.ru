@@ -7,6 +7,6 @@ public final class AllureEpic {
             AUTHORIZATION = "Авторизация",
             OBJECT = "Объект",
             API_COLLECTION = "Коллекция API",
-            CLIENT = "Клиент";
-
+            CLIENT = "Клиент",
+            CONSULTATION = "Консультация";
 }

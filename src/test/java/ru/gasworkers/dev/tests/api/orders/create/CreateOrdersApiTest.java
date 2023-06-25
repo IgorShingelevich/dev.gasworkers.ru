@@ -36,7 +36,7 @@ public class CreateOrdersApiTest extends BaseApiTest {
     @DisplayName("Success case: ")
     void positiveTestCase(CreateOrdersPositiveCase testCase, @WithUser User client) {
         step("Create order", () -> {
-            CreateOrdersResponseDto createResponse = createOrdersApi.create(testCase.getCreateRequestDto())
+            CreateOrdersResponseDto createResponse = createOrdersApi.createOrders(testCase.getCreateRequestDto())
                     .statusCode(200)
                     .extract().as(CreateOrdersResponseDto.class);
             Integer orderId = createResponse.getData().getOrderId();
@@ -73,7 +73,7 @@ public class CreateOrdersApiTest extends BaseApiTest {
 @DisplayName("Negative case: ")
 void negativeTestCaseV2(CreateOrdersNegativeCase testCase, @WithUser User client) {
     step("Create order", () -> {
-        CreateOrdersResponseDto actualResponse = createOrdersApi.create(testCase.getCreateOrdersRequestDto())
+        CreateOrdersResponseDto actualResponse = createOrdersApi.createOrders(testCase.getCreateOrdersRequestDto())
                 .statusCode(422)
                 .extract().as(CreateOrdersResponseDto.class);
 
