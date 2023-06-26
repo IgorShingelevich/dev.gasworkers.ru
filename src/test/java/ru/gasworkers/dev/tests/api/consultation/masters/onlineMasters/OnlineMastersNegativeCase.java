@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.api.consultation.masters;
+package ru.gasworkers.dev.tests.api.consultation.masters.onlineMasters;
 
 import lombok.AllArgsConstructor;
 

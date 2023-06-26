@@ -1,7 +1,7 @@
-package ru.gasworkers.dev.tests.api.consultation.masters;
+package ru.gasworkers.dev.tests.api.consultation.masters.onlineMasters;
 
 import lombok.AllArgsConstructor;
-import ru.gasworkers.dev.api.consultation.masters.dto.OnlineMastersRequestDto;
+import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMastersRequestDto;
 import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersRequestDto;
 import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentRequestDto;
 import ru.gasworkers.dev.exception.EnumNotSupportedException;
@@ -29,15 +29,13 @@ import ru.gasworkers.dev.exception.EnumNotSupportedException;
  }
 
  public OnlineMastersRequestDto getOnlineMastersDto(Integer orderId) {
-  switch (this) {
-   case ONLINE_MASTER_WITH_BOILER:
-    return OnlineMastersRequestDto.builder()
-            .orderId(orderId)
-            .search("rating")
-            .build();
-   default:
-    throw new EnumNotSupportedException(this);
+  if (this == OnlineMastersPositiveCase.ONLINE_MASTER_WITH_BOILER) {
+   return OnlineMastersRequestDto.builder()
+           .orderId(orderId)
+           .search("rating")
+           .build();
   }
+  throw new EnumNotSupportedException(this);
 
  }
 }

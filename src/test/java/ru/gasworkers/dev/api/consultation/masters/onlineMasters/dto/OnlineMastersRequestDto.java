@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.consultation.masters.dto;
+package ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

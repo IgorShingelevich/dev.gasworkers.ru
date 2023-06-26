@@ -1,0 +1,194 @@
+{
+  "data": [
+    {
+      "id": 340,
+      "full_name": "Громыко Илья Петрович",
+      "avatar": "https://gasworkers.storage.yandexcloud.net/photos/yDD5gY0UQ82RDJRqDTUZ2DPSTIDHD4FITgHswq3o.jpg",
+      "rating": "5.00",
+      "count_reviews": 35,
+      "consultation_price": 1,
+      "company": {
+        "id": 9,
+        "title": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГАЗТЕХ\"",
+        "short_title": "ООО \"ГАЗТЕХ\"",
+        "rating": "4.94",
+        "logo": "https://gasworkers.storage.yandexcloud.net/companies/logo/ny0fBuPVRKSiCv6Akbx3BtrHN9DuaGiljpWq1scX.png"
+      },
+      "brands": [
+      ]
+    },
+    {
+      "id": 1821,
+      "full_name": "Переводов Максим Петрович",
+      "avatar": "https://gasworkers.storage.yandexcloud.net/photos/gbtY9CDCBcjL6lb2W5F8Cl1S9LeuTEI0lDP9elyj.jpg",
+      "rating": "5.00",
+      "count_reviews": 5,
+      "consultation_price": 1,
+      "company": {
+        "id": 25,
+        "title": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"НОРМА\"",
+        "short_title": "ООО \"НОРМА\"",
+        "rating": "4.94",
+        "logo": "https://gasworkers.storage.yandexcloud.net/companies/logo/NhwTmLuIJGkQywhH2whj3UCEyJZdnLuh7fetDfzd.jpg"
+      },
+      "brands": [
+        {
+          "id": 10,
+          "title": "Bosch",
+          "logo": "https://gasworkers.storage.yandexcloud.net/YctLZcehfTAtU4yjkyw98UMNTVTPlPwmufh1UuPZ.png"
+        },
+        {
+          "id": 11,
+          "title": "Chaffoteaux",
+          "logo": "https://gasworkers.storage.yandexcloud.net/uNmBCfoIkcQTcpEz5WVbaaDrCOgdX3bsJ4G3eYEj.png"
+        },
+        {
+          "id": 25,
+          "title": "Viessmann",
+          "logo": "https://gasworkers.storage.yandexcloud.net/fvWzPAxGfBi65hRzga9lHqe5OikTem1eouB2LP5b.png"
+        },
+        {
+          "id": 28,
+          "title": "Baxi",
+          "logo": "https://gasworkers.storage.yandexcloud.net/PYRFYWejjBSNKT2xHFJMajwLUc3LLoUMuKkzXWOS.png"
+        },
+        {
+          "id": 32,
+          "title": "Protherm",
+          "logo": "https://gasworkers.storage.yandexcloud.net/6eV90aHPlA04crHBaIigUN0Me1g9kdWbSho4WQ0M.png"
+        },
+        {
+          "id": 36,
+          "title": "Ariston",
+          "logo": "https://gasworkers.storage.yandexcloud.net/QiaE440MlItA0fwCtdAyeQArCh5VKzvnkXaWIICE.png"
+        },
+        {
+          "id": 38,
+          "title": "BaltGaz",
+          "logo": "https://gasworkers.storage.yandexcloud.net/c8uGrXTWOUYTfsbOPtZxWrQPopTLJwGXkqeDNI6G.png"
+        },
+        {
+          "id": 40,
+          "title": "Buderus",
+          "logo": "https://gasworkers.storage.yandexcloud.net/MyS3butW1CWOe9V2ba1PJLf8C9qOvj0iWGVeKtIe.png"
+        },
+        {
+          "id": 46,
+          "title": "Immergas",
+          "logo": "https://gasworkers.storage.yandexcloud.net/GnzXJuCo8oWLzs5X507uPKcmTIjG43874bSq7BnH.png"
+        },
+        {
+          "id": 52,
+          "title": "Rinnai",
+          "logo": "https://gasworkers.storage.yandexcloud.net/pSzngud3W09LSE52lwZabl4IiGMBjUXkEyFaKFDw.png"
+        },
+        {
+          "id": 54,
+          "title": "Westen",
+          "logo": "https://gasworkers.storage.yandexcloud.net/4LViik1Mfgrpj11GziSfOTddybB2qrRwLaNezNVk.png"
+        },
+        {
+          "id": 57,
+          "title": "Electrolux",
+          "logo": "https://gasworkers.storage.yandexcloud.net/RGVOSolS4Tev5aGnDkj3uTw6p00X73lX1JnQsbmx.png"
+        },
+        {
+          "id": 63,
+          "title": "AEG",
+          "logo": "https://gasworkers.storage.yandexcloud.net/WeHGdgAQ9gPAq2g02BHuk29bRbEZb2eHbOWExPTp.png"
+        },
+        {
+          "id": 182,
+          "title": "Aksinja",
+          "logo": "https://gasworkers.storage.yandexcloud.net/7CWStisRU7HVERbw6m3sWwyyPJjWAypWyjQv9gai.png"
+        },
+        {
+          "id": 184,
+          "title": "American Water Heaters",
+          "logo": "https://gasworkers.storage.yandexcloud.net/gKcbUXbz0EELN0GCyjUDktKkAW8DqpIde0wf8emI.png"
+        }
+      ]
+    },
+    {
+      "id": 2275,
+      "full_name": "Ким Чим Пым",
+      "avatar": null,
+      "rating": "5.00",
+      "count_reviews": 1,
+      "consultation_price": 10,
+      "company": null,
+      "brands": [
+      ]
+    },
+    {
+      "id": 1600,
+      "full_name": "Иванов Иван Михайлович",
+      "avatar": null,
+      "rating": "5.00",
+      "count_reviews": 0,
+      "consultation_price": 1,
+      "company": {
+        "id": 9,
+        "title": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"ГАЗТЕХ\"",
+        "short_title": "ООО \"ГАЗТЕХ\"",
+        "rating": "4.94",
+        "logo": "https://gasworkers.storage.yandexcloud.net/companies/logo/ny0fBuPVRKSiCv6Akbx3BtrHN9DuaGiljpWq1scX.png"
+      },
+      "brands": [
+      ]
+    },
+    {
+      "id": 267,
+      "full_name": "Криворучко Иван Петрович",
+      "avatar": "https://gasworkers.storage.yandexcloud.net/files/X1zrt0BY0VgBbm2EKL9LhGzCXIxM1Nrq1dcFdGG9.jpg",
+      "rating": "5.00",
+      "count_reviews": 0,
+      "consultation_price": 15,
+      "company": null,
+      "brands": [
+        {
+          "id": 25,
+          "title": "Viessmann",
+          "logo": "https://gasworkers.storage.yandexcloud.net/fvWzPAxGfBi65hRzga9lHqe5OikTem1eouB2LP5b.png"
+        },
+        {
+          "id": 28,
+          "title": "Baxi",
+          "logo": "https://gasworkers.storage.yandexcloud.net/PYRFYWejjBSNKT2xHFJMajwLUc3LLoUMuKkzXWOS.png"
+        },
+        {
+          "id": 38,
+          "title": "BaltGaz",
+          "logo": "https://gasworkers.storage.yandexcloud.net/c8uGrXTWOUYTfsbOPtZxWrQPopTLJwGXkqeDNI6G.png"
+        }
+      ]
+    },
+    {
+      "id": 336,
+      "full_name": "Петров Петр Петирович",
+      "avatar": null,
+      "rating": "5.00",
+      "count_reviews": 0,
+      "consultation_price": 550,
+      "company": null,
+      "brands": [
+      ]
+    },
+    {
+      "id": 2323,
+      "full_name": "Кондрашов Андрей Александрович",
+      "avatar": "https://gasworkers.storage.yandexcloud.net/files/FRSILPuTV4MbvslQEPajLKtHrPtS9xO0vT2Yn7a0.jpg",
+      "rating": "5.00",
+      "count_reviews": 0,
+      "consultation_price": 15,
+      "company": null,
+      "brands": [
+        {
+          "id": 82,
+          "title": "De'Longhi",
+          "logo": "https://gasworkers.storage.yandexcloud.net/CnJvQptTZhfTp4oyQ9jlKhCBhPFNiBars6pOfN0J.png"
+        }
+      ]
+    }
+  ]
+}
