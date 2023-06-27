@@ -30,13 +30,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static io.qameta.allure.Allure.step;
+import static org.junit.jupiter.api.Assertions.*;
 
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.CONSULTATION)
 @Feature(AllureFeature.CONSULTATION_NOW)
 @Story("Выбор мастера онлайн")
 @Tag(AllureTag.REGRESSION)
-@Tag(AllureTag.CONSULTATION_NOW)
+@Tag(AllureTag.CONSULTATION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.MASTER)
 @Tag(AllureTag.API)
@@ -52,36 +53,36 @@ public class PickMasterApiTest extends BaseApiTest {
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Success case:")
     void positiveTestCase(PickMasterPositiveCase testCase, @WithUser User client) {
-        int addedObjectId = step("Add object", () -> {
-            JsonObject responseObject = JsonParser.parseString(
+        Integer objectId = step("Add object", () -> {
+            JsonObject actualResponseObject = JsonParser.parseString(
                     addObjectApi.addObject(AddHouseObjectBuilder.addDefaultHouseObjectRequest()) //todo add to test case
                             .statusCode(200)
                             .extract().asString()
             ).getAsJsonObject();
-            int objectId = responseObject.getAsJsonObject("data").get("id").getAsInt();
-            return objectId;
+            Integer currentObjectId = actualResponseObject.getAsJsonObject("data").get("id").getAsInt();
+            return currentObjectId;
         });
         step("Add equipment", () -> {
-            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), addedObjectId)
+            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), objectId)
                     .statusCode(200)
                     .extract().as(AddEquipmentResponseDto.class);
         });
-        int orderId = step("Create order", () -> {
-                    JsonObject responseObject = JsonParser.parseString(
+        Integer orderId = step("Create order", () -> {
+                    JsonObject actualResponseObject = JsonParser.parseString(
                             createOrdersApi.createOrders(testCase.getCreateOrdersDto())
                                     .statusCode(200)
                                     .extract().asString()
                     ).getAsJsonObject();
-                    int orderId1 = responseObject.getAsJsonObject("data").get("order_id").getAsInt();
-                    return orderId1;
+                    Integer currentOrderId = actualResponseObject.getAsJsonObject("data").get("order_id").getAsInt();
+                    return currentOrderId;
                 }
         );
-        List<Integer> mastersId = step("Get online masters", () -> {
+        List<Integer> mastersIdList = step("Get online masters", () -> {
             String responseString = onlineMastersApi.getOnlineMasters(testCase.getOnlineMastersDto(orderId))
                     .statusCode(200)
                     .extract().asString();
-            JsonObject responseObject = JsonParser.parseString(responseString).getAsJsonObject();
-            JsonArray dataArray = responseObject.getAsJsonArray("data");
+            JsonObject actualResponseObject = JsonParser.parseString(responseString).getAsJsonObject();
+            JsonArray dataArray = actualResponseObject.getAsJsonArray("data");
             List<Integer> currentMasterIds = new ArrayList<>();
 
             for (JsonElement element : dataArray) {
@@ -92,13 +93,37 @@ public class PickMasterApiTest extends BaseApiTest {
             System.out.println("List of Master IDs: " + currentMasterIds);
             return currentMasterIds;
         });
-        step("Pick master", () -> {
-            pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), mastersId.get(0))
-                    .statusCode(200);
+        Integer timetableId = step("Pick master", () -> {
+            JsonObject actualResponseObject = JsonParser.parseString(
+                    pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), mastersIdList.get(0))
+                            .statusCode(200)
+                            .extract().asString()
+            ).getAsJsonObject();
+            System.out.println("Actual response: " + actualResponseObject);
+
+            Boolean fromMaintenance = actualResponseObject.getAsJsonObject("data").get("from_maintenance").getAsBoolean();
+            System.out.println("From maintenance: " + fromMaintenance);
+
+            Boolean isInsuranceCase = actualResponseObject.getAsJsonObject("data").get("is_insurance_case").getAsBoolean();
+            System.out.println("Is insurance case: " + isInsuranceCase);
+
+            Boolean repairOrderId = actualResponseObject.getAsJsonObject("data").get("repair_order_id").isJsonNull();
+            System.out.println("Repair order id: " + repairOrderId);
+
+            Boolean maintenanceOrderId = actualResponseObject.getAsJsonObject("data").get("maintenance_order_id").isJsonNull();
+            System.out.println("Maintenance order id: " + maintenanceOrderId);
+
+            Integer currentTimetableId = actualResponseObject.getAsJsonObject("data").get("timetable_id").getAsInt();
+            System.out.println("Timetable ID: " + currentTimetableId);
+
+            assertEquals(false, fromMaintenance);
+            assertEquals(false, isInsuranceCase);
+            assertNull(repairOrderId);
+            assertNull(maintenanceOrderId);
+            assertTrue(currentTimetableId != null);
+
+            return currentTimetableId;
         });
 
-
     }
-
-
 }

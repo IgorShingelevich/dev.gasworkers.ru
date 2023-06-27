@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.consultation.masters.pickMaster.dto;
+package ru.gasworkers.dev.api.orders.selectPayment.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -13,13 +13,15 @@ import lombok.experimental.Accessors;
 @AllArgsConstructor
 //@JsonInclude(JsonInclude.Include.NON_NULL) // when is needed
 @Accessors(chain = true)
-public class PickMasterRequestDto {
-
+public class SelectPaymentRequestDto {
     @JsonProperty("order_id")
     private Integer orderId;
+    private String type;
+    @JsonProperty("receipt_id")
+    private Integer receiptId; //optional
 
-    @JsonProperty("timetable_id")
-    private Integer timetableId;
-    private Boolean online;
+    public static SelectPaymentRequestDto emptyRequest() {
+        return SelectPaymentRequestDto.builder()
+                .build();
+    }
 }
-

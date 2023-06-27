@@ -9,19 +9,11 @@ import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 @AllArgsConstructor
 enum PickMasterPositiveCase {
-    ONLINE_MASTER_WITH_BOILER("Online master with boiler");
+    ONLINE_MASTER_WITH_BOILER("Online master with boiler ( assertion error Expected :null Actual   :true )");
     private final String description;
-
 
     public AddEquipmentRequestDto getAddEquipmentDto() {
         return AddEquipmentRequestDto.defaultBoilerEquipment();
-
-
-    }
-
-    @Override
-    public String toString() {
-        return description;
     }
 
     public CreateOrdersRequestDto getCreateOrdersDto() {
@@ -38,7 +30,6 @@ enum PickMasterPositiveCase {
                     .build();
         }
         throw new EnumNotSupportedException(this);
-
     }
 
     public PickMasterRequestDto getPickMasterDto(Integer orderId) {
@@ -49,5 +40,10 @@ enum PickMasterPositiveCase {
                     .build();
         }
         throw new EnumNotSupportedException(this);
+    }
+
+    @Override
+    public String toString() {
+        return description;
     }
 }

@@ -30,7 +30,8 @@ public final class AllureTag {
 
     // order types
     public static final String
-            CONSULTATION = "consultation",
-            CONSULTATION_NOW = "consultation-now";
-
+            CONSULTATION = "consultation";
+    //processes
+    public static final String
+            PAYMENT = "payment";
 }

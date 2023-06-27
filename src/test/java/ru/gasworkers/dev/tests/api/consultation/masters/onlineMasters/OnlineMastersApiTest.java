@@ -35,7 +35,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @Feature(AllureFeature.CONSULTATION_NOW)
 @Story("Выбор мастера онлайн")
 @Tag(AllureTag.REGRESSION)
-@Tag(AllureTag.CONSULTATION_NOW)
+@Tag(AllureTag.CONSULTATION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.MASTER)
 @Tag(AllureTag.API)
@@ -51,7 +51,7 @@ public class OnlineMastersApiTest extends BaseApiTest {
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Success case:")
     void positiveTestCase(OnlineMastersPositiveCase testCase, @WithUser User client) {
-        Integer addedObjectId = step("Add object", () -> {
+        Integer objectId = step("Add object", () -> {
             JsonObject responseObject = JsonParser.parseReader(
                     new JsonReader(new StringReader(
                             addObjectApi.addObject(AddHouseObjectBuilder.addDefaultHouseObjectRequest())
@@ -63,7 +63,7 @@ public class OnlineMastersApiTest extends BaseApiTest {
         });
 
         step("Add equipment", () -> {
-            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), addedObjectId)
+            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), objectId)
                     .statusCode(200)
                     .extract().as(AddEquipmentResponseDto.class);
         });

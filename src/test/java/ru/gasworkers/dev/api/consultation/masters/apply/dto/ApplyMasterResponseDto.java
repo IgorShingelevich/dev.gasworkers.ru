@@ -8,8 +8,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import javax.annotation.Nullable;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -18,15 +16,15 @@ import javax.annotation.Nullable;
 @Accessors(chain = true)
 public class ApplyMasterResponseDto {
     /*{
-        "status": 0,
-            "message": "Desired date selected",
-            "data": {
-        "order_id": 104
+    "status": 0,
+    "message": "Мастер выбран",
+    "data": {
+        "order_id": 6542,
+        "receipt_id": 3999
     }
-    }*/
+}*/
     private Integer status;
     private String message;
-    @Nullable
     private DataDto data;
     private ErrorsDto errors;
 
@@ -47,7 +45,8 @@ public class ApplyMasterResponseDto {
     @JsonInclude(JsonInclude.Include.ALWAYS) // Include null fields during serialization
     public static class DataDto {
         @JsonProperty("order_id")
-        @Nullable
         private Integer orderId;
+        @JsonProperty("receipt_id")
+        private Integer receiptId;
     }
 }

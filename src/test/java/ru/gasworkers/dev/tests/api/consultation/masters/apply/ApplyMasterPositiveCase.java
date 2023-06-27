@@ -54,11 +54,11 @@ enum ApplyMasterPositiveCase {
         throw new EnumNotSupportedException(this);
     }
 
-    public ApplyMasterRequestDto getApplyMasterDto(Integer orderId) {
+    public ApplyMasterRequestDto getApplyMasterDto(Integer orderId, Integer timetableId) {
         if (this == ApplyMasterPositiveCase.ONLINE_MASTER_WITH_BOILER) {
             return ApplyMasterRequestDto.builder()
                     .orderId(orderId)
-                    .timetableId(1)
+                    .timetableId(timetableId)
                     .description("test")
                     .now(true)
                     .build();
