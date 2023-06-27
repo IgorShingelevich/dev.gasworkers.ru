@@ -51,16 +51,15 @@ public class OnlineMastersApiTest extends BaseApiTest {
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Success case:")
     void positiveTestCase(OnlineMastersPositiveCase testCase, @WithUser User client) {
-        int addedObjectId = step("Add object", () -> {
+        Integer addedObjectId = step("Add object", () -> {
             JsonObject responseObject = JsonParser.parseReader(
                     new JsonReader(new StringReader(
-                            addObjectApi.addObject(AddHouseObjectBuilder.addHouseObjectRequest())
+                            addObjectApi.addObject(AddHouseObjectBuilder.addDefaultHouseObjectRequest())
                                     .statusCode(200)
                                     .extract().asString()
                     ))
             ).getAsJsonObject();
-            int objectId = responseObject.getAsJsonObject("data").get("id").getAsInt();
-            return objectId;
+            return responseObject.getAsJsonObject("data").get("id").getAsInt();
         });
 
         step("Add equipment", () -> {
@@ -69,7 +68,7 @@ public class OnlineMastersApiTest extends BaseApiTest {
                     .extract().as(AddEquipmentResponseDto.class);
         });
 
-        int orderId = step("Create order", () -> {
+        Integer orderId = step("Create order", () -> {
             JsonObject responseObject = JsonParser.parseReader(
                     new JsonReader(new StringReader(
                             createOrdersApi.createOrders(testCase.getCreateOrdersDto())
@@ -77,8 +76,7 @@ public class OnlineMastersApiTest extends BaseApiTest {
                                     .extract().asString()
                     ))
             ).getAsJsonObject();
-            int orderId1 = responseObject.getAsJsonObject("data").get("order_id").getAsInt();
-            return orderId1;
+            return responseObject.getAsJsonObject("data").get("order_id").getAsInt();
         });
 
         step("Get online masters list", () -> {

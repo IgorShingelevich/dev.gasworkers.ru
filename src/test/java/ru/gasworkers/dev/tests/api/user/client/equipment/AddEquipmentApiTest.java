@@ -40,7 +40,7 @@ public class AddEquipmentApiTest extends BaseApiTest {
     void positiveTestCase(AddEquipmentPositiveCase testCase, @WithUser User client) {
         int addedObjectId = step("Add object", () -> {
             JsonObject responseObject = JsonParser.parseString(
-                    addObjectApi.addObject(AddHouseObjectBuilder.addHouseObjectRequest())
+                    addObjectApi.addObject(AddHouseObjectBuilder.addDefaultHouseObjectRequest())
                             .statusCode(200)
                             .extract().asString()
             ).getAsJsonObject();
@@ -64,7 +64,7 @@ public class AddEquipmentApiTest extends BaseApiTest {
     void negativeTestCase(AddEquipmentNegativeCase testCase, @WithUser User client) {
         int addedObjectId = step("Add object", () -> {
             JsonObject responseObject = JsonParser.parseString(
-                    addObjectApi.addObject(AddHouseObjectBuilder.addHouseObjectRequest())
+                    addObjectApi.addObject(AddHouseObjectBuilder.addDefaultHouseObjectRequest())
                             .statusCode(200)
                             .extract().asString()
             ).getAsJsonObject();

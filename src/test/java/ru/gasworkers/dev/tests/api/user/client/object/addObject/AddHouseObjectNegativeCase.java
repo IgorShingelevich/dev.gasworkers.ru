@@ -49,7 +49,7 @@ public enum AddHouseObjectNegativeCase {
     }
 
     public AddHouseObjectRequestDTO getAddHouseObjectDto() {
-        AddHouseObjectRequestDTO addHouseObjectDto = AddHouseObjectBuilder.addHouseObjectRequest();
+        AddHouseObjectRequestDTO addHouseObjectDto = AddHouseObjectBuilder.addDefaultHouseObjectRequest();
         switch (this) {
             case ADD_HOUSE_OBJECT_MISSING_ADDRESS_ID:
                 return addHouseObjectDto.setAddressId(null);

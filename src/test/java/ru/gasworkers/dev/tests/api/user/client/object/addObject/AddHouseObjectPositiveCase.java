@@ -3,7 +3,6 @@ package ru.gasworkers.dev.tests.api.user.client.object.addObject;
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.users.client.object.AddHouseObjectBuilder;
 import ru.gasworkers.dev.api.users.client.object.addObject.dto.AddHouseObjectRequestDTO;
-import ru.gasworkers.dev.api.users.client.object.addObject.dto.AddHouseObjectResponseDTO;
 
 @AllArgsConstructor
 enum AddHouseObjectPositiveCase {
@@ -16,7 +15,7 @@ enum AddHouseObjectPositiveCase {
     //todo case - add house object for the same user with the same data
 
     private final String description;
-    private final AddHouseObjectRequestDTO addObjectDto = AddHouseObjectBuilder.addHouseObjectRequest();
+    private final AddHouseObjectRequestDTO addObjectDto = AddHouseObjectBuilder.addDefaultHouseObjectRequest();
 
     public AddHouseObjectRequestDTO getAddObjectDtoDTO() {
         switch (this) {
