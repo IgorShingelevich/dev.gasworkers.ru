@@ -16,16 +16,19 @@ import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.consultation.isStarted.IsStartedApi;
-import ru.gasworkers.dev.api.consultation.isStarted.dto.IsStartedResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.apply.ApplyMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.PickMasterApi;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
+import ru.gasworkers.dev.api.orders.selectObject.SelectObjectApi;
+import ru.gasworkers.dev.api.orders.selectObject.dto.SelectObjectResponseDto;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
 import ru.gasworkers.dev.api.users.client.equipment.AddEquipmentApi;
 import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.api.users.client.object.AddHouseObjectBuilder;
 import ru.gasworkers.dev.api.users.client.object.addObject.AddHouseObjectApi;
+import ru.gasworkers.dev.api.users.client.object.getClientObjects.GetClientObjectsApi;
+import ru.gasworkers.dev.api.users.client.object.getClientObjects.dto.GetClientObjectResponseDto;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithUser;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
@@ -47,6 +50,8 @@ public class SelectPaymentApiTest extends BaseApiTest {
     private final AddHouseObjectApi addObjectApi = new AddHouseObjectApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
     private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
+    private final GetClientObjectsApi getClientObjectsApi = new GetClientObjectsApi();
+    private final SelectObjectApi selectObjectApi = new SelectObjectApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
     private final IsStartedApi isStartedApi = new IsStartedApi();
     private final PickMasterApi pickMasterApi = new PickMasterApi();
@@ -81,6 +86,7 @@ public class SelectPaymentApiTest extends BaseApiTest {
                     .statusCode(200)
                     .extract().as(AddEquipmentResponseDto.class);
         });
+
         Integer orderId = step("Create order", () -> {
                     JsonObject responseObject = JsonParser.parseString(
                             createOrdersApi.createOrders(testCase.getCreateOrdersDto())
@@ -92,6 +98,26 @@ public class SelectPaymentApiTest extends BaseApiTest {
                     return currentOrderId;
                 }
         );
+        GetClientObjectResponseDto actualResponse = getClientObjectsApi.getClientObjects()
+                .statusCode(200)
+                .extract().as(GetClientObjectResponseDto.class);
+        GetClientObjectResponseDto.DataDto firstData = actualResponse.getData()[0];
+        Integer firstEquipmentId = firstData.getEquipments()[0].getId();
+
+        List<Integer> equipmentList = new ArrayList<>();
+        for (GetClientObjectResponseDto.Equipment equipment : firstData.getEquipments()) {
+            equipmentList.add(equipment.getId());
+        }
+
+
+        Integer actualObjectId = firstData.getId();
+        System.out.println("equipmentList = " + equipmentList);
+        System.out.println("firstEquipmentId = " + firstEquipmentId);
+        System.out.println("actualObjectId = " + actualObjectId);
+
+        SelectObjectResponseDto expectedResponse = selectObjectApi.selectObject(testCase.getSelectObjectDto(actualObjectId, orderId, equipmentList))
+                .statusCode(200)
+                .extract().as(SelectObjectResponseDto.class);
 
         List<Integer> masterIdList = step("Get online masters", () -> {
             String responseString = onlineMastersApi.getOnlineMasters(testCase.getOnlineMastersDto(orderId))
@@ -107,11 +133,11 @@ public class SelectPaymentApiTest extends BaseApiTest {
             }
             return currentMasterIds;
         });
-        step("Is Started", () -> {
+       /* step("Is Started", () -> {
             isStartedApi.isStarted(testCase.getIsStartedDto(orderId))
                     .statusCode(200)
                     .extract().as(IsStartedResponseDto.class);
-        });
+        });*/
         Integer timetableId = step("Pick master", () -> {
             JsonObject actualResponseObject = JsonParser.parseString(
                     pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0))

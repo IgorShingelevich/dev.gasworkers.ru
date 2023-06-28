@@ -6,10 +6,11 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
 
-import static io.restassured.filter.log.LogDetail.ALL;
 import static io.restassured.filter.log.LogDetail.BODY;
 
 public abstract class BaseApi {
+//    public String token = RegularRegistrationApi.getLoginToken();
+
 
     protected final RequestSpecification baseRequestSpec = new RequestSpecBuilder()
             .setBaseUri("https://api.dev.gasworkers.ru/api/v1")

@@ -26,7 +26,7 @@ public final class AllureTag {
 
     public static final String
             ORDERS = "orders",
-            HOUSE_OBJECT = "house-object";
+            CLIENT_OBJECT = "house-object";
 
     // order types
     public static final String

@@ -1,0 +1,289 @@
+{
+  "data": [
+    {
+      "id": 1854,
+      "address": {
+        "id": 2121,
+        "full": "Москва, Московская улица",
+        "type": "street",
+        "full_with_zip": "Россия, Москва, Московская улица",
+        "zip": null,
+        "country": "Россия",
+        "country_code": "RU",
+        "region": "Москва",
+        "region_type": "Москва",
+        "region_with_type": null,
+        "area": null,
+        "area_type": null,
+        "area_with_type": null,
+        "city": null,
+        "city_type": null,
+        "city_with_type": null,
+        "settlement": null,
+        "settlement_type": null,
+        "settlement_with_type": null,
+        "street": null,
+        "street_type": null,
+        "street_with_type": null,
+        "house": null,
+        "house_type": null,
+        "house_with_type": null,
+        "block": null,
+        "flat": null,
+        "capital_marker": null,
+        "longitude": 37.416161,
+        "latitude": 55.671229
+      },
+      "title": "my house",
+      "equipments": [
+        {
+          "id": 1865,
+          "all_works": true,
+          "type": {
+            "id": 1,
+            "sort_order": 100,
+            "title": "Газовый котел",
+            "additional_parameter": "Мощность",
+            "note": null,
+            "power_required": true,
+            "included_in_price_list": true,
+            "is_show_hidden": false,
+            "ranges": [
+              {
+                "id": 1,
+                "from_value": 0,
+                "to_value": 20,
+                "domestic_price": null,
+                "foreign_price": null
+              },
+              {
+                "id": 2,
+                "from_value": 21,
+                "to_value": 50,
+                "domestic_price": null,
+                "foreign_price": null
+              },
+              {
+                "id": 3,
+                "from_value": 51,
+                "to_value": 100,
+                "domestic_price": null,
+                "foreign_price": null
+              },
+              {
+                "id": 4,
+                "from_value": 100,
+                "to_value": null,
+                "domestic_price": null,
+                "foreign_price": null
+              }
+            ]
+          },
+          "brand": {
+            "id": 25,
+            "title": "Viessmann",
+            "is_foreign": true,
+            "is_custom": false,
+            "is_show_hidden": false,
+            "logo": "https://gasworkers.storage.yandexcloud.net/fvWzPAxGfBi65hRzga9lHqe5OikTem1eouB2LP5b.png",
+            "created_at": 1640579586,
+            "types": [
+              {
+                "id": 1,
+                "sort_order": 100,
+                "title": "Газовый котел",
+                "additional_parameter": "Мощность",
+                "note": null,
+                "power_required": true,
+                "included_in_price_list": true,
+                "is_show_hidden": false,
+                "ranges": [
+                  {
+                    "id": 1,
+                    "from_value": 0,
+                    "to_value": 20,
+                    "domestic_price": null,
+                    "foreign_price": null
+                  },
+                  {
+                    "id": 2,
+                    "from_value": 21,
+                    "to_value": 50,
+                    "domestic_price": null,
+                    "foreign_price": null
+                  },
+                  {
+                    "id": 3,
+                    "from_value": 51,
+                    "to_value": 100,
+                    "domestic_price": null,
+                    "foreign_price": null
+                  },
+                  {
+                    "id": 4,
+                    "from_value": 100,
+                    "to_value": null,
+                    "domestic_price": null,
+                    "foreign_price": null
+                  }
+                ]
+              }
+            ]
+          },
+          "title": null,
+          "computed_title": "Газовый котел Viessmann Vitodens 100-W WB1C104 35kW",
+          "power": 35,
+          "photos": [
+          ],
+          "last_photo": null,
+          "videos": [
+          ],
+          "model": {
+            "id": 2199,
+            "title": "Vitodens 100-W WB1C104 35kW",
+            "power": "35",
+            "brand": {
+              "id": 25,
+              "title": "Viessmann",
+              "is_foreign": true,
+              "is_custom": false,
+              "is_show_hidden": false,
+              "logo": "https://gasworkers.storage.yandexcloud.net/fvWzPAxGfBi65hRzga9lHqe5OikTem1eouB2LP5b.png",
+              "created_at": 1640579586,
+              "types": [
+                {
+                  "id": 1,
+                  "sort_order": 100,
+                  "title": "Газовый котел",
+                  "additional_parameter": "Мощность",
+                  "note": null,
+                  "power_required": true,
+                  "included_in_price_list": true,
+                  "is_show_hidden": false,
+                  "ranges": [
+                    {
+                      "id": 1,
+                      "from_value": 0,
+                      "to_value": 20,
+                      "domestic_price": null,
+                      "foreign_price": null
+                    },
+                    {
+                      "id": 2,
+                      "from_value": 21,
+                      "to_value": 50,
+                      "domestic_price": null,
+                      "foreign_price": null
+                    },
+                    {
+                      "id": 3,
+                      "from_value": 51,
+                      "to_value": 100,
+                      "domestic_price": null,
+                      "foreign_price": null
+                    },
+                    {
+                      "id": 4,
+                      "from_value": 100,
+                      "to_value": null,
+                      "domestic_price": null,
+                      "foreign_price": null
+                    }
+                  ]
+                }
+              ]
+            },
+            "type": {
+              "id": 1,
+              "sort_order": 100,
+              "title": "Газовый котел",
+              "additional_parameter": "Мощность",
+              "note": null,
+              "power_required": true,
+              "included_in_price_list": true,
+              "is_show_hidden": false,
+              "ranges": [
+                {
+                  "id": 1,
+                  "from_value": 0,
+                  "to_value": 20,
+                  "domestic_price": null,
+                  "foreign_price": null
+                },
+                {
+                  "id": 2,
+                  "from_value": 21,
+                  "to_value": 50,
+                  "domestic_price": null,
+                  "foreign_price": null
+                },
+                {
+                  "id": 3,
+                  "from_value": 51,
+                  "to_value": 100,
+                  "domestic_price": null,
+                  "foreign_price": null
+                },
+                {
+                  "id": 4,
+                  "from_value": 100,
+                  "to_value": null,
+                  "domestic_price": null,
+                  "foreign_price": null
+                }
+              ]
+            },
+            "is_custom": false
+          },
+          "video_exists": false
+        }
+      ],
+      "photos": [
+      ],
+      "last_photo": null,
+      "distribution_company": {
+        "id": 1,
+        "title": "МособлГаз"
+      },
+      "distribution_company_branch": {
+        "id": null,
+        "title": null,
+        "account_number": null
+      }
+    }
+  ],
+  "links": {
+    "first": "https://api.dev.gasworkers.ru/api/v1/users/client-objects?page=1",
+    "last": "https://api.dev.gasworkers.ru/api/v1/users/client-objects?page=1",
+    "prev": null,
+    "next": null
+  },
+  "meta": {
+    "current_page": 1,
+    "from": 1,
+    "last_page": 1,
+    "links": [
+      {
+        "url": null,
+        "label": "&laquo; Previous",
+        "active": false
+      },
+      {
+        "url": "https://api.dev.gasworkers.ru/api/v1/users/client-objects?page=1",
+        "label": "1",
+        "active": true
+      },
+      {
+        "url": null,
+        "label": "Next &raquo;",
+        "active": false
+      }
+    ],
+    "path": "https://api.dev.gasworkers.ru/api/v1/users/client-objects",
+    "per_page": 10,
+    "to": 1,
+    "total": 1
+  },
+  "status": 0,
+  "message": "Список объектов"
+}

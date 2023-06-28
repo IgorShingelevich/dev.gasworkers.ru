@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.api.user.client.equipment;
+package ru.gasworkers.dev.tests.api.user.client.object.equipment;
 
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.users.client.equipment.AddEquipmentBuilder;

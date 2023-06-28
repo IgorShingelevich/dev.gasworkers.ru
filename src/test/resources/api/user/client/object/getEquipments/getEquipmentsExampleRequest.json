@@ -1,0 +1,109 @@
+{
+  "status": 0,
+  "message": "Client equipment resource",
+  "data": {
+    "id": 20,
+    "all_works": true,
+    "type": {
+      "id": 1,
+      "sort_order": 999999,
+      "title": "Котел",
+      "additional_parameter": null,
+      "note": null,
+      "power_required": true,
+      "included_in_price_list": true,
+      "ranges": []
+    },
+    "brand": {
+      "id": 1,
+      "title": "Gefest",
+      "is_foreign": true,
+      "is_custom": false,
+      "logo": "http://gastech.test/storage/x99yLypaU5FKMoBYKeYwLlZL6pftkglX4uifnr3U.png",
+      "created_at": 1650859400,
+      "types": [
+        {
+          "id": 1,
+          "sort_order": 999999,
+          "title": "Котел",
+          "additional_parameter": null,
+          "note": null,
+          "power_required": true,
+          "included_in_price_list": true,
+          "ranges": []
+        },
+        {
+          "id": 2,
+          "sort_order": 999999,
+          "title": "Колонка",
+          "additional_parameter": null,
+          "note": null,
+          "power_required": false,
+          "included_in_price_list": true,
+          "ranges": []
+        }
+      ]
+    },
+    "title": null,
+    "computed_title": "Котел Gefest ыпвывап",
+    "power": 123,
+    "photos": [],
+    "last_photo": null,
+    "videos": [
+      {
+        "id": 1,
+        "original_name": "IMG_3850.MP4",
+        "title": null,
+        "path": "http://gastech.test/storage/videos/gjYUGijQVW4HEdkrADTE2HCNotxA47aFGdY4h5er.mp4",
+        "extension": "mp4",
+        "preview": "https://gasworkers.ru/video-preview.svg"
+      }
+    ],
+    "model": {
+      "id": 20,
+      "title": "ыпвывап",
+      "power": null,
+      "brand": {
+        "id": 1,
+        "title": "Gefest",
+        "is_foreign": true,
+        "is_custom": false,
+        "logo": "http://gastech.test/storage/x99yLypaU5FKMoBYKeYwLlZL6pftkglX4uifnr3U.png",
+        "created_at": 1650859400,
+        "types": [
+          {
+            "id": 1,
+            "sort_order": 999999,
+            "title": "Котел",
+            "additional_parameter": null,
+            "note": null,
+            "power_required": true,
+            "included_in_price_list": true,
+            "ranges": []
+          },
+          {
+            "id": 2,
+            "sort_order": 999999,
+            "title": "Колонка",
+            "additional_parameter": null,
+            "note": null,
+            "power_required": false,
+            "included_in_price_list": true,
+            "ranges": []
+          }
+        ]
+      },
+      "type": {
+        "id": 1,
+        "sort_order": 999999,
+        "title": "Котел",
+        "additional_parameter": null,
+        "note": null,
+        "power_required": true,
+        "included_in_price_list": true,
+        "ranges": []
+      }
+    },
+    "video_exists": true
+  }
+}

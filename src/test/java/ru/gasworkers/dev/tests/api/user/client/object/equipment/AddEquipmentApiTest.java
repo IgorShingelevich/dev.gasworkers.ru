@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.api.user.client.equipment;
+package ru.gasworkers.dev.tests.api.user.client.object.equipment;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -28,7 +28,7 @@ import static io.qameta.allure.Allure.step;
 @Feature(AllureFeature.CLIENT_OBJECT)
 @Story("Добавление оборудования")
 @Tag(AllureTag.REGRESSION)
-@Tag(AllureTag.HOUSE_OBJECT)
+@Tag(AllureTag.CLIENT_OBJECT)
 @Tag(AllureTag.API)
 public class AddEquipmentApiTest extends BaseApiTest {
     private final AddHouseObjectApi addObjectApi = new AddHouseObjectApi();
