@@ -1,23 +1,22 @@
-package ru.gasworkers.dev.api.users.client.object.addObject;
+package ru.gasworkers.dev.api.consultation.isStarted;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
+import ru.gasworkers.dev.api.BaseApi;
+import ru.gasworkers.dev.api.consultation.isStarted.dto.IsStartedRequestDto;
 import ru.gasworkers.dev.api.registration.regular.RegularRegistrationApi;
-import ru.gasworkers.dev.api.users.BaseUserApi;
-import ru.gasworkers.dev.api.users.client.object.addObject.dto.AddHouseObjectRequestDTO;
 
 import static io.restassured.RestAssured.given;
 
-public class AddHouseObjectApi extends BaseUserApi {
-    //https://api.dev.gasworkers.ru/docs#obieekty-POSTapi-v1-users-client-objects
-    @Step("API: Add object")
-    public ValidatableResponse addObject(AddHouseObjectRequestDTO inputDto) {
+public class IsStartedApi extends BaseApi {
+    @Step("API: Is started")
+    public ValidatableResponse isStarted(IsStartedRequestDto inputDto) {
         String token = RegularRegistrationApi.getLoginToken();
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)
                 .body(inputDto)
                 .when()
-                .post("/users/client-objects")
+                .post("/consultation/is-started")
                 .then().spec(baseResponseSpec);
     }
 }

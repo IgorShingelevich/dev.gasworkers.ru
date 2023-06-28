@@ -9,6 +9,7 @@ import ru.gasworkers.dev.api.registration.regular.RegularRegistrationApi;
 import static io.restassured.RestAssured.given;
 
 public class PickMasterApi extends BaseApi {
+    //https://api.dev.gasworkers.ru/docs#konsultacii-POSTapi-v1-consultation-masters--master-
     @Step("API: Pick master")
     public ValidatableResponse pickMaster(PickMasterRequestDto inputDto, Integer masterId) {
         String token = RegularRegistrationApi.getLoginToken();

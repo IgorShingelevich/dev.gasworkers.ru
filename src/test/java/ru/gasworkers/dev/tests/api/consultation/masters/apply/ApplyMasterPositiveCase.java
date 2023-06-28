@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.tests.api.consultation.masters.apply;
 
 import lombok.AllArgsConstructor;
+import ru.gasworkers.dev.api.consultation.isStarted.dto.IsStartedRequestDto;
 import ru.gasworkers.dev.api.consultation.masters.apply.dto.ApplyMasterRequestDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMastersRequestDto;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterRequestDto;
@@ -23,11 +24,6 @@ enum ApplyMasterPositiveCase {
         return AddEquipmentRequestDto.defaultBoilerEquipment();
     }
 
-    @Override
-    public String toString() {
-        return description;
-    }
-
     public CreateOrdersRequestDto getCreateOrdersDto() {
         return CreateOrdersRequestDto.builder()
                 .type("consultation")
@@ -35,23 +31,24 @@ enum ApplyMasterPositiveCase {
     }
 
     public OnlineMastersRequestDto getOnlineMastersDto(Integer orderId) {
-        if (this == ApplyMasterPositiveCase.ONLINE_MASTER_WITH_BOILER) {
             return OnlineMastersRequestDto.builder()
                     .orderId(orderId)
                     .search("rating")
                     .build();
-        }
-        throw new EnumNotSupportedException(this);
     }
 
     public PickMasterRequestDto getPickMasterDto(Integer orderId) {
-        if (this == ApplyMasterPositiveCase.ONLINE_MASTER_WITH_BOILER) {
-            return PickMasterRequestDto.builder()
-                    .orderId(orderId)
-                    .online(true)
-                    .build();
-        }
-        throw new EnumNotSupportedException(this);
+        return PickMasterRequestDto.builder()
+                .orderId(orderId)
+                .online(true)
+                .build();
+    }
+
+    public IsStartedRequestDto getIsStartedDto(Integer orderId) {
+        return IsStartedRequestDto.builder()
+                .orderId(orderId)
+                .mainFilter("rating")
+                .build();
     }
 
     public ApplyMasterRequestDto getApplyMasterDto(Integer orderId, Integer timetableId) {
@@ -64,5 +61,10 @@ enum ApplyMasterPositiveCase {
                     .build();
         }
         throw new EnumNotSupportedException(this);
+    }
+
+    @Override
+    public String toString() {
+        return description;
     }
 }

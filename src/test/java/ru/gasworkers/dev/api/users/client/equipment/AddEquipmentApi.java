@@ -9,6 +9,7 @@ import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentRequestDto;
 import static io.restassured.RestAssured.given;
 
 public class AddEquipmentApi extends BaseUserApi {
+    //https://api.dev.gasworkers.ru/docs#obieekty-POSTapi-v1-client-objects--object--equipments
     @Step("API: Add equipment")
     public ValidatableResponse addEquipment(AddEquipmentRequestDto inputDto, Integer houseId) {
         String token = RegularRegistrationApi.getLoginToken();

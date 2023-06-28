@@ -9,6 +9,7 @@ import ru.gasworkers.dev.api.registration.regular.RegularRegistrationApi;
 import static io.restassured.RestAssured.given;
 
 public class SelectPaymentApi extends BaseApi {
+    //https://api.dev.gasworkers.ru/docs#zakazy-POSTapi-v1-orders-select-payment
     @Step("API: Select payment")
     public ValidatableResponse selectPayment(SelectPaymentRequestDto inputDto) {
         String token = RegularRegistrationApi.getLoginToken();

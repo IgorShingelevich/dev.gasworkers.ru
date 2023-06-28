@@ -9,6 +9,8 @@ import ru.gasworkers.dev.api.registration.regular.RegularRegistrationApi;
 import static io.restassured.RestAssured.given;
 
 public class OnlineMastersApi extends BaseApi {
+
+    //https://api.dev.gasworkers.ru/docs#konsultacii-GETapi-v1-consultation-masters-online
     @Step("API: Get online masters")
     public ValidatableResponse getOnlineMasters(OnlineMastersRequestDto inputDto) {
         String token = RegularRegistrationApi.getLoginToken();

@@ -14,6 +14,8 @@ import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
+import ru.gasworkers.dev.api.consultation.isStarted.IsStartedApi;
+import ru.gasworkers.dev.api.consultation.isStarted.dto.IsStartedResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.apply.ApplyMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.apply.dto.ApplyMasterResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
@@ -49,6 +51,7 @@ public class ApplyMasterApiTest extends BaseApiTest {
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
     private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
+    private final IsStartedApi isStartedApi = new IsStartedApi();
     private final PickMasterApi pickMasterApi = new PickMasterApi();
     private final ApplyMasterApi applyMasterApi = new ApplyMasterApi();
 
@@ -94,6 +97,11 @@ public class ApplyMasterApiTest extends BaseApiTest {
                 currentMasterIdList.add(element.getId());
             }
             return currentMasterIdList;
+        });
+        step("Is Started", () -> {
+            isStartedApi.isStarted(testCase.getIsStartedDto(orderId))
+                    .statusCode(200)
+                    .extract().as(IsStartedResponseDto.class);
         });
         Integer timetableId = step("Pick master", () -> {
             JsonObject actualResponseObject = JsonParser.parseString(

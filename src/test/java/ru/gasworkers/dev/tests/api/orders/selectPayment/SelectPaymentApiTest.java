@@ -15,6 +15,8 @@ import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
+import ru.gasworkers.dev.api.consultation.isStarted.IsStartedApi;
+import ru.gasworkers.dev.api.consultation.isStarted.dto.IsStartedResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.apply.ApplyMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.PickMasterApi;
@@ -46,9 +48,19 @@ public class SelectPaymentApiTest extends BaseApiTest {
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
     private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
+    private final IsStartedApi isStartedApi = new IsStartedApi();
     private final PickMasterApi pickMasterApi = new PickMasterApi();
     private final ApplyMasterApi applyMasterApi = new ApplyMasterApi();
     private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
+    /*
+    https://api.dev.gasworkers.ru/docs#obieekty-POSTapi-v1-users-client-objects
+    https://api.dev.gasworkers.ru/docs#obieekty-POSTapi-v1-client-objects--object--equipments
+    https://api.dev.gasworkers.ru/docs#zakazy-POSTapi-v1-orders-create
+    https://api.dev.gasworkers.ru/docs#konsultacii-GETapi-v1-consultation-masters-online
+    https://api.dev.gasworkers.ru/docs#konsultacii-POSTapi-v1-consultation-masters--master-
+    https://api.dev.gasworkers.ru/docs#konsultacii-POSTapi-v1-consultation-masters--master--apply
+    https://api.dev.gasworkers.ru/docs#zakazy-POSTapi-v1-orders-select-payment
+    */
 
     @ParameterizedTest(name = "{0}")
     @EnumSource(SelectPaymentPositiveCase.class)
@@ -80,6 +92,7 @@ public class SelectPaymentApiTest extends BaseApiTest {
                     return currentOrderId;
                 }
         );
+
         List<Integer> masterIdList = step("Get online masters", () -> {
             String responseString = onlineMastersApi.getOnlineMasters(testCase.getOnlineMastersDto(orderId))
                     .statusCode(200)
@@ -93,6 +106,11 @@ public class SelectPaymentApiTest extends BaseApiTest {
                 currentMasterIds.add(masterId);
             }
             return currentMasterIds;
+        });
+        step("Is Started", () -> {
+            isStartedApi.isStarted(testCase.getIsStartedDto(orderId))
+                    .statusCode(200)
+                    .extract().as(IsStartedResponseDto.class);
         });
         Integer timetableId = step("Pick master", () -> {
             JsonObject actualResponseObject = JsonParser.parseString(

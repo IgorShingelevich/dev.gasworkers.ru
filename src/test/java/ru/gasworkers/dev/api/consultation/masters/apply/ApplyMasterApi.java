@@ -9,6 +9,7 @@ import ru.gasworkers.dev.api.registration.regular.RegularRegistrationApi;
 import static io.restassured.RestAssured.given;
 
 public class ApplyMasterApi extends BaseApi {
+    //https://api.dev.gasworkers.ru/docs#konsultacii-POSTapi-v1-consultation-masters--master--apply
     @Step("API: Apply master")
     public ValidatableResponse applyMaster(ApplyMasterRequestDto inputDto, Integer masterId) {
         String token = RegularRegistrationApi.getLoginToken();
