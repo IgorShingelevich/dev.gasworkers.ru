@@ -109,6 +109,7 @@ public class ApplyMasterApiTest extends BaseApiTest {
             applyMasterApi.applyMaster(testCase.getApplyMasterDto(orderId, timetableId), masterIdList.get(0))
                     .statusCode(200)
                     .extract().as(ApplyMasterResponseDto.class);
+            //todo add assertions
         });
     }
 

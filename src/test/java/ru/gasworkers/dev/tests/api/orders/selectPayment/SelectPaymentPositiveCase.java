@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.tests.api.orders.selectPayment;
 
 import lombok.AllArgsConstructor;
+import ru.gasworkers.dev.api.consultation.masters.apply.dto.ApplyMasterRequestDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMastersRequestDto;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterRequestDto;
 import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersRequestDto;
@@ -39,16 +40,32 @@ enum SelectPaymentPositiveCase {
                 .build();
     }
 
-    public SelectPaymentRequestDto getSelectPaymentDto(Integer orderId) {
+    public ApplyMasterRequestDto getApplyMasterDto(Integer orderId, Integer timetableId) {
+        switch (this) {
+            case PAY_CARD:
+            case PAY_FPS:
+                return ApplyMasterRequestDto.builder()
+                        .orderId(orderId)
+                        .timetableId(timetableId)
+                        .description("test description")
+                        .now(true)
+                        .build();
+        }
+        throw new EnumNotSupportedException(this);
+    }
+
+    public SelectPaymentRequestDto getSelectPaymentDto(Integer orderId, Integer receiptId) {
         switch (this) {
             case PAY_CARD:
                 return SelectPaymentRequestDto.builder()
                         .orderId(orderId)
+                        .receiptId(receiptId)
                         .type("card")
                         .build();
             case PAY_FPS:
                 return SelectPaymentRequestDto.builder()
                         .orderId(orderId)
+                        .receiptId(receiptId)
                         .type("fps")
                         .build();
         }

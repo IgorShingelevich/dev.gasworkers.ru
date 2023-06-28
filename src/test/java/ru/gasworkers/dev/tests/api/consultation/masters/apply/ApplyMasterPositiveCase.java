@@ -59,7 +59,7 @@ enum ApplyMasterPositiveCase {
             return ApplyMasterRequestDto.builder()
                     .orderId(orderId)
                     .timetableId(timetableId)
-                    .description("test")
+                    .description("test description")
                     .now(true)
                     .build();
         }

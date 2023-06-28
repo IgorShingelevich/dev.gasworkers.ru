@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
+import ru.gasworkers.dev.api.consultation.masters.apply.ApplyMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.PickMasterApi;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
@@ -46,6 +47,7 @@ public class SelectPaymentApiTest extends BaseApiTest {
     private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
     private final PickMasterApi pickMasterApi = new PickMasterApi();
+    private final ApplyMasterApi applyMasterApi = new ApplyMasterApi();
     private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
 
     @ParameterizedTest(name = "{0}")
@@ -74,10 +76,11 @@ public class SelectPaymentApiTest extends BaseApiTest {
                                     .extract().asString()
                     ).getAsJsonObject();
                     Integer currentOrderId = responseObject.getAsJsonObject("data").get("order_id").getAsInt();
+                    System.out.println("CurrentOrderId = " + currentOrderId);
                     return currentOrderId;
                 }
         );
-        List<Integer> mastersId = step("Get online masters", () -> {
+        List<Integer> masterIdList = step("Get online masters", () -> {
             String responseString = onlineMastersApi.getOnlineMasters(testCase.getOnlineMastersDto(orderId))
                     .statusCode(200)
                     .extract().asString();
@@ -93,20 +96,30 @@ public class SelectPaymentApiTest extends BaseApiTest {
         });
         Integer timetableId = step("Pick master", () -> {
             JsonObject actualResponseObject = JsonParser.parseString(
-                    pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), mastersId.get(0))
+                    pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0))
                             .statusCode(200)
                             .extract().asString()
             ).getAsJsonObject();
             Integer currentTimetableId = actualResponseObject.getAsJsonObject("data").get("timetable_id").getAsInt();
             return currentTimetableId;
         });
-        String paymentUrl = step("Select payment", () -> {
+        Integer receiptId = step("Apply master", () -> {
             JsonObject actualResponseObject = JsonParser.parseString(
-                    selectPaymentApi.selectPayment(testCase.getSelectPaymentDto(orderId))
+                    applyMasterApi.applyMaster(testCase.getApplyMasterDto(orderId, timetableId), masterIdList.get(0))
                             .statusCode(200)
                             .extract().asString()
             ).getAsJsonObject();
-            String currentPaymentUrl = actualResponseObject.getAsJsonObject("data").get("payment_url").getAsString();
+            Integer currentReceiptId = actualResponseObject.getAsJsonObject("data").get("receipt_id").getAsInt();
+            System.out.println("Receipt id: " + currentReceiptId);
+            return currentReceiptId;
+        });
+        String payUrl = step("Select payment", () -> {
+            JsonObject actualResponseObject = JsonParser.parseString(
+                    selectPaymentApi.selectPayment(testCase.getSelectPaymentDto(orderId, receiptId))
+                            .statusCode(200)
+                            .extract().asString()
+            ).getAsJsonObject();
+            String currentPaymentUrl = actualResponseObject.getAsJsonObject("data").get("pay_url").getAsString();
             System.out.println("Payment url: " + currentPaymentUrl);
             return currentPaymentUrl;
         });

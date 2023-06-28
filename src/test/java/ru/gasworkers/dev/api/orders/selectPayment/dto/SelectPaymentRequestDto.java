@@ -5,20 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 //@JsonInclude(JsonInclude.Include.NON_NULL) // when is needed
-@Accessors(chain = true)
+//@Accessors(chain = true)
 public class SelectPaymentRequestDto {
     @JsonProperty("order_id")
     private Integer orderId;
     private String type;
     @JsonProperty("receipt_id")
-    private Integer receiptId; //optional
+    private Integer receiptId;
 
     public static SelectPaymentRequestDto emptyRequest() {
         return SelectPaymentRequestDto.builder()
