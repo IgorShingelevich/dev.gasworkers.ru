@@ -60,13 +60,13 @@ public class ApplyMasterApiTest extends BaseApiTest {
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Success case:")
     void positiveTestCase(ApplyMasterPositiveCase testCase, @WithUser User client) {
-        int objectId = step("Add object", () -> {
+        Integer objectId = step("Add object", () -> {
             JsonObject actualResponseObject = JsonParser.parseString(
                     addObjectApi.addObject(AddHouseObjectBuilder.addDefaultHouseObjectRequest()) //todo add to test case
                             .statusCode(200)
                             .extract().asString()
             ).getAsJsonObject();
-            int currentObjectId = actualResponseObject.getAsJsonObject("data").get("id").getAsInt();
+            Integer currentObjectId = actualResponseObject.getAsJsonObject("data").get("id").getAsInt();
             return currentObjectId;
         });
         step("Add equipment", () -> {
@@ -116,6 +116,72 @@ public class ApplyMasterApiTest extends BaseApiTest {
         step("Apply master", () -> {
             applyMasterApi.applyMaster(testCase.getApplyMasterDto(orderId, timetableId), masterIdList.get(0))
                     .statusCode(200)
+                    .extract().as(ApplyMasterResponseDto.class);
+            //todo add assertions
+        });
+    }
+
+    @ParameterizedTest(name = "{0}")
+    @EnumSource(ApplyMasterNegativeCase.class)
+    @Tag(AllureTag.NEGATIVE)
+    @DisplayName("Negative case:")
+    void negativeTestCase(ApplyMasterNegativeCase testCase, @WithUser User client) {
+        Integer objectId = step("Add object", () -> {
+            JsonObject actualResponseObject = JsonParser.parseString(
+                    addObjectApi.addObject(AddHouseObjectBuilder.addDefaultHouseObjectRequest()) //todo add to test case
+                            .statusCode(200)
+                            .extract().asString()
+            ).getAsJsonObject();
+            Integer currentObjectId = actualResponseObject.getAsJsonObject("data").get("id").getAsInt();
+            return currentObjectId;
+        });
+        step("Add equipment", () -> {
+            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), objectId)
+                    .statusCode(200)
+                    .extract().as(AddEquipmentResponseDto.class);
+        });
+        Integer orderId = step("Create order", () -> {
+            JsonObject actualResponseObject = JsonParser.parseReader(
+                    new JsonReader(new StringReader(
+                            createOrdersApi.createOrders(testCase.getCreateOrdersDto())
+                                    .statusCode(200)
+                                    .extract().asString()
+                    ))
+            ).getAsJsonObject();
+            return actualResponseObject.getAsJsonObject("data").get("order_id").getAsInt();
+        });
+        List<Integer> masterIdList = step("Get online masters list", () -> {
+            OnlineMastersResponseDto responseDto = onlineMastersApi.getOnlineMasters(testCase.getOnlineMastersDto(orderId))
+                    .statusCode(200)
+                    .extract()
+                    .as(OnlineMastersResponseDto.class);
+            // Asserting that at least one master is returned
+            assertNotNull(responseDto.getData().get(0).getId());
+            // get List of master id from responseDto
+            List<Integer> currentMasterIdList = new ArrayList<>();
+            for (OnlineMastersResponseDto.MasterDto element : responseDto.getData()) {
+                currentMasterIdList.add(element.getId());
+            }
+            return currentMasterIdList;
+        });
+        step("Is Started", () -> {
+            isStartedApi.isStarted(testCase.getIsStartedDto(orderId))
+                    .statusCode(200)
+                    .extract().as(IsStartedResponseDto.class);
+        });
+        Integer timetableId = step("Pick master", () -> {
+            JsonObject actualResponseObject = JsonParser.parseString(
+                    pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0))
+                            .statusCode(200)
+                            .extract().asString()
+            ).getAsJsonObject();
+            Integer currentTimetableId = actualResponseObject.getAsJsonObject("data").get("timetable_id").getAsInt();
+            System.out.println("Timetable ID: " + currentTimetableId);
+            return currentTimetableId;
+        });
+        step("Apply master", () -> {
+            applyMasterApi.applyMaster(testCase.getApplyMasterDto(orderId, timetableId), masterIdList.get(0))
+                    .statusCode(422)
                     .extract().as(ApplyMasterResponseDto.class);
             //todo add assertions
         });
