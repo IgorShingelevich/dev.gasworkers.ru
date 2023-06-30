@@ -57,15 +57,6 @@ public class SelectPaymentApiTest extends BaseApiTest {
     private final PickMasterApi pickMasterApi = new PickMasterApi();
     private final ApplyMasterApi applyMasterApi = new ApplyMasterApi();
     private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
-    /*
-    https://api.dev.gasworkers.ru/docs#obieekty-POSTapi-v1-users-client-objects
-    https://api.dev.gasworkers.ru/docs#obieekty-POSTapi-v1-client-objects--object--equipments
-    https://api.dev.gasworkers.ru/docs#zakazy-POSTapi-v1-orders-create
-    https://api.dev.gasworkers.ru/docs#konsultacii-GETapi-v1-consultation-masters-online
-    https://api.dev.gasworkers.ru/docs#konsultacii-POSTapi-v1-consultation-masters--master-
-    https://api.dev.gasworkers.ru/docs#konsultacii-POSTapi-v1-consultation-masters--master--apply
-    https://api.dev.gasworkers.ru/docs#zakazy-POSTapi-v1-orders-select-payment
-    */
 
     @ParameterizedTest(name = "{0}")
     @EnumSource(SelectPaymentPositiveCase.class)
@@ -74,13 +65,14 @@ public class SelectPaymentApiTest extends BaseApiTest {
     void positiveTestCase(SelectPaymentPositiveCase testCase, @WithUser User client) {
         Integer objectId = step("Add object", () -> {
             JsonObject responseObject = JsonParser.parseString(
-                    addObjectApi.addObject(AddHouseObjectBuilder.addDefaultHouseObjectRequest()) //todo add to test case
+                    addObjectApi.addObject(AddHouseObjectBuilder.addDefaultHouseObjectRequest())
                             .statusCode(200)
                             .extract().asString()
             ).getAsJsonObject();
             Integer currentObjectId = responseObject.getAsJsonObject("data").get("id").getAsInt();
             return currentObjectId;
         });
+
         step("Add equipment", () -> {
             addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), objectId)
                     .statusCode(200)
@@ -88,19 +80,22 @@ public class SelectPaymentApiTest extends BaseApiTest {
         });
 
         Integer orderId = step("Create order", () -> {
-                    JsonObject responseObject = JsonParser.parseString(
-                            createOrdersApi.createOrders(testCase.getCreateOrdersDto())
-                                    .statusCode(200)
-                                    .extract().asString()
-                    ).getAsJsonObject();
-                    Integer currentOrderId = responseObject.getAsJsonObject("data").get("order_id").getAsInt();
-                    System.out.println("CurrentOrderId = " + currentOrderId);
-                    return currentOrderId;
-                }
-        );
-        GetClientObjectResponseDto actualResponse = getClientObjectsApi.getClientObjects()
-                .statusCode(200)
-                .extract().as(GetClientObjectResponseDto.class);
+            JsonObject responseObject = JsonParser.parseString(
+                    createOrdersApi.createOrders(testCase.getCreateOrdersDto())
+                            .statusCode(200)
+                            .extract().asString()
+            ).getAsJsonObject();
+            Integer currentOrderId = responseObject.getAsJsonObject("data").get("order_id").getAsInt();
+            System.out.println("CurrentOrderId = " + currentOrderId);
+            return currentOrderId;
+        });
+
+        GetClientObjectResponseDto actualResponse = step("Get client objects", () -> {
+            return getClientObjectsApi.getClientObjects()
+                    .statusCode(200)
+                    .extract().as(GetClientObjectResponseDto.class);
+        });
+
         GetClientObjectResponseDto.DataDto firstData = actualResponse.getData()[0];
         Integer firstEquipmentId = firstData.getEquipments()[0].getId();
 
@@ -109,15 +104,16 @@ public class SelectPaymentApiTest extends BaseApiTest {
             equipmentList.add(equipment.getId());
         }
 
-
         Integer actualObjectId = firstData.getId();
         System.out.println("equipmentList = " + equipmentList);
         System.out.println("firstEquipmentId = " + firstEquipmentId);
         System.out.println("actualObjectId = " + actualObjectId);
 
-        SelectObjectResponseDto expectedResponse = selectObjectApi.selectObject(testCase.getSelectObjectDto(actualObjectId, orderId, equipmentList))
-                .statusCode(200)
-                .extract().as(SelectObjectResponseDto.class);
+        SelectObjectResponseDto expectedResponse = step("Select object", () -> {
+            return selectObjectApi.selectObject(testCase.getSelectObjectDto(actualObjectId, orderId, equipmentList))
+                    .statusCode(200)
+                    .extract().as(SelectObjectResponseDto.class);
+        });
 
         List<Integer> masterIdList = step("Get online masters", () -> {
             String responseString = onlineMastersApi.getOnlineMasters(testCase.getOnlineMastersDto(orderId))
@@ -131,13 +127,11 @@ public class SelectPaymentApiTest extends BaseApiTest {
                 int masterId = masterObject.get("id").getAsInt();
                 currentMasterIds.add(masterId);
             }
+            Integer firstMasterId = currentMasterIds.get(0);
+            System.out.println("First master id: " + firstMasterId);
             return currentMasterIds;
         });
-       /* step("Is Started", () -> {
-            isStartedApi.isStarted(testCase.getIsStartedDto(orderId))
-                    .statusCode(200)
-                    .extract().as(IsStartedResponseDto.class);
-        });*/
+
         Integer timetableId = step("Pick master", () -> {
             JsonObject actualResponseObject = JsonParser.parseString(
                     pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0))
@@ -147,6 +141,7 @@ public class SelectPaymentApiTest extends BaseApiTest {
             Integer currentTimetableId = actualResponseObject.getAsJsonObject("data").get("timetable_id").getAsInt();
             return currentTimetableId;
         });
+
         Integer receiptId = step("Apply master", () -> {
             JsonObject actualResponseObject = JsonParser.parseString(
                     applyMasterApi.applyMaster(testCase.getApplyMasterDto(orderId, timetableId), masterIdList.get(0))
@@ -157,6 +152,7 @@ public class SelectPaymentApiTest extends BaseApiTest {
             System.out.println("Receipt id: " + currentReceiptId);
             return currentReceiptId;
         });
+
         String payUrl = step("Select payment", () -> {
             JsonObject actualResponseObject = JsonParser.parseString(
                     selectPaymentApi.selectPayment(testCase.getSelectPaymentDto(orderId, receiptId))
@@ -167,6 +163,5 @@ public class SelectPaymentApiTest extends BaseApiTest {
             System.out.println("Payment url: " + currentPaymentUrl);
             return currentPaymentUrl;
         });
-
     }
 }

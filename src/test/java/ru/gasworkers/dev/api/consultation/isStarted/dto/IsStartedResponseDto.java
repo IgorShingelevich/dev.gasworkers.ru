@@ -22,7 +22,7 @@ public class IsStartedResponseDto {
     public static IsStartedResponseDto successStatusFalseResponse() {
         return IsStartedResponseDto.builder()
                 .status("0")
-                .message("СТатус начала конференции")
+                .message("Статус начала конференции")
                 .data(DataDto.builder()
                         .status(false)
                         .build())
