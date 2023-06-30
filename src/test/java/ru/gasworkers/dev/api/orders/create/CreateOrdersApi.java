@@ -12,7 +12,7 @@ public class CreateOrdersApi extends BaseApi {
     //https://api.dev.gasworkers.ru/docs#zakazy-POSTapi-v1-orders-create
     @Step("API: Create order")
     public ValidatableResponse createOrders(CreateOrdersRequestDto inputDto) {
-        String token = RegularRegistrationApi.getLoginToken();
+        String token = RegularRegistrationApi.getUserToken();
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)
                 .body(inputDto)

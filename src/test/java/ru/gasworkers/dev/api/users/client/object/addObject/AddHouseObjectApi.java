@@ -12,7 +12,7 @@ public class AddHouseObjectApi extends BaseUserApi {
     //https://api.dev.gasworkers.ru/docs#obieekty-POSTapi-v1-users-client-objects
     @Step("API: Add object")
     public ValidatableResponse addObject(AddHouseObjectRequestDTO inputDto) {
-        String token = RegularRegistrationApi.getLoginToken();
+        String token = RegularRegistrationApi.getUserToken();
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)
                 .body(inputDto)

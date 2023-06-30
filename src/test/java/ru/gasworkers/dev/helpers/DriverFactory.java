@@ -2,11 +2,9 @@ package ru.gasworkers.dev.helpers;
 
 import com.codeborne.selenide.SelenideConfig;
 import com.codeborne.selenide.SelenideDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import ru.gasworkers.dev.extension.browser.Browser;
 
 import static com.codeborne.selenide.FileDownloadMode.FOLDER;
-import static io.qameta.allure.Allure.step;
 
 public final class DriverFactory {
 
@@ -18,9 +16,9 @@ public final class DriverFactory {
         config.reportsFolder("target/selenide");
         config.timeout(8000);
 
-         config.headless(true);
+         config.headless(false);
 //         С удаленным запуском нельзя ставить в true!
-//        config.holdBrowserOpen(true);
+        config.holdBrowserOpen(true);
 
 
 

@@ -1,9 +1,15 @@
 package ru.gasworkers.dev.tests.api.registration.throughClientRegistration;
 
-import io.qameta.allure.*;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Story;
 import org.json.JSONArray;
 import org.junit.jupiter.api.*;
-import ru.gasworkers.dev.allure.*;
+import ru.gasworkers.dev.allure.AllureEpic;
+import ru.gasworkers.dev.allure.AllureFeature;
+import ru.gasworkers.dev.allure.AllureStory;
+import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.ApiTestConfig;
 import ru.gasworkers.dev.api.registration.throughClientRegistrationApi.CheckThroughRegistrationCodeApi;
 import ru.gasworkers.dev.api.registration.throughClientRegistrationApi.MaintenanceThroughClientRegistrationApi;
@@ -64,6 +70,6 @@ public class MaintenanceThroughClientRegistrationApiTest extends BaseTest {
         checkThroughRegistrationCodeApi.checkCode(111111, email, phone);
 
         clientPages.getLoginPage().open();
-        clientPages.getLoginPage().loginEmail(email, "1111");
+        clientPages.getLoginPage().login(email, "1111");
     }
 }

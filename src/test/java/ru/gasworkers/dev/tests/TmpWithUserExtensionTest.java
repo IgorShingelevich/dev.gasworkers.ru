@@ -19,7 +19,7 @@ public class TmpWithUserExtensionTest {
               @WithUser User client3,
               @WithUser User client4) {
         clientPages.getLoginPage().open()
-                .loginEmail(client1.getEmail(), client1.getPassword());
+                .login(client1.getEmail(), client1.getPassword());
     }
 
 }

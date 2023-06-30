@@ -12,7 +12,7 @@ public class SelectObjectApi extends BaseApi {
     //    https://api.dev.gasworkers.ru/docs#zakazy-POSTapi-v1-orders-select-object
     @Step("API: Select object")
     public ValidatableResponse selectObject(SelectObjectRequestDto inputDto) {
-        String token = RegularRegistrationApi.getLoginToken();
+        String token = RegularRegistrationApi.getUserToken();
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)
                 .body(inputDto)

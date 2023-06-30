@@ -18,7 +18,10 @@ import static io.restassured.RestAssured.given;
 public class RegularRegistrationApi extends BaseApi {
     @Getter
     @Setter
-    private static String loginToken;
+    private static String userToken;
+    @Getter
+    @Setter
+    private static String userPhone;
 
     //-------------------------------------COMPLEX REGISTRATION---------------------------------------------------------
     @Step("API: Комплексная регулярная регистрация")
@@ -63,11 +66,18 @@ public class RegularRegistrationApi extends BaseApi {
     //----------------------------------------------FINISH---------------------------------------------------------------
     @Step("API: Регулярная регистрация [Завершение]")
     public ValidatableResponse finishRegistration(FinishRegistrationRequestDto inputDto) {
-        return given().spec(baseRequestSpec)
+        Response response = given().spec(baseRequestSpec)
                 .body(inputDto)
                 .when()
                 .post("/auth/complete-registration")
-                .then().spec(baseResponseSpec);
+                .then().spec(baseResponseSpec)
+                .extract().response();
+        // Extract the phone from the response body data.phone
+        String userPhone = inputDto.getPhone();
+        System.out.println("userPhone = " + userPhone);
+        setUserPhone(userPhone);
+        return response.then().spec(baseResponseSpec);
+
     }
 
     //----------------------------------------------LOGIN----------------------------------------------------------------
@@ -84,7 +94,7 @@ public class RegularRegistrationApi extends BaseApi {
         String token = response.jsonPath().getString("data.token");
 
         // Store the token for later use
-        setLoginToken(token);
+        setUserToken(token);
 
         return response.then().spec(baseResponseSpec);
     }

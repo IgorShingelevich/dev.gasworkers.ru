@@ -12,7 +12,7 @@ public class GetEquipmentsApi extends BaseApi {
     //https://api.dev.gasworkers.ru/docs#obieekty-GETapi-v1-client-objects--object--equipments--id-
     @Step("API: Get equipments")
     public ValidatableResponse getEquipments(GetEquipmentsRequestDto inputDto, Integer objectId, Integer equipmentId) {
-        String token = RegularRegistrationApi.getLoginToken();
+        String token = RegularRegistrationApi.getUserToken();
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)
                 .when()

@@ -1,13 +1,10 @@
-package ru.gasworkers.dev.tests.api.orders.selectPayment;
+package ru.gasworkers.dev.tests.web.integration.consultation;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -24,31 +21,43 @@ import ru.gasworkers.dev.api.orders.selectObject.SelectObjectApi;
 import ru.gasworkers.dev.api.orders.selectObject.dto.SelectObjectResponseDto;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
 import ru.gasworkers.dev.api.registration.authorisation.LoginApi;
+import ru.gasworkers.dev.api.registration.authorisation.dto.LoginRequestDTO;
+import ru.gasworkers.dev.api.registration.authorisation.dto.LoginResponseDTO;
+import ru.gasworkers.dev.api.registration.regular.RegularRegistrationApi;
 import ru.gasworkers.dev.api.users.client.equipment.AddEquipmentApi;
 import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.api.users.client.object.AddHouseObjectBuilder;
 import ru.gasworkers.dev.api.users.client.object.addObject.AddHouseObjectApi;
 import ru.gasworkers.dev.api.users.client.object.getClientObjects.GetClientObjectsApi;
 import ru.gasworkers.dev.api.users.client.object.getClientObjects.dto.GetClientObjectResponseDto;
+import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithUser;
+import ru.gasworkers.dev.model.Role;
+import ru.gasworkers.dev.model.browser.PositionBrowser;
+import ru.gasworkers.dev.model.browser.SizeBrowser;
+import ru.gasworkers.dev.pages.context.ClientPages;
+import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import static io.qameta.allure.Allure.step;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.CONSULTATION)
 @Feature(AllureFeature.CONSULTATION_NOW)
-@Story("Выбор мастера онлайн на консультацию сейчас")
+@Story("Интеграция Консультация Клиент Мастер - консультация сейчас")
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.PAYMENT)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.API)
-public class SelectPaymentApiTest extends BaseApiTest {
+public class ConsultationClientMasterScenario extends BaseApiTest {
+
     private final AddHouseObjectApi addObjectApi = new AddHouseObjectApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
     private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
@@ -58,16 +67,17 @@ public class SelectPaymentApiTest extends BaseApiTest {
     private final PickMasterApi pickMasterApi = new PickMasterApi();
     private final ApplyMasterApi applyMasterApi = new ApplyMasterApi();
     private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
-
     private final LoginApi loginApi = new LoginApi();
     private final GetUserWithAdminApi getUserWithAdminApi = new GetUserWithAdminApi();
-
+    @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
+    ClientPages clientPages;
+    @Browser(role = Role.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.THIRD_ROLE)
+    MasterPages masterPages;
 
     @ParameterizedTest(name = "{0}")
-    @EnumSource(SelectPaymentPositiveCase.class)
-    @Tag(AllureTag.POSITIVE)
-    @DisplayName("Success case:")
-    void positiveTestCase(SelectPaymentPositiveCase testCase, @WithUser User client) {
+    @EnumSource(ConsultationMasterClientScenarioCase.class)
+    @DisplayName("Консультация сейчас")
+    void consultationNow(ConsultationMasterClientScenarioCase testCase, @WithUser User client) {
         Integer objectId = step("Add object", () -> {
             JsonObject responseObject = JsonParser.parseString(
                     addObjectApi.addObject(AddHouseObjectBuilder.addDefaultHouseObjectRequest())
@@ -168,15 +178,51 @@ public class SelectPaymentApiTest extends BaseApiTest {
             System.out.println("Payment url: " + currentPaymentUrl);
             return currentPaymentUrl;
         });
+        String masterEmail = step("Get master credentials", () -> {
+            LoginResponseDTO actualAdminResponse = loginApi.login(LoginRequestDTO.asAdmin())
+                    .statusCode(200)
+                    .extract().as(LoginResponseDTO.class);
 
-        //assert that payUrl  starts with "https://dev.gasworkers.ru/orders/consultation/"
-        assertTrue(payUrl.startsWith("https://dev.gasworkers.ru/orders/consultation/" + orderId + "/success-consultation-payment"));
+            LoginResponseDTO.DataDto loginData = actualAdminResponse.getData();
+            String tokenAdmin = loginData.getToken();
+            System.out.println(" tokenAdmin = " + tokenAdmin);
+
+            String actualUserResponse = getUserWithAdminApi.getUserWithAdmin(tokenAdmin, masterIdList.get(0)) //487
+                    .statusCode(200)
+                    .extract().asString();
+            JsonObject responseObject = JsonParser.parseString(actualUserResponse).getAsJsonObject();
+            JsonObject dataObject = responseObject.getAsJsonObject("data");
+            return dataObject.get("email").getAsString();
+        });
+        System.out.println("masterEmail = " + masterEmail);
+
+
+        String clientUserName = RegularRegistrationApi.getUserPhone();
+        step("авторизация Ролей ", () -> {
+            step("авторизация Клиента", () -> {
+                clientPages.getLoginPage()
+                        .open()
+                        .login(clientUserName, "1234");
+//            clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);  // TODO fix fullName order
+            });
+            step("авторизация Мастера", () -> {
+                masterPages.getLoginPage()
+                        .open()
+                        .login(masterEmail, "1234");
+                masterPages.getHomePage()
+                        .checkFinishLoading();
+            });
+            step("Test run credentials ", () -> {
+                Allure.addAttachment("Client creds", clientUserName + ": " + "1234" + "/");
+                Allure.addAttachment("Master creds", masterEmail + "/" + "1234");
+                String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                        + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+                Allure.addAttachment("RunStartTime: ", date);
+            });
+        });
 
 
     }
-
-
-
-
 }
+
 

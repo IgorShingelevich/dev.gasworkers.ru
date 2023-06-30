@@ -6,7 +6,7 @@ import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
 
 import java.util.stream.Stream;
-
+@Deprecated
 public abstract class BaseStartRegistrationTestCasesProvider  implements ArgumentsProvider{
 
 

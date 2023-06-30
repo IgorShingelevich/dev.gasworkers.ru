@@ -44,7 +44,7 @@ public class LoginApiTest extends BaseApiTest {
         step("Login", () ->
                 loginApi.login(testCase.getLoginDto())
                         .statusCode(200));
-        String token = RegularRegistrationApi.getLoginToken();
+        String token = RegularRegistrationApi.getUserToken();
         System.out.println("token = " + token);
     }
 }

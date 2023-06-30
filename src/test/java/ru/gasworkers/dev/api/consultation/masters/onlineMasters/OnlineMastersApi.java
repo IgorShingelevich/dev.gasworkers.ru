@@ -13,7 +13,7 @@ public class OnlineMastersApi extends BaseApi {
     //https://api.dev.gasworkers.ru/docs#konsultacii-GETapi-v1-consultation-masters-online
     @Step("API: Get online masters")
     public ValidatableResponse getOnlineMasters(OnlineMastersRequestDto inputDto) {
-        String token = RegularRegistrationApi.getLoginToken();
+        String token = RegularRegistrationApi.getUserToken();
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)
                 .queryParam("order_id", inputDto.getOrderId())

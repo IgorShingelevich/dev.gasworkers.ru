@@ -1,19 +1,28 @@
 package ru.gasworkers.dev.tests.api.registration.throughClientRegistration;
 
-import io.qameta.allure.*;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
-import ru.gasworkers.dev.allure.*;
-import ru.gasworkers.dev.api.*;
+import ru.gasworkers.dev.allure.AllureEpic;
+import ru.gasworkers.dev.allure.AllureFeature;
+import ru.gasworkers.dev.allure.AllureStory;
+import ru.gasworkers.dev.allure.AllureTag;
+import ru.gasworkers.dev.api.ApiTestConfig;
 import ru.gasworkers.dev.api.registration.throughClientRegistrationApi.ThroughClientRegistrationApi;
-import ru.gasworkers.dev.extension.browser.*;
-import ru.gasworkers.dev.model.*;
-import ru.gasworkers.dev.pages.context.*;
-import ru.gasworkers.dev.tests.*;
-import ru.gasworkers.dev.utils.userBuilder.*;
+import ru.gasworkers.dev.extension.browser.Browser;
+import ru.gasworkers.dev.model.OrderType;
+import ru.gasworkers.dev.pages.context.ClientPages;
+import ru.gasworkers.dev.tests.BaseTest;
+import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import static ru.gasworkers.dev.model.Role.*;
+import static ru.gasworkers.dev.model.Role.CLIENT;
 
 public class RepairThroughClientRegistrationApiTest extends BaseTest {
     @Browser(role = CLIENT)
@@ -59,6 +68,6 @@ public class RepairThroughClientRegistrationApiTest extends BaseTest {
                 orderType, addressId, equipments, email, phone, description, null, startDate, endDate, time);
 
         clientPages.getLoginPage().open();
-        clientPages.getLoginPage().loginEmail(email, "1111");
+        clientPages.getLoginPage().login(email, "1111");
     }
 }

@@ -11,7 +11,7 @@ public class GetClientObjectsApi extends BaseApi {
     //https://api.dev.gasworkers.ru/docs#obieekty-GETapi-v1-users-client-objects
     @Step("API: Get client objects")
     public ValidatableResponse getClientObjects() {
-        String token = RegularRegistrationApi.getLoginToken();
+        String token = RegularRegistrationApi.getUserToken();
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)
                 .when()

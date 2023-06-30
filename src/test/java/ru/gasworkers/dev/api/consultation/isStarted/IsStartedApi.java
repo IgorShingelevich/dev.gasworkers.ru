@@ -11,7 +11,7 @@ import static io.restassured.RestAssured.given;
 public class IsStartedApi extends BaseApi {
     @Step("API: Is started")
     public ValidatableResponse isStarted(IsStartedRequestDto inputDto) {
-        String token = RegularRegistrationApi.getLoginToken();
+        String token = RegularRegistrationApi.getUserToken();
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)
                 .body(inputDto)

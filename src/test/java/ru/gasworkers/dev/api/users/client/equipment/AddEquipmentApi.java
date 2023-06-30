@@ -12,7 +12,7 @@ public class AddEquipmentApi extends BaseUserApi {
     //https://api.dev.gasworkers.ru/docs#obieekty-POSTapi-v1-client-objects--object--equipments
     @Step("API: Add equipment")
     public ValidatableResponse addEquipment(AddEquipmentRequestDto inputDto, Integer houseId) {
-        String token = RegularRegistrationApi.getLoginToken();
+        String token = RegularRegistrationApi.getUserToken();
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)
                 .body(inputDto)

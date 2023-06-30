@@ -12,7 +12,7 @@ public class PickMasterApi extends BaseApi {
     //https://api.dev.gasworkers.ru/docs#konsultacii-POSTapi-v1-consultation-masters--master-
     @Step("API: Pick master")
     public ValidatableResponse pickMaster(PickMasterRequestDto inputDto, Integer masterId) {
-        String token = RegularRegistrationApi.getLoginToken();
+        String token = RegularRegistrationApi.getUserToken();
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)
                 .body(inputDto)

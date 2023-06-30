@@ -1,7 +1,9 @@
 package ru.gasworkers.dev.tests.api.helperApiTest;
 
-import java.util.stream.Stream;
 import org.junit.jupiter.params.provider.Arguments;
+
+import java.util.stream.Stream;
+@Deprecated
 public class StartRegistrationTestCasesProvider {
     public static Stream<Arguments> registrationTestCases(String email, String phone) {
         return Stream.of(
