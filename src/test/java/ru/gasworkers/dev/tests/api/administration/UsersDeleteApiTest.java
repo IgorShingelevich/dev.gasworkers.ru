@@ -6,16 +6,16 @@ import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.ApiTestConfig;
-import ru.gasworkers.dev.api.administration.usersDeleteApi;
+import ru.gasworkers.dev.api.administration.UsersDeleteApi;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
-public class usersDeleteApiTest {
+public class UsersDeleteApiTest {
 
-    public final usersDeleteApi usersDeleteApi = new usersDeleteApi();
+    public final UsersDeleteApi usersDeleteApi = new UsersDeleteApi();
 
     @BeforeEach
     public void setUp() {

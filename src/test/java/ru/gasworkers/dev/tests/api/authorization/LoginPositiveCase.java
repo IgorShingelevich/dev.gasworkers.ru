@@ -14,7 +14,8 @@ import ru.gasworkers.dev.exception.EnumNotSupportedException;
 enum LoginPositiveCase {
     CLIENT_WITH_EMAIL("Client with email"),
     CLIENT_WITH_PHONE("Client with phone"),
-    CLIENT_WITH_EMAIL_AND_PHONE("Client with email and phone");
+    CLIENT_WITH_EMAIL_AND_PHONE("Client with email and phone"),
+    LOGIN_ADMIN("Login admin");
     //todo add  client with nickname
     private final String description;
     private final ComplexRegistrationRequestDto complexDto = ComplexRegistrationFactory.defaultRandomClient();
@@ -48,10 +49,7 @@ enum LoginPositiveCase {
     }
 
     public FinishRegistrationRequestDto getFinishDto() {
-        switch (this) {
-            default:
-                return complexDto.toFinishRegistration();
-        }
+        return complexDto.toFinishRegistration();
     }
 
     public LoginRequestDTO getLoginDto() {
@@ -63,6 +61,8 @@ enum LoginPositiveCase {
                 return loginDto.setEmail(null);
             case CLIENT_WITH_EMAIL_AND_PHONE:
                 return loginDto;
+            case LOGIN_ADMIN:
+                return LoginRequestDTO.asAdmin();
             default:
                 throw new EnumNotSupportedException(this);
         }

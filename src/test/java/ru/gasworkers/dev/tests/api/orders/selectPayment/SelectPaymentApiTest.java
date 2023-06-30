@@ -15,6 +15,7 @@ import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
+import ru.gasworkers.dev.api.administration.getUserWithAdmin.GetUserWithAdminApi;
 import ru.gasworkers.dev.api.consultation.isStarted.IsStartedApi;
 import ru.gasworkers.dev.api.consultation.masters.apply.ApplyMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
@@ -23,6 +24,9 @@ import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
 import ru.gasworkers.dev.api.orders.selectObject.SelectObjectApi;
 import ru.gasworkers.dev.api.orders.selectObject.dto.SelectObjectResponseDto;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
+import ru.gasworkers.dev.api.registration.authorisation.LoginApi;
+import ru.gasworkers.dev.api.registration.authorisation.dto.LoginRequestDTO;
+import ru.gasworkers.dev.api.registration.authorisation.dto.LoginResponseDTO;
 import ru.gasworkers.dev.api.users.client.equipment.AddEquipmentApi;
 import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.api.users.client.object.AddHouseObjectBuilder;
@@ -57,6 +61,10 @@ public class SelectPaymentApiTest extends BaseApiTest {
     private final PickMasterApi pickMasterApi = new PickMasterApi();
     private final ApplyMasterApi applyMasterApi = new ApplyMasterApi();
     private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
+
+    private final LoginApi loginApi = new LoginApi();
+    private final GetUserWithAdminApi getUserWithAdminApi = new GetUserWithAdminApi();
+
 
     @ParameterizedTest(name = "{0}")
     @EnumSource(SelectPaymentPositiveCase.class)
@@ -163,5 +171,24 @@ public class SelectPaymentApiTest extends BaseApiTest {
             System.out.println("Payment url: " + currentPaymentUrl);
             return currentPaymentUrl;
         });
+        String masterEmail = step("Get master credentials", () -> {
+            LoginResponseDTO actualAdminResponse = loginApi.login(LoginRequestDTO.asAdmin())
+                    .statusCode(200)
+                    .extract().as(LoginResponseDTO.class);
+
+            LoginResponseDTO.DataDto loginData = actualAdminResponse.getData();
+            String tokenAdmin = loginData.getToken();
+            System.out.println(" tokenAdmin = " + tokenAdmin);
+
+            String actualUserResponse = getUserWithAdminApi.getUserWithAdmin(tokenAdmin, masterIdList.get(0)) //487
+                    .statusCode(200)
+                    .extract().asString();
+            // get DataDto.email
+            JsonObject responseObject = JsonParser.parseString(actualUserResponse).getAsJsonObject();
+            JsonObject dataObject = responseObject.getAsJsonObject("data");
+            return dataObject.get("email").getAsString();
+        });
+        System.out.println("masterEmail = " + masterEmail);
     }
 }
+

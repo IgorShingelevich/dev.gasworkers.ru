@@ -6,7 +6,7 @@ import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
-public class deleteUserByIDApi {
+public class DeleteUserByIDApi {
 
     public Response deleteUserById(String userId) {
         Allure.step("Удаление пользователя администратором системы по ИД: " + userId, () -> {
