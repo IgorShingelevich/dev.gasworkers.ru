@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import ru.gasworkers.dev.api.auth.registration.authorisation.dto.LoginRequestDTO;
+import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.check.CheckRegistrationRequestDto;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.finish.FinishRegistrationRequestDto;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.start.StartRegistrationRequestDto;
@@ -46,7 +46,7 @@ public class ComplexRegistrationRequestDto {
                 .build();
     }
 
-    public LoginRequestDTO toLogin() {
-        return LoginRequestDTO.newInstance(type, email, phone, null, password);
+    public LoginRequestDto toLogin() {
+        return LoginRequestDto.newInstance(type, email, phone, null, password);
     }
 }

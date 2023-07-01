@@ -3,7 +3,7 @@ package ru.gasworkers.dev.tests.api.user.client.object.getClientObjects;
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.users.client.equipment.AddEquipmentBuilder;
 import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentRequestDto;
-import ru.gasworkers.dev.api.users.client.object.getClientObjects.dto.GetClientObjectsRequestDto;
+import ru.gasworkers.dev.api.users.client.house.getClientObjects.dto.GetClientObjectsRequestDto;
 import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 @AllArgsConstructor

@@ -3,6 +3,7 @@ package ru.gasworkers.dev.tests.api;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 import org.skyscreamer.jsonassert.JSONAssert;
+import ru.gasworkers.dev.api.auth.login.LoginApi;
 import ru.gasworkers.dev.tests.BaseTest;
 
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.util.List;
 
 public abstract class BaseApiTest extends BaseTest {
 
+    protected final LoginApi loginApi = new LoginApi();
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     protected void assertResponse(Object expectedResponse, Object actualResponse) throws IOException {

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.users.client.object;
+package ru.gasworkers.dev.api.users.client.house;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonInclude;

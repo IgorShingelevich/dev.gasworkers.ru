@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.users.client.object.addObject.dto;
+package ru.gasworkers.dev.api.users.client.house.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import ru.gasworkers.dev.extension.user.WithHouse;
 
 import java.math.BigInteger;
 
@@ -29,7 +30,7 @@ public class AddHouseObjectRequestDTO {
     private String title;
 
     public static AddHouseObjectRequestDTO newInstance(Integer addressId, Integer companyId, Integer branchId, BigInteger accountNumber, Integer[] photos, String title) {
-        return  AddHouseObjectRequestDTO.builder()
+        return AddHouseObjectRequestDTO.builder()
                 .addressId(addressId)
                 .companyId(companyId)
                 .branchId(branchId)
@@ -38,4 +39,15 @@ public class AddHouseObjectRequestDTO {
                 .title(title)
                 .build();
     }
+
+    public static AddHouseObjectRequestDTO newInstance(WithHouse annotation) {
+        return newInstance(
+                annotation.addressId(),
+                annotation.companyId(),
+                null,
+                null,
+                new Integer[]{},
+                annotation.title());
+    }
+
 }

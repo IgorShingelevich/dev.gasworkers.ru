@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.users.client.object.getEquipments.dto;
+package ru.gasworkers.dev.api.users.client.house.getEquipments.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
