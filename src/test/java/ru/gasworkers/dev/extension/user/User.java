@@ -2,7 +2,7 @@ package ru.gasworkers.dev.extension.user;
 
 import lombok.Builder;
 import lombok.Data;
-import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRequestDto;
 
 @Data
 @Builder

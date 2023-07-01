@@ -84,4 +84,5 @@ enum ConsultationMasterClientScenarioCase {
     public String toString() {
         return description;
     }
+
 }

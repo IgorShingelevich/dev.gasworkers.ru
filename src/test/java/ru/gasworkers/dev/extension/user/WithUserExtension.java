@@ -1,13 +1,20 @@
 package ru.gasworkers.dev.extension.user;
 
 import org.junit.jupiter.api.extension.*;
-import ru.gasworkers.dev.api.registration.regular.RegularRegistrationApi;
-import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory;
-import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.login.LoginApi;
+import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
+import ru.gasworkers.dev.api.auth.login.dto.LoginResponseDto;
+import ru.gasworkers.dev.api.auth.registration.regular.RegularRegistrationApi;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationFactory;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRequestDto;
+import ru.gasworkers.dev.api.users.client.house.HouseApi;
+import ru.gasworkers.dev.api.users.client.house.dto.AddHouseObjectRequestDTO;
 
 public final class WithUserExtension implements ParameterResolver {
 
     private final RegularRegistrationApi registrationApi = new RegularRegistrationApi();
+    private final LoginApi loginApi = new LoginApi();
+    private final HouseApi houseApi = new HouseApi();
 
     @Override
     public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
@@ -19,9 +26,26 @@ public final class WithUserExtension implements ParameterResolver {
     @Override
     public User resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
             throws ParameterResolutionException {
+        WithUser annotation = parameterContext.getParameter().getAnnotation(WithUser.class);
+
         ComplexRegistrationRequestDto complexDto = ComplexRegistrationFactory.defaultRandomClient();
         registrationApi.complexRegistration(complexDto);
+
+        String token = login(complexDto);
+        for (WithHouse house : annotation.houses()) {
+            AddHouseObjectRequestDTO inputDto = AddHouseObjectRequestDTO.newInstance(house);
+            houseApi.addHouse(inputDto, token).statusCode(200);
+        }
+
         return User.fromComplexDto(complexDto);
+    }
+
+    private String login(ComplexRegistrationRequestDto complexUserDto) {
+        LoginRequestDto inputDto = LoginRequestDto.asUser(complexUserDto.getPhone(), complexUserDto.getPassword());
+        return loginApi.login(inputDto)
+                .statusCode(200)
+                .extract().as(LoginResponseDto.class)
+                .getData().getToken();
     }
 
 }

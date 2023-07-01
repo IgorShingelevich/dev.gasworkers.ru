@@ -10,7 +10,7 @@ import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureStory;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.ApiTestConfig;
-import ru.gasworkers.dev.api.registration.throughClientRegistrationApi.ThroughClientRegistrationApi;
+import ru.gasworkers.dev.api.auth.registration.throughClientRegistrationApi.ThroughClientRegistrationApi;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.pages.context.ClientPages;

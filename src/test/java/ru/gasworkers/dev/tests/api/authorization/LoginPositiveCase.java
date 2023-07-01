@@ -1,12 +1,12 @@
 package ru.gasworkers.dev.tests.api.authorization;
 
 import lombok.AllArgsConstructor;
-import ru.gasworkers.dev.api.registration.authorisation.dto.LoginRequestDTO;
-import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory;
-import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.regular.dto.finish.FinishRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationFactory;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.check.CheckRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.finish.FinishRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.start.StartRegistrationRequestDto;
 import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 
@@ -52,8 +52,8 @@ enum LoginPositiveCase {
         return complexDto.toFinishRegistration();
     }
 
-    public LoginRequestDTO getLoginDto() {
-        LoginRequestDTO loginDto = complexDto.toLogin();
+    public LoginRequestDto getLoginDto() {
+        LoginRequestDto loginDto = complexDto.toLogin();
         switch (this) {
             case CLIENT_WITH_EMAIL:
                 return loginDto.setPhone(null);
@@ -62,7 +62,7 @@ enum LoginPositiveCase {
             case CLIENT_WITH_EMAIL_AND_PHONE:
                 return loginDto;
             case LOGIN_ADMIN:
-                return LoginRequestDTO.asAdmin();
+                return LoginRequestDto.asAdmin();
             default:
                 throw new EnumNotSupportedException(this);
         }
