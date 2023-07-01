@@ -13,4 +13,5 @@ import java.lang.annotation.Target;
 @ExtendWith(WithUserExtension.class)
 public @interface WithUser {
     UserType type() default UserType.CLIENT;
+    WithHouse[] houses() default {};
 }
