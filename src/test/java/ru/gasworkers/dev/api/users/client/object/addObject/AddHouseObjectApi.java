@@ -2,7 +2,7 @@ package ru.gasworkers.dev.api.users.client.object.addObject;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
-import ru.gasworkers.dev.api.registration.regular.RegularRegistrationApi;
+import ru.gasworkers.dev.api.auth.registration.regular.RegularRegistrationApi;
 import ru.gasworkers.dev.api.users.BaseUserApi;
 import ru.gasworkers.dev.api.users.client.object.addObject.dto.AddHouseObjectRequestDTO;
 

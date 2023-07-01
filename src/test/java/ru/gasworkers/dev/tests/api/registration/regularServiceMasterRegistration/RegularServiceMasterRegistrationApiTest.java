@@ -3,8 +3,8 @@ package ru.gasworkers.dev.tests.api.registration.regularServiceMasterRegistratio
 
 import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.api.ApiTestConfig;
-import ru.gasworkers.dev.api.registration.regular.CheckRegistrationCodeApi;
-import ru.gasworkers.dev.api.registration.regular.FinishRegistrationApi;
+import ru.gasworkers.dev.api.auth.registration.regular.CheckRegistrationCodeApi;
+import ru.gasworkers.dev.api.auth.registration.regular.FinishRegistrationApi;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.apiModel.Gender;
 import ru.gasworkers.dev.model.apiModel.ServiceCompanyStaff;

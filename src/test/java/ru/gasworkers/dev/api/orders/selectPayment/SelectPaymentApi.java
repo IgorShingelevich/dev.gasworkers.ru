@@ -4,7 +4,7 @@ import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import ru.gasworkers.dev.api.BaseApi;
 import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentRequestDto;
-import ru.gasworkers.dev.api.registration.regular.RegularRegistrationApi;
+import ru.gasworkers.dev.api.auth.registration.regular.RegularRegistrationApi;
 
 import static io.restassured.RestAssured.given;
 

@@ -20,10 +20,10 @@ import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
 import ru.gasworkers.dev.api.orders.selectObject.SelectObjectApi;
 import ru.gasworkers.dev.api.orders.selectObject.dto.SelectObjectResponseDto;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
-import ru.gasworkers.dev.api.registration.authorisation.LoginApi;
-import ru.gasworkers.dev.api.registration.authorisation.dto.LoginRequestDTO;
-import ru.gasworkers.dev.api.registration.authorisation.dto.LoginResponseDTO;
-import ru.gasworkers.dev.api.registration.regular.RegularRegistrationApi;
+import ru.gasworkers.dev.api.auth.registration.authorisation.LoginApi;
+import ru.gasworkers.dev.api.auth.registration.authorisation.dto.LoginRequestDTO;
+import ru.gasworkers.dev.api.auth.registration.authorisation.dto.LoginResponseDTO;
+import ru.gasworkers.dev.api.auth.registration.regular.RegularRegistrationApi;
 import ru.gasworkers.dev.api.users.client.equipment.AddEquipmentApi;
 import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.api.users.client.object.AddHouseObjectBuilder;
@@ -56,7 +56,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.PAYMENT)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.API)
-public class ConsultationClientMasterScenario extends BaseApiTest {
+public class ConsultationClientMasterScenarioTest extends BaseApiTest {
 
     private final AddHouseObjectApi addObjectApi = new AddHouseObjectApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();

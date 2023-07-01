@@ -1,9 +1,9 @@
 package ru.gasworkers.dev.tests.api.administration.getUserWithAdmin;
 
 import lombok.AllArgsConstructor;
-import ru.gasworkers.dev.api.registration.authorisation.dto.LoginRequestDTO;
-import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory;
-import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.authorisation.dto.LoginRequestDTO;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationFactory;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRequestDto;
 import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 @AllArgsConstructor

@@ -9,8 +9,8 @@ import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.administration.getUserWithAdmin.GetUserWithAdminApi;
-import ru.gasworkers.dev.api.registration.authorisation.LoginApi;
-import ru.gasworkers.dev.api.registration.authorisation.dto.LoginResponseDTO;
+import ru.gasworkers.dev.api.auth.registration.authorisation.LoginApi;
+import ru.gasworkers.dev.api.auth.registration.authorisation.dto.LoginResponseDTO;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 @Owner("Igor Shingelevich")

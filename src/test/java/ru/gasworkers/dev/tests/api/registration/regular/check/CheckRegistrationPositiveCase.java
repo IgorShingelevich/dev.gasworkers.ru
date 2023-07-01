@@ -1,10 +1,10 @@
 package ru.gasworkers.dev.tests.api.registration.regular.check;
 
 import lombok.Getter;
-import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory;
-import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationFactory;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.check.CheckRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.start.StartRegistrationRequestDto;
 import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 enum CheckRegistrationPositiveCase {

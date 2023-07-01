@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.registration.authorisation.dto;
+package ru.gasworkers.dev.api.auth.registration.authorisation.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

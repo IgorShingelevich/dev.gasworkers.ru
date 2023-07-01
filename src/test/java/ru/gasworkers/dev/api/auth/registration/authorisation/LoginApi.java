@@ -1,8 +1,8 @@
-package ru.gasworkers.dev.api.registration.authorisation;
+package ru.gasworkers.dev.api.auth.registration.authorisation;
 
 import io.restassured.response.ValidatableResponse;
 import ru.gasworkers.dev.api.BaseApi;
-import ru.gasworkers.dev.api.registration.authorisation.dto.LoginRequestDTO;
+import ru.gasworkers.dev.api.auth.registration.authorisation.dto.LoginRequestDTO;
 
 import static io.restassured.RestAssured.given;
 

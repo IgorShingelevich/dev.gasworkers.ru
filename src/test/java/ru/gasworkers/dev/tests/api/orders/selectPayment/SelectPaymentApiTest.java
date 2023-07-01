@@ -23,7 +23,7 @@ import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
 import ru.gasworkers.dev.api.orders.selectObject.SelectObjectApi;
 import ru.gasworkers.dev.api.orders.selectObject.dto.SelectObjectResponseDto;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
-import ru.gasworkers.dev.api.registration.authorisation.LoginApi;
+import ru.gasworkers.dev.api.auth.registration.authorisation.LoginApi;
 import ru.gasworkers.dev.api.users.client.equipment.AddEquipmentApi;
 import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.api.users.client.object.AddHouseObjectBuilder;

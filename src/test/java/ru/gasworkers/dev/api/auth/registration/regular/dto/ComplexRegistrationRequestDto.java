@@ -1,14 +1,14 @@
-package ru.gasworkers.dev.api.registration.regular.dto;
+package ru.gasworkers.dev.api.auth.registration.regular.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import ru.gasworkers.dev.api.registration.authorisation.dto.LoginRequestDTO;
-import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.regular.dto.finish.FinishRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.authorisation.dto.LoginRequestDTO;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.check.CheckRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.finish.FinishRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.start.StartRegistrationRequestDto;
 
 @Data
 @Builder

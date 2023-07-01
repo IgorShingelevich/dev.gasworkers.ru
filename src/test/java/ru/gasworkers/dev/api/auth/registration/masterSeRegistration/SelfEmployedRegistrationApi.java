@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.registration.masterSeRegistration;
+package ru.gasworkers.dev.api.auth.registration.masterSeRegistration;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.ExtractableResponse;

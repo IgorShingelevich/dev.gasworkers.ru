@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.registration.regular;
+package ru.gasworkers.dev.api.auth.registration.regular;
 
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -6,14 +6,13 @@ import io.restassured.response.ValidatableResponse;
 import lombok.Getter;
 import lombok.Setter;
 import ru.gasworkers.dev.api.BaseApi;
-import ru.gasworkers.dev.api.registration.authorisation.dto.LoginRequestDTO;
-import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.regular.dto.check.CheckRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.regular.dto.finish.FinishRegistrationRequestDto;
-import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.authorisation.dto.LoginRequestDTO;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.check.CheckRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.finish.FinishRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.start.StartRegistrationRequestDto;
 
 import static io.restassured.RestAssured.given;
-
 
 public class RegularRegistrationApi extends BaseApi {
     @Getter

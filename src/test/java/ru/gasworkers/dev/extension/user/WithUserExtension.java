@@ -1,9 +1,9 @@
 package ru.gasworkers.dev.extension.user;
 
 import org.junit.jupiter.api.extension.*;
-import ru.gasworkers.dev.api.registration.regular.RegularRegistrationApi;
-import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationFactory;
-import ru.gasworkers.dev.api.registration.regular.dto.ComplexRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.regular.RegularRegistrationApi;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationFactory;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRequestDto;
 
 public final class WithUserExtension implements ParameterResolver {
 

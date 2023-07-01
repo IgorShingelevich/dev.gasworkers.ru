@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.registration.regular.dto.start;
+package ru.gasworkers.dev.api.auth.registration.regular.dto.start;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

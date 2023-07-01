@@ -11,8 +11,8 @@ import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.registration.regular.RegularRegistrationApi;
-import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationResponseDto;
+import ru.gasworkers.dev.api.auth.registration.regular.RegularRegistrationApi;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.start.StartRegistrationResponseDto;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import java.io.IOException;

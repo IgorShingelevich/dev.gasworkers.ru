@@ -1,7 +1,7 @@
 package ru.gasworkers.dev.tests.api.registration.regular;
 
 import org.junit.jupiter.params.provider.Arguments;
-import ru.gasworkers.dev.api.registration.regular.dto.start.StartRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.start.StartRegistrationRequestDto;
 import ru.gasworkers.dev.model.apiModel.UserType;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
