@@ -8,8 +8,8 @@ import static io.restassured.RestAssured.given;
 
 public class GetHouseApi extends BaseApi {
     //https://api.dev.gasworkers.ru/docs#obieekty-GETapi-v1-users-client-objects
-    @Step("API: Get client objects")
-    public ValidatableResponse getClientObjects(String token) {
+    @Step("API: Get house")
+    public ValidatableResponse getHouse(String token) {
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)
                 .when()

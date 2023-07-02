@@ -1,6 +1,9 @@
 package ru.gasworkers.dev.extension.user;
 
-import org.junit.jupiter.api.extension.*;
+import org.junit.jupiter.api.extension.ExtensionContext;
+import org.junit.jupiter.api.extension.ParameterContext;
+import org.junit.jupiter.api.extension.ParameterResolutionException;
+import org.junit.jupiter.api.extension.ParameterResolver;
 import ru.gasworkers.dev.api.auth.login.LoginApi;
 import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
 import ru.gasworkers.dev.api.auth.login.dto.LoginResponseDto;
@@ -8,7 +11,8 @@ import ru.gasworkers.dev.api.auth.registration.regular.RegularRegistrationApi;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationFactory;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRequestDto;
 import ru.gasworkers.dev.api.users.client.house.HouseApi;
-import ru.gasworkers.dev.api.users.client.house.dto.AddHouseObjectRequestDTO;
+import ru.gasworkers.dev.api.users.client.house.dto.HouseRequestDto;
+import ru.gasworkers.dev.api.users.client.house.dto.HouseResponseDto;
 
 public final class WithUserExtension implements ParameterResolver {
 
@@ -33,8 +37,9 @@ public final class WithUserExtension implements ParameterResolver {
 
         String token = login(complexDto);
         for (WithHouse house : annotation.houses()) {
-            AddHouseObjectRequestDTO inputDto = AddHouseObjectRequestDTO.newInstance(house);
-            houseApi.addHouse(inputDto, token).statusCode(200);
+            HouseRequestDto inputDto = HouseRequestDto.newInstance(house);
+            Integer currentHouseID = houseApi.addHouse(inputDto, token).statusCode(200)
+                    .extract().as(HouseResponseDto.class).getData().getId();
         }
 
         return User.fromComplexDto(complexDto);

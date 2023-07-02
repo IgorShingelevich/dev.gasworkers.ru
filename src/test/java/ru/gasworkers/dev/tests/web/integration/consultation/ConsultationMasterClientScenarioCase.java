@@ -6,9 +6,9 @@ import ru.gasworkers.dev.api.consultation.masters.apply.dto.ApplyMasterRequestDt
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMastersRequestDto;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterRequestDto;
 import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersRequestDto;
-import ru.gasworkers.dev.api.orders.selectObject.dto.SelectObjectRequestDto;
+import ru.gasworkers.dev.api.orders.selectHouse.dto.SelectHouseRequestDto;
 import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentRequestDto;
-import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentRequestDto;
+import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentRequestDto;
 import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 import java.util.List;
@@ -28,8 +28,8 @@ enum ConsultationMasterClientScenarioCase {
                 .build();
     }
 
-    public SelectObjectRequestDto getSelectObjectDto(Integer objectId, Integer orderId, List<Integer> equipmentList) {
-        return SelectObjectRequestDto.builder()
+    public SelectHouseRequestDto getSelectObjectDto(Integer objectId, Integer orderId, List<Integer> equipmentList) {
+        return SelectHouseRequestDto.builder()
                 .clientObjectId(objectId)
                 .orderId(orderId)
                 .equipment(equipmentList)

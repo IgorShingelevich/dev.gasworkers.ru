@@ -19,11 +19,11 @@ import ru.gasworkers.dev.api.consultation.isStarted.IsStartedApi;
 import ru.gasworkers.dev.api.consultation.isStarted.dto.IsStartedResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
-import ru.gasworkers.dev.api.users.client.equipment.AddEquipmentApi;
-import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.api.users.client.house.HouseApi;
 import ru.gasworkers.dev.api.users.client.house.HouseBuilder;
-import ru.gasworkers.dev.api.users.client.house.dto.AddHouseObjectResponseDTO;
+import ru.gasworkers.dev.api.users.client.house.addEquipment.AddEquipmentApi;
+import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentResponseDto;
+import ru.gasworkers.dev.api.users.client.house.dto.HouseResponseDto;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithUser;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
@@ -63,7 +63,7 @@ public class IsStartedApiTest extends BaseApiTest {
         Integer objectId = step("Add object", () -> {
             return houseApi.addHouse(HouseBuilder.addDefaultHouseRequestDto(), token)
                     .statusCode(200)
-                    .extract().as(AddHouseObjectResponseDTO.class).getData().getId();
+                    .extract().as(HouseResponseDto.class).getData().getId();
         });
         step("Add equipment", () -> {
             addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), objectId, token)

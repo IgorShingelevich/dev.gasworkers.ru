@@ -17,14 +17,19 @@ import lombok.experimental.Accessors;
 public class SelectPaymentResponseDto {
     private Integer status;
     private String message;
-    private String data;
+    private DataDto data;
     private ErrorDto error;
 
-    public static SelectPaymentResponseDto successResponse(String url) {
+    public static SelectPaymentResponseDto successResponse(String url, Integer paymentId) {
         return SelectPaymentResponseDto.builder()
                 .status(0)
-                .message("Payment URL")
-                .data(url)
+                .message("Ссылка на оплату заказа")
+                .data(DataDto.builder()
+                        .payUrl(url)
+                        .qrLink(null)
+                        .fpsLink(null)
+                        .paymentId(paymentId)
+                        .build())
                 .build();
     }
 
@@ -37,6 +42,22 @@ public class SelectPaymentResponseDto {
         @JsonProperty("order_id")
         private String orderId;
         private String type;
+    }
+
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    @JsonInclude(JsonInclude.Include.ALWAYS) // Include null fields during serialization
+    public static class DataDto {
+        @JsonProperty("pay_url")
+        private String payUrl;
+        @JsonProperty("qr_link")
+        private String qrLink;
+        @JsonProperty("fps_link")
+        private String fpsLink;
+        @JsonProperty("payment_id")
+        private Integer paymentId;
     }
 
 

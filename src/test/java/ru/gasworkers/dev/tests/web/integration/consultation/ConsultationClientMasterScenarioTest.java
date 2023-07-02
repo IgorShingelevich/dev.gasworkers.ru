@@ -18,21 +18,24 @@ import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
 import ru.gasworkers.dev.api.auth.login.dto.LoginResponseDto;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRequestDto;
 import ru.gasworkers.dev.api.consultation.masters.apply.ApplyMasterApi;
+import ru.gasworkers.dev.api.consultation.masters.apply.dto.ApplyMasterResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.PickMasterApi;
+import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterResponseDto;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
-import ru.gasworkers.dev.api.orders.selectObject.SelectObjectApi;
-import ru.gasworkers.dev.api.orders.selectObject.dto.SelectObjectResponseDto;
+import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
+import ru.gasworkers.dev.api.orders.selectHouse.SelectHouseApi;
+import ru.gasworkers.dev.api.orders.selectHouse.dto.SelectHouseResponseDto;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
-import ru.gasworkers.dev.api.users.client.equipment.AddEquipmentApi;
-import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentResponseDto;
+import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentResponseDto;
 import ru.gasworkers.dev.api.users.client.house.HouseApi;
-import ru.gasworkers.dev.api.users.client.house.HouseBuilder;
-import ru.gasworkers.dev.api.users.client.house.dto.AddHouseObjectResponseDTO;
+import ru.gasworkers.dev.api.users.client.house.addEquipment.AddEquipmentApi;
+import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.api.users.client.house.getHouse.GetHouseApi;
-import ru.gasworkers.dev.api.users.client.house.getHouse.dto.GetClientObjectResponseDto;
+import ru.gasworkers.dev.api.users.client.house.getHouse.dto.GetHouseResponseDto;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.extension.user.User;
+import ru.gasworkers.dev.extension.user.WithHouse;
 import ru.gasworkers.dev.extension.user.WithUser;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.browser.PositionBrowser;
@@ -62,8 +65,8 @@ public class ConsultationClientMasterScenarioTest extends BaseApiTest {
     private final HouseApi houseApi = new HouseApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
     private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
-    private final GetHouseApi getClientObjectsApi = new GetHouseApi();
-    private final SelectObjectApi selectObjectApi = new SelectObjectApi();
+    private final GetHouseApi getHouseApi = new GetHouseApi();
+    private final SelectHouseApi selectHouseApi = new SelectHouseApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
     private final PickMasterApi pickMasterApi = new PickMasterApi();
     private final ApplyMasterApi applyMasterApi = new ApplyMasterApi();
@@ -78,56 +81,41 @@ public class ConsultationClientMasterScenarioTest extends BaseApiTest {
     @ParameterizedTest(name = "{0}")
     @EnumSource(ConsultationMasterClientScenarioCase.class)
     @DisplayName("Консультация сейчас")
-    void consultationNow(ConsultationMasterClientScenarioCase testCase, @WithUser User client) {
+    void consultationNow(ConsultationMasterClientScenarioCase testCase, @WithUser(houses = {@WithHouse}) User client) {
         String token = loginApi.getToken(client);
-        Integer objectId = step("Add object", () -> {
-            return houseApi.addHouse(HouseBuilder.addDefaultHouseRequestDto(), token)
-                    .statusCode(200)
-                    .extract().as(AddHouseObjectResponseDTO.class).getData().getId();
-        });
-
+        Integer houseId = houseApi.houseId(client, token);
         step("Add equipment", () -> {
-            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), objectId, token)
+            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), houseId, token)
                     .statusCode(200)
                     .extract().as(AddEquipmentResponseDto.class);
         });
-
-        Integer orderId = step("Create order", () -> {
-            JsonObject responseObject = JsonParser.parseString(
-                    createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
-                            .statusCode(200)
-                            .extract().asString()
-            ).getAsJsonObject();
-            Integer currentOrderId = responseObject.getAsJsonObject("data").get("order_id").getAsInt();
-            System.out.println("CurrentOrderId = " + currentOrderId);
-            return currentOrderId;
-        });
-
-        GetClientObjectResponseDto actualResponse = step("Get client objects", () -> {
-            return getClientObjectsApi.getClientObjects(token)
+        Integer orderId = step("Create orders", () -> {
+            return createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
                     .statusCode(200)
-                    .extract().as(GetClientObjectResponseDto.class);
+                    .extract().as(CreateOrdersResponseDto.class).getData().getOrderId();
         });
-
-        GetClientObjectResponseDto.DataDto firstData = actualResponse.getData()[0];
+        GetHouseResponseDto actualResponse = step("Get client objects", () -> {
+            return getHouseApi.getHouse(token)
+                    .statusCode(200)
+                    .extract().as(GetHouseResponseDto.class);
+        });
+        GetHouseResponseDto.DataDto firstData = actualResponse.getData()[0];
         Integer firstEquipmentId = firstData.getEquipments()[0].getId();
 
         List<Integer> equipmentList = new ArrayList<>();
-        for (GetClientObjectResponseDto.Equipment equipment : firstData.getEquipments()) {
+        for (GetHouseResponseDto.Equipment equipment : firstData.getEquipments()) {
             equipmentList.add(equipment.getId());
         }
-
         Integer actualObjectId = firstData.getId();
         System.out.println("equipmentList = " + equipmentList);
         System.out.println("firstEquipmentId = " + firstEquipmentId);
         System.out.println("actualObjectId = " + actualObjectId);
 
-        SelectObjectResponseDto expectedResponse = step("Select object", () -> {
-            return selectObjectApi.selectObject(testCase.getSelectObjectDto(actualObjectId, orderId, equipmentList), token)
+        SelectHouseResponseDto expectedResponse = step("Select object", () -> {
+            return selectHouseApi.selectObject(testCase.getSelectObjectDto(actualObjectId, orderId, equipmentList), token)
                     .statusCode(200)
-                    .extract().as(SelectObjectResponseDto.class);
+                    .extract().as(SelectHouseResponseDto.class);
         });
-
         List<Integer> masterIdList = step("Get online masters", () -> {
             String responseString = onlineMastersApi.getOnlineMasters(testCase.getOnlineMastersDto(orderId), token)
                     .statusCode(200)
@@ -146,45 +134,26 @@ public class ConsultationClientMasterScenarioTest extends BaseApiTest {
         });
 
         Integer timetableId = step("Pick master", () -> {
-            JsonObject actualResponseObject = JsonParser.parseString(
-                    pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0), token)
-                            .statusCode(200)
-                            .extract().asString()
-            ).getAsJsonObject();
-            Integer currentTimetableId = actualResponseObject.getAsJsonObject("data").get("timetable_id").getAsInt();
-            return currentTimetableId;
-        });
-
-        Integer receiptId = step("Apply master", () -> {
-            JsonObject actualResponseObject = JsonParser.parseString(
-                    applyMasterApi.applyMaster(testCase.getApplyMasterDto(orderId, timetableId), masterIdList.get(0), token)
-                            .statusCode(200)
-                            .extract().asString()
-            ).getAsJsonObject();
-            Integer currentReceiptId = actualResponseObject.getAsJsonObject("data").get("receipt_id").getAsInt();
-            System.out.println("Receipt id: " + currentReceiptId);
-            return currentReceiptId;
-        });
-
-        String payUrl = step("Select payment", () -> {
-            JsonObject actualResponseObject = JsonParser.parseString(
-                    selectPaymentApi.selectPayment(testCase.getSelectPaymentDto(orderId, receiptId), token)
-                            .statusCode(200)
-                            .extract().asString()
-            ).getAsJsonObject();
-            String currentPaymentUrl = actualResponseObject.getAsJsonObject("data").get("pay_url").getAsString();
-            System.out.println("Payment url: " + currentPaymentUrl);
-            return currentPaymentUrl;
-        });
-        String masterEmail = step("Get master credentials", () -> {
-            LoginResponseDto actualAdminResponse = loginApi.login(LoginRequestDto.asAdmin())
+            return pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0), token)
                     .statusCode(200)
-                    .extract().as(LoginResponseDto.class);
-
-            LoginResponseDto.DataDto loginData = actualAdminResponse.getData();
-            String tokenAdmin = loginData.getToken();
-            System.out.println(" tokenAdmin = " + tokenAdmin);
-
+                    .extract().as(PickMasterResponseDto.class).getData().getTimetableId();
+        });
+        Integer receiptId = step("Apply master", () -> {
+            return applyMasterApi.applyMaster(testCase.getApplyMasterDto(orderId, timetableId), masterIdList.get(0), token)
+                    .statusCode(200)
+                    .extract().as(ApplyMasterResponseDto.class).getData().getReceiptId();
+        });
+        SelectPaymentResponseDto selectPaymentResponse = step("Select payment", () -> {
+            return selectPaymentApi.selectPayment(testCase.getSelectPaymentDto(orderId, receiptId), token)
+                    .statusCode(200)
+                    .extract().as(SelectPaymentResponseDto.class);
+        });
+        String payUrl = selectPaymentResponse.getData().getPayUrl();
+        Integer paymentId = selectPaymentResponse.getData().getPaymentId();
+        String masterEmail = step("Get master credentials", () -> {
+            String tokenAdmin = loginApi.login(LoginRequestDto.asAdmin())
+                    .statusCode(200)
+                    .extract().as(LoginResponseDto.class).getData().getToken();
             String actualUserResponse = getUserWithAdminApi.getUserWithAdmin(tokenAdmin, masterIdList.get(0)) //487
                     .statusCode(200)
                     .extract().asString();
@@ -220,8 +189,6 @@ public class ConsultationClientMasterScenarioTest extends BaseApiTest {
                 Allure.addAttachment("RunStartTime: ", date);
             });
         });
-
-
     }
 }
 

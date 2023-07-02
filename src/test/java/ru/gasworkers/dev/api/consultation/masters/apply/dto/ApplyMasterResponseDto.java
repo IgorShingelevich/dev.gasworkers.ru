@@ -12,6 +12,7 @@ import lombok.experimental.Accessors;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+
 //@JsonInclude(JsonInclude.Include.NON_NULL) // when is needed
 @Accessors(chain = true)
 public class ApplyMasterResponseDto {

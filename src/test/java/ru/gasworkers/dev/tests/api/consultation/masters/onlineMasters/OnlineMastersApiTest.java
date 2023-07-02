@@ -1,8 +1,5 @@
 package ru.gasworkers.dev.tests.api.consultation.masters.onlineMasters;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -17,16 +14,14 @@ import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMastersResponseDto;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
-import ru.gasworkers.dev.api.users.client.equipment.AddEquipmentApi;
-import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentResponseDto;
+import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
 import ru.gasworkers.dev.api.users.client.house.HouseApi;
-import ru.gasworkers.dev.api.users.client.house.HouseBuilder;
-import ru.gasworkers.dev.api.users.client.house.dto.AddHouseObjectResponseDTO;
+import ru.gasworkers.dev.api.users.client.house.addEquipment.AddEquipmentApi;
+import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.extension.user.User;
+import ru.gasworkers.dev.extension.user.WithHouse;
 import ru.gasworkers.dev.extension.user.WithUser;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
-
-import java.io.StringReader;
 
 import static io.qameta.allure.Allure.step;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -51,39 +46,25 @@ public class OnlineMastersApiTest extends BaseApiTest {
     @EnumSource(OnlineMastersPositiveCase.class)
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Success case:")
-    void positiveTestCase(OnlineMastersPositiveCase testCase, @WithUser User client) {
+    void positiveTestCase(OnlineMastersPositiveCase testCase, @WithUser(houses = {@WithHouse}) User client) {
         String token = loginApi.getToken(client);
-        Integer objectId = step("Add object", () -> {
-            return houseApi.addHouse(HouseBuilder.addDefaultHouseRequestDto(), token)
-                    .statusCode(200)
-                    .extract().as(AddHouseObjectResponseDTO.class).getData().getId();
-        });
-
+        Integer houseId = houseApi.houseId(client, token);
         step("Add equipment", () -> {
-            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), objectId, token)
+            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), houseId, token)
                     .statusCode(200)
                     .extract().as(AddEquipmentResponseDto.class);
         });
-
         Integer orderId = step("Create order", () -> {
-            JsonObject responseObject = JsonParser.parseReader(
-                    new JsonReader(new StringReader(
-                            createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
-                                    .statusCode(200)
-                                    .extract().asString()
-                    ))
-            ).getAsJsonObject();
-            return responseObject.getAsJsonObject("data").get("order_id").getAsInt();
+            return createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
+                    .statusCode(200)
+                    .extract().as(CreateOrdersResponseDto.class).getData().getOrderId();
         });
-
         step("Get online masters list", () -> {
             OnlineMastersResponseDto responseDto = onlineMastersApi.getOnlineMasters(testCase.getOnlineMastersDto(orderId), token)
                     .statusCode(200)
                     .extract()
                     .as(OnlineMastersResponseDto.class);
             assertNotNull(responseDto.getData().get(0).getId());
-
-
         });
     }
 }

@@ -20,12 +20,11 @@ import ru.gasworkers.dev.api.consultation.isStarted.dto.IsStartedResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.PickMasterApi;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
-import ru.gasworkers.dev.api.users.client.equipment.AddEquipmentApi;
-import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.api.users.client.house.HouseApi;
-import ru.gasworkers.dev.api.users.client.house.HouseBuilder;
-import ru.gasworkers.dev.api.users.client.house.dto.AddHouseObjectResponseDTO;
+import ru.gasworkers.dev.api.users.client.house.addEquipment.AddEquipmentApi;
+import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.extension.user.User;
+import ru.gasworkers.dev.extension.user.WithHouse;
 import ru.gasworkers.dev.extension.user.WithUser;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
@@ -56,26 +55,21 @@ public class PickMasterApiTest extends BaseApiTest {
     @EnumSource(PickMasterPositiveCase.class)
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Success case:")
-    void positiveTestCase(PickMasterPositiveCase testCase, @WithUser User client) {
+    void positiveTestCase(PickMasterPositiveCase testCase, @WithUser(houses = {@WithHouse}) User client) {
         String token = loginApi.getToken(client);
-        Integer objectId = step("Add object", () -> {
-            return houseApi.addHouse(HouseBuilder.addDefaultHouseRequestDto(), token)
-                    .statusCode(200)
-                    .extract().as(AddHouseObjectResponseDTO.class).getData().getId();
-        });
+        Integer houseId = houseApi.houseId(client, token);
         step("Add equipment", () -> {
-            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), objectId, token)
+            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), houseId, token)
                     .statusCode(200)
                     .extract().as(AddEquipmentResponseDto.class);
         });
         Integer orderId = step("Create order", () -> {
-                    JsonObject actualResponseObject = JsonParser.parseString(
-                            createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
+            JsonObject actualResponseObject = JsonParser.parseString(
+                    createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
                                     .statusCode(200)
                                     .extract().asString()
                     ).getAsJsonObject();
-                    Integer currentOrderId = actualResponseObject.getAsJsonObject("data").get("order_id").getAsInt();
-                    return currentOrderId;
+            return actualResponseObject.getAsJsonObject("data").get("order_id").getAsInt();
                 }
         );
         List<Integer> mastersIdList = step("Get online masters", () -> {

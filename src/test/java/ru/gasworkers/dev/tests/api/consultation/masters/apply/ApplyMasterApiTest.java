@@ -1,8 +1,5 @@
 package ru.gasworkers.dev.tests.api.consultation.masters.apply;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.stream.JsonReader;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -21,22 +18,21 @@ import ru.gasworkers.dev.api.consultation.masters.apply.dto.ApplyMasterResponseD
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMastersResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.PickMasterApi;
+import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterResponseDto;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
-import ru.gasworkers.dev.api.users.client.equipment.AddEquipmentApi;
-import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentResponseDto;
+import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
 import ru.gasworkers.dev.api.users.client.house.HouseApi;
-import ru.gasworkers.dev.api.users.client.house.HouseBuilder;
-import ru.gasworkers.dev.api.users.client.house.dto.AddHouseObjectResponseDTO;
+import ru.gasworkers.dev.api.users.client.house.addEquipment.AddEquipmentApi;
+import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.extension.user.User;
+import ru.gasworkers.dev.extension.user.WithHouse;
 import ru.gasworkers.dev.extension.user.WithUser;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
-import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import static io.qameta.allure.Allure.step;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.CONSULTATION)
@@ -60,35 +56,24 @@ public class ApplyMasterApiTest extends BaseApiTest {
     @EnumSource(ApplyMasterPositiveCase.class)
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Success case:")
-    void positiveTestCase(ApplyMasterPositiveCase testCase, @WithUser User client) {
+    void positiveTestCase(ApplyMasterPositiveCase testCase, @WithUser(houses = {@WithHouse}) User client) {
         String token = loginApi.getToken(client);
-        Integer objectId = step("Add object", () -> {
-            return houseApi.addHouse(HouseBuilder.addDefaultHouseRequestDto(), token)
-                    .statusCode(200)
-                    .extract().as(AddHouseObjectResponseDTO.class).getData().getId();
-        });
+        Integer houseId = houseApi.houseId(client, token);
         step("Add equipment", () -> {
-            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), objectId, token)
+            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), houseId, token)
                     .statusCode(200)
                     .extract().as(AddEquipmentResponseDto.class);
         });
         Integer orderId = step("Create order", () -> {
-            JsonObject actualResponseObject = JsonParser.parseReader(
-                    new JsonReader(new StringReader(
-                            createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
-                                    .statusCode(200)
-                                    .extract().asString()
-                    ))
-            ).getAsJsonObject();
-            return actualResponseObject.getAsJsonObject("data").get("order_id").getAsInt();
+            return createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
+                    .statusCode(200)
+                    .extract().as(CreateOrdersResponseDto.class).getData().getOrderId();
         });
         List<Integer> masterIdList = step("Get online masters list", () -> {
             OnlineMastersResponseDto responseDto = onlineMastersApi.getOnlineMasters(testCase.getOnlineMastersDto(orderId), token)
                     .statusCode(200)
                     .extract()
                     .as(OnlineMastersResponseDto.class);
-            // Asserting that at least one master is returned
-            assertNotNull(responseDto.getData().get(0).getId());
             // get List of master id from responseDto
             List<Integer> currentMasterIdList = new ArrayList<>();
             for (OnlineMastersResponseDto.MasterDto element : responseDto.getData()) {
@@ -101,15 +86,11 @@ public class ApplyMasterApiTest extends BaseApiTest {
                     .statusCode(200)
                     .extract().as(IsStartedResponseDto.class);
         });
+
         Integer timetableId = step("Pick master", () -> {
-            JsonObject actualResponseObject = JsonParser.parseString(
-                    pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0), token)
-                            .statusCode(200)
-                            .extract().asString()
-            ).getAsJsonObject();
-            Integer currentTimetableId = actualResponseObject.getAsJsonObject("data").get("timetable_id").getAsInt();
-            System.out.println("Timetable ID: " + currentTimetableId);
-            return currentTimetableId;
+            return pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0), token)
+                    .statusCode(200)
+                    .extract().as(PickMasterResponseDto.class).getData().getTimetableId();
         });
         step("Apply master", () -> {
             applyMasterApi.applyMaster(testCase.getApplyMasterDto(orderId, timetableId), masterIdList.get(0), token)
@@ -123,35 +104,24 @@ public class ApplyMasterApiTest extends BaseApiTest {
     @EnumSource(ApplyMasterNegativeCase.class)
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Negative case:")
-    void negativeTestCase(ApplyMasterNegativeCase testCase, @WithUser User client) {
+    void negativeTestCase(ApplyMasterNegativeCase testCase, @WithUser(houses = {@WithHouse}) User client) {
         String token = loginApi.getToken(client);
-        Integer objectId = step("Add object", () -> {
-            return houseApi.addHouse(HouseBuilder.addDefaultHouseRequestDto(), token)
-                    .statusCode(200)
-                    .extract().as(AddHouseObjectResponseDTO.class).getData().getId();
-        });
+        Integer houseId = houseApi.houseId(client, token);
         step("Add equipment", () -> {
-            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), objectId, token)
+            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), houseId, token)
                     .statusCode(200)
                     .extract().as(AddEquipmentResponseDto.class);
         });
         Integer orderId = step("Create order", () -> {
-            JsonObject actualResponseObject = JsonParser.parseReader(
-                    new JsonReader(new StringReader(
-                            createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
-                                    .statusCode(200)
-                                    .extract().asString()
-                    ))
-            ).getAsJsonObject();
-            return actualResponseObject.getAsJsonObject("data").get("order_id").getAsInt();
+            return createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
+                    .statusCode(200)
+                    .extract().as(CreateOrdersResponseDto.class).getData().getOrderId();
         });
         List<Integer> masterIdList = step("Get online masters list", () -> {
             OnlineMastersResponseDto responseDto = onlineMastersApi.getOnlineMasters(testCase.getOnlineMastersDto(orderId), token)
                     .statusCode(200)
                     .extract()
                     .as(OnlineMastersResponseDto.class);
-            // Asserting that at least one master is returned
-            assertNotNull(responseDto.getData().get(0).getId());
             // get List of master id from responseDto
             List<Integer> currentMasterIdList = new ArrayList<>();
             for (OnlineMastersResponseDto.MasterDto element : responseDto.getData()) {
@@ -165,14 +135,9 @@ public class ApplyMasterApiTest extends BaseApiTest {
                     .extract().as(IsStartedResponseDto.class);
         });
         Integer timetableId = step("Pick master", () -> {
-            JsonObject actualResponseObject = JsonParser.parseString(
-                    pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0), token)
-                            .statusCode(200)
-                            .extract().asString()
-            ).getAsJsonObject();
-            Integer currentTimetableId = actualResponseObject.getAsJsonObject("data").get("timetable_id").getAsInt();
-            System.out.println("Timetable ID: " + currentTimetableId);
-            return currentTimetableId;
+            return pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0), token)
+                    .statusCode(200)
+                    .extract().as(PickMasterResponseDto.class).getData().getTimetableId();
         });
         step("Apply master", () -> {
             applyMasterApi.applyMaster(testCase.getApplyMasterDto(orderId, timetableId), masterIdList.get(0), token)

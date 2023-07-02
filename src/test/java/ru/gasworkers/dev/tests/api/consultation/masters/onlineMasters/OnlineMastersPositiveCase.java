@@ -3,7 +3,7 @@ package ru.gasworkers.dev.tests.api.consultation.masters.onlineMasters;
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMastersRequestDto;
 import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersRequestDto;
-import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentRequestDto;
+import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentRequestDto;
 import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 @AllArgsConstructor
