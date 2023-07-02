@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.users.client.house.getClientObjects.dto;
+package ru.gasworkers.dev.api.users.client.house.getHouse.dto;
 
 import lombok.Builder;
 import lombok.Data;

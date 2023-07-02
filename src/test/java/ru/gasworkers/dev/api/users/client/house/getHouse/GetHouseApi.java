@@ -1,0 +1,19 @@
+package ru.gasworkers.dev.api.users.client.house.getHouse;
+
+import io.qameta.allure.Step;
+import io.restassured.response.ValidatableResponse;
+import ru.gasworkers.dev.api.BaseApi;
+
+import static io.restassured.RestAssured.given;
+
+public class GetHouseApi extends BaseApi {
+    //https://api.dev.gasworkers.ru/docs#obieekty-GETapi-v1-users-client-objects
+    @Step("API: Get client objects")
+    public ValidatableResponse getClientObjects(String token) {
+        return given().spec(baseRequestSpec)
+                .header("Authorization", "Bearer " + token)
+                .when()
+                .get("/users/client-objects")
+                .then().spec(baseResponseSpec);
+    }
+}

@@ -1,7 +1,7 @@
 package ru.gasworkers.dev.tests.api.user.client.object.addObject;
 
 import lombok.AllArgsConstructor;
-import ru.gasworkers.dev.api.users.client.house.HouseFactory;
+import ru.gasworkers.dev.api.users.client.house.HouseBuilder;
 import ru.gasworkers.dev.api.users.client.house.dto.AddHouseObjectRequestDTO;
 import ru.gasworkers.dev.api.users.client.house.dto.AddHouseObjectResponseDTO;
 
@@ -15,7 +15,7 @@ enum AddHousePositiveCase {
     private final String description;
 
     public AddHouseObjectRequestDTO getInputDto() {
-        AddHouseObjectRequestDTO inputDto = HouseFactory.addDefaultHouseRequestDto();
+        AddHouseObjectRequestDTO inputDto = HouseBuilder.addDefaultHouseRequestDto();
         return this == ADD_HOUSE_OBJECT_DUPLICATE_TITLE ? inputDto.setTitle("my house") : inputDto;
     }
 

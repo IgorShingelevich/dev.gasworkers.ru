@@ -7,7 +7,7 @@ import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMaster
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterRequestDto;
 import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersRequestDto;
 import ru.gasworkers.dev.api.users.client.equipment.dto.AddEquipmentRequestDto;
-import ru.gasworkers.dev.api.users.client.house.HouseFactory;
+import ru.gasworkers.dev.api.users.client.house.HouseBuilder;
 import ru.gasworkers.dev.api.users.client.house.dto.AddHouseObjectRequestDTO;
 import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
@@ -37,7 +37,7 @@ enum ApplyMasterNegativeCase {
     private final String description;
 
     public AddHouseObjectRequestDTO getAddObjectDto() {
-        return HouseFactory.addDefaultHouseRequestDto();
+        return HouseBuilder.addDefaultHouseRequestDto();
     }
 
     public AddEquipmentRequestDto getAddEquipmentDto() {

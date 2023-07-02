@@ -2,7 +2,7 @@ package ru.gasworkers.dev.tests.api.user.client.object.addObject;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import ru.gasworkers.dev.api.users.client.house.HouseFactory;
+import ru.gasworkers.dev.api.users.client.house.HouseBuilder;
 import ru.gasworkers.dev.api.users.client.house.dto.AddHouseObjectRequestDTO;
 import ru.gasworkers.dev.api.users.client.house.dto.AddHouseObjectResponseDTO;
 import ru.gasworkers.dev.exception.EnumNotSupportedException;
@@ -52,7 +52,7 @@ enum AddHouseNegativeDtoCase {
     private final AddHouseObjectResponseDTO expectedResponse;
 
     public AddHouseObjectRequestDTO getInputDto() {
-        AddHouseObjectRequestDTO addHouseObjectDto = HouseFactory.addDefaultHouseRequestDto();
+        AddHouseObjectRequestDTO addHouseObjectDto = HouseBuilder.addDefaultHouseRequestDto();
         switch (this) {
             case MISSING_ADDRESS_ID:
                 return addHouseObjectDto.setAddressId(null);

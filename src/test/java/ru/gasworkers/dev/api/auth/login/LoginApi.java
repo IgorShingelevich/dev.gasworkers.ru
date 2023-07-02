@@ -20,12 +20,11 @@ public class LoginApi extends BaseApi {
                 .then().spec(baseResponseSpec);
     }
 
-    public String successLogin(User user) {
+    public String getToken(User user) {
         LoginRequestDto inputDto = LoginRequestDto.asUser(user.getPhone(), user.getPassword());
         return login(inputDto)
                 .statusCode(200)
                 .extract().as(LoginResponseDto.class)
                 .getData().getToken();
     }
-
 }

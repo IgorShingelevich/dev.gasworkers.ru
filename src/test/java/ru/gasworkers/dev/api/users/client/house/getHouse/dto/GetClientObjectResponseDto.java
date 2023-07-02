@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.users.client.house.getClientObjects.dto;
+package ru.gasworkers.dev.api.users.client.house.getHouse.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;

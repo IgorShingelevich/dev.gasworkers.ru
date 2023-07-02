@@ -18,7 +18,7 @@ public final class DriverFactory {
 
          config.headless(false);
 //         С удаленным запуском нельзя ставить в true!
-        config.holdBrowserOpen(false);
+        config.holdBrowserOpen(true);
 
 
 
