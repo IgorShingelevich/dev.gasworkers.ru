@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.clientComponent.videoComponent.consultationComponent;
+package ru.gasworkers.dev.pages.components.clientComponent.conferenceComponent.consultationComponent;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
@@ -6,12 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
-import java.time.Duration;
-
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
 
 public class FilterConsultationVideoClientComponent extends BaseComponent {
     public FilterConsultationVideoClientComponent(RoleBrowser browser) {

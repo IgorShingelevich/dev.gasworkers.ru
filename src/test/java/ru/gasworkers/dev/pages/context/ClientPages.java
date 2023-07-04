@@ -6,16 +6,16 @@ import ru.gasworkers.dev.pages.client.*;
 import ru.gasworkers.dev.pages.client.maintenance.SelectDateMaintenanceClientPage;
 import ru.gasworkers.dev.pages.client.maintenance.SelectInsuranceClientPage;
 import ru.gasworkers.dev.pages.client.maintenance.SelectObjectMaintenanceClientPage;
-import ru.gasworkers.dev.pages.client.RegistrationClientPage;
 import ru.gasworkers.dev.pages.client.maintenance.SelectPaymentMaintenanceClientPage;
 import ru.gasworkers.dev.pages.client.video.ApproveDetailsVideoClientPage;
 import ru.gasworkers.dev.pages.client.video.ConsultationVideoClientPage;
 import ru.gasworkers.dev.pages.client.video.SelectPaymentVideoClientPage;
 import ru.gasworkers.dev.pages.client.video.SuccessPaymentVideoClientPage;
 import ru.gasworkers.dev.pages.sharedPages.AllNotificationsPage;
+import ru.gasworkers.dev.pages.sharedPages.ConferenceQrPage;
 import ru.gasworkers.dev.pages.sharedPages.LandingPage;
 
-import static ru.gasworkers.dev.model.Role.*;
+import static ru.gasworkers.dev.model.Role.CLIENT;
 
 @Getter
 public final class ClientPages extends BaseRolePages {
@@ -42,7 +42,7 @@ public final class ClientPages extends BaseRolePages {
     private final CheckDocumentsClientPage checkDocumentsPage = new CheckDocumentsClientPage(browser);
     private final SelectPaymentMaintenanceClientPage selectPaymentMaintenancePage = new SelectPaymentMaintenanceClientPage(browser);
     private final SelectPaymentVideoClientPage selectPaymentVideoPage = new SelectPaymentVideoClientPage(browser);
-    private final  SuccessPaymentVideoClientPage successPaymentVideoPage = new SuccessPaymentVideoClientPage(browser);
+    private final SuccessPaymentVideoClientPage successPaymentVideoPage = new SuccessPaymentVideoClientPage(browser);
     private final PaymentWizardClientPage paymentWizardPage = new PaymentWizardClientPage(browser);
     private final SignSMSClientPage signSMSPage = new SignSMSClientPage(browser);
     private final SignSuccessPage signSuccessPage = new SignSuccessPage(browser);
@@ -51,4 +51,6 @@ public final class ClientPages extends BaseRolePages {
     private final AllObjectsClientPage allObjectsPage = new AllObjectsClientPage(browser);
     private final AllOrdersClientPage allOrdersPage = new AllOrdersClientPage(browser);
     private final AllNotificationsPage allNotificationsPage = new AllNotificationsPage(browser);
+
+    private final ConferenceQrPage conferenceQrPage = new ConferenceQrPage(browser);
 }

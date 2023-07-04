@@ -4,10 +4,11 @@ import com.codeborne.selenide.SelenideDriver;
 import lombok.Getter;
 import ru.gasworkers.dev.pages.master.*;
 import ru.gasworkers.dev.pages.master.ordersHystoryMasterPage.AllCompletedOrdersHistoryMasterPage;
-import ru.gasworkers.dev.pages.master.ordersHystoryMasterPage.AllScheduledOrdersHistoryMasterPage;
 import ru.gasworkers.dev.pages.master.ordersHystoryMasterPage.AllNewOrdersHistoryMasterPage;
+import ru.gasworkers.dev.pages.master.ordersHystoryMasterPage.AllScheduledOrdersHistoryMasterPage;
+import ru.gasworkers.dev.pages.sharedPages.ConferenceQrPage;
 
-import static ru.gasworkers.dev.model.Role.*;
+import static ru.gasworkers.dev.model.Role.MASTER;
 
 
 @Getter
@@ -25,5 +26,8 @@ public final class MasterPages extends BaseRolePages {
     private final AllNewOrdersHistoryMasterPage allNewOrdersPage = new AllNewOrdersHistoryMasterPage(browser);
     private final AllScheduledOrdersHistoryMasterPage allScheduledOrdersPage = new AllScheduledOrdersHistoryMasterPage(browser);
     private final AllCompletedOrdersHistoryMasterPage allCompletedOrdersPage = new AllCompletedOrdersHistoryMasterPage(browser);
+
+    private final ConferenceQrPage conferenceQrPage = new ConferenceQrPage(browser);
+
 
 }

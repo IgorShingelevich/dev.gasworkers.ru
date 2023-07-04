@@ -268,5 +268,18 @@ class ClientFlowTest extends BaseTest {
 //        clientPages.getOrderCardPage().navDocsTab.downloadAgreement()
     }
 
+    @Test
+    public void dellMe() {
+       /* clientPages.getHomePage().conferenceNotification.toOrderChatButton();
+        clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
+        clientPages.getHomePage().sidebar.allOrdersAndInvoicesDropdown();
+        clientPages.getHomePage().sidebar.allOrders();
+        clientPages.getAllOrdersPage().checkFinishLoading();
+        clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
+        clientPages.getOrderCardPage().checkFinishLoading();
+        clientPages.getOrderCardPage().checkNotReviewedCompletedOrderState(OrderStatus.COMPLETED, OrderType.MAINTENANCE);
+//        clientPages.getOrderCardPage().navDocsTab.downloadAgreement()*/
+    }
+
 }
 // TODO client submitReview

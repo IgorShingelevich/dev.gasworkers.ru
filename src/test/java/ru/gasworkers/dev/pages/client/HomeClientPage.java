@@ -4,12 +4,12 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.clientComponent.guideComponent.FirstMaintenanceGuideComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClientComponent;
+import ru.gasworkers.dev.pages.components.clientComponent.guideComponent.FirstMaintenanceGuideComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.guideComponent.FirstRepairGuideComponent;
-import ru.gasworkers.dev.pages.components.clientComponent.videoComponent.videoBannerHomePageClientComponent.AwaitingNowVideoBGBannerHomePageClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.PersonSummaryComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.notifications.conferenceNotification.ConferenceNotificationSharedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 
 import java.time.Duration;
@@ -25,7 +25,7 @@ public final class HomeClientPage extends BaseClientPage {
     public final PersonSummaryComponent personSummaryComponent;
     public final FirstMaintenanceGuideComponent firstMaintenanceGuide;
     public final FirstRepairGuideComponent firstRepairGuide;
-    public final AwaitingNowVideoBGBannerHomePageClientComponent awaitingVideoBGBanner;
+    public final ConferenceNotificationSharedComponent conferenceNotification;
 
 
     public HomeClientPage(RoleBrowser browser) {
@@ -36,7 +36,7 @@ public final class HomeClientPage extends BaseClientPage {
         personSummaryComponent = new PersonSummaryComponent(browser);
         firstMaintenanceGuide = new FirstMaintenanceGuideComponent(browser);
         firstRepairGuide = new FirstRepairGuideComponent(browser);
-        awaitingVideoBGBanner = new AwaitingNowVideoBGBannerHomePageClientComponent(browser);
+        conferenceNotification = new ConferenceNotificationSharedComponent(browser);
     }
 
     private final String
@@ -151,7 +151,6 @@ public final class HomeClientPage extends BaseClientPage {
     public void checkVideoBGInitialState(String sinceDate, String masterFullName) {
         stepWithRole("Убедиться, что  Домашняя страница в состоянии после Фоновой регистрации на Видео", () -> {
             urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client");
-            awaitingVideoBGBanner.checkAwaitingNowBGVideoState(masterFullName);
 //            personSummaryComponent.checkBGInitialState(sinceDate); // changed appearance
             // todo  personSummaryComponent appearance changed
             stepWithRole("Убедиться, что присутствует баннер Ожидания видеоконсультации", () -> {

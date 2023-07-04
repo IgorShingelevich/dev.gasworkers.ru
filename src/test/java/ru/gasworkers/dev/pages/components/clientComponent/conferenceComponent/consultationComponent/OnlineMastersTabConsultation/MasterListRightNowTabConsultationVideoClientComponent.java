@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.clientComponent.videoComponent.consultationComponent.NavRightNowTabConsultation;
+package ru.gasworkers.dev.pages.components.clientComponent.conferenceComponent.consultationComponent.OnlineMastersTabConsultation;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.Condition;

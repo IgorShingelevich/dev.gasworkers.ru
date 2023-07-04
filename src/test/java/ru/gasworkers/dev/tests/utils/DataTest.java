@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests;
+package ru.gasworkers.dev.tests.utils;
 
 
 

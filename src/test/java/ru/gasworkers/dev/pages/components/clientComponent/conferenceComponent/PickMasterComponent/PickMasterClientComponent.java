@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.clientComponent.videoComponent.approveMasterComponent;
+package ru.gasworkers.dev.pages.components.clientComponent.conferenceComponent.PickMasterComponent;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
@@ -7,21 +7,18 @@ import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
-import static com.codeborne.selenide.Condition.partialText;
 import static com.codeborne.selenide.Condition.text;
 
-public class DetailsOrderVideoClientComponent extends BaseComponent {
-    public DetailsOrderVideoClientComponent(RoleBrowser browser) {
+public class PickMasterClientComponent extends BaseComponent {
+    private final String
+            titleText = "Информация по заказу";
+    ElementsCollection
+            serviceStarRatingCollection = driver.$$("div.gas-stars__star").as("Звезды рейтинга  сервисной компании"),
+            mediums = driver.$$(".medium");
+
+    public PickMasterClientComponent(RoleBrowser browser) {
         super(browser);
     }
-
-
-    private final String
-        titleText = "Информация по заказу";
-
-    ElementsCollection
-        serviceStarRatingCollection = driver.$$("div.gas-stars__star").as("Звезды рейтинга  сервисной компании"),
-        mediums = driver.$$(".medium");
 
     SelenideElement
         titleLocator = driver.$("p.h4.mb-20").as("Заголовок компонента Информация по заказу"),

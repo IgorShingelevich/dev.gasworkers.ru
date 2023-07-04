@@ -25,7 +25,7 @@ public class MasterFlowTest extends BaseTest {
             "Мастеров1СССР",
             "Зарегистрирован с 11 января 2023 года",
             " test_gas_master_sssr1@rambler.ru",
-            "123456",
+            "1234",
             null,
             79917644241L
     );
@@ -137,6 +137,16 @@ public class MasterFlowTest extends BaseTest {
         //TODO checkNotReviewedCompletedOrderState
 //        masterPages.getOrderCardPage().checkNotReviewedCompletedOrderState(OrderStatus.COMPLETED, OrderType.MAINTENANCE);
         // TODO checkFinishLoading - expand  docs check, order properties check, price check
+    }
+
+    @Owner("Igor Shingelevich")
+    @Feature("Кабинет мастера")
+    @Story("Начало Видеоконсультации")
+    @Tags({@Tag("regression"), @Tag("master"), @Tag("cabinet"), @Tag("positive")})
+    @DisplayName("Мастер начинает Видеоконсультацию")
+    @Test
+    void masterStartVC() {
+
     }
 
 }

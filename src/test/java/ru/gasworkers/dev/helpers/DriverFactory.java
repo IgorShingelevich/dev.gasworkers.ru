@@ -2,6 +2,7 @@ package ru.gasworkers.dev.helpers;
 
 import com.codeborne.selenide.SelenideConfig;
 import com.codeborne.selenide.SelenideDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import ru.gasworkers.dev.extension.browser.Browser;
 
 import static com.codeborne.selenide.FileDownloadMode.FOLDER;
@@ -16,11 +17,14 @@ public final class DriverFactory {
         config.reportsFolder("target/selenide");
         config.timeout(8000);
 
-         config.headless(false);
+        config.headless(false);
 //         С удаленным запуском нельзя ставить в true!
         config.holdBrowserOpen(true);
 
-
+// Enable camera and microphone access
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--use-fake-ui-for-media-stream");
+        config.browserCapabilities(chromeOptions);
 
 //        config.proxyEnabled(true);
         config.fileDownload(FOLDER);

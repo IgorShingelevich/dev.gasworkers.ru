@@ -4,8 +4,8 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.client.BaseClientPage;
-import ru.gasworkers.dev.pages.components.clientComponent.videoComponent.NavRightNowTabConsultationVideoClientComponent;
-import ru.gasworkers.dev.pages.components.clientComponent.videoComponent.NavScheduleTimeTabConsultationVideoClientComponent;
+import ru.gasworkers.dev.pages.components.clientComponent.conferenceComponent.NavRightNowTabConsultationVideoClientComponent;
+import ru.gasworkers.dev.pages.components.clientComponent.conferenceComponent.NavScheduleTimeTabConsultationVideoClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 

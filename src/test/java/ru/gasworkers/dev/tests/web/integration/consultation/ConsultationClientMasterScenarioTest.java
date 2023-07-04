@@ -162,11 +162,11 @@ public class ConsultationClientMasterScenarioTest extends BaseApiTest {
             return dataObject.get("email").getAsString();
         });
         System.out.println("masterEmail = " + masterEmail);
-
-
         String phone = ComplexRegistrationRequestDto.builder()
                 .phone(client.getPhone())
                 .build().getPhone();
+
+//        ----------------------------  UI  --------------------------------
         step("авторизация Ролей ", () -> {
             step("авторизация Клиента", () -> {
                 clientPages.getLoginPage()
@@ -174,6 +174,7 @@ public class ConsultationClientMasterScenarioTest extends BaseApiTest {
                         .login(phone, "1234");
 //            clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);  // TODO fix fullName order
             });
+
             step("авторизация Мастера", () -> {
                 masterPages.getLoginPage()
                         .open()
@@ -189,7 +190,20 @@ public class ConsultationClientMasterScenarioTest extends BaseApiTest {
                 Allure.addAttachment("RunStartTime: ", date);
             });
         });
+        step("Мастер начинает  консультацию", () -> {
+            masterPages.getHomePage()
+                    .conferenceNotification.mainButton();
+            masterPages.getConferenceQrPage()
+                    .pressOutlineButton();
+        });
+        step("Клиент принимает консультацию", () -> {
+            clientPages.getHomePage()
+                    .conferenceNotification.mainButton();
+            clientPages.getConferenceQrPage()
+                    .pressOutlineButton();
+        });
     }
+
 }
 
 

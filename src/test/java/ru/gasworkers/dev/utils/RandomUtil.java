@@ -2,13 +2,16 @@ package ru.gasworkers.dev.utils;
 
 import com.github.javafaker.Faker;
 import org.apache.commons.lang3.RandomStringUtils;
-import ru.gasworkers.dev.tests.DataTest;
+import ru.gasworkers.dev.tests.utils.DataTest;
 
 import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomUtil {
@@ -71,7 +74,7 @@ public class RandomUtil {
             StringBuilder sb = new StringBuilder(len);
             for (int i = 0; i < len; i++)
                 sb.append(AB.charAt(rnd.nextInt(AB.length())));
-            return sb.toString() + "_some_text";
+            return sb + "_some_text";
         }
 
         public static String generatedString = RandomStringUtils.random(20, true, true);
@@ -131,13 +134,13 @@ public class RandomUtil {
 
         public static   String randomMonth() {
             int randomMonth = (int) (Math.random() * month.length);
-            return month[randomMonth].toString();
+            return month[randomMonth];
         }
 
         public static String randomDayOfWeek() {
             String[] weekDay = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
             int randomDayOfWeek = (int) (Math.random() * weekDay.length);
-            return weekDay[randomDayOfWeek].toString();
+            return weekDay[randomDayOfWeek];
         }
 
         public static   String getActualDate() {
@@ -158,7 +161,7 @@ public class RandomUtil {
             int randomYear = (int) (Math.random() * (localDate.getYear() - 1950 + 1) + 1950);
             int randomMonth = (int) (Math.random() * 12 + 1);
             int randomDay = (int) (Math.random() * 28 + 1);
-            return LocalDate.of(randomYear, randomMonth, randomDay).format(formatter).toString();
+            return LocalDate.of(randomYear, randomMonth, randomDay).format(formatter);
         }
 
         public static  String randomDobDay() {
@@ -182,7 +185,7 @@ public class RandomUtil {
         }
 
         public static  String randomDate85to23y() {
-            LocalDate localDate = LocalDate.of(Math.toIntExact((Long) randomLongRange(1985L, 2023L)), Math.toIntExact((Long) randomLongRange(1L, 12L)), Math.toIntExact((Long) randomLongRange(1L, 28L)));
+            LocalDate localDate = LocalDate.of(Math.toIntExact(randomLongRange(1985L, 2023L)), Math.toIntExact(randomLongRange(1L, 12L)), Math.toIntExact(randomLongRange(1L, 28L)));
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMMM-yyyy");
             return localDate.format(formatter);
         }
@@ -205,7 +208,7 @@ public class RandomUtil {
         }
 
         public static Faker faker = new Faker(new Locale("ru"));
-        public static String SNP = faker.name().fullName().toString();
+        public static String SNP = faker.name().fullName();
 
         public static List<String> SNPList = Arrays.asList(SNP.split(" "));
 
@@ -220,7 +223,7 @@ public class RandomUtil {
 
         public static   String relativeFakerPatronymic() {
             String patronymic = SNPList.get(2);
-            return  patronymic.toString();
+            return patronymic;
         }
     public static String fakerRelativeGender() {
         String name = SNPList.get(1);

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.clientComponent.videoComponent.consultationComponent.NavScheduleTimeTabConsultation;
+package ru.gasworkers.dev.pages.components.clientComponent.conferenceComponent.consultationComponent.NavScheduleTimeTabConsultation;
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;

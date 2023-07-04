@@ -4,6 +4,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.notifications.conferenceNotification.ConferenceNotificationSharedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.MasterSidebarComponent;
 
 import java.time.Duration;
@@ -16,12 +17,14 @@ public class HomeMasterPage extends BaseMasterPage{
 
     public final MasterSidebarComponent sidebar;
     public final ActionsBlockMasterComponent actionsBlock;
+    public final ConferenceNotificationSharedComponent conferenceNotification;
 
 
     public HomeMasterPage(RoleBrowser browser) {
         super(browser);
         sidebar = new MasterSidebarComponent(browser);
         actionsBlock = new ActionsBlockMasterComponent(browser);
+        conferenceNotification = new ConferenceNotificationSharedComponent(browser);
     }
 
     SelenideElement

@@ -1,9 +1,9 @@
-package ru.gasworkers.dev.pages.components.clientComponent.videoComponent;
+package ru.gasworkers.dev.pages.components.clientComponent.conferenceComponent;
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
-import ru.gasworkers.dev.pages.components.clientComponent.videoComponent.consultationComponent.FilterConsultationVideoClientComponent;
-import ru.gasworkers.dev.pages.components.clientComponent.videoComponent.consultationComponent.NavRightNowTabConsultation.MasterListRightNowTabConsultationVideoClientComponent;
+import ru.gasworkers.dev.pages.components.clientComponent.conferenceComponent.consultationComponent.FilterConsultationVideoClientComponent;
+import ru.gasworkers.dev.pages.components.clientComponent.conferenceComponent.consultationComponent.OnlineMastersTabConsultation.MasterListRightNowTabConsultationVideoClientComponent;
 
 public class NavRightNowTabConsultationVideoClientComponent extends BaseComponent {
     public final FilterConsultationVideoClientComponent filter;
