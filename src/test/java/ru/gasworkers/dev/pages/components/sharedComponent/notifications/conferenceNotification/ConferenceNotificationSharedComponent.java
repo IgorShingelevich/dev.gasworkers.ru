@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.pages.components.sharedComponent.notifications.conferenceNotification;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
@@ -47,5 +48,19 @@ public class ConferenceNotificationSharedComponent extends BaseComponent {
             cancelConferenceButtonLocator = self.$("a.order-4").as("Кнопка отмены видеоконсультации"),
             primaryButton = self.$("[data-test-id=\"primary\"]").as("Основная кнопка");
 
+    public void checkClientWaitingMasterButtonState() {
+        self.shouldHave(Condition.partialText("Перейти к заказу"));
+    }
 
+    public void checkMasterStartConferenceButtonState() {
+        self.shouldHave(Condition.partialText("Начать консультацию"));
+    }
+
+    public void checkClientJoinConferenceButtonState() {
+        self.shouldHave(Condition.partialText("Продолжить"));
+    }
+
+    public void checkClientFindNewMasterButtonState() {
+        self.shouldHave(Condition.partialText("Найти нового мастера"));
+    }
 }

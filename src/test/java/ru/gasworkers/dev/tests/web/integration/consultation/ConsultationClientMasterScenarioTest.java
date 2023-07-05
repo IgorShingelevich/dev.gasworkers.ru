@@ -169,18 +169,26 @@ public class ConsultationClientMasterScenarioTest extends BaseApiTest {
 //        ----------------------------  UI  --------------------------------
         step("авторизация Ролей ", () -> {
             step("авторизация Клиента", () -> {
-                clientPages.getLoginPage()
-                        .open()
-                        .login(phone, "1234");
-//            clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);  // TODO fix fullName order
+                clientPages.getLoginPage().open();
+//                clientPages.getDriverManager().switchToTab(0);
+//                clientPages.getDriverManager().close();
+                clientPages.getLoginPage().login(phone, "1234");
+                clientPages.getHomePage().checkUrl();
+               /* // Enable the Dark Reader extension
+                Selenide.executeJavaScript("DarkReader.enable()");
+
+                // Wait for the Dark Reader CSS to be applied
+                Selenide.$("body").shouldHave(Condition.attribute("data-darkreader-mode", "dynamic"));
+                // Switch back to the first tab*/
+
             });
 
             step("авторизация Мастера", () -> {
                 masterPages.getLoginPage()
                         .open()
                         .login(masterEmail, "1234");
-                masterPages.getHomePage()
-                        .checkFinishLoading();
+                masterPages.getHomePage().checkUrl();
+
             });
             step("Test run credentials ", () -> {
                 Allure.addAttachment("Client creds", phone + ": " + "1234" + "/");
@@ -191,17 +199,49 @@ public class ConsultationClientMasterScenarioTest extends BaseApiTest {
             });
         });
         step("Мастер начинает  консультацию", () -> {
-            masterPages.getHomePage()
-                    .conferenceNotification.mainButton();
-            masterPages.getConferenceQrPage()
-                    .pressOutlineButton();
+            step("стр Лк мастера с уведомлением", () -> {
+                masterPages.getHomePage().conferenceNotification.checkMasterStartConferenceButtonState();
+                masterPages.getHomePage().conferenceNotification.mainButton();
+            });
+            step("стр QR кода", () -> {
+                masterPages.getConferenceQrPage().checkUrl();
+                masterPages.getConferenceQrPage().outlineButton();
+            });
+            step("стр Видео конференции", () -> {
+                masterPages.getConferencePage().checkFinishLoading();
+            });
         });
         step("Клиент принимает консультацию", () -> {
-            clientPages.getHomePage()
-                    .conferenceNotification.mainButton();
-            clientPages.getConferenceQrPage()
-                    .pressOutlineButton();
+            step("стр Лк клиента с уведомлением", () -> {
+                clientPages.getHomePage().conferenceNotification.checkClientJoinConferenceButtonState();
+                clientPages.getHomePage().conferenceNotification.mainButton();
+            });
+            step("стр QR кода", () -> {
+                clientPages.getConferenceQrPage().checkUrl();
+                clientPages.getConferenceQrPage().outlineButton();
+            });
+            step("стр Видео конференции", () -> {
+                clientPages.getConferencePage().checkFinishLoading();
+            });
         });
+        step("Завершение видеоконсультации", () -> {
+            step("Мастер завершает  консультацию", () -> {
+                masterPages.getConferencePage().endButton();
+                masterPages.getResumeConferencePage().checkUrl();
+                masterPages.getResumeConferencePage().fillResume("test");
+                masterPages.getResumeConferencePage().primaryButton();
+                masterPages.getOrderCardPage().checkUrl();
+                //TODO: check orderCard state
+
+            });
+            step("Клиент завершает  консультацию", () -> {
+                clientPages.getEndConferencePage().checkUrl();
+                clientPages.getEndConferencePage().primaryButton();
+                clientPages.getOrderCardPage().checkUrl();
+                //TODO: check orderCard state
+            });
+        });
+
     }
 
 }

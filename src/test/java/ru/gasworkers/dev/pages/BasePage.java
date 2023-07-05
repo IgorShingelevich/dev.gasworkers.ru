@@ -11,7 +11,7 @@ import static io.qameta.allure.Allure.step;
 public abstract class BasePage extends BaseComponent {
     public final PopUpNotificationsSharedComponent popUp;
     public final UrlCheckerSharedComponent urlChecker;
-    public SelenideElement primaryButton = driver.$("[data-test-id=\"primary\"]").as("Основная кнопка");
+    private final SelenideElement primaryButton = driver.$("[data-test-id=\"primary\"]").as("Основная кнопка");
 
     public BasePage(RoleBrowser browser) {
         super(browser);
@@ -19,13 +19,13 @@ public abstract class BasePage extends BaseComponent {
         urlChecker = new UrlCheckerSharedComponent(browser);
     }
 
-    public void pressPrimaryButton() {
+    public void primaryButton() {
         step("Нажать на основную кнопку ", () -> {
             driver.$("[data-test-id='primary']").click();
         });
     }
 
-    public void pressOutlineButton() {
+    public void outlineButton() {
         step("Нажать на альтернативную кнопку", () -> {
             driver.$("[data-test-id='outline-primary']").click();
         });

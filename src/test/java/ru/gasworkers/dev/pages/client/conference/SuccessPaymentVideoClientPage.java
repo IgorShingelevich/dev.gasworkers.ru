@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.client.video;
+package ru.gasworkers.dev.pages.client.conference;
 
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
@@ -6,7 +6,8 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.client.BaseClientPage;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 
 public class SuccessPaymentVideoClientPage extends BaseClientPage {
 

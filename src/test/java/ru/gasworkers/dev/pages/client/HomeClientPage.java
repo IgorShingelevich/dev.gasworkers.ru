@@ -174,4 +174,8 @@ public final class HomeClientPage extends BaseClientPage {
             });
         });
     }
+
+    public void checkUrl() {
+        urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client");
+    }
 }

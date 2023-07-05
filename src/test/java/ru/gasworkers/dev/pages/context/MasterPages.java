@@ -6,7 +6,8 @@ import ru.gasworkers.dev.pages.master.*;
 import ru.gasworkers.dev.pages.master.ordersHystoryMasterPage.AllCompletedOrdersHistoryMasterPage;
 import ru.gasworkers.dev.pages.master.ordersHystoryMasterPage.AllNewOrdersHistoryMasterPage;
 import ru.gasworkers.dev.pages.master.ordersHystoryMasterPage.AllScheduledOrdersHistoryMasterPage;
-import ru.gasworkers.dev.pages.sharedPages.ConferenceQrPage;
+import ru.gasworkers.dev.pages.sharedPages.conference.ConferenceQrPage;
+import ru.gasworkers.dev.pages.sharedPages.conference.ConferenceSharedPage;
 
 import static ru.gasworkers.dev.model.Role.MASTER;
 
@@ -28,6 +29,8 @@ public final class MasterPages extends BaseRolePages {
     private final AllCompletedOrdersHistoryMasterPage allCompletedOrdersPage = new AllCompletedOrdersHistoryMasterPage(browser);
 
     private final ConferenceQrPage conferenceQrPage = new ConferenceQrPage(browser);
+    private final ConferenceSharedPage conferencePage = new ConferenceSharedPage(browser);
+    private final ResumeConferenceMasterPage resumeConferencePage = new ResumeConferenceMasterPage(browser);
 
 
 }

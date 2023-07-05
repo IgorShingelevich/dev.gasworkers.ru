@@ -5,23 +5,20 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.Doc;
 import ru.gasworkers.dev.model.OrderStatus;
-import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.model.OrderType;
+import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.clientComponent.OffersClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCommonTabOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavDocsTabOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavInfoMasterTabOrderCardPageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-import static io.qameta.allure.Allure.step;
 
 public class OrderCardClientPage extends BaseClientPage {
     public final ClientSidebarComponent sidebar;
@@ -282,5 +279,9 @@ public class OrderCardClientPage extends BaseClientPage {
             cancelOrderButtonLocator.shouldBe(visible, Duration.ofSeconds(30)).click();
         });
         return this;
+    }
+
+    public void checkUrl() {
+        urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client/orders/");
     }
 }

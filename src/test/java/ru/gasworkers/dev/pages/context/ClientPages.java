@@ -3,17 +3,15 @@ package ru.gasworkers.dev.pages.context;
 import com.codeborne.selenide.SelenideDriver;
 import lombok.Getter;
 import ru.gasworkers.dev.pages.client.*;
+import ru.gasworkers.dev.pages.client.conference.*;
 import ru.gasworkers.dev.pages.client.maintenance.SelectDateMaintenanceClientPage;
 import ru.gasworkers.dev.pages.client.maintenance.SelectInsuranceClientPage;
 import ru.gasworkers.dev.pages.client.maintenance.SelectObjectMaintenanceClientPage;
 import ru.gasworkers.dev.pages.client.maintenance.SelectPaymentMaintenanceClientPage;
-import ru.gasworkers.dev.pages.client.video.ApproveDetailsVideoClientPage;
-import ru.gasworkers.dev.pages.client.video.ConsultationVideoClientPage;
-import ru.gasworkers.dev.pages.client.video.SelectPaymentVideoClientPage;
-import ru.gasworkers.dev.pages.client.video.SuccessPaymentVideoClientPage;
 import ru.gasworkers.dev.pages.sharedPages.AllNotificationsPage;
-import ru.gasworkers.dev.pages.sharedPages.ConferenceQrPage;
 import ru.gasworkers.dev.pages.sharedPages.LandingPage;
+import ru.gasworkers.dev.pages.sharedPages.conference.ConferenceQrPage;
+import ru.gasworkers.dev.pages.sharedPages.conference.ConferenceSharedPage;
 
 import static ru.gasworkers.dev.model.Role.CLIENT;
 
@@ -53,4 +51,6 @@ public final class ClientPages extends BaseRolePages {
     private final AllNotificationsPage allNotificationsPage = new AllNotificationsPage(browser);
 
     private final ConferenceQrPage conferenceQrPage = new ConferenceQrPage(browser);
+    private final ConferenceSharedPage conferencePage = new ConferenceSharedPage(browser);
+    private final EndConferenceClientPage endConferencePage = new EndConferenceClientPage(browser);
 }

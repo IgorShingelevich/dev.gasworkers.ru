@@ -46,7 +46,7 @@ public final class LoginPage extends BasePage {
                 passwordFieldLocator.pressEnter();
                 passwordFieldLocator.shouldHave(value(password));
             });
-            pressPrimaryButton();
+            primaryButton();
         });
 
     }

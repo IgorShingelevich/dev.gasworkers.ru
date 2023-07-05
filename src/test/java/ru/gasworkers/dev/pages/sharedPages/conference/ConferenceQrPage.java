@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.sharedPages;
+package ru.gasworkers.dev.pages.sharedPages.conference;
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
@@ -12,7 +12,12 @@ public class ConferenceQrPage extends BasePage {
     }
 
     @Override
-    public void pressOutlineButton() {
-        super.pressOutlineButton();
+    public void outlineButton() {
+        super.outlineButton();
+    }
+
+    public void checkUrl() {
+        urlChecker.urlStartsWith("https://dev.gasworkers.ru/conference");
+        urlChecker.urlContains("/qr");
     }
 }

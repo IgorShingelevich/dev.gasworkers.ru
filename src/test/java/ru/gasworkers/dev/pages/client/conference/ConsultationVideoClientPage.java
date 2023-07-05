@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.client.video;
+package ru.gasworkers.dev.pages.client.conference;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;

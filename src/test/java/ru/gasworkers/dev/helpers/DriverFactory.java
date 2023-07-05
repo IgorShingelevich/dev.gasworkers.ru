@@ -24,6 +24,8 @@ public final class DriverFactory {
 // Enable camera and microphone access
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--use-fake-ui-for-media-stream");
+        // Install and activate the extension
+//        chromeOptions.addExtensions(new File("src/test/resources/web/eimadpbcbfnmbkopoojfekhnkhdbieeh-4.9.64-Crx4Chrome.com.crx"));
         config.browserCapabilities(chromeOptions);
 
 //        config.proxyEnabled(true);
