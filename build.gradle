@@ -12,8 +12,8 @@ repositories {
 }
 
 ext {
-    selenideVersion = '6.14.0'
-    selenideProxy = '6.14.0'
+    selenideVersion = '6.16.0'
+    selenideProxy = '6.16.0'
     assertjVersion = '3.24.2'
     junitJupiterVersion = '5.9.0'
     hamcrest = '2.2'
@@ -115,8 +115,8 @@ task taskProvider_apiTest(type: Test) {
     }
 }
 
-task taskProvider_apiCollection(type: Test) {
+task taskProvider_webTest(type: Test) {
     useJUnitPlatform {
-        includeTags "api-collection"
+        includeTags "web"
     }
 }

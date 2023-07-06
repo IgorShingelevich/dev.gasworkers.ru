@@ -12,7 +12,7 @@ import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.Maste
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCheckListTabOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCommonTabOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavDocsTabOrderCardPageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavInfoMasterTabOrderCardPageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavInfoMasterTabOrderCardMasterPageComponent;
 
 import java.time.Duration;
 
@@ -24,9 +24,9 @@ public class OrderCardMasterPage extends BaseMasterPage {
     public final MasterSidebarComponent sidebar;
     public final ActionsBlockMasterComponent actionsBlock;
     public final StatusBoxOrderCardComponent statusBox;
-    public final NavCommonTabOrderCardPageComponent commonTab;
+    public final NavCommonTabOrderCardPageComponent tabCommon;
     public final NavCheckListTabOrderCardPageComponent tabCheckList;
-    public final NavInfoMasterTabOrderCardPageComponent tabInfoMaster;
+    public final NavInfoMasterTabOrderCardMasterPageComponent tabInfoMaster;
     public final NavDocsTabOrderCardPageComponent tabDocs;
     private final String PAGE_TITLE = "Заказ";
     ElementsCollection
@@ -45,6 +45,8 @@ public class OrderCardMasterPage extends BaseMasterPage {
             saveCheckListButtonLocator = mainButtonLocator.$(byTagAndText("span", "Сохранить")).as("Сохранить"),
             editObjectButtonLocator = driver.$(byTagAndText("span", "Редактировать объект/оборудование")).as("Редактировать объект/оборудование"),
             startWorkingButtonLocator = driver.$(byTagAndText("span", "Приступить к работе")).as("Приступить к работе"),
+            conferenceResumeTextLocator = driver.$("div.item.hr.mt-3 span").as("Текст резюме конференции"),
+            conferenceVideoLocator = driver.$("div.wrapper video").as("Видео конференции"),
             saveButtonLocator = driver.$(byTagAndText("span", "Сохранить")).as("Сохранить");
 
 
@@ -53,9 +55,9 @@ public class OrderCardMasterPage extends BaseMasterPage {
         sidebar = new MasterSidebarComponent(browser);
         actionsBlock = new ActionsBlockMasterComponent(browser);
         statusBox = new StatusBoxOrderCardComponent(browser);
-        commonTab = new NavCommonTabOrderCardPageComponent(browser);
+        tabCommon = new NavCommonTabOrderCardPageComponent(browser);
         tabCheckList = new NavCheckListTabOrderCardPageComponent(browser);
-        tabInfoMaster = new NavInfoMasterTabOrderCardPageComponent(browser);
+        tabInfoMaster = new NavInfoMasterTabOrderCardMasterPageComponent(browser);
         tabDocs = new NavDocsTabOrderCardPageComponent(browser);
     }
 
@@ -84,7 +86,8 @@ public class OrderCardMasterPage extends BaseMasterPage {
 
     public void navInfoMaster() {
         stepWithRole("Перейти на вкладку Информация по работам", () -> {
-            navButtonsCollection.get(2).shouldHave(text("Информация по работам")).click();
+            navButtonsCollection.get(2).shouldHave(text("Информация по работам"));
+            driver.$("li[data-name='master']").click();
         });
     }
 
@@ -98,9 +101,9 @@ public class OrderCardMasterPage extends BaseMasterPage {
         //TODO check current nav tab is navCommon
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                commonTab.fillUpBanner.checkBannerDetails();
-                commonTab.orderStatus.currentStatus(orderStatus);
-                commonTab.orderDetails.currentType(orderType);
+                tabCommon.fillUpBanner.checkBannerDetails();
+                tabCommon.orderStatus.currentStatus(orderStatus);
+                tabCommon.orderDetails.currentType(orderType);
                 stepWithRole("Убедиться, что  представлены кнопки  Редактировать объект/оборудование, кнопка Приступить к работе и кнопка Заказ на ремонт", () -> {
                     startWorkingButtonLocator.shouldBe(visible);
                     editObjectButtonLocator.shouldBe(visible);
@@ -108,7 +111,7 @@ public class OrderCardMasterPage extends BaseMasterPage {
                 });
             });
             stepWithRole("Вкладка Чек лист", () -> {
-                commonTab.fillUpBanner.clickOnCheckListLink();
+                tabCommon.fillUpBanner.clickOnCheckListLink();
                 tabCheckList.checkFinishLoading(orderStatus);
                 tabCheckList.checkListComponent.isDisableRadioButtonsState();
                 stepWithRole("Убедиться, представлена кнопки  Редактировать объект/оборудование, кнопка Кнопка Сохранить неактивная и кнопка Заказ на ремонт", () -> {
@@ -160,7 +163,7 @@ public class OrderCardMasterPage extends BaseMasterPage {
             stepWithRole("Убедиться что на всех вкладках карточки заказа отсутствует баннер Заполните чек-лист", () -> {
                 tabCheckList.fillUpBanner.checkBannerIsNotPresent();
                 navCommon();
-                commonTab.fillUpBanner.checkBannerIsNotPresent();
+                tabCommon.fillUpBanner.checkBannerIsNotPresent();
                 navInfoMaster();
                 tabInfoMaster.fillUpBanner.checkBannerIsNotPresent();
                 navDocs();
@@ -168,8 +171,8 @@ public class OrderCardMasterPage extends BaseMasterPage {
             });
             stepWithRole("Вкладка Описание заказа", () -> {
                 navCommon();
-                commonTab.orderStatus.currentStatus(orderStatus);
-                commonTab.orderDetails.currentType(orderType);
+                tabCommon.orderStatus.currentStatus(orderStatus);
+                tabCommon.orderDetails.currentType(orderType);
                 stepWithRole("Убедиться, что  представлены кнопки Приступить к работе, кнопка Заказ на ремонт", () -> {
                     editObjectButtonLocator.shouldNotBe(visible);
                     repairFromMaintenanceButtonLocator.shouldBe(visible);
@@ -227,5 +230,12 @@ public class OrderCardMasterPage extends BaseMasterPage {
 
     public void checkUrl() {
         urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/master/orders/");
+    }
+
+    public void checkFinishConference(String resume) {
+        stepWithRole("Проверить, что в конференции есть сообщение: " + resume, () -> {
+            conferenceResumeTextLocator.shouldHave(text(resume));
+            conferenceVideoLocator.shouldBe(visible);
+        });
     }
 }

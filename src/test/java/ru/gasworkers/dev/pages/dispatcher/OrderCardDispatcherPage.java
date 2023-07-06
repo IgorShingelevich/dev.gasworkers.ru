@@ -10,18 +10,16 @@ import ru.gasworkers.dev.pages.components.dispatcherComponent.DatePickerOrderDis
 import ru.gasworkers.dev.pages.components.dispatcherComponent.OfferPriceModalDispatcherComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.buttonSharedComponent.MainButtonSharedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockDispatcherComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.DispatcherSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCommonTabOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavDocsTabOrderCardPageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavInfoMasterTabOrderCardPageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.DispatcherSidebarComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavInfoMasterTabOrderCardMasterPageComponent;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
-import static io.qameta.allure.Allure.step;
 
 public class OrderCardDispatcherPage extends BaseDispatcherPage {
 
@@ -29,7 +27,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
     public final DatePickerOrderDispatcherComponent datePicker;
     public final ActionsBlockDispatcherComponent actionBlock;
     public final NavCommonTabOrderCardPageComponent tabCommon;
-    public final NavInfoMasterTabOrderCardPageComponent tabInfoMaster;
+    public final NavInfoMasterTabOrderCardMasterPageComponent tabInfoMaster;
     public final NavDocsTabOrderCardPageComponent tabDocs;
     public final MainButtonSharedComponent mainButton;
     public final OfferPriceModalDispatcherComponent offerPrice;
@@ -41,7 +39,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         datePicker = new DatePickerOrderDispatcherComponent(browser);
         actionBlock = new ActionsBlockDispatcherComponent(browser);
         tabCommon = new NavCommonTabOrderCardPageComponent(browser);
-        tabInfoMaster = new NavInfoMasterTabOrderCardPageComponent(browser);
+        tabInfoMaster = new NavInfoMasterTabOrderCardMasterPageComponent(browser);
         tabDocs = new NavDocsTabOrderCardPageComponent(browser);
         mainButton = new MainButtonSharedComponent(browser);
         offerPrice = new OfferPriceModalDispatcherComponent(browser);

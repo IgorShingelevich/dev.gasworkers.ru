@@ -20,8 +20,9 @@ public final class AllureTag {
             BG_REGISTRATION = "bg-registration",
             OBJECT = "object";
 
-    public static final String UI = "ui",
+    public static final String
             API = "api",
+            WEB = "web",
             API_COLLECTION = "api-collection";
 
     public static final String

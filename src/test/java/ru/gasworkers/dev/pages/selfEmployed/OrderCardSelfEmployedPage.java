@@ -7,14 +7,14 @@ import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.FillProfileBannerSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.orderPageComponent.FillUpOfferBannerOrderPageSelfEmployedComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.HeaderSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.orderPageComponent.OfferPriceModalWindowSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.StatusBoxOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.HeaderSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.modesSidebarSelfEmployedComponent.DispatcherModeSelfEmployedSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCheckListTabOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCommonTabOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavDocsTabOrderCardPageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavInfoMasterTabOrderCardPageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavInfoMasterTabOrderCardMasterPageComponent;
 
 import java.time.Duration;
 
@@ -34,7 +34,7 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
 
     public final NavCommonTabOrderCardPageComponent commonTab;
     public final NavCheckListTabOrderCardPageComponent tabCheckList;
-    public final NavInfoMasterTabOrderCardPageComponent tabInfoMaster;
+    public final NavInfoMasterTabOrderCardMasterPageComponent tabInfoMaster;
     public final NavDocsTabOrderCardPageComponent tabDocs;
 
 
@@ -48,7 +48,7 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
         statusBox = new StatusBoxOrderCardComponent(browser);
         commonTab = new NavCommonTabOrderCardPageComponent(browser);
         tabCheckList = new NavCheckListTabOrderCardPageComponent(browser);
-        tabInfoMaster = new NavInfoMasterTabOrderCardPageComponent(browser);
+        tabInfoMaster = new NavInfoMasterTabOrderCardMasterPageComponent(browser);
         tabDocs = new NavDocsTabOrderCardPageComponent(browser);
 
 
