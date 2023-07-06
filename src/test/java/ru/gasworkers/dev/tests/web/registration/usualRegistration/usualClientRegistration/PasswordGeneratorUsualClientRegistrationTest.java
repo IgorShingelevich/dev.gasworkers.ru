@@ -20,20 +20,18 @@ import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
 import static io.qameta.allure.Allure.step;
+@Owner("Igor Shingelevich")
+@Epic(AllureEpic.REGISTRATION)
+@Feature(AllureFeature.REGULAR_REGISTRATION)
+@Story("Регистрация со Сгенерированным паролем")
+@Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.WEB), @Tag(AllureTag.POSITIVE)})
 
 public class PasswordGeneratorUsualClientRegistrationTest extends BaseTest {
-
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
-
     RandomClient randomClient = new RandomClient();
 
     @Test
-    @Owner("Igor Shingelevich")
-    @Epic(AllureEpic.REGISTRATION)
-    @Feature(AllureFeature.REGULAR_REGISTRATION)
-    @Story("Регистрация со Сгенерированным паролем")
-    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Регистрация со Сгенерированным паролем")
     void registrationClientWithGeneratedPasswordByPhone() {
         step("Страница лендинга", () -> {
@@ -90,6 +88,4 @@ public class PasswordGeneratorUsualClientRegistrationTest extends BaseTest {
         });
         //TODO profile check
     }
-
-
 }

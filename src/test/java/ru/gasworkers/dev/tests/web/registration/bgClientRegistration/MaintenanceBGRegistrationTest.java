@@ -22,9 +22,15 @@ import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
 import static io.qameta.allure.Allure.step;
+@Owner("Igor Shingelevich")
+@Epic(AllureEpic.REGISTRATION)
+@Feature(AllureFeature.BG_REGISTRATION)
+@Story(AllureStory.MAINTENANCE)
+@Tag(AllureTag.BG_REGISTRATION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.REGISTRATION)
 @Tag(AllureTag.REGRESSION)
+@Tag(AllureTag.WEB)
 
 public class MaintenanceBGRegistrationTest extends BaseTest {
 
@@ -34,10 +40,7 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
     RandomClient randomClient = new RandomClient();
 
     @Test
-    @Owner("Igor Shingelevich")
-    @Epic(AllureEpic.REGISTRATION)
-    @Feature(AllureFeature.BG_REGISTRATION)
-    @Story(AllureStory.MAINTENANCE)
+
     @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.BG_REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Фоновая Регистрация на ТО с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
     public void  bgRegistrationPhoneMaintenance() {
@@ -75,7 +78,7 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
                 clientPages.getHomePage().checkBGInitialState(randomClient.getSinceTodayDate());
             });
             step("Страница Уведомления", () -> {
-               clientPages.getHomePage().actionsBlock.notifications();
+                clientPages.getHomePage().actionsBlock.notifications();
                 // TODO fix  Push notification  - not appear after Guide
 //                clientPages.getAllNotificationsPage().checkInitialBGState(orderNumber);
 //                clientPages.getAllNotificationsPage().readAll();

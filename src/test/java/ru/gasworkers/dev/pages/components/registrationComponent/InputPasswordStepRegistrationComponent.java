@@ -6,7 +6,6 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Condition.text;
 
 public class InputPasswordStepRegistrationComponent extends BaseComponent {
     public final HeaderRegistrationComponent header;
@@ -33,7 +32,7 @@ public class InputPasswordStepRegistrationComponent extends BaseComponent {
             generatePasswordButtonLocator = driver.$("div button.lock-icon.btn.btn-link.disable-outline").as("Кнопка генерации кода"),
             passwordInputLocator = driver.$("input[placeholder*=Пароль]").as("Поле ввода пароля"),
             confirmPasswordInputLocator = driver.$("input[placeholder*=Подтвердить]").as("Поле ввода подтверждения пароля"),
-            suggestedPasswordLocator = driver.$("input[readonly=readonly]").as("Предложенный пароль"),
+            suggestedPasswordFieldLocator = driver.$("form input[type='text']").as("Поле сгенерированного пароля"),
             passwordHintLocator = driver.$("div span.text").as("Подсказка к паролю"),
             errorMessageLocator = driver.$("div.gas-input__error").as("Сообщение об ошибке"),
             forwardButtonLocator = driver.$("div button.btn.btn-primary").as("Кнопка перехода к следующему шагу"),
@@ -96,9 +95,9 @@ public class InputPasswordStepRegistrationComponent extends BaseComponent {
             stepWithRole("Нажать на кнопку Сгенерировать пароль", () -> {
                 generatePasswordButtonLocator.click();
             });
-            stepWithRole("Убедиться, что сгенерирован Надежный  пароль: " + suggestedPasswordLocator.val().toString(), () -> {
-                suggestedPasswordLocator.shouldBe(visible);
-                System.out.println("suggestedPassword: " + suggestedPasswordLocator.val().toString());
+            stepWithRole("Убедиться, что сгенерирован Надежный  пароль: ", () -> {
+                suggestedPasswordFieldLocator.shouldBe(visible);
+                System.out.println("suggestedPassword: " + suggestedPasswordFieldLocator.val());
             });
             stepWithRole("Убедиться что появился подзаголовок поля Надежный пароль " + strongPasswordSubtitleCollection.get(0).getText(), () -> {
                 strongPasswordSubtitleCollection.get(0).as("подзаголовок поля Надежный пароль").shouldHave(text("Мы сгенерировали вам пароль"));
@@ -106,7 +105,7 @@ public class InputPasswordStepRegistrationComponent extends BaseComponent {
             stepWithRole("Убедиться что появилось описание поля Надежный пароль " + strongPasswordSubtitleCollection.get(1).getText(), () -> {
                 strongPasswordSubtitleCollection.get(1).as("описание поля Надежный пароль").shouldHave(text("Пароль должен содержать не менее 4 знаков"));
             });
-            stepWithRole("Убедиться, что поле Пароль и Подтверждение пароля заполнены сгенерированным паролем: " + passwordInputLocator.val().toString(), () -> {
+            stepWithRole("Убедиться, что поле Пароль и Подтверждение пароля заполнены сгенерированным паролем: " + passwordInputLocator.val(), () -> {
                 stepWithRole("Нажать на иконку Показать  скрытый пароль в поле Пароль и Подтверждение Пароля", () -> {
                     stepWithRole("Убедиться, что иконки переходят из состояния Скрытый пароль в состояние Пароль Отображается", () -> {
                         eyeIconCollection.get(0).shouldNotHave(cssClass("visible")).click();
@@ -115,7 +114,7 @@ public class InputPasswordStepRegistrationComponent extends BaseComponent {
                         eyeIconCollection.get(1).shouldHave(cssClass("visible"));
                     });
                 });
-                stepWithRole("Убедиться, что в поле Пароль и Подтверждение Пароля отображается сгенерированный пароль: " + passwordInputLocator.val().toString(), () -> {
+                stepWithRole("Убедиться, что в поле Пароль и Подтверждение Пароля отображается сгенерированный пароль: " + passwordInputLocator.val(), () -> {
                     passwordInputLocator.shouldNotBe(empty);
                     confirmPasswordInputLocator.shouldNotBe(empty);
                 });

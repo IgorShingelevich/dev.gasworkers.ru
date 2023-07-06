@@ -19,23 +19,16 @@ import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
 import static io.qameta.allure.Allure.step;
-
-
+@Owner("Igor Shingelevich")
+@Epic(AllureEpic.REGISTRATION)
+@Feature(AllureFeature.REGULAR_REGISTRATION)
+@Story("По телефону")
+@Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.WEB), @Tag(AllureTag.POSITIVE)})
 public class ByPhoneUsualClientRegistrationTest extends BaseTest {
-
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
-
     RandomClient randomClient = new RandomClient();
-
-
-
     @Test
-    @Owner("Igor Shingelevich")
-    @Epic(AllureEpic.REGISTRATION)
-    @Feature(AllureFeature.REGULAR_REGISTRATION)
-    @Story("По телефону")
-    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Регистрация клиента по телефону и проверка состояния кабинета")
     void registrationClientByPhone() {
         step("Страница лендинга", () -> {
@@ -118,7 +111,4 @@ public class ByPhoneUsualClientRegistrationTest extends BaseTest {
         });
         //TODO profile check
     }
-
-
-
 }

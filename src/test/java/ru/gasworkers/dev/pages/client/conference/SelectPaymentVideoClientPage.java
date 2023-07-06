@@ -50,7 +50,7 @@ public class SelectPaymentVideoClientPage extends BaseClientPage {
         reserveTextLocator.shouldBe(visible).shouldHave(text(RESERVE_TEXT));
         paymentMethodsSubtitleLocator.shouldBe(visible).shouldHave(text(PAYMENT_METHODS_SUBTITLE));
         payMirButtonLocator.shouldBe(visible);
-        paySpbButtonLocator.shouldBe(visible);
+//        paySpbButtonLocator.shouldBe(visible); not necessary on dev due to less then 10rub cost
         });
     }
 

@@ -20,19 +20,16 @@ import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
 
 import static io.qameta.allure.Allure.step;
-
+@Deprecated
+@Owner("Igor Shingelevich")
+@Epic(AllureEpic.REGISTRATION)
+@Feature(AllureFeature.REGULAR_REGISTRATION)
+@Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.SE_MEMBER), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.WEB), @Tag(AllureTag.POSITIVE)})
 public class SelfEmployedRegistrationApiTest extends BaseTest {
     RandomSelfEmployedAndMaster randomSelfEmployedAndMaster = new RandomSelfEmployedAndMaster();
-
-
     @Browser(role = Role.SELF_EMPLOYED, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     SelfEmployedPages selfEmployedPages;
-
     @Test
-    @Owner("Igor Shingelevich")
-    @Epic(AllureEpic.REGISTRATION)
-    @Feature(AllureFeature.REGULAR_REGISTRATION)
-    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.SE_MEMBER), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Регистрация СМЗ в СК")
     public void byPhoneSEMemberRegistrationTest() {
         String equipmentWorkPrice = "4000";

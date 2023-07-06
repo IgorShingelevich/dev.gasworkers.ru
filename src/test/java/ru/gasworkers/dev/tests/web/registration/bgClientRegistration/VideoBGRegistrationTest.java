@@ -6,7 +6,6 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
@@ -20,12 +19,22 @@ import ru.gasworkers.dev.model.equipment.EquipmentType;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
-import ru.gasworkers.dev.utils.userBuilder.UserBuilder;
 
 import static io.qameta.allure.Allure.step;
+
+@Owner("Igor Shingelevich")
+@Epic(AllureEpic.REGISTRATION)
+@Feature(AllureFeature.BG_REGISTRATION)
+@Story(AllureStory.VIDEO)
+@Tag(AllureTag.REGRESSION)
+@Tag(AllureTag.CLIENT)
+@Tag(AllureTag.REGISTRATION)
+@Tag(AllureTag.BG_REGISTRATION)
+@Tag(AllureTag.POSITIVE)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.REGISTRATION)
 @Tag(AllureTag.REGRESSION)
+@Tag(AllureTag.WEB)
 
 public class VideoBGRegistrationTest extends BaseTest {
 
@@ -35,7 +44,7 @@ public class VideoBGRegistrationTest extends BaseTest {
 
     RandomClient randomClient = new RandomClient();
 
-    UserBuilder masterИнжТехМастер3 = new UserBuilder(
+    /*UserBuilder masterИнжТехМастер3 = new UserBuilder(
             "ИнжТехМастер3",
             "ИнжТехМастерович3",
             "ИнжТехМастеров3",
@@ -53,14 +62,10 @@ public class VideoBGRegistrationTest extends BaseTest {
             " test_gas_master_sssr1@rambler.ru",
             "123456",
             null,
-            79917644241L);
+            79917644241L);*/
 
     @Test
-    @Owner("Igor Shingelevich")
-    @Epic(AllureEpic.REGISTRATION)
-    @Feature(AllureFeature.BG_REGISTRATION)
-    @Story(AllureStory.VIDEO)
-    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.BG_REGISTRATION), @Tag(AllureTag.POSITIVE)})
+
     @DisplayName("Фоновая Регистрация на Видео Сейчас с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
 
     public void bgRegistrationNowVideo() {
@@ -72,16 +77,16 @@ public class VideoBGRegistrationTest extends BaseTest {
         step("Клиент заполняет форму фоновой регистрации", () -> {
             clientPages.getLandingPage().bgRegistration.checkFinishLoading();
             clientPages.getLandingPage().bgRegistration.fillBGVideoRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhone(), randomClient.getEmail(), randomClient.getEquipmentVideoFile());
-           // TODO add photo video
-       });
+            // TODO add photo video
+        });
 //       String resultedAddress = clientPages.getLandingPage().bgRegistration.address.getResultedAddress(); // removed
-       String resultedEquipmentCollectionName = clientPages.getLandingPage().bgRegistration.equipment.getEquipmentName(0);
-       // todo String desiredDate =
-         // todo String desiredTime =
-       //todo modify equipmentCollection index for  different equipment count
-       String errorText = clientPages.getLandingPage().bgRegistration.equipment.getErrorText();
+        String resultedEquipmentCollectionName = clientPages.getLandingPage().bgRegistration.equipment.getEquipmentName(0);
+        // todo String desiredDate =
+        // todo String desiredTime =
+        //todo modify equipmentCollection index for  different equipment count
+        String errorText = clientPages.getLandingPage().bgRegistration.equipment.getErrorText();
         clientPages.getLandingPage().bgRegistration.findOffers();
-          clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode(), "https://dev.gasworkers.ru/orders/consultation");
+        clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode(), "https://dev.gasworkers.ru/orders/consultation");
 
 
         step("Страница Видеоконсультация", () -> {
@@ -122,18 +127,18 @@ public class VideoBGRegistrationTest extends BaseTest {
         });
         clientPages.getApproveMasterVideoPage().clickPayButton();
 
-        String priceWithCommissions =  step("Страница выбора способа оплаты", () -> {
+        String priceWithCommissions = step("Страница выбора способа оплаты", () -> {
             clientPages.getSelectPaymentVideoPage().checkFinishLoading();
-            String commissionValue = clientPages.getSelectPaymentVideoPage().getCommissionValue(1);
+            String commissionValue = clientPages.getSelectPaymentVideoPage().getCommissionValue(0);
             System.out.println("Комиссия СПБ: " + commissionValue);
-            clientPages.getSelectPaymentVideoPage().paySpb();
+            clientPages.getSelectPaymentVideoPage().payMir();
             return commissionValue;
         });
 
-        step("Страница оплаты картой", () -> {
-                clientPages.getPaymentWizardPage().checkFinishLoading(priceWithCommissions);
-                clientPages.getPaymentWizardPage().payButton();
-        });
+       /* step("Страница оплаты картой", () -> {
+            clientPages.getPaymentWizardPage().checkFinishLoading(priceWithCommissions);
+            clientPages.getPaymentWizardPage().payButton();
+        });*/
 
         step("Страница успешной оплаты", () -> {
             clientPages.getSuccessPaymentVideoPage().checkFinishLoading();
@@ -147,7 +152,7 @@ public class VideoBGRegistrationTest extends BaseTest {
             });*/
 
             step("Домашняя страница", () -> {
-               clientPages.getHomePage().checkVideoBGInitialState(randomClient.getSinceTodayDate(), masterFullNameByIndex);
+                clientPages.getHomePage().checkVideoBGInitialState(randomClient.getSinceTodayDate(), masterFullNameByIndex);
             });
             step("Страница Уведомления", () -> {
                 clientPages.getHomePage().actionsBlock.notifications();

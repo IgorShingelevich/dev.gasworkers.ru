@@ -7,7 +7,6 @@ import ru.gasworkers.dev.pages.components.registrationComponent.HeaderRegistrati
 import ru.gasworkers.dev.pages.components.registrationComponent.StepNumberRegistrationComponent;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Condition.checked;
 
 public class FirstStepClientRegistrationComponent extends BaseComponent {
     public final HeaderRegistrationComponent header;
@@ -32,16 +31,16 @@ public class FirstStepClientRegistrationComponent extends BaseComponent {
             inputPhoneLocator = driver.$("input[placeholder*=Номер]").as("Поле ввода номера телефона"),
             inputEmailLocator = driver.$("input[placeholder*=почта]").as("Поле ввода электронной почты"),
             checkboxLocator = driver.$("div input[type=checkbox]").as("Чекбокс"),
-            userAgreementLinkLocator = driver.$("a[href*=user_agreement]").as("Ссылка на пользовательское соглашение"),
+            userAgreementLinkLocator = driver.$("a.link-blue").as("Ссылка на пользовательское соглашение"),
             forwardButtonLocator = driver.$("div button.btn.btn-primary").as("Кнопка перехода к следующему шагу"),
             errorMessageLocator = driver.$("div.gas-input__error").as("Сообщение об ошибке"),
             backButtonLocator = driver.$("div button.btn.btn-outline-primary").as("Кнопка перехода к предыдущему шагу");
 
-    public void checkFirstStepFinishLoading () {
-        stepWithRole("Убедиться, что представлены компоненты первого шага регистрации: " , () -> {
-           stepNumber.checkStepNumber(1);
-           header.checkFinishLoading();
-            stepWithRole("Убедиться, что отображается заголовок: " + FIRST_TITLE , () -> {
+    public void checkFirstStepFinishLoading() {
+        stepWithRole("Убедиться, что представлены компоненты первого шага регистрации: ", () -> {
+            stepNumber.checkStepNumber(1);
+            header.checkFinishLoading();
+            stepWithRole("Убедиться, что отображается заголовок: " + FIRST_TITLE, () -> {
                 titleLocator.shouldHave(text(FIRST_TITLE));
             });
             stepWithRole("Убедиться, что отображается описание: " + FIRST_SUBTITLE , () -> {
@@ -91,7 +90,7 @@ public class FirstStepClientRegistrationComponent extends BaseComponent {
     }
 
     public void byPhone (String phone) {
-        String formatPhoneNumber ="+ " + phone.substring(0, 1) + "(" + phone.substring(1, 4) + ")-" + phone.substring(4, 7) + "-" + phone.substring(7, 11);
+        String formatPhoneNumber ="+ " + phone.charAt(0) + "(" + phone.substring(1, 4) + ")-" + phone.substring(4, 7) + "-" + phone.substring(7, 11);
         stepWithRole("Ввести номер телефона: " + formatPhoneNumber , () -> {
             inputPhoneLocator.setValue(phone);
             System.out.println("phone: " + formatPhoneNumber + " " + phone);

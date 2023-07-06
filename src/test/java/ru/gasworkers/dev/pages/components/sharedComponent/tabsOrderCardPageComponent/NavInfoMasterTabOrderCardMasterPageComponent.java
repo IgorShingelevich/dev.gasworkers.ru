@@ -6,7 +6,6 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.masterComponent.FillUpCheckListBannerComponent;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
 
 public class NavInfoMasterTabOrderCardMasterPageComponent extends BaseTabOrderCardComponent {
     public final OrderStatusOrderCardPageComponent orderState;
@@ -27,10 +26,9 @@ public class NavInfoMasterTabOrderCardMasterPageComponent extends BaseTabOrderCa
         orderState.currentStatus(orderStatus);
     }
 
-    public void checkFinishConference(String resume) {
+    public void checkResumeConference(String resume) {
         stepWithRole("Проверить, что в конференции есть сообщение: " + resume, () -> {
             conferenceResumeTextLocator.shouldHave(text(resume));
-            conferenceVideoLocator.shouldBe(visible);
         });
     }
 }

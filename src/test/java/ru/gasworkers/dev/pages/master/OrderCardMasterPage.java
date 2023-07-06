@@ -31,17 +31,17 @@ public class OrderCardMasterPage extends BaseMasterPage {
     private final String PAGE_TITLE = "Заказ";
     ElementsCollection
 
-            navButtonsCollection = driver.$$("div.navigation-block li").as("Навигационные кнопки"),
             orderDetailsCollection = driver.$$("div.order-details-item").as("Информация о заказе"),
             docsTitleCollection = driver.$$("div .link-pdf ").as("Названия документов");
     SelenideElement
+            navCommonTabButtonLocator = driver.$("li[data-name='common']").as("Вкладка Описание заказа"),
+            navInfoMasterTabButtonLocator = driver.$("li[data-name='master']").as("Вкладка Информация о мастере"),
+            navChecklistTabButtonLocator = driver.$("li[data-name='checklist']").as("Вкладка Чек-лист"),
+            navDocsTabButtonLocator = driver.$("li[data-name='documents']").as("Вкладка Документы"),
             titleLocator = driver.$("h1.h3.mb-2").as("Заголовок страницы"),
             repairFromMaintenanceButtonLocator = driver.$(byTagAndText("span", "Заказ на ремонт")).as("Заказ на ремонт из ТО"),
             orderBlockLocator = driver.$(".page-content #order").as("Блок заказа"),
-            navDescriptionButtonLocator = navButtonsCollection.get(0).as("Описание заказа"),
-            navCheckListButtonLocator = navButtonsCollection.get(1).as("Чек лист"),
-            navInfoButtonLocator = navButtonsCollection.get(2).as("Информация по работам"),
-            navDocumentsButtonLocator = navButtonsCollection.get(3).as("Документы"), mainButtonLocator = driver.$("button.btn.btn-primary").as("Основная кнопка"),
+            mainButtonLocator = driver.$("button.btn.btn-primary").as("Основная кнопка"),
             saveCheckListButtonLocator = mainButtonLocator.$(byTagAndText("span", "Сохранить")).as("Сохранить"),
             editObjectButtonLocator = driver.$(byTagAndText("span", "Редактировать объект/оборудование")).as("Редактировать объект/оборудование"),
             startWorkingButtonLocator = driver.$(byTagAndText("span", "Приступить к работе")).as("Приступить к работе"),
@@ -74,26 +74,38 @@ public class OrderCardMasterPage extends BaseMasterPage {
 
     public void navCommon() {
         stepWithRole("Перейти на вкладку Описание заказа", () -> {
-            navButtonsCollection.get(0).shouldHave(text("Описание заказа")).click();
+            navCommonTabButtonLocator.click();
+            stepWithRole("Убедиться, что открылась вкладка Описание заказа", () -> {
+                navCommonTabButtonLocator.shouldHave(cssClass("active")); // TODO uncomment after fix
+            });
         });
     }
 
     public void navCheckList() {
         stepWithRole("Перейти на вкладку Чек лист", () -> {
-            navButtonsCollection.get(1).shouldHave(text("Чек лист")).click();
+            navChecklistTabButtonLocator.click();
+            stepWithRole("Убедиться, что открылась вкладка Чек лист", () -> {
+                navChecklistTabButtonLocator.shouldHave(cssClass("active")); // TODO uncomment after fix
+            });
         });
     }
 
     public void navInfoMaster() {
         stepWithRole("Перейти на вкладку Информация по работам", () -> {
-            navButtonsCollection.get(2).shouldHave(text("Информация по работам"));
+            navInfoMasterTabButtonLocator.click();
             driver.$("li[data-name='master']").click();
+            stepWithRole("Убедиться, что открылась вкладка Информация по работам", () -> {
+                navInfoMasterTabButtonLocator.shouldHave(cssClass("active")); // TODO uncomment after fix
+            });
         });
     }
 
     public void navDocs() {
         stepWithRole("Перейти на вкладку Документы", () -> {
-            navButtonsCollection.get(3).shouldHave(text("Документы")).click();
+            navDocsTabButtonLocator.click();
+            stepWithRole("Убедиться, что открылась вкладка Документы", () -> {
+                navDocsTabButtonLocator.shouldHave(cssClass("active")); // TODO uncomment after fix
+            });
         });
     }
 

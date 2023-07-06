@@ -21,9 +21,17 @@ import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
 import static io.qameta.allure.Allure.step;
+
+@Owner("Igor Shingelevich")
+@Epic(AllureEpic.REGISTRATION)
+@Feature(AllureFeature.BG_REGISTRATION)
+@Story(AllureStory.REPAIR)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.REGISTRATION)
 @Tag(AllureTag.REGRESSION)
+@Tag(AllureTag.BG_REGISTRATION)
+@Tag(AllureTag.POSITIVE)
+@Tag(AllureTag.WEB)
 
 public class RepairBGRegistrationTest extends BaseTest {
 
@@ -37,7 +45,7 @@ public class RepairBGRegistrationTest extends BaseTest {
     @Epic(AllureEpic.REGISTRATION)
     @Feature(AllureFeature.BG_REGISTRATION)
     @Story(AllureStory.REPAIR)
-    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.BG_REGISTRATION), @Tag(AllureTag.POSITIVE)})
+    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.BG_REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Фоновая Регистрация на Ремонт с указанием телефона и почты")
     public void bgRegistrationPhoneRepair() {
         Integer masterIndex = 0;

@@ -27,7 +27,7 @@ import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
-
+@Deprecated
 class ClientDispatcherInteractionStatesTest extends BaseTest {
 
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)

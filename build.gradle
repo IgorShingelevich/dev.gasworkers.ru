@@ -15,7 +15,7 @@ ext {
     selenideVersion = '6.16.0'
     selenideProxy = '6.16.0'
     assertjVersion = '3.24.2'
-    junitJupiterVersion = '5.9.0'
+    junitJupiterVersion = '5.9.3'
     hamcrest = '2.2'
     allureSelenideVersion = '2.20.0'
     slf4jVersion = '2.0.5'
@@ -115,7 +115,7 @@ task taskProvider_apiTest(type: Test) {
     }
 }
 
-task taskProvider_webTest(type: Test) {
+task taskProvider_web(type: Test) {
     useJUnitPlatform {
         includeTags "web"
     }

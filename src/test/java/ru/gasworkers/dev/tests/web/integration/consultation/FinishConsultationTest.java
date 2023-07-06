@@ -56,12 +56,12 @@ import static io.qameta.allure.Allure.step;
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.CONSULTATION)
 @Feature(AllureFeature.CONSULTATION_NOW)
-@Story("Интеграция Консультация Клиент Мастер - консультация сейчас")
+@Story("Завершение консультации сейчас")
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.PAYMENT)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB)
-public class ConsultationClientMasterScenarioTest extends BaseApiTest {
+public class FinishConsultationTest extends BaseApiTest {
 
     private final HouseApi houseApi = new HouseApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
@@ -80,9 +80,9 @@ public class ConsultationClientMasterScenarioTest extends BaseApiTest {
     MasterPages masterPages;
 
     @ParameterizedTest(name = "{0}")
-    @EnumSource(ConsultationMasterClientScenarioCase.class)
-    @DisplayName("Консультация сейчас")
-    void consultationNow(ConsultationMasterClientScenarioCase testCase, @WithUser(houses = {@WithHouse}) User client) {
+    @EnumSource(FinishConsultationCase.class)
+    @DisplayName("Завершение консультации сейчас")
+    void consultationNow(FinishConsultationCase testCase, @WithUser(houses = {@WithHouse}) User client) {
         String token = loginApi.getToken(client);
         Integer houseId = houseApi.houseId(client, token);
         step("Add equipment", () -> {
@@ -209,6 +209,7 @@ public class ConsultationClientMasterScenarioTest extends BaseApiTest {
                 masterPages.getConferenceQrPage().outlineButton();
             });
             step("стр Видео конференции", () -> {
+                sleep(6000);
                 masterPages.getConferencePage().checkFinishLoading();
             });
         });
@@ -246,17 +247,17 @@ public class ConsultationClientMasterScenarioTest extends BaseApiTest {
         });
         step("Проверка карточки заказа после видеоконсультации", () -> {
             step("стр Лк клиента", () -> {
-                sleep(30000);
+//                sleep(30000);
 //                clientPages.getDriverManager().refresh();
                 clientPages.getOrderCardPage().checkUrl();
                 clientPages.getOrderCardPage().navInfoMaster();
-                clientPages.getOrderCardPage().infoMasterTab.checkFinishConference("test-resume");
+                clientPages.getOrderCardPage().infoMasterTab.checkResumeConference("test-resume");
             });
             step("стр Лк мастера", () -> {
 //                masterPages.getDriverManager().refresh();
                 masterPages.getOrderCardPage().checkUrl();
                 masterPages.getOrderCardPage().navInfoMaster();
-                masterPages.getOrderCardPage().tabInfoMaster.checkFinishConference("test-resume");
+                masterPages.getOrderCardPage().tabInfoMaster.checkResumeConference("test-resume");
             });
         });
 

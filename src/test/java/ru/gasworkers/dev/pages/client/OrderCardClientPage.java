@@ -41,28 +41,30 @@ public class OrderCardClientPage extends BaseClientPage {
     }
 
     private final String
-        LAST_ORDER_CARD_TITLE = "Заказ №",
-        COMPLETE_ORDER_INFO = "Договор техобслуживания ВДГО необходимо предоставить в вашу газораспределительную компанию. Оставьте отзыв на работу мастера и вы сможете передать договор в вашу газораспределительную компанию",
-        SUBMIT_AGREEMENT_SUBTITLE = "Кнопка «передать договор» в газораспределительную компанию будет активна после размещения отзыва";
+            LAST_ORDER_CARD_TITLE = "Заказ №",
+            COMPLETE_ORDER_INFO = "Договор техобслуживания ВДГО необходимо предоставить в вашу газораспределительную компанию. Оставьте отзыв на работу мастера и вы сможете передать договор в вашу газораспределительную компанию",
+            SUBMIT_AGREEMENT_SUBTITLE = "Кнопка «передать договор» в газораспределительную компанию будет активна после размещения отзыва";
 
     SelenideElement
-        titleNumberLocator = driver.$("h1.h3.mb-2").as(" Заголовок Карточки заказа"),
-//        orderStateLocator = driver.$(".item-flex p.text").as("Статус заказа"),
-        completeOrderInfoBannerLocator = driver.$(".hint-box p").as("Баннер с информацией о завершении заказа"),
-        submitAgreementSubtitleLocator = driver.$("div p.text-secondary").as("Пояснение кнопки Передать Договор"),
-        orderDetailsBlockLocator = driver.$("div.order-details").as("Блок с информацией о заказе"),
-        toMapButtonLocator = driver.$(byTagAndText("span", "Показать на карте")).as("Кнопка Показать на карте"),
-        cancelOrderButtonLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Кнопка Отменить заказ"),
-        payBillButtonLocator = driver.$(byTagAndText("span", "Оплатить счет")).as("Кнопка Оплатить счет"),
-        signButtonLocator = driver.$(byTagAndText("span", "Подписать")).as("Кнопка Подписать"),
-        submitAgreementButtonLocator = driver.$("div a.btn-link-custom").as("Кнопка Передать договор"),
-        mainButtonLocator = driver.$("div button.btn.btn-primary").as("Главная кнопка"),
-        submitReviewButtonLocator = mainButtonLocator.$(byTagAndText("span", "Оставить отзыв")).as("Кнопка Оставить отзыв");
+            titleNumberLocator = driver.$("h1.h3.mb-2").as(" Заголовок Карточки заказа"),
+    //        orderStateLocator = driver.$(".item-flex p.text").as("Статус заказа"),
+    completeOrderInfoBannerLocator = driver.$(".hint-box p").as("Баннер с информацией о завершении заказа"),
+            submitAgreementSubtitleLocator = driver.$("div p.text-secondary").as("Пояснение кнопки Передать Договор"),
+            orderDetailsBlockLocator = driver.$("div.order-details").as("Блок с информацией о заказе"),
+            toMapButtonLocator = driver.$(byTagAndText("span", "Показать на карте")).as("Кнопка Показать на карте"),
+            cancelOrderButtonLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Кнопка Отменить заказ"),
+            payBillButtonLocator = driver.$(byTagAndText("span", "Оплатить счет")).as("Кнопка Оплатить счет"),
+            signButtonLocator = driver.$(byTagAndText("span", "Подписать")).as("Кнопка Подписать"),
+            submitAgreementButtonLocator = driver.$("div a.btn-link-custom").as("Кнопка Передать договор"),
+            mainButtonLocator = driver.$("div button.btn.btn-primary").as("Главная кнопка"),
+            navCommonTabButtonLocator = driver.$("li[data-name='common']").as("Вкладка Описание заказа"),
+            navInfoMasterTabButtonLocator = driver.$("li[data-name='master']").as("Вкладка Информация о мастере"),
+            navDocsTabButtonLocator = driver.$("li[data-name='documents']").as("Вкладка Документы"),
+            submitReviewButtonLocator = mainButtonLocator.$(byTagAndText("span", "Оставить отзыв")).as("Кнопка Оставить отзыв");
     // TODO upd buttons to implement mainButtonLocator and be able to check enabled/disabled state
 
     ElementsCollection
-        navButtonsCollection = driver.$$("div.navigation-block li").as("Навигационные кнопки"),
-        orderDetailsCollection = driver.$$("div.order-details-item").as("Информация о заказе");
+            orderDetailsCollection = driver.$$("div.order-details-item").as("Информация о заказе");
 
 
     public OrderCardClientPage checkFinishLoading() {
@@ -78,9 +80,9 @@ public class OrderCardClientPage extends BaseClientPage {
 
     public OrderCardClientPage navCommon(){
         stepWithRole("Перейти на вкладку Описание заказа", () -> {
-            navButtonsCollection.get(0).shouldHave(text("Описание заказа")).click();
+            navCommonTabButtonLocator.click();
             stepWithRole("Убедиться, что открылась вкладка Описание заказа", () -> {
-//                navButtonsCollection.get(0).shouldHave(cssClass("active")); // TODO uncomment after fix
+                navCommonTabButtonLocator.shouldHave(cssClass("active")); // TODO uncomment after fix
             });
         });
         return this;
@@ -88,10 +90,10 @@ public class OrderCardClientPage extends BaseClientPage {
 
     public OrderCardClientPage navInfoMaster(){
         stepWithRole("Перейти на вкладку Информация по работам", () -> {
-            navButtonsCollection.get(1).shouldHave(text("Информация по работам"));
+            navInfoMasterTabButtonLocator.click();
             driver.$("li[data-name='master']").click();
             stepWithRole("Убедиться, что открылась вкладка Информация по работам", () -> {
-//                navButtonsCollection.get(1).shouldHave(cssClass("active")); // TODO uncomment after fix
+                navInfoMasterTabButtonLocator.shouldHave(cssClass("active")); // TODO uncomment after fix
             });
         });
         return this;
@@ -99,9 +101,9 @@ public class OrderCardClientPage extends BaseClientPage {
 
     public OrderCardClientPage navDocs(){
         stepWithRole("Перейти на вкладку Документы", () -> {
-            navButtonsCollection.get(2).shouldHave(text("Документы")).click();
+            navDocsTabButtonLocator.click();
             stepWithRole("Убедиться, что открылась вкладка Документы", () -> {
-//                navButtonsCollection.get(2).shouldHave(cssClass("active")); // TODO uncomment after fix
+                navDocsTabButtonLocator.shouldHave(cssClass("active")); // TODO uncomment after fix
             });
         });
         return this;

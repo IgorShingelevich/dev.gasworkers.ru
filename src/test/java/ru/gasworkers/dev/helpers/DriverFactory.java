@@ -17,9 +17,9 @@ public final class DriverFactory {
         config.reportsFolder("target/selenide");
         config.timeout(8000);
 
-        config.headless(false);
+        config.headless(true);
 //         С удаленным запуском нельзя ставить в true!
-        config.holdBrowserOpen(true);
+        config.holdBrowserOpen(false);
 
 // Enable camera and microphone access
         ChromeOptions chromeOptions = new ChromeOptions();

@@ -26,7 +26,7 @@ import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
-
+@Deprecated
 class ClientDispatcherInteractionTest extends BaseTest {
 
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
@@ -77,35 +77,35 @@ class ClientDispatcherInteractionTest extends BaseTest {
     @DisplayName(" ТО Интеграция Клиент-Диспетчер-Мастер")
     void integrationDispatcherAcceptClientMaintenanceRequest() {
         step("авторизация Ролей ", ()-> {
-                    step("авторизация Клиента", () -> {
-                        clientPages.getLoginPage().open().login(client.email, client.password);
+            step("авторизация Клиента", () -> {
+                clientPages.getLoginPage().open().login(client.email, client.password);
 //            clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);  // TODO fix fullName order
-                    });
-                    step("авторизация Диспетчера", () -> {
-                        dispatcherPages.getLoginPage().open().login(dispatcher.email, dispatcher.password);
-                        dispatcherPages.getHomePage().checkFinishLoading();
-                    });
-                    step("авторизация Мастера", () -> {
-                        masterPages.getLoginPage().open().login(master.email, master.password);
-                        masterPages.getHomePage().checkFinishLoading();
-                    });
-                    step("Test run credentials ", () -> {
-                        Allure.addAttachment("Client creds", client.fullName + ": " + client.email + "/" + client.password);
-                        Allure.addAttachment("Dispatcher creds", dispatcher.fullName + ": " + dispatcher.email + "/" + dispatcher.password);
-                        Allure.addAttachment("Master creds", master.fullName + ": " + master.email + "/" + master.password);
-                        String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-                                + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-                        Allure.addAttachment("RunStartTime: ", date);
-                    });
-                });
+            });
+            step("авторизация Диспетчера", () -> {
+                dispatcherPages.getLoginPage().open().login(dispatcher.email, dispatcher.password);
+                dispatcherPages.getHomePage().checkFinishLoading();
+            });
+            step("авторизация Мастера", () -> {
+                masterPages.getLoginPage().open().login(master.email, master.password);
+                masterPages.getHomePage().checkFinishLoading();
+            });
+            step("Test run credentials ", () -> {
+                Allure.addAttachment("Client creds", client.fullName + ": " + client.email + "/" + client.password);
+                Allure.addAttachment("Dispatcher creds", dispatcher.fullName + ": " + dispatcher.email + "/" + dispatcher.password);
+                Allure.addAttachment("Master creds", master.fullName + ": " + master.email + "/" + master.password);
+                String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                        + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+                Allure.addAttachment("RunStartTime: ", date);
+            });
+        });
 
 
         String orderNumber = step("Клиент размещает заказ на ТО", () -> {
             step("Выбирает тип заказа - ТО", () -> {
-                        clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
-                        clientPages.getHomePage().clickPlaceOrderButton();
-                        clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
-                        clientPages.getInfoTypeOrderPage().clickNextButton();
+                clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
+                clientPages.getHomePage().clickPlaceOrderButton();
+                clientPages.getTypeOrdersPage().selectOrderType(ClientRequestType.MAINTENANCE); //  .toString()
+                clientPages.getInfoTypeOrderPage().clickNextButton();
 //                    .checkTitle("Заказ на ТО")
 //                    .checkStepSequence("Шаг 1 из 3")
             });
@@ -295,7 +295,6 @@ class ClientDispatcherInteractionTest extends BaseTest {
 
                 //todo no checkBox - triggering error
             });
-
 
 
         });

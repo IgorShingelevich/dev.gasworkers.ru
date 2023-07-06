@@ -9,6 +9,7 @@ import ru.gasworkers.dev.pages.context.SelfEmployedPages;
 import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
+@Deprecated
 
 public class ClientSelfEmployedMaintenanceTest extends BaseTest {
 
@@ -20,7 +21,6 @@ public class ClientSelfEmployedMaintenanceTest extends BaseTest {
 
     RandomClient randomClient = new RandomClient();
     RandomSelfEmployedAndMaster randomSelfEmployedAndMaster = new RandomSelfEmployedAndMaster();
-
 
 
 }

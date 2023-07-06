@@ -19,7 +19,7 @@ import java.io.File;
 
 import static io.qameta.allure.Allure.step;
 import static ru.gasworkers.dev.model.Role.CLIENT;
-
+@Deprecated
 class ClientFlowTest extends BaseTest {
     @Browser(role = CLIENT)
     ClientPages clientPages;

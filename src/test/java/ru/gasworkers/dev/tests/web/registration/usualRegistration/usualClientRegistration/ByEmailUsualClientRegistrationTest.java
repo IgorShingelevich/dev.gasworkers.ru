@@ -20,20 +20,16 @@ import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
 import static io.qameta.allure.Allure.step;
-
+@Owner("Igor Shingelevich")
+@Epic(AllureEpic.REGISTRATION)
+@Feature(AllureFeature.REGULAR_REGISTRATION)
+@Story("По почте")
+@Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.WEB), @Tag(AllureTag.POSITIVE)})
 public class ByEmailUsualClientRegistrationTest extends BaseTest {
-
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
-
     RandomClient randomClient = new RandomClient();
-
     @Test
-    @Owner("Igor Shingelevich")
-    @Epic(AllureEpic.REGISTRATION)
-    @Feature(AllureFeature.REGULAR_REGISTRATION)
-    @Story("По почте")
-    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT),  @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Регистрация клиента по email и проверка состояния кабинета")
     void registrationClientByEmail() {
         step("Страница лендинга", () -> {
@@ -80,7 +76,7 @@ public class ByEmailUsualClientRegistrationTest extends BaseTest {
         step("Кабинет клиента - состояние после Регистрации", () -> {
             //clientPages.getHomePage().personSummaryComponent.checkFinishLoading(randomClient.getFullName(), randomClient.getSinceDate());
             // todo appearence of the person summary component
-           // clientPages.getHomePage().personSummaryComponent.checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
+            // clientPages.getHomePage().personSummaryComponent.checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
             clientPages.getHomePage().sidebar.allObjects();
             clientPages.getAllObjectsPage().checkInitialState();
             clientPages.getAllObjectsPage().sidebar.allOrders();
@@ -117,6 +113,4 @@ public class ByEmailUsualClientRegistrationTest extends BaseTest {
             //TODO profile  check - photo. rest of the fields
         });
     }
-
-
 }

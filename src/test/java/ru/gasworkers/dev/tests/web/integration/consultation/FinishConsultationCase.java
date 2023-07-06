@@ -14,7 +14,7 @@ import ru.gasworkers.dev.exception.EnumNotSupportedException;
 import java.util.List;
 
 @AllArgsConstructor
-enum ConsultationMasterClientScenarioCase {
+enum FinishConsultationCase {
     CONSULTATION_CASE("Консультация 1 кейс");
     private final String description;
 
@@ -58,7 +58,7 @@ enum ConsultationMasterClientScenarioCase {
     }
 
     public ApplyMasterRequestDto getApplyMasterDto(Integer orderId, Integer timetableId) {
-        if (this == ConsultationMasterClientScenarioCase.CONSULTATION_CASE) {
+        if (this == FinishConsultationCase.CONSULTATION_CASE) {
             return ApplyMasterRequestDto.builder()
                     .orderId(orderId)
                     .timetableId(timetableId)
@@ -70,7 +70,7 @@ enum ConsultationMasterClientScenarioCase {
     }
 
     public SelectPaymentRequestDto getSelectPaymentDto(Integer orderId, Integer receiptId) {
-        if (this == ConsultationMasterClientScenarioCase.CONSULTATION_CASE) {
+        if (this == FinishConsultationCase.CONSULTATION_CASE) {
             return SelectPaymentRequestDto.builder()
                     .orderId(orderId)
                     .receiptId(receiptId)
