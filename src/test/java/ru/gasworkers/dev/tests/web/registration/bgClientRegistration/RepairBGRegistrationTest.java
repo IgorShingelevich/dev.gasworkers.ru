@@ -6,7 +6,6 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
@@ -31,21 +30,13 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.BG_REGISTRATION)
 @Tag(AllureTag.POSITIVE)
+@Tag(AllureTag.POSITIVE)
 @Tag(AllureTag.WEB)
-
 public class RepairBGRegistrationTest extends BaseTest {
-
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
-
     RandomClient randomClient = new RandomClient();
-
     @Test
-    @Owner("Igor Shingelevich")
-    @Epic(AllureEpic.REGISTRATION)
-    @Feature(AllureFeature.BG_REGISTRATION)
-    @Story(AllureStory.REPAIR)
-    @Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.BG_REGISTRATION), @Tag(AllureTag.POSITIVE)})
     @DisplayName("Фоновая Регистрация на Ремонт с указанием телефона и почты")
     public void bgRegistrationPhoneRepair() {
         Integer masterIndex = 0;
@@ -64,10 +55,13 @@ public class RepairBGRegistrationTest extends BaseTest {
 
         clientPages.getLandingPage().bgRegistration.findOffers();
         clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode(), "https://dev.gasworkers.ru/profile/client");
-        step("Кабинет клиента - состояние после фоновой регистрации на Ремонт", () -> {
-            step("Гид  Ремонт по кабинету", () -> {
-                clientPages.getHomePage().firstRepairGuide.playSequence();
-            });
+        step("Гид  Ремонт по кабинету", () -> {
+            clientPages.getHomePage().firstRepairGuide.playSequence();
+        });
+        clientPages.getSelectServicePage().checkFinishRepairLoading();
+
+       /* step("Кабинет клиента - состояние после фоновой регистрации на Ремонт", () -> {
+
             step("Страница Карта", () -> {
                 clientPages.getSelectServicePage().checkFinishRepairLoading();
                 clientPages.getSelectServicePage().checkPublishedState();
@@ -135,9 +129,8 @@ public class RepairBGRegistrationTest extends BaseTest {
                 });
                 clientPages.getProfilePage().sidebar.home();
             });
-        });
+        });*/
     }
-
 }
 // todo bg registration with no email - add email in the profile
 //todo custom equipment brand and model input

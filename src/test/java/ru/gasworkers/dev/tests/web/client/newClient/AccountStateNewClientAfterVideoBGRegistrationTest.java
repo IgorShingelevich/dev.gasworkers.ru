@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.registration.bgClientRegistration;
+package ru.gasworkers.dev.tests.web.client.newClient;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -23,25 +23,19 @@ import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 import static io.qameta.allure.Allure.step;
 
 @Owner("Igor Shingelevich")
-@Epic(AllureEpic.REGISTRATION)
-@Feature(AllureFeature.BG_REGISTRATION)
+@Epic(AllureEpic.ACCOUNT)
+@Feature(AllureFeature.ACCOUNT_STATE)
 @Story(AllureStory.VIDEO)
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
-@Tag(AllureTag.REGISTRATION)
-@Tag(AllureTag.BG_REGISTRATION)
 @Tag(AllureTag.POSITIVE)
 @Tag(AllureTag.CLIENT)
-@Tag(AllureTag.REGISTRATION)
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.WEB)
 
-public class VideoBGRegistrationTest extends BaseTest {
-
-
+public class AccountStateNewClientAfterVideoBGRegistrationTest extends BaseTest {
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
-
     RandomClient randomClient = new RandomClient();
 
     /*UserBuilder masterИнжТехМастер3 = new UserBuilder(
@@ -63,12 +57,9 @@ public class VideoBGRegistrationTest extends BaseTest {
             "123456",
             null,
             79917644241L);*/
-
     @Test
-
-    @DisplayName("Фоновая Регистрация на Видео Сейчас с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
-
-    public void bgRegistrationNowVideo() {
+    @DisplayName("Состояние Кабинета СМЗ - Кабинет после Фоновой Регистрации на Видео Сейчас с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
+    public void accountStateAfterBGVideo() {
         Integer masterIndex = 0;
         Integer power = 20;
         EquipmentType GAS_BOILER_TYPE = EquipmentType.GAS_BOILER;
@@ -144,12 +135,12 @@ public class VideoBGRegistrationTest extends BaseTest {
             clientPages.getSuccessPaymentVideoPage().checkFinishLoading();
             clientPages.getSuccessPaymentVideoPage().clickButton();
         });
-        clientPages.getHomePage().checkUrl();
-       /* step("Кабинет клиента - состояние после фоновой регистрации на Видео", () -> {
+
+        step("Кабинет клиента - состояние после фоновой регистрации на Видео", () -> {
             //todo video guide
-            *//*step("Гид  ТО по кабинету", () -> {
+            /*step("Гид  ТО по кабинету", () -> {
                 clientPages.getHomePage().firstMaintenanceGuide.playSequence();
-            });*//*
+            });*/
 
             step("Домашняя страница", () -> {
                 clientPages.getHomePage().checkVideoBGInitialState(randomClient.getSinceTodayDate(), masterFullNameByIndex);
@@ -173,13 +164,13 @@ public class VideoBGRegistrationTest extends BaseTest {
                 clientPages.getAllOrdersPage().checkItemsAmount(1);
             });
             //todo OrderCardPage
-            *//*String orderNumber = step("Страница Карточка заказа", () -> {
+            /*String orderNumber = step("Страница Карточка заказа", () -> {
                 clientPages.getAllOrdersPage().toOrderCard();
                 clientPages.getOrderCardPage().checkFinishLoading();
                 clientPages.getOrderCardPage().checkRepairBGInitialState(resultedAddress, resultedEquipmentCollectionName, desiredDate, desiredTime, errorText);
                 String currentNumber = clientPages.getOrderCardPage().getOrderNumber();
                 return currentNumber;
-            });*//*
+            });*/
 
             step("Страница Счета", () -> {
                 clientPages.getAllOrdersPage().sidebar.allInvoices();
@@ -214,7 +205,8 @@ public class VideoBGRegistrationTest extends BaseTest {
                 clientPages.getProfilePage().sidebar.home();
             });
 
-        });*/
+        });
+
     }
 
 }

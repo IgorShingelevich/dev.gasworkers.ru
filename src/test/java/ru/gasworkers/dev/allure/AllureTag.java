@@ -11,23 +11,21 @@ public final class AllureTag {
 
     public static final String CLIENT = "client",
             MASTER = "master",
-            SE_MEMBER = "self-employed-member ",
-            SE_INDIVIDUAL = "self-employed-individual";
+            SELF_EMPLOYED = "self-employed",
+            SELF_EMPLOYED_IP = "self-employed-ip";
 
     public static final String ADMINISTRATION = "administration",
             REGISTRATION = "registration",
             AUTHORISATION = "authorisation",
-            BG_REGISTRATION = "bg-registration",
-            OBJECT = "object";
+            BG_REGISTRATION = "bg-registration";
 
     public static final String
             API = "api",
-            WEB = "web",
-            API_COLLECTION = "api-collection";
+            WEB = "web";
 
     public static final String
             ORDERS = "orders",
-            CLIENT_OBJECT = "house-object";
+            HOUSE = "house";
 
     // order types
     public static final String

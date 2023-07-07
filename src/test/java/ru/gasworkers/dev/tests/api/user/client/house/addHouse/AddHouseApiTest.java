@@ -22,10 +22,10 @@ import java.io.IOException;
 
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.CLIENT)
-@Feature(AllureFeature.CLIENT_OBJECT)
+@Feature(AllureFeature.CLIENT_HOUSE)
 @Story("Добавление объекта")
 @Tag(AllureTag.REGRESSION)
-@Tag(AllureTag.CLIENT_OBJECT)
+@Tag(AllureTag.HOUSE)
 @Tag(AllureTag.API)
 public class AddHouseApiTest extends BaseApiTest {
 

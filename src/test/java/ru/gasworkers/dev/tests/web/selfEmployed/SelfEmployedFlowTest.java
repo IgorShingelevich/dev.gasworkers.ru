@@ -11,7 +11,12 @@ import ru.gasworkers.dev.utils.userBuilder.UserBuilder;
 
 import static io.qameta.allure.Allure.step;
 import static ru.gasworkers.dev.model.Role.SELF_EMPLOYED;
-
+@Deprecated
+@Owner("Igor Shingelevich")
+@Feature("Кабинет СМЗ")
+@Tag("regression")
+@Tag("СМЗ")
+@Tag("cabinet")
 public class SelfEmployedFlowTest extends BaseTest {
 
     @Browser(role = SELF_EMPLOYED)
@@ -34,10 +39,9 @@ public class SelfEmployedFlowTest extends BaseTest {
         selfEmployedPages.getLoginPage().login(master.email, master.password);
     }
 
-    @Owner("Igor Shingelevich")
-    @Feature("Кабинет СМЗ")
+
     @Story("Незаполненный ( начальное состояние) кабинет")
-    @Tags({@Tag("regression"), @Tag("СМЗ"), @Tag("cabinet"), @Tag("positive")})
+    @Tag("positive")
     @DisplayName("СМЗ открывает кабинет в первый раз")
     @Test
     void checkInitialCabinetState() {
@@ -55,15 +59,12 @@ public class SelfEmployedFlowTest extends BaseTest {
             selfEmployedPages.getProfilePage().tabCommon.saveButton();
             selfEmployedPages.getProfilePage().tabCommon.checkEmptyFormValidationTriggeredState();
         });
-
-
     }
 
     @Test
     @Disabled
-    @Feature("Кабинет СМЗ")
     @Story("Просмотр заказа на ТО")
-    @Tags({@Tag("regression"), @Tag("СМЗ"), @Tag("cabinet"), @Tag("positive")})
+    @Tag("positive")
     @DisplayName("СМЗ открывает заказ в состоянии Мастер в пути")
     public void clientCheckMasterDispatchedOrderSate() {
 
@@ -71,19 +72,16 @@ public class SelfEmployedFlowTest extends BaseTest {
 
     @Test
     @Disabled
-    @Feature("Кабинет СМЗ")
     @Story("Просмотр заказа на ТО")
-    @Tags({@Tag("regression"), @Tag("СМЗ"), @Tag("cabinet"), @Tag("positive")})
+    @Tag("positive")
     @DisplayName("СМЗ редактирует чеклист")
     public void clientCheckFillUpCheckListState() {
 
     }
 
     @Disabled
-    @Owner("Igor Shingelevich")
-    @Feature("Кабинет СМЗ")
     @Story("Просмотр заказа ТО")
-    @Tags({@Tag("regression"), @Tag("СМЗ"), @Tag("cabinet"), @Tag("positive")})
+    @Tag("positive")
     @DisplayName("СМЗ открывает заказ в состоянии без Отзыва Завершен")
     @Test
     void checkNotReviewedCompletedOrderState() {

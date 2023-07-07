@@ -32,10 +32,10 @@ import static io.qameta.allure.Allure.step;
 
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.CLIENT)
-@Feature(AllureFeature.CLIENT_OBJECT)
+@Feature(AllureFeature.CLIENT_HOUSE)
 @Story("Добавление оборудования")
 @Tag(AllureTag.REGRESSION)
-@Tag(AllureTag.CLIENT_OBJECT)
+@Tag(AllureTag.HOUSE)
 @Tag(AllureTag.API)
 public class SelectHouseApiTest extends BaseApiTest {
     private final HouseApi houseApi = new HouseApi();

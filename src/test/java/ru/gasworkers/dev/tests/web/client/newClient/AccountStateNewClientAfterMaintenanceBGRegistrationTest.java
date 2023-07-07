@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.registration.bgClientRegistration;
+package ru.gasworkers.dev.tests.web.client.newClient;
 
 
 import io.qameta.allure.Epic;
@@ -21,24 +21,25 @@ import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
 import static io.qameta.allure.Allure.step;
+
 @Owner("Igor Shingelevich")
-@Epic(AllureEpic.REGISTRATION)
-@Feature(AllureFeature.BG_REGISTRATION)
+@Epic(AllureEpic.ACCOUNT)
+@Feature(AllureFeature.ACCOUNT_STATE)
 @Story(AllureStory.MAINTENANCE)
-@Tag(AllureTag.BG_REGISTRATION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.REGISTRATION)
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.POSITIVE)
 @Tag(AllureTag.WEB)
-public class MaintenanceBGRegistrationTest extends BaseTest {
+
+public class AccountStateNewClientAfterMaintenanceBGRegistrationTest extends BaseTest {
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
     RandomClient randomClient = new RandomClient();
 
     @Test
-    @DisplayName("Фоновая Регистрация на ТО с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
-    public void bgRegistrationMaintenance() {
+    @DisplayName("Состояние Кабинета СМЗ - Кабинет после Фоновой Регистрации на ТО с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
+    public void accountStateAfterBGMaintenance() {
         Integer masterIndex = 0;
         Integer power = 20;
         EquipmentType GAS_BOILER_TYPE = EquipmentType.GAS_BOILER;
@@ -54,12 +55,10 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
 
         clientPages.getLandingPage().bgRegistration.findOffers();
         clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode(), "https://dev.gasworkers.ru/profile/client");
-        step("Гид  ТО по кабинету", () -> {
-            clientPages.getHomePage().firstMaintenanceGuide.playSequence();
-        });
-        clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
-
-       /* step("Кабинет клиента - состояние после фоновой регистрации на ТО ", () -> {
+        step("Кабинет клиента - состояние после фоновой регистрации на ТО ", () -> {
+            step("Гид  ТО по кабинету", () -> {
+                clientPages.getHomePage().firstMaintenanceGuide.playSequence();
+            });
             step("Страница Карта", () -> {
                 clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
                 clientPages.getSelectServicePage().checkPublishedState();
@@ -84,7 +83,7 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
             step("Страница Объекты", () -> {
                 clientPages.getAllNotificationsPage().sidebar.allObjects();
                 clientPages.getAllObjectsPage().checkFinishLoading();
-                clientPages.getAllObjectsPage().initialBGState(GAS_BOILER_TYPE,resultedEquipmentCollectionName, power.toString(), resultedAddress);
+                clientPages.getAllObjectsPage().initialBGState(GAS_BOILER_TYPE, resultedEquipmentCollectionName, power.toString(), resultedAddress);
             });
             step("Страница Заказы", () -> {
                 clientPages.getAllObjectsPage().sidebar.allOrders();
@@ -92,13 +91,13 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
                 clientPages.getAllOrdersPage().checkBGInitialState(orderNumber);
             });
             // todo OrderCardPage
-            *//*String orderNumber = step("Страница Карточка заказа", () -> {
+            /*String orderNumber = step("Страница Карточка заказа", () -> {
                 clientPages.getSelectServicePage().toOrderCard();
                 clientPages.getOrderCardPage().checkFinishLoading();
 //                clientPages.getOrderCardPage().checkRepairBGInitialState(resultedAddress, resultedEquipmentCollectionName, desiredDate, desiredTime, errorText);
                 String currentNumber = clientPages.getOrderCardPage().getOrderNumber();
                 return currentNumber;
-            });*//*
+            });*/
 
             step("Страница Счета", () -> {
                 clientPages.getAllOrdersPage().sidebar.allInvoices();
@@ -134,7 +133,7 @@ public class MaintenanceBGRegistrationTest extends BaseTest {
             });
 
 
-        });*/
+        });
     }
 
 }
