@@ -17,11 +17,11 @@ enum GetHousePositiveCase {
     public AddEquipmentRequestDto getAddEquipmentDto() {
         switch (this) {
             case ADD_EQUIPMENT_BOILER:
-                return AddEquipmentBuilder.buildAddEquipmentBoilerViessmanRequest();
+                return AddEquipmentBuilder.boilerViessmanRequest();
             case ADD_EQUIPMENT_BOILER_BOSH:
-                return AddEquipmentBuilder.buildAddEquipmentBoilerBoshRequest();
+                return AddEquipmentBuilder.boilerBoshRequest();
             case ADD_EQUIPMENT_OVEN_BEON:
-                return AddEquipmentBuilder.buildAddEquipmentOwenBeonRequest();
+                return AddEquipmentBuilder.owenBeonRequest();
 
             default:
 //                throw new EnumConstantNotPresentException(this.getDeclaringClass(), this.name());

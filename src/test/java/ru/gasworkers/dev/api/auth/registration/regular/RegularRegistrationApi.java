@@ -7,6 +7,8 @@ import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRe
 import ru.gasworkers.dev.api.auth.registration.regular.dto.check.CheckRegistrationRequestDto;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.finish.FinishRegistrationRequestDto;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.start.StartRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.through.dto.check.CheckThroughRegistrationRequestDto;
+import ru.gasworkers.dev.api.auth.registration.through.dto.start.StartThroughRegistrationRequestDto;
 
 import static io.restassured.RestAssured.given;
 
@@ -17,8 +19,15 @@ public class RegularRegistrationApi extends BaseApi {
     @Step("API: Комплексная регулярная регистрация")
     public void complexRegistration(ComplexRegistrationRequestDto complexDto) {
         startRegistration(complexDto.toStartRegistration()).statusCode(200);
-        checkRegistration(complexDto.toCheckRegistration()).statusCode(200);
+        checkRegistration(complexDto.toCheckRegularRegistration()).statusCode(200);
         finishRegistration(complexDto.toFinishRegistration()).statusCode(200);
+    }
+
+    //-------------------------------------COMPLEX THROUGH REGISTRATION-------------------------------------------------
+    @Step("API: Комплексная фоновая регистрация")
+    public void complexThroughRegistration(ComplexRegistrationRequestDto complexDto) {
+        startThroughRegistration(complexDto.toStartThroughRegistration()).statusCode(200);
+        checkThroughRegistration(complexDto.toCheckThroughRegistration()).statusCode(200);
     }
 
     //--------------------------------------------START-----------------------------------------------------------------
@@ -48,7 +57,7 @@ public class RegularRegistrationApi extends BaseApi {
     }
 
     public ValidatableResponse checkRegistration(Integer code, String type, String email, String phone) {
-        CheckRegistrationRequestDto inputDto = CheckRegistrationRequestDto.newInstance(code, type, email, phone);
+        CheckRegistrationRequestDto inputDto = CheckRegistrationRequestDto.newInstanceRegularRegistration(code, type, email, phone);
         return checkRegistration(inputDto);
     }
 
@@ -59,6 +68,27 @@ public class RegularRegistrationApi extends BaseApi {
                 .body(inputDto)
                 .when()
                 .post("/auth/complete-registration")
+                .then().spec(baseResponseSpec);
+    }
+
+    //    -------------------------START THROUGH REGISTRATION-----------------------------------------------------------
+    @Step("API: Фоновая регистрация [Начало]")
+    public ValidatableResponse startThroughRegistration(StartThroughRegistrationRequestDto inputDto) {
+        return given().spec(baseRequestSpec)
+                .body(inputDto)
+                .when()
+                .post("/auth/register/through")
+                .then().spec(baseResponseSpec);
+    }
+
+    //    -------------------------CHECK THROUGH REGISTRATION----------------------------------------------------------
+    @Step("API: Фоновая регистрация [Проверка кода СМС]")
+    public ValidatableResponse checkThroughRegistration(CheckThroughRegistrationRequestDto inputDto) {
+        return given().spec(baseRequestSpec)
+//                .header("abracadabra", "randomValue")
+                .body(inputDto)
+                .when()
+                .post("/auth/register/through/sign")
                 .then().spec(baseResponseSpec);
     }
 

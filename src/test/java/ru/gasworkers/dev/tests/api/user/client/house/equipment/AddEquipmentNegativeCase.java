@@ -61,8 +61,8 @@ enum AddEquipmentNegativeCase {
     }
 
     public AddEquipmentRequestDto getAddEquipmentDto() {
-        AddEquipmentRequestDto addBoilerDto = AddEquipmentBuilder.buildAddEquipmentBoilerViessmanRequest();
-        AddEquipmentRequestDto addOvenDto = AddEquipmentBuilder.buildAddEquipmentOwenBeonRequest();
+        AddEquipmentRequestDto addBoilerDto = AddEquipmentBuilder.boilerViessmanRequest();
+        AddEquipmentRequestDto addOvenDto = AddEquipmentBuilder.owenBeonRequest();
         switch (this) {
             case ADD_EQUIPMENT_BOILER_MISSING_POWER:
                 return addBoilerDto.setPower(null);

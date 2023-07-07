@@ -4,7 +4,7 @@ import lombok.Builder;
 import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentRequestDto;
 @Builder
 public class AddEquipmentBuilder {
-    public static AddEquipmentRequestDto buildAddEquipmentBoilerViessmanRequest() {
+    public static AddEquipmentRequestDto boilerViessmanRequest() {
         return AddEquipmentRequestDto.builder()
                 .power(Double.valueOf(35))
                 .photos(new String[]{})
@@ -18,7 +18,7 @@ public class AddEquipmentBuilder {
                 .build();
     }
 
-    public static AddEquipmentRequestDto buildAddEquipmentBoilerBoshRequest() {
+    public static AddEquipmentRequestDto boilerBoshRequest() {
         return AddEquipmentRequestDto.builder()
                 .power(40.8)
                 .photos(new String[]{})
@@ -32,7 +32,7 @@ public class AddEquipmentBuilder {
                 .build();
     }
 
-    public static AddEquipmentRequestDto buildAddEquipmentOwenBeonRequest() {
+    public static AddEquipmentRequestDto owenBeonRequest() {
         return AddEquipmentRequestDto.builder()
                 .power(null)
                 .photos(new String[]{})

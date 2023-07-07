@@ -8,7 +8,9 @@ import lombok.Setter;
 
 import java.io.File;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -24,11 +26,14 @@ public class RandomClient {
     private String fullName;
     private String email;
     private String phone;
+    private Long phoneLong;
     private String sinceTodayDate;
     private String password = "1234";
     private String confirmationCode = "111111";
     private String description = "Не работает -  описание проблемы";
     private String objectAddress = "Московская обл, Одинцово г, г.о. Одинцовский, ул Маршала Неделина, д. 6А";
+    private String startDate;
+    private String endDate;
     private File avatarRandomPhotoFile;
     private File equipmentRandomPhotoFile;
     private File equipmentVideoFile;
@@ -63,7 +68,36 @@ public class RandomClient {
         String email = emailPrefixMock + prefixDateTime + latinSurname.toLowerCase() + "@" + emailClientDomainMock;
         this.email = email;
         this.phone = phoneClientPrefixMock + faker.regexify("[0-9]{7}");
+        this.phoneLong = Long.parseLong(this.phone);
         this.sinceTodayDate = LocalDate.now().format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
         this.objectAddress = objectAddress;
+        // Get current time in UTC
+        LocalDateTime currentDateTime = LocalDateTime.now(ZoneOffset.UTC);
+
+// Round the currentDateTime to the nearest hour
+        currentDateTime = currentDateTime.withMinute(0).withSecond(0).withNano(0);
+
+// Format the start and end dates
+        this.startDate = currentDateTime
+                .atOffset(ZoneOffset.UTC)
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+
+// Calculate the end date (3 days after the rounded start date)
+        LocalDateTime endDate = currentDateTime.plusDays(3);
+
+// Round the end date to the nearest hour
+        endDate = endDate.withMinute(0).withSecond(0).withNano(0);
+
+// Format the end date
+        this.endDate = endDate
+                .atOffset(ZoneOffset.UTC)
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+       /* this.startDate = LocalDateTime.now()
+                .atOffset(ZoneOffset.UTC)
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+        // set endDate 3 days after startDate
+        this.endDate = LocalDateTime.now().plusDays(3)
+                .atOffset(ZoneOffset.UTC)
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));*/
     }
 }

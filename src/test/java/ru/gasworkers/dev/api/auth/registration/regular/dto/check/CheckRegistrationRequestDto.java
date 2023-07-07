@@ -1,7 +1,10 @@
 package ru.gasworkers.dev.api.auth.registration.regular.dto.check;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 @Data
@@ -15,7 +18,7 @@ public class CheckRegistrationRequestDto {
     private Integer code;
     private String type, email, phone;
 
-    public static CheckRegistrationRequestDto newInstance(Integer code, String type, String email, String phone) {
+    public static CheckRegistrationRequestDto newInstanceRegularRegistration(Integer code, String type, String email, String phone) {
         return CheckRegistrationRequestDto.builder()
                 .type(type)
                 .email(email)
