@@ -15,17 +15,18 @@ import ru.gasworkers.dev.api.auth.registration.through.dto.start.StartThroughReg
 import java.util.List;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Accessors(chain = true)
 public class ComplexRegistrationRequestDto {
-    private String type, password, email, phone, gender,
+    private String userType, password, email, phone, gender,
             firstName, lastName, middleName, employedStatus;
     private Integer code, serviceId;
     private Boolean isPhoneSend, isHaveContract, isIp;
 
     //    from throughRegistration
+    private String orderType;
     private Integer objectId, addressId, time;
     private String startDate, endDate, timeStarted, timeEnded, description;
     private Boolean noGuide;
@@ -34,16 +35,16 @@ public class ComplexRegistrationRequestDto {
     private Long phoneAsLong;
 
     public StartRegistrationRequestDto toStartRegistration() {
-        return StartRegistrationRequestDto.newInstance(type, email, phone, isPhoneSend);
+        return StartRegistrationRequestDto.newInstance(userType, email, phone, isPhoneSend);
     }
 
     public CheckRegistrationRequestDto toCheckRegularRegistration() {
-        return CheckRegistrationRequestDto.newInstanceRegularRegistration(code, type, email, phone);
+        return CheckRegistrationRequestDto.newInstanceRegularRegistration(code, userType, email, phone);
     }
 
     public FinishRegistrationRequestDto toFinishRegistration() {
         return FinishRegistrationRequestDto.builder()
-                .type(type)
+                .type(userType)
                 .password(password)
                 .email(email)
                 .phone(phone)
@@ -60,7 +61,7 @@ public class ComplexRegistrationRequestDto {
 
     public StartThroughRegistrationRequestDto toStartThroughRegistration() {
         return StartThroughRegistrationRequestDto.builder()
-                .type(type)
+                .orderType(orderType)
                 //  need to convert to string phone to integer
                 .phone(phoneAsLong)
                 .email(email)
@@ -83,6 +84,6 @@ public class ComplexRegistrationRequestDto {
     }
 
     public LoginRequestDto toLogin() {
-        return LoginRequestDto.newInstance(type, email, phone, null, password);
+        return LoginRequestDto.newInstance(userType, email, phone, null, password);
     }
 }

@@ -71,7 +71,7 @@ public class SelectPaymentApiTest extends BaseApiTest {
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Success case:")
     void positiveTestCase(SelectPaymentPositiveCase testCase, @WithUser User client) {
-        String token = loginApi.getToken(client);
+        String token = loginApi.getTokenPhone(client);
         Integer objectId = step("Add object", () -> {
             return houseApi.addHouse(HouseBuilder.addDefaultHouseRequestDto(), token)
                     .statusCode(200)

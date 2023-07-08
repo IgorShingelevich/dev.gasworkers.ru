@@ -20,7 +20,8 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @Accessors(chain = true)
 public class StartThroughRegistrationRequestDto {
     ////    https://api.dev.gasworkers.ru/docs#avtorizaciiaregistraciia-POSTapi-v1-auth-register-through
-    private String type;
+    @JsonProperty("type")
+    private String orderType;
     @JsonProperty("object_id")
     private Integer objectId;
     @JsonProperty("address_id")
@@ -44,9 +45,9 @@ public class StartThroughRegistrationRequestDto {
     private List<OldEquipmentsDto> oldEquipments;
 
     @Builder
-    public static StartThroughRegistrationRequestDto newInstance(String type, Integer objectId, Integer addressId, String startDate, String endDate, Integer time, String timeStarted, String timeEnded, String email, Long phone, String description, Boolean noGuide, List<EquipmentsDto> equipments, List<OldEquipmentsDto> oldEquipments) {
+    public static StartThroughRegistrationRequestDto newInstance(String orderType, Integer objectId, Integer addressId, String startDate, String endDate, Integer time, String timeStarted, String timeEnded, String email, Long phone, String description, Boolean noGuide, List<EquipmentsDto> equipments, List<OldEquipmentsDto> oldEquipments) {
         return StartThroughRegistrationRequestDto.builder()
-                .type(type)
+                .orderType(orderType)
                 .objectId(objectId)
                 .addressId(addressId)
                 .startDate(startDate)

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.auth.registration.regular;
+package ru.gasworkers.dev.api.auth.registration;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
@@ -85,11 +85,15 @@ public class RegularRegistrationApi extends BaseApi {
     @Step("API: Фоновая регистрация [Проверка кода СМС]")
     public ValidatableResponse checkThroughRegistration(CheckThroughRegistrationRequestDto inputDto) {
         return given().spec(baseRequestSpec)
-//                .header("abracadabra", "randomValue")
                 .body(inputDto)
                 .when()
                 .post("/auth/register/through/sign")
                 .then().spec(baseResponseSpec);
+
     }
+
+    /*public String getThroughToken() {
+        return CheckThroughRegistrationResponseDto.getData().getToken();
+    }*/
 
 }

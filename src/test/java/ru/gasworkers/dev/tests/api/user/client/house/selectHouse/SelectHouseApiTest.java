@@ -48,7 +48,7 @@ public class SelectHouseApiTest extends BaseApiTest {
     @EnumSource(SelectHousePositiveCase.class)
     @DisplayName("Success case:")
     void positiveTestCase(SelectHousePositiveCase testCase, @WithUser(houses = {@WithHouse}) User client) {
-        String token = loginApi.getToken(client);
+        String token = loginApi.getTokenPhone(client);
         Integer houseId = houseApi.houseId(client, token);
         step("Add equipment", () -> {
             addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), houseId, token)

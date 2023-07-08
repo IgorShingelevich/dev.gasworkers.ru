@@ -61,7 +61,7 @@ public class AddHouseApiTest extends BaseApiTest {
     @DisplayName("Negative dto case:")
     void negativeDtoTestCase(AddHouseNegativeDtoCase testCase, @WithUser User client) throws IOException {
         // With valid token
-        String token = loginApi.getToken(client);
+        String token = loginApi.getTokenPhone(client);
         HouseResponseDto actualResponse = houseApi.addHouse(testCase.getInputDto(), token)
                 .statusCode(422)
                 .extract().as(HouseResponseDto.class);

@@ -7,7 +7,7 @@ import org.junit.jupiter.api.extension.ParameterResolver;
 import ru.gasworkers.dev.api.auth.login.LoginApi;
 import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
 import ru.gasworkers.dev.api.auth.login.dto.LoginResponseDto;
-import ru.gasworkers.dev.api.auth.registration.regular.RegularRegistrationApi;
+import ru.gasworkers.dev.api.auth.registration.RegularRegistrationApi;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationFactory;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRequestDto;
 import ru.gasworkers.dev.api.users.client.house.HouseApi;
@@ -46,7 +46,7 @@ public final class WithUserExtension implements ParameterResolver {
     }
 
     private String login(ComplexRegistrationRequestDto complexUserDto) {
-        LoginRequestDto inputDto = LoginRequestDto.asUser(complexUserDto.getPhone(), complexUserDto.getPassword());
+        LoginRequestDto inputDto = LoginRequestDto.asUserPhone(complexUserDto.getPhone(), complexUserDto.getPassword());
         return loginApi.login(inputDto)
                 .statusCode(200)
                 .extract().as(LoginResponseDto.class)

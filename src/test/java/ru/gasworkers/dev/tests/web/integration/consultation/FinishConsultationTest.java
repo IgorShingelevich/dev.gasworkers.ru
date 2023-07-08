@@ -83,7 +83,7 @@ public class FinishConsultationTest extends BaseApiTest {
     @EnumSource(FinishConsultationCase.class)
     @DisplayName("Завершение консультации сейчас")
     void consultationNow(FinishConsultationCase testCase, @WithUser(houses = {@WithHouse}) User client) {
-        String token = loginApi.getToken(client);
+        String token = loginApi.getTokenPhone(client);
         Integer houseId = houseApi.houseId(client, token);
         step("Add equipment", () -> {
             addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), houseId, token)

@@ -7,7 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRequestDto;
 
 @Data
 @Builder
@@ -35,9 +34,16 @@ public class LoginRequestDto {
                 .build();
     }
 
-    public static LoginRequestDto asUser(String phone, String password) {
+    public static LoginRequestDto asUserPhone(String phone, String password) {
         return LoginRequestDto.builder()
                 .phone(phone)
+                .password(password)
+                .build();
+    }
+
+    public static LoginRequestDto asUserEmail(String email, String password) {
+        return LoginRequestDto.builder()
+                .email(email)
                 .password(password)
                 .build();
     }

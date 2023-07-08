@@ -12,7 +12,7 @@ public class ComplexRegistrationFactory {
     public static ComplexRegistrationRequestDto defaultRandomClient() {
         RandomClient data = new RandomClient();
         return ComplexRegistrationRequestDto.builder()
-                .type(UserType.CLIENT.toString())
+                .userType(UserType.CLIENT.toString())
                 .password(data.getPassword())
                 .email(data.getEmail())
                 .phone(data.getPhone())
@@ -28,11 +28,10 @@ public class ComplexRegistrationFactory {
                 .serviceId(null)
                 .build();
     }
-
     public static ComplexRegistrationRequestDto defaultRandomThroughClient() {
         RandomClient data = new RandomClient();
         return ComplexRegistrationRequestDto.builder()
-                .type(UserType.CLIENT.toString())
+                .orderType(null)
                 .password(data.getPassword())
                 .email(data.getEmail())
                 .phoneAsLong(data.getPhoneLong())

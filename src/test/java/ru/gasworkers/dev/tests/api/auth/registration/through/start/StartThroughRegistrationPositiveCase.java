@@ -19,13 +19,13 @@ enum StartThroughRegistrationPositiveCase {
         switch (this) {
             case BG_MAINTENANCE:
                 return complexDto.toStartThroughRegistration()
-                        .setType("maintenance");
+                        .setOrderType("maintenance");
             case BG_REPAIR:
                 return complexDto.toStartThroughRegistration()
-                        .setType("repair");
+                        .setOrderType("repair");
             case BG_VIDEO:
                 return complexDto.toStartThroughRegistration()
-                        .setType("consultation");
+                        .setOrderType("consultation");
             default:
                 throw new EnumNotSupportedException(this);
         }

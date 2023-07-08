@@ -14,6 +14,8 @@ import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
 import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
 import ru.gasworkers.dev.extension.user.User;
+import ru.gasworkers.dev.extension.user.WithOrderType;
+import ru.gasworkers.dev.extension.user.WithThroughUser;
 import ru.gasworkers.dev.extension.user.WithUser;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
@@ -36,7 +38,28 @@ public class CreateOrdersApiTest extends BaseApiTest {
     @DisplayName("Success case: ")
     void positiveTestCase(CreateOrdersPositiveCase testCase, @WithUser User client) {
         step("Create order", () -> {
-            String token = loginApi.getToken(client);
+            String token = loginApi.getTokenPhone(client);
+
+            CreateOrdersResponseDto createResponse = createOrdersApi.createOrders(testCase.getCreateRequestDto(), token)
+                    .statusCode(200)
+                    .extract().as(CreateOrdersResponseDto.class);
+            Integer orderId = createResponse.getData().getOrderId();
+            Boolean insuranceCase = createResponse.getData().getIsInsuranceCase();
+
+            CreateOrdersResponseDto actualResponse = CreateOrdersResponseDto.successResponse(orderId, insuranceCase);
+            CreateOrdersResponseDto expectedResponse = testCase.getCreateResponseDto(orderId, insuranceCase);
+
+            assertResponse(expectedResponse, actualResponse);
+        });
+    }
+
+    @ParameterizedTest(name = "{0}")
+    @EnumSource(CreateOrdersPositiveCase.class)
+    @Tag(AllureTag.POSITIVE)
+    @DisplayName("Success case: ")
+    void positiveThroughTestCase(CreateOrdersPositiveCase testCase, @WithThroughUser(withOrderType = @WithOrderType(type = "maintenance")) User client) {
+        step("Create order", () -> {
+            String token = loginApi.getTokenThrough(client);
 
             CreateOrdersResponseDto createResponse = createOrdersApi.createOrders(testCase.getCreateRequestDto(), token)
                     .statusCode(200)
@@ -56,7 +79,7 @@ public class CreateOrdersApiTest extends BaseApiTest {
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Negative case: ")
     void negativeTestCaseV2(CreateOrdersNegativeCase testCase, @WithUser User client) {
-        String token = loginApi.getToken(client);
+        String token = loginApi.getTokenPhone(client);
         step("Create order", () -> {
             CreateOrdersResponseDto actualResponse = createOrdersApi.createOrders(testCase.getCreateOrdersRequestDto(), token)
                     .statusCode(422)

@@ -35,7 +35,7 @@ public class AddEquipmentApiTest extends BaseApiTest {
     @EnumSource(AddEquipmentPositiveCase.class)
     @DisplayName("Success case:")
     void positiveTestCase(AddEquipmentPositiveCase testCase, @WithUser User client) {
-        String token = loginApi.getToken(client);
+        String token = loginApi.getTokenPhone(client);
         Integer houseId = houseApi.houseId(client, token);
         step("Add equipment", () -> {
             AddEquipmentResponseDto expectedResponse = AddEquipmentResponseDto.successResponse();
@@ -51,7 +51,7 @@ public class AddEquipmentApiTest extends BaseApiTest {
     @EnumSource(AddEquipmentNegativeCase.class)
     @DisplayName("Negative case:")
     void negativeTestCase(AddEquipmentNegativeCase testCase, @WithUser User client) {
-        String token = loginApi.getToken(client);
+        String token = loginApi.getTokenPhone(client);
         Integer houseId = houseApi.houseId(client, token);
         step("Add equipment", () -> {
             AddEquipmentResponseDto expectedResponse = testCase.getExpectedResponse();

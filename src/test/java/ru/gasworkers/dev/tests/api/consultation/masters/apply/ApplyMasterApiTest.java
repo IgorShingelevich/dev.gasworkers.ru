@@ -57,7 +57,7 @@ public class ApplyMasterApiTest extends BaseApiTest {
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Success case:")
     void positiveTestCase(ApplyMasterPositiveCase testCase, @WithUser(houses = {@WithHouse}) User client) {
-        String token = loginApi.getToken(client);
+        String token = loginApi.getTokenPhone(client);
         Integer houseId = houseApi.houseId(client, token);
         step("Add equipment", () -> {
             addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), houseId, token)
@@ -105,7 +105,7 @@ public class ApplyMasterApiTest extends BaseApiTest {
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Negative case:")
     void negativeTestCase(ApplyMasterNegativeCase testCase, @WithUser(houses = {@WithHouse}) User client) {
-        String token = loginApi.getToken(client);
+        String token = loginApi.getTokenPhone(client);
         Integer houseId = houseApi.houseId(client, token);
         step("Add equipment", () -> {
             addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), houseId, token)

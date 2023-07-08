@@ -34,4 +34,6 @@ public class CheckThroughRegistrationRequestDto {
                 .phone(phone)
                 .build();
     }
+
+
 }

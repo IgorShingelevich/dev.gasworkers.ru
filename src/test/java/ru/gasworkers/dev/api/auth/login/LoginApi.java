@@ -20,8 +20,16 @@ public class LoginApi extends BaseApi {
                 .then().spec(baseResponseSpec);
     }
 
-    public String getToken(User user) {
-        LoginRequestDto inputDto = LoginRequestDto.asUser(user.getPhone(), user.getPassword());
+    public String getTokenPhone(User user) {
+        LoginRequestDto inputDto = LoginRequestDto.asUserPhone(user.getPhone(), user.getPassword());
+        return login(inputDto)
+                .statusCode(200)
+                .extract().as(LoginResponseDto.class)
+                .getData().getToken();
+    }
+
+    public String getTokenThrough(User user) {
+        LoginRequestDto inputDto = LoginRequestDto.asUserEmail(user.getEmail(), "1111");
         return login(inputDto)
                 .statusCode(200)
                 .extract().as(LoginResponseDto.class)
