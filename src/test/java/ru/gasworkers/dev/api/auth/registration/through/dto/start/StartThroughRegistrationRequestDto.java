@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.List;
+
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 
 @Data
@@ -37,12 +39,12 @@ public class StartThroughRegistrationRequestDto {
     private String description;
     @JsonProperty("no_guide")
     private Boolean noGuide;
+    private List<EquipmentsDto> equipments;
     @JsonProperty("old_equipments")
-    private OldEquipmentsDto oldEquipments;
-    private EquipmentsDto equipments;
+    private List<OldEquipmentsDto> oldEquipments;
 
     @Builder
-    public static StartThroughRegistrationRequestDto newInstance(String type, Integer objectId, Integer addressId, String startDate, String endDate, Integer time, String timeStarted, String timeEnded, String email, Long phone, String description, Boolean noGuide, StartThroughRegistrationRequestDto.OldEquipmentsDto oldEquipments, StartThroughRegistrationRequestDto.EquipmentsDto equipments) {
+    public static StartThroughRegistrationRequestDto newInstance(String type, Integer objectId, Integer addressId, String startDate, String endDate, Integer time, String timeStarted, String timeEnded, String email, Long phone, String description, Boolean noGuide, List<EquipmentsDto> equipments, List<OldEquipmentsDto> oldEquipments) {
         return StartThroughRegistrationRequestDto.builder()
                 .type(type)
                 .objectId(objectId)

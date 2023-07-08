@@ -6,6 +6,8 @@ import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentReq
 import ru.gasworkers.dev.model.apiModel.UserType;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
+import java.util.List;
+
 public class ComplexRegistrationFactory {
     public static ComplexRegistrationRequestDto defaultRandomClient() {
         RandomClient data = new RandomClient();
@@ -54,14 +56,16 @@ public class ComplexRegistrationFactory {
                 .description("error description")
                 .noGuide(null)
                 .oldEquipments(null)
-                .equipments(StartThroughRegistrationRequestDto.EquipmentsDto.builder()
-                        .brandId(AddEquipmentRequestDto.defaultBoilerEquipment().getBrandId())
-                        .modelId(AddEquipmentRequestDto.defaultBoilerEquipment().getModelId())
-                        .power(AddEquipmentRequestDto.defaultBoilerEquipment().getPower())
-                        .typeId(AddEquipmentRequestDto.defaultBoilerEquipment().getTypeId())
-                        .customBrand(null)
-                        .customModel(null)
-                        .build())
+                .equipments(List.of(StartThroughRegistrationRequestDto.EquipmentsDto.builder()
+                                .brandId(AddEquipmentRequestDto.defaultBoilerEquipment().getBrandId())
+                                .modelId(AddEquipmentRequestDto.defaultBoilerEquipment().getModelId())
+                                .typeId(AddEquipmentRequestDto.defaultBoilerEquipment().getTypeId())
+                                .power(AddEquipmentRequestDto.defaultBoilerEquipment().getPower())
+                                .customBrand(null)
+                                .customModel(null)
+                                .build()
+                        )
+                )
                 .time(null)
                 .build();
     }

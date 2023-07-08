@@ -12,6 +12,8 @@ import ru.gasworkers.dev.api.auth.registration.regular.dto.start.StartRegistrati
 import ru.gasworkers.dev.api.auth.registration.through.dto.check.CheckThroughRegistrationRequestDto;
 import ru.gasworkers.dev.api.auth.registration.through.dto.start.StartThroughRegistrationRequestDto;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -27,8 +29,8 @@ public class ComplexRegistrationRequestDto {
     private Integer objectId, addressId, time;
     private String startDate, endDate, timeStarted, timeEnded, description;
     private Boolean noGuide;
-    private StartThroughRegistrationRequestDto.OldEquipmentsDto oldEquipments;
-    private StartThroughRegistrationRequestDto.EquipmentsDto equipments;
+    private List<StartThroughRegistrationRequestDto.OldEquipmentsDto> oldEquipments;
+    private List<StartThroughRegistrationRequestDto.EquipmentsDto> equipments;
     private Long phoneAsLong;
 
     public StartRegistrationRequestDto toStartRegistration() {
