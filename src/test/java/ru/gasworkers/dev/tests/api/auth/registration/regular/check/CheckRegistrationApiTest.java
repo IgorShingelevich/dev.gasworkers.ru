@@ -40,7 +40,6 @@ public class CheckRegistrationApiTest extends BaseApiTest {
 
         step("Check registration", () -> {
             CheckRegistrationResponseDto expectedResponse = CheckRegistrationResponseDto.successResponse();
-            // or  get the same positive  expectedResponse from testCase?
             CheckRegistrationResponseDto actualResponse = registrationApi
                     .checkRegistration(testCase.getCheckDto())
                     .statusCode(200)

@@ -14,45 +14,60 @@ enum FinishRegistrationPositiveCase {
     CLIENT_WITH_EMAIL(
             "Client with email"),
     CLIENT_WITH_PHONE(
-            "Client with phone");
-
+            "Client with phone"),
+    SELF_EMPLOYED_WITH_EMAIL(
+            "Self-employed with email"),
+    SELF_EMPLOYED_WITH_PHONE(
+            "Self-employed with phone");
 
     private final String description;
-    private final ComplexRegistrationRequestDto complexDto = ComplexRegistrationFactory.defaultRandomClient();
+    private final ComplexRegistrationRequestDto complexClientDto = ComplexRegistrationFactory.defaultRandomClient();
+    private final ComplexRegistrationRequestDto complexSelfEmployedDto = ComplexRegistrationFactory.defaultRandomSelfEmployed();
 
     public StartRegistrationRequestDto getStartDto() {
-
-        StartRegistrationRequestDto startDto = complexDto.toStartRegistration();
+        StartRegistrationRequestDto startClientDto = complexClientDto.toStartRegistration();
+        StartRegistrationRequestDto startSelfEmployedDto = complexSelfEmployedDto.toStartRegistration();
         switch (this) {
             case CLIENT_WITH_EMAIL:
-                return startDto.setPhone(null);
+                return startClientDto.setPhone(null);
             case CLIENT_WITH_PHONE:
-                return startDto.setEmail(null);
+                return startClientDto.setEmail(null);
+            case SELF_EMPLOYED_WITH_EMAIL:
+                return startSelfEmployedDto.setPhone(null);
+            case SELF_EMPLOYED_WITH_PHONE:
+                return startSelfEmployedDto.setEmail(null);
             default:
-                return startDto;
+                return startClientDto;
         }
     }
 
     public CheckRegistrationRequestDto getCheckDto() {
-        CheckRegistrationRequestDto checkDto = complexDto.toCheckRegularRegistration();
-
-
+        CheckRegistrationRequestDto checkClientDto = complexClientDto.toCheckRegularRegistration();
+        CheckRegistrationRequestDto checkSelfEmployedDto = complexSelfEmployedDto.toCheckRegularRegistration();
         switch (this) {
             case CLIENT_WITH_EMAIL:
-                return checkDto.setPhone(null);
+                return checkClientDto.setPhone(null);
             case CLIENT_WITH_PHONE:
-               return checkDto.setEmail(null);
+                return checkClientDto.setEmail(null);
+            case SELF_EMPLOYED_WITH_EMAIL:
+                return checkSelfEmployedDto.setPhone(null);
+            case SELF_EMPLOYED_WITH_PHONE:
+                return checkSelfEmployedDto.setEmail(null);
             default:
-              return checkDto;
+                return checkClientDto;
         }
     }
 
     public FinishRegistrationRequestDto getFinishDto() {
         switch (this) {
             case CLIENT_WITH_EMAIL:
-                return complexDto.toFinishRegistration();
+                return complexClientDto.toFinishRegistration();
             case CLIENT_WITH_PHONE:
-                return complexDto.toFinishRegistration();
+                return complexClientDto.toFinishRegistration();
+            case SELF_EMPLOYED_WITH_EMAIL:
+                return complexSelfEmployedDto.toFinishRegistration();
+            case SELF_EMPLOYED_WITH_PHONE:
+                return complexSelfEmployedDto.toFinishRegistration();
             default:
                 throw new EnumNotSupportedException(this);
         }

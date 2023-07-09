@@ -57,6 +57,7 @@ public class OnlineMastersResponseDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder
+    // todo - adopt to userMode;
     public static class BrandDto {
         private Integer id;
         private String title;

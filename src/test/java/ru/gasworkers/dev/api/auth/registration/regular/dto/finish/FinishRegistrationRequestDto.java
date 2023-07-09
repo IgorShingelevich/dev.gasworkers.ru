@@ -41,4 +41,10 @@ public class FinishRegistrationRequestDto {
     @JsonProperty("service_id")
     private Integer serviceId;
 
+    @JsonProperty("referer_code")
+    private String refererCode;
+
+    @JsonProperty("referer_type")
+    private String refererType;
+
 }

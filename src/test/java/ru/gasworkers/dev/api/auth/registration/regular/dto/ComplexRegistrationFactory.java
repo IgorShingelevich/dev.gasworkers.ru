@@ -5,6 +5,7 @@ import ru.gasworkers.dev.api.users.client.house.HouseBuilder;
 import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentRequestDto;
 import ru.gasworkers.dev.model.apiModel.UserType;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
+import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
 
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class ComplexRegistrationFactory {
                 .serviceId(null)
                 .build();
     }
+
     public static ComplexRegistrationRequestDto defaultRandomThroughClient() {
         RandomClient data = new RandomClient();
         return ComplexRegistrationRequestDto.builder()
@@ -66,6 +68,25 @@ public class ComplexRegistrationFactory {
                         )
                 )
                 .time(null)
+                .build();
+    }
+
+    public static ComplexRegistrationRequestDto defaultRandomSelfEmployed() {
+        RandomSelfEmployedAndMaster data = new RandomSelfEmployedAndMaster();
+        return ComplexRegistrationRequestDto.builder()
+                .userType(UserType.MASTER.toString())
+                .email(data.getEmail())
+                .phone(data.getPhone())
+                .code(222222)
+                .firstName("")
+                .lastName("")
+                .middleName("")
+                .password(data.getPassword())
+                .employedStatus("pending-self-employed")
+                .gender(null)
+                .refererCode(null)
+                .refererType(null)
+                .serviceId(null)
                 .build();
     }
 }

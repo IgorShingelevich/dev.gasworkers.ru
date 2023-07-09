@@ -2,6 +2,10 @@ package ru.gasworkers.dev.utils.userBuilder;
 
 import com.github.javafaker.Faker;
 import com.ibm.icu.text.Transliterator;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -9,15 +13,18 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
-
+@Data
+@Getter
+@Setter
+@AllArgsConstructor
 public class RandomSelfEmployedAndMaster {
     private String name;
     private String surname;
-    private String patronymicName;
+    private String middleName;
     private String gender;
     private String fullName;
     private String email;
-    private String phoneNumber;
+    private String phone;
     private String sinceDate;
     private String password = "1234";
     private String confirmationCode = "222222";
@@ -65,16 +72,16 @@ public class RandomSelfEmployedAndMaster {
 
         this.name = faker.name().firstName();
         this.surname = faker.name().lastName();
-        this.patronymicName = "Автотестович";
+        this.middleName = "Мастерович";
         this.gender = null;
-        this.fullName = this.surname.toString() + " " + this.name.toString() + " " + this.patronymicName.toString();
+        this.fullName = this.surname + " " + this.name + " " + this.middleName;
         Transliterator cyrillicToLatin = Transliterator.getInstance("Cyrillic-Latin");
         String latinSurname = cyrillicToLatin.transliterate(surname);
 
         String email = emailPrefixMock + prefixDateTime + latinSurname.toLowerCase() + "@" + emailMasterDomainMock;
 // TODO  different  random email domains for test
         this.email = email;
-        this.phoneNumber = phoneMasterPrefixMock + faker.regexify("[0-9]{7}");
+        this.phone = phoneMasterPrefixMock + faker.regexify("[0-9]{7}");
 //        this.phoneNumber = faker.phoneNumber().subscriberNumber(11).replaceFirst("^[^7]", "7");
         this.sinceDate = LocalDate.now().format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
         this.passportSeries = faker.regexify("[0-9]{4}");
@@ -97,172 +104,6 @@ public class RandomSelfEmployedAndMaster {
         this.xlsxFile = new File("src/test/resources/uploadFiles/otherFormats/test_xlsx.xlsx");
         this.rarFile = new File("src/test/resources/uploadFiles/otherFormats/test_rar.rar");
 //todo  change all the paths to relative
-    }
-
-    public String getFirstName() {
-        return name;
-    }
-
-    public String getLastName() {
-        return surname;
-    }
-
-    public String getPatronymicName() {
-        return patronymicName;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public String getSinceDate() {
-        return sinceDate;
-    }
-
-    public String getWorkAddressNumber() {
-        return workAddressNumber;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getPhone() {
-        return phoneNumber;
-    }
-
-    public String getConfirmationCode() {
-        return confirmationCode;
-    }
-
-    public String getPassportSeries() {
-        return passportSeries;
-    }
-
-    public String getPassportNumber() {
-        return passportNumber;
-    }
-
-    public String getPassportIssuedDatePicker() {
-        return passportIssuedDatePicker;
-    }
-
-    public String getPassportIssuedBy() {
-        return passportIssuedBy;
-    }
-
-    public String getRegistrationAddress() {
-        return registrationAddress;
-    }
-
-    public String getRegistrationAddressNumber() {
-        return registrationAddressNumber;
-    }
-
-    public String getBik() {
-        return bik;
-    }
-
-    public String getBicResult() {
-        return bicResult;
-    }
-
-    public String getCheckingAccount() {
-        return checkingAccount;
-    }
-
-    public String getMasterIDValidTillNextYearDatePicker() {
-        return masterIDValidTillNextYearDatePicker;
-    }
-
-    public File getTaxpayerCertificatePhoto() {
-        return taxpayerCertificatePhoto;
-    }
-
-    public File getMasterPhoto() {
-        return masterPhoto;
-    }
-
-    public String getSpeciality() {
-        return speciality;
-    }
-
-    public String getSkills() {
-        return skills;
-    }
-
-    public String getWorkAddress() {
-        return workAddress;
-    }
-
-    public String getWorkRadius() {
-        return workRadius;
-    }
-
-    public String getVideoPrice() {
-        return videoPrice;
-    }
-
-    public String getMasterIDValidTillDatePicker() {
-        return masterIDValidTillDatePicker;
-    }
-
-    public String getBoilerEquipmentCertificateValidTillDatePicker() {
-        return equipmentCertificateValidTillDatePicker;
-    }
-
-    public File getAvatarRandomPhotoFile() {
-        return avatarRandomPhotoFile;
-    }
-
-    public File getEquipmentRandomPhotoFile() {
-        return equipmentRandomPhotoFile;
-    }
-
-    public File getEquipmentVideoFile() {
-        return equipmentVideoFile;
-    }
-
-    public File getPdfFile() {
-        return pdfFile;
-    }
-
-    public File getXlsxFile() {
-        return xlsxFile;
-    }
-
-    public File getRarFile() {
-        return rarFile;
-    }
-
-    public File getMasterIDFile() {
-        return masterIDFile;
-    }
-
-    public File getTaxpayerCertificateFile() {
-        return taxpayerCertificateFile;
-    }
-
-    public File getBoilerEquipmentCertificateFile() {
-        return equipmentCertificateFile;
-    }
-
-
-    public String getCode() {
-        return code;
-
     }
 }
 

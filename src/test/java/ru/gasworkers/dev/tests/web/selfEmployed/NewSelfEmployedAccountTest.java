@@ -140,7 +140,7 @@ public class NewSelfEmployedAccountTest extends BaseTest {
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.fillCollectionPrices("5010", "5100", primaryVisitPrice);
             int totalOfferPrice = selfEmployedPages.getOrderCardPage().offerPriceModalWindow.totalOfferPrice();
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.fillMasterIdDocuments(randomSelfEmployedAndMaster.getMasterIDFile(), randomSelfEmployedAndMaster.getMasterIDValidTillDatePicker());
-            selfEmployedPages.getOrderCardPage().offerPriceModalWindow.uploadAllBoilerEquipmentCertificateFileAndDate(randomSelfEmployedAndMaster.getBoilerEquipmentCertificateFile(), randomSelfEmployedAndMaster.getBoilerEquipmentCertificateValidTillDatePicker());
+            selfEmployedPages.getOrderCardPage().offerPriceModalWindow.uploadAllBoilerEquipmentCertificateFileAndDate(randomSelfEmployedAndMaster.getEquipmentCertificateFile(), randomSelfEmployedAndMaster.getEquipmentCertificateValidTillDatePicker());
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.saveButton();
         });
         step(" !убрать баг - Дублированное модальное окно Расценить заказ", () -> {

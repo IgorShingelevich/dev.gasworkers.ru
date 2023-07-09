@@ -16,12 +16,6 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @JsonInclude(NON_NULL)
 @Accessors(chain = true)
 public class CheckThroughRegistrationRequestDto {
-    /*{
-    "code": "111111",
-    "email": "shing453453elevich@gmail.com",
-    "phone": 70017654373
-}*/
-
     private Integer code;
     private String email, type;
     private Long phone;
@@ -34,6 +28,4 @@ public class CheckThroughRegistrationRequestDto {
                 .phone(phone)
                 .build();
     }
-
-
 }

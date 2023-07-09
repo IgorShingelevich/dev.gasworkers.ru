@@ -22,10 +22,10 @@ import java.util.List;
 public class ComplexRegistrationRequestDto {
     private String userType, password, email, phone, gender,
             firstName, lastName, middleName, employedStatus;
-    private Integer code, serviceId;
+    private Integer code, serviceId, refererCode, refererType;
     private Boolean isPhoneSend, isHaveContract, isIp;
 
-    //    from throughRegistration
+    //    from throughRegistration registration
     private String orderType;
     private Integer objectId, addressId, time;
     private String startDate, endDate, timeStarted, timeEnded, description;
@@ -33,6 +33,9 @@ public class ComplexRegistrationRequestDto {
     private List<StartThroughRegistrationRequestDto.OldEquipmentsDto> oldEquipments;
     private List<StartThroughRegistrationRequestDto.EquipmentsDto> equipments;
     private Long phoneAsLong;
+
+    //from selfEmployedAndMaster registration
+
 
     public StartRegistrationRequestDto toStartRegistration() {
         return StartRegistrationRequestDto.newInstance(userType, email, phone, isPhoneSend);

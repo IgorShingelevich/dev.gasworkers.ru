@@ -18,22 +18,41 @@ enum StartRegistrationPositiveCase {
             StartRegistrationResponseDto.successResponse("60")),
     CLIENT_VALID_EMAIL_WITH_INVALID_PHONE(
             "Client with valid Email invalid Phone",
+            StartRegistrationResponseDto.successResponse("60")),
+    SELF_EMPLOYED_WITH_EMAIL_ONLY("SelfEmployed with email only",
+            StartRegistrationResponseDto.successResponse("60")),
+    SELF_EMPLOYED_WITH_PHONE_ONLY("SelfEmployed with phone only",
+            StartRegistrationResponseDto.successResponse("60")),
+    SELF_EMPLOYED_WITH_EMAIL_AND_PHONE("SelfEmployed with email and phone",
+            StartRegistrationResponseDto.successResponse("60")),
+    SELF_EMPLOYED_VALID_EMAIL_WITH_INVALID_PHONE(
+            "SelfEmployed with valid Email invalid Phone",
             StartRegistrationResponseDto.successResponse("60"));
 
     private final String description;
     @Getter
     private final StartRegistrationResponseDto expectedResponse;
-    private final ComplexRegistrationRequestDto complexDto = ComplexRegistrationFactory.defaultRandomClient();
+    private final ComplexRegistrationRequestDto complexClientDto = ComplexRegistrationFactory.defaultRandomClient();
+    private final ComplexRegistrationRequestDto complexSelfEmployedDto = ComplexRegistrationFactory.defaultRandomSelfEmployed();
 
     public StartRegistrationRequestDto getStartDto() {
         switch (this) {
             case CLIENT_WITH_EMAIL_ONLY:
-                return complexDto.toStartRegistration().setPhone(null);
+                return complexClientDto.toStartRegistration().setPhone(null);
             case CLIENT_WITH_PHONE_ONLY:
-                return complexDto.toStartRegistration().setEmail(null);
+                return complexClientDto.toStartRegistration().setEmail(null);
             case CLIENT_WITH_EMAIL_AND_PHONE:
+                return complexClientDto.toStartRegistration();
             case CLIENT_VALID_EMAIL_WITH_INVALID_PHONE:
-                return complexDto.toStartRegistration().setPhone("invalid_phone");
+                return complexClientDto.toStartRegistration().setPhone("invalid_phone");
+            case SELF_EMPLOYED_WITH_EMAIL_ONLY:
+                return complexSelfEmployedDto.toStartRegistration().setPhone(null);
+            case SELF_EMPLOYED_WITH_PHONE_ONLY:
+                return complexSelfEmployedDto.toStartRegistration().setEmail(null);
+            case SELF_EMPLOYED_WITH_EMAIL_AND_PHONE:
+                return complexSelfEmployedDto.toStartRegistration();
+            case SELF_EMPLOYED_VALID_EMAIL_WITH_INVALID_PHONE:
+                return complexSelfEmployedDto.toStartRegistration().setPhone("invalid_phone");
             default:
                 throw new EnumNotSupportedException(this);
         }

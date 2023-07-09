@@ -24,6 +24,15 @@ enum CheckRegistrationNegativeCase {
     CLIENT_MISSING_ALL_FIELDS("Missing all fields( the response need to be handled properly- expected description of all the fields)", CheckRegistrationResponseDto.missingAllFieldsResponse()),
     CLIENT_MISSING_PHONE("Missing phone( discuss this case)  ", CheckRegistrationResponseDto.missingPhoneResponse()),
     CLIENT_START_MISSING_TYPE("Missing type in start", CheckRegistrationResponseDto.missingTypeResponse());
+    /*todo
+    * {
+    "status": 1008,
+    "message": "Вы можете повторить запрос через 59 секунд",
+    "data": {
+        "seconds_left": 59
+    }
+}
+*/
 
     private final String description;
     @Getter
