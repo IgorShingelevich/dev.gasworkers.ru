@@ -20,6 +20,10 @@ public class ConferenceNotificationSharedComponent extends BaseComponent {
         });
     }
 
+    public boolean isDisplayed(boolean b) {
+        return self.isDisplayed();
+    }
+
     void checkClientReadinessNotificationText(String masterFullName) {
         String clientDescription = "У вас сейчас начнётся видеоконсультация. Мастер " + masterFullName + " готовится к ней. Вам придет СМС со ссылкой для подключения к ней";
         stepWithRole("Проверка текста уведомления о готовности клиента", () -> {

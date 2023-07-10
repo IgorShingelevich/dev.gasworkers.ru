@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.tests.web.integration.consultation;
 
 import lombok.AllArgsConstructor;
+import ru.gasworkers.dev.api.consultation.cancel.dto.ConsultationCancelRequestDto;
 import ru.gasworkers.dev.api.consultation.isStarted.dto.IsStartedRequestDto;
 import ru.gasworkers.dev.api.consultation.masters.apply.dto.ApplyMasterRequestDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMastersRequestDto;
@@ -85,4 +86,12 @@ enum FinishConsultationCase {
         return description;
     }
 
+    public ConsultationCancelRequestDto getConsultationCancelDto(Integer orderId) {
+        return ConsultationCancelRequestDto.builder()
+                .refund(true)
+                .orderId(orderId)
+                .cancelReason(null)
+                .cancelCheckList(new String[]{"10"})
+                .build();
+    }
 }

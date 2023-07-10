@@ -27,7 +27,7 @@ enum FinishRegistrationNegativeCase {
             "Client with invalid name",
             FinishRegistrationResponseDto.invalidNameErrorResponse()),
     CLIENT_MISSING_ALL_FIELDS(
-            "Client without all data",
+            "Client without all data - need fix",
             FinishRegistrationResponseDto.missingAllFieldsErrorResponse()),
     CLIENT_MISSING_PHONE(
             "Client without phone",

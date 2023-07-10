@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
@@ -18,19 +20,205 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @AllArgsConstructor
 @JsonInclude(NON_NULL)
 @Accessors(chain = true)
-public class UserModelResponseDto {
+public class UserResponseDto {
     private Integer status;
     private String message;
-    private UserModelDto data;
+    private DataDto data;
+
+    public static UserResponseDto completeSelfEmployedResponse(Integer id, String email, Long phone, Boolean isIP, Boolean isHaveContract, String employmentStatus, Integer guidesId) {
+        return UserResponseDto.builder()
+                .data(DataDto.builder()
+                        .id(id)
+                        .firstName(null)
+                        .lastName(null)
+                        .middleName(null)
+                        .fullName("")
+                        .email(email)
+                        .login(null)
+                        .emailVerifiedAt(1681730865)
+                        .joinedAt(1681730865)
+                        .registeredAt(1688854983)
+                        .phone(phone)
+                        .contacts(DataDto.ContactsDto.builder()
+                                .contactsFacetime(null)
+                                .contactsWhatsapp(null)
+                                .contactsSkype(null)
+                                .contactsTelegram(null)
+                                .build()
+                        )
+                        .userType("dispatcher")
+                        .passport(null)
+                        .avatar(null)
+                        .diploma(null)
+                        .selfEmployedCertificate(null)
+                        .selfEmployedCertificateExpired("")
+                        .isFullProfile(false)
+                        .isHalfFullProfile(false)
+                        .specialization(null)
+                        .skills(null)
+                        .countObjects(0)
+                        .countOrders(null)
+                        .requisitesFilled(false)
+                        .bankDetailsFilled(false)
+                        .rateFilled(false)
+                        .priceListFilled(false)
+                        .distributionCompanyAgreementFilled(false)
+                        .equipmentsFilled(false)
+                        .contactsFilled(false)
+                        .profileCompleted(false)
+                        .createdAt(1688854982)
+                        .company(null)
+                        .service(null)
+                        .companyAsDispatcher(null)
+                        .serviceId(null)
+                        .distributionCompanyId(null)
+                        .onVerification(false)
+                        .verifiedAt(null)
+                        .bank(null)
+                        .accountNumber(null)
+                        .firstAccept(0)
+                        .secondAccept(null)
+                        .country(null)
+                        .postAddress(null)
+                        .employmentStatus(employmentStatus)
+                        .brands(new ArrayList<>())
+                        .certificates(new ArrayList<>())
+                        .insuranceStartedAt(null)
+                        .rating("5.00")
+                        .reviewsCount(0)
+                        .completedOrdersCount(0)
+                        .acceptTerms(true)
+                        .newMessagesCount(0)
+                        .userNotificationsCount(0)
+                        .pushNotificationsEnable(true)
+                        .emailNotificationsEnable(true)
+                        .smsNotificationsEnable(true)
+                        .readyForConsultation(false)
+                        .canConsulting(false)
+                        .isHaveContract(isHaveContract)
+                        .isIp(isIP)
+                        .inn(null)
+                        .activeRole("dispatcher")
+                        .consultationPrice(0)
+                        .livingAddressId(null)
+                        .livingAddress(null)
+                        .workDistance(null)
+                        .guides(Collections.singletonList(
+                                DataDto.GuidesDto.builder()
+                                        .guideId(guidesId)
+                                        .guideType("self_employed_register")
+                                        .guideNeedStart(true)
+                                        .guideFinished(false)
+                                        .guideScreen(0)
+                                        .build()
+                        ))
+                        .lastReview(null)
+                        .fpsPhone(null)
+                        .selectedPaymentMethod("bank")
+                        .fpsBank(null)
+                        .additionalPhone(null)
+                        .build()
+                )
+                .build();
+    }
+
+    public static UserResponseDto newSelfEmployedResponse(Integer id, String email, Long phone) {
+
+        return UserResponseDto.builder()
+                .data(DataDto.builder()
+                        .id(id)
+                        .firstName(null)
+                        .lastName(null)
+                        .middleName(null)
+                        .fullName("")
+                        .email(email)
+                        .login(null)
+                        .emailVerifiedAt(1681730865)
+                        .joinedAt(null)
+                        .registeredAt(1688854983)
+                        .phone(phone)
+                        .contacts(DataDto.ContactsDto.builder()
+                                .contactsFacetime(null)
+                                .contactsWhatsapp(null)
+                                .contactsSkype(null)
+                                .contactsTelegram(null)
+                                .build()
+                        )
+                        .userType("dispatcher")
+                        .passport(null)
+                        .avatar(null)
+                        .diploma(null)
+                        .selfEmployedCertificate(null)
+                        .selfEmployedCertificateExpired("")
+                        .isFullProfile(false)
+                        .isHalfFullProfile(false)
+                        .specialization(null)
+                        .skills(null)
+                        .countObjects(0)
+                        .countOrders(null)
+                        .requisitesFilled(false)
+                        .bankDetailsFilled(false)
+                        .rateFilled(false)
+                        .priceListFilled(false)
+                        .distributionCompanyAgreementFilled(false)
+                        .equipmentsFilled(false)
+                        .contactsFilled(false)
+                        .profileCompleted(false)
+                        .createdAt(1688854982)
+                        .company(null)
+                        .service(null)
+                        .companyAsDispatcher(null)
+                        .serviceId(null)
+                        .distributionCompanyId(null)
+                        .onVerification(false)
+                        .verifiedAt(null)
+                        .bank(null)
+                        .accountNumber(null)
+                        .firstAccept(0)
+                        .secondAccept(null)
+                        .country(null)
+                        .postAddress(null)
+                        .employmentStatus("pending-self-employed")
+                        .brands(new ArrayList<>())
+                        .certificates(new ArrayList<>())
+                        .insuranceStartedAt(null)
+                        .rating("5.00")
+                        .reviewsCount(0)
+                        .completedOrdersCount(0)
+                        .acceptTerms(true)
+                        .newMessagesCount(0)
+                        .userNotificationsCount(0)
+                        .pushNotificationsEnable(true)
+                        .emailNotificationsEnable(true)
+                        .smsNotificationsEnable(true)
+                        .readyForConsultation(false)
+                        .canConsulting(false)
+                        .isHaveContract(false)
+                        .isIp(false)
+                        .inn(null)
+                        .activeRole("dispatcher")
+                        .consultationPrice(0)
+                        .livingAddressId(null)
+                        .livingAddress(null)
+                        .workDistance(null)
+                        .guides(new ArrayList<>())
+                        .lastReview(null)
+                        .fpsPhone(null)
+                        .selectedPaymentMethod("bank")
+                        .fpsBank(null)
+                        .additionalPhone(null)
+                        .build()
+                )
+                .build();
+    }
 
     @Data
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class UserModelDto {
+    public static class DataDto {
 
-        @JsonProperty("id")
-        private String userId;
+        private Integer id;
         @JsonProperty("full_name")
         private String fullName;
         @JsonProperty("email_verified_at")
@@ -121,13 +309,13 @@ public class UserModelResponseDto {
         @JsonProperty("work_distance")
         private Integer workDistance;
         @JsonProperty("fps_phone")
-        private Integer fpsPhone;
+        private Long fpsPhone;
         @JsonProperty("selected_payment_method")
         private String selectedPaymentMethod;
         @JsonProperty("additional_phone")
-        private Integer additionalPhone;
+        private Long additionalPhone;
         private ContactsDto contacts;
-        private List<GuideDto> guides;
+        private List<GuidesDto> guides;
         private PassportDto passport;
         private DiplomaDto diploma;
         private SelfEmployedCertificateDto selfEmployedCertificate;
@@ -145,7 +333,8 @@ public class UserModelResponseDto {
         private List<CertificatesDto> certificates;
         private String firstName, lastName, middleName, email, login, avatar,
                 specialization, skills, rating;
-        private Integer phone, company, service, inn;
+        private Integer company, service, inn;
+        private Long phone;
 
         @Data
         public static class CertificatesDto {
@@ -464,6 +653,9 @@ public class UserModelResponseDto {
 
 
         @Data
+        @Builder
+        @NoArgsConstructor
+        @AllArgsConstructor
         public static class ContactsDto {
             @JsonProperty("facetime")
             private String contactsFacetime;
@@ -476,7 +668,10 @@ public class UserModelResponseDto {
         }
 
         @Data
-        public static class GuideDto {
+        @Builder
+        @NoArgsConstructor
+        @AllArgsConstructor
+        public static class GuidesDto {
             @JsonProperty("id")
             private Integer guideId;
             @JsonProperty("type")

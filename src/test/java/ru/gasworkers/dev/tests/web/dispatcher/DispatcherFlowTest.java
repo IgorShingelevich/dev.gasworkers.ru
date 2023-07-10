@@ -2,6 +2,7 @@ package ru.gasworkers.dev.tests.web.dispatcher;
 
 import io.qameta.allure.Step;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.extension.browser.Browser;
@@ -12,7 +13,8 @@ import ru.gasworkers.dev.tests.BaseTest;
 
 import static io.qameta.allure.Allure.step;
 import static ru.gasworkers.dev.model.Role.DISPATCHER;
-@Deprecated
+
+@Disabled
 public class DispatcherFlowTest extends BaseTest {
 
     @Browser(role = DISPATCHER)

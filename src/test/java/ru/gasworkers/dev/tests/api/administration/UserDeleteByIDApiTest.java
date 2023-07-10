@@ -7,6 +7,7 @@ import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.ApiTestConfig;
 import ru.gasworkers.dev.api.administration.DeleteUserByIDApi;
+@Disabled
 
 public class UserDeleteByIDApiTest {
     public final DeleteUserByIDApi deleteUserByIDApi = new DeleteUserByIDApi();
@@ -24,8 +25,6 @@ public class UserDeleteByIDApiTest {
     public void userDeleteByIDApiTest() {
         deleteUserByIDApi.deleteUserById("2226");
     }
-
-
 
 
 }

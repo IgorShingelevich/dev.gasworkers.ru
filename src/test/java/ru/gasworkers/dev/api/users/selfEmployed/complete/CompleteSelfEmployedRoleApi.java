@@ -7,11 +7,12 @@ import ru.gasworkers.dev.api.users.selfEmployed.complete.dto.CompleteRequestDto;
 
 import static io.restassured.RestAssured.given;
 
-public class CompleteApi extends BaseApi {
+public class CompleteSelfEmployedRoleApi extends BaseApi {
     //https://api.dev.gasworkers.ru/docs#endpoints-POSTapi-v1-self-employed-complete
-    @Step("API: Регистрация самозанятого [завершение]")
-    public ValidatableResponse completeSelfEmployed(CompleteRequestDto inputDto) {
+    @Step("API: Регистрация самозанятого [роль: завершение регистрации]")
+    public ValidatableResponse completeSelfEmployedRole(CompleteRequestDto inputDto, String token) {
         return given().spec(baseRequestSpec)
+                .header("Authorization", "Bearer " + token)
                 .body(inputDto)
                 .when()
                 .post("/self-employed/complete")

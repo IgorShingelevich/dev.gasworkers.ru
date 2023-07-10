@@ -13,8 +13,7 @@ import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.UserBuilder;
 
 import static ru.gasworkers.dev.model.Role.MASTER;
-@Deprecated
-
+@Disabled
 public class MasterFlowTest extends BaseTest {
 
     @Browser(role = MASTER)

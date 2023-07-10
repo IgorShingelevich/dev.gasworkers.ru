@@ -92,8 +92,11 @@ public class RegularRegistrationApi extends BaseApi {
 
     }
 
-    /*public String getThroughToken() {
-        return CheckThroughRegistrationResponseDto.getData().getToken();
+/*    public Integer getThroughOrderId() {
+        Response response = checkThroughRegistration().extract().response();
+        CheckThroughRegistrationResponseDto checkResponse = response.as(CheckThroughRegistrationResponseDto.class);
+        return checkResponse.getData().getId();
     }*/
+
 
 }

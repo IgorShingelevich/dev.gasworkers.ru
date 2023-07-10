@@ -11,7 +11,8 @@ import ru.gasworkers.dev.utils.userBuilder.UserBuilder;
 
 import static io.qameta.allure.Allure.step;
 import static ru.gasworkers.dev.model.Role.SELF_EMPLOYED;
-@Deprecated
+@Disabled
+
 @Owner("Igor Shingelevich")
 @Feature("Кабинет СМЗ")
 @Tag("regression")

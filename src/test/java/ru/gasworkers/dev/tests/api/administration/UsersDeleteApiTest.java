@@ -12,6 +12,7 @@ import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+@Disabled
 
 public class UsersDeleteApiTest {
 

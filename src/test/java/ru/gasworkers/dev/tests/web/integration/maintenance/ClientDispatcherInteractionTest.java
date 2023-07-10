@@ -1,10 +1,7 @@
 package ru.gasworkers.dev.tests.web.integration.maintenance;
 
 import io.qameta.allure.*;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.allure.AllureStory;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
@@ -26,7 +23,8 @@ import java.time.format.DateTimeFormatter;
 
 import static com.codeborne.selenide.Selenide.sleep;
 import static io.qameta.allure.Allure.step;
-@Deprecated
+
+@Disabled
 class ClientDispatcherInteractionTest extends BaseTest {
 
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)

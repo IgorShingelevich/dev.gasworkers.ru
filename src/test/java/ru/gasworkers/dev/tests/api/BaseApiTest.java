@@ -1,6 +1,8 @@
 package ru.gasworkers.dev.tests.api;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.recursive.comparison.RecursiveComparisonConfiguration;
 import org.json.JSONObject;
 import org.skyscreamer.jsonassert.JSONAssert;
 import ru.gasworkers.dev.api.auth.login.LoginApi;
@@ -20,6 +22,12 @@ public abstract class BaseApiTest extends BaseTest {
         String actualJson = objectMapper.writeValueAsString(actualResponse);
 
         JSONAssert.assertEquals(expectedJson, actualJson, false);
+    }
+
+    protected void assertResponse2(Object expectedResponse, Object actualResponse) throws IOException {
+        Assertions.assertThat(actualResponse)
+                .usingRecursiveComparison()
+                .isEqualTo(expectedResponse);
     }
 
     protected void assertResponsePartial(Object expectedResponse, Object actualResponse, List<String> excludedFields) throws IOException {
@@ -50,6 +58,15 @@ public abstract class BaseApiTest extends BaseTest {
         }
     }
 
+    protected void assertResponsePartial2(Object expectedResponse, Object actualResponse, List<String> excludedFields) throws IOException {
+        RecursiveComparisonConfiguration configuration = RecursiveComparisonConfiguration.builder()
+                .withIgnoredFields(excludedFields.toArray(new String[0]))
+                .build();
+
+        Assertions.assertThat(actualResponse)
+                .usingRecursiveComparison(configuration)
+                .isEqualTo(expectedResponse);
+    }
 
     /*protected void assertResponsePartial(Object expectedResponse, Object actualResponse, List<String> excludedFields) throws IOException {
         String expectedJson = objectMapper.writeValueAsString(expectedResponse);

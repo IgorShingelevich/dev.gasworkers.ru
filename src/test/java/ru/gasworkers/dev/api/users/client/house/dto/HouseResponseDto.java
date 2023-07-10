@@ -6,6 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -18,27 +22,51 @@ public class HouseResponseDto {
     private DataDto data;
     private ErrorsDto errors;
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class DataDto {
-        private Integer id;
-        private String title;
-        @JsonProperty("active_offers_count")
-        private Integer activeOffersCount;
-        private Object[] photos;
-        private AddressDto address;
-        private Object[] equipments;
-        private Object branch;
-        private CompanyDto company;
-        @JsonProperty("account_number")
-        private Object accountNumber;
-        @JsonProperty("video_exists")
-        private Boolean videoExists;
-        @JsonProperty("created_at")
-        private Integer createdAt;
+    public static HouseResponseDto successResponse() {
+        AddressDto address = AddressDto.builder()
+                .id(2121)
+                .full("Москва, Московская улица")
+                .type("street")
+                .fullWithZip("Россия, Москва, Московская улица")
+                .zip(null)
+                .country("Россия")
+                .countryCode("RU")
+                .region("Москва")
+                .regionType("Москва")
+                .longitude(37.416161)
+                .latitude(55.671229)
+                .build();
 
+        BranchDto[] branches = {
+                BranchDto.builder().id(1).title("Юг").build(),
+                BranchDto.builder().id(2).title("Север").build(),
+                BranchDto.builder().id(3).title("Восток").build(),
+                BranchDto.builder().id(4).title("Запад").build(),
+                BranchDto.builder().id(13).title("Юго-Восток").build(),
+                BranchDto.builder().id(14).title("Северо-Запад").build()
+        };
+
+        CompanyDto company = CompanyDto.builder()
+                .id(1)
+                .title("МособлГаз")
+                .branches(branches)
+                .build();
+
+        DataDto data = DataDto.builder()
+                .id(null)
+                .title("my house")
+                .activeOffersCount(0)
+                .photos(new Object[]{})
+                .address(address)
+                .equipments(new ArrayList<>())
+                .createdAt(null)
+                .build();
+
+        return HouseResponseDto.builder()
+                .status(0)
+                .message("Объект добавлен")
+                .data(data)
+                .build();
     }
     @Data
     @NoArgsConstructor
@@ -227,54 +255,27 @@ public class HouseResponseDto {
                 .build();
     }
 
-    public static HouseResponseDto successResponse() {
-        AddressDto address = AddressDto.builder()
-                .id(2121)
-                .full("Москва, Московская улица")
-                .type("street")
-                .fullWithZip("Россия, Москва, Московская улица")
-                .zip(null)
-                .country("Россия")
-                .countryCode("RU")
-                .region("Москва")
-                .regionType("Москва")
-                .longitude(37.416161)
-                .latitude(55.671229)
-                .build();
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder
+    public static class DataDto {
+        private Integer id;
+        private String title;
+        @JsonProperty("active_offers_count")
+        private Integer activeOffersCount;
+        private Object[] photos;
+        private AddressDto address;
+        private List<LastOrderInfoResponseDto.DataDto.EquipmentsDto> equipments;
+        private Object branch;
+        private CompanyDto company;
+        @JsonProperty("account_number")
+        private Object accountNumber;
+        @JsonProperty("video_exists")
+        private Boolean videoExists;
+        @JsonProperty("created_at")
+        private Integer createdAt;
 
-        BranchDto[] branches = {
-                BranchDto.builder().id(1).title("Юг").build(),
-                BranchDto.builder().id(2).title("Север").build(),
-                BranchDto.builder().id(3).title("Восток").build(),
-                BranchDto.builder().id(4).title("Запад").build(),
-                BranchDto.builder().id(13).title("Юго-Восток").build(),
-                BranchDto.builder().id(14).title("Северо-Запад").build()
-        };
-
-        CompanyDto company = CompanyDto.builder()
-                .id(1)
-                .title("МособлГаз")
-                .branches(branches)
-                .build();
-
-        DataDto data = DataDto.builder()
-                .id(null)
-                .title("my house")
-                .activeOffersCount(0)
-                .photos(new Object[]{})
-                .address(address)
-                .equipments(new Object[]{})
-                .company(company)
-                .accountNumber(null)
-                .videoExists(false)
-                .createdAt(null)
-                .build();
-
-        return HouseResponseDto.builder()
-                .status(0)
-                .message("Объект добавлен")
-                .data(data)
-                .build();
     }
 
     public static HouseResponseDto invalidExceedSymbolsLimitTitle() {

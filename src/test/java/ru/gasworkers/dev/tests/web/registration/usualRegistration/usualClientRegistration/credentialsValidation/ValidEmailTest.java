@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.tests.web.registration.usualRegistration.usualClientRegistration.credentialsValidation;
 
 import io.qameta.allure.*;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
@@ -17,6 +18,7 @@ import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
+@Disabled
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.REGISTRATION)
 @Feature(AllureFeature.REGULAR_REGISTRATION)

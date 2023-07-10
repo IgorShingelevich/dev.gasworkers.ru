@@ -10,8 +10,8 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
-@ExtendWith(WithThroughUserExtension.class)
-public @interface WithThroughUser {
-    UserType type() default UserType.CLIENT;
-    WithOrderType[] withOrderType() default {};
+@ExtendWith(WithSelfEmployedExtension.class)
+public @interface WithSelfEmployed {
+    UserType type() default UserType.MASTER;
+//    WithHouse[] houses() default {};
 }
