@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.given;
 public class LastOrderInfoApi extends BaseApi {
     //    https://api.dev.gasworkers.ru/docs#zakazy-GETapi-v1-users-last-order-info
     @Step("API: Получение информации о последнем заказе")
-    public ValidatableResponse getlastOrderInfo(String token) {
+    public ValidatableResponse getLastOrderInfo(String token) {
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)
                 .when()

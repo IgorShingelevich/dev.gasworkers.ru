@@ -9,5 +9,6 @@ public final class AllureEpic {
             CLIENT = "Клиент",
             ACCOUNT = "Аккаунт",
             SELF_EMPLOYED = "Самозанятый",
-            CONSULTATION = "Консультация";
+            CONSULTATION = "Консультация",
+            REPAIR = "Ремонт";
 }

@@ -26,6 +26,8 @@ import ru.gasworkers.dev.api.consultation.masters.pickMaster.PickMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterResponseDto;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
 import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
+import ru.gasworkers.dev.api.orders.ordersInfo.OrdersInfoApi;
+import ru.gasworkers.dev.api.orders.ordersInfo.dto.OrdersInfoResponseDto;
 import ru.gasworkers.dev.api.orders.selectHouse.SelectHouseApi;
 import ru.gasworkers.dev.api.orders.selectHouse.dto.SelectHouseResponseDto;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
@@ -35,6 +37,8 @@ import ru.gasworkers.dev.api.users.client.house.addEquipment.AddEquipmentApi;
 import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.api.users.client.house.getHouse.GetHouseApi;
 import ru.gasworkers.dev.api.users.client.house.getHouse.dto.GetHouseResponseDto;
+import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoApi;
+import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithHouse;
@@ -46,12 +50,14 @@ import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.codeborne.pdftest.assertj.Assertions.assertThat;
 import static io.qameta.allure.Allure.step;
 
 @Owner("Igor Shingelevich")
@@ -73,6 +79,8 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
     private final PickMasterApi pickMasterApi = new PickMasterApi();
     private final ApplyMasterApi applyMasterApi = new ApplyMasterApi();
     private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
+    private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
+    private final OrdersInfoApi ordersInfoApi = new OrdersInfoApi();
     private final ConsultationCancelApi consultationCancelApi = new ConsultationCancelApi();
     private final LoginApi loginApi = new LoginApi();
     private final GetUserWithAdminApi getUserWithAdminApi = new GetUserWithAdminApi();
@@ -84,7 +92,7 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
     @ParameterizedTest(name = "{0}")
     @EnumSource(FinishConsultationCase.class)
     @DisplayName("Отмена  оплаченной консультации клиентом")
-    void cancelClientPayedConsultationNow(FinishConsultationCase testCase, @WithUser(houses = {@WithHouse}) User client) {
+    void cancelClientPayedConsultationNow(FinishConsultationCase testCase, @WithUser(houses = {@WithHouse}) User client) throws IOException {
         String token = loginApi.getTokenPhone(client);
         Integer houseId = houseApi.houseId(client, token);
         step("Add equipment", () -> {
@@ -169,10 +177,36 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
                 .phone(client.getPhone())
                 .build().getPhone();
 
+        LastOrderInfoResponseDto lastOrderResponseBeforeCancel = lastOrderInfoApi.getLastOrderInfo(token)
+                .statusCode(200)
+                .extract().as(LastOrderInfoResponseDto.class);
+        Integer lastOrderId = lastOrderResponseBeforeCancel.getData().getId();
+        String lastOrderStatusBeforeCancel = lastOrderResponseBeforeCancel.getData().getStatus();
+        assertThat(lastOrderId).isEqualTo(orderId);
+        System.out.println("lastOrderStatusBeforeCancel = " + lastOrderStatusBeforeCancel);
+
+
         step("отмена оплаченной консультации", () -> {
             consultationCancelApi.cancelConsultation(testCase.getConsultationCancelDto(orderId), token)
                     .statusCode(200)
                     .extract().as(ConsultationCancelResponseDto.class);
+        });
+        step("убедиться что нет единственного последнего заказа после отмены", () -> {
+            LastOrderInfoResponseDto noLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(token)
+                    .statusCode(200)
+                    .extract().as(LastOrderInfoResponseDto.class);
+            assertResponse(noLastOrderResponse, LastOrderInfoResponseDto.noLastOrderResponse());
+        });
+        step("убедиться что карточка заказа после отмены имеет статус canceled", () -> {
+            OrdersInfoResponseDto ordersInfoResponse = ordersInfoApi.infoOrder(token, orderId)
+                    .statusCode(200)
+                    .extract().as(OrdersInfoResponseDto.class);
+            Integer currentOrderId = ordersInfoResponse.getData().getId();
+            String currentStatus = ordersInfoResponse.getData().getStatus();
+            String currentType = ordersInfoResponse.getData().getType();
+            assertThat(currentStatus).isEqualTo("canceled");
+            assertThat(currentType).isEqualTo("consultation");
+            assertThat(currentOrderId).isEqualTo(orderId);
         });
 
 

@@ -8,5 +8,6 @@ public final class AllureFeature {
     public static final String
             CLIENT_HOUSE = "Дом клиента",
             ORDERS = "Заказы",
-            CONSULTATION_NOW = "Консультация сейчас";
+            CONSULTATION_NOW = "Консультация сейчас",
+            REPAIR = "repair";
 }

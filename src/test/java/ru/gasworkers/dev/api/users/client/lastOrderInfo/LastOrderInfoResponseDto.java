@@ -20,6 +20,14 @@ public class LastOrderInfoResponseDto {
     private String message;
     private DataDto data;
 
+    public static LastOrderInfoResponseDto noLastOrderResponse() {
+        return LastOrderInfoResponseDto.builder()
+                .status(0)
+                .message("Информация о последнем заказе")
+                .data(null)
+                .build();
+    }
+
     @Data
     @Builder
     @AllArgsConstructor
