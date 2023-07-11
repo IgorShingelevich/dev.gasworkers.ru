@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.qameta.allure.*;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -22,7 +23,7 @@ import ru.gasworkers.dev.api.consultation.cancel.dto.ConsultationCancelResponseD
 import ru.gasworkers.dev.api.consultation.masters.apply.ApplyMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.apply.dto.ApplyMasterResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
-import ru.gasworkers.dev.api.consultation.masters.pickMaster.PickMasterApi;
+import ru.gasworkers.dev.api.consultation.masters.pickMaster.SelectConsultationMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterResponseDto;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
 import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
@@ -76,7 +77,7 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
     private final GetHouseApi getHouseApi = new GetHouseApi();
     private final SelectHouseApi selectHouseApi = new SelectHouseApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
-    private final PickMasterApi pickMasterApi = new PickMasterApi();
+    private final SelectConsultationMasterApi selectConsultationMasterApi = new SelectConsultationMasterApi();
     private final ApplyMasterApi applyMasterApi = new ApplyMasterApi();
     private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
@@ -145,7 +146,7 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
         });
 
         Integer timetableId = step("Pick master", () -> {
-            return pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0), token)
+            return selectConsultationMasterApi.selectMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0), token)
                     .statusCode(200)
                     .extract().as(PickMasterResponseDto.class).getData().getTimetableId();
         });
@@ -176,14 +177,15 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
         String phone = ComplexRegistrationRequestDto.builder()
                 .phone(client.getPhone())
                 .build().getPhone();
-
-        LastOrderInfoResponseDto lastOrderResponseBeforeCancel = lastOrderInfoApi.getLastOrderInfo(token)
-                .statusCode(200)
-                .extract().as(LastOrderInfoResponseDto.class);
-        Integer lastOrderId = lastOrderResponseBeforeCancel.getData().getId();
-        String lastOrderStatusBeforeCancel = lastOrderResponseBeforeCancel.getData().getStatus();
-        assertThat(lastOrderId).isEqualTo(orderId);
-        System.out.println("lastOrderStatusBeforeCancel = " + lastOrderStatusBeforeCancel);
+        step("убедиться что есть единственный последний заказ в статусе ожидания начала", () -> {
+            LastOrderInfoResponseDto lastOrderResponse = lastOrderInfoApi.getLastOrderInfo(token)
+                    .statusCode(200)
+                    .extract().as(LastOrderInfoResponseDto.class);
+            Integer lastOrderId = lastOrderResponse.getData().getId();
+            String lastOrderStatus = lastOrderResponse.getData().getStatus();
+            assertThat(lastOrderId).isEqualTo(orderId);
+            Assertions.assertThat(lastOrderStatus).isEqualTo("wait-for-master-starting");
+        });
 
 
         step("отмена оплаченной консультации", () -> {
@@ -252,6 +254,8 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
                 clientPages.getHomePage().conferenceNotification.isDisplayed(false);
             });
             //todo check invoice presence after cancel
+            //todo notification money back
+
 
         });
 

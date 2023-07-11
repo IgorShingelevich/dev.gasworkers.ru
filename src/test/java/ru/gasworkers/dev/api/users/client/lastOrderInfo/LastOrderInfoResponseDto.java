@@ -132,46 +132,7 @@ public class LastOrderInfoResponseDto {
             @AllArgsConstructor
             @NoArgsConstructor
             public static class EquipmentsTypeDto {
-                /*"type": {
-                    "id": 1,
-                    "sort_order": 100,
-                    "title": "Газовый котел",
-                    "additional_parameter": "Мощность",
-                    "note": null,
-                    "power_required": true,
-                    "included_in_price_list": true,
-                    "is_show_hidden": false,
-                    "ranges": [
-                        {
-                            "id": 1,
-                            "from_value": 0,
-                            "to_value": 20,
-                            "domestic_price": null,
-                            "foreign_price": null
-                        },
-                        {
-                            "id": 2,
-                            "from_value": 21,
-                            "to_value": 50,
-                            "domestic_price": null,
-                            "foreign_price": null
-                        },
-                        {
-                            "id": 3,
-                            "from_value": 51,
-                            "to_value": 100,
-                            "domestic_price": null,
-                            "foreign_price": null
-                        },
-                        {
-                            "id": 4,
-                            "from_value": 100,
-                            "to_value": null,
-                            "domestic_price": null,
-                            "foreign_price": null
-                        }
-                    ]
-                },*/
+
                 @JsonProperty("id")
                 private Integer typeId;
                 @JsonProperty("sort_order")

@@ -17,7 +17,7 @@ import ru.gasworkers.dev.api.consultation.masters.apply.ApplyMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.apply.dto.ApplyMasterResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMastersResponseDto;
-import ru.gasworkers.dev.api.consultation.masters.pickMaster.PickMasterApi;
+import ru.gasworkers.dev.api.consultation.masters.pickMaster.SelectConsultationMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterResponseDto;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
 import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
@@ -49,7 +49,7 @@ public class ApplyMasterApiTest extends BaseApiTest {
     private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
     private final IsStartedApi isStartedApi = new IsStartedApi();
-    private final PickMasterApi pickMasterApi = new PickMasterApi();
+    private final SelectConsultationMasterApi selectConsultationMasterApi = new SelectConsultationMasterApi();
     private final ApplyMasterApi applyMasterApi = new ApplyMasterApi();
 
     @ParameterizedTest(name = "{0}")
@@ -88,7 +88,7 @@ public class ApplyMasterApiTest extends BaseApiTest {
         });
 
         Integer timetableId = step("Pick master", () -> {
-            return pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0), token)
+            return selectConsultationMasterApi.selectMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0), token)
                     .statusCode(200)
                     .extract().as(PickMasterResponseDto.class).getData().getTimetableId();
         });
@@ -135,7 +135,7 @@ public class ApplyMasterApiTest extends BaseApiTest {
                     .extract().as(IsStartedResponseDto.class);
         });
         Integer timetableId = step("Pick master", () -> {
-            return pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0), token)
+            return selectConsultationMasterApi.selectMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0), token)
                     .statusCode(200)
                     .extract().as(PickMasterResponseDto.class).getData().getTimetableId();
         });

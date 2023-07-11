@@ -18,7 +18,7 @@ import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.consultation.isStarted.IsStartedApi;
 import ru.gasworkers.dev.api.consultation.isStarted.dto.IsStartedResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
-import ru.gasworkers.dev.api.consultation.masters.pickMaster.PickMasterApi;
+import ru.gasworkers.dev.api.consultation.masters.pickMaster.SelectConsultationMasterApi;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
 import ru.gasworkers.dev.api.users.client.house.HouseApi;
 import ru.gasworkers.dev.api.users.client.house.addEquipment.AddEquipmentApi;
@@ -43,13 +43,13 @@ import static org.junit.jupiter.api.Assertions.*;
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.MASTER)
 @Tag(AllureTag.API)
-public class PickMasterApiTest extends BaseApiTest {
+public class SelectConsultationMasterApiTest extends BaseApiTest {
     private final HouseApi houseApi = new HouseApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
     private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
     private final IsStartedApi isStartedApi = new IsStartedApi();
-    private final PickMasterApi pickMasterApi = new PickMasterApi();
+    private final SelectConsultationMasterApi selectConsultationMasterApi = new SelectConsultationMasterApi();
 
     @ParameterizedTest(name = "{0}")
     @EnumSource(PickMasterPositiveCase.class)
@@ -95,7 +95,7 @@ public class PickMasterApiTest extends BaseApiTest {
         });
         Integer timetableId = step("Pick master", () -> {
             JsonObject actualResponseObject = JsonParser.parseString(
-                    pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), mastersIdList.get(0), token)
+                    selectConsultationMasterApi.selectMaster(testCase.getPickMasterDto(orderId), mastersIdList.get(0), token)
                             .statusCode(200)
                             .extract().asString()
             ).getAsJsonObject();

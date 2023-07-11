@@ -20,7 +20,7 @@ import ru.gasworkers.dev.api.consultation.cancelRequest.ConsultationCancelReques
 import ru.gasworkers.dev.api.consultation.masters.apply.ApplyMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.apply.dto.ApplyMasterResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
-import ru.gasworkers.dev.api.consultation.masters.pickMaster.PickMasterApi;
+import ru.gasworkers.dev.api.consultation.masters.pickMaster.SelectConsultationMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterResponseDto;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
 import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentResponseDto;
@@ -51,7 +51,7 @@ public class ConsultationCancelRequestApiTest extends BaseApiTest {
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
     private final ClientOrdersRequestsApi clientOrdersRequestsApi = new ClientOrdersRequestsApi();
     private final ConsultationCancelRequestApi consultationCancelRequestApi = new ConsultationCancelRequestApi();
-    private final PickMasterApi pickMasterApi = new PickMasterApi();
+    private final SelectConsultationMasterApi selectConsultationMasterApi = new SelectConsultationMasterApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
     private final ApplyMasterApi applyMasterApi = new ApplyMasterApi();
     private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
@@ -87,7 +87,7 @@ public class ConsultationCancelRequestApiTest extends BaseApiTest {
 
 
         Integer timetableId = step("Pick master", () -> {
-            return pickMasterApi.pickMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0), token)
+            return selectConsultationMasterApi.selectMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0), token)
                     .statusCode(200)
                     .extract().as(PickMasterResponseDto.class).getData().getTimetableId();
         });

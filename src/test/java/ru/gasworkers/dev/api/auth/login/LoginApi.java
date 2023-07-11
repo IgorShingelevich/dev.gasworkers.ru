@@ -28,6 +28,13 @@ public class LoginApi extends BaseApi {
                 .getData().getToken();
     }
 
+    public String getUserToken(LoginRequestDto inputDto) {
+        return login(inputDto)
+                .statusCode(200)
+                .extract().as(LoginResponseDto.class)
+                .getData().getToken();
+    }
+
     public String getTokenThrough(User user) {
         LoginRequestDto inputDto = LoginRequestDto.asUserEmail(user.getEmail(), "1111");
         return login(inputDto)
