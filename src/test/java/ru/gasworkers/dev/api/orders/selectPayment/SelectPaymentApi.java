@@ -19,4 +19,13 @@ public class SelectPaymentApi extends BaseApi {
                 .then().spec(baseResponseSpec);
     }
 
+    @Step("API: Select payment")
+    public ValidatableResponse payCard(Integer orderId, String token) {
+        return selectPayment(SelectPaymentRequestDto.builder()
+                .orderId(orderId)
+                .type("card")
+                .build(), token);
+    }
+
+
 }

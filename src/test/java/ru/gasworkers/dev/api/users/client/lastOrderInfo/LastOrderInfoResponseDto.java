@@ -28,6 +28,7 @@ public class LastOrderInfoResponseDto {
                 .build();
     }
 
+
     @Data
     @Builder
     @AllArgsConstructor
@@ -101,31 +102,31 @@ public class LastOrderInfoResponseDto {
         @NoArgsConstructor
         public static class EquipmentsDto {
             @JsonProperty("id")
-            private Integer equipmentsId;
+            private Integer id;
             @JsonProperty("all_works")
-            private Boolean equipmentsAllWorks;
+            private Boolean allWorks;
             @JsonProperty("equipment_type_id")
-            private EquipmentBrandDto.EquipmentBrandTypeDto equipmentsType;
+            private EquipmentBrandDto.EquipmentBrandTypeDto type;
             @JsonProperty("brand")
-            private EquipmentBrandDto equipmentsBrand;
+            private EquipmentBrandDto brand;
             @JsonProperty("title")
-            private String equipmentsTitle;
+            private String title;
             @JsonProperty("computed_title")
-            private String equipmentsComputedTitle;
+            private String computedTitle;
             @JsonProperty("power")
-            private Integer equipmentsPower;
+            private Integer power;
             @JsonProperty("photos")
-            private List<String> equipmentsPhotos;
+            private List<String> photos;
             @JsonProperty("last_photo")
-            private String equipmentsLastPhoto;
+            private String lastPhoto;
             @JsonProperty("videos")
-            private List<VideoDto> equipmentsVideos;
+            private List<VideoDto> videos;
             @JsonProperty("model")
-            private EquipmentModelDto equipmentsModel;
+            private EquipmentModelDto model;
             @JsonProperty("video_exists")
-            private Boolean equipmentsVideoExists;
+            private Boolean videoExists;
             @JsonProperty("type")
-            private EquipmentsTypeDto equipmentsTypeDto;
+            private EquipmentsTypeDto typeDto;
 
             @Data
             @Builder
@@ -134,23 +135,23 @@ public class LastOrderInfoResponseDto {
             public static class EquipmentsTypeDto {
 
                 @JsonProperty("id")
-                private Integer typeId;
+                private Integer id;
                 @JsonProperty("sort_order")
-                private Integer typeSortOrder;
+                private Integer sortOrder;
                 @JsonProperty("title")
-                private String typeTitle;
+                private String title;
                 @JsonProperty("additional_parameter")
-                private String typeAdditionalParameter;
+                private String additionalParameter;
                 @JsonProperty("note")
-                private String typeNote;
+                private String note;
                 @JsonProperty("power_required")
-                private Boolean typePowerRequired;
+                private Boolean powerRequired;
                 @JsonProperty("included_in_price_list")
-                private Boolean typeIncludedInPriceList;
+                private Boolean includedInPriceList;
                 @JsonProperty("is_show_hidden")
-                private Boolean typeIsShowHidden;
+                private Boolean isShowHidden;
                 @JsonProperty("ranges")
-                private List<RangesDto> typeRanges;
+                private List<RangesDto> ranges;
 
                 @Data
                 @Builder
@@ -158,15 +159,15 @@ public class LastOrderInfoResponseDto {
                 @NoArgsConstructor
                 public static class RangesDto {
                     @JsonProperty("id")
-                    private Integer rangesId;
+                    private Integer id;
                     @JsonProperty("from_value")
-                    private Integer rangesFromValue;
+                    private Integer fromValue;
                     @JsonProperty("to_value")
-                    private Integer rangesToValue;
+                    private Integer toValue;
                     @JsonProperty("domestic_price")
-                    private Integer rangesDomesticPrice;
+                    private Integer domesticPrice;
                     @JsonProperty("foreign_price")
-                    private Integer rangesForeignPrice;
+                    private Integer foreignPrice;
                 }
 
             }
@@ -178,21 +179,21 @@ public class LastOrderInfoResponseDto {
             @NoArgsConstructor
             public static class EquipmentBrandDto {
                 @JsonProperty("id")
-                private Integer brandId;
+                private Integer id;
                 @JsonProperty("is_show_hidden")
-                private Boolean brandIsShowHidden;
+                private Boolean isShowHidden;
                 @JsonProperty("title")
-                private String brandTitle;
+                private String title;
                 @JsonProperty("is_foreign")
-                private Boolean brandIsForeign;
+                private Boolean isForeign;
                 @JsonProperty("is_custom")
-                private Boolean brandIsCustom;
+                private Boolean isCustom;
                 @JsonProperty("logo")
-                private String brandLogo;
+                private String logo;
                 @JsonProperty("created_at")
-                private Long brandCreatedAt;
+                private Long createdAt;
                 @JsonProperty("types")
-                private List<EquipmentBrandTypeDto> brandTypes;
+                private List<EquipmentBrandTypeDto> types;
 
                 @Data
                 @Builder
@@ -200,23 +201,23 @@ public class LastOrderInfoResponseDto {
                 @NoArgsConstructor
                 public static class EquipmentBrandTypeDto {
                     @JsonProperty("id")
-                    private Integer typeId;
+                    private Integer id;
                     @JsonProperty("sort_order")
-                    private Integer typeSortOrder;
+                    private Integer sortOrder;
                     @JsonProperty("title")
-                    private String typeTitle;
+                    private String title;
                     @JsonProperty("additional_parameter")
-                    private String typeAdditionalParameter;
+                    private String additionalParameter;
                     @JsonProperty("note")
-                    private String typeNote;
+                    private String note;
                     @JsonProperty("power_required")
-                    private Boolean typePowerRequired;
+                    private Boolean powerRequired;
                     @JsonProperty("included_in_price_list")
-                    private Boolean typeIncludedInPriceList;
+                    private Boolean includedInPriceList;
                     @JsonProperty("is_show_hidden")
-                    private Boolean typeIsShowHidden;
+                    private Boolean isShowHidden;
                     @JsonProperty("ranges")
-                    private List<Object> typeRanges;
+                    private List<Object> ranges;
                 }
             }
 

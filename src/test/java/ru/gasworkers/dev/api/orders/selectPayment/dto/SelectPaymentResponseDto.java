@@ -20,6 +20,7 @@ public class SelectPaymentResponseDto {
     private DataDto data;
     private ErrorDto error;
 
+    @Builder
     public static SelectPaymentResponseDto successResponse(String url, Integer paymentId) {
         return SelectPaymentResponseDto.builder()
                 .status(0)
@@ -32,6 +33,7 @@ public class SelectPaymentResponseDto {
                         .build())
                 .build();
     }
+
 
     @Data
     @NoArgsConstructor

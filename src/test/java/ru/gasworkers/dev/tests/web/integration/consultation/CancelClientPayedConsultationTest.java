@@ -27,8 +27,8 @@ import ru.gasworkers.dev.api.consultation.masters.pickMaster.SelectConsultationM
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterResponseDto;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
 import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
-import ru.gasworkers.dev.api.orders.ordersInfo.OrdersInfoApi;
-import ru.gasworkers.dev.api.orders.ordersInfo.dto.OrdersInfoResponseDto;
+import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
+import ru.gasworkers.dev.api.orders.info.dto.OrdersInfoResponseDto;
 import ru.gasworkers.dev.api.orders.selectHouse.SelectHouseApi;
 import ru.gasworkers.dev.api.orders.selectHouse.dto.SelectHouseResponseDto;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
@@ -200,7 +200,7 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
             assertResponse(noLastOrderResponse, LastOrderInfoResponseDto.noLastOrderResponse());
         });
         step("убедиться что карточка заказа после отмены имеет статус canceled", () -> {
-            OrdersInfoResponseDto ordersInfoResponse = ordersInfoApi.infoOrder(token, orderId)
+            OrdersInfoResponseDto ordersInfoResponse = ordersInfoApi.ordersInfo(orderId, token)
                     .statusCode(200)
                     .extract().as(OrdersInfoResponseDto.class);
             Integer currentOrderId = ordersInfoResponse.getData().getId();

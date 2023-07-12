@@ -30,7 +30,7 @@
 //        LoginResponseDto actualResponse = loginApi.login(testCase.getLoginDto())
 //                .statusCode(200)
 //                .extract().as(LoginResponseDto.class);
-//        LoginResponseDto.DataDto loginData = actualResponse.getData();
+//        LoginResponseDto.Data loginData = actualResponse.getData();
 //        String tokenAdmin = loginData.getToken();
 //        System.out.println(" tokenAdmin = " + tokenAdmin);
 //

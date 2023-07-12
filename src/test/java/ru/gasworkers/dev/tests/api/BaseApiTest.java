@@ -1,7 +1,9 @@
 package ru.gasworkers.dev.tests.api;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.SoftAssertions;
 import org.assertj.core.api.recursive.comparison.RecursiveComparisonConfiguration;
 import org.json.JSONObject;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -16,6 +18,24 @@ public abstract class BaseApiTest extends BaseTest {
 
     protected final LoginApi loginApi = new LoginApi();
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    public static void compareJsonDifferences(Object response1, Object response2) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+
+            String json1 = objectMapper.writeValueAsString(response1);
+            String json2 = objectMapper.writeValueAsString(response2);
+
+            JsonNode expectedNode = objectMapper.readTree(json1);
+            JsonNode actualNode = objectMapper.readTree(json2);
+
+            SoftAssertions softly = new SoftAssertions();
+            softly.assertThat(actualNode).usingRecursiveComparison().isEqualTo(expectedNode);
+            softly.assertAll();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     protected void assertResponse(Object expectedResponse, Object actualResponse) throws IOException {
         String expectedJson = objectMapper.writeValueAsString(expectedResponse);
@@ -68,37 +88,21 @@ public abstract class BaseApiTest extends BaseTest {
                 .isEqualTo(expectedResponse);
     }
 
-    /*protected void assertResponsePartial(Object expectedResponse, Object actualResponse, List<String> excludedFields) throws IOException {
-        String expectedJson = objectMapper.writeValueAsString(expectedResponse);
-        String actualJson = objectMapper.writeValueAsString(actualResponse);
+    protected void assertResponsePartialNoAt(Object expectedResponse, Object actualResponse) throws IOException {
+        RecursiveComparisonConfiguration configuration = RecursiveComparisonConfiguration.builder()
+                // ignore all fields that finish with _at
+                .withIgnoredFields(".*At")
+                .build();
 
-        JSONObject expectedJsonObject = new JSONObject(expectedJson);
-        JSONObject actualJsonObject = new JSONObject(actualJson);
-
-        for (String field : excludedFields) {
-            removeField(expectedJsonObject, field);
-            removeField(actualJsonObject, field);
-        }
-
-        JSONAssert.assertEquals(expectedJsonObject, actualJsonObject, false);
+        Assertions.assertThat(actualResponse)
+                .usingRecursiveComparison(configuration)
+                .isEqualTo(expectedResponse);
     }
-
-    private void removeField(JSONObject jsonObject, String field) {
-        String[] fieldComponents = field.split("\\.");
-
-        if (fieldComponents.length == 1) {
-            jsonObject.remove(field);
-        } else {
-            String currentField = fieldComponents[0];
-            String remainingFields = field.substring(currentField.length() + 1);
-
-            if (jsonObject.has(currentField) && jsonObject.get(currentField) instanceof JSONObject) {
-                removeField(jsonObject.getJSONObject(currentField), remainingFields);
-            }
-        }
-    }*/
-
-
-
-
 }
+
+
+
+
+
+
+
