@@ -1,0 +1,248 @@
+{
+  "status": 0,
+  "message": "Информация о заказе",
+  "data": {
+    "id": 7543,
+    "number": "99/23/077/007543",
+    "status": "date-selecting",
+    "type": "repair",
+    "service_center": {
+      "id": 39,
+      "short_title": "ООО \"СССР\"",
+      "logo": "https://gasworkers.storage.yandexcloud.net/files/gSyZMhRaO1hRyFAoidTw2dSdhb99Clk8aU3zLjYX.jpg",
+      "rating": "5.00",
+      "first_accept_price": 11.99,
+      "full_price": 11.99,
+      "full_price_wi": 11.99
+    },
+    "master": null,
+    "receipt": null,
+    "receipts": [
+      {
+        "id": 4494,
+        "amount": 11.99,
+        "paid": true,
+        "title": "first_accept_master_payment",
+        "remains_to_pay": 11.99,
+        "created_at": "Thu, 13 Jul 2023 23:20:18 +0300"
+      }
+    ],
+    "codes": [
+
+    ],
+    "stage": "repair_initial_departure",
+    "offer": {
+      "id": 683138,
+      "order_id": 7543,
+      "company_id": 39,
+      "status": "approved",
+      "created_at": "2023-07-13T20:20:09.000000Z",
+      "updated_at": "2023-07-13T20:20:18.000000Z",
+      "price": 11.99,
+      "price_wi": 11.99,
+      "master_id": null,
+      "start_price": null,
+      "price_real": 11.99,
+      "with_consultation": false,
+      "consultation_passed": false,
+      "master_started": false,
+      "wait_from": null,
+      "wait_notification": 0,
+      "master_selected": false,
+      "hide": false,
+      "client_closed": false
+    },
+    "desired_date_interval_started_at": 1689195600,
+    "desired_date_interval_ended_at": 1689454800,
+    "desired_time_started": "Thu, 13 Jul 23 06:00:00 +0300",
+    "desired_time_ended": "Thu, 13 Jul 23 18:00:00 +0300",
+    "insurance_type": null,
+    "repair_actions": [
+
+    ],
+    "material_values": [
+
+    ],
+    "need_sign": false,
+    "sign_type": null,
+    "record_started_at": null,
+    "need_master_sign": false,
+    "master_sign_type": null,
+    "last_code_sent": null,
+    "files": [
+
+    ],
+    "conference_url": null,
+    "consultation_canceled": false,
+    "refunded": false,
+    "equipments": [
+      {
+        "id": 2677,
+        "title": "Газовый котел Viessmann Vitodens 100-W WB1C104 35kW",
+        "is_show_hidden": false
+      }
+    ],
+    "client_object": {
+      "id": 3128,
+      "title": "Мой дом",
+      "last_photo": null,
+      "address": {
+        "id": 2121,
+        "full": "Москва, Московская улица",
+        "coordinates": [
+          55.671229,
+          37.416161
+        ]
+      }
+    },
+    "creation_status": null,
+    "online": false,
+    "history": [
+      {
+        "id": 1,
+        "src_title": "draft_title",
+        "title": "draft_title_client",
+        "description": "draft_description_client",
+        "set_at": "Thu, 13 Jul 23 23:20:06 +0300",
+        "completed_at": "Thu, 13 Jul 23 23:20:06 +0300",
+        "completed": true,
+        "is_current": false
+      },
+      {
+        "id": 2,
+        "src_title": "selecting_object_title",
+        "title": "selecting_object_title_client",
+        "description": "selecting_object_description_client",
+        "set_at": "Thu, 13 Jul 23 23:20:06 +0300",
+        "completed_at": "Thu, 13 Jul 23 23:20:06 +0300",
+        "completed": true,
+        "is_current": false
+      },
+      {
+        "id": 3,
+        "src_title": "selecting_date_title",
+        "title": "selecting_date_title_client",
+        "description": "selecting_date_description_client",
+        "set_at": "Thu, 13 Jul 23 23:20:06 +0300",
+        "completed_at": "Thu, 13 Jul 23 23:20:06 +0300",
+        "completed": true,
+        "is_current": false
+      },
+      {
+        "id": 4,
+        "src_title": "publication_title",
+        "title": "publication_title_client",
+        "description": "publication_description_client",
+        "set_at": "Thu, 13 Jul 23 23:20:06 +0300",
+        "completed_at": "Thu, 13 Jul 23 23:20:18 +0300",
+        "completed": true,
+        "is_current": false
+      },
+      {
+        "id": 7,
+        "src_title": "initial_departure_payment_title",
+        "title": "initial_departure_payment_title_client",
+        "description": "initial_departure_payment_description_client",
+        "set_at": "Thu, 13 Jul 23 23:20:18 +0300",
+        "completed_at": "Thu, 13 Jul 23 23:21:00 +0300",
+        "completed": true,
+        "is_current": false
+      },
+      {
+        "id": 9,
+        "src_title": "approving_order_time_title",
+        "title": "approving_order_time_title_client",
+        "description": "approving_order_time_description_client",
+        "set_at": "Thu, 13 Jul 23 23:21:00 +0300",
+        "completed_at": null,
+        "completed": false,
+        "is_current": true
+      },
+      {
+        "id": 11,
+        "src_title": "waiting_for_master_title",
+        "title": "waiting_for_master_title_client",
+        "description": "waiting_for_master_description_client",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false
+      },
+      {
+        "id": 20,
+        "src_title": "master_filling_repair_materials_title",
+        "title": "master_filling_repair_materials_title_client",
+        "description": "master_filling_repair_materials_description_client",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false
+      },
+      {
+        "id": 21,
+        "src_title": "repair_materials_payment_title",
+        "title": "repair_materials_payment_title_client",
+        "description": "repair_materials_payment_description_client",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false
+      },
+      {
+        "id": 22,
+        "src_title": "master_filling_repair_works_title",
+        "title": "master_filling_repair_works_title_client",
+        "description": "master_filling_repair_works_description_client",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false
+      },
+      {
+        "id": 23,
+        "src_title": "repair_works_payment_title",
+        "title": "repair_works_payment_title_client",
+        "description": "repair_works_payment_description_client",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false
+      },
+      {
+        "id": 24,
+        "src_title": "master_creating_order_repair_act_title",
+        "title": "master_creating_order_repair_act_title_client",
+        "description": "master_creating_order_repair_act_description_client",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false
+      },
+      {
+        "id": 25,
+        "src_title": "client_need_signing_order_repair_act_title",
+        "title": "client_need_signing_order_repair_act_title_client",
+        "description": "client_need_signing_order_repair_act_description_client",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false
+      },
+      {
+        "id": 18,
+        "src_title": "client_creating_review_title",
+        "title": "client_creating_review_title_client",
+        "description": "client_creating_review_description_client",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false
+      }
+    ],
+    "from_maintenance": false,
+    "is_insurance_case": false,
+    "canceled_by_master": false,
+    "canceled_by_client": false,
+    "money_back_available": false
+  }
+}

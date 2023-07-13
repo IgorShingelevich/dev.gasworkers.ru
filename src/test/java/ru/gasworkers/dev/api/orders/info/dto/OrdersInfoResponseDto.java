@@ -24,7 +24,7 @@ public class OrdersInfoResponseDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Data {
-//        private String address;
+        //        private String address;
         private Integer id;
         private String number;
         private String status;
@@ -32,8 +32,8 @@ public class OrdersInfoResponseDto {
         @JsonProperty("service_center")
         private ServiceCenter serviceCenter;
         private Object master;
-        private Object receipt;
-        private ArrayList<Receipt> receipts;
+        private Receipt receipt;
+        private ArrayList<Receipts> receipts;
         private ArrayList<Object> codes;
         private String stage;
         private OfferDto offer;
@@ -86,6 +86,34 @@ public class OrdersInfoResponseDto {
         private Boolean canceledByClient;
         @JsonProperty("money_back_available")
         private Boolean moneyBackAvailable;
+
+        @lombok.Data
+        @Builder
+        @AllArgsConstructor
+        @NoArgsConstructor
+        public static class Receipt {
+            private Integer id;
+            private Double amount;
+            @JsonProperty("remains_to_pay")
+            private Double remainsToPay;
+            private Boolean paid;
+            private String title;
+            @JsonProperty("order_id")
+            private Integer orderId;
+            @JsonProperty("created_at")
+            private String createdAt;
+            @JsonProperty("updated_at")
+            private String updatedAt;
+            private String stage;
+            private Boolean hide;
+            private Boolean refunded;
+            private Boolean cash;
+            @JsonProperty("is_insurance")
+            private Boolean isInsurance;
+            @JsonProperty("telegram_sent")
+            private Boolean telegramSent;
+        }
+
 
         @lombok.Data
         @Builder
@@ -145,11 +173,12 @@ public class OrdersInfoResponseDto {
             @JsonProperty("full_price_wi")
             private Object fullPriceWi;
         }
+
         @lombok.Data
         @Builder
         @AllArgsConstructor
         @NoArgsConstructor
-        public static class Receipt {
+        public static class Receipts {
             private Integer id;
             private Double amount;
             private Boolean paid;

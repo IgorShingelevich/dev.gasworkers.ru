@@ -188,11 +188,11 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
         });
 
 
-        step("отмена оплаченной консультации", () -> {
-            consultationCancelApi.cancelConsultation(testCase.getConsultationCancelDto(orderId), token)
-                    .statusCode(200)
-                    .extract().as(ConsultationCancelResponseDto.class);
-        });
+       step("отмена оплаченной консультации", () -> {
+           consultationCancelApi.cancelConsultation(testCase.getConsultationCancelDto(orderId), token)
+                   .statusCode(200)
+                   .extract().as(ConsultationCancelResponseDto.class);
+       });
         step("убедиться что нет единственного последнего заказа после отмены", () -> {
             LastOrderInfoResponseDto noLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(token)
                     .statusCode(200)

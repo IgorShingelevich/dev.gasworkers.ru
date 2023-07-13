@@ -67,7 +67,6 @@ public class ConsultationCancelRequestApiTest extends BaseApiTest {
                 .extract().as(ClientsOrdersRequestsResponse.class).getData().get(0).getId();
 
         System.out.println("Order id: " + orderId);
-
         List<Integer> masterIdList = step("Get online masters", () -> {
             String responseString = onlineMastersApi.getOnlineMasters(testCase.getOnlineMastersDto(orderId), token)
                     .statusCode(200)
