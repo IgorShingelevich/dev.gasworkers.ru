@@ -27,7 +27,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.HOUSE)
 @Tag(AllureTag.API)
-public class AddEquipmentApiTest extends BaseApiTest {
+public class AddEquipmentsApiTest extends BaseApiTest {
     private final HouseApi houseApi = new HouseApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
 

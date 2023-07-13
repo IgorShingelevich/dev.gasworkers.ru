@@ -1,14 +1,11 @@
 package ru.gasworkers.dev.api.orders.info.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 @Data
@@ -22,48 +19,12 @@ public class OrdersInfoResponseDto {
     private String message;
     private Data data;
 
-    public static OrdersInfoResponseDto publishedOrderInfoBGRepair(Integer orderId, String orderNumber, Integer clientObjectId, Integer equipmentsId) throws IOException {
-        ObjectMapper objectMapper = new ObjectMapper();
-        OrdersInfoResponseDto expectedResponse = objectMapper.readValue(new File("src/test/resources/api/repair/publishedBGRepairOrdersInfoRandomClient.json"), OrdersInfoResponseDto.class);
-
-        expectedResponse.getData().setId(orderId);
-        expectedResponse.getData().setNumber(orderNumber);
-        expectedResponse.getData().setClientObject(ClientObject.builder().id(clientObjectId).build());
-        expectedResponse.getData().setEquipments(new ArrayList<Data.Equipment>() {{
-            add(Data.Equipment.builder().id(equipmentsId).build());
-        }});
-
-        return expectedResponse;
-    }
-
-    @lombok.Data
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class Address {
-        private Integer id;
-        private String full;
-        private ArrayList<Double> coordinates;
-    }
-
-    @lombok.Data
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    public static class ClientObject {
-        private Integer id;
-        private String title;
-        @JsonProperty("last_photo")
-        private Object lastPhoto;
-        private Address address;
-    }
-
     @lombok.Data
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Data {
-        private String address;
+//        private String address;
         private Integer id;
         private String number;
         private String status;
@@ -75,7 +36,7 @@ public class OrdersInfoResponseDto {
         private ArrayList<Receipt> receipts;
         private ArrayList<Object> codes;
         private String stage;
-        private Object offer;
+        private OfferDto offer;
         @JsonProperty("desired_date_interval_started_at")
         private Object desiredDateIntervalStartedAt;
         @JsonProperty("desired_date_interval_ended_at")
@@ -108,7 +69,7 @@ public class OrdersInfoResponseDto {
         @JsonProperty("consultation_canceled")
         private Boolean consultationCanceled;
         private Boolean refunded;
-        private ArrayList<Equipment> equipments;
+        private ArrayList<Equipments> equipments;
         @JsonProperty("client_object")
         private ClientObject clientObject;
         @JsonProperty("creation_status")
@@ -130,6 +91,47 @@ public class OrdersInfoResponseDto {
         @Builder
         @AllArgsConstructor
         @NoArgsConstructor
+        public static class OfferDto {
+            private Integer id;
+            @JsonProperty("order_id")
+            private Integer orderId;
+            @JsonProperty("company_id")
+            private Integer companyId;
+            private String status;
+            @JsonProperty("created_at")
+            private String createdAt;
+            @JsonProperty("updated_at")
+            private String updatedAt;
+            private Integer price;
+            @JsonProperty("price_wi")
+            private Integer priceWi;
+            @JsonProperty("master_id")
+            private Object masterId;
+            @JsonProperty("start_price")
+            private Object startPrice;
+            @JsonProperty("price_real")
+            private Integer priceReal;
+            @JsonProperty("with_consultation")
+            private Boolean withConsultation;
+            @JsonProperty("consultation_passed")
+            private Boolean consultationPassed;
+            @JsonProperty("master_started")
+            private Boolean masterStarted;
+            @JsonProperty("wait_from")
+            private Object waitFrom;
+            @JsonProperty("wait_notification")
+            private Integer waitNotification;
+            @JsonProperty("master_selected")
+            private Boolean masterSelected;
+            private Boolean hide;
+            @JsonProperty("client_closed")
+            private Boolean clientClosed;
+        }
+
+        @lombok.Data
+        @Builder
+        @AllArgsConstructor
+        @NoArgsConstructor
         public static class ServiceCenter {
             private Integer id;
             @JsonProperty("short_title")
@@ -143,7 +145,6 @@ public class OrdersInfoResponseDto {
             @JsonProperty("full_price_wi")
             private Object fullPriceWi;
         }
-
         @lombok.Data
         @Builder
         @AllArgsConstructor
@@ -163,7 +164,8 @@ public class OrdersInfoResponseDto {
         @Builder
         @AllArgsConstructor
         @NoArgsConstructor
-        public static class Equipment {
+        public static class Equipments {
+            @JsonProperty("id")
             private Integer id;
             private String title;
             @JsonProperty("is_show_hidden")
@@ -187,6 +189,29 @@ public class OrdersInfoResponseDto {
             private Boolean completed;
             @JsonProperty("is_current")
             private Boolean isCurrent;
+        }
+
+
+        @lombok.Data
+        @Builder
+        @AllArgsConstructor
+        @NoArgsConstructor
+        public static class ClientObject {
+            private Integer id;
+            private String title;
+            @JsonProperty("last_photo")
+            private Object lastPhoto;
+            private Address address;
+
+            @lombok.Data
+            @Builder
+            @AllArgsConstructor
+            @NoArgsConstructor
+            public static class Address {
+                private Integer id;
+                private String full;
+                private ArrayList<Double> coordinates;
+            }
         }
     }
 }

@@ -78,7 +78,7 @@ public abstract class BaseApiTest extends BaseTest {
         }
     }
 
-    protected void assertResponsePartial2(Object expectedResponse, Object actualResponse, List<String> excludedFields) throws IOException {
+    protected void assertResponsePartialExcludeFields(Object expectedResponse, Object actualResponse, List<String> excludedFields) throws IOException {
         RecursiveComparisonConfiguration configuration = RecursiveComparisonConfiguration.builder()
                 .withIgnoredFields(excludedFields.toArray(new String[0]))
                 .build();
@@ -88,15 +88,52 @@ public abstract class BaseApiTest extends BaseTest {
                 .isEqualTo(expectedResponse);
     }
 
+    protected void assertResponsePartialNoATExcludeFields(Object expectedResponse, Object actualResponse, List<String> excludedFields) throws IOException {
+        RecursiveComparisonConfiguration.Builder builder = RecursiveComparisonConfiguration.builder();
+
+        // Condition 1: Ignore fields ending with "at"
+        builder = builder.withIgnoredFieldsMatchingRegexes(".*At");
+
+        // Condition 2: No excluded fields list
+        if (excludedFields.isEmpty()) {
+            builder = builder.withStrictTypeChecking(true);
+        } else {
+            builder = builder.withIgnoredFields(excludedFields.toArray(new String[0]));
+        }
+
+        RecursiveComparisonConfiguration configuration = builder.build();
+
+        Assertions.assertThat(actualResponse)
+                .usingRecursiveComparison(configuration)
+                .isEqualTo(expectedResponse);
+    }
+
+
     protected void assertResponsePartialNoAt(Object expectedResponse, Object actualResponse) throws IOException {
-        RecursiveComparisonConfiguration configuration = RecursiveComparisonConfiguration.builder()
-                // ignore all fields that finish with _at
+        RecursiveComparisonConfiguration.Builder builder = RecursiveComparisonConfiguration.builder();
+
+        // Condition 1: Ignore fields ending with "at"
+        builder = builder.withIgnoredFieldsMatchingRegexes(".*At");
+
+        /*// Condition 2: No excluded fields list
+        if (excludedFields.isEmpty()) {
+            builder = builder.withStrictTypeChecking(true);
+        } else {
+            builder = builder.withIgnoredFields(excludedFields.toArray(new String[0]));
+        }*/
+
+        RecursiveComparisonConfiguration configuration = builder.build();
+
+        Assertions.assertThat(actualResponse)
+                .usingRecursiveComparison(configuration)
+                .isEqualTo(expectedResponse);
+       /* RecursiveComparisonConfiguration configuration = RecursiveComparisonConfiguration.builder()
                 .withIgnoredFields(".*At")
                 .build();
 
         Assertions.assertThat(actualResponse)
                 .usingRecursiveComparison(configuration)
-                .isEqualTo(expectedResponse);
+                .isEqualTo(expectedResponse);*/
     }
 }
 

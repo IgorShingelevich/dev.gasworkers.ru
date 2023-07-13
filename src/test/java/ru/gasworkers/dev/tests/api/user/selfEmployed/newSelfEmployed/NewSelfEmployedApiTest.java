@@ -43,7 +43,7 @@ public class NewSelfEmployedApiTest extends BaseApiTest {
         Long phone = actualResponse.getData().getPhone();
         UserResponseDto expectedResponse = UserResponseDto.newSelfEmployedResponse(userId, email, phone);
         assertResponsePartial(expectedResponse, actualResponse, List.of("data.created_at", "data.created_at", "data.registered_at", "data.email_verified_at"));
-        assertResponsePartial2(expectedResponse, actualResponse, List.of("data.createdAt", "data.createdAt", "data.registeredAt", "data.emailVerifiedAt"));
+        assertResponsePartialExcludeFields(expectedResponse, actualResponse, List.of("data.createdAt", "data.createdAt", "data.registeredAt", "data.emailVerifiedAt"));
         System.out.println(selfEmployed);
     }
 }

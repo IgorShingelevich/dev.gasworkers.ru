@@ -2,8 +2,8 @@
   "status": 0,
   "message": "Информация о заказе",
   "data": {
-    "id": 7453,
-    "number": "99/23/077/007453",
+    "id": 7476,
+    "number": "99/23/077/007476",
     "status": "published",
     "type": "repair",
     "service_center": null,
@@ -12,15 +12,16 @@
     "receipts": [
     ],
     "codes": [
+
     ],
     "stage": null,
     "offer": {
-      "id": 639913,
-      "order_id": 7453,
+      "id": 648206,
+      "order_id": 7476,
       "company_id": 5,
       "status": "pending",
-      "created_at": "2023-07-12T17:59:30.000000Z",
-      "updated_at": "2023-07-12T17:59:30.000000Z",
+      "created_at": "2023-07-13T09:31:17.000000Z",
+      "updated_at": "2023-07-13T09:31:17.000000Z",
       "price": 3000,
       "price_wi": 3000,
       "master_id": null,
@@ -35,10 +36,10 @@
       "hide": false,
       "client_closed": false
     },
-    "desired_date_interval_started_at": 1689109200,
-    "desired_date_interval_ended_at": 1689368400,
-    "desired_time_started": "Wed, 12 Jul 23 06:00:00 +0300",
-    "desired_time_ended": "Wed, 12 Jul 23 18:00:00 +0300",
+    "desired_date_interval_started_at": 1689195600,
+    "desired_date_interval_ended_at": 1689454800,
+    "desired_time_started": "Thu, 13 Jul 23 06:00:00 +0300",
+    "desired_time_ended": "Thu, 13 Jul 23 18:00:00 +0300",
     "insurance_type": null,
     "repair_actions": [
     ],
@@ -51,19 +52,20 @@
     "master_sign_type": null,
     "last_code_sent": null,
     "files": [
+
     ],
     "conference_url": null,
     "consultation_canceled": false,
     "refunded": false,
     "equipments": [
       {
-        "id": 2620,
+        "id": 2635,
         "title": "Газовый котел Viessmann Vitodens 100-W WB1C104 35kW",
         "is_show_hidden": false
       }
     ],
     "client_object": {
-      "id": 3073,
+      "id": 3087,
       "title": "Мой дом",
       "last_photo": null,
       "address": {
@@ -83,8 +85,8 @@
         "src_title": "draft_title",
         "title": "draft_title_client",
         "description": "draft_description_client",
-        "set_at": "Wed, 12 Jul 23 20:59:29 +0300",
-        "completed_at": "Wed, 12 Jul 23 20:59:29 +0300",
+        "set_at": "Thu, 13 Jul 23 12:31:14 +0300",
+        "completed_at": "Thu, 13 Jul 23 12:31:14 +0300",
         "completed": true,
         "is_current": false
       },
@@ -93,8 +95,8 @@
         "src_title": "selecting_object_title",
         "title": "selecting_object_title_client",
         "description": "selecting_object_description_client",
-        "set_at": "Wed, 12 Jul 23 20:59:29 +0300",
-        "completed_at": "Wed, 12 Jul 23 20:59:29 +0300",
+        "set_at": "Thu, 13 Jul 23 12:31:14 +0300",
+        "completed_at": "Thu, 13 Jul 23 12:31:15 +0300",
         "completed": true,
         "is_current": false
       },
@@ -103,8 +105,8 @@
         "src_title": "selecting_date_title",
         "title": "selecting_date_title_client",
         "description": "selecting_date_description_client",
-        "set_at": "Wed, 12 Jul 23 20:59:29 +0300",
-        "completed_at": "Wed, 12 Jul 23 20:59:29 +0300",
+        "set_at": "Thu, 13 Jul 23 12:31:15 +0300",
+        "completed_at": "Thu, 13 Jul 23 12:31:15 +0300",
         "completed": true,
         "is_current": false
       },
@@ -113,7 +115,7 @@
         "src_title": "publication_title",
         "title": "publication_title_client",
         "description": "publication_description_client",
-        "set_at": "Wed, 12 Jul 23 20:59:29 +0300",
+        "set_at": "Thu, 13 Jul 23 12:31:15 +0300",
         "completed_at": null,
         "completed": false,
         "is_current": true
@@ -226,5 +228,3 @@
     "money_back_available": false
   }
 }
-
-

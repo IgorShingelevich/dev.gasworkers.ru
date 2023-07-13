@@ -124,7 +124,7 @@ public final class HomeClientPage extends BaseClientPage {
             });
             stepWithRole("Убедиться, что присутствует компонент Информация о последнем заказе", () -> {
                 lastOrderComponent.checkFinishLoading();
-                // TODO check background Address and Equipment and ServiceDate
+                // TODO check background Address and Equipments and ServiceDate
             });
             stepWithRole("Убедиться, что присутствует компонент Объекты и оборудование", () -> {
                 stepWithRole("Убедиться что присутствует только один объект", () -> {
@@ -133,7 +133,7 @@ public final class HomeClientPage extends BaseClientPage {
                 stepWithRole("Убедиться что имя объекта - Мой Дом", () -> {
                     objectTitleCollection.get(0).shouldHave(text("Мой дом"));
                 });
-                // TODO check background Equipment
+                // TODO check background Equipments
             });
         });
     }
@@ -161,7 +161,7 @@ public final class HomeClientPage extends BaseClientPage {
             });
             stepWithRole("Убедиться, что присутствует компонент Информация о последнем заказе", () -> {
                 lastOrderComponent.checkFinishLoading();
-                // TODO check background Address and Equipment and ServiceDate
+                // TODO check background Address and Equipments and ServiceDate
             });
             stepWithRole("Убедиться, что присутствует компонент Объекты и оборудование", () -> {
                 stepWithRole("Убедиться что присутствует только один объект", () -> {
@@ -170,7 +170,7 @@ public final class HomeClientPage extends BaseClientPage {
                 stepWithRole("Убедиться что имя объекта - Мой Дом", () -> {
                     objectTitleCollection.get(0).shouldHave(text("Мой дом"));
                 });
-                // TODO check background Equipment
+                // TODO check background Equipments
             });
         });
     }
