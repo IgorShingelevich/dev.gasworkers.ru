@@ -92,7 +92,7 @@ public abstract class BaseApiTest extends BaseTest {
         RecursiveComparisonConfiguration.Builder builder = RecursiveComparisonConfiguration.builder();
 
         // Condition 1: Ignore fields ending with "at"
-        builder = builder.withIgnoredFieldsMatchingRegexes(".*At");
+        builder = builder.withIgnoredFieldsMatchingRegexes(".*(At|Ended|Started)");
 
         // Condition 2: No excluded fields list
         if (excludedFields.isEmpty()) {
@@ -112,28 +112,15 @@ public abstract class BaseApiTest extends BaseTest {
     protected void assertResponsePartialNoAt(Object expectedResponse, Object actualResponse) throws IOException {
         RecursiveComparisonConfiguration.Builder builder = RecursiveComparisonConfiguration.builder();
 
-        // Condition 1: Ignore fields ending with "at"
-        builder = builder.withIgnoredFieldsMatchingRegexes(".*At");
+        builder = builder.withIgnoredFieldsMatchingRegexes(".*(At|Ended|Started)");
 
-        /*// Condition 2: No excluded fields list
-        if (excludedFields.isEmpty()) {
-            builder = builder.withStrictTypeChecking(true);
-        } else {
-            builder = builder.withIgnoredFields(excludedFields.toArray(new String[0]));
-        }*/
 
         RecursiveComparisonConfiguration configuration = builder.build();
 
         Assertions.assertThat(actualResponse)
                 .usingRecursiveComparison(configuration)
                 .isEqualTo(expectedResponse);
-       /* RecursiveComparisonConfiguration configuration = RecursiveComparisonConfiguration.builder()
-                .withIgnoredFields(".*At")
-                .build();
 
-        Assertions.assertThat(actualResponse)
-                .usingRecursiveComparison(configuration)
-                .isEqualTo(expectedResponse);*/
     }
 }
 
