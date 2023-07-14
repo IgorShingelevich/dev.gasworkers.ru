@@ -8,7 +8,7 @@ import ru.gasworkers.dev.api.users.companies.masters.dto.CompaniesMastersRequest
 
 import static io.restassured.RestAssured.given;
 
-public class CompaniesMasters extends BaseApi {
+public class CompaniesMastersApi extends BaseApi {
     //    https://api.dev.gasworkers.ru/docs#servisnye-kompanii-GETapi-v1-companies-masters
 //    https://api.dev.gasworkers.ru/docs#servisnye-kompanii-POSTapi-v1-companies-masters
     @Step("API: Get accepted masters")

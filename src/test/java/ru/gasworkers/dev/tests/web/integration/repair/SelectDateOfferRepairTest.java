@@ -1,9 +1,6 @@
-package ru.gasworkers.dev.tests.api.repair.pay;
+package ru.gasworkers.dev.tests.web.integration.repair;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -11,8 +8,6 @@ import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
-import ru.gasworkers.dev.api.auth.user.UserApi;
-import ru.gasworkers.dev.api.auth.user.UserResponseDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
 import ru.gasworkers.dev.api.orders.info.dto.OrdersInfoResponseDto;
 import ru.gasworkers.dev.api.orders.selectMaster.SelectMasterApi;
@@ -29,11 +24,21 @@ import ru.gasworkers.dev.api.users.companies.masters.CompaniesMastersApi;
 import ru.gasworkers.dev.api.users.companies.masters.dto.CompaniesMastersListResponse;
 import ru.gasworkers.dev.api.users.fspBankList.FspBankListApi;
 import ru.gasworkers.dev.api.users.fspBankList.FspBankListResponseDto;
+import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithOrderType;
 import ru.gasworkers.dev.extension.user.WithThroughUser;
+import ru.gasworkers.dev.model.Role;
+import ru.gasworkers.dev.model.browser.PositionBrowser;
+import ru.gasworkers.dev.model.browser.SizeBrowser;
+import ru.gasworkers.dev.pages.context.ClientPages;
+import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
+import ru.gasworkers.dev.tests.api.repair.pay.RepairCase;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,9 +51,9 @@ import static io.qameta.allure.Allure.step;
 @Story("Ремонт")
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
-@Tag(AllureTag.API)
-public class PayRepairApiTest extends BaseApiTest {
-    private final UserApi userApi = new UserApi();
+@Tag(AllureTag.WEB)
+public class SelectDateOfferRepairTest extends BaseApiTest {
+
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
     private final SelectMasterApi selectMasterApi = new SelectMasterApi();
@@ -60,30 +65,18 @@ public class PayRepairApiTest extends BaseApiTest {
     private final String sssrDispatcher1Email = "test_gw_dispatcher_sssr1@rambler.ru";
     private final String sssrDispatcher1Password = "1234";
     private final RepairCase repairCase = new RepairCase();
-    //    private CommonFieldsRepairDto commonFieldsDto = new CommonFieldsRepairDto();
-    private CommonFieldsRepairDto clientFields;
-    private String tokenClient;
-    private String tokenDispatcher;
-    private String tokenMaster;
-    private Integer clientId;
-    private String clientEmail;
-    private Integer clientGuides0Id;
-    private Long clientPhone;
-    private Integer clientNotificationsCount;
-    private Integer serviceId;
-    private Integer dispatcherId;
-    private Integer masterId;
+    @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
+    ClientPages clientPages;
+    //dispatcher
+    @Browser(role = Role.DISPATCHER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
+    DispatcherPages dispatcherPages;
     private Integer orderId;
     private Integer clientObjectId;
     private String orderNumber;
     private Integer equipmentsId;
+    private Integer serviceId;
     private Integer activeOffersCount;
     private Integer receiptId;
-
-    private UserResponseDto actualPublishedUserResponse;
-    private UserResponseDto actualHasOfferUserResponse;
-    private UserResponseDto actualBeforePaymentUserResponse;
-    private UserResponseDto dateSelectingUserResponse;
 
     private LastOrderInfoResponseDto actualPublishedLastOrderResponse;
     private OrdersInfoResponseDto actualPublishedOrderInfoResponse;
@@ -100,28 +93,9 @@ public class PayRepairApiTest extends BaseApiTest {
     @Test
     @DisplayName("payed repair")
     void payedRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        tokenClient = loginApi.getTokenThrough(client);
+        String tokenClient = loginApi.getTokenThrough(client);
 
         step("заказ на ремонт клиента в  состоянии published", () -> {
-            step("клиент - модель пользователя в  состоянии published ", () -> {
-                actualPublishedUserResponse = userApi.getUser(tokenClient)
-                        .statusCode(200)
-                        .extract().as(UserResponseDto.class);
-                clientId = actualPublishedUserResponse.getData().getId();
-                clientEmail = actualPublishedUserResponse.getData().getEmail();
-                clientGuides0Id = actualPublishedUserResponse.getData().getGuides().get(0).getId();
-                clientPhone = actualPublishedUserResponse.getData().getPhone();
-                clientNotificationsCount = actualPublishedUserResponse.getData().getUserNotificationsCount();
-                clientFields = CommonFieldsRepairDto.builder()
-                        .clientId(clientId)
-                        .clientEmail(clientEmail)
-                        .clientGuides0Id(clientGuides0Id)
-                        .clientPhone(clientPhone)
-                        .clientNotificationsCount(clientNotificationsCount)
-                        .build();
-                UserResponseDto expectedResponse = repairCase.publishedClient(clientFields);
-                assertResponsePartialNoAt(expectedResponse, actualPublishedUserResponse);
-            });
             step("клиент карточка последнего заказа - убедиться что есть последний заказ после фоновой регистрации", () -> {
                 actualPublishedLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(tokenClient)
                         .statusCode(200)
@@ -143,11 +117,11 @@ public class PayRepairApiTest extends BaseApiTest {
         });
 
         step("диспетчер выбирает мастера ", () -> {
-            step("диспетчер авторизуется", () -> {
-                tokenDispatcher = loginApi.getUserToken(LoginRequestDto.asUserEmail(sssrDispatcher1Email, sssrDispatcher1Password));
+            String tokenDispatcher = step("диспетчер авторизуется", () -> {
+                return loginApi.getUserToken(LoginRequestDto.asUserEmail(sssrDispatcher1Email, sssrDispatcher1Password));
             });
-            step("диспетчер получает список доступных мастеров ", () -> {
-                masterId = companiesMastersApi.getAcceptedMasters(tokenDispatcher)
+            Integer masterId = step("диспетчер получает список доступных мастеров ", () -> {
+                return companiesMastersApi.getAcceptedMasters(tokenDispatcher)
                         .statusCode(200)
                         .extract().as(CompaniesMastersListResponse.class).getData().get(0).getId();
             });
@@ -249,5 +223,30 @@ public class PayRepairApiTest extends BaseApiTest {
             });
         });
 
+        //    ------------------------------------------------- UI -----------------------------------------------------------
+        step("авторизация Ролей ", () -> {
+            step("авторизация Клиента", () -> {
+                clientPages.getLoginPage().open();
+                clientPages.getLoginPage().login(client.getEmail(), "1111");
+                clientPages.getHomePage().checkUrl();
+            });
+
+            step("авторизация Мастера", () -> {
+                dispatcherPages.getLoginPage()
+                        .open()
+                        .login(sssrDispatcher1Email, "1234");
+                dispatcherPages.getHomePage().checkUrl();
+            });
+            step("Test run credentials ", () -> {
+                Allure.addAttachment("Client creds", client.getEmail() + ": " + "1111" + "/");
+                Allure.addAttachment("Master creds", sssrDispatcher1Email + "/" + "1234");
+                String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                        + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+                Allure.addAttachment("RunStartTime: ", date);
+            });
+        });
+
     }
+
+
 }

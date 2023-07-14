@@ -1,13 +1,14 @@
 package ru.gasworkers.dev.tests.api.repair.pay;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import ru.gasworkers.dev.api.auth.user.UserResponseDto;
 import ru.gasworkers.dev.api.orders.info.dto.OrdersInfoResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 
 import java.io.File;
 import java.io.IOException;
 
-class RepairCase {
+public class RepairCase {
     ObjectMapper objectMapper = new ObjectMapper();
 
     public LastOrderInfoResponseDto publishedLastOrderInfoBGRepair(Integer orderId, String orderNumber, Integer clientObjectId, Integer equipmentsId) throws IOException {
@@ -96,6 +97,26 @@ class RepairCase {
         expectedTemplateResponse.getData().getEquipments().get(0).setId(equipmentsId);
         expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(equipmentsId);
         expectedTemplateResponse.getData().getClientObject().setActiveOffersCount(activeOffersCount);
+        return expectedTemplateResponse;
+    }
+
+    public UserResponseDto publishedClient(CommonFieldsRepairDto publishedCommonFieldsDto) throws IOException {
+        UserResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/publishedBgState/publishedUser.json"), UserResponseDto.class);
+        expectedTemplateResponse.getData().setId(publishedCommonFieldsDto.getClientId());
+        expectedTemplateResponse.getData().setEmail(publishedCommonFieldsDto.getClientEmail());
+        expectedTemplateResponse.getData().getGuides().get(0).setId(publishedCommonFieldsDto.getClientGuides0Id());
+        expectedTemplateResponse.getData().setPhone(publishedCommonFieldsDto.getClientPhone());
+        /*expectedTemplateResponse = UserResponseDto.builder()
+                .data(UserResponseDto.Data.builder()
+                        .id(publishedCommonFieldsDto.getClientId())
+                        .email(publishedCommonFieldsDto.getClientEmail())
+                        .guides(new ArrayList<>(Collections.singletonList(UserResponseDto.Data.Guides.builder()
+                                .id(publishedCommonFieldsDto.getClientGuides0Id())
+                                .build())))
+                        .phone(publishedCommonFieldsDto.getClientPhone())
+                        .build())
+                .build();*/
+
         return expectedTemplateResponse;
     }
 }

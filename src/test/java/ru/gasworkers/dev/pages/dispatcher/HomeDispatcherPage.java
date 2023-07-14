@@ -1,6 +1,5 @@
 package ru.gasworkers.dev.pages.dispatcher;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
@@ -165,12 +164,14 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
 
     public HomeDispatcherPage openRandomOrder() {
         switchToListView();
-        int randomOrderNumber = (int) (Math.random() * orderNumberLinkCollection.size()+1);
+        int randomOrderNumber = (int) (Math.random() * orderNumberLinkCollection.size() + 1);
         orderNumberLinkCollection.get(randomOrderNumber).shouldBe(visible).click();
         orderCardTitleLocator.shouldBe(visible);
         return this;
     }
 
 
-
+    public void checkUrl() {
+        urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/dispatcher");
+    }
 }
