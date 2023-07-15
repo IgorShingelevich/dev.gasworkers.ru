@@ -11,8 +11,8 @@ import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.users.client.house.HouseApi;
-import ru.gasworkers.dev.api.users.client.house.dto.HouseResponseDto;
+import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
+import ru.gasworkers.dev.api.users.client.house.dto.HousesResponseDto;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithHouse;
 import ru.gasworkers.dev.extension.user.WithUser;
@@ -27,18 +27,18 @@ import java.io.IOException;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.HOUSE)
 @Tag(AllureTag.API)
-public class AddHouseApiTest extends BaseApiTest {
+public class AddClientHousesApiTest extends BaseApiTest {
 
-    private final HouseApi houseApi = new HouseApi();
+    private final ClientHousesApi clientHousesApi = new ClientHousesApi();
 
     @ParameterizedTest(name = "{0}")
     @EnumSource(AddHousePositiveCase.class)
     @DisplayName("Success case:")
     void positiveTestCase(AddHousePositiveCase testCase, @WithUser(houses = {@WithHouse}) User client) throws IOException {
         /*String token = loginApi.getToken(client);
-        HouseResponseDto actualResponse = houseApi.addHouse(testCase.getInputDto(), token)
+        HousesResponseDto actualResponse = clientHousesApi.addHouse(testCase.getInputDto(), token)
                 .statusCode(200)
-                .extract().as(HouseResponseDto.class);
+                .extract().as(HousesResponseDto.class);
         assertResponsePartial(testCase.getExpectedResponse(), actualResponse, List.of("data.created_at", "data.id"));*/
     }
 
@@ -50,9 +50,9 @@ public class AddHouseApiTest extends BaseApiTest {
             @WithHouse(addressId = 2121, companyId = 1, title = "Another Custom House")
     }) User client) {
         /*String token = loginApi.getToken(client);
-        HouseResponseDto actualResponse = houseApi.addHouse(testCase.getInputDto(), token)
+        HousesResponseDto actualResponse = clientHousesApi.addHouse(testCase.getInputDto(), token)
                 .statusCode(200)
-                .extract().as(HouseResponseDto.class);
+                .extract().as(HousesResponseDto.class);
         assertResponsePartial(testCase.getExpectedResponse(), actualResponse, List.of("data.created_at", "data.id"));*/
     }
 
@@ -62,9 +62,9 @@ public class AddHouseApiTest extends BaseApiTest {
     void negativeDtoTestCase(AddHouseNegativeDtoCase testCase, @WithUser User client) throws IOException {
         // With valid token
         String token = loginApi.getTokenPhone(client);
-        HouseResponseDto actualResponse = houseApi.addHouse(testCase.getInputDto(), token)
+        HousesResponseDto actualResponse = clientHousesApi.addHouse(testCase.getInputDto(), token)
                 .statusCode(422)
-                .extract().as(HouseResponseDto.class);
+                .extract().as(HousesResponseDto.class);
         assertResponse(testCase.getExpectedResponse(), actualResponse);
     }
 
@@ -73,7 +73,7 @@ public class AddHouseApiTest extends BaseApiTest {
     @EnumSource(AddHouseNegativeAuthCase.class)
     @DisplayName("Negative auth case:")
     void negativeAuthTestCase(AddHouseNegativeAuthCase testCase, @WithUser User client) {
-        houseApi.addHouse(testCase.getInputDto(), testCase.getToken())
+        clientHousesApi.addHouse(testCase.getInputDto(), testCase.getToken())
                 .statusCode(401);
         // ToDo Add response body assert
     }

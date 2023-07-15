@@ -17,7 +17,7 @@ import java.math.BigInteger;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @Accessors(chain = true)
-public class HouseRequestDto {
+public class HousesRequestDto {
     @JsonProperty("address_id")
     private Integer addressId;
     @JsonProperty("company_id")
@@ -29,8 +29,8 @@ public class HouseRequestDto {
     private Integer[] photos;
     private String title;
 
-    public static HouseRequestDto newInstance(Integer addressId, Integer companyId, Integer branchId, BigInteger accountNumber, Integer[] photos, String title) {
-        return HouseRequestDto.builder()
+    public static HousesRequestDto newInstance(Integer addressId, Integer companyId, Integer branchId, BigInteger accountNumber, Integer[] photos, String title) {
+        return HousesRequestDto.builder()
                 .addressId(addressId)
                 .companyId(companyId)
                 .branchId(branchId)
@@ -40,7 +40,7 @@ public class HouseRequestDto {
                 .build();
     }
 
-    public static HouseRequestDto newInstance(WithHouse annotation) {
+    public static HousesRequestDto newInstance(WithHouse annotation) {
         return newInstance(
                 annotation.addressId(),
                 annotation.companyId(),

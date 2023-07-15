@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.users.client.house.getHouse.dto;
+package ru.gasworkers.dev.api.users.client.house.getClientHouses.dto;
 
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +11,6 @@ import lombok.experimental.Accessors;
 //@AllArgsConstructor
 //@JsonInclude(JsonInclude.Include.NON_NULL) // when is needed
 @Accessors(chain = true)
-public class GetHouseRequestDto {
+public class GetClientHousesRequestDto {
 
 }

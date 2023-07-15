@@ -19,11 +19,11 @@ import ru.gasworkers.dev.api.consultation.isStarted.IsStartedApi;
 import ru.gasworkers.dev.api.consultation.isStarted.dto.IsStartedResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
-import ru.gasworkers.dev.api.users.client.house.HouseApi;
-import ru.gasworkers.dev.api.users.client.house.HouseBuilder;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.AddEquipmentApi;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentResponseDto;
-import ru.gasworkers.dev.api.users.client.house.dto.HouseResponseDto;
+import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
+import ru.gasworkers.dev.api.users.client.house.ClientHousesBuilder;
+import ru.gasworkers.dev.api.users.client.house.dto.HousesResponseDto;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.AddEquipmentApi;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithUser;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
@@ -42,7 +42,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.API)
 public class IsStartedApiTest extends BaseApiTest {
-    private final HouseApi houseApi = new HouseApi();
+    private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
     private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
@@ -61,9 +61,9 @@ public class IsStartedApiTest extends BaseApiTest {
     void positiveTestCase(IsStartedPositiveCase testCase, @WithUser User client) {
         String token = loginApi.getTokenPhone(client);
         Integer objectId = step("Add object", () -> {
-            return houseApi.addHouse(HouseBuilder.addDefaultHouseRequestDto(), token)
+            return clientHousesApi.addHouse(ClientHousesBuilder.addDefaultHouseRequestDto(), token)
                     .statusCode(200)
-                    .extract().as(HouseResponseDto.class).getData().getId();
+                    .extract().as(HousesResponseDto.class).getData().getId();
         });
         step("Add equipment", () -> {
             addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), objectId, token)

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.api.auth.registration.through.check;
+package ru.gasworkers.dev.tests.api.auth.registration.through.checkAndFinish;
 
 import lombok.AllArgsConstructor;
 

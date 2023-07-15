@@ -21,9 +21,9 @@ import ru.gasworkers.dev.api.consultation.masters.pickMaster.SelectConsultationM
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterResponseDto;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
 import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
-import ru.gasworkers.dev.api.users.client.house.HouseApi;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.AddEquipmentApi;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentResponseDto;
+import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.AddEquipmentApi;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithHouse;
 import ru.gasworkers.dev.extension.user.WithUser;
@@ -44,7 +44,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.MASTER)
 @Tag(AllureTag.API)
 public class ApplyMasterApiTest extends BaseApiTest {
-    private final HouseApi houseApi = new HouseApi();
+    private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
     private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
@@ -58,7 +58,7 @@ public class ApplyMasterApiTest extends BaseApiTest {
     @DisplayName("Success case:")
     void positiveTestCase(ApplyMasterPositiveCase testCase, @WithUser(houses = {@WithHouse}) User client) {
         String token = loginApi.getTokenPhone(client);
-        Integer houseId = houseApi.houseId(client, token);
+        Integer houseId = clientHousesApi.houseId(client, token);
         step("Add equipment", () -> {
             addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), houseId, token)
                     .statusCode(200)
@@ -106,7 +106,7 @@ public class ApplyMasterApiTest extends BaseApiTest {
     @DisplayName("Negative case:")
     void negativeTestCase(ApplyMasterNegativeCase testCase, @WithUser(houses = {@WithHouse}) User client) {
         String token = loginApi.getTokenPhone(client);
-        Integer houseId = houseApi.houseId(client, token);
+        Integer houseId = clientHousesApi.houseId(client, token);
         step("Add equipment", () -> {
             addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), houseId, token)
                     .statusCode(200)

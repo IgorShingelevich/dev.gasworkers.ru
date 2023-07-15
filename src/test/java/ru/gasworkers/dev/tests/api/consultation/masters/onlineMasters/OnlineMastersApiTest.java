@@ -15,9 +15,9 @@ import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMastersResponseDto;
 import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
 import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
-import ru.gasworkers.dev.api.users.client.house.HouseApi;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.AddEquipmentApi;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentResponseDto;
+import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.AddEquipmentApi;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithHouse;
 import ru.gasworkers.dev.extension.user.WithUser;
@@ -36,7 +36,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @Tag(AllureTag.MASTER)
 @Tag(AllureTag.API)
 public class OnlineMastersApiTest extends BaseApiTest {
-    private final HouseApi houseApi = new HouseApi();
+    private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
     private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
@@ -48,7 +48,7 @@ public class OnlineMastersApiTest extends BaseApiTest {
     @DisplayName("Success case:")
     void positiveTestCase(OnlineMastersPositiveCase testCase, @WithUser(houses = {@WithHouse}) User client) {
         String token = loginApi.getTokenPhone(client);
-        Integer houseId = houseApi.houseId(client, token);
+        Integer houseId = clientHousesApi.houseId(client, token);
         step("Add equipment", () -> {
             addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), houseId, token)
                     .statusCode(200)

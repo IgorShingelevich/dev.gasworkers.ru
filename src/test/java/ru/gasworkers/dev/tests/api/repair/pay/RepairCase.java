@@ -106,6 +106,8 @@ public class RepairCase {
         expectedTemplateResponse.getData().setEmail(publishedCommonFieldsDto.getClientEmail());
         expectedTemplateResponse.getData().getGuides().get(0).setId(publishedCommonFieldsDto.getClientGuides0Id());
         expectedTemplateResponse.getData().setPhone(publishedCommonFieldsDto.getClientPhone());
+        expectedTemplateResponse.getData().setUserNotificationsCount(publishedCommonFieldsDto.getClientNotificationsCount());
+
         /*expectedTemplateResponse = UserResponseDto.builder()
                 .data(UserResponseDto.Data.builder()
                         .id(publishedCommonFieldsDto.getClientId())

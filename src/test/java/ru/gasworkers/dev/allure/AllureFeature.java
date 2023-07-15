@@ -10,4 +10,5 @@ public final class AllureFeature {
             ORDERS = "Заказы",
             CONSULTATION_NOW = "Консультация сейчас",
             REPAIR = "repair";
+    public static final String PRECONDITION = "Предусловия";
 }

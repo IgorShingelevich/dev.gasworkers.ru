@@ -15,11 +15,11 @@ import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
 import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
 import ru.gasworkers.dev.api.orders.selectHouse.SelectHouseApi;
 import ru.gasworkers.dev.api.orders.selectHouse.dto.SelectHouseResponseDto;
-import ru.gasworkers.dev.api.users.client.house.HouseApi;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.AddEquipmentApi;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentResponseDto;
-import ru.gasworkers.dev.api.users.client.house.getHouse.GetHouseApi;
-import ru.gasworkers.dev.api.users.client.house.getHouse.dto.GetHouseResponseDto;
+import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.AddEquipmentApi;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentResponseDto;
+import ru.gasworkers.dev.api.users.client.house.getClientHouses.GetClientHousesApi;
+import ru.gasworkers.dev.api.users.client.house.getClientHouses.dto.GetClientHousesResponseDto;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithHouse;
 import ru.gasworkers.dev.extension.user.WithUser;
@@ -37,11 +37,11 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.HOUSE)
 @Tag(AllureTag.API)
-public class SelectHouseApiTest extends BaseApiTest {
-    private final HouseApi houseApi = new HouseApi();
+public class SelectClientHousesApiTest extends BaseApiTest {
+    private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
     private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
-    private final GetHouseApi getHouseApi = new GetHouseApi();
+    private final GetClientHousesApi getClientHousesApi = new GetClientHousesApi();
     private final SelectHouseApi selectHouseApi = new SelectHouseApi();
 
     @ParameterizedTest(name = "{0}")
@@ -49,7 +49,7 @@ public class SelectHouseApiTest extends BaseApiTest {
     @DisplayName("Success case:")
     void positiveTestCase(SelectHousePositiveCase testCase, @WithUser(houses = {@WithHouse}) User client) {
         String token = loginApi.getTokenPhone(client);
-        Integer houseId = houseApi.houseId(client, token);
+        Integer houseId = clientHousesApi.houseId(client, token);
         step("Add equipment", () -> {
             addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), houseId, token)
                     .statusCode(200)
@@ -61,13 +61,13 @@ public class SelectHouseApiTest extends BaseApiTest {
                     .extract().as(CreateOrdersResponseDto.class).getData().getOrderId();
         });
 
-        GetHouseResponseDto actualResponse = getHouseApi.getHouse(token)
+        GetClientHousesResponseDto actualResponse = getClientHousesApi.getHouse(token)
                 .statusCode(200)
-                .extract().as(GetHouseResponseDto.class);
-        GetHouseResponseDto.DataDto firstData = actualResponse.getData()[0];
+                .extract().as(GetClientHousesResponseDto.class);
+        GetClientHousesResponseDto.DataDto firstData = actualResponse.getData()[0];
         Integer firstEquipmentId = firstData.getEquipments()[0].getId();
         List<Integer> equipmentList = new ArrayList<>();
-        for (GetHouseResponseDto.Equipment equipment : firstData.getEquipments()) {
+        for (GetClientHousesResponseDto.Equipment equipment : firstData.getEquipments()) {
             equipmentList.add(equipment.getId());
         }
         Integer actualObjectId = firstData.getId();

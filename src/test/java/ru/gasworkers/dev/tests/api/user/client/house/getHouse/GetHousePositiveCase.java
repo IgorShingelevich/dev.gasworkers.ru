@@ -1,9 +1,9 @@
 package ru.gasworkers.dev.tests.api.user.client.house.getHouse;
 
 import lombok.AllArgsConstructor;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.AddEquipmentBuilder;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentRequestDto;
-import ru.gasworkers.dev.api.users.client.house.getHouse.dto.GetHouseRequestDto;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.AddEquipmentBuilder;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentRequestDto;
+import ru.gasworkers.dev.api.users.client.house.getClientHouses.dto.GetClientHousesRequestDto;
 import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 @AllArgsConstructor
@@ -30,8 +30,8 @@ enum GetHousePositiveCase {
 
     }
 
-    public GetHouseRequestDto getHouseRequestDto() {
-        return GetHouseRequestDto.builder()
+    public GetClientHousesRequestDto getHouseRequestDto() {
+        return GetClientHousesRequestDto.builder()
                 .build();
     }
 

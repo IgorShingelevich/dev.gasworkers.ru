@@ -10,15 +10,15 @@ import ru.gasworkers.dev.api.auth.login.dto.LoginResponseDto;
 import ru.gasworkers.dev.api.auth.registration.RegularRegistrationApi;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationFactory;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRequestDto;
-import ru.gasworkers.dev.api.users.client.house.HouseApi;
-import ru.gasworkers.dev.api.users.client.house.dto.HouseRequestDto;
-import ru.gasworkers.dev.api.users.client.house.dto.HouseResponseDto;
+import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
+import ru.gasworkers.dev.api.users.client.house.dto.HousesRequestDto;
+import ru.gasworkers.dev.api.users.client.house.dto.HousesResponseDto;
 
 public final class WithUserExtension implements ParameterResolver {
 
     private final RegularRegistrationApi registrationApi = new RegularRegistrationApi();
     private final LoginApi loginApi = new LoginApi();
-    private final HouseApi houseApi = new HouseApi();
+    private final ClientHousesApi clientHousesApi = new ClientHousesApi();
 
     @Override
     public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
@@ -37,9 +37,9 @@ public final class WithUserExtension implements ParameterResolver {
 
         String token = login(complexDto);
         for (WithHouse house : annotation.houses()) {
-            HouseRequestDto inputDto = HouseRequestDto.newInstance(house);
-            Integer currentHouseID = houseApi.addHouse(inputDto, token).statusCode(200)
-                    .extract().as(HouseResponseDto.class).getData().getId();
+            HousesRequestDto inputDto = HousesRequestDto.newInstance(house);
+            Integer currentHouseID = clientHousesApi.addHouse(inputDto, token).statusCode(200)
+                    .extract().as(HousesResponseDto.class).getData().getId();
         }
 
         return User.fromComplexDto(complexDto);

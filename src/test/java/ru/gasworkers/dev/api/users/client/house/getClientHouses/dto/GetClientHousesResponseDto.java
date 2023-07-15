@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.users.client.house.getHouse.dto;
+package ru.gasworkers.dev.api.users.client.house.getClientHouses.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -15,7 +15,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetHouseResponseDto {
+public class GetClientHousesResponseDto {
     private DataDto[] data;
     private Links links;
     private Meta meta;

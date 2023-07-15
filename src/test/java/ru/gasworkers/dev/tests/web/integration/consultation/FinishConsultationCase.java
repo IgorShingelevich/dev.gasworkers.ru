@@ -9,7 +9,7 @@ import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterReque
 import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersRequestDto;
 import ru.gasworkers.dev.api.orders.selectHouse.dto.SelectHouseRequestDto;
 import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentRequestDto;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentRequestDto;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentRequestDto;
 import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 import java.util.List;

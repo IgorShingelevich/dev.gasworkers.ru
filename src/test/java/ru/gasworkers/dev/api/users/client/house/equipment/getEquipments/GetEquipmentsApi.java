@@ -1,9 +1,9 @@
-package ru.gasworkers.dev.api.users.client.house.getEquipments;
+package ru.gasworkers.dev.api.users.client.house.equipment.getEquipments;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;
 import ru.gasworkers.dev.api.BaseApi;
-import ru.gasworkers.dev.api.users.client.house.getEquipments.dto.GetEquipmentsRequestDto;
+import ru.gasworkers.dev.api.users.client.house.equipment.getEquipments.dto.GetEquipmentsRequestDto;
 
 import static io.restassured.RestAssured.given;
 

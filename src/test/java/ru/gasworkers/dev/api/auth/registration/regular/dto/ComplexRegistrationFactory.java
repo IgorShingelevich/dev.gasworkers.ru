@@ -1,8 +1,8 @@
 package ru.gasworkers.dev.api.auth.registration.regular.dto;
 
 import ru.gasworkers.dev.api.auth.registration.through.dto.start.StartThroughRegistrationRequestDto;
-import ru.gasworkers.dev.api.users.client.house.HouseBuilder;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentRequestDto;
+import ru.gasworkers.dev.api.users.client.house.ClientHousesBuilder;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentRequestDto;
 import ru.gasworkers.dev.model.apiModel.UserType;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
@@ -22,6 +22,7 @@ public class ComplexRegistrationFactory {
                 .firstName(data.getName())
                 .lastName(data.getSurname())
                 .middleName(data.getMiddleName())
+                .fullName(data.getFullName())
                 .isPhoneSend(null)
                 .isHaveContract(false)
                 .isIp(false)
@@ -48,7 +49,7 @@ public class ComplexRegistrationFactory {
                 .employedStatus(null)
                 .serviceId(null)
                 //from throughRegistrationObjectId())
-                .addressId(HouseBuilder.addDefaultHouseRequestDto().getAddressId())
+                .addressId(ClientHousesBuilder.addDefaultHouseRequestDto().getAddressId())
                 .objectId(null)
                 .startDate(data.getStartDate())
                 .endDate(data.getEndDate())

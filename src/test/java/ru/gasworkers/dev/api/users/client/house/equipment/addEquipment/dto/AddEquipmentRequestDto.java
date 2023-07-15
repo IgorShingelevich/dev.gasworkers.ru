@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.users.client.house.addEquipment.dto;
+package ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

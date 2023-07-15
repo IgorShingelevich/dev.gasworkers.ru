@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.gasworkers.dev.api.users.client.house.dto.HouseResponseDto;
+import ru.gasworkers.dev.api.users.client.house.dto.HousesResponseDto;
 
 import java.util.List;
 
@@ -56,7 +56,7 @@ public class LastOrderInfoResponseDto {
         private String creationStatus;
         @JsonProperty("review_left")
         private Boolean reviewLeft;
-        private HouseResponseDto.DataDto clientObject;
+        private HousesResponseDto.DataDto clientObject;
         @JsonProperty("offers_count")
         private Integer offersCount;
         @JsonProperty("approved_offer")

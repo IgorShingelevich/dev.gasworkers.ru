@@ -16,13 +16,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class HouseResponseDto {
+public class HousesResponseDto {
     private Integer status;
     private String message;
     private DataDto data;
     private ErrorsDto errors;
 
-    public static HouseResponseDto successResponse() {
+    public static HousesResponseDto successResponse() {
         AddressDto address = AddressDto.builder()
                 .id(2121)
                 .full("Москва, Московская улица")
@@ -62,7 +62,7 @@ public class HouseResponseDto {
                 .createdAt(null)
                 .build();
 
-        return HouseResponseDto.builder()
+        return HousesResponseDto.builder()
                 .status(0)
                 .message("Объект добавлен")
                 .data(data)
@@ -155,101 +155,101 @@ public class HouseResponseDto {
         private String[] branchIdErrors;
     }
 
-    public static HouseResponseDto missingAllFields() {
+    public static HousesResponseDto missingAllFields() {
         ErrorsDto errors = ErrorsDto.builder()
                 .addressIdErrors(new String[]{"Поле address id обязательно для заполнения."})
                 .companyIdErrors(new String[]{"Поле company id обязательно для заполнения."})
                 .titleErrors(new String[]{"Поле Название обязательно для заполнения."})
                 .build();
-        return HouseResponseDto.builder()
+        return HousesResponseDto.builder()
                 .errors(errors)
                 .message("Поле address id обязательно для заполнения. (и еще 2 ошибки)")
                 .build();
     }
 
-    public static HouseResponseDto missingAddressId() {
+    public static HousesResponseDto missingAddressId() {
         ErrorsDto errors = ErrorsDto.builder()
                 .addressIdErrors(new String[]{"Поле address id обязательно для заполнения."})
                 .build();
-        return HouseResponseDto.builder()
+        return HousesResponseDto.builder()
                 .errors(errors)
                 .message("Поле address id обязательно для заполнения.")
                 .build();
     }
 
-    public static HouseResponseDto missingCompanyId() {
+    public static HousesResponseDto missingCompanyId() {
         ErrorsDto errors = ErrorsDto.builder()
                 .companyIdErrors(new String[]{"Поле company id обязательно для заполнения."})
                 .build();
-        return HouseResponseDto.builder()
+        return HousesResponseDto.builder()
                 .errors(errors)
                 .message("Поле company id обязательно для заполнения.")
                 .build();
     }
 
-    public static HouseResponseDto missingTitle() {
+    public static HousesResponseDto missingTitle() {
         ErrorsDto errors = ErrorsDto.builder()
                 .titleErrors(new String[]{"Поле Название обязательно для заполнения."})
                 .build();
-        return HouseResponseDto.builder()
+        return HousesResponseDto.builder()
                 .errors(errors)
                 .message("Поле Название обязательно для заполнения.")
                 .build();
     }
 
-    public static HouseResponseDto missingBranchId() {
-        return HouseResponseDto.builder()
+    public static HousesResponseDto missingBranchId() {
+        return HousesResponseDto.builder()
                 .message("Не указан филиал")
                 .build();
     }
 
-    public static HouseResponseDto missingAccountNumber() {
-        return HouseResponseDto.builder()
+    public static HousesResponseDto missingAccountNumber() {
+        return HousesResponseDto.builder()
                 .message("Не указан лицевой счет")
                 .build();
     }
 
-    public static HouseResponseDto invalidAddressId() {
+    public static HousesResponseDto invalidAddressId() {
         ErrorsDto errors = ErrorsDto.builder()
                 .addressIdErrors(new String[]{"Выбранное значение для address id некорректно."})
                 .build();
-        return HouseResponseDto.builder()
+        return HousesResponseDto.builder()
                 .errors(errors)
                 .message("Выбранное значение для address id некорректно.")
                 .build();
     }
 
-    public static HouseResponseDto invalidCompanyId() {
+    public static HousesResponseDto invalidCompanyId() {
         ErrorsDto errors = ErrorsDto.builder()
                 .companyIdErrors(new String[]{"Выбранное значение для company id некорректно."})
                 .build();
-        return HouseResponseDto.builder()
+        return HousesResponseDto.builder()
                 .errors(errors)
                 .message("Выбранное значение для company id некорректно.")
                 .build();
     }
 
-    public static HouseResponseDto invalidBranchId() {
+    public static HousesResponseDto invalidBranchId() {
         ErrorsDto errors = ErrorsDto.builder()
                 .branchIdErrors(new String[]{"Выбранное значение для branch id некорректно."})
                 .build();
-        return HouseResponseDto.builder()
+        return HousesResponseDto.builder()
                 .errors(errors)
                 .message("Выбранное значение для branch id некорректно.")
                 .build();
     }
 
-    public static HouseResponseDto invalidAccountNumber() {
-        return HouseResponseDto.builder()
+    public static HousesResponseDto invalidAccountNumber() {
+        return HousesResponseDto.builder()
                 .message("Неверный лицевой счет")
                 .build();
     }
 
-    public static HouseResponseDto invalidTitle() {
+    public static HousesResponseDto invalidTitle() {
         ErrorsDto errors = ErrorsDto.builder()
                 .titleErrors(new String[]{"Поле Название обязательно для заполнения."})
                 .build();
-        return HouseResponseDto.builder()
+        return HousesResponseDto.builder()
                 .errors(errors)
                 .message("Поле Название обязательно для заполнения.")
                 .build();
@@ -278,11 +278,11 @@ public class HouseResponseDto {
 
     }
 
-    public static HouseResponseDto invalidExceedSymbolsLimitTitle() {
+    public static HousesResponseDto invalidExceedSymbolsLimitTitle() {
         ErrorsDto errors = ErrorsDto.builder()
                 .titleErrors(new String[]{"Количество символов в поле Название не может превышать 255."})
                 .build();
-        return HouseResponseDto.builder()
+        return HousesResponseDto.builder()
                 .errors(errors)
                 .message("Количество символов в поле Название не может превышать 255.")
                 .build();

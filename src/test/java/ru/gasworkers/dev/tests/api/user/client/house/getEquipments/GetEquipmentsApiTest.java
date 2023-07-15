@@ -11,9 +11,9 @@ import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.users.client.house.HouseApi;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.AddEquipmentApi;
-import ru.gasworkers.dev.api.users.client.house.getEquipments.GetEquipmentsApi;
+import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.AddEquipmentApi;
+import ru.gasworkers.dev.api.users.client.house.equipment.getEquipments.GetEquipmentsApi;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithUser;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
@@ -26,7 +26,7 @@ import ru.gasworkers.dev.tests.api.BaseApiTest;
 @Tag(AllureTag.HOUSE)
 @Tag(AllureTag.API)
 public class GetEquipmentsApiTest extends BaseApiTest {
-    private final HouseApi houseApi = new HouseApi();
+    private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
     private final GetEquipmentsApi getEquipmentsApi = new GetEquipmentsApi();
 
@@ -36,9 +36,9 @@ public class GetEquipmentsApiTest extends BaseApiTest {
     void positiveTestCase(GetEquipmentPositiveCase testCase, @WithUser User client) {
       /*  String token = loginApi.getToken(client);
         Integer objectId = step("Add object", () -> {
-            return houseApi.addHouse(HouseBuilder.addDefaultHouseRequestDto(), token)
+            return clientHousesApi.addHouse(ClientHousesBuilder.addDefaultHouseRequestDto(), token)
                     .statusCode(200)
-                    .extract().as(HouseResponseDto.class).getData().getId();
+                    .extract().as(HousesResponseDto.class).getData().getId();
         });
         Integer equipmentId = addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), objectId, token)
                 .statusCode(200)

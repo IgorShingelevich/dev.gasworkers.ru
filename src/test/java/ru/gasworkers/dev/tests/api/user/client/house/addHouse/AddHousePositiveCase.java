@@ -1,9 +1,9 @@
 package ru.gasworkers.dev.tests.api.user.client.house.addHouse;
 
 import lombok.AllArgsConstructor;
-import ru.gasworkers.dev.api.users.client.house.HouseBuilder;
-import ru.gasworkers.dev.api.users.client.house.dto.HouseRequestDto;
-import ru.gasworkers.dev.api.users.client.house.dto.HouseResponseDto;
+import ru.gasworkers.dev.api.users.client.house.ClientHousesBuilder;
+import ru.gasworkers.dev.api.users.client.house.dto.HousesRequestDto;
+import ru.gasworkers.dev.api.users.client.house.dto.HousesResponseDto;
 
 @AllArgsConstructor
 enum AddHousePositiveCase {
@@ -14,13 +14,13 @@ enum AddHousePositiveCase {
 
     private final String description;
 
-    public HouseRequestDto getInputDto() {
-        HouseRequestDto inputDto = HouseBuilder.addDefaultHouseRequestDto();
+    public HousesRequestDto getInputDto() {
+        HousesRequestDto inputDto = ClientHousesBuilder.addDefaultHouseRequestDto();
         return this == ADD_HOUSE_OBJECT_DUPLICATE_TITLE ? inputDto.setTitle("my house") : inputDto;
     }
 
-    public HouseResponseDto getExpectedResponse() {
-        return HouseResponseDto.successResponse();
+    public HousesResponseDto getExpectedResponse() {
+        return HousesResponseDto.successResponse();
     }
 
     @Override

@@ -6,7 +6,7 @@ import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMaster
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterRequestDto;
 import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersRequestDto;
 import ru.gasworkers.dev.api.orders.selectHouse.dto.SelectHouseRequestDto;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentRequestDto;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentRequestDto;
 
 import java.util.List;
 

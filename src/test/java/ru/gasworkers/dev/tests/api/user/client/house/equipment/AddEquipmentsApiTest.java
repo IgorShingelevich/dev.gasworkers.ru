@@ -11,9 +11,9 @@ import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.users.client.house.HouseApi;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.AddEquipmentApi;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentResponseDto;
+import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.AddEquipmentApi;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithUser;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
@@ -28,7 +28,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.HOUSE)
 @Tag(AllureTag.API)
 public class AddEquipmentsApiTest extends BaseApiTest {
-    private final HouseApi houseApi = new HouseApi();
+    private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
 
     @ParameterizedTest(name = "{0}")
@@ -36,7 +36,7 @@ public class AddEquipmentsApiTest extends BaseApiTest {
     @DisplayName("Success case:")
     void positiveTestCase(AddEquipmentPositiveCase testCase, @WithUser User client) {
         String token = loginApi.getTokenPhone(client);
-        Integer houseId = houseApi.houseId(client, token);
+        Integer houseId = clientHousesApi.houseId(client, token);
         step("Add equipment", () -> {
             AddEquipmentResponseDto expectedResponse = AddEquipmentResponseDto.successResponse();
 
@@ -52,7 +52,7 @@ public class AddEquipmentsApiTest extends BaseApiTest {
     @DisplayName("Negative case:")
     void negativeTestCase(AddEquipmentNegativeCase testCase, @WithUser User client) {
         String token = loginApi.getTokenPhone(client);
-        Integer houseId = houseApi.houseId(client, token);
+        Integer houseId = clientHousesApi.houseId(client, token);
         step("Add equipment", () -> {
             AddEquipmentResponseDto expectedResponse = testCase.getExpectedResponse();
             AddEquipmentResponseDto actualResponse = addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), houseId, token)

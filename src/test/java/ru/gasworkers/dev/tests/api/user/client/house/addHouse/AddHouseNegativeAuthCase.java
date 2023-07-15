@@ -2,8 +2,8 @@ package ru.gasworkers.dev.tests.api.user.client.house.addHouse;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import ru.gasworkers.dev.api.users.client.house.HouseBuilder;
-import ru.gasworkers.dev.api.users.client.house.dto.HouseRequestDto;
+import ru.gasworkers.dev.api.users.client.house.ClientHousesBuilder;
+import ru.gasworkers.dev.api.users.client.house.dto.HousesRequestDto;
 
 @AllArgsConstructor
 enum AddHouseNegativeAuthCase {
@@ -14,8 +14,8 @@ enum AddHouseNegativeAuthCase {
     @Getter
     private final String token;
 
-    public HouseRequestDto getInputDto() {
-        return HouseBuilder.addDefaultHouseRequestDto();
+    public HousesRequestDto getInputDto() {
+        return ClientHousesBuilder.addDefaultHouseRequestDto();
     }
 
     @Override

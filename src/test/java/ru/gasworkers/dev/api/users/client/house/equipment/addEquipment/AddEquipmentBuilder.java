@@ -1,7 +1,7 @@
-package ru.gasworkers.dev.api.users.client.house.addEquipment;
+package ru.gasworkers.dev.api.users.client.house.equipment.addEquipment;
 
 import lombok.Builder;
-import ru.gasworkers.dev.api.users.client.house.addEquipment.dto.AddEquipmentRequestDto;
+import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentRequestDto;
 @Builder
 public class AddEquipmentBuilder {
     public static AddEquipmentRequestDto boilerViessmanRequest() {
