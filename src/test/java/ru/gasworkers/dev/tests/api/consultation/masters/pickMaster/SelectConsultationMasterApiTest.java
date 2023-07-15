@@ -19,13 +19,13 @@ import ru.gasworkers.dev.api.consultation.isStarted.IsStartedApi;
 import ru.gasworkers.dev.api.consultation.isStarted.dto.IsStartedResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.SelectConsultationMasterApi;
-import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
+import ru.gasworkers.dev.api.orders.create.CreateOrderApi;
 import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
 import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.AddEquipmentApi;
 import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.extension.user.WithHouse;
-import ru.gasworkers.dev.extension.user.WithUser;
+import ru.gasworkers.dev.extension.user.client.WithHouse;
+import ru.gasworkers.dev.extension.user.client.WithClient;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class SelectConsultationMasterApiTest extends BaseApiTest {
     private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
-    private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
+    private final CreateOrderApi createOrdersApi = new CreateOrderApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
     private final IsStartedApi isStartedApi = new IsStartedApi();
     private final SelectConsultationMasterApi selectConsultationMasterApi = new SelectConsultationMasterApi();
@@ -55,7 +55,7 @@ public class SelectConsultationMasterApiTest extends BaseApiTest {
     @EnumSource(PickMasterPositiveCase.class)
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Success case:")
-    void positiveTestCase(PickMasterPositiveCase testCase, @WithUser(houses = {@WithHouse}) User client) {
+    void positiveTestCase(PickMasterPositiveCase testCase, @WithClient(houses = {@WithHouse}) User client) {
         String token = loginApi.getTokenPhone(client);
         Integer houseId = clientHousesApi.houseId(client, token);
         step("Add equipment", () -> {
@@ -65,7 +65,7 @@ public class SelectConsultationMasterApiTest extends BaseApiTest {
         });
         Integer orderId = step("Create order", () -> {
             JsonObject actualResponseObject = JsonParser.parseString(
-                    createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
+                    createOrdersApi.createOrder(testCase.getCreateOrdersDto(), token)
                                     .statusCode(200)
                                     .extract().asString()
                     ).getAsJsonObject();

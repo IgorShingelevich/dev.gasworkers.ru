@@ -19,14 +19,14 @@ import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMastersResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.SelectConsultationMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterResponseDto;
-import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
-import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
+import ru.gasworkers.dev.api.orders.create.CreateOrderApi;
+import ru.gasworkers.dev.api.orders.create.dto.CreateOrderResponseDto;
 import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
 import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.AddEquipmentApi;
 import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.extension.user.WithHouse;
-import ru.gasworkers.dev.extension.user.WithUser;
+import ru.gasworkers.dev.extension.user.client.WithHouse;
+import ru.gasworkers.dev.extension.user.client.WithClient;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ import static io.qameta.allure.Allure.step;
 public class ApplyMasterApiTest extends BaseApiTest {
     private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
-    private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
+    private final CreateOrderApi createOrdersApi = new CreateOrderApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
     private final IsStartedApi isStartedApi = new IsStartedApi();
     private final SelectConsultationMasterApi selectConsultationMasterApi = new SelectConsultationMasterApi();
@@ -56,7 +56,7 @@ public class ApplyMasterApiTest extends BaseApiTest {
     @EnumSource(ApplyMasterPositiveCase.class)
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Success case:")
-    void positiveTestCase(ApplyMasterPositiveCase testCase, @WithUser(houses = {@WithHouse}) User client) {
+    void positiveTestCase(ApplyMasterPositiveCase testCase, @WithClient(houses = @WithHouse) User client) {
         String token = loginApi.getTokenPhone(client);
         Integer houseId = clientHousesApi.houseId(client, token);
         step("Add equipment", () -> {
@@ -65,9 +65,9 @@ public class ApplyMasterApiTest extends BaseApiTest {
                     .extract().as(AddEquipmentResponseDto.class);
         });
         Integer orderId = step("Create order", () -> {
-            return createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
+            return createOrdersApi.createOrder(testCase.getCreateOrdersDto(), token)
                     .statusCode(200)
-                    .extract().as(CreateOrdersResponseDto.class).getData().getOrderId();
+                    .extract().as(CreateOrderResponseDto.class).getData().getOrderId();
         });
         List<Integer> masterIdList = step("Get online masters list", () -> {
             OnlineMastersResponseDto responseDto = onlineMastersApi.getOnlineMasters(testCase.getOnlineMastersDto(orderId), token)
@@ -104,7 +104,7 @@ public class ApplyMasterApiTest extends BaseApiTest {
     @EnumSource(ApplyMasterNegativeCase.class)
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Negative case:")
-    void negativeTestCase(ApplyMasterNegativeCase testCase, @WithUser(houses = {@WithHouse}) User client) {
+    void negativeTestCase(ApplyMasterNegativeCase testCase, @WithClient(houses = {@WithHouse}) User client) {
         String token = loginApi.getTokenPhone(client);
         Integer houseId = clientHousesApi.houseId(client, token);
         step("Add equipment", () -> {
@@ -113,9 +113,9 @@ public class ApplyMasterApiTest extends BaseApiTest {
                     .extract().as(AddEquipmentResponseDto.class);
         });
         Integer orderId = step("Create order", () -> {
-            return createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
+            return createOrdersApi.createOrder(testCase.getCreateOrdersDto(), token)
                     .statusCode(200)
-                    .extract().as(CreateOrdersResponseDto.class).getData().getOrderId();
+                    .extract().as(CreateOrderResponseDto.class).getData().getOrderId();
         });
         List<Integer> masterIdList = step("Get online masters list", () -> {
             OnlineMastersResponseDto responseDto = onlineMastersApi.getOnlineMasters(testCase.getOnlineMastersDto(orderId), token)

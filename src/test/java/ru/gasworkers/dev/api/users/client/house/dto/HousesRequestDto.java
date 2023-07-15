@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-import ru.gasworkers.dev.extension.user.WithHouse;
+import ru.gasworkers.dev.extension.user.client.WithHouse;
 
 import java.math.BigInteger;
 

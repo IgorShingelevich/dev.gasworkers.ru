@@ -16,12 +16,13 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_NULL;
 @AllArgsConstructor
 @JsonInclude(NON_NULL)
 @Accessors(chain = true)
-public class CreateOrdersRequestDto {
+public class CreateOrderRequestDto {
     /*{
     "type": "consultation"
     Тип заказа (urgent/repair/maintenance/consultation) Example: maintenance
 }*/
     private String type;
     @JsonProperty("object_id")
-    private String objectId;
+    private String houseId;
+
 }

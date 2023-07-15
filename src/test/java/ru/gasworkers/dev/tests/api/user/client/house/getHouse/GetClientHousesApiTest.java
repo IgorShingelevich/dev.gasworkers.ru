@@ -20,7 +20,7 @@ import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEq
 import ru.gasworkers.dev.api.users.client.house.getClientHouses.GetClientHousesApi;
 import ru.gasworkers.dev.api.users.client.house.getClientHouses.dto.GetClientHousesResponseDto;
 import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.extension.user.WithUser;
+import ru.gasworkers.dev.extension.user.client.WithClient;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import static io.qameta.allure.Allure.step;
@@ -40,7 +40,7 @@ public class GetClientHousesApiTest extends BaseApiTest {
     @ParameterizedTest(name = "{0}")
     @EnumSource(GetHousePositiveCase.class)
     @DisplayName("Success case:")
-    void positiveTestCase(GetHousePositiveCase testCase, @WithUser User client) {
+    void positiveTestCase(GetHousePositiveCase testCase, @WithClient User client) {
         String token = loginApi.getTokenPhone(client);
         Integer objectId = step("Add object", () -> {
             return clientHousesApi.addHouse(ClientHousesBuilder.addDefaultHouseRequestDto(), token)

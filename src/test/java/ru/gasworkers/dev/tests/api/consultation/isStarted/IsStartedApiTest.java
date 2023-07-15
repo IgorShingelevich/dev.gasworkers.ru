@@ -18,14 +18,14 @@ import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.consultation.isStarted.IsStartedApi;
 import ru.gasworkers.dev.api.consultation.isStarted.dto.IsStartedResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
-import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
+import ru.gasworkers.dev.api.orders.create.CreateOrderApi;
 import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
 import ru.gasworkers.dev.api.users.client.house.ClientHousesBuilder;
 import ru.gasworkers.dev.api.users.client.house.dto.HousesResponseDto;
 import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.AddEquipmentApi;
 import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.extension.user.WithUser;
+import ru.gasworkers.dev.extension.user.client.WithClient;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ import static io.qameta.allure.Allure.step;
 public class IsStartedApiTest extends BaseApiTest {
     private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
-    private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
+    private final CreateOrderApi createOrdersApi = new CreateOrderApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
     private final IsStartedApi isStartedApi = new IsStartedApi();
     /*
@@ -58,7 +58,7 @@ public class IsStartedApiTest extends BaseApiTest {
     @EnumSource(IsStartedPositiveCase.class)
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Success case:")
-    void positiveTestCase(IsStartedPositiveCase testCase, @WithUser User client) {
+    void positiveTestCase(IsStartedPositiveCase testCase, @WithClient User client) {
         String token = loginApi.getTokenPhone(client);
         Integer objectId = step("Add object", () -> {
             return clientHousesApi.addHouse(ClientHousesBuilder.addDefaultHouseRequestDto(), token)
@@ -72,7 +72,7 @@ public class IsStartedApiTest extends BaseApiTest {
         });
         Integer orderId = step("Create order", () -> {
                     JsonObject responseObject = JsonParser.parseString(
-                            createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
+                            createOrdersApi.createOrder(testCase.getCreateOrdersDto(), token)
                                     .statusCode(200)
                                     .extract().asString()
                     ).getAsJsonObject();

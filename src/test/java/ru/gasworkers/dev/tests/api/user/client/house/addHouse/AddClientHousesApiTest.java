@@ -14,8 +14,8 @@ import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
 import ru.gasworkers.dev.api.users.client.house.dto.HousesResponseDto;
 import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.extension.user.WithHouse;
-import ru.gasworkers.dev.extension.user.WithUser;
+import ru.gasworkers.dev.extension.user.client.WithHouse;
+import ru.gasworkers.dev.extension.user.client.WithClient;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import java.io.IOException;
@@ -34,7 +34,7 @@ public class AddClientHousesApiTest extends BaseApiTest {
     @ParameterizedTest(name = "{0}")
     @EnumSource(AddHousePositiveCase.class)
     @DisplayName("Success case:")
-    void positiveTestCase(AddHousePositiveCase testCase, @WithUser(houses = {@WithHouse}) User client) throws IOException {
+    void positiveTestCase(AddHousePositiveCase testCase, @WithClient(houses = {@WithHouse}) User client) throws IOException {
         /*String token = loginApi.getToken(client);
         HousesResponseDto actualResponse = clientHousesApi.addHouse(testCase.getInputDto(), token)
                 .statusCode(200)
@@ -45,7 +45,7 @@ public class AddClientHousesApiTest extends BaseApiTest {
     @ParameterizedTest(name = "{0}")
     @EnumSource(AddHousePositiveCase.class)
     @DisplayName("Success case:")
-    void positiveTestCase2(AddHousePositiveCase testCase, @WithUser(houses = {
+    void positiveTestCase2(AddHousePositiveCase testCase, @WithClient(houses = {
             @WithHouse(addressId = 2121, companyId = 1, title = "Custom House"),
             @WithHouse(addressId = 2121, companyId = 1, title = "Another Custom House")
     }) User client) {
@@ -59,7 +59,7 @@ public class AddClientHousesApiTest extends BaseApiTest {
     @ParameterizedTest(name = "{0}")
     @EnumSource(AddHouseNegativeDtoCase.class)
     @DisplayName("Negative dto case:")
-    void negativeDtoTestCase(AddHouseNegativeDtoCase testCase, @WithUser User client) throws IOException {
+    void negativeDtoTestCase(AddHouseNegativeDtoCase testCase, @WithClient User client) throws IOException {
         // With valid token
         String token = loginApi.getTokenPhone(client);
         HousesResponseDto actualResponse = clientHousesApi.addHouse(testCase.getInputDto(), token)
@@ -72,7 +72,7 @@ public class AddClientHousesApiTest extends BaseApiTest {
     @ParameterizedTest(name = "{0}")
     @EnumSource(AddHouseNegativeAuthCase.class)
     @DisplayName("Negative auth case:")
-    void negativeAuthTestCase(AddHouseNegativeAuthCase testCase, @WithUser User client) {
+    void negativeAuthTestCase(AddHouseNegativeAuthCase testCase, @WithClient User client) {
         clientHousesApi.addHouse(testCase.getInputDto(), testCase.getToken())
                 .statusCode(401);
         // ToDo Add response body assert

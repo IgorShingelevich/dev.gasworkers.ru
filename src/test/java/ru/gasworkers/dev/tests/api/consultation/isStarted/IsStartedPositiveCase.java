@@ -3,7 +3,7 @@ package ru.gasworkers.dev.tests.api.consultation.isStarted;
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.consultation.isStarted.dto.IsStartedRequestDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMastersRequestDto;
-import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersRequestDto;
+import ru.gasworkers.dev.api.orders.create.dto.CreateOrderRequestDto;
 import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentRequestDto;
 
 @AllArgsConstructor
@@ -15,8 +15,8 @@ enum IsStartedPositiveCase {
         return AddEquipmentRequestDto.defaultBoilerEquipment();
     }
 
-    public CreateOrdersRequestDto getCreateOrdersDto() {
-        return CreateOrdersRequestDto.builder()
+    public CreateOrderRequestDto getCreateOrdersDto() {
+        return CreateOrderRequestDto.builder()
                 .type("consultation")
                 .build();
     }

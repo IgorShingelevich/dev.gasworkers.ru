@@ -1,12 +1,9 @@
 package ru.gasworkers.dev.tests.api.orders.create;
 
 import lombok.AllArgsConstructor;
-import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersRequestDto;
-import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
+import ru.gasworkers.dev.api.orders.create.dto.CreateOrderRequestDto;
+import ru.gasworkers.dev.api.orders.create.dto.CreateOrderResponseDto;
 import ru.gasworkers.dev.exception.EnumNotSupportedException;
-
-import java.util.Arrays;
-import java.util.stream.Stream;
 
 @AllArgsConstructor
 enum CreateOrdersNegativeCase {
@@ -22,62 +19,62 @@ enum CreateOrdersNegativeCase {
     CREATE_ORDERS_INVALID_OBJECT_ID_LENGTH_LONG("invalid objectId length long( general answer -  not specified) ");
 
     private final String description;
-    public CreateOrdersRequestDto getCreateOrdersRequestDto() {
+    public CreateOrderRequestDto getCreateOrdersRequestDto() {
         switch (this) {
             case CREATE_ORDERS_EMPTY_REQUEST:
             case CREATE_ORDERS_MISSING_TYPE:
-                return CreateOrdersRequestDto.builder()
+                return CreateOrderRequestDto.builder()
                         .build();
             case CREATE_ORDERS_INVALID_TYPE:
-                return CreateOrdersRequestDto.builder()
+                return CreateOrderRequestDto.builder()
                         .type("invalid type")
                         .build();
             case CREATE_ORDERS_INVALID_OBJECT_ID:
-                return CreateOrdersRequestDto.builder()
+                return CreateOrderRequestDto.builder()
                         .type("maintenance")
-                        .objectId("invalid objectId")
+                        .houseId("invalid objectId")
                         .build();
             case CREATE_ORDERS_INVALID_OBJECT_ID_OTHER_USER_HOUSE_OBJECT_ID:
-                return CreateOrdersRequestDto.builder()
+                return CreateOrderRequestDto.builder()
                         .type("maintenance")
-                        .objectId("1611") // other user house object
+                        .houseId("1611") // other user house object
                         .build();
             case CREATE_ORDERS_INVALID_OBJECT_ID_NOT_EXIST_ZERO:
-                return CreateOrdersRequestDto.builder()
+                return CreateOrderRequestDto.builder()
                         .type("maintenance")
-                        .objectId("0")
+                        .houseId("0")
                         .build();
             case CREATE_ORDERS_INVALID_OBJECT_ID_TYPE:
-                return CreateOrdersRequestDto.builder()
+                return CreateOrderRequestDto.builder()
                         .type("invalid type")
-                        .objectId("invalid objectId")
+                        .houseId("invalid objectId")
                         .build();
             case CREATE_ORDERS_INVALID_OBJECT_ID_LENGTH_LONG:
-                return CreateOrdersRequestDto.builder()
+                return CreateOrderRequestDto.builder()
                         .type("maintenance")
-                        .objectId("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
+                        .houseId("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
                         .build();
             default:
                 throw new EnumNotSupportedException(this);
         }
     }
 
-    public CreateOrdersResponseDto getExpectedResponse(Integer orderId, Boolean isInsuranceCase) {
+    public CreateOrderResponseDto getExpectedResponse(Integer orderId, Boolean isInsuranceCase) {
         switch (this) {
             case CREATE_ORDERS_EMPTY_REQUEST:
-                return CreateOrdersResponseDto.emptyRequestResponse(orderId, isInsuranceCase);
+                return CreateOrderResponseDto.emptyRequestResponse(orderId, isInsuranceCase);
             case CREATE_ORDERS_MISSING_TYPE:
-                return CreateOrdersResponseDto.missingTypeResponse(orderId, isInsuranceCase);
+                return CreateOrderResponseDto.missingTypeResponse(orderId, isInsuranceCase);
             case CREATE_ORDERS_INVALID_TYPE:
-                return CreateOrdersResponseDto.invalidTypeResponse(orderId, isInsuranceCase);
+                return CreateOrderResponseDto.invalidTypeResponse(orderId, isInsuranceCase);
             case CREATE_ORDERS_INVALID_OBJECT_ID:
             case CREATE_ORDERS_INVALID_OBJECT_ID_NOT_EXIST_ZERO:
             case CREATE_ORDERS_INVALID_OBJECT_ID_LENGTH_LONG:
-                return CreateOrdersResponseDto.invalidObjectIdResponse(orderId, isInsuranceCase);
+                return CreateOrderResponseDto.invalidObjectIdResponse(orderId, isInsuranceCase);
             case CREATE_ORDERS_INVALID_OBJECT_ID_OTHER_USER_HOUSE_OBJECT_ID:
-                return CreateOrdersResponseDto.objectIdOtherUserHouseObjectResponse(orderId, isInsuranceCase);
+                return CreateOrderResponseDto.objectIdOtherUserHouseObjectResponse(orderId, isInsuranceCase);
             case CREATE_ORDERS_INVALID_OBJECT_ID_TYPE:
-                return CreateOrdersResponseDto.invalidObjectIdTypeResponse(orderId, isInsuranceCase);
+                return CreateOrderResponseDto.invalidObjectIdTypeResponse(orderId, isInsuranceCase);
            default:
                 throw new EnumNotSupportedException(this);
         }
