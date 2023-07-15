@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.api.auth.registration.regular.withUser;
+package ru.gasworkers.dev.tests.api.auth.registration.regular;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Epic;
@@ -19,7 +19,6 @@ import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import static io.qameta.allure.Allure.step;
 
@@ -33,6 +32,7 @@ import static io.qameta.allure.Allure.step;
 public class WithUserRegistrationApiTest extends BaseApiTest {
 
     private final UserApi userApi = new UserApi();
+    private Integer id;
 
 
     @Test
@@ -44,13 +44,15 @@ public class WithUserRegistrationApiTest extends BaseApiTest {
             UserResponseDto newClientResponseDto = userApi.getUser(token)
                     .statusCode(200)
                     .extract().as(UserResponseDto.class);
-            assertResponsePartialNoATExcludeFields(expectedUserResponseDto(client), newClientResponseDto, List.of("data.id"));
+            id = newClientResponseDto.getData().getId();
+            assertResponsePartialNoAt(expectedUserResponseDto(client), newClientResponseDto);
         });
     }
 
     private UserResponseDto expectedUserResponseDto(User client) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         UserResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/registration/regular/withUser/withUserUser.json"), UserResponseDto.class);
+        expectedTemplateResponse.getData().setId(id);
         expectedTemplateResponse.getData().setPhone(Long.valueOf(client.getPhone()));
         expectedTemplateResponse.getData().setEmail(client.getEmail());
         expectedTemplateResponse.getData().setFirstName(client.getFirstName());

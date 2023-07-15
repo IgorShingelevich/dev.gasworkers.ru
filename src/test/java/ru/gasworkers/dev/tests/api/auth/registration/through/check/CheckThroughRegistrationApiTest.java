@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.api.auth.registration.through.checkAndFinish;
+package ru.gasworkers.dev.tests.api.auth.registration.through.check;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;

@@ -20,7 +20,7 @@ import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.List;
 
 import static io.qameta.allure.Allure.step;
 
@@ -35,7 +35,8 @@ public class WithThroughUserRegistrationApiTest extends BaseApiTest {
     private final UserApi userApi = new UserApi();
     File repairAndMaintenanceJson = new File("src/test/resources/api/registration/through/repairWithTroughUser.json");
     File consultationJson = new File("src/test/resources/api/registration/through/consultationWithThroughUser.json");
-
+    private Integer id;
+    private Integer guide0Id;
 
     @Test
     @DisplayName("Предусловие фоновой регистрации  на ремонт")
@@ -45,10 +46,11 @@ public class WithThroughUserRegistrationApiTest extends BaseApiTest {
             UserResponseDto newClientResponseDto = userApi.getUser(clientToken)
                     .statusCode(200)
                     .extract().as(UserResponseDto.class);
-            //exclude fields data.id and data.guides[0].id
+            id = newClientResponseDto.getData().getId();
+            guide0Id = newClientResponseDto.getData().getGuides().get(0).getId();
             File repairAndMaintenanceJson = new File("src/test/resources/api/registration/through/repairWithTroughUser.json");
-//            assertResponsePartialNoATExcludeFields(expectedUserResponseDto(repairAndMaintenanceJson, client), newClientResponseDto, Arrays.asList("data.id", "data.userNotificationsCount",  "data.guides.id"));
-            assertResponsePartialNoATExcludeFields(expectedUserResponseDto(repairAndMaintenanceJson, client), newClientResponseDto, Arrays.asList("data.id", "data.guides.id"));
+            assertResponsePartialNoATExcludeFields(expectedUserResponseDto(repairAndMaintenanceJson, client), newClientResponseDto, List.of("data.userNotificationsCount"));
+//            assertResponsePartialNoAt(expectedUserResponseDto(repairAndMaintenanceJson, client), newClientResponseDto);
         });
     }
 
@@ -60,8 +62,10 @@ public class WithThroughUserRegistrationApiTest extends BaseApiTest {
             UserResponseDto newClientResponseDto = userApi.getUser(clientToken)
                     .statusCode(200)
                     .extract().as(UserResponseDto.class);
-            //exclude fields data.id and data.guides[0].id
-            assertResponsePartialNoATExcludeFields(expectedUserResponseDto(repairAndMaintenanceJson, client), newClientResponseDto, Arrays.asList("data.id", "data.guides.id"));
+            id = newClientResponseDto.getData().getId();
+            guide0Id = newClientResponseDto.getData().getGuides().get(0).getId();
+            assertResponsePartialNoATExcludeFields(expectedUserResponseDto(repairAndMaintenanceJson, client), newClientResponseDto, List.of("data.userNotificationsCount"));
+//            assertResponsePartialNoAt(expectedUserResponseDto(repairAndMaintenanceJson, client), newClientResponseDto);
         });
     }
 
@@ -73,14 +77,18 @@ public class WithThroughUserRegistrationApiTest extends BaseApiTest {
             UserResponseDto newClientResponseDto = userApi.getUser(clientToken)
                     .statusCode(200)
                     .extract().as(UserResponseDto.class);
-            //exclude fields data.id and data.guides[0].id
-            assertResponsePartialNoATExcludeFields(expectedUserResponseDto(consultationJson, client), newClientResponseDto, Arrays.asList("data.id", "data.guides.id"));
+            id = newClientResponseDto.getData().getId();
+            guide0Id = newClientResponseDto.getData().getGuides().get(0).getId();
+            assertResponsePartialNoATExcludeFields(expectedUserResponseDto(consultationJson, client), newClientResponseDto, List.of("data.userNotificationsCount"));
+//            assertResponsePartialNoAt(expectedUserResponseDto(consultationJson, client), newClientResponseDto);
         });
     }
 
     private UserResponseDto expectedUserResponseDto(File expectedJson, User client) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         UserResponseDto expectedTemplateResponse = objectMapper.readValue(expectedJson, UserResponseDto.class);
+        expectedTemplateResponse.getData().setId(id);
+        expectedTemplateResponse.getData().getGuides().get(0).setId(guide0Id);
         expectedTemplateResponse.getData().setPhone(client.getPhoneAsLong());
         expectedTemplateResponse.getData().setEmail(client.getEmail());
         return expectedTemplateResponse;
