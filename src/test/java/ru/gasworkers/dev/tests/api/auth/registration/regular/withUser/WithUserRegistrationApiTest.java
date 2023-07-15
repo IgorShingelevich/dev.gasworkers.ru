@@ -26,7 +26,7 @@ import static io.qameta.allure.Allure.step;
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.REGISTRATION)
 @Feature(AllureFeature.PRECONDITION)
-@Story(" предусловие регулярной регистрации")
+@Story("предусловие регулярной регистрации")
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.API)

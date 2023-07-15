@@ -9,11 +9,13 @@ import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRe
 public final class User {
 
     private String email, phone, password, firstName, lastName, middleName, fullName;
+    private Long phoneAsLong;
 
     public static User fromComplexDto(ComplexRegistrationRequestDto complexDto) {
         return User.builder()
                 .email(complexDto.getEmail())
                 .phone(complexDto.getPhone())
+                .phoneAsLong(complexDto.getPhoneAsLong())
                 .password(complexDto.getPassword())
                 .firstName(complexDto.getFirstName())
                 .lastName(complexDto.getLastName())
