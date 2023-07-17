@@ -11,8 +11,8 @@ import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
-import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
+import ru.gasworkers.dev.api.orders.create.CreateOrderApi;
+import ru.gasworkers.dev.api.orders.create.dto.CreateOrderResponseDto;
 import ru.gasworkers.dev.api.orders.selectHouse.SelectHouseApi;
 import ru.gasworkers.dev.api.orders.selectHouse.dto.SelectHouseResponseDto;
 import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
@@ -21,8 +21,8 @@ import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEq
 import ru.gasworkers.dev.api.users.client.house.getClientHouses.GetClientHousesApi;
 import ru.gasworkers.dev.api.users.client.house.getClientHouses.dto.GetClientHousesResponseDto;
 import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.extension.user.WithHouse;
-import ru.gasworkers.dev.extension.user.WithUser;
+import ru.gasworkers.dev.extension.user.client.WithHouse;
+import ru.gasworkers.dev.extension.user.client.WithClient;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import java.util.ArrayList;
@@ -40,14 +40,14 @@ import static io.qameta.allure.Allure.step;
 public class SelectClientHousesApiTest extends BaseApiTest {
     private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
-    private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
+    private final CreateOrderApi createOrdersApi = new CreateOrderApi();
     private final GetClientHousesApi getClientHousesApi = new GetClientHousesApi();
     private final SelectHouseApi selectHouseApi = new SelectHouseApi();
 
     @ParameterizedTest(name = "{0}")
     @EnumSource(SelectHousePositiveCase.class)
     @DisplayName("Success case:")
-    void positiveTestCase(SelectHousePositiveCase testCase, @WithUser(houses = {@WithHouse}) User client) {
+    void positiveTestCase(SelectHousePositiveCase testCase, @WithClient(houses = {@WithHouse}) User client) {
         String token = loginApi.getTokenPhone(client);
         Integer houseId = clientHousesApi.houseId(client, token);
         step("Add equipment", () -> {
@@ -56,9 +56,9 @@ public class SelectClientHousesApiTest extends BaseApiTest {
                     .extract().as(AddEquipmentResponseDto.class);
         });
         Integer orderId = step("Create orders", () -> {
-            return createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
+            return createOrdersApi.createOrder(testCase.getCreateOrdersDto(), token)
                     .statusCode(200)
-                    .extract().as(CreateOrdersResponseDto.class).getData().getOrderId();
+                    .extract().as(CreateOrderResponseDto.class).getData().getOrderId();
         });
 
         GetClientHousesResponseDto actualResponse = getClientHousesApi.getHouse(token)

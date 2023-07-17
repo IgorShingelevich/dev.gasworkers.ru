@@ -32,6 +32,7 @@ import ru.gasworkers.dev.api.users.fspBankList.FspBankListResponseDto;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithOrderType;
 import ru.gasworkers.dev.extension.user.WithThroughUser;
+import ru.gasworkers.dev.extension.user.client.WithClient;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import java.util.ArrayList;
@@ -60,18 +61,15 @@ public class PayRepairApiTest extends BaseApiTest {
     private final String sssrDispatcher1Email = "test_gw_dispatcher_sssr1@rambler.ru";
     private final String sssrDispatcher1Password = "1234";
     private final RepairCase repairCase = new RepairCase();
-    //    private CommonFieldsRepairDto commonFieldsDto = new CommonFieldsRepairDto();
     private CommonFieldsRepairDto clientFields;
     private String tokenClient;
     private String tokenDispatcher;
-    private String tokenMaster;
     private Integer clientId;
     private String clientEmail;
     private Integer clientGuides0Id;
     private Long clientPhone;
     private Integer clientNotificationsCount;
     private Integer serviceId;
-    private Integer dispatcherId;
     private Integer masterId;
     private Integer orderId;
     private Integer clientObjectId;
@@ -79,21 +77,13 @@ public class PayRepairApiTest extends BaseApiTest {
     private Integer equipmentsId;
     private Integer activeOffersCount;
     private Integer receiptId;
-
     private UserResponseDto actualPublishedUserResponse;
-    private UserResponseDto actualHasOfferUserResponse;
-    private UserResponseDto actualBeforePaymentUserResponse;
-    private UserResponseDto dateSelectingUserResponse;
-
     private LastOrderInfoResponseDto actualPublishedLastOrderResponse;
     private OrdersInfoResponseDto actualPublishedOrderInfoResponse;
-
     private LastOrderInfoResponseDto actualHasOfferLastOrderResponse;
     private OrdersInfoResponseDto actualHasOfferOrderInfoResponse;
-
     private OrdersInfoResponseDto actualBeforePaymentOrderInfoResponse;
     private LastOrderInfoResponseDto actualBeforePaymentLastOrderResponse;
-
     private OrdersInfoResponseDto dateSelectingOrderInfoResponse;
     private LastOrderInfoResponseDto dateSelectingLastOrderResponse;
 
@@ -122,6 +112,7 @@ public class PayRepairApiTest extends BaseApiTest {
                 UserResponseDto expectedResponse = repairCase.publishedClient(clientFields);
                 assertResponsePartialNoAt(expectedResponse, actualPublishedUserResponse);
             });
+
             step("клиент карточка последнего заказа - убедиться что есть последний заказ после фоновой регистрации", () -> {
                 actualPublishedLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(tokenClient)
                         .statusCode(200)
@@ -133,6 +124,7 @@ public class PayRepairApiTest extends BaseApiTest {
                 LastOrderInfoResponseDto expectedResponse = repairCase.publishedLastOrderInfoBGRepair(orderId, orderNumber, clientObjectId, equipmentsId);
                 assertResponsePartialNoAt(expectedResponse, actualPublishedLastOrderResponse);
             });
+
             step(" клиент карточка заказа - убедиться что после фоновой регистрации", () -> {
                 actualPublishedOrderInfoResponse = ordersInfoApi.ordersInfo(orderId, tokenClient)
                         .statusCode(200)

@@ -25,8 +25,8 @@ import ru.gasworkers.dev.api.consultation.masters.apply.dto.ApplyMasterResponseD
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.SelectConsultationMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterResponseDto;
-import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
-import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
+import ru.gasworkers.dev.api.orders.create.CreateOrderApi;
+import ru.gasworkers.dev.api.orders.create.dto.CreateOrderResponseDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
 import ru.gasworkers.dev.api.orders.info.dto.OrdersInfoResponseDto;
 import ru.gasworkers.dev.api.orders.selectHouse.SelectHouseApi;
@@ -42,8 +42,8 @@ import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoApi;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.extension.user.WithHouse;
-import ru.gasworkers.dev.extension.user.WithUser;
+import ru.gasworkers.dev.extension.user.client.WithHouse;
+import ru.gasworkers.dev.extension.user.client.WithClient;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
@@ -73,7 +73,7 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
 
     private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
-    private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
+    private final CreateOrderApi createOrdersApi = new CreateOrderApi();
     private final GetClientHousesApi getClientHousesApi = new GetClientHousesApi();
     private final SelectHouseApi selectHouseApi = new SelectHouseApi();
     private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
@@ -93,7 +93,7 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
     @ParameterizedTest(name = "{0}")
     @EnumSource(FinishConsultationCase.class)
     @DisplayName("Отмена  оплаченной консультации клиентом")
-    void cancelClientPayedConsultationNow(FinishConsultationCase testCase, @WithUser(houses = {@WithHouse}) User client) throws IOException {
+    void cancelClientPayedConsultationNow(FinishConsultationCase testCase, @WithClient(houses = {@WithHouse}) User client) throws IOException {
         String token = loginApi.getTokenPhone(client);
         Integer houseId = clientHousesApi.houseId(client, token);
         step("Add equipment", () -> {
@@ -102,9 +102,9 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
                     .extract().as(AddEquipmentResponseDto.class);
         });
         Integer orderId = step("Create orders", () -> {
-            return createOrdersApi.createOrders(testCase.getCreateOrdersDto(), token)
+            return createOrdersApi.createOrder(testCase.getCreateOrdersDto(), token)
                     .statusCode(200)
-                    .extract().as(CreateOrdersResponseDto.class).getData().getOrderId();
+                    .extract().as(CreateOrderResponseDto.class).getData().getOrderId();
         });
         GetClientHousesResponseDto actualResponse = step("Get client objects", () -> {
             return getClientHousesApi.getHouse(token)

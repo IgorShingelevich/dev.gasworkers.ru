@@ -15,7 +15,7 @@ import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
 import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.AddEquipmentApi;
 import ru.gasworkers.dev.api.users.client.house.equipment.getEquipments.GetEquipmentsApi;
 import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.extension.user.WithUser;
+import ru.gasworkers.dev.extension.user.client.WithClient;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 @Owner("Igor Shingelevich")
@@ -33,7 +33,7 @@ public class GetEquipmentsApiTest extends BaseApiTest {
     @ParameterizedTest(name = "{0}")
     @EnumSource(GetEquipmentPositiveCase.class)
     @DisplayName("Success case:")
-    void positiveTestCase(GetEquipmentPositiveCase testCase, @WithUser User client) {
+    void positiveTestCase(GetEquipmentPositiveCase testCase, @WithClient User client) {
       /*  String token = loginApi.getToken(client);
         Integer objectId = step("Add object", () -> {
             return clientHousesApi.addHouse(ClientHousesBuilder.addDefaultHouseRequestDto(), token)

@@ -6,17 +6,18 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.orders.create.CreateOrdersApi;
-import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
-import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.extension.user.WithOrderType;
-import ru.gasworkers.dev.extension.user.WithThroughUser;
-import ru.gasworkers.dev.extension.user.WithUser;
+import ru.gasworkers.dev.api.orders.create.CreateOrderApi;
+import ru.gasworkers.dev.api.orders.create.dto.CreateOrderResponseDto;
+import ru.gasworkers.dev.extension.user.*;
+import ru.gasworkers.dev.extension.user.client.WithClient;
+import ru.gasworkers.dev.extension.user.client.WithHouse;
+import ru.gasworkers.dev.extension.user.client.WithOrder;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import static io.qameta.allure.Allure.step;
@@ -30,24 +31,33 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.API)
 public class CreateOrdersApiTest extends BaseApiTest {
-    private final CreateOrdersApi createOrdersApi = new CreateOrdersApi();
+    private final CreateOrderApi createOrdersApi = new CreateOrderApi();
+
+//    @Test
+//    @WithClient(houses = {
+//            @WithHouse(orders = @WithOrder("asfasfas")),
+//            @WithHouse(order = {@WithOrder("asfasf"), @WithOrder("afsasfaf12")})
+//    })
+//    void test() {
+//
+//    }
 
     @ParameterizedTest(name = "{0}")
     @EnumSource(CreateOrdersPositiveCase.class)
     @Tag(AllureTag.POSITIVE)
     @DisplayName("Success case: ")
-    void positiveTestCase(CreateOrdersPositiveCase testCase, @WithUser User client) {
+    void positiveTestCase(CreateOrdersPositiveCase testCase, @WithClient User client) {
         step("Create order", () -> {
             String token = loginApi.getTokenPhone(client);
 
-            CreateOrdersResponseDto createResponse = createOrdersApi.createOrders(testCase.getCreateRequestDto(), token)
+            CreateOrderResponseDto createResponse = createOrdersApi.createOrder(testCase.getCreateRequestDto(), token)
                     .statusCode(200)
-                    .extract().as(CreateOrdersResponseDto.class);
+                    .extract().as(CreateOrderResponseDto.class);
             Integer orderId = createResponse.getData().getOrderId();
             Boolean insuranceCase = createResponse.getData().getIsInsuranceCase();
 
-            CreateOrdersResponseDto actualResponse = CreateOrdersResponseDto.successResponse(orderId, insuranceCase);
-            CreateOrdersResponseDto expectedResponse = testCase.getCreateResponseDto(orderId, insuranceCase);
+            CreateOrderResponseDto actualResponse = CreateOrderResponseDto.successResponse(orderId, insuranceCase);
+            CreateOrderResponseDto expectedResponse = testCase.getCreateResponseDto(orderId, insuranceCase);
 
             assertResponse(expectedResponse, actualResponse);
         });
@@ -61,14 +71,14 @@ public class CreateOrdersApiTest extends BaseApiTest {
         step("Create order", () -> {
             String token = loginApi.getTokenThrough(client);
 
-            CreateOrdersResponseDto createResponse = createOrdersApi.createOrders(testCase.getCreateRequestDto(), token)
+            CreateOrderResponseDto createResponse = createOrdersApi.createOrder(testCase.getCreateRequestDto(), token)
                     .statusCode(200)
-                    .extract().as(CreateOrdersResponseDto.class);
+                    .extract().as(CreateOrderResponseDto.class);
             Integer orderId = createResponse.getData().getOrderId();
             Boolean insuranceCase = createResponse.getData().getIsInsuranceCase();
 
-            CreateOrdersResponseDto actualResponse = CreateOrdersResponseDto.successResponse(orderId, insuranceCase);
-            CreateOrdersResponseDto expectedResponse = testCase.getCreateResponseDto(orderId, insuranceCase);
+            CreateOrderResponseDto actualResponse = CreateOrderResponseDto.successResponse(orderId, insuranceCase);
+            CreateOrderResponseDto expectedResponse = testCase.getCreateResponseDto(orderId, insuranceCase);
 
             assertResponse(expectedResponse, actualResponse);
         });
@@ -78,14 +88,14 @@ public class CreateOrdersApiTest extends BaseApiTest {
     @EnumSource(CreateOrdersNegativeCase.class)
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Negative case: ")
-    void negativeTestCaseV2(CreateOrdersNegativeCase testCase, @WithUser User client) {
+    void negativeTestCaseV2(CreateOrdersNegativeCase testCase, @WithClient User client) {
         String token = loginApi.getTokenPhone(client);
         step("Create order", () -> {
-            CreateOrdersResponseDto actualResponse = createOrdersApi.createOrders(testCase.getCreateOrdersRequestDto(), token)
+            CreateOrderResponseDto actualResponse = createOrdersApi.createOrder(testCase.getCreateOrdersRequestDto(), token)
                     .statusCode(422)
-                    .extract().as(CreateOrdersResponseDto.class);
+                    .extract().as(CreateOrderResponseDto.class);
 
-            CreateOrdersResponseDto expectedResponse = testCase.getExpectedResponse(null, null); // Set initial values as null
+            CreateOrderResponseDto expectedResponse = testCase.getExpectedResponse(null, null); // Set initial values as null
 
             if (actualResponse.getData() != null) {
                 Integer orderId = actualResponse.getData().getOrderId();

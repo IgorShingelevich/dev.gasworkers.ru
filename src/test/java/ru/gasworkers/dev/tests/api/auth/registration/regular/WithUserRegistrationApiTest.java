@@ -14,7 +14,7 @@ import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.auth.user.UserApi;
 import ru.gasworkers.dev.api.auth.user.UserResponseDto;
 import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.extension.user.WithUser;
+import ru.gasworkers.dev.extension.user.client.WithClient;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import java.io.File;
@@ -37,7 +37,7 @@ public class WithUserRegistrationApiTest extends BaseApiTest {
 
     @Test
     @DisplayName("Предусловие регулярной регистрации клиента")
-    void preconditionRegularRegistrationClient(@WithUser User client) {
+    void preconditionRegularRegistrationClient(@WithClient User client) {
         String token = loginApi.getTokenPhone(client);
 
         step("убедиться, что модель пользователя соответствует ожидаемой", () -> {

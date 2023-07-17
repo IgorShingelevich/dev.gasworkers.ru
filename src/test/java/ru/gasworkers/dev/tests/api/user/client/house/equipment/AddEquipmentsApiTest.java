@@ -15,7 +15,7 @@ import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
 import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.AddEquipmentApi;
 import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.extension.user.WithUser;
+import ru.gasworkers.dev.extension.user.client.WithClient;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import static io.qameta.allure.Allure.step;
@@ -34,7 +34,7 @@ public class AddEquipmentsApiTest extends BaseApiTest {
     @ParameterizedTest(name = "{0}")
     @EnumSource(AddEquipmentPositiveCase.class)
     @DisplayName("Success case:")
-    void positiveTestCase(AddEquipmentPositiveCase testCase, @WithUser User client) {
+    void positiveTestCase(AddEquipmentPositiveCase testCase, @WithClient User client) {
         String token = loginApi.getTokenPhone(client);
         Integer houseId = clientHousesApi.houseId(client, token);
         step("Add equipment", () -> {
@@ -50,7 +50,7 @@ public class AddEquipmentsApiTest extends BaseApiTest {
     @ParameterizedTest(name = "{0}")
     @EnumSource(AddEquipmentNegativeCase.class)
     @DisplayName("Negative case:")
-    void negativeTestCase(AddEquipmentNegativeCase testCase, @WithUser User client) {
+    void negativeTestCase(AddEquipmentNegativeCase testCase, @WithClient User client) {
         String token = loginApi.getTokenPhone(client);
         Integer houseId = clientHousesApi.houseId(client, token);
         step("Add equipment", () -> {

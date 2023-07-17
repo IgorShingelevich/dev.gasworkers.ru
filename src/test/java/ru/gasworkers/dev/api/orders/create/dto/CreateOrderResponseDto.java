@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.ALWAYS) // Include null fields during serialization
 @Builder
-public class CreateOrdersResponseDto {
+public class CreateOrderResponseDto {
 
     private Integer status;
     private String message;
@@ -52,8 +52,8 @@ public class CreateOrdersResponseDto {
         private Boolean isInsuranceCase;
     }
 
-    public static CreateOrdersResponseDto successResponse(Integer orderId, Boolean isInsuranceCase) {
-        return CreateOrdersResponseDto.builder()
+    public static CreateOrderResponseDto successResponse(Integer orderId, Boolean isInsuranceCase) {
+        return CreateOrderResponseDto.builder()
                 .status(0)
                 .message("Заказ создан")
                 .data(DataDto.builder()
@@ -63,8 +63,8 @@ public class CreateOrdersResponseDto {
                 .build();
     }
 
-    public static CreateOrdersResponseDto invalidTypeResponse(Integer orderId, Boolean isInsuranceCase) {
-        return CreateOrdersResponseDto.builder()
+    public static CreateOrderResponseDto invalidTypeResponse(Integer orderId, Boolean isInsuranceCase) {
+        return CreateOrderResponseDto.builder()
                 .message("Выбранное значение для тип ошибочно.")
                 .errors(ErrorsDto.builder()
                         .type(Arrays.asList("Выбранное значение для тип ошибочно."))
@@ -72,8 +72,8 @@ public class CreateOrdersResponseDto {
                 .build();
     }
 
-    public static CreateOrdersResponseDto emptyRequestResponse(Integer orderId, Boolean isInsuranceCase) {
-        return CreateOrdersResponseDto.builder()
+    public static CreateOrderResponseDto emptyRequestResponse(Integer orderId, Boolean isInsuranceCase) {
+        return CreateOrderResponseDto.builder()
                 .message("Поле тип обязательно для заполнения.")
                 .errors(ErrorsDto.builder()
                         .type(Arrays.asList("Поле тип обязательно для заполнения."))
@@ -81,8 +81,8 @@ public class CreateOrdersResponseDto {
                 .build();
     }
 
-    public static CreateOrdersResponseDto missingTypeResponse(Integer orderId, Boolean isInsuranceCase) {
-        return CreateOrdersResponseDto.builder()
+    public static CreateOrderResponseDto missingTypeResponse(Integer orderId, Boolean isInsuranceCase) {
+        return CreateOrderResponseDto.builder()
                 .message("Тип заказа отсутствует")
                 .errors(ErrorsDto.builder()
                         .type(Arrays.asList("Тип заказа отсутствует"))
@@ -90,8 +90,8 @@ public class CreateOrdersResponseDto {
                 .build();
     }
 
-    public static CreateOrdersResponseDto objectIdOtherUserHouseObjectResponse(Integer orderId, Boolean isInsuranceCase) {
-        return CreateOrdersResponseDto.builder()
+    public static CreateOrderResponseDto objectIdOtherUserHouseObjectResponse(Integer orderId, Boolean isInsuranceCase) {
+        return CreateOrderResponseDto.builder()
                 .message("Объект  не принадлежит пользователю")
                 .errors(ErrorsDto.builder()
                         .type(Arrays.asList("Объект  не принадлежит пользователю"))
@@ -99,8 +99,8 @@ public class CreateOrdersResponseDto {
                 .build();
     }
 
-    public static CreateOrdersResponseDto invalidObjectIdResponse(Integer orderId, Boolean isInsuranceCase) {
-        return CreateOrdersResponseDto.builder()
+    public static CreateOrderResponseDto invalidObjectIdResponse(Integer orderId, Boolean isInsuranceCase) {
+        return CreateOrderResponseDto.builder()
                 .message("Выбранное значение для object id некорректно.")
                 .errors(ErrorsDto.builder()
                         .objectId(Arrays.asList("Выбранное значение для object id некорректно."))
@@ -108,8 +108,8 @@ public class CreateOrdersResponseDto {
                 .build();
     }
 
-    public static CreateOrdersResponseDto invalidObjectIdTypeResponse(Integer orderId, Boolean isInsuranceCase) {
-        return CreateOrdersResponseDto.builder()
+    public static CreateOrderResponseDto invalidObjectIdTypeResponse(Integer orderId, Boolean isInsuranceCase) {
+        return CreateOrderResponseDto.builder()
                 .message("Выбранное значение для тип ошибочно. (и еще 1 ошибка)")
                 .errors(ErrorsDto.builder()
                         .type(Arrays.asList("Выбранное значение для тип ошибочно."))
@@ -118,8 +118,8 @@ public class CreateOrdersResponseDto {
                 .build();
     }
 
-    public static CreateOrdersResponseDto invalidObjectIdLengthLongResponse(Integer orderId, Boolean isInsuranceCase) {
-        return CreateOrdersResponseDto.builder()
+    public static CreateOrderResponseDto invalidObjectIdLengthLongResponse(Integer orderId, Boolean isInsuranceCase) {
+        return CreateOrderResponseDto.builder()
                 .message("Длина идентификатора объекта должна быть не более 255 символов")
                 .errors(ErrorsDto.builder()
                         .type(Arrays.asList("Длина идентификатора объекта должна быть не более 255 символов"))

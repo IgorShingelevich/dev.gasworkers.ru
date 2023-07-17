@@ -1,8 +1,8 @@
 package ru.gasworkers.dev.tests.api.orders.create;
 
 import lombok.AllArgsConstructor;
-import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersRequestDto;
-import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersResponseDto;
+import ru.gasworkers.dev.api.orders.create.dto.CreateOrderRequestDto;
+import ru.gasworkers.dev.api.orders.create.dto.CreateOrderResponseDto;
 import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 @AllArgsConstructor
@@ -14,22 +14,22 @@ enum CreateOrdersPositiveCase {
 
     private final String description;
 
-    public CreateOrdersRequestDto getCreateRequestDto() {
+    public CreateOrderRequestDto getCreateRequestDto() {
         switch (this) {
             case CREATE_ORDERS_MAINTENANCE:
-                return CreateOrdersRequestDto.builder()
+                return CreateOrderRequestDto.builder()
                         .type("maintenance")
                         .build();
             case CREATE_ORDERS_CONSULTATION:
-                return CreateOrdersRequestDto.builder()
+                return CreateOrderRequestDto.builder()
                         .type("consultation")
                         .build();
             case CREATE_ORDERS_URGENT:
-                return CreateOrdersRequestDto.builder()
+                return CreateOrderRequestDto.builder()
                         .type("urgent")
                         .build();
             case CREATE_ORDERS_REPAIR:
-                return CreateOrdersRequestDto.builder()
+                return CreateOrderRequestDto.builder()
                         .type("repair")
                         .build();
             default:
@@ -37,16 +37,16 @@ enum CreateOrdersPositiveCase {
         }
     }
 
-    public CreateOrdersResponseDto getCreateResponseDto(Integer orderId, Boolean isInsuranceCase) {
+    public CreateOrderResponseDto getCreateResponseDto(Integer orderId, Boolean isInsuranceCase) {
         switch (this) {
             case CREATE_ORDERS_MAINTENANCE:
             case CREATE_ORDERS_CONSULTATION:
             case CREATE_ORDERS_URGENT:
             case CREATE_ORDERS_REPAIR:
-                return CreateOrdersResponseDto.builder()
+                return CreateOrderResponseDto.builder()
                         .status(0)
                         .message("Заказ создан")
-                        .data(CreateOrdersResponseDto.DataDto.builder()
+                        .data(CreateOrderResponseDto.DataDto.builder()
                                 .orderId(orderId)
                                 .isInsuranceCase(false)
                                 .build()

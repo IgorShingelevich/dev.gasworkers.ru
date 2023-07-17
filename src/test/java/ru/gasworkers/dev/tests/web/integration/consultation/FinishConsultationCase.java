@@ -6,7 +6,7 @@ import ru.gasworkers.dev.api.consultation.isStarted.dto.IsStartedRequestDto;
 import ru.gasworkers.dev.api.consultation.masters.apply.dto.ApplyMasterRequestDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMastersRequestDto;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterRequestDto;
-import ru.gasworkers.dev.api.orders.create.dto.CreateOrdersRequestDto;
+import ru.gasworkers.dev.api.orders.create.dto.CreateOrderRequestDto;
 import ru.gasworkers.dev.api.orders.selectHouse.dto.SelectHouseRequestDto;
 import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentRequestDto;
 import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentRequestDto;
@@ -23,8 +23,8 @@ enum FinishConsultationCase {
         return AddEquipmentRequestDto.defaultBoilerEquipment();
     }
 
-    public CreateOrdersRequestDto getCreateOrdersDto() {
-        return CreateOrdersRequestDto.builder()
+    public CreateOrderRequestDto getCreateOrdersDto() {
+        return CreateOrderRequestDto.builder()
                 .type("consultation")
                 .build();
     }

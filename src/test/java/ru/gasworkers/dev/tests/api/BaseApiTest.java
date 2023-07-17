@@ -108,20 +108,16 @@ public abstract class BaseApiTest extends BaseTest {
                 .isEqualTo(expectedResponse);
     }
 
-
-    protected void assertResponsePartialNoAt(Object expectedResponse, Object actualResponse) throws IOException {
-        RecursiveComparisonConfiguration.Builder builder = RecursiveComparisonConfiguration.builder();
-
-        builder = builder.withIgnoredFieldsMatchingRegexes(".*(At|Ended|Started)");
-
-
-        RecursiveComparisonConfiguration configuration = builder.build();
+    protected void assertResponsePartialNoAt(Object expectedResponse, Object actualResponse) {
+        RecursiveComparisonConfiguration configuration = RecursiveComparisonConfiguration.builder()
+                .withIgnoredFieldsMatchingRegexes(".*(At|Ended|Started)")
+                .build();
 
         Assertions.assertThat(actualResponse)
                 .usingRecursiveComparison(configuration)
                 .isEqualTo(expectedResponse);
-
     }
+
 }
 
 
