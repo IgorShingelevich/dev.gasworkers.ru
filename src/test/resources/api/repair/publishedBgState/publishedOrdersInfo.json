@@ -225,6 +225,7 @@
     "is_insurance_case": false,
     "canceled_by_master": false,
     "canceled_by_client": false,
+    "possible_offer_id": null,
     "money_back_available": false
   }
 }

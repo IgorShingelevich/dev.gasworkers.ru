@@ -68,6 +68,8 @@ public class SuggestServicesResponseDto {
         @JsonProperty("master_orders_count")
         public Integer masterOrdersCount;
         public ArrayList<Brand> brands;
+        @JsonProperty("offer_id")
+        public Integer offerId;
 
         @lombok.Data
         @Builder
@@ -101,6 +103,8 @@ public class SuggestServicesResponseDto {
         public Double firstAccept;
         public MasterSC master;
         public Integer index;
+        @JsonProperty("offer_id")
+        public Integer offerId;
 
         @lombok.Data
         @Builder

@@ -36,7 +36,7 @@ public class OrdersInfoResponseDto {
         private ArrayList<Receipts> receipts;
         private ArrayList<Object> codes;
         private String stage;
-        private OfferDto offer;
+        private Offer offer;
         @JsonProperty("desired_date_interval_started_at")
         private Object desiredDateIntervalStartedAt;
         @JsonProperty("desired_date_interval_ended_at")
@@ -86,6 +86,8 @@ public class OrdersInfoResponseDto {
         private Boolean canceledByClient;
         @JsonProperty("money_back_available")
         private Boolean moneyBackAvailable;
+        @JsonProperty("possible_offer_id")
+        private Integer possibleOfferId;
 
         @lombok.Data
         @Builder
@@ -119,7 +121,7 @@ public class OrdersInfoResponseDto {
         @Builder
         @AllArgsConstructor
         @NoArgsConstructor
-        public static class OfferDto {
+        public static class Offer {
             private Integer id;
             @JsonProperty("order_id")
             private Integer orderId;
