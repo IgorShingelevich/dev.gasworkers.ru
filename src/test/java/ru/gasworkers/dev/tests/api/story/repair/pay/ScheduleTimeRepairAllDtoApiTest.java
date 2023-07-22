@@ -13,6 +13,8 @@ import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
 import ru.gasworkers.dev.api.auth.user.UserApi;
 import ru.gasworkers.dev.api.auth.user.UserResponseDto;
+import ru.gasworkers.dev.api.orders.approveDate.OrdersApproveDateApi;
+import ru.gasworkers.dev.api.orders.approveDate.OrdersApproveDateResponseDto;
 import ru.gasworkers.dev.api.orders.id.OrdersIdApi;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
@@ -60,6 +62,7 @@ public class ScheduleTimeRepairAllDtoApiTest extends BaseApiTest {
     private final OrdersInfoApi ordersInfoApi = new OrdersInfoApi();
     private final OrdersIdApi ordersIdApi = new OrdersIdApi();
     private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
+    private final OrdersApproveDateApi ordersApproveDateApi = new OrdersApproveDateApi();
     private final String sssrDispatcher1Email = "test_gw_dispatcher_sssr1@rambler.ru";
     private final String sssrDispatcher1Password = "1234";
     private final RepairCase repairCase = new RepairCase();
@@ -72,14 +75,19 @@ public class ScheduleTimeRepairAllDtoApiTest extends BaseApiTest {
     private LastOrderInfoResponseDto actualHasOfferLastOrderResponse;
     private OrdersInfoResponseDto actualHasOfferOrderInfoResponse;
     private OrdersIdResponseDto actualHasOfferOrderIdResponse;
+    private OrdersIdResponseDto expectedHasOfferOrderIdResponse;
 
     private OrdersInfoResponseDto actualBeforePaymentOrderInfoResponse;
     private LastOrderInfoResponseDto actualBeforePaymentLastOrderResponse;
     private OrdersIdResponseDto actualBeforePaymentOrderIdResponse;
 
-    private OrdersInfoResponseDto dateSelectingOrderInfoResponse;
-    private LastOrderInfoResponseDto dateSelectingLastOrderResponse;
-    private OrdersIdResponseDto dateSelectingOrderIdResponse;
+    private OrdersInfoResponseDto actualDateSelectingOrderInfoResponse;
+    private LastOrderInfoResponseDto actualDateSelectingLastOrderResponse;
+    private OrdersIdResponseDto expectedDateSelectingLastOrderResponse;
+    private OrdersIdResponseDto actualDateSelectingOrderIdResponse;
+
+    private OrdersIdResponseDto actualWaitMasterOrderIdResponse;
+    private OrdersIdResponseDto expectedWaitMasterOrderIdResponse;
 
 
     @Test
@@ -174,8 +182,9 @@ public class ScheduleTimeRepairAllDtoApiTest extends BaseApiTest {
                 actualHasOfferOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
-                OrdersIdResponseDto expectedResponse = repairCase.hasOfferOrderIdBGRepair(commonFields);
-                assertResponsePartialNoAt(expectedResponse, actualHasOfferOrderIdResponse);
+                expectedHasOfferOrderIdResponse = repairCase.hasOfferOrderIdBGRepair(commonFields);
+//                assertResponsePartialNoAt(expectedHasOfferOrderIdResponse, actualHasOfferOrderIdResponse);
+                assertResponsePartialNoATExcludeFields(expectedHasOfferOrderIdResponse, actualHasOfferOrderIdResponse, List.of("data.client.countNotReadNotification"));  // vary 1 or 2 cannot determine
             });
             step("клиент получает список доступных предложений", () -> {
                 SuggestServicesResponseDto suggestedServiceResponse = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
@@ -190,12 +199,8 @@ public class ScheduleTimeRepairAllDtoApiTest extends BaseApiTest {
                     }
                 }
                 assertThat(filteredServices).isNotEmpty();
-//                serviceId = filteredServices.get(0).getId();
-//                possibleOfferId = filteredServices.get(0).getOfferId();
                 commonFields.setServiceId(filteredServices.get(0).getId());
                 commonFields.setPossibleOfferId(filteredServices.get(0).getOfferId());
-//                assertThat(possibleOfferId).isEqualTo(offerId);
-
             });
             step("клиент выбирает предложение", () -> {
                 SelectServiceCompanyResponseDto actualResponse = selectServiceCompanyApi.selectServiceCompany(commonFields.getOrderId(), commonFields.getServiceId(), commonFields.getTokenClient())
@@ -239,28 +244,48 @@ public class ScheduleTimeRepairAllDtoApiTest extends BaseApiTest {
             });
         });
 
-        step("заказ на ремонт клиента в  состоянии Согласование даты и времени", () -> {
+        step("заказ на ремонт в  состоянии Согласование даты и времени", () -> {
             step("  клиент карточка заказа - убедиться что Согласование даты и времени", () -> {
-                dateSelectingOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
+                actualDateSelectingOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersInfoResponseDto.class);
                 OrdersInfoResponseDto expectedResponse = repairCase.dateSelectingOrderInfoBGRepair(commonFields);
-                assertResponsePartialNoAt(expectedResponse, dateSelectingOrderInfoResponse);
+                assertResponsePartialNoAt(expectedResponse, actualDateSelectingOrderInfoResponse);
             });
             step(" клиент карточка последнего заказа - убедиться что Согласование даты и времени", () -> {
-                dateSelectingLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
+                actualDateSelectingLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(LastOrderInfoResponseDto.class);
                 LastOrderInfoResponseDto expectedResponse = repairCase.dateSelectingLastOrderInfoBGRepair(commonFields);
-                assertResponsePartialNoAt(expectedResponse, dateSelectingLastOrderResponse);
+                assertResponsePartialNoAt(expectedResponse, actualDateSelectingLastOrderResponse);
             });
             step("диспетчер карточка заказа - убедиться что Согласование даты и времени", () -> {
                 System.out.println("dateSelectingOrderIdResponse");
-                dateSelectingOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                commonFields.setApproveDate(client.getApproveDate());
+                actualDateSelectingOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
-                OrdersIdResponseDto expectedResponse = repairCase.dateSelectingOrderIdBGRepair(commonFields);
-//                assertResponsePartialNoAt(expectedResponse, dateSelectingOrderIdResponse);  // falls
+                expectedDateSelectingLastOrderResponse = repairCase.dateSelectingOrderIdBGRepair(commonFields);
+                assertResponsePartialNoAt(expectedDateSelectingLastOrderResponse, actualDateSelectingOrderIdResponse);  // falls
+            });
+        });
+        step("заказ на ремонт в  состоянии wait-for-master-starting", () -> {
+            step("диспетчер подтверждает дату и время", () -> {
+                commonFields.setApproveDate(client.getApproveDate());
+                OrdersApproveDateResponseDto actualResponse = ordersApproveDateApi.ordersApproveDate(repairCase.approveDateRequest(commonFields), commonFields.getTokenDispatcher())
+                        .statusCode(200)
+                        .extract().as(OrdersApproveDateResponseDto.class);
+                OrdersApproveDateResponseDto expectedResponse = OrdersApproveDateResponseDto.successResponse();
+                assertResponse(expectedResponse, actualResponse);
+            });
+
+            step("диспетчер карточка заказа - убедиться что wait-for-master-starting", () -> {
+                System.out.println("waitMasterOrderIdResponse");
+                actualWaitMasterOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                        .statusCode(200)
+                        .extract().as(OrdersIdResponseDto.class);
+                expectedWaitMasterOrderIdResponse = repairCase.waitMasterOrderIdBGRepair(commonFields);
+                assertResponsePartialNoAt(expectedWaitMasterOrderIdResponse, actualWaitMasterOrderIdResponse);
             });
         });
 

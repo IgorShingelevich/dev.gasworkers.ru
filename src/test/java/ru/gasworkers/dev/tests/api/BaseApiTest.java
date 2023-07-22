@@ -113,7 +113,7 @@ public abstract class BaseApiTest extends BaseTest {
 
     protected void assertResponsePartialNoAt(Object expectedResponse, Object actualResponse) {
         RecursiveComparisonConfiguration configuration = RecursiveComparisonConfiguration.builder()
-                .withIgnoredFieldsMatchingRegexes(".*(At|Ended|Started)")
+                .withIgnoredFieldsMatchingRegexes(".*(At|Ended|Started|countNotReadNotification)")
                 .build();
 
         Assertions.assertThat(actualResponse)

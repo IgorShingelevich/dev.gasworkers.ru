@@ -21,7 +21,9 @@ import java.util.List;
 @Accessors(chain = true)
 public class ComplexRegistrationRequestDto {
     private String userType, password, email, phone, gender,
-            firstName, lastName, middleName, employedStatus, fullName;
+            firstName, lastName, middleName, employedStatus,
+            fullName,
+            approveDate;
     private Integer code, serviceId, refererCode, refererType;
     private Boolean isPhoneSend, isHaveContract, isIp;
 

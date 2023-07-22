@@ -33,6 +33,7 @@ public class RandomClient {
     private String description = "Не работает -  описание проблемы";
     private String objectAddress;
     private String startDate;
+    private String approveDate;
     private String endDate;
     private File avatarRandomPhotoFile;
     private File equipmentRandomPhotoFile;
@@ -85,8 +86,12 @@ public class RandomClient {
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
         LocalDateTime endDate = currentDateTime.plusDays(3);
         endDate = endDate.withMinute(0).withSecond(0).withNano(0);
+        this.approveDate = endDate
+                .atOffset(ZoneOffset.UTC)
+                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         this.endDate = endDate
                 .atOffset(ZoneOffset.UTC)
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+
     }
 }

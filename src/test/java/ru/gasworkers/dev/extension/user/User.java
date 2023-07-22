@@ -8,7 +8,7 @@ import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRe
 @Builder
 public final class User {
 
-    private String email, phone, password, firstName, lastName, middleName, fullName;
+    private String email, phone, password, firstName, lastName, middleName, fullName, approveDate;
     private Long phoneAsLong;
 
     public static User fromComplexDto(ComplexRegistrationRequestDto complexDto) {
@@ -21,6 +21,7 @@ public final class User {
                 .lastName(complexDto.getLastName())
                 .middleName(complexDto.getMiddleName())
                 .fullName(complexDto.getFullName())
+                .approveDate(complexDto.getEndDate())
                 .build();
     }
 
