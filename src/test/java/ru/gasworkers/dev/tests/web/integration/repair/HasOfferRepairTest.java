@@ -58,50 +58,49 @@ public class HasOfferRepairTest extends BaseApiTest {
     @DisplayName("repair has offer")
     void payedRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
         CommonFieldsRepairDto commonFields = new CommonFieldsRepairDto();
-        commonFields.setTokenClient(loginApi.getTokenThrough(client));
+        step("api precondition", () -> {
+            commonFields.setTokenClient(loginApi.getTokenThrough(client));
+            step("клиент заказ на ремонт клиента в  состоянии published", () -> {
+                step("клиент карточка последнего заказа", () -> {
+                    LastOrderInfoResponseDto actualPublishedLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
+                            .statusCode(200)
+                            .extract().as(LastOrderInfoResponseDto.class);
+                    commonFields.setOrderId(actualPublishedLastOrderResponse.getData().getId());
+                    commonFields.setOrderNumber(actualPublishedLastOrderResponse.getData().getNumber());
+                    commonFields.setClientObjectId(actualPublishedLastOrderResponse.getData().getClientObject().getId());
+                    commonFields.setEquipments0Id(actualPublishedLastOrderResponse.getData().getEquipments().get(0).getId());
+                });
+            });
 
-        step("заказ на ремонт клиента в  состоянии published", () -> {
-            step("клиент карточка последнего заказа", () -> {
-                LastOrderInfoResponseDto actualPublishedLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
-                        .statusCode(200)
-                        .extract().as(LastOrderInfoResponseDto.class);
-                commonFields.setOrderId(actualPublishedLastOrderResponse.getData().getId());
-                commonFields.setOrderNumber(actualPublishedLastOrderResponse.getData().getNumber());
-                commonFields.setClientObjectId(actualPublishedLastOrderResponse.getData().getClientObject().getId());
-                commonFields.setEquipmentsId(actualPublishedLastOrderResponse.getData().getEquipments().get(0).getId());
+            step("диспетчер выбирает мастера ", () -> {
+                step("диспетчер авторизуется", () -> {
+                    commonFields.setTokenDispatcher(loginApi.getUserToken(LoginRequestDto.asUserEmail(sssrDispatcher1Email, sssrDispatcher1Password)));
+                });
+                step("диспетчер получает список доступных мастеров ", () -> {
+                    commonFields.setMasterId(companiesMastersApi.getAcceptedMasters(commonFields.getTokenDispatcher())
+                            .statusCode(200)
+                            .extract().as(CompaniesMastersListResponse.class).getData().get(0).getId());
+                });
+                step("диспетчер подтверждает выбор первого мастера ", () -> {
+                    selectMasterApi.selectMaster(commonFields.getOrderId(), commonFields.getMasterId(), commonFields.getTokenDispatcher())
+                            .statusCode(200);
+                });
+            });
+
+            step("клиент заказ на ремонт клиента в состоянии есть отклик СК", () -> {
+
+                step(" клиент карточка последнего заказа -  есть отклик СК", () -> {
+                    commonFields.setActiveOffersCount(lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
+                            .statusCode(200)
+                            .extract().as(LastOrderInfoResponseDto.class).getData().getClientObject().getActiveOffersCount());
+                });
+                step("клиент карточка заказа -   есть отклик СК", () -> {
+                    commonFields.setOfferIdHasOfferClient(ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
+                            .statusCode(200)
+                            .extract().as(OrdersInfoResponseDto.class).getData().getOffer().getId());
+                });
             });
         });
-
-        step("диспетчер выбирает мастера ", () -> {
-            step("диспетчер авторизуется", () -> {
-                commonFields.setTokenDispatcher(loginApi.getUserToken(LoginRequestDto.asUserEmail(sssrDispatcher1Email, sssrDispatcher1Password)));
-            });
-            step("диспетчер получает список доступных мастеров ", () -> {
-                commonFields.setMasterId(companiesMastersApi.getAcceptedMasters(commonFields.getTokenDispatcher())
-                        .statusCode(200)
-                        .extract().as(CompaniesMastersListResponse.class).getData().get(0).getId());
-            });
-            step("диспетчер подтверждает выбор первого мастера ", () -> {
-                selectMasterApi.selectMaster(commonFields.getOrderId(), commonFields.getMasterId(), commonFields.getTokenDispatcher())
-                        .statusCode(200);
-            });
-        });
-
-        step("заказ на ремонт клиента в состоянии есть отклик СК", () -> {
-            step(" клиент карточка последнего заказа - убедиться что есть отклик СК", () -> {
-                LastOrderInfoResponseDto actualHasOfferLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
-                        .statusCode(200)
-                        .extract().as(LastOrderInfoResponseDto.class);
-                commonFields.setActiveOffersCount(actualHasOfferLastOrderResponse.getData().getClientObject().getActiveOffersCount());
-            });
-            step("клиент карточка заказа - убедиться что есть отклик СК", () -> {
-                OrdersInfoResponseDto actualHasOfferOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
-                        .statusCode(200)
-                        .extract().as(OrdersInfoResponseDto.class);
-                commonFields.setOfferIdHasOffer(actualHasOfferOrderInfoResponse.getData().getOffer().getId());
-            });
-        });
-
 
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("авторизация Ролей ", () -> {

@@ -10,24 +10,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommonFieldsRepairDto {
-    private String tokenClient;
-    private String tokenDispatcher;
-    private String tokenMaster;
-    private Integer clientId;
-    private String clientEmail;
-    private Integer clientGuides0Id;
+    private String tokenClient, tokenDispatcher, paymentUrl, tokenMaster, orderNumber, clientEmail, clientRefererCode;
     private Long clientPhone;
-    private Integer clientNotificationsCount;
-    private Integer serviceId;
-    private Integer dispatcherId;
-    private Integer masterId;
-    private Integer orderId;
-    private Integer offerIdBeforePayment;
-    private Integer offerIdHasOffer;
-    private Integer possibleOfferId;
-    private Integer clientObjectId;
-    private String orderNumber;
-    private Integer equipmentsId;
-    private Integer activeOffersCount;
-    private Integer receiptId;
+    private Integer clientNotificationsCount, serviceId, dispatcherId, masterId, orderId, offerIdBeforePayment,
+            offerIdHasOfferClient, possibleOfferId, offerIdPublishedByIdDispatcher, clientObjectId, equipments0Id, activeOffersCount,
+            receiptId, clientId, clientGuides0Id, paymentId, objectId, clientRoles0PivotModelId;
 }

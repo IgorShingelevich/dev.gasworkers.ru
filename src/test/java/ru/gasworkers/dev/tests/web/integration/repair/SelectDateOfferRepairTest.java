@@ -11,7 +11,6 @@ import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
 import ru.gasworkers.dev.api.orders.info.dto.OrdersInfoResponseDto;
 import ru.gasworkers.dev.api.orders.selectMaster.SelectMasterApi;
-import ru.gasworkers.dev.api.orders.selectMaster.SelectMasterResponseDto;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
 import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentResponseDto;
 import ru.gasworkers.dev.api.orders.selectServiceCompany.SelectServiceCompanyApi;
@@ -22,8 +21,6 @@ import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoApi;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.api.users.companies.masters.CompaniesMastersApi;
 import ru.gasworkers.dev.api.users.companies.masters.dto.CompaniesMastersListResponse;
-import ru.gasworkers.dev.api.users.fspBankList.FspBankListApi;
-import ru.gasworkers.dev.api.users.fspBankList.FspBankListResponseDto;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithOrderType;
@@ -34,7 +31,6 @@ import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
-import ru.gasworkers.dev.tests.api.story.repair.pay.RepairCase;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -42,7 +38,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.codeborne.pdftest.assertj.Assertions.assertThat;
 import static io.qameta.allure.Allure.step;
 
 @Owner("Igor Shingelevich")
@@ -53,104 +48,67 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB)
 public class SelectDateOfferRepairTest extends BaseApiTest {
-
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
     private final SelectMasterApi selectMasterApi = new SelectMasterApi();
     private final SuggestedServicesApi suggestedServicesApi = new SuggestedServicesApi();
     private final SelectServiceCompanyApi selectServiceCompanyApi = new SelectServiceCompanyApi();
-    private final FspBankListApi fspBankListApi = new FspBankListApi();
     private final OrdersInfoApi ordersInfoApi = new OrdersInfoApi();
     private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
     private final String sssrDispatcher1Email = "test_gw_dispatcher_sssr1@rambler.ru";
     private final String sssrDispatcher1Password = "1234";
-    private final RepairCase repairCase = new RepairCase();
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
     //dispatcher
     @Browser(role = Role.DISPATCHER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     DispatcherPages dispatcherPages;
-    private Integer orderId;
-    private Integer clientObjectId;
-    private String orderNumber;
-    private Integer equipmentsId;
-    private Integer serviceId;
-    private Integer activeOffersCount;
-    private Integer receiptId;
-
-    private LastOrderInfoResponseDto actualPublishedLastOrderResponse;
-    private OrdersInfoResponseDto actualPublishedOrderInfoResponse;
-
-    private LastOrderInfoResponseDto actualHasOfferLastOrderResponse;
-    private OrdersInfoResponseDto actualHasOfferOrderInfoResponse;
-
-    private OrdersInfoResponseDto actualBeforePaymentOrderInfoResponse;
-    private LastOrderInfoResponseDto actualBeforePaymentLastOrderResponse;
-
-    private OrdersInfoResponseDto dateSelectingOrderInfoResponse;
-    private LastOrderInfoResponseDto dateSelectingLastOrderResponse;
 
     @Test
     @DisplayName("repair select date")
     void payedRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        String tokenClient = loginApi.getTokenThrough(client);
+        step("api precondition", () -> {
+            commonFields.setTokenClient(loginApi.getTokenThrough(client));
+            step("клиент заказ на ремонт клиента в  состоянии published", () -> {
+                step("клиент карточка последнего заказа", () -> {
+                    LastOrderInfoResponseDto actualPublishedLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
+                            .statusCode(200)
+                            .extract().as(LastOrderInfoResponseDto.class);
+                    commonFields.setOrderId(actualPublishedLastOrderResponse.getData().getId());
+                    commonFields.setOrderNumber(actualPublishedLastOrderResponse.getData().getNumber());
+                    commonFields.setClientObjectId(actualPublishedLastOrderResponse.getData().getClientObject().getId());
+                    commonFields.setEquipments0Id(actualPublishedLastOrderResponse.getData().getEquipments().get(0).getId());
+                });
+            });
 
-        step("заказ на ремонт клиента в  состоянии published", () -> {
-            step("клиент карточка последнего заказа - убедиться что есть последний заказ после фоновой регистрации", () -> {
-                actualPublishedLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(tokenClient)
-                        .statusCode(200)
-                        .extract().as(LastOrderInfoResponseDto.class);
-                orderId = actualPublishedLastOrderResponse.getData().getId();
-                orderNumber = actualPublishedLastOrderResponse.getData().getNumber();
-                clientObjectId = actualPublishedLastOrderResponse.getData().getClientObject().getId();
-                equipmentsId = actualPublishedLastOrderResponse.getData().getEquipments().get(0).getId();
-                LastOrderInfoResponseDto expectedResponse = repairCase.publishedLastOrderInfoBGRepair(orderId, orderNumber, clientObjectId, equipmentsId);
-                assertResponsePartialNoAt(expectedResponse, actualPublishedLastOrderResponse);
+            step("диспетчер выбирает мастера ", () -> {
+                step("диспетчер авторизуется", () -> {
+                    commonFields.setTokenDispatcher(loginApi.getUserToken(LoginRequestDto.asUserEmail(sssrDispatcher1Email, sssrDispatcher1Password)));
+                });
+                step("диспетчер получает список доступных мастеров ", () -> {
+                    commonFields.setMasterId(companiesMastersApi.getAcceptedMasters(commonFields.getTokenDispatcher())
+                            .statusCode(200)
+                            .extract().as(CompaniesMastersListResponse.class).getData().get(0).getId());
+                });
+                step("диспетчер подтверждает выбор первого мастера ", () -> {
+                    selectMasterApi.selectMaster(commonFields.getOrderId(), commonFields.getMasterId(), commonFields.getTokenDispatcher())
+                            .statusCode(200);
+                });
             });
-            step(" клиент карточка заказа - убедиться что после фоновой регистрации", () -> {
-                actualPublishedOrderInfoResponse = ordersInfoApi.ordersInfo(orderId, tokenClient)
-                        .statusCode(200)
-                        .extract().as(OrdersInfoResponseDto.class);
-                OrdersInfoResponseDto expectedResponse = repairCase.publishedOrderInfoBGRepair(orderId, orderNumber, clientObjectId, equipmentsId);
-                assertResponsePartialNoATExcludeFields(expectedResponse, actualPublishedOrderInfoResponse, List.of("data.offer"));
-            });
-        });
 
-        step("диспетчер выбирает мастера ", () -> {
-            String tokenDispatcher = step("диспетчер авторизуется", () -> {
-                return loginApi.getUserToken(LoginRequestDto.asUserEmail(sssrDispatcher1Email, sssrDispatcher1Password));
-            });
-            Integer masterId = step("диспетчер получает список доступных мастеров ", () -> {
-                return companiesMastersApi.getAcceptedMasters(tokenDispatcher)
-                        .statusCode(200)
-                        .extract().as(CompaniesMastersListResponse.class).getData().get(0).getId();
-            });
-            step("диспетчер выбирает первого мастера ", () -> {
-                return selectMasterApi.selectMaster(orderId, masterId, tokenDispatcher)
-                        .statusCode(200)
-                        .extract().as(SelectMasterResponseDto.class);
-            });
-        });
-
-        step("заказ на ремонт клиента в состоянии есть отклик СК", () -> {
-            step(" клиент карточка последнего заказа - убедиться что есть отклик СК", () -> {
-                actualHasOfferLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(tokenClient)
-                        .statusCode(200)
-                        .extract().as(LastOrderInfoResponseDto.class);
-                activeOffersCount = actualHasOfferLastOrderResponse.getData().getClientObject().getActiveOffersCount();
-                LastOrderInfoResponseDto expectedResponse = repairCase.hasOfferLastOrderInfoBGRepair(orderId, orderNumber, clientObjectId, equipmentsId, activeOffersCount);
-                assertResponsePartialNoAt(expectedResponse, actualHasOfferLastOrderResponse);
-            });
-            step("клиент карточка заказа - убедиться что есть отклик СК", () -> {
-                actualHasOfferOrderInfoResponse = ordersInfoApi.ordersInfo(orderId, tokenClient)
-                        .statusCode(200)
-                        .extract().as(OrdersInfoResponseDto.class);
-                Integer offerId = actualHasOfferOrderInfoResponse.getData().getOffer().getId();
-                OrdersInfoResponseDto expectedResponse = repairCase.hasOfferOrderInfoBGRepair(orderId, orderNumber, clientObjectId, equipmentsId, activeOffersCount, offerId);
-                assertResponsePartialNoAt(expectedResponse, actualHasOfferOrderInfoResponse);
+            step("клиент заказ на ремонт клиента в состоянии есть отклик СК", () -> {
+                step(" клиент карточка последнего заказа -  есть отклик СК", () -> {
+                    commonFields.setActiveOffersCount(lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
+                            .statusCode(200)
+                            .extract().as(LastOrderInfoResponseDto.class).getData().getClientObject().getActiveOffersCount());
+                });
+                step("клиент карточка заказа -   есть отклик СК", () -> {
+                    commonFields.setOfferIdHasOfferClient(ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
+                            .statusCode(200)
+                            .extract().as(OrdersInfoResponseDto.class).getData().getOffer().getId());
+                });
             });
             step("клиент получает список доступных предложений", () -> {
-                SuggestServicesResponseDto suggestedServiceResponse = suggestedServicesApi.suggestServices(orderId, tokenClient)
+                SuggestServicesResponseDto suggestedServiceResponse = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SuggestServicesResponseDto.class);
                 List<SuggestServicesResponseDto.Service> services = suggestedServiceResponse.getData().getServices();
@@ -161,67 +119,28 @@ public class SelectDateOfferRepairTest extends BaseApiTest {
                         filteredServices.add(c);
                     }
                 }
-                serviceId = filteredServices.get(0).getId();
+                commonFields.setServiceId(filteredServices.get(0).getId());
+                commonFields.setPossibleOfferId(filteredServices.get(0).getOfferId());
             });
             step("клиент выбирает предложение", () -> {
-                SelectServiceCompanyResponseDto actualResponse = selectServiceCompanyApi.selectServiceCompany(orderId, serviceId, tokenClient)
+                commonFields.setReceiptId(selectServiceCompanyApi.selectServiceCompany(commonFields.getOrderId(), commonFields.getServiceId(), commonFields.getTokenClient())
                         .statusCode(200)
-                        .extract().as(SelectServiceCompanyResponseDto.class);
-                receiptId = actualResponse.getData().getReceiptId();
-                SelectServiceCompanyResponseDto expectedResponse = SelectServiceCompanyResponseDto.successResponse(receiptId).build();
-                assertThat(actualResponse).isEqualTo(expectedResponse);
-            });
-            step("клиент получает список банков на оплату", () -> {
-                FspBankListResponseDto actualResponse = fspBankListApi.fspBankList(tokenClient)
-                        .statusCode(200)
-                        .extract().as(FspBankListResponseDto.class);
-                Integer availableBanks = actualResponse.getData().size();
-                System.out.println("availableBanks = " + availableBanks);
-                //check  amount of banks
+                        .extract().as(SelectServiceCompanyResponseDto.class).getData().getReceiptId());
             });
             step("клиент карточка заказа - убедиться что перед оплатой", () -> {
-                actualBeforePaymentOrderInfoResponse = ordersInfoApi.ordersInfo(orderId, tokenClient)
+                commonFields.setOfferIdBeforePayment(ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
-                        .extract().as(OrdersInfoResponseDto.class);
-                Integer offerId = actualBeforePaymentOrderInfoResponse.getData().getOffer().getId();
-                OrdersInfoResponseDto expectedResponse = repairCase.beforePaymentOrderInfoBGRepair(orderId, orderNumber, clientObjectId, equipmentsId, activeOffersCount, offerId, receiptId);
-                assertResponsePartialNoAt(expectedResponse, actualBeforePaymentOrderInfoResponse);
-            });
-            step(" клиент карточка последнего заказа - убедиться что перед оплатой", () -> {
-                actualBeforePaymentLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(tokenClient)
-                        .statusCode(200)
-                        .extract().as(LastOrderInfoResponseDto.class);
-                LastOrderInfoResponseDto expectedResponse = repairCase.beforePaymentLastOrderInfoBGRepair(orderId, orderNumber, clientObjectId, equipmentsId, activeOffersCount);
-                assertResponsePartialNoAt(expectedResponse, actualBeforePaymentLastOrderResponse);
+                        .extract().as(OrdersInfoResponseDto.class).getData().getOffer().getId());
             });
             step("клиент оплачивает  выезд мастера", () -> {
-                SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(orderId, tokenClient)
+                SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SelectPaymentResponseDto.class);
-                String url = actualResponse.getData().getPayUrl();
-                Integer paymentId = actualResponse.getData().getPaymentId();
-                SelectPaymentResponseDto expectedResponse = SelectPaymentResponseDto.successResponse(url, paymentId);
-                assertThat(actualResponse).isEqualTo(expectedResponse);
+                commonFields.setPaymentUrl(actualResponse.getData().getPayUrl());
+                commonFields.setPaymentId(actualResponse.getData().getPaymentId());
             });
         });
 
-        step("заказ на ремонт клиента в  состоянии Согласование даты и времени", () -> {
-            step("  клиент карточка заказа - убедиться что Согласование даты и времени", () -> {
-                dateSelectingOrderInfoResponse = ordersInfoApi.ordersInfo(orderId, tokenClient)
-                        .statusCode(200)
-                        .extract().as(OrdersInfoResponseDto.class);
-                Integer offerId = dateSelectingOrderInfoResponse.getData().getOffer().getId();
-                OrdersInfoResponseDto expectedResponse = repairCase.dateSelectingOrderInfoBGRepair(orderId, orderNumber, clientObjectId, equipmentsId, activeOffersCount, offerId, receiptId);
-                assertResponsePartialNoAt(expectedResponse, dateSelectingOrderInfoResponse);
-            });
-            step(" клиент карточка последнего заказа - убедиться что Согласование даты и времени", () -> {
-                dateSelectingLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(tokenClient)
-                        .statusCode(200)
-                        .extract().as(LastOrderInfoResponseDto.class);
-                LastOrderInfoResponseDto expectedResponse = repairCase.dateSelectingLastOrderInfoBGRepair(orderId, orderNumber, clientObjectId, equipmentsId, activeOffersCount);
-                assertResponsePartialNoAt(expectedResponse, dateSelectingLastOrderResponse);
-            });
-        });
 
         //    ------------------------------------------------- UI -----------------------------------------------------------
         step("авторизация Ролей ", () -> {

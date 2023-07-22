@@ -23,8 +23,8 @@ public class OrdersInfoResponseDto {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
+//    @JsonIgnoreProperties(ignoreUnknown = true, value = {"clientObject"})
     public static class Data {
-        //        private String address;
         private Integer id;
         private String number;
         private String status;

@@ -1,0 +1,697 @@
+{
+  "status": 0,
+  "message": "Информация о заказе",
+  "data": {
+    "id": 8085,
+    "number": "99/23/077/008085",
+    "master": null,
+    "client": {
+      "id": 5886,
+      "first_name": null,
+      "last_name": null,
+      "middle_name": null,
+      "phone": 70019661277,
+      "login": null,
+      "facetime": null,
+      "whatsapp": null,
+      "skype": null,
+      "telegram": null,
+      "email": "gwtest2207_1757_kapustin@client.001",
+      "email_verified_at": "2023-07-22T14:57:04.000000Z",
+      "phone_verified_at": "2023-07-22T14:57:04.000000Z",
+      "gender": null,
+      "specialization": null,
+      "skills": null,
+      "avatar_id": null,
+      "service_id": null,
+      "deleted_at": null,
+      "created_at": "2023-07-22T14:57:04.000000Z",
+      "updated_at": "2023-07-22T14:57:07.000000Z",
+      "requisites_filled": false,
+      "bank_details_filled": false,
+      "rate_filled": false,
+      "price_list_filled": false,
+      "distribution_company_agreement_filled": false,
+      "equipments_filled": false,
+      "contacts_filled": false,
+      "bank_id": null,
+      "account_number": null,
+      "distribution_company_id": null,
+      "country_id": null,
+      "post_address_id": null,
+      "on_verification": false,
+      "verified_at": null,
+      "verification_hash": null,
+      "first_accept": 0,
+      "company_id": null,
+      "employment_status": null,
+      "dispatcher_company_id": null,
+      "position": null,
+      "rating": "5.00",
+      "accept_terms": true,
+      "new_messages_count": 0,
+      "tz": null,
+      "push_notifications_enable": true,
+      "email_notifications_enable": true,
+      "sms_notifications_enable": true,
+      "second_accept": null,
+      "can_consulting": false,
+      "consultation_price": 0,
+      "push_id": null,
+      "ready_for_consultation": false,
+      "active_role": null,
+      "is_have_contract": false,
+      "is_ip": false,
+      "diploma_id": null,
+      "inn": null,
+      "living_address_id": null,
+      "work_distance": null,
+      "joined_at": null,
+      "registered_at": "2023-07-22T14:57:04.000000Z",
+      "sc_notified_about_my_reg": false,
+      "sc_notified_about_my_certificates": false,
+      "debt": null,
+      "count_review": 0,
+      "count_completed_orders": 0,
+      "count_not_read_notification": 1,
+      "fps_phone": null,
+      "fps_bank_id": null,
+      "selected_payment_method": null,
+      "referer_id": null,
+      "referer_code": "ad0c24bd-43b4-4c22-a418-cab92cd213bc",
+      "balance": 0,
+      "default_referral_commission": 0,
+      "additional_phone": null,
+      "roles": [
+        {
+          "id": 4,
+          "name": "Client",
+          "guard_name": "web",
+          "created_at": "2022-04-25T01:37:20.000000Z",
+          "updated_at": "2022-04-25T01:37:20.000000Z",
+          "is_admin": 0,
+          "pivot": {
+            "model_id": 5886,
+            "role_id": 4,
+            "model_type": "App\\Models\\User"
+          }
+        }
+      ],
+      "company": null,
+      "service": null,
+      "full_name": ""
+    },
+    "serviceCenter": null,
+    "contract_type": null,
+    "clientObject": {
+      "id": 3888,
+      "title": "Мой дом",
+      "active_offers_count": 0,
+      "photos": [
+
+      ],
+      "address": {
+        "id": 2121,
+        "full": "Москва, Московская улица",
+        "type": "street",
+        "full_with_zip": "Россия, Москва, Московская улица",
+        "zip": null,
+        "country": "Россия",
+        "country_code": "RU",
+        "region": "Москва",
+        "region_type": "Москва",
+        "region_with_type": null,
+        "area": null,
+        "area_type": null,
+        "area_with_type": null,
+        "city": null,
+        "city_type": null,
+        "city_with_type": null,
+        "settlement": null,
+        "settlement_type": null,
+        "settlement_with_type": null,
+        "street": null,
+        "street_type": null,
+        "street_with_type": null,
+        "house": null,
+        "house_type": null,
+        "house_with_type": null,
+        "block": null,
+        "flat": null,
+        "capital_marker": null,
+        "longitude": 37.416161,
+        "latitude": 55.671229
+      },
+      "equipments": [
+        {
+          "id": 3193,
+          "all_works": false,
+          "type": {
+            "id": 1,
+            "sort_order": 100,
+            "title": "Газовый котел",
+            "additional_parameter": "Мощность",
+            "note": null,
+            "power_required": true,
+            "included_in_price_list": true,
+            "is_show_hidden": false,
+            "ranges": [
+              {
+                "id": 1,
+                "from_value": 0,
+                "to_value": 20,
+                "domestic_price": null,
+                "foreign_price": null
+              },
+              {
+                "id": 2,
+                "from_value": 21,
+                "to_value": 50,
+                "domestic_price": null,
+                "foreign_price": null
+              },
+              {
+                "id": 3,
+                "from_value": 51,
+                "to_value": 100,
+                "domestic_price": null,
+                "foreign_price": null
+              },
+              {
+                "id": 4,
+                "from_value": 100,
+                "to_value": null,
+                "domestic_price": null,
+                "foreign_price": null
+              }
+            ]
+          },
+          "brand": {
+            "id": 25,
+            "title": "Viessmann",
+            "is_foreign": true,
+            "is_custom": false,
+            "is_show_hidden": false,
+            "logo": "https://gasworkers.storage.yandexcloud.net/fvWzPAxGfBi65hRzga9lHqe5OikTem1eouB2LP5b.png",
+            "created_at": 1640579586,
+            "types": [
+              {
+                "id": 1,
+                "sort_order": 100,
+                "title": "Газовый котел",
+                "additional_parameter": "Мощность",
+                "note": null,
+                "power_required": true,
+                "included_in_price_list": true,
+                "is_show_hidden": false,
+                "ranges": [
+                  {
+                    "id": 1,
+                    "from_value": 0,
+                    "to_value": 20,
+                    "domestic_price": null,
+                    "foreign_price": null
+                  },
+                  {
+                    "id": 2,
+                    "from_value": 21,
+                    "to_value": 50,
+                    "domestic_price": null,
+                    "foreign_price": null
+                  },
+                  {
+                    "id": 3,
+                    "from_value": 51,
+                    "to_value": 100,
+                    "domestic_price": null,
+                    "foreign_price": null
+                  },
+                  {
+                    "id": 4,
+                    "from_value": 100,
+                    "to_value": null,
+                    "domestic_price": null,
+                    "foreign_price": null
+                  }
+                ]
+              }
+            ]
+          },
+          "title": null,
+          "computed_title": "Газовый котел Viessmann Vitodens 100-W WB1C104 35kW",
+          "power": 35,
+          "photos": [
+
+          ],
+          "last_photo": null,
+          "videos": [
+
+          ],
+          "model": {
+            "id": 2199,
+            "title": "Vitodens 100-W WB1C104 35kW",
+            "power": "35",
+            "brand": {
+              "id": 25,
+              "title": "Viessmann",
+              "is_foreign": true,
+              "is_custom": false,
+              "is_show_hidden": false,
+              "logo": "https://gasworkers.storage.yandexcloud.net/fvWzPAxGfBi65hRzga9lHqe5OikTem1eouB2LP5b.png",
+              "created_at": 1640579586,
+              "types": [
+                {
+                  "id": 1,
+                  "sort_order": 100,
+                  "title": "Газовый котел",
+                  "additional_parameter": "Мощность",
+                  "note": null,
+                  "power_required": true,
+                  "included_in_price_list": true,
+                  "is_show_hidden": false,
+                  "ranges": [
+                    {
+                      "id": 1,
+                      "from_value": 0,
+                      "to_value": 20,
+                      "domestic_price": null,
+                      "foreign_price": null
+                    },
+                    {
+                      "id": 2,
+                      "from_value": 21,
+                      "to_value": 50,
+                      "domestic_price": null,
+                      "foreign_price": null
+                    },
+                    {
+                      "id": 3,
+                      "from_value": 51,
+                      "to_value": 100,
+                      "domestic_price": null,
+                      "foreign_price": null
+                    },
+                    {
+                      "id": 4,
+                      "from_value": 100,
+                      "to_value": null,
+                      "domestic_price": null,
+                      "foreign_price": null
+                    }
+                  ]
+                }
+              ]
+            },
+            "type": {
+              "id": 1,
+              "sort_order": 100,
+              "title": "Газовый котел",
+              "additional_parameter": "Мощность",
+              "note": null,
+              "power_required": true,
+              "included_in_price_list": true,
+              "is_show_hidden": false,
+              "ranges": [
+                {
+                  "id": 1,
+                  "from_value": 0,
+                  "to_value": 20,
+                  "domestic_price": null,
+                  "foreign_price": null
+                },
+                {
+                  "id": 2,
+                  "from_value": 21,
+                  "to_value": 50,
+                  "domestic_price": null,
+                  "foreign_price": null
+                },
+                {
+                  "id": 3,
+                  "from_value": 51,
+                  "to_value": 100,
+                  "domestic_price": null,
+                  "foreign_price": null
+                },
+                {
+                  "id": 4,
+                  "from_value": 100,
+                  "to_value": null,
+                  "domestic_price": null,
+                  "foreign_price": null
+                }
+              ]
+            },
+            "is_custom": false
+          },
+          "video_exists": false
+        }
+      ],
+      "branch": null,
+      "company": null,
+      "account_number": null,
+      "created_at": 1690037824,
+      "video_exists": false
+    },
+    "equipments": [
+      {
+        "id": 3193,
+        "all_works": false,
+        "type": {
+          "id": 1,
+          "sort_order": 100,
+          "title": "Газовый котел",
+          "additional_parameter": "Мощность",
+          "note": null,
+          "power_required": true,
+          "included_in_price_list": true,
+          "is_show_hidden": false,
+          "ranges": [
+            {
+              "id": 1,
+              "from_value": 0,
+              "to_value": 20,
+              "domestic_price": null,
+              "foreign_price": null
+            },
+            {
+              "id": 2,
+              "from_value": 21,
+              "to_value": 50,
+              "domestic_price": null,
+              "foreign_price": null
+            },
+            {
+              "id": 3,
+              "from_value": 51,
+              "to_value": 100,
+              "domestic_price": null,
+              "foreign_price": null
+            },
+            {
+              "id": 4,
+              "from_value": 100,
+              "to_value": null,
+              "domestic_price": null,
+              "foreign_price": null
+            }
+          ]
+        },
+        "brand": {
+          "id": 25,
+          "title": "Viessmann",
+          "is_foreign": true,
+          "is_custom": false,
+          "is_show_hidden": false,
+          "logo": "https://gasworkers.storage.yandexcloud.net/fvWzPAxGfBi65hRzga9lHqe5OikTem1eouB2LP5b.png",
+          "created_at": 1640579586,
+          "types": [
+            {
+              "id": 1,
+              "sort_order": 100,
+              "title": "Газовый котел",
+              "additional_parameter": "Мощность",
+              "note": null,
+              "power_required": true,
+              "included_in_price_list": true,
+              "is_show_hidden": false,
+              "ranges": [
+                {
+                  "id": 1,
+                  "from_value": 0,
+                  "to_value": 20,
+                  "domestic_price": null,
+                  "foreign_price": null
+                },
+                {
+                  "id": 2,
+                  "from_value": 21,
+                  "to_value": 50,
+                  "domestic_price": null,
+                  "foreign_price": null
+                },
+                {
+                  "id": 3,
+                  "from_value": 51,
+                  "to_value": 100,
+                  "domestic_price": null,
+                  "foreign_price": null
+                },
+                {
+                  "id": 4,
+                  "from_value": 100,
+                  "to_value": null,
+                  "domestic_price": null,
+                  "foreign_price": null
+                }
+              ]
+            }
+          ]
+        },
+        "title": null,
+        "computed_title": "Газовый котел Viessmann Vitodens 100-W WB1C104 35kW",
+        "power": 35,
+        "photos": [
+
+        ],
+        "last_photo": null,
+        "videos": [
+
+        ],
+        "model": {
+          "id": 2199,
+          "title": "Vitodens 100-W WB1C104 35kW",
+          "power": "35",
+          "brand": {
+            "id": 25,
+            "title": "Viessmann",
+            "is_foreign": true,
+            "is_custom": false,
+            "is_show_hidden": false,
+            "logo": "https://gasworkers.storage.yandexcloud.net/fvWzPAxGfBi65hRzga9lHqe5OikTem1eouB2LP5b.png",
+            "created_at": 1640579586,
+            "types": [
+              {
+                "id": 1,
+                "sort_order": 100,
+                "title": "Газовый котел",
+                "additional_parameter": "Мощность",
+                "note": null,
+                "power_required": true,
+                "included_in_price_list": true,
+                "is_show_hidden": false,
+                "ranges": [
+                  {
+                    "id": 1,
+                    "from_value": 0,
+                    "to_value": 20,
+                    "domestic_price": null,
+                    "foreign_price": null
+                  },
+                  {
+                    "id": 2,
+                    "from_value": 21,
+                    "to_value": 50,
+                    "domestic_price": null,
+                    "foreign_price": null
+                  },
+                  {
+                    "id": 3,
+                    "from_value": 51,
+                    "to_value": 100,
+                    "domestic_price": null,
+                    "foreign_price": null
+                  },
+                  {
+                    "id": 4,
+                    "from_value": 100,
+                    "to_value": null,
+                    "domestic_price": null,
+                    "foreign_price": null
+                  }
+                ]
+              }
+            ]
+          },
+          "type": {
+            "id": 1,
+            "sort_order": 100,
+            "title": "Газовый котел",
+            "additional_parameter": "Мощность",
+            "note": null,
+            "power_required": true,
+            "included_in_price_list": true,
+            "is_show_hidden": false,
+            "ranges": [
+              {
+                "id": 1,
+                "from_value": 0,
+                "to_value": 20,
+                "domestic_price": null,
+                "foreign_price": null
+              },
+              {
+                "id": 2,
+                "from_value": 21,
+                "to_value": 50,
+                "domestic_price": null,
+                "foreign_price": null
+              },
+              {
+                "id": 3,
+                "from_value": 51,
+                "to_value": 100,
+                "domestic_price": null,
+                "foreign_price": null
+              },
+              {
+                "id": 4,
+                "from_value": 100,
+                "to_value": null,
+                "domestic_price": null,
+                "foreign_price": null
+              }
+            ]
+          },
+          "is_custom": false
+        },
+        "video_exists": false
+      }
+    ],
+    "address": "Москва, Московская улица",
+    "phone": 70019661277,
+    "status": "published",
+    "payment_status": false,
+    "type": "repair",
+    "desired_date_interval_started_at": "Sat, 22 Jul 2023 00:00:00 +0300",
+    "desired_date_interval_ended_at": "Tue, 25 Jul 2023 00:00:00 +0300",
+    "desired_time_started": "Sat, 22 Jul 2023 06:00:00 +0300",
+    "desired_time_ended": "Sat, 22 Jul 2023 18:00:00 +0300",
+    "selected_date": null,
+    "description": "error description",
+    "photos": [
+
+    ],
+    "videos": [
+
+    ],
+    "created_at": 1690037824,
+    "master_recommendation": null,
+    "all_works": false,
+    "master_left_review": false,
+    "client_left_review": false,
+    "insurance_contract": null,
+    "insurance_policy": null,
+    "maintenance_act": null,
+    "creation_status": "select-service",
+    "offers_count": null,
+    "offer": {
+      "master_equipment": [
+
+      ],
+      "start_price": null,
+      "price": 11.99,
+      "price_wi": 11.99,
+      "price_real": 11.99,
+      "with_consultation": false,
+      "consultation_passed": false,
+      "client_closed": false,
+      "wait_from": null,
+      "wait_notification": 0,
+      "master_selected": false,
+      "master_started": false,
+      "status": "pending"
+    },
+    "receipts": [
+
+    ],
+    "repair_stage": null,
+    "need_sign": false,
+    "sign_type": null,
+    "need_master_sign": false,
+    "master_sign_type": null,
+    "distributionCompany": {
+      "id": null,
+      "title": null,
+      "url": null
+    },
+    "check_list": [
+
+    ],
+    "dispatcher": null,
+    "conference_url": null,
+    "online": false,
+    "masterVideos": [
+
+    ],
+    "consultation_canceled": false,
+    "not_want_to_sign": false,
+    "not_want_to_pay": false,
+    "not_want_to_sign_by_client": false,
+    "active_dispatcher": false,
+    "offers": [
+      {
+        "id": 873830,
+        "price": 11.99,
+        "master_id": null,
+        "company_id": 39
+      }
+    ],
+    "additional_status": null,
+    "history": [
+      {
+        "id": 5,
+        "action": null,
+        "src_title": "tender_title",
+        "title": "tender_title_dispatcher",
+        "description": "tender_description_dispatcher",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false,
+        "sort_index": 5
+      },
+      {
+        "id": 10,
+        "action": null,
+        "src_title": "approving_order_master_title",
+        "title": "approving_order_master_title_dispatcher",
+        "description": "approving_order_master_description_dispatcher",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false,
+        "sort_index": 6
+      },
+      {
+        "id": 7,
+        "action": "select-payment",
+        "src_title": "initial_departure_payment_title",
+        "title": "initial_departure_payment_title_dispatcher",
+        "description": "initial_departure_payment_description_dispatcher",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false,
+        "sort_index": 7
+      },
+      {
+        "id": 9,
+        "action": null,
+        "src_title": "approving_order_time_title",
+        "title": "approving_order_time_title_dispatcher",
+        "description": "approving_order_time_description_dispatcher",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false,
+        "sort_index": 8
+      }
+    ],
+    "from_maintenance": false,
+    "is_insurance_case": false,
+    "repair_order_id": null,
+    "maintenance_order_id": null,
+    "possible_offer_id": null
+  }
+}
