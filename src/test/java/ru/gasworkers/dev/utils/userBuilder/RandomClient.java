@@ -34,6 +34,7 @@ public class RandomClient {
     private String objectAddress;
     private String startDate;
     private String approveDate;
+    private String selectedDate;
     private String endDate;
     private File avatarRandomPhotoFile;
     private File equipmentRandomPhotoFile;
@@ -84,14 +85,18 @@ public class RandomClient {
         this.startDate = currentDateTime
                 .atOffset(ZoneOffset.UTC)
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
-        LocalDateTime endDate = currentDateTime.plusDays(3);
-        endDate = endDate.withMinute(0).withSecond(0).withNano(0);
-        this.approveDate = endDate
+        LocalDateTime workDate = currentDateTime.plusDays(3);
+        workDate = workDate.withMinute(0).withSecond(0).withNano(0);
+        this.approveDate = workDate
                 .atOffset(ZoneOffset.UTC)
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        this.endDate = endDate
+        this.selectedDate = workDate
+                .atOffset(ZoneOffset.of("+03:00"))
+                .format(DateTimeFormatter.ofPattern("E, dd MMM yyyy HH:mm:ss Z", new Locale("en")));
+        this.endDate = workDate
                 .atOffset(ZoneOffset.UTC)
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+
 
     }
 }

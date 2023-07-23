@@ -32,6 +32,7 @@ public class OrdersInfoResponseDto {
         @JsonProperty("service_center")
         private ServiceCenter serviceCenter;
         private Object master;
+        private Object client;
         private Receipt receipt;
         private ArrayList<Receipts> receipts;
         private ArrayList<Object> codes;

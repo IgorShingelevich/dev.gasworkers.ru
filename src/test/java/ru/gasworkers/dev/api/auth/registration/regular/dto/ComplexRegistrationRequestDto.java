@@ -20,10 +20,8 @@ import java.util.List;
 @AllArgsConstructor
 @Accessors(chain = true)
 public class ComplexRegistrationRequestDto {
-    private String userType, password, email, phone, gender,
-            firstName, lastName, middleName, employedStatus,
-            fullName,
-            approveDate;
+    private String userType, password, email, phone, gender, firstName, lastName, middleName, fullName,
+            employedStatus, approveDate, selectedDate;
     private Integer code, serviceId, refererCode, refererType;
     private Boolean isPhoneSend, isHaveContract, isIp;
 

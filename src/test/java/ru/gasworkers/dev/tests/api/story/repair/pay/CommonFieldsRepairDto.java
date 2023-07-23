@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommonFieldsRepairDto {
-    private String tokenClient, tokenDispatcher, paymentUrl, tokenMaster, orderNumber, clientEmail, clientRefererCode, approveDate;
+    private String tokenClient, tokenDispatcher, paymentUrl, tokenMaster, orderNumber, clientEmail, clientRefererCode, approveDate, selectedDate;
     private Long clientPhone;
     private Integer clientNotificationsCount, serviceId, dispatcherId, masterId, orderId, offerIdBeforePayment,
             offerIdHasOfferClient, possibleOfferId, offerIdPublishedByIdDispatcher, clientObjectId, equipments0Id, activeOffersCount,
