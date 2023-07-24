@@ -14,5 +14,5 @@ public class CommonFieldsRepairDto {
     private Long clientPhone;
     private Integer clientNotificationsCount, serviceId, dispatcherId, masterId, orderId, offerIdBeforePayment,
             offerIdHasOfferClient, possibleOfferId, offerIdPublishedByIdDispatcher, clientObjectId, equipments0Id, activeOffersCount,
-            receiptId, clientId, clientGuides0Id, paymentId, objectId, clientRoles0PivotModelId;
+            receipt0Id, receipts1Id, receipts2Id, clientId, clientGuides0Id, paymentId, objectId, clientRoles0PivotModelId, masters0CompletedOrdersCount;
 }

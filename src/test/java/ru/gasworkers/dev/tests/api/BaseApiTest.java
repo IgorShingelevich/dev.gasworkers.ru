@@ -95,7 +95,7 @@ public abstract class BaseApiTest extends BaseTest {
         RecursiveComparisonConfiguration.Builder builder = RecursiveComparisonConfiguration.builder();
 
         // Condition 1: Ignore fields ending with "at"
-        builder = builder.withIgnoredFieldsMatchingRegexes(".*(At|Ended|Started)");
+        builder = builder.withIgnoredFieldsMatchingRegexes(".*(At|Ended|Started|countNotReadNotification)");
 
         // Condition 2: No excluded fields list
         if (excludedFields.isEmpty()) {

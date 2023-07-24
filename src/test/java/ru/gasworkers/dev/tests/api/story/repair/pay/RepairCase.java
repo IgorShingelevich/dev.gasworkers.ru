@@ -2,6 +2,8 @@ package ru.gasworkers.dev.tests.api.story.repair.pay;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.gasworkers.dev.api.auth.user.UserResponseDto;
+import ru.gasworkers.dev.api.orders.actions.dto.OrdersActionsRequestDto;
+import ru.gasworkers.dev.api.orders.actions.dto.OrdersSaveActionsRequestDto;
 import ru.gasworkers.dev.api.orders.approveDate.OrdersApproveDateRequestDto;
 import ru.gasworkers.dev.api.orders.checkList.SaveCheckListRequestDto;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
@@ -99,6 +101,7 @@ public class RepairCase {
         expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
         expectedTemplateResponse.getData().getOffers().get(0).setId(commonFields.getOfferIdPublishedByIdDispatcher());
         expectedTemplateResponse.getData().setPhone(commonFields.getClientPhone());
+        expectedTemplateResponse.getData().getMasters().get(0).setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
         return expectedTemplateResponse;
     }
 
@@ -122,9 +125,9 @@ public class RepairCase {
         expectedTemplateResponse.getData().getOffer().setId(commonFields.getOfferIdBeforePayment());
         expectedTemplateResponse.getData().setPossibleOfferId(commonFields.getPossibleOfferId());
         expectedTemplateResponse.getData().getOffer().setOrderId(commonFields.getOrderId());
-        expectedTemplateResponse.getData().getReceipt().setId(commonFields.getReceiptId());
+        expectedTemplateResponse.getData().getReceipt().setId(commonFields.getReceipt0Id());
         expectedTemplateResponse.getData().getReceipt().setOrderId(commonFields.getOrderId());
-        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceiptId());
+        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceipt0Id());
         return expectedTemplateResponse;
     }
 
@@ -138,7 +141,7 @@ public class RepairCase {
         expectedTemplateResponse.getData().getOffer().setId(commonFields.getOfferIdBeforePayment());
         expectedTemplateResponse.getData().getOffer().setOrderId(commonFields.getOrderId());
         expectedTemplateResponse.getData().setPossibleOfferId(commonFields.getPossibleOfferId());
-        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceiptId());
+        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceipt0Id());
         return expectedTemplateResponse;
     }
 
@@ -169,7 +172,10 @@ public class RepairCase {
         expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
         expectedTemplateResponse.getData().getOffers().get(0).setId(commonFields.getOfferIdPublishedByIdDispatcher());
         expectedTemplateResponse.getData().setPhone(commonFields.getClientPhone());
-        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceiptId());
+        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceipt0Id());
+        expectedTemplateResponse.getData().getMaster().setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getMasters().get(0).setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getServiceCenter().getMasters().get(0).setCountCompletedOrders(commonFields.getMasters0CompletedOrdersCount());
         return expectedTemplateResponse;
     }
 
@@ -196,8 +202,11 @@ public class RepairCase {
         expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
         expectedTemplateResponse.getData().getOffers().get(0).setId(commonFields.getOfferIdPublishedByIdDispatcher());
         expectedTemplateResponse.getData().setPhone(commonFields.getClientPhone());
-        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceiptId());
+        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceipt0Id());
         expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        expectedTemplateResponse.getData().getMaster().setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getMasters().get(0).setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getServiceCenter().getMasters().get(0).setCountCompletedOrders(commonFields.getMasters0CompletedOrdersCount());
         return expectedTemplateResponse;
     }
 
@@ -230,8 +239,11 @@ public class RepairCase {
         expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
         expectedTemplateResponse.getData().getOffers().get(0).setId(commonFields.getOfferIdPublishedByIdDispatcher());
         expectedTemplateResponse.getData().setPhone(commonFields.getClientPhone());
-        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceiptId());
+        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceipt0Id());
         expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        expectedTemplateResponse.getData().getMaster().setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getMasters().get(0).setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getServiceCenter().getMasters().get(0).setCountCompletedOrders(commonFields.getMasters0CompletedOrdersCount());
         return expectedTemplateResponse;
     }
 
@@ -250,8 +262,11 @@ public class RepairCase {
         expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
         expectedTemplateResponse.getData().getOffers().get(0).setId(commonFields.getOfferIdPublishedByIdDispatcher());
         expectedTemplateResponse.getData().setPhone(commonFields.getClientPhone());
-        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceiptId());
+        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceipt0Id());
         expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        expectedTemplateResponse.getData().getMaster().setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getMasters().get(0).setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getServiceCenter().getMasters().get(0).setCountCompletedOrders(commonFields.getMasters0CompletedOrdersCount());
         return expectedTemplateResponse;
     }
 
@@ -276,8 +291,11 @@ public class RepairCase {
         expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
         expectedTemplateResponse.getData().getOffers().get(0).setId(commonFields.getOfferIdPublishedByIdDispatcher());
         expectedTemplateResponse.getData().setPhone(commonFields.getClientPhone());
-        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceiptId());
+        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceipt0Id());
         expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        expectedTemplateResponse.getData().getMaster().setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getMasters().get(0).setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getServiceCenter().getMasters().get(0).setCountCompletedOrders(commonFields.getMasters0CompletedOrdersCount());
         return expectedTemplateResponse;
     }
 
@@ -302,6 +320,150 @@ public class RepairCase {
 
     public OrdersSaveMaterialValuesRequestDto saveMaterialValuesRequest(CommonFieldsRepairDto commonFields) {
         return OrdersSaveMaterialValuesRequestDto.oneMaterialRequest(commonFields.getOrderId());
+    }
+
+    public OrdersIdResponseDto materialInvoiceIssuedOrderIdAsMasterBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
+        OrdersIdResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/materialInvoiceIssued/materialInvoiceIssuedOrderIdAsMaster.json"), OrdersIdResponseDto.class);
+        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
+        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
+        expectedTemplateResponse.getData().setPossibleOfferId(commonFields.getPossibleOfferId());
+        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
+        expectedTemplateResponse.getData().getClient().setEmail(commonFields.getClientEmail());
+        expectedTemplateResponse.getData().getClient().setId(commonFields.getClientId());
+        expectedTemplateResponse.getData().getClient().setPhone(commonFields.getClientPhone());
+        expectedTemplateResponse.getData().getClient().setRefererCode(commonFields.getClientRefererCode());
+        expectedTemplateResponse.getData().getClient().getRoles().get(0).getPivot().setModelId(commonFields.getClientRoles0PivotModelId());
+        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        expectedTemplateResponse.getData().getOffers().get(0).setId(commonFields.getOfferIdPublishedByIdDispatcher());
+        expectedTemplateResponse.getData().setPhone(commonFields.getClientPhone());
+        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceipt0Id());
+        expectedTemplateResponse.getData().getReceipts().get(1).setId(commonFields.getReceipts1Id());
+        expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        expectedTemplateResponse.getData().getMaster().setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getMasters().get(0).setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getServiceCenter().getMasters().get(0).setCountCompletedOrders(commonFields.getMasters0CompletedOrdersCount());
+        return expectedTemplateResponse;
+    }
+
+    public LastOrderInfoResponseDto materialInvoiceIssuedLastOrderInfoBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
+        LastOrderInfoResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/materialInvoiceIssued/materialInvoiceIssuedLastOrder.json"), LastOrderInfoResponseDto.class);
+        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
+        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
+        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
+        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        expectedTemplateResponse.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
+        expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        return expectedTemplateResponse;
+    }
+
+    public OrdersActionsRequestDto actionsRequest(CommonFieldsRepairDto commonFields) {
+        return OrdersActionsRequestDto.builder()
+                .orderId(commonFields.getOrderId())
+                .build();
+    }
+
+    public LastOrderInfoResponseDto materialInvoicePaidLastOrderInfoBUGRepair(CommonFieldsRepairDto commonFields) throws IOException {
+        LastOrderInfoResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/materialInvoicePaid/materialInvoicePaidLastOrder.json"), LastOrderInfoResponseDto.class);
+        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
+        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
+        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
+        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        expectedTemplateResponse.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
+        expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        return expectedTemplateResponse;
+    }
+
+    public OrdersIdResponseDto materialInvoicePaidOrderIdAsMasterBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
+        OrdersIdResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/materialInvoicePaid/materialInvoicePaidOrderIdAsMaster.json"), OrdersIdResponseDto.class);
+        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
+        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
+        expectedTemplateResponse.getData().setPossibleOfferId(commonFields.getPossibleOfferId());
+        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
+        expectedTemplateResponse.getData().getClient().setEmail(commonFields.getClientEmail());
+        expectedTemplateResponse.getData().getClient().setId(commonFields.getClientId());
+        expectedTemplateResponse.getData().getClient().setPhone(commonFields.getClientPhone());
+        expectedTemplateResponse.getData().getClient().setRefererCode(commonFields.getClientRefererCode());
+        expectedTemplateResponse.getData().getClient().getRoles().get(0).getPivot().setModelId(commonFields.getClientRoles0PivotModelId());
+        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        expectedTemplateResponse.getData().getOffers().get(0).setId(commonFields.getOfferIdPublishedByIdDispatcher());
+        expectedTemplateResponse.getData().setPhone(commonFields.getClientPhone());
+        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceipt0Id());
+        expectedTemplateResponse.getData().getReceipts().get(1).setId(commonFields.getReceipts1Id());
+        expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        expectedTemplateResponse.getData().getMaster().setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getMasters().get(0).setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getServiceCenter().getMasters().get(0).setCountCompletedOrders(commonFields.getMasters0CompletedOrdersCount());
+        return expectedTemplateResponse;
+    }
+
+    public OrdersSaveActionsRequestDto saveActionsRequest(CommonFieldsRepairDto commonFields) {
+        return OrdersSaveActionsRequestDto.oneActionRequest(commonFields.getOrderId());
+    }
+
+    public OrdersIdResponseDto actionsInvoiceIssuedOrderIdAsMasterBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
+        OrdersIdResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/actionsInvoiceIssued/actionsInvoiceIssuedOrderIdAsMaster.json"), OrdersIdResponseDto.class);
+        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
+        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
+        expectedTemplateResponse.getData().setPossibleOfferId(commonFields.getPossibleOfferId());
+        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
+        expectedTemplateResponse.getData().getClient().setEmail(commonFields.getClientEmail());
+        expectedTemplateResponse.getData().getClient().setId(commonFields.getClientId());
+        expectedTemplateResponse.getData().getClient().setPhone(commonFields.getClientPhone());
+        expectedTemplateResponse.getData().getClient().setRefererCode(commonFields.getClientRefererCode());
+        expectedTemplateResponse.getData().getClient().getRoles().get(0).getPivot().setModelId(commonFields.getClientRoles0PivotModelId());
+        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        expectedTemplateResponse.getData().getOffers().get(0).setId(commonFields.getOfferIdPublishedByIdDispatcher());
+        expectedTemplateResponse.getData().setPhone(commonFields.getClientPhone());
+        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceipt0Id());
+        expectedTemplateResponse.getData().getReceipts().get(1).setId(commonFields.getReceipts1Id());
+        expectedTemplateResponse.getData().getReceipts().get(2).setId(commonFields.getReceipts2Id());
+        expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        expectedTemplateResponse.getData().getMaster().setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getMasters().get(0).setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getServiceCenter().getMasters().get(0).setCountCompletedOrders(commonFields.getMasters0CompletedOrdersCount());
+        return expectedTemplateResponse;
+    }
+
+    public LastOrderInfoResponseDto actionsInvoiceIssuedLastOrderInfoBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
+        LastOrderInfoResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/actionsInvoiceIssued/actionsInvoiceIssuedLastOrder.json"), LastOrderInfoResponseDto.class);
+        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
+        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
+        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
+        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        expectedTemplateResponse.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
+        expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        return expectedTemplateResponse;
+    }
+
+    public OrdersIdResponseDto actionsInvoiceIssuedOrderIdAsClientBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
+        OrdersIdResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/actionsInvoiceIssued/actionsInvoiceIssuedOrderIdAsClient.json"), OrdersIdResponseDto.class);
+        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
+        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
+        expectedTemplateResponse.getData().setPossibleOfferId(commonFields.getPossibleOfferId());
+        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
+        expectedTemplateResponse.getData().getClient().setEmail(commonFields.getClientEmail());
+        expectedTemplateResponse.getData().getClient().setId(commonFields.getClientId());
+        expectedTemplateResponse.getData().getClient().setPhone(commonFields.getClientPhone());
+        expectedTemplateResponse.getData().getClient().setRefererCode(commonFields.getClientRefererCode());
+        expectedTemplateResponse.getData().getClient().getRoles().get(0).getPivot().setModelId(commonFields.getClientRoles0PivotModelId());
+        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        expectedTemplateResponse.getData().getOffers().get(0).setId(commonFields.getOfferIdPublishedByIdDispatcher());
+        expectedTemplateResponse.getData().setPhone(commonFields.getClientPhone());
+        expectedTemplateResponse.getData().getReceipts().get(0).setId(commonFields.getReceipt0Id());
+        expectedTemplateResponse.getData().getReceipts().get(1).setId(commonFields.getReceipts1Id());
+        expectedTemplateResponse.getData().getReceipts().get(2).setId(commonFields.getReceipts2Id());
+        expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        expectedTemplateResponse.getData().getMaster().setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getMasters().get(0).setCompletedOrdersCount(commonFields.getMasters0CompletedOrdersCount());
+        expectedTemplateResponse.getData().getServiceCenter().getMasters().get(0).setCountCompletedOrders(commonFields.getMasters0CompletedOrdersCount());
+        return expectedTemplateResponse;
     }
 }
 

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -116,6 +117,32 @@ public class OrdersIdResponseDto {
         public Integer maintenanceOrderId;
         @JsonProperty("possible_offer_id")
         public Integer possibleOfferId;
+        @JsonProperty("material_values")
+        public List<MaterialValues> materialValues;
+        public List<Actions> actions;
+
+        @lombok.Data
+        @Builder
+        @AllArgsConstructor
+        @NoArgsConstructor
+        public static class MaterialValues {
+            public String title;
+            @JsonProperty("part_number")
+            public String partNumber;
+            public Integer qty;
+            public Double price;
+            public String manufacturer;
+        }
+
+        @lombok.Data
+        @Builder
+        @AllArgsConstructor
+        @NoArgsConstructor
+        public static class Actions {
+            public String description;
+            public Integer qty;
+            public Double price;
+        }
 
         @lombok.Data
         @Builder
@@ -168,6 +195,7 @@ public class OrdersIdResponseDto {
             public Double longitude;
             public Double latitude;
         }
+
 
         @lombok.Data
         @Builder

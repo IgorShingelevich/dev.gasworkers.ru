@@ -123,7 +123,7 @@ public class SelectDateOfferRepairTest extends BaseApiTest {
                 commonFields.setPossibleOfferId(filteredServices.get(0).getOfferId());
             });
             step("клиент выбирает предложение", () -> {
-                commonFields.setReceiptId(selectServiceCompanyApi.selectServiceCompany(commonFields.getOrderId(), commonFields.getServiceId(), commonFields.getTokenClient())
+                commonFields.setReceipt0Id(selectServiceCompanyApi.selectServiceCompany(commonFields.getOrderId(), commonFields.getServiceId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SelectServiceCompanyResponseDto.class).getData().getReceiptId());
             });

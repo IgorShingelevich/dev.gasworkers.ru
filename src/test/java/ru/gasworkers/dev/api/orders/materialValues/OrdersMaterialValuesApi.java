@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 public class OrdersMaterialValuesApi extends BaseApi {
     //https://api.dev.gasworkers.ru/docs#zakazy-POSTapi-v1-orders-material-values
     @Step("API: Создание таблицы материалов к ремонту")
-    public ValidatableResponse createMaterialValues(OrdersMaterialValuesRequestDto inputDto, String token) {
+    public ValidatableResponse materialValuesTable(OrdersMaterialValuesRequestDto inputDto, String token) {
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)
                 .body(inputDto)

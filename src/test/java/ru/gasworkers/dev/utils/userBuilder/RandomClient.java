@@ -87,9 +87,9 @@ public class RandomClient {
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
         LocalDateTime workDate = currentDateTime.plusDays(3);
         workDate = workDate.withMinute(0).withSecond(0).withNano(0);
-        this.approveDate = workDate
-                .atOffset(ZoneOffset.UTC)
-                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+       this.approveDate = workDate
+               .atOffset(ZoneOffset.UTC)
+               .format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
         this.selectedDate = workDate
                 .atOffset(ZoneOffset.of("+03:00"))
                 .format(DateTimeFormatter.ofPattern("E, dd MMM yyyy HH:mm:ss Z", new Locale("en")));
