@@ -2,8 +2,8 @@
   "status": 0,
   "message": "Информация о заказе",
   "data": {
-    "id": 8095,
-    "number": "99/23/077/008095",
+    "id": 8252,
+    "number": "99/23/077/008252",
     "master": {
       "id": 487,
       "active_role": null,
@@ -7085,31 +7085,31 @@
         }
       ],
       "reviews_count": 23,
-      "completed_orders_count": 185,
+      "completed_orders_count": 188,
       "created_at": 1673412836
     },
     "client": {
-      "id": 5896,
+      "id": 6010,
       "first_name": null,
       "last_name": null,
       "middle_name": null,
-      "phone": 70017205789,
+      "phone": 70018742682,
       "login": null,
       "facetime": null,
       "whatsapp": null,
       "skype": null,
       "telegram": null,
-      "email": "gwtest2207_2020_gorbunov@client.001",
-      "email_verified_at": "2023-07-22T17:20:07.000000Z",
-      "phone_verified_at": "2023-07-22T17:20:07.000000Z",
+      "email": "gwtest2507_1753_agafonov@client.001",
+      "email_verified_at": "2023-07-25T14:53:20.000000Z",
+      "phone_verified_at": "2023-07-25T14:53:20.000000Z",
       "gender": null,
       "specialization": null,
       "skills": null,
       "avatar_id": null,
       "service_id": null,
       "deleted_at": null,
-      "created_at": "2023-07-22T17:20:06.000000Z",
-      "updated_at": "2023-07-22T17:21:16.000000Z",
+      "created_at": "2023-07-25T14:53:19.000000Z",
+      "updated_at": "2023-07-25T14:53:37.000000Z",
       "requisites_filled": false,
       "bank_details_filled": false,
       "rate_filled": false,
@@ -7150,7 +7150,7 @@
       "living_address_id": null,
       "work_distance": null,
       "joined_at": null,
-      "registered_at": "2023-07-22T17:20:07.000000Z",
+      "registered_at": "2023-07-25T14:53:20.000000Z",
       "sc_notified_about_my_reg": false,
       "sc_notified_about_my_certificates": false,
       "debt": null,
@@ -7161,7 +7161,7 @@
       "fps_bank_id": null,
       "selected_payment_method": null,
       "referer_id": null,
-      "referer_code": "5912c29b-7334-463b-9ee1-ca7c7d2092ab",
+      "referer_code": "4dc7443b-ce10-40d8-867c-dd57452654eb",
       "balance": 0,
       "default_referral_commission": 0,
       "additional_phone": null,
@@ -7174,7 +7174,7 @@
           "updated_at": "2022-04-25T01:37:20.000000Z",
           "is_admin": 0,
           "pivot": {
-            "model_id": 5896,
+            "model_id": 6010,
             "role_id": 4,
             "model_type": "App\\Models\\User"
           }
@@ -7210,7 +7210,7 @@
           "service_id": 39,
           "deleted_at": null,
           "created_at": "2023-01-11T04:53:56.000000Z",
-          "updated_at": "2023-07-21T10:43:02.000000Z",
+          "updated_at": "2023-07-25T09:47:02.000000Z",
           "requisites_filled": false,
           "bank_details_filled": false,
           "rate_filled": false,
@@ -7256,8 +7256,8 @@
           "sc_notified_about_my_certificates": false,
           "debt": 0,
           "count_review": 23,
-          "count_completed_orders": 185,
-          "count_not_read_notification": 18,
+          "count_completed_orders": 188,
+          "count_not_read_notification": 1,
           "fps_phone": "70026442413",
           "fps_bank_id": null,
           "selected_payment_method": "fps",
@@ -8425,7 +8425,7 @@
     },
     "contract_type": null,
     "clientObject": {
-      "id": 3898,
+      "id": 4015,
       "title": "Мой дом",
       "active_offers_count": 1,
       "photos": [
@@ -8465,7 +8465,7 @@
       },
       "equipments": [
         {
-          "id": 3203,
+          "id": 3322,
           "all_works": false,
           "type": {
             "id": 1,
@@ -8671,12 +8671,12 @@
       "branch": null,
       "company": null,
       "account_number": null,
-      "created_at": 1690046407,
+      "created_at": 1690296800,
       "video_exists": false
     },
     "equipments": [
       {
-        "id": 3203,
+        "id": 3322,
         "all_works": false,
         "type": {
           "id": 1,
@@ -8880,15 +8880,15 @@
       }
     ],
     "address": "Москва, Московская улица",
-    "phone": 70017205789,
-    "status": "date-selecting",
+    "phone": 70018742682,
+    "status": "wait-for-master-starting",
     "payment_status": false,
     "type": "repair",
-    "desired_date_interval_started_at": "Sat, 22 Jul 2023 00:00:00 +0300",
-    "desired_date_interval_ended_at": "Tue, 25 Jul 2023 00:00:00 +0300",
-    "desired_time_started": "Sat, 22 Jul 2023 06:00:00 +0300",
-    "desired_time_ended": "Sat, 22 Jul 2023 18:00:00 +0300",
-    "selected_date": null,
+    "desired_date_interval_started_at": "Tue, 25 Jul 2023 00:00:00 +0300",
+    "desired_date_interval_ended_at": "Fri, 28 Jul 2023 00:00:00 +0300",
+    "desired_time_started": "Tue, 25 Jul 2023 06:00:00 +0300",
+    "desired_time_ended": "Tue, 25 Jul 2023 18:00:00 +0300",
+    "selected_date": "Fri, 28 Jul 2023 14:00:00 +0300",
     "description": "error description",
     "photos": [
 
@@ -8896,7 +8896,7 @@
     "videos": [
 
     ],
-    "created_at": 1690046407,
+    "created_at": 1690296800,
     "masters": [
       {
         "id": 487,
@@ -10411,7 +10411,7 @@
           }
         ],
         "reviews_count": 23,
-        "completed_orders_count": 185,
+        "completed_orders_count": 188,
         "created_at": 1673412836
       }
     ],
@@ -10425,6 +10425,7 @@
     "creation_status": null,
     "offers_count": null,
     "offer": {
+      "id": 967189,
       "master_equipment": [
 
       ],
@@ -10443,13 +10444,13 @@
     },
     "receipts": [
       {
-        "id": 4666,
-        "amount": 11.99,
+        "id": 4821,
+        "amount": 10,
         "paid": true,
-        "title": "first_accept_master_payment",
+        "title": "activation_payment",
         "stage": "repair_initial_departure",
-        "remains_to_pay": 11.99,
-        "created_at": "Sat, 22 Jul 2023 20:21:13 +0300"
+        "remains_to_pay": 10,
+        "created_at": "Tue, 25 Jul 2023 17:53:36 +0300"
       }
     ],
     "repair_stage": null,
@@ -10480,7 +10481,7 @@
     "active_dispatcher": false,
     "offers": [
       {
-        "id": 880410,
+        "id": 967189,
         "price": 11.99,
         "master_id": null,
         "company_id": 39
@@ -10495,7 +10496,7 @@
         "title": "tender_title_dispatcher",
         "description": "tender_description_dispatcher",
         "set_at": null,
-        "completed_at": "Sat, 22 Jul 23 20:21:17 +0300",
+        "completed_at": "Tue, 25 Jul 23 17:53:39 +0300",
         "completed": true,
         "is_current": false,
         "sort_index": 5
@@ -10507,7 +10508,7 @@
         "title": "approving_order_master_title_dispatcher",
         "description": "approving_order_master_description_dispatcher",
         "set_at": null,
-        "completed_at": "Sat, 22 Jul 23 20:21:17 +0300",
+        "completed_at": "Tue, 25 Jul 23 17:53:39 +0300",
         "completed": true,
         "is_current": false,
         "sort_index": 6
@@ -10518,8 +10519,8 @@
         "src_title": "initial_departure_payment_title",
         "title": "initial_departure_payment_title_dispatcher",
         "description": "initial_departure_payment_description_dispatcher",
-        "set_at": "Sat, 22 Jul 23 20:21:14 +0300",
-        "completed_at": "Sat, 22 Jul 23 20:21:17 +0300",
+        "set_at": "Tue, 25 Jul 23 17:53:36 +0300",
+        "completed_at": "Tue, 25 Jul 23 17:53:39 +0300",
         "completed": true,
         "is_current": false,
         "sort_index": 7
@@ -10530,10 +10531,10 @@
         "src_title": "approving_order_time_title",
         "title": "approving_order_time_title_dispatcher",
         "description": "approving_order_time_description_dispatcher",
-        "set_at": "Sat, 22 Jul 23 20:21:17 +0300",
-        "completed_at": null,
-        "completed": false,
-        "is_current": true,
+        "set_at": "Tue, 25 Jul 23 17:53:39 +0300",
+        "completed_at": "Tue, 25 Jul 23 17:53:45 +0300",
+        "completed": true,
+        "is_current": false,
         "sort_index": 8
       }
     ],
@@ -10541,6 +10542,6 @@
     "is_insurance_case": false,
     "repair_order_id": null,
     "maintenance_order_id": null,
-    "possible_offer_id": 880410
+    "possible_offer_id": 967189
   }
 }

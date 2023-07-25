@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.api.story.repair.pay;
+package ru.gasworkers.dev.tests.api.story.repair;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

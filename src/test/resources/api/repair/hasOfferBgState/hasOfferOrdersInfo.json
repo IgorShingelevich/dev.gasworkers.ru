@@ -35,7 +35,8 @@
       "wait_notification": 0,
       "master_selected": false,
       "hide": false,
-      "client_closed": false
+      "client_closed": false,
+      "shoved": false
     },
     "desired_date_interval_started_at": 1689195600,
     "desired_date_interval_ended_at": 1689454800,

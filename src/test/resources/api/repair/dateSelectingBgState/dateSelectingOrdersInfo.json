@@ -2,8 +2,8 @@
   "status": 0,
   "message": "Информация о заказе",
   "data": {
-    "id": 7543,
-    "number": "99/23/077/007543",
+    "id": 8249,
+    "number": "99/23/077/008249",
     "status": "date-selecting",
     "type": "repair",
     "service_center": {
@@ -19,12 +19,12 @@
     "receipt": null,
     "receipts": [
       {
-        "id": 4494,
-        "amount": 11.99,
+        "id": 4818,
+        "amount": 10,
         "paid": true,
-        "title": "first_accept_master_payment",
-        "remains_to_pay": 11.99,
-        "created_at": "Thu, 13 Jul 2023 23:20:18 +0300"
+        "title": "activation_payment",
+        "remains_to_pay": 10,
+        "created_at": "Tue, 25 Jul 2023 17:46:02 +0300"
       }
     ],
     "codes": [
@@ -32,12 +32,12 @@
     ],
     "stage": "repair_initial_departure",
     "offer": {
-      "id": 683138,
-      "order_id": 7543,
+      "id": 965215,
+      "order_id": 8249,
       "company_id": 39,
       "status": "approved",
-      "created_at": "2023-07-13T20:20:09.000000Z",
-      "updated_at": "2023-07-13T20:20:18.000000Z",
+      "created_at": "2023-07-25T14:45:48.000000Z",
+      "updated_at": "2023-07-25T14:46:02.000000Z",
       "price": 11.99,
       "price_wi": 11.99,
       "master_id": null,
@@ -50,12 +50,13 @@
       "wait_notification": 0,
       "master_selected": false,
       "hide": false,
-      "client_closed": false
+      "client_closed": false,
+      "shoved": false
     },
-    "desired_date_interval_started_at": 1689195600,
-    "desired_date_interval_ended_at": 1689454800,
-    "desired_time_started": "Thu, 13 Jul 23 06:00:00 +0300",
-    "desired_time_ended": "Thu, 13 Jul 23 18:00:00 +0300",
+    "desired_date_interval_started_at": 1690232400,
+    "desired_date_interval_ended_at": 1690491600,
+    "desired_time_started": "Tue, 25 Jul 23 06:00:00 +0300",
+    "desired_time_ended": "Tue, 25 Jul 23 18:00:00 +0300",
     "insurance_type": null,
     "repair_actions": [
 
@@ -77,13 +78,13 @@
     "refunded": false,
     "equipments": [
       {
-        "id": 2677,
+        "id": 3319,
         "title": "Газовый котел Viessmann Vitodens 100-W WB1C104 35kW",
         "is_show_hidden": false
       }
     ],
     "client_object": {
-      "id": 3128,
+      "id": 4012,
       "title": "Мой дом",
       "last_photo": null,
       "address": {
@@ -103,8 +104,8 @@
         "src_title": "draft_title",
         "title": "draft_title_client",
         "description": "draft_description_client",
-        "set_at": "Thu, 13 Jul 23 23:20:06 +0300",
-        "completed_at": "Thu, 13 Jul 23 23:20:06 +0300",
+        "set_at": "Tue, 25 Jul 23 17:45:46 +0300",
+        "completed_at": "Tue, 25 Jul 23 17:45:46 +0300",
         "completed": true,
         "is_current": false
       },
@@ -113,8 +114,8 @@
         "src_title": "selecting_object_title",
         "title": "selecting_object_title_client",
         "description": "selecting_object_description_client",
-        "set_at": "Thu, 13 Jul 23 23:20:06 +0300",
-        "completed_at": "Thu, 13 Jul 23 23:20:06 +0300",
+        "set_at": "Tue, 25 Jul 23 17:45:46 +0300",
+        "completed_at": "Tue, 25 Jul 23 17:45:47 +0300",
         "completed": true,
         "is_current": false
       },
@@ -123,8 +124,8 @@
         "src_title": "selecting_date_title",
         "title": "selecting_date_title_client",
         "description": "selecting_date_description_client",
-        "set_at": "Thu, 13 Jul 23 23:20:06 +0300",
-        "completed_at": "Thu, 13 Jul 23 23:20:06 +0300",
+        "set_at": "Tue, 25 Jul 23 17:45:47 +0300",
+        "completed_at": "Tue, 25 Jul 23 17:45:47 +0300",
         "completed": true,
         "is_current": false
       },
@@ -133,8 +134,8 @@
         "src_title": "publication_title",
         "title": "publication_title_client",
         "description": "publication_description_client",
-        "set_at": "Thu, 13 Jul 23 23:20:06 +0300",
-        "completed_at": "Thu, 13 Jul 23 23:20:18 +0300",
+        "set_at": "Tue, 25 Jul 23 17:45:47 +0300",
+        "completed_at": "Tue, 25 Jul 23 17:46:02 +0300",
         "completed": true,
         "is_current": false
       },
@@ -143,8 +144,8 @@
         "src_title": "initial_departure_payment_title",
         "title": "initial_departure_payment_title_client",
         "description": "initial_departure_payment_description_client",
-        "set_at": "Thu, 13 Jul 23 23:20:18 +0300",
-        "completed_at": "Thu, 13 Jul 23 23:21:00 +0300",
+        "set_at": "Tue, 25 Jul 23 17:46:02 +0300",
+        "completed_at": "Tue, 25 Jul 23 17:46:06 +0300",
         "completed": true,
         "is_current": false
       },
@@ -153,7 +154,7 @@
         "src_title": "approving_order_time_title",
         "title": "approving_order_time_title_client",
         "description": "approving_order_time_description_client",
-        "set_at": "Thu, 13 Jul 23 23:21:00 +0300",
+        "set_at": "Tue, 25 Jul 23 17:46:06 +0300",
         "completed_at": null,
         "completed": false,
         "is_current": true
@@ -243,6 +244,7 @@
     "is_insurance_case": false,
     "canceled_by_master": false,
     "canceled_by_client": false,
+    "possible_offer_id": 965215,
     "money_back_available": false
   }
 }

@@ -25,7 +25,7 @@ import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
-import ru.gasworkers.dev.tests.api.story.repair.pay.CommonFieldsRepairDto;
+import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

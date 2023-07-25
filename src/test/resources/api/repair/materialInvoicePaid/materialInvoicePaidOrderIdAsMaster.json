@@ -2,8 +2,8 @@
   "status": 0,
   "message": "Информация о заказе",
   "data": {
-    "id": 8212,
-    "number": "99/23/077/008212",
+    "id": 8257,
+    "number": "99/23/077/008257",
     "master": {
       "id": 487,
       "active_role": null,
@@ -7085,31 +7085,31 @@
         }
       ],
       "reviews_count": 23,
-      "completed_orders_count": 186,
+      "completed_orders_count": 188,
       "created_at": 1673412836
     },
     "client": {
-      "id": 5986,
+      "id": 6015,
       "first_name": null,
       "last_name": null,
       "middle_name": null,
-      "phone": 70014068445,
+      "phone": 70018660813,
       "login": null,
       "facetime": null,
       "whatsapp": null,
       "skype": null,
       "telegram": null,
-      "email": "gwtest2407_2122_gavrilov@client.001",
-      "email_verified_at": "2023-07-24T18:22:48.000000Z",
-      "phone_verified_at": "2023-07-24T18:22:48.000000Z",
+      "email": "gwtest2507_1815_drozdov@client.001",
+      "email_verified_at": "2023-07-25T15:15:04.000000Z",
+      "phone_verified_at": "2023-07-25T15:15:04.000000Z",
       "gender": null,
       "specialization": null,
       "skills": null,
       "avatar_id": null,
       "service_id": null,
       "deleted_at": null,
-      "created_at": "2023-07-24T18:22:48.000000Z",
-      "updated_at": "2023-07-24T18:23:36.000000Z",
+      "created_at": "2023-07-25T15:15:03.000000Z",
+      "updated_at": "2023-07-25T15:15:49.000000Z",
       "requisites_filled": false,
       "bank_details_filled": false,
       "rate_filled": false,
@@ -7150,7 +7150,7 @@
       "living_address_id": null,
       "work_distance": null,
       "joined_at": null,
-      "registered_at": "2023-07-24T18:22:48.000000Z",
+      "registered_at": "2023-07-25T15:15:04.000000Z",
       "sc_notified_about_my_reg": false,
       "sc_notified_about_my_certificates": false,
       "debt": null,
@@ -7161,7 +7161,7 @@
       "fps_bank_id": null,
       "selected_payment_method": null,
       "referer_id": null,
-      "referer_code": "5daeb4a7-62bf-46af-bf16-cdec2303c451",
+      "referer_code": "2f3eb766-0a60-4127-a3f7-8fd2d4d69b11",
       "balance": 0,
       "default_referral_commission": 0,
       "additional_phone": null,
@@ -7174,7 +7174,7 @@
           "updated_at": "2022-04-25T01:37:20.000000Z",
           "is_admin": 0,
           "pivot": {
-            "model_id": 5986,
+            "model_id": 6015,
             "role_id": 4,
             "model_type": "App\\Models\\User"
           }
@@ -7210,7 +7210,7 @@
           "service_id": 39,
           "deleted_at": null,
           "created_at": "2023-01-11T04:53:56.000000Z",
-          "updated_at": "2023-07-24T18:23:39.000000Z",
+          "updated_at": "2023-07-25T15:15:55.000000Z",
           "requisites_filled": false,
           "bank_details_filled": false,
           "rate_filled": false,
@@ -7256,8 +7256,8 @@
           "sc_notified_about_my_certificates": false,
           "debt": 0,
           "count_review": 23,
-          "count_completed_orders": 186,
-          "count_not_read_notification": 2,
+          "count_completed_orders": 188,
+          "count_not_read_notification": 8,
           "fps_phone": "70026442413",
           "fps_bank_id": null,
           "selected_payment_method": "fps",
@@ -8425,7 +8425,7 @@
     },
     "contract_type": null,
     "clientObject": {
-      "id": 3989,
+      "id": 4020,
       "title": "Мой дом",
       "active_offers_count": 1,
       "photos": [
@@ -8465,7 +8465,7 @@
       },
       "equipments": [
         {
-          "id": 3294,
+          "id": 3327,
           "all_works": false,
           "type": {
             "id": 1,
@@ -8671,12 +8671,12 @@
       "branch": null,
       "company": null,
       "account_number": null,
-      "created_at": 1690222968,
+      "created_at": 1690298104,
       "video_exists": false
     },
     "equipments": [
       {
-        "id": 3294,
+        "id": 3327,
         "all_works": false,
         "type": {
           "id": 1,
@@ -8880,15 +8880,15 @@
       }
     ],
     "address": "Москва, Московская улица",
-    "phone": 70014068445,
+    "phone": 70018660813,
     "status": "master-start-working",
     "payment_status": false,
     "type": "repair",
-    "desired_date_interval_started_at": "Mon, 24 Jul 2023 00:00:00 +0300",
-    "desired_date_interval_ended_at": "Thu, 27 Jul 2023 00:00:00 +0300",
-    "desired_time_started": "Mon, 24 Jul 2023 06:00:00 +0300",
-    "desired_time_ended": "Mon, 24 Jul 2023 18:00:00 +0300",
-    "selected_date": "Thu, 27 Jul 2023 18:00:00 +0300",
+    "desired_date_interval_started_at": "Tue, 25 Jul 2023 00:00:00 +0300",
+    "desired_date_interval_ended_at": "Fri, 28 Jul 2023 00:00:00 +0300",
+    "desired_time_started": "Tue, 25 Jul 2023 06:00:00 +0300",
+    "desired_time_ended": "Tue, 25 Jul 2023 18:00:00 +0300",
+    "selected_date": "Fri, 28 Jul 2023 15:00:00 +0300",
     "description": "error description",
     "photos": [
 
@@ -8896,7 +8896,7 @@
     "videos": [
 
     ],
-    "created_at": 1690222969,
+    "created_at": 1690298104,
     "masters": [
       {
         "id": 487,
@@ -10411,7 +10411,7 @@
           }
         ],
         "reviews_count": 23,
-        "completed_orders_count": 186,
+        "completed_orders_count": 188,
         "created_at": 1673412836
       }
     ],
@@ -10434,6 +10434,7 @@
     "creation_status": null,
     "offers_count": null,
     "offer": {
+      "id": 970479,
       "master_equipment": [
 
       ],
@@ -10452,22 +10453,22 @@
     },
     "receipts": [
       {
-        "id": 4772,
-        "amount": 11.99,
+        "id": 4827,
+        "amount": 10,
         "paid": true,
-        "title": "first_accept_master_payment",
+        "title": "activation_payment",
         "stage": "repair_initial_departure",
-        "remains_to_pay": 11.99,
-        "created_at": "Mon, 24 Jul 2023 21:23:04 +0300"
+        "remains_to_pay": 10,
+        "created_at": "Tue, 25 Jul 2023 18:15:19 +0300"
       },
       {
-        "id": 4773,
-        "amount": 3.99,
+        "id": 4828,
+        "amount": 4.39,
         "paid": true,
         "title": "order_materials_payment",
         "stage": "material_values",
-        "remains_to_pay": 3.99,
-        "created_at": "Mon, 24 Jul 2023 21:23:32 +0300"
+        "remains_to_pay": 4.39,
+        "created_at": "Tue, 25 Jul 2023 18:15:47 +0300"
       }
     ],
     "repair_stage": "works",
@@ -10653,3949 +10654,3949 @@
     "active_dispatcher": false,
     "offers": [
       {
-        "id": 947434,
+        "id": 970464,
         "price": 3000,
         "master_id": null,
         "company_id": 5
       },
       {
-        "id": 947435,
+        "id": 970465,
         "price": null,
         "master_id": null,
         "company_id": 10
       },
       {
-        "id": 947436,
+        "id": 970466,
         "price": null,
         "master_id": null,
         "company_id": 11
       },
       {
-        "id": 947437,
+        "id": 970467,
         "price": null,
         "master_id": null,
         "company_id": 15
       },
       {
-        "id": 947438,
+        "id": 970468,
         "price": null,
         "master_id": null,
         "company_id": 16
       },
       {
-        "id": 947439,
+        "id": 970469,
         "price": 5000,
         "master_id": null,
         "company_id": 2
       },
       {
-        "id": 947440,
+        "id": 970470,
         "price": 3000,
         "master_id": null,
         "company_id": 25
       },
       {
-        "id": 947441,
+        "id": 970471,
         "price": null,
         "master_id": null,
         "company_id": 26
       },
       {
-        "id": 947442,
+        "id": 970472,
         "price": 1999,
         "master_id": null,
         "company_id": 3
       },
       {
-        "id": 947443,
+        "id": 970473,
         "price": null,
         "master_id": null,
         "company_id": 31
       },
       {
-        "id": 947444,
+        "id": 970474,
         "price": null,
         "master_id": null,
         "company_id": 22
       },
       {
-        "id": 947445,
+        "id": 970475,
         "price": 11111,
         "master_id": null,
         "company_id": 35
       },
       {
-        "id": 947446,
+        "id": 970476,
         "price": 11111,
         "master_id": null,
         "company_id": 36
       },
       {
-        "id": 947447,
+        "id": 970477,
         "price": 10,
         "master_id": null,
         "company_id": 32
       },
       {
-        "id": 947448,
+        "id": 970478,
         "price": 10,
         "master_id": null,
         "company_id": 34
       },
       {
-        "id": 947449,
+        "id": 970479,
         "price": 11.99,
         "master_id": null,
         "company_id": 39
       },
       {
-        "id": 947450,
+        "id": 970480,
         "price": null,
         "master_id": null,
         "company_id": 38
       },
       {
-        "id": 947451,
+        "id": 970481,
         "price": null,
         "master_id": null,
         "company_id": 45
       },
       {
-        "id": 947452,
+        "id": 970482,
         "price": null,
         "master_id": null,
         "company_id": 46
       },
       {
-        "id": 947453,
+        "id": 970483,
         "price": 3000,
         "master_id": null,
         "company_id": 29
       },
       {
-        "id": 947454,
+        "id": 970484,
         "price": 4000,
         "master_id": null,
         "company_id": 49
       },
       {
-        "id": 947455,
+        "id": 970485,
         "price": null,
         "master_id": null,
         "company_id": 51
       },
       {
-        "id": 947456,
+        "id": 970486,
         "price": 15000,
         "master_id": null,
         "company_id": 53
       },
       {
-        "id": 947457,
+        "id": 970487,
         "price": 3000,
         "master_id": null,
         "company_id": 52
       },
       {
-        "id": 947458,
+        "id": 970488,
         "price": 3000,
         "master_id": null,
         "company_id": 9
       },
       {
-        "id": 947459,
+        "id": 970489,
         "price": 500,
         "master_id": null,
         "company_id": 54
       },
       {
-        "id": 947460,
+        "id": 970490,
         "price": 1000,
         "master_id": null,
         "company_id": 55
       },
       {
-        "id": 947461,
+        "id": 970491,
         "price": 0,
         "master_id": null,
         "company_id": 56
       },
       {
-        "id": 947462,
+        "id": 970492,
         "price": 20,
         "master_id": null,
         "company_id": 57
       },
       {
-        "id": 947463,
+        "id": 970493,
         "price": null,
         "master_id": null,
         "company_id": 59
       },
       {
-        "id": 947464,
+        "id": 970494,
         "price": null,
         "master_id": 267,
         "company_id": null
       },
       {
-        "id": 947465,
+        "id": 970495,
         "price": null,
         "master_id": 279,
         "company_id": null
       },
       {
-        "id": 947466,
+        "id": 970496,
         "price": null,
         "master_id": 282,
         "company_id": null
       },
       {
-        "id": 947467,
+        "id": 970497,
         "price": null,
         "master_id": 289,
         "company_id": null
       },
       {
-        "id": 947468,
+        "id": 970498,
         "price": null,
         "master_id": 291,
         "company_id": null
       },
       {
-        "id": 947469,
+        "id": 970499,
         "price": null,
         "master_id": 295,
         "company_id": null
       },
       {
-        "id": 947470,
+        "id": 970500,
         "price": null,
         "master_id": 298,
         "company_id": null
       },
       {
-        "id": 947471,
+        "id": 970501,
         "price": null,
         "master_id": 299,
         "company_id": null
       },
       {
-        "id": 947472,
+        "id": 970502,
         "price": null,
         "master_id": 305,
         "company_id": null
       },
       {
-        "id": 947473,
+        "id": 970503,
         "price": null,
         "master_id": 311,
         "company_id": null
       },
       {
-        "id": 947474,
+        "id": 970504,
         "price": null,
         "master_id": 316,
         "company_id": null
       },
       {
-        "id": 947475,
+        "id": 970505,
         "price": null,
         "master_id": 318,
         "company_id": null
       },
       {
-        "id": 947476,
+        "id": 970506,
         "price": null,
         "master_id": 319,
         "company_id": null
       },
       {
-        "id": 947477,
+        "id": 970507,
         "price": null,
         "master_id": 327,
         "company_id": null
       },
       {
-        "id": 947478,
+        "id": 970508,
         "price": null,
         "master_id": 328,
         "company_id": null
       },
       {
-        "id": 947479,
+        "id": 970509,
         "price": null,
         "master_id": 336,
         "company_id": null
       },
       {
-        "id": 947480,
+        "id": 970510,
         "price": null,
         "master_id": 354,
         "company_id": null
       },
       {
-        "id": 947481,
+        "id": 970511,
         "price": null,
         "master_id": 358,
         "company_id": null
       },
       {
-        "id": 947482,
+        "id": 970512,
         "price": null,
         "master_id": 376,
         "company_id": null
       },
       {
-        "id": 947483,
+        "id": 970513,
         "price": null,
         "master_id": 396,
         "company_id": null
       },
       {
-        "id": 947484,
+        "id": 970514,
         "price": null,
         "master_id": 398,
         "company_id": null
       },
       {
-        "id": 947485,
+        "id": 970515,
         "price": null,
         "master_id": 405,
         "company_id": null
       },
       {
-        "id": 947486,
+        "id": 970516,
         "price": null,
         "master_id": 406,
         "company_id": null
       },
       {
-        "id": 947487,
+        "id": 970517,
         "price": null,
         "master_id": 408,
         "company_id": null
       },
       {
-        "id": 947488,
+        "id": 970518,
         "price": null,
         "master_id": 428,
         "company_id": null
       },
       {
-        "id": 947489,
+        "id": 970519,
         "price": null,
         "master_id": 430,
         "company_id": null
       },
       {
-        "id": 947490,
+        "id": 970520,
         "price": null,
         "master_id": 450,
         "company_id": null
       },
       {
-        "id": 947491,
+        "id": 970521,
         "price": null,
         "master_id": 503,
         "company_id": null
       },
       {
-        "id": 947492,
+        "id": 970522,
         "price": null,
         "master_id": 505,
         "company_id": null
       },
       {
-        "id": 947493,
+        "id": 970523,
         "price": null,
         "master_id": 508,
         "company_id": null
       },
       {
-        "id": 947494,
+        "id": 970524,
         "price": null,
         "master_id": 516,
         "company_id": null
       },
       {
-        "id": 947495,
+        "id": 970525,
         "price": null,
         "master_id": 521,
         "company_id": null
       },
       {
-        "id": 947496,
+        "id": 970526,
         "price": null,
         "master_id": 527,
         "company_id": null
       },
       {
-        "id": 947497,
+        "id": 970527,
         "price": null,
         "master_id": 530,
         "company_id": null
       },
       {
-        "id": 947498,
+        "id": 970528,
         "price": null,
         "master_id": 531,
         "company_id": null
       },
       {
-        "id": 947499,
+        "id": 970529,
         "price": null,
         "master_id": 532,
         "company_id": null
       },
       {
-        "id": 947500,
+        "id": 970530,
         "price": null,
         "master_id": 543,
         "company_id": null
       },
       {
-        "id": 947501,
+        "id": 970531,
         "price": null,
         "master_id": 545,
         "company_id": null
       },
       {
-        "id": 947502,
+        "id": 970532,
         "price": null,
         "master_id": 679,
         "company_id": null
       },
       {
-        "id": 947503,
+        "id": 970533,
         "price": null,
         "master_id": 742,
         "company_id": null
       },
       {
-        "id": 947504,
+        "id": 970534,
         "price": null,
         "master_id": 747,
         "company_id": null
       },
       {
-        "id": 947505,
+        "id": 970535,
         "price": null,
         "master_id": 748,
         "company_id": null
       },
       {
-        "id": 947506,
+        "id": 970536,
         "price": null,
         "master_id": 749,
         "company_id": null
       },
       {
-        "id": 947507,
+        "id": 970537,
         "price": null,
         "master_id": 750,
         "company_id": null
       },
       {
-        "id": 947508,
+        "id": 970538,
         "price": null,
         "master_id": 751,
         "company_id": null
       },
       {
-        "id": 947509,
+        "id": 970539,
         "price": null,
         "master_id": 752,
         "company_id": null
       },
       {
-        "id": 947510,
+        "id": 970540,
         "price": null,
         "master_id": 753,
         "company_id": null
       },
       {
-        "id": 947511,
+        "id": 970541,
         "price": null,
         "master_id": 754,
         "company_id": null
       },
       {
-        "id": 947512,
+        "id": 970542,
         "price": null,
         "master_id": 755,
         "company_id": null
       },
       {
-        "id": 947513,
+        "id": 970543,
         "price": null,
         "master_id": 756,
         "company_id": null
       },
       {
-        "id": 947514,
+        "id": 970544,
         "price": null,
         "master_id": 757,
         "company_id": null
       },
       {
-        "id": 947515,
+        "id": 970545,
         "price": null,
         "master_id": 758,
         "company_id": null
       },
       {
-        "id": 947516,
+        "id": 970546,
         "price": null,
         "master_id": 759,
         "company_id": null
       },
       {
-        "id": 947517,
+        "id": 970547,
         "price": null,
         "master_id": 760,
         "company_id": null
       },
       {
-        "id": 947518,
+        "id": 970548,
         "price": null,
         "master_id": 761,
         "company_id": null
       },
       {
-        "id": 947519,
+        "id": 970549,
         "price": null,
         "master_id": 763,
         "company_id": null
       },
       {
-        "id": 947520,
+        "id": 970550,
         "price": null,
         "master_id": 764,
         "company_id": null
       },
       {
-        "id": 947521,
+        "id": 970551,
         "price": null,
         "master_id": 765,
         "company_id": null
       },
       {
-        "id": 947522,
+        "id": 970552,
         "price": null,
         "master_id": 766,
         "company_id": null
       },
       {
-        "id": 947523,
+        "id": 970553,
         "price": null,
         "master_id": 775,
         "company_id": null
       },
       {
-        "id": 947524,
+        "id": 970554,
         "price": null,
         "master_id": 875,
         "company_id": null
       },
       {
-        "id": 947525,
+        "id": 970555,
         "price": null,
         "master_id": 910,
         "company_id": null
       },
       {
-        "id": 947526,
+        "id": 970556,
         "price": null,
         "master_id": 915,
         "company_id": null
       },
       {
-        "id": 947527,
+        "id": 970557,
         "price": null,
         "master_id": 954,
         "company_id": null
       },
       {
-        "id": 947528,
+        "id": 970558,
         "price": null,
         "master_id": 957,
         "company_id": null
       },
       {
-        "id": 947529,
+        "id": 970559,
         "price": null,
         "master_id": 997,
         "company_id": null
       },
       {
-        "id": 947530,
+        "id": 970560,
         "price": null,
         "master_id": 998,
         "company_id": null
       },
       {
-        "id": 947531,
+        "id": 970561,
         "price": null,
         "master_id": 999,
         "company_id": null
       },
       {
-        "id": 947532,
+        "id": 970562,
         "price": null,
         "master_id": 1000,
         "company_id": null
       },
       {
-        "id": 947533,
+        "id": 970563,
         "price": null,
         "master_id": 1001,
         "company_id": null
       },
       {
-        "id": 947534,
+        "id": 970564,
         "price": null,
         "master_id": 1003,
         "company_id": null
       },
       {
-        "id": 947535,
+        "id": 970565,
         "price": null,
         "master_id": 1011,
         "company_id": null
       },
       {
-        "id": 947536,
+        "id": 970566,
         "price": null,
         "master_id": 1012,
         "company_id": null
       },
       {
-        "id": 947537,
+        "id": 970567,
         "price": null,
         "master_id": 1013,
         "company_id": null
       },
       {
-        "id": 947538,
+        "id": 970568,
         "price": null,
         "master_id": 1014,
         "company_id": null
       },
       {
-        "id": 947539,
+        "id": 970569,
         "price": null,
         "master_id": 1035,
         "company_id": null
       },
       {
-        "id": 947540,
+        "id": 970570,
         "price": null,
         "master_id": 1036,
         "company_id": null
       },
       {
-        "id": 947541,
+        "id": 970571,
         "price": null,
         "master_id": 1038,
         "company_id": null
       },
       {
-        "id": 947542,
+        "id": 970572,
         "price": null,
         "master_id": 1093,
         "company_id": null
       },
       {
-        "id": 947543,
+        "id": 970573,
         "price": null,
         "master_id": 1103,
         "company_id": null
       },
       {
-        "id": 947544,
+        "id": 970574,
         "price": null,
         "master_id": 1105,
         "company_id": null
       },
       {
-        "id": 947545,
+        "id": 970575,
         "price": null,
         "master_id": 1106,
         "company_id": null
       },
       {
-        "id": 947546,
+        "id": 970576,
         "price": null,
         "master_id": 1113,
         "company_id": null
       },
       {
-        "id": 947547,
+        "id": 970577,
         "price": null,
         "master_id": 1114,
         "company_id": null
       },
       {
-        "id": 947548,
+        "id": 970578,
         "price": null,
         "master_id": 1117,
         "company_id": null
       },
       {
-        "id": 947549,
+        "id": 970579,
         "price": null,
         "master_id": 1164,
         "company_id": null
       },
       {
-        "id": 947550,
+        "id": 970580,
         "price": null,
         "master_id": 1167,
         "company_id": null
       },
       {
-        "id": 947551,
+        "id": 970581,
         "price": null,
         "master_id": 1174,
         "company_id": null
       },
       {
-        "id": 947552,
+        "id": 970582,
         "price": null,
         "master_id": 1175,
         "company_id": null
       },
       {
-        "id": 947553,
+        "id": 970583,
         "price": null,
         "master_id": 1176,
         "company_id": null
       },
       {
-        "id": 947554,
+        "id": 970584,
         "price": null,
         "master_id": 1178,
         "company_id": null
       },
       {
-        "id": 947555,
+        "id": 970585,
         "price": null,
         "master_id": 1181,
         "company_id": null
       },
       {
-        "id": 947556,
+        "id": 970586,
         "price": null,
         "master_id": 1182,
         "company_id": null
       },
       {
-        "id": 947557,
+        "id": 970587,
         "price": null,
         "master_id": 1183,
         "company_id": null
       },
       {
-        "id": 947558,
+        "id": 970588,
         "price": null,
         "master_id": 1186,
         "company_id": null
       },
       {
-        "id": 947559,
+        "id": 970589,
         "price": null,
         "master_id": 1187,
         "company_id": null
       },
       {
-        "id": 947560,
+        "id": 970590,
         "price": null,
         "master_id": 1200,
         "company_id": null
       },
       {
-        "id": 947561,
+        "id": 970591,
         "price": null,
         "master_id": 1205,
         "company_id": null
       },
       {
-        "id": 947562,
+        "id": 970592,
         "price": null,
         "master_id": 1206,
         "company_id": null
       },
       {
-        "id": 947563,
+        "id": 970593,
         "price": null,
         "master_id": 1207,
         "company_id": null
       },
       {
-        "id": 947564,
+        "id": 970594,
         "price": null,
         "master_id": 1209,
         "company_id": null
       },
       {
-        "id": 947565,
+        "id": 970595,
         "price": null,
         "master_id": 1210,
         "company_id": null
       },
       {
-        "id": 947566,
+        "id": 970596,
         "price": null,
         "master_id": 1211,
         "company_id": null
       },
       {
-        "id": 947567,
+        "id": 970597,
         "price": null,
         "master_id": 1212,
         "company_id": null
       },
       {
-        "id": 947568,
+        "id": 970598,
         "price": null,
         "master_id": 1213,
         "company_id": null
       },
       {
-        "id": 947569,
+        "id": 970599,
         "price": null,
         "master_id": 1214,
         "company_id": null
       },
       {
-        "id": 947570,
+        "id": 970600,
         "price": null,
         "master_id": 1215,
         "company_id": null
       },
       {
-        "id": 947571,
+        "id": 970601,
         "price": null,
         "master_id": 1216,
         "company_id": null
       },
       {
-        "id": 947572,
+        "id": 970602,
         "price": null,
         "master_id": 1217,
         "company_id": null
       },
       {
-        "id": 947573,
+        "id": 970603,
         "price": null,
         "master_id": 1218,
         "company_id": null
       },
       {
-        "id": 947574,
+        "id": 970604,
         "price": null,
         "master_id": 1219,
         "company_id": null
       },
       {
-        "id": 947575,
+        "id": 970605,
         "price": null,
         "master_id": 1220,
         "company_id": null
       },
       {
-        "id": 947576,
+        "id": 970606,
         "price": null,
         "master_id": 1221,
         "company_id": null
       },
       {
-        "id": 947577,
+        "id": 970607,
         "price": null,
         "master_id": 1222,
         "company_id": null
       },
       {
-        "id": 947578,
+        "id": 970608,
         "price": null,
         "master_id": 1223,
         "company_id": null
       },
       {
-        "id": 947579,
+        "id": 970609,
         "price": null,
         "master_id": 1224,
         "company_id": null
       },
       {
-        "id": 947580,
+        "id": 970610,
         "price": null,
         "master_id": 1225,
         "company_id": null
       },
       {
-        "id": 947581,
+        "id": 970611,
         "price": null,
         "master_id": 1226,
         "company_id": null
       },
       {
-        "id": 947582,
+        "id": 970612,
         "price": null,
         "master_id": 1227,
         "company_id": null
       },
       {
-        "id": 947583,
+        "id": 970613,
         "price": null,
         "master_id": 1228,
         "company_id": null
       },
       {
-        "id": 947584,
+        "id": 970614,
         "price": null,
         "master_id": 1230,
         "company_id": null
       },
       {
-        "id": 947585,
+        "id": 970615,
         "price": null,
         "master_id": 1234,
         "company_id": null
       },
       {
-        "id": 947586,
+        "id": 970616,
         "price": null,
         "master_id": 1235,
         "company_id": null
       },
       {
-        "id": 947587,
+        "id": 970617,
         "price": null,
         "master_id": 1236,
         "company_id": null
       },
       {
-        "id": 947588,
+        "id": 970618,
         "price": null,
         "master_id": 1237,
         "company_id": null
       },
       {
-        "id": 947589,
+        "id": 970619,
         "price": null,
         "master_id": 1248,
         "company_id": null
       },
       {
-        "id": 947590,
+        "id": 970620,
         "price": null,
         "master_id": 1255,
         "company_id": null
       },
       {
-        "id": 947591,
+        "id": 970621,
         "price": null,
         "master_id": 1256,
         "company_id": null
       },
       {
-        "id": 947592,
+        "id": 970622,
         "price": null,
         "master_id": 1260,
         "company_id": null
       },
       {
-        "id": 947593,
+        "id": 970623,
         "price": null,
         "master_id": 1267,
         "company_id": null
       },
       {
-        "id": 947594,
+        "id": 970624,
         "price": null,
         "master_id": 1268,
         "company_id": null
       },
       {
-        "id": 947595,
+        "id": 970625,
         "price": null,
         "master_id": 1274,
         "company_id": null
       },
       {
-        "id": 947596,
+        "id": 970626,
         "price": null,
         "master_id": 1276,
         "company_id": null
       },
       {
-        "id": 947597,
+        "id": 970627,
         "price": null,
         "master_id": 1277,
         "company_id": null
       },
       {
-        "id": 947598,
+        "id": 970628,
         "price": null,
         "master_id": 1278,
         "company_id": null
       },
       {
-        "id": 947599,
+        "id": 970629,
         "price": null,
         "master_id": 1279,
         "company_id": null
       },
       {
-        "id": 947600,
+        "id": 970630,
         "price": null,
         "master_id": 1280,
         "company_id": null
       },
       {
-        "id": 947601,
+        "id": 970631,
         "price": null,
         "master_id": 1281,
         "company_id": null
       },
       {
-        "id": 947602,
+        "id": 970632,
         "price": null,
         "master_id": 1282,
         "company_id": null
       },
       {
-        "id": 947603,
+        "id": 970633,
         "price": null,
         "master_id": 1283,
         "company_id": null
       },
       {
-        "id": 947604,
+        "id": 970634,
         "price": null,
         "master_id": 1284,
         "company_id": null
       },
       {
-        "id": 947605,
+        "id": 970635,
         "price": null,
         "master_id": 1285,
         "company_id": null
       },
       {
-        "id": 947606,
+        "id": 970636,
         "price": null,
         "master_id": 1286,
         "company_id": null
       },
       {
-        "id": 947607,
+        "id": 970637,
         "price": null,
         "master_id": 1287,
         "company_id": null
       },
       {
-        "id": 947608,
+        "id": 970638,
         "price": null,
         "master_id": 1288,
         "company_id": null
       },
       {
-        "id": 947609,
+        "id": 970639,
         "price": null,
         "master_id": 1289,
         "company_id": null
       },
       {
-        "id": 947610,
+        "id": 970640,
         "price": null,
         "master_id": 1290,
         "company_id": null
       },
       {
-        "id": 947611,
+        "id": 970641,
         "price": null,
         "master_id": 1291,
         "company_id": null
       },
       {
-        "id": 947612,
+        "id": 970642,
         "price": null,
         "master_id": 1292,
         "company_id": null
       },
       {
-        "id": 947613,
+        "id": 970643,
         "price": null,
         "master_id": 1293,
         "company_id": null
       },
       {
-        "id": 947614,
+        "id": 970644,
         "price": null,
         "master_id": 1300,
         "company_id": null
       },
       {
-        "id": 947615,
+        "id": 970645,
         "price": null,
         "master_id": 1301,
         "company_id": null
       },
       {
-        "id": 947616,
+        "id": 970646,
         "price": null,
         "master_id": 1312,
         "company_id": null
       },
       {
-        "id": 947617,
+        "id": 970647,
         "price": null,
         "master_id": 1313,
         "company_id": null
       },
       {
-        "id": 947618,
+        "id": 970648,
         "price": null,
         "master_id": 1314,
         "company_id": null
       },
       {
-        "id": 947619,
+        "id": 970649,
         "price": null,
         "master_id": 1315,
         "company_id": null
       },
       {
-        "id": 947620,
+        "id": 970650,
         "price": null,
         "master_id": 1316,
         "company_id": null
       },
       {
-        "id": 947621,
+        "id": 970651,
         "price": null,
         "master_id": 1317,
         "company_id": null
       },
       {
-        "id": 947622,
+        "id": 970652,
         "price": null,
         "master_id": 1318,
         "company_id": null
       },
       {
-        "id": 947623,
+        "id": 970653,
         "price": null,
         "master_id": 1319,
         "company_id": null
       },
       {
-        "id": 947624,
+        "id": 970654,
         "price": null,
         "master_id": 1320,
         "company_id": null
       },
       {
-        "id": 947625,
+        "id": 970655,
         "price": null,
         "master_id": 1321,
         "company_id": null
       },
       {
-        "id": 947626,
+        "id": 970656,
         "price": null,
         "master_id": 1322,
         "company_id": null
       },
       {
-        "id": 947627,
+        "id": 970657,
         "price": null,
         "master_id": 1323,
         "company_id": null
       },
       {
-        "id": 947628,
+        "id": 970658,
         "price": null,
         "master_id": 1324,
         "company_id": null
       },
       {
-        "id": 947629,
+        "id": 970659,
         "price": null,
         "master_id": 1325,
         "company_id": null
       },
       {
-        "id": 947630,
+        "id": 970660,
         "price": null,
         "master_id": 1326,
         "company_id": null
       },
       {
-        "id": 947631,
+        "id": 970661,
         "price": null,
         "master_id": 1327,
         "company_id": null
       },
       {
-        "id": 947632,
+        "id": 970662,
         "price": null,
         "master_id": 1328,
         "company_id": null
       },
       {
-        "id": 947633,
+        "id": 970663,
         "price": null,
         "master_id": 1329,
         "company_id": null
       },
       {
-        "id": 947634,
+        "id": 970664,
         "price": null,
         "master_id": 1330,
         "company_id": null
       },
       {
-        "id": 947635,
+        "id": 970665,
         "price": null,
         "master_id": 1331,
         "company_id": null
       },
       {
-        "id": 947636,
+        "id": 970666,
         "price": null,
         "master_id": 1332,
         "company_id": null
       },
       {
-        "id": 947637,
+        "id": 970667,
         "price": null,
         "master_id": 1333,
         "company_id": null
       },
       {
-        "id": 947638,
+        "id": 970668,
         "price": null,
         "master_id": 1340,
         "company_id": null
       },
       {
-        "id": 947639,
+        "id": 970669,
         "price": null,
         "master_id": 1341,
         "company_id": null
       },
       {
-        "id": 947640,
+        "id": 970670,
         "price": null,
         "master_id": 1342,
         "company_id": null
       },
       {
-        "id": 947641,
+        "id": 970671,
         "price": null,
         "master_id": 1343,
         "company_id": null
       },
       {
-        "id": 947642,
+        "id": 970672,
         "price": null,
         "master_id": 1346,
         "company_id": null
       },
       {
-        "id": 947643,
+        "id": 970673,
         "price": null,
         "master_id": 1347,
         "company_id": null
       },
       {
-        "id": 947644,
+        "id": 970674,
         "price": null,
         "master_id": 1348,
         "company_id": null
       },
       {
-        "id": 947645,
+        "id": 970675,
         "price": null,
         "master_id": 1349,
         "company_id": null
       },
       {
-        "id": 947646,
+        "id": 970676,
         "price": null,
         "master_id": 1350,
         "company_id": null
       },
       {
-        "id": 947647,
+        "id": 970677,
         "price": null,
         "master_id": 1352,
         "company_id": null
       },
       {
-        "id": 947648,
+        "id": 970678,
         "price": null,
         "master_id": 1353,
         "company_id": null
       },
       {
-        "id": 947649,
+        "id": 970679,
         "price": null,
         "master_id": 1354,
         "company_id": null
       },
       {
-        "id": 947650,
+        "id": 970680,
         "price": null,
         "master_id": 1355,
         "company_id": null
       },
       {
-        "id": 947651,
+        "id": 970681,
         "price": null,
         "master_id": 1356,
         "company_id": null
       },
       {
-        "id": 947652,
+        "id": 970682,
         "price": null,
         "master_id": 1357,
         "company_id": null
       },
       {
-        "id": 947653,
+        "id": 970683,
         "price": null,
         "master_id": 1359,
         "company_id": null
       },
       {
-        "id": 947654,
+        "id": 970684,
         "price": null,
         "master_id": 1360,
         "company_id": null
       },
       {
-        "id": 947655,
+        "id": 970685,
         "price": null,
         "master_id": 1361,
         "company_id": null
       },
       {
-        "id": 947656,
+        "id": 970686,
         "price": null,
         "master_id": 1362,
         "company_id": null
       },
       {
-        "id": 947657,
+        "id": 970687,
         "price": null,
         "master_id": 1363,
         "company_id": null
       },
       {
-        "id": 947658,
+        "id": 970688,
         "price": null,
         "master_id": 1364,
         "company_id": null
       },
       {
-        "id": 947659,
+        "id": 970689,
         "price": null,
         "master_id": 1365,
         "company_id": null
       },
       {
-        "id": 947660,
+        "id": 970690,
         "price": null,
         "master_id": 1366,
         "company_id": null
       },
       {
-        "id": 947661,
+        "id": 970691,
         "price": null,
         "master_id": 1367,
         "company_id": null
       },
       {
-        "id": 947662,
+        "id": 970692,
         "price": null,
         "master_id": 1368,
         "company_id": null
       },
       {
-        "id": 947663,
+        "id": 970693,
         "price": null,
         "master_id": 1369,
         "company_id": null
       },
       {
-        "id": 947664,
+        "id": 970694,
         "price": null,
         "master_id": 1370,
         "company_id": null
       },
       {
-        "id": 947665,
+        "id": 970695,
         "price": null,
         "master_id": 1371,
         "company_id": null
       },
       {
-        "id": 947666,
+        "id": 970696,
         "price": null,
         "master_id": 1372,
         "company_id": null
       },
       {
-        "id": 947667,
+        "id": 970697,
         "price": null,
         "master_id": 1373,
         "company_id": null
       },
       {
-        "id": 947668,
+        "id": 970698,
         "price": null,
         "master_id": 1374,
         "company_id": null
       },
       {
-        "id": 947669,
+        "id": 970699,
         "price": null,
         "master_id": 1375,
         "company_id": null
       },
       {
-        "id": 947670,
+        "id": 970700,
         "price": null,
         "master_id": 1376,
         "company_id": null
       },
       {
-        "id": 947671,
+        "id": 970701,
         "price": null,
         "master_id": 1382,
         "company_id": null
       },
       {
-        "id": 947672,
+        "id": 970702,
         "price": null,
         "master_id": 1385,
         "company_id": null
       },
       {
-        "id": 947673,
+        "id": 970703,
         "price": null,
         "master_id": 1391,
         "company_id": null
       },
       {
-        "id": 947674,
+        "id": 970704,
         "price": null,
         "master_id": 1392,
         "company_id": null
       },
       {
-        "id": 947675,
+        "id": 970705,
         "price": null,
         "master_id": 1393,
         "company_id": null
       },
       {
-        "id": 947676,
+        "id": 970706,
         "price": null,
         "master_id": 1394,
         "company_id": null
       },
       {
-        "id": 947677,
+        "id": 970707,
         "price": null,
         "master_id": 1395,
         "company_id": null
       },
       {
-        "id": 947678,
+        "id": 970708,
         "price": null,
         "master_id": 1396,
         "company_id": null
       },
       {
-        "id": 947679,
+        "id": 970709,
         "price": null,
         "master_id": 1397,
         "company_id": null
       },
       {
-        "id": 947680,
+        "id": 970710,
         "price": null,
         "master_id": 1398,
         "company_id": null
       },
       {
-        "id": 947681,
+        "id": 970711,
         "price": null,
         "master_id": 1399,
         "company_id": null
       },
       {
-        "id": 947682,
+        "id": 970712,
         "price": null,
         "master_id": 1400,
         "company_id": null
       },
       {
-        "id": 947683,
+        "id": 970713,
         "price": null,
         "master_id": 1401,
         "company_id": null
       },
       {
-        "id": 947684,
+        "id": 970714,
         "price": null,
         "master_id": 1402,
         "company_id": null
       },
       {
-        "id": 947685,
+        "id": 970715,
         "price": null,
         "master_id": 1403,
         "company_id": null
       },
       {
-        "id": 947686,
+        "id": 970716,
         "price": null,
         "master_id": 1404,
         "company_id": null
       },
       {
-        "id": 947687,
+        "id": 970717,
         "price": null,
         "master_id": 1405,
         "company_id": null
       },
       {
-        "id": 947688,
+        "id": 970718,
         "price": null,
         "master_id": 1406,
         "company_id": null
       },
       {
-        "id": 947689,
+        "id": 970719,
         "price": null,
         "master_id": 1407,
         "company_id": null
       },
       {
-        "id": 947690,
+        "id": 970720,
         "price": null,
         "master_id": 1408,
         "company_id": null
       },
       {
-        "id": 947691,
+        "id": 970721,
         "price": null,
         "master_id": 1409,
         "company_id": null
       },
       {
-        "id": 947692,
+        "id": 970722,
         "price": null,
         "master_id": 1410,
         "company_id": null
       },
       {
-        "id": 947693,
+        "id": 970723,
         "price": null,
         "master_id": 1411,
         "company_id": null
       },
       {
-        "id": 947694,
+        "id": 970724,
         "price": null,
         "master_id": 1412,
         "company_id": null
       },
       {
-        "id": 947695,
+        "id": 970725,
         "price": null,
         "master_id": 1413,
         "company_id": null
       },
       {
-        "id": 947696,
+        "id": 970726,
         "price": null,
         "master_id": 1414,
         "company_id": null
       },
       {
-        "id": 947697,
+        "id": 970727,
         "price": null,
         "master_id": 1415,
         "company_id": null
       },
       {
-        "id": 947698,
+        "id": 970728,
         "price": null,
         "master_id": 1416,
         "company_id": null
       },
       {
-        "id": 947699,
+        "id": 970729,
         "price": null,
         "master_id": 1417,
         "company_id": null
       },
       {
-        "id": 947700,
+        "id": 970730,
         "price": null,
         "master_id": 1418,
         "company_id": null
       },
       {
-        "id": 947701,
+        "id": 970731,
         "price": null,
         "master_id": 1419,
         "company_id": null
       },
       {
-        "id": 947702,
+        "id": 970732,
         "price": null,
         "master_id": 1420,
         "company_id": null
       },
       {
-        "id": 947703,
+        "id": 970733,
         "price": null,
         "master_id": 1421,
         "company_id": null
       },
       {
-        "id": 947704,
+        "id": 970734,
         "price": null,
         "master_id": 1422,
         "company_id": null
       },
       {
-        "id": 947705,
+        "id": 970735,
         "price": null,
         "master_id": 1424,
         "company_id": null
       },
       {
-        "id": 947706,
+        "id": 970736,
         "price": null,
         "master_id": 1426,
         "company_id": null
       },
       {
-        "id": 947707,
+        "id": 970737,
         "price": null,
         "master_id": 1428,
         "company_id": null
       },
       {
-        "id": 947708,
+        "id": 970738,
         "price": null,
         "master_id": 1429,
         "company_id": null
       },
       {
-        "id": 947709,
+        "id": 970739,
         "price": null,
         "master_id": 1430,
         "company_id": null
       },
       {
-        "id": 947710,
+        "id": 970740,
         "price": null,
         "master_id": 1431,
         "company_id": null
       },
       {
-        "id": 947711,
+        "id": 970741,
         "price": null,
         "master_id": 1432,
         "company_id": null
       },
       {
-        "id": 947712,
+        "id": 970742,
         "price": null,
         "master_id": 1433,
         "company_id": null
       },
       {
-        "id": 947713,
+        "id": 970743,
         "price": null,
         "master_id": 1439,
         "company_id": null
       },
       {
-        "id": 947714,
+        "id": 970744,
         "price": null,
         "master_id": 1447,
         "company_id": null
       },
       {
-        "id": 947715,
+        "id": 970745,
         "price": null,
         "master_id": 1448,
         "company_id": null
       },
       {
-        "id": 947716,
+        "id": 970746,
         "price": null,
         "master_id": 1449,
         "company_id": null
       },
       {
-        "id": 947717,
+        "id": 970747,
         "price": null,
         "master_id": 1450,
         "company_id": null
       },
       {
-        "id": 947718,
+        "id": 970748,
         "price": null,
         "master_id": 1451,
         "company_id": null
       },
       {
-        "id": 947719,
+        "id": 970749,
         "price": null,
         "master_id": 1452,
         "company_id": null
       },
       {
-        "id": 947720,
+        "id": 970750,
         "price": null,
         "master_id": 1453,
         "company_id": null
       },
       {
-        "id": 947721,
+        "id": 970751,
         "price": null,
         "master_id": 1454,
         "company_id": null
       },
       {
-        "id": 947722,
+        "id": 970752,
         "price": null,
         "master_id": 1455,
         "company_id": null
       },
       {
-        "id": 947723,
+        "id": 970753,
         "price": null,
         "master_id": 1456,
         "company_id": null
       },
       {
-        "id": 947724,
+        "id": 970754,
         "price": null,
         "master_id": 1457,
         "company_id": null
       },
       {
-        "id": 947725,
+        "id": 970755,
         "price": null,
         "master_id": 1458,
         "company_id": null
       },
       {
-        "id": 947726,
+        "id": 970756,
         "price": null,
         "master_id": 1459,
         "company_id": null
       },
       {
-        "id": 947727,
+        "id": 970757,
         "price": null,
         "master_id": 1460,
         "company_id": null
       },
       {
-        "id": 947728,
+        "id": 970758,
         "price": null,
         "master_id": 1461,
         "company_id": null
       },
       {
-        "id": 947729,
+        "id": 970759,
         "price": null,
         "master_id": 1462,
         "company_id": null
       },
       {
-        "id": 947730,
+        "id": 970760,
         "price": null,
         "master_id": 1464,
         "company_id": null
       },
       {
-        "id": 947731,
+        "id": 970761,
         "price": null,
         "master_id": 1465,
         "company_id": null
       },
       {
-        "id": 947732,
+        "id": 970762,
         "price": null,
         "master_id": 1466,
         "company_id": null
       },
       {
-        "id": 947733,
+        "id": 970763,
         "price": null,
         "master_id": 1470,
         "company_id": null
       },
       {
-        "id": 947734,
+        "id": 970764,
         "price": null,
         "master_id": 1475,
         "company_id": null
       },
       {
-        "id": 947735,
+        "id": 970765,
         "price": null,
         "master_id": 1487,
         "company_id": null
       },
       {
-        "id": 947736,
+        "id": 970766,
         "price": null,
         "master_id": 1489,
         "company_id": null
       },
       {
-        "id": 947737,
+        "id": 970767,
         "price": null,
         "master_id": 1490,
         "company_id": null
       },
       {
-        "id": 947738,
+        "id": 970768,
         "price": null,
         "master_id": 1491,
         "company_id": null
       },
       {
-        "id": 947739,
+        "id": 970769,
         "price": null,
         "master_id": 1492,
         "company_id": null
       },
       {
-        "id": 947740,
+        "id": 970770,
         "price": null,
         "master_id": 1493,
         "company_id": null
       },
       {
-        "id": 947741,
+        "id": 970771,
         "price": null,
         "master_id": 1494,
         "company_id": null
       },
       {
-        "id": 947742,
+        "id": 970772,
         "price": null,
         "master_id": 1495,
         "company_id": null
       },
       {
-        "id": 947743,
+        "id": 970773,
         "price": null,
         "master_id": 1496,
         "company_id": null
       },
       {
-        "id": 947744,
+        "id": 970774,
         "price": null,
         "master_id": 1497,
         "company_id": null
       },
       {
-        "id": 947745,
+        "id": 970775,
         "price": null,
         "master_id": 1498,
         "company_id": null
       },
       {
-        "id": 947746,
+        "id": 970776,
         "price": null,
         "master_id": 1499,
         "company_id": null
       },
       {
-        "id": 947747,
+        "id": 970777,
         "price": null,
         "master_id": 1500,
         "company_id": null
       },
       {
-        "id": 947748,
+        "id": 970778,
         "price": null,
         "master_id": 1501,
         "company_id": null
       },
       {
-        "id": 947749,
+        "id": 970779,
         "price": null,
         "master_id": 1502,
         "company_id": null
       },
       {
-        "id": 947750,
+        "id": 970780,
         "price": null,
         "master_id": 1503,
         "company_id": null
       },
       {
-        "id": 947751,
+        "id": 970781,
         "price": null,
         "master_id": 1504,
         "company_id": null
       },
       {
-        "id": 947752,
+        "id": 970782,
         "price": null,
         "master_id": 1505,
         "company_id": null
       },
       {
-        "id": 947753,
+        "id": 970783,
         "price": null,
         "master_id": 1506,
         "company_id": null
       },
       {
-        "id": 947754,
+        "id": 970784,
         "price": null,
         "master_id": 1507,
         "company_id": null
       },
       {
-        "id": 947755,
+        "id": 970785,
         "price": null,
         "master_id": 1508,
         "company_id": null
       },
       {
-        "id": 947756,
+        "id": 970786,
         "price": null,
         "master_id": 1509,
         "company_id": null
       },
       {
-        "id": 947757,
+        "id": 970787,
         "price": null,
         "master_id": 1510,
         "company_id": null
       },
       {
-        "id": 947758,
+        "id": 970788,
         "price": null,
         "master_id": 1511,
         "company_id": null
       },
       {
-        "id": 947759,
+        "id": 970789,
         "price": null,
         "master_id": 1512,
         "company_id": null
       },
       {
-        "id": 947760,
+        "id": 970790,
         "price": null,
         "master_id": 1513,
         "company_id": null
       },
       {
-        "id": 947761,
+        "id": 970791,
         "price": null,
         "master_id": 1520,
         "company_id": null
       },
       {
-        "id": 947762,
+        "id": 970792,
         "price": null,
         "master_id": 1534,
         "company_id": null
       },
       {
-        "id": 947763,
+        "id": 970793,
         "price": null,
         "master_id": 1537,
         "company_id": null
       },
       {
-        "id": 947764,
+        "id": 970794,
         "price": null,
         "master_id": 1542,
         "company_id": null
       },
       {
-        "id": 947765,
+        "id": 970795,
         "price": null,
         "master_id": 1543,
         "company_id": null
       },
       {
-        "id": 947766,
+        "id": 970796,
         "price": null,
         "master_id": 1549,
         "company_id": null
       },
       {
-        "id": 947767,
+        "id": 970797,
         "price": null,
         "master_id": 1551,
         "company_id": null
       },
       {
-        "id": 947768,
+        "id": 970798,
         "price": null,
         "master_id": 1552,
         "company_id": null
       },
       {
-        "id": 947769,
+        "id": 970799,
         "price": null,
         "master_id": 1553,
         "company_id": null
       },
       {
-        "id": 947770,
+        "id": 970800,
         "price": null,
         "master_id": 1554,
         "company_id": null
       },
       {
-        "id": 947771,
+        "id": 970801,
         "price": null,
         "master_id": 1555,
         "company_id": null
       },
       {
-        "id": 947772,
+        "id": 970802,
         "price": null,
         "master_id": 1556,
         "company_id": null
       },
       {
-        "id": 947773,
+        "id": 970803,
         "price": null,
         "master_id": 1557,
         "company_id": null
       },
       {
-        "id": 947774,
+        "id": 970804,
         "price": null,
         "master_id": 1558,
         "company_id": null
       },
       {
-        "id": 947775,
+        "id": 970805,
         "price": null,
         "master_id": 1559,
         "company_id": null
       },
       {
-        "id": 947776,
+        "id": 970806,
         "price": null,
         "master_id": 1560,
         "company_id": null
       },
       {
-        "id": 947777,
+        "id": 970807,
         "price": null,
         "master_id": 1561,
         "company_id": null
       },
       {
-        "id": 947778,
+        "id": 970808,
         "price": null,
         "master_id": 1562,
         "company_id": null
       },
       {
-        "id": 947779,
+        "id": 970809,
         "price": null,
         "master_id": 1563,
         "company_id": null
       },
       {
-        "id": 947780,
+        "id": 970810,
         "price": null,
         "master_id": 1568,
         "company_id": null
       },
       {
-        "id": 947781,
+        "id": 970811,
         "price": null,
         "master_id": 1575,
         "company_id": null
       },
       {
-        "id": 947782,
+        "id": 970812,
         "price": null,
         "master_id": 1577,
         "company_id": null
       },
       {
-        "id": 947783,
+        "id": 970813,
         "price": null,
         "master_id": 1579,
         "company_id": null
       },
       {
-        "id": 947784,
+        "id": 970814,
         "price": null,
         "master_id": 1580,
         "company_id": null
       },
       {
-        "id": 947785,
+        "id": 970815,
         "price": null,
         "master_id": 1581,
         "company_id": null
       },
       {
-        "id": 947786,
+        "id": 970816,
         "price": null,
         "master_id": 1583,
         "company_id": null
       },
       {
-        "id": 947787,
+        "id": 970817,
         "price": null,
         "master_id": 1585,
         "company_id": null
       },
       {
-        "id": 947788,
+        "id": 970818,
         "price": null,
         "master_id": 1586,
         "company_id": null
       },
       {
-        "id": 947789,
+        "id": 970819,
         "price": null,
         "master_id": 1587,
         "company_id": null
       },
       {
-        "id": 947790,
+        "id": 970820,
         "price": null,
         "master_id": 1588,
         "company_id": null
       },
       {
-        "id": 947791,
+        "id": 970821,
         "price": null,
         "master_id": 1589,
         "company_id": null
       },
       {
-        "id": 947792,
+        "id": 970822,
         "price": null,
         "master_id": 1590,
         "company_id": null
       },
       {
-        "id": 947793,
+        "id": 970823,
         "price": null,
         "master_id": 1591,
         "company_id": null
       },
       {
-        "id": 947794,
+        "id": 970824,
         "price": null,
         "master_id": 1592,
         "company_id": null
       },
       {
-        "id": 947795,
+        "id": 970825,
         "price": null,
         "master_id": 1593,
         "company_id": null
       },
       {
-        "id": 947796,
+        "id": 970826,
         "price": null,
         "master_id": 1594,
         "company_id": null
       },
       {
-        "id": 947797,
+        "id": 970827,
         "price": null,
         "master_id": 1595,
         "company_id": null
       },
       {
-        "id": 947798,
+        "id": 970828,
         "price": null,
         "master_id": 1596,
         "company_id": null
       },
       {
-        "id": 947799,
+        "id": 970829,
         "price": null,
         "master_id": 1597,
         "company_id": null
       },
       {
-        "id": 947800,
+        "id": 970830,
         "price": null,
         "master_id": 1598,
         "company_id": null
       },
       {
-        "id": 947801,
+        "id": 970831,
         "price": null,
         "master_id": 1601,
         "company_id": null
       },
       {
-        "id": 947802,
+        "id": 970832,
         "price": null,
         "master_id": 1602,
         "company_id": null
       },
       {
-        "id": 947803,
+        "id": 970833,
         "price": null,
         "master_id": 1603,
         "company_id": null
       },
       {
-        "id": 947804,
+        "id": 970834,
         "price": null,
         "master_id": 1604,
         "company_id": null
       },
       {
-        "id": 947805,
+        "id": 970835,
         "price": null,
         "master_id": 1605,
         "company_id": null
       },
       {
-        "id": 947806,
+        "id": 970836,
         "price": null,
         "master_id": 1606,
         "company_id": null
       },
       {
-        "id": 947807,
+        "id": 970837,
         "price": null,
         "master_id": 1607,
         "company_id": null
       },
       {
-        "id": 947808,
+        "id": 970838,
         "price": null,
         "master_id": 1608,
         "company_id": null
       },
       {
-        "id": 947809,
+        "id": 970839,
         "price": null,
         "master_id": 1609,
         "company_id": null
       },
       {
-        "id": 947810,
+        "id": 970840,
         "price": null,
         "master_id": 1610,
         "company_id": null
       },
       {
-        "id": 947811,
+        "id": 970841,
         "price": null,
         "master_id": 1611,
         "company_id": null
       },
       {
-        "id": 947812,
+        "id": 970842,
         "price": null,
         "master_id": 1612,
         "company_id": null
       },
       {
-        "id": 947813,
+        "id": 970843,
         "price": null,
         "master_id": 1613,
         "company_id": null
       },
       {
-        "id": 947814,
+        "id": 970844,
         "price": null,
         "master_id": 1614,
         "company_id": null
       },
       {
-        "id": 947815,
+        "id": 970845,
         "price": null,
         "master_id": 1615,
         "company_id": null
       },
       {
-        "id": 947816,
+        "id": 970846,
         "price": null,
         "master_id": 1616,
         "company_id": null
       },
       {
-        "id": 947817,
+        "id": 970847,
         "price": null,
         "master_id": 1617,
         "company_id": null
       },
       {
-        "id": 947818,
+        "id": 970848,
         "price": null,
         "master_id": 1619,
         "company_id": null
       },
       {
-        "id": 947819,
+        "id": 970849,
         "price": null,
         "master_id": 1626,
         "company_id": null
       },
       {
-        "id": 947820,
+        "id": 970850,
         "price": null,
         "master_id": 1627,
         "company_id": null
       },
       {
-        "id": 947821,
+        "id": 970851,
         "price": null,
         "master_id": 1639,
         "company_id": null
       },
       {
-        "id": 947822,
+        "id": 970852,
         "price": null,
         "master_id": 1640,
         "company_id": null
       },
       {
-        "id": 947823,
+        "id": 970853,
         "price": null,
         "master_id": 1649,
         "company_id": null
       },
       {
-        "id": 947824,
+        "id": 970854,
         "price": null,
         "master_id": 1650,
         "company_id": null
       },
       {
-        "id": 947825,
+        "id": 970855,
         "price": null,
         "master_id": 1657,
         "company_id": null
       },
       {
-        "id": 947826,
+        "id": 970856,
         "price": null,
         "master_id": 1658,
         "company_id": null
       },
       {
-        "id": 947827,
+        "id": 970857,
         "price": null,
         "master_id": 1659,
         "company_id": null
       },
       {
-        "id": 947828,
+        "id": 970858,
         "price": null,
         "master_id": 1662,
         "company_id": null
       },
       {
-        "id": 947829,
+        "id": 970859,
         "price": null,
         "master_id": 1664,
         "company_id": null
       },
       {
-        "id": 947830,
+        "id": 970860,
         "price": null,
         "master_id": 1665,
         "company_id": null
       },
       {
-        "id": 947831,
+        "id": 970861,
         "price": null,
         "master_id": 1669,
         "company_id": null
       },
       {
-        "id": 947832,
+        "id": 970862,
         "price": null,
         "master_id": 1676,
         "company_id": null
       },
       {
-        "id": 947833,
+        "id": 970863,
         "price": null,
         "master_id": 1681,
         "company_id": null
       },
       {
-        "id": 947834,
+        "id": 970864,
         "price": null,
         "master_id": 1688,
         "company_id": null
       },
       {
-        "id": 947835,
+        "id": 970865,
         "price": null,
         "master_id": 1693,
         "company_id": null
       },
       {
-        "id": 947836,
+        "id": 970866,
         "price": null,
         "master_id": 1700,
         "company_id": null
       },
       {
-        "id": 947837,
+        "id": 970867,
         "price": null,
         "master_id": 1706,
         "company_id": null
       },
       {
-        "id": 947838,
+        "id": 970868,
         "price": null,
         "master_id": 1715,
         "company_id": null
       },
       {
-        "id": 947839,
+        "id": 970869,
         "price": null,
         "master_id": 1724,
         "company_id": null
       },
       {
-        "id": 947840,
+        "id": 970870,
         "price": null,
         "master_id": 1738,
         "company_id": null
       },
       {
-        "id": 947841,
+        "id": 970871,
         "price": null,
         "master_id": 1739,
         "company_id": null
       },
       {
-        "id": 947842,
+        "id": 970872,
         "price": null,
         "master_id": 1740,
         "company_id": null
       },
       {
-        "id": 947843,
+        "id": 970873,
         "price": null,
         "master_id": 1741,
         "company_id": null
       },
       {
-        "id": 947844,
+        "id": 970874,
         "price": null,
         "master_id": 1742,
         "company_id": null
       },
       {
-        "id": 947845,
+        "id": 970875,
         "price": null,
         "master_id": 1743,
         "company_id": null
       },
       {
-        "id": 947846,
+        "id": 970876,
         "price": null,
         "master_id": 1744,
         "company_id": null
       },
       {
-        "id": 947847,
+        "id": 970877,
         "price": null,
         "master_id": 1745,
         "company_id": null
       },
       {
-        "id": 947848,
+        "id": 970878,
         "price": null,
         "master_id": 1751,
         "company_id": null
       },
       {
-        "id": 947849,
+        "id": 970879,
         "price": null,
         "master_id": 1772,
         "company_id": null
       },
       {
-        "id": 947850,
+        "id": 970880,
         "price": null,
         "master_id": 1811,
         "company_id": null
       },
       {
-        "id": 947851,
+        "id": 970881,
         "price": null,
         "master_id": 1818,
         "company_id": null
       },
       {
-        "id": 947852,
+        "id": 970882,
         "price": null,
         "master_id": 1829,
         "company_id": null
       },
       {
-        "id": 947853,
+        "id": 970883,
         "price": null,
         "master_id": 1835,
         "company_id": null
       },
       {
-        "id": 947854,
+        "id": 970884,
         "price": null,
         "master_id": 1838,
         "company_id": null
       },
       {
-        "id": 947855,
+        "id": 970885,
         "price": null,
         "master_id": 1839,
         "company_id": null
       },
       {
-        "id": 947856,
+        "id": 970886,
         "price": null,
         "master_id": 1840,
         "company_id": null
       },
       {
-        "id": 947857,
+        "id": 970887,
         "price": null,
         "master_id": 1845,
         "company_id": null
       },
       {
-        "id": 947858,
+        "id": 970888,
         "price": null,
         "master_id": 1858,
         "company_id": null
       },
       {
-        "id": 947859,
+        "id": 970889,
         "price": null,
         "master_id": 1891,
         "company_id": null
       },
       {
-        "id": 947860,
+        "id": 970890,
         "price": null,
         "master_id": 1892,
         "company_id": null
       },
       {
-        "id": 947861,
+        "id": 970891,
         "price": null,
         "master_id": 1893,
         "company_id": null
       },
       {
-        "id": 947862,
+        "id": 970892,
         "price": null,
         "master_id": 1894,
         "company_id": null
       },
       {
-        "id": 947863,
+        "id": 970893,
         "price": null,
         "master_id": 1910,
         "company_id": null
       },
       {
-        "id": 947864,
+        "id": 970894,
         "price": null,
         "master_id": 1922,
         "company_id": null
       },
       {
-        "id": 947865,
+        "id": 970895,
         "price": null,
         "master_id": 1974,
         "company_id": null
       },
       {
-        "id": 947866,
+        "id": 970896,
         "price": null,
         "master_id": 1975,
         "company_id": null
       },
       {
-        "id": 947867,
+        "id": 970897,
         "price": null,
         "master_id": 1978,
         "company_id": null
       },
       {
-        "id": 947868,
+        "id": 970898,
         "price": null,
         "master_id": 1980,
         "company_id": null
       },
       {
-        "id": 947869,
+        "id": 970899,
         "price": null,
         "master_id": 2001,
         "company_id": null
       },
       {
-        "id": 947870,
+        "id": 970900,
         "price": null,
         "master_id": 2014,
         "company_id": null
       },
       {
-        "id": 947871,
+        "id": 970901,
         "price": null,
         "master_id": 2041,
         "company_id": null
       },
       {
-        "id": 947872,
+        "id": 970902,
         "price": null,
         "master_id": 2042,
         "company_id": null
       },
       {
-        "id": 947873,
+        "id": 970903,
         "price": null,
         "master_id": 2060,
         "company_id": null
       },
       {
-        "id": 947874,
+        "id": 970904,
         "price": null,
         "master_id": 2128,
         "company_id": null
       },
       {
-        "id": 947875,
+        "id": 970905,
         "price": null,
         "master_id": 2154,
         "company_id": null
       },
       {
-        "id": 947876,
+        "id": 970906,
         "price": null,
         "master_id": 2163,
         "company_id": null
       },
       {
-        "id": 947877,
+        "id": 970907,
         "price": null,
         "master_id": 2195,
         "company_id": null
       },
       {
-        "id": 947878,
+        "id": 970908,
         "price": null,
         "master_id": 2213,
         "company_id": null
       },
       {
-        "id": 947879,
+        "id": 970909,
         "price": null,
         "master_id": 2214,
         "company_id": null
       },
       {
-        "id": 947880,
+        "id": 970910,
         "price": null,
         "master_id": 2240,
         "company_id": null
       },
       {
-        "id": 947881,
+        "id": 970911,
         "price": null,
         "master_id": 2253,
         "company_id": null
       },
       {
-        "id": 947882,
+        "id": 970912,
         "price": null,
         "master_id": 2268,
         "company_id": null
       },
       {
-        "id": 947883,
+        "id": 970913,
         "price": null,
         "master_id": 2275,
         "company_id": null
       },
       {
-        "id": 947884,
+        "id": 970914,
         "price": null,
         "master_id": 2282,
         "company_id": null
       },
       {
-        "id": 947885,
+        "id": 970915,
         "price": null,
         "master_id": 2283,
         "company_id": null
       },
       {
-        "id": 947886,
+        "id": 970916,
         "price": null,
         "master_id": 2284,
         "company_id": null
       },
       {
-        "id": 947887,
+        "id": 970917,
         "price": null,
         "master_id": 2285,
         "company_id": null
       },
       {
-        "id": 947888,
+        "id": 970918,
         "price": null,
         "master_id": 2301,
         "company_id": null
       },
       {
-        "id": 947889,
+        "id": 970919,
         "price": null,
         "master_id": 2317,
         "company_id": null
       },
       {
-        "id": 947890,
+        "id": 970920,
         "price": null,
         "master_id": 2323,
         "company_id": null
       },
       {
-        "id": 947891,
+        "id": 970921,
         "price": null,
         "master_id": 2332,
         "company_id": null
       },
       {
-        "id": 947892,
+        "id": 970922,
         "price": null,
         "master_id": 2337,
         "company_id": null
       },
       {
-        "id": 947893,
+        "id": 970923,
         "price": null,
         "master_id": 2351,
         "company_id": null
       },
       {
-        "id": 947894,
+        "id": 970924,
         "price": null,
         "master_id": 2361,
         "company_id": null
       },
       {
-        "id": 947895,
+        "id": 970925,
         "price": null,
         "master_id": 2362,
         "company_id": null
       },
       {
-        "id": 947896,
+        "id": 970926,
         "price": null,
         "master_id": 2363,
         "company_id": null
       },
       {
-        "id": 947897,
+        "id": 970927,
         "price": null,
         "master_id": 2368,
         "company_id": null
       },
       {
-        "id": 947898,
+        "id": 970928,
         "price": null,
         "master_id": 2375,
         "company_id": null
       },
       {
-        "id": 947899,
+        "id": 970929,
         "price": null,
         "master_id": 2397,
         "company_id": null
       },
       {
-        "id": 947900,
+        "id": 970930,
         "price": null,
         "master_id": 2398,
         "company_id": null
       },
       {
-        "id": 947901,
+        "id": 970931,
         "price": null,
         "master_id": 2403,
         "company_id": null
       },
       {
-        "id": 947902,
+        "id": 970932,
         "price": null,
         "master_id": 2494,
         "company_id": null
       },
       {
-        "id": 947903,
+        "id": 970933,
         "price": null,
         "master_id": 4042,
         "company_id": null
       },
       {
-        "id": 947904,
+        "id": 970934,
         "price": null,
         "master_id": 4050,
         "company_id": null
       },
       {
-        "id": 947905,
+        "id": 970935,
         "price": null,
         "master_id": 4067,
         "company_id": null
       },
       {
-        "id": 947906,
+        "id": 970936,
         "price": null,
         "master_id": 4076,
         "company_id": null
       },
       {
-        "id": 947907,
+        "id": 970937,
         "price": null,
         "master_id": 4080,
         "company_id": null
       },
       {
-        "id": 947908,
+        "id": 970938,
         "price": null,
         "master_id": 4085,
         "company_id": null
       },
       {
-        "id": 947909,
+        "id": 970939,
         "price": null,
         "master_id": 4091,
         "company_id": null
       },
       {
-        "id": 947910,
+        "id": 970940,
         "price": null,
         "master_id": 4096,
         "company_id": null
       },
       {
-        "id": 947911,
+        "id": 970941,
         "price": null,
         "master_id": 4099,
         "company_id": null
       },
       {
-        "id": 947912,
+        "id": 970942,
         "price": null,
         "master_id": 4103,
         "company_id": null
       },
       {
-        "id": 947913,
+        "id": 970943,
         "price": null,
         "master_id": 4106,
         "company_id": null
       },
       {
-        "id": 947914,
+        "id": 970944,
         "price": null,
         "master_id": 4116,
         "company_id": null
       },
       {
-        "id": 947915,
+        "id": 970945,
         "price": null,
         "master_id": 4120,
         "company_id": null
       },
       {
-        "id": 947916,
+        "id": 970946,
         "price": null,
         "master_id": 4125,
         "company_id": null
       },
       {
-        "id": 947917,
+        "id": 970947,
         "price": null,
         "master_id": 4127,
         "company_id": null
       },
       {
-        "id": 947918,
+        "id": 970948,
         "price": null,
         "master_id": 4130,
         "company_id": null
       },
       {
-        "id": 947919,
+        "id": 970949,
         "price": null,
         "master_id": 4298,
         "company_id": null
       },
       {
-        "id": 947920,
+        "id": 970950,
         "price": null,
         "master_id": 4299,
         "company_id": null
       },
       {
-        "id": 947921,
+        "id": 970951,
         "price": null,
         "master_id": 4302,
         "company_id": null
       },
       {
-        "id": 947922,
+        "id": 970952,
         "price": null,
         "master_id": 4303,
         "company_id": null
       },
       {
-        "id": 947923,
+        "id": 970953,
         "price": null,
         "master_id": 4305,
         "company_id": null
       },
       {
-        "id": 947924,
+        "id": 970954,
         "price": null,
         "master_id": 4306,
         "company_id": null
       },
       {
-        "id": 947925,
+        "id": 970955,
         "price": null,
         "master_id": 4307,
         "company_id": null
       },
       {
-        "id": 947926,
+        "id": 970956,
         "price": null,
         "master_id": 4308,
         "company_id": null
       },
       {
-        "id": 947927,
+        "id": 970957,
         "price": null,
         "master_id": 4309,
         "company_id": null
       },
       {
-        "id": 947928,
+        "id": 970958,
         "price": null,
         "master_id": 4310,
         "company_id": null
       },
       {
-        "id": 947929,
+        "id": 970959,
         "price": null,
         "master_id": 4311,
         "company_id": null
       },
       {
-        "id": 947930,
+        "id": 970960,
         "price": null,
         "master_id": 4312,
         "company_id": null
       },
       {
-        "id": 947931,
+        "id": 970961,
         "price": null,
         "master_id": 4313,
         "company_id": null
       },
       {
-        "id": 947932,
+        "id": 970962,
         "price": null,
         "master_id": 4314,
         "company_id": null
       },
       {
-        "id": 947933,
+        "id": 970963,
         "price": null,
         "master_id": 4315,
         "company_id": null
       },
       {
-        "id": 947934,
+        "id": 970964,
         "price": null,
         "master_id": 4316,
         "company_id": null
       },
       {
-        "id": 947935,
+        "id": 970965,
         "price": null,
         "master_id": 4317,
         "company_id": null
       },
       {
-        "id": 947936,
+        "id": 970966,
         "price": null,
         "master_id": 4318,
         "company_id": null
       },
       {
-        "id": 947937,
+        "id": 970967,
         "price": null,
         "master_id": 4319,
         "company_id": null
       },
       {
-        "id": 947938,
+        "id": 970968,
         "price": null,
         "master_id": 4320,
         "company_id": null
       },
       {
-        "id": 947939,
+        "id": 970969,
         "price": null,
         "master_id": 4321,
         "company_id": null
       },
       {
-        "id": 947940,
+        "id": 970970,
         "price": null,
         "master_id": 4322,
         "company_id": null
       },
       {
-        "id": 947941,
+        "id": 970971,
         "price": null,
         "master_id": 4323,
         "company_id": null
       },
       {
-        "id": 947942,
+        "id": 970972,
         "price": null,
         "master_id": 4324,
         "company_id": null
       },
       {
-        "id": 947943,
+        "id": 970973,
         "price": null,
         "master_id": 4325,
         "company_id": null
       },
       {
-        "id": 947944,
+        "id": 970974,
         "price": null,
         "master_id": 4326,
         "company_id": null
       },
       {
-        "id": 947945,
+        "id": 970975,
         "price": null,
         "master_id": 4327,
         "company_id": null
       },
       {
-        "id": 947946,
+        "id": 970976,
         "price": null,
         "master_id": 4328,
         "company_id": null
       },
       {
-        "id": 947947,
+        "id": 970977,
         "price": null,
         "master_id": 4329,
         "company_id": null
       },
       {
-        "id": 947948,
+        "id": 970978,
         "price": null,
         "master_id": 4330,
         "company_id": null
       },
       {
-        "id": 947949,
+        "id": 970979,
         "price": null,
         "master_id": 4331,
         "company_id": null
       },
       {
-        "id": 947950,
+        "id": 970980,
         "price": null,
         "master_id": 4332,
         "company_id": null
       },
       {
-        "id": 947951,
+        "id": 970981,
         "price": null,
         "master_id": 4333,
         "company_id": null
       },
       {
-        "id": 947952,
+        "id": 970982,
         "price": null,
         "master_id": 4334,
         "company_id": null
       },
       {
-        "id": 947953,
+        "id": 970983,
         "price": null,
         "master_id": 4335,
         "company_id": null
       },
       {
-        "id": 947954,
+        "id": 970984,
         "price": null,
         "master_id": 4336,
         "company_id": null
       },
       {
-        "id": 947955,
+        "id": 970985,
         "price": null,
         "master_id": 4337,
         "company_id": null
       },
       {
-        "id": 947956,
+        "id": 970986,
         "price": null,
         "master_id": 4338,
         "company_id": null
       },
       {
-        "id": 947957,
+        "id": 970987,
         "price": null,
         "master_id": 4339,
         "company_id": null
       },
       {
-        "id": 947958,
+        "id": 970988,
         "price": null,
         "master_id": 4340,
         "company_id": null
       },
       {
-        "id": 947959,
+        "id": 970989,
         "price": null,
         "master_id": 4341,
         "company_id": null
       },
       {
-        "id": 947960,
+        "id": 970990,
         "price": null,
         "master_id": 4342,
         "company_id": null
       },
       {
-        "id": 947961,
+        "id": 970991,
         "price": null,
         "master_id": 4343,
         "company_id": null
       },
       {
-        "id": 947962,
+        "id": 970992,
         "price": null,
         "master_id": 4344,
         "company_id": null
       },
       {
-        "id": 947963,
+        "id": 970993,
         "price": null,
         "master_id": 4345,
         "company_id": null
       },
       {
-        "id": 947964,
+        "id": 970994,
         "price": null,
         "master_id": 4346,
         "company_id": null
       },
       {
-        "id": 947965,
+        "id": 970995,
         "price": null,
         "master_id": 4347,
         "company_id": null
       },
       {
-        "id": 947966,
+        "id": 970996,
         "price": null,
         "master_id": 4348,
         "company_id": null
       },
       {
-        "id": 947967,
+        "id": 970997,
         "price": null,
         "master_id": 4349,
         "company_id": null
       },
       {
-        "id": 947968,
+        "id": 970998,
         "price": null,
         "master_id": 4350,
         "company_id": null
       },
       {
-        "id": 947969,
+        "id": 970999,
         "price": null,
         "master_id": 4351,
         "company_id": null
       },
       {
-        "id": 947970,
+        "id": 971000,
         "price": null,
         "master_id": 4352,
         "company_id": null
       },
       {
-        "id": 947971,
+        "id": 971001,
         "price": null,
         "master_id": 4353,
         "company_id": null
       },
       {
-        "id": 947972,
+        "id": 971002,
         "price": null,
         "master_id": 4354,
         "company_id": null
       },
       {
-        "id": 947973,
+        "id": 971003,
         "price": null,
         "master_id": 4355,
         "company_id": null
       },
       {
-        "id": 947974,
+        "id": 971004,
         "price": null,
         "master_id": 4356,
         "company_id": null
       },
       {
-        "id": 947975,
+        "id": 971005,
         "price": null,
         "master_id": 4357,
         "company_id": null
       },
       {
-        "id": 947976,
+        "id": 971006,
         "price": null,
         "master_id": 4358,
         "company_id": null
       },
       {
-        "id": 947977,
+        "id": 971007,
         "price": null,
         "master_id": 4359,
         "company_id": null
       },
       {
-        "id": 947978,
+        "id": 971008,
         "price": null,
         "master_id": 4360,
         "company_id": null
       },
       {
-        "id": 947979,
+        "id": 971009,
         "price": null,
         "master_id": 4361,
         "company_id": null
       },
       {
-        "id": 947980,
+        "id": 971010,
         "price": null,
         "master_id": 4362,
         "company_id": null
       },
       {
-        "id": 947981,
+        "id": 971011,
         "price": null,
         "master_id": 4363,
         "company_id": null
       },
       {
-        "id": 947982,
+        "id": 971012,
         "price": null,
         "master_id": 4364,
         "company_id": null
       },
       {
-        "id": 947983,
+        "id": 971013,
         "price": null,
         "master_id": 4365,
         "company_id": null
       },
       {
-        "id": 947984,
+        "id": 971014,
         "price": null,
         "master_id": 4366,
         "company_id": null
       },
       {
-        "id": 947985,
+        "id": 971015,
         "price": null,
         "master_id": 4367,
         "company_id": null
       },
       {
-        "id": 947986,
+        "id": 971016,
         "price": null,
         "master_id": 4368,
         "company_id": null
       },
       {
-        "id": 947987,
+        "id": 971017,
         "price": null,
         "master_id": 4369,
         "company_id": null
       },
       {
-        "id": 947988,
+        "id": 971018,
         "price": null,
         "master_id": 4370,
         "company_id": null
       },
       {
-        "id": 947989,
+        "id": 971019,
         "price": null,
         "master_id": 4371,
         "company_id": null
       },
       {
-        "id": 947990,
+        "id": 971020,
         "price": null,
         "master_id": 4374,
         "company_id": null
       },
       {
-        "id": 947991,
+        "id": 971021,
         "price": null,
         "master_id": 4375,
         "company_id": null
       },
       {
-        "id": 947992,
+        "id": 971022,
         "price": null,
         "master_id": 4384,
         "company_id": null
       },
       {
-        "id": 947993,
+        "id": 971023,
         "price": null,
         "master_id": 4385,
         "company_id": null
       },
       {
-        "id": 947994,
+        "id": 971024,
         "price": null,
         "master_id": 4388,
         "company_id": null
       },
       {
-        "id": 947995,
+        "id": 971025,
         "price": null,
         "master_id": 4398,
         "company_id": null
       },
       {
-        "id": 947996,
+        "id": 971026,
         "price": null,
         "master_id": 4475,
         "company_id": null
       },
       {
-        "id": 947997,
+        "id": 971027,
         "price": null,
         "master_id": 4476,
         "company_id": null
       },
       {
-        "id": 947998,
+        "id": 971028,
         "price": null,
         "master_id": 4477,
         "company_id": null
       },
       {
-        "id": 947999,
+        "id": 971029,
         "price": null,
         "master_id": 4478,
         "company_id": null
       },
       {
-        "id": 948000,
+        "id": 971030,
         "price": null,
         "master_id": 4479,
         "company_id": null
       },
       {
-        "id": 948001,
+        "id": 971031,
         "price": null,
         "master_id": 4494,
         "company_id": null
       },
       {
-        "id": 948002,
+        "id": 971032,
         "price": null,
         "master_id": 4501,
         "company_id": null
       },
       {
-        "id": 948003,
+        "id": 971033,
         "price": null,
         "master_id": 4502,
         "company_id": null
       },
       {
-        "id": 948004,
+        "id": 971034,
         "price": null,
         "master_id": 4503,
         "company_id": null
       },
       {
-        "id": 948005,
+        "id": 971035,
         "price": null,
         "master_id": 4547,
         "company_id": null
       },
       {
-        "id": 948006,
+        "id": 971036,
         "price": null,
         "master_id": 4549,
         "company_id": null
       },
       {
-        "id": 948007,
+        "id": 971037,
         "price": null,
         "master_id": 4551,
         "company_id": null
       },
       {
-        "id": 948008,
+        "id": 971038,
         "price": null,
         "master_id": 4553,
         "company_id": null
       },
       {
-        "id": 948009,
+        "id": 971039,
         "price": null,
         "master_id": 4555,
         "company_id": null
       },
       {
-        "id": 948010,
+        "id": 971040,
         "price": null,
         "master_id": 4604,
         "company_id": null
       },
       {
-        "id": 948011,
+        "id": 971041,
         "price": null,
         "master_id": 4605,
         "company_id": null
       },
       {
-        "id": 948012,
+        "id": 971042,
         "price": null,
         "master_id": 4616,
         "company_id": null
       },
       {
-        "id": 948013,
+        "id": 971043,
         "price": null,
         "master_id": 4617,
         "company_id": null
       },
       {
-        "id": 948014,
+        "id": 971044,
         "price": null,
         "master_id": 4618,
         "company_id": null
       },
       {
-        "id": 948015,
+        "id": 971045,
         "price": null,
         "master_id": 4619,
         "company_id": null
       },
       {
-        "id": 948016,
+        "id": 971046,
         "price": null,
         "master_id": 4620,
         "company_id": null
       },
       {
-        "id": 948017,
+        "id": 971047,
         "price": null,
         "master_id": 4707,
         "company_id": null
       },
       {
-        "id": 948018,
+        "id": 971048,
         "price": null,
         "master_id": 4708,
         "company_id": null
       },
       {
-        "id": 948019,
+        "id": 971049,
         "price": null,
         "master_id": 4718,
         "company_id": null
       },
       {
-        "id": 948020,
+        "id": 971050,
         "price": null,
         "master_id": 4742,
         "company_id": null
       },
       {
-        "id": 948021,
+        "id": 971051,
         "price": null,
         "master_id": 4743,
         "company_id": null
       },
       {
-        "id": 948022,
+        "id": 971052,
         "price": null,
         "master_id": 4755,
         "company_id": null
       },
       {
-        "id": 948023,
+        "id": 971053,
         "price": null,
         "master_id": 4756,
         "company_id": null
       },
       {
-        "id": 948024,
+        "id": 971054,
         "price": null,
         "master_id": 4757,
         "company_id": null
       },
       {
-        "id": 948025,
+        "id": 971055,
         "price": null,
         "master_id": 4758,
         "company_id": null
       },
       {
-        "id": 948026,
+        "id": 971056,
         "price": null,
         "master_id": 4759,
         "company_id": null
       },
       {
-        "id": 948027,
+        "id": 971057,
         "price": null,
         "master_id": 4847,
         "company_id": null
       },
       {
-        "id": 948028,
+        "id": 971058,
         "price": null,
         "master_id": 4848,
         "company_id": null
       },
       {
-        "id": 948029,
+        "id": 971059,
         "price": null,
         "master_id": 4989,
         "company_id": null
       },
       {
-        "id": 948030,
+        "id": 971060,
         "price": null,
         "master_id": 4990,
         "company_id": null
       },
       {
-        "id": 948031,
+        "id": 971061,
         "price": null,
         "master_id": 4991,
         "company_id": null
       },
       {
-        "id": 948032,
+        "id": 971062,
         "price": null,
         "master_id": 4992,
         "company_id": null
       },
       {
-        "id": 948033,
+        "id": 971063,
         "price": null,
         "master_id": 4993,
         "company_id": null
       },
       {
-        "id": 948034,
+        "id": 971064,
         "price": null,
         "master_id": 4995,
         "company_id": null
       },
       {
-        "id": 948035,
+        "id": 971065,
         "price": null,
         "master_id": 4996,
         "company_id": null
       },
       {
-        "id": 948036,
+        "id": 971066,
         "price": null,
         "master_id": 5045,
         "company_id": null
       },
       {
-        "id": 948037,
+        "id": 971067,
         "price": null,
         "master_id": 5046,
         "company_id": null
       },
       {
-        "id": 948038,
+        "id": 971068,
         "price": null,
         "master_id": 5049,
         "company_id": null
       },
       {
-        "id": 948039,
+        "id": 971069,
         "price": null,
         "master_id": 5050,
         "company_id": null
       },
       {
-        "id": 948040,
+        "id": 971070,
         "price": null,
         "master_id": 5084,
         "company_id": null
       },
       {
-        "id": 948041,
+        "id": 971071,
         "price": null,
         "master_id": 5085,
         "company_id": null
       },
       {
-        "id": 948042,
+        "id": 971072,
         "price": null,
         "master_id": 5086,
         "company_id": null
       },
       {
-        "id": 948043,
+        "id": 971073,
         "price": null,
         "master_id": 5087,
         "company_id": null
       },
       {
-        "id": 948044,
+        "id": 971074,
         "price": null,
         "master_id": 5109,
         "company_id": null
       },
       {
-        "id": 948045,
+        "id": 971075,
         "price": null,
         "master_id": 5110,
         "company_id": null
       },
       {
-        "id": 948046,
+        "id": 971076,
         "price": null,
         "master_id": 5124,
         "company_id": null
       },
       {
-        "id": 948047,
+        "id": 971077,
         "price": null,
         "master_id": 5125,
         "company_id": null
       },
       {
-        "id": 948048,
+        "id": 971078,
         "price": null,
         "master_id": 5126,
         "company_id": null
       },
       {
-        "id": 948049,
+        "id": 971079,
         "price": null,
         "master_id": 5220,
         "company_id": null
       },
       {
-        "id": 948050,
+        "id": 971080,
         "price": null,
         "master_id": 5223,
         "company_id": null
       },
       {
-        "id": 948051,
+        "id": 971081,
         "price": null,
         "master_id": 5224,
         "company_id": null
       },
       {
-        "id": 948052,
+        "id": 971082,
         "price": null,
         "master_id": 5239,
         "company_id": null
       },
       {
-        "id": 948053,
+        "id": 971083,
         "price": null,
         "master_id": 5246,
         "company_id": null
       },
       {
-        "id": 948054,
+        "id": 971084,
         "price": null,
         "master_id": 5247,
         "company_id": null
       },
       {
-        "id": 948055,
+        "id": 971085,
         "price": null,
         "master_id": 5248,
         "company_id": null
       },
       {
-        "id": 948056,
+        "id": 971086,
         "price": null,
         "master_id": 5253,
         "company_id": null
       },
       {
-        "id": 948057,
+        "id": 971087,
         "price": null,
         "master_id": 5348,
         "company_id": null
       },
       {
-        "id": 948058,
+        "id": 971088,
         "price": null,
         "master_id": 5350,
         "company_id": null
       },
       {
-        "id": 948059,
+        "id": 971089,
         "price": null,
         "master_id": 5353,
         "company_id": null
       },
       {
-        "id": 948060,
+        "id": 971090,
         "price": null,
         "master_id": 5354,
         "company_id": null
       },
       {
-        "id": 948061,
+        "id": 971091,
         "price": null,
         "master_id": 5382,
         "company_id": null
       },
       {
-        "id": 948062,
+        "id": 971092,
         "price": null,
         "master_id": 5391,
         "company_id": null
       },
       {
-        "id": 948063,
+        "id": 971093,
         "price": null,
         "master_id": 5420,
         "company_id": null
       },
       {
-        "id": 948064,
+        "id": 971094,
         "price": null,
         "master_id": 5433,
         "company_id": null
       },
       {
-        "id": 948065,
+        "id": 971095,
         "price": null,
         "master_id": 5434,
         "company_id": null
       },
       {
-        "id": 948066,
+        "id": 971096,
         "price": null,
         "master_id": 5448,
         "company_id": null
       },
       {
-        "id": 948067,
+        "id": 971097,
         "price": null,
         "master_id": 5449,
         "company_id": null
       },
       {
-        "id": 948068,
+        "id": 971098,
         "price": null,
         "master_id": 5450,
         "company_id": null
       },
       {
-        "id": 948069,
+        "id": 971099,
         "price": null,
         "master_id": 5451,
         "company_id": null
       },
       {
-        "id": 948070,
+        "id": 971100,
         "price": null,
         "master_id": 5542,
         "company_id": null
       },
       {
-        "id": 948071,
+        "id": 971101,
         "price": null,
         "master_id": 5545,
         "company_id": null
       },
       {
-        "id": 948072,
+        "id": 971102,
         "price": null,
         "master_id": 5546,
         "company_id": null
       },
       {
-        "id": 948073,
+        "id": 971103,
         "price": null,
         "master_id": 5563,
         "company_id": null
       },
       {
-        "id": 948074,
+        "id": 971104,
         "price": null,
         "master_id": 5576,
         "company_id": null
       },
       {
-        "id": 948075,
+        "id": 971105,
         "price": null,
         "master_id": 5577,
         "company_id": null
       },
       {
-        "id": 948076,
+        "id": 971106,
         "price": null,
         "master_id": 5579,
         "company_id": null
       },
       {
-        "id": 948077,
+        "id": 971107,
         "price": null,
         "master_id": 5580,
         "company_id": null
       },
       {
-        "id": 948078,
+        "id": 971108,
         "price": null,
         "master_id": 5594,
         "company_id": null
       },
       {
-        "id": 948079,
+        "id": 971109,
         "price": null,
         "master_id": 5595,
         "company_id": null
       },
       {
-        "id": 948080,
+        "id": 971110,
         "price": null,
         "master_id": 5596,
         "company_id": null
       },
       {
-        "id": 948081,
+        "id": 971111,
         "price": null,
         "master_id": 5597,
         "company_id": null
       },
       {
-        "id": 948082,
+        "id": 971112,
         "price": null,
         "master_id": 5691,
         "company_id": null
       },
       {
-        "id": 948083,
+        "id": 971113,
         "price": null,
         "master_id": 5694,
         "company_id": null
       },
       {
-        "id": 948084,
+        "id": 971114,
         "price": null,
         "master_id": 5695,
         "company_id": null
       },
       {
-        "id": 948085,
+        "id": 971115,
         "price": null,
         "master_id": 5730,
         "company_id": null
       },
       {
-        "id": 948086,
+        "id": 971116,
         "price": null,
         "master_id": 5731,
         "company_id": null
       },
       {
-        "id": 948087,
+        "id": 971117,
         "price": null,
         "master_id": 5732,
         "company_id": null
       },
       {
-        "id": 948088,
+        "id": 971118,
         "price": null,
         "master_id": 5733,
         "company_id": null
       },
       {
-        "id": 948089,
+        "id": 971119,
         "price": null,
         "master_id": 5827,
         "company_id": null
       },
       {
-        "id": 948090,
+        "id": 971120,
         "price": null,
         "master_id": 5830,
         "company_id": null
       },
       {
-        "id": 948091,
+        "id": 971121,
         "price": null,
         "master_id": 5831,
         "company_id": null
@@ -14609,8 +14610,8 @@
         "src_title": "master_working_title",
         "title": "master_working_title_master",
         "description": "master_working_description_master",
-        "set_at": "Mon, 24 Jul 23 21:23:15 +0300",
-        "completed_at": "Mon, 24 Jul 23 21:23:27 +0300",
+        "set_at": "Tue, 25 Jul 23 18:15:30 +0300",
+        "completed_at": "Tue, 25 Jul 23 18:15:42 +0300",
         "completed": true,
         "is_current": false,
         "sort_index": 10
@@ -14621,8 +14622,8 @@
         "src_title": "master_filling_repair_materials_title",
         "title": "master_filling_repair_materials_title_master",
         "description": "master_filling_repair_materials_description_master",
-        "set_at": "Mon, 24 Jul 23 21:23:27 +0300",
-        "completed_at": "Mon, 24 Jul 23 21:23:32 +0300",
+        "set_at": "Tue, 25 Jul 23 18:15:42 +0300",
+        "completed_at": "Tue, 25 Jul 23 18:15:47 +0300",
         "completed": true,
         "is_current": false,
         "sort_index": 11
@@ -14633,8 +14634,8 @@
         "src_title": "repair_materials_payment_title",
         "title": "repair_materials_payment_title_master",
         "description": "repair_materials_payment_description_master",
-        "set_at": "Mon, 24 Jul 23 21:23:32 +0300",
-        "completed_at": "Mon, 24 Jul 23 21:23:37 +0300",
+        "set_at": "Tue, 25 Jul 23 18:15:47 +0300",
+        "completed_at": "Tue, 25 Jul 23 18:15:53 +0300",
         "completed": true,
         "is_current": false,
         "sort_index": 12
@@ -14645,7 +14646,7 @@
         "src_title": "master_filling_repair_works_title",
         "title": "master_filling_repair_works_title_master",
         "description": "master_filling_repair_works_description_master",
-        "set_at": "Mon, 24 Jul 23 21:23:37 +0300",
+        "set_at": "Tue, 25 Jul 23 18:15:53 +0300",
         "completed_at": null,
         "completed": false,
         "is_current": true,
@@ -14704,6 +14705,6 @@
     "is_insurance_case": false,
     "repair_order_id": null,
     "maintenance_order_id": null,
-    "possible_offer_id": 947449
+    "possible_offer_id": 970479
   }
 }

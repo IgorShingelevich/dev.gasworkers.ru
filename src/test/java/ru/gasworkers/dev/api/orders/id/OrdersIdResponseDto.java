@@ -615,6 +615,7 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Offer {
+            public Integer id;
             @JsonProperty("master_equipment")
             public ArrayList<Object> masterEquipment;
             @JsonProperty("start_price")

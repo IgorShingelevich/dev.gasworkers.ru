@@ -9,7 +9,7 @@ import org.json.JSONObject;
 import org.skyscreamer.jsonassert.JSONAssert;
 import ru.gasworkers.dev.api.auth.login.LoginApi;
 import ru.gasworkers.dev.tests.BaseTest;
-import ru.gasworkers.dev.tests.api.story.repair.pay.CommonFieldsRepairDto;
+import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
 
 import java.io.IOException;
 import java.util.Arrays;

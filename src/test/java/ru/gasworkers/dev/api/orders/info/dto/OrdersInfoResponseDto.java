@@ -157,6 +157,7 @@ public class OrdersInfoResponseDto {
             private Boolean hide;
             @JsonProperty("client_closed")
             private Boolean clientClosed;
+            private Boolean shoved;
         }
 
         @lombok.Data

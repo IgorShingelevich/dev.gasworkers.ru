@@ -2,8 +2,8 @@
   "status": 0,
   "message": "Информация о заказе",
   "data": {
-    "id": 8120,
-    "number": "99/23/077/008120",
+    "id": 8255,
+    "number": "99/23/077/008255",
     "master": {
       "id": 487,
       "active_role": null,
@@ -7085,31 +7085,31 @@
         }
       ],
       "reviews_count": 23,
-      "completed_orders_count": 185,
+      "completed_orders_count": 188,
       "created_at": 1673412836
     },
     "client": {
-      "id": 5921,
+      "id": 6013,
       "first_name": null,
       "last_name": null,
       "middle_name": null,
-      "phone": 70012758873,
+      "phone": 70014337778,
       "login": null,
       "facetime": null,
       "whatsapp": null,
       "skype": null,
       "telegram": null,
-      "email": "gwtest2307_0215_gulâeva@client.001",
-      "email_verified_at": "2023-07-22T23:15:58.000000Z",
-      "phone_verified_at": "2023-07-22T23:15:58.000000Z",
+      "email": "gwtest2507_1806_melʹnikova@client.001",
+      "email_verified_at": "2023-07-25T15:06:39.000000Z",
+      "phone_verified_at": "2023-07-25T15:06:39.000000Z",
       "gender": null,
       "specialization": null,
       "skills": null,
       "avatar_id": null,
       "service_id": null,
       "deleted_at": null,
-      "created_at": "2023-07-22T23:15:58.000000Z",
-      "updated_at": "2023-07-22T23:16:22.000000Z",
+      "created_at": "2023-07-25T15:06:39.000000Z",
+      "updated_at": "2023-07-25T15:07:08.000000Z",
       "requisites_filled": false,
       "bank_details_filled": false,
       "rate_filled": false,
@@ -7150,7 +7150,7 @@
       "living_address_id": null,
       "work_distance": null,
       "joined_at": null,
-      "registered_at": "2023-07-22T23:15:58.000000Z",
+      "registered_at": "2023-07-25T15:06:39.000000Z",
       "sc_notified_about_my_reg": false,
       "sc_notified_about_my_certificates": false,
       "debt": null,
@@ -7161,7 +7161,7 @@
       "fps_bank_id": null,
       "selected_payment_method": null,
       "referer_id": null,
-      "referer_code": "70b9b621-7216-49e1-b67d-cf11667454d2",
+      "referer_code": "2bd27c56-b962-4f1b-8902-b423ab942c3d",
       "balance": 0,
       "default_referral_commission": 0,
       "additional_phone": null,
@@ -7174,7 +7174,7 @@
           "updated_at": "2022-04-25T01:37:20.000000Z",
           "is_admin": 0,
           "pivot": {
-            "model_id": 5921,
+            "model_id": 6013,
             "role_id": 4,
             "model_type": "App\\Models\\User"
           }
@@ -7210,7 +7210,7 @@
           "service_id": 39,
           "deleted_at": null,
           "created_at": "2023-01-11T04:53:56.000000Z",
-          "updated_at": "2023-07-22T23:16:22.000000Z",
+          "updated_at": "2023-07-25T15:07:09.000000Z",
           "requisites_filled": false,
           "bank_details_filled": false,
           "rate_filled": false,
@@ -7256,7 +7256,7 @@
           "sc_notified_about_my_certificates": false,
           "debt": 0,
           "count_review": 23,
-          "count_completed_orders": 185,
+          "count_completed_orders": 188,
           "count_not_read_notification": 5,
           "fps_phone": "70026442413",
           "fps_bank_id": null,
@@ -8425,7 +8425,7 @@
     },
     "contract_type": null,
     "clientObject": {
-      "id": 3923,
+      "id": 4018,
       "title": "Мой дом",
       "active_offers_count": 1,
       "photos": [
@@ -8465,7 +8465,7 @@
       },
       "equipments": [
         {
-          "id": 3228,
+          "id": 3325,
           "all_works": false,
           "type": {
             "id": 1,
@@ -8671,12 +8671,12 @@
       "branch": null,
       "company": null,
       "account_number": null,
-      "created_at": 1690067758,
+      "created_at": 1690297599,
       "video_exists": false
     },
     "equipments": [
       {
-        "id": 3228,
+        "id": 3325,
         "all_works": false,
         "type": {
           "id": 1,
@@ -8880,15 +8880,15 @@
       }
     ],
     "address": "Москва, Московская улица",
-    "phone": 70012758873,
-    "status": "wait-for-master-starting",
+    "phone": 70014337778,
+    "status": "master-start-working",
     "payment_status": false,
     "type": "repair",
-    "desired_date_interval_started_at": "Sat, 22 Jul 2023 00:00:00 +0300",
-    "desired_date_interval_ended_at": "Tue, 25 Jul 2023 00:00:00 +0300",
-    "desired_time_started": "Sun, 23 Jul 2023 06:00:00 +0300",
-    "desired_time_ended": "Sun, 23 Jul 2023 18:00:00 +0300",
-    "selected_date": "Tue, 25 Jul 2023 23:00:00 +0300",
+    "desired_date_interval_started_at": "Tue, 25 Jul 2023 00:00:00 +0300",
+    "desired_date_interval_ended_at": "Fri, 28 Jul 2023 00:00:00 +0300",
+    "desired_time_started": "Tue, 25 Jul 2023 06:00:00 +0300",
+    "desired_time_ended": "Tue, 25 Jul 2023 18:00:00 +0300",
+    "selected_date": "Fri, 28 Jul 2023 15:00:00 +0300",
     "description": "error description",
     "photos": [
 
@@ -8896,7 +8896,7 @@
     "videos": [
 
     ],
-    "created_at": 1690067758,
+    "created_at": 1690297600,
     "masters": [
       {
         "id": 487,
@@ -10411,7 +10411,7 @@
           }
         ],
         "reviews_count": 23,
-        "completed_orders_count": 185,
+        "completed_orders_count": 188,
         "created_at": 1673412836
       }
     ],
@@ -10425,6 +10425,7 @@
     "creation_status": null,
     "offers_count": null,
     "offer": {
+      "id": 969163,
       "master_equipment": [
 
       ],
@@ -10443,16 +10444,16 @@
     },
     "receipts": [
       {
-        "id": 4681,
-        "amount": 11.99,
+        "id": 4824,
+        "amount": 10,
         "paid": true,
-        "title": "first_accept_master_payment",
+        "title": "activation_payment",
         "stage": "repair_initial_departure",
-        "remains_to_pay": 11.99,
-        "created_at": "Sun, 23 Jul 2023 02:16:13 +0300"
+        "remains_to_pay": 10,
+        "created_at": "Tue, 25 Jul 2023 18:06:54 +0300"
       }
     ],
-    "repair_stage": null,
+    "repair_stage": "materials",
     "need_sign": false,
     "sign_type": null,
     "need_master_sign": false,
@@ -10463,7 +10464,162 @@
       "url": null
     },
     "check_list": [
-
+      {
+        "id": 1,
+        "title": "ВДГО",
+        "items": [
+          {
+            "id": 2,
+            "title": "Фактически установленное оборудовании соответствует Проекту?",
+            "value": true
+          },
+          {
+            "id": 1,
+            "title": "Документация на газоснабжение: Технические условия, Проект ВДГО в наличии?",
+            "value": true
+          },
+          {
+            "id": 3,
+            "title": "Требуется ли замена котла/газовой плиты?",
+            "value": false
+          },
+          {
+            "id": 4,
+            "title": "Надо ли легализовать самовольно установленное оборудование?",
+            "value": false
+          },
+          {
+            "id": 5,
+            "title": "Опломбирован ли счетчик?",
+            "value": true
+          },
+          {
+            "id": 6,
+            "title": "Требуется ли поверка счётчика и/или замена батарейки?",
+            "value": false
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Гидросистема отопления",
+        "items": [
+          {
+            "id": 7,
+            "title": "Есть ли протечки гидросистемы и потеря давления?",
+            "value": false
+          },
+          {
+            "id": 8,
+            "title": "Надо ли заменить/очистить фильтры (шламоуловитель) гидросистемы?",
+            "value": true
+          },
+          {
+            "id": 9,
+            "title": "Требуется ли подкачка/замена расширительных гидроаккумуляторов?",
+            "value": true
+          },
+          {
+            "id": 10,
+            "title": "Требуется ли перепроектирование и перемонтаж гидросистемы?",
+            "value": false
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Электрика и автоматика",
+        "items": [
+          {
+            "id": 11,
+            "title": "Установлен ли стабилизатор напряжения ?",
+            "value": true
+          },
+          {
+            "id": 12,
+            "title": "Установлены ли датчики протечек и аварийных отсекателей водоснабжения",
+            "value": false
+          },
+          {
+            "id": 13,
+            "title": "Установлена ли погодозависимая автоматика отопления?",
+            "value": false
+          },
+          {
+            "id": 14,
+            "title": "Требуется ли настройка автоматики отопления",
+            "value": false
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Водоснабжение и водоотведение",
+        "items": [
+          {
+            "id": 15,
+            "title": "Требуется ли обслуживание системы очистки воды и замена фильтров ?",
+            "value": false
+          },
+          {
+            "id": 16,
+            "title": "Требуется ли обслуживание/ (очистка, откачка) септика",
+            "value": false
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Кондиционирование и вентиляция",
+        "items": [
+          {
+            "id": 17,
+            "title": "Есть ли в наличие свежие (менее года) Акты на обследование дымовых и вентканалов?",
+            "value": false
+          },
+          {
+            "id": 18,
+            "title": "Требуется ли обслуживание и очистка кондиционеров?",
+            "value": false
+          },
+          {
+            "id": 19,
+            "title": "Готов ли Заказчик  рассмотреть коммерческое предложение по любому из пунктов",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Каких бы Специалистов Заказчик хотел бы пригласить для выполнения работ",
+        "items": [
+          {
+            "id": 20,
+            "title": "Электрик",
+            "value": false
+          },
+          {
+            "id": 21,
+            "title": "Сантехник",
+            "value": false
+          },
+          {
+            "id": 22,
+            "title": "Специалист по отоплению",
+            "value": false
+          },
+          {
+            "id": 23,
+            "title": "Кондиционерщик",
+            "value": false
+          },
+          {
+            "id": 24,
+            "title": "Проектировщик",
+            "value": false
+          }
+        ]
+      }
     ],
     "dispatcher": {
       "phone": 21313131313
@@ -10480,67 +10636,4057 @@
     "active_dispatcher": false,
     "offers": [
       {
-        "id": 896860,
+        "id": 969148,
+        "price": 3000,
+        "master_id": null,
+        "company_id": 5
+      },
+      {
+        "id": 969149,
+        "price": null,
+        "master_id": null,
+        "company_id": 10
+      },
+      {
+        "id": 969150,
+        "price": null,
+        "master_id": null,
+        "company_id": 11
+      },
+      {
+        "id": 969151,
+        "price": null,
+        "master_id": null,
+        "company_id": 15
+      },
+      {
+        "id": 969152,
+        "price": null,
+        "master_id": null,
+        "company_id": 16
+      },
+      {
+        "id": 969153,
+        "price": 5000,
+        "master_id": null,
+        "company_id": 2
+      },
+      {
+        "id": 969154,
+        "price": 3000,
+        "master_id": null,
+        "company_id": 25
+      },
+      {
+        "id": 969155,
+        "price": null,
+        "master_id": null,
+        "company_id": 26
+      },
+      {
+        "id": 969156,
+        "price": 1999,
+        "master_id": null,
+        "company_id": 3
+      },
+      {
+        "id": 969157,
+        "price": null,
+        "master_id": null,
+        "company_id": 31
+      },
+      {
+        "id": 969158,
+        "price": null,
+        "master_id": null,
+        "company_id": 22
+      },
+      {
+        "id": 969159,
+        "price": 11111,
+        "master_id": null,
+        "company_id": 35
+      },
+      {
+        "id": 969160,
+        "price": 11111,
+        "master_id": null,
+        "company_id": 36
+      },
+      {
+        "id": 969161,
+        "price": 10,
+        "master_id": null,
+        "company_id": 32
+      },
+      {
+        "id": 969162,
+        "price": 10,
+        "master_id": null,
+        "company_id": 34
+      },
+      {
+        "id": 969163,
         "price": 11.99,
         "master_id": null,
         "company_id": 39
+      },
+      {
+        "id": 969164,
+        "price": null,
+        "master_id": null,
+        "company_id": 38
+      },
+      {
+        "id": 969165,
+        "price": null,
+        "master_id": null,
+        "company_id": 45
+      },
+      {
+        "id": 969166,
+        "price": null,
+        "master_id": null,
+        "company_id": 46
+      },
+      {
+        "id": 969167,
+        "price": 3000,
+        "master_id": null,
+        "company_id": 29
+      },
+      {
+        "id": 969168,
+        "price": 4000,
+        "master_id": null,
+        "company_id": 49
+      },
+      {
+        "id": 969169,
+        "price": null,
+        "master_id": null,
+        "company_id": 51
+      },
+      {
+        "id": 969170,
+        "price": 15000,
+        "master_id": null,
+        "company_id": 53
+      },
+      {
+        "id": 969171,
+        "price": 3000,
+        "master_id": null,
+        "company_id": 52
+      },
+      {
+        "id": 969172,
+        "price": 3000,
+        "master_id": null,
+        "company_id": 9
+      },
+      {
+        "id": 969173,
+        "price": 500,
+        "master_id": null,
+        "company_id": 54
+      },
+      {
+        "id": 969174,
+        "price": 1000,
+        "master_id": null,
+        "company_id": 55
+      },
+      {
+        "id": 969175,
+        "price": 0,
+        "master_id": null,
+        "company_id": 56
+      },
+      {
+        "id": 969176,
+        "price": 20,
+        "master_id": null,
+        "company_id": 57
+      },
+      {
+        "id": 969177,
+        "price": null,
+        "master_id": null,
+        "company_id": 59
+      },
+      {
+        "id": 969178,
+        "price": null,
+        "master_id": 267,
+        "company_id": null
+      },
+      {
+        "id": 969179,
+        "price": null,
+        "master_id": 279,
+        "company_id": null
+      },
+      {
+        "id": 969180,
+        "price": null,
+        "master_id": 282,
+        "company_id": null
+      },
+      {
+        "id": 969181,
+        "price": null,
+        "master_id": 289,
+        "company_id": null
+      },
+      {
+        "id": 969182,
+        "price": null,
+        "master_id": 291,
+        "company_id": null
+      },
+      {
+        "id": 969183,
+        "price": null,
+        "master_id": 295,
+        "company_id": null
+      },
+      {
+        "id": 969184,
+        "price": null,
+        "master_id": 298,
+        "company_id": null
+      },
+      {
+        "id": 969185,
+        "price": null,
+        "master_id": 299,
+        "company_id": null
+      },
+      {
+        "id": 969186,
+        "price": null,
+        "master_id": 305,
+        "company_id": null
+      },
+      {
+        "id": 969187,
+        "price": null,
+        "master_id": 311,
+        "company_id": null
+      },
+      {
+        "id": 969188,
+        "price": null,
+        "master_id": 316,
+        "company_id": null
+      },
+      {
+        "id": 969189,
+        "price": null,
+        "master_id": 318,
+        "company_id": null
+      },
+      {
+        "id": 969190,
+        "price": null,
+        "master_id": 319,
+        "company_id": null
+      },
+      {
+        "id": 969191,
+        "price": null,
+        "master_id": 327,
+        "company_id": null
+      },
+      {
+        "id": 969192,
+        "price": null,
+        "master_id": 328,
+        "company_id": null
+      },
+      {
+        "id": 969193,
+        "price": null,
+        "master_id": 336,
+        "company_id": null
+      },
+      {
+        "id": 969194,
+        "price": null,
+        "master_id": 354,
+        "company_id": null
+      },
+      {
+        "id": 969195,
+        "price": null,
+        "master_id": 358,
+        "company_id": null
+      },
+      {
+        "id": 969196,
+        "price": null,
+        "master_id": 376,
+        "company_id": null
+      },
+      {
+        "id": 969197,
+        "price": null,
+        "master_id": 396,
+        "company_id": null
+      },
+      {
+        "id": 969198,
+        "price": null,
+        "master_id": 398,
+        "company_id": null
+      },
+      {
+        "id": 969199,
+        "price": null,
+        "master_id": 405,
+        "company_id": null
+      },
+      {
+        "id": 969200,
+        "price": null,
+        "master_id": 406,
+        "company_id": null
+      },
+      {
+        "id": 969201,
+        "price": null,
+        "master_id": 408,
+        "company_id": null
+      },
+      {
+        "id": 969202,
+        "price": null,
+        "master_id": 428,
+        "company_id": null
+      },
+      {
+        "id": 969203,
+        "price": null,
+        "master_id": 430,
+        "company_id": null
+      },
+      {
+        "id": 969204,
+        "price": null,
+        "master_id": 450,
+        "company_id": null
+      },
+      {
+        "id": 969205,
+        "price": null,
+        "master_id": 503,
+        "company_id": null
+      },
+      {
+        "id": 969206,
+        "price": null,
+        "master_id": 505,
+        "company_id": null
+      },
+      {
+        "id": 969207,
+        "price": null,
+        "master_id": 508,
+        "company_id": null
+      },
+      {
+        "id": 969208,
+        "price": null,
+        "master_id": 516,
+        "company_id": null
+      },
+      {
+        "id": 969209,
+        "price": null,
+        "master_id": 521,
+        "company_id": null
+      },
+      {
+        "id": 969210,
+        "price": null,
+        "master_id": 527,
+        "company_id": null
+      },
+      {
+        "id": 969211,
+        "price": null,
+        "master_id": 530,
+        "company_id": null
+      },
+      {
+        "id": 969212,
+        "price": null,
+        "master_id": 531,
+        "company_id": null
+      },
+      {
+        "id": 969213,
+        "price": null,
+        "master_id": 532,
+        "company_id": null
+      },
+      {
+        "id": 969214,
+        "price": null,
+        "master_id": 543,
+        "company_id": null
+      },
+      {
+        "id": 969215,
+        "price": null,
+        "master_id": 545,
+        "company_id": null
+      },
+      {
+        "id": 969216,
+        "price": null,
+        "master_id": 679,
+        "company_id": null
+      },
+      {
+        "id": 969217,
+        "price": null,
+        "master_id": 742,
+        "company_id": null
+      },
+      {
+        "id": 969218,
+        "price": null,
+        "master_id": 747,
+        "company_id": null
+      },
+      {
+        "id": 969219,
+        "price": null,
+        "master_id": 748,
+        "company_id": null
+      },
+      {
+        "id": 969220,
+        "price": null,
+        "master_id": 749,
+        "company_id": null
+      },
+      {
+        "id": 969221,
+        "price": null,
+        "master_id": 750,
+        "company_id": null
+      },
+      {
+        "id": 969222,
+        "price": null,
+        "master_id": 751,
+        "company_id": null
+      },
+      {
+        "id": 969223,
+        "price": null,
+        "master_id": 752,
+        "company_id": null
+      },
+      {
+        "id": 969224,
+        "price": null,
+        "master_id": 753,
+        "company_id": null
+      },
+      {
+        "id": 969225,
+        "price": null,
+        "master_id": 754,
+        "company_id": null
+      },
+      {
+        "id": 969226,
+        "price": null,
+        "master_id": 755,
+        "company_id": null
+      },
+      {
+        "id": 969227,
+        "price": null,
+        "master_id": 756,
+        "company_id": null
+      },
+      {
+        "id": 969228,
+        "price": null,
+        "master_id": 757,
+        "company_id": null
+      },
+      {
+        "id": 969229,
+        "price": null,
+        "master_id": 758,
+        "company_id": null
+      },
+      {
+        "id": 969230,
+        "price": null,
+        "master_id": 759,
+        "company_id": null
+      },
+      {
+        "id": 969231,
+        "price": null,
+        "master_id": 760,
+        "company_id": null
+      },
+      {
+        "id": 969232,
+        "price": null,
+        "master_id": 761,
+        "company_id": null
+      },
+      {
+        "id": 969233,
+        "price": null,
+        "master_id": 763,
+        "company_id": null
+      },
+      {
+        "id": 969234,
+        "price": null,
+        "master_id": 764,
+        "company_id": null
+      },
+      {
+        "id": 969235,
+        "price": null,
+        "master_id": 765,
+        "company_id": null
+      },
+      {
+        "id": 969236,
+        "price": null,
+        "master_id": 766,
+        "company_id": null
+      },
+      {
+        "id": 969237,
+        "price": null,
+        "master_id": 775,
+        "company_id": null
+      },
+      {
+        "id": 969238,
+        "price": null,
+        "master_id": 875,
+        "company_id": null
+      },
+      {
+        "id": 969239,
+        "price": null,
+        "master_id": 910,
+        "company_id": null
+      },
+      {
+        "id": 969240,
+        "price": null,
+        "master_id": 915,
+        "company_id": null
+      },
+      {
+        "id": 969241,
+        "price": null,
+        "master_id": 954,
+        "company_id": null
+      },
+      {
+        "id": 969242,
+        "price": null,
+        "master_id": 957,
+        "company_id": null
+      },
+      {
+        "id": 969243,
+        "price": null,
+        "master_id": 997,
+        "company_id": null
+      },
+      {
+        "id": 969244,
+        "price": null,
+        "master_id": 998,
+        "company_id": null
+      },
+      {
+        "id": 969245,
+        "price": null,
+        "master_id": 999,
+        "company_id": null
+      },
+      {
+        "id": 969246,
+        "price": null,
+        "master_id": 1000,
+        "company_id": null
+      },
+      {
+        "id": 969247,
+        "price": null,
+        "master_id": 1001,
+        "company_id": null
+      },
+      {
+        "id": 969248,
+        "price": null,
+        "master_id": 1003,
+        "company_id": null
+      },
+      {
+        "id": 969249,
+        "price": null,
+        "master_id": 1011,
+        "company_id": null
+      },
+      {
+        "id": 969250,
+        "price": null,
+        "master_id": 1012,
+        "company_id": null
+      },
+      {
+        "id": 969251,
+        "price": null,
+        "master_id": 1013,
+        "company_id": null
+      },
+      {
+        "id": 969252,
+        "price": null,
+        "master_id": 1014,
+        "company_id": null
+      },
+      {
+        "id": 969253,
+        "price": null,
+        "master_id": 1035,
+        "company_id": null
+      },
+      {
+        "id": 969254,
+        "price": null,
+        "master_id": 1036,
+        "company_id": null
+      },
+      {
+        "id": 969255,
+        "price": null,
+        "master_id": 1038,
+        "company_id": null
+      },
+      {
+        "id": 969256,
+        "price": null,
+        "master_id": 1093,
+        "company_id": null
+      },
+      {
+        "id": 969257,
+        "price": null,
+        "master_id": 1103,
+        "company_id": null
+      },
+      {
+        "id": 969258,
+        "price": null,
+        "master_id": 1105,
+        "company_id": null
+      },
+      {
+        "id": 969259,
+        "price": null,
+        "master_id": 1106,
+        "company_id": null
+      },
+      {
+        "id": 969260,
+        "price": null,
+        "master_id": 1113,
+        "company_id": null
+      },
+      {
+        "id": 969261,
+        "price": null,
+        "master_id": 1114,
+        "company_id": null
+      },
+      {
+        "id": 969262,
+        "price": null,
+        "master_id": 1117,
+        "company_id": null
+      },
+      {
+        "id": 969263,
+        "price": null,
+        "master_id": 1164,
+        "company_id": null
+      },
+      {
+        "id": 969264,
+        "price": null,
+        "master_id": 1167,
+        "company_id": null
+      },
+      {
+        "id": 969265,
+        "price": null,
+        "master_id": 1174,
+        "company_id": null
+      },
+      {
+        "id": 969266,
+        "price": null,
+        "master_id": 1175,
+        "company_id": null
+      },
+      {
+        "id": 969267,
+        "price": null,
+        "master_id": 1176,
+        "company_id": null
+      },
+      {
+        "id": 969268,
+        "price": null,
+        "master_id": 1178,
+        "company_id": null
+      },
+      {
+        "id": 969269,
+        "price": null,
+        "master_id": 1181,
+        "company_id": null
+      },
+      {
+        "id": 969270,
+        "price": null,
+        "master_id": 1182,
+        "company_id": null
+      },
+      {
+        "id": 969271,
+        "price": null,
+        "master_id": 1183,
+        "company_id": null
+      },
+      {
+        "id": 969272,
+        "price": null,
+        "master_id": 1186,
+        "company_id": null
+      },
+      {
+        "id": 969273,
+        "price": null,
+        "master_id": 1187,
+        "company_id": null
+      },
+      {
+        "id": 969274,
+        "price": null,
+        "master_id": 1200,
+        "company_id": null
+      },
+      {
+        "id": 969275,
+        "price": null,
+        "master_id": 1205,
+        "company_id": null
+      },
+      {
+        "id": 969276,
+        "price": null,
+        "master_id": 1206,
+        "company_id": null
+      },
+      {
+        "id": 969277,
+        "price": null,
+        "master_id": 1207,
+        "company_id": null
+      },
+      {
+        "id": 969278,
+        "price": null,
+        "master_id": 1209,
+        "company_id": null
+      },
+      {
+        "id": 969279,
+        "price": null,
+        "master_id": 1210,
+        "company_id": null
+      },
+      {
+        "id": 969280,
+        "price": null,
+        "master_id": 1211,
+        "company_id": null
+      },
+      {
+        "id": 969281,
+        "price": null,
+        "master_id": 1212,
+        "company_id": null
+      },
+      {
+        "id": 969282,
+        "price": null,
+        "master_id": 1213,
+        "company_id": null
+      },
+      {
+        "id": 969283,
+        "price": null,
+        "master_id": 1214,
+        "company_id": null
+      },
+      {
+        "id": 969284,
+        "price": null,
+        "master_id": 1215,
+        "company_id": null
+      },
+      {
+        "id": 969285,
+        "price": null,
+        "master_id": 1216,
+        "company_id": null
+      },
+      {
+        "id": 969286,
+        "price": null,
+        "master_id": 1217,
+        "company_id": null
+      },
+      {
+        "id": 969287,
+        "price": null,
+        "master_id": 1218,
+        "company_id": null
+      },
+      {
+        "id": 969288,
+        "price": null,
+        "master_id": 1219,
+        "company_id": null
+      },
+      {
+        "id": 969289,
+        "price": null,
+        "master_id": 1220,
+        "company_id": null
+      },
+      {
+        "id": 969290,
+        "price": null,
+        "master_id": 1221,
+        "company_id": null
+      },
+      {
+        "id": 969291,
+        "price": null,
+        "master_id": 1222,
+        "company_id": null
+      },
+      {
+        "id": 969292,
+        "price": null,
+        "master_id": 1223,
+        "company_id": null
+      },
+      {
+        "id": 969293,
+        "price": null,
+        "master_id": 1224,
+        "company_id": null
+      },
+      {
+        "id": 969294,
+        "price": null,
+        "master_id": 1225,
+        "company_id": null
+      },
+      {
+        "id": 969295,
+        "price": null,
+        "master_id": 1226,
+        "company_id": null
+      },
+      {
+        "id": 969296,
+        "price": null,
+        "master_id": 1227,
+        "company_id": null
+      },
+      {
+        "id": 969297,
+        "price": null,
+        "master_id": 1228,
+        "company_id": null
+      },
+      {
+        "id": 969298,
+        "price": null,
+        "master_id": 1230,
+        "company_id": null
+      },
+      {
+        "id": 969299,
+        "price": null,
+        "master_id": 1234,
+        "company_id": null
+      },
+      {
+        "id": 969300,
+        "price": null,
+        "master_id": 1235,
+        "company_id": null
+      },
+      {
+        "id": 969301,
+        "price": null,
+        "master_id": 1236,
+        "company_id": null
+      },
+      {
+        "id": 969302,
+        "price": null,
+        "master_id": 1237,
+        "company_id": null
+      },
+      {
+        "id": 969303,
+        "price": null,
+        "master_id": 1248,
+        "company_id": null
+      },
+      {
+        "id": 969304,
+        "price": null,
+        "master_id": 1255,
+        "company_id": null
+      },
+      {
+        "id": 969305,
+        "price": null,
+        "master_id": 1256,
+        "company_id": null
+      },
+      {
+        "id": 969306,
+        "price": null,
+        "master_id": 1260,
+        "company_id": null
+      },
+      {
+        "id": 969307,
+        "price": null,
+        "master_id": 1267,
+        "company_id": null
+      },
+      {
+        "id": 969308,
+        "price": null,
+        "master_id": 1268,
+        "company_id": null
+      },
+      {
+        "id": 969309,
+        "price": null,
+        "master_id": 1274,
+        "company_id": null
+      },
+      {
+        "id": 969310,
+        "price": null,
+        "master_id": 1276,
+        "company_id": null
+      },
+      {
+        "id": 969311,
+        "price": null,
+        "master_id": 1277,
+        "company_id": null
+      },
+      {
+        "id": 969312,
+        "price": null,
+        "master_id": 1278,
+        "company_id": null
+      },
+      {
+        "id": 969313,
+        "price": null,
+        "master_id": 1279,
+        "company_id": null
+      },
+      {
+        "id": 969314,
+        "price": null,
+        "master_id": 1280,
+        "company_id": null
+      },
+      {
+        "id": 969315,
+        "price": null,
+        "master_id": 1281,
+        "company_id": null
+      },
+      {
+        "id": 969316,
+        "price": null,
+        "master_id": 1282,
+        "company_id": null
+      },
+      {
+        "id": 969317,
+        "price": null,
+        "master_id": 1283,
+        "company_id": null
+      },
+      {
+        "id": 969318,
+        "price": null,
+        "master_id": 1284,
+        "company_id": null
+      },
+      {
+        "id": 969319,
+        "price": null,
+        "master_id": 1285,
+        "company_id": null
+      },
+      {
+        "id": 969320,
+        "price": null,
+        "master_id": 1286,
+        "company_id": null
+      },
+      {
+        "id": 969321,
+        "price": null,
+        "master_id": 1287,
+        "company_id": null
+      },
+      {
+        "id": 969322,
+        "price": null,
+        "master_id": 1288,
+        "company_id": null
+      },
+      {
+        "id": 969323,
+        "price": null,
+        "master_id": 1289,
+        "company_id": null
+      },
+      {
+        "id": 969324,
+        "price": null,
+        "master_id": 1290,
+        "company_id": null
+      },
+      {
+        "id": 969325,
+        "price": null,
+        "master_id": 1291,
+        "company_id": null
+      },
+      {
+        "id": 969326,
+        "price": null,
+        "master_id": 1292,
+        "company_id": null
+      },
+      {
+        "id": 969327,
+        "price": null,
+        "master_id": 1293,
+        "company_id": null
+      },
+      {
+        "id": 969328,
+        "price": null,
+        "master_id": 1300,
+        "company_id": null
+      },
+      {
+        "id": 969329,
+        "price": null,
+        "master_id": 1301,
+        "company_id": null
+      },
+      {
+        "id": 969330,
+        "price": null,
+        "master_id": 1312,
+        "company_id": null
+      },
+      {
+        "id": 969331,
+        "price": null,
+        "master_id": 1313,
+        "company_id": null
+      },
+      {
+        "id": 969332,
+        "price": null,
+        "master_id": 1314,
+        "company_id": null
+      },
+      {
+        "id": 969333,
+        "price": null,
+        "master_id": 1315,
+        "company_id": null
+      },
+      {
+        "id": 969334,
+        "price": null,
+        "master_id": 1316,
+        "company_id": null
+      },
+      {
+        "id": 969335,
+        "price": null,
+        "master_id": 1317,
+        "company_id": null
+      },
+      {
+        "id": 969336,
+        "price": null,
+        "master_id": 1318,
+        "company_id": null
+      },
+      {
+        "id": 969337,
+        "price": null,
+        "master_id": 1319,
+        "company_id": null
+      },
+      {
+        "id": 969338,
+        "price": null,
+        "master_id": 1320,
+        "company_id": null
+      },
+      {
+        "id": 969339,
+        "price": null,
+        "master_id": 1321,
+        "company_id": null
+      },
+      {
+        "id": 969340,
+        "price": null,
+        "master_id": 1322,
+        "company_id": null
+      },
+      {
+        "id": 969341,
+        "price": null,
+        "master_id": 1323,
+        "company_id": null
+      },
+      {
+        "id": 969342,
+        "price": null,
+        "master_id": 1324,
+        "company_id": null
+      },
+      {
+        "id": 969343,
+        "price": null,
+        "master_id": 1325,
+        "company_id": null
+      },
+      {
+        "id": 969344,
+        "price": null,
+        "master_id": 1326,
+        "company_id": null
+      },
+      {
+        "id": 969345,
+        "price": null,
+        "master_id": 1327,
+        "company_id": null
+      },
+      {
+        "id": 969346,
+        "price": null,
+        "master_id": 1328,
+        "company_id": null
+      },
+      {
+        "id": 969347,
+        "price": null,
+        "master_id": 1329,
+        "company_id": null
+      },
+      {
+        "id": 969348,
+        "price": null,
+        "master_id": 1330,
+        "company_id": null
+      },
+      {
+        "id": 969349,
+        "price": null,
+        "master_id": 1331,
+        "company_id": null
+      },
+      {
+        "id": 969350,
+        "price": null,
+        "master_id": 1332,
+        "company_id": null
+      },
+      {
+        "id": 969351,
+        "price": null,
+        "master_id": 1333,
+        "company_id": null
+      },
+      {
+        "id": 969352,
+        "price": null,
+        "master_id": 1340,
+        "company_id": null
+      },
+      {
+        "id": 969353,
+        "price": null,
+        "master_id": 1341,
+        "company_id": null
+      },
+      {
+        "id": 969354,
+        "price": null,
+        "master_id": 1342,
+        "company_id": null
+      },
+      {
+        "id": 969355,
+        "price": null,
+        "master_id": 1343,
+        "company_id": null
+      },
+      {
+        "id": 969356,
+        "price": null,
+        "master_id": 1346,
+        "company_id": null
+      },
+      {
+        "id": 969357,
+        "price": null,
+        "master_id": 1347,
+        "company_id": null
+      },
+      {
+        "id": 969358,
+        "price": null,
+        "master_id": 1348,
+        "company_id": null
+      },
+      {
+        "id": 969359,
+        "price": null,
+        "master_id": 1349,
+        "company_id": null
+      },
+      {
+        "id": 969360,
+        "price": null,
+        "master_id": 1350,
+        "company_id": null
+      },
+      {
+        "id": 969361,
+        "price": null,
+        "master_id": 1352,
+        "company_id": null
+      },
+      {
+        "id": 969362,
+        "price": null,
+        "master_id": 1353,
+        "company_id": null
+      },
+      {
+        "id": 969363,
+        "price": null,
+        "master_id": 1354,
+        "company_id": null
+      },
+      {
+        "id": 969364,
+        "price": null,
+        "master_id": 1355,
+        "company_id": null
+      },
+      {
+        "id": 969365,
+        "price": null,
+        "master_id": 1356,
+        "company_id": null
+      },
+      {
+        "id": 969366,
+        "price": null,
+        "master_id": 1357,
+        "company_id": null
+      },
+      {
+        "id": 969367,
+        "price": null,
+        "master_id": 1359,
+        "company_id": null
+      },
+      {
+        "id": 969368,
+        "price": null,
+        "master_id": 1360,
+        "company_id": null
+      },
+      {
+        "id": 969369,
+        "price": null,
+        "master_id": 1361,
+        "company_id": null
+      },
+      {
+        "id": 969370,
+        "price": null,
+        "master_id": 1362,
+        "company_id": null
+      },
+      {
+        "id": 969371,
+        "price": null,
+        "master_id": 1363,
+        "company_id": null
+      },
+      {
+        "id": 969372,
+        "price": null,
+        "master_id": 1364,
+        "company_id": null
+      },
+      {
+        "id": 969373,
+        "price": null,
+        "master_id": 1365,
+        "company_id": null
+      },
+      {
+        "id": 969374,
+        "price": null,
+        "master_id": 1366,
+        "company_id": null
+      },
+      {
+        "id": 969375,
+        "price": null,
+        "master_id": 1367,
+        "company_id": null
+      },
+      {
+        "id": 969376,
+        "price": null,
+        "master_id": 1368,
+        "company_id": null
+      },
+      {
+        "id": 969377,
+        "price": null,
+        "master_id": 1369,
+        "company_id": null
+      },
+      {
+        "id": 969378,
+        "price": null,
+        "master_id": 1370,
+        "company_id": null
+      },
+      {
+        "id": 969379,
+        "price": null,
+        "master_id": 1371,
+        "company_id": null
+      },
+      {
+        "id": 969380,
+        "price": null,
+        "master_id": 1372,
+        "company_id": null
+      },
+      {
+        "id": 969381,
+        "price": null,
+        "master_id": 1373,
+        "company_id": null
+      },
+      {
+        "id": 969382,
+        "price": null,
+        "master_id": 1374,
+        "company_id": null
+      },
+      {
+        "id": 969383,
+        "price": null,
+        "master_id": 1375,
+        "company_id": null
+      },
+      {
+        "id": 969384,
+        "price": null,
+        "master_id": 1376,
+        "company_id": null
+      },
+      {
+        "id": 969385,
+        "price": null,
+        "master_id": 1382,
+        "company_id": null
+      },
+      {
+        "id": 969386,
+        "price": null,
+        "master_id": 1385,
+        "company_id": null
+      },
+      {
+        "id": 969387,
+        "price": null,
+        "master_id": 1391,
+        "company_id": null
+      },
+      {
+        "id": 969388,
+        "price": null,
+        "master_id": 1392,
+        "company_id": null
+      },
+      {
+        "id": 969389,
+        "price": null,
+        "master_id": 1393,
+        "company_id": null
+      },
+      {
+        "id": 969390,
+        "price": null,
+        "master_id": 1394,
+        "company_id": null
+      },
+      {
+        "id": 969391,
+        "price": null,
+        "master_id": 1395,
+        "company_id": null
+      },
+      {
+        "id": 969392,
+        "price": null,
+        "master_id": 1396,
+        "company_id": null
+      },
+      {
+        "id": 969393,
+        "price": null,
+        "master_id": 1397,
+        "company_id": null
+      },
+      {
+        "id": 969394,
+        "price": null,
+        "master_id": 1398,
+        "company_id": null
+      },
+      {
+        "id": 969395,
+        "price": null,
+        "master_id": 1399,
+        "company_id": null
+      },
+      {
+        "id": 969396,
+        "price": null,
+        "master_id": 1400,
+        "company_id": null
+      },
+      {
+        "id": 969397,
+        "price": null,
+        "master_id": 1401,
+        "company_id": null
+      },
+      {
+        "id": 969398,
+        "price": null,
+        "master_id": 1402,
+        "company_id": null
+      },
+      {
+        "id": 969399,
+        "price": null,
+        "master_id": 1403,
+        "company_id": null
+      },
+      {
+        "id": 969400,
+        "price": null,
+        "master_id": 1404,
+        "company_id": null
+      },
+      {
+        "id": 969401,
+        "price": null,
+        "master_id": 1405,
+        "company_id": null
+      },
+      {
+        "id": 969402,
+        "price": null,
+        "master_id": 1406,
+        "company_id": null
+      },
+      {
+        "id": 969403,
+        "price": null,
+        "master_id": 1407,
+        "company_id": null
+      },
+      {
+        "id": 969404,
+        "price": null,
+        "master_id": 1408,
+        "company_id": null
+      },
+      {
+        "id": 969405,
+        "price": null,
+        "master_id": 1409,
+        "company_id": null
+      },
+      {
+        "id": 969406,
+        "price": null,
+        "master_id": 1410,
+        "company_id": null
+      },
+      {
+        "id": 969407,
+        "price": null,
+        "master_id": 1411,
+        "company_id": null
+      },
+      {
+        "id": 969408,
+        "price": null,
+        "master_id": 1412,
+        "company_id": null
+      },
+      {
+        "id": 969409,
+        "price": null,
+        "master_id": 1413,
+        "company_id": null
+      },
+      {
+        "id": 969410,
+        "price": null,
+        "master_id": 1414,
+        "company_id": null
+      },
+      {
+        "id": 969411,
+        "price": null,
+        "master_id": 1415,
+        "company_id": null
+      },
+      {
+        "id": 969412,
+        "price": null,
+        "master_id": 1416,
+        "company_id": null
+      },
+      {
+        "id": 969413,
+        "price": null,
+        "master_id": 1417,
+        "company_id": null
+      },
+      {
+        "id": 969414,
+        "price": null,
+        "master_id": 1418,
+        "company_id": null
+      },
+      {
+        "id": 969415,
+        "price": null,
+        "master_id": 1419,
+        "company_id": null
+      },
+      {
+        "id": 969416,
+        "price": null,
+        "master_id": 1420,
+        "company_id": null
+      },
+      {
+        "id": 969417,
+        "price": null,
+        "master_id": 1421,
+        "company_id": null
+      },
+      {
+        "id": 969418,
+        "price": null,
+        "master_id": 1422,
+        "company_id": null
+      },
+      {
+        "id": 969419,
+        "price": null,
+        "master_id": 1424,
+        "company_id": null
+      },
+      {
+        "id": 969420,
+        "price": null,
+        "master_id": 1426,
+        "company_id": null
+      },
+      {
+        "id": 969421,
+        "price": null,
+        "master_id": 1428,
+        "company_id": null
+      },
+      {
+        "id": 969422,
+        "price": null,
+        "master_id": 1429,
+        "company_id": null
+      },
+      {
+        "id": 969423,
+        "price": null,
+        "master_id": 1430,
+        "company_id": null
+      },
+      {
+        "id": 969424,
+        "price": null,
+        "master_id": 1431,
+        "company_id": null
+      },
+      {
+        "id": 969425,
+        "price": null,
+        "master_id": 1432,
+        "company_id": null
+      },
+      {
+        "id": 969426,
+        "price": null,
+        "master_id": 1433,
+        "company_id": null
+      },
+      {
+        "id": 969427,
+        "price": null,
+        "master_id": 1439,
+        "company_id": null
+      },
+      {
+        "id": 969428,
+        "price": null,
+        "master_id": 1447,
+        "company_id": null
+      },
+      {
+        "id": 969429,
+        "price": null,
+        "master_id": 1448,
+        "company_id": null
+      },
+      {
+        "id": 969430,
+        "price": null,
+        "master_id": 1449,
+        "company_id": null
+      },
+      {
+        "id": 969431,
+        "price": null,
+        "master_id": 1450,
+        "company_id": null
+      },
+      {
+        "id": 969432,
+        "price": null,
+        "master_id": 1451,
+        "company_id": null
+      },
+      {
+        "id": 969433,
+        "price": null,
+        "master_id": 1452,
+        "company_id": null
+      },
+      {
+        "id": 969434,
+        "price": null,
+        "master_id": 1453,
+        "company_id": null
+      },
+      {
+        "id": 969435,
+        "price": null,
+        "master_id": 1454,
+        "company_id": null
+      },
+      {
+        "id": 969436,
+        "price": null,
+        "master_id": 1455,
+        "company_id": null
+      },
+      {
+        "id": 969437,
+        "price": null,
+        "master_id": 1456,
+        "company_id": null
+      },
+      {
+        "id": 969438,
+        "price": null,
+        "master_id": 1457,
+        "company_id": null
+      },
+      {
+        "id": 969439,
+        "price": null,
+        "master_id": 1458,
+        "company_id": null
+      },
+      {
+        "id": 969440,
+        "price": null,
+        "master_id": 1459,
+        "company_id": null
+      },
+      {
+        "id": 969441,
+        "price": null,
+        "master_id": 1460,
+        "company_id": null
+      },
+      {
+        "id": 969442,
+        "price": null,
+        "master_id": 1461,
+        "company_id": null
+      },
+      {
+        "id": 969443,
+        "price": null,
+        "master_id": 1462,
+        "company_id": null
+      },
+      {
+        "id": 969444,
+        "price": null,
+        "master_id": 1464,
+        "company_id": null
+      },
+      {
+        "id": 969445,
+        "price": null,
+        "master_id": 1465,
+        "company_id": null
+      },
+      {
+        "id": 969446,
+        "price": null,
+        "master_id": 1466,
+        "company_id": null
+      },
+      {
+        "id": 969447,
+        "price": null,
+        "master_id": 1470,
+        "company_id": null
+      },
+      {
+        "id": 969448,
+        "price": null,
+        "master_id": 1475,
+        "company_id": null
+      },
+      {
+        "id": 969449,
+        "price": null,
+        "master_id": 1487,
+        "company_id": null
+      },
+      {
+        "id": 969450,
+        "price": null,
+        "master_id": 1489,
+        "company_id": null
+      },
+      {
+        "id": 969451,
+        "price": null,
+        "master_id": 1490,
+        "company_id": null
+      },
+      {
+        "id": 969452,
+        "price": null,
+        "master_id": 1491,
+        "company_id": null
+      },
+      {
+        "id": 969453,
+        "price": null,
+        "master_id": 1492,
+        "company_id": null
+      },
+      {
+        "id": 969454,
+        "price": null,
+        "master_id": 1493,
+        "company_id": null
+      },
+      {
+        "id": 969455,
+        "price": null,
+        "master_id": 1494,
+        "company_id": null
+      },
+      {
+        "id": 969456,
+        "price": null,
+        "master_id": 1495,
+        "company_id": null
+      },
+      {
+        "id": 969457,
+        "price": null,
+        "master_id": 1496,
+        "company_id": null
+      },
+      {
+        "id": 969458,
+        "price": null,
+        "master_id": 1497,
+        "company_id": null
+      },
+      {
+        "id": 969459,
+        "price": null,
+        "master_id": 1498,
+        "company_id": null
+      },
+      {
+        "id": 969460,
+        "price": null,
+        "master_id": 1499,
+        "company_id": null
+      },
+      {
+        "id": 969461,
+        "price": null,
+        "master_id": 1500,
+        "company_id": null
+      },
+      {
+        "id": 969462,
+        "price": null,
+        "master_id": 1501,
+        "company_id": null
+      },
+      {
+        "id": 969463,
+        "price": null,
+        "master_id": 1502,
+        "company_id": null
+      },
+      {
+        "id": 969464,
+        "price": null,
+        "master_id": 1503,
+        "company_id": null
+      },
+      {
+        "id": 969465,
+        "price": null,
+        "master_id": 1504,
+        "company_id": null
+      },
+      {
+        "id": 969466,
+        "price": null,
+        "master_id": 1505,
+        "company_id": null
+      },
+      {
+        "id": 969467,
+        "price": null,
+        "master_id": 1506,
+        "company_id": null
+      },
+      {
+        "id": 969468,
+        "price": null,
+        "master_id": 1507,
+        "company_id": null
+      },
+      {
+        "id": 969469,
+        "price": null,
+        "master_id": 1508,
+        "company_id": null
+      },
+      {
+        "id": 969470,
+        "price": null,
+        "master_id": 1509,
+        "company_id": null
+      },
+      {
+        "id": 969471,
+        "price": null,
+        "master_id": 1510,
+        "company_id": null
+      },
+      {
+        "id": 969472,
+        "price": null,
+        "master_id": 1511,
+        "company_id": null
+      },
+      {
+        "id": 969473,
+        "price": null,
+        "master_id": 1512,
+        "company_id": null
+      },
+      {
+        "id": 969474,
+        "price": null,
+        "master_id": 1513,
+        "company_id": null
+      },
+      {
+        "id": 969475,
+        "price": null,
+        "master_id": 1520,
+        "company_id": null
+      },
+      {
+        "id": 969476,
+        "price": null,
+        "master_id": 1534,
+        "company_id": null
+      },
+      {
+        "id": 969477,
+        "price": null,
+        "master_id": 1537,
+        "company_id": null
+      },
+      {
+        "id": 969478,
+        "price": null,
+        "master_id": 1542,
+        "company_id": null
+      },
+      {
+        "id": 969479,
+        "price": null,
+        "master_id": 1543,
+        "company_id": null
+      },
+      {
+        "id": 969480,
+        "price": null,
+        "master_id": 1549,
+        "company_id": null
+      },
+      {
+        "id": 969481,
+        "price": null,
+        "master_id": 1551,
+        "company_id": null
+      },
+      {
+        "id": 969482,
+        "price": null,
+        "master_id": 1552,
+        "company_id": null
+      },
+      {
+        "id": 969483,
+        "price": null,
+        "master_id": 1553,
+        "company_id": null
+      },
+      {
+        "id": 969484,
+        "price": null,
+        "master_id": 1554,
+        "company_id": null
+      },
+      {
+        "id": 969485,
+        "price": null,
+        "master_id": 1555,
+        "company_id": null
+      },
+      {
+        "id": 969486,
+        "price": null,
+        "master_id": 1556,
+        "company_id": null
+      },
+      {
+        "id": 969487,
+        "price": null,
+        "master_id": 1557,
+        "company_id": null
+      },
+      {
+        "id": 969488,
+        "price": null,
+        "master_id": 1558,
+        "company_id": null
+      },
+      {
+        "id": 969489,
+        "price": null,
+        "master_id": 1559,
+        "company_id": null
+      },
+      {
+        "id": 969490,
+        "price": null,
+        "master_id": 1560,
+        "company_id": null
+      },
+      {
+        "id": 969491,
+        "price": null,
+        "master_id": 1561,
+        "company_id": null
+      },
+      {
+        "id": 969492,
+        "price": null,
+        "master_id": 1562,
+        "company_id": null
+      },
+      {
+        "id": 969493,
+        "price": null,
+        "master_id": 1563,
+        "company_id": null
+      },
+      {
+        "id": 969494,
+        "price": null,
+        "master_id": 1568,
+        "company_id": null
+      },
+      {
+        "id": 969495,
+        "price": null,
+        "master_id": 1575,
+        "company_id": null
+      },
+      {
+        "id": 969496,
+        "price": null,
+        "master_id": 1577,
+        "company_id": null
+      },
+      {
+        "id": 969497,
+        "price": null,
+        "master_id": 1579,
+        "company_id": null
+      },
+      {
+        "id": 969498,
+        "price": null,
+        "master_id": 1580,
+        "company_id": null
+      },
+      {
+        "id": 969499,
+        "price": null,
+        "master_id": 1581,
+        "company_id": null
+      },
+      {
+        "id": 969500,
+        "price": null,
+        "master_id": 1583,
+        "company_id": null
+      },
+      {
+        "id": 969501,
+        "price": null,
+        "master_id": 1585,
+        "company_id": null
+      },
+      {
+        "id": 969502,
+        "price": null,
+        "master_id": 1586,
+        "company_id": null
+      },
+      {
+        "id": 969503,
+        "price": null,
+        "master_id": 1587,
+        "company_id": null
+      },
+      {
+        "id": 969504,
+        "price": null,
+        "master_id": 1588,
+        "company_id": null
+      },
+      {
+        "id": 969505,
+        "price": null,
+        "master_id": 1589,
+        "company_id": null
+      },
+      {
+        "id": 969506,
+        "price": null,
+        "master_id": 1590,
+        "company_id": null
+      },
+      {
+        "id": 969507,
+        "price": null,
+        "master_id": 1591,
+        "company_id": null
+      },
+      {
+        "id": 969508,
+        "price": null,
+        "master_id": 1592,
+        "company_id": null
+      },
+      {
+        "id": 969509,
+        "price": null,
+        "master_id": 1593,
+        "company_id": null
+      },
+      {
+        "id": 969510,
+        "price": null,
+        "master_id": 1594,
+        "company_id": null
+      },
+      {
+        "id": 969511,
+        "price": null,
+        "master_id": 1595,
+        "company_id": null
+      },
+      {
+        "id": 969512,
+        "price": null,
+        "master_id": 1596,
+        "company_id": null
+      },
+      {
+        "id": 969513,
+        "price": null,
+        "master_id": 1597,
+        "company_id": null
+      },
+      {
+        "id": 969514,
+        "price": null,
+        "master_id": 1598,
+        "company_id": null
+      },
+      {
+        "id": 969515,
+        "price": null,
+        "master_id": 1601,
+        "company_id": null
+      },
+      {
+        "id": 969516,
+        "price": null,
+        "master_id": 1602,
+        "company_id": null
+      },
+      {
+        "id": 969517,
+        "price": null,
+        "master_id": 1603,
+        "company_id": null
+      },
+      {
+        "id": 969518,
+        "price": null,
+        "master_id": 1604,
+        "company_id": null
+      },
+      {
+        "id": 969519,
+        "price": null,
+        "master_id": 1605,
+        "company_id": null
+      },
+      {
+        "id": 969520,
+        "price": null,
+        "master_id": 1606,
+        "company_id": null
+      },
+      {
+        "id": 969521,
+        "price": null,
+        "master_id": 1607,
+        "company_id": null
+      },
+      {
+        "id": 969522,
+        "price": null,
+        "master_id": 1608,
+        "company_id": null
+      },
+      {
+        "id": 969523,
+        "price": null,
+        "master_id": 1609,
+        "company_id": null
+      },
+      {
+        "id": 969524,
+        "price": null,
+        "master_id": 1610,
+        "company_id": null
+      },
+      {
+        "id": 969525,
+        "price": null,
+        "master_id": 1611,
+        "company_id": null
+      },
+      {
+        "id": 969526,
+        "price": null,
+        "master_id": 1612,
+        "company_id": null
+      },
+      {
+        "id": 969527,
+        "price": null,
+        "master_id": 1613,
+        "company_id": null
+      },
+      {
+        "id": 969528,
+        "price": null,
+        "master_id": 1614,
+        "company_id": null
+      },
+      {
+        "id": 969529,
+        "price": null,
+        "master_id": 1615,
+        "company_id": null
+      },
+      {
+        "id": 969530,
+        "price": null,
+        "master_id": 1616,
+        "company_id": null
+      },
+      {
+        "id": 969531,
+        "price": null,
+        "master_id": 1617,
+        "company_id": null
+      },
+      {
+        "id": 969532,
+        "price": null,
+        "master_id": 1619,
+        "company_id": null
+      },
+      {
+        "id": 969533,
+        "price": null,
+        "master_id": 1626,
+        "company_id": null
+      },
+      {
+        "id": 969534,
+        "price": null,
+        "master_id": 1627,
+        "company_id": null
+      },
+      {
+        "id": 969535,
+        "price": null,
+        "master_id": 1639,
+        "company_id": null
+      },
+      {
+        "id": 969536,
+        "price": null,
+        "master_id": 1640,
+        "company_id": null
+      },
+      {
+        "id": 969537,
+        "price": null,
+        "master_id": 1649,
+        "company_id": null
+      },
+      {
+        "id": 969538,
+        "price": null,
+        "master_id": 1650,
+        "company_id": null
+      },
+      {
+        "id": 969539,
+        "price": null,
+        "master_id": 1657,
+        "company_id": null
+      },
+      {
+        "id": 969540,
+        "price": null,
+        "master_id": 1658,
+        "company_id": null
+      },
+      {
+        "id": 969541,
+        "price": null,
+        "master_id": 1659,
+        "company_id": null
+      },
+      {
+        "id": 969542,
+        "price": null,
+        "master_id": 1662,
+        "company_id": null
+      },
+      {
+        "id": 969543,
+        "price": null,
+        "master_id": 1664,
+        "company_id": null
+      },
+      {
+        "id": 969544,
+        "price": null,
+        "master_id": 1665,
+        "company_id": null
+      },
+      {
+        "id": 969545,
+        "price": null,
+        "master_id": 1669,
+        "company_id": null
+      },
+      {
+        "id": 969546,
+        "price": null,
+        "master_id": 1676,
+        "company_id": null
+      },
+      {
+        "id": 969547,
+        "price": null,
+        "master_id": 1681,
+        "company_id": null
+      },
+      {
+        "id": 969548,
+        "price": null,
+        "master_id": 1688,
+        "company_id": null
+      },
+      {
+        "id": 969549,
+        "price": null,
+        "master_id": 1693,
+        "company_id": null
+      },
+      {
+        "id": 969550,
+        "price": null,
+        "master_id": 1700,
+        "company_id": null
+      },
+      {
+        "id": 969551,
+        "price": null,
+        "master_id": 1706,
+        "company_id": null
+      },
+      {
+        "id": 969552,
+        "price": null,
+        "master_id": 1715,
+        "company_id": null
+      },
+      {
+        "id": 969553,
+        "price": null,
+        "master_id": 1724,
+        "company_id": null
+      },
+      {
+        "id": 969554,
+        "price": null,
+        "master_id": 1738,
+        "company_id": null
+      },
+      {
+        "id": 969555,
+        "price": null,
+        "master_id": 1739,
+        "company_id": null
+      },
+      {
+        "id": 969556,
+        "price": null,
+        "master_id": 1740,
+        "company_id": null
+      },
+      {
+        "id": 969557,
+        "price": null,
+        "master_id": 1741,
+        "company_id": null
+      },
+      {
+        "id": 969558,
+        "price": null,
+        "master_id": 1742,
+        "company_id": null
+      },
+      {
+        "id": 969559,
+        "price": null,
+        "master_id": 1743,
+        "company_id": null
+      },
+      {
+        "id": 969560,
+        "price": null,
+        "master_id": 1744,
+        "company_id": null
+      },
+      {
+        "id": 969561,
+        "price": null,
+        "master_id": 1745,
+        "company_id": null
+      },
+      {
+        "id": 969562,
+        "price": null,
+        "master_id": 1751,
+        "company_id": null
+      },
+      {
+        "id": 969563,
+        "price": null,
+        "master_id": 1772,
+        "company_id": null
+      },
+      {
+        "id": 969564,
+        "price": null,
+        "master_id": 1811,
+        "company_id": null
+      },
+      {
+        "id": 969565,
+        "price": null,
+        "master_id": 1818,
+        "company_id": null
+      },
+      {
+        "id": 969566,
+        "price": null,
+        "master_id": 1829,
+        "company_id": null
+      },
+      {
+        "id": 969567,
+        "price": null,
+        "master_id": 1835,
+        "company_id": null
+      },
+      {
+        "id": 969568,
+        "price": null,
+        "master_id": 1838,
+        "company_id": null
+      },
+      {
+        "id": 969569,
+        "price": null,
+        "master_id": 1839,
+        "company_id": null
+      },
+      {
+        "id": 969570,
+        "price": null,
+        "master_id": 1840,
+        "company_id": null
+      },
+      {
+        "id": 969571,
+        "price": null,
+        "master_id": 1845,
+        "company_id": null
+      },
+      {
+        "id": 969572,
+        "price": null,
+        "master_id": 1858,
+        "company_id": null
+      },
+      {
+        "id": 969573,
+        "price": null,
+        "master_id": 1891,
+        "company_id": null
+      },
+      {
+        "id": 969574,
+        "price": null,
+        "master_id": 1892,
+        "company_id": null
+      },
+      {
+        "id": 969575,
+        "price": null,
+        "master_id": 1893,
+        "company_id": null
+      },
+      {
+        "id": 969576,
+        "price": null,
+        "master_id": 1894,
+        "company_id": null
+      },
+      {
+        "id": 969577,
+        "price": null,
+        "master_id": 1910,
+        "company_id": null
+      },
+      {
+        "id": 969578,
+        "price": null,
+        "master_id": 1922,
+        "company_id": null
+      },
+      {
+        "id": 969579,
+        "price": null,
+        "master_id": 1974,
+        "company_id": null
+      },
+      {
+        "id": 969580,
+        "price": null,
+        "master_id": 1975,
+        "company_id": null
+      },
+      {
+        "id": 969581,
+        "price": null,
+        "master_id": 1978,
+        "company_id": null
+      },
+      {
+        "id": 969582,
+        "price": null,
+        "master_id": 1980,
+        "company_id": null
+      },
+      {
+        "id": 969583,
+        "price": null,
+        "master_id": 2001,
+        "company_id": null
+      },
+      {
+        "id": 969584,
+        "price": null,
+        "master_id": 2014,
+        "company_id": null
+      },
+      {
+        "id": 969585,
+        "price": null,
+        "master_id": 2041,
+        "company_id": null
+      },
+      {
+        "id": 969586,
+        "price": null,
+        "master_id": 2042,
+        "company_id": null
+      },
+      {
+        "id": 969587,
+        "price": null,
+        "master_id": 2060,
+        "company_id": null
+      },
+      {
+        "id": 969588,
+        "price": null,
+        "master_id": 2128,
+        "company_id": null
+      },
+      {
+        "id": 969589,
+        "price": null,
+        "master_id": 2154,
+        "company_id": null
+      },
+      {
+        "id": 969590,
+        "price": null,
+        "master_id": 2163,
+        "company_id": null
+      },
+      {
+        "id": 969591,
+        "price": null,
+        "master_id": 2195,
+        "company_id": null
+      },
+      {
+        "id": 969592,
+        "price": null,
+        "master_id": 2213,
+        "company_id": null
+      },
+      {
+        "id": 969593,
+        "price": null,
+        "master_id": 2214,
+        "company_id": null
+      },
+      {
+        "id": 969594,
+        "price": null,
+        "master_id": 2240,
+        "company_id": null
+      },
+      {
+        "id": 969595,
+        "price": null,
+        "master_id": 2253,
+        "company_id": null
+      },
+      {
+        "id": 969596,
+        "price": null,
+        "master_id": 2268,
+        "company_id": null
+      },
+      {
+        "id": 969597,
+        "price": null,
+        "master_id": 2275,
+        "company_id": null
+      },
+      {
+        "id": 969598,
+        "price": null,
+        "master_id": 2282,
+        "company_id": null
+      },
+      {
+        "id": 969599,
+        "price": null,
+        "master_id": 2283,
+        "company_id": null
+      },
+      {
+        "id": 969600,
+        "price": null,
+        "master_id": 2284,
+        "company_id": null
+      },
+      {
+        "id": 969601,
+        "price": null,
+        "master_id": 2285,
+        "company_id": null
+      },
+      {
+        "id": 969602,
+        "price": null,
+        "master_id": 2301,
+        "company_id": null
+      },
+      {
+        "id": 969603,
+        "price": null,
+        "master_id": 2317,
+        "company_id": null
+      },
+      {
+        "id": 969604,
+        "price": null,
+        "master_id": 2323,
+        "company_id": null
+      },
+      {
+        "id": 969605,
+        "price": null,
+        "master_id": 2332,
+        "company_id": null
+      },
+      {
+        "id": 969606,
+        "price": null,
+        "master_id": 2337,
+        "company_id": null
+      },
+      {
+        "id": 969607,
+        "price": null,
+        "master_id": 2351,
+        "company_id": null
+      },
+      {
+        "id": 969608,
+        "price": null,
+        "master_id": 2361,
+        "company_id": null
+      },
+      {
+        "id": 969609,
+        "price": null,
+        "master_id": 2362,
+        "company_id": null
+      },
+      {
+        "id": 969610,
+        "price": null,
+        "master_id": 2363,
+        "company_id": null
+      },
+      {
+        "id": 969611,
+        "price": null,
+        "master_id": 2368,
+        "company_id": null
+      },
+      {
+        "id": 969612,
+        "price": null,
+        "master_id": 2375,
+        "company_id": null
+      },
+      {
+        "id": 969613,
+        "price": null,
+        "master_id": 2397,
+        "company_id": null
+      },
+      {
+        "id": 969614,
+        "price": null,
+        "master_id": 2398,
+        "company_id": null
+      },
+      {
+        "id": 969615,
+        "price": null,
+        "master_id": 2403,
+        "company_id": null
+      },
+      {
+        "id": 969616,
+        "price": null,
+        "master_id": 2494,
+        "company_id": null
+      },
+      {
+        "id": 969617,
+        "price": null,
+        "master_id": 4042,
+        "company_id": null
+      },
+      {
+        "id": 969618,
+        "price": null,
+        "master_id": 4050,
+        "company_id": null
+      },
+      {
+        "id": 969619,
+        "price": null,
+        "master_id": 4067,
+        "company_id": null
+      },
+      {
+        "id": 969620,
+        "price": null,
+        "master_id": 4076,
+        "company_id": null
+      },
+      {
+        "id": 969621,
+        "price": null,
+        "master_id": 4080,
+        "company_id": null
+      },
+      {
+        "id": 969622,
+        "price": null,
+        "master_id": 4085,
+        "company_id": null
+      },
+      {
+        "id": 969623,
+        "price": null,
+        "master_id": 4091,
+        "company_id": null
+      },
+      {
+        "id": 969624,
+        "price": null,
+        "master_id": 4096,
+        "company_id": null
+      },
+      {
+        "id": 969625,
+        "price": null,
+        "master_id": 4099,
+        "company_id": null
+      },
+      {
+        "id": 969626,
+        "price": null,
+        "master_id": 4103,
+        "company_id": null
+      },
+      {
+        "id": 969627,
+        "price": null,
+        "master_id": 4106,
+        "company_id": null
+      },
+      {
+        "id": 969628,
+        "price": null,
+        "master_id": 4116,
+        "company_id": null
+      },
+      {
+        "id": 969629,
+        "price": null,
+        "master_id": 4120,
+        "company_id": null
+      },
+      {
+        "id": 969630,
+        "price": null,
+        "master_id": 4125,
+        "company_id": null
+      },
+      {
+        "id": 969631,
+        "price": null,
+        "master_id": 4127,
+        "company_id": null
+      },
+      {
+        "id": 969632,
+        "price": null,
+        "master_id": 4130,
+        "company_id": null
+      },
+      {
+        "id": 969633,
+        "price": null,
+        "master_id": 4298,
+        "company_id": null
+      },
+      {
+        "id": 969634,
+        "price": null,
+        "master_id": 4299,
+        "company_id": null
+      },
+      {
+        "id": 969635,
+        "price": null,
+        "master_id": 4302,
+        "company_id": null
+      },
+      {
+        "id": 969636,
+        "price": null,
+        "master_id": 4303,
+        "company_id": null
+      },
+      {
+        "id": 969637,
+        "price": null,
+        "master_id": 4305,
+        "company_id": null
+      },
+      {
+        "id": 969638,
+        "price": null,
+        "master_id": 4306,
+        "company_id": null
+      },
+      {
+        "id": 969639,
+        "price": null,
+        "master_id": 4307,
+        "company_id": null
+      },
+      {
+        "id": 969640,
+        "price": null,
+        "master_id": 4308,
+        "company_id": null
+      },
+      {
+        "id": 969641,
+        "price": null,
+        "master_id": 4309,
+        "company_id": null
+      },
+      {
+        "id": 969642,
+        "price": null,
+        "master_id": 4310,
+        "company_id": null
+      },
+      {
+        "id": 969643,
+        "price": null,
+        "master_id": 4311,
+        "company_id": null
+      },
+      {
+        "id": 969644,
+        "price": null,
+        "master_id": 4312,
+        "company_id": null
+      },
+      {
+        "id": 969645,
+        "price": null,
+        "master_id": 4313,
+        "company_id": null
+      },
+      {
+        "id": 969646,
+        "price": null,
+        "master_id": 4314,
+        "company_id": null
+      },
+      {
+        "id": 969647,
+        "price": null,
+        "master_id": 4315,
+        "company_id": null
+      },
+      {
+        "id": 969648,
+        "price": null,
+        "master_id": 4316,
+        "company_id": null
+      },
+      {
+        "id": 969649,
+        "price": null,
+        "master_id": 4317,
+        "company_id": null
+      },
+      {
+        "id": 969650,
+        "price": null,
+        "master_id": 4318,
+        "company_id": null
+      },
+      {
+        "id": 969651,
+        "price": null,
+        "master_id": 4319,
+        "company_id": null
+      },
+      {
+        "id": 969652,
+        "price": null,
+        "master_id": 4320,
+        "company_id": null
+      },
+      {
+        "id": 969653,
+        "price": null,
+        "master_id": 4321,
+        "company_id": null
+      },
+      {
+        "id": 969654,
+        "price": null,
+        "master_id": 4322,
+        "company_id": null
+      },
+      {
+        "id": 969655,
+        "price": null,
+        "master_id": 4323,
+        "company_id": null
+      },
+      {
+        "id": 969656,
+        "price": null,
+        "master_id": 4324,
+        "company_id": null
+      },
+      {
+        "id": 969657,
+        "price": null,
+        "master_id": 4325,
+        "company_id": null
+      },
+      {
+        "id": 969658,
+        "price": null,
+        "master_id": 4326,
+        "company_id": null
+      },
+      {
+        "id": 969659,
+        "price": null,
+        "master_id": 4327,
+        "company_id": null
+      },
+      {
+        "id": 969660,
+        "price": null,
+        "master_id": 4328,
+        "company_id": null
+      },
+      {
+        "id": 969661,
+        "price": null,
+        "master_id": 4329,
+        "company_id": null
+      },
+      {
+        "id": 969662,
+        "price": null,
+        "master_id": 4330,
+        "company_id": null
+      },
+      {
+        "id": 969663,
+        "price": null,
+        "master_id": 4331,
+        "company_id": null
+      },
+      {
+        "id": 969664,
+        "price": null,
+        "master_id": 4332,
+        "company_id": null
+      },
+      {
+        "id": 969665,
+        "price": null,
+        "master_id": 4333,
+        "company_id": null
+      },
+      {
+        "id": 969666,
+        "price": null,
+        "master_id": 4334,
+        "company_id": null
+      },
+      {
+        "id": 969667,
+        "price": null,
+        "master_id": 4335,
+        "company_id": null
+      },
+      {
+        "id": 969668,
+        "price": null,
+        "master_id": 4336,
+        "company_id": null
+      },
+      {
+        "id": 969669,
+        "price": null,
+        "master_id": 4337,
+        "company_id": null
+      },
+      {
+        "id": 969670,
+        "price": null,
+        "master_id": 4338,
+        "company_id": null
+      },
+      {
+        "id": 969671,
+        "price": null,
+        "master_id": 4339,
+        "company_id": null
+      },
+      {
+        "id": 969672,
+        "price": null,
+        "master_id": 4340,
+        "company_id": null
+      },
+      {
+        "id": 969673,
+        "price": null,
+        "master_id": 4341,
+        "company_id": null
+      },
+      {
+        "id": 969674,
+        "price": null,
+        "master_id": 4342,
+        "company_id": null
+      },
+      {
+        "id": 969675,
+        "price": null,
+        "master_id": 4343,
+        "company_id": null
+      },
+      {
+        "id": 969676,
+        "price": null,
+        "master_id": 4344,
+        "company_id": null
+      },
+      {
+        "id": 969677,
+        "price": null,
+        "master_id": 4345,
+        "company_id": null
+      },
+      {
+        "id": 969678,
+        "price": null,
+        "master_id": 4346,
+        "company_id": null
+      },
+      {
+        "id": 969679,
+        "price": null,
+        "master_id": 4347,
+        "company_id": null
+      },
+      {
+        "id": 969680,
+        "price": null,
+        "master_id": 4348,
+        "company_id": null
+      },
+      {
+        "id": 969681,
+        "price": null,
+        "master_id": 4349,
+        "company_id": null
+      },
+      {
+        "id": 969682,
+        "price": null,
+        "master_id": 4350,
+        "company_id": null
+      },
+      {
+        "id": 969683,
+        "price": null,
+        "master_id": 4351,
+        "company_id": null
+      },
+      {
+        "id": 969684,
+        "price": null,
+        "master_id": 4352,
+        "company_id": null
+      },
+      {
+        "id": 969685,
+        "price": null,
+        "master_id": 4353,
+        "company_id": null
+      },
+      {
+        "id": 969686,
+        "price": null,
+        "master_id": 4354,
+        "company_id": null
+      },
+      {
+        "id": 969687,
+        "price": null,
+        "master_id": 4355,
+        "company_id": null
+      },
+      {
+        "id": 969688,
+        "price": null,
+        "master_id": 4356,
+        "company_id": null
+      },
+      {
+        "id": 969689,
+        "price": null,
+        "master_id": 4357,
+        "company_id": null
+      },
+      {
+        "id": 969690,
+        "price": null,
+        "master_id": 4358,
+        "company_id": null
+      },
+      {
+        "id": 969691,
+        "price": null,
+        "master_id": 4359,
+        "company_id": null
+      },
+      {
+        "id": 969692,
+        "price": null,
+        "master_id": 4360,
+        "company_id": null
+      },
+      {
+        "id": 969693,
+        "price": null,
+        "master_id": 4361,
+        "company_id": null
+      },
+      {
+        "id": 969694,
+        "price": null,
+        "master_id": 4362,
+        "company_id": null
+      },
+      {
+        "id": 969695,
+        "price": null,
+        "master_id": 4363,
+        "company_id": null
+      },
+      {
+        "id": 969696,
+        "price": null,
+        "master_id": 4364,
+        "company_id": null
+      },
+      {
+        "id": 969697,
+        "price": null,
+        "master_id": 4365,
+        "company_id": null
+      },
+      {
+        "id": 969698,
+        "price": null,
+        "master_id": 4366,
+        "company_id": null
+      },
+      {
+        "id": 969699,
+        "price": null,
+        "master_id": 4367,
+        "company_id": null
+      },
+      {
+        "id": 969700,
+        "price": null,
+        "master_id": 4368,
+        "company_id": null
+      },
+      {
+        "id": 969701,
+        "price": null,
+        "master_id": 4369,
+        "company_id": null
+      },
+      {
+        "id": 969702,
+        "price": null,
+        "master_id": 4370,
+        "company_id": null
+      },
+      {
+        "id": 969703,
+        "price": null,
+        "master_id": 4371,
+        "company_id": null
+      },
+      {
+        "id": 969704,
+        "price": null,
+        "master_id": 4374,
+        "company_id": null
+      },
+      {
+        "id": 969705,
+        "price": null,
+        "master_id": 4375,
+        "company_id": null
+      },
+      {
+        "id": 969706,
+        "price": null,
+        "master_id": 4384,
+        "company_id": null
+      },
+      {
+        "id": 969707,
+        "price": null,
+        "master_id": 4385,
+        "company_id": null
+      },
+      {
+        "id": 969708,
+        "price": null,
+        "master_id": 4388,
+        "company_id": null
+      },
+      {
+        "id": 969709,
+        "price": null,
+        "master_id": 4398,
+        "company_id": null
+      },
+      {
+        "id": 969710,
+        "price": null,
+        "master_id": 4475,
+        "company_id": null
+      },
+      {
+        "id": 969711,
+        "price": null,
+        "master_id": 4476,
+        "company_id": null
+      },
+      {
+        "id": 969712,
+        "price": null,
+        "master_id": 4477,
+        "company_id": null
+      },
+      {
+        "id": 969713,
+        "price": null,
+        "master_id": 4478,
+        "company_id": null
+      },
+      {
+        "id": 969714,
+        "price": null,
+        "master_id": 4479,
+        "company_id": null
+      },
+      {
+        "id": 969715,
+        "price": null,
+        "master_id": 4494,
+        "company_id": null
+      },
+      {
+        "id": 969716,
+        "price": null,
+        "master_id": 4501,
+        "company_id": null
+      },
+      {
+        "id": 969717,
+        "price": null,
+        "master_id": 4502,
+        "company_id": null
+      },
+      {
+        "id": 969718,
+        "price": null,
+        "master_id": 4503,
+        "company_id": null
+      },
+      {
+        "id": 969719,
+        "price": null,
+        "master_id": 4547,
+        "company_id": null
+      },
+      {
+        "id": 969720,
+        "price": null,
+        "master_id": 4549,
+        "company_id": null
+      },
+      {
+        "id": 969721,
+        "price": null,
+        "master_id": 4551,
+        "company_id": null
+      },
+      {
+        "id": 969722,
+        "price": null,
+        "master_id": 4553,
+        "company_id": null
+      },
+      {
+        "id": 969723,
+        "price": null,
+        "master_id": 4555,
+        "company_id": null
+      },
+      {
+        "id": 969724,
+        "price": null,
+        "master_id": 4604,
+        "company_id": null
+      },
+      {
+        "id": 969725,
+        "price": null,
+        "master_id": 4605,
+        "company_id": null
+      },
+      {
+        "id": 969726,
+        "price": null,
+        "master_id": 4616,
+        "company_id": null
+      },
+      {
+        "id": 969727,
+        "price": null,
+        "master_id": 4617,
+        "company_id": null
+      },
+      {
+        "id": 969728,
+        "price": null,
+        "master_id": 4618,
+        "company_id": null
+      },
+      {
+        "id": 969729,
+        "price": null,
+        "master_id": 4619,
+        "company_id": null
+      },
+      {
+        "id": 969730,
+        "price": null,
+        "master_id": 4620,
+        "company_id": null
+      },
+      {
+        "id": 969731,
+        "price": null,
+        "master_id": 4707,
+        "company_id": null
+      },
+      {
+        "id": 969732,
+        "price": null,
+        "master_id": 4708,
+        "company_id": null
+      },
+      {
+        "id": 969733,
+        "price": null,
+        "master_id": 4718,
+        "company_id": null
+      },
+      {
+        "id": 969734,
+        "price": null,
+        "master_id": 4742,
+        "company_id": null
+      },
+      {
+        "id": 969735,
+        "price": null,
+        "master_id": 4743,
+        "company_id": null
+      },
+      {
+        "id": 969736,
+        "price": null,
+        "master_id": 4755,
+        "company_id": null
+      },
+      {
+        "id": 969737,
+        "price": null,
+        "master_id": 4756,
+        "company_id": null
+      },
+      {
+        "id": 969738,
+        "price": null,
+        "master_id": 4757,
+        "company_id": null
+      },
+      {
+        "id": 969739,
+        "price": null,
+        "master_id": 4758,
+        "company_id": null
+      },
+      {
+        "id": 969740,
+        "price": null,
+        "master_id": 4759,
+        "company_id": null
+      },
+      {
+        "id": 969741,
+        "price": null,
+        "master_id": 4847,
+        "company_id": null
+      },
+      {
+        "id": 969742,
+        "price": null,
+        "master_id": 4848,
+        "company_id": null
+      },
+      {
+        "id": 969743,
+        "price": null,
+        "master_id": 4989,
+        "company_id": null
+      },
+      {
+        "id": 969744,
+        "price": null,
+        "master_id": 4990,
+        "company_id": null
+      },
+      {
+        "id": 969745,
+        "price": null,
+        "master_id": 4991,
+        "company_id": null
+      },
+      {
+        "id": 969746,
+        "price": null,
+        "master_id": 4992,
+        "company_id": null
+      },
+      {
+        "id": 969747,
+        "price": null,
+        "master_id": 4993,
+        "company_id": null
+      },
+      {
+        "id": 969748,
+        "price": null,
+        "master_id": 4995,
+        "company_id": null
+      },
+      {
+        "id": 969749,
+        "price": null,
+        "master_id": 4996,
+        "company_id": null
+      },
+      {
+        "id": 969750,
+        "price": null,
+        "master_id": 5045,
+        "company_id": null
+      },
+      {
+        "id": 969751,
+        "price": null,
+        "master_id": 5046,
+        "company_id": null
+      },
+      {
+        "id": 969752,
+        "price": null,
+        "master_id": 5049,
+        "company_id": null
+      },
+      {
+        "id": 969753,
+        "price": null,
+        "master_id": 5050,
+        "company_id": null
+      },
+      {
+        "id": 969754,
+        "price": null,
+        "master_id": 5084,
+        "company_id": null
+      },
+      {
+        "id": 969755,
+        "price": null,
+        "master_id": 5085,
+        "company_id": null
+      },
+      {
+        "id": 969756,
+        "price": null,
+        "master_id": 5086,
+        "company_id": null
+      },
+      {
+        "id": 969757,
+        "price": null,
+        "master_id": 5087,
+        "company_id": null
+      },
+      {
+        "id": 969758,
+        "price": null,
+        "master_id": 5109,
+        "company_id": null
+      },
+      {
+        "id": 969759,
+        "price": null,
+        "master_id": 5110,
+        "company_id": null
+      },
+      {
+        "id": 969760,
+        "price": null,
+        "master_id": 5124,
+        "company_id": null
+      },
+      {
+        "id": 969761,
+        "price": null,
+        "master_id": 5125,
+        "company_id": null
+      },
+      {
+        "id": 969762,
+        "price": null,
+        "master_id": 5126,
+        "company_id": null
+      },
+      {
+        "id": 969763,
+        "price": null,
+        "master_id": 5220,
+        "company_id": null
+      },
+      {
+        "id": 969764,
+        "price": null,
+        "master_id": 5223,
+        "company_id": null
+      },
+      {
+        "id": 969765,
+        "price": null,
+        "master_id": 5224,
+        "company_id": null
+      },
+      {
+        "id": 969766,
+        "price": null,
+        "master_id": 5239,
+        "company_id": null
+      },
+      {
+        "id": 969767,
+        "price": null,
+        "master_id": 5246,
+        "company_id": null
+      },
+      {
+        "id": 969768,
+        "price": null,
+        "master_id": 5247,
+        "company_id": null
+      },
+      {
+        "id": 969769,
+        "price": null,
+        "master_id": 5248,
+        "company_id": null
+      },
+      {
+        "id": 969770,
+        "price": null,
+        "master_id": 5253,
+        "company_id": null
+      },
+      {
+        "id": 969771,
+        "price": null,
+        "master_id": 5348,
+        "company_id": null
+      },
+      {
+        "id": 969772,
+        "price": null,
+        "master_id": 5350,
+        "company_id": null
+      },
+      {
+        "id": 969773,
+        "price": null,
+        "master_id": 5353,
+        "company_id": null
+      },
+      {
+        "id": 969774,
+        "price": null,
+        "master_id": 5354,
+        "company_id": null
+      },
+      {
+        "id": 969775,
+        "price": null,
+        "master_id": 5382,
+        "company_id": null
+      },
+      {
+        "id": 969776,
+        "price": null,
+        "master_id": 5391,
+        "company_id": null
+      },
+      {
+        "id": 969777,
+        "price": null,
+        "master_id": 5420,
+        "company_id": null
+      },
+      {
+        "id": 969778,
+        "price": null,
+        "master_id": 5433,
+        "company_id": null
+      },
+      {
+        "id": 969779,
+        "price": null,
+        "master_id": 5434,
+        "company_id": null
+      },
+      {
+        "id": 969780,
+        "price": null,
+        "master_id": 5448,
+        "company_id": null
+      },
+      {
+        "id": 969781,
+        "price": null,
+        "master_id": 5449,
+        "company_id": null
+      },
+      {
+        "id": 969782,
+        "price": null,
+        "master_id": 5450,
+        "company_id": null
+      },
+      {
+        "id": 969783,
+        "price": null,
+        "master_id": 5451,
+        "company_id": null
+      },
+      {
+        "id": 969784,
+        "price": null,
+        "master_id": 5542,
+        "company_id": null
+      },
+      {
+        "id": 969785,
+        "price": null,
+        "master_id": 5545,
+        "company_id": null
+      },
+      {
+        "id": 969786,
+        "price": null,
+        "master_id": 5546,
+        "company_id": null
+      },
+      {
+        "id": 969787,
+        "price": null,
+        "master_id": 5563,
+        "company_id": null
+      },
+      {
+        "id": 969788,
+        "price": null,
+        "master_id": 5576,
+        "company_id": null
+      },
+      {
+        "id": 969789,
+        "price": null,
+        "master_id": 5577,
+        "company_id": null
+      },
+      {
+        "id": 969790,
+        "price": null,
+        "master_id": 5579,
+        "company_id": null
+      },
+      {
+        "id": 969791,
+        "price": null,
+        "master_id": 5580,
+        "company_id": null
+      },
+      {
+        "id": 969792,
+        "price": null,
+        "master_id": 5594,
+        "company_id": null
+      },
+      {
+        "id": 969793,
+        "price": null,
+        "master_id": 5595,
+        "company_id": null
+      },
+      {
+        "id": 969794,
+        "price": null,
+        "master_id": 5596,
+        "company_id": null
+      },
+      {
+        "id": 969795,
+        "price": null,
+        "master_id": 5597,
+        "company_id": null
+      },
+      {
+        "id": 969796,
+        "price": null,
+        "master_id": 5691,
+        "company_id": null
+      },
+      {
+        "id": 969797,
+        "price": null,
+        "master_id": 5694,
+        "company_id": null
+      },
+      {
+        "id": 969798,
+        "price": null,
+        "master_id": 5695,
+        "company_id": null
+      },
+      {
+        "id": 969799,
+        "price": null,
+        "master_id": 5730,
+        "company_id": null
+      },
+      {
+        "id": 969800,
+        "price": null,
+        "master_id": 5731,
+        "company_id": null
+      },
+      {
+        "id": 969801,
+        "price": null,
+        "master_id": 5732,
+        "company_id": null
+      },
+      {
+        "id": 969802,
+        "price": null,
+        "master_id": 5733,
+        "company_id": null
+      },
+      {
+        "id": 969803,
+        "price": null,
+        "master_id": 5827,
+        "company_id": null
+      },
+      {
+        "id": 969804,
+        "price": null,
+        "master_id": 5830,
+        "company_id": null
+      },
+      {
+        "id": 969805,
+        "price": null,
+        "master_id": 5831,
+        "company_id": null
       }
     ],
     "additional_status": null,
     "history": [
       {
-        "id": 5,
+        "id": 12,
         "action": null,
-        "src_title": "tender_title",
-        "title": "tender_title_dispatcher",
-        "description": "tender_description_dispatcher",
-        "set_at": null,
-        "completed_at": "Sun, 23 Jul 23 02:16:16 +0300",
+        "src_title": "master_working_title",
+        "title": "master_working_title_master",
+        "description": "master_working_description_master",
+        "set_at": "Tue, 25 Jul 23 18:07:05 +0300",
+        "completed_at": "Tue, 25 Jul 23 18:07:15 +0300",
         "completed": true,
         "is_current": false,
-        "sort_index": 5
+        "sort_index": 10
       },
       {
-        "id": 10,
+        "id": 20,
         "action": null,
-        "src_title": "approving_order_master_title",
-        "title": "approving_order_master_title_dispatcher",
-        "description": "approving_order_master_description_dispatcher",
-        "set_at": null,
-        "completed_at": "Sun, 23 Jul 23 02:16:17 +0300",
-        "completed": true,
-        "is_current": false,
-        "sort_index": 6
+        "src_title": "master_filling_repair_materials_title",
+        "title": "master_filling_repair_materials_title_master",
+        "description": "master_filling_repair_materials_description_master",
+        "set_at": "Tue, 25 Jul 23 18:07:15 +0300",
+        "completed_at": null,
+        "completed": false,
+        "is_current": true,
+        "sort_index": 11
       },
       {
-        "id": 7,
+        "id": 21,
         "action": "select-payment",
-        "src_title": "initial_departure_payment_title",
-        "title": "initial_departure_payment_title_dispatcher",
-        "description": "initial_departure_payment_description_dispatcher",
-        "set_at": "Sun, 23 Jul 23 02:16:13 +0300",
-        "completed_at": "Sun, 23 Jul 23 02:16:16 +0300",
-        "completed": true,
+        "src_title": "repair_materials_payment_title",
+        "title": "repair_materials_payment_title_master",
+        "description": "repair_materials_payment_description_master",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
         "is_current": false,
-        "sort_index": 7
+        "sort_index": 12
       },
       {
-        "id": 9,
+        "id": 22,
         "action": null,
-        "src_title": "approving_order_time_title",
-        "title": "approving_order_time_title_dispatcher",
-        "description": "approving_order_time_description_dispatcher",
-        "set_at": "Sun, 23 Jul 23 02:16:17 +0300",
-        "completed_at": "Sun, 23 Jul 23 02:16:21 +0300",
-        "completed": true,
+        "src_title": "master_filling_repair_works_title",
+        "title": "master_filling_repair_works_title_master",
+        "description": "master_filling_repair_works_description_master",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
         "is_current": false,
-        "sort_index": 8
+        "sort_index": 13
+      },
+      {
+        "id": 23,
+        "action": "select-payment",
+        "src_title": "repair_works_payment_title",
+        "title": "repair_works_payment_title_master",
+        "description": "repair_works_payment_description_master",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false,
+        "sort_index": 14
+      },
+      {
+        "id": 24,
+        "action": null,
+        "src_title": "master_creating_order_repair_act_title",
+        "title": "master_creating_order_repair_act_title_master",
+        "description": "master_creating_order_repair_act_description_master",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false,
+        "sort_index": 15
+      },
+      {
+        "id": 25,
+        "action": "sign",
+        "src_title": "client_need_signing_order_repair_act_title",
+        "title": "client_need_signing_order_repair_act_title_master",
+        "description": "client_need_signing_order_repair_act_description_master",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false,
+        "sort_index": 16
+      },
+      {
+        "id": 19,
+        "action": null,
+        "src_title": "master_creating_review_title",
+        "title": "master_creating_review_title_master",
+        "description": "master_creating_review_description_master",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false,
+        "sort_index": 18
       }
     ],
     "from_maintenance": false,
     "is_insurance_case": false,
     "repair_order_id": null,
     "maintenance_order_id": null,
-    "possible_offer_id": 896860
+    "possible_offer_id": 969163
   }
 }

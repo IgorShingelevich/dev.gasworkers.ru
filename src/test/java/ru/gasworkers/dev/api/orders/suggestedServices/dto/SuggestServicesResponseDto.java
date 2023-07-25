@@ -23,14 +23,14 @@ public class SuggestServicesResponseDto {
     @NoArgsConstructor
     public static class Data {
         public ArrayList<Service> services;
-        public ArrayList<Master> masters;
+        public ArrayList<Masters> masters;
     }
 
     @lombok.Data
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
-    public static class Master {
+    public static class Masters {
         public Integer id;
         public String title;
         public String logo;
@@ -70,6 +70,8 @@ public class SuggestServicesResponseDto {
         public ArrayList<Brand> brands;
         @JsonProperty("offer_id")
         public Integer offerId;
+        public Boolean shoved;
+
 
         @lombok.Data
         @Builder
@@ -105,6 +107,7 @@ public class SuggestServicesResponseDto {
         public Integer index;
         @JsonProperty("offer_id")
         public Integer offerId;
+        public Boolean shoved;
 
         @lombok.Data
         @Builder
@@ -120,7 +123,7 @@ public class SuggestServicesResponseDto {
             public Integer reviewsAsTargetCount;
             @JsonProperty("master_orders_count")
             public Object masterOrdersCount;
-            public ArrayList<Master.Brand> brands;
+            public ArrayList<Masters.Brand> brands;
         }
     }
 }
