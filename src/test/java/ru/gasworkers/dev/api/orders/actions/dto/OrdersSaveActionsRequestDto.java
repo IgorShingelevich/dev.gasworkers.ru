@@ -18,7 +18,6 @@ public class OrdersSaveActionsRequestDto {
     @JsonProperty("order_id")
     private Integer orderId;
     private Boolean paid;
-    //    private Actions[] actions;
     private List<Actions> actions;
 
     public static OrdersSaveActionsRequestDto oneActionRequest(Integer orderId) {
@@ -42,16 +41,16 @@ public class OrdersSaveActionsRequestDto {
                 .paid(false)
                 .actions(List.of(Actions.builder()
                                 .title("Work name")
-                                .qty(2)
-                                .price(3.11)
+                                .qty(3)
+                                .price(33.99)
                                 .searchQuery("")
                                 .actionList(Collections.emptyList())
                                 .searchActive(false)
                                 .build(),
                         Actions.builder()
                                 .title("Work name 2")
-                                .qty(3)
-                                .price(4.11)
+                                .qty(9)
+                                .price(111.99)
                                 .searchQuery("")
                                 .actionList(Collections.emptyList())
                                 .searchActive(false)

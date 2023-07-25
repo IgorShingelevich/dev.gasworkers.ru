@@ -123,7 +123,7 @@ public class SelectDateOfferRepairTest extends BaseApiTest {
                 commonFields.setPossibleOfferId(filteredServices.get(0).getOfferId());
             });
             step("клиент выбирает предложение", () -> {
-                commonFields.setReceipt0Id(selectServiceCompanyApi.selectServiceCompany(commonFields.getOrderId(), commonFields.getServiceId(), commonFields.getTokenClient())
+                commonFields.setReceipts0Id(selectServiceCompanyApi.selectServiceCompany(commonFields.getOrderId(), commonFields.getServiceId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SelectServiceCompanyResponseDto.class).getData().getReceiptId());
             });
@@ -136,8 +136,8 @@ public class SelectDateOfferRepairTest extends BaseApiTest {
                 SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SelectPaymentResponseDto.class);
-                commonFields.setPaymentUrl(actualResponse.getData().getPayUrl());
-                commonFields.setPaymentId(actualResponse.getData().getPaymentId());
+                commonFields.setPayment0Url(actualResponse.getData().getPayUrl());
+                commonFields.setPayment0Id(actualResponse.getData().getPaymentId());
             });
         });
 
