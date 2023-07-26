@@ -2,31 +2,31 @@
   "status": 0,
   "message": "Информация о заказе",
   "data": {
-    "id": 8092,
-    "number": "99/23/077/008092",
+    "id": 8389,
+    "number": "99/23/077/008389",
     "master": null,
     "client": {
-      "id": 5893,
+      "id": 6126,
       "first_name": null,
       "last_name": null,
       "middle_name": null,
-      "phone": 70011410902,
+      "phone": 70015751866,
       "login": null,
       "facetime": null,
       "whatsapp": null,
       "skype": null,
       "telegram": null,
-      "email": "gwtest2207_2003_sitnikova@client.001",
-      "email_verified_at": "2023-07-22T17:03:17.000000Z",
-      "phone_verified_at": "2023-07-22T17:03:17.000000Z",
+      "email": "gwtest2607_1431_kapustina@client.001",
+      "email_verified_at": "2023-07-26T11:31:50.000000Z",
+      "phone_verified_at": "2023-07-26T11:31:50.000000Z",
       "gender": null,
       "specialization": null,
       "skills": null,
       "avatar_id": null,
       "service_id": null,
       "deleted_at": null,
-      "created_at": "2023-07-22T17:03:17.000000Z",
-      "updated_at": "2023-07-22T17:03:26.000000Z",
+      "created_at": "2023-07-26T11:31:50.000000Z",
+      "updated_at": "2023-07-26T11:31:59.000000Z",
       "requisites_filled": false,
       "bank_details_filled": false,
       "rate_filled": false,
@@ -67,7 +67,7 @@
       "living_address_id": null,
       "work_distance": null,
       "joined_at": null,
-      "registered_at": "2023-07-22T17:03:17.000000Z",
+      "registered_at": "2023-07-26T11:31:50.000000Z",
       "sc_notified_about_my_reg": false,
       "sc_notified_about_my_certificates": false,
       "debt": null,
@@ -78,7 +78,7 @@
       "fps_bank_id": null,
       "selected_payment_method": null,
       "referer_id": null,
-      "referer_code": "84ef417d-7ca4-431e-95ee-603f3f3f6406",
+      "referer_code": "765eaf7d-8d44-47b2-b246-592b05766efb",
       "balance": 0,
       "default_referral_commission": 0,
       "additional_phone": null,
@@ -91,7 +91,7 @@
           "updated_at": "2022-04-25T01:37:20.000000Z",
           "is_admin": 0,
           "pivot": {
-            "model_id": 5893,
+            "model_id": 6126,
             "role_id": 4,
             "model_type": "App\\Models\\User"
           }
@@ -104,11 +104,10 @@
     "serviceCenter": null,
     "contract_type": null,
     "clientObject": {
-      "id": 3895,
+      "id": 4135,
       "title": "Мой дом",
       "active_offers_count": 1,
       "photos": [
-
       ],
       "address": {
         "id": 2121,
@@ -144,7 +143,7 @@
       },
       "equipments": [
         {
-          "id": 3200,
+          "id": 3442,
           "all_works": false,
           "type": {
             "id": 1,
@@ -350,12 +349,12 @@
       "branch": null,
       "company": null,
       "account_number": null,
-      "created_at": 1690045397,
+      "created_at": 1690371110,
       "video_exists": false
     },
     "equipments": [
       {
-        "id": 3200,
+        "id": 3442,
         "all_works": false,
         "type": {
           "id": 1,
@@ -559,23 +558,21 @@
       }
     ],
     "address": "Москва, Московская улица",
-    "phone": 70011410902,
+    "phone": 70015751866,
     "status": "published",
     "payment_status": false,
     "type": "repair",
-    "desired_date_interval_started_at": "Sat, 22 Jul 2023 00:00:00 +0300",
-    "desired_date_interval_ended_at": "Tue, 25 Jul 2023 00:00:00 +0300",
-    "desired_time_started": "Sat, 22 Jul 2023 06:00:00 +0300",
-    "desired_time_ended": "Sat, 22 Jul 2023 18:00:00 +0300",
+    "desired_date_interval_started_at": "Wed, 26 Jul 2023 00:00:00 +0300",
+    "desired_date_interval_ended_at": "Sat, 29 Jul 2023 00:00:00 +0300",
+    "desired_time_started": "Wed, 26 Jul 2023 06:00:00 +0300",
+    "desired_time_ended": "Wed, 26 Jul 2023 18:00:00 +0300",
     "selected_date": null,
     "description": "error description",
     "photos": [
-
     ],
     "videos": [
-
     ],
-    "created_at": 1690045397,
+    "created_at": 1690371110,
     "masters": [
       {
         "id": 487,
@@ -583,7 +580,7 @@
         "full_name": "МастеровСССР1 МастерСССР1 МастеровичСССР1",
         "last_name": "МастеровСССР1",
         "rating": "5.00",
-        "consultation_price": 11.99,
+        "consultation_price": 3100,
         "skills": "Навыки ремонта",
         "avatar": "https://gasworkers.storage.yandexcloud.net/files/2Fay9O26ZN2iC8ViKBVQHu1G1Bu0IlKvmbPPrPXR.jpg",
         "company": {
@@ -608,7 +605,7 @@
           "gen_dir_np": "Иванов Иван Иванович",
           "vdgo_contract_charter": "на ост указа№1",
           "is_self_employed_owner": false,
-          "first_accept": 11.99
+          "first_accept": 3100
         },
         "employment_status": "accepted",
         "brands": [
@@ -2090,7 +2087,7 @@
           }
         ],
         "reviews_count": 23,
-        "completed_orders_count": 185,
+        "completed_orders_count": 190,
         "created_at": 1673412836
       }
     ],
@@ -2104,13 +2101,13 @@
     "creation_status": "select-service",
     "offers_count": null,
     "offer": {
+      "id": 1056024,
       "master_equipment": [
-
       ],
       "start_price": null,
-      "price": 11.99,
-      "price_wi": 11.99,
-      "price_real": 11.99,
+      "price": 3100,
+      "price_wi": 3100,
+      "price_real": 3100,
       "with_consultation": false,
       "consultation_passed": false,
       "client_closed": false,
@@ -2151,8 +2148,8 @@
     "active_dispatcher": false,
     "offers": [
       {
-        "id": 878436,
-        "price": 11.99,
+        "id": 1056024,
+        "price": 3100,
         "master_id": null,
         "company_id": 39
       }

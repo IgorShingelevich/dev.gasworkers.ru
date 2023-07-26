@@ -2,31 +2,31 @@
   "status": 0,
   "message": "Информация о заказе",
   "data": {
-    "id": 8085,
-    "number": "99/23/077/008085",
+    "id": 8387,
+    "number": "99/23/077/008387",
     "master": null,
     "client": {
-      "id": 5886,
+      "id": 6125,
       "first_name": null,
       "last_name": null,
       "middle_name": null,
-      "phone": 70019661277,
+      "phone": 70013725588,
       "login": null,
       "facetime": null,
       "whatsapp": null,
       "skype": null,
       "telegram": null,
-      "email": "gwtest2207_1757_kapustin@client.001",
-      "email_verified_at": "2023-07-22T14:57:04.000000Z",
-      "phone_verified_at": "2023-07-22T14:57:04.000000Z",
+      "email": "gwtest2607_1420_medvedev@client.001",
+      "email_verified_at": "2023-07-26T11:20:23.000000Z",
+      "phone_verified_at": "2023-07-26T11:20:23.000000Z",
       "gender": null,
       "specialization": null,
       "skills": null,
       "avatar_id": null,
       "service_id": null,
       "deleted_at": null,
-      "created_at": "2023-07-22T14:57:04.000000Z",
-      "updated_at": "2023-07-22T14:57:07.000000Z",
+      "created_at": "2023-07-26T11:20:23.000000Z",
+      "updated_at": "2023-07-26T11:20:27.000000Z",
       "requisites_filled": false,
       "bank_details_filled": false,
       "rate_filled": false,
@@ -67,7 +67,7 @@
       "living_address_id": null,
       "work_distance": null,
       "joined_at": null,
-      "registered_at": "2023-07-22T14:57:04.000000Z",
+      "registered_at": "2023-07-26T11:20:23.000000Z",
       "sc_notified_about_my_reg": false,
       "sc_notified_about_my_certificates": false,
       "debt": null,
@@ -78,7 +78,7 @@
       "fps_bank_id": null,
       "selected_payment_method": null,
       "referer_id": null,
-      "referer_code": "ad0c24bd-43b4-4c22-a418-cab92cd213bc",
+      "referer_code": "0e393c4a-a1b8-4925-a055-f7ee15a8b908",
       "balance": 0,
       "default_referral_commission": 0,
       "additional_phone": null,
@@ -91,7 +91,7 @@
           "updated_at": "2022-04-25T01:37:20.000000Z",
           "is_admin": 0,
           "pivot": {
-            "model_id": 5886,
+            "model_id": 6125,
             "role_id": 4,
             "model_type": "App\\Models\\User"
           }
@@ -104,11 +104,10 @@
     "serviceCenter": null,
     "contract_type": null,
     "clientObject": {
-      "id": 3888,
+      "id": 4134,
       "title": "Мой дом",
       "active_offers_count": 0,
       "photos": [
-
       ],
       "address": {
         "id": 2121,
@@ -144,7 +143,7 @@
       },
       "equipments": [
         {
-          "id": 3193,
+          "id": 3441,
           "all_works": false,
           "type": {
             "id": 1,
@@ -350,12 +349,12 @@
       "branch": null,
       "company": null,
       "account_number": null,
-      "created_at": 1690037824,
+      "created_at": 1690370423,
       "video_exists": false
     },
     "equipments": [
       {
-        "id": 3193,
+        "id": 3441,
         "all_works": false,
         "type": {
           "id": 1,
@@ -559,23 +558,21 @@
       }
     ],
     "address": "Москва, Московская улица",
-    "phone": 70019661277,
+    "phone": 70013725588,
     "status": "published",
     "payment_status": false,
     "type": "repair",
-    "desired_date_interval_started_at": "Sat, 22 Jul 2023 00:00:00 +0300",
-    "desired_date_interval_ended_at": "Tue, 25 Jul 2023 00:00:00 +0300",
-    "desired_time_started": "Sat, 22 Jul 2023 06:00:00 +0300",
-    "desired_time_ended": "Sat, 22 Jul 2023 18:00:00 +0300",
+    "desired_date_interval_started_at": "Wed, 26 Jul 2023 00:00:00 +0300",
+    "desired_date_interval_ended_at": "Sat, 29 Jul 2023 00:00:00 +0300",
+    "desired_time_started": "Wed, 26 Jul 2023 06:00:00 +0300",
+    "desired_time_ended": "Wed, 26 Jul 2023 18:00:00 +0300",
     "selected_date": null,
     "description": "error description",
     "photos": [
-
     ],
     "videos": [
-
     ],
-    "created_at": 1690037824,
+    "created_at": 1690370423,
     "master_recommendation": null,
     "all_works": false,
     "master_left_review": false,
@@ -586,13 +583,13 @@
     "creation_status": "select-service",
     "offers_count": null,
     "offer": {
+      "id": 1054707,
       "master_equipment": [
-
       ],
       "start_price": null,
-      "price": 11.99,
-      "price_wi": 11.99,
-      "price_real": 11.99,
+      "price": 3100,
+      "price_wi": 3100,
+      "price_real": 3100,
       "with_consultation": false,
       "consultation_passed": false,
       "client_closed": false,
@@ -631,8 +628,8 @@
     "active_dispatcher": false,
     "offers": [
       {
-        "id": 873830,
-        "price": 11.99,
+        "id": 1054707,
+        "price": 3100,
         "master_id": null,
         "company_id": 39
       }

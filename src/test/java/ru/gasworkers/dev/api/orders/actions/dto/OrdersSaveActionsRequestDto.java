@@ -20,14 +20,29 @@ public class OrdersSaveActionsRequestDto {
     private Boolean paid;
     private List<Actions> actions;
 
+    public static OrdersSaveActionsRequestDto actionRequest(Integer qty, Double price, Integer orderId) {
+        return OrdersSaveActionsRequestDto.builder()
+                .orderId(orderId)
+                .paid(false)
+                .actions(List.of(Actions.builder()
+                        .title("Work name")
+                        .qty(qty)
+                        .price(price)
+                        .searchQuery("")
+                        .actionList(Collections.emptyList())
+                        .searchActive(false)
+                        .build()))
+                .build();
+    }
+
     public static OrdersSaveActionsRequestDto oneActionRequest(Integer orderId) {
         return OrdersSaveActionsRequestDto.builder()
                 .orderId(orderId)
                 .paid(false)
                 .actions(List.of(Actions.builder()
                         .title("Work name")
-                        .qty(2)
-                        .price(3.11)
+                        .qty(3)
+                        .price(1000.0)
                         .searchQuery("")
                         .actionList(Collections.emptyList())
                         .searchActive(false)

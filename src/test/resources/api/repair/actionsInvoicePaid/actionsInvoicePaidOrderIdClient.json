@@ -2,8 +2,8 @@
   "status": 0,
   "message": "Информация о заказе",
   "data": {
-    "id": 8392,
-    "number": "99/23/077/008392",
+    "id": 8409,
+    "number": "99/23/077/008409",
     "master": {
       "id": 487,
       "active_role": null,
@@ -58,7 +58,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -71,7 +70,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -124,7 +122,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -137,7 +134,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -161,7 +157,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -174,7 +169,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -187,7 +181,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -200,7 +193,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -213,7 +205,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -226,7 +217,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -239,7 +229,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -303,7 +292,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -367,7 +355,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -482,7 +469,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -597,7 +583,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -610,7 +595,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -623,7 +607,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -647,7 +630,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -671,7 +653,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -684,7 +665,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -697,7 +677,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -710,7 +689,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -724,7 +702,6 @@
           "logo": "https://gasworkers.storage.yandexcloud.net/O6nWCuwwjCQbgauE4wnOcF2lrKExCtnjNh2igux0.png",
           "created_at": 1641969189,
           "types": [
-
           ]
         },
         {
@@ -746,7 +723,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -759,7 +735,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -772,7 +747,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -796,7 +770,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -860,7 +833,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -873,7 +845,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -897,7 +868,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -921,7 +891,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -934,7 +903,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -998,7 +966,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -1022,7 +989,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1035,7 +1001,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1048,7 +1013,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1061,7 +1025,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1125,7 +1088,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -1149,7 +1111,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1162,7 +1123,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1175,7 +1135,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1188,7 +1147,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -1252,7 +1210,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -1367,7 +1324,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1380,7 +1336,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1393,7 +1348,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1406,7 +1360,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1419,7 +1372,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -1443,7 +1395,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1456,7 +1407,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -1480,7 +1430,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -1544,7 +1493,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1557,7 +1505,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -1581,7 +1528,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1594,7 +1540,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1607,7 +1552,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1620,7 +1564,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -1644,7 +1587,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -1668,7 +1610,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1681,7 +1622,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1694,7 +1634,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1707,7 +1646,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -1731,7 +1669,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1744,7 +1681,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1757,7 +1693,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -1883,7 +1818,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1896,7 +1830,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1909,7 +1842,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -1922,7 +1854,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -1997,7 +1928,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2010,7 +1940,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2034,7 +1963,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2047,7 +1975,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2060,7 +1987,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2084,7 +2010,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2097,7 +2022,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2110,7 +2034,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2123,7 +2046,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2136,7 +2058,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2149,7 +2070,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2213,7 +2133,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2237,7 +2156,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2301,7 +2219,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2314,7 +2231,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2327,7 +2243,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2340,7 +2255,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2364,7 +2278,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2377,7 +2290,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2390,7 +2302,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2403,7 +2314,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2416,7 +2326,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2440,7 +2349,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2515,7 +2423,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2528,7 +2435,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2541,7 +2447,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2554,7 +2459,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2629,7 +2533,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2653,7 +2556,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2677,7 +2579,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2690,7 +2591,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2703,7 +2603,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2716,7 +2615,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2729,7 +2627,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2753,7 +2650,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2766,7 +2662,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2779,7 +2674,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2792,7 +2686,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2805,7 +2698,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2818,7 +2710,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2842,7 +2733,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2855,7 +2745,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2868,7 +2757,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2892,7 +2780,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2905,7 +2792,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -2918,7 +2804,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2942,7 +2827,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2966,7 +2850,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -2990,7 +2873,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3014,7 +2896,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3027,7 +2908,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3051,7 +2931,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3064,7 +2943,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3077,7 +2955,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3090,7 +2967,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3103,7 +2979,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3116,7 +2991,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3140,7 +3014,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3153,7 +3026,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3177,7 +3049,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3201,7 +3072,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3214,7 +3084,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3227,7 +3096,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3240,7 +3108,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3253,7 +3120,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3277,7 +3143,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3290,7 +3155,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3303,7 +3167,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3327,7 +3190,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3340,7 +3202,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3415,7 +3276,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3428,7 +3288,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3441,7 +3300,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3465,7 +3323,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3489,7 +3346,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3502,7 +3358,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3526,7 +3381,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3539,7 +3393,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3563,7 +3416,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3638,7 +3490,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3702,7 +3553,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3726,7 +3576,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3739,7 +3588,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3752,7 +3600,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3765,7 +3612,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3789,7 +3635,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3813,7 +3658,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3877,7 +3721,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -3952,7 +3795,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3965,7 +3807,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3978,7 +3819,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -3991,7 +3831,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4015,7 +3854,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4028,7 +3866,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4052,7 +3889,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4076,7 +3912,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4089,7 +3924,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4113,7 +3947,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4126,7 +3959,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4150,7 +3982,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4163,7 +3994,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4176,7 +4006,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4200,7 +4029,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4315,7 +4143,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4339,7 +4166,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4352,7 +4178,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4376,7 +4201,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4389,7 +4213,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4402,7 +4225,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4426,7 +4248,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4439,7 +4260,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4463,7 +4283,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4476,7 +4295,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4489,7 +4307,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4513,7 +4330,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4526,7 +4342,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4601,7 +4416,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4625,7 +4439,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4649,7 +4462,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4662,7 +4474,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4675,7 +4486,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4699,7 +4509,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4712,7 +4521,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4725,7 +4533,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4749,7 +4556,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4773,7 +4579,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4797,7 +4602,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4810,7 +4614,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4834,7 +4637,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4898,7 +4700,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4911,7 +4712,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -4924,7 +4724,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -4988,7 +4787,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5012,7 +4810,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5076,7 +4873,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5151,7 +4947,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5175,7 +4970,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -5188,7 +4982,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5212,7 +5005,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5236,7 +5028,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5311,7 +5102,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5335,7 +5125,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -5348,7 +5137,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -5361,7 +5149,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -5374,7 +5161,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -5387,7 +5173,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5411,7 +5196,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -5424,7 +5208,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5488,7 +5271,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5512,7 +5294,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5536,7 +5317,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5560,7 +5340,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -5573,7 +5352,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5648,7 +5426,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -5661,7 +5438,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5685,7 +5461,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5709,7 +5484,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5784,7 +5558,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5808,7 +5581,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -5821,7 +5593,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5845,7 +5616,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -5858,7 +5628,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5882,7 +5651,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5906,7 +5674,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5930,7 +5697,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -5943,7 +5709,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -5956,7 +5721,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -5969,7 +5733,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -5993,7 +5756,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6017,7 +5779,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6041,7 +5802,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -6054,7 +5814,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -6067,7 +5826,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -6080,7 +5838,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -6093,7 +5850,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6117,7 +5873,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -6130,7 +5885,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6154,7 +5908,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6229,7 +5982,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6293,7 +6045,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6317,7 +6068,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6341,7 +6091,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -6354,7 +6103,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -6367,7 +6115,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6442,7 +6189,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6517,7 +6263,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -6530,7 +6275,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -6543,7 +6287,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6618,7 +6361,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -6631,7 +6373,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -6644,7 +6385,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6668,7 +6408,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6692,7 +6431,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6716,7 +6454,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -6729,7 +6466,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             },
             {
@@ -6742,7 +6478,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6766,7 +6501,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6790,7 +6524,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6814,7 +6547,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6838,7 +6570,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6862,7 +6593,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6886,7 +6616,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6910,7 +6639,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6934,7 +6662,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6948,7 +6675,6 @@
           "logo": null,
           "created_at": 1643099213,
           "types": [
-
           ]
         },
         {
@@ -6960,7 +6686,6 @@
           "logo": null,
           "created_at": 1643099213,
           "types": [
-
           ]
         },
         {
@@ -6982,7 +6707,6 @@
               "included_in_price_list": true,
               "is_show_hidden": false,
               "ranges": [
-
               ]
             }
           ]
@@ -6996,7 +6720,6 @@
           "logo": null,
           "created_at": 1643099213,
           "types": [
-
           ]
         },
         {
@@ -7008,7 +6731,6 @@
           "logo": null,
           "created_at": 1643099214,
           "types": [
-
           ]
         },
         {
@@ -7020,7 +6742,6 @@
           "logo": null,
           "created_at": 1643099327,
           "types": [
-
           ]
         },
         {
@@ -7032,7 +6753,6 @@
           "logo": "https://gasworkers.storage.yandexcloud.net/7SrO97QBZLF5fO7oxxv7J1w89ZV8aS6wOk65u4Vt.png",
           "created_at": 1659978861,
           "types": [
-
           ]
         },
         {
@@ -7044,7 +6764,6 @@
           "logo": "https://gasworkers.storage.yandexcloud.net/NZgh45AqFiLM0X98iVJSrfpYY0aGwmYMnafG3toT.gif",
           "created_at": 1660030156,
           "types": [
-
           ]
         },
         {
@@ -7056,7 +6775,6 @@
           "logo": "https://gasworkers.storage.yandexcloud.net/zLY2J9JeFCjcSQFUZGsdWRgVnVGHSLWWF0HurPYl.png",
           "created_at": 1660031471,
           "types": [
-
           ]
         },
         {
@@ -7068,7 +6786,6 @@
           "logo": "https://gasworkers.storage.yandexcloud.net/PGbMM94gmEtFbiCzy9hYw8GQz3VWRXWI8uU4Epvl.svg",
           "created_at": 1664781862,
           "types": [
-
           ]
         },
         {
@@ -7088,27 +6805,27 @@
       "created_at": 1673412836
     },
     "client": {
-      "id": 6129,
+      "id": 6144,
       "first_name": null,
       "last_name": null,
       "middle_name": null,
-      "phone": 70012190528,
+      "phone": 70013708148,
       "login": null,
       "facetime": null,
       "whatsapp": null,
       "skype": null,
       "telegram": null,
-      "email": "gwtest2607_1439_kabanov@client.001",
-      "email_verified_at": "2023-07-26T11:39:16.000000Z",
-      "phone_verified_at": "2023-07-26T11:39:16.000000Z",
+      "email": "gwtest2607_1822_timofeeva@client.001",
+      "email_verified_at": "2023-07-26T15:22:06.000000Z",
+      "phone_verified_at": "2023-07-26T15:22:06.000000Z",
       "gender": null,
       "specialization": null,
       "skills": null,
       "avatar_id": null,
       "service_id": null,
       "deleted_at": null,
-      "created_at": "2023-07-26T11:39:16.000000Z",
-      "updated_at": "2023-07-26T11:39:31.000000Z",
+      "created_at": "2023-07-26T15:22:06.000000Z",
+      "updated_at": "2023-07-26T15:23:04.000000Z",
       "requisites_filled": false,
       "bank_details_filled": false,
       "rate_filled": false,
@@ -7149,18 +6866,18 @@
       "living_address_id": null,
       "work_distance": null,
       "joined_at": null,
-      "registered_at": "2023-07-26T11:39:16.000000Z",
+      "registered_at": "2023-07-26T15:22:06.000000Z",
       "sc_notified_about_my_reg": false,
       "sc_notified_about_my_certificates": false,
       "debt": null,
       "count_review": 0,
       "count_completed_orders": 0,
-      "count_not_read_notification": 3,
+      "count_not_read_notification": 6,
       "fps_phone": null,
       "fps_bank_id": null,
       "selected_payment_method": null,
       "referer_id": null,
-      "referer_code": "4bb4480e-6cc4-4049-bc0a-fc016e341634",
+      "referer_code": "633633de-4d4f-471d-8a37-da7cc2053694",
       "balance": 0,
       "default_referral_commission": 0,
       "additional_phone": null,
@@ -7173,7 +6890,7 @@
           "updated_at": "2022-04-25T01:37:20.000000Z",
           "is_admin": 0,
           "pivot": {
-            "model_id": 6129,
+            "model_id": 6144,
             "role_id": 4,
             "model_type": "App\\Models\\User"
           }
@@ -7209,7 +6926,7 @@
           "service_id": 39,
           "deleted_at": null,
           "created_at": "2023-01-11T04:53:56.000000Z",
-          "updated_at": "2023-07-26T11:28:57.000000Z",
+          "updated_at": "2023-07-26T15:23:13.000000Z",
           "requisites_filled": false,
           "bank_details_filled": false,
           "rate_filled": false,
@@ -7256,7 +6973,7 @@
           "debt": 0,
           "count_review": 23,
           "count_completed_orders": 190,
-          "count_not_read_notification": 0,
+          "count_not_read_notification": 21,
           "fps_phone": "70026442413",
           "fps_bank_id": null,
           "selected_payment_method": "fps",
@@ -8424,7 +8141,7 @@
     },
     "contract_type": null,
     "clientObject": {
-      "id": 4138,
+      "id": 4153,
       "title": "Мой дом",
       "active_offers_count": 1,
       "photos": [
@@ -8463,7 +8180,7 @@
       },
       "equipments": [
         {
-          "id": 3445,
+          "id": 3460,
           "all_works": false,
           "type": {
             "id": 1,
@@ -8560,11 +8277,9 @@
           "computed_title": "Газовый котел Viessmann Vitodens 100-W WB1C104 35kW",
           "power": 35,
           "photos": [
-
           ],
           "last_photo": null,
           "videos": [
-
           ],
           "model": {
             "id": 2199,
@@ -8669,12 +8384,12 @@
       "branch": null,
       "company": null,
       "account_number": null,
-      "created_at": 1690371556,
+      "created_at": 1690384926,
       "video_exists": false
     },
     "equipments": [
       {
-        "id": 3445,
+        "id": 3460,
         "all_works": false,
         "type": {
           "id": 1,
@@ -8771,11 +8486,9 @@
         "computed_title": "Газовый котел Viessmann Vitodens 100-W WB1C104 35kW",
         "power": 35,
         "photos": [
-
         ],
         "last_photo": null,
         "videos": [
-
         ],
         "model": {
           "id": 2199,
@@ -8878,21 +8591,21 @@
       }
     ],
     "address": "Москва, Московская улица",
-    "phone": 70012190528,
-    "status": "date-selecting",
-    "payment_status": false,
+    "phone": 70013708148,
+    "status": "master-start-working",
+    "payment_status": true,
     "type": "repair",
     "desired_date_interval_started_at": "Wed, 26 Jul 2023 00:00:00 +0300",
     "desired_date_interval_ended_at": "Sat, 29 Jul 2023 00:00:00 +0300",
     "desired_time_started": "Wed, 26 Jul 2023 06:00:00 +0300",
     "desired_time_ended": "Wed, 26 Jul 2023 18:00:00 +0300",
-    "selected_date": null,
+    "selected_date": "Sat, 29 Jul 2023 15:00:00 +0300",
     "description": "error description",
     "photos": [
     ],
     "videos": [
     ],
-    "created_at": 1690371557,
+    "created_at": 1690384927,
     "masters": [
       {
         "id": 487,
@@ -10411,6 +10124,29 @@
         "created_at": 1673412836
       }
     ],
+    "actions": [
+      {
+        "description": "Work name",
+        "qty": 3,
+        "price": 1000
+      }
+    ],
+    "material_values": [
+      {
+        "title": "Material 1 Title",
+        "part_number": "Material 1 Part Number",
+        "qty": 3,
+        "price": 1000,
+        "manufacturer": "Material 1 Manufacturer"
+      },
+      {
+        "title": "Подбор и доставка материалов. Логистика",
+        "part_number": "-",
+        "qty": 1,
+        "price": 300,
+        "manufacturer": "-"
+      }
+    ],
     "master_recommendation": null,
     "all_works": false,
     "master_left_review": false,
@@ -10419,9 +10155,9 @@
     "insurance_policy": null,
     "maintenance_act": null,
     "creation_status": null,
-    "offers_count": null,
+    "offers_count": 1,
     "offer": {
-      "id": 1057998,
+      "id": 1068515,
       "master_equipment": [
       ],
       "start_price": null,
@@ -10439,16 +10175,34 @@
     },
     "receipts": [
       {
-        "id": 5132,
+        "id": 5164,
         "amount": 10,
         "paid": true,
         "title": "activation_payment",
         "stage": "repair_initial_departure",
         "remains_to_pay": 10,
-        "created_at": "Wed, 26 Jul 2023 14:39:29 +0300"
+        "created_at": "Wed, 26 Jul 2023 18:22:22 +0300"
+      },
+      {
+        "id": 5165,
+        "amount": 3300,
+        "paid": true,
+        "title": "order_materials_payment",
+        "stage": "material_values",
+        "remains_to_pay": 3300,
+        "created_at": "Wed, 26 Jul 2023 18:22:53 +0300"
+      },
+      {
+        "id": 5166,
+        "amount": 2990,
+        "paid": true,
+        "title": "order_repairs_payment",
+        "stage": "actions",
+        "remains_to_pay": 2990,
+        "created_at": "Wed, 26 Jul 2023 18:23:03 +0300"
       }
     ],
-    "repair_stage": null,
+    "repair_stage": "act",
     "need_sign": false,
     "sign_type": null,
     "need_master_sign": false,
@@ -10459,7 +10213,162 @@
       "url": null
     },
     "check_list": [
-
+      {
+        "id": 1,
+        "title": "ВДГО",
+        "items": [
+          {
+            "id": 2,
+            "title": "Фактически установленное оборудовании соответствует Проекту?",
+            "value": true
+          },
+          {
+            "id": 1,
+            "title": "Документация на газоснабжение: Технические условия, Проект ВДГО в наличии?",
+            "value": true
+          },
+          {
+            "id": 3,
+            "title": "Требуется ли замена котла/газовой плиты?",
+            "value": false
+          },
+          {
+            "id": 4,
+            "title": "Надо ли легализовать самовольно установленное оборудование?",
+            "value": false
+          },
+          {
+            "id": 5,
+            "title": "Опломбирован ли счетчик?",
+            "value": true
+          },
+          {
+            "id": 6,
+            "title": "Требуется ли поверка счётчика и/или замена батарейки?",
+            "value": false
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "title": "Гидросистема отопления",
+        "items": [
+          {
+            "id": 7,
+            "title": "Есть ли протечки гидросистемы и потеря давления?",
+            "value": false
+          },
+          {
+            "id": 8,
+            "title": "Надо ли заменить/очистить фильтры (шламоуловитель) гидросистемы?",
+            "value": true
+          },
+          {
+            "id": 9,
+            "title": "Требуется ли подкачка/замена расширительных гидроаккумуляторов?",
+            "value": true
+          },
+          {
+            "id": 10,
+            "title": "Требуется ли перепроектирование и перемонтаж гидросистемы?",
+            "value": false
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "title": "Электрика и автоматика",
+        "items": [
+          {
+            "id": 11,
+            "title": "Установлен ли стабилизатор напряжения ?",
+            "value": true
+          },
+          {
+            "id": 12,
+            "title": "Установлены ли датчики протечек и аварийных отсекателей водоснабжения",
+            "value": false
+          },
+          {
+            "id": 13,
+            "title": "Установлена ли погодозависимая автоматика отопления?",
+            "value": false
+          },
+          {
+            "id": 14,
+            "title": "Требуется ли настройка автоматики отопления",
+            "value": false
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "title": "Водоснабжение и водоотведение",
+        "items": [
+          {
+            "id": 15,
+            "title": "Требуется ли обслуживание системы очистки воды и замена фильтров ?",
+            "value": false
+          },
+          {
+            "id": 16,
+            "title": "Требуется ли обслуживание/ (очистка, откачка) септика",
+            "value": false
+          }
+        ]
+      },
+      {
+        "id": 5,
+        "title": "Кондиционирование и вентиляция",
+        "items": [
+          {
+            "id": 17,
+            "title": "Есть ли в наличие свежие (менее года) Акты на обследование дымовых и вентканалов?",
+            "value": false
+          },
+          {
+            "id": 18,
+            "title": "Требуется ли обслуживание и очистка кондиционеров?",
+            "value": false
+          },
+          {
+            "id": 19,
+            "title": "Готов ли Заказчик  рассмотреть коммерческое предложение по любому из пунктов",
+            "value": true
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "title": "Каких бы Специалистов Заказчик хотел бы пригласить для выполнения работ",
+        "items": [
+          {
+            "id": 20,
+            "title": "Электрик",
+            "value": false
+          },
+          {
+            "id": 21,
+            "title": "Сантехник",
+            "value": false
+          },
+          {
+            "id": 22,
+            "title": "Специалист по отоплению",
+            "value": false
+          },
+          {
+            "id": 23,
+            "title": "Кондиционерщик",
+            "value": false
+          },
+          {
+            "id": 24,
+            "title": "Проектировщик",
+            "value": false
+          }
+        ]
+      }
     ],
     "dispatcher": {
       "phone": 21313131313
@@ -10467,7 +10376,6 @@
     "conference_url": null,
     "online": false,
     "masterVideos": [
-
     ],
     "consultation_canceled": false,
     "not_want_to_sign": false,
@@ -10476,46 +10384,4012 @@
     "active_dispatcher": false,
     "offers": [
       {
-        "id": 1057998,
+        "id": 1068500,
+        "price": 3000,
+        "master_id": null,
+        "company_id": 5
+      },
+      {
+        "id": 1068501,
+        "price": null,
+        "master_id": null,
+        "company_id": 10
+      },
+      {
+        "id": 1068502,
+        "price": null,
+        "master_id": null,
+        "company_id": 11
+      },
+      {
+        "id": 1068503,
+        "price": null,
+        "master_id": null,
+        "company_id": 15
+      },
+      {
+        "id": 1068504,
+        "price": null,
+        "master_id": null,
+        "company_id": 16
+      },
+      {
+        "id": 1068505,
+        "price": 5000,
+        "master_id": null,
+        "company_id": 2
+      },
+      {
+        "id": 1068506,
+        "price": 3000,
+        "master_id": null,
+        "company_id": 25
+      },
+      {
+        "id": 1068507,
+        "price": null,
+        "master_id": null,
+        "company_id": 26
+      },
+      {
+        "id": 1068508,
+        "price": 1999,
+        "master_id": null,
+        "company_id": 3
+      },
+      {
+        "id": 1068509,
+        "price": null,
+        "master_id": null,
+        "company_id": 31
+      },
+      {
+        "id": 1068510,
+        "price": null,
+        "master_id": null,
+        "company_id": 22
+      },
+      {
+        "id": 1068511,
+        "price": 11111,
+        "master_id": null,
+        "company_id": 35
+      },
+      {
+        "id": 1068512,
+        "price": 11111,
+        "master_id": null,
+        "company_id": 36
+      },
+      {
+        "id": 1068513,
+        "price": 10,
+        "master_id": null,
+        "company_id": 32
+      },
+      {
+        "id": 1068514,
+        "price": 10,
+        "master_id": null,
+        "company_id": 34
+      },
+      {
+        "id": 1068515,
         "price": 3100,
         "master_id": null,
         "company_id": 39
+      },
+      {
+        "id": 1068516,
+        "price": null,
+        "master_id": null,
+        "company_id": 38
+      },
+      {
+        "id": 1068517,
+        "price": null,
+        "master_id": null,
+        "company_id": 45
+      },
+      {
+        "id": 1068518,
+        "price": null,
+        "master_id": null,
+        "company_id": 46
+      },
+      {
+        "id": 1068519,
+        "price": 3000,
+        "master_id": null,
+        "company_id": 29
+      },
+      {
+        "id": 1068520,
+        "price": 4000,
+        "master_id": null,
+        "company_id": 49
+      },
+      {
+        "id": 1068521,
+        "price": null,
+        "master_id": null,
+        "company_id": 51
+      },
+      {
+        "id": 1068522,
+        "price": 15000,
+        "master_id": null,
+        "company_id": 53
+      },
+      {
+        "id": 1068523,
+        "price": 3000,
+        "master_id": null,
+        "company_id": 52
+      },
+      {
+        "id": 1068524,
+        "price": 3000,
+        "master_id": null,
+        "company_id": 9
+      },
+      {
+        "id": 1068525,
+        "price": 500,
+        "master_id": null,
+        "company_id": 54
+      },
+      {
+        "id": 1068526,
+        "price": 1000,
+        "master_id": null,
+        "company_id": 55
+      },
+      {
+        "id": 1068527,
+        "price": 0,
+        "master_id": null,
+        "company_id": 56
+      },
+      {
+        "id": 1068528,
+        "price": 20,
+        "master_id": null,
+        "company_id": 57
+      },
+      {
+        "id": 1068529,
+        "price": null,
+        "master_id": null,
+        "company_id": 59
+      },
+      {
+        "id": 1068530,
+        "price": null,
+        "master_id": 267,
+        "company_id": null
+      },
+      {
+        "id": 1068531,
+        "price": null,
+        "master_id": 279,
+        "company_id": null
+      },
+      {
+        "id": 1068532,
+        "price": null,
+        "master_id": 282,
+        "company_id": null
+      },
+      {
+        "id": 1068533,
+        "price": null,
+        "master_id": 289,
+        "company_id": null
+      },
+      {
+        "id": 1068534,
+        "price": null,
+        "master_id": 291,
+        "company_id": null
+      },
+      {
+        "id": 1068535,
+        "price": null,
+        "master_id": 295,
+        "company_id": null
+      },
+      {
+        "id": 1068536,
+        "price": null,
+        "master_id": 298,
+        "company_id": null
+      },
+      {
+        "id": 1068537,
+        "price": null,
+        "master_id": 299,
+        "company_id": null
+      },
+      {
+        "id": 1068538,
+        "price": null,
+        "master_id": 305,
+        "company_id": null
+      },
+      {
+        "id": 1068539,
+        "price": null,
+        "master_id": 311,
+        "company_id": null
+      },
+      {
+        "id": 1068540,
+        "price": null,
+        "master_id": 316,
+        "company_id": null
+      },
+      {
+        "id": 1068541,
+        "price": null,
+        "master_id": 318,
+        "company_id": null
+      },
+      {
+        "id": 1068542,
+        "price": null,
+        "master_id": 319,
+        "company_id": null
+      },
+      {
+        "id": 1068543,
+        "price": null,
+        "master_id": 327,
+        "company_id": null
+      },
+      {
+        "id": 1068544,
+        "price": null,
+        "master_id": 328,
+        "company_id": null
+      },
+      {
+        "id": 1068545,
+        "price": null,
+        "master_id": 336,
+        "company_id": null
+      },
+      {
+        "id": 1068546,
+        "price": null,
+        "master_id": 354,
+        "company_id": null
+      },
+      {
+        "id": 1068547,
+        "price": null,
+        "master_id": 358,
+        "company_id": null
+      },
+      {
+        "id": 1068548,
+        "price": null,
+        "master_id": 376,
+        "company_id": null
+      },
+      {
+        "id": 1068549,
+        "price": null,
+        "master_id": 396,
+        "company_id": null
+      },
+      {
+        "id": 1068550,
+        "price": null,
+        "master_id": 398,
+        "company_id": null
+      },
+      {
+        "id": 1068551,
+        "price": null,
+        "master_id": 405,
+        "company_id": null
+      },
+      {
+        "id": 1068552,
+        "price": null,
+        "master_id": 406,
+        "company_id": null
+      },
+      {
+        "id": 1068553,
+        "price": null,
+        "master_id": 408,
+        "company_id": null
+      },
+      {
+        "id": 1068554,
+        "price": null,
+        "master_id": 428,
+        "company_id": null
+      },
+      {
+        "id": 1068555,
+        "price": null,
+        "master_id": 430,
+        "company_id": null
+      },
+      {
+        "id": 1068556,
+        "price": null,
+        "master_id": 450,
+        "company_id": null
+      },
+      {
+        "id": 1068557,
+        "price": null,
+        "master_id": 503,
+        "company_id": null
+      },
+      {
+        "id": 1068558,
+        "price": null,
+        "master_id": 505,
+        "company_id": null
+      },
+      {
+        "id": 1068559,
+        "price": null,
+        "master_id": 508,
+        "company_id": null
+      },
+      {
+        "id": 1068560,
+        "price": null,
+        "master_id": 516,
+        "company_id": null
+      },
+      {
+        "id": 1068561,
+        "price": null,
+        "master_id": 521,
+        "company_id": null
+      },
+      {
+        "id": 1068562,
+        "price": null,
+        "master_id": 527,
+        "company_id": null
+      },
+      {
+        "id": 1068563,
+        "price": null,
+        "master_id": 530,
+        "company_id": null
+      },
+      {
+        "id": 1068564,
+        "price": null,
+        "master_id": 531,
+        "company_id": null
+      },
+      {
+        "id": 1068565,
+        "price": null,
+        "master_id": 532,
+        "company_id": null
+      },
+      {
+        "id": 1068566,
+        "price": null,
+        "master_id": 543,
+        "company_id": null
+      },
+      {
+        "id": 1068567,
+        "price": null,
+        "master_id": 545,
+        "company_id": null
+      },
+      {
+        "id": 1068568,
+        "price": null,
+        "master_id": 679,
+        "company_id": null
+      },
+      {
+        "id": 1068569,
+        "price": null,
+        "master_id": 742,
+        "company_id": null
+      },
+      {
+        "id": 1068570,
+        "price": null,
+        "master_id": 747,
+        "company_id": null
+      },
+      {
+        "id": 1068571,
+        "price": null,
+        "master_id": 748,
+        "company_id": null
+      },
+      {
+        "id": 1068572,
+        "price": null,
+        "master_id": 749,
+        "company_id": null
+      },
+      {
+        "id": 1068573,
+        "price": null,
+        "master_id": 750,
+        "company_id": null
+      },
+      {
+        "id": 1068574,
+        "price": null,
+        "master_id": 751,
+        "company_id": null
+      },
+      {
+        "id": 1068575,
+        "price": null,
+        "master_id": 752,
+        "company_id": null
+      },
+      {
+        "id": 1068576,
+        "price": null,
+        "master_id": 753,
+        "company_id": null
+      },
+      {
+        "id": 1068577,
+        "price": null,
+        "master_id": 754,
+        "company_id": null
+      },
+      {
+        "id": 1068578,
+        "price": null,
+        "master_id": 755,
+        "company_id": null
+      },
+      {
+        "id": 1068579,
+        "price": null,
+        "master_id": 756,
+        "company_id": null
+      },
+      {
+        "id": 1068580,
+        "price": null,
+        "master_id": 757,
+        "company_id": null
+      },
+      {
+        "id": 1068581,
+        "price": null,
+        "master_id": 758,
+        "company_id": null
+      },
+      {
+        "id": 1068582,
+        "price": null,
+        "master_id": 759,
+        "company_id": null
+      },
+      {
+        "id": 1068583,
+        "price": null,
+        "master_id": 760,
+        "company_id": null
+      },
+      {
+        "id": 1068584,
+        "price": null,
+        "master_id": 761,
+        "company_id": null
+      },
+      {
+        "id": 1068585,
+        "price": null,
+        "master_id": 763,
+        "company_id": null
+      },
+      {
+        "id": 1068586,
+        "price": null,
+        "master_id": 764,
+        "company_id": null
+      },
+      {
+        "id": 1068587,
+        "price": null,
+        "master_id": 765,
+        "company_id": null
+      },
+      {
+        "id": 1068588,
+        "price": null,
+        "master_id": 766,
+        "company_id": null
+      },
+      {
+        "id": 1068589,
+        "price": null,
+        "master_id": 775,
+        "company_id": null
+      },
+      {
+        "id": 1068590,
+        "price": null,
+        "master_id": 875,
+        "company_id": null
+      },
+      {
+        "id": 1068591,
+        "price": null,
+        "master_id": 910,
+        "company_id": null
+      },
+      {
+        "id": 1068592,
+        "price": null,
+        "master_id": 915,
+        "company_id": null
+      },
+      {
+        "id": 1068593,
+        "price": null,
+        "master_id": 954,
+        "company_id": null
+      },
+      {
+        "id": 1068594,
+        "price": null,
+        "master_id": 957,
+        "company_id": null
+      },
+      {
+        "id": 1068595,
+        "price": null,
+        "master_id": 997,
+        "company_id": null
+      },
+      {
+        "id": 1068596,
+        "price": null,
+        "master_id": 998,
+        "company_id": null
+      },
+      {
+        "id": 1068597,
+        "price": null,
+        "master_id": 999,
+        "company_id": null
+      },
+      {
+        "id": 1068598,
+        "price": null,
+        "master_id": 1000,
+        "company_id": null
+      },
+      {
+        "id": 1068599,
+        "price": null,
+        "master_id": 1001,
+        "company_id": null
+      },
+      {
+        "id": 1068600,
+        "price": null,
+        "master_id": 1003,
+        "company_id": null
+      },
+      {
+        "id": 1068601,
+        "price": null,
+        "master_id": 1011,
+        "company_id": null
+      },
+      {
+        "id": 1068602,
+        "price": null,
+        "master_id": 1012,
+        "company_id": null
+      },
+      {
+        "id": 1068603,
+        "price": null,
+        "master_id": 1013,
+        "company_id": null
+      },
+      {
+        "id": 1068604,
+        "price": null,
+        "master_id": 1014,
+        "company_id": null
+      },
+      {
+        "id": 1068605,
+        "price": null,
+        "master_id": 1035,
+        "company_id": null
+      },
+      {
+        "id": 1068606,
+        "price": null,
+        "master_id": 1036,
+        "company_id": null
+      },
+      {
+        "id": 1068607,
+        "price": null,
+        "master_id": 1038,
+        "company_id": null
+      },
+      {
+        "id": 1068608,
+        "price": null,
+        "master_id": 1093,
+        "company_id": null
+      },
+      {
+        "id": 1068609,
+        "price": null,
+        "master_id": 1103,
+        "company_id": null
+      },
+      {
+        "id": 1068610,
+        "price": null,
+        "master_id": 1105,
+        "company_id": null
+      },
+      {
+        "id": 1068611,
+        "price": null,
+        "master_id": 1106,
+        "company_id": null
+      },
+      {
+        "id": 1068612,
+        "price": null,
+        "master_id": 1113,
+        "company_id": null
+      },
+      {
+        "id": 1068613,
+        "price": null,
+        "master_id": 1114,
+        "company_id": null
+      },
+      {
+        "id": 1068614,
+        "price": null,
+        "master_id": 1117,
+        "company_id": null
+      },
+      {
+        "id": 1068615,
+        "price": null,
+        "master_id": 1164,
+        "company_id": null
+      },
+      {
+        "id": 1068616,
+        "price": null,
+        "master_id": 1167,
+        "company_id": null
+      },
+      {
+        "id": 1068617,
+        "price": null,
+        "master_id": 1174,
+        "company_id": null
+      },
+      {
+        "id": 1068618,
+        "price": null,
+        "master_id": 1175,
+        "company_id": null
+      },
+      {
+        "id": 1068619,
+        "price": null,
+        "master_id": 1176,
+        "company_id": null
+      },
+      {
+        "id": 1068620,
+        "price": null,
+        "master_id": 1178,
+        "company_id": null
+      },
+      {
+        "id": 1068621,
+        "price": null,
+        "master_id": 1181,
+        "company_id": null
+      },
+      {
+        "id": 1068622,
+        "price": null,
+        "master_id": 1182,
+        "company_id": null
+      },
+      {
+        "id": 1068623,
+        "price": null,
+        "master_id": 1183,
+        "company_id": null
+      },
+      {
+        "id": 1068624,
+        "price": null,
+        "master_id": 1186,
+        "company_id": null
+      },
+      {
+        "id": 1068625,
+        "price": null,
+        "master_id": 1187,
+        "company_id": null
+      },
+      {
+        "id": 1068626,
+        "price": null,
+        "master_id": 1200,
+        "company_id": null
+      },
+      {
+        "id": 1068627,
+        "price": null,
+        "master_id": 1205,
+        "company_id": null
+      },
+      {
+        "id": 1068628,
+        "price": null,
+        "master_id": 1206,
+        "company_id": null
+      },
+      {
+        "id": 1068629,
+        "price": null,
+        "master_id": 1207,
+        "company_id": null
+      },
+      {
+        "id": 1068630,
+        "price": null,
+        "master_id": 1209,
+        "company_id": null
+      },
+      {
+        "id": 1068631,
+        "price": null,
+        "master_id": 1210,
+        "company_id": null
+      },
+      {
+        "id": 1068632,
+        "price": null,
+        "master_id": 1211,
+        "company_id": null
+      },
+      {
+        "id": 1068633,
+        "price": null,
+        "master_id": 1212,
+        "company_id": null
+      },
+      {
+        "id": 1068634,
+        "price": null,
+        "master_id": 1213,
+        "company_id": null
+      },
+      {
+        "id": 1068635,
+        "price": null,
+        "master_id": 1214,
+        "company_id": null
+      },
+      {
+        "id": 1068636,
+        "price": null,
+        "master_id": 1215,
+        "company_id": null
+      },
+      {
+        "id": 1068637,
+        "price": null,
+        "master_id": 1216,
+        "company_id": null
+      },
+      {
+        "id": 1068638,
+        "price": null,
+        "master_id": 1217,
+        "company_id": null
+      },
+      {
+        "id": 1068639,
+        "price": null,
+        "master_id": 1218,
+        "company_id": null
+      },
+      {
+        "id": 1068640,
+        "price": null,
+        "master_id": 1219,
+        "company_id": null
+      },
+      {
+        "id": 1068641,
+        "price": null,
+        "master_id": 1220,
+        "company_id": null
+      },
+      {
+        "id": 1068642,
+        "price": null,
+        "master_id": 1221,
+        "company_id": null
+      },
+      {
+        "id": 1068643,
+        "price": null,
+        "master_id": 1222,
+        "company_id": null
+      },
+      {
+        "id": 1068644,
+        "price": null,
+        "master_id": 1223,
+        "company_id": null
+      },
+      {
+        "id": 1068645,
+        "price": null,
+        "master_id": 1224,
+        "company_id": null
+      },
+      {
+        "id": 1068646,
+        "price": null,
+        "master_id": 1225,
+        "company_id": null
+      },
+      {
+        "id": 1068647,
+        "price": null,
+        "master_id": 1226,
+        "company_id": null
+      },
+      {
+        "id": 1068648,
+        "price": null,
+        "master_id": 1227,
+        "company_id": null
+      },
+      {
+        "id": 1068649,
+        "price": null,
+        "master_id": 1228,
+        "company_id": null
+      },
+      {
+        "id": 1068650,
+        "price": null,
+        "master_id": 1230,
+        "company_id": null
+      },
+      {
+        "id": 1068651,
+        "price": null,
+        "master_id": 1234,
+        "company_id": null
+      },
+      {
+        "id": 1068652,
+        "price": null,
+        "master_id": 1235,
+        "company_id": null
+      },
+      {
+        "id": 1068653,
+        "price": null,
+        "master_id": 1236,
+        "company_id": null
+      },
+      {
+        "id": 1068654,
+        "price": null,
+        "master_id": 1237,
+        "company_id": null
+      },
+      {
+        "id": 1068655,
+        "price": null,
+        "master_id": 1248,
+        "company_id": null
+      },
+      {
+        "id": 1068656,
+        "price": null,
+        "master_id": 1255,
+        "company_id": null
+      },
+      {
+        "id": 1068657,
+        "price": null,
+        "master_id": 1256,
+        "company_id": null
+      },
+      {
+        "id": 1068658,
+        "price": null,
+        "master_id": 1260,
+        "company_id": null
+      },
+      {
+        "id": 1068659,
+        "price": null,
+        "master_id": 1267,
+        "company_id": null
+      },
+      {
+        "id": 1068660,
+        "price": null,
+        "master_id": 1268,
+        "company_id": null
+      },
+      {
+        "id": 1068661,
+        "price": null,
+        "master_id": 1274,
+        "company_id": null
+      },
+      {
+        "id": 1068662,
+        "price": null,
+        "master_id": 1276,
+        "company_id": null
+      },
+      {
+        "id": 1068663,
+        "price": null,
+        "master_id": 1277,
+        "company_id": null
+      },
+      {
+        "id": 1068664,
+        "price": null,
+        "master_id": 1278,
+        "company_id": null
+      },
+      {
+        "id": 1068665,
+        "price": null,
+        "master_id": 1279,
+        "company_id": null
+      },
+      {
+        "id": 1068666,
+        "price": null,
+        "master_id": 1280,
+        "company_id": null
+      },
+      {
+        "id": 1068667,
+        "price": null,
+        "master_id": 1281,
+        "company_id": null
+      },
+      {
+        "id": 1068668,
+        "price": null,
+        "master_id": 1282,
+        "company_id": null
+      },
+      {
+        "id": 1068669,
+        "price": null,
+        "master_id": 1283,
+        "company_id": null
+      },
+      {
+        "id": 1068670,
+        "price": null,
+        "master_id": 1284,
+        "company_id": null
+      },
+      {
+        "id": 1068671,
+        "price": null,
+        "master_id": 1285,
+        "company_id": null
+      },
+      {
+        "id": 1068672,
+        "price": null,
+        "master_id": 1286,
+        "company_id": null
+      },
+      {
+        "id": 1068673,
+        "price": null,
+        "master_id": 1287,
+        "company_id": null
+      },
+      {
+        "id": 1068674,
+        "price": null,
+        "master_id": 1288,
+        "company_id": null
+      },
+      {
+        "id": 1068675,
+        "price": null,
+        "master_id": 1289,
+        "company_id": null
+      },
+      {
+        "id": 1068676,
+        "price": null,
+        "master_id": 1290,
+        "company_id": null
+      },
+      {
+        "id": 1068677,
+        "price": null,
+        "master_id": 1291,
+        "company_id": null
+      },
+      {
+        "id": 1068678,
+        "price": null,
+        "master_id": 1292,
+        "company_id": null
+      },
+      {
+        "id": 1068679,
+        "price": null,
+        "master_id": 1293,
+        "company_id": null
+      },
+      {
+        "id": 1068680,
+        "price": null,
+        "master_id": 1300,
+        "company_id": null
+      },
+      {
+        "id": 1068681,
+        "price": null,
+        "master_id": 1301,
+        "company_id": null
+      },
+      {
+        "id": 1068682,
+        "price": null,
+        "master_id": 1312,
+        "company_id": null
+      },
+      {
+        "id": 1068683,
+        "price": null,
+        "master_id": 1313,
+        "company_id": null
+      },
+      {
+        "id": 1068684,
+        "price": null,
+        "master_id": 1314,
+        "company_id": null
+      },
+      {
+        "id": 1068685,
+        "price": null,
+        "master_id": 1315,
+        "company_id": null
+      },
+      {
+        "id": 1068686,
+        "price": null,
+        "master_id": 1316,
+        "company_id": null
+      },
+      {
+        "id": 1068687,
+        "price": null,
+        "master_id": 1317,
+        "company_id": null
+      },
+      {
+        "id": 1068688,
+        "price": null,
+        "master_id": 1318,
+        "company_id": null
+      },
+      {
+        "id": 1068689,
+        "price": null,
+        "master_id": 1319,
+        "company_id": null
+      },
+      {
+        "id": 1068690,
+        "price": null,
+        "master_id": 1320,
+        "company_id": null
+      },
+      {
+        "id": 1068691,
+        "price": null,
+        "master_id": 1321,
+        "company_id": null
+      },
+      {
+        "id": 1068692,
+        "price": null,
+        "master_id": 1322,
+        "company_id": null
+      },
+      {
+        "id": 1068693,
+        "price": null,
+        "master_id": 1323,
+        "company_id": null
+      },
+      {
+        "id": 1068694,
+        "price": null,
+        "master_id": 1324,
+        "company_id": null
+      },
+      {
+        "id": 1068695,
+        "price": null,
+        "master_id": 1325,
+        "company_id": null
+      },
+      {
+        "id": 1068696,
+        "price": null,
+        "master_id": 1326,
+        "company_id": null
+      },
+      {
+        "id": 1068697,
+        "price": null,
+        "master_id": 1327,
+        "company_id": null
+      },
+      {
+        "id": 1068698,
+        "price": null,
+        "master_id": 1328,
+        "company_id": null
+      },
+      {
+        "id": 1068699,
+        "price": null,
+        "master_id": 1329,
+        "company_id": null
+      },
+      {
+        "id": 1068700,
+        "price": null,
+        "master_id": 1330,
+        "company_id": null
+      },
+      {
+        "id": 1068701,
+        "price": null,
+        "master_id": 1331,
+        "company_id": null
+      },
+      {
+        "id": 1068702,
+        "price": null,
+        "master_id": 1332,
+        "company_id": null
+      },
+      {
+        "id": 1068703,
+        "price": null,
+        "master_id": 1333,
+        "company_id": null
+      },
+      {
+        "id": 1068704,
+        "price": null,
+        "master_id": 1340,
+        "company_id": null
+      },
+      {
+        "id": 1068705,
+        "price": null,
+        "master_id": 1341,
+        "company_id": null
+      },
+      {
+        "id": 1068706,
+        "price": null,
+        "master_id": 1342,
+        "company_id": null
+      },
+      {
+        "id": 1068707,
+        "price": null,
+        "master_id": 1343,
+        "company_id": null
+      },
+      {
+        "id": 1068708,
+        "price": null,
+        "master_id": 1346,
+        "company_id": null
+      },
+      {
+        "id": 1068709,
+        "price": null,
+        "master_id": 1347,
+        "company_id": null
+      },
+      {
+        "id": 1068710,
+        "price": null,
+        "master_id": 1348,
+        "company_id": null
+      },
+      {
+        "id": 1068711,
+        "price": null,
+        "master_id": 1349,
+        "company_id": null
+      },
+      {
+        "id": 1068712,
+        "price": null,
+        "master_id": 1350,
+        "company_id": null
+      },
+      {
+        "id": 1068713,
+        "price": null,
+        "master_id": 1352,
+        "company_id": null
+      },
+      {
+        "id": 1068714,
+        "price": null,
+        "master_id": 1353,
+        "company_id": null
+      },
+      {
+        "id": 1068715,
+        "price": null,
+        "master_id": 1354,
+        "company_id": null
+      },
+      {
+        "id": 1068716,
+        "price": null,
+        "master_id": 1355,
+        "company_id": null
+      },
+      {
+        "id": 1068717,
+        "price": null,
+        "master_id": 1356,
+        "company_id": null
+      },
+      {
+        "id": 1068718,
+        "price": null,
+        "master_id": 1357,
+        "company_id": null
+      },
+      {
+        "id": 1068719,
+        "price": null,
+        "master_id": 1359,
+        "company_id": null
+      },
+      {
+        "id": 1068720,
+        "price": null,
+        "master_id": 1360,
+        "company_id": null
+      },
+      {
+        "id": 1068721,
+        "price": null,
+        "master_id": 1361,
+        "company_id": null
+      },
+      {
+        "id": 1068722,
+        "price": null,
+        "master_id": 1362,
+        "company_id": null
+      },
+      {
+        "id": 1068723,
+        "price": null,
+        "master_id": 1363,
+        "company_id": null
+      },
+      {
+        "id": 1068724,
+        "price": null,
+        "master_id": 1364,
+        "company_id": null
+      },
+      {
+        "id": 1068725,
+        "price": null,
+        "master_id": 1365,
+        "company_id": null
+      },
+      {
+        "id": 1068726,
+        "price": null,
+        "master_id": 1366,
+        "company_id": null
+      },
+      {
+        "id": 1068727,
+        "price": null,
+        "master_id": 1367,
+        "company_id": null
+      },
+      {
+        "id": 1068728,
+        "price": null,
+        "master_id": 1368,
+        "company_id": null
+      },
+      {
+        "id": 1068729,
+        "price": null,
+        "master_id": 1369,
+        "company_id": null
+      },
+      {
+        "id": 1068730,
+        "price": null,
+        "master_id": 1370,
+        "company_id": null
+      },
+      {
+        "id": 1068731,
+        "price": null,
+        "master_id": 1371,
+        "company_id": null
+      },
+      {
+        "id": 1068732,
+        "price": null,
+        "master_id": 1372,
+        "company_id": null
+      },
+      {
+        "id": 1068733,
+        "price": null,
+        "master_id": 1373,
+        "company_id": null
+      },
+      {
+        "id": 1068734,
+        "price": null,
+        "master_id": 1374,
+        "company_id": null
+      },
+      {
+        "id": 1068735,
+        "price": null,
+        "master_id": 1375,
+        "company_id": null
+      },
+      {
+        "id": 1068736,
+        "price": null,
+        "master_id": 1376,
+        "company_id": null
+      },
+      {
+        "id": 1068737,
+        "price": null,
+        "master_id": 1382,
+        "company_id": null
+      },
+      {
+        "id": 1068738,
+        "price": null,
+        "master_id": 1385,
+        "company_id": null
+      },
+      {
+        "id": 1068739,
+        "price": null,
+        "master_id": 1391,
+        "company_id": null
+      },
+      {
+        "id": 1068740,
+        "price": null,
+        "master_id": 1392,
+        "company_id": null
+      },
+      {
+        "id": 1068741,
+        "price": null,
+        "master_id": 1393,
+        "company_id": null
+      },
+      {
+        "id": 1068742,
+        "price": null,
+        "master_id": 1394,
+        "company_id": null
+      },
+      {
+        "id": 1068743,
+        "price": null,
+        "master_id": 1395,
+        "company_id": null
+      },
+      {
+        "id": 1068744,
+        "price": null,
+        "master_id": 1396,
+        "company_id": null
+      },
+      {
+        "id": 1068745,
+        "price": null,
+        "master_id": 1397,
+        "company_id": null
+      },
+      {
+        "id": 1068746,
+        "price": null,
+        "master_id": 1398,
+        "company_id": null
+      },
+      {
+        "id": 1068747,
+        "price": null,
+        "master_id": 1399,
+        "company_id": null
+      },
+      {
+        "id": 1068748,
+        "price": null,
+        "master_id": 1400,
+        "company_id": null
+      },
+      {
+        "id": 1068749,
+        "price": null,
+        "master_id": 1401,
+        "company_id": null
+      },
+      {
+        "id": 1068750,
+        "price": null,
+        "master_id": 1402,
+        "company_id": null
+      },
+      {
+        "id": 1068751,
+        "price": null,
+        "master_id": 1403,
+        "company_id": null
+      },
+      {
+        "id": 1068752,
+        "price": null,
+        "master_id": 1404,
+        "company_id": null
+      },
+      {
+        "id": 1068753,
+        "price": null,
+        "master_id": 1405,
+        "company_id": null
+      },
+      {
+        "id": 1068754,
+        "price": null,
+        "master_id": 1406,
+        "company_id": null
+      },
+      {
+        "id": 1068755,
+        "price": null,
+        "master_id": 1407,
+        "company_id": null
+      },
+      {
+        "id": 1068756,
+        "price": null,
+        "master_id": 1408,
+        "company_id": null
+      },
+      {
+        "id": 1068757,
+        "price": null,
+        "master_id": 1409,
+        "company_id": null
+      },
+      {
+        "id": 1068758,
+        "price": null,
+        "master_id": 1410,
+        "company_id": null
+      },
+      {
+        "id": 1068759,
+        "price": null,
+        "master_id": 1411,
+        "company_id": null
+      },
+      {
+        "id": 1068760,
+        "price": null,
+        "master_id": 1412,
+        "company_id": null
+      },
+      {
+        "id": 1068761,
+        "price": null,
+        "master_id": 1413,
+        "company_id": null
+      },
+      {
+        "id": 1068762,
+        "price": null,
+        "master_id": 1414,
+        "company_id": null
+      },
+      {
+        "id": 1068763,
+        "price": null,
+        "master_id": 1415,
+        "company_id": null
+      },
+      {
+        "id": 1068764,
+        "price": null,
+        "master_id": 1416,
+        "company_id": null
+      },
+      {
+        "id": 1068765,
+        "price": null,
+        "master_id": 1417,
+        "company_id": null
+      },
+      {
+        "id": 1068766,
+        "price": null,
+        "master_id": 1418,
+        "company_id": null
+      },
+      {
+        "id": 1068767,
+        "price": null,
+        "master_id": 1419,
+        "company_id": null
+      },
+      {
+        "id": 1068768,
+        "price": null,
+        "master_id": 1420,
+        "company_id": null
+      },
+      {
+        "id": 1068769,
+        "price": null,
+        "master_id": 1421,
+        "company_id": null
+      },
+      {
+        "id": 1068770,
+        "price": null,
+        "master_id": 1422,
+        "company_id": null
+      },
+      {
+        "id": 1068771,
+        "price": null,
+        "master_id": 1424,
+        "company_id": null
+      },
+      {
+        "id": 1068772,
+        "price": null,
+        "master_id": 1426,
+        "company_id": null
+      },
+      {
+        "id": 1068773,
+        "price": null,
+        "master_id": 1428,
+        "company_id": null
+      },
+      {
+        "id": 1068774,
+        "price": null,
+        "master_id": 1429,
+        "company_id": null
+      },
+      {
+        "id": 1068775,
+        "price": null,
+        "master_id": 1430,
+        "company_id": null
+      },
+      {
+        "id": 1068776,
+        "price": null,
+        "master_id": 1431,
+        "company_id": null
+      },
+      {
+        "id": 1068777,
+        "price": null,
+        "master_id": 1432,
+        "company_id": null
+      },
+      {
+        "id": 1068778,
+        "price": null,
+        "master_id": 1433,
+        "company_id": null
+      },
+      {
+        "id": 1068779,
+        "price": null,
+        "master_id": 1439,
+        "company_id": null
+      },
+      {
+        "id": 1068780,
+        "price": null,
+        "master_id": 1447,
+        "company_id": null
+      },
+      {
+        "id": 1068781,
+        "price": null,
+        "master_id": 1448,
+        "company_id": null
+      },
+      {
+        "id": 1068782,
+        "price": null,
+        "master_id": 1449,
+        "company_id": null
+      },
+      {
+        "id": 1068783,
+        "price": null,
+        "master_id": 1450,
+        "company_id": null
+      },
+      {
+        "id": 1068784,
+        "price": null,
+        "master_id": 1451,
+        "company_id": null
+      },
+      {
+        "id": 1068785,
+        "price": null,
+        "master_id": 1452,
+        "company_id": null
+      },
+      {
+        "id": 1068786,
+        "price": null,
+        "master_id": 1453,
+        "company_id": null
+      },
+      {
+        "id": 1068787,
+        "price": null,
+        "master_id": 1454,
+        "company_id": null
+      },
+      {
+        "id": 1068788,
+        "price": null,
+        "master_id": 1455,
+        "company_id": null
+      },
+      {
+        "id": 1068789,
+        "price": null,
+        "master_id": 1456,
+        "company_id": null
+      },
+      {
+        "id": 1068790,
+        "price": null,
+        "master_id": 1457,
+        "company_id": null
+      },
+      {
+        "id": 1068791,
+        "price": null,
+        "master_id": 1458,
+        "company_id": null
+      },
+      {
+        "id": 1068792,
+        "price": null,
+        "master_id": 1459,
+        "company_id": null
+      },
+      {
+        "id": 1068793,
+        "price": null,
+        "master_id": 1460,
+        "company_id": null
+      },
+      {
+        "id": 1068794,
+        "price": null,
+        "master_id": 1461,
+        "company_id": null
+      },
+      {
+        "id": 1068795,
+        "price": null,
+        "master_id": 1462,
+        "company_id": null
+      },
+      {
+        "id": 1068796,
+        "price": null,
+        "master_id": 1464,
+        "company_id": null
+      },
+      {
+        "id": 1068797,
+        "price": null,
+        "master_id": 1465,
+        "company_id": null
+      },
+      {
+        "id": 1068798,
+        "price": null,
+        "master_id": 1466,
+        "company_id": null
+      },
+      {
+        "id": 1068799,
+        "price": null,
+        "master_id": 1470,
+        "company_id": null
+      },
+      {
+        "id": 1068800,
+        "price": null,
+        "master_id": 1475,
+        "company_id": null
+      },
+      {
+        "id": 1068801,
+        "price": null,
+        "master_id": 1487,
+        "company_id": null
+      },
+      {
+        "id": 1068802,
+        "price": null,
+        "master_id": 1489,
+        "company_id": null
+      },
+      {
+        "id": 1068803,
+        "price": null,
+        "master_id": 1490,
+        "company_id": null
+      },
+      {
+        "id": 1068804,
+        "price": null,
+        "master_id": 1491,
+        "company_id": null
+      },
+      {
+        "id": 1068805,
+        "price": null,
+        "master_id": 1492,
+        "company_id": null
+      },
+      {
+        "id": 1068806,
+        "price": null,
+        "master_id": 1493,
+        "company_id": null
+      },
+      {
+        "id": 1068807,
+        "price": null,
+        "master_id": 1494,
+        "company_id": null
+      },
+      {
+        "id": 1068808,
+        "price": null,
+        "master_id": 1495,
+        "company_id": null
+      },
+      {
+        "id": 1068809,
+        "price": null,
+        "master_id": 1496,
+        "company_id": null
+      },
+      {
+        "id": 1068810,
+        "price": null,
+        "master_id": 1497,
+        "company_id": null
+      },
+      {
+        "id": 1068811,
+        "price": null,
+        "master_id": 1498,
+        "company_id": null
+      },
+      {
+        "id": 1068812,
+        "price": null,
+        "master_id": 1499,
+        "company_id": null
+      },
+      {
+        "id": 1068813,
+        "price": null,
+        "master_id": 1500,
+        "company_id": null
+      },
+      {
+        "id": 1068814,
+        "price": null,
+        "master_id": 1501,
+        "company_id": null
+      },
+      {
+        "id": 1068815,
+        "price": null,
+        "master_id": 1502,
+        "company_id": null
+      },
+      {
+        "id": 1068816,
+        "price": null,
+        "master_id": 1503,
+        "company_id": null
+      },
+      {
+        "id": 1068817,
+        "price": null,
+        "master_id": 1504,
+        "company_id": null
+      },
+      {
+        "id": 1068818,
+        "price": null,
+        "master_id": 1505,
+        "company_id": null
+      },
+      {
+        "id": 1068819,
+        "price": null,
+        "master_id": 1506,
+        "company_id": null
+      },
+      {
+        "id": 1068820,
+        "price": null,
+        "master_id": 1507,
+        "company_id": null
+      },
+      {
+        "id": 1068821,
+        "price": null,
+        "master_id": 1508,
+        "company_id": null
+      },
+      {
+        "id": 1068822,
+        "price": null,
+        "master_id": 1509,
+        "company_id": null
+      },
+      {
+        "id": 1068823,
+        "price": null,
+        "master_id": 1510,
+        "company_id": null
+      },
+      {
+        "id": 1068824,
+        "price": null,
+        "master_id": 1511,
+        "company_id": null
+      },
+      {
+        "id": 1068825,
+        "price": null,
+        "master_id": 1512,
+        "company_id": null
+      },
+      {
+        "id": 1068826,
+        "price": null,
+        "master_id": 1513,
+        "company_id": null
+      },
+      {
+        "id": 1068827,
+        "price": null,
+        "master_id": 1520,
+        "company_id": null
+      },
+      {
+        "id": 1068828,
+        "price": null,
+        "master_id": 1534,
+        "company_id": null
+      },
+      {
+        "id": 1068829,
+        "price": null,
+        "master_id": 1537,
+        "company_id": null
+      },
+      {
+        "id": 1068830,
+        "price": null,
+        "master_id": 1542,
+        "company_id": null
+      },
+      {
+        "id": 1068831,
+        "price": null,
+        "master_id": 1543,
+        "company_id": null
+      },
+      {
+        "id": 1068832,
+        "price": null,
+        "master_id": 1549,
+        "company_id": null
+      },
+      {
+        "id": 1068833,
+        "price": null,
+        "master_id": 1551,
+        "company_id": null
+      },
+      {
+        "id": 1068834,
+        "price": null,
+        "master_id": 1552,
+        "company_id": null
+      },
+      {
+        "id": 1068835,
+        "price": null,
+        "master_id": 1553,
+        "company_id": null
+      },
+      {
+        "id": 1068836,
+        "price": null,
+        "master_id": 1554,
+        "company_id": null
+      },
+      {
+        "id": 1068837,
+        "price": null,
+        "master_id": 1555,
+        "company_id": null
+      },
+      {
+        "id": 1068838,
+        "price": null,
+        "master_id": 1556,
+        "company_id": null
+      },
+      {
+        "id": 1068839,
+        "price": null,
+        "master_id": 1557,
+        "company_id": null
+      },
+      {
+        "id": 1068840,
+        "price": null,
+        "master_id": 1558,
+        "company_id": null
+      },
+      {
+        "id": 1068841,
+        "price": null,
+        "master_id": 1559,
+        "company_id": null
+      },
+      {
+        "id": 1068842,
+        "price": null,
+        "master_id": 1560,
+        "company_id": null
+      },
+      {
+        "id": 1068843,
+        "price": null,
+        "master_id": 1561,
+        "company_id": null
+      },
+      {
+        "id": 1068844,
+        "price": null,
+        "master_id": 1562,
+        "company_id": null
+      },
+      {
+        "id": 1068845,
+        "price": null,
+        "master_id": 1563,
+        "company_id": null
+      },
+      {
+        "id": 1068846,
+        "price": null,
+        "master_id": 1568,
+        "company_id": null
+      },
+      {
+        "id": 1068847,
+        "price": null,
+        "master_id": 1575,
+        "company_id": null
+      },
+      {
+        "id": 1068848,
+        "price": null,
+        "master_id": 1577,
+        "company_id": null
+      },
+      {
+        "id": 1068849,
+        "price": null,
+        "master_id": 1579,
+        "company_id": null
+      },
+      {
+        "id": 1068850,
+        "price": null,
+        "master_id": 1580,
+        "company_id": null
+      },
+      {
+        "id": 1068851,
+        "price": null,
+        "master_id": 1581,
+        "company_id": null
+      },
+      {
+        "id": 1068852,
+        "price": null,
+        "master_id": 1583,
+        "company_id": null
+      },
+      {
+        "id": 1068853,
+        "price": null,
+        "master_id": 1585,
+        "company_id": null
+      },
+      {
+        "id": 1068854,
+        "price": null,
+        "master_id": 1586,
+        "company_id": null
+      },
+      {
+        "id": 1068855,
+        "price": null,
+        "master_id": 1587,
+        "company_id": null
+      },
+      {
+        "id": 1068856,
+        "price": null,
+        "master_id": 1588,
+        "company_id": null
+      },
+      {
+        "id": 1068857,
+        "price": null,
+        "master_id": 1589,
+        "company_id": null
+      },
+      {
+        "id": 1068858,
+        "price": null,
+        "master_id": 1590,
+        "company_id": null
+      },
+      {
+        "id": 1068859,
+        "price": null,
+        "master_id": 1591,
+        "company_id": null
+      },
+      {
+        "id": 1068860,
+        "price": null,
+        "master_id": 1592,
+        "company_id": null
+      },
+      {
+        "id": 1068861,
+        "price": null,
+        "master_id": 1593,
+        "company_id": null
+      },
+      {
+        "id": 1068862,
+        "price": null,
+        "master_id": 1594,
+        "company_id": null
+      },
+      {
+        "id": 1068863,
+        "price": null,
+        "master_id": 1595,
+        "company_id": null
+      },
+      {
+        "id": 1068864,
+        "price": null,
+        "master_id": 1596,
+        "company_id": null
+      },
+      {
+        "id": 1068865,
+        "price": null,
+        "master_id": 1597,
+        "company_id": null
+      },
+      {
+        "id": 1068866,
+        "price": null,
+        "master_id": 1598,
+        "company_id": null
+      },
+      {
+        "id": 1068867,
+        "price": null,
+        "master_id": 1601,
+        "company_id": null
+      },
+      {
+        "id": 1068868,
+        "price": null,
+        "master_id": 1602,
+        "company_id": null
+      },
+      {
+        "id": 1068869,
+        "price": null,
+        "master_id": 1603,
+        "company_id": null
+      },
+      {
+        "id": 1068870,
+        "price": null,
+        "master_id": 1604,
+        "company_id": null
+      },
+      {
+        "id": 1068871,
+        "price": null,
+        "master_id": 1605,
+        "company_id": null
+      },
+      {
+        "id": 1068872,
+        "price": null,
+        "master_id": 1606,
+        "company_id": null
+      },
+      {
+        "id": 1068873,
+        "price": null,
+        "master_id": 1607,
+        "company_id": null
+      },
+      {
+        "id": 1068874,
+        "price": null,
+        "master_id": 1608,
+        "company_id": null
+      },
+      {
+        "id": 1068875,
+        "price": null,
+        "master_id": 1609,
+        "company_id": null
+      },
+      {
+        "id": 1068876,
+        "price": null,
+        "master_id": 1610,
+        "company_id": null
+      },
+      {
+        "id": 1068877,
+        "price": null,
+        "master_id": 1611,
+        "company_id": null
+      },
+      {
+        "id": 1068878,
+        "price": null,
+        "master_id": 1612,
+        "company_id": null
+      },
+      {
+        "id": 1068879,
+        "price": null,
+        "master_id": 1613,
+        "company_id": null
+      },
+      {
+        "id": 1068880,
+        "price": null,
+        "master_id": 1614,
+        "company_id": null
+      },
+      {
+        "id": 1068881,
+        "price": null,
+        "master_id": 1615,
+        "company_id": null
+      },
+      {
+        "id": 1068882,
+        "price": null,
+        "master_id": 1616,
+        "company_id": null
+      },
+      {
+        "id": 1068883,
+        "price": null,
+        "master_id": 1617,
+        "company_id": null
+      },
+      {
+        "id": 1068884,
+        "price": null,
+        "master_id": 1619,
+        "company_id": null
+      },
+      {
+        "id": 1068885,
+        "price": null,
+        "master_id": 1626,
+        "company_id": null
+      },
+      {
+        "id": 1068886,
+        "price": null,
+        "master_id": 1627,
+        "company_id": null
+      },
+      {
+        "id": 1068887,
+        "price": null,
+        "master_id": 1639,
+        "company_id": null
+      },
+      {
+        "id": 1068888,
+        "price": null,
+        "master_id": 1640,
+        "company_id": null
+      },
+      {
+        "id": 1068889,
+        "price": null,
+        "master_id": 1649,
+        "company_id": null
+      },
+      {
+        "id": 1068890,
+        "price": null,
+        "master_id": 1650,
+        "company_id": null
+      },
+      {
+        "id": 1068891,
+        "price": null,
+        "master_id": 1657,
+        "company_id": null
+      },
+      {
+        "id": 1068892,
+        "price": null,
+        "master_id": 1658,
+        "company_id": null
+      },
+      {
+        "id": 1068893,
+        "price": null,
+        "master_id": 1659,
+        "company_id": null
+      },
+      {
+        "id": 1068894,
+        "price": null,
+        "master_id": 1662,
+        "company_id": null
+      },
+      {
+        "id": 1068895,
+        "price": null,
+        "master_id": 1664,
+        "company_id": null
+      },
+      {
+        "id": 1068896,
+        "price": null,
+        "master_id": 1665,
+        "company_id": null
+      },
+      {
+        "id": 1068897,
+        "price": null,
+        "master_id": 1669,
+        "company_id": null
+      },
+      {
+        "id": 1068898,
+        "price": null,
+        "master_id": 1676,
+        "company_id": null
+      },
+      {
+        "id": 1068899,
+        "price": null,
+        "master_id": 1681,
+        "company_id": null
+      },
+      {
+        "id": 1068900,
+        "price": null,
+        "master_id": 1688,
+        "company_id": null
+      },
+      {
+        "id": 1068901,
+        "price": null,
+        "master_id": 1693,
+        "company_id": null
+      },
+      {
+        "id": 1068902,
+        "price": null,
+        "master_id": 1700,
+        "company_id": null
+      },
+      {
+        "id": 1068903,
+        "price": null,
+        "master_id": 1706,
+        "company_id": null
+      },
+      {
+        "id": 1068904,
+        "price": null,
+        "master_id": 1715,
+        "company_id": null
+      },
+      {
+        "id": 1068905,
+        "price": null,
+        "master_id": 1724,
+        "company_id": null
+      },
+      {
+        "id": 1068906,
+        "price": null,
+        "master_id": 1738,
+        "company_id": null
+      },
+      {
+        "id": 1068907,
+        "price": null,
+        "master_id": 1739,
+        "company_id": null
+      },
+      {
+        "id": 1068908,
+        "price": null,
+        "master_id": 1740,
+        "company_id": null
+      },
+      {
+        "id": 1068909,
+        "price": null,
+        "master_id": 1741,
+        "company_id": null
+      },
+      {
+        "id": 1068910,
+        "price": null,
+        "master_id": 1742,
+        "company_id": null
+      },
+      {
+        "id": 1068911,
+        "price": null,
+        "master_id": 1743,
+        "company_id": null
+      },
+      {
+        "id": 1068912,
+        "price": null,
+        "master_id": 1744,
+        "company_id": null
+      },
+      {
+        "id": 1068913,
+        "price": null,
+        "master_id": 1745,
+        "company_id": null
+      },
+      {
+        "id": 1068914,
+        "price": null,
+        "master_id": 1751,
+        "company_id": null
+      },
+      {
+        "id": 1068915,
+        "price": null,
+        "master_id": 1772,
+        "company_id": null
+      },
+      {
+        "id": 1068916,
+        "price": null,
+        "master_id": 1811,
+        "company_id": null
+      },
+      {
+        "id": 1068917,
+        "price": null,
+        "master_id": 1818,
+        "company_id": null
+      },
+      {
+        "id": 1068918,
+        "price": null,
+        "master_id": 1829,
+        "company_id": null
+      },
+      {
+        "id": 1068919,
+        "price": null,
+        "master_id": 1835,
+        "company_id": null
+      },
+      {
+        "id": 1068920,
+        "price": null,
+        "master_id": 1838,
+        "company_id": null
+      },
+      {
+        "id": 1068921,
+        "price": null,
+        "master_id": 1839,
+        "company_id": null
+      },
+      {
+        "id": 1068922,
+        "price": null,
+        "master_id": 1840,
+        "company_id": null
+      },
+      {
+        "id": 1068923,
+        "price": null,
+        "master_id": 1845,
+        "company_id": null
+      },
+      {
+        "id": 1068924,
+        "price": null,
+        "master_id": 1858,
+        "company_id": null
+      },
+      {
+        "id": 1068925,
+        "price": null,
+        "master_id": 1891,
+        "company_id": null
+      },
+      {
+        "id": 1068926,
+        "price": null,
+        "master_id": 1892,
+        "company_id": null
+      },
+      {
+        "id": 1068927,
+        "price": null,
+        "master_id": 1893,
+        "company_id": null
+      },
+      {
+        "id": 1068928,
+        "price": null,
+        "master_id": 1894,
+        "company_id": null
+      },
+      {
+        "id": 1068929,
+        "price": null,
+        "master_id": 1910,
+        "company_id": null
+      },
+      {
+        "id": 1068930,
+        "price": null,
+        "master_id": 1922,
+        "company_id": null
+      },
+      {
+        "id": 1068931,
+        "price": null,
+        "master_id": 1974,
+        "company_id": null
+      },
+      {
+        "id": 1068932,
+        "price": null,
+        "master_id": 1975,
+        "company_id": null
+      },
+      {
+        "id": 1068933,
+        "price": null,
+        "master_id": 1978,
+        "company_id": null
+      },
+      {
+        "id": 1068934,
+        "price": null,
+        "master_id": 1980,
+        "company_id": null
+      },
+      {
+        "id": 1068935,
+        "price": null,
+        "master_id": 2001,
+        "company_id": null
+      },
+      {
+        "id": 1068936,
+        "price": null,
+        "master_id": 2014,
+        "company_id": null
+      },
+      {
+        "id": 1068937,
+        "price": null,
+        "master_id": 2041,
+        "company_id": null
+      },
+      {
+        "id": 1068938,
+        "price": null,
+        "master_id": 2042,
+        "company_id": null
+      },
+      {
+        "id": 1068939,
+        "price": null,
+        "master_id": 2060,
+        "company_id": null
+      },
+      {
+        "id": 1068940,
+        "price": null,
+        "master_id": 2128,
+        "company_id": null
+      },
+      {
+        "id": 1068941,
+        "price": null,
+        "master_id": 2154,
+        "company_id": null
+      },
+      {
+        "id": 1068942,
+        "price": null,
+        "master_id": 2163,
+        "company_id": null
+      },
+      {
+        "id": 1068943,
+        "price": null,
+        "master_id": 2195,
+        "company_id": null
+      },
+      {
+        "id": 1068944,
+        "price": null,
+        "master_id": 2213,
+        "company_id": null
+      },
+      {
+        "id": 1068945,
+        "price": null,
+        "master_id": 2214,
+        "company_id": null
+      },
+      {
+        "id": 1068946,
+        "price": null,
+        "master_id": 2240,
+        "company_id": null
+      },
+      {
+        "id": 1068947,
+        "price": null,
+        "master_id": 2253,
+        "company_id": null
+      },
+      {
+        "id": 1068948,
+        "price": null,
+        "master_id": 2268,
+        "company_id": null
+      },
+      {
+        "id": 1068949,
+        "price": null,
+        "master_id": 2275,
+        "company_id": null
+      },
+      {
+        "id": 1068950,
+        "price": null,
+        "master_id": 2282,
+        "company_id": null
+      },
+      {
+        "id": 1068951,
+        "price": null,
+        "master_id": 2283,
+        "company_id": null
+      },
+      {
+        "id": 1068952,
+        "price": null,
+        "master_id": 2284,
+        "company_id": null
+      },
+      {
+        "id": 1068953,
+        "price": null,
+        "master_id": 2285,
+        "company_id": null
+      },
+      {
+        "id": 1068954,
+        "price": null,
+        "master_id": 2301,
+        "company_id": null
+      },
+      {
+        "id": 1068955,
+        "price": null,
+        "master_id": 2317,
+        "company_id": null
+      },
+      {
+        "id": 1068956,
+        "price": null,
+        "master_id": 2323,
+        "company_id": null
+      },
+      {
+        "id": 1068957,
+        "price": null,
+        "master_id": 2332,
+        "company_id": null
+      },
+      {
+        "id": 1068958,
+        "price": null,
+        "master_id": 2337,
+        "company_id": null
+      },
+      {
+        "id": 1068959,
+        "price": null,
+        "master_id": 2351,
+        "company_id": null
+      },
+      {
+        "id": 1068960,
+        "price": null,
+        "master_id": 2361,
+        "company_id": null
+      },
+      {
+        "id": 1068961,
+        "price": null,
+        "master_id": 2362,
+        "company_id": null
+      },
+      {
+        "id": 1068962,
+        "price": null,
+        "master_id": 2363,
+        "company_id": null
+      },
+      {
+        "id": 1068963,
+        "price": null,
+        "master_id": 2368,
+        "company_id": null
+      },
+      {
+        "id": 1068964,
+        "price": null,
+        "master_id": 2375,
+        "company_id": null
+      },
+      {
+        "id": 1068965,
+        "price": null,
+        "master_id": 2397,
+        "company_id": null
+      },
+      {
+        "id": 1068966,
+        "price": null,
+        "master_id": 2398,
+        "company_id": null
+      },
+      {
+        "id": 1068967,
+        "price": null,
+        "master_id": 2403,
+        "company_id": null
+      },
+      {
+        "id": 1068968,
+        "price": null,
+        "master_id": 2494,
+        "company_id": null
+      },
+      {
+        "id": 1068969,
+        "price": null,
+        "master_id": 4042,
+        "company_id": null
+      },
+      {
+        "id": 1068970,
+        "price": null,
+        "master_id": 4050,
+        "company_id": null
+      },
+      {
+        "id": 1068971,
+        "price": null,
+        "master_id": 4067,
+        "company_id": null
+      },
+      {
+        "id": 1068972,
+        "price": null,
+        "master_id": 4076,
+        "company_id": null
+      },
+      {
+        "id": 1068973,
+        "price": null,
+        "master_id": 4080,
+        "company_id": null
+      },
+      {
+        "id": 1068974,
+        "price": null,
+        "master_id": 4085,
+        "company_id": null
+      },
+      {
+        "id": 1068975,
+        "price": null,
+        "master_id": 4091,
+        "company_id": null
+      },
+      {
+        "id": 1068976,
+        "price": null,
+        "master_id": 4096,
+        "company_id": null
+      },
+      {
+        "id": 1068977,
+        "price": null,
+        "master_id": 4099,
+        "company_id": null
+      },
+      {
+        "id": 1068978,
+        "price": null,
+        "master_id": 4103,
+        "company_id": null
+      },
+      {
+        "id": 1068979,
+        "price": null,
+        "master_id": 4106,
+        "company_id": null
+      },
+      {
+        "id": 1068980,
+        "price": null,
+        "master_id": 4116,
+        "company_id": null
+      },
+      {
+        "id": 1068981,
+        "price": null,
+        "master_id": 4120,
+        "company_id": null
+      },
+      {
+        "id": 1068982,
+        "price": null,
+        "master_id": 4125,
+        "company_id": null
+      },
+      {
+        "id": 1068983,
+        "price": null,
+        "master_id": 4127,
+        "company_id": null
+      },
+      {
+        "id": 1068984,
+        "price": null,
+        "master_id": 4130,
+        "company_id": null
+      },
+      {
+        "id": 1068985,
+        "price": null,
+        "master_id": 4298,
+        "company_id": null
+      },
+      {
+        "id": 1068986,
+        "price": null,
+        "master_id": 4299,
+        "company_id": null
+      },
+      {
+        "id": 1068987,
+        "price": null,
+        "master_id": 4302,
+        "company_id": null
+      },
+      {
+        "id": 1068988,
+        "price": null,
+        "master_id": 4303,
+        "company_id": null
+      },
+      {
+        "id": 1068989,
+        "price": null,
+        "master_id": 4305,
+        "company_id": null
+      },
+      {
+        "id": 1068990,
+        "price": null,
+        "master_id": 4306,
+        "company_id": null
+      },
+      {
+        "id": 1068991,
+        "price": null,
+        "master_id": 4307,
+        "company_id": null
+      },
+      {
+        "id": 1068992,
+        "price": null,
+        "master_id": 4308,
+        "company_id": null
+      },
+      {
+        "id": 1068993,
+        "price": null,
+        "master_id": 4309,
+        "company_id": null
+      },
+      {
+        "id": 1068994,
+        "price": null,
+        "master_id": 4310,
+        "company_id": null
+      },
+      {
+        "id": 1068995,
+        "price": null,
+        "master_id": 4311,
+        "company_id": null
+      },
+      {
+        "id": 1068996,
+        "price": null,
+        "master_id": 4312,
+        "company_id": null
+      },
+      {
+        "id": 1068997,
+        "price": null,
+        "master_id": 4313,
+        "company_id": null
+      },
+      {
+        "id": 1068998,
+        "price": null,
+        "master_id": 4314,
+        "company_id": null
+      },
+      {
+        "id": 1068999,
+        "price": null,
+        "master_id": 4315,
+        "company_id": null
+      },
+      {
+        "id": 1069000,
+        "price": null,
+        "master_id": 4316,
+        "company_id": null
+      },
+      {
+        "id": 1069001,
+        "price": null,
+        "master_id": 4317,
+        "company_id": null
+      },
+      {
+        "id": 1069002,
+        "price": null,
+        "master_id": 4318,
+        "company_id": null
+      },
+      {
+        "id": 1069003,
+        "price": null,
+        "master_id": 4319,
+        "company_id": null
+      },
+      {
+        "id": 1069004,
+        "price": null,
+        "master_id": 4320,
+        "company_id": null
+      },
+      {
+        "id": 1069005,
+        "price": null,
+        "master_id": 4321,
+        "company_id": null
+      },
+      {
+        "id": 1069006,
+        "price": null,
+        "master_id": 4322,
+        "company_id": null
+      },
+      {
+        "id": 1069007,
+        "price": null,
+        "master_id": 4323,
+        "company_id": null
+      },
+      {
+        "id": 1069008,
+        "price": null,
+        "master_id": 4324,
+        "company_id": null
+      },
+      {
+        "id": 1069009,
+        "price": null,
+        "master_id": 4325,
+        "company_id": null
+      },
+      {
+        "id": 1069010,
+        "price": null,
+        "master_id": 4326,
+        "company_id": null
+      },
+      {
+        "id": 1069011,
+        "price": null,
+        "master_id": 4327,
+        "company_id": null
+      },
+      {
+        "id": 1069012,
+        "price": null,
+        "master_id": 4328,
+        "company_id": null
+      },
+      {
+        "id": 1069013,
+        "price": null,
+        "master_id": 4329,
+        "company_id": null
+      },
+      {
+        "id": 1069014,
+        "price": null,
+        "master_id": 4330,
+        "company_id": null
+      },
+      {
+        "id": 1069015,
+        "price": null,
+        "master_id": 4331,
+        "company_id": null
+      },
+      {
+        "id": 1069016,
+        "price": null,
+        "master_id": 4332,
+        "company_id": null
+      },
+      {
+        "id": 1069017,
+        "price": null,
+        "master_id": 4333,
+        "company_id": null
+      },
+      {
+        "id": 1069018,
+        "price": null,
+        "master_id": 4334,
+        "company_id": null
+      },
+      {
+        "id": 1069019,
+        "price": null,
+        "master_id": 4335,
+        "company_id": null
+      },
+      {
+        "id": 1069020,
+        "price": null,
+        "master_id": 4336,
+        "company_id": null
+      },
+      {
+        "id": 1069021,
+        "price": null,
+        "master_id": 4337,
+        "company_id": null
+      },
+      {
+        "id": 1069022,
+        "price": null,
+        "master_id": 4338,
+        "company_id": null
+      },
+      {
+        "id": 1069023,
+        "price": null,
+        "master_id": 4339,
+        "company_id": null
+      },
+      {
+        "id": 1069024,
+        "price": null,
+        "master_id": 4340,
+        "company_id": null
+      },
+      {
+        "id": 1069025,
+        "price": null,
+        "master_id": 4341,
+        "company_id": null
+      },
+      {
+        "id": 1069026,
+        "price": null,
+        "master_id": 4342,
+        "company_id": null
+      },
+      {
+        "id": 1069027,
+        "price": null,
+        "master_id": 4343,
+        "company_id": null
+      },
+      {
+        "id": 1069028,
+        "price": null,
+        "master_id": 4344,
+        "company_id": null
+      },
+      {
+        "id": 1069029,
+        "price": null,
+        "master_id": 4345,
+        "company_id": null
+      },
+      {
+        "id": 1069030,
+        "price": null,
+        "master_id": 4346,
+        "company_id": null
+      },
+      {
+        "id": 1069031,
+        "price": null,
+        "master_id": 4347,
+        "company_id": null
+      },
+      {
+        "id": 1069032,
+        "price": null,
+        "master_id": 4348,
+        "company_id": null
+      },
+      {
+        "id": 1069033,
+        "price": null,
+        "master_id": 4349,
+        "company_id": null
+      },
+      {
+        "id": 1069034,
+        "price": null,
+        "master_id": 4350,
+        "company_id": null
+      },
+      {
+        "id": 1069035,
+        "price": null,
+        "master_id": 4351,
+        "company_id": null
+      },
+      {
+        "id": 1069036,
+        "price": null,
+        "master_id": 4352,
+        "company_id": null
+      },
+      {
+        "id": 1069037,
+        "price": null,
+        "master_id": 4353,
+        "company_id": null
+      },
+      {
+        "id": 1069038,
+        "price": null,
+        "master_id": 4354,
+        "company_id": null
+      },
+      {
+        "id": 1069039,
+        "price": null,
+        "master_id": 4355,
+        "company_id": null
+      },
+      {
+        "id": 1069040,
+        "price": null,
+        "master_id": 4356,
+        "company_id": null
+      },
+      {
+        "id": 1069041,
+        "price": null,
+        "master_id": 4357,
+        "company_id": null
+      },
+      {
+        "id": 1069042,
+        "price": null,
+        "master_id": 4358,
+        "company_id": null
+      },
+      {
+        "id": 1069043,
+        "price": null,
+        "master_id": 4359,
+        "company_id": null
+      },
+      {
+        "id": 1069044,
+        "price": null,
+        "master_id": 4360,
+        "company_id": null
+      },
+      {
+        "id": 1069045,
+        "price": null,
+        "master_id": 4361,
+        "company_id": null
+      },
+      {
+        "id": 1069046,
+        "price": null,
+        "master_id": 4362,
+        "company_id": null
+      },
+      {
+        "id": 1069047,
+        "price": null,
+        "master_id": 4363,
+        "company_id": null
+      },
+      {
+        "id": 1069048,
+        "price": null,
+        "master_id": 4364,
+        "company_id": null
+      },
+      {
+        "id": 1069049,
+        "price": null,
+        "master_id": 4365,
+        "company_id": null
+      },
+      {
+        "id": 1069050,
+        "price": null,
+        "master_id": 4366,
+        "company_id": null
+      },
+      {
+        "id": 1069051,
+        "price": null,
+        "master_id": 4367,
+        "company_id": null
+      },
+      {
+        "id": 1069052,
+        "price": null,
+        "master_id": 4368,
+        "company_id": null
+      },
+      {
+        "id": 1069053,
+        "price": null,
+        "master_id": 4369,
+        "company_id": null
+      },
+      {
+        "id": 1069054,
+        "price": null,
+        "master_id": 4370,
+        "company_id": null
+      },
+      {
+        "id": 1069055,
+        "price": null,
+        "master_id": 4371,
+        "company_id": null
+      },
+      {
+        "id": 1069056,
+        "price": null,
+        "master_id": 4374,
+        "company_id": null
+      },
+      {
+        "id": 1069057,
+        "price": null,
+        "master_id": 4375,
+        "company_id": null
+      },
+      {
+        "id": 1069058,
+        "price": null,
+        "master_id": 4384,
+        "company_id": null
+      },
+      {
+        "id": 1069059,
+        "price": null,
+        "master_id": 4385,
+        "company_id": null
+      },
+      {
+        "id": 1069060,
+        "price": null,
+        "master_id": 4388,
+        "company_id": null
+      },
+      {
+        "id": 1069061,
+        "price": null,
+        "master_id": 4398,
+        "company_id": null
+      },
+      {
+        "id": 1069062,
+        "price": null,
+        "master_id": 4475,
+        "company_id": null
+      },
+      {
+        "id": 1069063,
+        "price": null,
+        "master_id": 4476,
+        "company_id": null
+      },
+      {
+        "id": 1069064,
+        "price": null,
+        "master_id": 4477,
+        "company_id": null
+      },
+      {
+        "id": 1069065,
+        "price": null,
+        "master_id": 4478,
+        "company_id": null
+      },
+      {
+        "id": 1069066,
+        "price": null,
+        "master_id": 4479,
+        "company_id": null
+      },
+      {
+        "id": 1069067,
+        "price": null,
+        "master_id": 4494,
+        "company_id": null
+      },
+      {
+        "id": 1069068,
+        "price": null,
+        "master_id": 4501,
+        "company_id": null
+      },
+      {
+        "id": 1069069,
+        "price": null,
+        "master_id": 4502,
+        "company_id": null
+      },
+      {
+        "id": 1069070,
+        "price": null,
+        "master_id": 4503,
+        "company_id": null
+      },
+      {
+        "id": 1069071,
+        "price": null,
+        "master_id": 4547,
+        "company_id": null
+      },
+      {
+        "id": 1069072,
+        "price": null,
+        "master_id": 4549,
+        "company_id": null
+      },
+      {
+        "id": 1069073,
+        "price": null,
+        "master_id": 4551,
+        "company_id": null
+      },
+      {
+        "id": 1069074,
+        "price": null,
+        "master_id": 4553,
+        "company_id": null
+      },
+      {
+        "id": 1069075,
+        "price": null,
+        "master_id": 4555,
+        "company_id": null
+      },
+      {
+        "id": 1069076,
+        "price": null,
+        "master_id": 4604,
+        "company_id": null
+      },
+      {
+        "id": 1069077,
+        "price": null,
+        "master_id": 4605,
+        "company_id": null
+      },
+      {
+        "id": 1069078,
+        "price": null,
+        "master_id": 4616,
+        "company_id": null
+      },
+      {
+        "id": 1069079,
+        "price": null,
+        "master_id": 4617,
+        "company_id": null
+      },
+      {
+        "id": 1069080,
+        "price": null,
+        "master_id": 4618,
+        "company_id": null
+      },
+      {
+        "id": 1069081,
+        "price": null,
+        "master_id": 4619,
+        "company_id": null
+      },
+      {
+        "id": 1069082,
+        "price": null,
+        "master_id": 4620,
+        "company_id": null
+      },
+      {
+        "id": 1069083,
+        "price": null,
+        "master_id": 4707,
+        "company_id": null
+      },
+      {
+        "id": 1069084,
+        "price": null,
+        "master_id": 4708,
+        "company_id": null
+      },
+      {
+        "id": 1069085,
+        "price": null,
+        "master_id": 4718,
+        "company_id": null
+      },
+      {
+        "id": 1069086,
+        "price": null,
+        "master_id": 4742,
+        "company_id": null
+      },
+      {
+        "id": 1069087,
+        "price": null,
+        "master_id": 4743,
+        "company_id": null
+      },
+      {
+        "id": 1069088,
+        "price": null,
+        "master_id": 4755,
+        "company_id": null
+      },
+      {
+        "id": 1069089,
+        "price": null,
+        "master_id": 4756,
+        "company_id": null
+      },
+      {
+        "id": 1069090,
+        "price": null,
+        "master_id": 4757,
+        "company_id": null
+      },
+      {
+        "id": 1069091,
+        "price": null,
+        "master_id": 4758,
+        "company_id": null
+      },
+      {
+        "id": 1069092,
+        "price": null,
+        "master_id": 4759,
+        "company_id": null
+      },
+      {
+        "id": 1069093,
+        "price": null,
+        "master_id": 4847,
+        "company_id": null
+      },
+      {
+        "id": 1069094,
+        "price": null,
+        "master_id": 4848,
+        "company_id": null
+      },
+      {
+        "id": 1069095,
+        "price": null,
+        "master_id": 4989,
+        "company_id": null
+      },
+      {
+        "id": 1069096,
+        "price": null,
+        "master_id": 4990,
+        "company_id": null
+      },
+      {
+        "id": 1069097,
+        "price": null,
+        "master_id": 4991,
+        "company_id": null
+      },
+      {
+        "id": 1069098,
+        "price": null,
+        "master_id": 4992,
+        "company_id": null
+      },
+      {
+        "id": 1069099,
+        "price": null,
+        "master_id": 4993,
+        "company_id": null
+      },
+      {
+        "id": 1069100,
+        "price": null,
+        "master_id": 4995,
+        "company_id": null
+      },
+      {
+        "id": 1069101,
+        "price": null,
+        "master_id": 4996,
+        "company_id": null
+      },
+      {
+        "id": 1069102,
+        "price": null,
+        "master_id": 5045,
+        "company_id": null
+      },
+      {
+        "id": 1069103,
+        "price": null,
+        "master_id": 5046,
+        "company_id": null
+      },
+      {
+        "id": 1069104,
+        "price": null,
+        "master_id": 5049,
+        "company_id": null
+      },
+      {
+        "id": 1069105,
+        "price": null,
+        "master_id": 5050,
+        "company_id": null
+      },
+      {
+        "id": 1069106,
+        "price": null,
+        "master_id": 5084,
+        "company_id": null
+      },
+      {
+        "id": 1069107,
+        "price": null,
+        "master_id": 5085,
+        "company_id": null
+      },
+      {
+        "id": 1069108,
+        "price": null,
+        "master_id": 5086,
+        "company_id": null
+      },
+      {
+        "id": 1069109,
+        "price": null,
+        "master_id": 5087,
+        "company_id": null
+      },
+      {
+        "id": 1069110,
+        "price": null,
+        "master_id": 5109,
+        "company_id": null
+      },
+      {
+        "id": 1069111,
+        "price": null,
+        "master_id": 5110,
+        "company_id": null
+      },
+      {
+        "id": 1069112,
+        "price": null,
+        "master_id": 5124,
+        "company_id": null
+      },
+      {
+        "id": 1069113,
+        "price": null,
+        "master_id": 5125,
+        "company_id": null
+      },
+      {
+        "id": 1069114,
+        "price": null,
+        "master_id": 5126,
+        "company_id": null
+      },
+      {
+        "id": 1069115,
+        "price": null,
+        "master_id": 5220,
+        "company_id": null
+      },
+      {
+        "id": 1069116,
+        "price": null,
+        "master_id": 5223,
+        "company_id": null
+      },
+      {
+        "id": 1069117,
+        "price": null,
+        "master_id": 5224,
+        "company_id": null
+      },
+      {
+        "id": 1069118,
+        "price": null,
+        "master_id": 5239,
+        "company_id": null
+      },
+      {
+        "id": 1069119,
+        "price": null,
+        "master_id": 5246,
+        "company_id": null
+      },
+      {
+        "id": 1069120,
+        "price": null,
+        "master_id": 5247,
+        "company_id": null
+      },
+      {
+        "id": 1069121,
+        "price": null,
+        "master_id": 5248,
+        "company_id": null
+      },
+      {
+        "id": 1069122,
+        "price": null,
+        "master_id": 5253,
+        "company_id": null
+      },
+      {
+        "id": 1069123,
+        "price": null,
+        "master_id": 5348,
+        "company_id": null
+      },
+      {
+        "id": 1069124,
+        "price": null,
+        "master_id": 5350,
+        "company_id": null
+      },
+      {
+        "id": 1069125,
+        "price": null,
+        "master_id": 5353,
+        "company_id": null
+      },
+      {
+        "id": 1069126,
+        "price": null,
+        "master_id": 5354,
+        "company_id": null
+      },
+      {
+        "id": 1069127,
+        "price": null,
+        "master_id": 5382,
+        "company_id": null
+      },
+      {
+        "id": 1069128,
+        "price": null,
+        "master_id": 5391,
+        "company_id": null
+      },
+      {
+        "id": 1069129,
+        "price": null,
+        "master_id": 5420,
+        "company_id": null
+      },
+      {
+        "id": 1069130,
+        "price": null,
+        "master_id": 5433,
+        "company_id": null
+      },
+      {
+        "id": 1069131,
+        "price": null,
+        "master_id": 5434,
+        "company_id": null
+      },
+      {
+        "id": 1069132,
+        "price": null,
+        "master_id": 5448,
+        "company_id": null
+      },
+      {
+        "id": 1069133,
+        "price": null,
+        "master_id": 5449,
+        "company_id": null
+      },
+      {
+        "id": 1069134,
+        "price": null,
+        "master_id": 5450,
+        "company_id": null
+      },
+      {
+        "id": 1069135,
+        "price": null,
+        "master_id": 5451,
+        "company_id": null
+      },
+      {
+        "id": 1069136,
+        "price": null,
+        "master_id": 5542,
+        "company_id": null
+      },
+      {
+        "id": 1069137,
+        "price": null,
+        "master_id": 5545,
+        "company_id": null
+      },
+      {
+        "id": 1069138,
+        "price": null,
+        "master_id": 5546,
+        "company_id": null
+      },
+      {
+        "id": 1069139,
+        "price": null,
+        "master_id": 5563,
+        "company_id": null
+      },
+      {
+        "id": 1069140,
+        "price": null,
+        "master_id": 5576,
+        "company_id": null
+      },
+      {
+        "id": 1069141,
+        "price": null,
+        "master_id": 5577,
+        "company_id": null
+      },
+      {
+        "id": 1069142,
+        "price": null,
+        "master_id": 5579,
+        "company_id": null
+      },
+      {
+        "id": 1069143,
+        "price": null,
+        "master_id": 5580,
+        "company_id": null
+      },
+      {
+        "id": 1069144,
+        "price": null,
+        "master_id": 5594,
+        "company_id": null
+      },
+      {
+        "id": 1069145,
+        "price": null,
+        "master_id": 5595,
+        "company_id": null
+      },
+      {
+        "id": 1069146,
+        "price": null,
+        "master_id": 5596,
+        "company_id": null
+      },
+      {
+        "id": 1069147,
+        "price": null,
+        "master_id": 5597,
+        "company_id": null
+      },
+      {
+        "id": 1069148,
+        "price": null,
+        "master_id": 5691,
+        "company_id": null
+      },
+      {
+        "id": 1069149,
+        "price": null,
+        "master_id": 5694,
+        "company_id": null
+      },
+      {
+        "id": 1069150,
+        "price": null,
+        "master_id": 5695,
+        "company_id": null
+      },
+      {
+        "id": 1069151,
+        "price": null,
+        "master_id": 5730,
+        "company_id": null
+      },
+      {
+        "id": 1069152,
+        "price": null,
+        "master_id": 5731,
+        "company_id": null
+      },
+      {
+        "id": 1069153,
+        "price": null,
+        "master_id": 5732,
+        "company_id": null
+      },
+      {
+        "id": 1069154,
+        "price": null,
+        "master_id": 5733,
+        "company_id": null
+      },
+      {
+        "id": 1069155,
+        "price": null,
+        "master_id": 5827,
+        "company_id": null
+      },
+      {
+        "id": 1069156,
+        "price": null,
+        "master_id": 5830,
+        "company_id": null
+      },
+      {
+        "id": 1069157,
+        "price": null,
+        "master_id": 5831,
+        "company_id": null
       }
     ],
     "additional_status": null,
     "history": [
       {
-        "id": 5,
+        "id": 1,
         "action": null,
-        "src_title": "tender_title",
-        "title": "tender_title_dispatcher",
-        "description": "tender_description_dispatcher",
-        "set_at": null,
-        "completed_at": "Wed, 26 Jul 23 14:39:32 +0300",
+        "src_title": "draft_title",
+        "title": "draft_title_client",
+        "description": "draft_description_client",
+        "set_at": "Wed, 26 Jul 23 18:22:07 +0300",
+        "completed_at": "Wed, 26 Jul 23 18:22:07 +0300",
         "completed": true,
         "is_current": false,
-        "sort_index": 5
+        "sort_index": 1
       },
       {
-        "id": 10,
+        "id": 2,
         "action": null,
-        "src_title": "approving_order_master_title",
-        "title": "approving_order_master_title_dispatcher",
-        "description": "approving_order_master_description_dispatcher",
-        "set_at": null,
-        "completed_at": "Wed, 26 Jul 23 14:39:32 +0300",
+        "src_title": "selecting_object_title",
+        "title": "selecting_object_title_client",
+        "description": "selecting_object_description_client",
+        "set_at": "Wed, 26 Jul 23 18:22:07 +0300",
+        "completed_at": "Wed, 26 Jul 23 18:22:07 +0300",
         "completed": true,
         "is_current": false,
-        "sort_index": 6
+        "sort_index": 2
+      },
+      {
+        "id": 3,
+        "action": null,
+        "src_title": "selecting_date_title",
+        "title": "selecting_date_title_client",
+        "description": "selecting_date_description_client",
+        "set_at": "Wed, 26 Jul 23 18:22:07 +0300",
+        "completed_at": "Wed, 26 Jul 23 18:22:07 +0300",
+        "completed": true,
+        "is_current": false,
+        "sort_index": 3
+      },
+      {
+        "id": 4,
+        "action": "select-service",
+        "src_title": "publication_title",
+        "title": "publication_title_client",
+        "description": "publication_description_client",
+        "set_at": "Wed, 26 Jul 23 18:22:07 +0300",
+        "completed_at": "Wed, 26 Jul 23 18:22:22 +0300",
+        "completed": true,
+        "is_current": false,
+        "sort_index": 4
       },
       {
         "id": 7,
         "action": "select-payment",
         "src_title": "initial_departure_payment_title",
-        "title": "initial_departure_payment_title_dispatcher",
-        "description": "initial_departure_payment_description_dispatcher",
-        "set_at": "Wed, 26 Jul 23 14:39:29 +0300",
-        "completed_at": "Wed, 26 Jul 23 14:39:32 +0300",
+        "title": "initial_departure_payment_title_client",
+        "description": "initial_departure_payment_description_client",
+        "set_at": "Wed, 26 Jul 23 18:22:22 +0300",
+        "completed_at": "Wed, 26 Jul 23 18:22:27 +0300",
         "completed": true,
         "is_current": false,
         "sort_index": 7
@@ -10524,19 +14398,115 @@
         "id": 9,
         "action": null,
         "src_title": "approving_order_time_title",
-        "title": "approving_order_time_title_dispatcher",
-        "description": "approving_order_time_description_dispatcher",
-        "set_at": "Wed, 26 Jul 23 14:39:32 +0300",
+        "title": "approving_order_time_title_client",
+        "description": "approving_order_time_description_client",
+        "set_at": "Wed, 26 Jul 23 18:22:27 +0300",
+        "completed_at": "Wed, 26 Jul 23 18:22:34 +0300",
+        "completed": true,
+        "is_current": false,
+        "sort_index": 8
+      },
+      {
+        "id": 11,
+        "action": null,
+        "src_title": "waiting_for_master_title",
+        "title": "waiting_for_master_title_client",
+        "description": "waiting_for_master_description_client",
+        "set_at": "Wed, 26 Jul 23 18:22:34 +0300",
+        "completed_at": "Wed, 26 Jul 23 18:22:47 +0300",
+        "completed": true,
+        "is_current": false,
+        "sort_index": 9
+      },
+      {
+        "id": 20,
+        "action": null,
+        "src_title": "master_filling_repair_materials_title",
+        "title": "master_filling_repair_materials_title_client",
+        "description": "master_filling_repair_materials_description_client",
+        "set_at": "Wed, 26 Jul 23 18:22:47 +0300",
+        "completed_at": "Wed, 26 Jul 23 18:22:54 +0300",
+        "completed": true,
+        "is_current": false,
+        "sort_index": 11
+      },
+      {
+        "id": 21,
+        "action": "select-payment",
+        "src_title": "repair_materials_payment_title",
+        "title": "repair_materials_payment_title_client",
+        "description": "repair_materials_payment_description_client",
+        "set_at": "Wed, 26 Jul 23 18:22:54 +0300",
+        "completed_at": "Wed, 26 Jul 23 18:22:57 +0300",
+        "completed": true,
+        "is_current": false,
+        "sort_index": 12
+      },
+      {
+        "id": 22,
+        "action": null,
+        "src_title": "master_filling_repair_works_title",
+        "title": "master_filling_repair_works_title_client",
+        "description": "master_filling_repair_works_description_client",
+        "set_at": "Wed, 26 Jul 23 18:22:57 +0300",
+        "completed_at": "Wed, 26 Jul 23 18:23:03 +0300",
+        "completed": true,
+        "is_current": false,
+        "sort_index": 13
+      },
+      {
+        "id": 23,
+        "action": "select-payment",
+        "src_title": "repair_works_payment_title",
+        "title": "repair_works_payment_title_client",
+        "description": "repair_works_payment_description_client",
+        "set_at": "Wed, 26 Jul 23 18:23:03 +0300",
+        "completed_at": "Wed, 26 Jul 23 18:23:11 +0300",
+        "completed": true,
+        "is_current": false,
+        "sort_index": 14
+      },
+      {
+        "id": 24,
+        "action": null,
+        "src_title": "master_creating_order_repair_act_title",
+        "title": "master_creating_order_repair_act_title_client",
+        "description": "master_creating_order_repair_act_description_client",
+        "set_at": "Wed, 26 Jul 23 18:23:11 +0300",
         "completed_at": null,
         "completed": false,
         "is_current": true,
-        "sort_index": 8
+        "sort_index": 15
+      },
+      {
+        "id": 25,
+        "action": "sign",
+        "src_title": "client_need_signing_order_repair_act_title",
+        "title": "client_need_signing_order_repair_act_title_client",
+        "description": "client_need_signing_order_repair_act_description_client",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false,
+        "sort_index": 16
+      },
+      {
+        "id": 18,
+        "action": null,
+        "src_title": "client_creating_review_title",
+        "title": "client_creating_review_title_client",
+        "description": "client_creating_review_description_client",
+        "set_at": null,
+        "completed_at": null,
+        "completed": false,
+        "is_current": false,
+        "sort_index": 17
       }
     ],
     "from_maintenance": false,
     "is_insurance_case": false,
     "repair_order_id": null,
     "maintenance_order_id": null,
-    "possible_offer_id": 1057998
+    "possible_offer_id": 1068515
   }
 }

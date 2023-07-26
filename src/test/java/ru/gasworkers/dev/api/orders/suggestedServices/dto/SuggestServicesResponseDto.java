@@ -70,7 +70,9 @@ public class SuggestServicesResponseDto {
         public ArrayList<Brand> brands;
         @JsonProperty("offer_id")
         public Integer offerId;
-        public Boolean shoved;
+        public Boolean showed;
+        @JsonProperty("count_completed_orders")
+        public Integer countCompletedOrders;
 
 
         @lombok.Data
@@ -107,7 +109,7 @@ public class SuggestServicesResponseDto {
         public Integer index;
         @JsonProperty("offer_id")
         public Integer offerId;
-        public Boolean shoved;
+        public Boolean showed;
 
         @lombok.Data
         @Builder
@@ -124,6 +126,8 @@ public class SuggestServicesResponseDto {
             @JsonProperty("master_orders_count")
             public Object masterOrdersCount;
             public ArrayList<Masters.Brand> brands;
+            @JsonProperty("count_completed_orders")
+            public Integer countCompletedOrders;
         }
     }
 }

@@ -5,9 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Collections;
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
@@ -15,16 +12,24 @@ import java.util.List;
 public class OrdersSaveActionsResponseDto {
     private Integer status;
     private String message;
-    private List<DataDto> data;
+    private DataDto data;
 
-    public static OrdersSaveActionsResponseDto successResponse() {
+    public static OrdersSaveActionsResponseDto oneActionResponse() {
+
         return OrdersSaveActionsResponseDto.builder()
                 .status(0)
                 .message("Данные о необходимых работах сохранены")
-                .data(Collections.emptyList())
+                .data(DataDto.builder()
+                        .totalAmount("2990.00")
+                        .build())
                 .build();
     }
 
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class DataDto {
+        private String totalAmount;
     }
 }

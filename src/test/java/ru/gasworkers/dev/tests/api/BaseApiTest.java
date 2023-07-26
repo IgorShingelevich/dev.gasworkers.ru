@@ -6,6 +6,7 @@ import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
 import org.assertj.core.api.recursive.comparison.RecursiveComparisonConfiguration;
 import org.json.JSONObject;
+import org.junit.jupiter.api.function.Executable;
 import org.skyscreamer.jsonassert.JSONAssert;
 import ru.gasworkers.dev.api.auth.login.LoginApi;
 import ru.gasworkers.dev.tests.BaseTest;
@@ -121,11 +122,38 @@ public abstract class BaseApiTest extends BaseTest {
                 .isEqualTo(expectedResponse);
     }
 
+    protected Executable assertResponsePartialNoAtExecutable(Object expectedResponse, Object actualResponse) {
+        return () -> {
+            RecursiveComparisonConfiguration configuration = RecursiveComparisonConfiguration.builder()
+                    .withIgnoredFieldsMatchingRegexes(".*(At|Ended|Started|countNotReadNotification)")
+                    .build();
+
+            Assertions.assertThat(actualResponse)
+                    .usingRecursiveComparison(configuration)
+                    .isEqualTo(expectedResponse);
+        };
+    }
+
+    protected Executable assertResponsePartialNoATExcludeFieldsExecutable(Object expectedResponse, Object actualResponse, List<String> excludedFields) {
+        return () -> {
+            RecursiveComparisonConfiguration.Builder builder = RecursiveComparisonConfiguration.builder();
+
+            // Condition 1: Ignore fields ending with "at"
+            builder = builder.withIgnoredFieldsMatchingRegexes(".*(At|Ended|Started|countNotReadNotification)");
+
+            // Condition 2: No excluded fields list
+            if (excludedFields.isEmpty()) {
+                builder = builder.withStrictTypeChecking(true);
+            } else {
+                builder = builder.withIgnoredFields(excludedFields.toArray(new String[0]));
+            }
+
+            RecursiveComparisonConfiguration configuration = builder.build();
+
+            Assertions.assertThat(actualResponse)
+                    .usingRecursiveComparison(configuration)
+                    .isEqualTo(expectedResponse);
+        };
+    }
+
 }
-
-
-
-
-
-
-

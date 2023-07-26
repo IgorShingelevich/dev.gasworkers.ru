@@ -19,33 +19,38 @@ public class OrdersSaveMaterialValuesRequestDto {
     private Boolean paid;
     @JsonProperty("material_values")
     private List<MaterialValuesDto> materialValues;
+    @JsonProperty("logistic_removed")
+    private Boolean logisticRemoved;
 
     public static OrdersSaveMaterialValuesRequestDto oneMaterialRequest(Integer orderId) {
         return OrdersSaveMaterialValuesRequestDto.builder()
                 .orderId(orderId)
                 .paid(false)
+                .logisticRemoved(false)
                 .materialValues(List.of(MaterialValuesDto.builder()
                         .title("Material 1 Title")
                         .partNumber("Material 1 Part Number")
                         .qty(3)
-                        .price(1.33)
+                        .price(1000.0)
                         .manufacturer("Material 1 Manufacturer")
                         .searchQuery("")
                         .valueList(List.of())
                         .searchActive(false)
                         .build()))
                 .build();
+
     }
 
     public static OrdersSaveMaterialValuesRequestDto twoMaterialRequest(Integer orderId) {
         return OrdersSaveMaterialValuesRequestDto.builder()
                 .orderId(orderId)
                 .paid(false)
+                .logisticRemoved(false)
                 .materialValues(List.of(MaterialValuesDto.builder()
                                 .title("Material 1 Title")
                                 .partNumber("Material 1 Part Number")
                                 .qty(3)
-                                .price(1.33)
+                                .price(1000.33)
                                 .manufacturer("Material 1 Manufacturer")
                                 .searchQuery("")
                                 .valueList(List.of())
@@ -55,7 +60,7 @@ public class OrdersSaveMaterialValuesRequestDto {
                                 .title("Material 2 Title")
                                 .partNumber("Material 2 Part Number")
                                 .qty(4)
-                                .price(2.33)
+                                .price(20.33)
                                 .manufacturer("Material 2 Manufacturer")
                                 .searchQuery("")
                                 .valueList(List.of())

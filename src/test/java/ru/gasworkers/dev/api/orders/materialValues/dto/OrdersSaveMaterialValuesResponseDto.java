@@ -5,27 +5,33 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Collections;
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrdersSaveMaterialValuesResponseDto {
 
+
     private Integer status;
     private String message;
-    private List<DataDto> data;
+    private DataDto data;
 
-    public static OrdersSaveMaterialValuesResponseDto successResponse() {
+    public static OrdersSaveMaterialValuesResponseDto oneMaterialResponse() {
+
         return OrdersSaveMaterialValuesResponseDto.builder()
                 .status(0)
                 .message("Данные о расходниках сохранены")
-                .data(Collections.emptyList())
+                .data(DataDto.builder()
+                        .totalAmount("3300.00")
+                        .build())
                 .build();
     }
 
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class DataDto {
+        private String totalAmount;
     }
 }

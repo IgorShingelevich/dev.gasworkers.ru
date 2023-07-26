@@ -2,15 +2,15 @@
   "status": 0,
   "message": "Информация о заказе",
   "data": {
-    "id": 8252,
-    "number": "99/23/077/008252",
+    "id": 8393,
+    "number": "99/23/077/008393",
     "master": {
       "id": 487,
       "active_role": null,
       "full_name": "МастеровСССР1 МастерСССР1 МастеровичСССР1",
       "last_name": "МастеровСССР1",
       "rating": "5.00",
-      "consultation_price": 11.99,
+      "consultation_price": 3100,
       "skills": "Навыки ремонта",
       "avatar": "https://gasworkers.storage.yandexcloud.net/files/2Fay9O26ZN2iC8ViKBVQHu1G1Bu0IlKvmbPPrPXR.jpg",
       "company": {
@@ -35,7 +35,7 @@
         "gen_dir_np": "Иванов Иван Иванович",
         "vdgo_contract_charter": "на ост указа№1",
         "is_self_employed_owner": false,
-        "first_accept": 11.99
+        "first_accept": 3100
       },
       "employment_status": "accepted",
       "brands": [
@@ -7080,36 +7080,35 @@
           "logo": "https://gasworkers.storage.yandexcloud.net/0goN9WY5aD0EgHW8FbgtuFGmVmmVExTwhglxSUg0.png",
           "created_at": 1670237182,
           "types": [
-
           ]
         }
       ],
       "reviews_count": 23,
-      "completed_orders_count": 188,
+      "completed_orders_count": 190,
       "created_at": 1673412836
     },
     "client": {
-      "id": 6010,
+      "id": 6130,
       "first_name": null,
       "last_name": null,
       "middle_name": null,
-      "phone": 70018742682,
+      "phone": 70017973116,
       "login": null,
       "facetime": null,
       "whatsapp": null,
       "skype": null,
       "telegram": null,
-      "email": "gwtest2507_1753_agafonov@client.001",
-      "email_verified_at": "2023-07-25T14:53:20.000000Z",
-      "phone_verified_at": "2023-07-25T14:53:20.000000Z",
+      "email": "gwtest2607_1450_soboleva@client.001",
+      "email_verified_at": "2023-07-26T11:50:03.000000Z",
+      "phone_verified_at": "2023-07-26T11:50:03.000000Z",
       "gender": null,
       "specialization": null,
       "skills": null,
       "avatar_id": null,
       "service_id": null,
       "deleted_at": null,
-      "created_at": "2023-07-25T14:53:19.000000Z",
-      "updated_at": "2023-07-25T14:53:37.000000Z",
+      "created_at": "2023-07-26T11:50:02.000000Z",
+      "updated_at": "2023-07-26T11:50:23.000000Z",
       "requisites_filled": false,
       "bank_details_filled": false,
       "rate_filled": false,
@@ -7150,7 +7149,7 @@
       "living_address_id": null,
       "work_distance": null,
       "joined_at": null,
-      "registered_at": "2023-07-25T14:53:20.000000Z",
+      "registered_at": "2023-07-26T11:50:03.000000Z",
       "sc_notified_about_my_reg": false,
       "sc_notified_about_my_certificates": false,
       "debt": null,
@@ -7161,7 +7160,7 @@
       "fps_bank_id": null,
       "selected_payment_method": null,
       "referer_id": null,
-      "referer_code": "4dc7443b-ce10-40d8-867c-dd57452654eb",
+      "referer_code": "cdd8247f-50d4-46e4-99ab-630241f79ff8",
       "balance": 0,
       "default_referral_commission": 0,
       "additional_phone": null,
@@ -7174,7 +7173,7 @@
           "updated_at": "2022-04-25T01:37:20.000000Z",
           "is_admin": 0,
           "pivot": {
-            "model_id": 6010,
+            "model_id": 6130,
             "role_id": 4,
             "model_type": "App\\Models\\User"
           }
@@ -7187,7 +7186,7 @@
     "serviceCenter": {
       "id": 39,
       "title": "ОБЩЕСТВО С ОГРАНИЧЕННОЙ ОТВЕТСТВЕННОСТЬЮ \"СЕРПУХОВСКИЙСТРОИТЕЛЬНЫЙСЕТЕВОЙРЕСУРС\"",
-      "first_accept": 11.99,
+      "first_accept": 3100,
       "masters": [
         {
           "id": 487,
@@ -7210,7 +7209,7 @@
           "service_id": 39,
           "deleted_at": null,
           "created_at": "2023-01-11T04:53:56.000000Z",
-          "updated_at": "2023-07-25T09:47:02.000000Z",
+          "updated_at": "2023-07-26T11:50:34.000000Z",
           "requisites_filled": false,
           "bank_details_filled": false,
           "rate_filled": false,
@@ -7240,7 +7239,7 @@
           "sms_notifications_enable": true,
           "second_accept": null,
           "can_consulting": true,
-          "consultation_price": 1199,
+          "consultation_price": 310000,
           "push_id": null,
           "ready_for_consultation": true,
           "active_role": null,
@@ -7256,7 +7255,7 @@
           "sc_notified_about_my_certificates": false,
           "debt": 0,
           "count_review": 23,
-          "count_completed_orders": 188,
+          "count_completed_orders": 190,
           "count_not_read_notification": 1,
           "fps_phone": "70026442413",
           "fps_bank_id": null,
@@ -7364,7 +7363,7 @@
           "service_id": 39,
           "deleted_at": null,
           "created_at": "2023-01-11T05:35:57.000000Z",
-          "updated_at": "2023-07-21T08:22:02.000000Z",
+          "updated_at": "2023-07-26T11:10:04.000000Z",
           "requisites_filled": false,
           "bank_details_filled": false,
           "rate_filled": false,
@@ -7394,7 +7393,7 @@
           "sms_notifications_enable": true,
           "second_accept": null,
           "can_consulting": true,
-          "consultation_price": 1199,
+          "consultation_price": 310000,
           "push_id": null,
           "ready_for_consultation": true,
           "active_role": null,
@@ -7518,7 +7517,7 @@
           "service_id": 39,
           "deleted_at": null,
           "created_at": "2023-01-13T04:14:36.000000Z",
-          "updated_at": "2023-06-26T08:10:18.000000Z",
+          "updated_at": "2023-07-26T11:10:04.000000Z",
           "requisites_filled": false,
           "bank_details_filled": false,
           "rate_filled": false,
@@ -7548,7 +7547,7 @@
           "sms_notifications_enable": true,
           "second_accept": null,
           "can_consulting": false,
-          "consultation_price": 1199,
+          "consultation_price": 310000,
           "push_id": null,
           "ready_for_consultation": false,
           "active_role": null,
@@ -7672,7 +7671,7 @@
           "service_id": 39,
           "deleted_at": null,
           "created_at": "2023-01-13T10:29:59.000000Z",
-          "updated_at": "2023-06-26T08:10:18.000000Z",
+          "updated_at": "2023-07-26T11:10:04.000000Z",
           "requisites_filled": false,
           "bank_details_filled": false,
           "rate_filled": false,
@@ -7702,7 +7701,7 @@
           "sms_notifications_enable": true,
           "second_accept": null,
           "can_consulting": false,
-          "consultation_price": 1199,
+          "consultation_price": 310000,
           "push_id": null,
           "ready_for_consultation": false,
           "active_role": null,
@@ -7826,7 +7825,7 @@
           "service_id": 39,
           "deleted_at": null,
           "created_at": "2023-01-17T08:00:15.000000Z",
-          "updated_at": "2023-06-26T08:10:18.000000Z",
+          "updated_at": "2023-07-26T11:10:04.000000Z",
           "requisites_filled": false,
           "bank_details_filled": false,
           "rate_filled": false,
@@ -7856,7 +7855,7 @@
           "sms_notifications_enable": true,
           "second_accept": null,
           "can_consulting": false,
-          "consultation_price": 1199,
+          "consultation_price": 310000,
           "push_id": null,
           "ready_for_consultation": false,
           "active_role": null,
@@ -7980,7 +7979,7 @@
           "service_id": 39,
           "deleted_at": null,
           "created_at": "2023-01-19T04:41:01.000000Z",
-          "updated_at": "2023-06-26T08:10:18.000000Z",
+          "updated_at": "2023-07-26T11:10:04.000000Z",
           "requisites_filled": false,
           "bank_details_filled": false,
           "rate_filled": false,
@@ -8010,7 +8009,7 @@
           "sms_notifications_enable": true,
           "second_accept": null,
           "can_consulting": false,
-          "consultation_price": 1199,
+          "consultation_price": 310000,
           "push_id": null,
           "ready_for_consultation": false,
           "active_role": null,
@@ -8134,7 +8133,7 @@
           "service_id": 39,
           "deleted_at": null,
           "created_at": "2023-04-14T07:40:52.000000Z",
-          "updated_at": "2023-06-26T08:10:18.000000Z",
+          "updated_at": "2023-07-26T11:10:04.000000Z",
           "requisites_filled": false,
           "bank_details_filled": false,
           "rate_filled": false,
@@ -8164,7 +8163,7 @@
           "sms_notifications_enable": true,
           "second_accept": null,
           "can_consulting": false,
-          "consultation_price": 1199,
+          "consultation_price": 310000,
           "push_id": null,
           "ready_for_consultation": false,
           "active_role": null,
@@ -8288,7 +8287,7 @@
           "service_id": 39,
           "deleted_at": null,
           "created_at": "2023-07-07T08:32:17.000000Z",
-          "updated_at": "2023-07-07T08:39:05.000000Z",
+          "updated_at": "2023-07-26T11:10:04.000000Z",
           "requisites_filled": false,
           "bank_details_filled": false,
           "rate_filled": false,
@@ -8318,7 +8317,7 @@
           "sms_notifications_enable": true,
           "second_accept": null,
           "can_consulting": false,
-          "consultation_price": 0,
+          "consultation_price": 310000,
           "push_id": null,
           "ready_for_consultation": false,
           "active_role": null,
@@ -8425,11 +8424,10 @@
     },
     "contract_type": null,
     "clientObject": {
-      "id": 4015,
+      "id": 4139,
       "title": "Мой дом",
       "active_offers_count": 1,
       "photos": [
-
       ],
       "address": {
         "id": 2121,
@@ -8465,7 +8463,7 @@
       },
       "equipments": [
         {
-          "id": 3322,
+          "id": 3446,
           "all_works": false,
           "type": {
             "id": 1,
@@ -8671,12 +8669,12 @@
       "branch": null,
       "company": null,
       "account_number": null,
-      "created_at": 1690296800,
+      "created_at": 1690372203,
       "video_exists": false
     },
     "equipments": [
       {
-        "id": 3322,
+        "id": 3446,
         "all_works": false,
         "type": {
           "id": 1,
@@ -8880,23 +8878,21 @@
       }
     ],
     "address": "Москва, Московская улица",
-    "phone": 70018742682,
+    "phone": 70017973116,
     "status": "wait-for-master-starting",
     "payment_status": false,
     "type": "repair",
-    "desired_date_interval_started_at": "Tue, 25 Jul 2023 00:00:00 +0300",
-    "desired_date_interval_ended_at": "Fri, 28 Jul 2023 00:00:00 +0300",
-    "desired_time_started": "Tue, 25 Jul 2023 06:00:00 +0300",
-    "desired_time_ended": "Tue, 25 Jul 2023 18:00:00 +0300",
-    "selected_date": "Fri, 28 Jul 2023 14:00:00 +0300",
+    "desired_date_interval_started_at": "Wed, 26 Jul 2023 00:00:00 +0300",
+    "desired_date_interval_ended_at": "Sat, 29 Jul 2023 00:00:00 +0300",
+    "desired_time_started": "Wed, 26 Jul 2023 06:00:00 +0300",
+    "desired_time_ended": "Wed, 26 Jul 2023 18:00:00 +0300",
+    "selected_date": "Sat, 29 Jul 2023 11:00:00 +0300",
     "description": "error description",
     "photos": [
-
     ],
     "videos": [
-
     ],
-    "created_at": 1690296800,
+    "created_at": 1690372204,
     "masters": [
       {
         "id": 487,
@@ -8904,7 +8900,7 @@
         "full_name": "МастеровСССР1 МастерСССР1 МастеровичСССР1",
         "last_name": "МастеровСССР1",
         "rating": "5.00",
-        "consultation_price": 11.99,
+        "consultation_price": 3100,
         "skills": "Навыки ремонта",
         "avatar": "https://gasworkers.storage.yandexcloud.net/files/2Fay9O26ZN2iC8ViKBVQHu1G1Bu0IlKvmbPPrPXR.jpg",
         "company": {
@@ -8929,7 +8925,7 @@
           "gen_dir_np": "Иванов Иван Иванович",
           "vdgo_contract_charter": "на ост указа№1",
           "is_self_employed_owner": false,
-          "first_accept": 11.99
+          "first_accept": 3100
         },
         "employment_status": "accepted",
         "brands": [
@@ -10411,7 +10407,7 @@
           }
         ],
         "reviews_count": 23,
-        "completed_orders_count": 188,
+        "completed_orders_count": 190,
         "created_at": 1673412836
       }
     ],
@@ -10425,14 +10421,13 @@
     "creation_status": null,
     "offers_count": null,
     "offer": {
-      "id": 967189,
+      "id": 1058656,
       "master_equipment": [
-
       ],
       "start_price": null,
-      "price": 11.99,
-      "price_wi": 11.99,
-      "price_real": 11.99,
+      "price": 3100,
+      "price_wi": 3100,
+      "price_real": 3100,
       "with_consultation": false,
       "consultation_passed": false,
       "client_closed": false,
@@ -10444,13 +10439,13 @@
     },
     "receipts": [
       {
-        "id": 4821,
+        "id": 5133,
         "amount": 10,
         "paid": true,
         "title": "activation_payment",
         "stage": "repair_initial_departure",
         "remains_to_pay": 10,
-        "created_at": "Tue, 25 Jul 2023 17:53:36 +0300"
+        "created_at": "Wed, 26 Jul 2023 14:50:21 +0300"
       }
     ],
     "repair_stage": null,
@@ -10481,8 +10476,8 @@
     "active_dispatcher": false,
     "offers": [
       {
-        "id": 967189,
-        "price": 11.99,
+        "id": 1058656,
+        "price": 3100,
         "master_id": null,
         "company_id": 39
       }
@@ -10496,7 +10491,7 @@
         "title": "tender_title_dispatcher",
         "description": "tender_description_dispatcher",
         "set_at": null,
-        "completed_at": "Tue, 25 Jul 23 17:53:39 +0300",
+        "completed_at": "Wed, 26 Jul 23 14:50:25 +0300",
         "completed": true,
         "is_current": false,
         "sort_index": 5
@@ -10508,7 +10503,7 @@
         "title": "approving_order_master_title_dispatcher",
         "description": "approving_order_master_description_dispatcher",
         "set_at": null,
-        "completed_at": "Tue, 25 Jul 23 17:53:39 +0300",
+        "completed_at": "Wed, 26 Jul 23 14:50:25 +0300",
         "completed": true,
         "is_current": false,
         "sort_index": 6
@@ -10519,8 +10514,8 @@
         "src_title": "initial_departure_payment_title",
         "title": "initial_departure_payment_title_dispatcher",
         "description": "initial_departure_payment_description_dispatcher",
-        "set_at": "Tue, 25 Jul 23 17:53:36 +0300",
-        "completed_at": "Tue, 25 Jul 23 17:53:39 +0300",
+        "set_at": "Wed, 26 Jul 23 14:50:21 +0300",
+        "completed_at": "Wed, 26 Jul 23 14:50:25 +0300",
         "completed": true,
         "is_current": false,
         "sort_index": 7
@@ -10531,8 +10526,8 @@
         "src_title": "approving_order_time_title",
         "title": "approving_order_time_title_dispatcher",
         "description": "approving_order_time_description_dispatcher",
-        "set_at": "Tue, 25 Jul 23 17:53:39 +0300",
-        "completed_at": "Tue, 25 Jul 23 17:53:45 +0300",
+        "set_at": "Wed, 26 Jul 23 14:50:25 +0300",
+        "completed_at": "Wed, 26 Jul 23 14:50:31 +0300",
         "completed": true,
         "is_current": false,
         "sort_index": 8
@@ -10542,6 +10537,6 @@
     "is_insurance_case": false,
     "repair_order_id": null,
     "maintenance_order_id": null,
-    "possible_offer_id": 967189
+    "possible_offer_id": 1058656
   }
 }

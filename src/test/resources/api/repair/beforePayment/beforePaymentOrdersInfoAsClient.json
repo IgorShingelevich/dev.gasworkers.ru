@@ -2,8 +2,8 @@
   "status": 0,
   "message": "Информация о заказе",
   "data": {
-    "id": 8246,
-    "number": "99/23/077/008246",
+    "id": 8390,
+    "number": "99/23/077/008390",
     "status": "published",
     "type": "repair",
     "service_center": {
@@ -11,20 +11,20 @@
       "short_title": "Gasworkers",
       "logo": "https://storage.yandexcloud.net/static-gasworkers/images/fire.svg",
       "rating": "5.00",
-      "first_accept_price": 11.99,
-      "full_price": 11.99,
-      "full_price_wi": 11.99
+      "first_accept_price": 3100,
+      "full_price": 3100,
+      "full_price_wi": 3100
     },
     "master": null,
     "receipt": {
-      "id": 4815,
+      "id": 5130,
       "amount": 10,
       "remains_to_pay": 10,
       "paid": false,
       "title": "activation_payment",
-      "order_id": 8246,
-      "created_at": "2023-07-25T14:36:37.000000Z",
-      "updated_at": "2023-07-25T14:36:37.000000Z",
+      "order_id": 8390,
+      "created_at": "2023-07-26T11:35:48.000000Z",
+      "updated_at": "2023-07-26T11:35:48.000000Z",
       "stage": "repair_initial_departure",
       "hide": false,
       "refunded": false,
@@ -34,12 +34,12 @@
     },
     "receipts": [
       {
-        "id": 4815,
+        "id": 5130,
         "amount": 10,
         "paid": false,
         "title": "activation_payment",
         "remains_to_pay": 10,
-        "created_at": "Tue, 25 Jul 2023 17:36:37 +0300"
+        "created_at": "Wed, 26 Jul 2023 14:35:48 +0300"
       }
     ],
     "codes": [
@@ -47,17 +47,17 @@
     ],
     "stage": "repair_initial_departure",
     "offer": {
-      "id": 963241,
-      "order_id": 8246,
+      "id": 1056682,
+      "order_id": 8390,
       "company_id": 39,
       "status": "approved",
-      "created_at": "2023-07-25T14:36:26.000000Z",
-      "updated_at": "2023-07-25T14:36:37.000000Z",
-      "price": 11.99,
-      "price_wi": 11.99,
+      "created_at": "2023-07-26T11:35:36.000000Z",
+      "updated_at": "2023-07-26T11:35:48.000000Z",
+      "price": 3100,
+      "price_wi": 3100,
       "master_id": null,
       "start_price": null,
-      "price_real": 11.99,
+      "price_real": 3100,
       "with_consultation": false,
       "consultation_passed": false,
       "master_started": false,
@@ -66,18 +66,16 @@
       "master_selected": false,
       "hide": false,
       "client_closed": false,
-      "shoved": false
+      "showed": false
     },
-    "desired_date_interval_started_at": 1690232400,
-    "desired_date_interval_ended_at": 1690491600,
-    "desired_time_started": "Tue, 25 Jul 23 06:00:00 +0300",
-    "desired_time_ended": "Tue, 25 Jul 23 18:00:00 +0300",
+    "desired_date_interval_started_at": 1690318800,
+    "desired_date_interval_ended_at": 1690578000,
+    "desired_time_started": "Wed, 26 Jul 23 06:00:00 +0300",
+    "desired_time_ended": "Wed, 26 Jul 23 18:00:00 +0300",
     "insurance_type": null,
     "repair_actions": [
-
     ],
     "material_values": [
-
     ],
     "need_sign": false,
     "sign_type": null,
@@ -93,13 +91,13 @@
     "refunded": false,
     "equipments": [
       {
-        "id": 3316,
+        "id": 3443,
         "title": "Газовый котел Viessmann Vitodens 100-W WB1C104 35kW",
         "is_show_hidden": false
       }
     ],
     "client_object": {
-      "id": 4009,
+      "id": 4136,
       "title": "Мой дом",
       "last_photo": null,
       "address": {
@@ -119,8 +117,8 @@
         "src_title": "draft_title",
         "title": "draft_title_client",
         "description": "draft_description_client",
-        "set_at": "Tue, 25 Jul 23 17:36:22 +0300",
-        "completed_at": "Tue, 25 Jul 23 17:36:22 +0300",
+        "set_at": "Wed, 26 Jul 23 14:35:33 +0300",
+        "completed_at": "Wed, 26 Jul 23 14:35:33 +0300",
         "completed": true,
         "is_current": false
       },
@@ -129,8 +127,8 @@
         "src_title": "selecting_object_title",
         "title": "selecting_object_title_client",
         "description": "selecting_object_description_client",
-        "set_at": "Tue, 25 Jul 23 17:36:22 +0300",
-        "completed_at": "Tue, 25 Jul 23 17:36:22 +0300",
+        "set_at": "Wed, 26 Jul 23 14:35:33 +0300",
+        "completed_at": "Wed, 26 Jul 23 14:35:33 +0300",
         "completed": true,
         "is_current": false
       },
@@ -139,8 +137,8 @@
         "src_title": "selecting_date_title",
         "title": "selecting_date_title_client",
         "description": "selecting_date_description_client",
-        "set_at": "Tue, 25 Jul 23 17:36:22 +0300",
-        "completed_at": "Tue, 25 Jul 23 17:36:22 +0300",
+        "set_at": "Wed, 26 Jul 23 14:35:33 +0300",
+        "completed_at": "Wed, 26 Jul 23 14:35:33 +0300",
         "completed": true,
         "is_current": false
       },
@@ -149,8 +147,8 @@
         "src_title": "publication_title",
         "title": "publication_title_client",
         "description": "publication_description_client",
-        "set_at": "Tue, 25 Jul 23 17:36:22 +0300",
-        "completed_at": "Tue, 25 Jul 23 17:36:38 +0300",
+        "set_at": "Wed, 26 Jul 23 14:35:34 +0300",
+        "completed_at": "Wed, 26 Jul 23 14:35:48 +0300",
         "completed": true,
         "is_current": false
       },
@@ -159,7 +157,7 @@
         "src_title": "initial_departure_payment_title",
         "title": "initial_departure_payment_title_client",
         "description": "initial_departure_payment_description_client",
-        "set_at": "Tue, 25 Jul 23 17:36:38 +0300",
+        "set_at": "Wed, 26 Jul 23 14:35:48 +0300",
         "completed_at": null,
         "completed": false,
         "is_current": true
@@ -259,7 +257,7 @@
     "is_insurance_case": false,
     "canceled_by_master": false,
     "canceled_by_client": false,
-    "possible_offer_id": 963241,
+    "possible_offer_id": 1056682,
     "money_back_available": false
   }
 }
