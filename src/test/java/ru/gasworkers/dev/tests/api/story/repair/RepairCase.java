@@ -626,6 +626,7 @@ public class RepairCase {
         inputDto.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
         inputDto.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
         inputDto.getData().setSelectedDate(commonFields.getSelectedDate());
+        // qqqq
     }
 }
 
