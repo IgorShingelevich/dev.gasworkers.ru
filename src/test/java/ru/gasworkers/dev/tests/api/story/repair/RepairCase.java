@@ -33,18 +33,7 @@ public class RepairCase {
 
     public LastOrderInfoResponseDto publishedLastOrderInfoBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
         LastOrderInfoResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/publishedBgState/publishedLastOrder.json"), LastOrderInfoResponseDto.class);
-       /* expectedTemplateResponse.getData().setId(commonFields.getOrderId());
-        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
-        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
-        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());*/
-        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
-        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
-        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
-        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
-        expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        populateLastOrderInfoFields(expectedTemplateResponse, commonFields);
         return expectedTemplateResponse;
     }
 
@@ -78,12 +67,7 @@ public class RepairCase {
 
     public LastOrderInfoResponseDto hasOfferLastOrderInfoBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
         LastOrderInfoResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/hasOfferBgState/hasOfferLastOrderInfo.json"), LastOrderInfoResponseDto.class);
-        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
-        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
-        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
-        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
+        populateLastOrderInfoFields(expectedTemplateResponse, commonFields);
         return expectedTemplateResponse;
     }
 
@@ -119,12 +103,7 @@ public class RepairCase {
 
     public LastOrderInfoResponseDto beforePaymentLastOrderInfoBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
         LastOrderInfoResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/beforePayment/beforePaymentLastOrderInfo.json"), LastOrderInfoResponseDto.class);
-        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
-        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
-        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
-        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
+        populateLastOrderInfoFields(expectedTemplateResponse, commonFields);
         return expectedTemplateResponse;
     }
 
@@ -160,12 +139,7 @@ public class RepairCase {
 
     public LastOrderInfoResponseDto dateSelectingLastOrderInfoBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
         LastOrderInfoResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/dateSelectingBgState/dateSelectingLastOrderInfo.json"), LastOrderInfoResponseDto.class);
-        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
-        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
-        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
-        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
+        populateLastOrderInfoFields(expectedTemplateResponse, commonFields);
         return expectedTemplateResponse;
     }
 
@@ -227,13 +201,7 @@ public class RepairCase {
 
     public LastOrderInfoResponseDto waitMasterLastOrderInfoBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
         LastOrderInfoResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/waitMaster/waitMasterLastOrder.json"), LastOrderInfoResponseDto.class);
-        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
-        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
-        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
-        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
-        expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        populateLastOrderInfoFields(expectedTemplateResponse, commonFields);
         return expectedTemplateResponse;
     }
 
@@ -318,13 +286,7 @@ public class RepairCase {
 
     public LastOrderInfoResponseDto masterStartWorkingLastOrderInfoBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
         LastOrderInfoResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/masterStartWorking/masterStartWorkingLastOrder.json"), LastOrderInfoResponseDto.class);
-        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
-        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
-        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
-        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
-        expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        populateLastOrderInfoFields(expectedTemplateResponse, commonFields);
         return expectedTemplateResponse;
     }
 
@@ -366,13 +328,7 @@ public class RepairCase {
 
     public LastOrderInfoResponseDto materialInvoiceIssuedLastOrderInfoBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
         LastOrderInfoResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/materialInvoiceIssued/materialInvoiceIssuedLastOrder.json"), LastOrderInfoResponseDto.class);
-        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
-        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
-        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
-        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
-        expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        populateLastOrderInfoFields(expectedTemplateResponse, commonFields);
         return expectedTemplateResponse;
     }
 
@@ -384,13 +340,7 @@ public class RepairCase {
 
     public LastOrderInfoResponseDto materialInvoicePaidLastOrderInfoBUGRepair(CommonFieldsRepairDto commonFields) throws IOException {
         LastOrderInfoResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/materialInvoicePaid/materialInvoicePaidLastOrder.json"), LastOrderInfoResponseDto.class);
-        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
-        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
-        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
-        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
-        expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        populateLastOrderInfoFields(expectedTemplateResponse, commonFields);
         return expectedTemplateResponse;
     }
 
@@ -451,13 +401,7 @@ public class RepairCase {
 
     public LastOrderInfoResponseDto actionsInvoiceIssuedLastOrderInfoBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
         LastOrderInfoResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/actionsInvoiceIssued/actionsInvoiceIssuedLastOrder.json"), LastOrderInfoResponseDto.class);
-        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
-        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
-        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
-        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
-        expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        populateLastOrderInfoFields(expectedTemplateResponse, commonFields);
         return expectedTemplateResponse;
     }
 
@@ -489,13 +433,7 @@ public class RepairCase {
 
     public LastOrderInfoResponseDto actionsInvoicePaidLastOrderInfoBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
         LastOrderInfoResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/actionsInvoicePaid/actionsInvoicePaidLastOrderInfo.json"), LastOrderInfoResponseDto.class);
-        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
-        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
-        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
-        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
-        expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        populateLastOrderInfoFields(expectedTemplateResponse, commonFields);
         return expectedTemplateResponse;
     }
 
@@ -579,13 +517,7 @@ public class RepairCase {
 
     public LastOrderInfoResponseDto actSignedMasterLastOrderInfoBGRepair(CommonFieldsRepairDto commonFields) throws IOException {
         LastOrderInfoResponseDto expectedTemplateResponse = objectMapper.readValue(new File("src/test/resources/api/repair/actSignedMaster/actSignedMasterLastOrder.json"), LastOrderInfoResponseDto.class);
-        expectedTemplateResponse.getData().setId(commonFields.getOrderId());
-        expectedTemplateResponse.getData().setNumber(commonFields.getOrderNumber());
-        expectedTemplateResponse.getData().getClientObject().setId(commonFields.getClientObjectId());
-        expectedTemplateResponse.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
-        expectedTemplateResponse.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
-        expectedTemplateResponse.getData().setSelectedDate(commonFields.getSelectedDate());
+        populateLastOrderInfoFields(expectedTemplateResponse, commonFields);
         return expectedTemplateResponse;
     }
 
@@ -684,6 +616,16 @@ public class RepairCase {
 
     public OrdersSignRequestDto signRequest(CommonFieldsRepairDto commonFields) {
         return OrdersSignRequestDto.clientRequest(commonFields.getOrderId());
+    }
+
+    private void populateLastOrderInfoFields(LastOrderInfoResponseDto inputDto, CommonFieldsRepairDto commonFields) {
+        inputDto.getData().setId(commonFields.getOrderId());
+        inputDto.getData().setNumber(commonFields.getOrderNumber());
+        inputDto.getData().getClientObject().setId(commonFields.getClientObjectId());
+        inputDto.getData().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        inputDto.getData().getClientObject().getEquipments().get(0).setId(commonFields.getEquipments0Id());
+        inputDto.getData().getClientObject().setActiveOffersCount(commonFields.getActiveOffersCount());
+        inputDto.getData().setSelectedDate(commonFields.getSelectedDate());
     }
 }
 
