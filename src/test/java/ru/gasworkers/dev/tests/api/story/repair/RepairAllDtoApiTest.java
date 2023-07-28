@@ -49,6 +49,7 @@ import ru.gasworkers.dev.api.users.companies.masters.CompaniesMastersApi;
 import ru.gasworkers.dev.api.users.companies.masters.dto.CompaniesMastersListResponse;
 import ru.gasworkers.dev.api.users.fspBankList.FspBankListApi;
 import ru.gasworkers.dev.api.users.fspBankList.FspBankListResponseDto;
+import ru.gasworkers.dev.api.users.settings.UserSettingsApi;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithOrderType;
 import ru.gasworkers.dev.extension.user.WithThroughUser;
@@ -68,6 +69,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.API)
 public class RepairAllDtoApiTest extends BaseApiTest {
     private final UserApi userApi = new UserApi();
+    private final UserSettingsApi userSettingsApi = new UserSettingsApi();
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
     private final SelectMasterApi selectMasterApi = new SelectMasterApi();
@@ -146,7 +148,7 @@ public class RepairAllDtoApiTest extends BaseApiTest {
 
     @Test
     @DisplayName("payed repair")
-    void payedRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+    void allDtoRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
         commonFields.setTokenClient(loginApi.getTokenThrough(client));
 
         step("заказ на ремонт в состоянии published", () -> {
@@ -162,6 +164,19 @@ public class RepairAllDtoApiTest extends BaseApiTest {
                 UserResponseDto expectedResponse = repairCase.publishedClient(commonFields);
                 assertResponsePartialNoAt(expectedResponse, actualPublishedUserResponse);
             });
+            /*step("заполнение профиля клиента после Фоновой Регистрации", () -> {
+                UserSettingsCommonResponseDto actualResponse = userSettingsApi.common(UserSettingsCommonRequestDto.defaultBGClientRequest(client), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(UserSettingsCommonResponseDto.class);
+                commonFields.setPassportId(actualResponse.getData().getPassport().getId());
+                commonFields.setClientId(actualResponse.getData().getId());
+                UserSettingsCommonResponseDto expectedResponse = UserSettingsCommonResponseDto.defaultBGUserResponse(client, commonFields);
+                expectedResponse.getData().getGuides().get(0).setId(actualResponse.getData().getGuides().get(0).getId());
+                expectedResponse.getData().getPassport().setIssuedDate(actualResponse.getData().getPassport().getIssuedDate());
+                assertResponsePartialNoATExcludeFields(expectedResponse, actualResponse, List.of("data.userNotificationsCount"));
+                //todo assert клиент - модель пользователя в  состоянии после заполнения профиля
+                // todo change all  dto to include  user details
+            });*/
             step("клиент карточка последнего заказа - убедиться что в  состоянии published", () -> {
                 actualPublishedLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                         .statusCode(200)

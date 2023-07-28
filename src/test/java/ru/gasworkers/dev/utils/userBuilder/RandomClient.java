@@ -47,6 +47,7 @@ public class RandomClient {
     private String passportSeries;
     private String passportNumber;
     private String passportIssuedDatePicker;
+    private Long passportTimestampYesterday;
     private String passportIssuedBy = "ОВД Одинцовского района г. Одинцово";
 
     public RandomClient() {
@@ -96,6 +97,8 @@ public class RandomClient {
         this.endDate = workDate
                 .atOffset(ZoneOffset.UTC)
                 .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"));
+        // convert localDateTime to timestamp like 1688169540
+        this.passportTimestampYesterday = currentDateTime.minusDays(1).toEpochSecond(ZoneOffset.UTC);
 
 
     }

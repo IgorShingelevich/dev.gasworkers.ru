@@ -76,6 +76,7 @@ public class ComplexRegistrationFactory {
                         )
                 )
                 .time(null)
+                .passportTimestampYesterday(data.getPassportTimestampYesterday())
                 .build();
     }
 

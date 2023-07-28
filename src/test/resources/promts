@@ -1,0 +1,1 @@
+create enum class StateTransitionRepair  to based on helper class to Define an enum for order states for Use enum for states rather than separate classes

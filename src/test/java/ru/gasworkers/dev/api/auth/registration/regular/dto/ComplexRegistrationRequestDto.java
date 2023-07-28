@@ -32,7 +32,7 @@ public class ComplexRegistrationRequestDto {
     private Boolean noGuide;
     private List<StartThroughRegistrationRequestDto.OldEquipmentsDto> oldEquipments;
     private List<StartThroughRegistrationRequestDto.EquipmentsDto> equipments;
-    private Long phoneAsLong;
+    private Long phoneAsLong, passportTimestampYesterday;
 
     //from selfEmployedAndMaster registration
 

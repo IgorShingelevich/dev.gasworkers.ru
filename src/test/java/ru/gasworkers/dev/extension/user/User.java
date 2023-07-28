@@ -9,7 +9,7 @@ import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRe
 public final class User {
 
     private String email, phone, password, firstName, lastName, middleName, fullName, approveDate, selectedDate;
-    private Long phoneAsLong;
+    private Long phoneAsLong, passportTimestamp;
 
     public static User fromComplexDto(ComplexRegistrationRequestDto complexDto) {
         return User.builder()
@@ -23,6 +23,7 @@ public final class User {
                 .fullName(complexDto.getFullName())
                 .approveDate(complexDto.getEndDate())
                 .selectedDate(complexDto.getSelectedDate())
+                .passportTimestamp(complexDto.getPassportTimestampYesterday())
                 .build();
     }
 
