@@ -92,7 +92,7 @@ public class RepairAllDtoApiTest extends BaseApiTest {
     private final String sssrMaster1Email = "test_gas_master_sssr1@rambler.ru";
     private final String sssrDispatcher1Password = "1234";
     private final String sssrMaster1Password = "1234";
-    private final RepairCase repairCase = new RepairCase();
+    private final RepairTestCase repairCase = new RepairTestCase();
     private UserResponseDto actualPublishedUserResponse;
 
     private LastOrderInfoResponseDto actualPublishedLastOrderResponse;

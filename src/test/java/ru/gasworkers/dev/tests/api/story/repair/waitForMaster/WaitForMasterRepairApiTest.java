@@ -42,7 +42,7 @@ import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithOrderType;
 import ru.gasworkers.dev.extension.user.WithThroughUser;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
-import ru.gasworkers.dev.tests.api.story.repair.RepairCase;
+import ru.gasworkers.dev.tests.api.story.repair.RepairTestCase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -77,7 +77,7 @@ public class WaitForMasterRepairApiTest extends BaseApiTest {
     private final String sssrMaster1Email = "test_gas_master_sssr1@rambler.ru";
     private final String sssrDispatcher1Password = "1234";
     private final String sssrMaster1Password = "1234";
-    private final RepairCase repairCase = new RepairCase();
+    private final RepairTestCase repairCase = new RepairTestCase();
     private UserResponseDto actualPublishedUserResponse;
 
     private LastOrderInfoResponseDto actualPublishedLastOrderResponse;

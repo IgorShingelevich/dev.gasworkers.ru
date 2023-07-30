@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -19,4 +22,6 @@ public class CommonFieldsRepairDto {
             equipments0Id, activeOffersCount = 0, receipts0Id, receipts1Id, receipts2Id, clientId,
             clientGuides0Id, payment0Id, payment1Id, payment2Id, objectId, clientRoles0PivotModelId,
             masters0CompletedOrdersCount, passportId;
+    private List<OrdersIdResponseDto.Data.Receipts> receipts = List.of();
+    private OrdersIdResponseDto.Data.Master master = null;
 }

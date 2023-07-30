@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Builder
@@ -34,7 +35,7 @@ public class OrdersInfoResponseDto {
         private Object master;
         private Object client;
         private Receipt receipt;
-        private ArrayList<Receipts> receipts;
+        private List<Receipts> receipts;
         private ArrayList<Object> codes;
         private String stage;
         private Offer offer;

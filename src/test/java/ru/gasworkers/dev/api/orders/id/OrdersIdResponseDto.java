@@ -74,7 +74,7 @@ public class OrdersIdResponseDto {
         @JsonProperty("offers_count")
         public Object offersCount;
         public Offer offer;
-        public ArrayList<Receipt> receipts;
+        public List<Receipts> receipts;
         @JsonProperty("repair_stage")
         public Object repairStage;
         @JsonProperty("need_sign")
@@ -688,7 +688,7 @@ public class OrdersIdResponseDto {
         @Builder
         @AllArgsConstructor
         @NoArgsConstructor
-        public static class Receipt {
+        public static class Receipts {
             public Integer id;
             public Double amount;
             public Boolean paid;

@@ -1,12 +1,12 @@
 package ru.gasworkers.dev.extension.browser;
 
 import com.codeborne.selenide.SelenideDriver;
-import ru.gasworkers.dev.helpers.DriverFactory;
 import lombok.SneakyThrows;
-import ru.gasworkers.dev.helpers.TestIdentifierHelper;
-import ru.gasworkers.dev.model.browser.RoleBrowsers;
-import ru.gasworkers.dev.model.browser.RoleBrowser;
 import org.junit.jupiter.api.extension.*;
+import ru.gasworkers.dev.helpers.DriverFactory;
+import ru.gasworkers.dev.helpers.TestIdentifierHelper;
+import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.model.browser.RoleBrowsers;
 import ru.gasworkers.dev.pages.context.BaseRolePages;
 
 import java.lang.reflect.Constructor;
@@ -20,6 +20,9 @@ import static org.junit.jupiter.api.extension.ExtensionContext.Namespace.create;
 public class BrowserExtension implements BeforeEachCallback, ParameterResolver, AfterEachCallback {
 
     public static final ExtensionContext.Namespace NAMESPACE = create(BrowserExtension.class);
+  /*  // to get the displayName from the extensionContext
+    public ThreadLocal<String> currentDisplayName = new ThreadLocal<>();*/
+
 
     @Override
     public void beforeEach(ExtensionContext extensionContext) throws Exception {
@@ -42,6 +45,12 @@ public class BrowserExtension implements BeforeEachCallback, ParameterResolver, 
             field.setAccessible(true);
             field.set(testInstance, rolePages);
         }
+
+        /*// Get the displayName from the extensionContext
+         String displayName = extensionContext.getDisplayName();
+        currentDisplayName.set(displayName);
+        System.out.println("displayName: " + displayName);*/
+
 
         if (!browsers.isEmpty())
             saveToStore(extensionContext, browsers);
