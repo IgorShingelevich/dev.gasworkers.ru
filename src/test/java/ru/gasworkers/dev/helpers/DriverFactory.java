@@ -2,6 +2,7 @@ package ru.gasworkers.dev.helpers;
 
 import com.codeborne.selenide.SelenideConfig;
 import com.codeborne.selenide.SelenideDriver;
+import org.junit.jupiter.api.extension.ExtensionContext;
 import org.openqa.selenium.MutableCapabilities;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -16,7 +17,7 @@ import static com.codeborne.selenide.FileDownloadMode.FOLDER;
 
 public final class DriverFactory {
 
-    public static SelenideDriver getDriver(Browser annotation) throws MalformedURLException {
+    public static SelenideDriver getDriver(Browser annotation, ExtensionContext actualContext) throws MalformedURLException {
         SelenideConfig config = new SelenideConfig();
         config.baseUrl("https://dev.gasworkers.ru");
         config.browserSize(annotation.browserSize());
@@ -39,14 +40,13 @@ public final class DriverFactory {
 
         MutableCapabilities selenoidCapabilities = new MutableCapabilities();
 
-       /* // Get the @DisplayName name of the test and use it as the Selenoid container name
-        BrowserExtension browserExtension = new BrowserExtension(); // Create an instance
-        System.out.println("name: " + browserExtension.currentDisplayName.get());
-        selenoidCapabilities.setCapability("name", browserExtension.currentDisplayName.get()); // Get the displayName from the extensionContext*/
+        // Get the @DisplayName name of the test and use it as the Selenoid container name
+        System.out.println("name: " + actualContext.getDisplayName());
+        selenoidCapabilities.setCapability("name", actualContext.getDisplayName());
 
 
-        /* How to set session timeout */
-        selenoidCapabilities.setCapability("sessionTimeout", "15m");
+        /* *//* How to set session timeout *//*
+        selenoidCapabilities.setCapability("sessionTimeout", "1m");*/
 
         /* How to set timezone */
         selenoidCapabilities.setCapability("env", new ArrayList<String>() {{

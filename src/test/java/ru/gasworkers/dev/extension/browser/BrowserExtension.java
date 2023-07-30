@@ -34,7 +34,7 @@ public class BrowserExtension implements BeforeEachCallback, ParameterResolver, 
         RoleBrowsers browsers = new RoleBrowsers();
         for (Field field : fields) {
             Browser annotation = field.getDeclaredAnnotation(Browser.class);
-            RoleBrowser browser = RoleBrowser.instance(DriverFactory.getDriver(annotation), annotation.role());
+            RoleBrowser browser = RoleBrowser.instance(DriverFactory.getDriver(annotation, extensionContext), annotation.role());
             browsers.add(browser);
 
             Constructor<? extends BaseRolePages> constructor = annotation.role().getPagesObjectClass()
@@ -69,7 +69,7 @@ public class BrowserExtension implements BeforeEachCallback, ParameterResolver, 
     public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext)
             throws ParameterResolutionException {
         Browser annotation = parameterContext.getParameter().getAnnotation(Browser.class);
-        RoleBrowser browser = RoleBrowser.instance(DriverFactory.getDriver(annotation), annotation.role());
+        RoleBrowser browser = RoleBrowser.instance(DriverFactory.getDriver(annotation, extensionContext), annotation.role());
 
         RoleBrowsers browsersFromStore = getFromStore(extensionContext);
         if (browsersFromStore == null)
