@@ -18,11 +18,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.extension.ExtensionContext.Namespace.create;
 
 public class BrowserExtension implements BeforeEachCallback, ParameterResolver, AfterEachCallback {
-
     public static final ExtensionContext.Namespace NAMESPACE = create(BrowserExtension.class);
-  /*  // to get the displayName from the extensionContext
-    public ThreadLocal<String> currentDisplayName = new ThreadLocal<>();*/
-
 
     @Override
     public void beforeEach(ExtensionContext extensionContext) throws Exception {
@@ -45,12 +41,6 @@ public class BrowserExtension implements BeforeEachCallback, ParameterResolver, 
             field.setAccessible(true);
             field.set(testInstance, rolePages);
         }
-
-        /*// Get the displayName from the extensionContext
-         String displayName = extensionContext.getDisplayName();
-        currentDisplayName.set(displayName);
-        System.out.println("displayName: " + displayName);*/
-
 
         if (!browsers.isEmpty())
             saveToStore(extensionContext, browsers);

@@ -4,12 +4,9 @@ import com.codeborne.selenide.SelenideConfig;
 import com.codeborne.selenide.SelenideDriver;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.openqa.selenium.MutableCapabilities;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import ru.gasworkers.dev.extension.browser.Browser;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,13 +24,12 @@ public final class DriverFactory {
         config.headless(false);
         config.holdBrowserOpen(false);
 
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--use-fake-ui-for-media-stream");
+        MutableCapabilities capabilities = BrowserCapabilities.CHROME_115.getCapabilities();
 
-        config.browserCapabilities(chromeOptions);
+        config.browserCapabilities(capabilities);
         config.fileDownload(FOLDER);
-        config.browser("chrome");
-        config.browserVersion("115.0");
+        config.browser(capabilities.getBrowserName());
+        config.browserVersion(capabilities.getBrowserVersion());
         config.remote("http://localhost:4444/wd/hub");
 
         String videoOutputDir = "/opt/selenoid/video/"; // the video output dir is inside the docker container.
@@ -41,12 +37,8 @@ public final class DriverFactory {
         MutableCapabilities selenoidCapabilities = new MutableCapabilities();
 
         // Get the @DisplayName name of the test and use it as the Selenoid container name
-        System.out.println("name: " + actualContext.getDisplayName());
+        System.out.println("@DisplayName: " + actualContext.getDisplayName());
         selenoidCapabilities.setCapability("name", actualContext.getDisplayName());
-
-
-        /* *//* How to set session timeout *//*
-        selenoidCapabilities.setCapability("sessionTimeout", "1m");*/
 
         /* How to set timezone */
         selenoidCapabilities.setCapability("env", new ArrayList<String>() {{
@@ -61,14 +53,10 @@ public final class DriverFactory {
         selenoidCapabilities.setCapability("enableVideo", false);
         selenoidCapabilities.setCapability("videoOutputDir", videoOutputDir);
 
-        MutableCapabilities capabilities = new MutableCapabilities();
         capabilities.setCapability("selenoid:options", selenoidCapabilities);
 
         config.browserCapabilities(capabilities);
         config.fileDownload(FOLDER);
-        // Create a RemoteWebDriver instance
-        RemoteWebDriver driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), chromeOptions);
-
         return new SelenideDriver(config);
     }
 }
