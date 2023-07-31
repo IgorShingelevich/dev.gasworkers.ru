@@ -68,24 +68,6 @@ public class PasswordGeneratorUsualClientRegistrationTest extends BaseTest {
         step("Страница успешная регистрация", () -> {
             clientPages.getRegistrationPage().successRegistrationStep.checkFinishLoading();
         });
-        step(("Страница начальный гид"), () -> {
-            clientPages.getHomePage().checkInitialGuide();
-            clientPages.getHomePage().clickLaterInitialModal();
-        });
-        step("Кабинет клиента - состояние после Регистрации", () -> {
-            //todo personSummaryComponent appperance
-            /*clientPages.getHomePage().personSummaryComponent.checkFinishLoading(randomClient.getFullName(), randomClient.getSinceDate());
-            clientPages.getHomePage().personSummaryComponent.checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());*/
-            clientPages.getHomePage().sidebar.allObjects();
-            clientPages.getAllObjectsPage().checkInitialState();
-            clientPages.getAllObjectsPage().sidebar.allOrders();
-            clientPages.getAllOrdersPage().checkInitialState();
-            clientPages.getAllOrdersPage().sidebar.allInvoices();
-            clientPages.getAllInvoicesPage().checkInitialState();
-            clientPages.getAllInvoicesPage().actionsBlock.notifications();
-            clientPages.getAllNotificationsPage().checkInitialState();
-            clientPages.getHomePage().open();
-        });
-        //TODO profile check
+        clientPages.getHomePage().urlChecker.urlContains("profile/client");
     }
 }

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.client.newClient;
+package ru.gasworkers.dev.tests.web.client.newClient.afterBG;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -38,7 +38,7 @@ public class AfterRepairBGRegistrationTest extends BaseTest {
     @Test
     @Owner("Igor Shingelevich")
     @DisplayName("Состояние Кабинета СМЗ - Кабинет после Фоновой Регистрации на Ремонт с указанием телефона и почты")
-    public void accountStateAfterBGRepair() {
+    public void clientAfterBGRepair() {
         Integer masterIndex = 0;
         Integer power = 20;
         EquipmentType GAS_BOILER_TYPE = EquipmentType.GAS_BOILER;

@@ -1,9 +1,8 @@
-package ru.gasworkers.dev.tests.web.registration.usualRegistration.usualClientRegistration;
+package ru.gasworkers.dev.tests.web.client.newClient;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
-import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -19,22 +18,23 @@ import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
 import static io.qameta.allure.Allure.step;
+
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.REGISTRATION)
 @Feature(AllureFeature.REGULAR_REGISTRATION)
-@Story("По почте")
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.REGISTRATION)
 @Tag(AllureTag.WEB)
 @Tag(AllureTag.POSITIVE)
-public class ByEmailUsualClientRegistrationTest extends BaseTest {
+public class ClientAfterByEmailUsualClientRegistrationTest extends BaseTest {
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
     RandomClient randomClient = new RandomClient();
+
     @Test
-    @DisplayName("Регистрация клиента по email")
-    void registrationClientByEmail() {
+    @DisplayName("Состояние - проверка состояния кабинета после регистрации")
+    void clientAfterRegistration() {
         step("Страница лендинга", () -> {
             clientPages.getLandingPage().open();
             clientPages.getLandingPage().checkFinishLoading();
@@ -72,6 +72,48 @@ public class ByEmailUsualClientRegistrationTest extends BaseTest {
         step("Страница успешная регистрация", () -> {
             clientPages.getRegistrationPage().successRegistrationStep.checkFinishLoading();
         });
-        clientPages.getHomePage().urlChecker.urlContains("profile/client");
+        step(("Страница начальный гид"), () -> {
+            clientPages.getHomePage().checkInitialGuide();
+            clientPages.getHomePage().clickLaterInitialModal();
+        });
+        step("Кабинет клиента - состояние после Регистрации", () -> {
+            //clientPages.getHomePage().personSummaryComponent.checkFinishLoading(randomClient.getFullName(), randomClient.getSinceDate());
+            // todo appearence of the person summary component
+            // clientPages.getHomePage().personSummaryComponent.checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
+            clientPages.getHomePage().sidebar.allObjects();
+            clientPages.getAllObjectsPage().checkInitialState();
+            clientPages.getAllObjectsPage().sidebar.allOrders();
+            clientPages.getAllOrdersPage().checkInitialState();
+            clientPages.getAllOrdersPage().sidebar.allInvoices();
+            clientPages.getAllInvoicesPage().checkInitialState();
+            clientPages.getAllInvoicesPage().actionsBlock.notifications();
+            clientPages.getAllNotificationsPage().checkInitialState();
+            step("Страница Профиль", () -> {
+                clientPages.getHomePage().sidebar.profile();
+                clientPages.getProfilePage().checkFinishLoading();
+                step("Вкадка Общее данные", () -> {
+                    clientPages.getProfilePage().navCommon();
+                    clientPages.getProfilePage().navCommonTab.checkFinishLoading();
+                    clientPages.getProfilePage().navCommonTab.checkInitialState(randomClient.getName(), randomClient.getMiddleName(), randomClient.getSurname());
+                });
+                step("Вкадка Контакты", () -> {
+                    clientPages.getProfilePage().navContacts();
+                    clientPages.getProfilePage().navContactsTab.checkFinishLoading();
+                    clientPages.getProfilePage().navContactsTab.checkInitialState(randomClient.getEmail(), randomClient.getPhone());
+                });
+                step("Вкадка Пароль", () -> {
+                    clientPages.getProfilePage().navPassword();
+                    clientPages.getProfilePage().navPasswordTab.checkFinishLoading();
+                    clientPages.getProfilePage().navPasswordTab.checkInitialState();
+                });
+                step("Вкладка Уведомления", () -> {
+                    clientPages.getProfilePage().navNotifications();
+                    clientPages.getProfilePage().navNotificationsTab.checkFinishLoading();
+                    clientPages.getProfilePage().navNotificationsTab.checkInitialState();
+                });
+            });
+            clientPages.getHomePage().open();
+            //TODO profile  check - photo. rest of the fields
+        });
     }
 }

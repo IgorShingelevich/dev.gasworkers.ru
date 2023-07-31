@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.client.newClient;
+package ru.gasworkers.dev.tests.web.client.newClient.afterBG;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -37,29 +37,9 @@ public class AfterVideoBGRegistrationTest extends BaseTest {
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
     RandomClient randomClient = new RandomClient();
-
-    /*UserBuilder masterИнжТехМастер3 = new UserBuilder(
-            "ИнжТехМастер3",
-            "ИнжТехМастерович3",
-            "ИнжТехМастеров3",
-            "Зарегистрирован с 11 января 2023 года",
-            " test_gas_master_sssr1@rambler.ru",
-            "123456",
-            null,
-            79917644241L);
-
-    UserBuilder masterИнжТехМастер4 = new UserBuilder(
-            "ИнжТехМастер4",
-            "ИнжТехМастерович4",
-            "ИнжТехМастеров4",
-            "Зарегистрирован с 11 января 2023 года",
-            " test_gas_master_sssr1@rambler.ru",
-            "123456",
-            null,
-            79917644241L);*/
     @Test
     @DisplayName("Состояние Кабинета СМЗ - Кабинет после Фоновой Регистрации на Видео Сейчас с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
-    public void accountStateAfterBGVideo() {
+    public void clientAfterBGVideo() {
         Integer masterIndex = 0;
         Integer power = 20;
         EquipmentType GAS_BOILER_TYPE = EquipmentType.GAS_BOILER;
