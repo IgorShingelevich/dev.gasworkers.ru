@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.tests.web.client.newClient;
 
+
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -24,21 +25,21 @@ import static io.qameta.allure.Allure.step;
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.ACCOUNT)
 @Feature(AllureFeature.ACCOUNT_STATE)
-@Story(AllureStory.REPAIR)
+@Story(AllureStory.MAINTENANCE)
 @Tag(AllureTag.CLIENT)
+@Tag(AllureTag.REGISTRATION)
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.POSITIVE)
 @Tag(AllureTag.WEB)
 
-public class AccountStateNewClientAfterRepairBGRegistrationTest extends BaseTest {
+public class AfterMaintenanceBGRegistrationTest extends BaseTest {
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
     RandomClient randomClient = new RandomClient();
 
     @Test
-    @Owner("Igor Shingelevich")
-    @DisplayName("Состояние Кабинета СМЗ - Кабинет после Фоновой Регистрации на Ремонт с указанием телефона и почты")
-    public void accountStateAfterBGRepair() {
+    @DisplayName("Состояние Кабинета СМЗ - Кабинет после Фоновой Регистрации на ТО с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
+    public void accountStateAfterBGMaintenance() {
         Integer masterIndex = 0;
         Integer power = 20;
         EquipmentType GAS_BOILER_TYPE = EquipmentType.GAS_BOILER;
@@ -46,28 +47,25 @@ public class AccountStateNewClientAfterRepairBGRegistrationTest extends BaseTest
         clientPages.getLandingPage().checkFinishLoading();
         step("Клиент заполняет форму фоновой регистрации", () -> {
             clientPages.getLandingPage().bgRegistration.checkFinishLoading();
-            clientPages.getLandingPage().bgRegistration.fillBGRepairRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhone(), randomClient.getEmail(), randomClient.getEquipmentRandomPhotoFile());
-            //TODO add photo video
+            clientPages.getLandingPage().bgRegistration.fillBGMaintenanceRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhone(), randomClient.getEmail());
+            // TODO add photo video
         });
         String resultedAddress = clientPages.getLandingPage().bgRegistration.address.getResultedAddress();
         String resultedEquipmentCollectionName = clientPages.getLandingPage().bgRegistration.equipment.getEquipmentName(0);
-        String errorText = clientPages.getLandingPage().bgRegistration.equipment.getErrorText();
 
         clientPages.getLandingPage().bgRegistration.findOffers();
         clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode(), "https://dev.gasworkers.ru/profile/client");
-        step("Кабинет клиента - состояние после фоновой регистрации на Ремонт", () -> {
-            step("Гид  Ремонт по кабинету", () -> {
-                clientPages.getHomePage().firstRepairGuide.playSequence();
+        step("Кабинет клиента - состояние после фоновой регистрации на ТО ", () -> {
+            step("Гид  ТО по кабинету", () -> {
+                clientPages.getHomePage().firstMaintenanceGuide.playSequence();
             });
             step("Страница Карта", () -> {
-                clientPages.getSelectServicePage().checkFinishRepairLoading();
+                clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
                 clientPages.getSelectServicePage().checkPublishedState();
             });
-            // todo OrderCardPage
             String orderNumber = step("Страница Карточка заказа", () -> {
                 clientPages.getSelectServicePage().toOrderCard();
                 clientPages.getOrderCardPage().checkFinishLoading();
-//                clientPages.getOrderCardPage().checkRepairBGInitialState(resultedAddress, resultedEquipmentCollectionName, desiredDate, desiredTime, errorText);
                 String currentNumber = clientPages.getOrderCardPage().getOrderNumber();
                 return currentNumber;
             });
@@ -91,8 +89,15 @@ public class AccountStateNewClientAfterRepairBGRegistrationTest extends BaseTest
                 clientPages.getAllObjectsPage().sidebar.allOrders();
                 clientPages.getAllOrdersPage().checkFinishLoading();
                 clientPages.getAllOrdersPage().checkBGInitialState(orderNumber);
-                // todo orderBoxDetails
             });
+            // todo OrderCardPage
+            /*String orderNumber = step("Страница Карточка заказа", () -> {
+                clientPages.getSelectServicePage().toOrderCard();
+                clientPages.getOrderCardPage().checkFinishLoading();
+//                clientPages.getOrderCardPage().checkRepairBGInitialState(resultedAddress, resultedEquipmentCollectionName, desiredDate, desiredTime, errorText);
+                String currentNumber = clientPages.getOrderCardPage().getOrderNumber();
+                return currentNumber;
+            });*/
 
             step("Страница Счета", () -> {
                 clientPages.getAllOrdersPage().sidebar.allInvoices();
@@ -126,19 +131,16 @@ public class AccountStateNewClientAfterRepairBGRegistrationTest extends BaseTest
                 });
                 clientPages.getProfilePage().sidebar.home();
             });
+
+
         });
     }
 
 }
 // todo bg registration with no email - add email in the profile
-//todo custom equipment brand and model input
+//
+//todo custom equipment brand and model
+//todo only phone, only email
 // TODO registration validation  cases - all fields are empty, checkbox unchecked. existed phone and email
 // todo pick random address suggestion and equipment
-//todo only phone, only email
-//todo add equipment to request, delete, add two  other random equipments
-// todo form validation no address, no equipment, no equipment brand, no equipment model, no date, no time, no phone, no email
-// todo add delete add  photo video, media types validation
-
-
-
 

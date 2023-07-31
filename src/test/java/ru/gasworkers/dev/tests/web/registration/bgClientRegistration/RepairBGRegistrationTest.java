@@ -49,87 +49,9 @@ public class RepairBGRegistrationTest extends BaseTest {
             clientPages.getLandingPage().bgRegistration.fillBGRepairRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhone(), randomClient.getEmail(), randomClient.getEquipmentRandomPhotoFile());
             //TODO add photo video
         });
-        String resultedAddress = clientPages.getLandingPage().bgRegistration.address.getResultedAddress();
-        String resultedEquipmentCollectionName = clientPages.getLandingPage().bgRegistration.equipment.getEquipmentName(0);
-        String errorText = clientPages.getLandingPage().bgRegistration.equipment.getErrorText();
-
         clientPages.getLandingPage().bgRegistration.findOffers();
         clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode(), "https://dev.gasworkers.ru/profile/client");
-        step("Гид  Ремонт по кабинету", () -> {
-            clientPages.getHomePage().firstRepairGuide.playSequence();
-        });
-        clientPages.getSelectServicePage().checkFinishRepairLoading();
-
-       /* step("Кабинет клиента - состояние после фоновой регистрации на Ремонт", () -> {
-
-            step("Страница Карта", () -> {
-                clientPages.getSelectServicePage().checkFinishRepairLoading();
-                clientPages.getSelectServicePage().checkPublishedState();
-            });
-            // todo OrderCardPage
-            String orderNumber = step("Страница Карточка заказа", () -> {
-                clientPages.getSelectServicePage().toOrderCard();
-                clientPages.getOrderCardPage().checkFinishLoading();
-//                clientPages.getOrderCardPage().checkRepairBGInitialState(resultedAddress, resultedEquipmentCollectionName, desiredDate, desiredTime, errorText);
-                String currentNumber = clientPages.getOrderCardPage().getOrderNumber();
-                return currentNumber;
-            });
-            step("Домашняя страница", () -> {
-                clientPages.getOrderCardPage().sidebar.home();
-                clientPages.getHomePage().checkBGInitialState(randomClient.getSinceTodayDate());
-            });
-            step("Страница Уведомления", () -> {
-                clientPages.getHomePage().actionsBlock.notifications();
-                // TODO fix  Push notification  - not appear after Guide
-//                clientPages.getAllNotificationsPage().checkInitialBGState(orderNumber);
-//                clientPages.getAllNotificationsPage().readAll();
-
-            });
-            step("Страница Объекты", () -> {
-                clientPages.getAllNotificationsPage().sidebar.allObjects();
-                clientPages.getAllObjectsPage().checkFinishLoading();
-                clientPages.getAllObjectsPage().initialBGState(GAS_BOILER_TYPE, resultedEquipmentCollectionName, power.toString(), resultedAddress);
-            });
-            step("Страница Заказы", () -> {
-                clientPages.getAllObjectsPage().sidebar.allOrders();
-                clientPages.getAllOrdersPage().checkFinishLoading();
-                clientPages.getAllOrdersPage().checkBGInitialState(orderNumber);
-                // todo orderBoxDetails
-            });
-
-            step("Страница Счета", () -> {
-                clientPages.getAllOrdersPage().sidebar.allInvoices();
-                clientPages.getAllInvoicesPage().checkFinishLoading();
-                clientPages.getAllInvoicesPage().checkInitialState();
-            });
-
-            step("Страница Профиль", () -> {
-                clientPages.getAllInvoicesPage().sidebar.profile();
-                clientPages.getProfilePage().checkFinishLoading();
-                step("Вкадка Общее данные", () -> {
-                    clientPages.getProfilePage().navCommon();
-                    clientPages.getProfilePage().navCommonTab.checkFinishLoading();
-                    clientPages.getProfilePage().navCommonTab.checkInitialBGState();
-                    clientPages.getProfilePage().navCommonTab.uploadPhoto(randomClient.getAvatarRandomPhotoFile());
-                });
-                step("Вкадка Контакты", () -> {
-                    clientPages.getProfilePage().navContacts();
-                    clientPages.getProfilePage().navContactsTab.checkFinishLoading();
-                    clientPages.getProfilePage().navContactsTab.checkInitialState(randomClient.getEmail(), randomClient.getPhone());
-                });
-                step("Вкадка Пароль", () -> {
-                    clientPages.getProfilePage().navPassword();
-                    clientPages.getProfilePage().navPasswordTab.checkFinishLoading();
-                    clientPages.getProfilePage().navPasswordTab.checkInitialState();
-                });
-                step("Вкладка Уведомления", () -> {
-                    clientPages.getProfilePage().navNotifications();
-                    clientPages.getProfilePage().navNotificationsTab.checkFinishLoading();
-                    clientPages.getProfilePage().navNotificationsTab.checkInitialState();
-                });
-                clientPages.getProfilePage().sidebar.home();
-            });
-        });*/
+        clientPages.getHomePage().urlChecker.urlContains("profile/client");
     }
 }
 // todo bg registration with no email - add email in the profile

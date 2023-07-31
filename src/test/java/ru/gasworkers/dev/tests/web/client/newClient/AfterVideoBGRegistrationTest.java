@@ -33,7 +33,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.WEB)
 
-public class AccountStateNewClientAfterVideoBGRegistrationTest extends BaseTest {
+public class AfterVideoBGRegistrationTest extends BaseTest {
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
     RandomClient randomClient = new RandomClient();
