@@ -58,6 +58,7 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
+
 dependencies {
     implementation "com.codeborne:selenide-proxy:${selenideProxy}"
 
@@ -87,6 +88,10 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    testLogging {
+        events "started", "skipped", "failed", "standard_error", "standard_out"
+        exceptionFormat "short"
+    }
 }
 
 task registrationTest(type: Test) {
