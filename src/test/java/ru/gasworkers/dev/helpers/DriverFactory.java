@@ -13,8 +13,7 @@ import java.util.HashMap;
 import static com.codeborne.selenide.FileDownloadMode.FOLDER;
 
 public final class DriverFactory {
-
-    public static SelenideDriver getDriver(Browser annotation, ExtensionContext actualContext) throws MalformedURLException {
+       public static SelenideDriver getDriver(Browser annotation, ExtensionContext actualContext) throws MalformedURLException {
         SelenideConfig config = new SelenideConfig();
         config.baseUrl("https://dev.gasworkers.ru");
         config.browserSize(annotation.browserSize());
@@ -30,36 +29,64 @@ public final class DriverFactory {
         config.fileDownload(FOLDER);
         config.browser(capabilities.getBrowserName());
         config.browserVersion(capabilities.getBrowserVersion());
-        config.remote("http://localhost:4444/wd/hub");
-
-        String videoOutputDir = "/opt/selenoid/video/"; // the video output dir is inside the docker container.
 
         MutableCapabilities selenoidCapabilities = new MutableCapabilities();
-
-        // Get the @DisplayName name of the test and use it as the Selenoid container name
+              config.remote("http://localhost:4444/wd/hub");
+              selenoidCapabilities.setCapability("enableVNC", true);
+              selenoidCapabilities.setCapability("enableVideo", false);
+              capabilities.setCapability("selenoid:options", selenoidCapabilities);
         System.out.println("@DisplayName: " + actualContext.getDisplayName());
         selenoidCapabilities.setCapability("name", actualContext.getDisplayName());
-
-        /* How to set timezone */
         selenoidCapabilities.setCapability("env", new ArrayList<String>() {{
             add("TZ=UTC");
         }});
-
-        /* How to add "trash" button */
         selenoidCapabilities.setCapability("labels", new HashMap<String, Object>() {{
             put("manual", "true");
         }});
-        selenoidCapabilities.setCapability("enableVNC", true);
-        selenoidCapabilities.setCapability("enableVideo", false);
-        selenoidCapabilities.setCapability("videoOutputDir", videoOutputDir);
 
-        capabilities.setCapability("selenoid:options", selenoidCapabilities);
 
         config.browserCapabilities(capabilities);
         config.fileDownload(FOLDER);
         return new SelenideDriver(config);
     }
+
 }
+
+/*private static final Object driverCreationLock = new Object();
+
+    public static SelenideDriver getDriver(Browser annotation, ExtensionContext actualContext) throws MalformedURLException {
+        List<SelenideDriver> drivers = new ArrayList<>();
+
+        for (BrowserCapabilities browserCapability : BrowserCapabilities.values()) {
+            drivers.add(createDriver(browserCapability, annotation, actualContext));
+        }
+
+        // You can now use the drivers list if needed (e.g., for cleanup or assertions).
+        // For this example, we'll return the last driver created (you can modify this as per your requirements).
+        return drivers.get(drivers.size() - 1);
+    }
+
+    private static SelenideDriver createDriver(BrowserCapabilities browserCapability, Browser annotation, ExtensionContext actualContext) throws MalformedURLException {
+        synchronized (driverCreationLock) {
+            SelenideConfig config = new SelenideConfig();
+            config.baseUrl("https://dev.gasworkers.ru");
+            config.browserSize(annotation.browserSize());
+            config.browserPosition(annotation.browserPosition());
+            config.reportsFolder("target/selenide");
+            config.timeout(8000);
+            config.headless(false);
+            config.holdBrowserOpen(false);
+
+            MutableCapabilities capabilities = browserCapability.getCapabilities();
+
+            config.browserCapabilities(capabilities);
+            config.fileDownload(FOLDER);
+
+            return new SelenideDriver(config);
+        }
+    }*/
+
+
 
 /*SelenideConfig config = new SelenideConfig();
         config.baseUrl("https://dev.gasworkers.ru"); // ToDo вынести в конфиг

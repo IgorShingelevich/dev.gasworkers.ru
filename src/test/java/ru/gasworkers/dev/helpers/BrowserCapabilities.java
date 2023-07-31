@@ -25,6 +25,7 @@ public enum BrowserCapabilities {
             case CHROME_114:
                 chromeOptions.addArguments("--use-fake-ui-for-media-stream");
                 chromeOptions.setCapability("browserVersion", browserVersion);
+                return chromeOptions;
             case CHROME_115:
                 chromeOptions.addArguments("--use-fake-ui-for-media-stream");
                 chromeOptions.setCapability("browserVersion", browserVersion);
@@ -32,6 +33,7 @@ public enum BrowserCapabilities {
             case FIREFOX_114:
                 firefoxOptions.addArguments("--use-fake-ui-for-media-stream");
                 firefoxOptions.setCapability("browserVersion", browserVersion);
+                return firefoxOptions;
             case FIREFOX_115:
                 firefoxOptions.addArguments("--use-fake-ui-for-media-stream");
                 firefoxOptions.setCapability("browserVersion", browserVersion);

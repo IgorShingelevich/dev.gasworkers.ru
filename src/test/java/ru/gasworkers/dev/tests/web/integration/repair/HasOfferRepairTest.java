@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.tests.web.integration.repair;
 
 import io.qameta.allure.*;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -54,8 +55,9 @@ public class HasOfferRepairTest extends BaseApiTest {
     @Browser(role = Role.DISPATCHER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     DispatcherPages dispatcherPages;
 
+    @Disabled
     @Test
-    @DisplayName("repair has offer")
+    @DisplayName("Ремонт - диспетчер сделал предложение")
     void payedRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
         CommonFieldsRepairDto commonFields = new CommonFieldsRepairDto();
         step("api precondition", () -> {

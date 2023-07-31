@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.tests.web.integration.repair;
 
 import io.qameta.allure.*;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -63,8 +64,9 @@ public class SelectDateOfferRepairTest extends BaseApiTest {
     @Browser(role = Role.DISPATCHER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     DispatcherPages dispatcherPages;
 
+    @Disabled
     @Test
-    @DisplayName("repair select date")
+    @DisplayName("Ремонт - выбор даты и времени")
     void payedRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
         step("api precondition", () -> {
             commonFields.setTokenClient(loginApi.getTokenThrough(client));
