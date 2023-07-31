@@ -6,7 +6,6 @@ import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
@@ -24,8 +23,11 @@ import static io.qameta.allure.Allure.step;
 @Epic(AllureEpic.REGISTRATION)
 @Feature(AllureFeature.REGULAR_REGISTRATION)
 @Story("Регистрация со Сгенерированным паролем")
-@Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.WEB), @Tag(AllureTag.POSITIVE)})
-
+@Tag(AllureTag.REGRESSION)
+@Tag(AllureTag.CLIENT)
+@Tag(AllureTag.REGISTRATION)
+@Tag(AllureTag.WEB)
+@Tag(AllureTag.POSITIVE)
 public class PasswordGeneratorUsualClientRegistrationTest extends BaseTest {
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
