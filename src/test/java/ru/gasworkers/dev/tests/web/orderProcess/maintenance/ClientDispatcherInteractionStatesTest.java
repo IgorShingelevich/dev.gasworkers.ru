@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.integration.maintenance;
+package ru.gasworkers.dev.tests.web.orderProcess.maintenance;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;

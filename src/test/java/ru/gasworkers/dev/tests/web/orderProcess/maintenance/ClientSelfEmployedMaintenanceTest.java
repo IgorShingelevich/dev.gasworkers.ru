@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.integration.maintenance;
+package ru.gasworkers.dev.tests.web.orderProcess.maintenance;
 
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.Role;

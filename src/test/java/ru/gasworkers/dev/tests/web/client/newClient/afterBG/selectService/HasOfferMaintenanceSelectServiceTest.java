@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.tests.web.client.newClient.afterBG.selectService;
 
+
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
@@ -25,46 +26,42 @@ import static io.qameta.allure.Allure.step;
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.ACCOUNT)
 @Feature(AllureFeature.ACCOUNT_STATE)
-@Story(AllureStory.REPAIR)
+@Story(AllureStory.MAINTENANCE)
 @Tag(AllureTag.CLIENT)
+@Tag(AllureTag.REGISTRATION)
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.POSITIVE)
 @Tag(AllureTag.WEB)
 
-public class RepairSelectServiceTest extends BaseTest {
+public class HasOfferMaintenanceSelectServiceTest extends BaseTest {
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
     RandomClient randomClient = new RandomClient();
 
     @Disabled
     @Test
-    @Owner("Igor Shingelevich")
-    @DisplayName("Состояние Кабинета СМЗ - Выбор Исполнителя на Ремонт")
-    public void repairSelectService() {
-        Integer masterIndex = 0;
+    @DisplayName("Состояние Кабинета Клиента Есть Отклики - Выбор Исполнителя на ТО")
+    public void hasOfferSelectServiceMaintenance() {
         Integer power = 20;
         EquipmentType GAS_BOILER_TYPE = EquipmentType.GAS_BOILER;
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
         step("Клиент заполняет форму фоновой регистрации", () -> {
             clientPages.getLandingPage().bgRegistration.checkFinishLoading();
-            clientPages.getLandingPage().bgRegistration.fillBGRepairRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhone(), randomClient.getEmail(), randomClient.getEquipmentRandomPhotoFile());
+            clientPages.getLandingPage().bgRegistration.fillBGMaintenanceRequest(randomClient.getObjectAddress(), GAS_BOILER_TYPE, 1, 1, power, randomClient.getPhone(), randomClient.getEmail());
         });
         clientPages.getLandingPage().bgRegistration.findOffers();
         clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode(), "https://dev.gasworkers.ru/profile/client");
-        step("Кабинет клиента - состояние после фоновой регистрации на Ремонт", () -> {
-            step("Гид  Ремонт по кабинету", () -> {
-                clientPages.getHomePage().firstRepairGuide.playSequence();
+        step("Кабинет клиента - состояние после фоновой регистрации на ТО ", () -> {
+            step("Гид  ТО по кабинету", () -> {
+                clientPages.getHomePage().firstMaintenanceGuide.playSequence();
             });
             step("Страница Карта", () -> {
                 //todo actual design
-                clientPages.getSelectServicePage().checkFinishRepairLoading();
+                clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
                 clientPages.getSelectServicePage().checkPublishedState();
             });
         });
     }
+
 }
-
-
-
-

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.integration.consultation;
+package ru.gasworkers.dev.tests.web.orderProcess.consultation;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -35,8 +35,8 @@ import ru.gasworkers.dev.api.users.client.house.getClientHouses.GetClientHousesA
 import ru.gasworkers.dev.api.users.client.house.getClientHouses.dto.GetClientHousesResponseDto;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.extension.user.client.WithHouse;
 import ru.gasworkers.dev.extension.user.client.WithClient;
+import ru.gasworkers.dev.extension.user.client.WithHouse;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;

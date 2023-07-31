@@ -68,6 +68,10 @@ public class PasswordGeneratorUsualClientRegistrationTest extends BaseTest {
         step("Страница успешная регистрация", () -> {
             clientPages.getRegistrationPage().successRegistrationStep.checkFinishLoading();
         });
+        step(("Страница начальный гид"), () -> {
+            clientPages.getHomePage().checkInitialGuide();
+            clientPages.getHomePage().clickLaterInitialModal();
+        });
         clientPages.getHomePage().urlChecker.urlContains("profile/client");
     }
 }

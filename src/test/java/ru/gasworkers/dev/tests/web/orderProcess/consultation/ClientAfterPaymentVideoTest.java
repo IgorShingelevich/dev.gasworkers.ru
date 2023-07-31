@@ -1,10 +1,9 @@
-package ru.gasworkers.dev.tests.web.client.newClient.afterBG;
+package ru.gasworkers.dev.tests.web.orderProcess.consultation;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -13,6 +12,7 @@ import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureStory;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
+import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.model.equipment.EquipmentType;
@@ -33,15 +33,14 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.WEB)
 
-public class AfterVideoBGRegistrationTest extends BaseTest {
+public class ClientAfterPaymentVideoTest extends BaseTest {
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
     RandomClient randomClient = new RandomClient();
 
-    @Disabled
     @Test
-    @DisplayName("Состояние Кабинета СМЗ - Кабинет после Фоновой Регистрации на Видео Сейчас с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
-    public void clientAfterBGVideo() {
+    @DisplayName("Состояние Кабинета СМЗ - Кабинет после оплаты Видео Сейчас")
+    public void clientAfterPaymentVideo() {
         Integer masterIndex = 0;
         Integer power = 20;
         EquipmentType GAS_BOILER_TYPE = EquipmentType.GAS_BOILER;
@@ -66,9 +65,66 @@ public class AfterVideoBGRegistrationTest extends BaseTest {
             clientPages.getConsultationVideoPage().checkFinishLoading();
             clientPages.getConsultationVideoPage().defaultBGVideoState();
         });
+
+
+        /*step("Выбрать Мастера по имени", () -> {
+            String masterFullNameByName = clientPages.getConsultationVideoPage().rightNowTab.masterList.getCurrentMasterByName(masterИнжТехМастер3.fullName);
+        });*/
+        String masterFullNameByIndex = clientPages.getConsultationVideoPage().rightNowTab.masterList.getCurrentMasterByIndex(masterIndex);
+        String masterPriceByIndex = clientPages.getConsultationVideoPage().rightNowTab.masterList.getMasterPriceByIndex(masterIndex);
+
+
+        clientPages.getConsultationVideoPage().rightNowTab.masterList.selectMasterByName(masterFullNameByIndex);
+
+        step("Страница Подтверждение деталей Видео консультации Сейчас", () -> {
+            clientPages.getApproveMasterVideoPage().checkFinishLoading();
+            step("Компонент прикрепленные данные", () -> {
+                clientPages.getApproveMasterVideoPage().errorAttachments.checkFinishLoading();
+                clientPages.getApproveMasterVideoPage().errorAttachments.checkBGRightNowState(errorText);
+            });
+            step("Компонент детали заказа", () -> {
+                //todo workplace, fullName link or txt, review count
+                clientPages.getApproveMasterVideoPage().details.checkFinishLoading();
+                clientPages.getApproveMasterVideoPage().details.checkMasterFullName(masterFullNameByIndex);
+//                clientPages.getApproveMasterVideoPage().details.checkPlaceWork("ООО \"ИНЖЕНЕРНЫЕ ТЕХНОЛОГИИ\"");
+//                clientPages.getApproveMasterVideoPage().details.checkQuantityOfCompletedOrders("12");
+                clientPages.getApproveMasterVideoPage().details.checkOrderDate(randomClient.getSinceTodayDate());
+                clientPages.getApproveMasterVideoPage().details.checkRightNowTimeOrderState();
+                clientPages.getApproveMasterVideoPage().details.checkPriceOrder(masterPriceByIndex);
+                clientPages.getApproveMasterVideoPage().details.checkOrderType(OrderType.VIDEO);
+                clientPages.getApproveMasterVideoPage().details.checkEquipment(resultedEquipmentCollectionName);
+//                clientPages.getApproveMasterVideoPage().details.checkPersonAddress(resultedAddress); // removed
+                //todo  video attachments
+            });
+        });
+        clientPages.getApproveMasterVideoPage().clickPayButton();
+
+        String priceWithCommissions = step("Страница выбора способа оплаты", () -> {
+            clientPages.getSelectPaymentVideoPage().checkFinishLoading();
+            String commissionValue = clientPages.getSelectPaymentVideoPage().getCommissionValue(0);
+            System.out.println("Комиссия СПБ: " + commissionValue);
+            clientPages.getSelectPaymentVideoPage().payMir();
+            return commissionValue;
+        });
+
+       /* step("Страница оплаты картой", () -> {
+            clientPages.getPaymentWizardPage().checkFinishLoading(priceWithCommissions);
+            clientPages.getPaymentWizardPage().payButton();
+        });*/
+
+        step("Страница успешной оплаты", () -> {
+            clientPages.getSuccessPaymentVideoPage().checkFinishLoading();
+            clientPages.getSuccessPaymentVideoPage().clickButton();
+        });
+
         step("Кабинет клиента - состояние после фоновой регистрации на Видео", () -> {
+            //todo video guide
+            /*step("Гид  ТО по кабинету", () -> {
+                clientPages.getHomePage().firstMaintenanceGuide.playSequence();
+            });*/
+
             step("Домашняя страница", () -> {
-//                clientPages.getHomePage().checkVideoBGInitialState(randomClient.getSinceTodayDate(), masterFullNameByIndex);
+                clientPages.getHomePage().checkVideoBGInitialState(randomClient.getSinceTodayDate(), masterFullNameByIndex);
             });
             step("Страница Уведомления", () -> {
                 clientPages.getHomePage().actionsBlock.notifications();

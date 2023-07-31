@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.integration.consultation;
+package ru.gasworkers.dev.tests.web.orderProcess.consultation;
 
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.consultation.cancel.dto.ConsultationCancelRequestDto;

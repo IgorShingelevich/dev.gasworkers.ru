@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.integration.repair;
+package ru.gasworkers.dev.tests.web.orderProcess.repair;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Disabled;
@@ -12,6 +12,12 @@ import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
 import ru.gasworkers.dev.api.orders.info.dto.OrdersInfoResponseDto;
 import ru.gasworkers.dev.api.orders.selectMaster.SelectMasterApi;
+import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
+import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentResponseDto;
+import ru.gasworkers.dev.api.orders.selectServiceCompany.SelectServiceCompanyApi;
+import ru.gasworkers.dev.api.orders.selectServiceCompany.dto.SelectServiceCompanyResponseDto;
+import ru.gasworkers.dev.api.orders.suggestedServices.SuggestedServicesApi;
+import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoApi;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.api.users.companies.masters.CompaniesMastersApi;
@@ -26,11 +32,12 @@ import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
-import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 import static io.qameta.allure.Allure.step;
 
@@ -41,12 +48,14 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB)
-public class HasOfferRepairTest extends BaseApiTest {
-
+public class SelectDateOfferRepairTest extends BaseApiTest {
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
     private final SelectMasterApi selectMasterApi = new SelectMasterApi();
+    private final SuggestedServicesApi suggestedServicesApi = new SuggestedServicesApi();
+    private final SelectServiceCompanyApi selectServiceCompanyApi = new SelectServiceCompanyApi();
     private final OrdersInfoApi ordersInfoApi = new OrdersInfoApi();
+    private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
     private final String sssrDispatcher1Email = "test_gw_dispatcher_sssr1@rambler.ru";
     private final String sssrDispatcher1Password = "1234";
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
@@ -57,9 +66,8 @@ public class HasOfferRepairTest extends BaseApiTest {
 
     @Disabled
     @Test
-    @DisplayName("Ремонт - диспетчер сделал предложение")
+    @DisplayName("Ремонт - выбор даты и времени")
     void payedRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        CommonFieldsRepairDto commonFields = new CommonFieldsRepairDto();
         step("api precondition", () -> {
             commonFields.setTokenClient(loginApi.getTokenThrough(client));
             step("клиент заказ на ремонт клиента в  состоянии published", () -> {
@@ -90,7 +98,6 @@ public class HasOfferRepairTest extends BaseApiTest {
             });
 
             step("клиент заказ на ремонт клиента в состоянии есть отклик СК", () -> {
-
                 step(" клиент карточка последнего заказа -  есть отклик СК", () -> {
                     commonFields.setActiveOffersCount(lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                             .statusCode(200)
@@ -102,9 +109,42 @@ public class HasOfferRepairTest extends BaseApiTest {
                             .extract().as(OrdersInfoResponseDto.class).getData().getOffer().getId());
                 });
             });
+            step("клиент получает список доступных предложений", () -> {
+                SuggestServicesResponseDto suggestedServiceResponse = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(SuggestServicesResponseDto.class);
+                List<SuggestServicesResponseDto.Service> services = suggestedServiceResponse.getData().getServices();
+                // Filter companies with non-null prices
+                List<SuggestServicesResponseDto.Service> filteredServices = new ArrayList<>();
+                for (SuggestServicesResponseDto.Service c : services) {
+                    if (c.getPrice() != null) {
+                        filteredServices.add(c);
+                    }
+                }
+                commonFields.setServiceId(filteredServices.get(0).getId());
+                commonFields.setPossibleOfferId(filteredServices.get(0).getOfferId());
+            });
+            step("клиент выбирает предложение", () -> {
+                commonFields.setReceipts0Id(selectServiceCompanyApi.selectServiceCompany(commonFields.getOrderId(), commonFields.getServiceId(), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(SelectServiceCompanyResponseDto.class).getData().getReceiptId());
+            });
+            step("клиент карточка заказа - убедиться что перед оплатой", () -> {
+                commonFields.setOfferIdBeforePayment(ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(OrdersInfoResponseDto.class).getData().getOffer().getId());
+            });
+            step("клиент оплачивает  выезд мастера", () -> {
+                SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderId(), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(SelectPaymentResponseDto.class);
+                commonFields.setPayment0Url(actualResponse.getData().getPayUrl());
+                commonFields.setPayment0Id(actualResponse.getData().getPaymentId());
+            });
         });
 
-//    ------------------------------------------------- UI -----------------------------------------------------------
+
+        //    ------------------------------------------------- UI -----------------------------------------------------------
         step("авторизация Ролей ", () -> {
             step("авторизация Клиента", () -> {
                 clientPages.getLoginPage().open();
@@ -126,5 +166,8 @@ public class HasOfferRepairTest extends BaseApiTest {
                 Allure.addAttachment("RunStartTime: ", date);
             });
         });
+
     }
+
+
 }

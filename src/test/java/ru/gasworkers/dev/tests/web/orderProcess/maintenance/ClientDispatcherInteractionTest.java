@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.integration.maintenance;
+package ru.gasworkers.dev.tests.web.orderProcess.maintenance;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.*;

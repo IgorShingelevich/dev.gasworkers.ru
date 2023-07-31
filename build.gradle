@@ -89,33 +89,32 @@ test {
     useJUnitPlatform()
 }
 
-// Task providers
-task taskProvider_registrationTest(type: Test) {
+task registrationTest(type: Test) {
     useJUnitPlatform {
         includeTags "registration"
     }
 }
 
-task taskProvider_clientTest(type: Test) {
+task clientTest(type: Test) {
     useJUnitPlatform {
         includeTags "client"
     }
 }
 
-task taskProvider_bg_registrationTest(type: Test) {
+task bgRegistrationTest(type: Test) {
     useJUnitPlatform {
         includeTags "bg-registration"
     }
 }
 
 
-task taskProvider_apiTest(type: Test) {
+task apiTest(type: Test) {
     useJUnitPlatform {
         includeTags "api"
     }
 }
 
-task taskProvider_web(type: Test) {
+task webTest(type: Test) {
     useJUnitPlatform {
         includeTags "web"
     }

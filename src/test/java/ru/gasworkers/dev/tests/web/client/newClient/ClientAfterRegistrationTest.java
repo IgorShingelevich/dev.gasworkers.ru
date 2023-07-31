@@ -27,7 +27,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGISTRATION)
 @Tag(AllureTag.WEB)
 @Tag(AllureTag.POSITIVE)
-public class ClientAfterByEmailUsualClientRegistrationTest extends BaseTest {
+public class ClientAfterRegistrationTest extends BaseTest {
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
     RandomClient randomClient = new RandomClient();

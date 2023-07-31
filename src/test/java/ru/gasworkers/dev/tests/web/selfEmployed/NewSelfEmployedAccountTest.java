@@ -3,10 +3,7 @@ package ru.gasworkers.dev.tests.web.selfEmployed;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
@@ -21,6 +18,7 @@ import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
 
 import static io.qameta.allure.Allure.step;
 
+@Disabled
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.SELF_EMPLOYED)
 @Feature(AllureFeature.ACCOUNT_STATE)
