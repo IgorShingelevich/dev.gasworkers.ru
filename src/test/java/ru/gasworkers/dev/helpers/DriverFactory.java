@@ -16,24 +16,20 @@ public final class DriverFactory {
        public static SelenideDriver getDriver(Browser annotation, ExtensionContext actualContext) throws MalformedURLException {
         SelenideConfig config = new SelenideConfig();
         config.baseUrl("https://dev.gasworkers.ru");
-        config.browserSize(annotation.browserSize());
-        config.browserPosition(annotation.browserPosition());
-        config.reportsFolder("target/selenide");
-        config.timeout(8000);
-        config.headless(false);
-        config.holdBrowserOpen(false);
 
         MutableCapabilities capabilities = BrowserCapabilities.CHROME_115.getCapabilities();
 
-        config.browserCapabilities(capabilities);
-        config.fileDownload(FOLDER);
         config.browser(capabilities.getBrowserName());
         config.browserVersion(capabilities.getBrowserVersion());
+        config.browserSize(annotation.browserSize());
+        config.browserPosition(annotation.browserPosition());
+        config.timeout(8000);
+        config.browserCapabilities(capabilities);
 
         MutableCapabilities selenoidCapabilities = new MutableCapabilities();
-              config.remote("http://localhost:4444/wd/hub");
+              config.remote("http://tests.gasworkers.ru:4444/wd/hub");
               selenoidCapabilities.setCapability("enableVNC", true);
-              selenoidCapabilities.setCapability("enableVideo", false);
+              selenoidCapabilities.setCapability("enableVideo", true);
               capabilities.setCapability("selenoid:options", selenoidCapabilities);
         System.out.println("@DisplayName: " + actualContext.getDisplayName());
         selenoidCapabilities.setCapability("name", actualContext.getDisplayName());
