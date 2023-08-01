@@ -35,4 +35,7 @@ public final class AllureTag {
             ACCOUNT = "account",
             ORDERS = "orders",
             HOUSE = "house";
+    //samples
+    public static final String SAMPLE_WEB_TEST = "sample-web-test",
+            SAMPLE_API_TEST = "sample-api-test";
 }

@@ -124,3 +124,15 @@ task webTest(type: Test) {
         includeTags "web"
     }
 }
+task sampleWebTest(type: Test) {
+    useJUnitPlatform {
+        includeTags "sample-web-test"
+    }
+}
+
+task sampleApiTest(type: Test) {
+    useJUnitPlatform {
+        includeTags "sample-api-test"
+    }
+}
+
