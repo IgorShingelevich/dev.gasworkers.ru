@@ -22,16 +22,6 @@ public class SampleApiTest extends BaseApiTest {
         assertThat(1).isEqualTo(1);
     }
 
-    @Test
-    @DisplayName("sample api test 3 - negative")
-    void failApiTest() {
-        assertThat(1).isEqualTo(2);
-    }
 
-    @Test
-    @DisplayName("sample api test 4 - negative")
-    void failApiTest2() {
-        assertThat(1).isEqualTo(2);
-    }
 
 }

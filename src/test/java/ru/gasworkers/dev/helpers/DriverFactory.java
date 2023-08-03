@@ -23,6 +23,7 @@ public final class DriverFactory {
         config.headless(false);
         config.holdBrowserOpen(false);
 
+
         MutableCapabilities capabilities = BrowserCapabilities.CHROME_115.getCapabilities();
 
         config.browserCapabilities(capabilities);
@@ -31,7 +32,7 @@ public final class DriverFactory {
         config.browserVersion(capabilities.getBrowserVersion());
 
         MutableCapabilities selenoidCapabilities = new MutableCapabilities();
-              config.remote("http://localhost:4444/wd/hub");
+           config.remote("https://tests.gasworkers.ru:4444/wd/hub");
               selenoidCapabilities.setCapability("enableVNC", true);
               selenoidCapabilities.setCapability("enableVideo", false);
               capabilities.setCapability("selenoid:options", selenoidCapabilities);
@@ -51,6 +52,28 @@ public final class DriverFactory {
     }
 
 }
+
+/* // Use switch-case to set server-specific or local-specific configurations
+        switch (System.getenv("SELENOID_ENV")) {
+            case "server":
+                config.remote("http://server-selenoid-url:4444/wd/hub");
+                break;
+            default:
+                config.remote("http://localhost:4444/wd/hub");
+                break;
+        }
+
+        MutableCapabilities selenoidCapabilities = new MutableCapabilities();
+        selenoidCapabilities.setCapability("enableVNC", true);
+
+        switch (System.getenv("SELENOID_ENV")) {
+            case "server":
+                selenoidCapabilities.setCapability("enableVideo", true);
+                break;
+            default:
+                selenoidCapabilities.setCapability("enableVideo", false);
+                break;
+        }*/
 
 /*private static final Object driverCreationLock = new Object();
 
