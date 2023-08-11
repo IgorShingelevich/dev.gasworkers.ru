@@ -18,7 +18,7 @@ public class SampleWebTest extends BaseTest {
     RandomClient randomClient = new RandomClient();
 
     @Test
-    @DisplayName("sample web test - positive")
+    @DisplayName("sample web test 1 - positive")
     public void positiveWebTest() {
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
@@ -27,6 +27,48 @@ public class SampleWebTest extends BaseTest {
     @Test
     @DisplayName("sample web test 2  - positive")
     public void positiveWebTest2() {
+        clientPages.getLandingPage().open();
+        clientPages.getLandingPage().checkFinishLoading();
+    }
+
+    @Test
+    @DisplayName("sample web test 3 - positive")
+    public void positiveWebTest3() {
+        clientPages.getLandingPage().open();
+        clientPages.getLandingPage().checkFinishLoading();
+    }
+
+    @Test
+    @DisplayName("sample web test 4  - positive")
+    public void positiveWebTest4() {
+        clientPages.getLandingPage().open();
+        clientPages.getLandingPage().checkFinishLoading();
+    }
+
+    @Test
+    @DisplayName("sample web test 5 - positive")
+    public void positiveWebTest5() {
+        clientPages.getLandingPage().open();
+        clientPages.getLandingPage().checkFinishLoading();
+    }
+
+    @Test
+    @DisplayName("sample web test 6  - positive")
+    public void positiveWebTest6() {
+        clientPages.getLandingPage().open();
+        clientPages.getLandingPage().checkFinishLoading();
+    }
+
+    @Test
+    @DisplayName("sample web test 7 - positive")
+    public void positiveWebTest7() {
+        clientPages.getLandingPage().open();
+        clientPages.getLandingPage().checkFinishLoading();
+    }
+
+    @Test
+    @DisplayName("sample web test 8  - positive")
+    public void positiveWebTest8() {
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
     }

@@ -147,7 +147,7 @@ public class RepairAllDtoApiTest extends BaseApiTest {
 
 
     @Test
-    @DisplayName("payed repair")
+    @DisplayName("all dto repair")
     void allDtoRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
         commonFields.setTokenClient(loginApi.getTokenThrough(client));
 
