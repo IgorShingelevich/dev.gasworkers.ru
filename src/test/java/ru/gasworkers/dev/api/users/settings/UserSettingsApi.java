@@ -9,7 +9,7 @@ import static io.restassured.RestAssured.given;
 public class UserSettingsApi extends BaseApi {
     //    https://api.dev.gasworkers.ru/docs#polzovateli-POSTapi-v1-users-settings--section-
     @Step("API: User settings common")
-    public ValidatableResponse common(UserSettingsCommonRequestDto inputDto, String token) {
+    public ValidatableResponse setCommon(UserSettingsCommonRequestDto inputDto, String token) {
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)
                 .body(inputDto)

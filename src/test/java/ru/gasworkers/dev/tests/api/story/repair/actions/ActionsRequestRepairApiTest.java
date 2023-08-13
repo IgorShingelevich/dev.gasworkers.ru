@@ -90,9 +90,9 @@ public class ActionsRequestRepairApiTest extends BaseApiTest {
     private OrdersIdResponseDto actionsInvoiceIssuedOrderIdResponseAsClient;
 
     @ParameterizedTest(name = "{0}")
-    @EnumSource(ActionsPriceRepairCase.class)
+    @EnumSource(ActionsIssuedRepairCase.class)
     @DisplayName("save actions repair")
-    void saveActionsRepair(ActionsPriceRepairCase testCase, @WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+    void saveActionsRepair(ActionsIssuedRepairCase testCase, @WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
         commonFields.setTokenClient(loginApi.getTokenThrough(client));
         step("заказ на ремонт в состоянии published", () -> {
             step("клиент - модель пользователя в  состоянии published ", () -> {

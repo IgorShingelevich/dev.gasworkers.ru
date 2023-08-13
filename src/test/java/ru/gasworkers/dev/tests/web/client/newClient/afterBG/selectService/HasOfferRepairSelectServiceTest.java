@@ -54,7 +54,7 @@ public class HasOfferRepairSelectServiceTest extends BaseTest {
         clientPages.getLandingPage().confirmationCodeModalBG.fillCode(randomClient.getConfirmationCode(), "https://dev.gasworkers.ru/profile/client");
         step("Кабинет клиента - состояние после фоновой регистрации на Ремонт", () -> {
             step("Гид  Ремонт по кабинету", () -> {
-                clientPages.getHomePage().firstRepairGuide.playSequence();
+                clientPages.getHomePage().guide.playSequenceFirstRepairGuide();
             });
             step("Страница Карта", () -> {
                 //todo actual design

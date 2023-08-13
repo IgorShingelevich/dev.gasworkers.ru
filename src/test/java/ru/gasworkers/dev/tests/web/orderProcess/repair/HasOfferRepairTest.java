@@ -1,14 +1,16 @@
 package ru.gasworkers.dev.tests.web.orderProcess.repair;
 
 import io.qameta.allure.*;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
+import ru.gasworkers.dev.api.administration.getUserWithAdmin.GetUserWithAdminApi;
 import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
+import ru.gasworkers.dev.api.auth.login.dto.LoginResponseDto;
+import ru.gasworkers.dev.api.auth.user.UserResponseDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
 import ru.gasworkers.dev.api.orders.info.dto.OrdersInfoResponseDto;
 import ru.gasworkers.dev.api.orders.selectMaster.SelectMasterApi;
@@ -25,6 +27,7 @@ import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
+import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
 
@@ -47,6 +50,7 @@ public class HasOfferRepairTest extends BaseApiTest {
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
     private final SelectMasterApi selectMasterApi = new SelectMasterApi();
     private final OrdersInfoApi ordersInfoApi = new OrdersInfoApi();
+    private final GetUserWithAdminApi getUserWithAdminApi = new GetUserWithAdminApi();
     private final String sssrDispatcher1Email = "test_gw_dispatcher_sssr1@rambler.ru";
     private final String sssrDispatcher1Password = "1234";
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
@@ -54,8 +58,10 @@ public class HasOfferRepairTest extends BaseApiTest {
     //dispatcher
     @Browser(role = Role.DISPATCHER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     DispatcherPages dispatcherPages;
+    //master
+    @Browser(role = Role.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
+    MasterPages masterPages;
 
-    @Disabled
     @Test
     @DisplayName("Ремонт - диспетчер сделал предложение")
     void payedRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
@@ -88,6 +94,16 @@ public class HasOfferRepairTest extends BaseApiTest {
                             .statusCode(200);
                 });
             });
+            step("Получение учетных данных  выбранного мастера за  роль администратора", () -> {
+                String tokenAdmin = loginApi.login(LoginRequestDto.asAdmin())
+                        .statusCode(200)
+                        .extract().as(LoginResponseDto.class).getData().getToken();
+                System.out.println("getUserWithAdmin: " + commonFields.getMasterId());
+                UserResponseDto masterDto = getUserWithAdminApi.getUserWithAdmin(tokenAdmin, commonFields.getMasterId())
+                        .statusCode(200)
+                        .extract().as(UserResponseDto.class);
+                commonFields.setMasterEmail(masterDto.getData().getEmail());
+            });
 
             step("клиент заказ на ремонт клиента в состоянии есть отклик СК", () -> {
 
@@ -110,13 +126,20 @@ public class HasOfferRepairTest extends BaseApiTest {
                 clientPages.getLoginPage().open();
                 clientPages.getLoginPage().login(client.getEmail(), "1111");
                 clientPages.getHomePage().checkUrl();
+                clientPages.getHomePage().guide.skipButton();
             });
 
-            step("авторизация Мастера", () -> {
+            step("авторизация Диспетчера", () -> {
                 dispatcherPages.getLoginPage()
                         .open()
                         .login(sssrDispatcher1Email, "1234");
                 dispatcherPages.getHomePage().checkUrl();
+            });
+            step("авторизация Мастера", () -> {
+                masterPages.getLoginPage()
+                        .open()
+                        .login(commonFields.getMasterEmail(), "1234");
+                masterPages.getHomePage().checkUrl();
             });
             step("Test run credentials ", () -> {
                 Allure.addAttachment("Client creds", client.getEmail() + ": " + "1111" + "/");

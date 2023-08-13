@@ -78,6 +78,6 @@ public class HomeMasterPage extends BaseMasterPage{
     }
 
     public void checkUrl() {
-        urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile");
+        urlChecker.urlContains("profile/master");
     }
 }

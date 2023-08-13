@@ -6,14 +6,13 @@ import org.junit.jupiter.api.extension.ExtensionContext;
 import org.openqa.selenium.MutableCapabilities;
 import ru.gasworkers.dev.extension.browser.Browser;
 
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import static com.codeborne.selenide.FileDownloadMode.FOLDER;
 
 public final class DriverFactory {
-       public static SelenideDriver getDriver(Browser annotation, ExtensionContext actualContext) throws MalformedURLException {
+    public static SelenideDriver getDriver(Browser annotation, ExtensionContext actualContext) {
         SelenideConfig config = new SelenideConfig();
         config.baseUrl("https://dev.gasworkers.ru");
 
@@ -24,6 +23,8 @@ public final class DriverFactory {
         config.browserSize(annotation.browserSize());
         config.browserPosition(annotation.browserPosition());
         config.timeout(8000);
+        config.headless(false);
+        config.holdBrowserOpen(false); // check remote
         config.browserCapabilities(capabilities);
 
         MutableCapabilities selenoidCapabilities = new MutableCapabilities();
@@ -31,15 +32,17 @@ public final class DriverFactory {
               selenoidCapabilities.setCapability("enableVNC", true);
               selenoidCapabilities.setCapability("enableVideo", true);
               capabilities.setCapability("selenoid:options", selenoidCapabilities);
-        System.out.println("@DisplayName: " + actualContext.getDisplayName());
-        selenoidCapabilities.setCapability("name", actualContext.getDisplayName());
+        // Selenoid user-friendly instance name
+        String currentRole = String.valueOf(annotation.role());
+        String currentTestInstanceName = currentRole + ": " + actualContext.getDisplayName();
+        System.out.println("browser instances : " + currentTestInstanceName);
+        selenoidCapabilities.setCapability("name", currentTestInstanceName);
         selenoidCapabilities.setCapability("env", new ArrayList<String>() {{
             add("TZ=UTC");
         }});
         selenoidCapabilities.setCapability("labels", new HashMap<String, Object>() {{
             put("manual", "true");
         }});
-
 
         config.browserCapabilities(capabilities);
         config.fileDownload(FOLDER);

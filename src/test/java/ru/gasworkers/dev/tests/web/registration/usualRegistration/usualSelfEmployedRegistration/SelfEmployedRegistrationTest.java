@@ -78,7 +78,7 @@ public class SelfEmployedRegistrationTest extends BaseTest {
             selfEmployedPages.getSuccessfulRegistrationPage().clickForwardButton();
         });
         step("Гид СМЗ", () -> {
-            selfEmployedPages.getHomePage().firstGuide.playSequence(15);
+            selfEmployedPages.getHomePage().firstGuide.playSequenceFirstSEGuide();
         });
     }
 }

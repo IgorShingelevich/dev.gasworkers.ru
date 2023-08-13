@@ -60,7 +60,7 @@ import static io.qameta.allure.Allure.step;
 @Story("save actions OrderId")
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.API)
-public class ActionsRepairApiTest extends BaseApiTest {
+public class ActionsSavedRepairApiTest extends BaseApiTest {
     private final UserApi userApi = new UserApi();
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
@@ -451,8 +451,8 @@ public class ActionsRepairApiTest extends BaseApiTest {
                     OrdersSaveActionsResponseDto expectedResponse = OrdersSaveActionsResponseDto.oneActionResponse();
                     assertResponse(expectedResponse, actualResponse);
                 });
-                step("мастер карточка заказа - убедиться что actions-invoice-issued", () -> {
-                    System.out.println("actionsInvoiceIssuedOrderIdResponseAsMaster");
+                step("мастер карточка заказа - убедиться что actions-saved", () -> {
+                    System.out.println("actionsSavedOrderIdResponseAsMaster");
                     actionsInvoiceIssuedOrderIdResponseAsMaster = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenMaster())
                             .statusCode(200)
                             .extract().as(OrdersIdResponseDto.class);
@@ -460,16 +460,16 @@ public class ActionsRepairApiTest extends BaseApiTest {
                     OrdersIdResponseDto expectedResponse = repairCase.actionsInvoiceIssuedOrderIdAsMasterBGRepair(commonFields);
                     assertResponsePartialNoATExcludeFields(expectedResponse, actionsInvoiceIssuedOrderIdResponseAsMaster, List.of("data.offers"));
                 });
-                step(" клиент карточка последнего заказа - убедиться что actions-invoice-issued", () -> {
-                    System.out.println("actionsInvoiceIssuedLastOrderResponse");
+                step(" клиент карточка последнего заказа - убедиться что actions-saved", () -> {
+                    System.out.println("actionsSavedLastOrderResponse");
                     actionsInvoiceIssuedLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                             .statusCode(200)
                             .extract().as(LastOrderInfoResponseDto.class);
                     LastOrderInfoResponseDto expectedResponse = repairCase.actionsInvoiceIssuedLastOrderInfoBGRepair(commonFields);
                     assertResponsePartialNoAt(expectedResponse, actionsInvoiceIssuedLastOrderResponse);
                 });
-                step("  клиент карточка заказа - убедиться что actions-invoice-issued", () -> {
-                    System.out.println("actionsInvoiceIssuedOrderIdResponseAsClient");
+                step("  клиент карточка заказа - убедиться что actions-saved", () -> {
+                    System.out.println("actionsSavedOrderIdResponseAsClient");
                     actionsInvoiceIssuedOrderIdResponseAsClient = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenClient())
                             .statusCode(200)
                             .extract().as(OrdersIdResponseDto.class);

@@ -79,7 +79,7 @@ public class NewSelfEmployedAccountTest extends BaseTest {
             selfEmployedPages.getSuccessfulRegistrationPage().clickForwardButton();
         });
         step("Гид СМЗ", () -> {
-            selfEmployedPages.getHomePage().firstGuide.playSequence(15);
+            selfEmployedPages.getHomePage().firstGuide.playSequenceFirstSEGuide();
         });
 //        --------------------------------- Ui tests ---------------------------------
         step("Домашняя СМЗ после гида - режим карта и режим мастер", () -> {

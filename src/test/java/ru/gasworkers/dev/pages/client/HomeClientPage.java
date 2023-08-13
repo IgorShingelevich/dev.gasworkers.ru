@@ -5,9 +5,8 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClientComponent;
-import ru.gasworkers.dev.pages.components.clientComponent.guideComponent.FirstMaintenanceGuideComponent;
-import ru.gasworkers.dev.pages.components.clientComponent.guideComponent.FirstRepairGuideComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.PersonSummaryComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.guideComponent.PlayGuideComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.notifications.conferenceNotification.ConferenceNotificationSharedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
@@ -23,8 +22,7 @@ public final class HomeClientPage extends BaseClientPage {
     public final ClientActionsBlockComponent actionsBlock;
     public final LastOrderProfileClientComponent lastOrderComponent;
     public final PersonSummaryComponent personSummaryComponent;
-    public final FirstMaintenanceGuideComponent firstMaintenanceGuide;
-    public final FirstRepairGuideComponent firstRepairGuide;
+    public final PlayGuideComponent guide;
     public final ConferenceNotificationSharedComponent conferenceNotification;
 
 
@@ -34,8 +32,7 @@ public final class HomeClientPage extends BaseClientPage {
         actionsBlock = new ClientActionsBlockComponent(browser);
         lastOrderComponent = new LastOrderProfileClientComponent(browser);
         personSummaryComponent = new PersonSummaryComponent(browser);
-        firstMaintenanceGuide = new FirstMaintenanceGuideComponent(browser);
-        firstRepairGuide = new FirstRepairGuideComponent(browser);
+        guide = new PlayGuideComponent(browser);
         conferenceNotification = new ConferenceNotificationSharedComponent(browser);
     }
 
@@ -176,6 +173,6 @@ public final class HomeClientPage extends BaseClientPage {
     }
 
     public void checkUrl() {
-        urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client");
+        urlChecker.urlContains("profile/client");
     }
 }

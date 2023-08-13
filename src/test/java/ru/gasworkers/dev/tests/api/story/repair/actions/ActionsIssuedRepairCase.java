@@ -8,8 +8,9 @@ import ru.gasworkers.dev.exception.EnumNotSupportedException;
 import java.util.Collections;
 import java.util.List;
 
+@Getter
 @AllArgsConstructor
-public enum ActionsPriceRepairCase {
+public enum ActionsIssuedRepairCase {
     UI_CALCULATION("UI calculation"),
     NEGATIVE_PRICE("Negative price"),
     NEGATIVE_QTY("Negative qty"),
@@ -23,7 +24,6 @@ public enum ActionsPriceRepairCase {
     NULL_ACTION("Null action"),
     EMPTY_ACTION("Empty action");
 
-    @Getter
     private final String description;
 
     private static OrdersSaveActionsRequestDto actionRequest(Integer qty, Double price, Integer orderId) {

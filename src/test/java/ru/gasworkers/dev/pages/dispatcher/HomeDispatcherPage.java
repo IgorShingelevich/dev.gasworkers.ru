@@ -172,6 +172,6 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
 
 
     public void checkUrl() {
-        urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/dispatcher");
+        urlChecker.urlContains("profile/dispatcher");
     }
 }

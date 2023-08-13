@@ -1,17 +1,16 @@
 package ru.gasworkers.dev.pages.selfEmployed;
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.guideComponent.FirstSelfEmployedGuideComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.HeaderSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.mapMode.ModeDispatcherHomeSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.masterMode.ModeMasterHomeSelfEmployedComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.guideComponent.PlayGuideComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.HeaderSelfEmployedComponent;
 
 public class HomeSelfEmployedPage extends BaseSelfEmployedPage{
     public final ModeDispatcherHomeSelfEmployedComponent modeDispatcher;
-            ;
     public final ModeMasterHomeSelfEmployedComponent modeMaster;
     public final HeaderSelfEmployedComponent header;
-    public final FirstSelfEmployedGuideComponent firstGuide;
+    public final PlayGuideComponent firstGuide;
 
 
 
@@ -20,7 +19,7 @@ public class HomeSelfEmployedPage extends BaseSelfEmployedPage{
         header = new HeaderSelfEmployedComponent(browser);
         modeDispatcher = new ModeDispatcherHomeSelfEmployedComponent(browser);
         modeMaster = new ModeMasterHomeSelfEmployedComponent(browser);
-        firstGuide = new FirstSelfEmployedGuideComponent(browser);
+        firstGuide = new PlayGuideComponent(browser);
     }
 
 

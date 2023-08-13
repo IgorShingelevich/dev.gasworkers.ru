@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 public class CommonFieldsRepairDto {
     private String tokenClient, tokenDispatcher, payment0Url, payment1Url, payment2Url, tokenMaster,
-            orderNumber, clientEmail, clientRefererCode, approveDate, selectedDate;
+            orderNumber, clientEmail, masterEmail, clientRefererCode, approveDate, selectedDate;
     private Long clientPhone;
     private Integer clientNotificationsCount, serviceId, dispatcherId, masterId, orderId,
             offerIdBeforePayment,

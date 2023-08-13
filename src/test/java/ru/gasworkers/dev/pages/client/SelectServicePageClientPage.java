@@ -1,27 +1,21 @@
 package ru.gasworkers.dev.pages.client;
 
 import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.Selenide;
-import ru.gasworkers.dev.model.browser.RoleBrowser;
-
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import ru.gasworkers.dev.pages.components.clientComponent.guideComponent.FirstMaintenanceGuideComponent;
+import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.clientComponent.OffersClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.SpinnerComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.guideComponent.PlayGuideComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
-import java.sql.SQLOutput;
 import java.time.Duration;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static com.codeborne.selenide.Condition.*;
-import static io.qameta.allure.Allure.step;
-
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.startsWith;
 
 public class SelectServicePageClientPage extends BaseClientPage {
 
@@ -29,7 +23,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
     public final StepperComponent stepper;
     public final SpinnerComponent spinner;
     public final OffersClientComponent offers;
-    public final FirstMaintenanceGuideComponent guideFirst;
+    public final PlayGuideComponent guide;
 
 
     public SelectServicePageClientPage(RoleBrowser browser) {
@@ -38,7 +32,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
         stepper = new StepperComponent(browser);
         spinner = new SpinnerComponent(browser);
         offers = new OffersClientComponent(browser);
-        guideFirst = new FirstMaintenanceGuideComponent(browser);
+        guide = new PlayGuideComponent(browser);
     }
 
     private final String
