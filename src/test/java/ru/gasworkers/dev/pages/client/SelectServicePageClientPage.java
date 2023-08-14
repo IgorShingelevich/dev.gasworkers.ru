@@ -4,7 +4,7 @@ import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.clientComponent.OffersClientComponent;
+import ru.gasworkers.dev.pages.components.clientComponent.OffersCounterClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.SpinnerComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.guideComponent.PlayGuideComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
@@ -22,7 +22,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
     public final FocusHeaderComponent header;
     public final StepperComponent stepper;
     public final SpinnerComponent spinner;
-    public final OffersClientComponent offers;
+    public final OffersCounterClientComponent offers;
     public final PlayGuideComponent guide;
 
 
@@ -31,7 +31,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
         header = new FocusHeaderComponent(browser);
         stepper = new StepperComponent(browser);
         spinner = new SpinnerComponent(browser);
-        offers = new OffersClientComponent(browser);
+        offers = new OffersCounterClientComponent(browser);
         guide = new PlayGuideComponent(browser);
     }
 
@@ -159,6 +159,12 @@ public class SelectServicePageClientPage extends BaseClientPage {
                 }
             }
             return null;
+        });
+    }
+
+    public void checkUrl() {
+        stepWithRole("Убедиться, что url страницы соответствует шаблону", () -> {
+            urlChecker.urlContains("select-service");
         });
     }
 }

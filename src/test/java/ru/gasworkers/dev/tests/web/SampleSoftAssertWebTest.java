@@ -19,6 +19,7 @@ public class SampleSoftAssertWebTest extends BaseTest {
 
     Executable case1 = () -> {
         clientPages.getLandingPage().open();
+//        clientPages.getDriverManager().switchToTab(0);
         clientPages.getLandingPage().wrongButton();
     };
 

@@ -3,11 +3,14 @@ package ru.gasworkers.dev.pages.client;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import lombok.Builder;
+import lombok.Data;
+import ru.gasworkers.dev.api.orders.info.dto.OrdersInfoResponseDto;
 import ru.gasworkers.dev.model.Doc;
 import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.clientComponent.OffersClientComponent;
+import ru.gasworkers.dev.pages.components.clientComponent.OffersCounterClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
@@ -24,26 +27,25 @@ public class OrderCardClientPage extends BaseClientPage {
     public final ClientSidebarComponent sidebar;
     public final ClientActionsBlockComponent actionsBlock;
     public final StepperComponent stepper;
-    public final OffersClientComponent offers;
+    public final OffersCounterClientComponent offersCounter;
     public final NavCommonTabOrderCardPageComponent commonTab;
     public final NavInfoMasterTabOrderCardClientPageComponent infoMasterTab;
     public final NavDocsTabOrderCardPageComponent docsTab;
+    private final String
+            ORDER_CARD_TITLE = "Заказ №",
+            COMPLETE_ORDER_INFO = "Договор техобслуживания ВДГО необходимо предоставить в вашу газораспределительную компанию. Оставьте отзыв на работу мастера и вы сможете передать договор в вашу газораспределительную компанию",
+            SUBMIT_AGREEMENT_SUBTITLE = "Кнопка «передать договор» в газораспределительную компанию будет активна после размещения отзыва";
 
     public OrderCardClientPage (RoleBrowser browser) {
         super(browser);
         sidebar = new ClientSidebarComponent(browser);
         actionsBlock = new ClientActionsBlockComponent(browser);
         stepper = new StepperComponent(browser);
-        offers = new OffersClientComponent(browser);
+        offersCounter = new OffersCounterClientComponent(browser);
         commonTab = new NavCommonTabOrderCardPageComponent(browser);
         infoMasterTab = new NavInfoMasterTabOrderCardClientPageComponent(browser);
         docsTab = new NavDocsTabOrderCardPageComponent(browser);
     }
-
-    private final String
-            LAST_ORDER_CARD_TITLE = "Заказ №",
-            COMPLETE_ORDER_INFO = "Договор техобслуживания ВДГО необходимо предоставить в вашу газораспределительную компанию. Оставьте отзыв на работу мастера и вы сможете передать договор в вашу газораспределительную компанию",
-            SUBMIT_AGREEMENT_SUBTITLE = "Кнопка «передать договор» в газораспределительную компанию будет активна после размещения отзыва";
 
     SelenideElement
             titleNumberLocator = driver.$("h1.h3.mb-2").as(" Заголовок Карточки заказа"),
@@ -66,14 +68,12 @@ public class OrderCardClientPage extends BaseClientPage {
     ElementsCollection
             orderDetailsCollection = driver.$$("div.order-details-item").as("Информация о заказе");
 
-
     public OrderCardClientPage checkFinishLoading() {
         titleNumberLocator.shouldBe(visible, Duration.ofSeconds(30));
-        String orderNumber = titleNumberLocator.getText().substring(LAST_ORDER_CARD_TITLE.length());
+        String orderNumber = titleNumberLocator.getText().substring(ORDER_CARD_TITLE.length());
         stepWithRole("Убедиться, что Карточка Заказа: " + orderNumber + " загружена", () -> {
-            titleNumberLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(LAST_ORDER_CARD_TITLE));
+            titleNumberLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(ORDER_CARD_TITLE));
             orderDetailsBlockLocator.shouldBe(visible, Duration.ofSeconds(20));
-            System.out.println("orderNumber: " + orderNumber);
         });
         return this;
     }
@@ -114,7 +114,7 @@ public class OrderCardClientPage extends BaseClientPage {
             stepWithRole("Вкладка Описание заказа", () -> {
                 commonTab.orderStatus.currentStatus(orderStatus);
                 commonTab.orderDetails.currentType(orderType);
-                offers.noOffers();
+                offersCounter.noOffers();
                 stepWithRole("Убедиться, что  в Карточке заказа: " + orderStatus + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
                     toMapButtonLocator.shouldBe(visible);
                     cancelOrderButtonLocator.shouldBe(visible);
@@ -137,7 +137,7 @@ public class OrderCardClientPage extends BaseClientPage {
             stepWithRole("Вкладка Описание заказа", () -> {
                 commonTab.orderStatus.currentStatus(orderStatus);
                 commonTab.orderDetails.currentType(orderType);
-                offers.haveOffers(offersCount);
+                offersCounter.haveOffers(offersCount);
                 stepWithRole("Убедиться, что  в Карточке заказа: " + orderStatus + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
                     toMapButtonLocator.shouldBe(visible);
                     cancelOrderButtonLocator.shouldBe(visible);
@@ -289,4 +289,32 @@ public class OrderCardClientPage extends BaseClientPage {
     }
 
 
+    public void checkHasOfferRepairState(OrdersInfoResponseDto currentOrderInfoDto) {
+        OrderInfoFields orderFields = OrderInfoFields.builder()
+                .title(ORDER_CARD_TITLE)
+                .orderNumber(currentOrderInfoDto.getData().getNumber())
+//                .status(currentOrderInfoDto.getData().getStatus().getTitle())
+//                .clientDetails(currentOrderInfoDto.getData().getClientObject().getFullName())
+                .serviceType("Ремонт")
+                .address(currentOrderInfoDto.getData().getClientObject().getAddress().getFull())
+                .equipment(currentOrderInfoDto.getData().getEquipments().get(0).getTitle())
+                .build();
+    }
+
+    @Data
+    @Builder
+    private static class OrderInfoFields {
+        private final String title;
+        private final String orderNumber;
+        private final String status;
+        private final String paymentDetails;
+        private final String serviceType;
+        private final String clientDetails;
+        private final String equipment;
+        private final String address;
+        private final String date;
+        private final String time;
+        private final String description;
+        //todo stepper
+    }
 }

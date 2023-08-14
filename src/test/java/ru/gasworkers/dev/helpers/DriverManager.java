@@ -1,6 +1,5 @@
 package ru.gasworkers.dev.helpers;
 
-import com.codeborne.selenide.WebDriverRunner;
 import io.qameta.allure.Step;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 
@@ -13,6 +12,7 @@ public final class DriverManager {
     public DriverManager(RoleBrowser roleBrowser) {
         this.roleBrowser = roleBrowser;
     }
+
 
     public void back() {
         step(roleBrowser.getRole() + ": back", () ->
@@ -39,14 +39,15 @@ public final class DriverManager {
     }
 
     public void switchToTab(int index) {
-        step(roleBrowser.getRole() + ": switch to tab", () ->
-                roleBrowser.getDriver().switchTo().window(index));
+        step(roleBrowser.getRole() + ": switch to tab", () -> {
+            roleBrowser.getDriver().driver().switchTo().frame(index);
+        });
     }
 
     // close current tab .closeWindow
-    public void closeWindow() {
-        step(roleBrowser.getRole() + ": close tab", () ->
-                WebDriverRunner.closeWindow());
+    public void closeTab() {
+        roleBrowser.getDriver().driver().close();
+
     }
 
     @Step("Add screenshot to {attachName}")
@@ -62,4 +63,6 @@ public final class DriverManager {
         step(roleBrowser.getRole() + ": close", () ->
                 roleBrowser.getDriver().close());
     }
+
+
 }

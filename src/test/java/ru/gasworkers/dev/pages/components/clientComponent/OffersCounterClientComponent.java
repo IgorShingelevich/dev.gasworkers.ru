@@ -9,39 +9,39 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 
-public class OffersClientComponent extends BaseComponent {
+public class OffersCounterClientComponent extends BaseComponent {
     public final UrlCheckerSharedComponent urlChecker;
-    public OffersClientComponent(RoleBrowser browser) {
+
+    SelenideElement
+            offersCounterComponentLocator = driver.$("div.map-sticky__header--offers").as("Блок с предложениями");
+
+    public OffersCounterClientComponent(RoleBrowser browser) {
         super(browser);
         urlChecker = new UrlCheckerSharedComponent(browser);
     }
 
-    SelenideElement
-            offersComponentLocator = driver.$("div.map-sticky__header--offers").as("Блок с предложениями");
-
-
     public void noOffers() {
         stepWithRole("Убедиться, что нет предложений", () -> {
-            offersComponentLocator.shouldHave(text("Нет предложений"), Duration.ofSeconds(10));
+            offersCounterComponentLocator.shouldHave(text("Нет предложений"), Duration.ofSeconds(10));
         });
     }
 
     public void haveOffers(Integer count) {
         stepWithRole("Убедиться, что есть " + count + " предложений", () -> {
-            offersComponentLocator.shouldHave(partialText(count.toString()), Duration.ofSeconds(10));
+            offersCounterComponentLocator.shouldHave(partialText(count.toString()), Duration.ofSeconds(10));
         });
     }
 
     public void clickOffers() {
         stepWithRole("Нажать на компонент предложения", () -> {
-            offersComponentLocator.shouldBe(visible, Duration.ofSeconds(10)).click();
+            offersCounterComponentLocator.shouldBe(visible, Duration.ofSeconds(10)).click();
             urlChecker.urlContains("select-service");
         });
     }
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что компонент предложения загрузился", () -> {
-            offersComponentLocator.shouldBe(visible);
+            offersCounterComponentLocator.shouldBe(visible);
         });
     }
 }

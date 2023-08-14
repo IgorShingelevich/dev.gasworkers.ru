@@ -134,7 +134,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
                 //check notification - orderPublished
             });
             String currentOrderNumber = clientPages.getOrderCardPage().getOrderNumber();
-            clientPages.getOrderCardPage().offers.clickOffers();
+            clientPages.getOrderCardPage().offersCounter.clickOffers();
             clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
             return currentOrderNumber;
         });
@@ -163,7 +163,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
                 clientPages.getOrderCardPage().popUp.close();
                 clientPages.getOrderCardPage().checkReviewOffersState(OrderStatus.PUBLISHED, OrderType.MAINTENANCE, 1);
                 //go back to order card and check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
-                clientPages.getOrderCardPage().offers.clickOffers();
+                clientPages.getOrderCardPage().offersCounter.clickOffers();
                 clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
             });
             step("Клиент рассматривает предложение от Диспетчера СК", () -> {

@@ -107,6 +107,20 @@ public class LandingPage extends BasePage {
         });
     }
 
+    public void close() {
+        stepWithRole("Закрыть главную страницу", () -> {
+            driver.close();
+        });
+    }
+
+    public void swichToTab(int tabNumber) {
+        stepWithRole("Переключиться на вкладку " + tabNumber, () -> {
+            driver.switchTo().window(tabNumber);
+        });
+    }
+
+
+
     /*public LandingPage clickUserRepairButton() {
     stepWithRole("Нажать кнопку Ремонт", () -> {
     repairButtonLocator.shouldHave(text("Ремонт")).click();

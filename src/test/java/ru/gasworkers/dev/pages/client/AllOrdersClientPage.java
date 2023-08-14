@@ -7,8 +7,7 @@ import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.action
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 
 import static com.codeborne.selenide.CollectionCondition.size;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 
 public class AllOrdersClientPage extends BaseClientPage {
 
@@ -54,7 +53,7 @@ public class AllOrdersClientPage extends BaseClientPage {
 
     public AllOrdersClientPage orderByNumber(String orderNumber) {
         stepWithRole("Открыть заказ № " + orderNumber, () -> {
-            itemNumberCollection.findBy(text(orderNumber)).click();
+            itemNumberCollection.findBy(partialText(orderNumber)).click();
         });
         return this;
     }
