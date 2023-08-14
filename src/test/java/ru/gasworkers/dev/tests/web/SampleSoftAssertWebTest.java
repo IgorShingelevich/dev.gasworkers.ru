@@ -43,7 +43,7 @@ public class SampleSoftAssertWebTest extends BaseTest {
 
     @Test
     @DisplayName("sample softAssert tests")
-    public void allPositiveWebTests() {
+    public void softAssertWebTests() {
         assertAll(case1, case2, case3, case4);
     }
 }
