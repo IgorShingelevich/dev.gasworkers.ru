@@ -20,25 +20,21 @@ public class SampleSoftAssertWebTest extends BaseTest {
     Executable case1 = () -> {
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().wrongButton();
-        assert true : "sample web test 1 - negative";
     };
 
     Executable case2 = () -> {
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
-        assert true : "sample web test 2 - positive";
     };
 
     Executable case3 = () -> {
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().checkFinishLoading();
-        assert true : "sample web test 3 - positive";
     };
 
     Executable case4 = () -> {
         clientPages.getLandingPage().open();
         clientPages.getLandingPage().wrongButton();
-        assert true : "sample web test 4 - negative";
     };
 
     @Test
