@@ -27,12 +27,28 @@ public final class DriverFactory {
         config.holdBrowserOpen(false); // check remote
         config.browserCapabilities(capabilities);
 
+        if (isLocalExecution()) {
+            // Handle local execution settings if needed
+        } else {
+            configureRemoteCapabilities(config, annotation, actualContext);
+        }
+
+        config.fileDownload(FOLDER);
+        return new SelenideDriver(config);
+    }
+
+    private static boolean isLocalExecution() {
+        String localExecution = System.getenv("LOCAL_EXECUTION");
+        return localExecution != null && localExecution.equalsIgnoreCase("true");
+    }
+
+    private static void configureRemoteCapabilities(SelenideConfig config, Browser annotation, ExtensionContext actualContext) {
+        MutableCapabilities capabilities = config.browserCapabilities();
+
         MutableCapabilities selenoidCapabilities = new MutableCapabilities();
-              config.remote("http://tests.gasworkers.ru:4444/wd/hub");
-              selenoidCapabilities.setCapability("enableVNC", true);
-              selenoidCapabilities.setCapability("enableVideo", true);
-              capabilities.setCapability("selenoid:options", selenoidCapabilities);
-        // Selenoid user-friendly instance name
+        selenoidCapabilities.setCapability("enableVNC", true);
+        selenoidCapabilities.setCapability("enableVideo", true);
+
         String currentRole = String.valueOf(annotation.role());
         String currentTestInstanceName = currentRole + ": " + actualContext.getDisplayName();
         System.out.println("browser instances : " + currentTestInstanceName);
@@ -44,11 +60,9 @@ public final class DriverFactory {
             put("manual", "true");
         }});
 
-        config.browserCapabilities(capabilities);
-        config.fileDownload(FOLDER);
-        return new SelenideDriver(config);
+        capabilities.setCapability("selenoid:options", selenoidCapabilities);
+        config.remote("http://tests.gasworkers.ru:4444/wd/hub");
     }
-
 }
 
 /*private static final Object driverCreationLock = new Object();
