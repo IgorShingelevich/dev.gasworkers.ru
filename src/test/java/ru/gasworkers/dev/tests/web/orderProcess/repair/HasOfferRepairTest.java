@@ -64,7 +64,7 @@ public class HasOfferRepairTest extends BaseApiTest {
 
     @Test
     @DisplayName("Ремонт - диспетчер сделал предложение")
-    void payedRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+    void hasOfferRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
         CommonFieldsRepairDto commonFields = new CommonFieldsRepairDto();
         step("api precondition", () -> {
             commonFields.setTokenClient(loginApi.getTokenThrough(client));

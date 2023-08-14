@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Tag(AllureTag.SAMPLE_API_TEST)
 public class SampleApiTest extends BaseApiTest {
     @Test
-    @DisplayName("sample api test - positive")
+    @DisplayName("sample api test 1 - positive")
     void positiveApiTest() {
         assertThat(1).isEqualTo(1);
     }
@@ -21,7 +21,6 @@ public class SampleApiTest extends BaseApiTest {
     void positiveApiTest2() {
         assertThat(1).isEqualTo(1);
     }
-
 
 
 }
