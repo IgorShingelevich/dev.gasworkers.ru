@@ -1,7 +1,7 @@
 package ru.gasworkers.dev.tests.web.orderProcess.repair;
 
 import lombok.AllArgsConstructor;
-import ru.gasworkers.dev.api.orders.info.dto.OrdersInfoResponseDto;
+import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.pages.client.SelectServicePageClientPage;
 import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClientComponent;
@@ -24,14 +24,14 @@ public enum StateRepair {
     private final String state;
 
 
-    public void checkLastOrderComponent(LastOrderProfileClientComponent page, LastOrderInfoResponseDto currentOrderInfoDto) {
+    public void checkLastOrderComponent(LastOrderProfileClientComponent page, LastOrderInfoResponseDto dto) {
         String
-                orderNumber = currentOrderInfoDto.getData().getNumber(),
+                orderNumber = dto.getData().getNumber(),
                 serviceType = "Ремонт",
-                address = currentOrderInfoDto.getData().getAddress(),
-                equipments0 = currentOrderInfoDto.getData().getEquipments().get(0).getComputedTitle();
+                address = dto.getData().getAddress(),
+                equipments0 = dto.getData().getEquipments().get(0).getComputedTitle();
 //        todo time and stepper
-        Integer offersCount = currentOrderInfoDto.getData().getOffersCount();
+        Integer offersCount = dto.getData().getOffersCount();
 
         switch (this) {
             case PUBLISHED:
@@ -54,13 +54,51 @@ public enum StateRepair {
         }
     }
 
-    public void checkSelectServicePage(SelectServicePageClientPage selectServicePageClientPage, OrdersInfoResponseDto hasOfferOrderInfo) {
+    public void checkSelectServicePage(SelectServicePageClientPage page, SuggestServicesResponseDto dto) {
+        int offerIndex = 0;
+        int ratingCompany = (int) Math.round(Double.parseDouble(dto.getData().services.get(0).getRating()));
+        int ratingMaster = (int) Math.round(Double.parseDouble(dto.getData().services.get(0).getMaster().getRating()));
+
+// Apply custom rounding logic for ratingCompany
+        double ratingCompanyDouble = Double.parseDouble(dto.getData().services.get(0).getRating());
+        if (ratingCompanyDouble >= 4.5 && ratingCompanyDouble < 5) {
+            ratingCompany = 5;
+            //todo computedRatingStars
+        }
+
+// Apply custom rounding logic for ratingMaster
+        double ratingMasterDouble = Double.parseDouble(dto.getData().services.get(0).getMaster().getRating());
+        if (ratingMasterDouble >= 4.5 && ratingMasterDouble < 5) {
+            ratingMaster = 5;
+            //todo computedRatingStars
+        }
+        String visitPrice = dto.getData().getServices().get(offerIndex).getFirstAccept().toString(),
+                fullMasterName = dto.getData().getServices().get(offerIndex).getMaster().getFullName(),
+                masterAvatar = dto.getData().getServices().get(offerIndex).getMaster().getAvatar(),
+                masterReviewCount = dto.getData().getServices().get(offerIndex).getMaster().getReviewsAsTargetCount().toString(),
+                masterCompletedOrders = dto.getData().getServices().get(offerIndex).getMaster().getCountCompletedOrders().toString();
+
+
+        //todo offerCount
         switch (this) {
             case PUBLISHED:
-                selectServicePageClientPage.checkAmountOfferBox(0);
+                page.offersCounter.noOffers();
+                page.companyBoxRepair.checkNoOffers();
                 break;
             case HAS_OFFER:
-                selectServicePageClientPage.checkAmountOfferBox(hasOfferOrderInfo.getData().getOffersCount());
+                page.offersCounter.amount(page.companyBoxRepair.getAmountOfferBox());
+                page.companyBoxRepair.checkBoxTitle(offerIndex);
+                page.companyBoxRepair.checkGeoTag(offerIndex);
+                page.companyBoxRepair.checkRatingCompany(offerIndex, ratingCompany);
+                page.companyBoxRepair.checkAvatarCompany(offerIndex);
+                page.companyBoxRepair.checkVisitPrice(offerIndex, visitPrice);
+                page.companyBoxRepair.checkNotificationPaymentAfterArrival(offerIndex);
+                page.companyBoxRepair.checkFullNameMaster(offerIndex, fullMasterName);
+                page.companyBoxRepair.checkAvatarMaster(offerIndex, masterAvatar);
+                page.companyBoxRepair.checkRatingMaster(offerIndex, ratingMaster);
+                page.companyBoxRepair.checkMasterReviewCount(offerIndex, masterReviewCount);
+                page.companyBoxRepair.checkMasterCompletedOrders(offerIndex, masterCompletedOrders);
+                page.companyBoxRepair.checkButtonActive(offerIndex);
                 break;
             // ... other cases ...
         }

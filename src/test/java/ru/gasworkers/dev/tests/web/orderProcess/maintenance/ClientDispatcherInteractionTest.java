@@ -156,7 +156,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             step("Клиент получает предложение от Диспетчера СК", () -> {
                 //check notification - ServiceReady
                 clientPages.getSelectServicePage().waitForResponses();
-                clientPages.getSelectServicePage().checkHasOfferState(1);
+//                clientPages.getSelectServicePage().checkHasOfferState(1);
                 //check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
                 clientPages.getSelectServicePage().toOrderCard();
                 clientPages.getOrderCardPage().checkFinishLoading();

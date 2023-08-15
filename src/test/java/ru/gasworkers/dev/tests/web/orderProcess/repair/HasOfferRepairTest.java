@@ -14,6 +14,8 @@ import ru.gasworkers.dev.api.auth.user.UserResponseDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
 import ru.gasworkers.dev.api.orders.info.dto.OrdersInfoResponseDto;
 import ru.gasworkers.dev.api.orders.selectMaster.SelectMasterApi;
+import ru.gasworkers.dev.api.orders.suggestedServices.SuggestedServicesApi;
+import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoApi;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.api.users.companies.masters.CompaniesMastersApi;
@@ -38,10 +40,13 @@ import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 
 import static io.qameta.allure.Allure.step;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.REPAIR)
@@ -56,6 +61,7 @@ public class HasOfferRepairTest extends BaseApiTest {
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
     private final SelectMasterApi selectMasterApi = new SelectMasterApi();
     private final OrdersInfoApi ordersInfoApi = new OrdersInfoApi();
+    private final SuggestedServicesApi suggestedServicesApi = new SuggestedServicesApi();
     private final GetUserWithAdminApi getUserWithAdminApi = new GetUserWithAdminApi();
     private final String sssrDispatcher1Email = "test_gw_dispatcher_sssr1@rambler.ru";
     private final String sssrDispatcher1Password = "1234";
@@ -70,6 +76,7 @@ public class HasOfferRepairTest extends BaseApiTest {
 
     LastOrderInfoResponseDto hasOfferLastOrderInfo;
     OrdersInfoResponseDto hasOfferOrderInfo;
+    SuggestServicesResponseDto suggestedServiceResponse;
 
 
     @Test
@@ -145,6 +152,22 @@ public class HasOfferRepairTest extends BaseApiTest {
                             .extract().as(OrdersInfoResponseDto.class);
                     commonFields.setOfferIdHasOfferClient(hasOfferOrderInfo.getData().getOffer().getId());
                 });
+                step("клиент получает список доступных предложений", () -> {
+                    suggestedServiceResponse = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
+                            .statusCode(200)
+                            .extract().as(SuggestServicesResponseDto.class);
+                    List<SuggestServicesResponseDto.Service> services = suggestedServiceResponse.getData().getServices();
+                    // Filter companies with non-null prices
+                    List<SuggestServicesResponseDto.Service> filteredServices = new ArrayList<>();
+                    for (SuggestServicesResponseDto.Service c : services) {
+                        if (c.getPrice() != null) {
+                            filteredServices.add(c);
+                        }
+                    }
+                    assertThat(filteredServices).isNotEmpty();
+                    commonFields.setServiceId(filteredServices.get(0).getId());
+                    commonFields.setPossibleOfferId(filteredServices.get(0).getOfferId());
+                });
             });
         });
 
@@ -156,7 +179,6 @@ public class HasOfferRepairTest extends BaseApiTest {
                 clientPages.getHomePage().checkUrl();
                 clientPages.getHomePage().guide.skipButton();
             });
-
             step("авторизация Диспетчера", () -> {
                 dispatcherPages.getLoginPage()
                         .open()
@@ -193,13 +215,13 @@ public class HasOfferRepairTest extends BaseApiTest {
             };
             Consumer<SoftAssert> case3 = softAssert -> {
                 step("клиент страница выбора услуги", () -> {
-                    clientPages.getSelectServicePage().open();
                     clientPages.getSelectServicePage().checkFinishLoadingRepair();
-                    clientPages.getSelectServicePage().checkState(StateRepair.HAS_OFFER, hasOfferOrderInfo);
+                    clientPages.getSelectServicePage().checkState(StateRepair.HAS_OFFER, suggestedServiceResponse);
                 });
-            assertAll(Arrays.asList(case1, case2));
-        })
-        }
+            };
+            assertAll(Arrays.asList(case1, case2, case3));
+        });
+    }
 }
 
      /*step("клиент карточка заказа -  есть отклик СК", () -> {

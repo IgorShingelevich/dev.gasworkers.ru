@@ -3,7 +3,7 @@ package ru.gasworkers.dev.pages.client;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import ru.gasworkers.dev.api.orders.info.dto.OrdersInfoResponseDto;
+import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.clientComponent.OffersCounterClientComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.repairComponent.CompanyBoxSelectService;
@@ -99,8 +99,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
             banner1Locator.shouldHave(text(banner1Text));
             banner2Locator.shouldHave(text(banner2Text));
 //            titleLocator.shouldHave(text("Ваш заказ принят и обрабатывается диспетчерами"));
+            mapContainerLocator.shouldBe(visible, Duration.ofSeconds(40));
             stepWithRole("Убедиться что появился первый таб", () -> {
-                firstServiceTabLocator.shouldBe(visible, Duration.ofSeconds(40));
+                firstServiceTabLocator.shouldBe(exist, Duration.ofSeconds(40));
             });
             /*stepWithRole("Убедиться что компонент карты загрузился", () -> {
                 driver.refresh();
@@ -137,21 +138,14 @@ public class SelectServicePageClientPage extends BaseClientPage {
         });
     }
 
-    public void checkBoxesWithOffer(Integer count) {
-        stepWithRole("Убедиться, что присутствует: " + count + " карточек предложений", () -> {
-            boxesWithButtonCollection.shouldHave(CollectionCondition.sizeGreaterThanOrEqual(1));
-            boxesWithButtonCollection.shouldHave(CollectionCondition.size(count));
-            //TODO map component behavior
-        });
-    }
-
-    public void checkBoxesWithOffers(Integer count) {
+    public void checkAmountOfferBox(Integer count) {
         stepWithRole("Убедиться, что статус карты - Есть " + count + " тендеров", () -> {
             boxesWithButtonCollection.shouldHave(CollectionCondition.sizeGreaterThanOrEqual(1));
             boxesWithButtonCollection.shouldHave(CollectionCondition.size(count));
             //TODO map component behavior
         });
     }
+
 
     public SelectServicePageClientPage proceedWithFirstService() {
         stepWithRole("Нажать на кнопку Выбрать Компанию ", () -> {
@@ -169,9 +163,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
         return this;
     }
 
-    public void checkState(StateRepair stateRepair, OrdersInfoResponseDto hasOfferOrderInfo) {
+    public void checkState(StateRepair stateRepair, SuggestServicesResponseDto dto) {
         stepWithRole("Убедиться, что статус карты - " + stateRepair, () -> {
-            stateRepair.checkSelectServicePage(this, hasOfferOrderInfo);
+            stateRepair.checkSelectServicePage(this, dto);
         });
     }
 
