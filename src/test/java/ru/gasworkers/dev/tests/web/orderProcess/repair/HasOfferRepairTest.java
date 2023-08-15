@@ -186,14 +186,20 @@ public class HasOfferRepairTest extends BaseApiTest {
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
-                step("клиент карточка последнего заказа -  есть отклик СК", () -> {
-                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-                    clientPages.getHomePage().lastOrderComponent.checkState(StateRepair.HAS_OFFER, hasOfferLastOrderInfo);
+                step("клиент карточка заказа редирект на карту", () -> {
+                    clientPages.getHomePage().lastOrderComponent.open();
+                    clientPages.getSelectServicePage().checkUrl();
                 });
             };
+            Consumer<SoftAssert> case3 = softAssert -> {
+                step("клиент страница выбора услуги", () -> {
+                    clientPages.getSelectServicePage().open();
+                    clientPages.getSelectServicePage().checkFinishLoadingRepair();
+                    clientPages.getSelectServicePage().checkState(StateRepair.HAS_OFFER, hasOfferOrderInfo);
+                });
             assertAll(Arrays.asList(case1, case2));
-        });
-    }
+        })
+        }
 }
 
      /*step("клиент карточка заказа -  есть отклик СК", () -> {

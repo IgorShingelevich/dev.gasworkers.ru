@@ -143,7 +143,7 @@ class ClientDispatcherInteractionStatesTest extends BaseTest {
             });
             String currentOrderNumber = clientPages.getOrderCardPage().getOrderNumber();
             clientPages.getOrderCardPage().offersCounter.clickOffers();
-            clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
+            clientPages.getSelectServicePage().checkFinishLoadingMaintenance();
             return currentOrderNumber;
         });
 
@@ -165,7 +165,7 @@ class ClientDispatcherInteractionStatesTest extends BaseTest {
             step("Клиент получает предложение от Диспетчера СК", () -> {
                 //check notification - ServiceReady
                 clientPages.getSelectServicePage().waitForResponses();
-                clientPages.getSelectServicePage().checkResponseState(1);
+                clientPages.getSelectServicePage().checkHasOfferState(1);
                 //check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
                 clientPages.getSelectServicePage().toOrderCard();
                 clientPages.getOrderCardPage().checkFinishLoading();
@@ -173,7 +173,7 @@ class ClientDispatcherInteractionStatesTest extends BaseTest {
                 clientPages.getOrderCardPage().checkReviewOffersState(OrderStatus.PUBLISHED, OrderType.MAINTENANCE, 1);
                 //go back to order card and check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
                 clientPages.getOrderCardPage().offersCounter.clickOffers();
-                clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
+                clientPages.getSelectServicePage().checkFinishLoadingMaintenance();
             });
             step("Клиент рассматривает предложение от Диспетчера СК", () -> {
                 // find on the map

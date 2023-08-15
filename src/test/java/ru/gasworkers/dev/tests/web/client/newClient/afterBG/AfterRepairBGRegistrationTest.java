@@ -60,7 +60,7 @@ public class AfterRepairBGRegistrationTest extends BaseTest {
                 clientPages.getHomePage().guide.playSequenceFirstRepairGuide();
             });
             step("Страница Карта", () -> {
-                clientPages.getSelectServicePage().checkFinishRepairLoading();
+                clientPages.getSelectServicePage().checkFinishLoadingRepair();
                 clientPages.getSelectServicePage().checkPublishedState();
             });
             // todo OrderCardPage

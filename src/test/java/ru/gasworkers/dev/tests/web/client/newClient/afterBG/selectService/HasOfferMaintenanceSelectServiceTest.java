@@ -58,7 +58,7 @@ public class HasOfferMaintenanceSelectServiceTest extends BaseTest {
             });
             step("Страница Карта", () -> {
                 //todo actual design
-                clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
+                clientPages.getSelectServicePage().checkFinishLoadingMaintenance();
                 clientPages.getSelectServicePage().checkPublishedState();
             });
         });

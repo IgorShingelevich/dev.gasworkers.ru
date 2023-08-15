@@ -119,7 +119,7 @@ public class LastOrderProfileClientComponent extends BaseComponent {
 
     public void checkState(StateRepair state, LastOrderInfoResponseDto currentLastOrderInfoDto) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
-            state.checkLastOrderState(this, currentLastOrderInfoDto);
+            state.checkLastOrderComponent(this, currentLastOrderInfoDto);
         });
     }
 }

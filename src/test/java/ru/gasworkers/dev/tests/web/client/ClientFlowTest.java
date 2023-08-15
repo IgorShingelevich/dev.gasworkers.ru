@@ -137,7 +137,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0);
         clientPages.getSelectDateMaintenancePage().pickNowDateAM();
         clientPages.getSelectDateMaintenancePage().submitOrder();
-        clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
+        clientPages.getSelectServicePage().checkFinishLoadingMaintenance();
         clientPages.getSelectServicePage().toOrderCard();
         clientPages.getOrderCardPage().checkFinishLoading();
         clientPages.getSelectServicePage().popUp.close();
@@ -160,7 +160,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getSelectObjectMaintenancePage().selectObjectByIndex(0);
         clientPages.getSelectDateMaintenancePage().pickNowDateAM();
         clientPages.getSelectDateMaintenancePage().submitOrder();
-        clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
+        clientPages.getSelectServicePage().checkFinishLoadingMaintenance();
         clientPages.getSelectServicePage().toOrderCard();
         clientPages.getSelectServicePage().popUp.close();
         clientPages.getOrderCardPage().checkFinishLoading();
@@ -170,7 +170,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getCancelOrderPage().backButton();
         clientPages.getOrderCardPage().checkFinishLoading();
         clientPages.getOrderCardPage().showOnMap();
-        clientPages.getSelectServicePage().checkFinishMaintenanceLoading();
+        clientPages.getSelectServicePage().checkFinishLoadingMaintenance();
         clientPages.getSelectServicePage().toOrderCard();
         clientPages.getOrderCardPage().checkFinishLoading();
         clientPages.getOrderCardPage().cancelOrder();

@@ -58,7 +58,7 @@ public class HasOfferRepairSelectServiceTest extends BaseTest {
             });
             step("Страница Карта", () -> {
                 //todo actual design
-                clientPages.getSelectServicePage().checkFinishRepairLoading();
+                clientPages.getSelectServicePage().checkFinishLoadingRepair();
                 clientPages.getSelectServicePage().checkPublishedState();
             });
         });

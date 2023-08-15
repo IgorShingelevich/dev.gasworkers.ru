@@ -1,7 +1,9 @@
 package ru.gasworkers.dev.tests.web.orderProcess.repair;
 
 import lombok.AllArgsConstructor;
+import ru.gasworkers.dev.api.orders.info.dto.OrdersInfoResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
+import ru.gasworkers.dev.pages.client.SelectServicePageClientPage;
 import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClientComponent;
 
 @AllArgsConstructor
@@ -22,7 +24,7 @@ public enum StateRepair {
     private final String state;
 
 
-    public void checkLastOrderState(LastOrderProfileClientComponent page, LastOrderInfoResponseDto currentOrderInfoDto) {
+    public void checkLastOrderComponent(LastOrderProfileClientComponent page, LastOrderInfoResponseDto currentOrderInfoDto) {
         String
                 orderNumber = currentOrderInfoDto.getData().getNumber(),
                 serviceType = "Ремонт",
@@ -47,6 +49,18 @@ public enum StateRepair {
                 page.checkEquipment(equipments0);
                 page.offersCounter.amount(offersCount);
 //        todo time and stepper
+                break;
+            // ... other cases ...
+        }
+    }
+
+    public void checkSelectServicePage(SelectServicePageClientPage selectServicePageClientPage, OrdersInfoResponseDto hasOfferOrderInfo) {
+        switch (this) {
+            case PUBLISHED:
+                selectServicePageClientPage.checkAmountOfferBox(0);
+                break;
+            case HAS_OFFER:
+                selectServicePageClientPage.checkAmountOfferBox(hasOfferOrderInfo.getData().getOffersCount());
                 break;
             // ... other cases ...
         }
