@@ -35,22 +35,10 @@ public class OrderCardClientPage extends BaseClientPage {
             ORDER_CARD_TITLE = "Заказ №",
             COMPLETE_ORDER_INFO = "Договор техобслуживания ВДГО необходимо предоставить в вашу газораспределительную компанию. Оставьте отзыв на работу мастера и вы сможете передать договор в вашу газораспределительную компанию",
             SUBMIT_AGREEMENT_SUBTITLE = "Кнопка «передать договор» в газораспределительную компанию будет активна после размещения отзыва";
-
-    public OrderCardClientPage (RoleBrowser browser) {
-        super(browser);
-        sidebar = new ClientSidebarComponent(browser);
-        actionsBlock = new ClientActionsBlockComponent(browser);
-        stepper = new StepperComponent(browser);
-        offersCounter = new OffersCounterClientComponent(browser);
-        commonTab = new NavCommonTabOrderCardPageComponent(browser);
-        infoMasterTab = new NavInfoMasterTabOrderCardClientPageComponent(browser);
-        docsTab = new NavDocsTabOrderCardPageComponent(browser);
-    }
-
     SelenideElement
             titleNumberLocator = driver.$("h1.h3.mb-2").as(" Заголовок Карточки заказа"),
-    //        orderStateLocator = driver.$(".item-flex p.text").as("Статус заказа"),
-    completeOrderInfoBannerLocator = driver.$(".hint-box p").as("Баннер с информацией о завершении заказа"),
+            orderStateLocator = driver.$(".item-flex p.text").as("Статус заказа"),
+            completeOrderInfoBannerLocator = driver.$(".hint-box p").as("Баннер с информацией о завершении заказа"),
             submitAgreementSubtitleLocator = driver.$("div p.text-secondary").as("Пояснение кнопки Передать Договор"),
             orderDetailsBlockLocator = driver.$("div.order-details").as("Блок с информацией о заказе"),
             toMapButtonLocator = driver.$(byTagAndText("span", "Показать на карте")).as("Кнопка Показать на карте"),
@@ -62,11 +50,34 @@ public class OrderCardClientPage extends BaseClientPage {
             navCommonTabButtonLocator = driver.$("li[data-name='common']").as("Вкладка Описание заказа"),
             navInfoMasterTabButtonLocator = driver.$("li[data-name='master']").as("Вкладка Информация о мастере"),
             navDocsTabButtonLocator = driver.$("li[data-name='documents']").as("Вкладка Документы"),
-            submitReviewButtonLocator = mainButtonLocator.$(byTagAndText("span", "Оставить отзыв")).as("Кнопка Оставить отзыв");
-    // TODO upd buttons to implement mainButtonLocator and be able to check enabled/disabled state
-
+            submitReviewButtonLocator = mainButtonLocator.$(byTagAndText("span", "Оставить отзыв")).as("Кнопка Оставить отзыв"),
+    //payment section
+    activationPaymentStage = driver.$$("ul.order-details__prices span.bold").findBy(text("Активация безопасной сделки")),
+            activationPaymentStatus = activationPaymentStage.sibling(0),
+            activationPaymentAmount = activationPaymentStage.parent().find(".order-details__prices--price strong"),
+            activationPaymentStatusDate = activationPaymentStage.parent().find(".payment-date"),
+            materialsPaymentStage = driver.$$("ul.order-details__prices span.bold").findBy(text("Оплата материалов")),
+            materialsPaymentStatus = materialsPaymentStage.sibling(0),
+            materialsPaymentAmount = materialsPaymentStage.parent().find(".order-details__prices--price strong"),
+            materialsPaymentDate = materialsPaymentStage.parent().find(".payment-date"),
+            actionsPaymentStage = driver.$$("ul.order-details__prices span.bold").findBy(text("Оплата ремонтных работ")),
+            actionsPaymentStatus = actionsPaymentStage.sibling(0),
+            actionsPaymentAmount = actionsPaymentStage.parent().find(".order-details__prices--price strong"),
+            actionsPaymentDate = actionsPaymentStage.parent().find(".payment-date");
     ElementsCollection
             orderDetailsCollection = driver.$$("div.order-details-item").as("Информация о заказе");
+    // TODO upd buttons to implement mainButtonLocator and be able to check enabled/disabled state
+
+    public OrderCardClientPage(RoleBrowser browser) {
+        super(browser);
+        sidebar = new ClientSidebarComponent(browser);
+        actionsBlock = new ClientActionsBlockComponent(browser);
+        stepper = new StepperComponent(browser);
+        offersCounter = new OffersCounterClientComponent(browser);
+        commonTab = new NavCommonTabOrderCardPageComponent(browser);
+        infoMasterTab = new NavInfoMasterTabOrderCardClientPageComponent(browser);
+        docsTab = new NavDocsTabOrderCardPageComponent(browser);
+    }
 
     public OrderCardClientPage checkFinishLoading() {
         titleNumberLocator.shouldBe(visible, Duration.ofSeconds(30));
@@ -78,7 +89,7 @@ public class OrderCardClientPage extends BaseClientPage {
         return this;
     }
 
-    public OrderCardClientPage navCommon(){
+    public OrderCardClientPage navCommon() {
         stepWithRole("Перейти на вкладку Описание заказа", () -> {
             navCommonTabButtonLocator.click();
             stepWithRole("Убедиться, что открылась вкладка Описание заказа", () -> {
@@ -88,7 +99,7 @@ public class OrderCardClientPage extends BaseClientPage {
         return this;
     }
 
-    public OrderCardClientPage navInfoMaster(){
+    public OrderCardClientPage navInfoMaster() {
         stepWithRole("Перейти на вкладку Информация по работам", () -> {
             navInfoMasterTabButtonLocator.click();
             driver.$("li[data-name='master']").click();
@@ -99,7 +110,7 @@ public class OrderCardClientPage extends BaseClientPage {
         return this;
     }
 
-    public OrderCardClientPage navDocs(){
+    public OrderCardClientPage navDocs() {
         stepWithRole("Перейти на вкладку Документы", () -> {
             navDocsTabButtonLocator.click();
             stepWithRole("Убедиться, что открылась вкладка Документы", () -> {
@@ -113,9 +124,9 @@ public class OrderCardClientPage extends BaseClientPage {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
                 commonTab.orderStatus.currentStatus(orderStatus);
-                commonTab.orderDetails.currentType(orderType);
+                commonTab.orderDetails.serviceType(orderType);
                 offersCounter.noOffers();
-                stepWithRole("Убедиться, что  в Карточке заказа: " + orderStatus + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
+                stepWithRole("Убедиться, что  в Карточке заказа: " + orderStatus + " представлены кнопки Показать на карте и Отменить заказ ", () -> {
                     toMapButtonLocator.shouldBe(visible);
                     cancelOrderButtonLocator.shouldBe(visible);
 //TODO buttons for this order state
@@ -136,9 +147,9 @@ public class OrderCardClientPage extends BaseClientPage {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
                 commonTab.orderStatus.currentStatus(orderStatus);
-                commonTab.orderDetails.currentType(orderType);
-                offersCounter.haveOffers(offersCount);
-                stepWithRole("Убедиться, что  в Карточке заказа: " + orderStatus + " представлены кнопки Показать на карте и Отменить заказ " , () -> {
+                commonTab.orderDetails.serviceType(orderType);
+                offersCounter.amount(offersCount);
+                stepWithRole("Убедиться, что  в Карточке заказа: " + orderStatus + " представлены кнопки Показать на карте и Отменить заказ ", () -> {
                     toMapButtonLocator.shouldBe(visible);
                     cancelOrderButtonLocator.shouldBe(visible);
 //TODO buttons for this order state
@@ -159,8 +170,8 @@ public class OrderCardClientPage extends BaseClientPage {
     public void checkScheduleVisitState(OrderStatus orderStatus, OrderType orderType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                    commonTab.orderStatus.currentStatus(orderStatus);
-                    commonTab.orderDetails.currentType(orderType);
+                commonTab.orderStatus.currentStatus(orderStatus);
+                commonTab.orderDetails.serviceType(orderType);
                 stepWithRole("Убедиться, что в Карточке заказа: " + orderStatus + " представлена кнопка Отменить заказ ", () -> {
                     toMapButtonLocator.shouldNotBe(visible);
                     cancelOrderButtonLocator.shouldBe(visible);
@@ -176,9 +187,9 @@ public class OrderCardClientPage extends BaseClientPage {
                 navDocs();
                 docsTab.checkFinishLoading(orderStatus);
                 docsTab.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
-                stepWithRole("Скачать документы: Договор ТО и Страховой полис " , () -> {
-                docsTab.downloadAgreement();
-                docsTab.downloadInsurance();
+                stepWithRole("Скачать документы: Договор ТО и Страховой полис ", () -> {
+                    docsTab.downloadAgreement();
+                    docsTab.downloadInsurance();
                 });
             });
             navCommon();
@@ -190,7 +201,7 @@ public class OrderCardClientPage extends BaseClientPage {
         return titleNumberLocator.getText().substring(titleNumberLocator.getText().length() - 4);
     }
 
-    public  String getTitleNumber() {
+    public String getTitleNumber() {
         return driver.$("h1.h3.mb-2").getText();
     }
 
@@ -201,18 +212,18 @@ public class OrderCardClientPage extends BaseClientPage {
                     completeOrderInfoBannerLocator.shouldHave(text(COMPLETE_ORDER_INFO));
                 });
                 commonTab.orderStatus.currentStatus(orderStatus);
-                commonTab.orderDetails.currentType(orderType);
+                commonTab.orderDetails.serviceType(orderType);
                 stepWithRole("Убедиться, что в Карточке заказа: " + orderStatus + " представлена кнопка Передать договор с описанием и кнопка На главную", () -> {
 //                submitAgreementButtonLocator.shouldHave(text("Передать договор")).shouldHave(Condition.cssClass("disabled");
-                submitAgreementButtonLocator.shouldHave(Condition.cssClass("disabled")).shouldHave(text("Передать договор"));
-                submitAgreementSubtitleLocator.shouldHave(text(SUBMIT_AGREEMENT_SUBTITLE));
-                submitReviewButtonLocator.shouldBe(visible);
+                    submitAgreementButtonLocator.shouldHave(Condition.cssClass("disabled")).shouldHave(text("Передать договор"));
+                    submitAgreementSubtitleLocator.shouldHave(text(SUBMIT_AGREEMENT_SUBTITLE));
+                    submitReviewButtonLocator.shouldBe(visible);
 //                toHomeButtonLocator.shouldHave(text("На главную")); - -after review
-                toMapButtonLocator.shouldNotBe(visible);
-                cancelOrderButtonLocator.shouldNotBe(visible);
-                payBillButtonLocator.shouldNotBe(visible);
-                signButtonLocator.shouldNotBe(visible);
-                //TODO buttons for this order state
+                    toMapButtonLocator.shouldNotBe(visible);
+                    cancelOrderButtonLocator.shouldNotBe(visible);
+                    payBillButtonLocator.shouldNotBe(visible);
+                    signButtonLocator.shouldNotBe(visible);
+                    //TODO buttons for this order state
                 });
             });
             stepWithRole("Вкладка Документы", () -> {
@@ -227,7 +238,7 @@ public class OrderCardClientPage extends BaseClientPage {
                 });
             });
             navCommon();
-    });
+        });
         System.out.println("client orderType: " + orderType + "client orderStatus: " + orderStatus);
         return this;
     }
@@ -239,7 +250,7 @@ public class OrderCardClientPage extends BaseClientPage {
                     completeOrderInfoBannerLocator.shouldHave(text(COMPLETE_ORDER_INFO));
                 });
                 commonTab.orderStatus.currentStatus(orderStatus);
-                commonTab.orderDetails.currentType(orderType);
+                commonTab.orderDetails.serviceType(orderType);
                 stepWithRole("Убедиться, что в Карточке заказа: " + orderStatus + " представлена кнопка Передать договор с описанием и кнопка На главную", () -> {
                     submitAgreementButtonLocator.shouldBe(enabled).shouldHave(text("Передать договор"));
                     submitAgreementSubtitleLocator.shouldHave(text(SUBMIT_AGREEMENT_SUBTITLE));
@@ -272,7 +283,7 @@ public class OrderCardClientPage extends BaseClientPage {
 
     public OrderCardClientPage showOnMap() {
         stepWithRole("Нажать на кнопку Показать на карте", () -> {
-            toMapButtonLocator.shouldBe(visible,Duration.ofSeconds(30)).click();  //.scrollTo()
+            toMapButtonLocator.shouldBe(visible, Duration.ofSeconds(30)).click();  //.scrollTo()
         });
         return this;
     }
@@ -288,6 +299,54 @@ public class OrderCardClientPage extends BaseClientPage {
         urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client/orders/");
     }
 
+    public void checkTitle() {
+        stepWithRole("Убедиться, что заголовок Карточки заказа отображается", () -> {
+            titleNumberLocator.shouldBe(visible, Duration.ofSeconds(30)).shouldHave(text(ORDER_CARD_TITLE));
+        });
+    }
+
+    public void checkOrderNumber(String expectedOrderNumber) {
+        stepWithRole("Убедиться, что номер заказа " + expectedOrderNumber + " соответствует ожидаемому", () -> {
+            titleNumberLocator.shouldHave(partialText(expectedOrderNumber));
+        });
+    }
+
+    public void checkServiceType(String expectedServiceType) {
+        stepWithRole("Убедиться, что тип заказа " + expectedServiceType + " соответствует ожидаемому", () -> {
+            commonTab.orderDetails.serviceType(OrderType.valueOf(expectedServiceType));
+        });
+    }
+
+ /*   public void checkAddress(String expectedAddress) {
+        stepWithRole("Убедиться, что адрес " + expectedAddress + " соответствует ожидаемому", () -> {
+            commonTab.orderDetails.address(expectedAddress);
+        });
+    }
+
+    public void checkEquipment(String expectedEquipment) {
+        stepWithRole("Убедиться, что оборудование " + expectedEquipment + " соответствует ожидаемому", () -> {
+            commonTab.orderDetails.equipment(expectedEquipment);
+        });
+    }
+
+    public void checkDate(String expectedDate) {
+        stepWithRole("Убедиться, что дата " + expectedDate + " соответствует ожидаемой", () -> {
+            commonTab.orderDetails.date(expectedDate);
+        });
+    }
+
+    public void checkTime(String expectedTime) {
+        stepWithRole("Убедиться, что время " + expectedTime + " соответствует ожидаемому", () -> {
+            commonTab.orderDetails.time(expectedTime);
+        });
+    }
+
+    public void checkDescription(String expectedDescription) {
+        stepWithRole("Убедиться, что описание " + expectedDescription + " соответствует ожидаемому", () -> {
+            commonTab.orderDetails.description(expectedDescription);
+        });
+    }
+*/
 
     public void checkHasOfferRepairState(OrdersInfoResponseDto currentOrderInfoDto) {
         OrderInfoFields orderFields = OrderInfoFields.builder()
@@ -317,4 +376,6 @@ public class OrderCardClientPage extends BaseClientPage {
         private final String description;
         //todo stepper
     }
+
+
 }

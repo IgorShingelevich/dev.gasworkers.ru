@@ -1,13 +1,12 @@
 package ru.gasworkers.dev.pages.components.clientComponent;
 
 import com.codeborne.selenide.SelenideElement;
-import lombok.Builder;
-import lombok.Data;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.UrlCheckerSharedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
 
 import java.time.Duration;
 
@@ -19,13 +18,13 @@ public class LastOrderProfileClientComponent extends BaseComponent {
     public final OffersCounterClientComponent offersCounter;
     private final String
             LAST_ORDER_CARD_TITLE = "Информация о последнем заказе",
-            LAST_ORDER_CARD_SERVICE_TYPE_TITLE = "Тип услуги",
+            LAST_ORDER_CARD_SERVICE_TYPE_TITLE = "Тип заказа",
             LAST_ORDER_CARD_OBJECT_ADDRESS_TITLE = "Адрес объекта",
             LAST_ORDER_CARD_OBJECT_EQUIPMENT_TITLE = "Оборудование",
             LAST_ORDER_CARD_OBJECT_DATE_TITLE = "Выбранная дата",
             LAST_ORDER_CARD_OBJECT_TIME_TITLE = "Выбранное время";
     SelenideElement
-            lastOrderCardLocator = driver.$(".section .section.order"),
+            self = driver.$(".section .section.order"),
             lastOrderCardTitleLocator = driver.$(".section .header .title.d-flex.justify-content-between"),
             lastOrderCardOrderNumberLinkLocator = driver.$(".section .content .h5.link-blue.text-primary.pointer"),
             lastOrderCardActionButtonLocator = driver.$(".section .content .actions .actions__btn"),
@@ -35,6 +34,7 @@ public class LastOrderProfileClientComponent extends BaseComponent {
             lastOrderCardEquipmentTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_EQUIPMENT_TITLE)),
             lastOrderCardDateTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_DATE_TITLE)),
             lastOrderCardTimeTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_TIME_TITLE));
+
 
     public LastOrderProfileClientComponent(RoleBrowser browser) {
         super(browser);
@@ -70,60 +70,56 @@ public class LastOrderProfileClientComponent extends BaseComponent {
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что секция Карточка последнего заказа отображается", () -> {
-            lastOrderCardLocator.shouldBe(visible, Duration.ofSeconds(10));
+            self.shouldBe(visible, Duration.ofSeconds(10));
+            checkTitle();
         });
     }
 
-    public void checkHasOfferRepairState(LastOrderInfoResponseDto currentOrderInfoDto) {
-        LastOrderFields orderFields = LastOrderFields.builder()
-                .title(LAST_ORDER_CARD_TITLE)
-                .serviceType("Ремонт")
-                .orderNumber(currentOrderInfoDto.getData().getNumber())
-                .address(currentOrderInfoDto.getData().getAddress())
-                .equipment(currentOrderInfoDto.getData().getEquipments().get(0).getComputedTitle())
-//             todo   .date(currentOrderInfoDto.getObjectDate())
-//                .time(currentOrderInfoDto.getObjectTime())
-                .build();
-        offersCounter.haveOffers(currentOrderInfoDto.getData().getClientObject().getActiveOffersCount());
-        checkState(orderFields);
-    }
-
-    public void checkPublishedRepairState(LastOrderInfoResponseDto currentOrderInfoDto) {
-        LastOrderFields publishedState = LastOrderFields.builder()
-                .title(LAST_ORDER_CARD_TITLE)
-                .serviceType("Ремонт")
-                .orderNumber(currentOrderInfoDto.getData().getNumber())
-                .address(currentOrderInfoDto.getData().getAddress())
-                .equipment(currentOrderInfoDto.getData().getEquipments().get(0).getComputedTitle())
-                .build();
-        checkState(publishedState);
-        offersCounter.noOffers();
-    }
-
-    public void checkState(LastOrderFields fields) {
-        stepWithRole("Проверить состояние Карточки последнего заказа", () -> {
-            lastOrderCardTitleLocator.shouldHave(text(fields.getTitle()));
-            lastOrderCardOrderNumberLinkLocator.shouldHave(partialText(fields.getOrderNumber()));
-            lastOrderCardServiceTypeTitleCollection.shouldHave(text(fields.getServiceType()));
-            lastOrderCardAddressTitleLocator.shouldHave(text(fields.getAddress()));
-            lastOrderCardEquipmentTitleLocator.shouldHave(text(fields.getEquipment()));
-            lastOrderCardDateTitleLocator.shouldHave(text(fields.getDate()));
-            lastOrderCardTimeTitleLocator.shouldHave(text(fields.getTime()));
-            //todo stepper
-
+    public void checkTitle() {
+        stepWithRole("Убедиться, что заголовок Карточки последнего заказа отображается", () -> {
+            lastOrderCardTitleLocator.shouldHave(text(LAST_ORDER_CARD_TITLE));
         });
     }
 
-    @Data
-    @Builder
-    private static class LastOrderFields {
-        private final String title;
-        private final String orderNumber;
-        private final String serviceType;
-        private final String address;
-        private final String equipment;
-        private final String date;
-        private final String time;
-        //todo stepper
+    public void checkOrderNumber(String expectedOrderNumber) {
+        stepWithRole("Убедиться, что номер заказа " + expectedOrderNumber + " соответствует ожидаемому", () -> {
+            lastOrderCardOrderNumberLinkLocator.shouldHave(partialText(expectedOrderNumber));
+        });
+    }
+
+    public void checkServiceType(String expectedServiceType) {
+        stepWithRole("Убедиться, что тип заказа " + expectedServiceType + " соответствует ожидаемому", () -> {
+            lastOrderCardServiceTypeTitleCollection.shouldHave(text(expectedServiceType));
+        });
+    }
+
+    public void checkAddress(String expectedAddress) {
+        stepWithRole("Убедиться, что адрес " + expectedAddress + " соответствует ожидаемому", () -> {
+            lastOrderCardAddressTitleLocator.shouldHave(text(expectedAddress));
+        });
+    }
+
+    public void checkEquipment(String expectedEquipment) {
+        stepWithRole("Убедиться, что оборудование " + expectedEquipment + " соответствует ожидаемому", () -> {
+            lastOrderCardEquipmentTitleLocator.shouldHave(text(expectedEquipment));
+        });
+    }
+
+    public void checkDate(String expectedDate) {
+        stepWithRole("Убедиться, что дата " + expectedDate + " соответствует ожидаемой", () -> {
+            lastOrderCardDateTitleLocator.shouldHave(text(expectedDate));
+        });
+    }
+
+    public void checkTime(String expectedTime) {
+        stepWithRole("Убедиться, что время " + expectedTime + " соответствует ожидаемому", () -> {
+            lastOrderCardTimeTitleLocator.shouldHave(text(expectedTime));
+        });
+    }
+
+    public void checkState(StateRepair state, LastOrderInfoResponseDto currentLastOrderInfoDto) {
+        stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
+            state.checkLastOrderState(this, currentLastOrderInfoDto);
+        });
     }
 }

@@ -26,7 +26,7 @@ public class OffersCounterClientComponent extends BaseComponent {
         });
     }
 
-    public void haveOffers(Integer count) {
+    public void amount(Integer count) {
         stepWithRole("Убедиться, что есть " + count + " предложений", () -> {
             offersCounterComponentLocator.shouldHave(partialText(count.toString()), Duration.ofSeconds(10));
         });

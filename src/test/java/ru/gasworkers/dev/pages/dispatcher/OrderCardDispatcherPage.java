@@ -100,7 +100,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
                 tabCommon.orderStatus.currentStatus(orderStatus);
-                tabCommon.orderDetails.currentType(orderType);
+                tabCommon.orderDetails.serviceType(orderType);
                 stepWithRole("Убедиться, что в Карточке заказа  представлена кнопка Принять Заказ и Отказаться ", () -> {
                     acceptRequestButtonLocator.scrollTo().shouldBe(visible);
                     declineRequestButtonLocator.shouldBe(visible);
@@ -139,7 +139,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
                 tabCommon.orderStatus.currentStatus(orderStatus);
-                tabCommon.orderDetails.currentType(orderType);
+                tabCommon.orderDetails.serviceType(orderType);
                 stepWithRole("Убедиться, что в Карточке заказа  представлена неактивная  кнопка Уже участвуете ", () -> {
                     alreadyAcceptedButtonLocator.shouldBe(visible);
                     acceptRequestButtonLocator.shouldNot(visible);
@@ -163,7 +163,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
                 tabCommon.orderStatus.currentStatus(orderStatus);
-                tabCommon.orderDetails.currentType(orderType);
+                tabCommon.orderDetails.serviceType(orderType);
                 stepWithRole("Убедиться, что  в Карточке заказа представлена кнопка Назначить время и Отменить заказ ", () -> {
                     selectTimeButtonLocator.shouldBe(visible);
                     cancelButtonLocator.shouldBe(visible);
@@ -192,7 +192,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
                 tabCommon.orderStatus.currentStatus(orderStatus);
-                tabCommon.orderDetails.currentType(orderType);
+                tabCommon.orderDetails.serviceType(orderType);
                 stepWithRole("Убедиться, что  в Карточке заказа представлена кнопка Назначить Другого Мастера и Назанчить Новое Время ", () -> {
                     selectAnotherTimeButtonLocator.as("Назначить Новое Время").shouldBe(visible, Duration.ofSeconds(10));
                     selectAnotherMasterButtonLocator.as("Назначить Другого Мастера").shouldBe(visible, Duration.ofSeconds(10));

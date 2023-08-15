@@ -115,7 +115,7 @@ public class OrderCardMasterPage extends BaseMasterPage {
             stepWithRole("Вкладка Описание заказа", () -> {
                 tabCommon.fillUpBanner.checkBannerDetails();
                 tabCommon.orderStatus.currentStatus(orderStatus);
-                tabCommon.orderDetails.currentType(orderType);
+                tabCommon.orderDetails.serviceType(orderType);
                 stepWithRole("Убедиться, что  представлены кнопки  Редактировать объект/оборудование, кнопка Приступить к работе и кнопка Заказ на ремонт", () -> {
                     startWorkingButtonLocator.shouldBe(visible);
                     editObjectButtonLocator.shouldBe(visible);
@@ -184,7 +184,7 @@ public class OrderCardMasterPage extends BaseMasterPage {
             stepWithRole("Вкладка Описание заказа", () -> {
                 navCommon();
                 tabCommon.orderStatus.currentStatus(orderStatus);
-                tabCommon.orderDetails.currentType(orderType);
+                tabCommon.orderDetails.serviceType(orderType);
                 stepWithRole("Убедиться, что  представлены кнопки Приступить к работе, кнопка Заказ на ремонт", () -> {
                     editObjectButtonLocator.shouldNotBe(visible);
                     repairFromMaintenanceButtonLocator.shouldBe(visible);

@@ -31,12 +31,15 @@ import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.pages.context.MasterPages;
+import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.function.Consumer;
 
 import static io.qameta.allure.Allure.step;
 
@@ -67,6 +70,7 @@ public class HasOfferRepairTest extends BaseApiTest {
 
     LastOrderInfoResponseDto hasOfferLastOrderInfo;
     OrdersInfoResponseDto hasOfferOrderInfo;
+
 
     @Test
     @DisplayName("Ремонт - диспетчер сделал предложение")
@@ -175,11 +179,24 @@ public class HasOfferRepairTest extends BaseApiTest {
         });
 
         step("кабинет клиента в состоянии - есть отклик СК", () -> {
-            step("клиент карточка последнего заказа -  есть отклик СК", () -> {
-                clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-                clientPages.getHomePage().lastOrderComponent.checkHasOfferRepairState(hasOfferLastOrderInfo);
-            });
-            step("клиент карточка заказа -  есть отклик СК", () -> {
+            Consumer<SoftAssert> case1 = softAssert -> {
+                step("клиент карточка последнего заказа -  есть отклик СК", () -> {
+                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
+                    clientPages.getHomePage().lastOrderComponent.checkState(StateRepair.HAS_OFFER, hasOfferLastOrderInfo);
+                });
+            };
+            Consumer<SoftAssert> case2 = softAssert -> {
+                step("клиент карточка последнего заказа -  есть отклик СК", () -> {
+                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
+                    clientPages.getHomePage().lastOrderComponent.checkState(StateRepair.HAS_OFFER, hasOfferLastOrderInfo);
+                });
+            };
+            assertAll(Arrays.asList(case1, case2));
+        });
+    }
+}
+
+     /*step("клиент карточка заказа -  есть отклик СК", () -> {
                 clientPages.getHomePage().sidebar.allOrders();
                 clientPages.getAllOrdersPage().checkFinishLoading();
                 clientPages.getAllOrdersPage().orderByNumber(commonFields.getOrderNumber());
@@ -187,11 +204,4 @@ public class HasOfferRepairTest extends BaseApiTest {
                 clientPages.getSelectServicePage().toOrderCard();
                 clientPages.getOrderCardPage().checkFinishLoading();
                 clientPages.getOrderCardPage().checkHasOfferRepairState(hasOfferOrderInfo);
-
-
-            });
-
-
-        });
-    }
-}
+            });*/

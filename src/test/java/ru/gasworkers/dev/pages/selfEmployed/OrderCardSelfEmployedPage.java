@@ -171,7 +171,7 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
             });
             stepWithRole("Вкладка Описание заказа", () -> {
                 commonTab.orderStatus.currentStatus(orderStatus);
-                commonTab.orderDetails.currentType(orderType);
+                commonTab.orderDetails.serviceType(orderType);
                 stepWithRole("Убедиться, что в Карточке заказа  представлена кнопка Принять Заказ и Отказаться ", () -> {
                     acceptRequestButtonLocator.scrollTo().shouldBe(visible);
                     declineRequestButtonLocator.shouldBe(visible);

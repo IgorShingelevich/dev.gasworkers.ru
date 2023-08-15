@@ -14,7 +14,7 @@ public class OrderDetailsCommonTabComponent extends BaseTabOrderCardComponent {
     ElementsCollection
             orderDetailsCollection = driver.$$("div.order-details-item").as("Информация о заказе");
 
-    public void currentType(OrderType orderType) {
+    public void serviceType(OrderType orderType) {
         stepWithRole("Убедиться, что тип заказа: " + orderType.toString(), () -> {
             orderDetailsCollection.findBy(text("Тип заказа")).shouldHave(text(orderType.toString()));
         });
