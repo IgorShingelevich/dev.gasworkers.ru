@@ -33,18 +33,41 @@ public class SelectServicePageClientPage extends BaseClientPage {
             endMaintenancePrefixText = "и обрабатывается диспетчерами",
             startRepairPrefixText = "Ожидайте подтверждение заказа диспетчером. Номер заказа ",
             endRepairPrefixText = "Ремонтные работы и запчасти оплачиваются дополнительно к указанной стоимости.",
-            banner1Text = "После подтверждения цвет заказа изменится на зелёный и отобразится стоимость выезда мастера.",
-            banner2Text = "Сервис работает через безопасную сделку, необходимо оплатить 10 руб. для активации сделки и принятия мастера на заказ.";
+            publishedText = "Ожидайте подтверждение заказа диспетчером. После подтверждения цвет заказа изменится на зелёный и отобразится стоимость выезда мастера.",
+            hasOffer1Text = "После подтверждения цвет заказа изменится на зелёный и отобразится стоимость выезда мастера.",
+            hasOffer2Text = "Сервис работает через безопасную сделку, необходимо оплатить 10 руб. для активации сделки и принятия мастера на заказ.";
     SelenideElement
             titleLocator = driver.$(".align-items-center .text-center").as("Заголовок страницы Выбор СК"), // changed driver.$("div h4.text-center")
             banner1Locator = driver.$("div.gas-tip__text .first-text").as("Баннер 1"),
-            banner2Locator = driver.$("div.gas-tip__text .second-text").as("Баннер 2"),
+            hasOfferRepairBanner2Locator = driver.$("div.gas-tip__text .second-text").as("Есть отклик Ск - Баннер 2"),
             toOrderButtonLocator = driver.$("button.btn.btn-primary").as("Кнопка Смотреть  заказ"),
             backButtonLocator = driver.$(".col-12.col-md-3 .link-dark-blue.mr-32.medium").as("Кнопка Назад"),
             spinnerServicesContainerLocator = driver.$(".scrollbar.mb-3.col-lg-5 .d-flex.justify-content-center.pb-5").as("Спиннер загрузки контейнера с Сервисными компаниями"),
             firstServiceTabLocator = driver.$("[id^=company-item]").as("Первая вкладка Сервисного предложения"),
             mapContainerLocator = driver.$("[id^=yandexMap]").as("Контейнер карты");
 
+    public void checkFinishLoadingRepair() {
+        stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
+            spinner.checkPresence();
+//            spinnerScrollbarLocator.should(disappear);
+            assertThat(titleLocator.getText(), startsWith(startRepairPrefixText));
+            assertThat(titleLocator.getText(), endsWith(endRepairPrefixText));
+            mapContainerLocator.shouldBe(visible, Duration.ofSeconds(40));
+            stepWithRole("Убедиться что появился первый таб", () -> {
+                firstServiceTabLocator.shouldBe(exist, Duration.ofSeconds(40));
+            });
+            /*stepWithRole("Убедиться что компонент карты загрузился", () -> {
+                driver.refresh();
+                mapContainerLocator.shouldBe(visible, Duration.ofSeconds(40));
+                driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
+            });*/
+            offersCounter.checkFinishLoading();
+            getOrderNumber();
+        });
+    }    ElementsCollection
+            serviceBoxCollection = driver.$$("[id^='company-item-company-']").as("Блоки Сервисных компаний"),
+            boxesWithButtonCollectionOld = serviceBoxCollection.filterBy(cssClass("btn-primary")).as("Блоки с кнопкой Выбрать"),
+            boxesWithButtonCollection = serviceBoxCollection.filterBy(attribute("data-test-id", "primary")).as("Блоки с кнопкой Выбрать");
     public SelectServicePageClientPage(RoleBrowser browser) {
         super(browser);
         header = new FocusHeaderComponent(browser);
@@ -90,31 +113,20 @@ public class SelectServicePageClientPage extends BaseClientPage {
         });
     }
 
-    public void checkFinishLoadingRepair() {
-        stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
-            spinner.checkPresence();
-//            spinnerScrollbarLocator.should(disappear);
-            assertThat(titleLocator.getText(), startsWith(startRepairPrefixText));
-            assertThat(titleLocator.getText(), endsWith(endRepairPrefixText));
-            banner1Locator.shouldHave(text(banner1Text));
-            banner2Locator.shouldHave(text(banner2Text));
-//            titleLocator.shouldHave(text("Ваш заказ принят и обрабатывается диспетчерами"));
-            mapContainerLocator.shouldBe(visible, Duration.ofSeconds(40));
-            stepWithRole("Убедиться что появился первый таб", () -> {
-                firstServiceTabLocator.shouldBe(exist, Duration.ofSeconds(40));
-            });
-            /*stepWithRole("Убедиться что компонент карты загрузился", () -> {
-                driver.refresh();
-                mapContainerLocator.shouldBe(visible, Duration.ofSeconds(40));
-                driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
-            });*/
-            offersCounter.checkFinishLoading();
-            getOrderNumber();
+    public void checkHasOfferBanner() {
+        stepWithRole("Убедиться, что отображается баннер Есть отклик СК", () -> {
+            banner1Locator.shouldHave(text(hasOffer1Text));
+            hasOfferRepairBanner2Locator.shouldHave(text(hasOffer2Text));
         });
-    }    ElementsCollection
-            serviceBoxCollection = driver.$$("[id^='company-item-company-']").as("Блоки Сервисных компаний"),
-            boxesWithButtonCollectionOld = serviceBoxCollection.filterBy(cssClass("btn-primary")).as("Блоки с кнопкой Выбрать"),
-            boxesWithButtonCollection = serviceBoxCollection.filterBy(attribute("data-test-id", "primary")).as("Блоки с кнопкой Выбрать");
+    }
+
+    public void checkPublishedBanner() {
+        stepWithRole("Убедиться, что отображается баннер Опубликован", () -> {
+            banner1Locator.shouldHave(text(publishedText));
+        });
+    }
+
+
 
     public void checkPublishedState() {
         stepWithRole("Убедиться, что статус карты - Нет тендеров", () -> {
@@ -168,6 +180,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
             stateRepair.checkSelectServicePage(this, dto);
         });
     }
+
 
     public String getOrderNumber() {
         return stepWithRole("Получить номер заказа", () -> {

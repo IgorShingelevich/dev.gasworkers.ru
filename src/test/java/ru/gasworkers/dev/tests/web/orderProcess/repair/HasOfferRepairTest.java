@@ -80,7 +80,7 @@ public class HasOfferRepairTest extends BaseApiTest {
 
 
     @Test
-    @DisplayName("Ремонт - диспетчер сделал предложение")
+    @DisplayName("Ремонт - в состоянии есть отклик СК")
     void hasOfferRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
         CommonFieldsRepairDto commonFields = new CommonFieldsRepairDto();
         step("api precondition", () -> {
@@ -88,15 +88,15 @@ public class HasOfferRepairTest extends BaseApiTest {
             step("клиент заказ на ремонт клиента в  состоянии published", () -> {
                 step("клиент карточка последнего заказа", () -> {
                     System.out.println("publishedLastOrderInfo");
-                    LastOrderInfoResponseDto actualPublishedLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
+                    LastOrderInfoResponseDto publishedLastOrderInfo = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                             .statusCode(200)
                             .extract().as(LastOrderInfoResponseDto.class);
-                    commonFields.setOrderId(actualPublishedLastOrderResponse.getData().getId());
-                    commonFields.setOrderNumber(actualPublishedLastOrderResponse.getData().getNumber());
-                    commonFields.setClientObjectId(actualPublishedLastOrderResponse.getData().getClientObject().getId());
-                    commonFields.setEquipments0Id(actualPublishedLastOrderResponse.getData().getEquipments().get(0).getId());
+                    commonFields.setOrderId(publishedLastOrderInfo.getData().getId());
+                    commonFields.setOrderNumber(publishedLastOrderInfo.getData().getNumber());
+                    commonFields.setClientObjectId(publishedLastOrderInfo.getData().getClientObject().getId());
+                    commonFields.setEquipments0Id(publishedLastOrderInfo.getData().getEquipments().get(0).getId());
                 });
-                step("заполнение профиля клиента после Фоновой Регистрации", () -> {
+                step("клиент - заполнение профиля после Фоновой Регистрации", () -> {
                     UserSettingsCommonResponseDto actualResponse = userSettingsApi.setCommon(UserSettingsCommonRequestDto.defaultBGClientRequest(client), commonFields.getTokenClient())
                             .statusCode(200)
                             .extract().as(UserSettingsCommonResponseDto.class);
@@ -200,21 +200,21 @@ public class HasOfferRepairTest extends BaseApiTest {
             });
         });
 
-        step("кабинет клиента в состоянии - есть отклик СК", () -> {
+        step("кабинет клиента в состоянии - в состоянии есть отклик СК", () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
-                step("клиент карточка последнего заказа -  есть отклик СК", () -> {
+                step("клиент карточка последнего заказа - в состоянии есть отклик СК", () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.checkState(StateRepair.HAS_OFFER, hasOfferLastOrderInfo);
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
-                step("клиент карточка заказа редирект на карту", () -> {
+                step("клиент карточка заказа редирект на карту - в состоянии есть отклик СК", () -> {
                     clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getSelectServicePage().checkUrl();
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {
-                step("клиент страница выбора услуги", () -> {
+                step("клиент страница выбора услуги - в состоянии есть отклик СК", () -> {
                     clientPages.getSelectServicePage().checkFinishLoadingRepair();
                     clientPages.getSelectServicePage().checkState(StateRepair.HAS_OFFER, suggestedServiceResponse);
                 });

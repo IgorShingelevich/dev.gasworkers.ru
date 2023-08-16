@@ -153,8 +153,8 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
     void allDtoRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
         commonFields.setTokenClient(loginApi.getTokenThrough(client));
 
-        step("заказ на ремонт в состоянии published", () -> {
-            step("клиент - модель пользователя в  состоянии published ", () -> {
+        step("клиент - заказ на ремонт клиента - в состоянии published", () -> {
+            step("клиент - модель пользователя - в состоянии published ", () -> {
                 actualPublishedUserResponse = userApi.getUser(commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(UserResponseDto.class);
@@ -166,7 +166,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
                 UserResponseDto expectedResponse = repairCase.publishedClient(commonFields);
 //                assertResponsePartialNoAt(expectedResponse, actualPublishedUserResponse);
             });
-            step("заполнение профиля клиента после Фоновой Регистрации", () -> {
+            step("клиент заполнение профиля после Фоновой Регистрации", () -> {
                 UserSettingsCommonResponseDto actualResponse = userSettingsApi.setCommon(UserSettingsCommonRequestDto.defaultBGClientRequest(client), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(UserSettingsCommonResponseDto.class);
