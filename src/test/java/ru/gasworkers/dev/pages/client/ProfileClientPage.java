@@ -4,17 +4,16 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.NavContactsTabProfilePageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.NavNotificationsTabProfilePageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.NavPasswordTabProfilePageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navCommon.NavCommonTabClientProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.NavContactsTabProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.NavNotificationsTabProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.NavPasswordTabProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.navCommon.NavCommonTabClientProfilePageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Condition.visible;
 
 public class ProfileClientPage extends BaseClientPage{
 

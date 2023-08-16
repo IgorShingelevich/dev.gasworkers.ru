@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +34,7 @@ public class OrdersInfoResponseDto {
         @JsonProperty("service_center")
         private ServiceCenter serviceCenter;
         private Object master;
-        private Object client;
+        private Client client;
         private Receipt receipt;
         private List<Receipts> receipts;
         private ArrayList<Object> codes;
@@ -246,6 +247,155 @@ public class OrdersInfoResponseDto {
                 private String full;
                 private ArrayList<Double> coordinates;
             }
+        }
+
+        @lombok.Data
+        @Builder
+        @AllArgsConstructor
+        @NoArgsConstructor
+        public static class Client {
+            String gender;
+            String specialization;
+            String skills;
+            @JsonProperty("avatar_id")
+            String avatarId;
+            @JsonProperty("service_id")
+            Integer serviceId;
+            @JsonProperty("deleted_at")
+            String deletedAt;
+            @JsonProperty("created_at")
+            String createdAt;
+            @JsonProperty("updated_at")
+            String updatedAt;
+            @JsonProperty("requisites_filled")
+            Boolean requisitesFilled;
+            @JsonProperty("bank_details_filled")
+            Boolean bankDetailsFilled;
+            @JsonProperty("rate_filled")
+            Boolean rateFilled;
+            @JsonProperty("price_list_filled")
+            Boolean priceListFilled;
+            @JsonProperty("distribution_company_agreement_filled")
+            Boolean distributionCompanyAgreementFilled;
+            @JsonProperty("equipments_filled")
+            Boolean equipmentsFilled;
+            @JsonProperty("contacts_filled")
+            Boolean contactsFilled;
+            @JsonProperty("bank_id")
+            Integer bankId;
+            @JsonProperty("account_number")
+            Integer accountNumber;
+            @JsonProperty("distribution_company_id")
+            Integer distributionCompanyId;
+            @JsonProperty("country_id")
+            Integer countryId;
+            @JsonProperty("post_address_id")
+            Integer postAddressId;
+            @JsonProperty("on_verification")
+            Boolean onVerification;
+            @JsonProperty("verified_at")
+            String verifiedAt;
+            @JsonProperty("verification_hash")
+            String verificationHash;
+            @JsonProperty("first_accept")
+            Integer firstAccept;
+            @JsonProperty("company_id")
+            Integer companyId;
+            @JsonProperty("employment_status")
+            String employmentStatus;
+            @JsonProperty("dispatcher_company_id")
+            Integer dispatcherCompanyId;
+            String position;
+            String rating;
+            @JsonProperty("accept_terms")
+            Boolean acceptTerms;
+            @JsonProperty("new_messages_count")
+            Integer newMessagesCount;
+            String tz;
+            @JsonProperty("push_notifications_enable")
+            Boolean pushNotificationsEnable;
+            @JsonProperty("email_notifications_enable")
+            Boolean emailNotificationsEnable;
+            @JsonProperty("sms_notifications_enable")
+            Boolean smsNotificationsEnable;
+            @JsonProperty("second_accept")
+            Integer secondAccept;
+            @JsonProperty("can_consulting")
+            Boolean canConsulting;
+            @JsonProperty("consultation_price")
+            Integer consultationPrice;
+            @JsonProperty("push_id")
+            Integer pushId;
+            @JsonProperty("ready_for_consultation")
+            Boolean readyForConsultation;
+            @JsonProperty("active_role")
+            String activeRole;
+            @JsonProperty("is_have_contract")
+            Boolean isHaveContract;
+            @JsonProperty("is_ip")
+            Boolean isIp;
+            @JsonProperty("diploma_id")
+            Integer diplomaId;
+            String inn;
+            @JsonProperty("living_address_id")
+            Integer livingAddressId;
+            @JsonProperty("work_distance")
+            Integer workDistance;
+            @JsonProperty("joined_at")
+            String joinedAt;
+            @JsonProperty("registered_at")
+            String registeredAt;
+            @JsonProperty("sc_notified_about_my_reg")
+            Boolean scNotifiedAboutMyReg;
+            @JsonProperty("sc_notified_about_my_certificates")
+            Boolean scNotifiedAboutMyCertificates;
+            Double debt;
+            @JsonProperty("count_review")
+            Integer countReview;
+            @JsonProperty("count_completed_orders")
+            Integer countCompletedOrders;
+            @JsonProperty("count_not_read_notification")
+            Integer countNotReadNotification;
+            @JsonProperty("fps_phone")
+            String fpsPhone;
+            @JsonProperty("fps_bank_id")
+            Integer fpsBankId;
+            @JsonProperty("selected_payment_method")
+            String selectedPaymentMethod;
+            @JsonProperty("referer_id")
+            Integer refererId;
+            @JsonProperty("referer_code")
+            String refererCode;
+            Double balance;
+            @JsonProperty("default_referral_commission")
+            Integer defaultReferralCommission;
+            @JsonProperty("additional_phone")
+            String additionalPhone;
+            ArrayList<OrdersIdResponseDto.Data.Roles> roles;
+            @JsonProperty("company")
+            Object company;
+            @JsonProperty("service")
+            Object service;
+            @JsonProperty("full_name")
+            String fullName;
+            private Integer id;
+            @JsonProperty("first_name")
+            private String firstName;
+            @JsonProperty("last_name")
+            private String lastName;
+            @JsonProperty("middle_name")
+            private String middleName;
+            private String phone;
+            private String login;
+            private String facetime;
+            private String whatsapp;
+            private String skype;
+            private String telegram;
+            private String email;
+            @JsonProperty("email_verified_at")
+            private String emailVerifiedAt;
+            @JsonProperty("phone_verified_at")
+            private String phoneVerifiedAt;
         }
     }
 }

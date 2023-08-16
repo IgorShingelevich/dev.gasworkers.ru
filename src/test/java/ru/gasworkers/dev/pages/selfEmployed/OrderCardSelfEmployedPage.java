@@ -3,18 +3,18 @@ package ru.gasworkers.dev.pages.selfEmployed;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.OrderStatus;
-import ru.gasworkers.dev.model.OrderType;
+import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.FillProfileBannerSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.orderPageComponent.FillUpOfferBannerOrderPageSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.orderPageComponent.OfferPriceModalWindowSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.StatusBoxOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.HeaderSelfEmployedComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.CheckListTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.CommonTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.DocsTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.InfoMasterTabOrderCardMasterComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.modesSidebarSelfEmployedComponent.DispatcherModeSelfEmployedSidebarComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCheckListTabOrderCardPageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCommonTabOrderCardPageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavDocsTabOrderCardPageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavInfoMasterTabOrderCardMasterPageComponent;
 
 import java.time.Duration;
 
@@ -32,10 +32,10 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
     public final OfferPriceModalWindowSelfEmployedComponent offerPriceModalWindow;
     public final StatusBoxOrderCardComponent statusBox;
 
-    public final NavCommonTabOrderCardPageComponent commonTab;
-    public final NavCheckListTabOrderCardPageComponent tabCheckList;
-    public final NavInfoMasterTabOrderCardMasterPageComponent tabInfoMaster;
-    public final NavDocsTabOrderCardPageComponent tabDocs;
+    public final CommonTabOrderCardComponent commonTab;
+    public final CheckListTabOrderCardComponent tabCheckList;
+    public final InfoMasterTabOrderCardMasterComponent tabInfoMaster;
+    public final DocsTabOrderCardComponent tabDocs;
 
 
     public OrderCardSelfEmployedPage(RoleBrowser browser) {
@@ -46,10 +46,10 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
         fillUpOfferPriceBanner = new FillUpOfferBannerOrderPageSelfEmployedComponent(browser);
         offerPriceModalWindow = new OfferPriceModalWindowSelfEmployedComponent(browser);
         statusBox = new StatusBoxOrderCardComponent(browser);
-        commonTab = new NavCommonTabOrderCardPageComponent(browser);
-        tabCheckList = new NavCheckListTabOrderCardPageComponent(browser);
-        tabInfoMaster = new NavInfoMasterTabOrderCardMasterPageComponent(browser);
-        tabDocs = new NavDocsTabOrderCardPageComponent(browser);
+        commonTab = new CommonTabOrderCardComponent(browser);
+        tabCheckList = new CheckListTabOrderCardComponent(browser);
+        tabInfoMaster = new InfoMasterTabOrderCardMasterComponent(browser);
+        tabDocs = new DocsTabOrderCardComponent(browser);
 
 
     }
@@ -164,14 +164,14 @@ public class OrderCardSelfEmployedPage extends BaseSelfEmployedPage {
         });
     }
 
-    public void checkNewTenderState(OrderStatus orderStatus, OrderType orderType) {
+    public void checkNewTenderState(OrderStatus orderStatus, ServiceType serviceType) {
         stepWithRole("Убедиться, что статус заказа Тендер ", () -> {
             stepWithRole("Убедиться что вкладок заказа - 3", () -> {
                 navButtonsCollection.shouldHave(size(3));
             });
             stepWithRole("Вкладка Описание заказа", () -> {
-                commonTab.orderStatus.currentStatus(orderStatus);
-                commonTab.orderDetails.serviceType(orderType);
+                commonTab.status.checkCurrentStatus(orderStatus);
+                commonTab.details.checkServiceType(serviceType);
                 stepWithRole("Убедиться, что в Карточке заказа  представлена кнопка Принять Заказ и Отказаться ", () -> {
                     acceptRequestButtonLocator.scrollTo().shouldBe(visible);
                     declineRequestButtonLocator.shouldBe(visible);

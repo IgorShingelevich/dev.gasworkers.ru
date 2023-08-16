@@ -6,11 +6,11 @@ import ru.gasworkers.dev.pages.components.selfEmployedComponent.FillProfileBanne
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.ModeSwitcherSelfEmployedComponent;
 import ru.gasworkers.dev.pages.components.selfEmployedComponent.MosOblGasBannerSelfEmployedSideBarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.HeaderSelfEmployedComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.*;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.navCommon.NavCommonTabSelfEmployedProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.navProfile.NavProfileTabSelfEmployedProfilePageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.modesSidebarSelfEmployedComponent.DispatcherModeSelfEmployedSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.modesSidebarSelfEmployedComponent.MasterModeSelfEmployedSidebarComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.*;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navCommon.NavCommonTabSelfEmployedProfilePageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navProfile.NavProfileTabSelfEmployedProfilePageComponent;
 import ru.gasworkers.dev.utils.userBuilder.RandomSelfEmployedAndMaster;
 
 public class ProfileSelfEmployedPage extends BaseSelfEmployedPage {

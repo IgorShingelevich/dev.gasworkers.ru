@@ -13,35 +13,41 @@ public class OffersCounterClientComponent extends BaseComponent {
     public final UrlCheckerSharedComponent urlChecker;
 
     SelenideElement
-            offersCounterComponentLocator = driver.$("div.map-sticky__header--offers").as("Блок с предложениями");
+            self = driver.$("div.map-sticky__header--offers").as("Блок с предложениями");
 
     public OffersCounterClientComponent(RoleBrowser browser) {
         super(browser);
         urlChecker = new UrlCheckerSharedComponent(browser);
     }
 
+    public void checkNoSelf() {
+        stepWithRole("Убедиться, что нет компонента предложений", () -> {
+            self.shouldNotBe(visible);
+        });
+    }
+
     public void noOffers() {
         stepWithRole("Убедиться, что нет предложений", () -> {
-            offersCounterComponentLocator.shouldHave(text("Нет предложений"), Duration.ofSeconds(10));
+            self.shouldHave(text("Нет предложений"), Duration.ofSeconds(10));
         });
     }
 
     public void amount(Integer count) {
         stepWithRole("Убедиться, что есть " + count + " предложений", () -> {
-            offersCounterComponentLocator.shouldHave(partialText(count.toString()), Duration.ofSeconds(10));
+            self.shouldHave(partialText(count.toString()), Duration.ofSeconds(10));
         });
     }
 
     public void clickOffers() {
         stepWithRole("Нажать на компонент предложения", () -> {
-            offersCounterComponentLocator.shouldBe(visible, Duration.ofSeconds(10)).click();
+            self.shouldBe(visible, Duration.ofSeconds(10)).click();
             urlChecker.urlContains("select-service");
         });
     }
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что компонент предложения загрузился", () -> {
-            offersCounterComponentLocator.shouldBe(visible);
+            self.shouldBe(visible);
         });
     }
 }

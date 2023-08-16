@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.OrderStatus;
-import ru.gasworkers.dev.model.OrderType;
+import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.model.client.ClientRequestType;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.BaseTest;
@@ -141,7 +141,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getSelectServicePage().toOrderCard();
         clientPages.getOrderCardPage().checkFinishLoading();
         clientPages.getSelectServicePage().popUp.close();
-        clientPages.getOrderCardPage().checkPublishedState(OrderStatus.NEW_ORDER, OrderType.MAINTENANCE);
+        clientPages.getOrderCardPage().checkPublishedState(OrderStatus.NEW_ORDER, ServiceType.MAINTENANCE);
     }
 
     @Test
@@ -191,7 +191,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getAllOrdersPage().checkFinishLoading();
         clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
         clientPages.getOrderCardPage().checkFinishLoading();
-        clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_VISIT, OrderType.MAINTENANCE);
+        clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_VISIT, ServiceType.MAINTENANCE);
     }
 
     @Test
@@ -207,7 +207,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getAllOrdersPage().checkFinishLoading();
         clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
         clientPages.getOrderCardPage().checkFinishLoading();
-        clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+        clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.MASTER_DISPATCHED, ServiceType.MAINTENANCE);
     }
 
     @Test
@@ -226,8 +226,8 @@ class ClientFlowTest extends BaseTest {
         clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
         clientPages.getOrderCardPage().checkFinishLoading();
         clientPages.getDriverManager().screenshot("Фотка №3");
-        clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
-        clientPages.getOrderCardPage().navDocs();
+        clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.MASTER_DISPATCHED, ServiceType.MAINTENANCE);
+        clientPages.getOrderCardPage().nav.docs();
         clientPages.getDriverManager().screenshot("Фотка №4");
         clientPages.getOrderCardPage().docsTab.downloadAgreement();
         clientPages.getOrderCardPage().docsTab.downloadAgreement();
@@ -248,7 +248,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getAllOrdersPage().checkFinishLoading();
         clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
         clientPages.getOrderCardPage().checkFinishLoading();
-        clientPages.getOrderCardPage().checkNotReviewedCompletedOrderState(OrderStatus.COMPLETED, OrderType.MAINTENANCE);
+        clientPages.getOrderCardPage().checkNotReviewedCompletedOrderState(OrderStatus.COMPLETED, ServiceType.MAINTENANCE);
 //        clientPages.getOrderCardPage().navDocsTab.downloadAgreement()
     }
 
@@ -264,7 +264,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getAllOrdersPage().checkFinishLoading();
         clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
         clientPages.getOrderCardPage().checkFinishLoading();
-        clientPages.getOrderCardPage().checkReviewedCompletedOrderState(OrderStatus.COMPLETED, OrderType.MAINTENANCE);
+        clientPages.getOrderCardPage().checkReviewedCompletedOrderState(OrderStatus.COMPLETED, ServiceType.MAINTENANCE);
 //        clientPages.getOrderCardPage().navDocsTab.downloadAgreement()
     }
 
@@ -277,7 +277,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getAllOrdersPage().checkFinishLoading();
         clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
         clientPages.getOrderCardPage().checkFinishLoading();
-        clientPages.getOrderCardPage().checkNotReviewedCompletedOrderState(OrderStatus.COMPLETED, OrderType.MAINTENANCE);
+        clientPages.getOrderCardPage().checkNotReviewedCompletedOrderState(OrderStatus.COMPLETED, ServiceType.MAINTENANCE);
 //        clientPages.getOrderCardPage().navDocsTab.downloadAgreement()*/
     }
 

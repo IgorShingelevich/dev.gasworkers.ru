@@ -2,12 +2,12 @@ package ru.gasworkers.dev.pages.components.masterComponent;
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.BaseTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.BaseOrderCardComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 
-public class FillUpCheckListBannerComponent extends BaseTabOrderCardComponent {
+public class FillUpCheckListBannerComponent extends BaseOrderCardComponent {
     public FillUpCheckListBannerComponent(RoleBrowser browser) {
         super(browser);
     }

@@ -2,11 +2,11 @@ package ru.gasworkers.dev.pages.dispatcher;
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockDispatcherComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.NavContactsTabProfilePageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.NavNotificationsTabProfilePageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.NavPasswordTabProfilePageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navCommon.NavCommonTabDispatcherProfilePageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navProfile.NavProfileTabDispatcherProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.NavContactsTabProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.NavNotificationsTabProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.NavPasswordTabProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.navCommon.NavCommonTabDispatcherProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.navProfile.NavProfileTabDispatcherProfilePageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.DispatcherSidebarComponent;
 
 public class ProfileDispatcherPage extends BaseDispatcherPage {

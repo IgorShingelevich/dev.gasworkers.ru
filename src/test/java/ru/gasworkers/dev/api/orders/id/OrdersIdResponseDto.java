@@ -48,15 +48,15 @@ public class OrdersIdResponseDto {
         @JsonProperty("desired_time_ended")
         public String desiredTimeEnded;
         @JsonProperty("selected_date")
-        public Object selectedDate;
-        public Object description;
+        public String selectedDate;
+        public String description;
         public ArrayList<Object> photos;
         public ArrayList<Object> videos;
         @JsonProperty("created_at")
         public String createdAt;
         public ArrayList<Masters> masters;
         @JsonProperty("master_recommendation")
-        public Object masterRecommendation;
+        public String masterRecommendation;
         @JsonProperty("all_works")
         public Boolean allWorks;
         @JsonProperty("master_left_review")

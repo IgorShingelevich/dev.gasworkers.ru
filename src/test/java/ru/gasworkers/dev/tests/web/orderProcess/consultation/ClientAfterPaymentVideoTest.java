@@ -12,8 +12,8 @@ import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureStory;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
-import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.Role;
+import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.model.equipment.EquipmentType;
 import ru.gasworkers.dev.pages.context.ClientPages;
@@ -91,7 +91,7 @@ public class ClientAfterPaymentVideoTest extends BaseTest {
                 clientPages.getApproveMasterVideoPage().details.checkOrderDate(randomClient.getSinceTodayDate());
                 clientPages.getApproveMasterVideoPage().details.checkRightNowTimeOrderState();
                 clientPages.getApproveMasterVideoPage().details.checkPriceOrder(masterPriceByIndex);
-                clientPages.getApproveMasterVideoPage().details.checkOrderType(OrderType.VIDEO);
+                clientPages.getApproveMasterVideoPage().details.checkOrderType(ServiceType.VIDEO);
                 clientPages.getApproveMasterVideoPage().details.checkEquipment(resultedEquipmentCollectionName);
 //                clientPages.getApproveMasterVideoPage().details.checkPersonAddress(resultedAddress); // removed
                 //todo  video attachments

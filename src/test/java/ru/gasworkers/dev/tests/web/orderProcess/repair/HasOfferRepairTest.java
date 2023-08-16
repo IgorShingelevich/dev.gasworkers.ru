@@ -1,6 +1,9 @@
 package ru.gasworkers.dev.tests.web.orderProcess.repair;
 
-import io.qameta.allure.*;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -37,9 +40,6 @@ import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -179,7 +179,7 @@ public class HasOfferRepairTest extends BaseApiTest {
                 clientPages.getHomePage().checkUrl();
                 clientPages.getHomePage().guide.skipButton();
             });
-            step("авторизация Диспетчера", () -> {
+          /*  step("авторизация Диспетчера", () -> {
                 dispatcherPages.getLoginPage()
                         .open()
                         .login(sssrDispatcher1Email, "1234");
@@ -197,7 +197,7 @@ public class HasOfferRepairTest extends BaseApiTest {
                 String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                         + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
                 Allure.addAttachment("RunStartTime: ", date);
-            });
+            });*/
         });
 
         step("кабинет клиента в состоянии - в состоянии есть отклик СК", () -> {
@@ -219,17 +219,19 @@ public class HasOfferRepairTest extends BaseApiTest {
                     clientPages.getSelectServicePage().checkState(StateRepair.HAS_OFFER, suggestedServiceResponse);
                 });
             };
+            Consumer<SoftAssert> case4 = softAssert -> {
+                step("диспетчер карточка заказа - в состоянии есть отклик СК", () -> {
+                });
+            };
+            Consumer<SoftAssert> case5 = softAssert -> {
+                step("диспетчер карта - в состоянии есть отклик СК", () -> {
+                });
+            };
+            Consumer<SoftAssert> case6 = softAssert -> {
+                step("мастер список заказов - в состоянии есть отклик СК", () -> {
+                });
+            };
             assertAll(Arrays.asList(case1, case2, case3));
         });
     }
 }
-
-     /*step("клиент карточка заказа -  есть отклик СК", () -> {
-                clientPages.getHomePage().sidebar.allOrders();
-                clientPages.getAllOrdersPage().checkFinishLoading();
-                clientPages.getAllOrdersPage().orderByNumber(commonFields.getOrderNumber());
-                clientPages.getSelectServicePage().checkUrl();
-                clientPages.getSelectServicePage().toOrderCard();
-                clientPages.getOrderCardPage().checkFinishLoading();
-                clientPages.getOrderCardPage().checkHasOfferRepairState(hasOfferOrderInfo);
-            });*/

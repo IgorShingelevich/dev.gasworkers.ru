@@ -2,12 +2,12 @@ package ru.gasworkers.dev.pages.master;
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.NavContactsTabProfilePageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.NavEquipmentTabProfilePageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.NavNotificationsTabProfilePageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.NavPasswordTabProfilePageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navCommon.NavCommonTabMasterProfilePageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsProfilePageComponent.navProfile.NavProfileTabMasterProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.NavContactsTabProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.NavEquipmentTabProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.NavNotificationsTabProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.NavPasswordTabProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.navCommon.NavCommonTabMasterProfilePageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.profileComponent.navProfile.NavProfileTabMasterProfilePageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.MasterSidebarComponent;
 
 public class ProfileMasterPage extends BaseMasterPage{

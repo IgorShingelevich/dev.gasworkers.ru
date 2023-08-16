@@ -156,6 +156,18 @@ public class PublishedRepairTest extends BaseApiTest {
                     clientPages.getSelectServicePage().checkState(StateRepair.PUBLISHED, suggestedServiceResponse);
                 });
             };
+            Consumer<SoftAssert> case4 = softAssert -> {
+                step("диспетчер карточка заказа - в состоянии published", () -> {
+                });
+            };
+            Consumer<SoftAssert> case5 = softAssert -> {
+                step("диспетчер карта - в состоянии published", () -> {
+                });
+            };
+            Consumer<SoftAssert> case6 = softAssert -> {
+                step("мастер список заказов - в состоянии published", () -> {
+                });
+            };
             assertAll(Arrays.asList(case1, case2, case3));
         });
     }

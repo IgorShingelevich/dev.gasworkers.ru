@@ -6,7 +6,7 @@ import io.qameta.allure.Story;
 import org.junit.jupiter.api.*;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.OrderStatus;
-import ru.gasworkers.dev.model.OrderType;
+import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.model.master.ReadyForVideoState;
 import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.BaseTest;
@@ -75,7 +75,7 @@ public class MasterFlowTest extends BaseTest {
         masterPages.getAllNewOrdersPage().switchToListView();
         masterPages.getAllNewOrdersPage().openByNumber(checkedOrderNumber);
         masterPages.getOrderCardPage().checkFinishLoading();
-        masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+        masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.MASTER_DISPATCHED, ServiceType.MAINTENANCE);
         masterPages.getOrderCardPage().editObject();
         masterPages.getEditObjectPage().checkFinishLoading();
         masterPages.getEditObjectPage().navGasBranch();
@@ -108,7 +108,7 @@ public class MasterFlowTest extends BaseTest {
         masterPages.getAllNewOrdersPage().openByNumber(checkedOrderNumber);
         masterPages.getOrderCardPage().checkFinishLoading();
         masterPages.getOrderCardPage().startWork();
-        masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+        masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.MASTER_DISPATCHED, ServiceType.MAINTENANCE);
 //        masterPages.getOrderCardPage().navInfoMaster();
 //        masterPages.getOrderCardPage().tabInfoMaster.table.checkDefaultState();
         masterPages.getOrderCardPage().navCheckList();
@@ -135,7 +135,7 @@ public class MasterFlowTest extends BaseTest {
         masterPages.getAllNewOrdersPage().openByNumber(orderNumber);
         masterPages.getOrderCardPage().checkFinishLoading();
         //TODO checkNotReviewedCompletedOrderState
-//        masterPages.getOrderCardPage().checkNotReviewedCompletedOrderState(OrderStatus.COMPLETED, OrderType.MAINTENANCE);
+//        masterPages.getOrderCardPage().checkNotReviewedCompletedOrderState(OrderStatus.COMPLETED, ServiceType.MAINTENANCE);
         // TODO checkFinishLoading - expand  docs check, order properties check, price check
     }
 

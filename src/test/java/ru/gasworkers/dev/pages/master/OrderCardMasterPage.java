@@ -4,15 +4,15 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.Doc;
 import ru.gasworkers.dev.model.OrderStatus;
-import ru.gasworkers.dev.model.OrderType;
+import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.StatusBoxOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockMasterComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.CheckListTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.CommonTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.DocsTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.InfoMasterTabOrderCardMasterComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.MasterSidebarComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCheckListTabOrderCardPageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCommonTabOrderCardPageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavDocsTabOrderCardPageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavInfoMasterTabOrderCardMasterPageComponent;
 
 import java.time.Duration;
 
@@ -24,10 +24,10 @@ public class OrderCardMasterPage extends BaseMasterPage {
     public final MasterSidebarComponent sidebar;
     public final ActionsBlockMasterComponent actionsBlock;
     public final StatusBoxOrderCardComponent statusBox;
-    public final NavCommonTabOrderCardPageComponent tabCommon;
-    public final NavCheckListTabOrderCardPageComponent tabCheckList;
-    public final NavInfoMasterTabOrderCardMasterPageComponent tabInfoMaster;
-    public final NavDocsTabOrderCardPageComponent tabDocs;
+    public final CommonTabOrderCardComponent tabCommon;
+    public final CheckListTabOrderCardComponent tabCheckList;
+    public final InfoMasterTabOrderCardMasterComponent tabInfoMaster;
+    public final DocsTabOrderCardComponent tabDocs;
     private final String PAGE_TITLE = "Заказ";
     ElementsCollection
 
@@ -55,10 +55,10 @@ public class OrderCardMasterPage extends BaseMasterPage {
         sidebar = new MasterSidebarComponent(browser);
         actionsBlock = new ActionsBlockMasterComponent(browser);
         statusBox = new StatusBoxOrderCardComponent(browser);
-        tabCommon = new NavCommonTabOrderCardPageComponent(browser);
-        tabCheckList = new NavCheckListTabOrderCardPageComponent(browser);
-        tabInfoMaster = new NavInfoMasterTabOrderCardMasterPageComponent(browser);
-        tabDocs = new NavDocsTabOrderCardPageComponent(browser);
+        tabCommon = new CommonTabOrderCardComponent(browser);
+        tabCheckList = new CheckListTabOrderCardComponent(browser);
+        tabInfoMaster = new InfoMasterTabOrderCardMasterComponent(browser);
+        tabDocs = new DocsTabOrderCardComponent(browser);
     }
 
     public void checkFinishLoading() {
@@ -109,13 +109,13 @@ public class OrderCardMasterPage extends BaseMasterPage {
         });
     }
 
-    public void checkMasterDispatchedOrderState(OrderStatus orderStatus, OrderType orderType) {
+    public void checkMasterDispatchedOrderState(OrderStatus orderStatus, ServiceType serviceType) {
         //TODO check current nav tab is navCommon
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
                 tabCommon.fillUpBanner.checkBannerDetails();
-                tabCommon.orderStatus.currentStatus(orderStatus);
-                tabCommon.orderDetails.serviceType(orderType);
+                tabCommon.status.checkCurrentStatus(orderStatus);
+                tabCommon.details.checkServiceType(serviceType);
                 stepWithRole("Убедиться, что  представлены кнопки  Редактировать объект/оборудование, кнопка Приступить к работе и кнопка Заказ на ремонт", () -> {
                     startWorkingButtonLocator.shouldBe(visible);
                     editObjectButtonLocator.shouldBe(visible);
@@ -167,7 +167,7 @@ public class OrderCardMasterPage extends BaseMasterPage {
         });
     }
 
-    public void checkFillingCheckListState(OrderStatus orderStatus, OrderType orderType) {
+    public void checkFillingCheckListState(OrderStatus orderStatus, ServiceType serviceType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Убедиться что открыта вкладка Чеклист", () -> {
                 tabCheckList.checkFinishLoading(orderStatus);
@@ -183,8 +183,8 @@ public class OrderCardMasterPage extends BaseMasterPage {
             });
             stepWithRole("Вкладка Описание заказа", () -> {
                 navCommon();
-                tabCommon.orderStatus.currentStatus(orderStatus);
-                tabCommon.orderDetails.serviceType(orderType);
+                tabCommon.status.checkCurrentStatus(orderStatus);
+                tabCommon.details.checkServiceType(serviceType);
                 stepWithRole("Убедиться, что  представлены кнопки Приступить к работе, кнопка Заказ на ремонт", () -> {
                     editObjectButtonLocator.shouldNotBe(visible);
                     repairFromMaintenanceButtonLocator.shouldBe(visible);

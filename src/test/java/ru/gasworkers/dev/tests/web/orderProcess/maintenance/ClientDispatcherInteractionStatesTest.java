@@ -7,8 +7,8 @@ import ru.gasworkers.dev.allure.AllureStory;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.OrderStatus;
-import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.Role;
+import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.model.client.ClientRequestType;
@@ -138,7 +138,7 @@ class ClientDispatcherInteractionStatesTest extends BaseTest {
                 clientPages.getHomePage().lastOrderComponent.lastOrderCard();
                 Selenide.sleep(1000);
 //                clientPages.getOrderCardPage().checkFinishLoading();
-                clientPages.getOrderCardPage().checkPublishedState(OrderStatus.PUBLISHED, OrderType.MAINTENANCE);
+                clientPages.getOrderCardPage().checkPublishedState(OrderStatus.PUBLISHED, ServiceType.MAINTENANCE);
                 //check notification - orderPublished
             });
             String currentOrderNumber = clientPages.getOrderCardPage().getOrderNumber();
@@ -156,9 +156,9 @@ class ClientDispatcherInteractionStatesTest extends BaseTest {
 //            dispatcherPages.getOrderCardPage().checkFinishLoading();
             Selenide.sleep(1000);
             dispatcherPages.getOrderCardPage().popUp.close();
-            dispatcherPages.getOrderCardPage().checkNewTenderState(OrderStatus.NEW_TENDER, OrderType.MAINTENANCE);
+            dispatcherPages.getOrderCardPage().checkNewTenderState(OrderStatus.NEW_TENDER, ServiceType.MAINTENANCE);
             dispatcherPages.getOrderCardPage().acceptOrder();
-            dispatcherPages.getOrderCardPage().checkParticipateTenderState(OrderStatus.PARTICIPATE_TENDER, OrderType.MAINTENANCE);
+            dispatcherPages.getOrderCardPage().checkParticipateTenderState(OrderStatus.PARTICIPATE_TENDER, ServiceType.MAINTENANCE);
         });
 
         step("Клиент получает предложение Диспетчера СК", () -> {
@@ -170,7 +170,7 @@ class ClientDispatcherInteractionStatesTest extends BaseTest {
                 clientPages.getSelectServicePage().toOrderCard();
                 clientPages.getOrderCardPage().checkFinishLoading();
                 clientPages.getOrderCardPage().popUp.close();
-                clientPages.getOrderCardPage().checkReviewOffersState(OrderStatus.PUBLISHED, OrderType.MAINTENANCE, 1);
+                clientPages.getOrderCardPage().checkReviewOffersState(OrderStatus.PUBLISHED, ServiceType.MAINTENANCE, 1);
                 //go back to order card and check that quantity of responses in ServiceTabs is equal to number in ResponseCountBlock
                 clientPages.getOrderCardPage().offersCounter.clickOffers();
                 clientPages.getSelectServicePage().checkFinishLoadingMaintenance();
@@ -220,7 +220,7 @@ class ClientDispatcherInteractionStatesTest extends BaseTest {
                 clientPages.getHomePage().popUp.close();
                 clientPages.getHomePage().lastOrderComponent.lastOrderCard();
                 clientPages.getOrderCardPage().checkFinishLoading();
-                clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_VISIT, OrderType.MAINTENANCE);
+                clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_VISIT, ServiceType.MAINTENANCE);
             });
         });
 
@@ -237,14 +237,14 @@ class ClientDispatcherInteractionStatesTest extends BaseTest {
             dispatcherPages.getHomePage().openOrderByNumber(orderNumber);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             dispatcherPages.getOrderCardPage().popUp.close();
-            dispatcherPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_VISIT, OrderType.MAINTENANCE);
+            dispatcherPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_VISIT, ServiceType.MAINTENANCE);
             dispatcherPages.getOrderCardPage().selectTimeButton();
             dispatcherPages.getOrderCardPage().datePicker.selectNowDateAndTime();
             dispatcherPages.getOrderCardPage().selectMaster();
             dispatcherPages.getSelectMasterPage().checkFinishLoading();
             dispatcherPages.getSelectMasterPage().selectNewMasterByIndex(0);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
-            dispatcherPages.getOrderCardPage().checkMasterDispatchedState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+            dispatcherPages.getOrderCardPage().checkMasterDispatchedState(OrderStatus.MASTER_DISPATCHED, ServiceType.MAINTENANCE);
         });
 
         step("Мастер открывает заказ в состоянии Мастер в пути", () -> {
@@ -256,7 +256,7 @@ class ClientDispatcherInteractionStatesTest extends BaseTest {
             masterPages.getAllNewOrdersPage().switchToTabView();
             masterPages.getAllNewOrdersPage().openByNumber(orderNumber);
             masterPages.getOrderCardPage().checkFinishLoading();
-            masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+            masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.MASTER_DISPATCHED, ServiceType.MAINTENANCE);
             // todo add OrderStatusBoxComponent to  OrderCardPage
             //todo:default checklist state
 
@@ -285,7 +285,7 @@ class ClientDispatcherInteractionStatesTest extends BaseTest {
         step("Мастер прибывает на обьект", () -> {
             step("Мастер заполняет чеклист", () -> {
                 masterPages.getOrderCardPage().startWork();
-                masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.MASTER_DISPATCHED, OrderType.MAINTENANCE);
+                masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.MASTER_DISPATCHED, ServiceType.MAINTENANCE);
                 //todo check checklist default state
                 //todo: add test for checklist changes and its affect on order state
             });

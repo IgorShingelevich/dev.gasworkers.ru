@@ -9,8 +9,8 @@ import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.OrderStatus;
-import ru.gasworkers.dev.model.OrderType;
 import ru.gasworkers.dev.model.Role;
+import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.SelfEmployedPages;
 import ru.gasworkers.dev.tests.BaseTest;
@@ -145,7 +145,7 @@ public class NewSelfEmployedAccountTest extends BaseTest {
             selfEmployedPages.getOrderCardPage().offerPriceModalWindow.close();
         });
         step("Страница карточки  расцененного заказа - первый заказ незаполненный профиль", () -> {
-            selfEmployedPages.getOrderCardPage().checkNewTenderState(OrderStatus.NEW_TENDER, OrderType.MAINTENANCE);
+            selfEmployedPages.getOrderCardPage().checkNewTenderState(OrderStatus.NEW_TENDER, ServiceType.MAINTENANCE);
             selfEmployedPages.getOrderCardPage().initialStateAcceptOrder();
         });
         step("Страница информации о заполнении профиля", () -> {

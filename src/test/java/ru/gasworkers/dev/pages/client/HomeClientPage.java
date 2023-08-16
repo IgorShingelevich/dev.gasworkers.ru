@@ -8,7 +8,7 @@ import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClient
 import ru.gasworkers.dev.pages.components.sharedComponent.PersonSummaryComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.guideComponent.PlayGuideComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.notifications.conferenceNotification.ConferenceNotificationSharedComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.notificationsComponent.conferenceNotification.ConferenceNotificationSharedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 
 import java.time.Duration;

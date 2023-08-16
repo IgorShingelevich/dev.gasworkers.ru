@@ -4,16 +4,16 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.Doc;
 import ru.gasworkers.dev.model.OrderStatus;
-import ru.gasworkers.dev.model.OrderType;
+import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.dispatcherComponent.DatePickerOrderDispatcherComponent;
 import ru.gasworkers.dev.pages.components.dispatcherComponent.OfferPriceModalDispatcherComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.buttonSharedComponent.MainButtonSharedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockDispatcherComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.CommonTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.DocsTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.InfoMasterTabOrderCardMasterComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.DispatcherSidebarComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavCommonTabOrderCardPageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavDocsTabOrderCardPageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.tabsOrderCardPageComponent.NavInfoMasterTabOrderCardMasterPageComponent;
 
 import java.time.Duration;
 
@@ -26,9 +26,9 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
     public final DispatcherSidebarComponent sidebar;
     public final DatePickerOrderDispatcherComponent datePicker;
     public final ActionsBlockDispatcherComponent actionBlock;
-    public final NavCommonTabOrderCardPageComponent tabCommon;
-    public final NavInfoMasterTabOrderCardMasterPageComponent tabInfoMaster;
-    public final NavDocsTabOrderCardPageComponent tabDocs;
+    public final CommonTabOrderCardComponent tabCommon;
+    public final InfoMasterTabOrderCardMasterComponent tabInfoMaster;
+    public final DocsTabOrderCardComponent tabDocs;
     public final MainButtonSharedComponent mainButton;
     public final OfferPriceModalDispatcherComponent offerPrice;
 
@@ -38,9 +38,9 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         sidebar = new DispatcherSidebarComponent(browser);
         datePicker = new DatePickerOrderDispatcherComponent(browser);
         actionBlock = new ActionsBlockDispatcherComponent(browser);
-        tabCommon = new NavCommonTabOrderCardPageComponent(browser);
-        tabInfoMaster = new NavInfoMasterTabOrderCardMasterPageComponent(browser);
-        tabDocs = new NavDocsTabOrderCardPageComponent(browser);
+        tabCommon = new CommonTabOrderCardComponent(browser);
+        tabInfoMaster = new InfoMasterTabOrderCardMasterComponent(browser);
+        tabDocs = new DocsTabOrderCardComponent(browser);
         mainButton = new MainButtonSharedComponent(browser);
         offerPrice = new OfferPriceModalDispatcherComponent(browser);
     }
@@ -96,11 +96,11 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         });
     }
 
-    public void checkNewTenderState(OrderStatus orderStatus, OrderType orderType) {
+    public void checkNewTenderState(OrderStatus orderStatus, ServiceType serviceType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                tabCommon.orderStatus.currentStatus(orderStatus);
-                tabCommon.orderDetails.serviceType(orderType);
+                tabCommon.status.checkCurrentStatus(orderStatus);
+                tabCommon.details.checkServiceType(serviceType);
                 stepWithRole("Убедиться, что в Карточке заказа  представлена кнопка Принять Заказ и Отказаться ", () -> {
                     acceptRequestButtonLocator.scrollTo().shouldBe(visible);
                     declineRequestButtonLocator.shouldBe(visible);
@@ -135,11 +135,11 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         });
     }
 
-    public void checkParticipateTenderState(OrderStatus orderStatus, OrderType orderType) {
+    public void checkParticipateTenderState(OrderStatus orderStatus, ServiceType serviceType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                tabCommon.orderStatus.currentStatus(orderStatus);
-                tabCommon.orderDetails.serviceType(orderType);
+                tabCommon.status.checkCurrentStatus(orderStatus);
+                tabCommon.details.checkServiceType(serviceType);
                 stepWithRole("Убедиться, что в Карточке заказа  представлена неактивная  кнопка Уже участвуете ", () -> {
                     alreadyAcceptedButtonLocator.shouldBe(visible);
                     acceptRequestButtonLocator.shouldNot(visible);
@@ -159,11 +159,11 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         System.out.println("dispatcher orderStatus: " + orderStatus);
     }
 
-    public void checkScheduleVisitState(OrderStatus orderStatus, OrderType orderType) {
+    public void checkScheduleVisitState(OrderStatus orderStatus, ServiceType serviceType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                tabCommon.orderStatus.currentStatus(orderStatus);
-                tabCommon.orderDetails.serviceType(orderType);
+                tabCommon.status.checkCurrentStatus(orderStatus);
+                tabCommon.details.checkServiceType(serviceType);
                 stepWithRole("Убедиться, что  в Карточке заказа представлена кнопка Назначить время и Отменить заказ ", () -> {
                     selectTimeButtonLocator.shouldBe(visible);
                     cancelButtonLocator.shouldBe(visible);
@@ -188,11 +188,11 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         System.out.println("dispatcher orderStatus: " + orderStatus);
     }
 
-    public void checkMasterDispatchedState(OrderStatus orderStatus, OrderType orderType) {
+    public void checkMasterDispatchedState(OrderStatus orderStatus, ServiceType serviceType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
-                tabCommon.orderStatus.currentStatus(orderStatus);
-                tabCommon.orderDetails.serviceType(orderType);
+                tabCommon.status.checkCurrentStatus(orderStatus);
+                tabCommon.details.checkServiceType(serviceType);
                 stepWithRole("Убедиться, что  в Карточке заказа представлена кнопка Назначить Другого Мастера и Назанчить Новое Время ", () -> {
                     selectAnotherTimeButtonLocator.as("Назначить Новое Время").shouldBe(visible, Duration.ofSeconds(10));
                     selectAnotherMasterButtonLocator.as("Назначить Другого Мастера").shouldBe(visible, Duration.ofSeconds(10));

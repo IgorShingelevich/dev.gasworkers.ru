@@ -3,7 +3,7 @@ package ru.gasworkers.dev.pages.components.clientComponent.conferenceComponent.P
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import ru.gasworkers.dev.model.OrderType;
+import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 
@@ -79,9 +79,9 @@ public class PickMasterClientComponent extends BaseComponent {
             System.out.println("Стоимость: " + mediums.findBy(Condition.text("Стоимость:")).sibling(0).getText());
         }
 
-    public void checkOrderType(OrderType orderType) {
+    public void checkOrderType(ServiceType serviceType) {
         stepWithRole("Убедиться, что в компоненте  тип заказа  - Видеоконсультация", () -> {
-            mediums.findBy(Condition.text("Тип заказа:")).sibling(0).shouldHave(text(orderType.toString()));
+            mediums.findBy(Condition.text("Тип заказа:")).sibling(0).shouldHave(text(serviceType.toString()));
         });
         System.out.println("Тип заказа:" + mediums.findBy(Condition.text("Тип заказа:")).sibling(0).text());
     }

@@ -250,7 +250,7 @@ public class FinishConsultationTest extends BaseApiTest {
 //                sleep(30000);
 //                clientPages.getDriverManager().refresh();
                 clientPages.getOrderCardPage().checkUrl();
-                clientPages.getOrderCardPage().navInfoMaster();
+                clientPages.getOrderCardPage().nav.infoMaster();
                 clientPages.getOrderCardPage().infoMasterTab.checkResumeConference("test-resume");
             });
             step("стр Лк мастера", () -> {

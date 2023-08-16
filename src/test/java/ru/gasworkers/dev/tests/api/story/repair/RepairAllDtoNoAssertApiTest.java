@@ -228,8 +228,8 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
         });
 
-        step("заказ на ремонт в состоянии hasOffer", () -> {
-            step(" клиент карточка последнего заказа - убедиться что в состоянии hasOffer", () -> {
+        step("заказ на ремонт в состоянии - есть отклик СК", () -> {
+            step(" клиент карточка последнего заказа - убедиться что в состоянии - есть отклик СК", () -> {
                 actualHasOfferLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(LastOrderInfoResponseDto.class);
@@ -238,7 +238,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
                 LastOrderInfoResponseDto expectedResponse = repairCase.hasOfferLastOrderInfoBGRepair(commonFields);
 //                assertResponsePartialNoAt(expectedResponse, actualHasOfferLastOrderResponse);
             });
-            step("клиент карточка заказа - убедиться что в состоянии hasOffer", () -> {
+            step("клиент карточка заказа - убедиться что в состоянии - есть отклик СК", () -> {
                 actualHasOfferOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersInfoResponseDto.class);
@@ -247,7 +247,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
                 OrdersInfoResponseDto expectedResponse = repairCase.hasOfferOrderInfoBGRepair(commonFields);
 //                assertResponsePartialNoAt(expectedResponse, actualHasOfferOrderInfoResponse);
             });
-            step("диспетчер карточка заказа - убедиться что в состоянии hasOffer", () -> {
+            step("диспетчер карточка заказа - убедиться что в состоянии - есть отклик СК", () -> {
                 System.out.println("actualHasOfferOrderIdResponseAsDispatcher");
                 actualHasOfferOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
                         .statusCode(200)
@@ -311,7 +311,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
 
         });
 
-        step("заказ на ремонт в  состоянии Согласование даты и времени", () -> {
+        step("заказ на ремонт - в  состоянии согласование даты и времени", () -> {
             step("клиент оплачивает  выезд мастера", () -> {
                 SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
@@ -319,7 +319,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
                 commonFields.setPayment0Url(actualResponse.getData().getPayUrl());
                 commonFields.setPayment0Id(actualResponse.getData().getPaymentId());
             });
-            step("клиент карточка заказа - убедиться что Согласование даты и времени", () -> {
+            step("клиент карточка заказа - убедиться что согласование даты и времени", () -> {
                 System.out.println("dateSelectingOrderInfoResponseAsClient");
                 actualDateSelectingOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
@@ -327,14 +327,14 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
                 OrdersInfoResponseDto expectedResponse = repairCase.dateSelectingOrderInfoBGRepair(commonFields);
 //                assertResponsePartialNoAt(expectedResponse, actualDateSelectingOrderInfoResponse);
             });
-            step(" клиент карточка последнего заказа - убедиться что Согласование даты и времени", () -> {
+            step(" клиент карточка последнего заказа - убедиться что согласование даты и времени", () -> {
                 actualDateSelectingLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(LastOrderInfoResponseDto.class);
                 LastOrderInfoResponseDto expectedResponse = repairCase.dateSelectingLastOrderInfoBGRepair(commonFields);
 //                assertResponsePartialNoAt(expectedResponse, actualDateSelectingLastOrderResponse);
             });
-            step("диспетчер карточка заказа - убедиться что Согласование даты и времени", () -> {
+            step("диспетчер карточка заказа - убедиться что согласование даты и времени", () -> {
                 System.out.println("dateSelectingOrderIdResponseAsDispatcher");
                 commonFields.setApproveDate(client.getApproveDate());
                 actualDateSelectingOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
