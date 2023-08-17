@@ -1,17 +1,17 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs;
+package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.BaseComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.BaseOrderCardComponent;
 
 import static com.codeborne.selenide.Condition.disabled;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 
-public class TableInfoMasterTabComponent extends BaseComponent {
-    public TableInfoMasterTabComponent(RoleBrowser browser) {
+public class MaintenanceDetailsInfoMasterTabComponent extends BaseOrderCardComponent {
+    public MaintenanceDetailsInfoMasterTabComponent(RoleBrowser browser) {
         super(browser);
     }
 

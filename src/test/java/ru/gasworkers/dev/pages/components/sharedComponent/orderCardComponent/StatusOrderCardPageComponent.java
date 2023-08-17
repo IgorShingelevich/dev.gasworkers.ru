@@ -9,27 +9,6 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import static com.codeborne.selenide.Condition.*;
 
 public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
-
-    /*<ul data-v-04bd6842="" class="order-details__prices"><li data-v-04bd6842=""><div data-v-04bd6842="" class="order-details__prices--status"><span data-v-04bd6842="" class="bold">
-              Активация безопасной сделки
-            </span> <span data-v-04bd6842="" class="status green">
-              Оплачено
-            </span></div> <div data-v-04bd6842="" class="order-details__prices--price"><strong data-v-04bd6842="">10 ₽</strong>
-              /
-              <span data-v-04bd6842="" class="payment-date">26 июля 2023 год</span></div></li><li data-v-04bd6842=""><div data-v-04bd6842="" class="order-details__prices--status"><span data-v-04bd6842="" class="bold">
-              Оплата материалов
-            </span> <span data-v-04bd6842="" class="status green">
-              Оплачено
-            </span></div> <div data-v-04bd6842="" class="order-details__prices--price"><strong data-v-04bd6842="">3300 ₽</strong>
-              /
-              <span data-v-04bd6842="" class="payment-date">26 июля 2023 год</span></div></li><li data-v-04bd6842=""><div data-v-04bd6842="" class="order-details__prices--status"><span data-v-04bd6842="" class="bold">
-              Оплата ремонтных работ
-            </span> <span data-v-04bd6842="" class="status green">
-              Оплачено
-            </span></div> <div data-v-04bd6842="" class="order-details__prices--price"><strong data-v-04bd6842="">7090 ₽</strong>
-              /
-              <span data-v-04bd6842="" class="payment-date">26 июля 2023 год</span></div></li></ul>*/
-
     ElementsCollection
             paymentCollection = driver.$$("ul.order-details__prices li").as("Коллекция платежей");
     SelenideElement
@@ -38,15 +17,14 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
             materialsStagePaymentLocatorBox = driver.$$("ul.order-details__prices li").findBy(text("Оплата материалов")).parent(),
             actionsStagePaymentLocatorBox = driver.$$("ul.order-details__prices li").findBy(text("Оплата ремонтных работ")).parent(),
             activationStatusPaymentLocator = activationStagePaymentLocatorBox.find(".order-details__prices--status .status"),
-            activationAmountPaymentLocator = activationStagePaymentLocatorBox.find(".order-details__prices--price strong"),
+            activationPricePaymentLocator = activationStagePaymentLocatorBox.find(".order-details__prices--price strong"),
             activationStatusDatePaymentLocator = activationStagePaymentLocatorBox.find(".payment-date"),
             materialsStatusPaymentLocator = materialsStagePaymentLocatorBox.find(".order-details__prices--status .status"),
-            materialsAmountPaymentLocator = materialsStagePaymentLocatorBox.find(".order-details__prices--price strong"),
+            materialsPricePaymentLocator = materialsStagePaymentLocatorBox.find(".order-details__prices--price strong"),
             materialsDatePaymentLocator = materialsStagePaymentLocatorBox.find(".payment-date"),
             actionsStatusPaymentLocator = actionsStagePaymentLocatorBox.find(".order-details__prices--status .status"),
-            actionsAmountPaymentLocator = actionsStagePaymentLocatorBox.find(".order-details__prices--price strong"),
+            actionsPricePaymentLocator = actionsStagePaymentLocatorBox.find(".order-details__prices--price strong"),
             actionsDatePaymentLocator = actionsStagePaymentLocatorBox.find(".payment-date");
-
 
     public StatusOrderCardPageComponent(RoleBrowser browser) {
         super(browser);
@@ -68,9 +46,9 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
         });
     }
 
-    public void checkActivationAmountPayment(String expectedAmount) {
-        stepWithRole("Убедиться, что сумма платежа за активацию " + expectedAmount + " соответствует ожидаемой", () -> {
-            activationAmountPaymentLocator.shouldHave(partialText(expectedAmount));
+    public void checkActivationPricePayment(String expectedPrice) {
+        stepWithRole("Убедиться, что сумма платежа за активацию " + expectedPrice + " соответствует ожидаемой", () -> {
+            activationPricePaymentLocator.shouldHave(partialText(expectedPrice));
         });
     }
 
@@ -90,9 +68,9 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
         });
     }
 
-    public void checkMaterialsAmountPayment(String expectedAmount) {
-        stepWithRole("Убедиться, что сумма платежа за материалы " + expectedAmount + " соответствует ожидаемой", () -> {
-            materialsAmountPaymentLocator.shouldHave(text(expectedAmount));
+    public void checkMaterialsPricePayment(String expectedPrice) {
+        stepWithRole("Убедиться, что сумма платежа за материалы " + expectedPrice + " соответствует ожидаемой", () -> {
+            materialsPricePaymentLocator.shouldHave(text(expectedPrice));
         });
     }
 
@@ -112,9 +90,9 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
         });
     }
 
-    public void checkActionsAmountPayment(String expectedAmount) {
-        stepWithRole("Убедиться, что сумма платежа за работы " + expectedAmount + " соответствует ожидаемой", () -> {
-            actionsAmountPaymentLocator.shouldHave(text(expectedAmount));
+    public void checkActionsPricePayment(String expectedPrice) {
+        stepWithRole("Убедиться, что сумма платежа за работы " + expectedPrice + " соответствует ожидаемой", () -> {
+            actionsPricePaymentLocator.shouldHave(text(expectedPrice));
         });
     }
 
@@ -123,11 +101,6 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
             actionsDatePaymentLocator.shouldHave(text(expectedDate));
         });
     }
-
-    private void dateConvertor(String date) {
-        // how to  turn "created_at": "Wed, 16 Aug 2023 15:43:33 +0300" to
-    }
-
 
     private void isPaid(Boolean expectedStatus, SelenideElement statusPaymentLocator) {
         stepWithRole("Убедиться, что статус платежа " + expectedStatus.toString(), () -> {
@@ -138,6 +111,4 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
             }
         });
     }
-
-
 }

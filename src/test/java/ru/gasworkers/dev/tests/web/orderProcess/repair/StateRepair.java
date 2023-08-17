@@ -6,9 +6,10 @@ import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesRespons
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.ServiceType;
-import ru.gasworkers.dev.pages.client.OrderCardClientPage;
 import ru.gasworkers.dev.pages.client.SelectServicePageClientPage;
 import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.common.CommonTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster.InfoMasterTabOrderCardClientComponent;
 
 @AllArgsConstructor
 public enum StateRepair {
@@ -25,11 +26,11 @@ public enum StateRepair {
     MASTER_CREATE_ACT("Мастер создал акт"),
     CLIENT_SIGN_ACT("Клиент подписал акт");
 
-    private static final StateRepairHelper helper = new StateRepairHelper();
+    private static final StateRepairBuilder helper = new StateRepairBuilder();
     private final String state;
 
     public void checkLastOrderComponent(LastOrderProfileClientComponent page, LastOrderInfoResponseDto dto) {
-        StateRepairHelper.LastOrderInfoData data = helper.extractLastOrderInfoData(dto);
+        StateRepairBuilder.LastOrderInfoData data = helper.extractLastOrderInfoData(dto);
 
         switch (this) {
             case PUBLISHED:
@@ -60,27 +61,51 @@ public enum StateRepair {
         }
     }
 
-    public void checkOrderCardPage(OrderCardClientPage page, OrdersIdResponseDto scheduleTimeOrdersIdResponse) {
-        StateRepairHelper.OrderIdData data = helper.extractOrdersIdData(scheduleTimeOrdersIdResponse);
+    public void checkCommonTab(CommonTabOrderCardComponent tab, OrdersIdResponseDto dto) {
+        StateRepairBuilder.OrderIdData data = helper.extractOrdersIdData(dto);
         switch (this) {
             case SCHEDULE_TIME:
-                page.checkOrderNumber(data.getOrderNumber());
-                page.commonTab.status.checkCurrentStatus(OrderStatus.SCHEDULE_VISIT);
-                page.commonTab.status.checkActivationStatusIsPaid(data.getActivationIsPaid());
-                page.commonTab.status.checkActivationAmountPayment(data.getActivationAmount());
-                page.commonTab.status.checkActivationDatePayment(data.getActivationDate());
-                page.commonTab.status.checkNoMaterialsStagePayment();
-                page.commonTab.status.checkNoActionsStagePayment();
-                page.commonTab.details.checkServiceType(ServiceType.REPAIR);
-                page.commonTab.details.checkNoServiceCompany();
-                page.commonTab.details.checkPersonalData(data.getClientFullName());
-                page.commonTab.details.checkAddress(data.getAddress());
-                page.commonTab.details.checkPhone(data.getPhone());
-                page.commonTab.details.checkEquipment(data.getEquipments0());
-                page.commonTab.details.checkDesiredDate(data.getDesiredDate());
-                page.commonTab.details.checkDesiredTime(data.getDesiredTime());
-                page.commonTab.details.checkDescription(data.getDescription());
-                // todo time and stepper
+                tab.status.checkCurrentStatus(OrderStatus.SCHEDULE_VISIT);
+                tab.status.checkActivationStatusIsPaid(data.getActivationIsPaid());
+                tab.status.checkActivationPricePayment(data.getActivationPrice());
+                tab.status.checkActivationDatePayment(data.getActivationDate());
+                tab.status.checkNoMaterialsStagePayment();
+                tab.status.checkNoActionsStagePayment();
+                tab.details.checkServiceType(ServiceType.REPAIR);
+                tab.details.checkNoServiceCompany();
+                tab.details.checkPersonalData(data.getClientFullName());
+                tab.details.checkAddress(data.getAddress());
+                tab.details.checkPhone(data.getPhone());
+                tab.details.checkEquipment(data.getEquipments0());
+                tab.details.checkDesiredDate(data.getDesiredDate());
+                tab.details.checkDesiredTime(data.getDesiredTime());
+                tab.details.checkDescription(data.getDescription());
+                // todo time and stepper buttons
+                break;
+        }
+    }
+
+    public void checkInfoMasterTab(InfoMasterTabOrderCardClientComponent tab, OrdersIdResponseDto dto) {
+        StateRepairBuilder.OrderIdData data = helper.extractOrdersIdData(dto);
+        switch (this) {
+            case SCHEDULE_TIME:
+                tab.status.checkCurrentStatus(OrderStatus.SCHEDULE_VISIT);
+                tab.status.checkActivationStatusIsPaid(data.getActivationIsPaid());
+                tab.status.checkActivationPricePayment(data.getActivationPrice());
+                tab.status.checkActivationDatePayment(data.getActivationDate());
+                tab.status.checkNoMaterialsStagePayment();
+                tab.status.checkNoActionsStagePayment();
+                tab.masterCard.checkFinishLoading();
+                tab.masterCard.checkMasterFullName(data.getMasterFullName());
+                tab.masterCard.checkMasterAvatar(data.getMasterAvatar());
+                tab.masterCard.checkRegisterDate(data.getMasterRegisterDate());
+                tab.masterCard.checkReviews(data.getMasterReviewCount());
+                tab.masterCard.checkRating(data.getMasterRating());
+                tab.repairDetails.checkFinishLoading();
+                tab.repairDetails.checkMaterialsTotalPrice("0");
+                tab.repairDetails.checkActionsTotalPrice("0");
+
+                // todo time and stepper buttons
                 break;
         }
     }
@@ -90,10 +115,10 @@ public enum StateRepair {
         int ratingCompany = helper.getCalculateRatingCompany(dto);
         int ratingMaster = helper.getCalculateRatingMaster(dto);
         String visitPrice = helper.getVisitPrice(dto, offerIndex),
-                fullMasterName = helper.getMasterFullName(dto, offerIndex),
-                masterAvatar = helper.getMasterAvatar(dto, offerIndex),
-                masterReviewCount = helper.getMasterReviewCount(dto, offerIndex),
-                masterCompletedOrders = helper.getMasterCompletedOrders(dto, offerIndex);
+                offeredMasterFullName = helper.getOfferedMasterFullName(dto, offerIndex),
+                offeredMasterAvatar = helper.getOfferedMasterAvatar(dto, offerIndex),
+                offeredMasterReviewCount = helper.getOfferedMasterReviewCount(dto, offerIndex),
+                offeredMasterCompletedOrders = helper.getOfferedMasterCompletedOrders(dto, offerIndex);
 
 
         //todo offerCount
@@ -112,11 +137,11 @@ public enum StateRepair {
                 page.companyBoxRepair.checkAvatarCompany(offerIndex);
                 page.companyBoxRepair.checkVisitPrice(offerIndex, visitPrice);
                 page.companyBoxRepair.checkNotificationPaymentAfterArrival(offerIndex);
-                page.companyBoxRepair.checkFullNameMaster(offerIndex, fullMasterName);
-                page.companyBoxRepair.checkAvatarMaster(offerIndex, masterAvatar);
+                page.companyBoxRepair.checkFullNameMaster(offerIndex, offeredMasterFullName);
+                page.companyBoxRepair.checkAvatarMaster(offerIndex, offeredMasterAvatar);
                 page.companyBoxRepair.checkRatingMaster(offerIndex, ratingMaster);
-                page.companyBoxRepair.checkMasterReviewCount(offerIndex, masterReviewCount);
-                page.companyBoxRepair.checkMasterCompletedOrders(offerIndex, masterCompletedOrders);
+                page.companyBoxRepair.checkMasterReviewCount(offerIndex, offeredMasterReviewCount);
+                page.companyBoxRepair.checkMasterCompletedOrders(offerIndex, offeredMasterCompletedOrders);
                 page.companyBoxRepair.checkButtonActive(offerIndex);
                 break;
             // ... other cases ...

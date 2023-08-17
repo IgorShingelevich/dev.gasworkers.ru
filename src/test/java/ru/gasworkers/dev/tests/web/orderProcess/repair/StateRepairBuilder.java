@@ -12,7 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-public class StateRepairHelper {
+public class StateRepairBuilder {
 
     public LastOrderInfoData extractLastOrderInfoData(LastOrderInfoResponseDto dto) {
         return LastOrderInfoData.builder()
@@ -28,7 +28,7 @@ public class StateRepairHelper {
         return OrderIdData.builder()
                 .orderNumber(dto.getData().getNumber())
                 .activationIsPaid(dto.getData().getReceipts().get(0).getPaid())
-                .activationAmount(amountFormatter(String.valueOf(dto.getData().getReceipts().get(0).getAmount())))
+                .activationPrice(priceFormatter(String.valueOf(dto.getData().getReceipts().get(0).getAmount())))
                 .activationDate(createdAtFormatter(dto.getData().getReceipts().get(0).getCreatedAt()))
                 .serviceType(ServiceType.REPAIR.toString())
                 .clientFullName(dto.getData().getClient().getFullName())
@@ -38,6 +38,11 @@ public class StateRepairHelper {
                 .desiredDate(desiredDateIntervalFormatter(dto.getData().getDesiredDateIntervalStartedAt(), dto.getData().getDesiredDateIntervalEndedAt()))
                 .desiredTime(desiredTimeIntervalFormatter(dto.getData().getDesiredTimeStarted(), dto.getData().getDesiredTimeEnded()))
                 .description(dto.getData().getDescription())
+                .masterFullName(dto.getData().getMaster().getFullName())
+                .masterAvatar(dto.getData().getMaster().getAvatar())
+                .masterRegisterDate(convertRegisterDateFromStamp(Integer.parseInt(dto.getData().getMaster().getCreatedAt())))
+                .masterReviewCount(String.valueOf(dto.getData().getMaster().getReviewsCount()))
+                .masterRating(dto.getData().getMaster().getRating())
                 .build();
     }
 
@@ -81,7 +86,7 @@ public class StateRepairHelper {
         return null; // Default value if services list is empty or index is out of bounds
     }
 
-    public String getMasterFullName(SuggestServicesResponseDto dto, int offerIndex) {
+    public String getOfferedMasterFullName(SuggestServicesResponseDto dto, int offerIndex) {
         if (dto.getData().getServices() != null && offerIndex < dto.getData().getServices().size() &&
                 dto.getData().getServices().get(offerIndex).getMaster() != null) {
             return dto.getData().getServices().get(offerIndex).getMaster().getFullName();
@@ -89,7 +94,7 @@ public class StateRepairHelper {
         return null; // Default value if master is null or services list is empty or index is out of bounds
     }
 
-    public String getMasterAvatar(SuggestServicesResponseDto dto, int offerIndex) {
+    public String getOfferedMasterAvatar(SuggestServicesResponseDto dto, int offerIndex) {
         if (dto.getData().getServices() != null && offerIndex < dto.getData().getServices().size() &&
                 dto.getData().getServices().get(offerIndex).getMaster() != null) {
             return dto.getData().getServices().get(offerIndex).getMaster().getAvatar();
@@ -97,7 +102,7 @@ public class StateRepairHelper {
         return null; // Default value if master is null or services list is empty or index is out of bounds
     }
 
-    public String getMasterReviewCount(SuggestServicesResponseDto dto, int offerIndex) {
+    public String getOfferedMasterReviewCount(SuggestServicesResponseDto dto, int offerIndex) {
         if (dto.getData().getServices() != null && offerIndex < dto.getData().getServices().size() &&
                 dto.getData().getServices().get(offerIndex).getMaster() != null) {
             return dto.getData().getServices().get(offerIndex).getMaster().getReviewsAsTargetCount().toString();
@@ -105,7 +110,7 @@ public class StateRepairHelper {
         return null; // Default value if master is null or services list is empty or index is out of bounds
     }
 
-    public String getMasterCompletedOrders(SuggestServicesResponseDto dto, int offerIndex) {
+    public String getOfferedMasterCompletedOrders(SuggestServicesResponseDto dto, int offerIndex) {
         if (dto.getData().getServices() != null && offerIndex < dto.getData().getServices().size() &&
                 dto.getData().getServices().get(offerIndex).getMaster() != null) {
             return dto.getData().getServices().get(offerIndex).getMaster().getCountCompletedOrders().toString();
@@ -161,9 +166,15 @@ public class StateRepairHelper {
         }
     }
 
-    private String amountFormatter(String text) {
+    private String priceFormatter(String text) {
         String amount = text.replaceAll("[^0-9.]", "");
         return amount.split("\\.")[0];
+    }
+
+    private String convertRegisterDateFromStamp(int timestamp) {
+        Date date = new Date((long) timestamp * 1000L); // Convert seconds to milliseconds
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMMM yyyy 'года'", new Locale("ru"));
+        return "Зарегистрирован с " + outputFormat.format(date);
     }
 
     @Getter
@@ -183,13 +194,13 @@ public class StateRepairHelper {
         private final Integer offersCount;
         private final String orderNumber;
         private final Boolean activationIsPaid;
-        private final String activationAmount;
+        private final String activationPrice;
         private final String activationDate;
         private final Boolean materialsIsPaid;
-        private final String materialsAmount;
+        private final String materialsPrice;
         private final String materialsDate;
         private final Boolean actionsIsPaid;
-        private final String actionsAmount;
+        private final String actionsPrice;
         private final String actionsDate;
         private final String serviceType;
         private final String clientFullName;
@@ -199,6 +210,10 @@ public class StateRepairHelper {
         private final String desiredTime;
         private final String desiredDate;
         private final String description;
+        private final String masterFullName;
+        private final String masterAvatar;
+        private final String masterRegisterDate;
+        private final String masterReviewCount;
+        private final String masterRating;
     }
-
 }

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs;
+package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster;
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.OrderStatus;
@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Condition.text;
 public class InfoMasterTabOrderCardMasterComponent extends BaseOrderCardComponent {
     public final StatusOrderCardPageComponent orderState;
     public final FillUpCheckListBannerComponent fillUpBanner;
-    public final TableInfoMasterTabComponent table;
+    public final MaintenanceDetailsInfoMasterTabComponent maintenanceDetails;
     SelenideElement
             conferenceResumeTextLocator = driver.$("div.item.hr.mt-3 span").as("Текст резюме конференции"),
             conferenceVideoLocator = driver.$("div.wrapper video").as("Видео конференции");
@@ -21,7 +21,7 @@ public class InfoMasterTabOrderCardMasterComponent extends BaseOrderCardComponen
         super(browser);
         orderState = new StatusOrderCardPageComponent(browser);
         fillUpBanner = new FillUpCheckListBannerComponent(browser);
-        table = new TableInfoMasterTabComponent(browser);
+        maintenanceDetails = new MaintenanceDetailsInfoMasterTabComponent(browser);
     }
 
     public void checkFinishLoading(OrderStatus orderStatus) {

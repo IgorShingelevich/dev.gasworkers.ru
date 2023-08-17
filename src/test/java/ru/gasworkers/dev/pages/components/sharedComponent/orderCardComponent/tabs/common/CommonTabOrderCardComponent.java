@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs;
+package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.common;
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.masterComponent.FillUpCheckListBannerComponent;
@@ -10,6 +10,7 @@ public class CommonTabOrderCardComponent extends BaseOrderCardComponent {
     public final FillUpCheckListBannerComponent fillUpBanner;
     public final StatusOrderCardPageComponent status;
     public final DetailsCommonTabOrderCardComponent details;
+    //todo add buttons
 
 
     public CommonTabOrderCardComponent(RoleBrowser browser) {

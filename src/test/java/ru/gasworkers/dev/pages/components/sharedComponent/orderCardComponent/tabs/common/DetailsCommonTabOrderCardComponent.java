@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs;
+package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.common;
 
 import com.codeborne.selenide.ElementsCollection;
 import ru.gasworkers.dev.model.ServiceType;
@@ -60,13 +60,13 @@ public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
     }
 
     public void checkDesiredDate(String expectedDate) {
-        stepWithRole("Убедиться, что дата " + expectedDate + " соответствует ожидаемой", () -> {
+        stepWithRole("Убедиться, что  желаемая дата " + expectedDate + " соответствует ожидаемой", () -> {
             selfCollection.findBy(text("Желаемая дата:")).shouldHave(text(expectedDate));
         });
     }
 
     public void checkDesiredTime(String expectedTime) {
-        stepWithRole("Убедиться, что время " + expectedTime + " соответствует ожидаемому", () -> {
+        stepWithRole("Убедиться, что желаемое время " + expectedTime + " соответствует ожидаемому", () -> {
             selfCollection.findBy(text("Желаемое время:")).shouldHave(text(expectedTime));
         });
     }

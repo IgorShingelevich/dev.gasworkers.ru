@@ -11,9 +11,9 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.clientComponent.OffersCounterClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.NavigationOrderCardPageComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.CommonTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.DocsTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.InfoMasterTabOrderCardClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.common.CommonTabOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster.InfoMasterTabOrderCardClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
@@ -267,9 +267,13 @@ public class OrderCardClientPage extends BaseClientPage {
         });
     }
 
-    public void checkState(StateRepair state, OrdersIdResponseDto scheduleTimeOrdersIdResponse) {
+    public void checkState(StateRepair state, OrdersIdResponseDto dto) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
-            state.checkOrderCardPage(this, scheduleTimeOrdersIdResponse);
+            checkOrderNumber(dto.getData().getNumber());
+            nav.common();
+            state.checkCommonTab(this.commonTab, dto);
+            nav.infoMaster();
+            state.checkInfoMasterTab(this.infoMasterTab, dto);
         });
     }
 
