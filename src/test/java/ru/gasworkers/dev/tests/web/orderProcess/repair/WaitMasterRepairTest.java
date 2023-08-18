@@ -14,6 +14,8 @@ import ru.gasworkers.dev.api.administration.getUserWithAdmin.GetUserWithAdminApi
 import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
 import ru.gasworkers.dev.api.auth.login.dto.LoginResponseDto;
 import ru.gasworkers.dev.api.auth.user.UserResponseDto;
+import ru.gasworkers.dev.api.orders.approveDate.OrdersApproveDateApi;
+import ru.gasworkers.dev.api.orders.approveDate.OrdersApproveDateResponseDto;
 import ru.gasworkers.dev.api.orders.id.OrdersIdApi;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
@@ -47,6 +49,7 @@ import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
+import ru.gasworkers.dev.tests.api.story.repair.RepairTestCase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -63,7 +66,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB)
-public class ScheduleTimeRepairTest extends BaseApiTest {
+public class WaitMasterRepairTest extends BaseApiTest {
+    private final RepairTestCase repairCase = new RepairTestCase();
     private final UserSettingsApi userSettingsApi = new UserSettingsApi();
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
@@ -74,9 +78,13 @@ public class ScheduleTimeRepairTest extends BaseApiTest {
     private final SelectServiceCompanyApi selectServiceCompanyApi = new SelectServiceCompanyApi();
     private final FspBankListApi fspBankListApi = new FspBankListApi();
     private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
+    private final OrdersApproveDateApi ordersApproveDateApi = new OrdersApproveDateApi();
+
     private final OrdersIdApi ordersIdApi = new OrdersIdApi();
     private final String sssrDispatcher1Email = "test_gw_dispatcher_sssr1@rambler.ru";
     private final String sssrDispatcher1Password = "1234";
+    private final String sssrMaster1Email = "test_gas_master_sssr1@rambler.ru";
+    private final String sssrMaster1Password = "1234";
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
     //dispatcher
@@ -86,14 +94,15 @@ public class ScheduleTimeRepairTest extends BaseApiTest {
     @Browser(role = Role.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     MasterPages masterPages;
 
-    LastOrderInfoResponseDto scheduleTimeLastOrderResponse;
-    OrdersIdResponseDto scheduleTimeOrderIdResponseDispatcher;
-    OrdersIdResponseDto scheduleTimeOrderIdResponseClient;
+    LastOrderInfoResponseDto waitMasterLastOrderResponse;
+    OrdersIdResponseDto waitMasterAsDispatcherOrderIdResponse;
+    OrdersIdResponseDto waitMasterAsClientOrderIdResponse;
+    OrdersIdResponseDto waitMasterAsMasterOrderIdResponse;
 
 
     @Test
-    @DisplayName("Ремонт - в  состоянии согласование даты и времени")
-    void scheduleTimeRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+    @DisplayName("Ремонт - в  состоянии мастер в пути")
+    void waitMasterRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
         CommonFieldsRepairDto commonFields = new CommonFieldsRepairDto();
         step("api precondition", () -> {
             commonFields.setTokenClient(loginApi.getTokenThrough(client));
@@ -183,10 +192,8 @@ public class ScheduleTimeRepairTest extends BaseApiTest {
                     SelectServiceCompanyResponseDto actualResponse = selectServiceCompanyApi.selectServiceCompany(commonFields.getOrderId(), commonFields.getServiceId(), commonFields.getTokenClient())
                             .statusCode(200)
                             .extract().as(SelectServiceCompanyResponseDto.class);
-//                receiptId = actualResponse.getData().getReceiptId();
                     commonFields.setReceipts0Id(actualResponse.getData().getReceiptId());
                     SelectServiceCompanyResponseDto expectedResponse = SelectServiceCompanyResponseDto.successResponse(commonFields.getReceipts0Id()).build();
-//                assertThat(actualResponse).isEqualTo(expectedResponse);
                 });
                 step("клиент получает список банков на оплату", () -> {
                     FspBankListResponseDto actualResponse = fspBankListApi.fspBankList(commonFields.getTokenClient())
@@ -194,7 +201,6 @@ public class ScheduleTimeRepairTest extends BaseApiTest {
                             .extract().as(FspBankListResponseDto.class);
                     Integer availableBanks = actualResponse.getData().size();
                     System.out.println("availableBanks = " + availableBanks);
-                    //check  amount of banks
                 });
             });
             step("заказ на ремонт - в  состоянии согласование даты и времени", () -> {
@@ -205,30 +211,41 @@ public class ScheduleTimeRepairTest extends BaseApiTest {
                     commonFields.setPayment0Url(actualResponse.getData().getPayUrl());
                     commonFields.setPayment0Id(actualResponse.getData().getPaymentId());
                 });
-                step("клиент карточка заказа - в  состоянии согласование даты и времени", () -> {
-                    System.out.println("scheduleTimeOrderIdResponseAsClient");
-                    scheduleTimeOrderIdResponseClient = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenClient())
-                            .statusCode(200)
-                            .extract().as(OrdersIdResponseDto.class);
-//                    OrdersInfoResponseDto expectedResponse = repairCase.dateSelectingOrderInfoBGRepair(commonFields);
-//                assertResponsePartialNoAt(expectedResponse, actualDateSelectingOrderInfoResponse);
-                });
-                step(" клиент карточка последнего заказа - в  состоянии согласование даты и времени", () -> {
-                    System.out.println("scheduleTimeLastOrderResponseAsClient");
-                    scheduleTimeLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
-                            .statusCode(200)
-                            .extract().as(LastOrderInfoResponseDto.class);
-//                    LastOrderInfoResponseDto expectedResponse = repairCase.dateSelectingLastOrderInfoBGRepair(commonFields);
-//                assertResponsePartialNoAt(expectedResponse, actualDateSelectingLastOrderResponse);
-                });
-                step("диспетчер карточка заказа - в  состоянии согласование даты и времени", () -> {
-                    System.out.println("scheduleTimeOrderIdResponseAsDispatcher");
-                    commonFields.setApproveDate(client.getApproveDate());
-                    scheduleTimeOrderIdResponseDispatcher = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
-                            .statusCode(200)
-                            .extract().as(OrdersIdResponseDto.class);
-//                    expectedDateSelectingLastOrderResponse = repairCase.dateSelectingOrderIdBGRepair(commonFields);
-//                assertResponsePartialNoAt(expectedDateSelectingLastOrderResponse, actualDateSelectingOrderIdResponse);  // falls
+                step("заказ на ремонт - в состоянии waitMaster", () -> {
+                    step("диспетчер подтверждает дату и время", () -> {
+                        commonFields.setApproveDate(client.getApproveDate());
+                        OrdersApproveDateResponseDto actualResponse = ordersApproveDateApi.ordersApproveDate(repairCase.approveDateRequest(commonFields), commonFields.getTokenDispatcher())
+                                .statusCode(200)
+                                .extract().as(OrdersApproveDateResponseDto.class);
+                    });
+                    step("диспетчер карточка заказа - убедиться что в состоянии waitMaster", () -> {
+                        System.out.println("waitMasterOrderIdResponseAsDispatcher");
+                        waitMasterAsDispatcherOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                                .statusCode(200)
+                                .extract().as(OrdersIdResponseDto.class);
+                        commonFields.setSelectedDate(client.getSelectedDate());
+                    });
+                    step(" клиент карточка последнего заказа - убедиться что в состоянии waitMaster", () -> {
+                        System.out.println("waitMasterLastOrderResponse");
+                        waitMasterLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
+                                .statusCode(200)
+                                .extract().as(LastOrderInfoResponseDto.class);
+                    });
+                    step("  клиент карточка заказа - убедиться что в состоянии waitMaster", () -> {
+                        System.out.println("waitMasterOrdersIdResponseAsClient");
+                        waitMasterAsClientOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenClient())
+                                .statusCode(200)
+                                .extract().as(OrdersIdResponseDto.class);
+                    });
+                    step("мастер авторизуется", () -> {
+                        commonFields.setTokenMaster(loginApi.getUserToken(LoginRequestDto.asUserEmail(sssrMaster1Email, sssrMaster1Password)));
+                    });
+                    step("мастер карточка заказа - убедиться что в состоянии waitMaster", () -> {
+                        System.out.println("waitMasterOrderIdResponseAsMaster");
+                        waitMasterAsMasterOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenMaster())
+                                .statusCode(200)
+                                .extract().as(OrdersIdResponseDto.class);
+                    });
                 });
             });
         });
@@ -262,33 +279,38 @@ public class ScheduleTimeRepairTest extends BaseApiTest {
             });*/
         });
 
-        step("кабинет клиента в состоянии - в  состоянии согласование даты и времени", () -> {
+        step(Role.CLIENT + " кабинет в состоянии - в состоянии " + StateRepair.WAIT_MASTER, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
-                step("клиент карточка последнего заказа - в  состоянии согласование даты и времени", () -> {
+                step(Role.CLIENT + " карточка последнего заказа - в состоянии " + StateRepair.WAIT_MASTER, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-                    clientPages.getHomePage().lastOrderComponent.checkState(StateRepair.SCHEDULE_TIME, scheduleTimeLastOrderResponse);
+                    clientPages.getHomePage().lastOrderComponent.checkState(StateRepair.WAIT_MASTER, waitMasterLastOrderResponse);
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
-                step("клиент карточка заказа - в  состоянии согласование даты и времени", () -> {
+                step(Role.CLIENT + " карточка заказа - в состоянии " + StateRepair.WAIT_MASTER, () -> {
                     clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkState(StateRepair.SCHEDULE_TIME, scheduleTimeOrderIdResponseClient);
+                    clientPages.getOrderCardPage().checkState(StateRepair.WAIT_MASTER, waitMasterAsClientOrderIdResponse);
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {
-                step("диспетчер карточка заказа - в  состоянии согласование даты и времени", () -> {
+                step(Role.DISPATCHER + " карточка заказа - в состоянии " + StateRepair.WAIT_MASTER, () -> {
                 });
             };
             Consumer<SoftAssert> case4 = softAssert -> {
-                step("диспетчер карта - в  состоянии согласование даты и времени", () -> {
+                step(Role.DISPATCHER + " карта - в состоянии " + StateRepair.WAIT_MASTER, () -> {
                 });
             };
             Consumer<SoftAssert> case5 = softAssert -> {
-                step("мастер список заказов - в  состоянии согласование даты и времени", () -> {
+                step(Role.MASTER + " список заказов - в состоянии " + StateRepair.WAIT_MASTER, () -> {
                 });
             };
-            assertAll(Arrays.asList(case1, case2, case3));
+
+            Consumer<SoftAssert> case6 = softAssert -> {
+                step(Role.MASTER + " карточка заказа - в  состоянии согласование даты и времени", () -> {
+                });
+            };
+            assertAll(Arrays.asList(case1, case2));
         });
     }
 }

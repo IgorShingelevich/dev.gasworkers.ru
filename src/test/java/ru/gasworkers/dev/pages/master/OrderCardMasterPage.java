@@ -145,7 +145,7 @@ public class OrderCardMasterPage extends BaseMasterPage {
             });
             stepWithRole("Вкладка Документы", () -> {
                 navDocs();
-                tabDocs.checkFinishLoading(orderStatus);
+                tabDocs.checkFinishLoadingOLD(orderStatus);
                 tabDocs.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
                 stepWithRole("Убедиться, что  представлены кнопки  Редактировать объект/оборудование, кнопка Приступить к работе и кнопка Заказ на ремонт", () -> {
                     startWorkingButtonLocator.shouldBe(visible);
@@ -215,7 +215,7 @@ public class OrderCardMasterPage extends BaseMasterPage {
             });
             stepWithRole("Вкладка Документы", () -> {
                 navDocs();
-                tabDocs.checkFinishLoading(orderStatus);
+                tabDocs.checkFinishLoadingOLD(orderStatus);
                 tabDocs.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
                 stepWithRole("Убедиться, что  представлены кнопки  Редактировать объект/оборудование, кнопка Заказ на ремонт", () -> {
                     editObjectButtonLocator.shouldNotBe(visible);

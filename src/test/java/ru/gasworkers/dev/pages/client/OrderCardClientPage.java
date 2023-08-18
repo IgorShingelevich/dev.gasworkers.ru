@@ -11,6 +11,7 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.clientComponent.OffersCounterClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.NavigationOrderCardPageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.buttons.ClientButtonsOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.DocsTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.common.CommonTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster.InfoMasterTabOrderCardClientComponent;
@@ -32,6 +33,7 @@ public class OrderCardClientPage extends BaseClientPage {
     public final CommonTabOrderCardComponent commonTab;
     public final InfoMasterTabOrderCardClientComponent infoMasterTab;
     public final DocsTabOrderCardComponent docsTab;
+    public final ClientButtonsOrderCardComponent buttons;
     private final String
             ORDER_CARD_TITLE = "Заказ №",
             COMPLETE_ORDER_INFO = "Договор техобслуживания ВДГО необходимо предоставить в вашу газораспределительную компанию. Оставьте отзыв на работу мастера и вы сможете передать договор в вашу газораспределительную компанию",
@@ -63,6 +65,7 @@ public class OrderCardClientPage extends BaseClientPage {
         commonTab = new CommonTabOrderCardComponent(browser);
         infoMasterTab = new InfoMasterTabOrderCardClientComponent(browser);
         docsTab = new DocsTabOrderCardComponent(browser);
+        buttons = new ClientButtonsOrderCardComponent(browser);
     }
 
     public OrderCardClientPage checkFinishLoading() {
@@ -141,7 +144,7 @@ public class OrderCardClientPage extends BaseClientPage {
             });
             stepWithRole("Вкладка Документы", () -> {
                 nav.docs();
-                docsTab.checkFinishLoading(orderStatus);
+                docsTab.checkFinishLoadingOLD(orderStatus);
                 docsTab.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
                 stepWithRole("Скачать документы: Договор ТО и Страховой полис ", () -> {
                     docsTab.downloadAgreement();
@@ -274,7 +277,10 @@ public class OrderCardClientPage extends BaseClientPage {
             state.checkCommonTab(this.commonTab, dto);
             nav.infoMaster();
             state.checkInfoMasterTab(this.infoMasterTab, dto);
+            nav.docs();
+            state.checkDocsTab(this.docsTab, dto);
         });
+
     }
 
 

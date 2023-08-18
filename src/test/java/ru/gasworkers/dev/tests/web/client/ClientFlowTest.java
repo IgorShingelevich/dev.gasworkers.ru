@@ -191,7 +191,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getAllOrdersPage().checkFinishLoading();
         clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
         clientPages.getOrderCardPage().checkFinishLoading();
-        clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_VISIT, ServiceType.MAINTENANCE);
+        clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_DATE, ServiceType.MAINTENANCE);
     }
 
     @Test
@@ -207,7 +207,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getAllOrdersPage().checkFinishLoading();
         clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
         clientPages.getOrderCardPage().checkFinishLoading();
-        clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.MASTER_DISPATCHED, ServiceType.MAINTENANCE);
+        clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.WAIT_MASTER, ServiceType.MAINTENANCE);
     }
 
     @Test
@@ -226,7 +226,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
         clientPages.getOrderCardPage().checkFinishLoading();
         clientPages.getDriverManager().screenshot("Фотка №3");
-        clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.MASTER_DISPATCHED, ServiceType.MAINTENANCE);
+        clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.WAIT_MASTER, ServiceType.MAINTENANCE);
         clientPages.getOrderCardPage().nav.docs();
         clientPages.getDriverManager().screenshot("Фотка №4");
         clientPages.getOrderCardPage().docsTab.downloadAgreement();

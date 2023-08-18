@@ -43,13 +43,13 @@ public class DispatcherFlowTest extends BaseTest {
     @Step("Диспетчер открывает заказ в статусе: ")
     @Test
      void checkMasterDispatchedOrderStatus() {
-        step("Диспетчер открывает заказ в статусе: " + OrderStatus.MASTER_DISPATCHED, () -> {
+        step("Диспетчер открывает заказ в статусе: " + OrderStatus.WAIT_MASTER, () -> {
             dispatcherPages.getHomePage().checkFinishLoading();
             dispatcherPages.getHomePage().switchToListView();
             dispatcherPages.getHomePage().navInProgress();
             dispatcherPages.getHomePage().openOrderByNumber("3192");
             dispatcherPages.getOrderCardPage().checkFinishLoading();
-            dispatcherPages.getOrderCardPage().checkMasterDispatchedState(OrderStatus.MASTER_DISPATCHED, ServiceType.MAINTENANCE);
+            dispatcherPages.getOrderCardPage().checkMasterDispatchedState(OrderStatus.WAIT_MASTER, ServiceType.MAINTENANCE);
             dispatcherPages.getOrderCardPage().selectAnotherTime();
             dispatcherPages.getOrderCardPage().datePicker.selectNowDateAndTime();
             dispatcherPages.getOrderCardPage().selectAnotherMaster();

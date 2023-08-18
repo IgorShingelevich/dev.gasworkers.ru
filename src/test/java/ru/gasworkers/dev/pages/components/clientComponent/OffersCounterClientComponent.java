@@ -20,7 +20,7 @@ public class OffersCounterClientComponent extends BaseComponent {
         urlChecker = new UrlCheckerSharedComponent(browser);
     }
 
-    public void checkNoSelf() {
+    public void noComponent() {
         stepWithRole("Убедиться, что нет компонента предложений", () -> {
             self.shouldNotBe(visible);
         });

@@ -23,19 +23,19 @@ public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
         });
     }
 
-    public void checkServiceCompany(String expectedServiceCompany) {
+    public void checkCompanyFullName(String expectedServiceCompany) {
         stepWithRole("Убедиться, что сервисная компания: " + expectedServiceCompany + " соответствует ожидаемой", () -> {
             selfCollection.findBy(text("Сервисная компания:")).shouldHave(text(expectedServiceCompany));
         });
     }
 
-    public void checkNoServiceCompany() {
+    public void checkNoCompany() {
         stepWithRole("Убедиться, что сервисная компания отсутствует", () -> {
             selfCollection.findBy(text("Сервисная компания:")).shouldNotBe(visible);
         });
     }
 
-    public void checkPersonalData(String expectedPersonalData) {
+    public void checkClientFullName(String expectedPersonalData) {
         stepWithRole("Убедиться, что личные данные " + expectedPersonalData + " соответствуют ожидаемым", () -> {
             selfCollection.findBy(text("Личные данные:")).shouldHave(text(expectedPersonalData));
         });

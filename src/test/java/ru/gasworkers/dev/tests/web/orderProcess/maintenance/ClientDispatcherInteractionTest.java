@@ -211,7 +211,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
                 clientPages.getHomePage().popUp.close();
                 clientPages.getHomePage().lastOrderComponent.lastOrderCard();
                 clientPages.getOrderCardPage().checkFinishLoading();
-                clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_VISIT, ServiceType.MAINTENANCE);
+                clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_DATE, ServiceType.MAINTENANCE);
             });
         });
 
@@ -228,14 +228,14 @@ class ClientDispatcherInteractionTest extends BaseTest {
             dispatcherPages.getHomePage().openOrderByNumber(orderNumber);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
             dispatcherPages.getOrderCardPage().popUp.close();
-            dispatcherPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_VISIT, ServiceType.MAINTENANCE);
+            dispatcherPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_DATE, ServiceType.MAINTENANCE);
             dispatcherPages.getOrderCardPage().selectTimeButton();
             dispatcherPages.getOrderCardPage().datePicker.selectNowDateAndTime();
             dispatcherPages.getOrderCardPage().selectMaster();
             dispatcherPages.getSelectMasterPage().checkFinishLoading();
             dispatcherPages.getSelectMasterPage().selectNewMasterByIndex(0);
             dispatcherPages.getOrderCardPage().checkFinishLoading();
-            dispatcherPages.getOrderCardPage().checkMasterDispatchedState(OrderStatus.MASTER_DISPATCHED, ServiceType.MAINTENANCE);
+            dispatcherPages.getOrderCardPage().checkMasterDispatchedState(OrderStatus.WAIT_MASTER, ServiceType.MAINTENANCE);
         });
 
         step("Мастер открывает заказ в состоянии Мастер в пути", () -> {
@@ -247,7 +247,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
             masterPages.getAllNewOrdersPage().switchToTabView();
             masterPages.getAllNewOrdersPage().openByNumber(orderNumber);
             masterPages.getOrderCardPage().checkFinishLoading();
-            masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.MASTER_DISPATCHED, ServiceType.MAINTENANCE);
+            masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.WAIT_MASTER, ServiceType.MAINTENANCE);
             // todo add OrderStatusBoxComponent to  OrderCardPage
             //todo:default checklist state
 
@@ -276,7 +276,7 @@ class ClientDispatcherInteractionTest extends BaseTest {
         step("Мастер прибывает на обьект", () -> {
             step("Мастер заполняет чеклист", () -> {
                 masterPages.getOrderCardPage().startWork();
-                masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.MASTER_DISPATCHED, ServiceType.MAINTENANCE);
+                masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.WAIT_MASTER, ServiceType.MAINTENANCE);
                 //todo check checklist default state
                 //todo: add test for checklist changes and its affect on order state
             });

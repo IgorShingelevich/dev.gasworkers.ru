@@ -43,6 +43,8 @@ public class StateRepairBuilder {
                 .masterRegisterDate(convertRegisterDateFromStamp(Integer.parseInt(dto.getData().getMaster().getCreatedAt())))
                 .masterReviewCount(String.valueOf(dto.getData().getMaster().getReviewsCount()))
                 .masterRating(dto.getData().getMaster().getRating())
+                .companyFullName(dto.getData().getServiceCenter().getTitle())
+//               todo .scheduledTime(desiredTimeIntervalFormatter(dto.getData().getScheduledTimeStarted(), dto.getData().getScheduledTimeEnded()))
                 .build();
     }
 
@@ -215,5 +217,9 @@ public class StateRepairBuilder {
         private final String masterRegisterDate;
         private final String masterReviewCount;
         private final String masterRating;
+        private final String companyFullName;
+        private final String scheduledTime;
+
+
     }
 }

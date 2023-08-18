@@ -75,7 +75,7 @@ public class MasterFlowTest extends BaseTest {
         masterPages.getAllNewOrdersPage().switchToListView();
         masterPages.getAllNewOrdersPage().openByNumber(checkedOrderNumber);
         masterPages.getOrderCardPage().checkFinishLoading();
-        masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.MASTER_DISPATCHED, ServiceType.MAINTENANCE);
+        masterPages.getOrderCardPage().checkMasterDispatchedOrderState(OrderStatus.WAIT_MASTER, ServiceType.MAINTENANCE);
         masterPages.getOrderCardPage().editObject();
         masterPages.getEditObjectPage().checkFinishLoading();
         masterPages.getEditObjectPage().navGasBranch();
@@ -108,7 +108,7 @@ public class MasterFlowTest extends BaseTest {
         masterPages.getAllNewOrdersPage().openByNumber(checkedOrderNumber);
         masterPages.getOrderCardPage().checkFinishLoading();
         masterPages.getOrderCardPage().startWork();
-        masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.MASTER_DISPATCHED, ServiceType.MAINTENANCE);
+        masterPages.getOrderCardPage().checkFillingCheckListState(OrderStatus.WAIT_MASTER, ServiceType.MAINTENANCE);
 //        masterPages.getOrderCardPage().navInfoMaster();
 //        masterPages.getOrderCardPage().tabInfoMaster.table.checkDefaultState();
         masterPages.getOrderCardPage().navCheckList();

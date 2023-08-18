@@ -7,7 +7,8 @@ import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesRespons
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.clientComponent.OffersCounterClientComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.repairComponent.CompanyBoxSelectService;
-import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.SpinnerComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.spinner.MapSpinnerSelectServiceComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.spinner.ServiceSpinnerSelectServiceComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.guideComponent.PlayGuideComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
@@ -24,7 +25,8 @@ public class SelectServicePageClientPage extends BaseClientPage {
 
     public final FocusHeaderComponent header;
     public final StepperComponent stepper;
-    public final SpinnerComponent spinner;
+    public final ServiceSpinnerSelectServiceComponent serviceSpinner;
+    public final MapSpinnerSelectServiceComponent mapSpinner;
     public final OffersCounterClientComponent offersCounter;
     public final PlayGuideComponent guide;
     public final CompanyBoxSelectService companyBoxRepair;
@@ -46,9 +48,23 @@ public class SelectServicePageClientPage extends BaseClientPage {
             firstServiceTabLocator = driver.$("[id^=company-item]").as("Первая вкладка Сервисного предложения"),
             mapContainerLocator = driver.$("[id^=yandexMap]").as("Контейнер карты");
 
-    public void checkFinishLoadingRepair() {
+        public SelectServicePageClientPage(RoleBrowser browser) {
+        super(browser);
+        header = new FocusHeaderComponent(browser);
+        stepper = new StepperComponent(browser);
+        serviceSpinner = new ServiceSpinnerSelectServiceComponent(browser);
+        mapSpinner = new MapSpinnerSelectServiceComponent(browser);
+        offersCounter = new OffersCounterClientComponent(browser);
+        guide = new PlayGuideComponent(browser);
+        companyBoxRepair = new CompanyBoxSelectService(browser);
+    }    ElementsCollection
+            serviceBoxCollection = driver.$$("[id^='company-item-company-']").as("Блоки Сервисных компаний"),
+            boxesWithButtonCollectionOld = serviceBoxCollection.filterBy(cssClass("btn-primary")).as("Блоки с кнопкой Выбрать"),
+            boxesWithButtonCollection = serviceBoxCollection.filterBy(attribute("data-test-id", "primary")).as("Блоки с кнопкой Выбрать");
+
+public void checkFinishLoadingRepair() {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
-            spinner.checkPresence();
+            serviceSpinner.checkPresence();
 //            spinnerScrollbarLocator.should(disappear);
             assertThat(titleLocator.getText(), startsWith(startRepairPrefixText));
             assertThat(titleLocator.getText(), endsWith(endRepairPrefixText));
@@ -64,18 +80,6 @@ public class SelectServicePageClientPage extends BaseClientPage {
             offersCounter.checkFinishLoading();
             getOrderNumber();
         });
-    }    ElementsCollection
-            serviceBoxCollection = driver.$$("[id^='company-item-company-']").as("Блоки Сервисных компаний"),
-            boxesWithButtonCollectionOld = serviceBoxCollection.filterBy(cssClass("btn-primary")).as("Блоки с кнопкой Выбрать"),
-            boxesWithButtonCollection = serviceBoxCollection.filterBy(attribute("data-test-id", "primary")).as("Блоки с кнопкой Выбрать");
-    public SelectServicePageClientPage(RoleBrowser browser) {
-        super(browser);
-        header = new FocusHeaderComponent(browser);
-        stepper = new StepperComponent(browser);
-        spinner = new SpinnerComponent(browser);
-        offersCounter = new OffersCounterClientComponent(browser);
-        guide = new PlayGuideComponent(browser);
-        companyBoxRepair = new CompanyBoxSelectService(browser);
     }
 
     public SelectServicePageClientPage backLink() {
@@ -88,7 +92,8 @@ public class SelectServicePageClientPage extends BaseClientPage {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
 //            spinnerScrollbarLocator.should(disappear);
             urlChecker.urlStartsWith("https://dev.gasworkers.ru/orders/maintenance/");
-            spinner.checkPresence();
+            serviceSpinner.checkPresence();
+            mapSpinner.checkPresence();
             assertThat(titleLocator.getText(), startsWith(startMaintenancePrefixText));
             assertThat(titleLocator.getText(), endsWith(endMaintenancePrefixText)); //changed title again
 //            titleLocator.shouldHave(text("Спасибо! Ваш заказ принят и обрабатывается диспетчерами")); // title changed

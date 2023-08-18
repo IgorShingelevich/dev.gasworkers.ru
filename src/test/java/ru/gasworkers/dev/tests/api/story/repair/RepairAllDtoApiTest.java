@@ -89,8 +89,8 @@ public class RepairAllDtoApiTest extends BaseApiTest {
     private final OrdersSendSignApi ordersSendSignApi = new OrdersSendSignApi();
     private final OrdersSignApi ordersSignApi = new OrdersSignApi();
     private final String sssrDispatcher1Email = "test_gw_dispatcher_sssr1@rambler.ru";
-    private final String sssrMaster1Email = "test_gas_master_sssr1@rambler.ru";
     private final String sssrDispatcher1Password = "1234";
+    private final String sssrMaster1Email = "test_gas_master_sssr1@rambler.ru";
     private final String sssrMaster1Password = "1234";
     private final RepairTestCase repairCase = new RepairTestCase();
     private UserResponseDto actualPublishedUserResponse;
@@ -343,7 +343,7 @@ public class RepairAllDtoApiTest extends BaseApiTest {
             });
         });
 
-        step("заказ на ремонт в  состоянии wait-for-master-starting", () -> {
+        step("заказ на ремонт - в состоянии waitMaster", () -> {
             step("диспетчер подтверждает дату и время", () -> {
                 commonFields.setApproveDate(client.getApproveDate());
                 OrdersApproveDateResponseDto actualResponse = ordersApproveDateApi.ordersApproveDate(repairCase.approveDateRequest(commonFields), commonFields.getTokenDispatcher())
@@ -352,7 +352,7 @@ public class RepairAllDtoApiTest extends BaseApiTest {
                 OrdersApproveDateResponseDto expectedResponse = OrdersApproveDateResponseDto.successResponse();
                 assertResponse(expectedResponse, actualResponse);
             });
-            step("диспетчер карточка заказа - убедиться что wait-for-master-starting", () -> {
+            step("диспетчер карточка заказа - убедиться что в состоянии waitMaster", () -> {
                 System.out.println("waitMasterOrderIdResponseAsDispatcher");
                 actualWaitMasterAsDispatcherOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
                         .statusCode(200)
@@ -361,7 +361,7 @@ public class RepairAllDtoApiTest extends BaseApiTest {
                 expectedWaitMasterAsDispatcherOrderIdResponse = repairCase.waitMasterOrderIdAsDispatcherBGRepair(commonFields);
                 assertResponsePartialNoAt(expectedWaitMasterAsDispatcherOrderIdResponse, actualWaitMasterAsDispatcherOrderIdResponse);
             });
-            step(" клиент карточка последнего заказа - убедиться что wait-for-master-starting", () -> {
+            step(" клиент карточка последнего заказа - убедиться что в состоянии waitMaster", () -> {
                 System.out.println("waitMasterLastOrderResponse");
                 actualWaitMasterLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                         .statusCode(200)
@@ -369,7 +369,7 @@ public class RepairAllDtoApiTest extends BaseApiTest {
                 LastOrderInfoResponseDto expectedResponse = repairCase.waitMasterLastOrderInfoBGRepair(commonFields);
                 assertResponsePartialNoAt(expectedResponse, actualWaitMasterLastOrderResponse);
             });
-            step("  клиент карточка заказа - убедиться что wait-for-master-starting", () -> {
+            step("  клиент карточка заказа - убедиться что в состоянии waitMaster", () -> {
                 System.out.println("waitMasterOrdersIdResponseAsClient");
                 OrdersIdResponseDto actualResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
@@ -380,7 +380,7 @@ public class RepairAllDtoApiTest extends BaseApiTest {
             step("мастер авторизуется", () -> {
                 commonFields.setTokenMaster(loginApi.getUserToken(LoginRequestDto.asUserEmail(sssrMaster1Email, sssrMaster1Password)));
             });
-            step("мастер карточка заказа - убедиться что wait-for-master-starting", () -> {
+            step("мастер карточка заказа - убедиться что в состоянии waitMaster", () -> {
                 System.out.println("waitMasterOrderIdResponseAsMaster");
                 actualWaitMasterAsMasterOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenMaster())
                         .statusCode(200)

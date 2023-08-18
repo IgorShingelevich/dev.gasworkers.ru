@@ -18,6 +18,16 @@ public class CommonTabOrderCardComponent extends BaseOrderCardComponent {
         fillUpBanner = new FillUpCheckListBannerComponent(browser);
         status = new StatusOrderCardPageComponent(browser);
         details = new DetailsCommonTabOrderCardComponent(browser);
+        ButtonsCommonTabOrderCardComponent buttons = new ButtonsCommonTabOrderCardComponent(browser);
+    }
+
+    static class ButtonsCommonTabOrderCardComponent extends BaseOrderCardComponent {
+
+        public ButtonsCommonTabOrderCardComponent(RoleBrowser browser) {
+            super(browser);
+        }
+
+
     }
 
 

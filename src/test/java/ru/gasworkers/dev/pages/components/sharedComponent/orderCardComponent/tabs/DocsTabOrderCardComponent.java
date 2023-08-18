@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.Doc;
 import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
@@ -11,8 +12,7 @@ import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.Sta
 import java.io.File;
 
 import static com.codeborne.selenide.CollectionCondition.size;
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 
 
 public class DocsTabOrderCardComponent extends BaseOrderCardComponent {
@@ -27,12 +27,15 @@ public class DocsTabOrderCardComponent extends BaseOrderCardComponent {
         fillUpBanner = new FillUpCheckListBannerComponent(browser);
     }
 
-    ElementsCollection
-        docsTitleCollection = driver.$$("div .link-pdf ").as("Названия документов"),
-        docsDownloadButtonCollection = driver.$$(".link-pdf").as("Кнопки скачать документы");
-
-    public void checkFinishLoading(OrderStatus orderStatus) {
+    public void checkFinishLoadingOLD(OrderStatus orderStatus) {
         orderState.checkCurrentStatus(orderStatus);
+    }
+
+    public void checkFinishLoading() {
+        stepWithRole("Убедиться, что контейнер с документами загрузился", () -> {
+            self.shouldBe(visible);
+            totalPriceLocator.shouldBe(visible);
+        });
     }
 
     public void noDocs() {
@@ -40,6 +43,14 @@ public class DocsTabOrderCardComponent extends BaseOrderCardComponent {
             docsTitleCollection.shouldBe(size(0));
         });
     }
+
+    public void checkFinalPrice(String finalPrice) {
+        stepWithRole("Убедиться, что итоговая стоимость " + finalPrice, () -> {
+            totalPriceLocator.shouldHave(partialText(finalPrice));
+        });
+    }    SelenideElement
+            self = driver.$("div.order-details").as("Контейнер с документами"),
+            totalPriceLocator = self.$("div.order-details-item").as("Итоговая стоимость");
 
     public void presentedDocs(Doc... docs) {
         stepWithRole("Убедиться, что документы " + docs + " присутствуют", () -> {
@@ -67,6 +78,10 @@ public class DocsTabOrderCardComponent extends BaseOrderCardComponent {
         return file;
     }
 
+    ElementsCollection
+            docsTitleCollection = self.$$("div .link-pdf ").as("Названия документов"),
+            docsDownloadButtonCollection = self.$$(".link-pdf").as("Кнопки скачать документы");
+
     public File downloadCompletionAct() throws Exception {
         return stepWithRole("Скачать акт выполненных работ", () -> {
             return docsTitleCollection.findBy(text("Акт выполненных работ")).download(downloadTimeout);
@@ -77,5 +92,12 @@ public class DocsTabOrderCardComponent extends BaseOrderCardComponent {
         return stepWithRole("Скачать страховой полис", () ->
                 docsTitleCollection.findBy(text("Страховой полис")).download(downloadTimeout));
     }
+
+
+
+
+
+
+
 
 }

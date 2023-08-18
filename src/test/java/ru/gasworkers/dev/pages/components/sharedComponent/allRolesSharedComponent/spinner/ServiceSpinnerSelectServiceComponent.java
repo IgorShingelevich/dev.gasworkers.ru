@@ -1,17 +1,17 @@
-package ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent;
+package ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.spinner;
 
 import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.ex.ElementShould;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.pages.components.BaseComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.AllRolesSharedComponent;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 
-public class SpinnerComponent extends AllRolesSharedComponent {
+public class ServiceSpinnerSelectServiceComponent extends AllRolesSharedComponent {
 
-        public SpinnerComponent(RoleBrowser browser) {
+    public ServiceSpinnerSelectServiceComponent(RoleBrowser browser) {
             super(browser);
         }
 
