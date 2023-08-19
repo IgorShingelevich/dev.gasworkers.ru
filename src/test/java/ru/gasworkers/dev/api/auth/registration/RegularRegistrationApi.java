@@ -24,7 +24,7 @@ public class RegularRegistrationApi extends BaseApi {
     }
 
     //-------------------------------------COMPLEX THROUGH REGISTRATION-------------------------------------------------
-    @Step("API: Комплексная фоновая регистрация")
+    @Step("API:  предусловие - комплексная фоновая регистрация")
     public void complexThroughRegistration(ComplexRegistrationRequestDto complexDto) {
         startThroughRegistration(complexDto.toStartThroughRegistration()).statusCode(200);
         checkThroughRegistration(complexDto.toCheckThroughRegistration()).statusCode(200);

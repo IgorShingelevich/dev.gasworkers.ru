@@ -17,13 +17,9 @@ import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tab
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster.InfoMasterTabOrderCardClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
-import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
@@ -168,7 +164,7 @@ public class OrderCardClientPage extends BaseClientPage {
         return driver.$("h1.h3.mb-2").getText();
     }
 
-    public OrderCardClientPage checkNotReviewedCompletedOrderState(OrderStatus orderStatus, ServiceType serviceType) {
+    public void checkNotReviewedCompletedOrderState(OrderStatus orderStatus, ServiceType serviceType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
                 stepWithRole("Убедиться что баннер с информацией о завершении заказа присутствует", () -> {
@@ -203,10 +199,9 @@ public class OrderCardClientPage extends BaseClientPage {
             nav.common();
         });
         System.out.println("client serviceType: " + serviceType + "client orderStatus: " + orderStatus);
-        return this;
     }
 
-    public OrderCardClientPage checkReviewedCompletedOrderState(OrderStatus orderStatus, ServiceType serviceType) {
+    public void checkReviewedCompletedOrderState(OrderStatus orderStatus, ServiceType serviceType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
                 stepWithRole("Убедиться что баннер с информацией о завершении заказа присутствует", () -> {
@@ -241,7 +236,6 @@ public class OrderCardClientPage extends BaseClientPage {
             nav.common();
         });
         System.out.println("client serviceType: " + serviceType + "client orderStatus: " + orderStatus);
-        return this;
     }
 
     public void checkUrl() {
@@ -250,7 +244,7 @@ public class OrderCardClientPage extends BaseClientPage {
 
     public void checkTitle() {
         stepWithRole("Убедиться, что заголовок Карточки заказа отображается", () -> {
-            titleNumberLocator.shouldBe(visible, Duration.ofSeconds(30)).shouldHave(text(ORDER_CARD_TITLE));
+            titleNumberLocator.shouldBe(visible).shouldHave(text(ORDER_CARD_TITLE));
         });
     }
 
@@ -272,7 +266,8 @@ public class OrderCardClientPage extends BaseClientPage {
         });
     }
 
-    public List<Consumer<SoftAssert>> checkStateList(StateRepair state, OrdersIdResponseDto dto) {
+}
+/*public List<Consumer<SoftAssert>> checkStateList(StateRepair state, OrdersIdResponseDto dto) {
         List<Consumer<SoftAssert>> softAssertions = new ArrayList<>();
 
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
@@ -296,7 +291,4 @@ public class OrderCardClientPage extends BaseClientPage {
         });
 
         return softAssertions;
-    }
-
-
-}
+    }*/
