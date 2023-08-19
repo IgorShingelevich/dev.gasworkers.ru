@@ -8,12 +8,18 @@ import ru.gasworkers.dev.api.orders.id.OrdersIdApi;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
 import ru.gasworkers.dev.api.orders.selectMaster.SelectMasterApi;
+import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
+import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentResponseDto;
+import ru.gasworkers.dev.api.orders.selectServiceCompany.SelectServiceCompanyApi;
+import ru.gasworkers.dev.api.orders.selectServiceCompany.dto.SelectServiceCompanyResponseDto;
 import ru.gasworkers.dev.api.orders.suggestedServices.SuggestedServicesApi;
 import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoApi;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.api.users.companies.masters.CompaniesMastersApi;
 import ru.gasworkers.dev.api.users.companies.masters.dto.CompaniesMastersListResponse;
+import ru.gasworkers.dev.api.users.fspBankList.FspBankListApi;
+import ru.gasworkers.dev.api.users.fspBankList.FspBankListResponseDto;
 import ru.gasworkers.dev.api.users.settings.UserSettingsApi;
 import ru.gasworkers.dev.api.users.settings.UserSettingsCommonRequestDto;
 import ru.gasworkers.dev.api.users.settings.UserSettingsCommonResponseDto;
@@ -39,6 +45,9 @@ public class PreconditionRepair extends BaseApiTest {
     private final OrdersInfoApi ordersInfoApi = new OrdersInfoApi();
     private final SuggestedServicesApi suggestedServicesApi = new SuggestedServicesApi();
     private final GetUserWithAdminApi getUserWithAdminApi = new GetUserWithAdminApi();
+    private final SelectServiceCompanyApi selectServiceCompanyApi = new SelectServiceCompanyApi();
+    private final FspBankListApi fspBankListApi = new FspBankListApi();
+    private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
     private final String sssrDispatcher1Email = "test_gw_dispatcher_sssr1@rambler.ru";
     private final String sssrDispatcher1Password = "1234";
     LastOrderInfoResponseDto publishedLastOrderInfo;
@@ -48,7 +57,10 @@ public class PreconditionRepair extends BaseApiTest {
     OrdersIdResponseDto hasOfferOrderIdClient;
     SuggestServicesResponseDto hasOfferSuggestedServiceResponse;
 
-    public StateInfo applyPrecondition(User client, StateRepair stateRepair, CommonFieldsRepairDto commonFields) {
+    LastOrderInfoResponseDto scheduleTimeLastOrderResponse;
+    OrdersIdResponseDto scheduleTimeOrderIdResponseClient;
+
+    public StateInfo applyPrecondition(User client, StateRepair stateRepair) {
         stateInfo.setCommonFields(commonFields);
         switch (stateRepair) {
             case PUBLISHED:
@@ -58,6 +70,11 @@ public class PreconditionRepair extends BaseApiTest {
                 applyPublishedPrecondition(client, commonFields);
                 applyHasOfferPrecondition(client, commonFields);
                 return stateInfo.hasOfferDtoSet();
+            case SCHEDULE_DATE:
+                applyPublishedPrecondition(client, commonFields);
+                applyHasOfferPrecondition(client, commonFields);
+                applyScheduleDatePrecondition(client, commonFields);
+                return stateInfo.scheduleDateDtoSet();
         }
         return null; // or throw an exception if the state is not handled
     }
@@ -176,6 +193,46 @@ public class PreconditionRepair extends BaseApiTest {
             stateInfo.setHasOfferLastOrderInfo(hasOfferLastOrderInfo);
             stateInfo.setHasOfferSuggestedServiceResponse(hasOfferSuggestedServiceResponse);
             stateInfo.setHasOfferOrderIdClient(hasOfferOrderIdClient);
+        });
+    }
+
+    private void applyScheduleDatePrecondition(User client, CommonFieldsRepairDto commonFields) {
+        step("API: предусловие - " + Role.CLIENT + " заказ на ремонт в состоянии " + StateRepair.SCHEDULE_DATE, () -> {
+            step("клиент выбирает предложение", () -> {
+                SelectServiceCompanyResponseDto actualResponse = selectServiceCompanyApi.selectServiceCompany(commonFields.getOrderId(), commonFields.getServiceId(), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(SelectServiceCompanyResponseDto.class);
+                commonFields.setReceipts0Id(actualResponse.getData().getReceiptId());
+                SelectServiceCompanyResponseDto expectedResponse = SelectServiceCompanyResponseDto.successResponse(commonFields.getReceipts0Id()).build();
+            });
+            step("клиент получает список банков на оплату", () -> {
+                FspBankListResponseDto actualResponse = fspBankListApi.fspBankList(commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(FspBankListResponseDto.class);
+                Integer availableBanks = actualResponse.getData().size();
+                System.out.println("availableBanks = " + availableBanks);
+            });
+            step("клиент оплачивает  выезд мастера", () -> {
+                SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderId(), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(SelectPaymentResponseDto.class);
+                commonFields.setPayment0Url(actualResponse.getData().getPayUrl());
+                commonFields.setPayment0Id(actualResponse.getData().getPaymentId());
+            });
+            step("клиент карточка заказа - в  состоянии согласование даты и времени", () -> {
+                System.out.println("scheduleTimeOrderIdResponseAsClient");
+                scheduleTimeOrderIdResponseClient = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(OrdersIdResponseDto.class);
+            });
+            step(" клиент карточка последнего заказа - в  состоянии согласование даты и времени", () -> {
+                System.out.println("scheduleTimeLastOrderResponseAsClient");
+                scheduleTimeLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(LastOrderInfoResponseDto.class);
+            });
+            stateInfo.setScheduleDateLastOrderInfo(scheduleTimeLastOrderResponse);
+            stateInfo.setScheduleDateOrderIdResponse(scheduleTimeOrderIdResponseClient);
         });
     }
 }

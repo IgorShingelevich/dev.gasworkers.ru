@@ -14,29 +14,39 @@ import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
 @NoArgsConstructor
 @AllArgsConstructor
 public class StateInfo {
+    private CommonFieldsRepairDto commonFields;
     private LastOrderInfoResponseDto hasOfferLastOrderInfo;
     private SuggestServicesResponseDto hasOfferSuggestedServiceResponse;
     private OrdersIdResponseDto hasOfferOrderIdClient;
     private LastOrderInfoResponseDto publishedLastOrderInfo;
     private OrdersIdResponseDto publishedOrderIdResponse;
     private SuggestServicesResponseDto publishedSuggestedServiceResponse;
-    private CommonFieldsRepairDto commonFields; // Include the common fields
+    private LastOrderInfoResponseDto scheduleDateLastOrderInfo;
+    private OrdersIdResponseDto scheduleDateOrderIdResponse;
 
     public StateInfo hasOfferDtoSet() {
         return StateInfo.builder()
-                .hasOfferLastOrderInfo(hasOfferLastOrderInfo)
-                .hasOfferSuggestedServiceResponse(hasOfferSuggestedServiceResponse)
-                .hasOfferOrderIdClient(hasOfferOrderIdClient)
                 .commonFields(commonFields) // Include the common fields
+                .hasOfferSuggestedServiceResponse(hasOfferSuggestedServiceResponse)
+                .hasOfferLastOrderInfo(hasOfferLastOrderInfo)
+                .hasOfferOrderIdClient(hasOfferOrderIdClient)
                 .build();
     }
 
     public StateInfo publishedDtoSet() {
         return StateInfo.builder()
+                .commonFields(commonFields) // Include the common fields
+                .publishedSuggestedServiceResponse(publishedSuggestedServiceResponse)
                 .publishedLastOrderInfo(publishedLastOrderInfo)
                 .publishedOrderIdResponse(publishedOrderIdResponse)
-                .publishedSuggestedServiceResponse(publishedSuggestedServiceResponse)
+                .build();
+    }
+
+    public StateInfo scheduleDateDtoSet() {
+        return StateInfo.builder()
                 .commonFields(commonFields) // Include the common fields
+                .scheduleDateLastOrderInfo(scheduleDateLastOrderInfo)
+                .scheduleDateOrderIdResponse(scheduleDateOrderIdResponse)
                 .build();
     }
 }

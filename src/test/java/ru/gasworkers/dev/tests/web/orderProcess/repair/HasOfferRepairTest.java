@@ -18,7 +18,6 @@ import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
-import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -39,9 +38,8 @@ public class HasOfferRepairTest extends BaseApiTest {
     @Test
     @DisplayName("Ремонт - в состоянии есть отклик СК")
     void hasOfferRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        CommonFieldsRepairDto commonFields = new CommonFieldsRepairDto();
         PreconditionRepair preconditionRepair = new PreconditionRepair();
-        StateInfo stateInfo = preconditionRepair.applyPrecondition(client, StateRepair.HAS_OFFER, commonFields);
+        StateInfo stateInfo = preconditionRepair.applyPrecondition(client, StateRepair.HAS_OFFER);
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("WEB " + Role.CLIENT + " авторизация", () -> {
             clientPages.getLoginPage().open();

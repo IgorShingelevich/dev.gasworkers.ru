@@ -18,7 +18,6 @@ import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
-import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -38,9 +37,8 @@ public class PublishedRepairTest extends BaseApiTest {
     @Test
     @DisplayName("Ремонт - в состоянии published")
     void publishedRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        CommonFieldsRepairDto commonFields = new CommonFieldsRepairDto();
         PreconditionRepair preconditionRepair = new PreconditionRepair();
-        StateInfo stateInfo = preconditionRepair.applyPrecondition(client, StateRepair.PUBLISHED, commonFields);
+        StateInfo stateInfo = preconditionRepair.applyPrecondition(client, StateRepair.PUBLISHED);
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("WEB " + Role.CLIENT + " авторизация", () -> {
                 clientPages.getLoginPage().open();
