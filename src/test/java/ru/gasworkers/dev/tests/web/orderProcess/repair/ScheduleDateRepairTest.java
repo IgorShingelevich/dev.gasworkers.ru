@@ -62,7 +62,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Story("Ремонт")
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
-@Tag(AllureTag.WEB)
+@Tag(AllureTag.WEB_REPAIR)
 public class ScheduleDateRepairTest extends BaseApiTest {
     private final UserSettingsApi userSettingsApi = new UserSettingsApi();
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
@@ -203,7 +203,7 @@ public class ScheduleDateRepairTest extends BaseApiTest {
                 });
                 step("клиент карточка заказа - в  состоянии согласование даты и времени", () -> {
                     System.out.println("scheduleTimeOrderIdResponseAsClient");
-                    scheduleTimeOrderIdResponseClient = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenClient())
+                    scheduleTimeOrderIdResponseClient = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
                             .statusCode(200)
                             .extract().as(OrdersIdResponseDto.class);
                 });
@@ -216,7 +216,7 @@ public class ScheduleDateRepairTest extends BaseApiTest {
                 step("диспетчер карточка заказа - в  состоянии согласование даты и времени", () -> {
                     System.out.println("scheduleTimeOrderIdResponseAsDispatcher");
                     commonFields.setApproveDate(client.getApproveDate());
-                    scheduleTimeOrderIdResponseDispatcher = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                    scheduleTimeOrderIdResponseDispatcher = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
                             .statusCode(200)
                             .extract().as(OrdersIdResponseDto.class);
                 });

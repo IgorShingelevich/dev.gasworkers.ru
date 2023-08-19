@@ -8,6 +8,7 @@ public enum OrderStatus {
     NEW_TENDER("Тендер", "dispatcher"),
     PARTICIPATE_TENDER("Тендер", "dispatcher"),
     NEW_ORDER("Новый заказ", "dispatcher, client"),
+    HAS_OFFER("Новый заказ", "dispatcher, client"),
     SCHEDULE_DATE("Согласование даты заказа", "dispatcher"),
     SELECT_MASTER("Выбор мастера", "dispatcher"),
     WAIT_MASTER("Мастер в пути", "dispatcher, master"),

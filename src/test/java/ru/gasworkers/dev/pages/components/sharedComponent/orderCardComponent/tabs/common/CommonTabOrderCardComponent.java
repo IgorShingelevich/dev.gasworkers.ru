@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.ta
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.masterComponent.FillUpCheckListBannerComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.BaseOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.SharedButtonsOrderCardClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.StatusOrderCardPageComponent;
 
 public class CommonTabOrderCardComponent extends BaseOrderCardComponent {
@@ -10,6 +11,8 @@ public class CommonTabOrderCardComponent extends BaseOrderCardComponent {
     public final FillUpCheckListBannerComponent fillUpBanner;
     public final StatusOrderCardPageComponent status;
     public final DetailsCommonTabOrderCardComponent details;
+    public final SharedButtonsOrderCardClientComponent buttons;
+    public final SuggestedMasterRepairCommonTabOrderCardComponent suggestedMasterRepair;
     //todo add buttons
 
 
@@ -18,20 +21,9 @@ public class CommonTabOrderCardComponent extends BaseOrderCardComponent {
         fillUpBanner = new FillUpCheckListBannerComponent(browser);
         status = new StatusOrderCardPageComponent(browser);
         details = new DetailsCommonTabOrderCardComponent(browser);
-        ButtonsCommonTabOrderCardComponent buttons = new ButtonsCommonTabOrderCardComponent(browser);
+        buttons = new SharedButtonsOrderCardClientComponent(browser);
+        suggestedMasterRepair = new SuggestedMasterRepairCommonTabOrderCardComponent(browser);
     }
-
-    static class ButtonsCommonTabOrderCardComponent extends BaseOrderCardComponent {
-
-        public ButtonsCommonTabOrderCardComponent(RoleBrowser browser) {
-            super(browser);
-        }
-
-
-    }
-
-
-
 
 }
 

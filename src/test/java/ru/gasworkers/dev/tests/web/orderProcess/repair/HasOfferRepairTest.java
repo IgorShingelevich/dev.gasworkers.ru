@@ -14,6 +14,8 @@ import ru.gasworkers.dev.api.administration.getUserWithAdmin.GetUserWithAdminApi
 import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
 import ru.gasworkers.dev.api.auth.login.dto.LoginResponseDto;
 import ru.gasworkers.dev.api.auth.user.UserResponseDto;
+import ru.gasworkers.dev.api.orders.id.OrdersIdApi;
+import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
 import ru.gasworkers.dev.api.orders.info.dto.OrdersInfoResponseDto;
 import ru.gasworkers.dev.api.orders.selectMaster.SelectMasterApi;
@@ -54,12 +56,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Story("Ремонт")
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
-@Tag(AllureTag.WEB)
+@Tag(AllureTag.WEB_REPAIR)
 public class HasOfferRepairTest extends BaseApiTest {
     private final UserSettingsApi userSettingsApi = new UserSettingsApi();
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
     private final SelectMasterApi selectMasterApi = new SelectMasterApi();
+    private final OrdersIdApi ordersIdApi = new OrdersIdApi();
     private final OrdersInfoApi ordersInfoApi = new OrdersInfoApi();
     private final SuggestedServicesApi suggestedServicesApi = new SuggestedServicesApi();
     private final GetUserWithAdminApi getUserWithAdminApi = new GetUserWithAdminApi();
@@ -75,6 +78,7 @@ public class HasOfferRepairTest extends BaseApiTest {
     MasterPages masterPages;
 
     LastOrderInfoResponseDto hasOfferLastOrderInfo;
+    OrdersIdResponseDto hasOfferOrderIdClient;
     OrdersInfoResponseDto hasOfferOrderInfo;
     SuggestServicesResponseDto suggestedServiceResponse;
 
@@ -85,8 +89,8 @@ public class HasOfferRepairTest extends BaseApiTest {
         CommonFieldsRepairDto commonFields = new CommonFieldsRepairDto();
         step("api precondition", () -> {
             commonFields.setTokenClient(loginApi.getTokenThrough(client));
-            step("клиент заказ на ремонт клиента в  состоянии published", () -> {
-                step("клиент карточка последнего заказа", () -> {
+            step(Role.CLIENT + " заказ на ремонт в состоянии " + StateRepair.HAS_OFFER, () -> {
+                step(Role.CLIENT + " карточка последнего заказа", () -> {
                     System.out.println("publishedLastOrderInfo");
                     LastOrderInfoResponseDto publishedLastOrderInfo = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                             .statusCode(200)
@@ -96,7 +100,7 @@ public class HasOfferRepairTest extends BaseApiTest {
                     commonFields.setClientObjectId(publishedLastOrderInfo.getData().getClientObject().getId());
                     commonFields.setEquipments0Id(publishedLastOrderInfo.getData().getEquipments().get(0).getId());
                 });
-                step("клиент - заполнение профиля после Фоновой Регистрации", () -> {
+                step(Role.CLIENT + " заполнение профиля после Фоновой Регистрации", () -> {
                     UserSettingsCommonResponseDto actualResponse = userSettingsApi.setCommon(UserSettingsCommonRequestDto.defaultBGClientRequest(client), commonFields.getTokenClient())
                             .statusCode(200)
                             .extract().as(UserSettingsCommonResponseDto.class);
@@ -105,22 +109,21 @@ public class HasOfferRepairTest extends BaseApiTest {
                     UserSettingsCommonResponseDto expectedResponse = UserSettingsCommonResponseDto.defaultBGUserResponse(client, commonFields);
                     expectedResponse.getData().getGuides().get(0).setId(actualResponse.getData().getGuides().get(0).getId());
                     expectedResponse.getData().getPassport().setIssuedDate(actualResponse.getData().getPassport().getIssuedDate());
-//                assertResponsePartialNoATExcludeFields(expectedResponse, actualResponse, List.of("data.userNotificationsCount"));
                     //todo assert клиент - модель пользователя в  состоянии после заполнения профиля
                     // todo change all  dto to include  user details
                 });
             });
 
-            step("диспетчер выбирает мастера ", () -> {
-                step("диспетчер авторизуется", () -> {
+            step(Role.DISPATCHER + " выбирает мастера ", () -> {
+                step(Role.DISPATCHER + " авторизуется", () -> {
                     commonFields.setTokenDispatcher(loginApi.getUserToken(LoginRequestDto.asUserEmail(sssrDispatcher1Email, sssrDispatcher1Password)));
                 });
-                step("диспетчер получает список доступных мастеров ", () -> {
+                step(Role.DISPATCHER + " получает список доступных мастеров ", () -> {
                     commonFields.setMasterId(companiesMastersApi.getAcceptedMasters(commonFields.getTokenDispatcher())
                             .statusCode(200)
                             .extract().as(CompaniesMastersListResponse.class).getData().get(0).getId());
                 });
-                step("диспетчер подтверждает выбор первого мастера ", () -> {
+                step(Role.DISPATCHER + " подтверждает выбор первого мастера ", () -> {
                     selectMasterApi.selectMaster(commonFields.getOrderId(), commonFields.getMasterId(), commonFields.getTokenDispatcher())
                             .statusCode(200);
                 });
@@ -136,23 +139,23 @@ public class HasOfferRepairTest extends BaseApiTest {
                 commonFields.setMasterEmail(masterDto.getData().getEmail());
             });
 
-            step("клиент заказ на ремонт клиента в состоянии есть отклик СК", () -> {
+            step(Role.CLIENT + " заказ на ремонт в состоянии " + StateRepair.HAS_OFFER, () -> {
 
-                step(" клиент карточка последнего заказа -  есть отклик СК", () -> {
+                step(Role.CLIENT + " карточка последнего заказа в состоянии " + StateRepair.HAS_OFFER, () -> {
                     System.out.println("hasOfferLastOrderInfo");
                     hasOfferLastOrderInfo = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                             .statusCode(200)
                             .extract().as(LastOrderInfoResponseDto.class);
                     commonFields.setOrderId(hasOfferLastOrderInfo.getData().getId());
                 });
-                step("клиент карточка заказа -   есть отклик СК", () -> {
-                    System.out.println("hasOfferOrderInfo");
-                    hasOfferOrderInfo = ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
+                step(Role.CLIENT + " карточка заказа в состоянии " + StateRepair.HAS_OFFER, () -> {
+                    System.out.println("hasOfferOrdersId");
+                    hasOfferOrderIdClient = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
                             .statusCode(200)
-                            .extract().as(OrdersInfoResponseDto.class);
-                    commonFields.setOfferIdHasOfferClient(hasOfferOrderInfo.getData().getOffer().getId());
+                            .extract().as(OrdersIdResponseDto.class);
+                    commonFields.setOfferIdHasOfferClient(hasOfferOrderIdClient.getData().getOffer().getId());
                 });
-                step("клиент получает список доступных предложений", () -> {
+                step(Role.CLIENT + " получает список доступных предложений", () -> {
                     suggestedServiceResponse = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
                             .statusCode(200)
                             .extract().as(SuggestServicesResponseDto.class);
@@ -173,7 +176,7 @@ public class HasOfferRepairTest extends BaseApiTest {
 
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("авторизация Ролей ", () -> {
-            step("авторизация Клиента", () -> {
+            step(Role.CLIENT + " авторизация", () -> {
                 clientPages.getLoginPage().open();
                 clientPages.getLoginPage().login(client.getEmail(), "1111");
                 clientPages.getHomePage().checkUrl();
@@ -200,38 +203,46 @@ public class HasOfferRepairTest extends BaseApiTest {
             });*/
         });
 
-        step("кабинет клиента в состоянии - в состоянии есть отклик СК", () -> {
+        step(Role.CLIENT + " кабинет  в состоянии - в состоянии " + StateRepair.HAS_OFFER, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
-                step("клиент карточка последнего заказа - в состоянии есть отклик СК", () -> {
+                step(Role.CLIENT + " карточка последнего заказа - в состоянии " + StateRepair.HAS_OFFER, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.checkState(StateRepair.HAS_OFFER, hasOfferLastOrderInfo);
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
-                step("клиент карточка заказа редирект на карту - в состоянии есть отклик СК", () -> {
+                step(Role.CLIENT + " карточка заказа редирект на карту - в состоянии " + StateRepair.HAS_OFFER, () -> {
                     clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getSelectServicePage().checkUrl();
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {
-                step("клиент страница выбора услуги - в состоянии есть отклик СК", () -> {
+                step(Role.CLIENT + " страница выбора услуги - в состоянии " + StateRepair.HAS_OFFER, () -> {
                     clientPages.getSelectServicePage().checkFinishLoadingRepair();
                     clientPages.getSelectServicePage().checkState(StateRepair.HAS_OFFER, suggestedServiceResponse);
                 });
             };
+
             Consumer<SoftAssert> case4 = softAssert -> {
-                step("диспетчер карточка заказа - в состоянии есть отклик СК", () -> {
+                step(Role.CLIENT + " карточка заказа - в состоянии " + StateRepair.HAS_OFFER, () -> {
+                    clientPages.getSelectServicePage().toOrderCard();
+                    clientPages.getOrderCardPage().checkFinishLoading();
+                    clientPages.getOrderCardPage().checkState(StateRepair.HAS_OFFER, hasOfferOrderIdClient);
                 });
             };
             Consumer<SoftAssert> case5 = softAssert -> {
-                step("диспетчер карта - в состоянии есть отклик СК", () -> {
+                step(Role.DISPATCHER + " карточка заказа - в состоянии " + StateRepair.HAS_OFFER, () -> {
                 });
             };
             Consumer<SoftAssert> case6 = softAssert -> {
-                step("мастер список заказов - в состоянии есть отклик СК", () -> {
+                step(Role.DISPATCHER + " карта - в состоянии " + StateRepair.HAS_OFFER, () -> {
                 });
             };
-            assertAll(Arrays.asList(case1, case2, case3));
+            Consumer<SoftAssert> case7 = softAssert -> {
+                step(Role.MASTER + " список заказов - в состоянии " + StateRepair.HAS_OFFER, () -> {
+                });
+            };
+            assertAll(Arrays.asList(case1, case2, case3, case4));
         });
     }
 }

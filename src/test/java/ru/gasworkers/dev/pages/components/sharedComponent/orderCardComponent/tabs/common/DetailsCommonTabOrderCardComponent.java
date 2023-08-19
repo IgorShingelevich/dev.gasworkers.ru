@@ -47,7 +47,7 @@ public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
         });
     }
 
-    public void checkPhone(String expectedPhoneNumber) {
+    public void checkClientPhone(String expectedPhoneNumber) {
         stepWithRole("Убедиться, что номер телефона " + expectedPhoneNumber + " соответствует ожидаемому", () -> {
             selfCollection.findBy(text("Номер телефона:")).shouldHave(text(expectedPhoneNumber));
         });

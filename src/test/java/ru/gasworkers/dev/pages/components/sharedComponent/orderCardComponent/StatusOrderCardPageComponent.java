@@ -5,8 +5,11 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepairBuilder;
 
 import static com.codeborne.selenide.Condition.*;
+import static io.qameta.allure.Allure.step;
 
 public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
     ElementsCollection
@@ -108,6 +111,34 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                 statusPaymentLocator.shouldHave(Condition.cssClass("green"));
             } else {
                 statusPaymentLocator.shouldHave(Condition.cssClass("red"));
+            }
+        });
+    }
+
+    public void statusSet(StateRepair stateRepair, StateRepairBuilder.OrderIdData data) {
+        step("Проверить статус заказа и оплаты в состоянии " + stateRepair, () -> {
+            switch (stateRepair) {
+                case PUBLISHED:
+                    checkCurrentStatus(OrderStatus.PUBLISHED);
+                    checkNoActivationStagePayment();
+                    checkNoMaterialsStagePayment();
+                    checkNoActionsStagePayment();
+
+                case HAS_OFFER:
+                    checkCurrentStatus(OrderStatus.HAS_OFFER);
+                    checkNoActivationStagePayment();
+                    checkNoMaterialsStagePayment();
+                    checkNoActionsStagePayment();
+                    break;
+                case SCHEDULE_DATE:
+                    checkCurrentStatus(OrderStatus.SCHEDULE_DATE);
+                    checkActivationStatusIsPaid(true);
+                    checkActivationPricePayment(data.getActivationPrice());
+                    checkActivationDatePayment(data.getActivationDate());
+                    checkNoMaterialsStagePayment();
+                    checkNoActionsStagePayment();
+                    break;
+
             }
         });
     }

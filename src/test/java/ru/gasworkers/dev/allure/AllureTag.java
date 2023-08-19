@@ -34,7 +34,8 @@ public final class AllureTag {
             PAYMENT = "payment",
             ACCOUNT = "account",
             ORDERS = "orders",
-            HOUSE = "house";
+            HOUSE = "house",
+            WEB_REPAIR = "web-repair";
     //samples
     public static final String SAMPLE_WEB_TEST = "sampleWebTest",
             SAMPLE_API_TEST = "sampleApiTest";

@@ -165,15 +165,15 @@ class ClientFlowTest extends BaseTest {
         clientPages.getSelectServicePage().popUp.close();
         clientPages.getOrderCardPage().checkFinishLoading();
         clientPages.getOrderCardPage().popUp.close();
-        clientPages.getOrderCardPage().cancelOrder();
+        clientPages.getOrderCardPage().buttons.cancelOrder();
         clientPages.getCancelOrderPage().checkFinishLoading();
         clientPages.getCancelOrderPage().backButton();
         clientPages.getOrderCardPage().checkFinishLoading();
-        clientPages.getOrderCardPage().showOnMap();
+        clientPages.getOrderCardPage().buttons.showOnMap();
         clientPages.getSelectServicePage().checkFinishLoadingMaintenance();
         clientPages.getSelectServicePage().toOrderCard();
         clientPages.getOrderCardPage().checkFinishLoading();
-        clientPages.getOrderCardPage().cancelOrder();
+        clientPages.getOrderCardPage().buttons.cancelOrder();
         clientPages.getCancelOrderPage().checkFinishLoading();
         clientPages.getCancelOrderPage().yesButton();
         clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);

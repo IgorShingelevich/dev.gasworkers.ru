@@ -5,7 +5,9 @@ import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.masterComponent.FillUpCheckListBannerComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.BaseOrderCardComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.SharedButtonsOrderCardClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.StatusOrderCardPageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.common.SuggestedMasterRepairCommonTabOrderCardComponent;
 
 import static com.codeborne.selenide.Condition.text;
 
@@ -15,8 +17,12 @@ public class InfoMasterTabOrderCardClientComponent extends BaseOrderCardComponen
     public final MasterCardInfoMasterTabOrderCardComponent masterCard;
     public final MaintenanceDetailsInfoMasterTabComponent maintenanceDetails;
     public final RepairDetailsInfoMasterTabOrderCardComponent repairDetails;
+    public final SuggestedMasterRepairCommonTabOrderCardComponent suggestedMasterRepair;
+    public final SharedButtonsOrderCardClientComponent buttons;
+
     //todo add buttons
     SelenideElement
+            noInfoTextLocator = driver.$("div.text-center").as("Текст отсутствия информации"),
             conferenceResumeTextLocator = driver.$("div.item.hr.mt-3 span").as("Текст резюме конференции"),
             conferenceVideoLocator = driver.$("div.wrapper video").as("Видео конференции");
 
@@ -27,6 +33,8 @@ public class InfoMasterTabOrderCardClientComponent extends BaseOrderCardComponen
         masterCard = new MasterCardInfoMasterTabOrderCardComponent(browser);
         maintenanceDetails = new MaintenanceDetailsInfoMasterTabComponent(browser);
         repairDetails = new RepairDetailsInfoMasterTabOrderCardComponent(browser);
+        suggestedMasterRepair = new SuggestedMasterRepairCommonTabOrderCardComponent(browser);
+        buttons = new SharedButtonsOrderCardClientComponent(browser);
     }
 
     public void checkFinishLoading(OrderStatus orderStatus) {
@@ -34,8 +42,16 @@ public class InfoMasterTabOrderCardClientComponent extends BaseOrderCardComponen
     }
 
     public void checkResumeConference(String resume) {
-        stepWithRole("Проверить, что в конференции есть сообщение: " + resume, () -> {
+        stepWithRole("Убедиться, что в конференции есть сообщение: " + resume, () -> {
             conferenceResumeTextLocator.shouldHave(text(resume));
         });
     }
+
+    public void checkNoInfoBox() {
+        stepWithRole("Убедиться, что отсутствует информация", () -> {
+            noInfoTextLocator.shouldHave(text("Информации пока нет."));
+        });
+    }
+
+
 }

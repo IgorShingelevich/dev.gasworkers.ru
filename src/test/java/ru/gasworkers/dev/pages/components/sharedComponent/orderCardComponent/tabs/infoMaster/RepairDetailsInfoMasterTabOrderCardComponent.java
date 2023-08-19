@@ -40,4 +40,10 @@ public class RepairDetailsInfoMasterTabOrderCardComponent extends BaseOrderCardC
             actionsTotalPriceLocator.shouldHave(partialText(expectedActionsTotalPrice));
         });
     }
+
+    public void checkNoRepairDetails() {
+        stepWithRole("Убедиться, что информация о заказе отсутствует", () -> {
+            self.shouldNotBe(visible);
+        });
+    }
 }

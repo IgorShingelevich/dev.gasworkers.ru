@@ -121,7 +121,7 @@ public class ActionsRequestRepairApiTest extends BaseApiTest {
             });
             step("диспетчер карточка заказа - убедиться что в состоянии published", () -> {
                 System.out.println("publishedOrderIdAsDispatcherResponse");
-                OrdersIdResponseDto actualResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                OrdersIdResponseDto actualResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 commonFields.setClientRefererCode(actualResponse.getData().getClient().getRefererCode());
@@ -155,7 +155,7 @@ public class ActionsRequestRepairApiTest extends BaseApiTest {
             });
             step("диспетчер карточка заказа - убедиться что в состоянии hasOffer", () -> {
                 System.out.println("actualHasOfferOrderIdResponse");
-                OrdersIdResponseDto actualResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                OrdersIdResponseDto actualResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 commonFields.setMasters0CompletedOrdersCount(actualResponse.data.getMasters().get(0).getCompletedOrdersCount());
@@ -213,7 +213,7 @@ public class ActionsRequestRepairApiTest extends BaseApiTest {
             });
             step("диспетчер карточка заказа - убедиться что wait-for-master-starting", () -> {
                 System.out.println("waitMasterOrderIdResponseAsDispatcher");
-                ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 commonFields.setSelectedDate(client.getSelectedDate());
@@ -244,7 +244,7 @@ public class ActionsRequestRepairApiTest extends BaseApiTest {
             });
             step("мастер карточка заказа - убедиться что material invoice issued", () -> {
                 System.out.println("materialInvoiceIssuedOrderIdResponseAsMaster");
-                OrdersIdResponseDto actualResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenMaster())
+                OrdersIdResponseDto actualResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 commonFields.setReceipts1Id(actualResponse.getData().getReceipts().get(1).getId());
@@ -287,7 +287,7 @@ public class ActionsRequestRepairApiTest extends BaseApiTest {
 
                 Executable assertion2 = step("клиент карточка заказа - убедиться что actions-invoice-issued", () -> {
                     System.out.println("actionsInvoiceIssuedOrderIdResponseAsClient");
-                    actionsInvoiceIssuedOrderIdResponseAsClient = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenClient())
+                    actionsInvoiceIssuedOrderIdResponseAsClient = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
                             .statusCode(200)
                             .extract().as(OrdersIdResponseDto.class);
                     OrdersIdResponseDto expectedResponse = repairCase.actionsInvoiceIssuedOrderIdAsClientBGRepair(commonFields);
@@ -296,7 +296,7 @@ public class ActionsRequestRepairApiTest extends BaseApiTest {
 
                 Executable assertion3 = step("мастер карточка заказа - убедиться что actions-invoice-issued", () -> {
                     System.out.println("actionsInvoiceIssuedOrderIdResponseAsMaster");
-                    actionsInvoiceIssuedOrderIdResponseAsMaster = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenMaster())
+                    actionsInvoiceIssuedOrderIdResponseAsMaster = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenMaster())
                             .statusCode(200)
                             .extract().as(OrdersIdResponseDto.class);
 //                    commonFields.setReceipts2Id(actionsInvoiceIssuedOrderIdResponseAsMaster.getData().getReceipts().get(2).getId());

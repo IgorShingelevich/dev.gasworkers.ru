@@ -153,7 +153,7 @@ public class WaitForMasterRepairApiTest extends BaseApiTest {
             });
             step("диспетчер карточка заказа - убедиться что в состоянии published", () -> {
                 System.out.println("publishedOrderIdAsDispatcherResponse");
-                actualPublishedOrderIdAsDispatcherResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                actualPublishedOrderIdAsDispatcherResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 commonFields.setClientRefererCode(actualPublishedOrderIdAsDispatcherResponse.getData().getClient().getRefererCode());
@@ -196,7 +196,7 @@ public class WaitForMasterRepairApiTest extends BaseApiTest {
             });
             step("диспетчер карточка заказа - убедиться что в состоянии hasOffer", () -> {
                 System.out.println("actualHasOfferOrderIdResponse");
-                actualHasOfferOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                actualHasOfferOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 commonFields.setMasters0CompletedOrdersCount(actualHasOfferOrderIdResponse.data.getMasters().get(0).getCompletedOrdersCount());
@@ -282,7 +282,7 @@ public class WaitForMasterRepairApiTest extends BaseApiTest {
             step("диспетчер карточка заказа - убедиться что Согласование даты и времени", () -> {
                 System.out.println("dateSelectingOrderIdResponseAsDispatcher");
                 commonFields.setApproveDate(client.getApproveDate());
-                actualDateSelectingOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                actualDateSelectingOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 expectedDateSelectingLastOrderResponse = repairCase.dateSelectingOrderIdBGRepair(commonFields);
@@ -301,7 +301,7 @@ public class WaitForMasterRepairApiTest extends BaseApiTest {
             });
             step("диспетчер карточка заказа - убедиться что wait-for-master-starting", () -> {
                 System.out.println("waitMasterOrderIdResponseAsDispatcher");
-                actualWaitMasterAsDispatcherOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                actualWaitMasterAsDispatcherOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 commonFields.setSelectedDate(client.getSelectedDate());
@@ -318,7 +318,7 @@ public class WaitForMasterRepairApiTest extends BaseApiTest {
             });
             step("  клиент карточка заказа - убедиться что wait-for-master-starting", () -> {
                 System.out.println("waitMasterOrdersIdResponseAsClient");
-                OrdersIdResponseDto actualResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenClient())
+                OrdersIdResponseDto actualResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 OrdersIdResponseDto expectedResponse = repairCase.waitMasterOrderIdAsClientBGRepair(commonFields);
@@ -329,7 +329,7 @@ public class WaitForMasterRepairApiTest extends BaseApiTest {
             });
             step("мастер карточка заказа - убедиться что wait-for-master-starting", () -> {
                 System.out.println("waitMasterOrderIdResponseAsMaster");
-                actualWaitMasterAsMasterOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenMaster())
+                actualWaitMasterAsMasterOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 expectedWaitMasterAsMasterOrderIdResponse = repairCase.waitMasterOrderIdAsMasterBGRepair(commonFields);

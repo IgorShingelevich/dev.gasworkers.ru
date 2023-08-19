@@ -65,7 +65,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @Story("Ремонт")
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
-@Tag(AllureTag.WEB)
+@Tag(AllureTag.WEB_REPAIR)
 public class WaitMasterRepairTest extends BaseApiTest {
     private final RepairTestCase repairCase = new RepairTestCase();
     private final UserSettingsApi userSettingsApi = new UserSettingsApi();
@@ -220,7 +220,7 @@ public class WaitMasterRepairTest extends BaseApiTest {
                     });
                     step("диспетчер карточка заказа - убедиться что в состоянии waitMaster", () -> {
                         System.out.println("waitMasterOrderIdResponseAsDispatcher");
-                        waitMasterAsDispatcherOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                        waitMasterAsDispatcherOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
                                 .statusCode(200)
                                 .extract().as(OrdersIdResponseDto.class);
                         commonFields.setSelectedDate(client.getSelectedDate());
@@ -233,7 +233,7 @@ public class WaitMasterRepairTest extends BaseApiTest {
                     });
                     step("  клиент карточка заказа - убедиться что в состоянии waitMaster", () -> {
                         System.out.println("waitMasterOrdersIdResponseAsClient");
-                        waitMasterAsClientOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenClient())
+                        waitMasterAsClientOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
                                 .statusCode(200)
                                 .extract().as(OrdersIdResponseDto.class);
                     });
@@ -242,7 +242,7 @@ public class WaitMasterRepairTest extends BaseApiTest {
                     });
                     step("мастер карточка заказа - убедиться что в состоянии waitMaster", () -> {
                         System.out.println("waitMasterOrderIdResponseAsMaster");
-                        waitMasterAsMasterOrderIdResponse = ordersIdApi.ordersId(commonFields.getOrderId(), commonFields.getTokenMaster())
+                        waitMasterAsMasterOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenMaster())
                                 .statusCode(200)
                                 .extract().as(OrdersIdResponseDto.class);
                     });

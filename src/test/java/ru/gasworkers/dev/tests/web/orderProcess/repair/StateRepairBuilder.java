@@ -3,16 +3,13 @@ package ru.gasworkers.dev.tests.web.orderProcess.repair;
 import lombok.Builder;
 import lombok.Getter;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
-import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.model.ServiceType;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
+import java.util.List;
 
 public class StateRepairBuilder {
+    public StateRepairHelper helper = new StateRepairHelper();
 
     public LastOrderInfoData extractLastOrderInfoData(LastOrderInfoResponseDto dto) {
         return LastOrderInfoData.builder()
@@ -24,31 +21,103 @@ public class StateRepairBuilder {
                 .build();
     }
 
-    public OrderIdData extractOrdersIdData(OrdersIdResponseDto dto) {
-        return OrderIdData.builder()
-                .orderNumber(dto.getData().getNumber())
-                .activationIsPaid(dto.getData().getReceipts().get(0).getPaid())
-                .activationPrice(priceFormatter(String.valueOf(dto.getData().getReceipts().get(0).getAmount())))
-                .activationDate(createdAtFormatter(dto.getData().getReceipts().get(0).getCreatedAt()))
-                .serviceType(ServiceType.REPAIR.toString())
-                .clientFullName(dto.getData().getClient().getFullName())
-                .address(dto.getData().getClientObject().getAddress().getFull())
-                .phone(dto.getData().getClient().getPhone().toString())
-                .equipments0(dto.getData().getEquipments().get(0).getComputedTitle())
-                .desiredDate(desiredDateIntervalFormatter(dto.getData().getDesiredDateIntervalStartedAt(), dto.getData().getDesiredDateIntervalEndedAt()))
-                .desiredTime(desiredTimeIntervalFormatter(dto.getData().getDesiredTimeStarted(), dto.getData().getDesiredTimeEnded()))
-                .description(dto.getData().getDescription())
-                .masterFullName(dto.getData().getMaster().getFullName())
-                .masterAvatar(dto.getData().getMaster().getAvatar())
-                .masterRegisterDate(convertRegisterDateFromStamp(Integer.parseInt(dto.getData().getMaster().getCreatedAt())))
-                .masterReviewCount(String.valueOf(dto.getData().getMaster().getReviewsCount()))
-                .masterRating(dto.getData().getMaster().getRating())
-                .companyFullName(dto.getData().getServiceCenter().getTitle())
-//               todo .scheduledTime(desiredTimeIntervalFormatter(dto.getData().getScheduledTimeStarted(), dto.getData().getScheduledTimeEnded()))
+    public void extractMasterOrdersId(OrdersIdResponseDto.Data.Master master) {
+        String masterFullName = master.getFullName();
+        String masterAvatar = master.getAvatar();
+        String masterCreatedAt = master.getCreatedAt();
+        String masterReviewCount = String.valueOf(master.getReviewsCount());
+        String masterRating = master.getRating();
+    }
+
+    public SuggestedMasterRepairCommonTabOrderCardComponent extractMastersOrdersId(OrdersIdResponseDto.Data.Masters suggestedMaster) {
+        String suggestedMasterFullName = suggestedMaster.getFullName();
+        String suggestedMasterAvatar = suggestedMaster.getAvatar();
+        String suggestedMasterRegisterDate = suggestedMaster.getCreatedAt();
+        String suggestedMasterRating = suggestedMaster.getRating();
+        String suggestedMasterReviewCount = String.valueOf(suggestedMaster.getReviewsCount());
+        String suggestedMasterShortWorkPlace = suggestedMaster.getCompany().getShortTitle();
+        String suggestedMasterSkills = suggestedMaster.getSkills();
+        Double suggestedMasterCompanyRatingStarsCount = Double.parseDouble(suggestedMaster.getCompany().getRating());
+        Integer convertDoubleToInt = suggestedMasterCompanyRatingStarsCount.intValue();
+        Integer suggestedMasterCertifiedEquipmentCount = suggestedMaster.getBrands().size();
+        String suggestedMasterCompletedOrdersCount = String.valueOf(suggestedMaster.getCompletedOrdersCount());
+        String suggestedMasterVisitPrice = suggestedMaster.getCompany().getFirstAccept().toString();
+
+        return SuggestedMasterRepairCommonTabOrderCardComponent.builder()
+                .suggestedMasterFullName(suggestedMasterFullName)
+                .suggestedMasterAvatar(suggestedMasterAvatar)
+                .suggestedMasterRegisterDate(helper.convertRegisterDateFromStamp(Integer.parseInt(suggestedMasterRegisterDate)))
+                .suggestedMasterRating(suggestedMasterRating)
+                .suggestedMasterReviewCount(suggestedMasterReviewCount)
+                .suggestedMasterShortWorkPlace(suggestedMasterShortWorkPlace)
+                .suggestedMasterSkills(suggestedMasterSkills)
+                .suggestedMasterCompanyRatingStarsCount(convertDoubleToInt)
+                .suggestedMasterCertifiedEquipmentCount(suggestedMasterCertifiedEquipmentCount)
+                .suggestedMasterCompletedOrdersCount(suggestedMasterCompletedOrdersCount)
+                .suggestedMasterVisitPrice(helper.priceFormatter(suggestedMasterVisitPrice))
                 .build();
     }
 
-    public int getCalculateRatingCompany(SuggestServicesResponseDto dto) {
+    public OrderIdData extractOrdersIdData(OrdersIdResponseDto dto) {
+        OrdersIdResponseDto.Data.Master master = dto.getData().getMaster();
+        String masterFullName = (master != null) ? master.getFullName() : null;
+        String masterAvatar = (master != null) ? master.getAvatar() : null;
+        String masterCreatedAt = (master != null) ? master.getCreatedAt() : null;
+        String masterRating = (master != null) ? master.getRating() : null;
+        String masterReviewCount = (master != null) ? String.valueOf(master.getReviewsCount()) : null;
+
+
+        List<OrdersIdResponseDto.Data.Receipts> receipts = dto.getData().getReceipts();
+        Boolean activationIsPaid = (receipts != null && !receipts.isEmpty()) ? receipts.get(0).getPaid() : null;
+        String activationPrice = (receipts != null && !receipts.isEmpty()) ? helper.priceFormatter(String.valueOf(receipts.get(0).getAmount())) : null;
+        String activationDate = (receipts != null && !receipts.isEmpty()) ? helper.createdAtFormatter(receipts.get(0).getCreatedAt()) : null;
+
+        OrdersIdResponseDto.Data.ServiceCenter serviceCenter = dto.getData().getServiceCenter();
+        String companyFullName = (serviceCenter != null) ? serviceCenter.getTitle() : null;
+
+        OrdersIdResponseDto.Data.Client client = dto.getData().getClient();
+        String clientFullName = (client != null) ? client.getFullName() : null;
+
+
+        return OrderIdData.builder()
+                .orderNumber(dto.getData().getNumber())
+                .activationIsPaid(activationIsPaid)
+                .activationPrice(activationPrice)
+                .activationDate(activationDate)
+                .serviceType(ServiceType.REPAIR.toString())
+                .clientFullName(clientFullName)
+                .address(dto.getData().getClientObject().getAddress().getFull())
+                .phone(dto.getData().getClient().getPhone().toString())
+                .equipments0(dto.getData().getEquipments().get(0).getComputedTitle())
+                .desiredDate(helper.desiredDateIntervalFormatter(dto.getData().getDesiredDateIntervalStartedAt(), dto.getData().getDesiredDateIntervalEndedAt()))
+                .desiredTime(helper.desiredTimeIntervalFormatter(dto.getData().getDesiredTimeStarted(), dto.getData().getDesiredTimeEnded()))
+                .description(dto.getData().getDescription())
+                .masterFullName(masterFullName)
+                .masterAvatar(masterAvatar)
+                .masterRegisterDate(masterCreatedAt != null ? helper.convertRegisterDateFromStamp(Integer.parseInt(masterCreatedAt)) : null)
+                .masterReviewCount(masterReviewCount)
+                .masterRating(masterRating)
+                .companyFullName(companyFullName)
+                // todo .scheduledTime(desiredTimeIntervalFormatter(dto.getData().getScheduledTimeStarted(), dto.getData().getScheduledTimeEnded()))
+                .build();
+    }
+
+    /*public int getSuggestServiceSuggestedMasterCompanyRating(OrdersIdResponseDto.Data data, int masterIndex) {
+        if (data != null && data.getMasters() != null && masterIndex >= 0 && masterIndex < data.getMasters().size()) {
+            String ratingCompanyString = data.getMasters().get(masterIndex).getCompany().getRating();
+            if (ratingCompanyString != null) {
+                double ratingCompanyDouble = Double.parseDouble(ratingCompanyString);
+                int ratingCompany = (int) Math.round(ratingCompanyDouble);
+                if (ratingCompanyDouble >= 4.5 && ratingCompanyDouble < 5) {
+                    ratingCompany = 5;
+                }
+                return ratingCompany;
+            }
+        }
+        return 0; // Default value if masters list is empty or rating is null
+    }
+
+    public int getSuggestServiceSuggestedMasterCompanyRating(SuggestServicesResponseDto dto) {
         if (dto.getData().services != null && !dto.getData().services.isEmpty()) {
             String ratingCompanyString = dto.getData().services.get(0).getRating();
             if (ratingCompanyString != null) {
@@ -81,7 +150,7 @@ public class StateRepairBuilder {
         return 0; // Default value if services list is empty or master or rating is null
     }
 
-    public String getVisitPrice(SuggestServicesResponseDto dto, int offerIndex) {
+    public String getServicePageOfferVisitPrice(SuggestServicesResponseDto dto, int offerIndex) {
         if (dto.getData().getServices() != null && offerIndex < dto.getData().getServices().size()) {
             return dto.getData().getServices().get(offerIndex).getFirstAccept().toString();
         }
@@ -169,6 +238,9 @@ public class StateRepairBuilder {
     }
 
     private String priceFormatter(String text) {
+        if (text == null) {
+            return null; // or return a default value if you prefer
+        }
         String amount = text.replaceAll("[^0-9.]", "");
         return amount.split("\\.")[0];
     }
@@ -177,6 +249,38 @@ public class StateRepairBuilder {
         Date date = new Date((long) timestamp * 1000L); // Convert seconds to milliseconds
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMMM yyyy 'года'", new Locale("ru"));
         return "Зарегистрирован с " + outputFormat.format(date);
+    }*/
+
+    @Getter
+    @Builder
+    public static class SuggestedMasterRepairCommonTabOrderCardComponent {
+        private final String suggestedMasterFullName;
+        private final String suggestedMasterRegisterDate;
+        private final String suggestedMasterAvatar;
+        private final String suggestedMasterRating;
+        private final String suggestedMasterReviewCount;
+        private final String suggestedMasterShortWorkPlace;
+        private final String suggestedMasterSkills;
+        private final Integer suggestedMasterCompanyRatingStarsCount;
+        private final Integer suggestedMasterCertifiedEquipmentCount;
+        private final String suggestedMasterCompletedOrdersCount;
+        private final String suggestedMasterVisitPrice;
+    }
+
+    @Getter
+    @Builder
+    public static class selectedMasterRepairCommonTabOrderCardComponent {
+        private final String selectedMasterFullName;
+        private final String selectedMasterAvatar;
+        private final String selectedMasterRegisterDate;
+        private final String selectedMasterRating;
+        private final String selectedMasterReviewCount;
+        private final String selectedMasterShortWorkPlace;
+        private final String selectedMasterSkills;
+        private final Integer selectedMasterCompanyRatingStarsCount;
+        private final Integer selectedMasterCertifiedEquipmentCount;
+        private final String selectedMasterCompletedOrdersCount;
+        private final String selectedMasterVisitPrice;
     }
 
     @Getter
@@ -219,7 +323,5 @@ public class StateRepairBuilder {
         private final String masterRating;
         private final String companyFullName;
         private final String scheduledTime;
-
-
     }
 }

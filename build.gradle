@@ -124,6 +124,12 @@ task webTest(type: Test) {
         includeTags "web"
     }
 }
+
+task webRepairTest(type: Test) {
+    useJUnitPlatform {
+        includeTags "web-repair"
+    }
+}
 task sampleWebTest(type: Test) {
     useJUnitPlatform {
         includeTags "sampleWebTest"

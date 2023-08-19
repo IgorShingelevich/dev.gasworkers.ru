@@ -59,4 +59,9 @@ public class MasterCardInfoMasterTabOrderCardComponent extends BaseOrderCardComp
     }
 
 
+    public void checkNoMasterCard() {
+        stepWithRole("Убедиться, что карточка мастера не отображается", () -> {
+            self.shouldNotBe(visible);
+        });
+    }
 }

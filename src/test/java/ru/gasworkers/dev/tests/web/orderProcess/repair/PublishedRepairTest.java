@@ -11,6 +11,8 @@ import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.administration.getUserWithAdmin.GetUserWithAdminApi;
+import ru.gasworkers.dev.api.orders.id.OrdersIdApi;
+import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
 import ru.gasworkers.dev.api.orders.info.dto.OrdersInfoResponseDto;
 import ru.gasworkers.dev.api.orders.selectMaster.SelectMasterApi;
@@ -47,11 +49,12 @@ import static io.qameta.allure.Allure.step;
 @Story("Ремонт")
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
-@Tag(AllureTag.WEB)
+@Tag(AllureTag.WEB_REPAIR)
 public class PublishedRepairTest extends BaseApiTest {
     private final UserSettingsApi userSettingsApi = new UserSettingsApi();
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
+    private final OrdersIdApi ordersIdApi = new OrdersIdApi();
     private final SelectMasterApi selectMasterApi = new SelectMasterApi();
     private final OrdersInfoApi ordersInfoApi = new OrdersInfoApi();
     private final SuggestedServicesApi suggestedServicesApi = new SuggestedServicesApi();
@@ -68,6 +71,7 @@ public class PublishedRepairTest extends BaseApiTest {
     MasterPages masterPages;
 
     LastOrderInfoResponseDto publishedLastOrderInfo;
+    OrdersIdResponseDto publishedOrderIdResponse;
     OrdersInfoResponseDto hasOfferOrderInfo;
     SuggestServicesResponseDto suggestedServiceResponse;
 
@@ -78,8 +82,8 @@ public class PublishedRepairTest extends BaseApiTest {
         CommonFieldsRepairDto commonFields = new CommonFieldsRepairDto();
         step("api precondition", () -> {
             commonFields.setTokenClient(loginApi.getTokenThrough(client));
-            step("клиент заказ на ремонт клиента - в состоянии published", () -> {
-                step("клиент карточка последнего заказа - в состоянии published", () -> {
+            step(Role.CLIENT + " заказ на ремонт - в состоянии " + StateRepair.PUBLISHED, () -> {
+                step(Role.CLIENT + " карточка последнего заказа - в состоянии " + StateRepair.PUBLISHED, () -> {
                     System.out.println("publishedLastOrderInfo");
                     publishedLastOrderInfo = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                             .statusCode(200)
@@ -89,8 +93,13 @@ public class PublishedRepairTest extends BaseApiTest {
                     commonFields.setClientObjectId(publishedLastOrderInfo.getData().getClientObject().getId());
                     commonFields.setEquipments0Id(publishedLastOrderInfo.getData().getEquipments().get(0).getId());
                 });
+                step(Role.CLIENT + " карточка заказа - в состоянии " + StateRepair.PUBLISHED, () -> {
+                    publishedOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
+                            .statusCode(200)
+                            .extract().as(OrdersIdResponseDto.class);
+                });
             });
-            step("клиент получает список доступных предложений", () -> {
+            step(Role.CLIENT + " получает список доступных предложений", () -> {
                 suggestedServiceResponse = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SuggestServicesResponseDto.class);
@@ -137,29 +146,34 @@ public class PublishedRepairTest extends BaseApiTest {
             });*/
         });
 
-        step("кабинет клиента в состоянии - в состоянии published", () -> {
+        step(Role.CLIENT + " кабинет в состоянии - в состоянии " + StateRepair.PUBLISHED, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
-                step("клиент карточка последнего заказа - в состоянии published", () -> {
+                step(Role.CLIENT + " карточка последнего заказа - в состоянии " + StateRepair.PUBLISHED, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.checkState(StateRepair.PUBLISHED, publishedLastOrderInfo);
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
-                step("клиент карточка заказа редирект на карту - в состоянии published", () -> {
+                step(Role.CLIENT + " карточка заказа редирект на карту - в состоянии " + StateRepair.PUBLISHED, () -> {
                     clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getSelectServicePage().checkUrl();
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {
-                step("клиент страница выбора услуги - в состоянии published", () -> {
+                step(Role.CLIENT + " страница выбора услуги - в состоянии " + StateRepair.PUBLISHED, () -> {
                     clientPages.getSelectServicePage().checkFinishLoadingRepair();
                     clientPages.getSelectServicePage().checkState(StateRepair.PUBLISHED, suggestedServiceResponse);
                 });
             };
             Consumer<SoftAssert> case4 = softAssert -> {
-                step("диспетчер карточка заказа - в состоянии published", () -> {
+                step(Role.CLIENT + " карточка заказа - в состоянии " + StateRepair.PUBLISHED, () -> {
+                    clientPages.getSelectServicePage().toOrderCard();
+                    clientPages.getOrderCardPage().checkFinishLoading();
+                    clientPages.getOrderCardPage().checkState(StateRepair.PUBLISHED, publishedOrderIdResponse);
+
                 });
             };
+
             Consumer<SoftAssert> case5 = softAssert -> {
                 step("диспетчер карта - в состоянии published", () -> {
                 });
@@ -168,7 +182,20 @@ public class PublishedRepairTest extends BaseApiTest {
                 step("мастер список заказов - в состоянии published", () -> {
                 });
             };
-            assertAll(Arrays.asList(case1, case2, case3));
+            assertAll(Arrays.asList(case1, case2, case3, case4));
+
+          /*  // Get the soft assertions from the page class
+            List<Consumer<SoftAssert>> softAssertionsFromPageClass = clientPages.getOrderCardPage().checkStateList(StateRepair.PUBLISHED, publishedOrderIdResponse);
+            List<Consumer<SoftAssert>> allSoftAssertions = new ArrayList<>();
+            allSoftAssertions.addAll(Arrays.asList(case1, case2, case3));
+            allSoftAssertions.addAll(softAssertionsFromPageClass);
+
+            SoftAssert softAssert = new SoftAssert();
+            for (Consumer<SoftAssert> assertion : allSoftAssertions) {
+                assertion.accept(softAssert);
+            }
+            softAssert.assertAll();
+*/
         });
     }
 }

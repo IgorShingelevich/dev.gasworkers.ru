@@ -17,9 +17,13 @@ import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tab
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster.InfoMasterTabOrderCardClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
+import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
@@ -240,20 +244,6 @@ public class OrderCardClientPage extends BaseClientPage {
         return this;
     }
 
-    public OrderCardClientPage showOnMap() {
-        stepWithRole("Нажать на кнопку Показать на карте", () -> {
-            toMapButtonLocator.shouldBe(visible, Duration.ofSeconds(30)).click();  //.scrollTo()
-        });
-        return this;
-    }
-
-    public OrderCardClientPage cancelOrder() {
-        stepWithRole("Нажать на кнопку Отменить заказ", () -> {
-            cancelOrderButtonLocator.shouldBe(visible, Duration.ofSeconds(30)).click();
-        });
-        return this;
-    }
-
     public void checkUrl() {
         urlChecker.urlContains("/client/orders/");
     }
@@ -280,7 +270,32 @@ public class OrderCardClientPage extends BaseClientPage {
             nav.docs();
             state.checkDocsTab(this.docsTab, dto);
         });
+    }
 
+    public List<Consumer<SoftAssert>> checkStateList(StateRepair state, OrdersIdResponseDto dto) {
+        List<Consumer<SoftAssert>> softAssertions = new ArrayList<>();
+
+        stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
+            Consumer<SoftAssert> case1 = softAssert -> {
+                checkOrderNumber(dto.getData().getNumber());
+                nav.common();
+                state.checkCommonTab(this.commonTab, dto);
+            };
+            Consumer<SoftAssert> case2 = softAssert -> {
+                nav.infoMaster();
+                state.checkInfoMasterTab(this.infoMasterTab, dto);
+            };
+            Consumer<SoftAssert> case3 = softAssert -> {
+                nav.docs();
+                state.checkDocsTab(this.docsTab, dto);
+            };
+
+            softAssertions.add(case1);
+            softAssertions.add(case2);
+            softAssertions.add(case3);
+        });
+
+        return softAssertions;
     }
 
 
