@@ -310,7 +310,7 @@ public class RepairAllDtoApiTest extends BaseApiTest {
         });
 
         step("заказ на ремонт в  состоянии Согласование даты и времени", () -> {
-            step("клиент оплачивает  выезд мастера", () -> {
+            step("клиент оплачивает активацию сделки", () -> {
                 SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SelectPaymentResponseDto.class);

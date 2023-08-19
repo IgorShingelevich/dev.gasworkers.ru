@@ -4,6 +4,8 @@ import ru.gasworkers.dev.api.administration.getUserWithAdmin.GetUserWithAdminApi
 import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
 import ru.gasworkers.dev.api.auth.login.dto.LoginResponseDto;
 import ru.gasworkers.dev.api.auth.user.UserResponseDto;
+import ru.gasworkers.dev.api.orders.approveDate.OrdersApproveDateApi;
+import ru.gasworkers.dev.api.orders.approveDate.OrdersApproveDateResponseDto;
 import ru.gasworkers.dev.api.orders.id.OrdersIdApi;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
@@ -27,6 +29,7 @@ import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
+import ru.gasworkers.dev.tests.api.story.repair.RepairTestCase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PreconditionRepair extends BaseApiTest {
 
     public final StateInfo stateInfo = new StateInfo();
+    private final RepairTestCase repairCase = new RepairTestCase();
     private final UserSettingsApi userSettingsApi = new UserSettingsApi();
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
@@ -48,6 +52,7 @@ public class PreconditionRepair extends BaseApiTest {
     private final SelectServiceCompanyApi selectServiceCompanyApi = new SelectServiceCompanyApi();
     private final FspBankListApi fspBankListApi = new FspBankListApi();
     private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
+    private final OrdersApproveDateApi ordersApproveDateApi = new OrdersApproveDateApi();
     private final String sssrDispatcher1Email = "test_gw_dispatcher_sssr1@rambler.ru";
     private final String sssrDispatcher1Password = "1234";
     LastOrderInfoResponseDto publishedLastOrderInfo;
@@ -59,6 +64,9 @@ public class PreconditionRepair extends BaseApiTest {
 
     LastOrderInfoResponseDto scheduleTimeLastOrderResponse;
     OrdersIdResponseDto scheduleTimeOrderIdResponseClient;
+
+    LastOrderInfoResponseDto waitMasterLastOrderResponse;
+    OrdersIdResponseDto waitMasterOrderIdResponse;
 
     public StateInfo applyPrecondition(User client, StateRepair stateRepair) {
         stateInfo.setCommonFields(commonFields);
@@ -75,6 +83,12 @@ public class PreconditionRepair extends BaseApiTest {
                 applyHasOfferPrecondition(client, commonFields);
                 applyScheduleDatePrecondition(client, commonFields);
                 return stateInfo.scheduleDateDtoSet();
+            case WAIT_MASTER:
+                applyPublishedPrecondition(client, commonFields);
+                applyHasOfferPrecondition(client, commonFields);
+                applyScheduleDatePrecondition(client, commonFields);
+                applyWaitMasterPreconditionUser(client, commonFields);
+                return stateInfo.waitMasterDtoSet();
         }
         return null; // or throw an exception if the state is not handled
     }
@@ -212,7 +226,7 @@ public class PreconditionRepair extends BaseApiTest {
                 Integer availableBanks = actualResponse.getData().size();
                 System.out.println("availableBanks = " + availableBanks);
             });
-            step("клиент оплачивает  выезд мастера", () -> {
+            step("клиент оплачивает  активацию сделки", () -> {
                 SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SelectPaymentResponseDto.class);
@@ -233,6 +247,31 @@ public class PreconditionRepair extends BaseApiTest {
             });
             stateInfo.setScheduleDateLastOrderInfo(scheduleTimeLastOrderResponse);
             stateInfo.setScheduleDateOrderIdResponse(scheduleTimeOrderIdResponseClient);
+        });
+    }
+
+    private void applyWaitMasterPreconditionUser(User client, CommonFieldsRepairDto commonFields) {
+        step("API: предусловие - " + Role.CLIENT + " заказ на ремонт в состоянии " + StateRepair.WAIT_MASTER, () -> {
+            step("диспетчер подтверждает дату и время", () -> {
+                commonFields.setApproveDate(client.getApproveDate());
+                OrdersApproveDateResponseDto actualResponse = ordersApproveDateApi.ordersApproveDate(repairCase.approveDateRequest(commonFields), commonFields.getTokenDispatcher())
+                        .statusCode(200)
+                        .extract().as(OrdersApproveDateResponseDto.class);
+            });
+            step(" клиент карточка последнего заказа - убедиться что в состоянии waitMaster", () -> {
+                System.out.println("waitMasterLastOrderResponse");
+                waitMasterLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(LastOrderInfoResponseDto.class);
+            });
+            step("  клиент карточка заказа - убедиться что в состоянии waitMaster", () -> {
+                System.out.println("waitMasterOrdersIdResponseAsClient");
+                waitMasterOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(OrdersIdResponseDto.class);
+            });
+            stateInfo.setWaitMasterLastOrderInfo(waitMasterLastOrderResponse);
+            stateInfo.setWaitMasterOrderIdResponse(waitMasterOrderIdResponse);
         });
     }
 }
