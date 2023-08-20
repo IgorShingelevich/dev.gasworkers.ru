@@ -3,8 +3,10 @@ package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
 
 import static com.codeborne.selenide.Condition.cssClass;
+import static com.codeborne.selenide.Condition.visible;
 
 public class NavigationOrderCardPageComponent extends BaseComponent {
     SelenideElement
@@ -52,5 +54,27 @@ public class NavigationOrderCardPageComponent extends BaseComponent {
                 navDocsTabButtonLocator.shouldHave(cssClass("active"));
             });
         });
+    }
+
+    public void noChecklistTab() {
+        stepWithRole("Убедиться, что нет вкладки Чек лист", () -> {
+            navChecklistTabButtonLocator.shouldNotBe(visible);
+        });
+    }
+
+    public void checkChecklistTab() {
+        stepWithRole("Убедиться, что есть вкладка Чек лист", () -> {
+            navChecklistTabButtonLocator.shouldBe(visible);
+        });
+    }
+
+    public void checkNavStateMasterRole(StateRepair state) {
+        switch (state) {
+            case WAIT_MASTER:
+                checkChecklistTab();
+                break;
+            default:
+                noChecklistTab();
+        }
     }
 }

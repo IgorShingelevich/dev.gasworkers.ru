@@ -4,16 +4,25 @@ import ru.gasworkers.dev.api.administration.getUserWithAdmin.GetUserWithAdminApi
 import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
 import ru.gasworkers.dev.api.auth.login.dto.LoginResponseDto;
 import ru.gasworkers.dev.api.auth.user.UserResponseDto;
+import ru.gasworkers.dev.api.orders.actions.OrdersActionsApi;
+import ru.gasworkers.dev.api.orders.actions.OrdersSaveActionsApi;
 import ru.gasworkers.dev.api.orders.approveDate.OrdersApproveDateApi;
 import ru.gasworkers.dev.api.orders.approveDate.OrdersApproveDateResponseDto;
+import ru.gasworkers.dev.api.orders.checkList.SaveCheckListApi;
+import ru.gasworkers.dev.api.orders.checkList.SaveCheckListResponseDto;
+import ru.gasworkers.dev.api.orders.createAct.OrdersCreateActApi;
 import ru.gasworkers.dev.api.orders.id.OrdersIdApi;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
+import ru.gasworkers.dev.api.orders.materialValues.OrdersMaterialValuesApi;
+import ru.gasworkers.dev.api.orders.materialValues.OrdersSaveMaterialValuesApi;
 import ru.gasworkers.dev.api.orders.selectMaster.SelectMasterApi;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
 import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentResponseDto;
 import ru.gasworkers.dev.api.orders.selectServiceCompany.SelectServiceCompanyApi;
 import ru.gasworkers.dev.api.orders.selectServiceCompany.dto.SelectServiceCompanyResponseDto;
+import ru.gasworkers.dev.api.orders.sign.OrdersSendSignApi;
+import ru.gasworkers.dev.api.orders.sign.OrdersSignApi;
 import ru.gasworkers.dev.api.orders.suggestedServices.SuggestedServicesApi;
 import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoApi;
@@ -53,8 +62,18 @@ public class PreconditionRepair extends BaseApiTest {
     private final FspBankListApi fspBankListApi = new FspBankListApi();
     private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
     private final OrdersApproveDateApi ordersApproveDateApi = new OrdersApproveDateApi();
+    private final SaveCheckListApi saveCheckListApi = new SaveCheckListApi();
+    private final OrdersMaterialValuesApi ordersMaterialValuesApi = new OrdersMaterialValuesApi();
+    private final OrdersSaveMaterialValuesApi ordersSaveMaterialValuesApi = new OrdersSaveMaterialValuesApi();
+    private final OrdersActionsApi ordersActionsApi = new OrdersActionsApi();
+    private final OrdersSaveActionsApi ordersSaveActionsApi = new OrdersSaveActionsApi();
+    private final OrdersCreateActApi ordersCreateActApi = new OrdersCreateActApi();
+    private final OrdersSendSignApi ordersSendSignApi = new OrdersSendSignApi();
+    private final OrdersSignApi ordersSignApi = new OrdersSignApi();
     private final String sssrDispatcher1Email = "test_gw_dispatcher_sssr1@rambler.ru";
     private final String sssrDispatcher1Password = "1234";
+    private final String sssrMaster1Email = "test_gas_master_sssr1@rambler.ru";
+    private final String sssrMaster1Password = "1234";
     LastOrderInfoResponseDto publishedLastOrderInfo;
     OrdersIdResponseDto publishedOrderIdResponse;
     SuggestServicesResponseDto publishedSuggestedServiceResponse;
@@ -67,6 +86,9 @@ public class PreconditionRepair extends BaseApiTest {
 
     LastOrderInfoResponseDto waitMasterLastOrderResponse;
     OrdersIdResponseDto waitMasterOrderIdResponse;
+
+    LastOrderInfoResponseDto masterStartWorkLastOrderResponse;
+    OrdersIdResponseDto masterStartWorkOrderIdResponse;
 
     public StateInfo applyPrecondition(User client, StateRepair stateRepair) {
         stateInfo.setCommonFields(commonFields);
@@ -89,6 +111,13 @@ public class PreconditionRepair extends BaseApiTest {
                 applyScheduleDatePrecondition(client, commonFields);
                 applyWaitMasterPreconditionUser(client, commonFields);
                 return stateInfo.waitMasterDtoSet();
+            case MASTER_START_WORK:
+                applyPublishedPrecondition(client, commonFields);
+                applyHasOfferPrecondition(client, commonFields);
+                applyScheduleDatePrecondition(client, commonFields);
+                applyWaitMasterPreconditionUser(client, commonFields);
+                applyMasterStartWorkPrecondition(client, commonFields);
+                return stateInfo.masterStartWorkDtoSet();
         }
         return null; // or throw an exception if the state is not handled
     }
@@ -252,19 +281,19 @@ public class PreconditionRepair extends BaseApiTest {
 
     private void applyWaitMasterPreconditionUser(User client, CommonFieldsRepairDto commonFields) {
         step("API: предусловие - " + Role.CLIENT + " заказ на ремонт в состоянии " + StateRepair.WAIT_MASTER, () -> {
-            step("диспетчер подтверждает дату и время", () -> {
+            step(Role.DISPATCHER + " подтверждает дату и время в состоянии" + StateRepair.WAIT_MASTER, () -> {
                 commonFields.setApproveDate(client.getApproveDate());
                 OrdersApproveDateResponseDto actualResponse = ordersApproveDateApi.ordersApproveDate(repairCase.approveDateRequest(commonFields), commonFields.getTokenDispatcher())
                         .statusCode(200)
                         .extract().as(OrdersApproveDateResponseDto.class);
             });
-            step(" клиент карточка последнего заказа - убедиться что в состоянии waitMaster", () -> {
+            step(Role.CLIENT + "  карточка последнего заказа - убедиться что в состоянии" + StateRepair.WAIT_MASTER, () -> {
                 System.out.println("waitMasterLastOrderResponse");
                 waitMasterLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(LastOrderInfoResponseDto.class);
             });
-            step("  клиент карточка заказа - убедиться что в состоянии waitMaster", () -> {
+            step(Role.CLIENT + " карточка заказа - убедиться что в состоянии" + StateRepair.WAIT_MASTER, () -> {
                 System.out.println("waitMasterOrdersIdResponseAsClient");
                 waitMasterOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
@@ -272,6 +301,35 @@ public class PreconditionRepair extends BaseApiTest {
             });
             stateInfo.setWaitMasterLastOrderInfo(waitMasterLastOrderResponse);
             stateInfo.setWaitMasterOrderIdResponse(waitMasterOrderIdResponse);
+        });
+    }
+
+    private void applyMasterStartWorkPrecondition(User client, CommonFieldsRepairDto commonFields) {
+        step("API: предусловие - " + Role.CLIENT + " заказ на ремонт в состоянии " + StateRepair.MASTER_START_WORK, () -> {
+            step(Role.MASTER + "  авторизуется", () -> {
+                commonFields.setTokenMaster(loginApi.getUserToken(LoginRequestDto.asUserEmail(sssrMaster1Email, sssrMaster1Password)));
+            });
+            step(Role.MASTER + " сохраняет чеклист", () -> {
+                SaveCheckListResponseDto actualResponse = saveCheckListApi.saveCheckList(repairCase.saveCheckListRequest(commonFields), commonFields.getTokenMaster())
+                        .statusCode(200)
+                        .extract().as(SaveCheckListResponseDto.class);
+                SaveCheckListResponseDto expectedResponse = SaveCheckListResponseDto.successResponse();
+                assertResponse(expectedResponse, actualResponse);
+            });
+            step(Role.CLIENT + "  карточка последнего заказа - убедиться что в состоянии" + StateRepair.MASTER_START_WORK, () -> {
+                System.out.println("masterStartWorkLastOrderResponse");
+                masterStartWorkLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(LastOrderInfoResponseDto.class);
+            });
+            step(Role.CLIENT + " карточка заказа - убедиться что в состоянии" + StateRepair.MASTER_START_WORK, () -> {
+                System.out.println("masterStartWorkOrdersIdResponseAsClient");
+                masterStartWorkOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(OrdersIdResponseDto.class);
+            });
+            stateInfo.setMasterStartWorkLastOrderInfo(masterStartWorkLastOrderResponse);
+            stateInfo.setMasterStartWorkOrderIdResponse(masterStartWorkOrderIdResponse);
         });
     }
 }

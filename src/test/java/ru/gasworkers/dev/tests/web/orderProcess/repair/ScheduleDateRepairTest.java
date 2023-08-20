@@ -1,9 +1,6 @@
 package ru.gasworkers.dev.tests.web.orderProcess.repair;
 
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
-import io.qameta.allure.Owner;
-import io.qameta.allure.Story;
+import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -19,6 +16,9 @@ import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
@@ -41,11 +41,17 @@ public class ScheduleDateRepairTest extends BaseApiTest {
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         StateInfo stateInfo = preconditionRepair.applyPrecondition(client, StateRepair.SCHEDULE_DATE);
 //    ------------------------------------------------- UI -----------------------------------------------------------
-        step(Role.CLIENT + " авторизация", () -> {
+        step("Web " + Role.CLIENT + " авторизация", () -> {
             clientPages.getLoginPage().open();
             clientPages.getLoginPage().login(client.getEmail(), "1111");
             clientPages.getHomePage().checkUrl();
             clientPages.getHomePage().guide.skipButton();
+            step(Role.CLIENT + " учетные данные", () -> {
+                Allure.addAttachment("Client creds", client.getEmail() + ": " + "1111" + "/");
+                String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                        + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+                Allure.addAttachment("RunStartTime: ", date);
+            });
         });
         step(Role.CLIENT + " кабинет в состоянии - в состоянии " + StateRepair.SCHEDULE_DATE, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
@@ -56,6 +62,7 @@ public class ScheduleDateRepairTest extends BaseApiTest {
             };
             Consumer<SoftAssert> case2 = softAssert -> {
                 step(Role.CLIENT + " карточка заказа - в состоянии " + StateRepair.SCHEDULE_DATE, () -> {
+                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getOrderCardPage().checkFinishLoading();
                     clientPages.getOrderCardPage().checkState(StateRepair.SCHEDULE_DATE, stateInfo.getScheduleDateOrderIdResponse());

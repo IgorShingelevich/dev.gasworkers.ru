@@ -12,10 +12,44 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
     SelenideElement
             showOnMapButtonLocator = driver.$(byTagAndText("span", "Показать на карте")).as("Кнопка Показать на карте"),
             cancelOrderButtonLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Кнопка Отменить заказ"),
-            selectNewCompanyButtonLocator = driver.$(byTagAndText("span", "Выбрать новую компанию")).as("Кнопка Выбрать новую компанию");
-
+            selectNewCompanyButtonLocator = driver.$(byTagAndText("span", "Выбрать новую компанию")).as("Кнопка Выбрать новую компанию"),
+            returnToWorkButtonLocator = driver.$(byTagAndText("span", "Вернуть в работу")).as("Кнопка Вернуть в работу");
     public SharedButtonsOrderCardClientComponent(RoleBrowser browser) {
         super(browser);
+    }
+
+    public void buttonSet(StateRepair stateRepair) {
+        step("Проверить набор кнопок в состоянии " + stateRepair, () -> {
+            switch (stateRepair) {
+                case PUBLISHED:
+                case HAS_OFFER:
+                    checkShowOnMapButton();
+                    checkCancelButton();
+                    noSelectNewCompanyButton();
+                    noReturnToWorkButton();
+                    break;
+                case SCHEDULE_DATE:
+                    noShowOnMapButton();
+                    noReturnToWorkButton();
+                    checkCancelButton();
+                    checkSelectNewCompanyButton();
+                    break;
+                case WAIT_MASTER:
+                    noShowOnMapButton();
+                    noReturnToWorkButton();
+                    checkCancelButton();
+                    noSelectNewCompanyButton();
+                    break;
+                case MASTER_START_WORK:
+                    noShowOnMapButton();
+                    noCancelButton();
+                    noSelectNewCompanyButton();
+                    checkReturnToWorkButton();
+                    break;
+                default:
+                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);
+            }
+        });
     }
 
     public void checkShowOnMapButton() {
@@ -66,26 +100,28 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
         });
     }
 
-    public void buttonSet(StateRepair stateRepair) {
-        step("Проверить набор кнопок в состоянии " + stateRepair, () -> {
-            switch (stateRepair) {
-                case PUBLISHED:
-                case HAS_OFFER:
-                    checkShowOnMapButton();
-                    checkCancelButton();
-                    noSelectNewCompanyButton();
-                    break;
-                case SCHEDULE_DATE:
-                    noShowOnMapButton();
-                    checkCancelButton();
-                    checkSelectNewCompanyButton();
-                    break;
-                case WAIT_MASTER:
-                    noShowOnMapButton();
-                    checkCancelButton();
-                    noSelectNewCompanyButton();
-                    break;
-            }
+
+    public void noCancelButton() {
+        stepWithRole("Убедиться, что кнопка Отменить заказ отсутствует", () -> {
+            cancelOrderButtonLocator.shouldNotBe(visible);
+        });
+    }
+
+    public void checkReturnToWorkButton() {
+        stepWithRole("Убедиться, что кнопка Вернуть в работу присутствует", () -> {
+            returnToWorkButtonLocator.shouldBe(visible);
+        });
+    }
+
+    public void returnToWork() {
+        stepWithRole("Нажать на кнопку Вернуть в работу", () -> {
+            returnToWorkButtonLocator.click();
+        });
+    }
+
+    public void noReturnToWorkButton() {
+        stepWithRole("Убедиться, что кнопка Вернуть в работу отсутствует", () -> {
+            returnToWorkButtonLocator.shouldNotBe(visible);
         });
     }
 }

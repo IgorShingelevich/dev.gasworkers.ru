@@ -15,6 +15,7 @@ public class OffersCounterClientComponent extends BaseComponent {
     SelenideElement
             self = driver.$("div.map-sticky__header--offers").as("Блок с предложениями");
 
+
     public OffersCounterClientComponent(RoleBrowser browser) {
         super(browser);
         urlChecker = new UrlCheckerSharedComponent(browser);

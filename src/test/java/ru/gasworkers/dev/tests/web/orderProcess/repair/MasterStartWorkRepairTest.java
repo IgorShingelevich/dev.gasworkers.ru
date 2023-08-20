@@ -31,15 +31,15 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class HasOfferRepairTest extends BaseApiTest {
+public class MasterStartWorkRepairTest extends BaseApiTest {
     @Browser(role = Role.CLIENT)
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Ремонт - в состоянии есть отклик СК")
-    void hasOfferRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+    @DisplayName("Ремонт - в  состоянии мастер приступил к работе")
+    void masterStartWork(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
         PreconditionRepair preconditionRepair = new PreconditionRepair();
-        StateInfo stateInfo = preconditionRepair.applyPrecondition(client, StateRepair.HAS_OFFER);
+        StateInfo stateInfo = preconditionRepair.applyPrecondition(client, StateRepair.MASTER_START_WORK);
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("Web " + Role.CLIENT + " авторизация", () -> {
             clientPages.getLoginPage().open();
@@ -53,36 +53,22 @@ public class HasOfferRepairTest extends BaseApiTest {
                 Allure.addAttachment("RunStartTime: ", date);
             });
         });
-
-        step(Role.CLIENT + " кабинет  в состоянии - в состоянии " + StateRepair.HAS_OFFER, () -> {
+        step(Role.CLIENT + " кабинет в состоянии - в состоянии " + StateRepair.MASTER_START_WORK, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
-                step(Role.CLIENT + " карточка последнего заказа - в состоянии " + StateRepair.HAS_OFFER, () -> {
+                step(Role.CLIENT + " карточка последнего заказа - в состоянии " + StateRepair.MASTER_START_WORK, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-                    clientPages.getHomePage().lastOrderComponent.checkState(StateRepair.HAS_OFFER, stateInfo.getHasOfferLastOrderInfo());
+                    clientPages.getHomePage().lastOrderComponent.checkState(StateRepair.MASTER_START_WORK, stateInfo.getMasterStartWorkLastOrderInfo());
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
-                step(Role.CLIENT + " карточка заказа редирект на карту - в состоянии " + StateRepair.HAS_OFFER, () -> {
+                step(Role.CLIENT + " карточка заказа - в состоянии " + StateRepair.MASTER_START_WORK, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.open();
-                    clientPages.getSelectServicePage().checkUrl();
-                });
-            };
-            Consumer<SoftAssert> case3 = softAssert -> {
-                step(Role.CLIENT + " страница выбора услуги - в состоянии " + StateRepair.HAS_OFFER, () -> {
-                    clientPages.getSelectServicePage().checkFinishLoadingRepair();
-                    clientPages.getSelectServicePage().checkState(StateRepair.HAS_OFFER, stateInfo.getHasOfferSuggestedServiceResponse());
-                });
-            };
-
-            Consumer<SoftAssert> case4 = softAssert -> {
-                step(Role.CLIENT + " карточка заказа - в состоянии " + StateRepair.HAS_OFFER, () -> {
-                    clientPages.getSelectServicePage().toOrderCard();
                     clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkState(StateRepair.HAS_OFFER, stateInfo.getHasOfferOrderIdClient());
+                    clientPages.getOrderCardPage().checkState(StateRepair.MASTER_START_WORK, stateInfo.getMasterStartWorkOrderIdResponse());
                 });
             };
-            assertAll(Arrays.asList(case1, case2, case3, case4));
+            assertAll(Arrays.asList(case1, case2));
         });
     }
 }

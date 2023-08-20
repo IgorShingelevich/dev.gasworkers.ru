@@ -257,6 +257,7 @@ public class OrderCardClientPage extends BaseClientPage {
     public void checkState(StateRepair state, OrdersIdResponseDto dto) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
             checkOrderNumber(dto.getData().getNumber());
+            nav.noChecklistTab();
             nav.common();
             state.checkCommonTab(this.commonTab, dto);
             nav.infoMaster();

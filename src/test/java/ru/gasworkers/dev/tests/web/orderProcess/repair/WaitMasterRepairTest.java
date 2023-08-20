@@ -40,19 +40,17 @@ public class WaitMasterRepairTest extends BaseApiTest {
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         StateInfo stateInfo = preconditionRepair.applyPrecondition(client, StateRepair.WAIT_MASTER);
 //    ------------------------------------------------- UI -----------------------------------------------------------
-        step(Role.CLIENT + " авторизация", () -> {
-            step("авторизация Клиента", () -> {
+        step("Web " + Role.CLIENT + " авторизация", () -> {
                 clientPages.getLoginPage().open();
                 clientPages.getLoginPage().login(client.getEmail(), "1111");
                 clientPages.getHomePage().checkUrl();
                 clientPages.getHomePage().guide.skipButton();
-                step("Test run credentials ", () -> {
+            step(Role.CLIENT + " учетные данные", () -> {
                     Allure.addAttachment("Client creds", client.getEmail() + ": " + "1111" + "/");
                     String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                             + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
                     Allure.addAttachment("RunStartTime: ", date);
                 });
-            });
         });
         step(Role.CLIENT + " кабинет в состоянии - в состоянии " + StateRepair.WAIT_MASTER, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
@@ -63,6 +61,7 @@ public class WaitMasterRepairTest extends BaseApiTest {
             };
             Consumer<SoftAssert> case2 = softAssert -> {
                 step(Role.CLIENT + " карточка заказа - в состоянии " + StateRepair.WAIT_MASTER, () -> {
+                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getOrderCardPage().checkFinishLoading();
                     clientPages.getOrderCardPage().checkState(StateRepair.WAIT_MASTER, stateInfo.getWaitMasterOrderIdResponse());

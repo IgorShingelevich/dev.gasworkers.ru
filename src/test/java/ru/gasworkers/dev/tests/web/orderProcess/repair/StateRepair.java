@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
-import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.pages.client.SelectServicePageClientPage;
 import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.DocsTabOrderCardComponent;
@@ -28,7 +27,7 @@ public enum StateRepair {
     MASTER_CREATE_ACT("Мастер создал акт"),
     CLIENT_SIGN_ACT("Клиент подписал акт");
 
-    private static final StateRepairBuilder builder = new StateRepairBuilder();
+    public static final StateRepairBuilder builder = new StateRepairBuilder();
     private final String state;
 
     public void checkLastOrderComponent(LastOrderProfileClientComponent component, LastOrderInfoResponseDto dto) {
@@ -41,20 +40,32 @@ public enum StateRepair {
             switch (this) {
                 case PUBLISHED:
                     component.offersCounter.noOffers();
-                    // todo time and stepper
+                    component.noMasterVisitDateAndTime();
+//                 todo   component.checkDesiredTime(data.getDesiredTime());
+                    // todo stepper
                     break;
                 case HAS_OFFER:
                     component.offersCounter.amount(data.getOffersCount());
-                    // todo time and stepper
+                    component.noMasterVisitDateAndTime();
+//                 todo   component.checkDesiredTime(data.getDesiredTime());
+                    // todo stepper
                     break;
                 case SCHEDULE_DATE:
                     component.offersCounter.noComponent();
-                    // todo time and stepper
+                    //                 todo   component.checkDesiredTime(data.getDesiredTime());
+                    // todo stepper
                     break;
                 case WAIT_MASTER:
                     component.offersCounter.noComponent();
-                    // todo assigned date
-                    // todo time and stepper
+                    component.noDesiredDate();
+                    component.noDesiredTime();
+//                   todo component.checkMasterVisitDateAndTime(data.getMasterVisitDateAndTime());
+                    // todo  stepper
+                    break;
+                case MASTER_START_WORK:
+                    component.offersCounter.noComponent();
+                    //                   todo component.checkMasterVisitDateAndTime(data.getMasterVisitDateAndTime());
+                    // todo  stepper
                     break;
             }
         });
@@ -63,45 +74,27 @@ public enum StateRepair {
     public void checkCommonTab(CommonTabOrderCardComponent tab, OrdersIdResponseDto dto) {
         step("Убедиться, что вкладка Описание заказа в состоянии " + this, () -> {
             StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-            tab.details.checkServiceType(ServiceType.REPAIR);
-            tab.details.checkAddress(data.getAddress());
-            tab.details.checkEquipment(data.getEquipments0());
-            tab.details.checkDescription(data.getDescription());
-            tab.buttons.buttonSet(this);
             tab.status.statusSet(this, data);
+            tab.details.detailsSet(this, data);
+            tab.suggestedMasterRepair.statusSet(this, dto, 0);
+            tab.buttons.buttonSet(this);
             switch (this) {
                 case PUBLISHED:
-                    tab.details.checkNoCompany();
-                    tab.details.checkDesiredDate(data.getDesiredDate());
-                    tab.details.checkDesiredTime(data.getDesiredTime());
-                    tab.suggestedMasterRepair.checkNoSuggestedMastersRepair();
-                    // todo time and stepper buttons
+                    // todo stepper
                     break;
                 case HAS_OFFER:
-                    StateRepairBuilder.SuggestedMasterRepairCommonTabOrderCardComponent dataSuggestedMaster = builder.extractMastersOrdersId(dto.getData().getMasters().get(0));
-                    tab.details.checkNoCompany();
-                    tab.details.checkClientFullName(data.getClientFullName());
-                    tab.details.checkDesiredDate(data.getDesiredDate());
-                    tab.details.checkDesiredTime(data.getDesiredTime());
-                    tab.suggestedMasterRepair.checkMasterCountSuggestedMaster(dto.getData().getMasters().size());
-                    tab.suggestedMasterRepair.checkHasOfferMastersDetails(tab.suggestedMasterRepair, dataSuggestedMaster, 0);
-                    // todo time and stepper buttons
+                    // todo stepper
                     break;
                 case SCHEDULE_DATE:
-                    tab.details.checkNoCompany();
-                    tab.details.checkClientFullName(data.getClientFullName());
-                    tab.details.checkClientPhone(data.getPhone());
-                    tab.details.checkDesiredDate(data.getDesiredDate());
-                    tab.details.checkDesiredTime(data.getDesiredTime());
-                    // todo time and stepper buttons
+                    // todo stepper
                     break;
                 case WAIT_MASTER:
-                    tab.status.checkNoActionsStagePayment();
-                    tab.details.checkClientFullName(data.getClientFullName());
-                    tab.details.checkClientPhone(data.getPhone());
-                    tab.details.checkCompanyFullName(data.getCompanyFullName());
+                    // todo stepper
+                case MASTER_START_WORK:
+                    // todo stepper
                     break;
-//                     todo  ask where tab.details.checkScheduledTime(data.getScheduledTime());
+                default:
+                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
         });
     }
@@ -110,29 +103,19 @@ public enum StateRepair {
     public void checkInfoMasterTab(InfoMasterTabOrderCardClientComponent tab, OrdersIdResponseDto dto) {
         step("Убедиться, что вкладка Информация по работам в состоянии " + this, () -> {
             StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-            tab.buttons.buttonSet(this);
             tab.status.statusSet(this, data);
+            tab.suggestedMasterCardRepair.statusSet(this, dto, 0);
+            tab.approvedMasterCard.statusSet(this, data);
+            tab.buttons.buttonSet(this);
             switch (this) {
                 case PUBLISHED:
-                    tab.checkNoInfoBox();
-                    tab.masterCard.checkNoMasterCard();
-                    tab.repairDetails.checkNoRepairDetails();
-                    tab.suggestedMasterRepair.checkNoSuggestedMastersRepair();
-                    break;
                 case HAS_OFFER:
-                    StateRepairBuilder.SuggestedMasterRepairCommonTabOrderCardComponent dataSuggestedMaster = builder.extractMastersOrdersId(dto.getData().getMasters().get(0));
                     tab.checkNoInfoBox();
                     tab.repairDetails.checkNoRepairDetails();
-                    tab.suggestedMasterRepair.checkMasterCountSuggestedMaster(dto.getData().getMasters().size());
-                    tab.suggestedMasterRepair.checkHasOfferMastersDetails(tab.suggestedMasterRepair, dataSuggestedMaster, 0);
                     break;
                 case SCHEDULE_DATE:
-                    tab.masterCard.checkFinishLoading();
-                    tab.masterCard.checkMasterFullName(data.getMasterFullName());
-                    tab.masterCard.checkMasterAvatar(data.getMasterAvatar());
-                    tab.masterCard.checkRegisterDate(data.getMasterRegisterDate());
-                    tab.masterCard.checkReviews(data.getMasterReviewCount());
-                    tab.masterCard.checkRating(data.getMasterRating());
+                case WAIT_MASTER:
+                case MASTER_START_WORK:
                     tab.repairDetails.checkFinishLoading();
                     tab.repairDetails.checkMaterialsTotalPrice("0");
                     tab.repairDetails.checkActionsTotalPrice("0");
@@ -144,26 +127,19 @@ public enum StateRepair {
 
     public void checkDocsTab(DocsTabOrderCardComponent tab, OrdersIdResponseDto dto) {
         StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-        tab.buttons.buttonSet(this);
         tab.status.statusSet(this, data);
+        tab.suggestedMastersRepair.statusSet(this, dto, 0);
+        tab.buttons.buttonSet(this);
         step("Убедиться, что вкладка Документы в состоянии " + this, () -> {
             switch (this) {
                 case PUBLISHED:
-                    tab.checkNoDocs();
-                    tab.checkNoTotalPrice();
-                    tab.suggestedMastersRepair.checkNoSuggestedMastersRepair();
-                    tab.buttons.checkShowOnMapButton();
-                    tab.buttons.checkCancelButton();
-                    break;
                 case HAS_OFFER:
-                    StateRepairBuilder.SuggestedMasterRepairCommonTabOrderCardComponent dataSuggestedMaster = builder.extractMastersOrdersId(dto.getData().getMasters().get(0));
                     tab.checkNoDocs();
                     tab.checkNoTotalPrice();
-                    tab.suggestedMastersRepair.checkMasterCountSuggestedMaster(dto.getData().getMasters().size());
-                    tab.suggestedMastersRepair.checkHasOfferMastersDetails(tab.suggestedMastersRepair, dataSuggestedMaster, 0);
                     break;
                 case SCHEDULE_DATE:
-                    tab.suggestedMastersRepair.checkNoSuggestedMastersRepair();
+                case WAIT_MASTER:
+                case MASTER_START_WORK:
                     tab.checkFinalPrice("10");
                     break;
             }
@@ -172,15 +148,6 @@ public enum StateRepair {
 
     public void checkSelectServicePage(SelectServicePageClientPage page, SuggestServicesResponseDto dto) {
         step("Убедиться, что  стр выбора  компании в состоянии " + this, () -> {
-            StateRepairHelper helper = new StateRepairHelper();
-            int offerIndex = 0;
-            int ratingCompany = helper.getSuggestServiceSuggestedMasterCompanyRating(dto);
-            int ratingMaster = helper.getCalculateRatingMaster(dto);
-            String visitPrice = helper.getServicePageOfferVisitPrice(dto, offerIndex),
-                    offeredMasterFullName = helper.getOfferedMasterFullName(dto, offerIndex),
-                    offeredMasterAvatar = helper.getOfferedMasterAvatar(dto, offerIndex),
-                    offeredMasterReviewCount = helper.getOfferedMasterReviewCount(dto, offerIndex),
-                    offeredMasterCompletedOrders = helper.getOfferedMasterCompletedOrders(dto, offerIndex);
             //todo offerCount
             switch (this) {
                 case PUBLISHED:
@@ -191,18 +158,7 @@ public enum StateRepair {
                 case HAS_OFFER:
                     page.offersCounter.amount(page.companyBoxRepair.getAmountOfferBox());
                     page.checkHasOfferBanner();
-                    page.companyBoxRepair.checkBoxTitle(offerIndex);
-                    page.companyBoxRepair.checkGeoTag(offerIndex);
-                    page.companyBoxRepair.checkRatingCompany(offerIndex, ratingCompany);
-                    page.companyBoxRepair.checkAvatarCompany(offerIndex);
-                    page.companyBoxRepair.checkVisitPrice(offerIndex, visitPrice);
-                    page.companyBoxRepair.checkNotificationPaymentAfterArrival(offerIndex);
-                    page.companyBoxRepair.checkFullNameMaster(offerIndex, offeredMasterFullName);
-                    page.companyBoxRepair.checkAvatarMaster(offerIndex, offeredMasterAvatar);
-                    page.companyBoxRepair.checkRatingMaster(offerIndex, ratingMaster);
-                    page.companyBoxRepair.checkMasterReviewCount(offerIndex, offeredMasterReviewCount);
-                    page.companyBoxRepair.checkMasterCompletedOrders(offerIndex, offeredMasterCompletedOrders);
-                    page.companyBoxRepair.checkButtonActive(offerIndex);
+                    page.companyBoxRepair.checkOfferBoxHasOfferState(0, dto);
                     break;
             }
         });

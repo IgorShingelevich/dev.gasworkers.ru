@@ -122,7 +122,7 @@ public class StateRepairBuilder {
 
     @Getter
     @Builder
-    public static class selectedMasterRepairCommonTabOrderCardComponent {
+    public static class SelectedMasterRepairCommonTabOrderCardComponent {
         private final String selectedMasterFullName;
         private final String selectedMasterAvatar;
         private final String selectedMasterRegisterDate;

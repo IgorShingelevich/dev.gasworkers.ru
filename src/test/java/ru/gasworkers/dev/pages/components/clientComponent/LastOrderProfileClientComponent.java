@@ -21,19 +21,21 @@ public class LastOrderProfileClientComponent extends BaseComponent {
             LAST_ORDER_CARD_SERVICE_TYPE_TITLE = "Тип заказа",
             LAST_ORDER_CARD_OBJECT_ADDRESS_TITLE = "Адрес объекта",
             LAST_ORDER_CARD_OBJECT_EQUIPMENT_TITLE = "Оборудование",
-            LAST_ORDER_CARD_OBJECT_DATE_TITLE = "Выбранная дата",
-            LAST_ORDER_CARD_OBJECT_TIME_TITLE = "Выбранное время";
+            LAST_ORDER_CARD_OBJECT_DESIRED_DATE_TITLE = "Выбранная дата",
+            LAST_ORDER_CARD_OBJECT_DESIRED_TIME_TITLE = "Выбранное время",
+            MASTER_VISIT_DATE_AND_TIME = "Дата и время приезда мастера";
     SelenideElement
-            self = driver.$(".section .section.order"),
-            lastOrderCardTitleLocator = driver.$(".section .header .title.d-flex.justify-content-between"),
-            lastOrderCardOrderNumberLinkLocator = driver.$(".section .content .h5.link-blue.text-primary.pointer"),
-            lastOrderCardActionButtonLocator = driver.$(".section .content .actions .actions__btn"),
-            lastOrderCardOrderActionOpenLinkLocator = driver.$(".section .content .actions .actions__slot--link"),
-            lastOrderCardServiceTypeTitleCollection = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_SERVICE_TYPE_TITLE)),
-            lastOrderCardAddressTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_ADDRESS_TITLE)),
-            lastOrderCardEquipmentTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_EQUIPMENT_TITLE)),
-            lastOrderCardDateTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_DATE_TITLE)),
-            lastOrderCardTimeTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_TIME_TITLE));
+            self = driver.$(".section .section.order").as("Секция Карточка последнего заказа"),
+            lastOrderCardTitleLocator = driver.$(".section .header .title.d-flex.justify-content-between").as("Заголовок Карточки последнего заказа"),
+            lastOrderCardOrderNumberLinkLocator = driver.$(".section .content .h5.link-blue.text-primary.pointer").as("Ссылка на номер заказа"),
+            lastOrderCardActionButtonLocator = driver.$(".section .content .actions .actions__btn").as("Кнопка открытия меню действий карточки последнего заказа"),
+            lastOrderCardOrderActionOpenLinkLocator = driver.$(".section .content .actions .actions__slot--link").as("Кнопка открытия карточки заказа"),
+            lastOrderCardServiceTypeTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_SERVICE_TYPE_TITLE)).as("Тип заказа"),
+            lastOrderCardAddressTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_ADDRESS_TITLE)).as("Адрес объекта"),
+            lastOrderCardEquipmentTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_EQUIPMENT_TITLE)).as("Оборудование"),
+            lastOrderCardDesiredDateTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_DESIRED_DATE_TITLE)).as("Выбранная дата"),
+            lastOrderCardDesiredTimeTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_DESIRED_TIME_TITLE)).as("Выбранное время"),
+            lastOrderCardMasterVisitDateAndTimeTitleLocator = driver.$$(".section__row.row").findBy(text(MASTER_VISIT_DATE_AND_TIME)).as("Дата и время приезда мастера");
 
 
     public LastOrderProfileClientComponent(RoleBrowser browser) {
@@ -63,8 +65,10 @@ public class LastOrderProfileClientComponent extends BaseComponent {
     }
 
     public LastOrderProfileClientComponent open() {
-        lastOrderCardActionButtonLocator.shouldBe(visible).click();
-        lastOrderCardOrderActionOpenLinkLocator.shouldBe(visible).click();
+        lastOrderCardActionButtonLocator.shouldBe(visible)
+                .click();
+        lastOrderCardOrderActionOpenLinkLocator.shouldBe(visible)
+                .click();
         return this;
     }
 
@@ -89,7 +93,7 @@ public class LastOrderProfileClientComponent extends BaseComponent {
 
     public void checkServiceType(String expectedServiceType) {
         stepWithRole("Убедиться, что тип заказа " + expectedServiceType + " соответствует ожидаемому", () -> {
-            lastOrderCardServiceTypeTitleCollection.shouldHave(text(expectedServiceType));
+            lastOrderCardServiceTypeTitleLocator.shouldHave(text(expectedServiceType));
         });
     }
 
@@ -105,15 +109,39 @@ public class LastOrderProfileClientComponent extends BaseComponent {
         });
     }
 
-    public void checkDate(String expectedDate) {
+    public void checkDesiredDate(String expectedDate) {
         stepWithRole("Убедиться, что дата " + expectedDate + " соответствует ожидаемой", () -> {
-            lastOrderCardDateTitleLocator.shouldHave(text(expectedDate));
+            lastOrderCardDesiredDateTitleLocator.shouldHave(text(expectedDate));
         });
     }
 
-    public void checkTime(String expectedTime) {
+    public void noDesiredDate() {
+        stepWithRole("Убедиться, что дата отсутствует", () -> {
+            lastOrderCardDesiredDateTitleLocator.shouldNotBe(visible);
+        });
+    }
+
+    public void checkDesiredTime(String expectedTime) {
         stepWithRole("Убедиться, что время " + expectedTime + " соответствует ожидаемому", () -> {
-            lastOrderCardTimeTitleLocator.shouldHave(text(expectedTime));
+            lastOrderCardDesiredTimeTitleLocator.shouldHave(text(expectedTime));
+        });
+    }
+
+    public void noDesiredTime() {
+        stepWithRole("Убедиться, что время отсутствует", () -> {
+            lastOrderCardDesiredTimeTitleLocator.shouldNotBe(visible);
+        });
+    }
+
+    public void checkMasterVisitDateAndTime(String expectedDateAndTime) {
+        stepWithRole("Убедиться, что дата и время " + expectedDateAndTime + " соответствует ожидаемому", () -> {
+            lastOrderCardMasterVisitDateAndTimeTitleLocator.shouldHave(text(expectedDateAndTime));
+        });
+    }
+
+    public void noMasterVisitDateAndTime() {
+        stepWithRole("Убедиться, что дата и время отсутствует", () -> {
+            lastOrderCardMasterVisitDateAndTimeTitleLocator.shouldNotBe(visible);
         });
     }
 

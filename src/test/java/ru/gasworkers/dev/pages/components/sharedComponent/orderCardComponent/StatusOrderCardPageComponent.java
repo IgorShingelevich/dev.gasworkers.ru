@@ -123,7 +123,6 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkNoActivationStagePayment();
                     checkNoMaterialsStagePayment();
                     checkNoActionsStagePayment();
-
                 case HAS_OFFER:
                     checkCurrentStatus(OrderStatus.HAS_OFFER);
                     checkNoActivationStagePayment();
@@ -138,7 +137,24 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkNoMaterialsStagePayment();
                     checkNoActionsStagePayment();
                     break;
-
+                case WAIT_MASTER:
+                    checkCurrentStatus(OrderStatus.WAIT_MASTER);
+                    checkActivationStatusIsPaid(true);
+                    checkActivationPricePayment(data.getActivationPrice());
+                    checkActivationDatePayment(data.getActivationDate());
+                    checkNoMaterialsStagePayment();
+                    checkNoActionsStagePayment();
+                    break;
+                case MASTER_START_WORK:
+                    checkCurrentStatus(OrderStatus.MASTER_START_WORK);
+                    checkActivationStatusIsPaid(true);
+                    checkActivationPricePayment(data.getActivationPrice());
+                    checkActivationDatePayment(data.getActivationDate());
+                    checkNoMaterialsStagePayment();
+                    checkNoActionsStagePayment();
+                    break;
+                default:
+                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);
             }
         });
     }

@@ -26,6 +26,9 @@ public class StateInfo {
     private LastOrderInfoResponseDto waitMasterLastOrderInfo;
     private OrdersIdResponseDto waitMasterOrderIdResponse;
 
+    private LastOrderInfoResponseDto masterStartWorkLastOrderInfo;
+    private OrdersIdResponseDto masterStartWorkOrderIdResponse;
+
     public StateInfo hasOfferDtoSet() {
         return StateInfo.builder()
                 .commonFields(commonFields) // Include the common fields
@@ -57,6 +60,14 @@ public class StateInfo {
                 .commonFields(commonFields) // Include the common fields
                 .waitMasterLastOrderInfo(waitMasterLastOrderInfo)
                 .waitMasterOrderIdResponse(waitMasterOrderIdResponse)
+                .build();
+    }
+
+    public StateInfo masterStartWorkDtoSet() {
+        return StateInfo.builder()
+                .commonFields(commonFields) // Include the common fields
+                .masterStartWorkLastOrderInfo(masterStartWorkLastOrderInfo)
+                .masterStartWorkOrderIdResponse(masterStartWorkOrderIdResponse)
                 .build();
     }
 }

@@ -33,7 +33,7 @@ public final class LoginPage extends BasePage {
         stepWithRole("Проверить, что логин произведен успешно ", () -> {
             driver.$(".title h3").shouldHave(text("Войдите в личный кабинет"));
             stepWithRole("Ввести имя пользователя: " + userName, () -> {
-                Selenide.sleep(2000);
+                Selenide.sleep(3000);
                 // todo reset all input fields without sleep
                 userNameFieldLocator.click();
                 userNameFieldLocator.setValue(userName);

@@ -14,10 +14,10 @@ import static com.codeborne.selenide.Condition.text;
 public class InfoMasterTabOrderCardClientComponent extends BaseOrderCardComponent {
     public final StatusOrderCardPageComponent status;
     public final FillUpCheckListBannerComponent fillUpBanner;
-    public final MasterCardInfoMasterTabOrderCardComponent masterCard;
+    public final ApprovedMasterCardInfoMasterTabOrderCardComponent approvedMasterCard;
     public final MaintenanceDetailsInfoMasterTabComponent maintenanceDetails;
     public final RepairDetailsInfoMasterTabOrderCardComponent repairDetails;
-    public final SuggestedMasterRepairCommonTabOrderCardComponent suggestedMasterRepair;
+    public final SuggestedMasterRepairCommonTabOrderCardComponent suggestedMasterCardRepair;
     public final SharedButtonsOrderCardClientComponent buttons;
 
     //todo add buttons
@@ -30,10 +30,10 @@ public class InfoMasterTabOrderCardClientComponent extends BaseOrderCardComponen
         super(browser);
         status = new StatusOrderCardPageComponent(browser);
         fillUpBanner = new FillUpCheckListBannerComponent(browser);
-        masterCard = new MasterCardInfoMasterTabOrderCardComponent(browser);
+        approvedMasterCard = new ApprovedMasterCardInfoMasterTabOrderCardComponent(browser);
         maintenanceDetails = new MaintenanceDetailsInfoMasterTabComponent(browser);
         repairDetails = new RepairDetailsInfoMasterTabOrderCardComponent(browser);
-        suggestedMasterRepair = new SuggestedMasterRepairCommonTabOrderCardComponent(browser);
+        suggestedMasterCardRepair = new SuggestedMasterRepairCommonTabOrderCardComponent(browser);
         buttons = new SharedButtonsOrderCardClientComponent(browser);
     }
 
