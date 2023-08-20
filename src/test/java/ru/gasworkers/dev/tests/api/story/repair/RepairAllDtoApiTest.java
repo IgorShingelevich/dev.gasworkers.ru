@@ -49,7 +49,7 @@ import ru.gasworkers.dev.api.users.companies.masters.CompaniesMastersApi;
 import ru.gasworkers.dev.api.users.companies.masters.dto.CompaniesMastersListResponse;
 import ru.gasworkers.dev.api.users.fspBankList.FspBankListApi;
 import ru.gasworkers.dev.api.users.fspBankList.FspBankListResponseDto;
-import ru.gasworkers.dev.api.users.settings.UserSettingsApi;
+import ru.gasworkers.dev.api.users.profile.UserSettingsApi;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithOrderType;
 import ru.gasworkers.dev.extension.user.WithThroughUser;

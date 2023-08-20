@@ -37,37 +37,47 @@ public class WaitMasterRepairTest extends BaseApiTest {
     @Test
     @DisplayName("Ремонт - в  состоянии мастер в пути")
     void waitMasterRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+        StateRepair state = StateRepair.WAIT_MASTER;
+        Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
-        StateInfo stateInfo = preconditionRepair.applyPrecondition(client, StateRepair.WAIT_MASTER);
+        StateInfo stateInfo = preconditionRepair.applyPrecondition(client, state);
 //    ------------------------------------------------- UI -----------------------------------------------------------
-        step("Web " + Role.CLIENT + " авторизация", () -> {
+        step("Web " + role + " авторизация", () -> {
                 clientPages.getLoginPage().open();
                 clientPages.getLoginPage().login(client.getEmail(), "1111");
                 clientPages.getHomePage().checkUrl();
                 clientPages.getHomePage().guide.skipButton();
-            step(Role.CLIENT + " учетные данные", () -> {
+            step(role + " учетные данные", () -> {
                     Allure.addAttachment("Client creds", client.getEmail() + ": " + "1111" + "/");
                     String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                             + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
                     Allure.addAttachment("RunStartTime: ", date);
                 });
         });
-        step(Role.CLIENT + " кабинет в состоянии - в состоянии " + StateRepair.WAIT_MASTER, () -> {
+        step(role + " кабинет в состоянии - в состоянии " + state, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
-                step(Role.CLIENT + " карточка последнего заказа - в состоянии " + StateRepair.WAIT_MASTER, () -> {
+                step(role + " карточка последнего заказа - в состоянии " + state, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-                    clientPages.getHomePage().lastOrderComponent.checkState(StateRepair.WAIT_MASTER, stateInfo.getWaitMasterLastOrderInfo());
+                    clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getWaitMasterLastOrderInfo());
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
-                step(Role.CLIENT + " карточка заказа - в состоянии " + StateRepair.WAIT_MASTER, () -> {
+                step(role + " карточка заказа - в состоянии " + state, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkState(StateRepair.WAIT_MASTER, stateInfo.getWaitMasterOrderIdResponse());
+                    clientPages.getOrderCardPage().checkState(state, stateInfo.getWaitMasterOrderIdResponse());
                 });
             };
-            assertAll(Arrays.asList(case1, case2));
+            Consumer<SoftAssert> case3 = softAssert -> {
+                step(role + " уведомления - в состоянии " + state, () -> {
+                    clientPages.getOrderCardPage().actionsBlock.checkFinishLoading();
+                    clientPages.getOrderCardPage().actionsBlock.notifications();
+                    clientPages.getAllNotificationsPage().checkFinishLoading();
+                    clientPages.getAllNotificationsPage().checkState(state, stateInfo.getWaitMasterNotifications());
+                });
+            };
+            assertAll(Arrays.asList(case1, case2, case3));
         });
     }
 }

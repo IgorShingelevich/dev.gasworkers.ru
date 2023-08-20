@@ -51,14 +51,13 @@ public final class HomeClientPage extends BaseClientPage {
             gotoObjectActionCollection = driver.$$(".actions .actions__slot--link"),
             actionButtonCollection = driver.$$(".actions .actions__btn");
 
-    public HomeClientPage open() {
+    public void open() {
         stepWithRole("Открыть домашнюю страницу", () -> {
             driver.open("/profile/client");
         });
-        return this;
     }
 
-    public HomeClientPage checkInitialGuide() {
+    public void checkInitialGuide() {
         stepWithRole("Убедиться, что представлены компоненты страницы Вводного гида: ", () -> {
             stepWithRole(" Убедиться что текст заголовка и подзаголовка правильный", () -> {
                 driver.$("div.completed-block h3").shouldBe(visible, Duration.ofSeconds(30)).shouldHave(text("Укажите Ваш объект и оборудование")).as("Initial title");
@@ -69,7 +68,6 @@ public final class HomeClientPage extends BaseClientPage {
                 driver.$(byTagAndText("span", "Позже")).shouldBe(visible).as("Later button");
             });
         });
-        return this;
     }
 
     public void clickStartNowInitialModal() {
@@ -84,7 +82,7 @@ public final class HomeClientPage extends BaseClientPage {
         });
     }
 
-    public HomeClientPage checkFinishLoading(String fullName, String sinceDate) {
+    public void checkFinishLoading(String fullName, String sinceDate) {
         stepWithRole("Убедиться, что загружена Домашняя страница", () -> {
             urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client");
             //todo personSummaryComponent appeariance
@@ -92,7 +90,6 @@ public final class HomeClientPage extends BaseClientPage {
             lastOrderComponent.checkFinishLoading();
             driver.$(".client-objects [data-index='0']").shouldBe(visible, Duration.ofSeconds(20));
         });
-        return this;
     }
 
     public void checkInitialState() {

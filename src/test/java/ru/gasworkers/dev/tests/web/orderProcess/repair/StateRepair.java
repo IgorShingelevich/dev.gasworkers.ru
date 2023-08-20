@@ -15,20 +15,21 @@ import static io.qameta.allure.Allure.step;
 @AllArgsConstructor
 public enum StateRepair {
 
-    PUBLISHED("Опубликован"),
-    HAS_OFFER("Есть предложения"),
-    SCHEDULE_DATE("Согласование даты заказа"),
-    WAIT_MASTER("Мастер в пути"),
-    MASTER_START_WORK("Мастер приступил к работе"),
-    MATERIAL_INVOICE_ISSUED("Выставлен счет на материалы"),
-    MATERIAL_INVOICE_PAID("Оплачен счет на материалы"),
-    ACTIONS_INVOICE_ISSUED("Выставлен счет на работы"),
-    ACTIONS_INVOICE_PAID("Оплачен счет на работы"),
-    MASTER_CREATE_ACT("Мастер создал акт"),
-    CLIENT_SIGN_ACT("Клиент подписал акт");
+    PUBLISHED("Опубликован", " опубликован"),
+    HAS_OFFER("Есть предложения", "Отклик на заявку"),
+    SCHEDULE_DATE("Согласование даты заказа", "Оплатите счет по заказу"),
+    WAIT_MASTER("Мастер в пути", "Назначено время заказа"),
+    MASTER_START_WORK("Мастер приступил к работе", null),
+    MATERIAL_INVOICE_ISSUED("Выставлен счет на материалы", "Оплатите счет по заказу"),
+    MATERIAL_INVOICE_PAID("Оплачен счет на материалы", null),
+    ACTIONS_INVOICE_ISSUED("Выставлен счет на работы", "Оплатите счет по заказу"),
+    ACTIONS_INVOICE_PAID("Оплачен счет на работы", null),
+    MASTER_CREATE_ACT("Мастер создал акт", null),
+    CLIENT_SIGN_ACT("Клиент подписал акт", "Оставьте отзыв по заявке");
 
     public static final StateRepairBuilder builder = new StateRepairBuilder();
     private final String state;
+    public final String notification;
 
     public void checkLastOrderComponent(LastOrderProfileClientComponent component, LastOrderInfoResponseDto dto) {
         step("Проверка компонента Последний заказ", () -> {
@@ -167,5 +168,9 @@ public enum StateRepair {
     @Override
     public String toString() {
         return state;
+    }
+
+    public String notification() {
+        return notification;
     }
 }

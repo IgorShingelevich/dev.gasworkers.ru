@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.users.settings;
+package ru.gasworkers.dev.api.users.profile;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

@@ -1,21 +1,37 @@
 package ru.gasworkers.dev.pages.sharedPages;
 
-import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import ru.gasworkers.dev.api.users.notification.NotificationsResponseDto;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.endsWith;
+import static org.hamcrest.Matchers.startsWith;
 
 public class AllNotificationsPage extends BasePage {
 
     public final ClientActionsBlockComponent actionBlock;
     public final ClientSidebarComponent sidebar;
+    private final String
+            NOTIFICATIONS_TITLE = "Уведомления";
+    ElementsCollection
+            notificationsCollection = driver.$$("div.notice-large").as("коллекция  уведомлений"),
+            unreadNotificationsBadgeCollection = driver.$$("div.notice-large .item-header .w-25").as("коллекция непрочитанных уведомлений"),
+            readButtonCollection = driver.$$("div.notice-large .w-25 .link-dark-blue").as("коллекция кнопок Прочитать"),
+            orderNumberLinkCollection = driver.$$("div.notice-large .item-header .link-dark-blue").as("коллекция ссылок на номер заказа");
+
+    SelenideElement
+            pageTitleLocator = driver.$(".page-title"),
+            readAllButtonLocator = driver.$(byTagAndText("span", "Прочитать все")),
+            allNotificationsHaveReadButtonLocator = driver.$(byTagAndText("span", "Все уведомления прочитаны"));
 
     public AllNotificationsPage(RoleBrowser browser) {
         super(browser);
@@ -23,64 +39,81 @@ public class AllNotificationsPage extends BasePage {
         sidebar = new ClientSidebarComponent(browser);
     }
 
-    private final String
-        NOTIFICATIONS_TITLE = "Уведомления";
-
-    SelenideElement
-        pageTitleLocator = driver.$(".page-title"),
-        readAllButtonLocator = driver.$(byTagAndText("span", "Прочитать все"));
-    ElementsCollection
-        notificationTitleCollection = driver.$$(".messages-list div.d-flex .flex-wrap.text-break").as("Notification title collection"),
-        unreadStatusCollection = driver.$$("div.gas-box a").as("unread status");
-
-
     public void checkInitialState() {
         stepWithRole("Убедиться, что страница в  начальном состоянии", () -> {
             pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
-            driver.$(byTagAndText("span", "Все уведомления прочитаны")).shouldNotBe(visible);
-            notificationTitleCollection.shouldHave(size(0));
+            allNotificationsHaveReadButtonLocator.shouldNotBe(visible);
+            notificationsCollection.shouldHave(size(0));
         });
     }
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что загрузилась страница Уведомления", () -> {
             pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
-            readAllButtonLocator.shouldBe(visible);
-            notificationTitleCollection.shouldHave(CollectionCondition.sizeGreaterThan(0));
         });
     }
 
-    public AllNotificationsPage readAll() {
+    public void readAll() {
         stepWithRole("Прочитать все уведомления", () -> {
             stepWithRole("Нажать кнопку Прочитать все", () -> {
                 readAllButtonLocator.click();
             });
             stepWithRole("Убедиться, что нет непрочитанных уведомлений", () -> {
-                unreadStatusCollection.shouldHave(size(0));
+                unreadNotificationsBadgeCollection.shouldHave(size(0));
             });
             stepWithRole("Убедиться, что присутствует неактивная кнопка Все уведомления прочитаны", () -> {
-                driver.$(byTagAndText("span", "Все уведомления прочитаны")).shouldBe(visible);
+                allNotificationsHaveReadButtonLocator.shouldBe(visible);
             });
-        });
-        return this;
-    }
-
-    public void openNotificationByTitle(String notificationTitle) {
-        stepWithRole("Открыть уведомление с заголовком: " + notificationTitle, () -> {
-            notificationTitleCollection.findBy(text(notificationTitle)).click();
         });
     }
 
-    public void checkInitialBGState(String orderNumber) {
-        stepWithRole("Убедиться, что на странице в  состоянии после Фоновой регистрации пристутствует увеедомление о заказе: " + orderNumber, () -> {
-            pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
-            stepWithRole("Убедиться, что присутствует кнопка Прочитать все", () -> {
-                readAllButtonLocator.shouldBe(visible);
-            });
-            stepWithRole("Убедиться, что у клиента одно уведомление", () -> {
-                notificationTitleCollection.shouldHave(size(1));
-                notificationTitleCollection.get(0).shouldHave(partialText(orderNumber));
-            });
+    public void openNotificationByTitle(String orderNumber) {
+        stepWithRole("Открыть уведомление с заголовком: " + orderNumber, () -> {
+            notificationsCollection.findBy(partialText(orderNumber)).click();
         });
+    }
+
+    public void checkFirstNotificationText(String notification) {
+        stepWithRole("Убедиться, что первое уведомление содержит текст: " + notification, () -> {
+            notificationsCollection.first().$(".item-flex .w-100.text-left").shouldHave(partialText(notification));
+        });
+    }
+
+    public void checkExpectedAmountOfNotifications(int amount) {
+        stepWithRole("Убедиться, что количество уведомлений равно: " + amount, () -> {
+            notificationsCollection.shouldHave(size(amount));
+        });
+    }
+
+
+    public void checkState(StateRepair stateRepair, NotificationsResponseDto dto) {
+        stepWithRole("Проверить уведомления в состоянии " + stateRepair, () -> {
+            switch (stateRepair) {
+                case PUBLISHED:
+                    checkExpectedAmountOfNotifications(1);
+                    checkFirstNotificationText(stateRepair.notification());
+                    assertThat(dto.getData().get(0).getText(), endsWith(stateRepair.notification()));
+                    break;
+                case HAS_OFFER:
+                    checkExpectedAmountOfNotifications(2);
+                    checkFirstNotificationText(stateRepair.notification());
+                    assertThat(dto.getData().get(0).getText(), endsWith(stateRepair.notification()));
+                    break;
+                case SCHEDULE_DATE:
+                    checkExpectedAmountOfNotifications(3);
+                    checkFirstNotificationText(stateRepair.notification());
+                    assertThat(dto.getData().get(0).getText(), startsWith(stateRepair.notification()));
+                    break;
+                case WAIT_MASTER:
+                    checkExpectedAmountOfNotifications(4);
+                    checkFirstNotificationText(stateRepair.notification());
+                    assertThat(dto.getData().get(0).getText(), startsWith(stateRepair.notification()));
+                    break;
+                case MASTER_START_WORK:
+                    checkExpectedAmountOfNotifications(4);
+                    break;
+            }
+        });
+
     }
 }

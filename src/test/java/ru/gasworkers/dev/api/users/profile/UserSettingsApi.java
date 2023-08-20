@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.users.settings;
+package ru.gasworkers.dev.api.users.profile;
 
 import io.qameta.allure.Step;
 import io.restassured.response.ValidatableResponse;

@@ -31,9 +31,11 @@ import ru.gasworkers.dev.api.users.companies.masters.CompaniesMastersApi;
 import ru.gasworkers.dev.api.users.companies.masters.dto.CompaniesMastersListResponse;
 import ru.gasworkers.dev.api.users.fspBankList.FspBankListApi;
 import ru.gasworkers.dev.api.users.fspBankList.FspBankListResponseDto;
-import ru.gasworkers.dev.api.users.settings.UserSettingsApi;
-import ru.gasworkers.dev.api.users.settings.UserSettingsCommonRequestDto;
-import ru.gasworkers.dev.api.users.settings.UserSettingsCommonResponseDto;
+import ru.gasworkers.dev.api.users.notification.NotificationsApi;
+import ru.gasworkers.dev.api.users.notification.NotificationsResponseDto;
+import ru.gasworkers.dev.api.users.profile.UserSettingsApi;
+import ru.gasworkers.dev.api.users.profile.UserSettingsCommonRequestDto;
+import ru.gasworkers.dev.api.users.profile.UserSettingsCommonResponseDto;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
@@ -50,6 +52,7 @@ public class PreconditionRepair extends BaseApiTest {
 
     public final StateInfo stateInfo = new StateInfo();
     private final RepairTestCase repairCase = new RepairTestCase();
+    private final NotificationsApi notificationsApi = new NotificationsApi();
     private final UserSettingsApi userSettingsApi = new UserSettingsApi();
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
@@ -74,19 +77,21 @@ public class PreconditionRepair extends BaseApiTest {
     private final String sssrDispatcher1Password = "1234";
     private final String sssrMaster1Email = "test_gas_master_sssr1@rambler.ru";
     private final String sssrMaster1Password = "1234";
+    NotificationsResponseDto publishedNotifications;
     LastOrderInfoResponseDto publishedLastOrderInfo;
     OrdersIdResponseDto publishedOrderIdResponse;
     SuggestServicesResponseDto publishedSuggestedServiceResponse;
+    NotificationsResponseDto hasOfferNotifications;
     LastOrderInfoResponseDto hasOfferLastOrderInfo;
     OrdersIdResponseDto hasOfferOrderIdClient;
     SuggestServicesResponseDto hasOfferSuggestedServiceResponse;
-
+    NotificationsResponseDto scheduleTimeNotifications;
     LastOrderInfoResponseDto scheduleTimeLastOrderResponse;
     OrdersIdResponseDto scheduleTimeOrderIdResponseClient;
-
+    NotificationsResponseDto waitMasterNotifications;
     LastOrderInfoResponseDto waitMasterLastOrderResponse;
     OrdersIdResponseDto waitMasterOrderIdResponse;
-
+    NotificationsResponseDto masterStartWorkNotifications;
     LastOrderInfoResponseDto masterStartWorkLastOrderResponse;
     OrdersIdResponseDto masterStartWorkOrderIdResponse;
 
@@ -141,6 +146,11 @@ public class PreconditionRepair extends BaseApiTest {
                             .statusCode(200)
                             .extract().as(OrdersIdResponseDto.class);
                 });
+                step(Role.CLIENT + " уведомления - в состоянии " + StateRepair.PUBLISHED, () -> {
+                    publishedNotifications = notificationsApi.getNotifications(commonFields.getTokenClient())
+                            .statusCode(200)
+                            .extract().as(NotificationsResponseDto.class);
+                });
             });
             step(Role.CLIENT + " получает список доступных предложений", () -> {
                 publishedSuggestedServiceResponse = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
@@ -158,6 +168,7 @@ public class PreconditionRepair extends BaseApiTest {
             stateInfo.setPublishedLastOrderInfo(publishedLastOrderInfo);
             stateInfo.setPublishedOrderIdResponse(publishedOrderIdResponse);
             stateInfo.setPublishedSuggestedServiceResponse(publishedSuggestedServiceResponse);
+            stateInfo.setPublishedNotifications(publishedNotifications);
         });
     }
 
@@ -216,6 +227,11 @@ public class PreconditionRepair extends BaseApiTest {
                             .extract().as(OrdersIdResponseDto.class);
                     commonFields.setOfferIdHasOfferClient(hasOfferOrderIdClient.getData().getOffer().getId());
                 });
+                step(Role.CLIENT + " уведомления - в состоянии " + StateRepair.HAS_OFFER, () -> {
+                    hasOfferNotifications = notificationsApi.getNotifications(commonFields.getTokenClient())
+                            .statusCode(200)
+                            .extract().as(NotificationsResponseDto.class);
+                });
                 step(Role.CLIENT + " получает список доступных предложений", () -> {
                     hasOfferSuggestedServiceResponse = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
                             .statusCode(200)
@@ -236,6 +252,7 @@ public class PreconditionRepair extends BaseApiTest {
             stateInfo.setHasOfferLastOrderInfo(hasOfferLastOrderInfo);
             stateInfo.setHasOfferSuggestedServiceResponse(hasOfferSuggestedServiceResponse);
             stateInfo.setHasOfferOrderIdClient(hasOfferOrderIdClient);
+            stateInfo.setHasOfferNotifications(hasOfferNotifications);
         });
     }
 
@@ -274,8 +291,14 @@ public class PreconditionRepair extends BaseApiTest {
                         .statusCode(200)
                         .extract().as(LastOrderInfoResponseDto.class);
             });
+            step(Role.CLIENT + " уведомления - в состоянии " + StateRepair.SCHEDULE_DATE, () -> {
+                scheduleTimeNotifications = notificationsApi.getNotifications(commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(NotificationsResponseDto.class);
+            });
             stateInfo.setScheduleDateLastOrderInfo(scheduleTimeLastOrderResponse);
             stateInfo.setScheduleDateOrderIdResponse(scheduleTimeOrderIdResponseClient);
+            stateInfo.setScheduleDateNotifications(scheduleTimeNotifications);
         });
     }
 
@@ -299,8 +322,14 @@ public class PreconditionRepair extends BaseApiTest {
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
             });
+            step(Role.CLIENT + " уведомления - в состоянии " + StateRepair.WAIT_MASTER, () -> {
+                waitMasterNotifications = notificationsApi.getNotifications(commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(NotificationsResponseDto.class);
+            });
             stateInfo.setWaitMasterLastOrderInfo(waitMasterLastOrderResponse);
             stateInfo.setWaitMasterOrderIdResponse(waitMasterOrderIdResponse);
+            stateInfo.setWaitMasterNotifications(waitMasterNotifications);
         });
     }
 
@@ -328,8 +357,14 @@ public class PreconditionRepair extends BaseApiTest {
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
             });
+            step(Role.CLIENT + " уведомления - в состоянии " + StateRepair.MASTER_START_WORK, () -> {
+                masterStartWorkNotifications = notificationsApi.getNotifications(commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(NotificationsResponseDto.class);
+            });
             stateInfo.setMasterStartWorkLastOrderInfo(masterStartWorkLastOrderResponse);
             stateInfo.setMasterStartWorkOrderIdResponse(masterStartWorkOrderIdResponse);
+            stateInfo.setMasterStartWorkNotifications(masterStartWorkNotifications);
         });
     }
 }
