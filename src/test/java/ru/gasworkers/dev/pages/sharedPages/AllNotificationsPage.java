@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.pages.sharedPages;
 
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.api.users.notification.NotificationsResponseDto;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
@@ -50,6 +51,7 @@ public class AllNotificationsPage extends BasePage {
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что загрузилась страница Уведомления", () -> {
             pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
+            Selenide.sleep(2000);
         });
     }
 
