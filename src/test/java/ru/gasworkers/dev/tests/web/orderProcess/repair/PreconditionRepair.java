@@ -79,38 +79,6 @@ public class PreconditionRepair extends BaseApiTest {
     private final String sssrDispatcher1Password = "1234";
     private final String sssrMaster1Email = "test_gas_master_sssr1@rambler.ru";
     private final String sssrMaster1Password = "1234";
-    //Dto
-    NotificationsResponseDto publishedNotifications;
-    LastOrderInfoResponseDto publishedLastOrderInfo;
-    OrdersIdResponseDto publishedOrderIdResponse;
-    SuggestServicesResponseDto publishedSuggestedServiceResponse;
-
-    NotificationsResponseDto hasOfferNotifications;
-    LastOrderInfoResponseDto hasOfferLastOrderInfo;
-    OrdersIdResponseDto hasOfferOrderIdClient;
-    SuggestServicesResponseDto hasOfferSuggestedServiceResponse;
-
-    NotificationsResponseDto scheduleTimeNotifications;
-    LastOrderInfoResponseDto scheduleTimeLastOrderResponse;
-    OrdersIdResponseDto scheduleTimeOrderIdResponseClient;
-
-    NotificationsResponseDto waitMasterNotifications;
-    LastOrderInfoResponseDto waitMasterLastOrderResponse;
-    OrdersIdResponseDto waitMasterOrderIdResponse;
-
-    NotificationsResponseDto masterStartWorkNotifications;
-    LastOrderInfoResponseDto masterStartWorkLastOrderResponse;
-    OrdersIdResponseDto masterStartWorkOrderIdResponse;
-
-    NotificationsResponseDto materialInvoiceIssuedNotifications;
-    LastOrderInfoResponseDto materialInvoiceIssuedLastOrderResponse;
-    OrdersIdResponseDto materialInvoiceIssuedOrderIdResponse;
-
-    NotificationsResponseDto materialInvoicePaidNotifications;
-    LastOrderInfoResponseDto materialInvoicePaidLastOrderResponse;
-    OrdersIdResponseDto materialInvoicePaidOrderIdResponse;
-
-
 
     public StateInfo applyPrecondition(User client, StateRepair stateRepair) {
         stateInfo.setCommonFields(commonFields);
@@ -184,22 +152,23 @@ public class PreconditionRepair extends BaseApiTest {
             step(Role.CLIENT + " заказ на ремонт - в состоянии " + StateRepair.PUBLISHED, () -> {
                 step(Role.CLIENT + " карточка последнего заказа - в состоянии " + StateRepair.PUBLISHED, () -> {
                     System.out.println("publishedLastOrderInfo");
-                    publishedLastOrderInfo = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
+                    LastOrderInfoResponseDto lastOrderDto = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                             .statusCode(200)
                             .extract().as(LastOrderInfoResponseDto.class);
-                    commonFields.setOrderId(publishedLastOrderInfo.getData().getId());
-                    commonFields.setOrderNumber(publishedLastOrderInfo.getData().getNumber());
-                    commonFields.setClientObjectId(publishedLastOrderInfo.getData().getClientObject().getId());
-                    commonFields.setEquipments0Id(publishedLastOrderInfo.getData().getEquipments().get(0).getId());
+                    commonFields.setOrderId(lastOrderDto.getData().getId());
+                    commonFields.setOrderNumber(lastOrderDto.getData().getNumber());
+                    commonFields.setClientObjectId(lastOrderDto.getData().getClientObject().getId());
+                    commonFields.setEquipments0Id(lastOrderDto.getData().getEquipments().get(0).getId());
+                    stateInfo.setPublishedLastOrderInfo(lastOrderDto);
                 });
-                publishedOrderIdResponse = getOrderId(commonFields, stateRepair);
-                publishedNotifications = getNotifications(commonFields, stateRepair);
+                stateInfo.setPublishedOrderIdResponse(getOrdersId(commonFields, stateRepair));
+                stateInfo.setPublishedNotifications(getNotifications(commonFields, stateRepair));
             });
             step(Role.CLIENT + " получает список доступных предложений", () -> {
-                publishedSuggestedServiceResponse = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
+                SuggestServicesResponseDto suggestServiceDto = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SuggestServicesResponseDto.class);
-                List<SuggestServicesResponseDto.Service> services = publishedSuggestedServiceResponse.getData().getServices();
+                List<SuggestServicesResponseDto.Service> services = suggestServiceDto.getData().getServices();
                 // Filter companies with non-null prices
                 List<SuggestServicesResponseDto.Service> filteredServices = new ArrayList<>();
                 for (SuggestServicesResponseDto.Service c : services) {
@@ -207,11 +176,8 @@ public class PreconditionRepair extends BaseApiTest {
                         filteredServices.add(c);
                     }
                 }
+                stateInfo.setPublishedSuggestedServiceResponse(suggestServiceDto);
             });
-            stateInfo.setPublishedLastOrderInfo(publishedLastOrderInfo);
-            stateInfo.setPublishedOrderIdResponse(publishedOrderIdResponse);
-            stateInfo.setPublishedSuggestedServiceResponse(publishedSuggestedServiceResponse);
-            stateInfo.setPublishedNotifications(publishedNotifications);
         });
     }
 
@@ -255,10 +221,10 @@ public class PreconditionRepair extends BaseApiTest {
             });
             step(Role.CLIENT + " заказ на ремонт в состоянии " + StateRepair.HAS_OFFER, () -> {
                 step(Role.CLIENT + " получает список доступных предложений", () -> {
-                    hasOfferSuggestedServiceResponse = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
+                    SuggestServicesResponseDto suggestedServiceDto = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
                             .statusCode(200)
                             .extract().as(SuggestServicesResponseDto.class);
-                    List<SuggestServicesResponseDto.Service> services = hasOfferSuggestedServiceResponse.getData().getServices();
+                    List<SuggestServicesResponseDto.Service> services = suggestedServiceDto.getData().getServices();
                     // Filter companies with non-null prices
                     List<SuggestServicesResponseDto.Service> filteredServices = new ArrayList<>();
                     for (SuggestServicesResponseDto.Service c : services) {
@@ -269,15 +235,13 @@ public class PreconditionRepair extends BaseApiTest {
                     assertThat(filteredServices).isNotEmpty();
                     commonFields.setServiceId(filteredServices.get(0).getId());
                     commonFields.setPossibleOfferId(filteredServices.get(0).getOfferId());
+                    stateInfo.setHasOfferSuggestedServiceResponse(suggestedServiceDto);
+
                 });
             });
-            hasOfferLastOrderInfo = getLastOrderInfo(commonFields, stateRepair);
-            hasOfferOrderIdClient = getOrderId(commonFields, stateRepair);
-            hasOfferNotifications = getNotifications(commonFields, stateRepair);
-            stateInfo.setHasOfferLastOrderInfo(hasOfferLastOrderInfo);
-            stateInfo.setHasOfferSuggestedServiceResponse(hasOfferSuggestedServiceResponse);
-            stateInfo.setHasOfferOrderIdClient(hasOfferOrderIdClient);
-            stateInfo.setHasOfferNotifications(hasOfferNotifications);
+            stateInfo.setHasOfferLastOrderInfo(getLastOrderInfo(commonFields, stateRepair));
+            stateInfo.setHasOfferOrderIdClient(getOrdersId(commonFields, stateRepair));
+            stateInfo.setHasOfferNotifications(getNotifications(commonFields, stateRepair));
         });
     }
 
@@ -304,12 +268,9 @@ public class PreconditionRepair extends BaseApiTest {
                 commonFields.setPayment0Url(actualResponse.getData().getPayUrl());
                 commonFields.setPayment0Id(actualResponse.getData().getPaymentId());
             });
-            scheduleTimeOrderIdResponseClient = getOrderId(commonFields, stateRepair);
-            scheduleTimeLastOrderResponse = getLastOrderInfo(commonFields, stateRepair);
-            scheduleTimeNotifications = getNotifications(commonFields, stateRepair);
-            stateInfo.setScheduleDateLastOrderInfo(scheduleTimeLastOrderResponse);
-            stateInfo.setScheduleDateOrderIdResponse(scheduleTimeOrderIdResponseClient);
-            stateInfo.setScheduleDateNotifications(scheduleTimeNotifications);
+            stateInfo.setScheduleDateLastOrderInfo(getLastOrderInfo(commonFields, stateRepair));
+            stateInfo.setScheduleDateOrderIdResponse(getOrdersId(commonFields, stateRepair));
+            stateInfo.setScheduleDateNotifications(getNotifications(commonFields, stateRepair));
         });
     }
 
@@ -321,12 +282,9 @@ public class PreconditionRepair extends BaseApiTest {
                         .statusCode(200)
                         .extract().as(OrdersApproveDateResponseDto.class);
             });
-            waitMasterLastOrderResponse = getLastOrderInfo(commonFields, stateRepair);
-            waitMasterOrderIdResponse = getOrderId(commonFields, stateRepair);
-            waitMasterNotifications = getNotifications(commonFields, stateRepair);
-            stateInfo.setWaitMasterLastOrderInfo(waitMasterLastOrderResponse);
-            stateInfo.setWaitMasterOrderIdResponse(waitMasterOrderIdResponse);
-            stateInfo.setWaitMasterNotifications(waitMasterNotifications);
+            stateInfo.setWaitMasterLastOrderInfo(getLastOrderInfo(commonFields, stateRepair));
+            stateInfo.setWaitMasterOrderIdResponse(getOrdersId(commonFields, stateRepair));
+            stateInfo.setWaitMasterNotifications(getNotifications(commonFields, stateRepair));
         });
     }
 
@@ -342,12 +300,9 @@ public class PreconditionRepair extends BaseApiTest {
                 SaveCheckListResponseDto expectedResponse = SaveCheckListResponseDto.successResponse();
                 assertResponse(expectedResponse, actualResponse);
             });
-            masterStartWorkLastOrderResponse = getLastOrderInfo(commonFields, stateRepair);
-            masterStartWorkOrderIdResponse = getOrderId(commonFields, stateRepair);
-            masterStartWorkNotifications = getNotifications(commonFields, stateRepair);
-            stateInfo.setMasterStartWorkLastOrderInfo(masterStartWorkLastOrderResponse);
-            stateInfo.setMasterStartWorkOrderIdResponse(masterStartWorkOrderIdResponse);
-            stateInfo.setMasterStartWorkNotifications(masterStartWorkNotifications);
+            stateInfo.setMasterStartWorkLastOrderInfo(getLastOrderInfo(commonFields, stateRepair));
+            stateInfo.setMasterStartWorkOrderIdResponse(getOrdersId(commonFields, stateRepair));
+            stateInfo.setMasterStartWorkNotifications(getNotifications(commonFields, stateRepair));
         });
     }
 
@@ -367,12 +322,9 @@ public class PreconditionRepair extends BaseApiTest {
                 OrdersSaveMaterialValuesResponseDto expectedResponse = OrdersSaveMaterialValuesResponseDto.oneMaterialResponse();
                 assertResponse(expectedResponse, actualResponse);
             });
-            materialInvoiceIssuedLastOrderResponse = getLastOrderInfo(commonFields, stateRepair);
-            materialInvoiceIssuedOrderIdResponse = getOrderId(commonFields, stateRepair);
-            materialInvoiceIssuedNotifications = getNotifications(commonFields, stateRepair);
-            stateInfo.setMaterialInvoiceIssuedLastOrderInfo(materialInvoiceIssuedLastOrderResponse);
-            stateInfo.setMaterialInvoiceIssuedOrderIdResponse(materialInvoiceIssuedOrderIdResponse);
-            stateInfo.setMaterialInvoiceIssuedNotifications(materialInvoiceIssuedNotifications);
+            stateInfo.setMaterialInvoiceIssuedLastOrderInfo(getLastOrderInfo(commonFields, stateRepair));
+            stateInfo.setMaterialInvoiceIssuedOrderIdResponse(getOrdersId(commonFields, stateRepair));
+            stateInfo.setMaterialInvoiceIssuedNotifications(getNotifications(commonFields, stateRepair));
         });
     }
 
@@ -384,12 +336,9 @@ public class PreconditionRepair extends BaseApiTest {
                         .extract().as(SelectPaymentResponseDto.class);
                 commonFields.setPayment0Url(actualResponse.getData().getPayUrl());
                 commonFields.setPayment0Id(actualResponse.getData().getPaymentId());
-                materialInvoicePaidLastOrderResponse = getLastOrderInfo(commonFields, stateRepair);
-                materialInvoicePaidOrderIdResponse = getOrderId(commonFields, stateRepair);
-                materialInvoicePaidNotifications = getNotifications(commonFields, stateRepair);
-                stateInfo.setMaterialInvoicePaidLastOrderInfo(materialInvoicePaidLastOrderResponse);
-                stateInfo.setMaterialInvoicePaidOrderIdResponse(materialInvoicePaidOrderIdResponse);
-                stateInfo.setMaterialInvoicePaidNotifications(materialInvoicePaidNotifications);
+                stateInfo.setMaterialInvoicePaidLastOrderInfo(getLastOrderInfo(commonFields, stateRepair));
+                stateInfo.setMaterialInvoicePaidOrderIdResponse(getOrdersId(commonFields, stateRepair));
+                stateInfo.setMaterialInvoicePaidNotifications(getNotifications(commonFields, stateRepair));
             });
         });
     }
@@ -403,7 +352,7 @@ public class PreconditionRepair extends BaseApiTest {
         });
     }
 
-    private OrdersIdResponseDto getOrderId(CommonFieldsRepairDto commonFields, StateRepair state) {
+    private OrdersIdResponseDto getOrdersId(CommonFieldsRepairDto commonFields, StateRepair state) {
         System.out.println(state + ": OrdersId");
         return step("API: " + Role.CLIENT + " карточка заказа - в состоянии " + state, () -> {
             return ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
