@@ -134,6 +134,7 @@ public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
             case WAIT_MASTER:
             case MASTER_START_WORK:
             case MATERIAL_INVOICE_ISSUED:
+            case MATERIAL_INVOICE_PAID:
                 checkClientFullName(data.getClientFullName());
                 checkClientPhone(data.getPhone());
                 checkCompanyFullName(data.getCompanyFullName());

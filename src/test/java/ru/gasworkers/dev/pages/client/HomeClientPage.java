@@ -5,6 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClientComponent;
+import ru.gasworkers.dev.pages.components.clientComponent.RedNoticeComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.PersonSummaryComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.guideComponent.PlayGuideComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
@@ -24,6 +25,7 @@ public final class HomeClientPage extends BaseClientPage {
     public final PersonSummaryComponent personSummaryComponent;
     public final PlayGuideComponent guide;
     public final ConferenceNotificationSharedComponent conferenceNotification;
+    public final RedNoticeComponent redNotice;
 
 
     public HomeClientPage(RoleBrowser browser) {
@@ -34,6 +36,7 @@ public final class HomeClientPage extends BaseClientPage {
         personSummaryComponent = new PersonSummaryComponent(browser);
         guide = new PlayGuideComponent(browser);
         conferenceNotification = new ConferenceNotificationSharedComponent(browser);
+        redNotice = new RedNoticeComponent(browser);
     }
 
     private final String
@@ -91,6 +94,16 @@ public final class HomeClientPage extends BaseClientPage {
             driver.$(".client-objects [data-index='0']").shouldBe(visible, Duration.ofSeconds(20));
         });
     }
+
+    public void checkFinishLoading() {
+        stepWithRole("Убедиться, что загружена Домашняя страница", () -> {
+            urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client");
+            lastOrderComponent.checkFinishLoading();
+            driver.$(".client-objects [data-index='0']").shouldBe(visible, Duration.ofSeconds(5));
+        });
+    }
+
+
 
     public void checkInitialState() {
         stepWithRole("Убедиться, что  Домашняя страница в состоянии после Регистрации", () -> {

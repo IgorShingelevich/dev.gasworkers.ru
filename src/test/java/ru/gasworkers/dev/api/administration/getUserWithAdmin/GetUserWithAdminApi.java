@@ -16,8 +16,4 @@ public class GetUserWithAdminApi extends BaseApi {
                 .get("/admin/users/" + userId)
                 .then().spec(baseResponseSpec);
     }
-
-    /*public  ValidatableResponse getUserWithAdmin(Integer userId) {
-        LoginRequestDTO loginDto = LoginRequestDTO.asUser();
-    }*/
 }

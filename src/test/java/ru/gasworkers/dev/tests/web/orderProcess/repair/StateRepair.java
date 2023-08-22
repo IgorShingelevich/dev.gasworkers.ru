@@ -57,20 +57,9 @@ public enum StateRepair {
                     // todo stepper
                     break;
                 case WAIT_MASTER:
-                    component.offersCounter.noComponent();
-                    component.noDesiredDate();
-                    component.noDesiredTime();
-//                   todo component.checkMasterVisitDateAndTime(data.getMasterVisitDateAndTime());
-                    // todo  stepper
-                    break;
                 case MASTER_START_WORK:
-                    component.offersCounter.noComponent();
-                    component.noDesiredDate();
-                    component.noDesiredTime();
-                    //                   todo component.checkMasterVisitDateAndTime(data.getMasterVisitDateAndTime());
-                    // todo  stepper
-                    break;
                 case MATERIAL_INVOICE_ISSUED:
+                case MATERIAL_INVOICE_PAID:
                     component.offersCounter.noComponent();
                     component.noDesiredDate();
                     component.noDesiredTime();
@@ -106,6 +95,9 @@ public enum StateRepair {
                 case MATERIAL_INVOICE_ISSUED:
                     // todo stepper
                     break;
+                case MATERIAL_INVOICE_PAID:
+                    // todo stepper
+                    break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
@@ -135,12 +127,15 @@ public enum StateRepair {
                     // todo time and stepper buttons notifications
                     break;
                 case MATERIAL_INVOICE_ISSUED:
+                case MATERIAL_INVOICE_PAID:
                     tab.repairDetails.checkFinishLoading();
                     tab.repairDetails.checkMaterialsFirstEquipmentPrice(dto, 0);
                     tab.repairDetails.checkMaterialsLogisticFeeAdded(dto);
                     tab.repairDetails.checkMaterialsPrice(dto, data);
                     tab.repairDetails.checkActionsPrice("0");
                     break;
+                default:
+                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
         });
     }
@@ -164,9 +159,12 @@ public enum StateRepair {
                     // todo add tab.checkComputedToTalPrice - no field in json
                     break;
                 case MATERIAL_INVOICE_ISSUED:
+                case MATERIAL_INVOICE_PAID:
                     tab.checkTotalPrice("3310");
-
+                    // todo add tab.checkComputedToTalPrice - no field in json
                     break;
+                default:
+                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
         });
     }

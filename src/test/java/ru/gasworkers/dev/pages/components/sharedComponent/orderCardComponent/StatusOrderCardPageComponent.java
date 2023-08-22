@@ -166,6 +166,16 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkMaterialsDatePayment(data.getMaterialsDate());
                     noActionsStagePayment();
                     break;
+                case MATERIAL_INVOICE_PAID:
+                    checkCurrentStatus(OrderStatus.MATERIAL_INVOICE_PAID);
+                    checkActivationStatusIsPaid(true);
+                    checkActivationPricePayment(data.getActivationPrice());
+                    checkActivationDatePayment(data.getActivationDate());
+                    checkMaterialsStatusIsPaid(true);
+                    checkMaterialsPricePayment(data.getMaterialsPrice());
+                    checkMaterialsDatePayment(data.getMaterialsDate());
+                    noActionsStagePayment();
+                    break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);
             }

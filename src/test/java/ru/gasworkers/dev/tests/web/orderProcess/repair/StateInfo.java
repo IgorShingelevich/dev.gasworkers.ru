@@ -43,6 +43,10 @@ public class StateInfo {
     private LastOrderInfoResponseDto materialInvoiceIssuedLastOrderInfo;
     private OrdersIdResponseDto materialInvoiceIssuedOrderIdResponse;
 
+    private NotificationsResponseDto materialInvoicePaidNotifications;
+    private LastOrderInfoResponseDto materialInvoicePaidLastOrderInfo;
+    private OrdersIdResponseDto materialInvoicePaidOrderIdResponse;
+
     public StateInfo hasOfferDtoSet() {
         return StateInfo.builder()
                 .commonFields(commonFields) // Include the common fields
@@ -96,6 +100,15 @@ public class StateInfo {
                 .materialInvoiceIssuedLastOrderInfo(materialInvoiceIssuedLastOrderInfo)
                 .materialInvoiceIssuedOrderIdResponse(materialInvoiceIssuedOrderIdResponse)
                 .materialInvoiceIssuedNotifications(materialInvoiceIssuedNotifications)
+                .build();
+    }
+
+    public StateInfo materialInvoicePaidDtoSet() {
+        return StateInfo.builder()
+                .commonFields(commonFields) // Include the common fields
+                .materialInvoicePaidLastOrderInfo(materialInvoicePaidLastOrderInfo)
+                .materialInvoicePaidOrderIdResponse(materialInvoicePaidOrderIdResponse)
+                .materialInvoicePaidNotifications(materialInvoicePaidNotifications)
                 .build();
     }
 }

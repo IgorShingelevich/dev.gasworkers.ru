@@ -31,14 +31,15 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class MasterStartWorkRepairTest extends BaseApiTest {
+public class MaterialInvoicePaidTest extends BaseApiTest {
     @Browser(role = Role.CLIENT)
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Ремонт - в  состоянии мастер приступил к работе")
-    void masterStartWork(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.MASTER_START_WORK;
+    @DisplayName("Ремонт - в  состоянии клиент оплатил счет на материалы")
+    void materialInvoicePaid
+            (@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+        StateRepair state = StateRepair.MATERIAL_INVOICE_PAID;
         Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         StateInfo stateInfo = preconditionRepair.applyPrecondition(client, state);
@@ -59,7 +60,7 @@ public class MasterStartWorkRepairTest extends BaseApiTest {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(role + " карточка последнего заказа - в состоянии " + state, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-                    clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getMasterStartWorkLastOrderInfo());
+                    clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getMaterialInvoicePaidLastOrderInfo());
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
@@ -67,16 +68,17 @@ public class MasterStartWorkRepairTest extends BaseApiTest {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkState(state, stateInfo.getMasterStartWorkOrderIdResponse());
+                    clientPages.getOrderCardPage().checkState(state, stateInfo.getMaterialInvoicePaidOrderIdResponse());
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {
                 step(role + " уведомления - в состоянии " + state, () -> {
                     clientPages.getAllNotificationsPage().open();
                     clientPages.getAllNotificationsPage().checkFinishLoading();
-                    clientPages.getAllNotificationsPage().checkState(state, stateInfo.getMasterStartWorkNotifications());
+                    clientPages.getAllNotificationsPage().checkState(state, stateInfo.getMaterialInvoicePaidNotifications());
                 });
             };
+
             Consumer<SoftAssert> case4 = softAssert -> {
                 step(role + " красное уведомление в лк - в состоянии " + state, () -> {
                     clientPages.getHomePage().open();
@@ -84,6 +86,7 @@ public class MasterStartWorkRepairTest extends BaseApiTest {
                     clientPages.getHomePage().redNotice.noNotice();
                 });
             };
+
             Consumer<SoftAssert> case5 = softAssert -> {
                 step(role + " красное уведомление на стр лендинга - в состоянии " + state, () -> {
                     clientPages.getLandingPage().open();

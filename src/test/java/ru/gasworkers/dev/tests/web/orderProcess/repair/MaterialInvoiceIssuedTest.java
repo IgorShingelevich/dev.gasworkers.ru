@@ -36,7 +36,7 @@ public class MaterialInvoiceIssuedTest extends BaseApiTest {
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Ремонт - в  состоянии мастер выставил счет нга материалы")
+    @DisplayName("Ремонт - в  состоянии мастер выставил счет на материалы")
     void materialInvoiceIssued
             (@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
         StateRepair state = StateRepair.MATERIAL_INVOICE_ISSUED;
@@ -73,13 +73,27 @@ public class MaterialInvoiceIssuedTest extends BaseApiTest {
             };
             Consumer<SoftAssert> case3 = softAssert -> {
                 step(role + " уведомления - в состоянии " + state, () -> {
-                    clientPages.getOrderCardPage().actionsBlock.checkFinishLoading();
-                    clientPages.getOrderCardPage().actionsBlock.notifications();
+                    clientPages.getAllNotificationsPage().open();
                     clientPages.getAllNotificationsPage().checkFinishLoading();
                     clientPages.getAllNotificationsPage().checkState(state, stateInfo.getMaterialInvoiceIssuedNotifications());
                 });
             };
-            assertAll(Arrays.asList(case1, case2, case3));
+
+            Consumer<SoftAssert> case4 = softAssert -> {
+                step(role + " красное уведомление в лк - в состоянии " + state, () -> {
+                    clientPages.getHomePage().open();
+                    clientPages.getHomePage().checkFinishLoading();
+                    clientPages.getHomePage().redNotice.checkInvoiceIssuedNotice();
+                });
+            };
+            Consumer<SoftAssert> case5 = softAssert -> {
+                step(role + " красное уведомление на стр лендинга - в состоянии " + state, () -> {
+                    clientPages.getLandingPage().open();
+                    clientPages.getLandingPage().checkFinishLoading();
+                    clientPages.getLandingPage().noticeComponent.redNotice.checkInvoiceIssuedNotice();
+                });
+            };
+            assertAll(Arrays.asList(case1, case2, case3, case4, case5));
         });
     }
 }

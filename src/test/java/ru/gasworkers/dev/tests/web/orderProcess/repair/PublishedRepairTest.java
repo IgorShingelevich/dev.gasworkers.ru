@@ -86,13 +86,27 @@ public class PublishedRepairTest extends BaseApiTest {
 
             Consumer<SoftAssert> case5 = softAssert -> {
                 step(role + " уведомления - в состоянии " + state, () -> {
-                    clientPages.getOrderCardPage().actionsBlock.checkFinishLoading();
-                    clientPages.getOrderCardPage().actionsBlock.notifications();
+                    clientPages.getAllNotificationsPage().open();
                     clientPages.getAllNotificationsPage().checkFinishLoading();
                     clientPages.getAllNotificationsPage().checkState(state, stateInfo.getPublishedNotifications());
                 });
             };
-            assertAll(Arrays.asList(case1, case2, case3, case4, case5));
+
+            Consumer<SoftAssert> case6 = softAssert -> {
+                step(role + " красное уведомление в лк - в состоянии " + state, () -> {
+                    clientPages.getHomePage().open();
+                    clientPages.getHomePage().checkFinishLoading();
+                    clientPages.getHomePage().redNotice.noNotice();
+                });
+            };
+            Consumer<SoftAssert> case7 = softAssert -> {
+                step(role + " красное уведомление на стр лендинга - в состоянии " + state, () -> {
+                    clientPages.getLandingPage().open();
+                    clientPages.getLandingPage().checkFinishLoading();
+                    clientPages.getLandingPage().noticeComponent.noNotifications();
+                });
+            };
+            assertAll(Arrays.asList(case1, case2, case3, case4, case5, case6, case7));
         });
     }
 }

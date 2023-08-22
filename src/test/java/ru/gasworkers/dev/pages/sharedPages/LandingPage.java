@@ -5,9 +5,9 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
+import ru.gasworkers.dev.pages.components.clientComponent.NoticeComponent;
 import ru.gasworkers.dev.pages.components.landingComponent.BackgroundRegistrationComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.ConfirmationCodeModalWindowBGComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.JivoMessengerComponent;
 
 import java.time.Duration;
 
@@ -17,8 +17,8 @@ import static com.codeborne.selenide.Condition.visible;
 public class LandingPage extends BasePage {
 
     public final BackgroundRegistrationComponent bgRegistration;
-    public final JivoMessengerComponent jivoMessengerComponent;
     public final ConfirmationCodeModalWindowBGComponent confirmationCodeModalBG;
+    public final NoticeComponent noticeComponent;
     private final String
             TITLE_TEXT = "Ремонт и техобслуживание газового оборудования от 499 ₽",
             SUBTITLE_TEXT = "Выезд мастера по Московской области в день обращения от 30 минут";
@@ -40,19 +40,18 @@ public class LandingPage extends BasePage {
     public LandingPage(RoleBrowser browser) {
         super(browser);
         bgRegistration = new BackgroundRegistrationComponent(browser);
-        jivoMessengerComponent = new JivoMessengerComponent(browser);
         confirmationCodeModalBG = new ConfirmationCodeModalWindowBGComponent(browser);
+        noticeComponent = new NoticeComponent(browser);
     }
 
-    public LandingPage open() {
+    public void open() {
         stepWithRole("Открыть главную страницу", () -> {
             driver.open("https://dev.gasworkers.ru/");
             primaryHeaderLocator.shouldBe(visible);
         });
-        return this;
     }
 
-    public LandingPage checkFinishLoading() {
+    public void checkFinishLoading() {
         stepWithRole("Убедиться, что главная страница загружена", () -> {
             urlChecker.urlStartsWith("https://dev.gasworkers.ru/");
             Selenide.sleep(1000);
@@ -70,14 +69,12 @@ public class LandingPage extends BasePage {
             // TODO add the rest  components checks
             // todo footer components checks
         });
-        return this;
     }
 
-    public LandingPage clickUserProfileSignIn() {
+    public void clickUserProfileSignIn() {
         stepWithRole("Нажать кнопку Личный кабинет", () -> {
             signInButtonLocator.click();
         });
-        return this;
     }
 
     public void signUpClient() {
@@ -119,26 +116,4 @@ public class LandingPage extends BasePage {
         });
     }
 
-
-
-    /*public LandingPage clickUserRepairButton() {
-    stepWithRole("Нажать кнопку Ремонт", () -> {
-    repairButtonLocator.shouldHave(text("Ремонт")).click();
-    });
-    return this;
-    }
-
-    public LandingPage clickUserMaintenanceButton() {
-    stepWithRole("Нажать кнопку Техобслуживание", () -> {
-        maintenanceButtonLocator.shouldHave(text("Техобслуживание")).click();
-    });
-    return this;
-    }
-
-    public LandingPage clickUserVideoButton() {
-    stepWithRole("Нажать кнопку Видеоконсультация", () -> {
-        videoButtonLocator.shouldHave(text("Видеоконсультация")).click();
-    });
-    return this;
-    }*/
 }

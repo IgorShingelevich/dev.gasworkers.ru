@@ -106,34 +106,46 @@ public class PreconditionRepair extends BaseApiTest {
     LastOrderInfoResponseDto materialInvoiceIssuedLastOrderResponse;
     OrdersIdResponseDto materialInvoiceIssuedOrderIdResponse;
 
+    NotificationsResponseDto materialInvoicePaidNotifications;
+    LastOrderInfoResponseDto materialInvoicePaidLastOrderResponse;
+    OrdersIdResponseDto materialInvoicePaidOrderIdResponse;
+
+
+
     public StateInfo applyPrecondition(User client, StateRepair stateRepair) {
         stateInfo.setCommonFields(commonFields);
+        StateInfo result = null;
         switch (stateRepair) {
             case PUBLISHED:
                 applyPublishedPrecondition(client, commonFields);
-                return stateInfo.publishedDtoSet();
+                result = stateInfo.publishedDtoSet();
+                break;
             case HAS_OFFER:
                 applyPublishedPrecondition(client, commonFields);
                 applyHasOfferPrecondition(client, commonFields);
-                return stateInfo.hasOfferDtoSet();
+                result = stateInfo.hasOfferDtoSet();
+                break;
             case SCHEDULE_DATE:
                 applyPublishedPrecondition(client, commonFields);
                 applyHasOfferPrecondition(client, commonFields);
                 applyScheduleDatePrecondition(client, commonFields);
-                return stateInfo.scheduleDateDtoSet();
+                result = stateInfo.scheduleDateDtoSet();
+                break;
             case WAIT_MASTER:
                 applyPublishedPrecondition(client, commonFields);
                 applyHasOfferPrecondition(client, commonFields);
                 applyScheduleDatePrecondition(client, commonFields);
                 applyWaitMasterPreconditionUser(client, commonFields);
-                return stateInfo.waitMasterDtoSet();
+                result = stateInfo.waitMasterDtoSet();
+                break;
             case MASTER_START_WORK:
                 applyPublishedPrecondition(client, commonFields);
                 applyHasOfferPrecondition(client, commonFields);
                 applyScheduleDatePrecondition(client, commonFields);
                 applyWaitMasterPreconditionUser(client, commonFields);
                 applyMasterStartWorkPrecondition(client, commonFields);
-                return stateInfo.masterStartWorkDtoSet();
+                result = stateInfo.masterStartWorkDtoSet();
+                break;
             case MATERIAL_INVOICE_ISSUED:
                 applyPublishedPrecondition(client, commonFields);
                 applyHasOfferPrecondition(client, commonFields);
@@ -141,9 +153,29 @@ public class PreconditionRepair extends BaseApiTest {
                 applyWaitMasterPreconditionUser(client, commonFields);
                 applyMasterStartWorkPrecondition(client, commonFields);
                 applyMaterialInvoiceIssuedPrecondition(client, commonFields);
-                return stateInfo.materialInvoiceIssuedDtoSet();
+                result = stateInfo.materialInvoiceIssuedDtoSet();
+                break;
+            case MATERIAL_INVOICE_PAID:
+                applyPublishedPrecondition(client, commonFields);
+                applyHasOfferPrecondition(client, commonFields);
+                applyScheduleDatePrecondition(client, commonFields);
+                applyWaitMasterPreconditionUser(client, commonFields);
+                applyMasterStartWorkPrecondition(client, commonFields);
+                applyMaterialInvoiceIssuedPrecondition(client, commonFields);
+                applyMaterialInvoicePaidPrecondition(client, commonFields);
+                result = stateInfo.materialInvoicePaidDtoSet();
+                break;
+            default:
+                return null; // or throw an exception if the state is not handled
         }
-        return null; // or throw an exception if the state is not handled
+        readAllNotifications();
+        return result;
+    }
+
+
+    private void readAllNotifications() {
+        notificationsApi.readAllNotifications(commonFields.getTokenClient())
+                .statusCode(200);
     }
 
     private void applyPublishedPrecondition(User client, CommonFieldsRepairDto commonFields) {
@@ -389,14 +421,14 @@ public class PreconditionRepair extends BaseApiTest {
 
     private void applyMaterialInvoiceIssuedPrecondition(User client, CommonFieldsRepairDto commonFields) {
         step("API: предусловие - " + Role.CLIENT + " заказ на ремонт в состоянии " + StateRepair.MATERIAL_INVOICE_ISSUED, () -> {
-            step("мастер создает таблицу материалов", () -> {
+            step(Role.MASTER + " создает таблицу материалов - в состоянии " + StateRepair.MATERIAL_INVOICE_ISSUED, () -> {
                 OrdersMaterialValuesResponseDto actualResponse = ordersMaterialValuesApi.materialValuesTable(repairCase.materialValuesRequest(commonFields), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersMaterialValuesResponseDto.class);
                 OrdersMaterialValuesResponseDto expectedResponse = OrdersMaterialValuesResponseDto.successResponse();
                 assertResponse(expectedResponse, actualResponse);
             });
-            step("мастер сохраняет таблицу материалов", () -> {
+            step(Role.MASTER + " сохраняет таблицу материалов - в состоянии " + StateRepair.MATERIAL_INVOICE_ISSUED, () -> {
                 OrdersSaveMaterialValuesResponseDto actualResponse = ordersSaveMaterialValuesApi.saveMaterialValues(repairCase.saveMaterialValuesRequest(commonFields), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersSaveMaterialValuesResponseDto.class);
@@ -423,6 +455,38 @@ public class PreconditionRepair extends BaseApiTest {
             stateInfo.setMaterialInvoiceIssuedLastOrderInfo(materialInvoiceIssuedLastOrderResponse);
             stateInfo.setMaterialInvoiceIssuedOrderIdResponse(materialInvoiceIssuedOrderIdResponse);
             stateInfo.setMaterialInvoiceIssuedNotifications(materialInvoiceIssuedNotifications);
+        });
+    }
+
+    private void applyMaterialInvoicePaidPrecondition(User client, CommonFieldsRepairDto commonFields) {
+        step("API: предусловие - " + Role.CLIENT + " заказ на ремонт в состоянии " + StateRepair.MATERIAL_INVOICE_PAID, () -> {
+            step(Role.CLIENT + " оплачивает счет на Материалы - в состоянии " + StateRepair.MATERIAL_INVOICE_PAID, () -> {
+                SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderId(), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(SelectPaymentResponseDto.class);
+                commonFields.setPayment0Url(actualResponse.getData().getPayUrl());
+                commonFields.setPayment0Id(actualResponse.getData().getPaymentId());
+                step(Role.CLIENT + "  карточка последнего заказа - убедиться что в состоянии" + StateRepair.MATERIAL_INVOICE_PAID, () -> {
+                    System.out.println("materialInvoicePaidLastOrderResponse");
+                    materialInvoicePaidLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
+                            .statusCode(200)
+                            .extract().as(LastOrderInfoResponseDto.class);
+                });
+                step(Role.CLIENT + " карточка заказа - убедиться что в состоянии" + StateRepair.MATERIAL_INVOICE_PAID, () -> {
+                    System.out.println("materialInvoicePaidOrdersIdResponseAsClient");
+                    materialInvoicePaidOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
+                            .statusCode(200)
+                            .extract().as(OrdersIdResponseDto.class);
+                });
+                step(Role.CLIENT + " уведомления - в состоянии " + StateRepair.MATERIAL_INVOICE_PAID, () -> {
+                    materialInvoicePaidNotifications = notificationsApi.getNotifications(commonFields.getTokenClient())
+                            .statusCode(200)
+                            .extract().as(NotificationsResponseDto.class);
+                });
+            });
+            stateInfo.setMaterialInvoicePaidLastOrderInfo(materialInvoicePaidLastOrderResponse);
+            stateInfo.setMaterialInvoicePaidOrderIdResponse(materialInvoicePaidOrderIdResponse);
+            stateInfo.setMaterialInvoicePaidNotifications(materialInvoicePaidNotifications);
         });
     }
 }

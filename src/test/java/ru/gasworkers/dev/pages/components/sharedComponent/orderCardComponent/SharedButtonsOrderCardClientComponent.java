@@ -59,6 +59,13 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     checkReturnToWorkButton();
                     checkPayInvoiceButton();
                     break;
+                case MATERIAL_INVOICE_PAID:
+                    noShowOnMapButton();
+                    noSelectNewCompanyButton();
+                    noPayInvoiceButton();
+                    noCancelButton();
+                    checkReturnToWorkButton();
+                    break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);
             }

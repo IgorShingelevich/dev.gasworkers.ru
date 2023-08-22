@@ -50,6 +50,7 @@ public class AllNotificationsPage extends BasePage {
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что загрузилась страница Уведомления", () -> {
+            urlChecker.urlContains("/profile/notifications");
             pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
             Selenide.sleep(2000);
         });
@@ -88,37 +89,61 @@ public class AllNotificationsPage extends BasePage {
     }
 
 
+    public void checkExpectedAmountOfNotifications(int amount, int ifWaitMilliseconds) {
+        stepWithRole("Убедиться, что количество уведомлений равно: " + amount, () -> {
+            if (notificationsCollection.size() != amount) {
+                stepWithRole(" Ждем " + ifWaitMilliseconds + " мс", () -> {
+                    System.out.println("waitNotifications: " + ifWaitMilliseconds + " ms");
+                    Selenide.sleep(ifWaitMilliseconds);
+                    open();// Pause execution for the specified number of milliseconds
+                });
+            }
+            notificationsCollection.shouldHave(size(amount));
+        });
+    }
+
+    public void open() {
+        stepWithRole("Открыть страницу Уведомления", () -> {
+            driver.open("/profile/notifications");
+        });
+    }
+
+
+
     public void checkState(StateRepair stateRepair, NotificationsResponseDto dto) {
         stepWithRole("Проверить уведомления в состоянии " + stateRepair, () -> {
+            String firstNotificationText = dto.getData().get(0).getText();
             switch (stateRepair) {
                 case PUBLISHED:
-                    checkExpectedAmountOfNotifications(1);
+                    checkExpectedAmountOfNotifications(1, 4000);
                     checkFirstNotificationText(stateRepair.notification());
-                    assertThat(dto.getData().get(0).getText(), endsWith(stateRepair.notification()));
+                    assertThat(firstNotificationText, endsWith(stateRepair.notification()));
                     break;
                 case HAS_OFFER:
-                    checkExpectedAmountOfNotifications(2);
+                    checkExpectedAmountOfNotifications(2, 4000);
                     checkFirstNotificationText(stateRepair.notification());
-                    assertThat(dto.getData().get(0).getText(), endsWith(stateRepair.notification()));
+                    assertThat(firstNotificationText, endsWith(stateRepair.notification()));
                     break;
                 case SCHEDULE_DATE:
-                    checkExpectedAmountOfNotifications(3);
+                    checkExpectedAmountOfNotifications(3, 4000);
                     checkFirstNotificationText(stateRepair.notification());
-                    assertThat(dto.getData().get(0).getText(), startsWith(stateRepair.notification()));
+                    assertThat(firstNotificationText, startsWith(stateRepair.notification()));
                     break;
                 case WAIT_MASTER:
-                    checkExpectedAmountOfNotifications(4);
+                    checkExpectedAmountOfNotifications(4, 4000);
                     checkFirstNotificationText(stateRepair.notification());
-                    assertThat(dto.getData().get(0).getText(), startsWith(stateRepair.notification()));
+                    assertThat(firstNotificationText, startsWith(stateRepair.notification()));
                     break;
                 case MASTER_START_WORK:
-                    checkExpectedAmountOfNotifications(4);
+                    checkExpectedAmountOfNotifications(4, 4000);
                     break;
                 case MATERIAL_INVOICE_ISSUED:
-                    checkExpectedAmountOfNotifications(5);
-                    assertThat(dto.getData().get(0).getText(), startsWith(stateRepair.notification()));
+                    checkExpectedAmountOfNotifications(5, 4000);
+                    assertThat(firstNotificationText, startsWith(stateRepair.notification()));
                     break;
-
+                case MATERIAL_INVOICE_PAID:
+                    checkExpectedAmountOfNotifications(5, 4000);
+                    break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }

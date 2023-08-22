@@ -16,4 +16,14 @@ public class NotificationsApi extends BaseApi {
                 .get("/notifications")
                 .then().spec(baseResponseSpec);
     }
+
+    //    https://api.dev.gasworkers.ru/docs#uvedomleniia-POSTapi-v1-notifications-read-all
+    @Step("API: Read all notifications")
+    public ValidatableResponse readAllNotifications(String token) {
+        return given().spec(baseRequestSpec)
+                .header("Authorization", "Bearer " + token)
+                .when()
+                .post("/notifications/read-all")
+                .then().spec(baseResponseSpec);
+    }
 }

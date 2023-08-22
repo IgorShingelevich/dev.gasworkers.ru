@@ -32,6 +32,7 @@ public final class DriverFactory {
 //        chromeOptions.addExtensions(new File("src/test/resources/web/eimadpbcbfnmbkopoojfekhnkhdbieeh-4.9.64-Crx4Chrome.com.crx"));
         // Enable camera and microphone access
         chromeOptions.addArguments("--use-fake-ui-for-media-stream");
+//        chromeOptions.addArguments("auto-open-devtools-for-tabs"); // open dev tools
 
         config.browserCapabilities(chromeOptions);
 
