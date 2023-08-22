@@ -144,6 +144,7 @@ public class SuggestedMasterRepairCommonTabOrderCardComponent extends BaseOrderC
                 case SCHEDULE_DATE:
                 case WAIT_MASTER:
                 case MASTER_START_WORK:
+                case MATERIAL_INVOICE_ISSUED:
                     noSuggestedMastersCard();
                     break;
                 case HAS_OFFER:

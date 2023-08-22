@@ -86,6 +86,7 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
                 case SCHEDULE_DATE:
                 case WAIT_MASTER:
                 case MASTER_START_WORK:
+                case MATERIAL_INVOICE_ISSUED:
                     checkApprovedMasterCardExists();
                     checkFinishLoading();
                     checkMasterFullName(dto.getMasterFullName());

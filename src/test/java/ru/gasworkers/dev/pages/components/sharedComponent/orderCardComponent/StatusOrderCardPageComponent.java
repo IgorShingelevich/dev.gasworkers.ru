@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
@@ -16,9 +17,9 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
             paymentCollection = driver.$$("ul.order-details__prices li").as("Коллекция платежей");
     SelenideElement
             orderStatusLocator = driver.$(".item-flex p.text").as("Статус заказа"),
-            activationStagePaymentLocatorBox = driver.$$("ul.order-details__prices li").findBy(text("Активация безопасной сделки")).parent(),
-            materialsStagePaymentLocatorBox = driver.$$("ul.order-details__prices li").findBy(text("Оплата материалов")).parent(),
-            actionsStagePaymentLocatorBox = driver.$$("ul.order-details__prices li").findBy(text("Оплата ремонтных работ")).parent(),
+            activationStagePaymentLocatorBox = driver.$$("ul.order-details__prices li").findBy(text("Активация безопасной сделки")),
+            materialsStagePaymentLocatorBox = driver.$$("ul.order-details__prices li").findBy(text("Оплата материалов")),
+            actionsStagePaymentLocatorBox = driver.$$("ul.order-details__prices li").findBy(text("Оплата ремонтных работ")),
             activationStatusPaymentLocator = activationStagePaymentLocatorBox.find(".order-details__prices--status .status"),
             activationPricePaymentLocator = activationStagePaymentLocatorBox.find(".order-details__prices--price strong"),
             activationStatusDatePaymentLocator = activationStagePaymentLocatorBox.find(".payment-date"),
@@ -43,7 +44,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
         isPaid(expectedStatus, activationStatusPaymentLocator);
     }
 
-    public void checkNoActivationStagePayment() {
+    public void noActivationStagePayment() {
         stepWithRole("Убедиться, что нет платежа за активацию", () -> {
             activationStagePaymentLocatorBox.shouldNotBe(visible);
         });
@@ -65,7 +66,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
         isPaid(expectedStatus, materialsStatusPaymentLocator);
     }
 
-    public void checkNoMaterialsStagePayment() {
+    public void noMaterialsStagePayment() {
         stepWithRole("Убедиться, что нет платежа за материалы", () -> {
             materialsStagePaymentLocatorBox.shouldNotBe(visible);
         });
@@ -87,7 +88,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
         isPaid(expectedStatus, actionsStatusPaymentLocator);
     }
 
-    public void checkNoActionsStagePayment() {
+    public void noActionsStagePayment() {
         stepWithRole("Убедиться, что нет платежа за работы", () -> {
             actionsStagePaymentLocatorBox.shouldNotBe(visible);
         });
@@ -115,43 +116,55 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
         });
     }
 
-    public void statusSet(StateRepair stateRepair, StateRepairBuilder.OrderIdData data) {
+    public void statusSet(StateRepair stateRepair, StateRepairBuilder.OrderIdData data, OrdersIdResponseDto dto) {
+
         step("Проверить статус заказа и оплаты в состоянии " + stateRepair, () -> {
             switch (stateRepair) {
+
                 case PUBLISHED:
                     checkCurrentStatus(OrderStatus.PUBLISHED);
-                    checkNoActivationStagePayment();
-                    checkNoMaterialsStagePayment();
-                    checkNoActionsStagePayment();
+                    noActivationStagePayment();
+                    noMaterialsStagePayment();
+                    noActionsStagePayment();
                 case HAS_OFFER:
                     checkCurrentStatus(OrderStatus.HAS_OFFER);
-                    checkNoActivationStagePayment();
-                    checkNoMaterialsStagePayment();
-                    checkNoActionsStagePayment();
+                    noActivationStagePayment();
+                    noMaterialsStagePayment();
+                    noActionsStagePayment();
                     break;
                 case SCHEDULE_DATE:
                     checkCurrentStatus(OrderStatus.SCHEDULE_DATE);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());
-                    checkNoMaterialsStagePayment();
-                    checkNoActionsStagePayment();
+                    noMaterialsStagePayment();
+                    noActionsStagePayment();
                     break;
                 case WAIT_MASTER:
                     checkCurrentStatus(OrderStatus.WAIT_MASTER);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());
-                    checkNoMaterialsStagePayment();
-                    checkNoActionsStagePayment();
+                    noMaterialsStagePayment();
+                    noActionsStagePayment();
                     break;
                 case MASTER_START_WORK:
                     checkCurrentStatus(OrderStatus.MASTER_START_WORK);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());
-                    checkNoMaterialsStagePayment();
-                    checkNoActionsStagePayment();
+                    noMaterialsStagePayment();
+                    noActionsStagePayment();
+                    break;
+                case MATERIAL_INVOICE_ISSUED:
+                    checkCurrentStatus(OrderStatus.MATERIAL_INVOICE_ISSUED);
+                    checkActivationStatusIsPaid(true);
+                    checkActivationPricePayment(data.getActivationPrice());
+                    checkActivationDatePayment(data.getActivationDate());
+                    checkMaterialsStatusIsPaid(false);
+                    checkMaterialsPricePayment(data.getMaterialsPrice());
+                    checkMaterialsDatePayment(data.getMaterialsDate());
+                    noActionsStagePayment();
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);

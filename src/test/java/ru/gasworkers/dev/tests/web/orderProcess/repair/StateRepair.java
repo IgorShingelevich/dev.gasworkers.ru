@@ -65,6 +65,15 @@ public enum StateRepair {
                     break;
                 case MASTER_START_WORK:
                     component.offersCounter.noComponent();
+                    component.noDesiredDate();
+                    component.noDesiredTime();
+                    //                   todo component.checkMasterVisitDateAndTime(data.getMasterVisitDateAndTime());
+                    // todo  stepper
+                    break;
+                case MATERIAL_INVOICE_ISSUED:
+                    component.offersCounter.noComponent();
+                    component.noDesiredDate();
+                    component.noDesiredTime();
                     //                   todo component.checkMasterVisitDateAndTime(data.getMasterVisitDateAndTime());
                     // todo  stepper
                     break;
@@ -75,7 +84,7 @@ public enum StateRepair {
     public void checkCommonTab(CommonTabOrderCardComponent tab, OrdersIdResponseDto dto) {
         step("Убедиться, что вкладка Описание заказа в состоянии " + this, () -> {
             StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-            tab.status.statusSet(this, data);
+            tab.status.statusSet(this, data, dto);
             tab.details.detailsSet(this, data);
             tab.suggestedMasterRepair.statusSet(this, dto, 0);
             tab.buttons.buttonSet(this);
@@ -94,6 +103,9 @@ public enum StateRepair {
                 case MASTER_START_WORK:
                     // todo stepper
                     break;
+                case MATERIAL_INVOICE_ISSUED:
+                    // todo stepper
+                    break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
@@ -104,7 +116,7 @@ public enum StateRepair {
     public void checkInfoMasterTab(InfoMasterTabOrderCardClientComponent tab, OrdersIdResponseDto dto) {
         step("Убедиться, что вкладка Информация по работам в состоянии " + this, () -> {
             StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-            tab.status.statusSet(this, data);
+            tab.status.statusSet(this, data, dto);
             tab.suggestedMasterCardRepair.statusSet(this, dto, 0);
             tab.approvedMasterCard.statusSet(this, data);
             tab.buttons.buttonSet(this);
@@ -118,9 +130,16 @@ public enum StateRepair {
                 case WAIT_MASTER:
                 case MASTER_START_WORK:
                     tab.repairDetails.checkFinishLoading();
-                    tab.repairDetails.checkMaterialsTotalPrice("0");
-                    tab.repairDetails.checkActionsTotalPrice("0");
+                    tab.repairDetails.checkMaterialsPrice("0");
+                    tab.repairDetails.checkActionsPrice("0");
                     // todo time and stepper buttons notifications
+                    break;
+                case MATERIAL_INVOICE_ISSUED:
+                    tab.repairDetails.checkFinishLoading();
+                    tab.repairDetails.checkMaterialsFirstEquipmentPrice(dto, 0);
+                    tab.repairDetails.checkMaterialsLogisticFeeAdded(dto);
+                    tab.repairDetails.checkMaterialsPrice(dto, data);
+                    tab.repairDetails.checkActionsPrice("0");
                     break;
             }
         });
@@ -128,7 +147,7 @@ public enum StateRepair {
 
     public void checkDocsTab(DocsTabOrderCardComponent tab, OrdersIdResponseDto dto) {
         StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-        tab.status.statusSet(this, data);
+        tab.status.statusSet(this, data, dto);
         tab.suggestedMastersRepair.statusSet(this, dto, 0);
         tab.buttons.buttonSet(this);
         step("Убедиться, что вкладка Документы в состоянии " + this, () -> {
@@ -141,7 +160,12 @@ public enum StateRepair {
                 case SCHEDULE_DATE:
                 case WAIT_MASTER:
                 case MASTER_START_WORK:
-                    tab.checkFinalPrice("10");
+                    tab.checkTotalPrice("10");
+                    // todo add tab.checkComputedToTalPrice - no field in json
+                    break;
+                case MATERIAL_INVOICE_ISSUED:
+                    tab.checkTotalPrice("3310");
+
                     break;
             }
         });
@@ -161,6 +185,7 @@ public enum StateRepair {
                     page.checkHasOfferBanner();
                     page.companyBoxRepair.checkOfferBoxHasOfferState(0, dto);
                     break;
+
             }
         });
     }

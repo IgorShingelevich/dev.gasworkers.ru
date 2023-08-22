@@ -1,16 +1,21 @@
 package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster;
 
 import com.codeborne.selenide.SelenideElement;
+import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.BaseOrderCardComponent;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepairBuilder;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepairHelper;
 
-import static com.codeborne.selenide.Condition.partialText;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 
 public class RepairDetailsInfoMasterTabOrderCardComponent extends BaseOrderCardComponent {
     public RepairDetailsInfoMasterTabOrderCardComponent(RoleBrowser browser) {
         super(browser);
     }
+
+    StateRepairHelper helper = new StateRepairHelper();
+
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что информация о заказе загрузилась", () -> {
@@ -20,25 +25,34 @@ public class RepairDetailsInfoMasterTabOrderCardComponent extends BaseOrderCardC
             materialsTableLocator.shouldBe(visible);
             actionsTableLocator.shouldBe(visible);
         });
-    }    SelenideElement
+    }
+
+    public void checkMaterialsPrice(String expectedMaterialsTotalPrice) {
+        stepWithRole("Убедиться, что итоговая цена запасных частей и расходных материалов: " + expectedMaterialsTotalPrice, () -> {
+            materialsTotalPriceLocator.shouldHave(partialText(expectedMaterialsTotalPrice));
+        });
+    }
+    public void checkActionsPrice(String expectedActionsTotalPrice) {
+        stepWithRole("Убедиться, что итоговая цена выполненных работ и услуг: " + expectedActionsTotalPrice, () -> {
+            actionsTotalPriceLocator.shouldHave(partialText(expectedActionsTotalPrice));
+        });
+    }SelenideElement
             self = driver.$("div.order-details").as("Информация о заказе"),
             materialsTitleTextLocator = self.$$("div.bold.mb-2").get(0).as("Запасные части и расходные материалы"),
             actionsTitleTextLocator = self.$$("div.bold.mb-2").get(1).as("Выполненные работы и услуги"),
             materialsTableLocator = self.$$("div.table-div-scroll").get(0).as("Таблица запасных частей и расходных материалов"),
             actionsTableLocator = self.$$("div.table-div-scroll").get(1).as("Таблица выполненных работ и услуг"),
-            materialsTotalPriceLocator = materialsTableLocator.$x(".//div[@class='table-div-body-td x-2'][contains(.,'₽')][1]").as("Итоговая цена запасных частей и расходных материалов"),
-            actionsTotalPriceLocator = actionsTableLocator.$x(".//div[@class='table-div-body-td x-2'][contains(.,'₽')][1]").as("Итоговая цена выполненных работ и услуг");
+            materialsTotalPriceLocator1 = materialsTableLocator.$x(".//div[@class='table-div-body-td x-2'][contains(.,'₽')][1]").as("Итоговая цена запасных частей и расходных материалов"),
+            materialsTotalPriceLocator = materialsTableLocator.$$("div[class*='tr']").last()
+                    .$$("div[class*='td']").last().as("Итоговая цена запасных частей и расходных материалов"),
+            actionsTotalPriceLocator1 = actionsTableLocator.$x(".//div[@class='table-div-body-td x-2'][contains(.,'₽')][1]").as("Итоговая цена выполненных работ и услуг"),
+            actionsTotalPriceLocator = actionsTableLocator.$$("div[class*='tr']").last()
+                    .$$("div[class*='td']").last().as("Итоговая цена выполненных работ и услуг");
 
-    public void checkMaterialsTotalPrice(String expectedMaterialsTotalPrice) {
-        stepWithRole("Убедиться, что итоговая цена запасных частей и расходных материалов: " + expectedMaterialsTotalPrice, () -> {
-            materialsTotalPriceLocator.shouldHave(partialText(expectedMaterialsTotalPrice));
-        });
-    }
-
-    public void checkActionsTotalPrice(String expectedActionsTotalPrice) {
-        stepWithRole("Убедиться, что итоговая цена выполненных работ и услуг: " + expectedActionsTotalPrice, () -> {
-            actionsTotalPriceLocator.shouldHave(partialText(expectedActionsTotalPrice));
-        });
+    public void checkMaterialsPrice(OrdersIdResponseDto dto, StateRepairBuilder.OrderIdData data) {
+        materialsTableLocator.$$(".table-div-body-tr").last()
+                .$(".bold").as(" Итого материалы")
+                .shouldHave(partialText(helper.priceFormatter(String.valueOf(dto.getData().getReceipts().get(1).getAmount()))));
     }
 
     public void checkNoRepairDetails() {
@@ -46,4 +60,27 @@ public class RepairDetailsInfoMasterTabOrderCardComponent extends BaseOrderCardC
             self.shouldNotBe(visible);
         });
     }
+
+    public void checkMaterialsLogisticFeeAdded(OrdersIdResponseDto dto) {
+        stepWithRole("Убедиться, что в таблице запасных частей и расходных материалов добавлена логистическая услуга", () -> {
+            materialsTableLocator.$$(".table-div-body-tr")
+                    .filterBy(text("Подбор и доставка материалов. Логистика")).first()
+                    .$$(".bold").last().as("Логистические услуги")
+                    .shouldHave(partialText(String.valueOf(dto.getData().getMaterialValues().get(1).getPrice())));
+        });
+    }
+
+    public void checkMaterialsFirstEquipmentPrice(OrdersIdResponseDto dto, Integer equipmentIndex) {
+        stepWithRole("Убедиться, что в таблице запасных частей и расходных материалов добавлена первая запчасть", () -> {
+            Integer price = (int) ((dto.getData().getMaterialValues().get(0).getPrice()) * (dto.getData().getMaterialValues().get(0).getQty()));
+            materialsTableLocator.$$(".table-div-body-tr")
+                    .get(equipmentIndex)
+                    .$$("div[class*='td']").last()
+                    .shouldHave(partialText(String.valueOf(price)));
+        });
+    }
+
+
+
+
 }

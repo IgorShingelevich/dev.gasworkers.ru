@@ -114,6 +114,13 @@ public class AllNotificationsPage extends BasePage {
                 case MASTER_START_WORK:
                     checkExpectedAmountOfNotifications(4);
                     break;
+                case MATERIAL_INVOICE_ISSUED:
+                    checkExpectedAmountOfNotifications(5);
+                    assertThat(dto.getData().get(0).getText(), startsWith(stateRepair.notification()));
+                    break;
+
+                default:
+                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
         });
 

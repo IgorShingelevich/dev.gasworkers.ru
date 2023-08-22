@@ -16,6 +16,8 @@ import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
 import ru.gasworkers.dev.api.orders.materialValues.OrdersMaterialValuesApi;
 import ru.gasworkers.dev.api.orders.materialValues.OrdersSaveMaterialValuesApi;
+import ru.gasworkers.dev.api.orders.materialValues.dto.OrdersMaterialValuesResponseDto;
+import ru.gasworkers.dev.api.orders.materialValues.dto.OrdersSaveMaterialValuesResponseDto;
 import ru.gasworkers.dev.api.orders.selectMaster.SelectMasterApi;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
 import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentResponseDto;
@@ -77,23 +79,32 @@ public class PreconditionRepair extends BaseApiTest {
     private final String sssrDispatcher1Password = "1234";
     private final String sssrMaster1Email = "test_gas_master_sssr1@rambler.ru";
     private final String sssrMaster1Password = "1234";
+    //Dto
     NotificationsResponseDto publishedNotifications;
     LastOrderInfoResponseDto publishedLastOrderInfo;
     OrdersIdResponseDto publishedOrderIdResponse;
     SuggestServicesResponseDto publishedSuggestedServiceResponse;
+
     NotificationsResponseDto hasOfferNotifications;
     LastOrderInfoResponseDto hasOfferLastOrderInfo;
     OrdersIdResponseDto hasOfferOrderIdClient;
     SuggestServicesResponseDto hasOfferSuggestedServiceResponse;
+
     NotificationsResponseDto scheduleTimeNotifications;
     LastOrderInfoResponseDto scheduleTimeLastOrderResponse;
     OrdersIdResponseDto scheduleTimeOrderIdResponseClient;
+
     NotificationsResponseDto waitMasterNotifications;
     LastOrderInfoResponseDto waitMasterLastOrderResponse;
     OrdersIdResponseDto waitMasterOrderIdResponse;
+
     NotificationsResponseDto masterStartWorkNotifications;
     LastOrderInfoResponseDto masterStartWorkLastOrderResponse;
     OrdersIdResponseDto masterStartWorkOrderIdResponse;
+
+    NotificationsResponseDto materialInvoiceIssuedNotifications;
+    LastOrderInfoResponseDto materialInvoiceIssuedLastOrderResponse;
+    OrdersIdResponseDto materialInvoiceIssuedOrderIdResponse;
 
     public StateInfo applyPrecondition(User client, StateRepair stateRepair) {
         stateInfo.setCommonFields(commonFields);
@@ -123,6 +134,14 @@ public class PreconditionRepair extends BaseApiTest {
                 applyWaitMasterPreconditionUser(client, commonFields);
                 applyMasterStartWorkPrecondition(client, commonFields);
                 return stateInfo.masterStartWorkDtoSet();
+            case MATERIAL_INVOICE_ISSUED:
+                applyPublishedPrecondition(client, commonFields);
+                applyHasOfferPrecondition(client, commonFields);
+                applyScheduleDatePrecondition(client, commonFields);
+                applyWaitMasterPreconditionUser(client, commonFields);
+                applyMasterStartWorkPrecondition(client, commonFields);
+                applyMaterialInvoiceIssuedPrecondition(client, commonFields);
+                return stateInfo.materialInvoiceIssuedDtoSet();
         }
         return null; // or throw an exception if the state is not handled
     }
@@ -365,6 +384,45 @@ public class PreconditionRepair extends BaseApiTest {
             stateInfo.setMasterStartWorkLastOrderInfo(masterStartWorkLastOrderResponse);
             stateInfo.setMasterStartWorkOrderIdResponse(masterStartWorkOrderIdResponse);
             stateInfo.setMasterStartWorkNotifications(masterStartWorkNotifications);
+        });
+    }
+
+    private void applyMaterialInvoiceIssuedPrecondition(User client, CommonFieldsRepairDto commonFields) {
+        step("API: предусловие - " + Role.CLIENT + " заказ на ремонт в состоянии " + StateRepair.MATERIAL_INVOICE_ISSUED, () -> {
+            step("мастер создает таблицу материалов", () -> {
+                OrdersMaterialValuesResponseDto actualResponse = ordersMaterialValuesApi.materialValuesTable(repairCase.materialValuesRequest(commonFields), commonFields.getTokenMaster())
+                        .statusCode(200)
+                        .extract().as(OrdersMaterialValuesResponseDto.class);
+                OrdersMaterialValuesResponseDto expectedResponse = OrdersMaterialValuesResponseDto.successResponse();
+                assertResponse(expectedResponse, actualResponse);
+            });
+            step("мастер сохраняет таблицу материалов", () -> {
+                OrdersSaveMaterialValuesResponseDto actualResponse = ordersSaveMaterialValuesApi.saveMaterialValues(repairCase.saveMaterialValuesRequest(commonFields), commonFields.getTokenMaster())
+                        .statusCode(200)
+                        .extract().as(OrdersSaveMaterialValuesResponseDto.class);
+                OrdersSaveMaterialValuesResponseDto expectedResponse = OrdersSaveMaterialValuesResponseDto.oneMaterialResponse();
+                assertResponse(expectedResponse, actualResponse);
+            });
+            step(Role.CLIENT + "  карточка последнего заказа - убедиться что в состоянии" + StateRepair.MATERIAL_INVOICE_ISSUED, () -> {
+                System.out.println("materialInvoiceIssuedLastOrderResponse");
+                materialInvoiceIssuedLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(LastOrderInfoResponseDto.class);
+            });
+            step(Role.CLIENT + " карточка заказа - убедиться что в состоянии" + StateRepair.MATERIAL_INVOICE_ISSUED, () -> {
+                System.out.println("materialInvoiceIssuedOrdersIdResponseAsClient");
+                materialInvoiceIssuedOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(OrdersIdResponseDto.class);
+            });
+            step(Role.CLIENT + " уведомления - в состоянии " + StateRepair.MATERIAL_INVOICE_ISSUED, () -> {
+                materialInvoiceIssuedNotifications = notificationsApi.getNotifications(commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(NotificationsResponseDto.class);
+            });
+            stateInfo.setMaterialInvoiceIssuedLastOrderInfo(materialInvoiceIssuedLastOrderResponse);
+            stateInfo.setMaterialInvoiceIssuedOrderIdResponse(materialInvoiceIssuedOrderIdResponse);
+            stateInfo.setMaterialInvoiceIssuedNotifications(materialInvoiceIssuedNotifications);
         });
     }
 }

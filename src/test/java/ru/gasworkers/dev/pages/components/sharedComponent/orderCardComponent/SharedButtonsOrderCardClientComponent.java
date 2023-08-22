@@ -13,7 +13,9 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
             showOnMapButtonLocator = driver.$(byTagAndText("span", "Показать на карте")).as("Кнопка Показать на карте"),
             cancelOrderButtonLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Кнопка Отменить заказ"),
             selectNewCompanyButtonLocator = driver.$(byTagAndText("span", "Выбрать новую компанию")).as("Кнопка Выбрать новую компанию"),
+            payInvoiceButtonLocator = driver.$(byTagAndText("span", "Оплатить счет")).as("Кнопка Оплатить счет"),
             returnToWorkButtonLocator = driver.$(byTagAndText("span", "Вернуть в работу")).as("Кнопка Вернуть в работу");
+
     public SharedButtonsOrderCardClientComponent(RoleBrowser browser) {
         super(browser);
     }
@@ -23,28 +25,39 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
             switch (stateRepair) {
                 case PUBLISHED:
                 case HAS_OFFER:
-                    checkShowOnMapButton();
-                    checkCancelButton();
                     noSelectNewCompanyButton();
                     noReturnToWorkButton();
+                    noPayInvoiceButton();
+                    checkShowOnMapButton();
+                    checkCancelButton();
                     break;
                 case SCHEDULE_DATE:
                     noShowOnMapButton();
                     noReturnToWorkButton();
+                    noPayInvoiceButton();
                     checkCancelButton();
                     checkSelectNewCompanyButton();
                     break;
                 case WAIT_MASTER:
                     noShowOnMapButton();
                     noReturnToWorkButton();
-                    checkCancelButton();
                     noSelectNewCompanyButton();
+                    noPayInvoiceButton();
+                    checkCancelButton();
                     break;
                 case MASTER_START_WORK:
                     noShowOnMapButton();
                     noCancelButton();
                     noSelectNewCompanyButton();
+                    noPayInvoiceButton();
                     checkReturnToWorkButton();
+                    break;
+                case MATERIAL_INVOICE_ISSUED:
+                    noShowOnMapButton();
+                    noCancelButton();
+                    noSelectNewCompanyButton();
+                    checkReturnToWorkButton();
+                    checkPayInvoiceButton();
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);
@@ -122,6 +135,24 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
     public void noReturnToWorkButton() {
         stepWithRole("Убедиться, что кнопка Вернуть в работу отсутствует", () -> {
             returnToWorkButtonLocator.shouldNotBe(visible);
+        });
+    }
+
+    public void checkPayInvoiceButton() {
+        stepWithRole("Убедиться, что кнопка Оплатить счет присутствует", () -> {
+            payInvoiceButtonLocator.shouldBe(visible);
+        });
+    }
+
+    public void payInvoice() {
+        stepWithRole("Нажать на кнопку Оплатить счет", () -> {
+            payInvoiceButtonLocator.click();
+        });
+    }
+
+    public void noPayInvoiceButton() {
+        stepWithRole("Убедиться, что кнопка Оплатить счет отсутствует", () -> {
+            payInvoiceButtonLocator.shouldNotBe(visible);
         });
     }
 }

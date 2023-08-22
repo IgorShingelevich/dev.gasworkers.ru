@@ -68,9 +68,20 @@ public class StateRepairBuilder {
 
 
         List<OrdersIdResponseDto.Data.Receipts> receipts = dto.getData().getReceipts();
-        Boolean activationIsPaid = (receipts != null && !receipts.isEmpty()) ? receipts.get(0).getPaid() : null;
-        String activationPrice = (receipts != null && !receipts.isEmpty()) ? helper.priceFormatter(String.valueOf(receipts.get(0).getAmount())) : null;
-        String activationDate = (receipts != null && !receipts.isEmpty()) ? helper.createdAtFormatter(receipts.get(0).getCreatedAt()) : null;
+        assert receipts != null;
+
+        Boolean activationIsPaid = (receipts != null && !receipts.isEmpty()) ? receipts.get(0).getPaid() : false;
+        String activationPrice = (receipts != null && !receipts.isEmpty()) ? helper.priceFormatter(String.valueOf(receipts.get(0).getAmount())) : "";
+        String activationDate = (receipts != null && !receipts.isEmpty()) ? helper.createdAtFormatter(receipts.get(0).getCreatedAt()) : "";
+
+        Boolean materialsIsPaid = (receipts != null && receipts.size() > 1) ? receipts.get(1).getPaid() : false;
+        String materialsPrice = (receipts != null && receipts.size() > 1) ? helper.priceFormatter(String.valueOf(receipts.get(1).getAmount())) : "";
+        String materialsDate = (receipts != null && receipts.size() > 1) ? helper.createdAtFormatter(receipts.get(1).getCreatedAt()) : "";
+
+        Boolean actionsIsPaid = (receipts != null && receipts.size() > 2) ? receipts.get(2).getPaid() : false;
+        String actionsPrice = (receipts != null && receipts.size() > 2) ? helper.priceFormatter(String.valueOf(receipts.get(2).getAmount())) : "";
+        String actionsDate = (receipts != null && receipts.size() > 2) ? helper.createdAtFormatter(receipts.get(2).getCreatedAt()) : "";
+
 
         OrdersIdResponseDto.Data.ServiceCenter serviceCenter = dto.getData().getServiceCenter();
         String companyFullName = (serviceCenter != null) ? serviceCenter.getTitle() : null;
@@ -84,6 +95,12 @@ public class StateRepairBuilder {
                 .activationIsPaid(activationIsPaid)
                 .activationPrice(activationPrice)
                 .activationDate(activationDate)
+                .materialsIsPaid(materialsIsPaid)
+                .materialsPrice(materialsPrice)
+                .materialsDate(materialsDate)
+                .actionsIsPaid(actionsIsPaid)
+                .actionsPrice(actionsPrice)
+                .actionsDate(actionsDate)
                 .serviceType(ServiceType.REPAIR.toString())
                 .clientFullName(clientFullName)
                 .address(dto.getData().getClientObject().getAddress().getFull())
@@ -101,7 +118,6 @@ public class StateRepairBuilder {
                 // todo .scheduledTime(desiredTimeIntervalFormatter(dto.getData().getScheduledTimeStarted(), dto.getData().getScheduledTimeEnded()))
                 .build();
     }
-
 
 
     @Getter

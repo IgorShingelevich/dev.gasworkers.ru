@@ -79,7 +79,7 @@ public class DocsTabOrderCardComponent extends BaseOrderCardComponent {
         });
     }
 
-    public void checkFinalPrice(String finalPrice) {
+    public void checkTotalPrice(String finalPrice) {
         stepWithRole("Убедиться, что итоговая стоимость " + finalPrice, () -> {
             totalPriceLocator.shouldHave(partialText(finalPrice));
         });
