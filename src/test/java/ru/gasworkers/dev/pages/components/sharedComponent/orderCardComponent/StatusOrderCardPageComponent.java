@@ -41,7 +41,9 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
     }
 
     public void checkActivationStatusIsPaid(Boolean expectedStatus) {
+        stepWithRole("Убедиться, что статус платежа за активацию" + expectedStatus.toString(), () -> {
         isPaid(expectedStatus, activationStatusPaymentLocator);
+        });
     }
 
     public void noActivationStagePayment() {
@@ -63,7 +65,9 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
     }
 
     public void checkMaterialsStatusIsPaid(Boolean expectedStatus) {
-        isPaid(expectedStatus, materialsStatusPaymentLocator);
+        stepWithRole("Убедиться, что статус платежа за материалы" + expectedStatus.toString(), () -> {
+            isPaid(expectedStatus, materialsStatusPaymentLocator);
+        });
     }
 
     public void noMaterialsStagePayment() {
@@ -175,6 +179,30 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkMaterialsPricePayment(data.getMaterialsPrice());
                     checkMaterialsDatePayment(data.getMaterialsDate());
                     noActionsStagePayment();
+                    break;
+                case ACTIONS_INVOICE_ISSUED:
+                    checkCurrentStatus(OrderStatus.ACTIONS_INVOICE_ISSUED);
+                    checkActivationStatusIsPaid(true);
+                    checkActivationPricePayment(data.getActivationPrice());
+                    checkActivationDatePayment(data.getActivationDate());
+                    checkMaterialsStatusIsPaid(true);
+                    checkMaterialsPricePayment(data.getMaterialsPrice());
+                    checkMaterialsDatePayment(data.getMaterialsDate());
+                    checkActionsStatusIsPaid(false);
+                    checkActionsPricePayment(data.getActionsPrice());
+                    checkActionsDatePayment(data.getActionsDate());
+                    break;
+                case ACTIONS_INVOICE_PAID:
+                    checkCurrentStatus(OrderStatus.COMPLETED);
+                    checkActivationStatusIsPaid(true);
+                    checkActivationPricePayment(data.getActivationPrice());
+                    checkActivationDatePayment(data.getActivationDate());
+                    checkMaterialsStatusIsPaid(true);
+                    checkMaterialsPricePayment(data.getMaterialsPrice());
+                    checkMaterialsDatePayment(data.getMaterialsDate());
+                    checkActionsStatusIsPaid(true);
+                    checkActionsPricePayment(data.getActionsPrice());
+                    checkActionsDatePayment(data.getActionsDate());
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);

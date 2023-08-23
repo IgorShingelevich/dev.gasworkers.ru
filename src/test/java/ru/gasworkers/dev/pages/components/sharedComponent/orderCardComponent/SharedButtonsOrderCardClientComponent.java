@@ -53,6 +53,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     checkReturnToWorkButton();
                     break;
                 case MATERIAL_INVOICE_ISSUED:
+                case ACTIONS_INVOICE_ISSUED:
                     noShowOnMapButton();
                     noCancelButton();
                     noSelectNewCompanyButton();

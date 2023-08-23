@@ -44,7 +44,7 @@ public class MaterialInvoiceIssuedTest extends BaseApiTest {
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         StateInfo stateInfo = preconditionRepair.applyPrecondition(client, state);
 //    ------------------------------------------------- UI -----------------------------------------------------------
-        step("Web " + role + " авторизация", () -> {
+        step("Web: " + role + " авторизация", () -> {
             clientPages.getLoginPage().open();
             clientPages.getLoginPage().login(client.getEmail(), "1111");
             clientPages.getHomePage().checkUrl();
@@ -60,7 +60,7 @@ public class MaterialInvoiceIssuedTest extends BaseApiTest {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(role + " карточка последнего заказа - в состоянии " + state, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-                    clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getMaterialInvoiceIssuedLastOrderInfo());
+                    clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getLastOrderInfoDto());
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
@@ -68,14 +68,14 @@ public class MaterialInvoiceIssuedTest extends BaseApiTest {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkState(state, stateInfo.getMaterialInvoiceIssuedOrderIdResponse());
+                    clientPages.getOrderCardPage().checkState(state, stateInfo.getOrdersIdResponseDto());
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {
                 step(role + " уведомления - в состоянии " + state, () -> {
                     clientPages.getAllNotificationsPage().open();
                     clientPages.getAllNotificationsPage().checkFinishLoading();
-                    clientPages.getAllNotificationsPage().checkState(state, stateInfo.getMaterialInvoiceIssuedNotifications());
+                    clientPages.getAllNotificationsPage().checkState(state, stateInfo.getNotificationsDto());
                 });
             };
 

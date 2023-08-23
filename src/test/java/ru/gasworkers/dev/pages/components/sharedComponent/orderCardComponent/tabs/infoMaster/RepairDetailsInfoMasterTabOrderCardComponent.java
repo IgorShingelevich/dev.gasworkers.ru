@@ -55,6 +55,13 @@ public class RepairDetailsInfoMasterTabOrderCardComponent extends BaseOrderCardC
                 .shouldHave(partialText(helper.priceFormatter(String.valueOf(dto.getData().getReceipts().get(1).getAmount()))));
     }
 
+    public void checkActionsPrice(OrdersIdResponseDto dto, StateRepairBuilder.OrderIdData data) {
+        int price = (int) ((dto.getData().getReceipts().get(2).getAmount()) + (dto.getData().getReceipts().get(0).getAmount())); //  activation fee + actions
+        actionsTableLocator.$$(".table-div-body-tr").last()
+                .$(".bold").as(" Итого работы")
+                .shouldHave(partialText(helper.priceFormatter(String.valueOf(price))));
+    }
+
     public void checkNoRepairDetails() {
         stepWithRole("Убедиться, что информация о заказе отсутствует", () -> {
             self.shouldNotBe(visible);
@@ -81,6 +88,13 @@ public class RepairDetailsInfoMasterTabOrderCardComponent extends BaseOrderCardC
     }
 
 
-
-
+    public void checkActionsFirstItemPrice(OrdersIdResponseDto dto, int actionItemIndex) {
+        stepWithRole("Убедиться, что в таблице выполненных работ и услуг добавлена первая работа", () -> {
+            int price = (int) ((dto.getData().getActions().get(0).getPrice()) * (dto.getData().getActions().get(0).getQty()));
+            actionsTableLocator.$$(".table-div-body-tr")
+                    .get(actionItemIndex)
+                    .$$("div[class*='td']").last()
+                    .shouldHave(partialText(String.valueOf(price)));
+        });
+    }
 }

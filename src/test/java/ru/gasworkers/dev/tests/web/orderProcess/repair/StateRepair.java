@@ -60,6 +60,7 @@ public enum StateRepair {
                 case MASTER_START_WORK:
                 case MATERIAL_INVOICE_ISSUED:
                 case MATERIAL_INVOICE_PAID:
+                case ACTIONS_INVOICE_ISSUED:
                     component.offersCounter.noComponent();
                     component.noDesiredDate();
                     component.noDesiredTime();
@@ -98,6 +99,9 @@ public enum StateRepair {
                 case MATERIAL_INVOICE_PAID:
                     // todo stepper
                     break;
+                case ACTIONS_INVOICE_ISSUED:
+                    // todo stepper
+                    break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
@@ -134,6 +138,13 @@ public enum StateRepair {
                     tab.repairDetails.checkMaterialsPrice(dto, data);
                     tab.repairDetails.checkActionsPrice("0");
                     break;
+                case ACTIONS_INVOICE_ISSUED:
+                    tab.repairDetails.checkMaterialsFirstEquipmentPrice(dto, 0);
+                    tab.repairDetails.checkMaterialsLogisticFeeAdded(dto);
+                    tab.repairDetails.checkMaterialsPrice(dto, data);
+                    tab.repairDetails.checkActionsFirstItemPrice(dto, 0);
+                    tab.repairDetails.checkActionsPrice(dto, data);
+                    break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
@@ -161,6 +172,9 @@ public enum StateRepair {
                 case MATERIAL_INVOICE_ISSUED:
                 case MATERIAL_INVOICE_PAID:
                     tab.checkTotalPrice("3310");
+                    break;
+                case ACTIONS_INVOICE_ISSUED:
+                    tab.checkTotalPrice("6300");
                     // todo add tab.checkComputedToTalPrice - no field in json
                     break;
                 default:

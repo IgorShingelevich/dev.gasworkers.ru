@@ -31,15 +31,15 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class MaterialInvoicePaidTest extends BaseApiTest {
+public class ActionsInvoiceIssuedTest extends BaseApiTest {
     @Browser(role = Role.CLIENT)
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Ремонт - в  состоянии клиент оплатил счет на материалы")
-    void materialInvoicePaid
+    @DisplayName("Ремонт - в  состоянии мастер выставил счет на услуги")
+    void actionInvoiceIssued
             (@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.MATERIAL_INVOICE_PAID;
+        StateRepair state = StateRepair.ACTIONS_INVOICE_ISSUED;
         Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         StateInfo stateInfo = preconditionRepair.applyPrecondition(client, state);
@@ -83,7 +83,7 @@ public class MaterialInvoicePaidTest extends BaseApiTest {
                 step(role + " красное уведомление в лк - в состоянии " + state, () -> {
                     clientPages.getHomePage().open();
                     clientPages.getHomePage().checkFinishLoading();
-                    clientPages.getHomePage().redNotice.noNotice();
+                    clientPages.getHomePage().redNotice.checkInvoiceIssuedNotice();
                 });
             };
 
@@ -91,7 +91,7 @@ public class MaterialInvoicePaidTest extends BaseApiTest {
                 step(role + " красное уведомление на стр лендинга - в состоянии " + state, () -> {
                     clientPages.getLandingPage().open();
                     clientPages.getLandingPage().checkFinishLoading();
-                    clientPages.getLandingPage().noticeComponent.noNotifications();
+                    clientPages.getLandingPage().noticeComponent.redNotice.checkInvoiceIssuedNotice();
                 });
             };
             assertAll(Arrays.asList(case1, case2, case3, case4, case5));

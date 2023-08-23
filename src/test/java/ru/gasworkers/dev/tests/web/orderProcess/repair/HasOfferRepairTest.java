@@ -43,7 +43,7 @@ public class HasOfferRepairTest extends BaseApiTest {
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         StateInfo stateInfo = preconditionRepair.applyPrecondition(client, state);
 //    ------------------------------------------------- UI -----------------------------------------------------------
-        step("Web " + role + " авторизация", () -> {
+        step("Web: " + role + " авторизация", () -> {
             clientPages.getLoginPage().open();
             clientPages.getLoginPage().login(client.getEmail(), "1111");
             clientPages.getHomePage().checkUrl();
@@ -60,7 +60,7 @@ public class HasOfferRepairTest extends BaseApiTest {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(role + " карточка последнего заказа - в состоянии " + state, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-                    clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getHasOfferLastOrderInfo());
+                    clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getLastOrderInfoDto());
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
@@ -73,7 +73,7 @@ public class HasOfferRepairTest extends BaseApiTest {
             Consumer<SoftAssert> case3 = softAssert -> {
                 step(role + " страница выбора услуги - в состоянии " + state, () -> {
                     clientPages.getSelectServicePage().checkFinishLoadingRepair();
-                    clientPages.getSelectServicePage().checkState(state, stateInfo.getHasOfferSuggestedServiceResponse());
+                    clientPages.getSelectServicePage().checkState(state, stateInfo.getSuggestedServiceDto());
                 });
             };
 
@@ -81,14 +81,14 @@ public class HasOfferRepairTest extends BaseApiTest {
                 step(role + " карточка заказа - в состоянии " + state, () -> {
                     clientPages.getSelectServicePage().toOrderCard();
                     clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkState(state, stateInfo.getHasOfferOrderIdClient());
+                    clientPages.getOrderCardPage().checkState(state, stateInfo.getOrdersIdResponseDto());
                 });
             };
             Consumer<SoftAssert> case5 = softAssert -> {
                 step(role + " уведомления - в состоянии " + state, () -> {
                     clientPages.getAllNotificationsPage().open();
                     clientPages.getAllNotificationsPage().checkFinishLoading();
-                    clientPages.getAllNotificationsPage().checkState(state, stateInfo.getHasOfferNotifications());
+                    clientPages.getAllNotificationsPage().checkState(state, stateInfo.getNotificationsDto());
                 });
             };
             Consumer<SoftAssert> case6 = softAssert -> {

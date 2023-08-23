@@ -35,14 +35,14 @@ public class WaitMasterRepairTest extends BaseApiTest {
     @Browser(role = Role.CLIENT)
     ClientPages clientPages;
     @Test
-    @DisplayName("Ремонт - в  состоянии мастер в пути")
+    @DisplayName("Ремонт - в состоянии мастер в пути")
     void waitMasterRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
         StateRepair state = StateRepair.WAIT_MASTER;
         Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         StateInfo stateInfo = preconditionRepair.applyPrecondition(client, state);
 //    ------------------------------------------------- UI -----------------------------------------------------------
-        step("Web " + role + " авторизация", () -> {
+        step("Web: " + role + " авторизация", () -> {
                 clientPages.getLoginPage().open();
                 clientPages.getLoginPage().login(client.getEmail(), "1111");
                 clientPages.getHomePage().checkUrl();
@@ -58,7 +58,7 @@ public class WaitMasterRepairTest extends BaseApiTest {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(role + " карточка последнего заказа - в состоянии " + state, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-                    clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getWaitMasterLastOrderInfo());
+                    clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getLastOrderInfoDto());
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
@@ -66,14 +66,14 @@ public class WaitMasterRepairTest extends BaseApiTest {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkState(state, stateInfo.getWaitMasterOrderIdResponse());
+                    clientPages.getOrderCardPage().checkState(state, stateInfo.getOrdersIdResponseDto());
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {
                 step(role + " уведомления - в состоянии " + state, () -> {
                     clientPages.getAllNotificationsPage().open();
                     clientPages.getAllNotificationsPage().checkFinishLoading();
-                    clientPages.getAllNotificationsPage().checkState(state, stateInfo.getWaitMasterNotifications());
+                    clientPages.getAllNotificationsPage().checkState(state, stateInfo.getNotificationsDto());
                 });
             };
             Consumer<SoftAssert> case4 = softAssert -> {
