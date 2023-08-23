@@ -40,27 +40,27 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     break;
                 case WAIT_MASTER:
                     noShowOnMapButton();
-                    noReturnToWorkButton();
                     noSelectNewCompanyButton();
+                    noReturnToWorkButton();
                     noPayInvoiceButton();
                     checkCancelButton();
                     break;
                 case MASTER_START_WORK:
                     noShowOnMapButton();
-                    noCancelButton();
                     noSelectNewCompanyButton();
+                    noCancelButton();
                     noPayInvoiceButton();
                     checkReturnToWorkButton();
                     break;
                 case MATERIAL_INVOICE_ISSUED:
                 case ACTIONS_INVOICE_ISSUED:
                     noShowOnMapButton();
-                    noCancelButton();
                     noSelectNewCompanyButton();
+                    noCancelButton();
                     checkReturnToWorkButton();
                     checkPayInvoiceButton();
                     break;
-                case MATERIAL_INVOICE_PAID:
+                case ACTIONS_INVOICE_PAID:
                     noShowOnMapButton();
                     noSelectNewCompanyButton();
                     noPayInvoiceButton();

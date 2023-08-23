@@ -17,6 +17,7 @@ public enum OrderStatus {
     MATERIAL_INVOICE_ISSUED("Мастер приступил к работе", Role.CLIENT + ", " + Role.DISPATCHER + ", " + Role.MASTER),
     MATERIAL_INVOICE_PAID("Мастер приступил к работе", Role.CLIENT + ", " + Role.DISPATCHER + ", " + Role.MASTER),
     ACTIONS_INVOICE_ISSUED("Мастер приступил к работе", Role.CLIENT + ", " + Role.DISPATCHER + ", " + Role.MASTER),
+    ACTIONS_INVOICE_PAID("Мастер приступил к работе", Role.CLIENT + ", " + Role.DISPATCHER + ", " + Role.MASTER),
     SIGN_MAINTENANCE_AGREEMENT_SMS("Подписание договора ТО смс", "client"),
     START_MAINTENANCE_WORK("Приезд мастера и проведение ТО", "master"),
     PAY_MAINTENANCE_WORK("Оплата ТО", "client"),

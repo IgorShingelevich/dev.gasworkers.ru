@@ -193,7 +193,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkActionsDatePayment(data.getActionsDate());
                     break;
                 case ACTIONS_INVOICE_PAID:
-                    checkCurrentStatus(OrderStatus.COMPLETED);
+                    checkCurrentStatus(OrderStatus.ACTIONS_INVOICE_PAID);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());

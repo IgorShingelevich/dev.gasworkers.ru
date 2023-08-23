@@ -31,15 +31,14 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class ActionsInvoiceIssuedTest extends BaseApiTest {
+public class ActionsInvoicePaidTest extends BaseApiTest {
     @Browser(role = Role.CLIENT)
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Ремонт - в  состоянии мастер выставил счет на работы")
-    void actionInvoiceIssued
-            (@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.ACTIONS_INVOICE_ISSUED;
+    @DisplayName("Ремонт - в  состоянии клиент оплатил счет на работы")
+    void actionInvoicePaid(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+        StateRepair state = StateRepair.ACTIONS_INVOICE_PAID;
         Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         StateInfo stateInfo = preconditionRepair.applyPrecondition(client, state);
@@ -83,7 +82,7 @@ public class ActionsInvoiceIssuedTest extends BaseApiTest {
                 step(role + " красное уведомление в лк - в состоянии " + state, () -> {
                     clientPages.getHomePage().open();
                     clientPages.getHomePage().checkFinishLoading();
-                    clientPages.getHomePage().redNotice.checkInvoiceIssuedNotice();
+                    clientPages.getHomePage().redNotice.noNotice();
                 });
             };
 
@@ -91,7 +90,7 @@ public class ActionsInvoiceIssuedTest extends BaseApiTest {
                 step(role + " красное уведомление на стр лендинга - в состоянии " + state, () -> {
                     clientPages.getLandingPage().open();
                     clientPages.getLandingPage().checkFinishLoading();
-                    clientPages.getLandingPage().noticeComponent.redNotice.checkInvoiceIssuedNotice();
+                    clientPages.getLandingPage().noticeComponent.noNotifications();
                 });
             };
             assertAll(Arrays.asList(case1, case2, case3, case4, case5));

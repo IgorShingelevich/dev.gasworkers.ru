@@ -61,6 +61,7 @@ public enum StateRepair {
                 case MATERIAL_INVOICE_ISSUED:
                 case MATERIAL_INVOICE_PAID:
                 case ACTIONS_INVOICE_ISSUED:
+                case ACTIONS_INVOICE_PAID:
                     component.offersCounter.noComponent();
                     component.noDesiredDate();
                     component.noDesiredTime();
@@ -102,6 +103,9 @@ public enum StateRepair {
                 case ACTIONS_INVOICE_ISSUED:
                     // todo stepper
                     break;
+                case ACTIONS_INVOICE_PAID:
+                    // todo stepper
+                    break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
@@ -139,8 +143,9 @@ public enum StateRepair {
                     tab.repairDetails.checkActionsPrice("0");
                     break;
                 case ACTIONS_INVOICE_ISSUED:
-                    tab.repairDetails.checkMaterialsFirstEquipmentPrice(dto, 0);
+                case ACTIONS_INVOICE_PAID:
                     tab.repairDetails.checkMaterialsLogisticFeeAdded(dto);
+                    tab.repairDetails.checkMaterialsFirstEquipmentPrice(dto, 0);
                     tab.repairDetails.checkMaterialsPrice(dto, data);
                     tab.repairDetails.checkActionsFirstItemPrice(dto, 0);
                     tab.repairDetails.checkActionsPrice(dto, data);
@@ -174,6 +179,7 @@ public enum StateRepair {
                     tab.checkTotalPrice("3310");
                     break;
                 case ACTIONS_INVOICE_ISSUED:
+                case ACTIONS_INVOICE_PAID:
                     tab.checkTotalPrice("6300");
                     // todo add tab.checkComputedToTalPrice - no field in json
                     break;

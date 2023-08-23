@@ -109,7 +109,6 @@ public class AllNotificationsPage extends BasePage {
     }
 
 
-
     public void checkState(StateRepair stateRepair, NotificationsResponseDto dto) {
         stepWithRole("Проверить уведомления в состоянии " + stateRepair, () -> {
             String firstNotificationText = dto.getData().get(0).getText();
@@ -147,6 +146,9 @@ public class AllNotificationsPage extends BasePage {
                 case ACTIONS_INVOICE_ISSUED:
                     checkExpectedAmountOfNotifications(6, 4000);
                     assertThat(firstNotificationText, startsWith(stateRepair.notification()));
+                    break;
+                case ACTIONS_INVOICE_PAID:
+                    checkExpectedAmountOfNotifications(6, 4000);
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);

@@ -110,6 +110,9 @@ public class PreconditionRepair extends BaseApiTest {
                 case ACTIONS_INVOICE_ISSUED:
                     applyActionsInvoiceIssuedPrecondition(stateRepair, client, commonFields);
                     break;
+                case ACTIONS_INVOICE_PAID:
+                    applyActionsInvoicePaidPrecondition(stateRepair, client, commonFields);
+                    break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
@@ -326,6 +329,19 @@ public class PreconditionRepair extends BaseApiTest {
                         .extract().as(OrdersSaveActionsResponseDto.class);
                 OrdersSaveActionsResponseDto expectedResponse = OrdersSaveActionsResponseDto.oneActionResponse();
                 assertResponse(expectedResponse, actualResponse);
+            });
+        });
+    }
+
+    private void applyActionsInvoicePaidPrecondition(StateRepair stateRepair, User client, CommonFieldsRepairDto commonFields) {
+        applyActionsInvoiceIssuedPrecondition(stateRepair, client, commonFields);
+        step("API: предусловие - " + Role.CLIENT + " заказ на ремонт в состоянии " + stateRepair, () -> {
+            step(Role.CLIENT + " оплачивает  счет на Работы", () -> {
+                SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderId(), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(SelectPaymentResponseDto.class);
+                commonFields.setPayment2Url(actualResponse.getData().getPayUrl());
+                commonFields.setPayment2Id(actualResponse.getData().getPaymentId());
             });
         });
     }
