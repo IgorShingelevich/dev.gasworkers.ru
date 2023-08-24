@@ -10,7 +10,7 @@ public class OrdersCreateActApi extends BaseApi {
     // https://api.dev.gasworkers.ru/docs#zakazy-POSTapi-v1-orders-create-act
 
     @Step("API: Create act")
-    public ValidatableResponse createAct(OrdersCreateActRequestDto inputDto, String token) {
+    public ValidatableResponse signAct(OrdersCreateActRequestDto inputDto, String token) {
         return given().spec(baseRequestSpec)
                 .header("Authorization", "Bearer " + token)
                 .body(inputDto)

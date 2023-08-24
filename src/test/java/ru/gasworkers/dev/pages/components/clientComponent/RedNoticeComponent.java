@@ -14,7 +14,15 @@ public class RedNoticeComponent extends BaseComponent {
         stepWithRole("Убедиться, что появилось красное  уведомление о выставлении счета на оплату", () -> {
             textLocator.shouldHave(Condition.partialText("Вам выставлен счёт на оплату"));
         });
-    }    SelenideElement
+    }
+
+    public void checkNeedSignActNotice() {
+        stepWithRole("Убедиться, что появилось красное  уведомление о необходимости подписать акт", () -> {
+            textLocator.shouldHave(Condition.partialText("Необходимо проставить подпись в Акте выполненных работ по заказу"));
+        });
+    }
+
+    SelenideElement
             self = driver.$("div.gas-notice-danger").as("Красное уведомление в лк"),
             orderNumberLocator = self.$("div.justify-content-between").as("Номер заказа"),
             orderNumberTextLocator = orderNumberLocator.$("span").as("Номер заказа"),

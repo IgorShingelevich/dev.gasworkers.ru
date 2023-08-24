@@ -24,7 +24,7 @@ public enum StateRepair {
     MATERIAL_INVOICE_PAID("Оплачен счет на материалы", null),
     ACTIONS_INVOICE_ISSUED("Выставлен счет на работы", "Оплатите счет по заказу"),
     ACTIONS_INVOICE_PAID("Оплачен счет на работы", null),
-    MASTER_CREATE_ACT("Мастер создал акт", null),
+    MASTER_SIGN_ACT("Мастер заполнил данные по заказу", "Акт выполненных работ сформирован"),
     CLIENT_SIGN_ACT("Клиент подписал акт", "Оставьте отзыв по заявке");
 
     public static final StateRepairBuilder builder = new StateRepairBuilder();
@@ -62,6 +62,7 @@ public enum StateRepair {
                 case MATERIAL_INVOICE_PAID:
                 case ACTIONS_INVOICE_ISSUED:
                 case ACTIONS_INVOICE_PAID:
+                case MASTER_SIGN_ACT:
                     component.offersCounter.noComponent();
                     component.noDesiredDate();
                     component.noDesiredTime();
@@ -106,6 +107,9 @@ public enum StateRepair {
                 case ACTIONS_INVOICE_PAID:
                     // todo stepper
                     break;
+                case MASTER_SIGN_ACT:
+                    // todo stepper
+                    break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
@@ -144,6 +148,7 @@ public enum StateRepair {
                     break;
                 case ACTIONS_INVOICE_ISSUED:
                 case ACTIONS_INVOICE_PAID:
+                case MASTER_SIGN_ACT:
                     tab.repairDetails.checkMaterialsLogisticFeeAdded(dto);
                     tab.repairDetails.checkMaterialsFirstEquipmentPrice(dto, 0);
                     tab.repairDetails.checkMaterialsPrice(dto, data);
@@ -165,21 +170,29 @@ public enum StateRepair {
             switch (this) {
                 case PUBLISHED:
                 case HAS_OFFER:
-                    tab.checkNoDocs();
+                    tab.noDocs();
                     tab.checkNoTotalPrice();
                     break;
                 case SCHEDULE_DATE:
                 case WAIT_MASTER:
                 case MASTER_START_WORK:
+                    tab.noDocs();
                     tab.checkTotalPrice("10");
                     // todo add tab.checkComputedToTalPrice - no field in json
                     break;
                 case MATERIAL_INVOICE_ISSUED:
                 case MATERIAL_INVOICE_PAID:
+                    tab.noDocs();
                     tab.checkTotalPrice("3310");
                     break;
                 case ACTIONS_INVOICE_ISSUED:
                 case ACTIONS_INVOICE_PAID:
+                    tab.noDocs();
+                    tab.checkTotalPrice("6300");
+                    // todo add tab.checkComputedToTalPrice - no field in json
+                    break;
+                case MASTER_SIGN_ACT:
+                    tab.checkActDoc();
                     tab.checkTotalPrice("6300");
                     // todo add tab.checkComputedToTalPrice - no field in json
                     break;

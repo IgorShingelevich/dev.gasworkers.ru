@@ -150,6 +150,10 @@ public class AllNotificationsPage extends BasePage {
                 case ACTIONS_INVOICE_PAID:
                     checkExpectedAmountOfNotifications(6, 4000);
                     break;
+                case MASTER_SIGN_ACT:
+                    checkExpectedAmountOfNotifications(7, 4000);
+                    assertThat(firstNotificationText, startsWith(stateRepair.notification()));
+                    break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }

@@ -13,6 +13,7 @@ import ru.gasworkers.dev.api.orders.approveDate.OrdersApproveDateResponseDto;
 import ru.gasworkers.dev.api.orders.checkList.SaveCheckListApi;
 import ru.gasworkers.dev.api.orders.checkList.SaveCheckListResponseDto;
 import ru.gasworkers.dev.api.orders.createAct.OrdersCreateActApi;
+import ru.gasworkers.dev.api.orders.createAct.OrdersCreateActResponseDto;
 import ru.gasworkers.dev.api.orders.id.OrdersIdApi;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
@@ -112,6 +113,9 @@ public class PreconditionRepair extends BaseApiTest {
                     break;
                 case ACTIONS_INVOICE_PAID:
                     applyActionsInvoicePaidPrecondition(stateRepair, client, commonFields);
+                    break;
+                case MASTER_SIGN_ACT:
+                    applyMasterSignActPrecondition(stateRepair, client, commonFields);
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
@@ -312,7 +316,6 @@ public class PreconditionRepair extends BaseApiTest {
         });
     }
 
-
     private void applyActionsInvoiceIssuedPrecondition(StateRepair stateRepair, User client, CommonFieldsRepairDto commonFields) {
         applyMaterialInvoicePaidPrecondition(stateRepair, client, commonFields);
         step("API: предусловие - " + Role.CLIENT + " заказ на ремонт в состоянии " + stateRepair, () -> {
@@ -342,6 +345,19 @@ public class PreconditionRepair extends BaseApiTest {
                         .extract().as(SelectPaymentResponseDto.class);
                 commonFields.setPayment2Url(actualResponse.getData().getPayUrl());
                 commonFields.setPayment2Id(actualResponse.getData().getPaymentId());
+            });
+        });
+    }
+
+    private void applyMasterSignActPrecondition(StateRepair stateRepair, User client, CommonFieldsRepairDto commonFields) {
+        applyActionsInvoicePaidPrecondition(stateRepair, client, commonFields);
+        step("API: предусловие - " + Role.CLIENT + " заказ на ремонт в состоянии " + stateRepair, () -> {
+            step(Role.MASTER + " подписывает Акт", () -> {
+                OrdersCreateActResponseDto actualResponse = ordersCreateActApi.signAct(repairCase.createActRequest(commonFields), commonFields.getTokenMaster())
+                        .statusCode(200)
+                        .extract().as(OrdersCreateActResponseDto.class);
+                OrdersCreateActResponseDto expectedResponse = OrdersCreateActResponseDto.defaultResponse();
+                assertResponse(expectedResponse, actualResponse);
             });
         });
     }

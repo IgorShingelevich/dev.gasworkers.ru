@@ -42,7 +42,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
 
     public void checkActivationStatusIsPaid(Boolean expectedStatus) {
         stepWithRole("Убедиться, что статус платежа за активацию" + expectedStatus.toString(), () -> {
-        isPaid(expectedStatus, activationStatusPaymentLocator);
+            isPaid(expectedStatus, activationStatusPaymentLocator);
         });
     }
 
@@ -194,6 +194,18 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     break;
                 case ACTIONS_INVOICE_PAID:
                     checkCurrentStatus(OrderStatus.ACTIONS_INVOICE_PAID);
+                    checkActivationStatusIsPaid(true);
+                    checkActivationPricePayment(data.getActivationPrice());
+                    checkActivationDatePayment(data.getActivationDate());
+                    checkMaterialsStatusIsPaid(true);
+                    checkMaterialsPricePayment(data.getMaterialsPrice());
+                    checkMaterialsDatePayment(data.getMaterialsDate());
+                    checkActionsStatusIsPaid(true);
+                    checkActionsPricePayment(data.getActionsPrice());
+                    checkActionsDatePayment(data.getActionsDate());
+                    break;
+                case MASTER_SIGN_ACT:
+                    checkCurrentStatus(OrderStatus.MASTER_SIGN_ACT);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());

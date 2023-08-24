@@ -556,7 +556,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
 
         step("заказ на ремонт в состоянии мастер  подписывает Акт", () -> {
             step("мастер создает Акт", () -> {
-                OrdersCreateActResponseDto actualResponse = ordersCreateActApi.createAct(repairCase.createActRequest(commonFields), commonFields.getTokenMaster())
+                OrdersCreateActResponseDto actualResponse = ordersCreateActApi.signAct(repairCase.createActRequest(commonFields), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersCreateActResponseDto.class);
                 OrdersCreateActResponseDto expectedResponse = OrdersCreateActResponseDto.defaultResponse();

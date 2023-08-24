@@ -30,6 +30,7 @@ public class DocsTabOrderCardComponent extends BaseOrderCardComponent {
             self = driver.$("div.order-details").as("Контейнер с документами"),
             totalPriceLocator = self.$("div.order-details-item").as("Итоговая стоимость");
     ElementsCollection
+            docsBoxCollection = self.$$("div.link-pdf-wrapper").as("Контейнеры с документами"),
             docsTitleCollection = self.$$("div .link-pdf ").as("Названия документов"),
             docsDownloadButtonCollection = self.$$(".link-pdf").as("Кнопки скачать документы");
 
@@ -58,14 +59,7 @@ public class DocsTabOrderCardComponent extends BaseOrderCardComponent {
         });
     }
 
-    public void checkNoDocs() {
-        stepWithRole("Убедиться, что нет документов", () -> {
-            checkNoDocsInfoBox();
-            self.shouldNotBe(visible);
-            docsTitleCollection.shouldBe(size(0));
-            docsDownloadButtonCollection.shouldBe(size(0));
-        });
-    }
+
 
     public void checkNoDocsInfoBox() {
         stepWithRole("Убедиться, что информационный блок о том, что документов нет, присутствует", () -> {
@@ -75,7 +69,13 @@ public class DocsTabOrderCardComponent extends BaseOrderCardComponent {
 
     public void noDocs() {
         stepWithRole("Убедиться, что нет документов", () -> {
-            docsTitleCollection.shouldBe(size(0));
+            docsBoxCollection.shouldBe(size(0));
+        });
+    }
+
+    public void checkActDoc() {
+        stepWithRole("Убедиться, что документ Акт выполненных работ присутствует", () -> {
+            docsTitleCollection.findBy(text("Акт выполненных работ")).shouldBe(visible);
         });
     }
 

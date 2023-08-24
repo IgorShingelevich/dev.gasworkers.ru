@@ -14,7 +14,8 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
             cancelOrderButtonLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Кнопка Отменить заказ"),
             selectNewCompanyButtonLocator = driver.$(byTagAndText("span", "Выбрать новую компанию")).as("Кнопка Выбрать новую компанию"),
             payInvoiceButtonLocator = driver.$(byTagAndText("span", "Оплатить счет")).as("Кнопка Оплатить счет"),
-            returnToWorkButtonLocator = driver.$(byTagAndText("span", "Вернуть в работу")).as("Кнопка Вернуть в работу");
+            returnToWorkButtonLocator = driver.$(byTagAndText("span", "Вернуть в работу")).as("Кнопка Вернуть в работу"),
+            signActButtonLocator = driver.$(byTagAndText("span", "Подписать акт")).as("Кнопка Подписать акт");
 
     public SharedButtonsOrderCardClientComponent(RoleBrowser browser) {
         super(browser);
@@ -28,6 +29,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     noSelectNewCompanyButton();
                     noReturnToWorkButton();
                     noPayInvoiceButton();
+                    noSignActButton();
                     checkShowOnMapButton();
                     checkCancelButton();
                     break;
@@ -36,6 +38,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     noReturnToWorkButton();
                     noPayInvoiceButton();
                     checkCancelButton();
+                    noSignActButton();
                     checkSelectNewCompanyButton();
                     break;
                 case WAIT_MASTER:
@@ -43,6 +46,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     noSelectNewCompanyButton();
                     noReturnToWorkButton();
                     noPayInvoiceButton();
+                    noSignActButton();
                     checkCancelButton();
                     break;
                 case MASTER_START_WORK:
@@ -50,6 +54,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     noSelectNewCompanyButton();
                     noCancelButton();
                     noPayInvoiceButton();
+                    noSignActButton();
                     checkReturnToWorkButton();
                     break;
                 case MATERIAL_INVOICE_ISSUED:
@@ -57,6 +62,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     noShowOnMapButton();
                     noSelectNewCompanyButton();
                     noCancelButton();
+                    noSignActButton();
                     checkReturnToWorkButton();
                     checkPayInvoiceButton();
                     break;
@@ -65,7 +71,16 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     noSelectNewCompanyButton();
                     noPayInvoiceButton();
                     noCancelButton();
+                    noSignActButton();
                     checkReturnToWorkButton();
+                    break;
+                case MASTER_SIGN_ACT:
+                    noShowOnMapButton();
+                    noSelectNewCompanyButton();
+                    noCancelButton();
+                    noPayInvoiceButton();
+                    checkReturnToWorkButton();
+                    checkSignActButton();
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);
@@ -161,6 +176,24 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
     public void noPayInvoiceButton() {
         stepWithRole("Убедиться, что кнопка Оплатить счет отсутствует", () -> {
             payInvoiceButtonLocator.shouldNotBe(visible);
+        });
+    }
+
+    public void noSignActButton() {
+        stepWithRole("Убедиться, что кнопка Подписать акт отсутствует", () -> {
+            signActButtonLocator.shouldNotBe(visible);
+        });
+    }
+
+    public void checkSignActButton() {
+        stepWithRole("Убедиться, что кнопка Подписать акт присутствует", () -> {
+            signActButtonLocator.shouldBe(visible);
+        });
+    }
+
+    public void signAct() {
+        stepWithRole("Нажать на кнопку Подписать акт", () -> {
+            signActButtonLocator.click();
         });
     }
 }
