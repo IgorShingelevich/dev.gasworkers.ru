@@ -52,7 +52,7 @@ public class AllNotificationsPage extends BasePage {
         stepWithRole("Убедиться, что загрузилась страница Уведомления", () -> {
             urlChecker.urlContains("/profile/notifications");
             pageTitleLocator.shouldHave(text(NOTIFICATIONS_TITLE));
-            Selenide.sleep(2000);
+
         });
     }
 
@@ -104,6 +104,7 @@ public class AllNotificationsPage extends BasePage {
 
     public void open() {
         stepWithRole("Открыть страницу Уведомления", () -> {
+            Selenide.sleep(2000);
             driver.open("/profile/notifications");
         });
     }

@@ -31,6 +31,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.POSITIVE)
 @Tag(AllureTag.WEB)
+@Tag(AllureTag.WEB_REGISTRATION)
 public class MaintenanceBGRegistrationTest extends BaseTest {
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;

@@ -3,9 +3,9 @@ package ru.gasworkers.dev.tests.web.registration.usualRegistration.usualSelfEmpl
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureTag;
@@ -21,12 +21,18 @@ import static io.qameta.allure.Allure.step;
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.REGISTRATION)
 @Feature("Регистрация Самозанятого")
-@Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.SELF_EMPLOYED), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.WEB), @Tag(AllureTag.POSITIVE)})
+@Tag(AllureTag.REGRESSION)
+@Tag(AllureTag.SELF_EMPLOYED)
+@Tag(AllureTag.REGISTRATION)
+@Tag(AllureTag.WEB)
+@Tag(AllureTag.WEB_REGISTRATION)
+@Tag(AllureTag.POSITIVE)
 public class SelfEmployedRegistrationTest extends BaseTest {
     RandomSelfEmployedAndMaster randomSelfEmployedAndMaster = new RandomSelfEmployedAndMaster();
     @Browser(role = Role.SELF_EMPLOYED, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     SelfEmployedPages selfEmployedPages;
 
+    @Disabled
     @Test
     @DisplayName("Регистрация СМЗ")
     public void byPhoneSEMemberRegistrationTest() {

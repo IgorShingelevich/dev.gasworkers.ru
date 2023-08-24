@@ -4,7 +4,6 @@ import io.qameta.allure.*;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import ru.gasworkers.dev.allure.AllureEpic;
@@ -23,8 +22,12 @@ import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 @Epic(AllureEpic.REGISTRATION)
 @Feature(AllureFeature.REGULAR_REGISTRATION)
 @Feature("Валидация учетных данных")
-@Tags({@Tag(AllureTag.REGRESSION), @Tag(AllureTag.CLIENT), @Tag(AllureTag.REGISTRATION), @Tag(AllureTag.WEB)})
-public class ValidEmailTest extends BaseTest {
+@Tag(AllureTag.REGRESSION)
+@Tag(AllureTag.CLIENT)
+@Tag(AllureTag.REGISTRATION)
+@Tag(AllureTag.WEB)
+@Tag(AllureTag.WEB_REGISTRATION)
+public class ValidEmailPTest extends BaseTest {
     //    SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(true));
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;

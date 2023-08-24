@@ -34,6 +34,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGISTRATION)
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.WEB)
+@Tag(AllureTag.WEB_REGISTRATION)
 
 public class VideoBGRegistrationTest extends BaseTest {
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")

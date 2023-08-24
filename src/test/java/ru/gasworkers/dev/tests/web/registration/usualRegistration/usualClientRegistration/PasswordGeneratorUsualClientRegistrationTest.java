@@ -27,6 +27,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.REGISTRATION)
 @Tag(AllureTag.WEB)
+@Tag(AllureTag.WEB_REGISTRATION)
 @Tag(AllureTag.POSITIVE)
 public class PasswordGeneratorUsualClientRegistrationTest extends BaseTest {
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)

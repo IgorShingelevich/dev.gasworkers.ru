@@ -11,7 +11,7 @@ import static com.codeborne.selenide.Condition.visible;
 
 public class BaseGuideComponent extends BaseComponent {
     SelenideElement
-            self = driver.$("div.gas-guide-wrapper").as("Гайд фрейм");
+            self = driver.$("div.gas-guide-wrapper").as("Гайд бокс");
     ElementsCollection
             footerGuideButtonsCollection = self.$("div.gas-guide-footer").$$("button").as("Коллекция кнопок футера гида"),
             qrCodeDescriptionLocator = self.$$("div.mt-2.small").as("Коллекция Описание QR кодов");

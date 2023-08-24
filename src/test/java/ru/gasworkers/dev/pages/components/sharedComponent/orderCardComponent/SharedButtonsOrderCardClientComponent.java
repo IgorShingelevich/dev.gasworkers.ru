@@ -50,6 +50,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     checkCancelButton();
                     break;
                 case MASTER_START_WORK:
+                case MATERIAL_INVOICE_PAID:
                     noShowOnMapButton();
                     noSelectNewCompanyButton();
                     noCancelButton();
