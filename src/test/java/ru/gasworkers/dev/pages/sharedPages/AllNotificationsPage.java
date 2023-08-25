@@ -13,6 +13,7 @@ import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
+import static org.hamcrest.CoreMatchers.either;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.startsWith;
@@ -154,6 +155,11 @@ public class AllNotificationsPage extends BasePage {
                 case MASTER_SIGN_ACT:
                     checkExpectedAmountOfNotifications(7, 4000);
                     assertThat(firstNotificationText, startsWith(stateRepair.notification()));
+                    break;
+                case CLIENT_SIGN_ACT:
+                    checkExpectedAmountOfNotifications(9, 4000);
+                    assertThat(firstNotificationText, either(startsWith("Акт выполненных работ сформирован")).or(startsWith("Оставьте отзыв по заявке")));
+//                    assertThat(secondNotificationText, startsWith("Акт выполненных работ сформирован"));
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);

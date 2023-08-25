@@ -135,7 +135,7 @@ class ClientDispatcherInteractionStatesTest extends BaseTest {
                  clientPages.getHomePage().popUp.close();
             });
             step("Клиент просматривает опубликованный заказа в карточке объекта", () -> {
-                clientPages.getHomePage().lastOrderComponent.lastOrderCard();
+                clientPages.getHomePage().lastOrderComponent.toOrderCard();
                 Selenide.sleep(1000);
 //                clientPages.getOrderCardPage().checkFinishLoading();
                 clientPages.getOrderCardPage().checkPublishedState(OrderStatus.PUBLISHED, ServiceType.MAINTENANCE);
@@ -218,7 +218,7 @@ class ClientDispatcherInteractionStatesTest extends BaseTest {
             step("Клиент ожидает согласования даты и времени", () -> {
                 clientPages.getHomePage().checkFinishLoading(client.fullName, client.sinceDate);
                 clientPages.getHomePage().popUp.close();
-                clientPages.getHomePage().lastOrderComponent.lastOrderCard();
+                clientPages.getHomePage().lastOrderComponent.toOrderCard();
                 clientPages.getOrderCardPage().checkFinishLoading();
                 clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_DATE, ServiceType.MAINTENANCE);
             });

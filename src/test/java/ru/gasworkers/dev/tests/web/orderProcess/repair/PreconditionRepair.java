@@ -1,5 +1,7 @@
 package ru.gasworkers.dev.tests.web.orderProcess.repair;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import ru.gasworkers.dev.api.administration.getUserWithAdmin.GetUserWithAdminApi;
 import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
 import ru.gasworkers.dev.api.auth.login.dto.LoginResponseDto;
@@ -28,6 +30,8 @@ import ru.gasworkers.dev.api.orders.selectServiceCompany.SelectServiceCompanyApi
 import ru.gasworkers.dev.api.orders.selectServiceCompany.dto.SelectServiceCompanyResponseDto;
 import ru.gasworkers.dev.api.orders.sign.OrdersSendSignApi;
 import ru.gasworkers.dev.api.orders.sign.OrdersSignApi;
+import ru.gasworkers.dev.api.orders.sign.dto.OrdersSendSignResponseDto;
+import ru.gasworkers.dev.api.orders.sign.dto.OrdersSignResponseDto;
 import ru.gasworkers.dev.api.orders.suggestedServices.SuggestedServicesApi;
 import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoApi;
@@ -83,7 +87,10 @@ public class PreconditionRepair extends BaseApiTest {
     private final String sssrMaster1Email = "test_gas_master_sssr1@rambler.ru";
     private final String sssrMaster1Password = "1234";
 
-    public StateInfo applyPrecondition(User client, StateRepair stateRepair) {
+    private StateInfo stateInfoResult;
+    private CommonFieldsRepairDto commonFieldsResult;
+
+    public Result applyPrecondition(User client, StateRepair stateRepair) {
         return step("API: ремонт предусловие: " + stateRepair, () -> {
             stateInfo.setCommonFields(commonFields);
             switch (stateRepair) {
@@ -117,13 +124,36 @@ public class PreconditionRepair extends BaseApiTest {
                 case MASTER_SIGN_ACT:
                     applyMasterSignActPrecondition(stateRepair, client, commonFields);
                     break;
+                case CLIENT_SIGN_ACT:
+                    applyClientSignActPrecondition(stateRepair, client, commonFields);
+                    break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
             getActualDtoSet(commonFields, stateRepair);
             StateInfo result = stateInfo.actualDtoSet();
             readAllNotifications();
-            return result;
+            return new Result(result, commonFields);
+        });
+    }
+
+    private void applyClientSignActPrecondition(StateRepair stateRepair, User client, CommonFieldsRepairDto commonFields) {
+        applyMasterSignActPrecondition(stateRepair, client, commonFields);
+        step("API: предусловие - " + Role.CLIENT + " заказ на ремонт в состоянии " + stateRepair, () -> {
+            step(Role.CLIENT + " запрос на подпись Акта", () -> {
+                OrdersSendSignResponseDto actualResponse = ordersSendSignApi.sendSign(repairCase.sendSignRequest(commonFields), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(OrdersSendSignResponseDto.class);
+                OrdersSendSignResponseDto expectedResponse = OrdersSendSignResponseDto.successResponse();
+                assertResponse(expectedResponse, actualResponse);
+            });
+            step(Role.CLIENT + " подписывает Акт", () -> {
+                OrdersSignResponseDto actualResponse = ordersSignApi.sign(repairCase.signRequest(commonFields), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(OrdersSignResponseDto.class);
+                OrdersSignResponseDto expectedResponse = OrdersSignResponseDto.successResponse();
+                assertResponse(expectedResponse, actualResponse);
+            });
         });
     }
 
@@ -360,6 +390,13 @@ public class PreconditionRepair extends BaseApiTest {
                 assertResponse(expectedResponse, actualResponse);
             });
         });
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public class Result {
+        private StateInfo stateInfoResult;
+        private CommonFieldsRepairDto commonFieldsResult;
     }
 
     private LastOrderInfoResponseDto getLastOrderInfoDto(CommonFieldsRepairDto commonFields, StateRepair state) {

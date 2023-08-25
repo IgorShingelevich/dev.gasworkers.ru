@@ -34,25 +34,28 @@ public enum StateRepair {
     public void checkLastOrderComponent(LastOrderProfileClientComponent component, LastOrderInfoResponseDto dto) {
         step("Проверка компонента Последний заказ", () -> {
             StateRepairBuilder.LastOrderInfoData data = builder.extractLastOrderInfoData(dto);
-            component.checkOrderNumber(data.getOrderNumber());
+           /* component.checkOrderNumber(data.getOrderNumber());
             component.checkServiceType(data.getServiceType());
             component.checkAddress(data.getAddress());
-            component.checkEquipment(data.getEquipments0());
+            component.checkEquipment(data.getEquipments0());*/
             switch (this) {
                 case PUBLISHED:
                     component.offersCounter.noOffers();
+                    checkDetailsLastOrder(component, data);
                     component.noMasterVisitDateAndTime();
 //                 todo   component.checkDesiredTime(data.getDesiredTime());
                     // todo stepper
                     break;
                 case HAS_OFFER:
                     component.offersCounter.amount(data.getOffersCount());
+                    checkDetailsLastOrder(component, data);
                     component.noMasterVisitDateAndTime();
 //                 todo   component.checkDesiredTime(data.getDesiredTime());
                     // todo stepper
                     break;
                 case SCHEDULE_DATE:
                     component.offersCounter.noComponent();
+                    checkDetailsLastOrder(component, data);
                     //                 todo   component.checkDesiredTime(data.getDesiredTime());
                     // todo stepper
                     break;
@@ -64,14 +67,20 @@ public enum StateRepair {
                 case ACTIONS_INVOICE_PAID:
                 case MASTER_SIGN_ACT:
                     component.offersCounter.noComponent();
+                    checkDetailsLastOrder(component, data);
                     component.noDesiredDate();
                     component.noDesiredTime();
                     //                   todo component.checkMasterVisitDateAndTime(data.getMasterVisitDateAndTime());
                     // todo  stepper
                     break;
+                default:
+                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
+
             }
+
         });
     }
+
 
     public void checkCommonTab(CommonTabOrderCardComponent tab, OrdersIdResponseDto dto) {
         step("Убедиться, что вкладка Описание заказа в состоянии " + this, () -> {
@@ -108,6 +117,9 @@ public enum StateRepair {
                     // todo stepper
                     break;
                 case MASTER_SIGN_ACT:
+                    // todo stepper
+                    break;
+                case CLIENT_SIGN_ACT:
                     // todo stepper
                     break;
                 default:
@@ -149,6 +161,7 @@ public enum StateRepair {
                 case ACTIONS_INVOICE_ISSUED:
                 case ACTIONS_INVOICE_PAID:
                 case MASTER_SIGN_ACT:
+                case CLIENT_SIGN_ACT:
                     tab.repairDetails.checkMaterialsLogisticFeeAdded(dto);
                     tab.repairDetails.checkMaterialsFirstEquipmentPrice(dto, 0);
                     tab.repairDetails.checkMaterialsPrice(dto, data);
@@ -192,6 +205,7 @@ public enum StateRepair {
                     // todo add tab.checkComputedToTalPrice - no field in json
                     break;
                 case MASTER_SIGN_ACT:
+                case CLIENT_SIGN_ACT:
                     tab.checkActDoc();
                     tab.checkTotalPrice("6300");
                     // todo add tab.checkComputedToTalPrice - no field in json
@@ -219,6 +233,13 @@ public enum StateRepair {
 
             }
         });
+    }
+
+    private void checkDetailsLastOrder(LastOrderProfileClientComponent component, StateRepairBuilder.LastOrderInfoData data) {
+        component.checkOrderNumber(data.getOrderNumber());
+        component.checkServiceType(data.getServiceType());
+        component.checkAddress(data.getAddress());
+        component.checkEquipment(data.getEquipments0());
     }
 
     @Override

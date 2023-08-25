@@ -216,6 +216,18 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkActionsPricePayment(data.getActionsPrice());
                     checkActionsDatePayment(data.getActionsDate());
                     break;
+                case CLIENT_SIGN_ACT:
+                    checkCurrentStatus(OrderStatus.CLIENT_SIGN_ACT);
+                    checkActivationStatusIsPaid(true);
+                    checkActivationPricePayment(data.getActivationPrice());
+                    checkActivationDatePayment(data.getActivationDate());
+                    checkMaterialsStatusIsPaid(true);
+                    checkMaterialsPricePayment(data.getMaterialsPrice());
+                    checkMaterialsDatePayment(data.getMaterialsDate());
+                    checkActionsStatusIsPaid(true);
+                    checkActionsPricePayment(data.getActionsPrice());
+                    checkActionsDatePayment(data.getActionsDate());
+                    break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);
             }

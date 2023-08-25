@@ -248,7 +248,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getAllOrdersPage().checkFinishLoading();
         clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
         clientPages.getOrderCardPage().checkFinishLoading();
-        clientPages.getOrderCardPage().checkNotReviewedCompletedOrderState(OrderStatus.COMPLETED, ServiceType.MAINTENANCE);
+        clientPages.getOrderCardPage().checkNotReviewedCompletedOrderState(OrderStatus.CLIENT_SIGN_ACT, ServiceType.MAINTENANCE);
 //        clientPages.getOrderCardPage().navDocsTab.downloadAgreement()
     }
 
@@ -264,7 +264,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getAllOrdersPage().checkFinishLoading();
         clientPages.getAllOrdersPage().orderByNumber(checkedOrderNumber);
         clientPages.getOrderCardPage().checkFinishLoading();
-        clientPages.getOrderCardPage().checkReviewedCompletedOrderState(OrderStatus.COMPLETED, ServiceType.MAINTENANCE);
+        clientPages.getOrderCardPage().checkReviewedCompletedOrderState(OrderStatus.CLIENT_SIGN_ACT, ServiceType.MAINTENANCE);
 //        clientPages.getOrderCardPage().navDocsTab.downloadAgreement()
     }
 

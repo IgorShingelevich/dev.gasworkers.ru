@@ -68,7 +68,11 @@ public class OrderCardClientPage extends BaseClientPage {
         buttons = new ClientButtonsOrderCardComponent(browser);
     }
 
-    public OrderCardClientPage checkFinishLoading() {
+    public void open(String orderId) {
+        driver.open("/profile/client/orders/" + orderId);
+    }
+
+    public void checkFinishLoading() {
         checkUrl();
         titleNumberLocator.shouldBe(visible);
         String orderNumber = titleNumberLocator.getText().substring(ORDER_CARD_TITLE.length());
@@ -76,7 +80,6 @@ public class OrderCardClientPage extends BaseClientPage {
             titleNumberLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(ORDER_CARD_TITLE));
             orderDetailsBlockLocator.shouldBe(visible, Duration.ofSeconds(20));
         });
-        return this;
     }
 
     public void checkPublishedState(OrderStatus orderStatus, ServiceType serviceType) {

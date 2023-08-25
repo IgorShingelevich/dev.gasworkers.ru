@@ -15,6 +15,7 @@ import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
+import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -31,20 +32,22 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class PublishedRepairTest extends BaseApiTest {
+public class ClientSignActRepairTest extends BaseApiTest {
     @Browser(role = Role.CLIENT)
     ClientPages clientPages;
-    @Test
-    @DisplayName("Ремонт - в состоянии published")
-    void publishedRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
 
-        StateRepair state = StateRepair.PUBLISHED;
+    @Test
+    @DisplayName("Ремонт - в  состоянии клиент подписал акт")
+    void clientSignAct(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+        StateRepair state = StateRepair.CLIENT_SIGN_ACT;
         Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
 
 // Get the StateInfo and CommonFieldsRepairDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
+        CommonFieldsRepairDto commonFieldsFromStateInfo = result.getCommonFieldsResult();
+        CommonFieldsRepairDto commonFieldsFromStateInfo2 = stateInfo.getCommonFields();
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("Web: " + role + " авторизация", () -> {
             clientPages.getLoginPage().open();
@@ -61,33 +64,17 @@ public class PublishedRepairTest extends BaseApiTest {
         step(role + " кабинет в состоянии - в состоянии " + state, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(role + " карточка последнего заказа - в состоянии " + state, () -> {
-                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-                    clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getLastOrderInfoDto());
+                    clientPages.getHomePage().lastOrderComponent.noLastOrderCard();
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
-                step(role + " карточка заказа редирект на карту - в состоянии " + state, () -> {
-                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-                    clientPages.getHomePage().lastOrderComponent.open();
-                    clientPages.getSelectServicePage().checkUrl();
+                step(role + " карточка заказа - в состоянии " + state, () -> {
+                    clientPages.getOrderCardPage().open(String.valueOf(commonFieldsFromStateInfo.getOrderId()));
+                    clientPages.getOrderCardPage().checkFinishLoading();
+                    clientPages.getOrderCardPage().checkState(state, stateInfo.getOrdersIdResponseDto());
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {
-                step(role + " страница выбора услуги - в состоянии " + state, () -> {
-                    clientPages.getSelectServicePage().checkFinishLoadingRepair();
-                    clientPages.getSelectServicePage().checkState(state, stateInfo.getSuggestedServiceDto());
-                });
-            };
-            Consumer<SoftAssert> case4 = softAssert -> {
-                step(role + " карточка заказа - в состоянии " + state, () -> {
-                    clientPages.getSelectServicePage().toOrderCard();
-                    clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkState(state, stateInfo.getOrdersIdResponseDto());
-
-                });
-            };
-
-            Consumer<SoftAssert> case5 = softAssert -> {
                 step(role + " уведомления - в состоянии " + state, () -> {
                     clientPages.getAllNotificationsPage().open();
                     clientPages.getAllNotificationsPage().checkFinishLoading();
@@ -95,34 +82,21 @@ public class PublishedRepairTest extends BaseApiTest {
                 });
             };
 
-            Consumer<SoftAssert> case6 = softAssert -> {
+            Consumer<SoftAssert> case4 = softAssert -> {
                 step(role + " красное уведомление в лк - в состоянии " + state, () -> {
                     clientPages.getHomePage().open();
                     clientPages.getHomePage().checkFinishLoading();
                     clientPages.getHomePage().redNotice.noNotice();
                 });
             };
-            Consumer<SoftAssert> case7 = softAssert -> {
+            Consumer<SoftAssert> case5 = softAssert -> {
                 step(role + " красное уведомление на стр лендинга - в состоянии " + state, () -> {
                     clientPages.getLandingPage().open();
                     clientPages.getLandingPage().checkFinishLoading();
                     clientPages.getLandingPage().noticeComponent.noNotifications();
                 });
             };
-            assertAll(Arrays.asList(case1, case2, case3, case4, case5, case6, case7));
+            assertAll(Arrays.asList(case1, case2, case3, case4, case5));
         });
     }
 }
-
- /*  // Get the soft assertions from the page class
-            List<Consumer<SoftAssert>> softAssertionsFromPageClass = clientPages.getOrderCardPage().checkStateList(state, publishedOrderIdResponse);
-            List<Consumer<SoftAssert>> allSoftAssertions = new ArrayList<>();
-            allSoftAssertions.addAll(Arrays.asList(case1, case2, case3));
-            allSoftAssertions.addAll(softAssertionsFromPageClass);
-
-            SoftAssert softAssert = new SoftAssert();
-            for (Consumer<SoftAssert> assertion : allSoftAssertions) {
-                assertion.accept(softAssert);
-            }
-            softAssert.assertAll();
-*/

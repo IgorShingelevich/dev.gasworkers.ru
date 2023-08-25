@@ -15,7 +15,8 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
             selectNewCompanyButtonLocator = driver.$(byTagAndText("span", "Выбрать новую компанию")).as("Кнопка Выбрать новую компанию"),
             payInvoiceButtonLocator = driver.$(byTagAndText("span", "Оплатить счет")).as("Кнопка Оплатить счет"),
             returnToWorkButtonLocator = driver.$(byTagAndText("span", "Вернуть в работу")).as("Кнопка Вернуть в работу"),
-            signActButtonLocator = driver.$(byTagAndText("span", "Подписать акт")).as("Кнопка Подписать акт");
+            signActButtonLocator = driver.$(byTagAndText("span", "Подписать акт")).as("Кнопка Подписать акт"),
+            makeReviewButtonLocator = driver.$(byTagAndText("span", "Оставить отзыв")).as("Кнопка Оставить отзыв");
 
     public SharedButtonsOrderCardClientComponent(RoleBrowser browser) {
         super(browser);
@@ -30,6 +31,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     noReturnToWorkButton();
                     noPayInvoiceButton();
                     noSignActButton();
+                    noMakeReviewButton();
                     checkShowOnMapButton();
                     checkCancelButton();
                     break;
@@ -39,6 +41,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     noPayInvoiceButton();
                     checkCancelButton();
                     noSignActButton();
+                    noMakeReviewButton();
                     checkSelectNewCompanyButton();
                     break;
                 case WAIT_MASTER:
@@ -47,6 +50,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     noReturnToWorkButton();
                     noPayInvoiceButton();
                     noSignActButton();
+                    noMakeReviewButton();
                     checkCancelButton();
                     break;
                 case MASTER_START_WORK:
@@ -56,6 +60,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     noCancelButton();
                     noPayInvoiceButton();
                     noSignActButton();
+                    noMakeReviewButton();
                     checkReturnToWorkButton();
                     break;
                 case MATERIAL_INVOICE_ISSUED:
@@ -64,6 +69,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     noSelectNewCompanyButton();
                     noCancelButton();
                     noSignActButton();
+                    noMakeReviewButton();
                     checkReturnToWorkButton();
                     checkPayInvoiceButton();
                     break;
@@ -73,6 +79,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     noPayInvoiceButton();
                     noCancelButton();
                     noSignActButton();
+                    noMakeReviewButton();
                     checkReturnToWorkButton();
                     break;
                 case MASTER_SIGN_ACT:
@@ -80,8 +87,18 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     noSelectNewCompanyButton();
                     noCancelButton();
                     noPayInvoiceButton();
+                    noMakeReviewButton();
                     checkReturnToWorkButton();
                     checkSignActButton();
+                    break;
+                case CLIENT_SIGN_ACT:
+                    noShowOnMapButton();
+                    noSelectNewCompanyButton();
+                    noCancelButton();
+                    noPayInvoiceButton();
+                    noSignActButton();
+                    noReturnToWorkButton();
+                    checkMakeReviewButton();
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);
@@ -195,6 +212,24 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
     public void signAct() {
         stepWithRole("Нажать на кнопку Подписать акт", () -> {
             signActButtonLocator.click();
+        });
+    }
+
+    public void checkMakeReviewButton() {
+        stepWithRole("Убедиться, что кнопка Оставить отзыв присутствует", () -> {
+            makeReviewButtonLocator.shouldBe(visible);
+        });
+    }
+
+    public void makeReview() {
+        stepWithRole("Нажать на кнопку Оставить отзыв", () -> {
+            makeReviewButtonLocator.click();
+        });
+    }
+
+    public void noMakeReviewButton() {
+        stepWithRole("Убедиться, что кнопка Оставить отзыв отсутствует", () -> {
+            makeReviewButtonLocator.shouldNotBe(visible);
         });
     }
 }

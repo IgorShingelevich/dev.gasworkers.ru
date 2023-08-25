@@ -98,7 +98,6 @@ public final class HomeClientPage extends BaseClientPage {
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что загружена Домашняя страница", () -> {
             urlChecker.urlStartsWith("https://dev.gasworkers.ru/profile/client");
-            lastOrderComponent.checkFinishLoading();
             driver.$(".client-objects [data-index='0']").shouldBe(visible, Duration.ofSeconds(5));
         });
     }

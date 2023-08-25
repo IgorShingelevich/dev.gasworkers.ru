@@ -25,7 +25,7 @@ public class LastOrderProfileClientComponent extends BaseComponent {
             LAST_ORDER_CARD_OBJECT_DESIRED_TIME_TITLE = "Выбранное время",
             MASTER_VISIT_DATE_AND_TIME = "Дата и время приезда мастера";
     SelenideElement
-            self = driver.$(".section .section.order").as("Секция Карточка последнего заказа"),
+            self = driver.$(".section .section.order").as("Бокс Карточка последнего заказа"),
             lastOrderCardTitleLocator = driver.$(".section .header .title.d-flex.justify-content-between").as("Заголовок Карточки последнего заказа"),
             lastOrderCardOrderNumberLinkLocator = driver.$(".section .content .h5.link-blue.text-primary.pointer").as("Ссылка на номер заказа"),
             lastOrderCardActionButtonLocator = driver.$(".section .content .actions .actions__btn").as("Кнопка открытия меню действий карточки последнего заказа"),
@@ -45,31 +45,33 @@ public class LastOrderProfileClientComponent extends BaseComponent {
         offersCounter = new OffersCounterClientComponent(browser);
     }
 
-    public LastOrderProfileClientComponent lastOrderCard() {
+    public void toOrderCard() {
         stepWithRole("Перейти в Карточку последнего заказа", () -> {
             lastOrderCardOrderNumberLinkLocator.click();
             urlChecker.urlStartsWith("https://gasworkers.ru/client/orders/");
         });
-        return this;
     }
 
-    public LastOrderProfileClientComponent hoverOverLastOrderActionButton() {
+    public void noLastOrderCard() {
+        stepWithRole("Убедиться, что Карточка последнего заказа отсутствует", () -> {
+            self.shouldNotBe(visible);
+        });
+    }
+
+    public void hoverOverLastOrderActionButton() {
         lastOrderCardActionButtonLocator.hover();
         lastOrderCardOrderActionOpenLinkLocator.shouldBe(visible);
-        return this;
     }
 
-    public LastOrderProfileClientComponent clickLastOrderActionButton() {
+    public void clickLastOrderActionButton() {
         lastOrderCardActionButtonLocator.shouldBe(visible).click();
-        return this;
     }
 
-    public LastOrderProfileClientComponent open() {
+    public void open() {
         lastOrderCardActionButtonLocator.shouldBe(visible)
                 .click();
         lastOrderCardOrderActionOpenLinkLocator.shouldBe(visible)
                 .click();
-        return this;
     }
 
     public void checkFinishLoading() {

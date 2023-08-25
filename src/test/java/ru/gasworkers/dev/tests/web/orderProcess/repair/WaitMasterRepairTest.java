@@ -40,7 +40,10 @@ public class WaitMasterRepairTest extends BaseApiTest {
         StateRepair state = StateRepair.WAIT_MASTER;
         Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
-        StateInfo stateInfo = preconditionRepair.applyPrecondition(client, state);
+        PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
+
+// Get the StateInfo and CommonFieldsRepairDto from the result
+        StateInfo stateInfo = result.getStateInfoResult();
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("Web: " + role + " авторизация", () -> {
                 clientPages.getLoginPage().open();

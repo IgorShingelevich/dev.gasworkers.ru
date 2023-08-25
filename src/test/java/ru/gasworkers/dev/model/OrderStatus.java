@@ -23,7 +23,7 @@ public enum OrderStatus {
     START_MAINTENANCE_WORK("Приезд мастера и проведение ТО", "master"),
     PAY_MAINTENANCE_WORK("Оплата ТО", "client"),
     SIGN_COMPLETION_ACT("Подписание Акта выполненных работ", Role.CLIENT + ", " + Role.DISPATCHER + ", " + Role.MASTER),
-    COMPLETED("Завершен", "all");
+    CLIENT_SIGN_ACT("Завершен", Role.CLIENT + ", " + Role.DISPATCHER + ", " + Role.MASTER);
 
     private final String description;
 

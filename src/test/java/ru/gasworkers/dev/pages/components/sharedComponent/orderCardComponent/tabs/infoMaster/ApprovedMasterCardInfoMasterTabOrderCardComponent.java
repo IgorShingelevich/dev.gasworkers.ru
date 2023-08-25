@@ -31,6 +31,12 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
         stepWithRole("Убедиться, что карточка мастера назначенного существует", () -> {
             self.shouldHave(text("Ваш мастер"));
         });
+    }
+
+    public void noApprovedMasterCard() {
+        stepWithRole("Убедиться, что карточка назначенного мастера отсутствует", () -> {
+            self.$(byTagAndText("p", "Ваш мастер")).shouldNotBe(visible);
+        });
     }    SelenideElement
             self = driver.$("div.master-card-wrap").as("Карточка назначенного мастера"),
             subtitleApprovedMastersTextLocator = driver.$("div.master-card-wrap p.h4").as("Текст подзаголовка назначенного мастера"),
@@ -39,12 +45,6 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
             approvedMasterRegisterDateLocator = self.$("div.register-date p.text").as("Дата регистрации назначенного мастера"),
             approvedMasterRatingLocator = self.$("div.rating div.rating-badge").as("Рейтинг назначенного мастера"),
             approvedMasterReviewsLocator = self.$("div.rating div.reviews a").as("Количество отзывов назначенного мастера");
-
-    public void noApprovedMasterCard() {
-        stepWithRole("Убедиться, что карточка назначенного мастера отсутствует", () -> {
-            self.$(byTagAndText("p", "Ваш мастер")).shouldNotBe(visible);
-        });
-    }
 
     public void checkMasterFullName(String expectedMasterFullName) {
         stepWithRole("Убедиться, что ФИО мастера: " + expectedMasterFullName, () -> {
@@ -91,6 +91,7 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
                 case ACTIONS_INVOICE_ISSUED:
                 case ACTIONS_INVOICE_PAID:
                 case MASTER_SIGN_ACT:
+                case CLIENT_SIGN_ACT:
                     checkApprovedMasterCardExists();
                     checkFinishLoading();
                     checkMasterFullName(dto.getMasterFullName());

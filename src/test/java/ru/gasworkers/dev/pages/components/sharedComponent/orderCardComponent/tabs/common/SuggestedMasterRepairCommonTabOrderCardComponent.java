@@ -149,6 +149,7 @@ public class SuggestedMasterRepairCommonTabOrderCardComponent extends BaseOrderC
                 case ACTIONS_INVOICE_ISSUED:
                 case ACTIONS_INVOICE_PAID:
                 case MASTER_SIGN_ACT:
+                case CLIENT_SIGN_ACT:
                     noSuggestedMastersCard();
                     break;
                 case HAS_OFFER:
