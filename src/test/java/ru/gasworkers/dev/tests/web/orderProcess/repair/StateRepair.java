@@ -88,7 +88,7 @@ public enum StateRepair {
             tab.status.statusSet(this, data, dto);
             tab.details.detailsSet(this, data);
             tab.suggestedMasterRepair.statusSet(this, dto, 0);
-            tab.buttons.buttonSet(this);
+            tab.buttons.checkButtons(this);
             switch (this) {
                 case PUBLISHED:
                     // todo stepper
@@ -135,7 +135,7 @@ public enum StateRepair {
             tab.status.statusSet(this, data, dto);
             tab.suggestedMasterCardRepair.statusSet(this, dto, 0);
             tab.approvedMasterCard.statusSet(this, data);
-            tab.buttons.buttonSet(this);
+            tab.buttons.checkButtons(this);
             switch (this) {
                 case PUBLISHED:
                 case HAS_OFFER:
@@ -178,7 +178,7 @@ public enum StateRepair {
         StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
         tab.status.statusSet(this, data, dto);
         tab.suggestedMastersRepair.statusSet(this, dto, 0);
-        tab.buttons.buttonSet(this);
+        tab.buttons.checkButtons(this);
         step("Убедиться, что вкладка Документы в состоянии " + this, () -> {
             switch (this) {
                 case PUBLISHED:
