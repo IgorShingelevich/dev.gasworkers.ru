@@ -53,69 +53,82 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
 //                    visibleButtons.add(RETURN_TO_WORK);
 //                    visibleButtons.add(PAY_INVOICE);
 
-                    visibleButtons = List.of(SELECT_NEW_COMPANY, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
                     notVisibleButtons = List.of(SHOW_ON_MAP, CANCEL_ORDER);
+                    visibleButtons = List.of(SELECT_NEW_COMPANY, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
                     break;
                 case SCHEDULE_DATE:
-                    visibleButtons = List.of(SHOW_ON_MAP, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
                     notVisibleButtons = List.of(CANCEL_ORDER, SELECT_NEW_COMPANY);
+                    visibleButtons = List.of(SHOW_ON_MAP, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
                     break;
-//                case WAIT_MASTER:
-//                    noShowOnMapButton();
-//                    noSelectNewCompanyButton();
-//                    noReturnToWorkButton();
-//                    noPayInvoiceButton();
-//                    noSignActButton();
-//                    noMakeReviewButton();
-//                    checkCancelButton();
-//                    break;
-//                case MASTER_START_WORK:
-//                case MATERIAL_INVOICE_PAID:
-//                    noShowOnMapButton();
-//                    noSelectNewCompanyButton();
-//                    noCancelButton();
-//                    noPayInvoiceButton();
-//                    noSignActButton();
-//                    noMakeReviewButton();
-//                    checkReturnToWorkButton();
-//                    break;
-//                case MATERIAL_INVOICE_ISSUED:
-//                case ACTIONS_INVOICE_ISSUED:
-//                    noShowOnMapButton();
-//                    noSelectNewCompanyButton();
-//                    noCancelButton();
-//                    noSignActButton();
-//                    noMakeReviewButton();
-//                    checkReturnToWorkButton();
-//                    checkPayInvoiceButton();
-//                    break;
-//                case ACTIONS_INVOICE_PAID:
-//                    noShowOnMapButton();
-//                    noSelectNewCompanyButton();
-//                    noPayInvoiceButton();
-//                    noCancelButton();
-//                    noSignActButton();
-//                    noMakeReviewButton();
-//                    checkReturnToWorkButton();
-//                    break;
-//                case MASTER_SIGN_ACT:
-//                    noShowOnMapButton();
-//                    noSelectNewCompanyButton();
-//                    noCancelButton();
-//                    noPayInvoiceButton();
-//                    noMakeReviewButton();
-//                    checkReturnToWorkButton();
-//                    checkSignActButton();
-//                    break;
-//                case CLIENT_SIGN_ACT:
-//                    noShowOnMapButton();
-//                    noSelectNewCompanyButton();
-//                    noCancelButton();
-//                    noPayInvoiceButton();
-//                    noSignActButton();
-//                    noReturnToWorkButton();
-//                    checkMakeReviewButton();
-//                    break;
+                case WAIT_MASTER:
+                  /*  noShowOnMapButton();
+                    noSelectNewCompanyButton();
+                    noReturnToWorkButton();
+                    noPayInvoiceButton();
+                    noSignActButton();
+                    noMakeReviewButton();
+                    checkCancelButton();*/
+                    notVisibleButtons = List.of(SHOW_ON_MAP, SELECT_NEW_COMPANY, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
+                    visibleButtons = List.of(CANCEL_ORDER);
+                    break;
+                case MASTER_START_WORK:
+                case MATERIAL_INVOICE_PAID:
+                    /*noShowOnMapButton();
+                    noSelectNewCompanyButton();
+                    noCancelButton();
+                    noPayInvoiceButton();
+                    noSignActButton();
+                    noMakeReviewButton();
+                    checkReturnToWorkButton();*/
+                    notVisibleButtons = List.of(SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
+                    visibleButtons = List.of(RETURN_TO_WORK);
+                    break;
+                case MATERIAL_INVOICE_ISSUED:
+                case ACTIONS_INVOICE_ISSUED:
+                    /*noShowOnMapButton();
+                    noSelectNewCompanyButton();
+                    noCancelButton();
+                    noSignActButton();
+                    noMakeReviewButton();
+                    checkReturnToWorkButton();
+                    checkPayInvoiceButton();*/
+                    notVisibleButtons = List.of(SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, SIGN_ACT, MAKE_REVIEW);
+                    visibleButtons = List.of(RETURN_TO_WORK, PAY_INVOICE);
+                    break;
+                case ACTIONS_INVOICE_PAID:
+                   /* noShowOnMapButton();
+                    noSelectNewCompanyButton();
+                    noPayInvoiceButton();
+                    noCancelButton();
+                    noSignActButton();
+                    noMakeReviewButton();
+                    checkReturnToWorkButton();*/
+                    notVisibleButtons = List.of(SHOW_ON_MAP, SELECT_NEW_COMPANY, PAY_INVOICE, CANCEL_ORDER, SIGN_ACT, MAKE_REVIEW);
+                    visibleButtons = List.of(RETURN_TO_WORK);
+
+                    break;
+                case MASTER_SIGN_ACT:
+                    /*noShowOnMapButton();
+                    noSelectNewCompanyButton();
+                    noCancelButton();
+                    noPayInvoiceButton();
+                    noMakeReviewButton();
+                    checkReturnToWorkButton();
+                    checkSignActButton();*/
+                    notVisibleButtons = List.of(SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, MAKE_REVIEW);
+                    visibleButtons = List.of(RETURN_TO_WORK, SIGN_ACT);
+                    break;
+                case CLIENT_SIGN_ACT:
+                    /*noShowOnMapButton();
+                    noSelectNewCompanyButton();
+                    noCancelButton();
+                    noPayInvoiceButton();
+                    noSignActButton();
+                    noReturnToWorkButton();
+                    checkMakeReviewButton();*/
+                    notVisibleButtons = List.of(SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, SIGN_ACT, RETURN_TO_WORK);
+                    visibleButtons = List.of(MAKE_REVIEW);
+                    break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);
             }
