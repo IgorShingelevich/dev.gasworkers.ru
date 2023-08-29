@@ -1,4 +1,6 @@
 package ru.gasworkers.dev.tests.web;
 
-public class BaseWebTest {
+import ru.gasworkers.dev.tests.api.BaseApiTest;
+
+public class BaseWebTest extends BaseApiTest {
 }

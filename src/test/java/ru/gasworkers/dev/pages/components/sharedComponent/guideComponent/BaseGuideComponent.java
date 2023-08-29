@@ -32,7 +32,6 @@ public class BaseGuideComponent extends BaseComponent {
             skipButtonLocator.click();
             self.shouldNotBe(visible, Duration.ofSeconds(10));
         });
-        System.out.println("guideSkipped");
     }
 
     public void nextButton() {
