@@ -60,6 +60,18 @@ public final class HomeClientPage extends BaseClientPage {
         });
     }
 
+    public void checkFillProfileButton() {
+        stepWithRole("Убедиться, что присутствует кнопка Заполнить профиль", () -> {
+            fillProfileButtonLocator.shouldBe(visible);
+        });
+    }
+
+    public void noFillProfileButton() {
+        stepWithRole("Убедиться, что отсутствует кнопка Заполнить профиль", () -> {
+            fillProfileButtonLocator.shouldNotBe(visible);
+        });
+    }
+
     public void checkInitialGuide() {
         stepWithRole("Убедиться, что представлены компоненты страницы Вводного гида: ", () -> {
             stepWithRole(" Убедиться что текст заголовка и подзаголовка правильный", () -> {

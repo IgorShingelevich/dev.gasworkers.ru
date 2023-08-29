@@ -17,6 +17,7 @@ import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tab
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster.InfoMasterTabOrderCardClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
 
 import java.time.Duration;
@@ -258,6 +259,19 @@ public class OrderCardClientPage extends BaseClientPage {
     }
 
     public void checkState(StateRepair state, OrdersIdResponseDto dto) {
+        stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
+            checkOrderNumber(dto.getData().getNumber());
+            nav.noChecklistTab();
+            nav.common();
+            state.checkCommonTab(this.commonTab, dto);
+            nav.infoMaster();
+            state.checkInfoMasterTab(this.infoMasterTab, dto);
+            nav.docs();
+            state.checkDocsTab(this.docsTab, dto);
+        });
+    }
+
+    public void checkState(StateConsultation state, OrdersIdResponseDto dto) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
             checkOrderNumber(dto.getData().getNumber());
             nav.noChecklistTab();

@@ -104,7 +104,7 @@ public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
     }
 
 
-    public void detailsSet(StateRepair stateRepair, StateRepairBuilder.OrderIdData data) {
+    public void detailsRepair(StateRepair stateRepair, StateRepairBuilder.OrderIdData data) {
         checkServiceType(ServiceType.REPAIR);
         checkAddress(data.getAddress());
         checkEquipment(data.getEquipments0());

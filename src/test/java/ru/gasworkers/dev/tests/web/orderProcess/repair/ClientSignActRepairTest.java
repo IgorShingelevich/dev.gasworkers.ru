@@ -14,7 +14,7 @@ import ru.gasworkers.dev.extension.user.WithThroughUser;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
-import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
+import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 import ru.gasworkers.dev.tests.web.BaseWebTest;
 
 import java.time.LocalDate;
@@ -44,10 +44,10 @@ public class ClientSignActRepairTest extends BaseWebTest {
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
 
-// Get the StateInfo and CommonFieldsRepairDto from the result
+// Get the StateInfo and CommonFieldsDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
-        CommonFieldsRepairDto commonFieldsFromStateInfo = result.getCommonFieldsResult();
-        CommonFieldsRepairDto commonFieldsFromStateInfo2 = stateInfo.getCommonFields();
+        CommonFieldsDto commonFieldsFromStateInfo = result.getCommonFieldsResult();
+        CommonFieldsDto commonFieldsFromStateInfo2 = stateInfo.getCommonFields();
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("Web: " + role + " авторизация", () -> {
             clientPages.getLoginPage().open();
@@ -78,7 +78,7 @@ public class ClientSignActRepairTest extends BaseWebTest {
                 step(role + " уведомления - в состоянии " + state, () -> {
                     clientPages.getAllNotificationsPage().open();
                     clientPages.getAllNotificationsPage().checkFinishLoading();
-                    clientPages.getAllNotificationsPage().checkState(state, stateInfo.getNotificationsDto());
+                    clientPages.getAllNotificationsPage().checkRepairState(state, stateInfo.getNotificationsDto());
                 });
             };
 

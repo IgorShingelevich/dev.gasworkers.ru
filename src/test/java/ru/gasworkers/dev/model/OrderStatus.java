@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public enum OrderStatus {
+    //repair
     PUBLISHED("Новый заказ", "client"),
     NEW_TENDER("Тендер", "dispatcher"),
     PARTICIPATE_TENDER("Тендер", "dispatcher"),
@@ -23,7 +24,12 @@ public enum OrderStatus {
     START_MAINTENANCE_WORK("Приезд мастера и проведение ТО", "master"),
     PAY_MAINTENANCE_WORK("Оплата ТО", "client"),
     SIGN_COMPLETION_ACT("Подписание Акта выполненных работ", Role.CLIENT + ", " + Role.DISPATCHER + ", " + Role.MASTER),
-    CLIENT_SIGN_ACT("Завершен", Role.CLIENT + ", " + Role.DISPATCHER + ", " + Role.MASTER);
+    CLIENT_SIGN_ACT("Завершен", Role.CLIENT + ", " + Role.DISPATCHER + ", " + Role.MASTER),
+    //consultation
+    CLIENT_WAIT_MASTER("Ожидает когда мастер начнет консультацию", Role.CLIENT + ", " + Role.MASTER),
+    MASTER_START_CONSULTATION("Мастер приступил к работе", Role.CLIENT + ", " + Role.MASTER),
+    MASTER_FILLED_CONCLUSION("Мастер заполнил данные по заказу", Role.CLIENT + ", " + Role.MASTER),
+    COMPLETED("Завершен", Role.CLIENT + ", " + Role.MASTER);
 
     private final String description;
 

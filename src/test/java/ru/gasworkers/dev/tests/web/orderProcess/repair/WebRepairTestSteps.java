@@ -64,7 +64,7 @@ public class WebRepairTestSteps extends BaseWebTest {
         step(role + " уведомления - в состоянии " + state, () -> {
             clientPages.getAllNotificationsPage().open();
             clientPages.getAllNotificationsPage().checkFinishLoading();
-            clientPages.getAllNotificationsPage().checkState(state, stateInfo.getNotificationsDto());
+            clientPages.getAllNotificationsPage().checkRepairState(state, stateInfo.getNotificationsDto());
         });
     }
 

@@ -42,7 +42,7 @@ public class HasOfferRepairTest extends BaseWebTest {
         Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
-// Get the StateInfo and CommonFieldsRepairDto from the result
+// Get the StateInfo and CommonFieldsDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
         WebRepairTestSteps webStep = new WebRepairTestSteps();
 //    ------------------------------------------------- UI -----------------------------------------------------------

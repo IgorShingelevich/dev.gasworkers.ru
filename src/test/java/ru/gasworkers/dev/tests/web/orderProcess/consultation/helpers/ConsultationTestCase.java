@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.api.story.repair;
+package ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.gasworkers.dev.api.auth.user.UserResponseDto;
@@ -14,11 +14,12 @@ import ru.gasworkers.dev.api.orders.materialValues.dto.OrdersSaveMaterialValuesR
 import ru.gasworkers.dev.api.orders.sign.dto.OrdersSendSignRequestDto;
 import ru.gasworkers.dev.api.orders.sign.dto.OrdersSignRequestDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
+import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 
 import java.io.File;
 import java.io.IOException;
 
-public class RepairTestCase {
+public class ConsultationTestCase {
     ObjectMapper objectMapper = new ObjectMapper();
 
     public UserResponseDto publishedClient(CommonFieldsDto commonFields) throws IOException {

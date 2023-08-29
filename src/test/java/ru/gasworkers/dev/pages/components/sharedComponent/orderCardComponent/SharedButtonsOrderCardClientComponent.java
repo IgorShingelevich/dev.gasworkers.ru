@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideDriver;
 import com.codeborne.selenide.SelenideElement;
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
 
 import java.util.List;
@@ -19,7 +20,26 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
         super(browser);
     }
 
-    public void checkButtons(StateRepair stateRepair) {
+    public void checkConsultationButtons(StateConsultation stateConsultation) {
+        step("Проверить набор кнопок в состоянии " + stateConsultation, () -> {
+            List<Button> visibleButtons;
+            List<Button> notVisibleButtons;
+            switch (stateConsultation) {
+                case CLIENT_WAIT_MASTER:
+                case MASTER_START_CONSULTATION:
+                case MASTER_FILLED_CONCLUSION:
+                case COMPLETED:
+                    notVisibleButtons = List.of(SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
+                    visibleButtons = List.of(RETURN_TO_WORK);
+                    break;
+                default:
+                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateConsultation);
+            }
+        });
+    }
+
+
+    public void checkRepairButtons(StateRepair stateRepair) {
         step("Проверить набор кнопок в состоянии " + stateRepair, () -> {
             List<Button> visibleButtons;
             List<Button> notVisibleButtons;

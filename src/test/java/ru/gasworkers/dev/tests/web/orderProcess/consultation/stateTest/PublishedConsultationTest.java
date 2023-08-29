@@ -1,45 +1,23 @@
-package ru.gasworkers.dev.tests.web.orderProcess.consultation;
+package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTest;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 import io.qameta.allure.*;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.EnumSource;
+import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.administration.getUserWithAdmin.GetUserWithAdminApi;
 import ru.gasworkers.dev.api.auth.login.LoginApi;
-import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
-import ru.gasworkers.dev.api.auth.login.dto.LoginResponseDto;
-import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRequestDto;
-import ru.gasworkers.dev.api.consultation.cancel.ConsultationCancelApi;
-import ru.gasworkers.dev.api.consultation.cancel.dto.ConsultationCancelResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.apply.ApplyMasterApi;
-import ru.gasworkers.dev.api.consultation.masters.apply.dto.ApplyMasterResponseDto;
 import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.SelectConsultationMasterApi;
-import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterResponseDto;
 import ru.gasworkers.dev.api.orders.create.CreateOrderApi;
-import ru.gasworkers.dev.api.orders.create.dto.CreateOrderResponseDto;
-import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
-import ru.gasworkers.dev.api.orders.info.dto.OrdersInfoResponseDto;
 import ru.gasworkers.dev.api.orders.selectHouse.SelectHouseApi;
-import ru.gasworkers.dev.api.orders.selectHouse.dto.SelectHouseResponseDto;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
-import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentResponseDto;
 import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
 import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.AddEquipmentApi;
-import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.dto.AddEquipmentResponseDto;
 import ru.gasworkers.dev.api.users.client.house.getClientHouses.GetClientHousesApi;
-import ru.gasworkers.dev.api.users.client.house.getClientHouses.dto.GetClientHousesResponseDto;
-import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoApi;
-import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.client.WithClient;
@@ -49,27 +27,29 @@ import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.MasterPages;
-import ru.gasworkers.dev.tests.api.BaseApiTest;
+import ru.gasworkers.dev.tests.SoftAssert;
+import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
+import ru.gasworkers.dev.tests.web.BaseWebTest;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.PreconditionConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.StateInfo;
 
-import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.function.Consumer;
 
-import static com.codeborne.pdftest.assertj.Assertions.assertThat;
 import static io.qameta.allure.Allure.step;
 
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.CONSULTATION)
 @Feature(AllureFeature.CONSULTATION_NOW)
-@Story("Отмена консультации")
+@Story("Видеоконсультация")
 @Tag(AllureTag.REGRESSION)
-@Tag(AllureTag.PAYMENT)
 @Tag(AllureTag.CLIENT)
-@Tag(AllureTag.WEB)
-public class CancelClientPayedConsultationTest extends BaseApiTest {
+@Tag(AllureTag.WEB_CONSULTATION)
+public class PublishedConsultationTest extends BaseWebTest {
 
     private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
@@ -80,9 +60,6 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
     private final SelectConsultationMasterApi selectConsultationMasterApi = new SelectConsultationMasterApi();
     private final ApplyMasterApi applyMasterApi = new ApplyMasterApi();
     private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
-    private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
-    private final OrdersInfoApi ordersInfoApi = new OrdersInfoApi();
-    private final ConsultationCancelApi consultationCancelApi = new ConsultationCancelApi();
     private final LoginApi loginApi = new LoginApi();
     private final GetUserWithAdminApi getUserWithAdminApi = new GetUserWithAdminApi();
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
@@ -90,19 +67,31 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
     @Browser(role = Role.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.THIRD_ROLE)
     MasterPages masterPages;
 
-    @ParameterizedTest(name = "{0}")
-    @EnumSource(FinishConsultationCase.class)
-    @DisplayName("Отмена  оплаченной консультации клиентом")
-    void cancelClientPayedConsultationNow(FinishConsultationCase testCase, @WithClient(houses = {@WithHouse}) User client) throws IOException {
-        String token = loginApi.getTokenPhone(client);
+    @Test
+    @DisplayName("Консультация - в состоянии clientWaitMaster")
+    void clientWaitMaster(@WithClient(houses = {@WithHouse}) User client) {
+        StateConsultation state = StateConsultation.CLIENT_WAIT_MASTER;
+        Role role = Role.CLIENT;
+
+        PreconditionConsultation preconditionConsultation = new PreconditionConsultation();
+        PreconditionConsultation.Result result = preconditionConsultation.applyPrecondition(client, state);
+
+// Get the StateInfo and CommonFieldsDto from the result
+        StateInfo stateInfo = result.getStateInfoResult();
+        CommonFieldsDto commonFields = result.getCommonFieldsResult();
+
+        /*String token = loginApi.getTokenPhone(client);
         Integer houseId = clientHousesApi.houseId(client, token);
         step("Add equipment", () -> {
-            addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), houseId, token)
+            addEquipmentApi.addEquipment(AddEquipmentRequestDto.defaultBoilerEquipment(), houseId, token)
                     .statusCode(200)
                     .extract().as(AddEquipmentResponseDto.class);
         });
         Integer orderId = step("Create orders", () -> {
-            return createOrdersApi.createOrder(testCase.getCreateOrdersDto(), token)
+            return createOrdersApi.createOrder(CreateOrderRequestDto.builder()
+                            .type("consultation")
+                            .houseId(String.valueOf(houseId))
+                            .build(), token)
                     .statusCode(200)
                     .extract().as(CreateOrderResponseDto.class).getData().getOrderId();
         });
@@ -124,12 +113,19 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
         System.out.println("actualObjectId = " + actualObjectId);
 
         SelectHouseResponseDto expectedResponse = step("Select object", () -> {
-            return selectHouseApi.selectObject(testCase.getSelectObjectDto(actualObjectId, orderId, equipmentList), token)
+            return selectHouseApi.selectObject(SelectHouseRequestDto.builder()
+                            .clientObjectId(houseId)
+                            .orderId(orderId)
+                            .equipment(equipmentList)
+                            .build(), token)
                     .statusCode(200)
                     .extract().as(SelectHouseResponseDto.class);
         });
         List<Integer> masterIdList = step("Get online masters", () -> {
-            String responseString = onlineMastersApi.getOnlineMasters(testCase.getOnlineMastersDto(orderId), token)
+            String responseString = onlineMastersApi.getOnlineMasters(OnlineMastersRequestDto.builder()
+                            .orderId(orderId)
+                            .search("rating")
+                            .build(), token)
                     .statusCode(200)
                     .extract().asString();
             JsonObject responseObject = JsonParser.parseString(responseString).getAsJsonObject();
@@ -146,17 +142,29 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
         });
 
         Integer timetableId = step("Pick master", () -> {
-            return selectConsultationMasterApi.selectMaster(testCase.getPickMasterDto(orderId), masterIdList.get(0), token)
+            return selectConsultationMasterApi.selectMaster(PickMasterRequestDto.builder()
+                            .orderId(orderId)
+                            .online(true)
+                            .build(), masterIdList.get(0), token)
                     .statusCode(200)
                     .extract().as(PickMasterResponseDto.class).getData().getTimetableId();
         });
         Integer receiptId = step("Apply master", () -> {
-            return applyMasterApi.applyMaster(testCase.getApplyMasterDto(orderId, timetableId), masterIdList.get(0), token)
+            return applyMasterApi.applyMaster(ApplyMasterRequestDto.builder()
+                            .orderId(orderId)
+                            .timetableId(timetableId)
+                            .description("test description")
+                            .now(true)
+                            .build(), masterIdList.get(0), token)
                     .statusCode(200)
                     .extract().as(ApplyMasterResponseDto.class).getData().getReceiptId();
         });
         SelectPaymentResponseDto selectPaymentResponse = step("Select payment", () -> {
-            return selectPaymentApi.selectPayment(testCase.getSelectPaymentDto(orderId, receiptId), token)
+            return selectPaymentApi.selectPayment(SelectPaymentRequestDto.builder()
+                            .orderId(orderId)
+                            .receiptId(receiptId)
+                            .type("fps")
+                            .build(), token)
                     .statusCode(200)
                     .extract().as(SelectPaymentResponseDto.class);
         });
@@ -176,91 +184,85 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
         System.out.println("masterEmail = " + masterEmail);
         String phone = ComplexRegistrationRequestDto.builder()
                 .phone(client.getPhone())
-                .build().getPhone();
-        step("убедиться что есть единственный последний заказ в статусе ожидания начала", () -> {
-            LastOrderInfoResponseDto lastOrderResponse = lastOrderInfoApi.getLastOrderInfo(token)
-                    .statusCode(200)
-                    .extract().as(LastOrderInfoResponseDto.class);
-            Integer lastOrderId = lastOrderResponse.getData().getId();
-            String lastOrderStatus = lastOrderResponse.getData().getStatus();
-            assertThat(lastOrderId).isEqualTo(orderId);
-            Assertions.assertThat(lastOrderStatus).isEqualTo("wait-for-master-starting");
-        });
-
-
-       step("отмена оплаченной консультации", () -> {
-           consultationCancelApi.cancelConsultation(testCase.getConsultationCancelDto(orderId), token)
-                   .statusCode(200)
-                   .extract().as(ConsultationCancelResponseDto.class);
-       });
-        step("убедиться что нет единственного последнего заказа после отмены", () -> {
-            LastOrderInfoResponseDto noLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(token)
-                    .statusCode(200)
-                    .extract().as(LastOrderInfoResponseDto.class);
-            assertResponse(noLastOrderResponse, LastOrderInfoResponseDto.noLastOrderResponse());
-        });
-        step("убедиться что карточка заказа после отмены имеет статус canceled", () -> {
-            OrdersInfoResponseDto ordersInfoResponse = ordersInfoApi.ordersInfo(orderId, token)
-                    .statusCode(200)
-                    .extract().as(OrdersInfoResponseDto.class);
-            Integer currentOrderId = ordersInfoResponse.getData().getId();
-            String currentStatus = ordersInfoResponse.getData().getStatus();
-            String currentType = ordersInfoResponse.getData().getType();
-            assertThat(currentStatus).isEqualTo("canceled");
-            assertThat(currentType).isEqualTo("consultation");
-            assertThat(currentOrderId).isEqualTo(orderId);
-        });
-
+                .build().getPhone();*/
 
 //        ----------------------------  UI  --------------------------------
         step("авторизация Ролей ", () -> {
             step("авторизация Клиента", () -> {
                 clientPages.getLoginPage().open();
-//                clientPages.getDriverManager().switchToTab(0);
-//                clientPages.getDriverManager().close();
-                clientPages.getLoginPage().login(phone, "1234");
+                clientPages.getLoginPage().login(String.valueOf(commonFields.getClientPhone()), "1234");
                 clientPages.getHomePage().checkUrl();
-               /* // Enable the Dark Reader extension
-                Selenide.executeJavaScript("DarkReader.enable()");
-
-                // Wait for the Dark Reader CSS to be applied
-                Selenide.$("body").shouldHave(Condition.attribute("data-darkreader-mode", "dynamic"));
-                // Switch back to the first tab*/
 
             });
 
-            step("авторизация Мастера", () -> {
-                masterPages.getLoginPage()
-                        .open()
-                        .login(masterEmail, "1234");
-                masterPages.getHomePage().checkUrl();
-
-            });
             step("Test run credentials ", () -> {
-                Allure.addAttachment("Client creds", phone + ": " + "1234" + "/");
-                Allure.addAttachment("Master creds", masterEmail + "/" + "1234");
+                Allure.addAttachment("Client creds", commonFields.getClientPhone() + ": " + "1234" + "/");
+                Allure.addAttachment("Master creds", commonFields.getMasterEmail() + "/" + "1234");
                 String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                         + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
                 Allure.addAttachment("RunStartTime: ", date);
             });
         });
-        step("Мастер отсутствует уведомление", () -> {
-            step("стр Лк мастера ", () -> {
-                masterPages.getHomePage().conferenceNotification.noConsultationComponent();
-            });
-        });
-        step("Клиент отсутствует уведомление", () -> {
-            step("стр Лк клиента ", () -> {
-                clientPages.getHomePage().conferenceNotification.noConsultationComponent();
-            });
-            //todo check invoice presence after cancel
-            //todo notification money back
 
 
+        step(role + " кабинет в состоянии - в состоянии " + state, () -> {
+
+            Consumer<SoftAssert> case1 = softAssert -> {
+                step(role + " карточка последнего заказа - в состоянии " + state, () -> {
+                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
+                    clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getLastOrderInfoDto());
+                });
+            };
+
+            Consumer<SoftAssert> case2 = softAssert -> {
+                step(role + " компонент баннер ВК в лк - в состоянии " + state, () -> {
+                    clientPages.getHomePage().conferenceNotification.checkState(state);
+                });
+            };
+
+            Consumer<SoftAssert> case3 = softAssert -> {
+                step(role + " кнопка на дом стр Заполнить профиль - в состоянии " + state, () -> {
+                    clientPages.getHomePage().checkFillProfileButton();
+                });
+            };
+
+            Consumer<SoftAssert> case4 = softAssert -> {
+                step(role + " карточка заказа - в состоянии " + state, () -> {
+                    clientPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderId()));
+                    clientPages.getOrderCardPage().checkFinishLoading();
+                    clientPages.getOrderCardPage().checkState(state, stateInfo.getOrdersIdResponseDto());
+                });
+            };
+
+            Consumer<SoftAssert> case5 = softAssert -> {
+                step(role + " уведомления - в состоянии " + state, () -> {
+                    clientPages.getAllNotificationsPage().open();
+                    clientPages.getAllNotificationsPage().checkFinishLoading();
+                    clientPages.getAllNotificationsPage().checkConsultationState(state, stateInfo.getNotificationsDto());
+                });
+            };
+
+            Consumer<SoftAssert> case6 = softAssert -> {
+                step(role + " красное уведомление в лк - в состоянии " + state, () -> {
+                    clientPages.getHomePage().open();
+                    clientPages.getHomePage().checkFinishLoading();
+                    clientPages.getHomePage().redNotice.noNotice();
+                });
+            };
+            Consumer<SoftAssert> case7 = softAssert -> {
+                step(role + " красное уведомление на стр лендинга - в состоянии " + state, () -> {
+                    clientPages.getLandingPage().open();
+                    clientPages.getLandingPage().checkFinishLoading();
+                    clientPages.getLandingPage().noticeComponent.noNotifications();
+                });
+            };
+            assertAll(Arrays.asList(case1,
+                    case2, case3,
+                    case4, case5, case6, case7));
         });
 
     }
-
 }
+
 
 

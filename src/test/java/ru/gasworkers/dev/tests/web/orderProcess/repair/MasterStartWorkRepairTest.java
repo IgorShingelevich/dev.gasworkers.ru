@@ -43,7 +43,7 @@ public class MasterStartWorkRepairTest extends BaseWebTest {
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
 
-// Get the StateInfo and CommonFieldsRepairDto from the result
+// Get the StateInfo and CommonFieldsDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("Web: " + role + " авторизация", () -> {
@@ -77,7 +77,7 @@ public class MasterStartWorkRepairTest extends BaseWebTest {
                 step(role + " уведомления - в состоянии " + state, () -> {
                     clientPages.getAllNotificationsPage().open();
                     clientPages.getAllNotificationsPage().checkFinishLoading();
-                    clientPages.getAllNotificationsPage().checkState(state, stateInfo.getNotificationsDto());
+                    clientPages.getAllNotificationsPage().checkRepairState(state, stateInfo.getNotificationsDto());
                 });
             };
             Consumer<SoftAssert> case4 = softAssert -> {

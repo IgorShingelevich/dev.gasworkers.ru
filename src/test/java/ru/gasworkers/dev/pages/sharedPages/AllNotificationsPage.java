@@ -8,6 +8,7 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
 
 import static com.codeborne.selenide.CollectionCondition.size;
@@ -110,8 +111,25 @@ public class AllNotificationsPage extends BasePage {
         });
     }
 
+    public void checkConsultationState(StateConsultation stateConsultation, NotificationsResponseDto dto) {
+        stepWithRole("Проверить уведомления в состоянии " + stateConsultation, () -> {
+            switch (stateConsultation) {
+                case CLIENT_WAIT_MASTER:
+                case MASTER_START_CONSULTATION:
+                case MASTER_FILLED_CONCLUSION:
+                case COMPLETED:
+                    checkExpectedAmountOfNotifications(0, 4000);
+                    break;
+                default:
+                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
+            }
 
-    public void checkState(StateRepair stateRepair, NotificationsResponseDto dto) {
+
+        });
+    }
+
+
+    public void checkRepairState(StateRepair stateRepair, NotificationsResponseDto dto) {
         stepWithRole("Проверить уведомления в состоянии " + stateRepair, () -> {
             String firstNotificationText = dto.getData().get(0).getText();
             switch (stateRepair) {

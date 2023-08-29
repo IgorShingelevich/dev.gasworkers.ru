@@ -89,6 +89,16 @@ public class StateRepairBuilder {
         OrdersIdResponseDto.Data.Client client = dto.getData().getClient();
         String clientFullName = (client != null) ? client.getFullName() : null;
 
+        String desiredDate = null;
+        if (dto.getData().getDesiredDateIntervalStartedAt() != null && dto.getData().getDesiredDateIntervalEndedAt() != null) {
+            desiredDate = helper.desiredDateIntervalFormatter(dto.getData().getDesiredDateIntervalStartedAt(), dto.getData().getDesiredDateIntervalEndedAt());
+        }
+
+        String desiredTime = null;
+        if (dto.getData().getDesiredTimeStarted() != null && dto.getData().getDesiredTimeEnded() != null) {
+            desiredTime = helper.desiredTimeIntervalFormatter(dto.getData().getDesiredTimeStarted(), dto.getData().getDesiredTimeEnded());
+        }
+
 
         return OrderIdData.builder()
                 .orderNumber(dto.getData().getNumber())
@@ -106,8 +116,8 @@ public class StateRepairBuilder {
                 .address(dto.getData().getClientObject().getAddress().getFull())
                 .phone(dto.getData().getClient().getPhone().toString())
                 .equipments0(dto.getData().getEquipments().get(0).getComputedTitle())
-                .desiredDate(helper.desiredDateIntervalFormatter(dto.getData().getDesiredDateIntervalStartedAt(), dto.getData().getDesiredDateIntervalEndedAt()))
-                .desiredTime(helper.desiredTimeIntervalFormatter(dto.getData().getDesiredTimeStarted(), dto.getData().getDesiredTimeEnded()))
+                .desiredDate(desiredDate)
+                .desiredTime(desiredTime)
                 .description(dto.getData().getDescription())
                 .masterFullName(masterFullName)
                 .masterAvatar(masterAvatar)

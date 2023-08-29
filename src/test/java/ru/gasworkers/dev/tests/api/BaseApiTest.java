@@ -10,7 +10,7 @@ import org.junit.jupiter.api.function.Executable;
 import org.skyscreamer.jsonassert.JSONAssert;
 import ru.gasworkers.dev.api.auth.login.LoginApi;
 import ru.gasworkers.dev.tests.BaseTest;
-import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
+import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -20,7 +20,7 @@ public abstract class BaseApiTest extends BaseTest {
 
     protected final LoginApi loginApi = new LoginApi();
     private final ObjectMapper objectMapper = new ObjectMapper();
-    protected final CommonFieldsRepairDto commonFields = new CommonFieldsRepairDto();
+    protected final CommonFieldsDto commonFields = new CommonFieldsDto();
 
 
     public static void compareJsonDifferences(Object response1, Object response2) {

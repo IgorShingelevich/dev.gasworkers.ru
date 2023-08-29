@@ -40,4 +40,5 @@ public final class AllureTag {
     //samples
     public static final String SAMPLE_WEB_TEST = "sampleWebTest",
             SAMPLE_API_TEST = "sampleApiTest";
+    public static final String WEB_CONSULTATION = "web-consultation";
 }

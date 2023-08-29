@@ -6,6 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepairBuilder;
 
@@ -120,7 +121,43 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
         });
     }
 
-    public void statusSet(StateRepair stateRepair, StateRepairBuilder.OrderIdData data, OrdersIdResponseDto dto) {
+    public void statusRepair(StateConsultation stateConsultation, StateRepairBuilder.OrderIdData data, OrdersIdResponseDto dto) {
+
+        step("Проверить статус заказа и оплаты в состоянии " + stateConsultation, () -> {
+            switch (stateConsultation) {
+                case CLIENT_WAIT_MASTER:
+                    checkCurrentStatus(OrderStatus.CLIENT_WAIT_MASTER);
+                    noActivationStagePayment();
+                    noMaterialsStagePayment();
+                    noActionsStagePayment();
+                    break;
+                case MASTER_START_CONSULTATION:
+                    checkCurrentStatus(OrderStatus.MASTER_START_CONSULTATION);
+                    noActivationStagePayment();
+                    noMaterialsStagePayment();
+                    noActionsStagePayment();
+                    break;
+                case MASTER_FILLED_CONCLUSION:
+                    checkCurrentStatus(OrderStatus.MASTER_FILLED_CONCLUSION);
+                    noActivationStagePayment();
+                    noMaterialsStagePayment();
+                    noActionsStagePayment();
+                    break;
+                case COMPLETED:
+                    checkCurrentStatus(OrderStatus.COMPLETED);
+                    noActivationStagePayment();
+                    noMaterialsStagePayment();
+                    noActionsStagePayment();
+                    // todo stepper
+                    break;
+                default:
+                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
+
+            }
+        });
+    }
+
+    public void statusRepair(StateRepair stateRepair, StateRepairBuilder.OrderIdData data, OrdersIdResponseDto dto) {
 
         step("Проверить статус заказа и оплаты в состоянии " + stateRepair, () -> {
             switch (stateRepair) {

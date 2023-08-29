@@ -8,14 +8,14 @@ import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.api.users.notification.NotificationsResponseDto;
-import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
+import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class StateInfo {
-    private CommonFieldsRepairDto commonFields;
+    private CommonFieldsDto commonFields;
     private SuggestServicesResponseDto suggestedServiceDto;
     private NotificationsResponseDto notificationsDto;
     private LastOrderInfoResponseDto lastOrderInfoDto;

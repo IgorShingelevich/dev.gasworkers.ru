@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsRepairDto;
+import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class UserSettingsCommonResponseDto {
     private String message;
     private DataDto data;
 
-    public static UserSettingsCommonResponseDto defaultBGUserResponse(User user, CommonFieldsRepairDto commonFields) {
+    public static UserSettingsCommonResponseDto defaultBGUserResponse(User user, CommonFieldsDto commonFields) {
         return UserSettingsCommonResponseDto.builder()
                 .status(0)
                 .message("Профиль обновлен")
