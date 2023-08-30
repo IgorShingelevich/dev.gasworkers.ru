@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'io.qameta.allure' version '2.11.2'
     id "io.freefair.lombok" version "6.4.2"
+    id("org.gradle.test-retry") version "1.5.3"
 }
 
 group 'com.example'
@@ -30,7 +31,7 @@ ext {
     jacksonDatabind = '2.15.1'
     jsonPath = '2.4.0'
     jsonSimple = '1.1.1'
-    orgJson = '20210307'
+    orgJson = '20230227'
     annotationsVersion = '23.0.0'
     jsonassertVersion = '1.5.0'
     commonsIoVersion = '1.3.2'
@@ -92,6 +93,10 @@ test {
         events "started", "skipped", "failed", "standard_error", "standard_out"
         exceptionFormat "short"
     }
+    retry {
+        maxRetries = 2
+        failOnPassedAfterRetry = false
+    }
 }
 
 task registrationTest(type: Test) {
@@ -133,6 +138,12 @@ task webRepairTest(type: Test) {
 task webRegistrationTest(type: Test) {
     useJUnitPlatform {
         includeTags "web-registration"
+    }
+}
+
+task webConsultationTest(type: Test) {
+    useJUnitPlatform {
+        includeTags "web-consultation"
     }
 }
 task sampleWebTest(type: Test) {

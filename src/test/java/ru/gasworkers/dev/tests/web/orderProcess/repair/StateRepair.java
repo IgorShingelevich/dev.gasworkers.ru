@@ -89,8 +89,8 @@ public enum StateRepair {
             StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
             tab.status.statusRepair(this, data, dto);
             tab.details.detailsRepair(this, data);
-            tab.suggestedMasterRepair.statusSet(this, dto, 0);
-            tab.buttons.checkRepairButtons(this);
+            tab.suggestedMasterRepair.checkState(this, dto, 0);
+            tab.buttons.checkStateRepair(this);
             switch (this) {
                 case PUBLISHED:
                     // todo stepper
@@ -135,14 +135,14 @@ public enum StateRepair {
         step("Убедиться, что вкладка Информация по работам в состоянии " + this, () -> {
             StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
             tab.status.statusRepair(this, data, dto);
-            tab.suggestedMasterCardRepair.statusSet(this, dto, 0);
-            tab.approvedMasterCard.statusSet(this, data);
-            tab.buttons.checkRepairButtons(this);
+            tab.suggestedMasterCardRepair.checkState(this, dto, 0);
+            tab.approvedMasterCard.checkStateRepair(this, data);
+            tab.buttons.checkStateRepair(this);
             switch (this) {
                 case PUBLISHED:
                 case HAS_OFFER:
                     tab.checkNoInfoBox();
-                    tab.repairDetails.checkNoRepairDetails();
+                    tab.repairDetails.noTables();
                     break;
                 case SCHEDULE_DATE:
                 case WAIT_MASTER:
@@ -179,8 +179,8 @@ public enum StateRepair {
     public void checkDocsTab(DocsTabOrderCardComponent tab, OrdersIdResponseDto dto) {
         StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
         tab.status.statusRepair(this, data, dto);
-        tab.suggestedMastersRepair.statusSet(this, dto, 0);
-        tab.buttons.checkRepairButtons(this);
+        tab.suggestedMastersRepair.checkState(this, dto, 0);
+        tab.buttons.checkStateRepair(this);
         step("Убедиться, что вкладка Документы в состоянии " + this, () -> {
             switch (this) {
                 case PUBLISHED:

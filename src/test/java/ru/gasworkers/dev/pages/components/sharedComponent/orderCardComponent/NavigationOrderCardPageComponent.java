@@ -1,5 +1,7 @@
 package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
@@ -37,7 +39,7 @@ public class NavigationOrderCardPageComponent extends BaseComponent {
         });
     }
 
-    public void infoMaster() {
+   /* public void infoMaster() {
         stepWithRole("Перейти на вкладку Информация по работам", () -> {
             navInfoMasterTabButtonLocator.click();
             driver.$("li[data-name='master']").click();
@@ -45,10 +47,27 @@ public class NavigationOrderCardPageComponent extends BaseComponent {
                 navInfoMasterTabButtonLocator.shouldHave(cssClass("active"));
             });
         });
+    }*/
+
+    public void infoMaster() {
+        stepWithRole("Перейти на вкладку Информация по работам", () -> {
+            Selenide.sleep(1000); // Sleep for 1 second
+            navInfoMasterTabButtonLocator.click();
+            driver.$("li[data-name='master']").click();
+            stepWithRole("Убедиться, что открылась вкладка Информация по работам", () -> {
+//                if (!navInfoMasterTabButtonLocator.has(Condition.cssClass("active"))) {
+//                    Selenide.sleep(1000); // Sleep for 1 second
+//                    navInfoMasterTabButtonLocator.shouldHave(Condition.cssClass("active"));
+//                } else {
+                navInfoMasterTabButtonLocator.shouldHave(Condition.cssClass("active"));
+//                }
+            });
+        });
     }
 
     public void docs() {
         stepWithRole("Перейти на вкладку Документы", () -> {
+            Selenide.sleep(1000); // Sleep for 1 second
             navDocsTabButtonLocator.click();
             stepWithRole("Убедиться, что открылась вкладка Документы", () -> {
                 navDocsTabButtonLocator.shouldHave(cssClass("active"));

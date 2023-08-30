@@ -26,6 +26,18 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
             List<Button> notVisibleButtons;
             switch (stateConsultation) {
                 case CLIENT_WAIT_MASTER:
+                    notVisibleButtons = List.of(
+                            SHOW_ON_MAP,
+                            SELECT_NEW_COMPANY,
+                            RETURN_TO_WORK,
+                            PAY_INVOICE,
+                            SIGN_ACT,
+                            MAKE_REVIEW);
+                    visibleButtons = List.of(
+                            CANCEL_ORDER
+                    );
+
+                    break;
                 case MASTER_START_CONSULTATION:
                 case MASTER_FILLED_CONCLUSION:
                 case COMPLETED:
@@ -35,11 +47,13 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateConsultation);
             }
+            visibleButtons.forEach(this::checkButtonIsVisible);
+            notVisibleButtons.forEach(this::checkButtonIsNotVisible);
         });
     }
 
 
-    public void checkRepairButtons(StateRepair stateRepair) {
+    public void checkStateRepair(StateRepair stateRepair) {
         step("Проверить набор кнопок в состоянии " + stateRepair, () -> {
             List<Button> visibleButtons;
             List<Button> notVisibleButtons;

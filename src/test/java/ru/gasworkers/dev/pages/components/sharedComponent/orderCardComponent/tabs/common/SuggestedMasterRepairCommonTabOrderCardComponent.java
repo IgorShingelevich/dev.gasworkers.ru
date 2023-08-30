@@ -137,7 +137,7 @@ public class SuggestedMasterRepairCommonTabOrderCardComponent extends BaseOrderC
         });
     }
 
-    public void statusSet(StateRepair stateRepair, OrdersIdResponseDto dto, Integer masterIndex) {
+    public void checkState(StateRepair stateRepair, OrdersIdResponseDto dto, Integer masterIndex) {
         stepWithRole("Проверить предложенного мастера под индексом: " + masterIndex, () -> {
             switch (stateRepair) {
                 case PUBLISHED:

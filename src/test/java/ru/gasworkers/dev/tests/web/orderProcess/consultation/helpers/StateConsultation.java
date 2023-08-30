@@ -3,6 +3,7 @@ package ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers;
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
+import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.DocsTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.common.CommonTabOrderCardComponent;
@@ -29,7 +30,7 @@ public enum StateConsultation {
             switch (this) {
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
-                    component.offersCounter.noOffers();
+                    component.offersCounter.noComponent();
                     checkDetailsLastOrder(component, data);
                     component.noMasterVisitDateAndTime();
 //                 todo   component.checkDesiredTime(data.getDesiredTime());
@@ -37,7 +38,7 @@ public enum StateConsultation {
                     break;
                 case DRAFT:
                 case COMPLETED:
-                    component.offersCounter.noOffers();
+                    component.offersCounter.noComponent();
                     component.noLastOrderCard();
                     break;
                 default:
@@ -75,15 +76,15 @@ public enum StateConsultation {
             StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
             tab.status.statusRepair(this, data, dto);
             tab.suggestedMasterCardRepair.noSuggestedMastersCard();
-            tab.approvedMasterCard.noApprovedMasterCard();
+            tab.approvedMasterCard.checkStateConsultation(this, data);
             tab.buttons.checkConsultationButtons(this);
             switch (this) {
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
                 case MASTER_FILLED_CONCLUSION:
                 case COMPLETED:
-                    tab.checkNoInfoBox();
-                    tab.repairDetails.checkNoRepairDetails();
+//                    tab.checkNoInfoBox();
+                    tab.repairDetails.noTables();
                     // todo stepper
                     break;
                 /*case PUBLISHED:
@@ -135,8 +136,7 @@ public enum StateConsultation {
                 case MASTER_FILLED_CONCLUSION:
                 case COMPLETED:
                     tab.noDocs();
-                    tab.checkNoTotalPrice();
-                    tab.checkTotalPrice("10");
+                    tab.checkTotalPrice(String.valueOf(dto.getData().getMaster().getConsultationPrice()));
                /* case HAS_OFFER:
                     tab.noDocs();
                     tab.checkNoTotalPrice();
@@ -165,6 +165,7 @@ public enum StateConsultation {
                     tab.checkTotalPrice("6300");
                     // todo add tab.checkComputedToTalPrice - no field in json
                     break;*/
+                    break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
@@ -192,7 +193,7 @@ public enum StateConsultation {
 
     private void checkDetailsLastOrder(LastOrderProfileClientComponent component, StateRepairBuilder.LastOrderInfoData data) {
         component.checkOrderNumber(data.getOrderNumber());
-        component.checkServiceType(data.getServiceType());
+        component.checkServiceType(ServiceType.CONSULTATION.toString());
         component.checkAddress(data.getAddress());
         component.checkEquipment(data.getEquipments0());
     }

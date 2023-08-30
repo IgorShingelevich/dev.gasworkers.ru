@@ -91,7 +91,7 @@ public class ClientAfterPaymentVideoTest extends BaseTest {
                 clientPages.getApproveMasterVideoPage().details.checkOrderDate(randomClient.getSinceTodayDate());
                 clientPages.getApproveMasterVideoPage().details.checkRightNowTimeOrderState();
                 clientPages.getApproveMasterVideoPage().details.checkPriceOrder(masterPriceByIndex);
-                clientPages.getApproveMasterVideoPage().details.checkOrderType(ServiceType.VIDEO);
+                clientPages.getApproveMasterVideoPage().details.checkOrderType(ServiceType.CONSULTATION);
                 clientPages.getApproveMasterVideoPage().details.checkEquipment(resultedEquipmentCollectionName);
 //                clientPages.getApproveMasterVideoPage().details.checkPersonAddress(resultedAddress); // removed
                 //todo  video attachments

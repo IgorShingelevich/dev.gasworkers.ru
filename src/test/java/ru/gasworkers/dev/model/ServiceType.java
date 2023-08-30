@@ -7,7 +7,7 @@ import lombok.Getter;
 public enum ServiceType {
     MAINTENANCE("Техническое обслуживание", "maintenance"),
     REPAIR("Ремонт", "repair"),
-    VIDEO("Видеоконсультация","consultation"),
+    CONSULTATION("Видеоконсультация", "consultation"),
     URGENT("Видеоконсультация сейчас", "urgent");
 
      final String description;

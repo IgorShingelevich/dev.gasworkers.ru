@@ -49,7 +49,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_CONSULTATION)
-public class PublishedConsultationTest extends BaseWebTest {
+public class ClientWaitMasterConsultationTest extends BaseWebTest {
 
     private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();

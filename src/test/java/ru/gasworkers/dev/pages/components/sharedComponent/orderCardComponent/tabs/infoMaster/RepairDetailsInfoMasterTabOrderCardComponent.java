@@ -62,9 +62,10 @@ public class RepairDetailsInfoMasterTabOrderCardComponent extends BaseOrderCardC
                 .shouldHave(partialText(helper.priceFormatter(String.valueOf(price))));
     }
 
-    public void checkNoRepairDetails() {
-        stepWithRole("Убедиться, что информация о заказе отсутствует", () -> {
-            self.shouldNotBe(visible);
+    public void noTables() {
+        stepWithRole("Убедиться, что таблицы с  работами и материалами о заказе отсутствует", () -> {
+            materialsTableLocator.shouldNotBe(visible);
+            actionsTableLocator.shouldNotBe(visible);
         });
     }
 
