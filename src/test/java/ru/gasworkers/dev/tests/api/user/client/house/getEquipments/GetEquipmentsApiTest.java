@@ -38,11 +38,11 @@ public class GetEquipmentsApiTest extends BaseApiTest {
         Integer objectId = step("Add object", () -> {
             return clientHousesApi.addHouse(ClientHousesBuilder.addDefaultHouseRequestDto(), token)
                     .statusCode(200)
-                    .extract().as(HousesResponseDto.class).getData().getId();
+                    .extract().as(HousesResponseDto.class).getDataDto().getId();
         });
         Integer equipmentId = addEquipmentApi.addEquipment(testCase.getAddEquipmentDto(), objectId, token)
                 .statusCode(200)
-                .extract().as(AddEquipmentResponseDto.class).getData().getId();
+                .extract().as(AddEquipmentResponseDto.class).getDataDto().getId();
         GetEquipmentsResponseDto expectedResponse = GetEquipmentsResponseDto.successResponse();
         GetEquipmentsResponseDto actualResponse = getEquipmentsApi.getEquipments(testCase.getGetEquipmentsDto(), objectId, equipmentId, token)
                 .statusCode(200)

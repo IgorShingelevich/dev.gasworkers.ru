@@ -6,6 +6,7 @@ import ru.gasworkers.dev.pages.context.*;
 
 @AllArgsConstructor
 public enum Role {
+    ADMIN("Admin", null, null),
     CLIENT("Client", 79312534936L, ClientPages.class),
     MASTER("Master", 79917644241L, MasterPages.class),
     SELF_EMPLOYED("Self-employed", null, SelfEmployedPages.class),

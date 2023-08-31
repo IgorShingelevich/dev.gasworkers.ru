@@ -4,8 +4,8 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.BaseOrderCardComponent;
 import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.StateBuilder;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepairBuilder;
 
 import java.time.Duration;
 
@@ -79,7 +79,7 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
         });
     }
 
-    public void checkStateRepair(StateRepair stateRepair, StateRepairBuilder.OrderIdData dto) {
+    public void checkStateRepair(StateRepair stateRepair, StateBuilder.OrderIdData dto) {
         step("Проверить, что карточка назначенного мастера в состоянии " + stateRepair, () -> {
             switch (stateRepair) {
                 case PUBLISHED:
@@ -109,7 +109,7 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
         });
     }
 
-    public void checkStateConsultation(StateConsultation stateConsultation, StateRepairBuilder.OrderIdData dto) {
+    public void checkStateConsultation(StateConsultation stateConsultation, StateBuilder.OrderIdData dto) {
         step("Проверить, что карточка назначенного мастера в состоянии " + stateConsultation, () -> {
             switch (stateConsultation) {
                 case CLIENT_WAIT_MASTER:

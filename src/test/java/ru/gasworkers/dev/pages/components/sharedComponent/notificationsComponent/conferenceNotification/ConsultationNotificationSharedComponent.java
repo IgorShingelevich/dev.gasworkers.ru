@@ -7,40 +7,41 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.byTagAndText;
 
-public class ConferenceNotificationSharedComponent extends BaseComponent {
+public class ConsultationNotificationSharedComponent extends BaseComponent {
     String title = "Видеоконсультация онлайн";
 
-    public ConferenceNotificationSharedComponent(RoleBrowser browser) {
+    public ConsultationNotificationSharedComponent(RoleBrowser browser) {
         super(browser);
     }
 
     public void checkState(StateConsultation state) {
         switch (state) {
+            case DRAFT:
+            case COMPLETED:
+                noNoticeConsultationComponent();
+                break;
             case CLIENT_WAIT_MASTER:
                 checkFinishLoading();
                 checkNoticePartialText("У вас сейчас начнётся видеоконсультация.");
+                noProceedButton();
                 checkChatMasterLink();
                 checkCancelConsultationLink();
                 checkToOrderButton();
                 break;
             case MASTER_START_CONSULTATION:
-
-                break;
-            case COMPLETED:
-
+                checkFinishLoading();
+                checkNoticePartialText("Мастер ожидает вас на консультации. Пожалуйста, перейдите в видео консультацию.");
+                noToOrderButton();
+                checkChatMasterLink();
+                checkCancelConsultationLink();
+                checkProceedButton();
                 break;
             default:
                 throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
         }
-    }    SelenideElement self = driver.$("div[data-test-id='upcoming-conference-notification']").as("Уведомление о предстоящей видеоконсультации"),
-            chatMasterButtonLocator = self.$("a.order-1").as("Кнопка чата с мастером"),
-            cancelConferenceButtonLocator = self.$("a.order-4").as("Кнопка отмены видеоконсультации"),
-            primaryButton = self.$("[data-test-id=\"primary\"]").as("Основная кнопка"),
-            noticeTextLocator = self.$("p.gas-notice-primary__text--text").as("Текст уведомления"),
-            chatMasterLinkLocator = self.$("a.link-dashed.mb-3.me-4.order-1").as("Ссылка на чат с мастером"),
-            cancelConsultationLinkLocator = self.$("a.link-dashed.ms-sm-auto.mb-3.me-4.order-4.order-sm-2").as("Ссылка на отмену видеоконсультации"),
-            toOrderButtonLocator = self.$("button[data-test-id='primary']").as("Кнопка Перейти к заказу");
+    }
 
     public void checkNoticePartialText(String text) {
         stepWithRole("Убедиться, что текст уведомления: " + text, () -> {
@@ -48,15 +49,27 @@ public class ConferenceNotificationSharedComponent extends BaseComponent {
         });
     }
 
-    public void noConsultationComponent() {
-        stepWithRole("Убедиться, что компонент Видеоконсультация онлайн не отображается", () -> {
+    public void noNoticeConsultationComponent() {
+        stepWithRole("Убедиться, что компонент уведомление Видеоконсультация онлайн не отображается", () -> {
             self.shouldNotBe(visible);
+        });
+    }    SelenideElement self = driver.$("div[data-test-id='upcoming-conference-notification']").as("Уведомление о предстоящей видеоконсультации"),
+            noticeTextLocator = self.$("p.gas-notice-primary__text--text").as("Текст уведомления"),
+            primaryButton = self.$("[data-test-id=\"primary\"]").as("Основная кнопка"),
+            proceedButtonLocator = self.$(byTagAndText("span", "Продолжить")).as("Кнопка Продолжить"),
+            chatMasterLinkLocator = self.$(byTagAndText("a", "Написать мастеру в чат")).as("Ссылка на чат с мастером"), //todo: change
+            cancelConsultationLinkLocator = self.$(byTagAndText("a", "Отменить консультацию")).as("Ссылка на отмену консультации"), //todo: change
+            toOrderButtonLocator = self.$(byTagAndText("span", "Перейти к заказу")).as("Кнопка Перейти к заказу"); //todo: change
+
+    public void checkFinishLoading() {
+        stepWithRole("Убедиться, что загрузился компонент уведомление Видеоконсультация онлайн", () -> {
+            self.shouldBe(visible);
         });
     }
 
-    public void checkFinishLoading() {
-        stepWithRole("Убедиться, что загрузился компонент Видеоконсультация онлайн", () -> {
-            self.shouldBe(visible);
+    public void checkProceedButton() {
+        stepWithRole("Убедиться, что кнопка Продолжить отображается", () -> {
+            proceedButtonLocator.shouldBe(visible);
         });
     }
 
@@ -114,12 +127,25 @@ public class ConferenceNotificationSharedComponent extends BaseComponent {
         });
     }
 
+    public void clickProceedButton() {
+        stepWithRole("Нажать кнопку Продолжить", () -> {
+            proceedButtonLocator.click();
+        });
+    }
+
+    public void noProceedButton() {
+        stepWithRole("Убедиться, что кнопка Продолжить не отображается", () -> {
+            proceedButtonLocator.shouldNotBe(visible);
+        });
+    }
+
+
+
     public void mainButton() {
         stepWithRole("Нажать на основную кнопку", () -> {
             primaryButton.click();
         });
     }
-
 
     void checkClientReadinessNotificationText(String masterFullName) {
         String clientDescription = "У вас сейчас начнётся видеоконсультация. Мастер " + masterFullName + " готовится к ней. Вам придет СМС со ссылкой для подключения к ней";
@@ -143,8 +169,6 @@ public class ConferenceNotificationSharedComponent extends BaseComponent {
             self.shouldHave(text(masterDescription4));
         });
     }
-
-
 
     public void checkClientWaitingMasterButtonState() {
         self.shouldHave(Condition.partialText("Перейти к заказу"));

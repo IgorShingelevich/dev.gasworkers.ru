@@ -49,7 +49,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_CONSULTATION)
-public class ClientWaitMasterConsultationTest extends BaseWebTest {
+public class MasterStartConsultationTest extends BaseWebTest {
 
     private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
@@ -68,27 +68,25 @@ public class ClientWaitMasterConsultationTest extends BaseWebTest {
     MasterPages masterPages;
 
     @Test
-    @DisplayName("Консультация - в состоянии clientWaitMaster")
-    void clientWaitMaster(@WithClient(houses = {@WithHouse}) User client) {
-        StateConsultation state = StateConsultation.CLIENT_WAIT_MASTER;
+    @DisplayName("Консультация - в состоянии masterStartConsultation")
+    void masterStartConsultation(@WithClient(houses = {@WithHouse}) User client) {
+        StateConsultation state = StateConsultation.MASTER_START_CONSULTATION;
         Role role = Role.CLIENT;
 
         PreconditionConsultation preconditionConsultation = new PreconditionConsultation();
         PreconditionConsultation.Result result = preconditionConsultation.applyPrecondition(client, state);
-
 // Get the StateInfo and CommonFieldsDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
         CommonFieldsDto commonFields = result.getCommonFieldsResult();
 //        ----------------------------  UI  --------------------------------
-        step("авторизация Ролей ", () -> {
-            step("авторизация Клиента", () -> {
+        step("WEB: авторизация Ролей ", () -> {
+            step(role + " авторизация", () -> {
                 clientPages.getLoginPage().open();
                 clientPages.getLoginPage().login(String.valueOf(commonFields.getClientPhone()), "1234");
                 clientPages.getHomePage().checkUrl();
 
             });
-
-            step("Test run credentials ", () -> {
+            step(role + " test run credentials ", () -> {
                 Allure.addAttachment("Client creds", commonFields.getClientPhone() + ": " + "1234" + "/");
                 Allure.addAttachment("Master creds", commonFields.getMasterEmail() + "/" + "1234");
                 String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
@@ -96,7 +94,6 @@ public class ClientWaitMasterConsultationTest extends BaseWebTest {
                 Allure.addAttachment("RunStartTime: ", date);
             });
         });
-
 
         step(role + " кабинет в состоянии - в состоянии " + state, () -> {
 
@@ -142,19 +139,13 @@ public class ClientWaitMasterConsultationTest extends BaseWebTest {
                     clientPages.getHomePage().redNotice.noNotice();
                 });
             };
-
             Consumer<SoftAssert> case7 = softAssert -> {
                 step(role + "  стр лендинга - в состоянии " + state, () -> {
                     clientPages.getLandingPage().open();
                     clientPages.getLandingPage().checkFinishLoading();
-                    clientPages.getLandingPage().clickUserProfileSignIn();
-                    clientPages.getHomePage().checkFinishLoading();
-                    clientPages.getHomePage().header.clickLogo();
-                    clientPages.getLandingPage().checkFinishLoading();
                     clientPages.getLandingPage().checkStateConsultation(state);
                 });
             };
-
             assertAll(Arrays.asList(case1,
                     case2, case3,
                     case4, case5, case6, case7));

@@ -6,8 +6,8 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.BaseOrderCardComponent;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.StateBuilder;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepairBuilder;
 
 import static com.codeborne.selenide.Condition.*;
 import static ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair.builder;
@@ -119,7 +119,7 @@ public class SuggestedMasterRepairCommonTabOrderCardComponent extends BaseOrderC
         });
     }
 
-    public void checkSuggestedMastersDetails(SuggestedMasterRepairCommonTabOrderCardComponent tab, StateRepairBuilder.SuggestedMasterRepairCommonTabOrderCardComponent dataSuggestedMaster, Integer masterIndex) {
+    public void checkSuggestedMastersDetails(SuggestedMasterRepairCommonTabOrderCardComponent tab, StateBuilder.SuggestedMasterRepairCommonTabOrderCardComponent dataSuggestedMaster, Integer masterIndex) {
         stepWithRole("Проверить детали предложенного мастера под индексом: " + masterIndex, () -> {
             tab.checkSubtitleSuggestedMastersText();
             tab.checkFullNameSuggestedMaster(masterIndex, dataSuggestedMaster.getSuggestedMasterFullName());
@@ -153,7 +153,7 @@ public class SuggestedMasterRepairCommonTabOrderCardComponent extends BaseOrderC
                     noSuggestedMastersCard();
                     break;
                 case HAS_OFFER:
-                    StateRepairBuilder.SuggestedMasterRepairCommonTabOrderCardComponent dataSuggestedMaster = builder.extractMastersOrdersId(dto.getData().getMasters().get(0));
+                    StateBuilder.SuggestedMasterRepairCommonTabOrderCardComponent dataSuggestedMaster = builder.extractMastersOrdersId(dto.getData().getMasters().get(0));
                     checkCountSuggestedMaster(dto.getData().getMasters().size());
                     checkSuggestedMastersDetails(this, dataSuggestedMaster, 0);
                     break;

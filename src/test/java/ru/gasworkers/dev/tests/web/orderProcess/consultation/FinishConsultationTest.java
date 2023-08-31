@@ -215,8 +215,8 @@ public class FinishConsultationTest extends BaseApiTest {
         });
         step("Клиент принимает консультацию", () -> {
             step("стр Лк клиента с уведомлением", () -> {
-                clientPages.getHomePage().conferenceNotification.checkClientJoinConferenceButtonState();
-                clientPages.getHomePage().conferenceNotification.mainButton();
+                clientPages.getHomePage().consultationNotification.checkClientJoinConferenceButtonState();
+                clientPages.getHomePage().consultationNotification.mainButton();
             });
             step("стр QR кода", () -> {
                 clientPages.getConferenceQrPage().checkUrl();

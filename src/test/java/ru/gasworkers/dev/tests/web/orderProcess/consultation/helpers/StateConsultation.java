@@ -8,7 +8,7 @@ import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClient
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.DocsTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.common.CommonTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster.InfoMasterTabOrderCardClientComponent;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepairBuilder;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.StateBuilder;
 
 import static io.qameta.allure.Allure.step;
 
@@ -20,13 +20,13 @@ public enum StateConsultation {
     MASTER_FILLED_CONCLUSION("Мастер заполнил данные по заказу", null),
     COMPLETED("Завершен", "Резюме по видеоконсультации создано мастером");
 
-    public static final StateRepairBuilder builder = new StateRepairBuilder();
-    public final String notification;
+    public static final StateBuilder builder = new StateBuilder();
     private final String state;
+    public final String notification;
 
     public void checkLastOrderComponent(LastOrderProfileClientComponent component, LastOrderInfoResponseDto dto) {
         step("Проверка компонента Последний заказ", () -> {
-            StateRepairBuilder.LastOrderInfoData data = builder.extractLastOrderInfoData(dto);
+            StateBuilder.LastOrderInfoData data = builder.extractLastOrderInfoData(dto);
             switch (this) {
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
@@ -52,11 +52,11 @@ public enum StateConsultation {
 
     public void checkCommonTab(CommonTabOrderCardComponent tab, OrdersIdResponseDto dto) {
         step("Убедиться, что вкладка Описание заказа в состоянии " + this, () -> {
-            StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-            tab.status.statusRepair(this, data, dto);
-//            tab.details.detailsRepair(this, data);
+            StateBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
+            tab.status.checkStateConsultation(this, data, dto);
+            tab.details.detailsConsultation(this, data);
             tab.suggestedMasterRepair.noSuggestedMastersCard();
-            tab.buttons.checkConsultationButtons(this);
+            tab.buttons.checkStateConsultation(this);
             switch (this) {
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
@@ -73,11 +73,11 @@ public enum StateConsultation {
 
     public void checkInfoMasterTab(InfoMasterTabOrderCardClientComponent tab, OrdersIdResponseDto dto) {
         step("Убедиться, что вкладка Информация по работам в состоянии " + this, () -> {
-            StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-            tab.status.statusRepair(this, data, dto);
+            StateBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
+            tab.status.checkStateConsultation(this, data, dto);
             tab.suggestedMasterCardRepair.noSuggestedMastersCard();
             tab.approvedMasterCard.checkStateConsultation(this, data);
-            tab.buttons.checkConsultationButtons(this);
+            tab.buttons.checkStateConsultation(this);
             switch (this) {
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
@@ -125,10 +125,10 @@ public enum StateConsultation {
     }
 
     public void checkDocsTab(DocsTabOrderCardComponent tab, OrdersIdResponseDto dto) {
-        StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-        tab.status.statusRepair(this, data, dto);
+        StateBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
+        tab.status.checkStateConsultation(this, data, dto);
         tab.suggestedMastersRepair.noSuggestedMastersCard();
-        tab.buttons.checkConsultationButtons(this);
+        tab.buttons.checkStateConsultation(this);
         step("Убедиться, что вкладка Документы в состоянии " + this, () -> {
             switch (this) {
                 case CLIENT_WAIT_MASTER:
@@ -137,6 +137,7 @@ public enum StateConsultation {
                 case COMPLETED:
                     tab.noDocs();
                     tab.checkTotalPrice(String.valueOf(dto.getData().getMaster().getConsultationPrice()));
+                    // todo add tab.checkComputedToTalPrice - no field in json
                /* case HAS_OFFER:
                     tab.noDocs();
                     tab.checkNoTotalPrice();
@@ -191,7 +192,7 @@ public enum StateConsultation {
         });
     }*/
 
-    private void checkDetailsLastOrder(LastOrderProfileClientComponent component, StateRepairBuilder.LastOrderInfoData data) {
+    private void checkDetailsLastOrder(LastOrderProfileClientComponent component, StateBuilder.LastOrderInfoData data) {
         component.checkOrderNumber(data.getOrderNumber());
         component.checkServiceType(ServiceType.CONSULTATION.toString());
         component.checkAddress(data.getAddress());

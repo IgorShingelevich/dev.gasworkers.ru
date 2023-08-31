@@ -4,7 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.BaseOrderCardComponent;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepairBuilder;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.StateBuilder;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepairHelper;
 
 import static com.codeborne.selenide.Condition.*;
@@ -49,13 +49,13 @@ public class RepairDetailsInfoMasterTabOrderCardComponent extends BaseOrderCardC
             actionsTotalPriceLocator = actionsTableLocator.$$("div[class*='tr']").last()
                     .$$("div[class*='td']").last().as("Итоговая цена выполненных работ и услуг");
 
-    public void checkMaterialsPrice(OrdersIdResponseDto dto, StateRepairBuilder.OrderIdData data) {
+    public void checkMaterialsPrice(OrdersIdResponseDto dto, StateBuilder.OrderIdData data) {
         materialsTableLocator.$$(".table-div-body-tr").last()
                 .$(".bold").as(" Итого материалы")
                 .shouldHave(partialText(helper.priceFormatter(String.valueOf(dto.getData().getReceipts().get(1).getAmount()))));
     }
 
-    public void checkActionsPrice(OrdersIdResponseDto dto, StateRepairBuilder.OrderIdData data) {
+    public void checkActionsPrice(OrdersIdResponseDto dto, StateBuilder.OrderIdData data) {
         int price = (int) ((dto.getData().getReceipts().get(2).getAmount()) + (dto.getData().getReceipts().get(0).getAmount())); //  activation fee + actions
         actionsTableLocator.$$(".table-div-body-tr").last()
                 .$(".bold").as(" Итого работы")

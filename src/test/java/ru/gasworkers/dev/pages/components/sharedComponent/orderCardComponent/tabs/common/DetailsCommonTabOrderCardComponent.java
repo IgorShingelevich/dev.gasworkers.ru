@@ -4,11 +4,13 @@ import com.codeborne.selenide.ElementsCollection;
 import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.BaseOrderCardComponent;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.StateBuilder;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepairBuilder;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static io.qameta.allure.Allure.step;
 
 public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
 
@@ -104,50 +106,80 @@ public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
     }
 
 
-    public void detailsRepair(StateRepair stateRepair, StateRepairBuilder.OrderIdData data) {
-        checkServiceType(ServiceType.REPAIR);
-        checkAddress(data.getAddress());
-        checkEquipment(data.getEquipments0());
-        checkDescription(data.getDescription());
-        switch (stateRepair) {
-            case PUBLISHED:
-                checkDesiredDate(data.getDesiredDate());
-                checkDesiredTime(data.getDesiredTime());
-                checkNoCompany();
-                noAssignedDateAndTime();
-                break;
-            case HAS_OFFER:
-                checkNoCompany();
-                noAssignedDateAndTime();
-                checkClientFullName(data.getClientFullName());
-                checkDesiredDate(data.getDesiredDate());
-                checkDesiredTime(data.getDesiredTime());
-                break;
-            case SCHEDULE_DATE:
-                checkNoCompany();
-                noAssignedDateAndTime();
-                checkClientFullName(data.getClientFullName());
-                checkClientPhone(data.getPhone());
-                checkDesiredDate(data.getDesiredDate());
-                checkDesiredTime(data.getDesiredTime());
-                break;
-            case WAIT_MASTER:
-            case MASTER_START_WORK:
-            case MATERIAL_INVOICE_ISSUED:
-            case MATERIAL_INVOICE_PAID:
-            case ACTIONS_INVOICE_ISSUED:
-            case ACTIONS_INVOICE_PAID:
-            case MASTER_SIGN_ACT:
-            case CLIENT_SIGN_ACT:
-                checkClientFullName(data.getClientFullName());
-                checkClientPhone(data.getPhone());
-                checkCompanyFullName(data.getCompanyFullName());
+    public void detailsRepair(StateRepair stateRepair, StateBuilder.OrderIdData data) {
+        step("Убедиться, что  детали заказа соответствуют ожидаемым в состоянии " + stateRepair, () -> {
+            checkCommonDetails(data, ServiceType.REPAIR);
+            switch (stateRepair) {
+                case PUBLISHED:
+                    checkDesiredDate(data.getDesiredDate());
+                    checkDesiredTime(data.getDesiredTime());
+                    checkNoCompany();
+                    noAssignedDateAndTime();
+                    break;
+                case HAS_OFFER:
+                    checkNoCompany();
+                    noAssignedDateAndTime();
+                    checkClientFullName(data.getClientFullName());
+                    checkDesiredDate(data.getDesiredDate());
+                    checkDesiredTime(data.getDesiredTime());
+                    break;
+                case SCHEDULE_DATE:
+                    checkNoCompany();
+                    noAssignedDateAndTime();
+                    checkClientFullName(data.getClientFullName());
+                    checkClientPhone(data.getPhone());
+                    checkDesiredDate(data.getDesiredDate());
+                    checkDesiredTime(data.getDesiredTime());
+                    break;
+                case WAIT_MASTER:
+                case MASTER_START_WORK:
+                case MATERIAL_INVOICE_ISSUED:
+                case MATERIAL_INVOICE_PAID:
+                case ACTIONS_INVOICE_ISSUED:
+                case ACTIONS_INVOICE_PAID:
+                case MASTER_SIGN_ACT:
+                case CLIENT_SIGN_ACT:
+                    checkClientFullName(data.getClientFullName());
+                    checkClientPhone(data.getPhone());
+                    checkCompanyFullName(data.getCompanyFullName());
 //                 todo checkAssignedDateAndTime(data.getAssignedDateAndTime());
-                noDesiredDate();
-                noDesiredTime();
-                break;
-            default:
-                throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);
-        }
+                    noDesiredDate();
+                    noDesiredTime();
+                    break;
+                default:
+                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);
+            }
+        });
+    }
+
+    private void checkCommonDetails(StateBuilder.OrderIdData data, ServiceType serviceType) {
+        step("Убедиться, что общие детали заказа соответствуют ожидаемым", () -> {
+            checkServiceType(serviceType);
+            checkAddress(data.getAddress());
+            checkEquipment(data.getEquipments0());
+            checkDescription(data.getDescription());
+        });
+    }
+
+    public void detailsConsultation(StateConsultation stateConsultation, StateBuilder.OrderIdData data) {
+        step("Убедиться, что  детали заказа соответствуют ожидаемым в состоянии " + stateConsultation, () -> {
+            checkCommonDetails(data, ServiceType.CONSULTATION);
+            switch (stateConsultation) {
+                case CLIENT_WAIT_MASTER:
+                case MASTER_START_CONSULTATION:
+                case MASTER_FILLED_CONCLUSION:
+                case COMPLETED:
+                    checkClientFullName(data.getClientFullName());
+                    checkClientPhone(data.getPhone());
+//                    checkNoCompany(); //todo selfemployed or master SC - need to determine
+//                    checkCompanyFullName(data.getCompanyFullName());
+//                 todo checkAssignedDateAndTime(data.getAssignedDateAndTime());
+                    noDesiredDate();
+                    noDesiredTime();
+                    break;
+                default:
+                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateConsultation);
+            }
+        });
     }
 }

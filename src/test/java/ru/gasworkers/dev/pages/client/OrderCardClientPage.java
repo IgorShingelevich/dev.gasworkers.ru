@@ -10,6 +10,7 @@ import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.clientComponent.OffersCounterClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.notificationsComponent.conferenceNotification.ConsultationNotificationSharedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.NavigationOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.buttons.ClientButtonsOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.DocsTabOrderCardComponent;
@@ -29,6 +30,7 @@ public class OrderCardClientPage extends BaseClientPage {
     public final ClientSidebarComponent sidebar;
     public final ClientActionsBlockComponent actionsBlock;
     public final StepperComponent stepper;
+    public final ConsultationNotificationSharedComponent consultationNotification;
     public final OffersCounterClientComponent offersCounter;
     public final NavigationOrderCardPageComponent nav;
     public final CommonTabOrderCardComponent commonTab;
@@ -62,6 +64,7 @@ public class OrderCardClientPage extends BaseClientPage {
         nav = new NavigationOrderCardPageComponent(browser);
         actionsBlock = new ClientActionsBlockComponent(browser);
         stepper = new StepperComponent(browser);
+        consultationNotification = new ConsultationNotificationSharedComponent(browser);
         offersCounter = new OffersCounterClientComponent(browser);
         commonTab = new CommonTabOrderCardComponent(browser);
         infoMasterTab = new InfoMasterTabOrderCardClientComponent(browser);
@@ -258,9 +261,10 @@ public class OrderCardClientPage extends BaseClientPage {
         });
     }
 
-    public void checkState(StateRepair state, OrdersIdResponseDto dto) {
+    public void checkStateRepair(StateRepair state, OrdersIdResponseDto dto) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
             checkOrderNumber(dto.getData().getNumber());
+            consultationNotification.noNoticeConsultationComponent();
             nav.noChecklistTab();
             nav.common();
             state.checkCommonTab(this.commonTab, dto);
@@ -271,9 +275,10 @@ public class OrderCardClientPage extends BaseClientPage {
         });
     }
 
-    public void checkState(StateConsultation state, OrdersIdResponseDto dto) {
+    public void checkStateConsultation(StateConsultation state, OrdersIdResponseDto dto) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
             checkOrderNumber(dto.getData().getNumber());
+            consultationNotification.checkState(state);
             nav.noChecklistTab();
             nav.common();
             state.checkCommonTab(this.commonTab, dto);
@@ -290,7 +295,7 @@ public class OrderCardClientPage extends BaseClientPage {
 
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
-                checkOrderNumber(dto.getData().getNumber());
+                checkOrderNumber(dto.getDataDto().getNumber());
                 nav.common();
                 state.checkCommonTab(this.commonTab, dto);
             };

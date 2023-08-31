@@ -27,13 +27,13 @@ public enum StateRepair {
     MASTER_SIGN_ACT("Мастер заполнил данные по заказу", "Акт выполненных работ сформирован"),
     CLIENT_SIGN_ACT("Клиент подписал акт", "Оставьте отзыв по заявке");
 
-    public static final StateRepairBuilder builder = new StateRepairBuilder();
+    public static final StateBuilder builder = new StateBuilder();
     private final String state;
     public final String notification;
 
     public void checkLastOrderComponent(LastOrderProfileClientComponent component, LastOrderInfoResponseDto dto) {
         step("Проверка компонента Последний заказ", () -> {
-            StateRepairBuilder.LastOrderInfoData data = builder.extractLastOrderInfoData(dto);
+            StateBuilder.LastOrderInfoData data = builder.extractLastOrderInfoData(dto);
             switch (this) {
                 case PUBLISHED:
                     component.offersCounter.noOffers();
@@ -86,8 +86,8 @@ public enum StateRepair {
 
     public void checkCommonTab(CommonTabOrderCardComponent tab, OrdersIdResponseDto dto) {
         step("Убедиться, что вкладка Описание заказа в состоянии " + this, () -> {
-            StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-            tab.status.statusRepair(this, data, dto);
+            StateBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
+            tab.status.checkStateRepair(this, data, dto);
             tab.details.detailsRepair(this, data);
             tab.suggestedMasterRepair.checkState(this, dto, 0);
             tab.buttons.checkStateRepair(this);
@@ -133,8 +133,8 @@ public enum StateRepair {
 
     public void checkInfoMasterTab(InfoMasterTabOrderCardClientComponent tab, OrdersIdResponseDto dto) {
         step("Убедиться, что вкладка Информация по работам в состоянии " + this, () -> {
-            StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-            tab.status.statusRepair(this, data, dto);
+            StateBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
+            tab.status.checkStateRepair(this, data, dto);
             tab.suggestedMasterCardRepair.checkState(this, dto, 0);
             tab.approvedMasterCard.checkStateRepair(this, data);
             tab.buttons.checkStateRepair(this);
@@ -177,8 +177,8 @@ public enum StateRepair {
     }
 
     public void checkDocsTab(DocsTabOrderCardComponent tab, OrdersIdResponseDto dto) {
-        StateRepairBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-        tab.status.statusRepair(this, data, dto);
+        StateBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
+        tab.status.checkStateRepair(this, data, dto);
         tab.suggestedMastersRepair.checkState(this, dto, 0);
         tab.buttons.checkStateRepair(this);
         step("Убедиться, что вкладка Документы в состоянии " + this, () -> {
@@ -237,7 +237,7 @@ public enum StateRepair {
         });
     }
 
-    private void checkDetailsLastOrder(LastOrderProfileClientComponent component, StateRepairBuilder.LastOrderInfoData data) {
+    private void checkDetailsLastOrder(LastOrderProfileClientComponent component, StateBuilder.LastOrderInfoData data) {
         component.checkOrderNumber(data.getOrderNumber());
         component.checkServiceType(data.getServiceType());
         component.checkAddress(data.getAddress());

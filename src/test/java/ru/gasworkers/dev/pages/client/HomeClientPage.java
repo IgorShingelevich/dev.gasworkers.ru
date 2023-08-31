@@ -7,9 +7,10 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClientComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.RedNoticeComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.PersonSummaryComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.SharedHeaderComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.guideComponent.PlayGuideComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.notificationsComponent.conferenceNotification.ConferenceNotificationSharedComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.notificationsComponent.conferenceNotification.ConsultationNotificationSharedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 
 import java.time.Duration;
@@ -20,11 +21,12 @@ import static com.codeborne.selenide.Selectors.byTagAndText;
 public final class HomeClientPage extends BaseClientPage {
 
     public final ClientSidebarComponent sidebar;
+    public final SharedHeaderComponent header;
     public final ClientActionsBlockComponent actionsBlock;
     public final LastOrderProfileClientComponent lastOrderComponent;
     public final PersonSummaryComponent personSummaryComponent;
     public final PlayGuideComponent guide;
-    public final ConferenceNotificationSharedComponent conferenceNotification;
+    public final ConsultationNotificationSharedComponent consultationNotification;
     public final RedNoticeComponent redNotice;
 
 
@@ -32,10 +34,11 @@ public final class HomeClientPage extends BaseClientPage {
         super(browser);
         sidebar = new ClientSidebarComponent(browser);
         actionsBlock = new ClientActionsBlockComponent(browser);
+        header = new SharedHeaderComponent(browser);
         lastOrderComponent = new LastOrderProfileClientComponent(browser);
         personSummaryComponent = new PersonSummaryComponent(browser);
         guide = new PlayGuideComponent(browser);
-        conferenceNotification = new ConferenceNotificationSharedComponent(browser);
+        consultationNotification = new ConsultationNotificationSharedComponent(browser);
         redNotice = new RedNoticeComponent(browser);
     }
 

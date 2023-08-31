@@ -8,7 +8,7 @@ import ru.gasworkers.dev.model.ServiceType;
 
 import java.util.List;
 
-public class StateRepairBuilder {
+public class StateBuilder {
     public StateRepairHelper helper = new StateRepairHelper();
 
     public LastOrderInfoData extractLastOrderInfoData(LastOrderInfoResponseDto dto) {
@@ -125,7 +125,7 @@ public class StateRepairBuilder {
                 .masterReviewCount(masterReviewCount)
                 .masterRating(masterRating)
                 .companyFullName(companyFullName)
-                // todo .scheduledTime(desiredTimeIntervalFormatter(dto.getData().getScheduledTimeStarted(), dto.getData().getScheduledTimeEnded()))
+                // todo .scheduledTime(desiredTimeIntervalFormatter(dto.getDataDto().getScheduledTimeStarted(), dto.getDataDto().getScheduledTimeEnded()))
                 .build();
     }
 

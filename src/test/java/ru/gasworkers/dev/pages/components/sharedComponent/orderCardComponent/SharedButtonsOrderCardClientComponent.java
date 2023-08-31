@@ -20,13 +20,14 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
         super(browser);
     }
 
-    public void checkConsultationButtons(StateConsultation stateConsultation) {
+    public void checkStateConsultation(StateConsultation stateConsultation) {
         step("Проверить набор кнопок в состоянии " + stateConsultation, () -> {
             List<Button> visibleButtons;
             List<Button> notVisibleButtons;
             switch (stateConsultation) {
                 case CLIENT_WAIT_MASTER:
                     notVisibleButtons = List.of(
+                            START_CONSULTATION,
                             SHOW_ON_MAP,
                             SELECT_NEW_COMPANY,
                             RETURN_TO_WORK,
@@ -39,9 +40,21 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
 
                     break;
                 case MASTER_START_CONSULTATION:
+                    notVisibleButtons = List.of(
+                            CANCEL_ORDER,
+                            SHOW_ON_MAP,
+                            SELECT_NEW_COMPANY,
+                            RETURN_TO_WORK,
+                            PAY_INVOICE,
+                            SIGN_ACT,
+                            MAKE_REVIEW);
+                    visibleButtons = List.of(
+                            START_CONSULTATION
+                    );
+                    break;
                 case MASTER_FILLED_CONCLUSION:
                 case COMPLETED:
-                    notVisibleButtons = List.of(SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
+                    notVisibleButtons = List.of(START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
                     visibleButtons = List.of(RETURN_TO_WORK);
                     break;
                 default:
@@ -60,29 +73,29 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
             switch (stateRepair) {
                 case PUBLISHED:
                 case HAS_OFFER:
-                    notVisibleButtons = List.of(SELECT_NEW_COMPANY, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
+                    notVisibleButtons = List.of(START_CONSULTATION, SELECT_NEW_COMPANY, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
                     visibleButtons = List.of(SHOW_ON_MAP, CANCEL_ORDER);
                     break;
                 case SCHEDULE_DATE:
+                    notVisibleButtons = List.of(START_CONSULTATION, SHOW_ON_MAP, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
                     visibleButtons = List.of(CANCEL_ORDER, SELECT_NEW_COMPANY);
-                    notVisibleButtons = List.of(SHOW_ON_MAP, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
                     break;
                 case WAIT_MASTER:
-                    notVisibleButtons = List.of(SHOW_ON_MAP, SELECT_NEW_COMPANY, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
+                    notVisibleButtons = List.of(START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
                     visibleButtons = List.of(CANCEL_ORDER);
                     break;
                 case MASTER_START_WORK:
                 case MATERIAL_INVOICE_PAID:
-                    notVisibleButtons = List.of(SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
+                    notVisibleButtons = List.of(START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
                     visibleButtons = List.of(RETURN_TO_WORK);
                     break;
                 case MATERIAL_INVOICE_ISSUED:
                 case ACTIONS_INVOICE_ISSUED:
-                    notVisibleButtons = List.of(SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, SIGN_ACT, MAKE_REVIEW);
+                    notVisibleButtons = List.of(START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, SIGN_ACT, MAKE_REVIEW);
                     visibleButtons = List.of(RETURN_TO_WORK, PAY_INVOICE);
                     break;
                 case ACTIONS_INVOICE_PAID:
-                    notVisibleButtons = List.of(SHOW_ON_MAP, SELECT_NEW_COMPANY, PAY_INVOICE, CANCEL_ORDER, SIGN_ACT, MAKE_REVIEW);
+                    notVisibleButtons = List.of(START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, PAY_INVOICE, CANCEL_ORDER, SIGN_ACT, MAKE_REVIEW, START_CONSULTATION);
                     visibleButtons = List.of(RETURN_TO_WORK);
 
                     break;
@@ -120,6 +133,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
     @AllArgsConstructor
     public enum Button {
         SHOW_ON_MAP("Показать на карте"),
+        START_CONSULTATION("Начать консультацию"),
         CANCEL_ORDER("Отменить заказ"),
         SELECT_NEW_COMPANY("Выбрать новую компанию"),
         PAY_INVOICE("Оплатить счет"),

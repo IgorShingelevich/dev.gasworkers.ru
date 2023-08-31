@@ -168,11 +168,11 @@ public class RepairAllDtoApiTest extends BaseApiTest {
                 UserSettingsCommonResponseDto actualResponse = userSettingsApi.common(UserSettingsCommonRequestDto.defaultBGClientRequest(client), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(UserSettingsCommonResponseDto.class);
-                commonFields.setPassportId(actualResponse.getData().getPassport().getId());
-                commonFields.setClientId(actualResponse.getData().getId());
+                commonFields.setPassportId(actualResponse.getDataDto().getPassport().getId());
+                commonFields.setClientId(actualResponse.getDataDto().getId());
                 UserSettingsCommonResponseDto expectedResponse = UserSettingsCommonResponseDto.defaultBGUserResponse(client, commonFields);
-                expectedResponse.getData().getGuides().get(0).setId(actualResponse.getData().getGuides().get(0).getId());
-                expectedResponse.getData().getPassport().setIssuedDate(actualResponse.getData().getPassport().getIssuedDate());
+                expectedResponse.getDataDto().getGuides().get(0).setId(actualResponse.getDataDto().getGuides().get(0).getId());
+                expectedResponse.getDataDto().getPassport().setIssuedDate(actualResponse.getDataDto().getPassport().getIssuedDate());
                 assertResponsePartialNoATExcludeFields(expectedResponse, actualResponse, List.of("data.userNotificationsCount"));
                 //todo assert клиент - модель пользователя в  состоянии после заполнения профиля
                 // todo change all  dto to include  user details
@@ -231,7 +231,7 @@ public class RepairAllDtoApiTest extends BaseApiTest {
                 actualHasOfferLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(LastOrderInfoResponseDto.class);
-//                activeOffersCount = actualHasOfferLastOrderResponse.getData().getClientObject().getActiveOffersCount();
+//                activeOffersCount = actualHasOfferLastOrderResponse.getDataDto().getClientObject().getActiveOffersCount();
                 commonFields.setActiveOffersCount(actualHasOfferLastOrderResponse.getData().getClientObject().getActiveOffersCount());
                 LastOrderInfoResponseDto expectedResponse = repairCase.hasOfferLastOrderInfoBGRepair(commonFields);
                 assertResponsePartialNoAt(expectedResponse, actualHasOfferLastOrderResponse);
@@ -240,7 +240,7 @@ public class RepairAllDtoApiTest extends BaseApiTest {
                 actualHasOfferOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersInfoResponseDto.class);
-//                offerIdHasOffer = actualHasOfferOrderInfoResponse.getData().getOffer().getId();
+//                offerIdHasOffer = actualHasOfferOrderInfoResponse.getDataDto().getOffer().getId();
                 commonFields.setOfferIdHasOfferClient(actualHasOfferOrderInfoResponse.getData().getOffer().getId());
                 OrdersInfoResponseDto expectedResponse = repairCase.hasOfferOrderInfoBGRepair(commonFields);
                 assertResponsePartialNoAt(expectedResponse, actualHasOfferOrderInfoResponse);
@@ -275,7 +275,7 @@ public class RepairAllDtoApiTest extends BaseApiTest {
                 SelectServiceCompanyResponseDto actualResponse = selectServiceCompanyApi.selectServiceCompany(commonFields.getOrderId(), commonFields.getServiceId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SelectServiceCompanyResponseDto.class);
-//                receiptId = actualResponse.getData().getReceiptId();
+//                receiptId = actualResponse.getDataDto().getReceiptId();
                 commonFields.setReceipts0Id(actualResponse.getData().getReceiptId());
                 SelectServiceCompanyResponseDto expectedResponse = SelectServiceCompanyResponseDto.successResponse(commonFields.getReceipts0Id()).build();
                 assertThat(actualResponse).isEqualTo(expectedResponse);
@@ -293,7 +293,7 @@ public class RepairAllDtoApiTest extends BaseApiTest {
                 actualBeforePaymentOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersInfoResponseDto.class);
-//                Integer offerIdBeforePayment = actualBeforePaymentOrderInfoResponse.getData().getOffer().getId();
+//                Integer offerIdBeforePayment = actualBeforePaymentOrderInfoResponse.getDataDto().getOffer().getId();
                 commonFields.setOfferIdBeforePayment(actualBeforePaymentOrderInfoResponse.getData().getOffer().getId());
                 OrdersInfoResponseDto expectedResponse = repairCase.beforePaymentOrderInfoBGRepair(commonFields);
                 assertResponsePartialNoAt(expectedResponse, actualBeforePaymentOrderInfoResponse);

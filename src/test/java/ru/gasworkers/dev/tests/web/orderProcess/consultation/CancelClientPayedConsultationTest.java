@@ -246,12 +246,12 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
         });
         step("Мастер отсутствует уведомление", () -> {
             step("стр Лк мастера ", () -> {
-                masterPages.getHomePage().conferenceNotification.noConsultationComponent();
+                masterPages.getHomePage().conferenceNotification.noNoticeConsultationComponent();
             });
         });
         step("Клиент отсутствует уведомление", () -> {
             step("стр Лк клиента ", () -> {
-                clientPages.getHomePage().conferenceNotification.noConsultationComponent();
+                clientPages.getHomePage().consultationNotification.noNoticeConsultationComponent();
             });
             //todo check invoice presence after cancel
             //todo notification money back

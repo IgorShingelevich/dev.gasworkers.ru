@@ -299,7 +299,7 @@ public class ActionsRequestRepairApiTest extends BaseApiTest {
                     actionsInvoiceIssuedOrderIdResponseAsMaster = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenMaster())
                             .statusCode(200)
                             .extract().as(OrdersIdResponseDto.class);
-//                    commonFields.setReceipts2Id(actionsInvoiceIssuedOrderIdResponseAsMaster.getData().getReceipts().get(2).getId());
+//                    commonFields.setReceipts2Id(actionsInvoiceIssuedOrderIdResponseAsMaster.getDataDto().getReceipts().get(2).getId());
                     OrdersIdResponseDto expectedResponse = repairCase.actionsInvoiceIssuedOrderIdAsMasterBGRepair(commonFields);
                     return assertResponsePartialNoATExcludeFieldsExecutable(expectedResponse, actionsInvoiceIssuedOrderIdResponseAsMaster, List.of("data.offers"));
                 });

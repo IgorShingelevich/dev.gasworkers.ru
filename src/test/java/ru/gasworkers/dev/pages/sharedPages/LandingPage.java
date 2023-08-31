@@ -8,11 +8,13 @@ import ru.gasworkers.dev.pages.BasePage;
 import ru.gasworkers.dev.pages.components.clientComponent.NoticeComponent;
 import ru.gasworkers.dev.pages.components.landingComponent.BackgroundRegistrationComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.ConfirmationCodeModalWindowBGComponent;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
 
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
+import static io.qameta.allure.Allure.step;
 
 public class LandingPage extends BasePage {
 
@@ -116,4 +118,18 @@ public class LandingPage extends BasePage {
         });
     }
 
+    public void checkStateConsultation(StateConsultation state) {
+        step(role + "  - в состоянии " + state, () -> {
+            noticeComponent.checkStateConsultation(state);
+            switch (state) {
+                case DRAFT:
+                case COMPLETED:
+                case CLIENT_WAIT_MASTER:
+                case MASTER_START_CONSULTATION:
+                    break;
+                default:
+                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
+            }
+        });
+    }
 }

@@ -174,7 +174,7 @@ public class MaterialInvoiceIssuedRepairApiTest extends BaseApiTest {
                         .statusCode(200)
                         .extract().as(SelectMasterResponseDto.class);
                 //todo add dtoassert
-//                assertThat(actualSelectMasterResponse.getData().getReceiptId()).isNull();
+//                assertThat(actualSelectMasterResponse.getDataDto().getReceiptId()).isNull();
             });
         });
 
@@ -191,7 +191,7 @@ public class MaterialInvoiceIssuedRepairApiTest extends BaseApiTest {
                 actualHasOfferOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersInfoResponseDto.class);
-//                offerIdHasOffer = actualHasOfferOrderInfoResponse.getData().getOffer().getId();
+//                offerIdHasOffer = actualHasOfferOrderInfoResponse.getDataDto().getOffer().getId();
                 commonFields.setOfferIdHasOfferClient(actualHasOfferOrderInfoResponse.getData().getOffer().getId());
 //                OrdersInfoResponseDto expectedResponse = repairCase.hasOfferOrderInfoBGRepair(commonFields);
 //                assertResponsePartialNoAt(expectedResponse, actualHasOfferOrderInfoResponse);
@@ -233,7 +233,7 @@ public class MaterialInvoiceIssuedRepairApiTest extends BaseApiTest {
                 FspBankListResponseDto actualResponse = fspBankListApi.fspBankList(commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(FspBankListResponseDto.class);
-//                Integer availableBanks = actualResponse.getData().size();
+//                Integer availableBanks = actualResponse.getDataDto().size();
 //                System.out.println("availableBanks = " + availableBanks);
                 //check  amount of banks
             });
@@ -242,7 +242,7 @@ public class MaterialInvoiceIssuedRepairApiTest extends BaseApiTest {
                 actualBeforePaymentOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersInfoResponseDto.class);
-//                Integer offerIdBeforePayment = actualBeforePaymentOrderInfoResponse.getData().getOffer().getId();
+//                Integer offerIdBeforePayment = actualBeforePaymentOrderInfoResponse.getDataDto().getOffer().getId();
                 commonFields.setOfferIdBeforePayment(actualBeforePaymentOrderInfoResponse.getData().getOffer().getId());
 //                OrdersInfoResponseDto expectedResponse = repairCase.beforePaymentOrderInfoBGRepair(commonFields);
 //                assertResponsePartialNoAt(expectedResponse, actualBeforePaymentOrderInfoResponse);

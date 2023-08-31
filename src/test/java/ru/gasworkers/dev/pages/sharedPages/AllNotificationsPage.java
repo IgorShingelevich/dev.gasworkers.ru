@@ -111,7 +111,7 @@ public class AllNotificationsPage extends BasePage {
         });
     }
 
-    public void checkConsultationState(StateConsultation stateConsultation, NotificationsResponseDto dto) {
+    public void checkStateConsultation(StateConsultation stateConsultation, NotificationsResponseDto dto) {
         stepWithRole("Проверить уведомления в состоянии " + stateConsultation, () -> {
             switch (stateConsultation) {
                 case CLIENT_WAIT_MASTER:

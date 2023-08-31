@@ -2,9 +2,9 @@
 //
 //import lombok.AllArgsConstructor;
 //import lombok.Builder;
-//import lombok.Data;
+//import lombok.DataDto;
 //
-//@Data
+//@DataDto
 //@AllArgsConstructor
 //@Builder
 //public class CurrentOrderProperties {
