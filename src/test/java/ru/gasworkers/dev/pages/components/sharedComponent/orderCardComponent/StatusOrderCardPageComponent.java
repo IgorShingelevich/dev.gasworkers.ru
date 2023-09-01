@@ -133,21 +133,23 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     // todo calculatedTime
                     break;
                 case MASTER_START_CONSULTATION:
+                case CLIENT_JOIN_CONSULTATION:
                     checkCurrentStatus(OrderStatus.MASTER_START_CONSULTATION);
                     noActivationStagePayment();
                     noMaterialsStagePayment();
                     noActionsStagePayment();
                     // todo calculatedTime
                     break;
-                case MASTER_FILLED_CONCLUSION:
+                case MASTER_COMPLETE_CONSULTATION:
+                case MASTER_FILLED_RESUME:
                     checkCurrentStatus(OrderStatus.MASTER_FILLED_CONCLUSION);
                     noActivationStagePayment();
                     noMaterialsStagePayment();
                     noActionsStagePayment();
                     // todo calculatedTime
                     break;
-                case COMPLETED:
-                    checkCurrentStatus(OrderStatus.COMPLETED);
+                case ORDER_COMPLETED:
+                    checkCurrentStatus(OrderStatus.ORDER_COMPLETED);
                     noActivationStagePayment();
                     noMaterialsStagePayment();
                     noActionsStagePayment();

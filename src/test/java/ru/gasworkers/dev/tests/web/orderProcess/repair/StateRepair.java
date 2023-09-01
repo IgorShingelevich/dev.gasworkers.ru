@@ -31,6 +31,7 @@ public enum StateRepair {
     private final String state;
     public final String notification;
 
+
     public void checkLastOrderComponent(LastOrderProfileClientComponent component, LastOrderInfoResponseDto dto) {
         step("Проверка компонента Последний заказ", () -> {
             StateBuilder.LastOrderInfoData data = builder.extractLastOrderInfoData(dto);

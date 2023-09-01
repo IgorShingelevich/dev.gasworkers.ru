@@ -19,7 +19,9 @@ public class ConsultationNotificationSharedComponent extends BaseComponent {
     public void checkState(StateConsultation state) {
         switch (state) {
             case DRAFT:
-            case COMPLETED:
+            case MASTER_COMPLETE_CONSULTATION:
+            case MASTER_FILLED_RESUME:
+            case ORDER_COMPLETED:
                 noNoticeConsultationComponent();
                 break;
             case CLIENT_WAIT_MASTER:
@@ -31,6 +33,7 @@ public class ConsultationNotificationSharedComponent extends BaseComponent {
                 checkToOrderButton();
                 break;
             case MASTER_START_CONSULTATION:
+            case CLIENT_JOIN_CONSULTATION:
                 checkFinishLoading();
                 checkNoticePartialText("Мастер ожидает вас на консультации. Пожалуйста, перейдите в видео консультацию.");
                 noToOrderButton();

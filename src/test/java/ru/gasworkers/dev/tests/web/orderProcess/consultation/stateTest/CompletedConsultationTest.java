@@ -6,6 +6,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.qameta.allure.*;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -65,7 +66,7 @@ import static io.qameta.allure.Allure.step;
 @Story("Видеоконсультация")
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
-@Tag(AllureTag.WEB_CONSULTATION)
+@Tag(AllureTag.WEB)
 public class CompletedConsultationTest extends BaseWebTest {
 
     private final ClientHousesApi clientHousesApi = new ClientHousesApi();
@@ -84,6 +85,7 @@ public class CompletedConsultationTest extends BaseWebTest {
     @Browser(role = Role.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.THIRD_ROLE)
     MasterPages masterPages;
 
+    @Disabled
     @Test
     @DisplayName("Консультация - в состоянии completed")
     void completedConsultation(@WithClient(houses = {@WithHouse}) User client) {

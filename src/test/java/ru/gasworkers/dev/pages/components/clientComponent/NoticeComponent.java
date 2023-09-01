@@ -58,11 +58,6 @@ public class NoticeComponent extends BaseComponent {
         });
     }
 
-    public void noUpcomingConsultationNotification() {
-        stepWithRole("Убедиться, что уведомление о предстоящей видеоконсультации не отображается", () -> {
-            conferenceNotificationBoxLocator.shouldNotBe(visible);
-        });
-    }
 
     public void checkStateConsultation(StateConsultation state) {
         stepWithRole("Убедиться, что  уведомление соответствует состоянию: " + state, () -> {
@@ -70,13 +65,14 @@ public class NoticeComponent extends BaseComponent {
             redNotice.noNotice();
             switch (state) {
                 case DRAFT:
-                case COMPLETED:
+                case ORDER_COMPLETED:
                     noNotifications();
                     break;
                 case CLIENT_WAIT_MASTER:
                     checkUpcomingConsultationNotification();
                     break;
                 case MASTER_START_CONSULTATION:
+                case CLIENT_JOIN_CONSULTATION:
                     checkMasterStartConsultationNotification();
                     break;
                 default:

@@ -123,9 +123,12 @@ public class LandingPage extends BasePage {
             noticeComponent.checkStateConsultation(state);
             switch (state) {
                 case DRAFT:
-                case COMPLETED:
+                case ORDER_COMPLETED:
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
+                case CLIENT_JOIN_CONSULTATION:
+                case MASTER_COMPLETE_CONSULTATION:
+                case MASTER_FILLED_RESUME:
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);

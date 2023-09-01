@@ -77,7 +77,7 @@ public class MasterStartWorkRepairTest extends BaseWebTest {
                 step(role + " уведомления - в состоянии " + state, () -> {
                     clientPages.getAllNotificationsPage().open();
                     clientPages.getAllNotificationsPage().checkFinishLoading();
-                    clientPages.getAllNotificationsPage().checkRepairState(state, stateInfo.getNotificationsDto());
+                    clientPages.getAllNotificationsPage().checkStateRepair(state, stateInfo.getNotificationsDto());
                 });
             };
             Consumer<SoftAssert> case4 = softAssert -> {

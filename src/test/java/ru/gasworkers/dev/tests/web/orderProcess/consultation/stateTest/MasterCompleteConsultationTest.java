@@ -37,15 +37,15 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_CONSULTATION)
-public class MasterStartConsultationTest extends BaseWebTest {
+public class MasterCompleteConsultationTest extends BaseWebTest {
 
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Консультация - в состоянии masterStartConsultation")
-    void masterStartConsultation(@WithClient(houses = {@WithHouse}) User client) {
-        StateConsultation state = StateConsultation.MASTER_START_CONSULTATION;
+    @DisplayName("Консультация - в состоянии masterCompleteConsultation")
+    void masterCompleteConsultation(@WithClient(houses = {@WithHouse}) User client) {
+        StateConsultation state = StateConsultation.MASTER_COMPLETE_CONSULTATION;
         Role role = Role.CLIENT;
 
         PreconditionConsultation preconditionConsultation = new PreconditionConsultation();

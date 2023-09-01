@@ -7,17 +7,6 @@ import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
-import ru.gasworkers.dev.api.administration.getUserWithAdmin.GetUserWithAdminApi;
-import ru.gasworkers.dev.api.auth.login.LoginApi;
-import ru.gasworkers.dev.api.consultation.masters.apply.ApplyMasterApi;
-import ru.gasworkers.dev.api.consultation.masters.onlineMasters.OnlineMastersApi;
-import ru.gasworkers.dev.api.consultation.masters.pickMaster.SelectConsultationMasterApi;
-import ru.gasworkers.dev.api.orders.create.CreateOrderApi;
-import ru.gasworkers.dev.api.orders.selectHouse.SelectHouseApi;
-import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
-import ru.gasworkers.dev.api.users.client.house.ClientHousesApi;
-import ru.gasworkers.dev.api.users.client.house.equipment.addEquipment.AddEquipmentApi;
-import ru.gasworkers.dev.api.users.client.house.getClientHouses.GetClientHousesApi;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.client.WithClient;
@@ -26,7 +15,6 @@ import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
-import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 import ru.gasworkers.dev.tests.web.BaseWebTest;
@@ -51,21 +39,8 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.WEB_CONSULTATION)
 public class ClientWaitMasterConsultationTest extends BaseWebTest {
 
-    private final ClientHousesApi clientHousesApi = new ClientHousesApi();
-    private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
-    private final CreateOrderApi createOrdersApi = new CreateOrderApi();
-    private final GetClientHousesApi getClientHousesApi = new GetClientHousesApi();
-    private final SelectHouseApi selectHouseApi = new SelectHouseApi();
-    private final OnlineMastersApi onlineMastersApi = new OnlineMastersApi();
-    private final SelectConsultationMasterApi selectConsultationMasterApi = new SelectConsultationMasterApi();
-    private final ApplyMasterApi applyMasterApi = new ApplyMasterApi();
-    private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
-    private final LoginApi loginApi = new LoginApi();
-    private final GetUserWithAdminApi getUserWithAdminApi = new GetUserWithAdminApi();
     @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
-    @Browser(role = Role.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.THIRD_ROLE)
-    MasterPages masterPages;
 
     @Test
     @DisplayName("Консультация - в состоянии clientWaitMaster")

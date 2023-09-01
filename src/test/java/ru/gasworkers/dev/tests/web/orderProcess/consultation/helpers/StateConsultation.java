@@ -17,8 +17,10 @@ public enum StateConsultation {
     DRAFT(null, null),
     CLIENT_WAIT_MASTER("Ожидает когда мастер начнет консультацию", null),
     MASTER_START_CONSULTATION("Мастер приступил к работе", null),
-    MASTER_FILLED_CONCLUSION("Мастер заполнил данные по заказу", null),
-    COMPLETED("Завершен", "Резюме по видеоконсультации создано мастером");
+    CLIENT_JOIN_CONSULTATION("Мастер приступил к работе", null),
+    MASTER_COMPLETE_CONSULTATION("Мастер заполнил данные по заказу", null),
+    MASTER_FILLED_RESUME("Мастер заполнил данные по заказу", null),
+    ORDER_COMPLETED("Завершен", "Резюме по видеоконсультации создано мастером");
 
     public static final StateBuilder builder = new StateBuilder();
     private final String state;
@@ -30,6 +32,7 @@ public enum StateConsultation {
             switch (this) {
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
+                case CLIENT_JOIN_CONSULTATION:
                     component.offersCounter.noComponent();
                     checkDetailsLastOrder(component, data);
                     component.noMasterVisitDateAndTime();
@@ -37,15 +40,13 @@ public enum StateConsultation {
                     // todo stepper
                     break;
                 case DRAFT:
-                case COMPLETED:
+                case ORDER_COMPLETED:
                     component.offersCounter.noComponent();
                     component.noLastOrderCard();
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
-
             }
-
         });
     }
 
@@ -54,14 +55,16 @@ public enum StateConsultation {
         step("Убедиться, что вкладка Описание заказа в состоянии " + this, () -> {
             StateBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
             tab.status.checkStateConsultation(this, data, dto);
-            tab.details.detailsConsultation(this, data);
+            tab.details.checkStateDetailsConsultation(this, data);
             tab.suggestedMasterRepair.noSuggestedMastersCard();
             tab.buttons.checkStateConsultation(this);
             switch (this) {
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
-                case MASTER_FILLED_CONCLUSION:
-                case COMPLETED:
+                case CLIENT_JOIN_CONSULTATION:
+                case MASTER_COMPLETE_CONSULTATION:
+                case MASTER_FILLED_RESUME:
+                case ORDER_COMPLETED:
                     // todo stepper
                     break;
                 default:
@@ -81,43 +84,14 @@ public enum StateConsultation {
             switch (this) {
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
-                case MASTER_FILLED_CONCLUSION:
-                case COMPLETED:
+                case CLIENT_JOIN_CONSULTATION:
+                case MASTER_COMPLETE_CONSULTATION:
+                case MASTER_FILLED_RESUME:
+                case ORDER_COMPLETED:
 //                    tab.checkNoInfoBox();
                     tab.repairDetails.noTables();
                     // todo stepper
                     break;
-                /*case PUBLISHED:
-                case HAS_OFFER:
-                    tab.checkNoInfoBox();
-                    tab.repairDetails.checkNoRepairDetails();
-                    break;
-                case SCHEDULE_DATE:
-                case WAIT_MASTER:
-                case MASTER_START_CONSULTATION:
-                    tab.repairDetails.checkFinishLoading();
-                    tab.repairDetails.checkMaterialsPrice("0");
-                    tab.repairDetails.checkActionsPrice("0");
-                    // todo time and stepper buttons notifications
-                    break;
-                case MATERIAL_INVOICE_ISSUED:
-                case MATERIAL_INVOICE_PAID:
-                    tab.repairDetails.checkFinishLoading();
-                    tab.repairDetails.checkMaterialsFirstEquipmentPrice(dto, 0);
-                    tab.repairDetails.checkMaterialsLogisticFeeAdded(dto);
-                    tab.repairDetails.checkMaterialsPrice(dto, data);
-                    tab.repairDetails.checkActionsPrice("0");
-                    break;
-                case ACTIONS_INVOICE_ISSUED:
-                case ACTIONS_INVOICE_PAID:
-                case MASTER_SIGN_ACT:
-                case CLIENT_SIGN_ACT:
-                    tab.repairDetails.checkMaterialsLogisticFeeAdded(dto);
-                    tab.repairDetails.checkMaterialsFirstEquipmentPrice(dto, 0);
-                    tab.repairDetails.checkMaterialsPrice(dto, data);
-                    tab.repairDetails.checkActionsFirstItemPrice(dto, 0);
-                    tab.repairDetails.checkActionsPrice(dto, data);
-                    break;*/
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
@@ -133,39 +107,13 @@ public enum StateConsultation {
             switch (this) {
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
-                case MASTER_FILLED_CONCLUSION:
-                case COMPLETED:
+                case CLIENT_JOIN_CONSULTATION:
+                case MASTER_COMPLETE_CONSULTATION:
+                case MASTER_FILLED_RESUME:
+                case ORDER_COMPLETED:
                     tab.noDocs();
                     tab.checkTotalPrice(String.valueOf(dto.getData().getMaster().getConsultationPrice()));
                     // todo add tab.checkComputedToTalPrice - no field in json
-               /* case HAS_OFFER:
-                    tab.noDocs();
-                    tab.checkNoTotalPrice();
-                    break;
-                case SCHEDULE_DATE:
-                case WAIT_MASTER:
-                case MASTER_START_CONSULTATION:
-                    tab.noDocs();
-                    tab.checkTotalPrice("10");
-                    // todo add tab.checkComputedToTalPrice - no field in json
-                    break;
-                case MATERIAL_INVOICE_ISSUED:
-                case MATERIAL_INVOICE_PAID:
-                    tab.noDocs();
-                    tab.checkTotalPrice("3310");
-                    break;
-                case ACTIONS_INVOICE_ISSUED:
-                case ACTIONS_INVOICE_PAID:
-                    tab.noDocs();
-                    tab.checkTotalPrice("6300");
-                    // todo add tab.checkComputedToTalPrice - no field in json
-                    break;
-                case MASTER_SIGN_ACT:
-                case CLIENT_SIGN_ACT:
-                    tab.checkActDoc();
-                    tab.checkTotalPrice("6300");
-                    // todo add tab.checkComputedToTalPrice - no field in json
-                    break;*/
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);

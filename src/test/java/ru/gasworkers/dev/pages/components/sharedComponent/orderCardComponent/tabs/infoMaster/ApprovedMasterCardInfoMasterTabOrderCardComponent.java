@@ -114,8 +114,10 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
             switch (stateConsultation) {
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
-                case MASTER_FILLED_CONCLUSION:
-                case COMPLETED:
+                case CLIENT_JOIN_CONSULTATION:
+                case MASTER_COMPLETE_CONSULTATION:
+                case MASTER_FILLED_RESUME:
+                case ORDER_COMPLETED:
                     checkApprovedMasterCardExists();
                     checkFinishLoading();
                     checkMasterFullName(dto.getMasterFullName());

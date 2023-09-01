@@ -116,8 +116,10 @@ public class AllNotificationsPage extends BasePage {
             switch (stateConsultation) {
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
-                case MASTER_FILLED_CONCLUSION:
-                case COMPLETED:
+                case CLIENT_JOIN_CONSULTATION:
+                case MASTER_COMPLETE_CONSULTATION:
+                case MASTER_FILLED_RESUME:
+                case ORDER_COMPLETED:
                     checkExpectedAmountOfNotifications(0, 4000);
                     break;
                 default:
@@ -129,7 +131,7 @@ public class AllNotificationsPage extends BasePage {
     }
 
 
-    public void checkRepairState(StateRepair stateRepair, NotificationsResponseDto dto) {
+    public void checkStateRepair(StateRepair stateRepair, NotificationsResponseDto dto) {
         stepWithRole("Проверить уведомления в состоянии " + stateRepair, () -> {
             String firstNotificationText = dto.getData().get(0).getText();
             switch (stateRepair) {

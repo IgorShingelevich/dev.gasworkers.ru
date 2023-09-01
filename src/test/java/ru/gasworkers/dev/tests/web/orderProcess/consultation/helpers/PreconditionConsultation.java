@@ -13,6 +13,9 @@ import ru.gasworkers.dev.api.auth.user.UserResponseDto;
 import ru.gasworkers.dev.api.consultation.CodeByOrder.CodeByOrderConsultationApi;
 import ru.gasworkers.dev.api.consultation.CodeByOrder.CodeByOrderConsultationRequest;
 import ru.gasworkers.dev.api.consultation.CodeByOrder.CodeByOrderConsultationResponse;
+import ru.gasworkers.dev.api.consultation.complete.CompleteConsultationApi;
+import ru.gasworkers.dev.api.consultation.complete.CompleteConsultationRequest;
+import ru.gasworkers.dev.api.consultation.complete.CompleteConsultationResponse;
 import ru.gasworkers.dev.api.consultation.masters.apply.ApplyMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.apply.dto.ApplyMasterRequestDto;
 import ru.gasworkers.dev.api.consultation.masters.apply.dto.ApplyMasterResponseDto;
@@ -21,6 +24,8 @@ import ru.gasworkers.dev.api.consultation.masters.onlineMasters.dto.OnlineMaster
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.SelectConsultationMasterApi;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterRequestDto;
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterResponseDto;
+import ru.gasworkers.dev.api.consultation.resume.ResumeConsultationApi;
+import ru.gasworkers.dev.api.consultation.resume.ResumeConsultationRequest;
 import ru.gasworkers.dev.api.orders.actions.OrdersActionsApi;
 import ru.gasworkers.dev.api.orders.actions.OrdersSaveActionsApi;
 import ru.gasworkers.dev.api.orders.approveDate.OrdersApproveDateApi;
@@ -83,6 +88,8 @@ public class PreconditionConsultation extends BaseApiTest {
     private final SelectConsultationMasterApi selectConsultationMasterApi = new SelectConsultationMasterApi();
     private final ApplyMasterApi applyMasterApi = new ApplyMasterApi();
     private final CodeByOrderConsultationApi codeByOrderConsultationApi = new CodeByOrderConsultationApi();
+    private final CompleteConsultationApi completeConsultationApi = new CompleteConsultationApi();
+    private final ResumeConsultationApi resumeConsultationApi = new ResumeConsultationApi();
 
 
     private final NotificationsApi notificationsApi = new NotificationsApi();
@@ -124,11 +131,17 @@ public class PreconditionConsultation extends BaseApiTest {
                 case MASTER_START_CONSULTATION:
                     applyMasterStartConsultationPrecondition(stateConsultation, client, commonFields);
                     break;
-                case MASTER_FILLED_CONCLUSION:
-                    applyMasterFilledConclusionPrecondition(stateConsultation, client, commonFields);
+                case CLIENT_JOIN_CONSULTATION:
+                    applyClientJoinConsultationPrecondition(stateConsultation, client, commonFields);
                     break;
-                case COMPLETED:
-                    applyCompletedPreconditionUser(stateConsultation, client, commonFields);
+                case MASTER_COMPLETE_CONSULTATION:
+                    applyMasterCompleteConclusionPrecondition(stateConsultation, client, commonFields);
+                    break;
+                case MASTER_FILLED_RESUME:
+                    applyMasterFilledResumePrecondition(stateConsultation, client, commonFields);
+                    break;
+                case ORDER_COMPLETED:
+                    applyOrderCompletedPreconditionUser(stateConsultation, client, commonFields);
                     break;
 
                 default:
@@ -257,6 +270,7 @@ public class PreconditionConsultation extends BaseApiTest {
                 commonFields.setTokenMaster(loginApi.getUserToken(LoginRequestDto.asUserEmail(commonFields.getMasterEmail(), "1234")));
             });
             step(Role.MASTER + " начинает ВК", () -> {
+                System.out.println("codeByOrder masterStartConsultation");
                 CodeByOrderConsultationResponse actualResponse = codeByOrderConsultationApi.codeByOrder(CodeByOrderConsultationRequest.builder()
                                 .orderId(commonFields.getOrderId())
                                 .build(), commonFields.getTokenMaster())
@@ -266,15 +280,50 @@ public class PreconditionConsultation extends BaseApiTest {
         });
     }
 
-    private void applyMasterFilledConclusionPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
+    private void applyClientJoinConsultationPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
         applyMasterStartConsultationPrecondition(stateConsultation, client, commonFields);
         step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + stateConsultation, () -> {
-
+            step(Role.CLIENT + " присоединяется к  ВК", () -> {
+                System.out.println("codeByOrder clientJoinConsultation");
+                CodeByOrderConsultationResponse actualResponse = codeByOrderConsultationApi.codeByOrder(CodeByOrderConsultationRequest.builder()
+                                .orderId(commonFields.getOrderId())
+                                .build(), commonFields.getTokenClient())
+                        .statusCode(200)
+                        .extract().as(CodeByOrderConsultationResponse.class);
+            });
         });
     }
 
-    private void applyCompletedPreconditionUser(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
-        applyMasterFilledConclusionPrecondition(stateConsultation, client, commonFields);
+    private void applyMasterCompleteConclusionPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
+        applyClientJoinConsultationPrecondition(stateConsultation, client, commonFields);
+        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + stateConsultation, () -> {
+            step(Role.MASTER + " завершает ВК", () -> {
+                System.out.println("completeConsultation");
+                CompleteConsultationResponse actualResponse = completeConsultationApi.complete(CompleteConsultationRequest.builder()
+                                .orderId(commonFields.getOrderId())
+                                .build(), commonFields.getTokenMaster())
+                        .statusCode(200)
+                        .extract().as(CompleteConsultationResponse.class);
+            });
+        });
+    }
+
+    private void applyMasterFilledResumePrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
+        applyMasterCompleteConclusionPrecondition(stateConsultation, client, commonFields);
+        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + stateConsultation, () -> {
+            step(Role.MASTER + " заполняет резюме", () -> {
+                System.out.println("resumeConsultation");
+                resumeConsultationApi.resume(ResumeConsultationRequest.builder()
+                                .orderId(String.valueOf(commonFields.getOrderId()))
+                                .description("test resume description")
+                                .build(), commonFields.getTokenMaster())
+                        .statusCode(200);
+            });
+        });
+    }
+
+    private void applyOrderCompletedPreconditionUser(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
+        applyMasterFilledResumePrecondition(stateConsultation, client, commonFields);
         step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + stateConsultation, () -> {
 
         });

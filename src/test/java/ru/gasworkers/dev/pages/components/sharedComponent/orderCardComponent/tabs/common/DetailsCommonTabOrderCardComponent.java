@@ -161,14 +161,16 @@ public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
         });
     }
 
-    public void detailsConsultation(StateConsultation stateConsultation, StateBuilder.OrderIdData data) {
+    public void checkStateDetailsConsultation(StateConsultation stateConsultation, StateBuilder.OrderIdData data) {
         step("Убедиться, что  детали заказа соответствуют ожидаемым в состоянии " + stateConsultation, () -> {
             checkCommonDetails(data, ServiceType.CONSULTATION);
             switch (stateConsultation) {
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
-                case MASTER_FILLED_CONCLUSION:
-                case COMPLETED:
+                case CLIENT_JOIN_CONSULTATION:
+                case MASTER_COMPLETE_CONSULTATION:
+                case MASTER_FILLED_RESUME:
+                case ORDER_COMPLETED:
                     checkClientFullName(data.getClientFullName());
                     checkClientPhone(data.getPhone());
 //                    checkNoCompany(); //todo selfemployed or master SC - need to determine

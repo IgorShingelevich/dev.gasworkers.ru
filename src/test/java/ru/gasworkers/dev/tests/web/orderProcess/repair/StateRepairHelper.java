@@ -97,7 +97,7 @@ public class StateRepairHelper {
         return null; // Default value if master is null or services list is empty or index is out of bounds
     }
 
-    public String desiredDateIntervalFormatter(String desiredDateStart, String desiredDateEnd) {
+    /*public String desiredDateIntervalFormatter(String desiredDateStart, String desiredDateEnd) {
         SimpleDateFormat inputFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
         SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMMM yyyy", new Locale("ru"));
         try {
@@ -112,10 +112,39 @@ public class StateRepairHelper {
             e.printStackTrace();
             return "Error parsing dates";
         }
+    }*/
+
+    public String desiredDateIntervalFormatter(String desiredDateStart, String desiredDateEnd) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMMM yyyy", new Locale("ru"));
+
+        try {
+            Date startDate = inputFormat.parse(desiredDateStart);
+            Date endDate = inputFormat.parse(desiredDateEnd);
+
+            String formattedStartDate = outputFormat.format(startDate);
+            String formattedEndDate = outputFormat.format(endDate);
+
+            String startDayPart = formattedStartDate.split(" ")[0];
+            String endDayPart = formattedEndDate.split(" ")[0];
+
+            if (startDayPart.startsWith("0")) {
+                startDayPart = startDayPart.substring(1);
+            }
+
+            if (endDayPart.startsWith("0")) {
+                endDayPart = endDayPart.substring(1);
+            }
+
+            return startDayPart + formattedStartDate.substring(formattedStartDate.indexOf(" ")) + " - " + endDayPart + formattedEndDate.substring(formattedEndDate.indexOf(" "));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "Error parsing dates";
+        }
     }
 
     public String desiredTimeIntervalFormatter(String desiredTimeStart, String desiredTimeEnd) {
-        SimpleDateFormat inputFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
+        SimpleDateFormat inputFormat = new SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
         SimpleDateFormat outputFormat = new SimpleDateFormat("HH:mm");
 
         try {
@@ -134,7 +163,7 @@ public class StateRepairHelper {
 
     public String createdAtFormatter(String createdAt) {
         SimpleDateFormat inputFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
-        SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMMM yyyy 'год'", new Locale("ru"));
+        SimpleDateFormat outputFormat = new SimpleDateFormat("d MMMM yyyy 'год'", new Locale("ru"));
 
         try {
             Date date = inputFormat.parse(createdAt);
@@ -144,6 +173,31 @@ public class StateRepairHelper {
             return "Error parsing date";
         }
     }
+
+    /*public String createdAtFormatter(String createdAt) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("EEE, dd MMM yyyy HH:mm:ss Z", Locale.ENGLISH);
+        SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMMM yyyy 'год'", new Locale("ru"));
+
+        try {
+            Date date = inputFormat.parse(createdAt);
+            String formattedDate = outputFormat.format(date);
+
+            // Extract the day part from the formatted date
+            String dayPart = formattedDate.split(" ")[0];
+
+            // Remove leading zero from the day part if it exists
+            if (dayPart.startsWith("0")) {
+                dayPart = dayPart.substring(1);
+            }
+
+            // Reassemble the formatted date with the modified day part
+            return dayPart + formattedDate.substring(formattedDate.indexOf(" "));
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return "Error parsing date";
+        }
+    }*/
 
     public String priceFormatter(String text) {
         if (text == null) {
