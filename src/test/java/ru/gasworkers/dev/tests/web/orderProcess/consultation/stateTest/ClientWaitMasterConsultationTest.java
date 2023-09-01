@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTest;
 
+import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -104,7 +105,10 @@ public class ClientWaitMasterConsultationTest extends BaseWebTest {
 
             Consumer<SoftAssert> case5 = softAssert -> {
                 step(role + " уведомления - в состоянии " + state, () -> {
-                    clientPages.getAllNotificationsPage().open();
+                    clientPages.getHomePage().open();
+                    clientPages.getHomePage().checkFinishLoading();
+                    Selenide.sleep(3000);
+                    clientPages.getHomePage().header.actionsBlock.notifications();
                     clientPages.getAllNotificationsPage().checkFinishLoading();
                     clientPages.getAllNotificationsPage().checkStateConsultation(state, stateInfo.getNotificationsDto());
                 });

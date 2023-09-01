@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.tests.web.orderProcess.repair;
 
+import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -75,7 +76,10 @@ public class ScheduleDateRepairTest extends BaseWebTest {
             };
             Consumer<SoftAssert> case3 = softAssert -> {
                 step(role + " уведомления - в состоянии " + state, () -> {
-                    clientPages.getAllNotificationsPage().open();
+                    clientPages.getHomePage().open();
+                    clientPages.getHomePage().checkFinishLoading();
+                    Selenide.sleep(3000);
+                    clientPages.getHomePage().header.actionsBlock.notifications();
                     clientPages.getAllNotificationsPage().checkFinishLoading();
                     clientPages.getAllNotificationsPage().checkStateRepair(state, stateInfo.getNotificationsDto());
                 });

@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.tests.web.orderProcess.repair;
 
+import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Allure;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.model.Role;
@@ -62,7 +63,10 @@ public class WebRepairTestSteps extends BaseWebTest {
 
     void checkNotificationsPage(Role role, StateRepair state, StateInfo stateInfo) {
         step(role + " уведомления - в состоянии " + state, () -> {
-            clientPages.getAllNotificationsPage().open();
+            clientPages.getHomePage().open();
+            clientPages.getHomePage().checkFinishLoading();
+            Selenide.sleep(3000);
+            clientPages.getHomePage().header.actionsBlock.notifications();
             clientPages.getAllNotificationsPage().checkFinishLoading();
             clientPages.getAllNotificationsPage().checkStateRepair(state, stateInfo.getNotificationsDto());
         });

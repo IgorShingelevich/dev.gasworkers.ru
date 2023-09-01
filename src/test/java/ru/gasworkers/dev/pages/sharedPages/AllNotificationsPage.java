@@ -106,7 +106,7 @@ public class AllNotificationsPage extends BasePage {
 
     public void open() {
         stepWithRole("Открыть страницу Уведомления", () -> {
-            Selenide.sleep(2000);
+            Selenide.sleep(3000);
             driver.open("/profile/notifications");
         });
     }
