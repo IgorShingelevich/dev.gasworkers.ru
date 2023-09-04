@@ -33,6 +33,7 @@ public enum StateConsultation {
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
                 case CLIENT_JOIN_CONSULTATION:
+                case MASTER_COMPLETE_CONSULTATION:
                     component.offersCounter.noComponent();
                     checkDetailsLastOrder(component, data);
                     component.noMasterVisitDateAndTime();
@@ -40,6 +41,7 @@ public enum StateConsultation {
                     // todo stepper
                     break;
                 case DRAFT:
+                case MASTER_FILLED_RESUME:
                 case ORDER_COMPLETED:
                     component.offersCounter.noComponent();
                     component.noLastOrderCard();

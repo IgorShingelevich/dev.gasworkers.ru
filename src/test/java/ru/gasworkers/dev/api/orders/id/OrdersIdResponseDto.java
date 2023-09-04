@@ -890,7 +890,7 @@ public class OrdersIdResponseDto {
                 @JsonProperty("consultation_price")
                 public Integer consultationPrice;
                 @JsonProperty("push_id")
-                public Integer pushId;
+                public String pushId;
                 @JsonProperty("ready_for_consultation")
                 public Boolean readyForConsultation;
                 @JsonProperty("active_role")

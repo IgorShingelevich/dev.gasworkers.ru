@@ -209,7 +209,7 @@ public class StateRepairHelper {
 
     public String convertRegisterDateFromStamp(int timestamp) {
         Date date = new Date((long) timestamp * 1000L); // Convert seconds to milliseconds
-        SimpleDateFormat outputFormat = new SimpleDateFormat("dd MMMM yyyy 'года'", new Locale("ru"));
+        SimpleDateFormat outputFormat = new SimpleDateFormat("d MMMM yyyy 'года'", new Locale("ru"));
         return "Зарегистрирован с " + outputFormat.format(date);
     }
 }

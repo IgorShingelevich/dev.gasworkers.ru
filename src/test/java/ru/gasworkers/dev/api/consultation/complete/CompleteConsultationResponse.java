@@ -22,6 +22,11 @@ public class CompleteConsultationResponse {
     @JsonProperty("data")
     private List<DataDto> data;
 
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     public static class DataDto {
         @JsonProperty("time_left")
         private Integer timeLeft;

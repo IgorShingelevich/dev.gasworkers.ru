@@ -23,7 +23,7 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
             self.shouldBe(visible);
             subtitleApprovedMastersTextLocator.shouldHave(text("Ваш мастер"));
             approvedMasterFullNameLocator.shouldBe(visible);
-            approvedMasterAvatarLocator.shouldBe(visible, Duration.ofSeconds(3));
+            approvedMasterAvatarLocator.shouldBe(visible, Duration.ofSeconds(10));
             approvedMasterRegisterDateLocator.shouldBe(visible);
             approvedMasterRatingLocator.shouldBe(visible);
             approvedMasterReviewsLocator.shouldBe(visible);

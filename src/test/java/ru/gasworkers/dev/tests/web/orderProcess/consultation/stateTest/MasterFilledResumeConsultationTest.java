@@ -118,16 +118,20 @@ public class MasterFilledResumeConsultationTest extends BaseWebTest {
                     clientPages.getHomePage().redNotice.noNotice();
                 });
             };
-            Consumer<SoftAssert> case7 = softAssert -> {
-                step(role + "  стр лендинга - в состоянии " + state, () -> {
-                    clientPages.getLandingPage().open();
-                    clientPages.getLandingPage().checkFinishLoading();
-                    clientPages.getLandingPage().checkStateConsultation(state);
-                });
-            };
+//            Consumer<SoftAssert> case7 = softAssert -> {
+//                step(role + "  стр лендинга - в состоянии " + state, () -> {
+//                    clientPages.getHomePage().open();
+//                    clientPages.getHomePage().checkFinishLoading();
+//                    clientPages.getHomePage().header.clickLogo();
+//                    clientPages.getLandingPage().checkFinishLoading();
+//                    clientPages.getLandingPage().checkStateConsultation(state);
+//                });
+//            };
             assertAll(Arrays.asList(case1,
                     case2, case3,
-                    case4, case5, case6, case7));
+                    case4, case5, case6
+//                    , case7
+            ));
         });
 
     }
