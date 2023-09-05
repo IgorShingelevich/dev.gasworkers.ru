@@ -180,6 +180,8 @@ public class PreconditionRepair extends BaseApiTest {
                 });
             });
             step(Role.CLIENT + " получает список доступных предложений", () -> {
+                // sleep 3 sec
+                Thread.sleep(3000);
                 SuggestServicesResponseDto suggestServiceDto = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SuggestServicesResponseDto.class);

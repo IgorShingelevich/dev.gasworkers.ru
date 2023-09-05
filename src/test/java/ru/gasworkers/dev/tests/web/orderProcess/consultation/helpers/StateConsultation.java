@@ -28,12 +28,13 @@ public enum StateConsultation {
 
     public void checkLastOrderComponent(LastOrderProfileClientComponent component, LastOrderInfoResponseDto dto) {
         step("Проверка компонента Последний заказ", () -> {
-            StateBuilder.LastOrderInfoData data = builder.extractLastOrderInfoData(dto);
             switch (this) {
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
                 case CLIENT_JOIN_CONSULTATION:
                 case MASTER_COMPLETE_CONSULTATION:
+                    StateBuilder.LastOrderInfoData data = builder.extractLastOrderInfoData(dto);
+                    component.checkFinishLoading();
                     component.offersCounter.noComponent();
                     checkDetailsLastOrder(component, data);
                     component.noMasterVisitDateAndTime();
@@ -43,8 +44,8 @@ public enum StateConsultation {
                 case DRAFT:
                 case MASTER_FILLED_RESUME:
                 case ORDER_COMPLETED:
-                    component.offersCounter.noComponent();
                     component.noLastOrderCard();
+                    component.offersCounter.noComponent();
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);

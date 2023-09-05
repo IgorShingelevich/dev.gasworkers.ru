@@ -133,6 +133,7 @@ public class AllNotificationsPage extends BasePage {
 
     public void checkStateRepair(StateRepair stateRepair, NotificationsResponseDto dto) {
         stepWithRole("Проверить уведомления в состоянии " + stateRepair, () -> {
+            Selenide.sleep(3000);
             String firstNotificationText = dto.getData().get(0).getText();
             switch (stateRepair) {
                 case PUBLISHED:

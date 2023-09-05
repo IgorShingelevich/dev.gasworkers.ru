@@ -66,10 +66,10 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                             SELECT_NEW_COMPANY,
                             CANCEL_ORDER,
                             PAY_INVOICE,
-                            SIGN_ACT,
-                            MAKE_REVIEW);
+                            SIGN_ACT
+                    );
                     visibleButtons = List.of(
-                            NO_BUTTON
+                            MAKE_REVIEW
                     );
                     break;
                 default:

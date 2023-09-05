@@ -7,8 +7,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -20,7 +18,7 @@ public class CompleteConsultationResponse {
     @JsonProperty("message")
     private String message;
     @JsonProperty("data")
-    private List<DataDto> data;
+    private Object data;
 
     @Data
     @Builder

@@ -28,7 +28,7 @@ public enum OrderStatus {
     //consultation
     CLIENT_WAIT_MASTER("Ожидает когда мастер начнет консультацию", Role.CLIENT + ", " + Role.MASTER),
     MASTER_START_CONSULTATION("Мастер приступил к работе", Role.CLIENT + ", " + Role.MASTER),
-    MASTER_FILLED_CONCLUSION("Мастер заполнил данные по заказу", Role.CLIENT + ", " + Role.MASTER),
+    MASTER_FILLED_CONCLUSION("Завершен", Role.CLIENT + ", " + Role.MASTER),
     ORDER_COMPLETED("Завершен", Role.CLIENT + ", " + Role.MASTER);
 
     private final String description;
