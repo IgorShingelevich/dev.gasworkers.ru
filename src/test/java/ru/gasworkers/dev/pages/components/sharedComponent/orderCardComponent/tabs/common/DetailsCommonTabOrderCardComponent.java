@@ -110,6 +110,7 @@ public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
         step("Убедиться, что  детали заказа соответствуют ожидаемым в состоянии " + stateRepair, () -> {
             checkCommonDetails(data, ServiceType.REPAIR);
             switch (stateRepair) {
+
                 case PUBLISHED:
                     checkDesiredDate(data.getDesiredDate());
                     checkDesiredTime(data.getDesiredTime());
@@ -163,14 +164,26 @@ public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
 
     public void checkStateDetailsConsultation(StateConsultation stateConsultation, StateBuilder.OrderIdData data) {
         step("Убедиться, что  детали заказа соответствуют ожидаемым в состоянии " + stateConsultation, () -> {
-            checkCommonDetails(data, ServiceType.CONSULTATION);
             switch (stateConsultation) {
+                case DRAFT_ONLINE_MASTERS:
+                    checkServiceType(ServiceType.CONSULTATION);
+                    checkClientFullName(data.getClientFullName());
+                    checkAddress(data.getAddress());
+                    checkEquipment(data.getEquipments0());
+//                    checkNoCompany(); //todo selfemployed or master SC - need to determine
+//                    checkCompanyFullName(data.getCompanyFullName());
+//                 todo checkAssignedDateAndTime(data.getAssignedDateAndTime());
+                    noDesiredDate();
+                    noDesiredTime();
+                    noDescription();
+                    break;
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
                 case CLIENT_JOIN_CONSULTATION:
                 case MASTER_COMPLETE_CONSULTATION:
                 case MASTER_FILLED_RESUME:
                 case ORDER_COMPLETED:
+                    checkCommonDetails(data, ServiceType.CONSULTATION);
                     checkClientFullName(data.getClientFullName());
                     checkClientPhone(data.getPhone());
 //                    checkNoCompany(); //todo selfemployed or master SC - need to determine
@@ -182,6 +195,12 @@ public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateConsultation);
             }
+        });
+    }
+
+    private void noDescription() {
+        stepWithRole("Убедиться, что описание отсутствует", () -> {
+            selfCollection.findBy(text("Описание проблемы:")).shouldNotBe(visible);
         });
     }
 }

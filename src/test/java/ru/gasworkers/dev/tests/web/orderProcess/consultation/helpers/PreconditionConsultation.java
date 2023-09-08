@@ -125,6 +125,9 @@ public class PreconditionConsultation extends BaseApiTest {
         return step("API: Видеоконсультация сейчас предусловие: " + stateConsultation, () -> {
             stateInfo.setCommonFields(commonFields);
             switch (stateConsultation) {
+                case DRAFT_ONLINE_MASTERS:
+                    applyDraftConsultationPrecondition(stateConsultation, client, commonFields);
+                    break;
                 case CLIENT_WAIT_MASTER:
                     applyClientWaitMasterPrecondition(stateConsultation, client, commonFields);
                     break;
@@ -160,10 +163,13 @@ public class PreconditionConsultation extends BaseApiTest {
                 .statusCode(200);
     }
 
-    private void applyClientWaitMasterPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
+    private void applyDraftConsultationPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
         step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + stateConsultation, () -> {
+
             commonFields.setTokenClient(loginApi.getTokenPhone(client));
             commonFields.setClientObjectId(clientHousesApi.houseId(client, commonFields.getTokenClient()));
+            commonFields.setClientPhone(Long.valueOf(client.getPhone()));
+
             step(Role.CLIENT + "  add equipment", () -> {
                 addEquipmentApi.addEquipment(AddEquipmentRequestDto.defaultBoilerEquipment(), commonFields.getClientObjectId(), commonFields.getTokenClient())
                         .statusCode(200)
@@ -222,12 +228,18 @@ public class PreconditionConsultation extends BaseApiTest {
                 System.out.println("First master id: " + commonFields.getMasterId());
                 return currentMasterIds;
             });
+        });
+    }
+
+    private void applyClientWaitMasterPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
+        applyDraftConsultationPrecondition(stateConsultation, client, commonFields);
+        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + stateConsultation, () -> {
             Integer timetableId = step(Role.CLIENT + " pick master", () -> {
                 return selectConsultationMasterApi.selectMaster(PickMasterRequestDto.builder()
                                         .orderId(commonFields.getOrderId())
                                         .online(true)
                                         .build(),
-                                masterIdList.get(0), commonFields.getTokenClient())
+                                commonFields.getMasterId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(PickMasterResponseDto.class).getData().getTimetableId();
             });
@@ -259,7 +271,6 @@ public class PreconditionConsultation extends BaseApiTest {
                         .statusCode(200)
                         .extract().as(UserResponseDto.class).getData().getEmail());
             });
-            commonFields.setClientPhone(Long.valueOf(client.getPhone()));
         });
     }
 
@@ -298,6 +309,12 @@ public class PreconditionConsultation extends BaseApiTest {
         applyClientJoinConsultationPrecondition(stateConsultation, client, commonFields);
         step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + stateConsultation, () -> {
             step(Role.MASTER + " завершает ВК", () -> {
+                // Wait for 3 seconds  for starting record on  backend
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("completeConsultation");
                 CompleteConsultationResponse actualResponse = completeConsultationApi.complete(CompleteConsultationRequest.builder()
                                 .orderId(commonFields.getOrderId())

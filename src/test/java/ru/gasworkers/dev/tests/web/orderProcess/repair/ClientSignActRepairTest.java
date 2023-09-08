@@ -65,7 +65,8 @@ public class ClientSignActRepairTest extends BaseWebTest {
         step(role + " кабинет в состоянии - в состоянии " + state, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(role + " карточка последнего заказа - в состоянии " + state, () -> {
-                    clientPages.getHomePage().lastOrderComponent.noLastOrderCard();
+                    clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getLastOrderInfoDto());
+
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {

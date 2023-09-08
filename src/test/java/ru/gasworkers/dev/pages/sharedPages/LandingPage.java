@@ -122,7 +122,7 @@ public class LandingPage extends BasePage {
         step(role + "  - в состоянии " + state, () -> {
             noticeComponent.checkStateConsultation(state);
             switch (state) {
-                case DRAFT:
+                case DRAFT_ONLINE_MASTERS:
                 case ORDER_COMPLETED:
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:

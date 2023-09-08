@@ -64,7 +64,7 @@ public class NoticeComponent extends BaseComponent {
             checkFinishLoading();
             redNotice.noNotice();
             switch (state) {
-                case DRAFT:
+                case DRAFT_ONLINE_MASTERS:
                 case ORDER_COMPLETED:
                     noNotifications();
                     break;

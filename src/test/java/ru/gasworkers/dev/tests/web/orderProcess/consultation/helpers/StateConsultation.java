@@ -14,7 +14,7 @@ import static io.qameta.allure.Allure.step;
 
 @AllArgsConstructor
 public enum StateConsultation {
-    DRAFT(null, null),
+    DRAFT_ONLINE_MASTERS(null, null),
     CLIENT_WAIT_MASTER("Ожидает когда мастер начнет консультацию", null),
     MASTER_START_CONSULTATION("Мастер приступил к работе", null),
     CLIENT_JOIN_CONSULTATION("Мастер приступил к работе", null),
@@ -29,10 +29,13 @@ public enum StateConsultation {
     public void checkLastOrderComponent(LastOrderProfileClientComponent component, LastOrderInfoResponseDto dto) {
         step("Проверка компонента Последний заказ", () -> {
             switch (this) {
+                case DRAFT_ONLINE_MASTERS:
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
                 case CLIENT_JOIN_CONSULTATION:
                 case MASTER_COMPLETE_CONSULTATION:
+                case MASTER_FILLED_RESUME:
+                case ORDER_COMPLETED:
                     StateBuilder.LastOrderInfoData data = builder.extractLastOrderInfoData(dto);
                     component.checkFinishLoading();
                     component.offersCounter.noComponent();
@@ -40,12 +43,6 @@ public enum StateConsultation {
                     component.noMasterVisitDateAndTime();
 //                 todo   component.checkDesiredTime(data.getDesiredTime());
                     // todo stepper
-                    break;
-                case DRAFT:
-                case MASTER_FILLED_RESUME:
-                case ORDER_COMPLETED:
-                    component.noLastOrderCard();
-                    component.offersCounter.noComponent();
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
@@ -62,6 +59,7 @@ public enum StateConsultation {
             tab.suggestedMasterRepair.noSuggestedMastersCard();
             tab.buttons.checkStateConsultation(this);
             switch (this) {
+                case DRAFT_ONLINE_MASTERS:
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
                 case CLIENT_JOIN_CONSULTATION:
@@ -85,6 +83,7 @@ public enum StateConsultation {
             tab.approvedMasterCard.checkStateConsultation(this, data);
             tab.buttons.checkStateConsultation(this);
             switch (this) {
+                case DRAFT_ONLINE_MASTERS:
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
                 case CLIENT_JOIN_CONSULTATION:
@@ -108,6 +107,10 @@ public enum StateConsultation {
         tab.buttons.checkStateConsultation(this);
         step("Убедиться, что вкладка Документы в состоянии " + this, () -> {
             switch (this) {
+                case DRAFT_ONLINE_MASTERS:
+                    tab.noDocs();
+                    tab.noTotalPrice();
+                    break;
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
                 case CLIENT_JOIN_CONSULTATION:

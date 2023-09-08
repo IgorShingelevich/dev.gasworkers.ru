@@ -53,7 +53,7 @@ public class DocsTabOrderCardComponent extends BaseOrderCardComponent {
         });
     }
 
-    public void checkNoTotalPrice() {
+    public void noTotalPrice() {
         stepWithRole("Убедиться, что итоговая стоимость отсутствует", () -> {
             totalPriceLocator.shouldNotBe(visible);
         });

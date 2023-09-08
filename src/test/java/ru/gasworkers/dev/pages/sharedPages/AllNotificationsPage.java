@@ -114,6 +114,7 @@ public class AllNotificationsPage extends BasePage {
     public void checkStateConsultation(StateConsultation stateConsultation, NotificationsResponseDto dto) {
         stepWithRole("Проверить уведомления в состоянии " + stateConsultation, () -> {
             switch (stateConsultation) {
+                case DRAFT_ONLINE_MASTERS:
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
                 case CLIENT_JOIN_CONSULTATION:

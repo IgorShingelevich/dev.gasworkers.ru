@@ -14,7 +14,7 @@ import static io.qameta.allure.Allure.step;
 
 @AllArgsConstructor
 public enum StateRepair {
-
+    DRAFT("Черновик", null),
     PUBLISHED("Опубликован", " опубликован"),
     HAS_OFFER("Есть предложения", "Отклик на заявку"),
     SCHEDULE_DATE("Согласование даты заказа", "Оплатите счет по заказу"),
@@ -30,7 +30,6 @@ public enum StateRepair {
     public static final StateBuilder builder = new StateBuilder();
     private final String state;
     public final String notification;
-
 
     public void checkLastOrderComponent(LastOrderProfileClientComponent component, LastOrderInfoResponseDto dto) {
         step("Проверка компонента Последний заказ", () -> {
@@ -63,16 +62,12 @@ public enum StateRepair {
                 case ACTIONS_INVOICE_ISSUED:
                 case ACTIONS_INVOICE_PAID:
                 case MASTER_SIGN_ACT:
+                case CLIENT_SIGN_ACT:
+
                     component.offersCounter.noComponent();
                     checkDetailsLastOrder(component, data);
                     component.noDesiredDate();
                     component.noDesiredTime();
-                    //                   todo component.checkMasterVisitDateAndTime(data.getMasterVisitDateAndTime());
-                    // todo  stepper
-                    break;
-                case CLIENT_SIGN_ACT:
-                    component.offersCounter.noComponent();
-                    component.noLastOrderCard();
                     //                   todo component.checkMasterVisitDateAndTime(data.getMasterVisitDateAndTime());
                     // todo  stepper
                     break;
@@ -187,7 +182,7 @@ public enum StateRepair {
                 case PUBLISHED:
                 case HAS_OFFER:
                     tab.noDocs();
-                    tab.checkNoTotalPrice();
+                    tab.noTotalPrice();
                     break;
                 case SCHEDULE_DATE:
                 case WAIT_MASTER:

@@ -125,6 +125,12 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
 
         step("Проверить статус заказа и оплаты в состоянии " + stateConsultation, () -> {
             switch (stateConsultation) {
+                case DRAFT_ONLINE_MASTERS:
+                    checkCurrentStatus(OrderStatus.DRAFT);
+                    noActivationStagePayment();
+                    noMaterialsStagePayment();
+                    noActionsStagePayment();
+                    break;
                 case CLIENT_WAIT_MASTER:
                     checkCurrentStatus(OrderStatus.CLIENT_WAIT_MASTER);
                     noActivationStagePayment();

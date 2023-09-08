@@ -114,6 +114,9 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
     public void checkStateConsultation(StateConsultation stateConsultation, StateBuilder.OrderIdData dto) {
         step("Проверить, что карточка назначенного мастера в состоянии " + stateConsultation, () -> {
             switch (stateConsultation) {
+                case DRAFT_ONLINE_MASTERS:
+                    noApprovedMasterCard();
+                    break;
                 case CLIENT_WAIT_MASTER:
                 case MASTER_START_CONSULTATION:
                 case CLIENT_JOIN_CONSULTATION:

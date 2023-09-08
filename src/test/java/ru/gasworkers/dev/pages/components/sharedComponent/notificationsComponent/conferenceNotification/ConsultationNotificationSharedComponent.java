@@ -18,7 +18,7 @@ public class ConsultationNotificationSharedComponent extends BaseComponent {
 
     public void checkState(StateConsultation state) {
         switch (state) {
-            case DRAFT:
+            case DRAFT_ONLINE_MASTERS:
             case MASTER_COMPLETE_CONSULTATION:
             case MASTER_FILLED_RESUME:
             case ORDER_COMPLETED:

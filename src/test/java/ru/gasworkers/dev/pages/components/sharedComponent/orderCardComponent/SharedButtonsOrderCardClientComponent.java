@@ -25,12 +25,28 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
             List<Button> visibleButtons;
             List<Button> notVisibleButtons;
             switch (stateConsultation) {
+                case DRAFT_ONLINE_MASTERS:
+                    notVisibleButtons = List.of(
+                            CREATE_CONCLUSION,
+                            START_CONSULTATION,
+                            SHOW_ON_MAP,
+                            SELECT_NEW_COMPANY,
+                            RETURN_TO_WORK,
+                            PAY_INVOICE,
+                            SIGN_ACT,
+                            MAKE_REVIEW);
+                    visibleButtons = List.of(
+                            CANCEL_ORDER,
+                            SELECT_MASTER
+                    );
+                    break;
                 case CLIENT_WAIT_MASTER:
                     notVisibleButtons = List.of(
                             CREATE_CONCLUSION,
                             START_CONSULTATION,
                             SHOW_ON_MAP,
                             SELECT_NEW_COMPANY,
+                            SELECT_MASTER,
                             RETURN_TO_WORK,
                             PAY_INVOICE,
                             SIGN_ACT,
@@ -46,6 +62,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                             CREATE_CONCLUSION,
                             CANCEL_ORDER,
                             SHOW_ON_MAP,
+                            SELECT_MASTER,
                             SELECT_NEW_COMPANY,
                             RETURN_TO_WORK,
                             PAY_INVOICE,
@@ -63,6 +80,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                             RETURN_TO_WORK,
                             START_CONSULTATION,
                             SHOW_ON_MAP,
+                            SELECT_MASTER,
                             SELECT_NEW_COMPANY,
                             CANCEL_ORDER,
                             PAY_INVOICE,
@@ -155,6 +173,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
         START_CONSULTATION("Начать консультацию"),
         CANCEL_ORDER("Отменить заказ"),
         SELECT_NEW_COMPANY("Выбрать новую компанию"),
+        SELECT_MASTER("Выберите мастера"),
         PAY_INVOICE("Оплатить счет"),
         RETURN_TO_WORK("Вернуть в работу"),
         SIGN_ACT("Подписать акт"),

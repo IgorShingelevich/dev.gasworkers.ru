@@ -62,7 +62,6 @@ public class ActionsInvoicePaidTest extends BaseWebTest {
         step(role + " кабинет в состоянии - в состоянии " + state, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(role + " карточка последнего заказа - в состоянии " + state, () -> {
-                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getLastOrderInfoDto());
                 });
             };
