@@ -14,7 +14,7 @@ import static io.qameta.allure.Allure.step;
 
 @AllArgsConstructor
 public enum StateConsultation {
-    DRAFT_ONLINE_MASTERS(null, null),
+    DRAFT_ONLINE_MASTERS("Черновик клиент  выбирает мастера на ВК сейчас ", null),
     CLIENT_WAIT_MASTER("Ожидает когда мастер начнет консультацию", null),
     MASTER_START_CONSULTATION("Мастер приступил к работе", null),
     CLIENT_JOIN_CONSULTATION("Мастер приступил к работе", null),

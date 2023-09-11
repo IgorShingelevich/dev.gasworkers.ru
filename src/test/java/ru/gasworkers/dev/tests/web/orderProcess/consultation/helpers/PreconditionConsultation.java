@@ -164,7 +164,7 @@ public class PreconditionConsultation extends BaseApiTest {
     }
 
     private void applyDraftConsultationPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
-        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + stateConsultation, () -> {
+        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.DRAFT_ONLINE_MASTERS, () -> {
 
             commonFields.setTokenClient(loginApi.getTokenPhone(client));
             commonFields.setClientObjectId(clientHousesApi.houseId(client, commonFields.getTokenClient()));
@@ -233,7 +233,7 @@ public class PreconditionConsultation extends BaseApiTest {
 
     private void applyClientWaitMasterPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
         applyDraftConsultationPrecondition(stateConsultation, client, commonFields);
-        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + stateConsultation, () -> {
+        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.CLIENT_WAIT_MASTER, () -> {
             Integer timetableId = step(Role.CLIENT + " pick master", () -> {
                 return selectConsultationMasterApi.selectMaster(PickMasterRequestDto.builder()
                                         .orderId(commonFields.getOrderId())
@@ -276,7 +276,7 @@ public class PreconditionConsultation extends BaseApiTest {
 
     private void applyMasterStartConsultationPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
         applyClientWaitMasterPrecondition(stateConsultation, client, commonFields);
-        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + stateConsultation, () -> {
+        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.MASTER_START_CONSULTATION, () -> {
             step(Role.MASTER + " авторизуется", () -> {
                 commonFields.setTokenMaster(loginApi.getUserToken(LoginRequestDto.asUserEmail(commonFields.getMasterEmail(), "1234")));
             });
@@ -293,7 +293,7 @@ public class PreconditionConsultation extends BaseApiTest {
 
     private void applyClientJoinConsultationPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
         applyMasterStartConsultationPrecondition(stateConsultation, client, commonFields);
-        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + stateConsultation, () -> {
+        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.CLIENT_JOIN_CONSULTATION, () -> {
             step(Role.CLIENT + " присоединяется к  ВК", () -> {
                 System.out.println("codeByOrder clientJoinConsultation");
                 CodeByOrderConsultationResponse actualResponse = codeByOrderConsultationApi.codeByOrder(CodeByOrderConsultationRequest.builder()
@@ -307,7 +307,7 @@ public class PreconditionConsultation extends BaseApiTest {
 
     private void applyMasterCompleteConclusionPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
         applyClientJoinConsultationPrecondition(stateConsultation, client, commonFields);
-        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + stateConsultation, () -> {
+        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.MASTER_COMPLETE_CONSULTATION, () -> {
             step(Role.MASTER + " завершает ВК", () -> {
                 // Wait for 3 seconds  for starting record on  backend
                 try {
@@ -327,7 +327,7 @@ public class PreconditionConsultation extends BaseApiTest {
 
     private void applyMasterFilledResumePrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
         applyMasterCompleteConclusionPrecondition(stateConsultation, client, commonFields);
-        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + stateConsultation, () -> {
+        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.MASTER_FILLED_RESUME, () -> {
             step(Role.MASTER + " заполняет резюме", () -> {
                 System.out.println("resumeConsultation");
                 resumeConsultationApi.resume(ResumeConsultationRequest.builder()
@@ -341,7 +341,7 @@ public class PreconditionConsultation extends BaseApiTest {
 
     private void applyOrderCompletedPreconditionUser(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
         applyMasterFilledResumePrecondition(stateConsultation, client, commonFields);
-        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + stateConsultation, () -> {
+        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.ORDER_COMPLETED, () -> {
 
         });
     }
