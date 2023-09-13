@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.repair;
+package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;
@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
+import ru.gasworkers.dev.allure.AllureStory;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.extension.user.User;
@@ -16,6 +17,9 @@ import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.web.BaseWebTest;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.PreconditionRepair;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateInfo;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -28,18 +32,19 @@ import static io.qameta.allure.Allure.step;
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.REPAIR)
 @Feature(AllureFeature.REPAIR)
-@Story("Ремонт")
+@Story(AllureStory.WEB_STATE_REPAIR)
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class ScheduleDateRepairTest extends BaseWebTest {
+public class ActionsInvoiceIssuedTest extends BaseWebTest {
     @Browser(role = Role.CLIENT)
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Ремонт - в  состоянии согласование даты и времени")
-    void scheduleDateRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.SCHEDULE_DATE;
+    @DisplayName("Ремонт - в  состоянии мастер выставил счет на работы")
+    void actionInvoiceIssued
+            (@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+        StateRepair state = StateRepair.ACTIONS_INVOICE_ISSUED;
         Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
@@ -84,18 +89,20 @@ public class ScheduleDateRepairTest extends BaseWebTest {
                     clientPages.getAllNotificationsPage().checkStateRepair(state, stateInfo.getNotificationsDto());
                 });
             };
+
             Consumer<SoftAssert> case4 = softAssert -> {
                 step(role + " красное уведомление в лк - в состоянии " + state, () -> {
                     clientPages.getHomePage().open();
                     clientPages.getHomePage().checkFinishLoading();
-                    clientPages.getHomePage().redNotice.noNotice();
+                    clientPages.getHomePage().redNotice.checkInvoiceIssuedNotice();
                 });
             };
+
             Consumer<SoftAssert> case5 = softAssert -> {
                 step(role + " красное уведомление на стр лендинга - в состоянии " + state, () -> {
                     clientPages.getLandingPage().open();
                     clientPages.getLandingPage().checkFinishLoading();
-                    clientPages.getLandingPage().noticeComponent.noNotifications();
+                    clientPages.getLandingPage().noticeComponent.redNotice.checkInvoiceIssuedNotice();
                 });
             };
             assertAll(Arrays.asList(case1, case2, case3, case4, case5));

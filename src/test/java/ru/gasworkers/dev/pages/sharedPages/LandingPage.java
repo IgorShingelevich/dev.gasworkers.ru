@@ -8,7 +8,7 @@ import ru.gasworkers.dev.pages.BasePage;
 import ru.gasworkers.dev.pages.components.clientComponent.NoticeComponent;
 import ru.gasworkers.dev.pages.components.landingComponent.BackgroundRegistrationComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.ConfirmationCodeModalWindowBGComponent;
-import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.StateConsultation;
 
 import java.time.Duration;
 

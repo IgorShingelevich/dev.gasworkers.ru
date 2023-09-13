@@ -8,8 +8,8 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
-import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.StateConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import static com.codeborne.selenide.CollectionCondition.size;
 import static com.codeborne.selenide.Condition.*;
@@ -18,6 +18,7 @@ import static org.hamcrest.CoreMatchers.either;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.endsWith;
 import static org.hamcrest.Matchers.startsWith;
+import static ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair.PUBLISHED;
 
 public class AllNotificationsPage extends BasePage {
 
@@ -142,6 +143,13 @@ public class AllNotificationsPage extends BasePage {
                     checkFirstNotificationText(stateRepair.notification());
                     assertThat(firstNotificationText, endsWith(stateRepair.notification()));
                     break;
+                case CANCEL_CLIENT_PUBLISHED:
+                    checkExpectedAmountOfNotifications(1, 4000);
+                    checkFirstNotificationText(PUBLISHED.notification());
+                    assertThat(firstNotificationText, endsWith(PUBLISHED.notification()));
+                    break;
+                case CANCEL_CLIENT_HAS_OFFER:
+                case CANCEL_DISPATCHER_HAS_OFFER:
                 case HAS_OFFER:
                     checkExpectedAmountOfNotifications(2, 4000);
                     checkFirstNotificationText(stateRepair.notification());

@@ -6,9 +6,9 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateBuilder;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.StateConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateBuilder;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import static com.codeborne.selenide.Condition.*;
 import static io.qameta.allure.Allure.step;
@@ -173,12 +173,12 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
 
         step("Проверить статус заказа и оплаты в состоянии " + stateRepair, () -> {
             switch (stateRepair) {
-
                 case PUBLISHED:
                     checkCurrentStatus(OrderStatus.PUBLISHED);
                     noActivationStagePayment();
                     noMaterialsStagePayment();
                     noActionsStagePayment();
+                    break;
                 case HAS_OFFER:
                     checkCurrentStatus(OrderStatus.HAS_OFFER);
                     noActivationStagePayment();
@@ -276,6 +276,14 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkActionsStatusIsPaid(true);
                     checkActionsPricePayment(data.getActionsPrice());
                     checkActionsDatePayment(data.getActionsDate());
+                    break;
+                case CANCEL_CLIENT_PUBLISHED:
+                case CANCEL_CLIENT_HAS_OFFER:
+                case CANCEL_DISPATCHER_HAS_OFFER:
+                    checkCurrentStatus(OrderStatus.CANCELED);
+                    noActivationStagePayment();
+                    noMaterialsStagePayment();
+                    noActionsStagePayment();
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);

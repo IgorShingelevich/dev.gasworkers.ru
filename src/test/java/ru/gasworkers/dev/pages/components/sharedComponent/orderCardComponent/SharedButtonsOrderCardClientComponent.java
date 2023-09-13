@@ -4,8 +4,8 @@ import com.codeborne.selenide.SelenideDriver;
 import com.codeborne.selenide.SelenideElement;
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
-import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.StateConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import java.util.List;
 
@@ -37,7 +37,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                             MAKE_REVIEW);
                     visibleButtons = List.of(
                             CANCEL_ORDER,
-                            SELECT_MASTER
+                            SELECT_MASTER_CONSULTATION
                     );
                     break;
                 case CLIENT_WAIT_MASTER:
@@ -46,15 +46,12 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                             START_CONSULTATION,
                             SHOW_ON_MAP,
                             SELECT_NEW_COMPANY,
-                            SELECT_MASTER,
+                            SELECT_MASTER_CONSULTATION,
                             RETURN_TO_WORK,
                             PAY_INVOICE,
                             SIGN_ACT,
                             MAKE_REVIEW);
-                    visibleButtons = List.of(
-                            CANCEL_ORDER
-                    );
-
+                    visibleButtons = List.of(CANCEL_ORDER);
                     break;
                 case MASTER_START_CONSULTATION:
                 case CLIENT_JOIN_CONSULTATION:
@@ -62,7 +59,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                             CREATE_CONCLUSION,
                             CANCEL_ORDER,
                             SHOW_ON_MAP,
-                            SELECT_MASTER,
+                            SELECT_MASTER_CONSULTATION,
                             SELECT_NEW_COMPANY,
                             RETURN_TO_WORK,
                             PAY_INVOICE,
@@ -80,7 +77,7 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                             RETURN_TO_WORK,
                             START_CONSULTATION,
                             SHOW_ON_MAP,
-                            SELECT_MASTER,
+                            SELECT_MASTER_CONSULTATION,
                             SELECT_NEW_COMPANY,
                             CANCEL_ORDER,
                             PAY_INVOICE,
@@ -106,38 +103,53 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
             switch (stateRepair) {
                 case PUBLISHED:
                 case HAS_OFFER:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, START_CONSULTATION, SELECT_NEW_COMPANY, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
+                    notVisibleButtons = List.of(CREATE_CONCLUSION, START_CONSULTATION, SELECT_MASTER_CONSULTATION, SELECT_NEW_COMPANY, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
                     visibleButtons = List.of(SHOW_ON_MAP, CANCEL_ORDER);
                     break;
+                case CANCEL_CLIENT_PUBLISHED:
+                case CANCEL_CLIENT_HAS_OFFER:
+                case CANCEL_DISPATCHER_HAS_OFFER:
+                    notVisibleButtons = List.of(
+                            CREATE_CONCLUSION,
+                            START_CONSULTATION,
+                            SELECT_MASTER_CONSULTATION,
+                            SHOW_ON_MAP,
+                            SELECT_NEW_COMPANY,
+                            RETURN_TO_WORK,
+                            PAY_INVOICE,
+                            SIGN_ACT,
+                            MAKE_REVIEW,
+                            CANCEL_ORDER);
+                    visibleButtons = List.of();
+                    break;
                 case SCHEDULE_DATE:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, START_CONSULTATION, SHOW_ON_MAP, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
+                    notVisibleButtons = List.of(CREATE_CONCLUSION, SELECT_MASTER_CONSULTATION, START_CONSULTATION, SHOW_ON_MAP, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
                     visibleButtons = List.of(CANCEL_ORDER, SELECT_NEW_COMPANY);
                     break;
                 case WAIT_MASTER:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
+                    notVisibleButtons = List.of(CREATE_CONCLUSION, SELECT_MASTER_CONSULTATION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
                     visibleButtons = List.of(CANCEL_ORDER);
                     break;
                 case MASTER_START_WORK:
                 case MATERIAL_INVOICE_PAID:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
+                    notVisibleButtons = List.of(CREATE_CONCLUSION, SELECT_MASTER_CONSULTATION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
                     visibleButtons = List.of(RETURN_TO_WORK);
                     break;
                 case MATERIAL_INVOICE_ISSUED:
                 case ACTIONS_INVOICE_ISSUED:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, SIGN_ACT, MAKE_REVIEW);
+                    notVisibleButtons = List.of(CREATE_CONCLUSION, SELECT_MASTER_CONSULTATION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, SIGN_ACT, MAKE_REVIEW);
                     visibleButtons = List.of(RETURN_TO_WORK, PAY_INVOICE);
                     break;
                 case ACTIONS_INVOICE_PAID:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, PAY_INVOICE, CANCEL_ORDER, SIGN_ACT, MAKE_REVIEW, START_CONSULTATION);
+                    notVisibleButtons = List.of(CREATE_CONCLUSION, SELECT_MASTER_CONSULTATION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, PAY_INVOICE, CANCEL_ORDER, SIGN_ACT, MAKE_REVIEW, START_CONSULTATION);
                     visibleButtons = List.of(RETURN_TO_WORK);
-
                     break;
                 case MASTER_SIGN_ACT:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, MAKE_REVIEW);
+                    notVisibleButtons = List.of(CREATE_CONCLUSION, SELECT_MASTER_CONSULTATION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, MAKE_REVIEW);
                     visibleButtons = List.of(RETURN_TO_WORK, SIGN_ACT);
                     break;
                 case CLIENT_SIGN_ACT:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, SIGN_ACT, RETURN_TO_WORK);
+                    notVisibleButtons = List.of(CREATE_CONCLUSION, SELECT_MASTER_CONSULTATION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, SIGN_ACT, RETURN_TO_WORK);
                     visibleButtons = List.of(MAKE_REVIEW);
                     break;
                 default:
@@ -149,9 +161,9 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
     }
 
     public void checkButtonIsVisible(Button button) {
-        if (button == NO_BUTTON) {
+       /* if (button == NO_BUTTON) {
             return;
-        }
+        }*/
         stepWithRole("Убедиться, что  присутствует кнопка " + button, () ->
                 button.asSelenideElement(driver).shouldBe(visible));
     }
@@ -168,12 +180,11 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
 
     @AllArgsConstructor
     public enum Button {
-        NO_BUTTON(""),
         SHOW_ON_MAP("Показать на карте"),
         START_CONSULTATION("Начать консультацию"),
         CANCEL_ORDER("Отменить заказ"),
         SELECT_NEW_COMPANY("Выбрать новую компанию"),
-        SELECT_MASTER("Выберите мастера"),
+        SELECT_MASTER_CONSULTATION("Выберите мастера"),
         PAY_INVOICE("Оплатить счет"),
         RETURN_TO_WORK("Вернуть в работу"),
         SIGN_ACT("Подписать акт"),

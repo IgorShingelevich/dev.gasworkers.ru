@@ -5,7 +5,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import static com.codeborne.selenide.Condition.cssClass;
 import static com.codeborne.selenide.Condition.visible;
@@ -74,6 +74,14 @@ public class NavigationOrderCardPageComponent extends BaseComponent {
             });
         });
     }
+
+    public void noDocsTab() {
+        stepWithRole("Убедиться, что нет вкладки Документы", () -> {
+            navDocsTabButtonLocator.shouldNotBe(visible);
+        });
+    }
+
+
 
     public void noChecklistTab() {
         stepWithRole("Убедиться, что нет вкладки Чек лист", () -> {

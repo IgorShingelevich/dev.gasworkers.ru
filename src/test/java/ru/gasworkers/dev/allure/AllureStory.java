@@ -7,4 +7,7 @@ public final class AllureStory {
         VIDEO = "Видео",
         REPAIR = "Ремонт";
 
+    public static final String WEB_STATE_REPAIR = "Story: Ремонт - состояния",
+            WEB_STATE_VIDEO = "Story: Видео - состояния",
+            WEB_STATE_MAINTENANCE = "Story: Обслуживания - состояния";
 }

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers;
+package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -68,7 +68,7 @@ import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 import ru.gasworkers.dev.tests.api.story.repair.RepairTestCase;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateInfo;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateInfo;
 
 import java.util.ArrayList;
 import java.util.List;

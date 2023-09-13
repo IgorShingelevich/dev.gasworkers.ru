@@ -18,8 +18,8 @@ import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tab
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster.InfoMasterTabOrderCardClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
-import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.StateConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import java.time.Duration;
 
@@ -270,8 +270,16 @@ public class OrderCardClientPage extends BaseClientPage {
             state.checkCommonTab(this.commonTab, dto);
             nav.infoMaster();
             state.checkInfoMasterTab(this.infoMasterTab, dto);
-            nav.docs();
-            state.checkDocsTab(this.docsTab, dto);
+            switch (state) {
+                case CANCEL_CLIENT_PUBLISHED:
+                case CANCEL_CLIENT_HAS_OFFER:
+                case CANCEL_DISPATCHER_HAS_OFFER:
+                    nav.noDocsTab();
+                    break;
+                default:
+                    nav.docs();
+                    state.checkDocsTab(this.docsTab, dto);
+            }
         });
     }
 

@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.repair;
+package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;
@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
+import ru.gasworkers.dev.allure.AllureStory;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.extension.user.User;
@@ -16,6 +17,9 @@ import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.web.BaseWebTest;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.PreconditionRepair;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateInfo;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -28,7 +32,7 @@ import static io.qameta.allure.Allure.step;
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.REPAIR)
 @Feature(AllureFeature.REPAIR)
-@Story("Ремонт")
+@Story(AllureStory.WEB_STATE_REPAIR)
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)

@@ -3,9 +3,9 @@ package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.ta
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.BaseOrderCardComponent;
-import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateBuilder;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.StateConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateBuilder;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import java.time.Duration;
 
@@ -43,19 +43,12 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
             self.$(byTagAndText("p", "Ваш мастер")).shouldNotBe(visible);
         });
     }
+
     public void checkMasterAvatarBox() {
         stepWithRole("Убедиться, что  бокс аватара мастера отображается", () -> {
             approvedMasterAvatarBoxLocator.shouldBe(visible);
         });
-    }SelenideElement
-            self = driver.$("div.master-card-wrap").as("Карточка назначенного мастера"),
-            subtitleApprovedMastersTextLocator = driver.$("div.master-card-wrap p.h4").as("Текст подзаголовка назначенного мастера"),
-            approvedMasterFullNameLocator = self.$("div.title div.name a").as("ФИО назначенного мастера"),
-            approvedMasterAvatarLocator = self.$("div.profile-image div.image img").as("Аватар назначенного мастера"),
-            approvedMasterAvatarBoxLocator = self.$("div.profile-image").as("Блок аватара назначенного мастера"),
-            approvedMasterRegisterDateLocator = self.$("div.register-date p.text").as("Дата регистрации назначенного мастера"),
-            approvedMasterRatingLocator = self.$("div.rating div.rating-badge").as("Рейтинг назначенного мастера"),
-            approvedMasterReviewsLocator = self.$("div.rating div.reviews a").as("Количество отзывов назначенного мастера");
+    }
 
     public void checkMasterFullName(String expectedMasterFullName) {
         stepWithRole("Убедиться, что ФИО мастера: " + expectedMasterFullName, () -> {
@@ -68,6 +61,9 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
             switch (stateRepair) {
                 case PUBLISHED:
                 case HAS_OFFER:
+                case CANCEL_CLIENT_PUBLISHED:
+                case CANCEL_CLIENT_HAS_OFFER:
+                case CANCEL_DISPATCHER_HAS_OFFER:
                     noApprovedMasterCard();
                     break;
                 case SCHEDULE_DATE:
@@ -91,7 +87,17 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
         });
-    }
+    }    SelenideElement
+            self = driver.$("div.master-card-wrap").as("Карточка назначенного мастера"),
+            subtitleApprovedMastersTextLocator = driver.$("div.master-card-wrap p.h4").as("Текст подзаголовка назначенного мастера"),
+            approvedMasterFullNameLocator = self.$("div.title div.name a").as("ФИО назначенного мастера"),
+            approvedMasterAvatarLocator = self.$("div.profile-image div.image img").as("Аватар назначенного мастера"),
+            approvedMasterAvatarBoxLocator = self.$("div.profile-image").as("Блок аватара назначенного мастера"),
+            approvedMasterRegisterDateLocator = self.$("div.register-date p.text").as("Дата регистрации назначенного мастера"),
+            approvedMasterRatingLocator = self.$("div.rating div.rating-badge").as("Рейтинг назначенного мастера"),
+            approvedMasterReviewsLocator = self.$("div.rating div.reviews a").as("Количество отзывов назначенного мастера");
+
+
 
     public void checkRegisterDate(String expectedRegisterDate) {
         stepWithRole("Убедиться, что дата регистрации мастера: " + expectedRegisterDate, () -> {

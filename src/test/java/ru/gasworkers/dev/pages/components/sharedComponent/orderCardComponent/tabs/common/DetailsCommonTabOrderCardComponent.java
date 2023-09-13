@@ -4,9 +4,9 @@ import com.codeborne.selenide.ElementsCollection;
 import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.BaseOrderCardComponent;
-import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateBuilder;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.StateConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateBuilder;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -112,12 +112,15 @@ public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
             switch (stateRepair) {
 
                 case PUBLISHED:
+                case CANCEL_CLIENT_PUBLISHED:
                     checkDesiredDate(data.getDesiredDate());
                     checkDesiredTime(data.getDesiredTime());
                     checkNoCompany();
                     noAssignedDateAndTime();
                     break;
                 case HAS_OFFER:
+                case CANCEL_CLIENT_HAS_OFFER:
+                case CANCEL_DISPATCHER_HAS_OFFER:
                     checkNoCompany();
                     noAssignedDateAndTime();
                     checkClientFullName(data.getClientFullName());

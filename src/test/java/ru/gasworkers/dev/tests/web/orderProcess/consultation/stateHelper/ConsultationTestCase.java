@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers;
+package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ru.gasworkers.dev.api.auth.user.UserResponseDto;

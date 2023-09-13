@@ -6,7 +6,7 @@ import com.codeborne.selenide.ElementsCollection;
 import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepairHelper;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepairHelper;
 
 import static com.codeborne.selenide.Condition.*;
 

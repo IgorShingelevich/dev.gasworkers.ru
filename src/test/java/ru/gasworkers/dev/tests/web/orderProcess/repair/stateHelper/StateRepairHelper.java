@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.repair;
+package ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper;
 
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;

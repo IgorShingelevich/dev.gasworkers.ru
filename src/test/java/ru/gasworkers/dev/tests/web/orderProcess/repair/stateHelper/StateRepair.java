@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.repair;
+package ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper;
 
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
@@ -16,7 +16,10 @@ import static io.qameta.allure.Allure.step;
 public enum StateRepair {
     DRAFT("Черновик", null),
     PUBLISHED("Опубликован", " опубликован"),
+    CANCEL_CLIENT_PUBLISHED("Заказ отменен", null),
     HAS_OFFER("Есть предложения", "Отклик на заявку"),
+    CANCEL_CLIENT_HAS_OFFER("Заказ отменен", "Заказ отменен"),
+    CANCEL_DISPATCHER_HAS_OFFER("Заказ отменен", "Заказ отменен"),
     SCHEDULE_DATE("Согласование даты заказа", "Оплатите счет по заказу"),
     WAIT_MASTER("Мастер в пути", "Назначено время заказа"),
     MASTER_START_WORK("Мастер приступил к работе", null),
@@ -36,10 +39,13 @@ public enum StateRepair {
             StateBuilder.LastOrderInfoData data = builder.extractLastOrderInfoData(dto);
             switch (this) {
                 case PUBLISHED:
-                    component.offersCounter.noOffers();
+                case CANCEL_CLIENT_PUBLISHED:
+                    component.offersCounter.noComponent();
                     checkDetailsLastOrder(component, data);
                     component.noMasterVisitDateAndTime();
-//                 todo   component.checkDesiredTime(data.getDesiredTime());
+//                 todo   component.checkSelectedTime(data.getDesiredTime());
+                    // todo desired time and date
+
                     // todo stepper
                     break;
                 case HAS_OFFER:
@@ -91,6 +97,9 @@ public enum StateRepair {
                 case PUBLISHED:
                     // todo stepper
                     break;
+                case CANCEL_CLIENT_PUBLISHED:
+                    // todo stepper
+                    break;
                 case HAS_OFFER:
                     // todo stepper
                     break;
@@ -139,6 +148,12 @@ public enum StateRepair {
                 case HAS_OFFER:
                     tab.checkNoInfoBox();
                     tab.repairDetails.noTables();
+                    break;
+                case CANCEL_CLIENT_PUBLISHED:
+                case CANCEL_CLIENT_HAS_OFFER:
+                case CANCEL_DISPATCHER_HAS_OFFER:
+                    tab.repairDetails.checkMaterialsPrice("0");
+                    tab.repairDetails.checkActionsPrice("0");
                     break;
                 case SCHEDULE_DATE:
                 case WAIT_MASTER:
@@ -228,6 +243,8 @@ public enum StateRepair {
                     page.checkHasOfferBanner();
                     page.companyBoxRepair.checkOfferBoxHasOfferState(0, dto);
                     break;
+                default:
+                    page.notAvailable();
 
             }
         });

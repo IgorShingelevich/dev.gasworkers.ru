@@ -19,9 +19,9 @@ import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 import ru.gasworkers.dev.tests.web.BaseWebTest;
-import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.PreconditionConsultation;
-import ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers.StateConsultation;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateInfo;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.PreconditionConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.StateConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateInfo;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

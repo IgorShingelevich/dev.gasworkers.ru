@@ -12,7 +12,7 @@ import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponen
 import ru.gasworkers.dev.pages.components.sharedComponent.guideComponent.PlayGuideComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.FocusHeaderComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import java.time.Duration;
 
@@ -209,7 +209,18 @@ public void checkFinishLoadingRepair() {
     }
 
 
+    public void notAvailable() {
+        stepWithRole("Убедиться, что страница не доступна", () -> {
+            urlChecker.urlContains("select-service");
+            titleLocator.shouldHave(text("Страница не доступна"));
+        });
+    }
 
+    public void open(String orderId) {
+        stepWithRole("Открыть страницу Выбор СК", () -> {
+            driver.open("/orders/" + orderId + "/select-service");
+        });
+    }
 }
 
 

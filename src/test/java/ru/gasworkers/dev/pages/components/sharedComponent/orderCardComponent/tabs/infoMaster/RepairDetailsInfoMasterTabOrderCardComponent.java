@@ -4,8 +4,8 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.BaseOrderCardComponent;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateBuilder;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepairHelper;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateBuilder;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepairHelper;
 
 import static com.codeborne.selenide.Condition.*;
 

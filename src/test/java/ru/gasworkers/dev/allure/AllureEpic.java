@@ -2,13 +2,13 @@ package ru.gasworkers.dev.allure;
 
 public final class AllureEpic {
     public static final String
-            ADMINISTRATION = "Администрирование",
-            REGISTRATION = "Регистрация",
-            AUTHORIZATION = "Авторизация",
-            HOUSE = "Дом",
-            CLIENT = "Клиент",
-            ACCOUNT = "Аккаунт",
-            SELF_EMPLOYED = "Самозанятый",
-            CONSULTATION = "Консультация",
-            REPAIR = "Ремонт";
+            ADMINISTRATION = "Эпик: Администрирование",
+            REGISTRATION = "Эпик: Регистрация",
+            AUTHORIZATION = "Эпик: Авторизация",
+            HOUSE = "Эпик: Дом",
+            CLIENT = "Эпик: Клиент",
+            ACCOUNT = "Эпик: Аккаунт",
+            SELF_EMPLOYED = "Эпик: Самозанятый",
+            CONSULTATION = "Эпик: Консультация",
+            REPAIR = "Эпик: Ремонт";
 }

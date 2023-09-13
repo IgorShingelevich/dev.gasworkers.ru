@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.repair;
+package ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper;
 
 import lombok.Builder;
 import lombok.Getter;

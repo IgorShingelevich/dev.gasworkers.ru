@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.consultation.helpers;
+package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper;
 
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
@@ -8,7 +8,7 @@ import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClient
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.DocsTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.common.CommonTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster.InfoMasterTabOrderCardClientComponent;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateBuilder;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateBuilder;
 
 import static io.qameta.allure.Allure.step;
 

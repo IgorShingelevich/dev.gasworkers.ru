@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.repair;
+package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;
@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
+import ru.gasworkers.dev.allure.AllureStory;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.extension.user.User;
@@ -16,6 +17,9 @@ import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.web.BaseWebTest;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.PreconditionRepair;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateInfo;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -28,18 +32,19 @@ import static io.qameta.allure.Allure.step;
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.REPAIR)
 @Feature(AllureFeature.REPAIR)
-@Story("Ремонт")
+@Story(AllureStory.WEB_STATE_REPAIR)
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class ActionsInvoicePaidTest extends BaseWebTest {
+public class MaterialInvoicePaidTest extends BaseWebTest {
     @Browser(role = Role.CLIENT)
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Ремонт - в  состоянии клиент оплатил счет на работы")
-    void actionInvoicePaid(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.ACTIONS_INVOICE_PAID;
+    @DisplayName("Ремонт - в  состоянии клиент оплатил счет на материалы")
+    void materialInvoicePaid
+            (@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+        StateRepair state = StateRepair.MATERIAL_INVOICE_PAID;
         Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
@@ -62,6 +67,7 @@ public class ActionsInvoicePaidTest extends BaseWebTest {
         step(role + " кабинет в состоянии - в состоянии " + state, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(role + " карточка последнего заказа - в состоянии " + state, () -> {
+                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getLastOrderInfoDto());
                 });
             };

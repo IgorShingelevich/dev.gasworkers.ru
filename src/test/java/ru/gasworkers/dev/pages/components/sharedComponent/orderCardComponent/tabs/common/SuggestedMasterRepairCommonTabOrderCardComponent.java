@@ -6,11 +6,11 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.BaseOrderCardComponent;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateBuilder;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateBuilder;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import static com.codeborne.selenide.Condition.*;
-import static ru.gasworkers.dev.tests.web.orderProcess.repair.StateRepair.builder;
+import static ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair.builder;
 
 public class SuggestedMasterRepairCommonTabOrderCardComponent extends BaseOrderCardComponent {
     ElementsCollection
@@ -141,6 +141,9 @@ public class SuggestedMasterRepairCommonTabOrderCardComponent extends BaseOrderC
         stepWithRole("Проверить предложенного мастера под индексом: " + masterIndex, () -> {
             switch (stateRepair) {
                 case PUBLISHED:
+                case CANCEL_CLIENT_PUBLISHED:
+                case CANCEL_DISPATCHER_HAS_OFFER:
+                case CANCEL_CLIENT_HAS_OFFER:
                 case SCHEDULE_DATE:
                 case WAIT_MASTER:
                 case MASTER_START_WORK:

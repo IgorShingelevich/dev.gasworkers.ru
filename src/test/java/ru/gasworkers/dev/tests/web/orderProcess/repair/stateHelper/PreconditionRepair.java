@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.repair;
+package ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +12,10 @@ import ru.gasworkers.dev.api.orders.actions.dto.OrdersActionsResponseDto;
 import ru.gasworkers.dev.api.orders.actions.dto.OrdersSaveActionsResponseDto;
 import ru.gasworkers.dev.api.orders.approveDate.OrdersApproveDateApi;
 import ru.gasworkers.dev.api.orders.approveDate.OrdersApproveDateResponseDto;
+import ru.gasworkers.dev.api.orders.cancel.cancelById.CancelOrderByIdApi;
+import ru.gasworkers.dev.api.orders.cancel.cancelById.CancelOrderByIdRequestDto;
+import ru.gasworkers.dev.api.orders.cancel.cancelOfferClient.CancelOfferClientApi;
+import ru.gasworkers.dev.api.orders.cancel.moneyBack.MoneyBackApi;
 import ru.gasworkers.dev.api.orders.checkList.SaveCheckListApi;
 import ru.gasworkers.dev.api.orders.checkList.SaveCheckListResponseDto;
 import ru.gasworkers.dev.api.orders.createAct.OrdersCreateActApi;
@@ -78,6 +82,9 @@ public class PreconditionRepair extends BaseApiTest {
     private final OrdersMaterialValuesApi ordersMaterialValuesApi = new OrdersMaterialValuesApi();
     private final OrdersSaveMaterialValuesApi ordersSaveMaterialValuesApi = new OrdersSaveMaterialValuesApi();
     private final OrdersActionsApi ordersActionsApi = new OrdersActionsApi();
+    private final CancelOfferClientApi cancelOfferClientApi = new CancelOfferClientApi();
+    private final MoneyBackApi moneyBackApi = new MoneyBackApi();
+    private final CancelOrderByIdApi cancelOrderByIdApi = new CancelOrderByIdApi();
     private final OrdersSaveActionsApi ordersSaveActionsApi = new OrdersSaveActionsApi();
     private final OrdersCreateActApi ordersCreateActApi = new OrdersCreateActApi();
     private final OrdersSendSignApi ordersSendSignApi = new OrdersSendSignApi();
@@ -96,6 +103,9 @@ public class PreconditionRepair extends BaseApiTest {
             switch (stateRepair) {
                 case PUBLISHED:
                     applyPublishedPrecondition(stateRepair, client, commonFields);
+                    break;
+                case CANCEL_CLIENT_PUBLISHED:
+                    applyCancelClientPublishedPrecondition(stateRepair, client, commonFields);
                     break;
                 case HAS_OFFER:
                     applyHasOfferPrecondition(stateRepair, client, commonFields);
@@ -177,6 +187,26 @@ public class PreconditionRepair extends BaseApiTest {
                     }
                 }
                 stateInfo.setSuggestedServiceDto(suggestServiceDto);
+            });
+        });
+    }
+
+    private void applyCancelClientPublishedPrecondition(StateRepair stateRepair, User client, CommonFieldsDto commonFields) {
+        applyPublishedPrecondition(stateRepair, client, commonFields);
+        StateRepair actualStateRepair = StateRepair.CANCEL_CLIENT_PUBLISHED;
+        step("API: предусловие - " + Role.CLIENT + " заказ на ремонт в состоянии " + actualStateRepair, () -> {
+            step(Role.CLIENT + " отменяет заказ", () -> {
+                /*System.out.println("moneyBack");
+               moneyBackApi.moneyBackInfo(MoneyBackRequestDto.builder()
+                       .orderId(commonFields.getOrderId())
+                       .receiptId(null)
+                       .build(),
+                          commonFields.getTokenClient())
+                          .statusCode(200);*/
+                System.out.println("cancelOrderById");
+                cancelOrderByIdApi.cancelOrderById(CancelOrderByIdRequestDto.defaultCancelRequest(),
+                                commonFields.getOrderId(), commonFields.getTokenClient())
+                        .statusCode(200);
             });
         });
     }
