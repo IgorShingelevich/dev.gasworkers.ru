@@ -70,6 +70,20 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
                     );
                     break;
                 case MASTER_COMPLETE_CONSULTATION:
+                    notVisibleButtons = List.of(
+                            CREATE_CONCLUSION,
+                            RETURN_TO_WORK,
+                            START_CONSULTATION,
+                            SHOW_ON_MAP,
+                            SELECT_MASTER_CONSULTATION,
+                            SELECT_NEW_COMPANY,
+                            CANCEL_ORDER,
+                            PAY_INVOICE,
+                            SIGN_ACT,
+                            MAKE_REVIEW
+                    );
+                    visibleButtons = List.of();
+                    break;
                 case MASTER_FILLED_RESUME:
                 case ORDER_COMPLETED:
                     notVisibleButtons = List.of(
