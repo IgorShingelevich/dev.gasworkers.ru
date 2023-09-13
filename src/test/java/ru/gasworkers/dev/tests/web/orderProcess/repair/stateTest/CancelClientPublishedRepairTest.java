@@ -72,7 +72,7 @@ public class CancelClientPublishedRepairTest extends BaseWebTest {
                 });
             };
 
-           /* // todo redirect tests
+           /* // todo redirect from not aviable pages tests
            Consumer<SoftAssert> case3 = softAssert -> {
                 step(role + " страница выбора услуги - в состоянии " + state, () -> {
                     clientPages.getSelectServicePage().open(stateInfo.getOrdersIdResponseDto().getData().getId().toString());

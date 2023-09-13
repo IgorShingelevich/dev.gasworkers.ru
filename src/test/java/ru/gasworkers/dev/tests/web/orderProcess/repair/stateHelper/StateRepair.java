@@ -39,13 +39,19 @@ public enum StateRepair {
             StateBuilder.LastOrderInfoData data = builder.extractLastOrderInfoData(dto);
             switch (this) {
                 case PUBLISHED:
+                    component.offersCounter.noOffers();
+                    checkDetailsLastOrder(component, data);
+                    component.noMasterVisitDateAndTime();
+//                 todo   component.checkSelectedTime(data.getDesiredTime());
+                    // todo desired time and date
+                    // todo stepper
+                    break;
                 case CANCEL_CLIENT_PUBLISHED:
                     component.offersCounter.noComponent();
                     checkDetailsLastOrder(component, data);
                     component.noMasterVisitDateAndTime();
 //                 todo   component.checkSelectedTime(data.getDesiredTime());
                     // todo desired time and date
-
                     // todo stepper
                     break;
                 case HAS_OFFER:
