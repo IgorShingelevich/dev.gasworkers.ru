@@ -143,7 +143,7 @@ public class CompanyBoxSelectService extends BaseComponent {
             checkGeoTag(offerIndex);
             checkRatingCompany(offerIndex, ratingCompany);
             checkAvatarCompany(offerIndex);
-            checkVisitPrice(offerIndex, visitPrice);
+//            checkVisitPrice(offerIndex, visitPrice);// todo set  suggested price instead of  the fixed one
             checkNotificationPaymentAfterArrival(offerIndex);
             checkFullNameMaster(offerIndex, offeredMasterFullName);
             checkAvatarMaster(offerIndex, offeredMasterAvatar);

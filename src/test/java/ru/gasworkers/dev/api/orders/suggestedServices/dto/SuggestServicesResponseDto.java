@@ -110,6 +110,10 @@ public class SuggestServicesResponseDto {
         @JsonProperty("offer_id")
         public Integer offerId;
         public Boolean showed;
+        @JsonProperty("possible_first_accept_price")
+        public Double possibleFirstAcceptPrice;
+        @JsonProperty("possible_full_repair_price")
+        public Double possibleFullRepairPrice;
 
         @lombok.Data
         @Builder
