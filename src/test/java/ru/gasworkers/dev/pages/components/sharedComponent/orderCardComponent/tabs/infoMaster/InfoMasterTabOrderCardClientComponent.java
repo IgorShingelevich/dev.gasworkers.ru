@@ -5,7 +5,7 @@ import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.masterComponent.FillUpCheckListBannerComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.BaseOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.SharedButtonsOrderCardClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.SharedButtonsOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.StatusOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.common.SuggestedMasterRepairCommonTabOrderCardComponent;
 
@@ -18,7 +18,7 @@ public class InfoMasterTabOrderCardClientComponent extends BaseOrderCardComponen
     public final MaintenanceDetailsInfoMasterTabComponent maintenanceDetails;
     public final RepairDetailsInfoMasterTabOrderCardComponent repairDetails;
     public final SuggestedMasterRepairCommonTabOrderCardComponent suggestedMasterCardRepair;
-    public final SharedButtonsOrderCardClientComponent buttons;
+    public final SharedButtonsOrderCardComponent buttons;
 
     //todo add buttons
     SelenideElement
@@ -34,7 +34,7 @@ public class InfoMasterTabOrderCardClientComponent extends BaseOrderCardComponen
         maintenanceDetails = new MaintenanceDetailsInfoMasterTabComponent(browser);
         repairDetails = new RepairDetailsInfoMasterTabOrderCardComponent(browser);
         suggestedMasterCardRepair = new SuggestedMasterRepairCommonTabOrderCardComponent(browser);
-        buttons = new SharedButtonsOrderCardClientComponent(browser);
+        buttons = new SharedButtonsOrderCardComponent(browser);
     }
 
     public void checkFinishLoading(OrderStatus orderStatus) {

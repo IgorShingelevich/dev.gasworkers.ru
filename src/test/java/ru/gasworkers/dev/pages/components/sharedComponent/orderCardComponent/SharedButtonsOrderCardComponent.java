@@ -12,11 +12,11 @@ import java.util.List;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 import static io.qameta.allure.Allure.step;
-import static ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.SharedButtonsOrderCardClientComponent.Button.*;
+import static ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.SharedButtonsOrderCardComponent.Button.*;
 
-public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponent {
+public class SharedButtonsOrderCardComponent extends BaseOrderCardComponent {
 
-    public SharedButtonsOrderCardClientComponent(RoleBrowser browser) {
+    public SharedButtonsOrderCardComponent(RoleBrowser browser) {
         super(browser);
     }
 
@@ -203,7 +203,11 @@ public class SharedButtonsOrderCardClientComponent extends BaseOrderCardComponen
         RETURN_TO_WORK("Вернуть в работу"),
         SIGN_ACT("Подписать акт"),
         CREATE_CONCLUSION("Создать резюме"),
-        MAKE_REVIEW("Оставить отзыв");
+        MAKE_REVIEW("Оставить отзыв"),
+
+        //dispatcher buttons
+        DISPATCHER_SELECT_MASTER("Выбрать мастера"),
+        DISPATCHER_REFUSE("Отказаться");
 
         private final String title;
 

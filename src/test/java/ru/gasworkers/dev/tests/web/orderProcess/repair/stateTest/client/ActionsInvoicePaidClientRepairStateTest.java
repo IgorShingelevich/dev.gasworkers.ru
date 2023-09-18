@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest;
+package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest.client;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;
@@ -16,7 +16,6 @@ import ru.gasworkers.dev.extension.user.WithThroughUser;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
-import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 import ru.gasworkers.dev.tests.web.BaseWebTest;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.PreconditionRepair;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateInfo;
@@ -37,22 +36,20 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class ClientSignActRepairTest extends BaseWebTest {
+public class ActionsInvoicePaidClientRepairStateTest extends BaseWebTest {
     @Browser(role = Role.CLIENT)
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Ремонт - в  состоянии клиент подписал акт")
-    void clientSignAct(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.CLIENT_SIGN_ACT;
+    @DisplayName("Ремонт - в  состоянии клиент оплатил счет на работы")
+    void actionInvoicePaid(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+        StateRepair state = StateRepair.ACTIONS_INVOICE_PAID;
         Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
 
 // Get the StateInfo and CommonFieldsDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
-        CommonFieldsDto commonFieldsFromStateInfo = result.getCommonFieldsResult();
-        CommonFieldsDto commonFieldsFromStateInfo2 = stateInfo.getCommonFields();
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("Web: " + role + " авторизация", () -> {
             clientPages.getLoginPage().open();
@@ -70,12 +67,12 @@ public class ClientSignActRepairTest extends BaseWebTest {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(role + " карточка последнего заказа - в состоянии " + state, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getLastOrderInfoDto());
-
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
                 step(role + " карточка заказа - в состоянии " + state, () -> {
-                    clientPages.getOrderCardPage().open(String.valueOf(commonFieldsFromStateInfo.getOrderId()));
+                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
+                    clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getOrderCardPage().checkFinishLoading();
                     clientPages.getOrderCardPage().checkStateRepair(state, stateInfo.getOrdersIdResponseDto());
                 });
@@ -98,6 +95,7 @@ public class ClientSignActRepairTest extends BaseWebTest {
                     clientPages.getHomePage().redNotice.noNotice();
                 });
             };
+
             Consumer<SoftAssert> case5 = softAssert -> {
                 step(role + " красное уведомление на стр лендинга - в состоянии " + state, () -> {
                     clientPages.getLandingPage().open();

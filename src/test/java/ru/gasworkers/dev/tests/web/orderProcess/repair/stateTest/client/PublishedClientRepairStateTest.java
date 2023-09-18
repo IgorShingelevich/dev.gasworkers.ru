@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest;
+package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest.client;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;
@@ -36,14 +36,14 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class MasterStartWorkRepairTest extends BaseWebTest {
+public class PublishedClientRepairStateTest extends BaseWebTest {
     @Browser(role = Role.CLIENT)
     ClientPages clientPages;
-
     @Test
-    @DisplayName("Ремонт - в  состоянии мастер приступил к работе")
-    void masterStartWork(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.MASTER_START_WORK;
+    @DisplayName("Ремонт - в состоянии published")
+    void publishedRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+
+        StateRepair state = StateRepair.PUBLISHED;
         Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
@@ -71,14 +71,28 @@ public class MasterStartWorkRepairTest extends BaseWebTest {
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
-                step(role + " карточка заказа - в состоянии " + state, () -> {
+                step(role + " карточка заказа редирект на карту - в состоянии " + state, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.open();
-                    clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkStateRepair(state, stateInfo.getOrdersIdResponseDto());
+                    clientPages.getSelectServicePage().checkUrl();
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {
+                step(role + " страница выбора услуги - в состоянии " + state, () -> {
+                    clientPages.getSelectServicePage().checkFinishLoadingRepair();
+                    clientPages.getSelectServicePage().checkState(state, stateInfo.getSuggestedServiceDto());
+                });
+            };
+            Consumer<SoftAssert> case4 = softAssert -> {
+                step(role + " карточка заказа - в состоянии " + state, () -> {
+                    clientPages.getSelectServicePage().toOrderCard();
+                    clientPages.getOrderCardPage().checkFinishLoading();
+                    clientPages.getOrderCardPage().checkStateRepair(state, stateInfo.getOrdersIdResponseDto());
+
+                });
+            };
+
+            Consumer<SoftAssert> case5 = softAssert -> {
                 step(role + " уведомления - в состоянии " + state, () -> {
                     clientPages.getHomePage().open();
                     clientPages.getHomePage().checkFinishLoading();
@@ -88,21 +102,35 @@ public class MasterStartWorkRepairTest extends BaseWebTest {
                     clientPages.getAllNotificationsPage().checkStateRepair(state, stateInfo.getNotificationsDto());
                 });
             };
-            Consumer<SoftAssert> case4 = softAssert -> {
+
+            Consumer<SoftAssert> case6 = softAssert -> {
                 step(role + " красное уведомление в лк - в состоянии " + state, () -> {
                     clientPages.getHomePage().open();
                     clientPages.getHomePage().checkFinishLoading();
                     clientPages.getHomePage().redNotice.noNotice();
                 });
             };
-            Consumer<SoftAssert> case5 = softAssert -> {
+            Consumer<SoftAssert> case7 = softAssert -> {
                 step(role + " красное уведомление на стр лендинга - в состоянии " + state, () -> {
                     clientPages.getLandingPage().open();
                     clientPages.getLandingPage().checkFinishLoading();
                     clientPages.getLandingPage().noticeComponent.noNotifications();
                 });
             };
-            assertAll(Arrays.asList(case1, case2, case3, case4, case5));
+            assertAll(Arrays.asList(case1, case2, case3, case4, case5, case6, case7));
         });
     }
 }
+
+ /*  // Get the soft assertions from the page class
+            List<Consumer<SoftAssert>> softAssertionsFromPageClass = clientPages.getOrderCardPage().checkStateList(state, publishedOrderIdResponse);
+            List<Consumer<SoftAssert>> allSoftAssertions = new ArrayList<>();
+            allSoftAssertions.addAll(Arrays.asList(case1, case2, case3));
+            allSoftAssertions.addAll(softAssertionsFromPageClass);
+
+            SoftAssert softAssert = new SoftAssert();
+            for (Consumer<SoftAssert> assertion : allSoftAssertions) {
+                assertion.accept(softAssert);
+            }
+            softAssert.assertAll();
+*/

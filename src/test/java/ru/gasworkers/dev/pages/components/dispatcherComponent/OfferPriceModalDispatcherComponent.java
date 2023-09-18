@@ -5,6 +5,7 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.buttonSharedComponent.MainButtonSharedComponent;
 
+import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 
 public class OfferPriceModalDispatcherComponent extends BaseComponent {
@@ -22,8 +23,9 @@ public class OfferPriceModalDispatcherComponent extends BaseComponent {
     public void checkFinishLoading(){
         stepWithRole("Убедиться, что модальное окно расценка оборудования загрузилось", () -> {
             selfLocator.shouldBe(visible);
-            mosOblGasBanner.checkFinishLoading();
-            mainButton.checkButtonText("Сохранить", selfLocator);
+//            mosOblGasBanner.checkFinishLoading(); todo ask   mosoblgas  here
+//            mainButton.checkButtonText("Сохранить", selfLocator);
+            driver.$("div.order-price-title").shouldHave(text("Расценить и участвовать в заказе"));
             //add second button check
             //add price calculation check
             //add toggle check

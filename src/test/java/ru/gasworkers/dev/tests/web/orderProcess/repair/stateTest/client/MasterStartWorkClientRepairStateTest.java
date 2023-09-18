@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest;
+package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest.client;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;
@@ -36,14 +36,14 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class ActionsInvoicePaidTest extends BaseWebTest {
+public class MasterStartWorkClientRepairStateTest extends BaseWebTest {
     @Browser(role = Role.CLIENT)
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Ремонт - в  состоянии клиент оплатил счет на работы")
-    void actionInvoicePaid(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.ACTIONS_INVOICE_PAID;
+    @DisplayName("Ремонт - в  состоянии мастер приступил к работе")
+    void masterStartWork(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+        StateRepair state = StateRepair.MASTER_START_WORK;
         Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
@@ -66,6 +66,7 @@ public class ActionsInvoicePaidTest extends BaseWebTest {
         step(role + " кабинет в состоянии - в состоянии " + state, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(role + " карточка последнего заказа - в состоянии " + state, () -> {
+                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getLastOrderInfoDto());
                 });
             };
@@ -87,7 +88,6 @@ public class ActionsInvoicePaidTest extends BaseWebTest {
                     clientPages.getAllNotificationsPage().checkStateRepair(state, stateInfo.getNotificationsDto());
                 });
             };
-
             Consumer<SoftAssert> case4 = softAssert -> {
                 step(role + " красное уведомление в лк - в состоянии " + state, () -> {
                     clientPages.getHomePage().open();
@@ -95,7 +95,6 @@ public class ActionsInvoicePaidTest extends BaseWebTest {
                     clientPages.getHomePage().redNotice.noNotice();
                 });
             };
-
             Consumer<SoftAssert> case5 = softAssert -> {
                 step(role + " красное уведомление на стр лендинга - в состоянии " + state, () -> {
                     clientPages.getLandingPage().open();

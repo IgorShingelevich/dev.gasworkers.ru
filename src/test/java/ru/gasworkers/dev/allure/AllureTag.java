@@ -9,10 +9,14 @@ public final class AllureTag {
     public static final String REGRESSION = "regression",
             SMOKE = "smoke";
     //user roles
-    public static final String CLIENT = "client",
+    public static final String
+            CLIENT = "client",
             MASTER = "master",
             SELF_EMPLOYED = "self-employed",
-            SELF_EMPLOYED_IP = "self-employed-ip";
+            SELF_EMPLOYED_IP = "self-employed-ip",
+            DISPATCHER = "dispatcher",
+            SUPER_DISPATCHER = "super-dispatcher",
+            ADMIN = "admin";
 
     // target
     public static final String

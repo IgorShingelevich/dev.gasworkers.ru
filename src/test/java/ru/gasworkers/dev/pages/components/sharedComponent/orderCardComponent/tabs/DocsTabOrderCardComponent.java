@@ -7,7 +7,7 @@ import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.masterComponent.FillUpCheckListBannerComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.BaseOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.SharedButtonsOrderCardClientComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.SharedButtonsOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.StatusOrderCardPageComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.common.SuggestedMasterRepairCommonTabOrderCardComponent;
 
@@ -21,7 +21,7 @@ public class DocsTabOrderCardComponent extends BaseOrderCardComponent {
     public final StatusOrderCardPageComponent status;
     public final FillUpCheckListBannerComponent fillUpBanner;
     public final SuggestedMasterRepairCommonTabOrderCardComponent suggestedMastersRepair;
-    public final SharedButtonsOrderCardClientComponent buttons;
+    public final SharedButtonsOrderCardComponent buttons;
 
 
     private final long downloadTimeout = 4_000L;
@@ -39,7 +39,7 @@ public class DocsTabOrderCardComponent extends BaseOrderCardComponent {
         status = new StatusOrderCardPageComponent(browser);
         fillUpBanner = new FillUpCheckListBannerComponent(browser);
         suggestedMastersRepair = new SuggestedMasterRepairCommonTabOrderCardComponent(browser);
-        buttons = new SharedButtonsOrderCardClientComponent(browser);
+        buttons = new SharedButtonsOrderCardComponent(browser);
     }
 
     public void checkFinishLoadingOLD(OrderStatus orderStatus) {

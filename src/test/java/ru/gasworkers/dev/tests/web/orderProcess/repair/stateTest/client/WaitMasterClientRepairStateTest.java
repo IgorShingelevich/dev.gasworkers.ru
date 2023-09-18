@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest;
+package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest.client;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;
@@ -36,14 +36,13 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class MasterSignActTest extends BaseWebTest {
+public class WaitMasterClientRepairStateTest extends BaseWebTest {
     @Browser(role = Role.CLIENT)
     ClientPages clientPages;
-
     @Test
-    @DisplayName("Ремонт - в  состоянии мастер подписал акт")
-    void masterSignAct(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.MASTER_SIGN_ACT;
+    @DisplayName("Ремонт - в состоянии мастер в пути")
+    void waitMasterRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+        StateRepair state = StateRepair.WAIT_MASTER;
         Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
@@ -52,16 +51,16 @@ public class MasterSignActTest extends BaseWebTest {
         StateInfo stateInfo = result.getStateInfoResult();
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("Web: " + role + " авторизация", () -> {
-            clientPages.getLoginPage().open();
-            clientPages.getLoginPage().login(client.getEmail(), "1111");
-            clientPages.getHomePage().checkUrl();
-            clientPages.getHomePage().guide.skipButton();
+                clientPages.getLoginPage().open();
+                clientPages.getLoginPage().login(client.getEmail(), "1111");
+                clientPages.getHomePage().checkUrl();
+                clientPages.getHomePage().guide.skipButton();
             step(role + " учетные данные", () -> {
-                Allure.addAttachment("Client creds", client.getEmail() + ": " + "1111" + "/");
-                String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-                        + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-                Allure.addAttachment("RunStartTime: ", date);
-            });
+                    Allure.addAttachment("Client creds", client.getEmail() + ": " + "1111" + "/");
+                    String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                            + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+                    Allure.addAttachment("RunStartTime: ", date);
+                });
         });
         step(role + " кабинет в состоянии - в состоянии " + state, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
@@ -88,23 +87,21 @@ public class MasterSignActTest extends BaseWebTest {
                     clientPages.getAllNotificationsPage().checkStateRepair(state, stateInfo.getNotificationsDto());
                 });
             };
-
             Consumer<SoftAssert> case4 = softAssert -> {
                 step(role + " красное уведомление в лк - в состоянии " + state, () -> {
                     clientPages.getHomePage().open();
                     clientPages.getHomePage().checkFinishLoading();
-                    clientPages.getHomePage().redNotice.checkNeedSignActNotice();
+                    clientPages.getHomePage().redNotice.noNotice();
                 });
             };
-            // todo add notice on landing page
-           /* Consumer<SoftAssert> case5 = softAssert -> {
+            Consumer<SoftAssert> case5 = softAssert -> {
                 step(role + " красное уведомление на стр лендинга - в состоянии " + state, () -> {
                     clientPages.getLandingPage().open();
                     clientPages.getLandingPage().checkFinishLoading();
-                    clientPages.getLandingPage().noticeComponent.redNotice.checkNeedSignActNotice();
+                    clientPages.getLandingPage().noticeComponent.noNotifications();
                 });
-            };*/
-            assertAll(Arrays.asList(case1, case2, case3, case4));
+            };
+            assertAll(Arrays.asList(case1, case2, case3, case4, case5));
         });
     }
 }

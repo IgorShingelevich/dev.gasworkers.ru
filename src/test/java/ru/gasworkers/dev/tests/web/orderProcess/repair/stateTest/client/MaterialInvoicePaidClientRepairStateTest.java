@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest;
+package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest.client;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;
@@ -36,7 +36,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class MaterialInvoicePaidTest extends BaseWebTest {
+public class MaterialInvoicePaidClientRepairStateTest extends BaseWebTest {
     @Browser(role = Role.CLIENT)
     ClientPages clientPages;
 

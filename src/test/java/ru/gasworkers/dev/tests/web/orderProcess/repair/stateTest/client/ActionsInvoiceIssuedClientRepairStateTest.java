@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest;
+package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest.client;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;
@@ -36,14 +36,15 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class ScheduleDateRepairTest extends BaseWebTest {
+public class ActionsInvoiceIssuedClientRepairStateTest extends BaseWebTest {
     @Browser(role = Role.CLIENT)
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Ремонт - в  состоянии согласование даты и времени")
-    void scheduleDateRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.SCHEDULE_DATE;
+    @DisplayName("Ремонт - в  состоянии мастер выставил счет на работы")
+    void actionInvoiceIssued
+            (@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+        StateRepair state = StateRepair.ACTIONS_INVOICE_ISSUED;
         Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
@@ -88,18 +89,20 @@ public class ScheduleDateRepairTest extends BaseWebTest {
                     clientPages.getAllNotificationsPage().checkStateRepair(state, stateInfo.getNotificationsDto());
                 });
             };
+
             Consumer<SoftAssert> case4 = softAssert -> {
                 step(role + " красное уведомление в лк - в состоянии " + state, () -> {
                     clientPages.getHomePage().open();
                     clientPages.getHomePage().checkFinishLoading();
-                    clientPages.getHomePage().redNotice.noNotice();
+                    clientPages.getHomePage().redNotice.checkInvoiceIssuedNotice();
                 });
             };
+
             Consumer<SoftAssert> case5 = softAssert -> {
                 step(role + " красное уведомление на стр лендинга - в состоянии " + state, () -> {
                     clientPages.getLandingPage().open();
                     clientPages.getLandingPage().checkFinishLoading();
-                    clientPages.getLandingPage().noticeComponent.noNotifications();
+                    clientPages.getLandingPage().noticeComponent.redNotice.checkInvoiceIssuedNotice();
                 });
             };
             assertAll(Arrays.asList(case1, case2, case3, case4, case5));

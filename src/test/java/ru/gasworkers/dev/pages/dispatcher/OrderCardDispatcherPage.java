@@ -2,50 +2,56 @@ package ru.gasworkers.dev.pages.dispatcher;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import ru.gasworkers.dev.model.Doc;
-import ru.gasworkers.dev.model.OrderStatus;
-import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.components.clientComponent.OffersCounterClientComponent;
 import ru.gasworkers.dev.pages.components.dispatcherComponent.DatePickerOrderDispatcherComponent;
 import ru.gasworkers.dev.pages.components.dispatcherComponent.OfferPriceModalDispatcherComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.buttonSharedComponent.MainButtonSharedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ActionsBlockDispatcherComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.notificationsComponent.conferenceNotification.ConsultationNotificationSharedComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.NavigationOrderCardPageComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.CheckListTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.DocsTabOrderCardComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.common.CommonTabOrderCardComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster.InfoMasterTabOrderCardMasterComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster.InfoMasterTabOrderCardClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.DispatcherSidebarComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
-import java.time.Duration;
-
+import static com.codeborne.selenide.Condition.partialText;
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public class OrderCardDispatcherPage extends BaseDispatcherPage {
 
     public final DispatcherSidebarComponent sidebar;
-    public final DatePickerOrderDispatcherComponent datePicker;
     public final ActionsBlockDispatcherComponent actionBlock;
-    public final CommonTabOrderCardComponent tabCommon;
-    public final InfoMasterTabOrderCardMasterComponent tabInfoMaster;
-    public final DocsTabOrderCardComponent tabDocs;
-    public final MainButtonSharedComponent mainButton;
-    public final OfferPriceModalDispatcherComponent offerPrice;
+    public final StepperComponent stepper;
+    public final ConsultationNotificationSharedComponent consultationNotification;
+    public final OffersCounterClientComponent offersCounter;
+    public final DatePickerOrderDispatcherComponent datePicker;
+    public final OfferPriceModalDispatcherComponent offerModal;
+    public final NavigationOrderCardPageComponent nav;
+    public final CommonTabOrderCardComponent commonTab;
+    public final InfoMasterTabOrderCardClientComponent infoMasterTab;
+    public final DocsTabOrderCardComponent docsTab;
+    public final CheckListTabOrderCardComponent checkListTab;
 
 
     public OrderCardDispatcherPage(RoleBrowser browser) {
         super(browser);
         sidebar = new DispatcherSidebarComponent(browser);
-        datePicker = new DatePickerOrderDispatcherComponent(browser);
         actionBlock = new ActionsBlockDispatcherComponent(browser);
-        tabCommon = new CommonTabOrderCardComponent(browser);
-        tabInfoMaster = new InfoMasterTabOrderCardMasterComponent(browser);
-        tabDocs = new DocsTabOrderCardComponent(browser);
-        mainButton = new MainButtonSharedComponent(browser);
-        offerPrice = new OfferPriceModalDispatcherComponent(browser);
+        consultationNotification = new ConsultationNotificationSharedComponent(browser);
+        offersCounter = new OffersCounterClientComponent(browser);
+        stepper = new StepperComponent(browser);
+        datePicker = new DatePickerOrderDispatcherComponent(browser);
+        nav = new NavigationOrderCardPageComponent(browser);
+        commonTab = new CommonTabOrderCardComponent(browser);
+        infoMasterTab = new InfoMasterTabOrderCardClientComponent(browser);
+        checkListTab = new CheckListTabOrderCardComponent(browser);
+        docsTab = new DocsTabOrderCardComponent(browser);
+        offerModal = new OfferPriceModalDispatcherComponent(browser);
     }
 
-    private final String pageTitleText = "Заказ";
 
     ElementsCollection
         navButtonsCollection = driver.$$("div.navigation-block ul li");
@@ -69,14 +75,24 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         cancelOrderLocator = driver.$(byTagAndText("span", "Отменить заказ")).as("Отменить заказ");
 
 
-    public void checkFinishLoading() {
-        pageTitleLocator.shouldBe(visible, Duration.ofSeconds(40)).shouldHave(text(pageTitleText));
-        String orderCardNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
-        stepWithRole("Убедиться, что Карточка Заказа: " + orderCardNumber + " загружена", () -> {
-            orderBlockLocator.shouldBe(visible);
-            System.out.println("dispatcher orderCardNumber: " + orderCardNumber);
+    public void checkFinishLoading(String orderNumber) {
+        stepWithRole("Убедиться, что Карточка Заказа: " + orderNumber + " загружена", () -> {
+            pageTitleLocator.shouldHave(partialText(orderNumber));
         });
     }
+
+    public void checkUrl(String orderNumber) {
+        stepWithRole("Убедиться, что url соответствует номеру заказа: " + orderNumber, () -> {
+            boolean endsWith = driver.url().endsWith(orderNumber);
+        });
+    }
+
+    public void open(String orderId) {
+        stepWithRole("Открыть карточку заказа: " + orderId, () -> {
+            driver.open("/profile/dispatcher/orders/" + orderId);
+        });
+    }
+
 
     public void navCommon(){
         stepWithRole("Перейти на вкладку Описание заказа", () -> {
@@ -96,7 +112,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         });
     }
 
-    public void checkNewTenderState(OrderStatus orderStatus, ServiceType serviceType) {
+    /*public void checkNewTenderState(OrderStatus orderStatus, ServiceType serviceType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
                 tabCommon.status.checkCurrentStatus(orderStatus);
@@ -118,9 +134,9 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         });
         //TODO - check price, docs, buttons, info
         System.out.println("dispatcher orderStatus: " + orderStatus);
-    }
+    }*/
 
-    public void acceptOrder() {
+    /*public void acceptOrder() {
         String factualOrderNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
         stepWithRole("Принять заказ: " + factualOrderNumber , () -> {
             acceptRequestButtonLocator.scrollTo().click();
@@ -133,9 +149,9 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
                 declineRequestButtonLocator.shouldNotBe(visible);
             });
         });
-    }
+    }*/
 
-    public void checkParticipateTenderState(OrderStatus orderStatus, ServiceType serviceType) {
+    /*public void checkParticipateTenderState(OrderStatus orderStatus, ServiceType serviceType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
                 tabCommon.status.checkCurrentStatus(orderStatus);
@@ -157,9 +173,9 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         });
         //TODO - check price, docs, buttons, info
         System.out.println("dispatcher orderStatus: " + orderStatus);
-    }
+    }*/
 
-    public void checkScheduleVisitState(OrderStatus orderStatus, ServiceType serviceType) {
+   /* public void checkScheduleVisitState(OrderStatus orderStatus, ServiceType serviceType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
                 tabCommon.status.checkCurrentStatus(orderStatus);
@@ -174,7 +190,8 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
             });
             stepWithRole("Вкладка Документы", () -> {
                 navDocs();
-                stepWithRole("Убедиться, что  в Карточке заказа в документах присутствует Договор ТО и Страховой полис " /*+ docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText()*/ , () -> {
+                stepWithRole("Убедиться, что  в Карточке заказа в документах присутствует Договор ТО и Страховой полис " */
+    /*+ docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText()*//* , () -> {
                     tabDocs.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
                 });
                 stepWithRole("Скачать документы: Договор ТО и Страховой полис " , () -> {
@@ -186,9 +203,9 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         });
         //TODO - check price, docs, buttons, info
         System.out.println("dispatcher orderStatus: " + orderStatus);
-    }
+    }*/
 
-    public void checkMasterDispatchedState(OrderStatus orderStatus, ServiceType serviceType) {
+  /*  public void checkMasterDispatchedState(OrderStatus orderStatus, ServiceType serviceType) {
         stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
             stepWithRole("Вкладка Описание заказа", () -> {
                 tabCommon.status.checkCurrentStatus(orderStatus);
@@ -203,7 +220,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
             });
             stepWithRole("Вкладка Документы", () -> {
                 navDocs();
-                stepWithRole("Убедиться, что  в Карточке заказа в документах присутствует Договор ТО и Страховой полис " /*+ docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText()*/ , () -> {
+                stepWithRole("Убедиться, что  в Карточке заказа в документах присутствует Договор ТО и Страховой полис " *//*+ docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText()*//* , () -> {
                     tabDocs.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
                 });
                 stepWithRole("Скачать документы: Договор ТО и Страховой полис " , () -> {
@@ -215,38 +232,36 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         });
         //TODO - check price, docs, buttons, info
         System.out.println("dispatcher orderStatus: " + orderStatus);
-    }
+    }*/
 
-    public OrderCardDispatcherPage selectMaster() {
+  /*  public OrderCardDispatcherPage selectMaster() {
         stepWithRole("Нажать на кнопку Выбрать мастера", () -> {
             selectMasterButtonLocator.click();
         });
         return this;
     }
-    public OrderCardDispatcherPage selectAnotherMaster() {
+    public void selectAnotherMaster() {
         stepWithRole("Нажать на кнопку Выбрать другого мастера", () -> {
             selectAnotherMasterButtonLocator.click();
         });
-        return this;
     }
 
-    public OrderCardDispatcherPage selectTimeButton() {
+    public void selectTimeButton() {
         stepWithRole("Нажать на кнопку Выбрать время", () -> {
             selectTimeButtonLocator.click();
         });
-        return this;
     }
 
-    public OrderCardDispatcherPage selectAnotherTime() {
+    public void selectAnotherTime() {
         stepWithRole("Нажать на кнопку Выбрать новое время", () -> {
             selectAnotherTimeButtonLocator.click();
         });
-        return this;
     }
 
     public OrderCardDispatcherPage declineOrder() {
         declineRequestButtonLocator.click();
         return this;
-    }
+    }*/
+
 
 }

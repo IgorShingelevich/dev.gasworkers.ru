@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest;
+package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest.client;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;
@@ -16,6 +16,7 @@ import ru.gasworkers.dev.extension.user.WithThroughUser;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
+import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 import ru.gasworkers.dev.tests.web.BaseWebTest;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.PreconditionRepair;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateInfo;
@@ -36,43 +37,45 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class WaitMasterRepairTest extends BaseWebTest {
+public class ClientSignActClientRepairStateTest extends BaseWebTest {
     @Browser(role = Role.CLIENT)
     ClientPages clientPages;
+
     @Test
-    @DisplayName("Ремонт - в состоянии мастер в пути")
-    void waitMasterRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.WAIT_MASTER;
+    @DisplayName("Ремонт - в  состоянии клиент подписал акт")
+    void clientSignAct(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+        StateRepair state = StateRepair.CLIENT_SIGN_ACT;
         Role role = Role.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
 
 // Get the StateInfo and CommonFieldsDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
+        CommonFieldsDto commonFieldsFromStateInfo = result.getCommonFieldsResult();
+        CommonFieldsDto commonFieldsFromStateInfo2 = stateInfo.getCommonFields();
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("Web: " + role + " авторизация", () -> {
-                clientPages.getLoginPage().open();
-                clientPages.getLoginPage().login(client.getEmail(), "1111");
-                clientPages.getHomePage().checkUrl();
-                clientPages.getHomePage().guide.skipButton();
+            clientPages.getLoginPage().open();
+            clientPages.getLoginPage().login(client.getEmail(), "1111");
+            clientPages.getHomePage().checkUrl();
+            clientPages.getHomePage().guide.skipButton();
             step(role + " учетные данные", () -> {
-                    Allure.addAttachment("Client creds", client.getEmail() + ": " + "1111" + "/");
-                    String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-                            + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-                    Allure.addAttachment("RunStartTime: ", date);
-                });
+                Allure.addAttachment("Client creds", client.getEmail() + ": " + "1111" + "/");
+                String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+                        + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
+                Allure.addAttachment("RunStartTime: ", date);
+            });
         });
         step(role + " кабинет в состоянии - в состоянии " + state, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(role + " карточка последнего заказа - в состоянии " + state, () -> {
-                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getLastOrderInfoDto());
+
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
                 step(role + " карточка заказа - в состоянии " + state, () -> {
-                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-                    clientPages.getHomePage().lastOrderComponent.open();
+                    clientPages.getOrderCardPage().open(String.valueOf(commonFieldsFromStateInfo.getOrderId()));
                     clientPages.getOrderCardPage().checkFinishLoading();
                     clientPages.getOrderCardPage().checkStateRepair(state, stateInfo.getOrdersIdResponseDto());
                 });
@@ -87,6 +90,7 @@ public class WaitMasterRepairTest extends BaseWebTest {
                     clientPages.getAllNotificationsPage().checkStateRepair(state, stateInfo.getNotificationsDto());
                 });
             };
+
             Consumer<SoftAssert> case4 = softAssert -> {
                 step(role + " красное уведомление в лк - в состоянии " + state, () -> {
                     clientPages.getHomePage().open();

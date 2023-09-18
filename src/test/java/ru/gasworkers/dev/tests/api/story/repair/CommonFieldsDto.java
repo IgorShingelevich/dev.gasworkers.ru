@@ -24,4 +24,8 @@ public class CommonFieldsDto {
             masters0CompletedOrdersCount, passportId;
     private List<OrdersIdResponseDto.Data.Receipts> receipts = List.of();
     private OrdersIdResponseDto.Data.Master master = null;
+    //sssr dispatcher
+    public String dispatcherEmail = "test_gw_dispatcher_sssr1@rambler.ru",
+            dispatcherPassword = "1234";
+
 }

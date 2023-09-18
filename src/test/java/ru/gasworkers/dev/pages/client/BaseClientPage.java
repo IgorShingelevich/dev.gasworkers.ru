@@ -12,16 +12,10 @@ public abstract class BaseClientPage extends BasePage {
     private final ClientActionsBlockComponent actionBlockClient;
     private final ClientBreadcrumbsComponent breadcrumbsClient;
 
-
-
-
     public BaseClientPage(RoleBrowser browser) {
         super(browser);
         sidebarClient = new ClientSidebarComponent(browser);
         actionBlockClient = new ClientActionsBlockComponent(browser);
         breadcrumbsClient = new ClientBreadcrumbsComponent(browser);
     }
-
-
-
 }

@@ -1,13 +1,10 @@
 package ru.gasworkers.dev.tests.web.dispatcher;
 
-import io.qameta.allure.Step;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.extension.browser.Browser;
-import ru.gasworkers.dev.model.OrderStatus;
-import ru.gasworkers.dev.model.ServiceType;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.tests.BaseTest;
 
@@ -40,29 +37,5 @@ public class DispatcherFlowTest extends BaseTest {
 
         });
     }
-    @Step("Диспетчер открывает заказ в статусе: ")
-    @Test
-     void checkMasterDispatchedOrderStatus() {
-        step("Диспетчер открывает заказ в статусе: " + OrderStatus.WAIT_MASTER, () -> {
-            dispatcherPages.getHomePage().checkFinishLoading();
-            dispatcherPages.getHomePage().switchToListView();
-            dispatcherPages.getHomePage().navInProgress();
-            dispatcherPages.getHomePage().openOrderByNumber("3192");
-            dispatcherPages.getOrderCardPage().checkFinishLoading();
-            dispatcherPages.getOrderCardPage().checkMasterDispatchedState(OrderStatus.WAIT_MASTER, ServiceType.MAINTENANCE);
-            dispatcherPages.getOrderCardPage().selectAnotherTime();
-            dispatcherPages.getOrderCardPage().datePicker.selectNowDateAndTime();
-            dispatcherPages.getOrderCardPage().selectAnotherMaster();
-            dispatcherPages.getSelectMasterPage().checkFinishLoading();
-            dispatcherPages.getSelectMasterPage().selectAvailableMasterByIndex(0);
-            dispatcherPages.getOrderCardPage().checkFinishLoading();
 
-
-
-
-
-
-
-        });
-    }
 }
