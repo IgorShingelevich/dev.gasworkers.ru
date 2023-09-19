@@ -27,7 +27,7 @@ public class MapDispatcherComponent extends BaseComponent {
         stepWithRole("Убедиться, что карта загружена", () -> {
             self.shouldBe(visible);
             headerLocator.shouldBe(visible);
-            loader.handleLoader();
+            loader.handleLoaderMap();
             offersCounterLocator.shouldBe(visible);
             legendDropdownLocator.shouldBe(visible);
             toggleFullMapLocator.shouldBe(visible);
@@ -36,10 +36,5 @@ public class MapDispatcherComponent extends BaseComponent {
             mapContainerLocator.shouldBe(visible);
         });
     }
-
-    public boolean isLoaderVisible() {
-        return driver.$("img[src*='logo-blue-loader.svg']").isDisplayed();
-    }
-
 
 }

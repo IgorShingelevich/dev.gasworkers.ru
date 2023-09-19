@@ -69,7 +69,7 @@ public class HasOfferDispatcherRepairStateTest extends BaseWebTest {
         step(role + " кабинет  в состоянии - в состоянии " + state, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(role + " стр карта - в состоянии " + state, () -> {
-                    dispatcherPages.getHomePage().checkFinishDefaultSateLoading();
+                    dispatcherPages.getHomePage().checkFinishLoading();
                     dispatcherPages.getDriverManager().screenshot(" стр карта - в состоянии " + state);
                 });
             };

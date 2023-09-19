@@ -7,6 +7,7 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 import static com.codeborne.selenide.Condition.visible;
 
 public class ViewModeDispatcherComponent extends BaseComponent {
+
     public ViewModeDispatcherComponent(RoleBrowser browser) {
         super(browser);
     }

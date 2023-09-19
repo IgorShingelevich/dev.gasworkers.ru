@@ -33,7 +33,7 @@ public class DispatcherFlowTest extends BaseTest {
         step("Диспетчере посещает разделы Сайта", () -> {
 //            dispatcherPages.getLoginPage().open();
 //            dispatcherPages.getLoginPage().login(emailDispatcher, passwordDispatcher);
-            dispatcherPages.getHomePage().checkFinishDefaultSateLoading();
+            dispatcherPages.getHomePage().checkFinishLoading();
 
         });
     }

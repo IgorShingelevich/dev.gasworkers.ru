@@ -19,12 +19,13 @@ public class ClientActionsBlockComponent extends BaseComponent {
             notificationsCounterLocator = driver.$("div.notifications.icon .count").as("Счетчик Уведомлений"),
             messagesButtonLocator = driver.$("div.messages.icon").as("Сообщения"),
             dropdownArrowLocator = driver.$(".actions-block .arrow-down").as("Дропдаун Стрелка вниз"),
-            profileNameABLocator = driver.$(".profile-menu .profile-menu__link.text-primary").as("Ссылка Имя профиля"),
+            nameABLocator = driver.$(".profile-menu .profile-menu__link.text-primary").as("Ссылка Имя профиля"),
             profileLinkABLocator = driver.$("a[href='/profile/edit']").as("Ссылка на профиль"),
             reviewLinkABLocator = driver.$("a[href='/profile/reviews']").as("Ссылка на отзывы"),
+            supportLinkABLocator = driver.$("a[href='/profile/messages/chats/support']").as("Ссылка на службу поддержки"),
             logoutLinkABLocator = driver.$$("button.profile-menu__link").findBy(text("Выйти")).as("Ссылка на выход");
 
-    public void checkFinishLoading() {
+    public void checkFinishLoadingClient() {
         stepWithRole("Убедиться что все компоненты блока действий загрузились", () -> {
             self.shouldBe(visible);
             //todo add messagesButtonLocator
@@ -32,12 +33,31 @@ public class ClientActionsBlockComponent extends BaseComponent {
             messagesButtonLocator.shouldBe(visible);
             dropdownArrowLocator.shouldBe(visible);
             clickDropdown();
-            profileNameABLocator.shouldBe(visible);
+            nameABLocator.shouldBe(visible);
             profileLinkABLocator.shouldBe(visible);
             reviewLinkABLocator.shouldBe(visible);
+            supportLinkABLocator.shouldBe(visible);
             logoutLinkABLocator.shouldBe(visible);
             clickDropdown();
         });
+    }
+
+    public void checkFinishLoadingDispatcher() {
+        stepWithRole("Убедиться что все компоненты блока действий загрузились", () -> {
+            self.shouldBe(visible);
+            //todo add messagesButtonLocator
+            notificationsButtonLocator.shouldBe(visible);
+            messagesButtonLocator.shouldBe(visible);
+            dropdownArrowLocator.shouldBe(visible);
+            clickDropdown();
+            nameABLocator.shouldBe(visible);
+            profileLinkABLocator.shouldBe(visible);
+            reviewLinkABLocator.shouldNotBe(visible);
+            supportLinkABLocator.shouldBe(visible);
+            logoutLinkABLocator.shouldBe(visible);
+            clickDropdown();
+        });
+
     }
 
     public void clickDropdown() {

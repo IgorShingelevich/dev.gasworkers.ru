@@ -72,7 +72,7 @@ public class PublishedDispatcherRepairStateTest extends BaseWebTest {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(role + " стр карта - в состоянии " + state, () -> {
                     dispatcherPages.getHomePage().checkUrl();
-                    dispatcherPages.getHomePage().checkFinishDefaultSateLoading();
+                    dispatcherPages.getHomePage().checkFinishLoading();
                     dispatcherPages.getDriverManager().screenshot(" стр карта - в состоянии " + state);
                 });
             };
@@ -80,6 +80,7 @@ public class PublishedDispatcherRepairStateTest extends BaseWebTest {
                 step(role + " карточка заказа - в состоянии " + state, () -> {
                     dispatcherPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderId()));
                     dispatcherPages.getOrderCardPage().checkUrl(String.valueOf(commonFields.getOrderId()));
+                    dispatcherPages.getOrderCardPage().scrollIntoButton(SharedButtonsOrderCardComponent.Button.DISPATCHER_SELECT_MASTER.toString(), false);
                     dispatcherPages.getDriverManager().screenshot(" стр карточка заказа - в состоянии " + state);
                 });
             };
@@ -87,6 +88,8 @@ public class PublishedDispatcherRepairStateTest extends BaseWebTest {
                 step(role + " модальное окно  расценки офера - в состоянии " + state, () -> {
                     dispatcherPages.getOrderCardPage().commonTab.buttons.clickOnButton(SharedButtonsOrderCardComponent.Button.DISPATCHER_SELECT_MASTER);
                     dispatcherPages.getOrderCardPage().offerModal.checkFinishLoading();
+                    dispatcherPages.getOrderCardPage().offerModal.checkFinishLoading();
+                    dispatcherPages.getOrderCardPage().offerModal.scrollIntoButton(SharedButtonsOrderCardComponent.Button.DISPATCHER_SAVE.toString(), false);
                     dispatcherPages.getDriverManager().screenshot(" стр модальное окно  расценки офера - в состоянии " + state);
                 });
             };

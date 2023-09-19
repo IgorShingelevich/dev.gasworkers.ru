@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.buttonSharedComponent.MainButtonSharedComponent;
+import ru.gasworkers.dev.pages.dispatcher.LoaderComponent;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -11,10 +12,13 @@ import static com.codeborne.selenide.Condition.visible;
 public class OfferPriceModalDispatcherComponent extends BaseComponent {
     public final MainButtonSharedComponent mainButton;
     public final MosOblGasBannerOfferPriceModalDispatcherComponent mosOblGasBanner;
+    public final LoaderComponent loader;
+
     public OfferPriceModalDispatcherComponent(RoleBrowser browser) {
         super(browser);
         mainButton = new MainButtonSharedComponent(browser);
         mosOblGasBanner = new MosOblGasBannerOfferPriceModalDispatcherComponent(browser);
+        loader = new LoaderComponent(browser);
     }
 
     SelenideElement
@@ -22,6 +26,7 @@ public class OfferPriceModalDispatcherComponent extends BaseComponent {
 
     public void checkFinishLoading(){
         stepWithRole("Убедиться, что модальное окно расценка оборудования загрузилось", () -> {
+            loader.handleLoaderPage();
             selfLocator.shouldBe(visible);
 //            mosOblGasBanner.checkFinishLoading(); todo ask   mosoblgas  here
 //            mainButton.checkButtonText("Сохранить", selfLocator);

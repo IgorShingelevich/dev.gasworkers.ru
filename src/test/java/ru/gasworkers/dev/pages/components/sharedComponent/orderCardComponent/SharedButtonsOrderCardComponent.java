@@ -207,7 +207,9 @@ public class SharedButtonsOrderCardComponent extends BaseOrderCardComponent {
 
         //dispatcher buttons
         DISPATCHER_SELECT_MASTER("Выбрать мастера"),
-        DISPATCHER_REFUSE("Отказаться");
+        DISPATCHER_REFUSE("Отказаться"),
+        DISPATCHER_CANCEL("Отменить"),
+        DISPATCHER_SAVE("Сохранить");
 
         private final String title;
 

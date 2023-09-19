@@ -17,7 +17,6 @@ import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.Dispa
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
 
 import static com.codeborne.selenide.Condition.partialText;
-import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public class OrderCardDispatcherPage extends BaseDispatcherPage {
@@ -87,181 +86,24 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
         });
     }
 
+    /*public void scrollIntoButton(String button, boolean align) {
+        stepWithRole("Скролл до кнопок", () -> {
+            driver.$(byTagAndText("span", button)).scrollIntoView(align);
+            Selenide.sleep(2000);
+        });
+    }*/
+
+    public void scrollPxls(int pxls) {
+        stepWithRole("Скролл на " + pxls + " пикселей", () -> {
+            driver.executeJavaScript("window.scrollBy(0," + pxls + ")");
+        });
+    }
+
     public void open(String orderId) {
         stepWithRole("Открыть карточку заказа: " + orderId, () -> {
             driver.open("/profile/dispatcher/orders/" + orderId);
         });
     }
-
-
-    public void navCommon(){
-        stepWithRole("Перейти на вкладку Описание заказа", () -> {
-            navButtonsCollection.get(0).shouldHave(text("Описание заказа")).click();
-        });
-    }
-
-    public void navInfoMaster(){
-        stepWithRole("Перейти на вкладку Информация по работам", () -> {
-            navButtonsCollection.get(1).shouldHave(text("Информация по работам")).click();
-        });
-    }
-
-    public void navDocs(){
-        stepWithRole("Перейти на вкладку Документы", () -> {
-            navButtonsCollection.get(2).shouldHave(text("Документы")).click();
-        });
-    }
-
-    /*public void checkNewTenderState(OrderStatus orderStatus, ServiceType serviceType) {
-        stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
-            stepWithRole("Вкладка Описание заказа", () -> {
-                tabCommon.status.checkCurrentStatus(orderStatus);
-                tabCommon.details.checkServiceType(serviceType);
-                stepWithRole("Убедиться, что в Карточке заказа  представлена кнопка Принять Заказ и Отказаться ", () -> {
-                    acceptRequestButtonLocator.scrollTo().shouldBe(visible);
-                    declineRequestButtonLocator.shouldBe(visible);
-                    alreadyAcceptedButtonLocator.shouldNotBe(visible);
-                });
-            });
-            stepWithRole("Вкладка Информация по работам", () -> {
-                //TODO: add steps for this tab
-            });
-            stepWithRole("Вкладка Документы", () -> {
-                navDocs();
-                tabDocs.noDocs();
-            });
-            navCommon();
-        });
-        //TODO - check price, docs, buttons, info
-        System.out.println("dispatcher orderStatus: " + orderStatus);
-    }*/
-
-    /*public void acceptOrder() {
-        String factualOrderNumber = pageTitleLocator.getText().substring(pageTitleLocator.getText().length() - 4);
-        stepWithRole("Принять заказ: " + factualOrderNumber , () -> {
-            acceptRequestButtonLocator.scrollTo().click();
-            offerPrice.checkFinishLoading();
-            offerPrice.saveButton();
-            stepWithRole("Убедиться, что в Карточке заказа  представлена неактивная кнопка Уже участвуете ", () -> {
-
-                alreadyAcceptedButtonLocator.shouldBe(visible, Duration.ofSeconds(10));
-                acceptRequestButtonLocator.shouldNotBe(visible);
-                declineRequestButtonLocator.shouldNotBe(visible);
-            });
-        });
-    }*/
-
-    /*public void checkParticipateTenderState(OrderStatus orderStatus, ServiceType serviceType) {
-        stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
-            stepWithRole("Вкладка Описание заказа", () -> {
-                tabCommon.status.checkCurrentStatus(orderStatus);
-                tabCommon.details.checkServiceType(serviceType);
-                stepWithRole("Убедиться, что в Карточке заказа  представлена неактивная  кнопка Уже участвуете ", () -> {
-                    alreadyAcceptedButtonLocator.shouldBe(visible);
-                    acceptRequestButtonLocator.shouldNot(visible);
-                    declineRequestButtonLocator.shouldNot(visible);
-                });
-            });
-            stepWithRole("Вкладка Информация по работам", () -> {
-                //TODO: add steps for this tab
-            });
-            stepWithRole("Вкладка Документы", () -> {
-                navDocs();
-                tabDocs.noDocs();
-            });
-            navCommon();
-        });
-        //TODO - check price, docs, buttons, info
-        System.out.println("dispatcher orderStatus: " + orderStatus);
-    }*/
-
-   /* public void checkScheduleVisitState(OrderStatus orderStatus, ServiceType serviceType) {
-        stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
-            stepWithRole("Вкладка Описание заказа", () -> {
-                tabCommon.status.checkCurrentStatus(orderStatus);
-                tabCommon.details.checkServiceType(serviceType);
-                stepWithRole("Убедиться, что  в Карточке заказа представлена кнопка Назначить время и Отменить заказ ", () -> {
-                    selectTimeButtonLocator.shouldBe(visible);
-                    cancelButtonLocator.shouldBe(visible);
-                });
-            });
-            stepWithRole("Вкладка Информация по работам", () -> {
-                //TODO: add steps for this tab
-            });
-            stepWithRole("Вкладка Документы", () -> {
-                navDocs();
-                stepWithRole("Убедиться, что  в Карточке заказа в документах присутствует Договор ТО и Страховой полис " */
-    /*+ docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText()*//* , () -> {
-                    tabDocs.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
-                });
-                stepWithRole("Скачать документы: Договор ТО и Страховой полис " , () -> {
-                    tabDocs.downloadAgreement();
-                    tabDocs.downloadInsurance();
-                });
-            });
-            navCommon();
-        });
-        //TODO - check price, docs, buttons, info
-        System.out.println("dispatcher orderStatus: " + orderStatus);
-    }*/
-
-  /*  public void checkMasterDispatchedState(OrderStatus orderStatus, ServiceType serviceType) {
-        stepWithRole("Убедиться, что статус заказа соответствует его Признакам ", () -> {
-            stepWithRole("Вкладка Описание заказа", () -> {
-                tabCommon.status.checkCurrentStatus(orderStatus);
-                tabCommon.details.checkServiceType(serviceType);
-                stepWithRole("Убедиться, что  в Карточке заказа представлена кнопка Назначить Другого Мастера и Назанчить Новое Время ", () -> {
-                    selectAnotherTimeButtonLocator.as("Назначить Новое Время").shouldBe(visible, Duration.ofSeconds(10));
-                    selectAnotherMasterButtonLocator.as("Назначить Другого Мастера").shouldBe(visible, Duration.ofSeconds(10));
-                });
-            });
-            stepWithRole("Вкладка Информация по работам", () -> {
-                //TODO: add steps for this tab
-            });
-            stepWithRole("Вкладка Документы", () -> {
-                navDocs();
-                stepWithRole("Убедиться, что  в Карточке заказа в документах присутствует Договор ТО и Страховой полис " *//*+ docsTitleCollection.get(0).getText() + docsTitleCollection.get(1).getText()*//* , () -> {
-                    tabDocs.presentedDocs(Doc.AGREEMENT, Doc.INSURANCE);
-                });
-                stepWithRole("Скачать документы: Договор ТО и Страховой полис " , () -> {
-                    tabDocs.downloadAgreement();
-                    tabDocs.downloadInsurance();
-                });
-            });
-            navCommon();
-        });
-        //TODO - check price, docs, buttons, info
-        System.out.println("dispatcher orderStatus: " + orderStatus);
-    }*/
-
-  /*  public OrderCardDispatcherPage selectMaster() {
-        stepWithRole("Нажать на кнопку Выбрать мастера", () -> {
-            selectMasterButtonLocator.click();
-        });
-        return this;
-    }
-    public void selectAnotherMaster() {
-        stepWithRole("Нажать на кнопку Выбрать другого мастера", () -> {
-            selectAnotherMasterButtonLocator.click();
-        });
-    }
-
-    public void selectTimeButton() {
-        stepWithRole("Нажать на кнопку Выбрать время", () -> {
-            selectTimeButtonLocator.click();
-        });
-    }
-
-    public void selectAnotherTime() {
-        stepWithRole("Нажать на кнопку Выбрать новое время", () -> {
-            selectAnotherTimeButtonLocator.click();
-        });
-    }
-
-    public OrderCardDispatcherPage declineOrder() {
-        declineRequestButtonLocator.click();
-        return this;
-    }*/
 
 
 }

@@ -20,7 +20,7 @@ public class SharedHeaderComponent extends BaseComponent {
         stepWithRole("Убедиться что хедер загрузился", () -> {
             self.shouldBe(visible);
             logoLocator.shouldBe(visible);
-            actionsBlock.checkFinishLoading();
+            actionsBlock.checkFinishLoadingClient();
         });
     }
 

@@ -1,9 +1,12 @@
 package ru.gasworkers.dev.pages.components;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideDriver;
 import io.qameta.allure.Allure;
 import ru.gasworkers.dev.model.Role;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+
+import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public abstract class BaseComponent {
 
@@ -25,6 +28,13 @@ public abstract class BaseComponent {
 
     private String getStepNameWithRole(String name) {
         return role + ": " + name;
+    }
+
+    public void scrollIntoButton(String button, boolean align) {
+        stepWithRole("Скролл до кнопок", () -> {
+            driver.$(byTagAndText("span", button)).scrollIntoView(align);
+            Selenide.sleep(2000);
+        });
     }
 
 

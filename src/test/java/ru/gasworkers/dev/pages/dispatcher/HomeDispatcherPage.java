@@ -1,12 +1,14 @@
 package ru.gasworkers.dev.pages.dispatcher;
 
 import ru.gasworkers.dev.model.browser.RoleBrowser;
+import ru.gasworkers.dev.pages.components.sharedComponent.MapDispatcherHeader;
 import ru.gasworkers.dev.pages.components.sharedComponent.SharedHeaderComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.DispatcherSidebarComponent;
 
 public class HomeDispatcherPage extends BaseDispatcherPage {
 
     public final SharedHeaderComponent header;
+    public final MapDispatcherHeader mapHeader;
     public final DispatcherOrdersFilterComponent filter;
     public final ViewModeDispatcherComponent viewMode;
     public final MapDispatcherComponent map;
@@ -17,6 +19,7 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
         super(browser);
         sidebarDispatcher = new DispatcherSidebarComponent(browser);
         header = new SharedHeaderComponent(browser);
+        mapHeader = new MapDispatcherHeader(browser);
         filter = new DispatcherOrdersFilterComponent(browser);
         viewMode = new ViewModeDispatcherComponent(browser);
         map = new MapDispatcherComponent(browser);
@@ -24,10 +27,10 @@ public class HomeDispatcherPage extends BaseDispatcherPage {
 
     }
 
-    public void checkFinishDefaultSateLoading() {
+    public void checkFinishLoading() {
         stepWithRole("Убедиться, что Домашняя страница загружена", () -> {
             checkUrl();
-            header.checkFinishLoading();
+            mapHeader.checkFinishLoading();
             map.checkFinishLoading();
             filter.checkButtonLoading();
             viewMode.checkDefaultState();
