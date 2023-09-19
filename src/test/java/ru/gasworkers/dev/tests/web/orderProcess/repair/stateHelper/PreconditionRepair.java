@@ -142,23 +142,31 @@ public class PreconditionRepair extends BaseApiTest {
             }
             getActualDtoSet(commonFields, stateRepair);
             StateInfo result = stateInfo.actualDtoSet();
-            readAllNotifications();
+            readAllNotificationsClient();
             return new Result(result, commonFields);
         });
     }
 
 
-
-
-    private void readAllNotifications() {
+    private void readAllNotificationsClient() {
         notificationsApi.readAllNotifications(commonFields.getTokenClient())
+                .statusCode(200);
+    }
+
+    public void readAllNotifications(String token) {
+        notificationsApi.readAllNotifications(token)
                 .statusCode(200);
     }
 
     private void applyPublishedPrecondition(StateRepair stateRepair, User client, CommonFieldsDto commonFields) {
         StateRepair actualStateRepair = StateRepair.PUBLISHED;
         step("API: предусловие - " + Role.CLIENT + " заказ на ремонт в состоянии " + actualStateRepair, () -> {
+            step(Role.CLIENT + " авторизуется", () -> {
             commonFields.setTokenClient(loginApi.getTokenThrough(client));
+            });
+            step(Role.DISPATCHER + " авторизуется", () -> {
+                commonFields.setTokenDispatcher(loginApi.getUserToken(LoginRequestDto.asUserEmail(sssrDispatcher1Email, sssrDispatcher1Password)));
+            });
             step(Role.CLIENT + " заказ на ремонт - в состоянии " + actualStateRepair, () -> {
                 step(Role.CLIENT + " карточка последнего заказа - в состоянии " + actualStateRepair, () -> {
                     System.out.println("publishedLastOrderInfo");
@@ -228,9 +236,7 @@ public class PreconditionRepair extends BaseApiTest {
                 // todo change all  dto to include  user details
             });
             step(Role.DISPATCHER + " выбирает мастера ", () -> {
-                step(Role.DISPATCHER + " авторизуется", () -> {
-                    commonFields.setTokenDispatcher(loginApi.getUserToken(LoginRequestDto.asUserEmail(sssrDispatcher1Email, sssrDispatcher1Password)));
-                });
+
                 step(Role.DISPATCHER + " получает список доступных мастеров ", () -> {
                     commonFields.setMasterId(companiesMastersApi.getAcceptedMasters(commonFields.getTokenDispatcher())
                             .statusCode(200)

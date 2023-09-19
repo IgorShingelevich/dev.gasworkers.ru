@@ -13,8 +13,10 @@ import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithOrderType;
 import ru.gasworkers.dev.extension.user.WithThroughUser;
 import ru.gasworkers.dev.model.Role;
+import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.SharedButtonsOrderCardComponent;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.tests.SoftAssert;
+import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 import ru.gasworkers.dev.tests.web.BaseWebTest;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.PreconditionRepair;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateInfo;
@@ -30,8 +32,8 @@ import static io.qameta.allure.Allure.step;
 
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.REPAIR)
-@Feature(AllureFeature.REPAIR)
-@Story(AllureStory.WEB_STATE_REPAIR)
+@Feature(AllureFeature.REPAIR_STATE)
+@Story(AllureStory.REPAIR_STATE_DISPATCHER)
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.DISPATCHER)
 @Tag(AllureTag.WEB_REPAIR)
@@ -48,97 +50,70 @@ public class PublishedDispatcherRepairStateTest extends BaseWebTest {
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
 
-// Get the StateInfo and CommonFieldsDto from the result
+// Get the StateInfo and CommonFieldsRepairDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
+        CommonFieldsDto commonFields = result.getCommonFieldsResult();
+        preconditionRepair.readAllNotifications(commonFields.getTokenDispatcher());
+
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("Web: " + role + " авторизация", () -> {
             dispatcherPages.getLoginPage().open();
-            dispatcherPages.getLoginPage().login(client.getEmail(), "1111");
+            dispatcherPages.getLoginPage().login(commonFields.getDispatcherEmail(), commonFields.getDispatcherPassword());
             dispatcherPages.getHomePage().checkUrl();
-//            dispatcherPages.getHomePage().guide.skipButton();
             step(role + " учетные данные", () -> {
-                Allure.addAttachment("Client creds", client.getEmail() + ": " + "1111" + "/");
+                Allure.addAttachment(role + " creds: ", commonFields.getDispatcherEmail() + ": " + commonFields.getDispatcherPassword());
                 String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
                         + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
                 Allure.addAttachment("RunStartTime: ", date);
             });
         });
-        step(role + " кабинет в состоянии - в состоянии " + state, () -> {
 
-            Consumer<SoftAssert> case0 = softAssert -> {
-                step(role + " карта - в состоянии " + state, () -> {
-
-                });
-            };
-
-
+        step(role + " кабинет  в состоянии - в состоянии " + state, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
-                step(role + " карточка последнего заказа - в состоянии " + state, () -> {
-//                    dispatcherPages.getHomePage().lastOrderComponent.checkFinishLoading();
-//                    dispatcherPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getLastOrderInfoDto());
+                step(role + " стр карта - в состоянии " + state, () -> {
+                    dispatcherPages.getHomePage().checkUrl();
+                    dispatcherPages.getHomePage().checkFinishDefaultSateLoading();
+                    dispatcherPages.getDriverManager().screenshot(" стр карта - в состоянии " + state);
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
-                step(role + " карточка заказа редирект на карту - в состоянии " + state, () -> {
-//                    dispatcherPages.getHomePage().lastOrderComponent.checkFinishLoading();
-//                    dispatcherPages.getHomePage().lastOrderComponent.open();
-//                    dispatcherPages.getSelectServicePage().checkUrl();
+                step(role + " карточка заказа - в состоянии " + state, () -> {
+                    dispatcherPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderId()));
+                    dispatcherPages.getOrderCardPage().checkUrl(String.valueOf(commonFields.getOrderId()));
+                    dispatcherPages.getDriverManager().screenshot(" стр карточка заказа - в состоянии " + state);
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {
-                step(role + " страница выбора услуги - в состоянии " + state, () -> {
-//                    dispatcherPages.getSelectServicePage().checkFinishLoadingRepair();
-//                    dispatcherPages.getSelectServicePage().checkState(state, stateInfo.getSuggestedServiceDto());
+                step(role + " модальное окно  расценки офера - в состоянии " + state, () -> {
+                    dispatcherPages.getOrderCardPage().commonTab.buttons.clickOnButton(SharedButtonsOrderCardComponent.Button.DISPATCHER_SELECT_MASTER);
+                    dispatcherPages.getOrderCardPage().offerModal.checkFinishLoading();
+                    dispatcherPages.getDriverManager().screenshot(" стр модальное окно  расценки офера - в состоянии " + state);
                 });
             };
             Consumer<SoftAssert> case4 = softAssert -> {
-                step(role + " карточка заказа - в состоянии " + state, () -> {
-//                    dispatcherPages.getSelectServicePage().toOrderCard();
-//                    dispatcherPages.getOrderCardPage().checkFinishLoading();
-//                    dispatcherPages.getOrderCardPage().checkStateRepair(state, stateInfo.getOrdersIdResponseDto());
-
-                });
-            };
-
-            Consumer<SoftAssert> case5 = softAssert -> {
                 step(role + " уведомления - в состоянии " + state, () -> {
-//                    dispatcherPages.getHomePage().open();
-//                    dispatcherPages.getHomePage().checkFinishLoading();
-//                    Selenide.sleep(3000);
-//                    dispatcherPages.getHomePage().header.actionsBlock.notifications();
-//                    dispatcherPages.getAllNotificationsPage().checkFinishLoading();
-//                    dispatcherPages.getAllNotificationsPage().checkStateRepair(state, stateInfo.getNotificationsDto());
+                    dispatcherPages.getAllNotificationsPage().open();
+                    dispatcherPages.getAllNotificationsPage().checkUrl();
+                    dispatcherPages.getAllNotificationsPage().checkFinishLoading();
+                    dispatcherPages.getDriverManager().screenshot(" стр уведомления - в состоянии " + state);
                 });
             };
+            Consumer<SoftAssert> case5 = softAssert -> {
+                step(role + " красное уведомление на карте  - в состоянии " + state, () -> {
 
+                });
+            };
             Consumer<SoftAssert> case6 = softAssert -> {
-                step(role + " красное уведомление в лк - в состоянии " + state, () -> {
-//                    dispatcherPages.getHomePage().open();
-//                    dispatcherPages.getHomePage().checkFinishLoading();
-//                    dispatcherPages.getHomePage().redNotice.noNotice();
-                });
-            };
-            Consumer<SoftAssert> case7 = softAssert -> {
                 step(role + " красное уведомление на стр лендинга - в состоянии " + state, () -> {
-//                    dispatcherPages.getLandingPage().open();
-//                    dispatcherPages.getLandingPage().checkFinishLoading();
-//                    dispatcherPages.getLandingPage().noticeComponent.noNotifications();
+
                 });
             };
-            assertAll(Arrays.asList(case0, case1, case2, case3, case4, case5, case6, case7));
+            assertAll(Arrays.asList(case1,
+                    case2, case3,
+                    case4
+//                    , case5, case6
+            ));
         });
     }
+
 }
-
- /*  // Get the soft assertions from the page class
-            List<Consumer<SoftAssert>> softAssertionsFromPageClass = clientPages.getOrderCardPage().checkStateList(state, publishedOrderIdResponse);
-            List<Consumer<SoftAssert>> allSoftAssertions = new ArrayList<>();
-            allSoftAssertions.addAll(Arrays.asList(case1, case2, case3));
-            allSoftAssertions.addAll(softAssertionsFromPageClass);
-
-            SoftAssert softAssert = new SoftAssert();
-            for (Consumer<SoftAssert> assertion : allSoftAssertions) {
-                assertion.accept(softAssert);
-            }
-            softAssert.assertAll();
-*/

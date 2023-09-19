@@ -13,9 +13,9 @@ import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.WithOrderType;
 import ru.gasworkers.dev.extension.user.WithThroughUser;
 import ru.gasworkers.dev.model.Role;
-import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.SharedButtonsOrderCardComponent;
 import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.tests.SoftAssert;
+import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 import ru.gasworkers.dev.tests.web.BaseWebTest;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.PreconditionRepair;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateInfo;
@@ -31,13 +31,13 @@ import static io.qameta.allure.Allure.step;
 
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.REPAIR)
-@Feature(AllureFeature.REPAIR)
-@Story(AllureStory.WEB_STATE_REPAIR)
+@Feature(AllureFeature.REPAIR_STATE)
+@Story(AllureStory.REPAIR_STATE_DISPATCHER)
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.DISPATCHER)
 @Tag(AllureTag.WEB_REPAIR)
 public class HasOfferDispatcherRepairStateTest extends BaseWebTest {
-    @Browser(role = Role.DISPATCHER)
+    @Browser(role = Role.DISPATCHER, browserSize = "1920x1080")
     DispatcherPages dispatcherPages;
 
     @Test
@@ -50,6 +50,9 @@ public class HasOfferDispatcherRepairStateTest extends BaseWebTest {
 
 // Get the StateInfo and CommonFieldsRepairDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
+        CommonFieldsDto commonFields = result.getCommonFieldsResult();
+        preconditionRepair.readAllNotifications(commonFields.getTokenDispatcher());
+
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("Web: " + role + " авторизация", () -> {
             dispatcherPages.getLoginPage().open();
@@ -66,27 +69,24 @@ public class HasOfferDispatcherRepairStateTest extends BaseWebTest {
         step(role + " кабинет  в состоянии - в состоянии " + state, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(role + " стр карта - в состоянии " + state, () -> {
-                    dispatcherPages.getHomePage().checkUrl();
+                    dispatcherPages.getHomePage().checkFinishDefaultSateLoading();
                     dispatcherPages.getDriverManager().screenshot(" стр карта - в состоянии " + state);
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
                 step(role + " карточка заказа - в состоянии " + state, () -> {
-                    dispatcherPages.getOrderCardPage().open(commonFields.getOrderNumber());
-                    dispatcherPages.getOrderCardPage().checkUrl(commonFields.getOrderNumber());
+                    dispatcherPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderId()));
+                    dispatcherPages.getOrderCardPage().checkUrl(String.valueOf(commonFields.getOrderId()));
                     dispatcherPages.getDriverManager().screenshot(" стр карточка заказа - в состоянии " + state);
                 });
             };
-            Consumer<SoftAssert> case3 = softAssert -> {
-                step(role + " модальное окно  расценки офера - в состоянии " + state, () -> {
-                    dispatcherPages.getOrderCardPage().commonTab.buttons.clickOnButton(SharedButtonsOrderCardComponent.Button.DISPATCHER_SELECT_MASTER);
-                    dispatcherPages.getOrderCardPage().offerModal.checkFinishLoading();
-                    dispatcherPages.getDriverManager().screenshot(" стр модальное окно  расценки офера - в состоянии " + state);
-                });
-            };
+
             Consumer<SoftAssert> case4 = softAssert -> {
                 step(role + " уведомления - в состоянии " + state, () -> {
-
+                    dispatcherPages.getAllNotificationsPage().open();
+                    dispatcherPages.getAllNotificationsPage().checkUrl();
+                    dispatcherPages.getAllNotificationsPage().checkFinishLoading();
+                    dispatcherPages.getDriverManager().screenshot(" стр уведомления - в состоянии " + state);
                 });
             };
             Consumer<SoftAssert> case5 = softAssert -> {
@@ -100,8 +100,11 @@ public class HasOfferDispatcherRepairStateTest extends BaseWebTest {
                 });
             };
             assertAll(Arrays.asList(case1,
-                    case2, case3,
-                    case4, case5, case6));
+                    case2,
+//                    case3,
+                    case4
+//                    , case5, case6
+            ));
         });
     }
 

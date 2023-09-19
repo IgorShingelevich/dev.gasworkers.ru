@@ -30,4 +30,6 @@ public abstract class BasePage extends BaseComponent {
             driver.$("[data-test-id='outline-primary']").click();
         });
     }
+
+
 }

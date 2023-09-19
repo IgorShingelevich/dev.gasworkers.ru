@@ -120,6 +120,9 @@ public class OrdersIdResponseDto {
         @JsonProperty("material_values")
         public List<MaterialValues> materialValues;
         public List<Actions> actions;
+        public Boolean transfered;
+        @JsonProperty("need_master_selecting")
+        public Boolean needMasterSelecting;
 
         @lombok.Data
         @Builder
@@ -640,6 +643,10 @@ public class OrdersIdResponseDto {
             @JsonProperty("master_started")
             public Boolean masterStarted;
             public String status;
+            @JsonProperty("possible_full_repair_price")
+            public Double possibleFullRepairPrice;
+            @JsonProperty("possible_first_accept_price")
+            public Double possibleFirstAcceptPrice;
         }
 
         @lombok.Data

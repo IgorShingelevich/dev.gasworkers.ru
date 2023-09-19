@@ -30,8 +30,8 @@ import static io.qameta.allure.Allure.step;
 
 @Owner("Igor Shingelevich")
 @Epic(AllureEpic.REPAIR)
-@Feature(AllureFeature.REPAIR)
-@Story(AllureStory.WEB_STATE_REPAIR)
+@Feature(AllureFeature.REPAIR_STATE)
+@Story(AllureStory.REPAIR_STATE_SUPER_DISPATCHER)
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.SUPER_DISPATCHER)
 @Tag(AllureTag.WEB_REPAIR)

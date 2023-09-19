@@ -10,8 +10,6 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
 public class AllNotificationsDispatcherPage extends BaseDispatcherPage {
 
@@ -37,10 +35,11 @@ public class AllNotificationsDispatcherPage extends BaseDispatcherPage {
         statusNewNotificationLinkCollection = driver.$$(".item-header.d-flex.justify-content-between.w-100 div.h4");
 
 
-
-    public AllNotificationsDispatcherPage isOpened() {
-        firstNotificationLocator.should(appear, Duration.ofSeconds(10));
-        return this;
+    public void checkFinishLoading() {
+        stepWithRole("Убедиться, что страница " + PAGE_TITLE + " загрузилась", () -> {
+            checkUrl();
+            pageTitleLocator.shouldHave(text(PAGE_TITLE));
+        });
     }
 
 
@@ -68,5 +67,16 @@ public class AllNotificationsDispatcherPage extends BaseDispatcherPage {
     }
 
 
+    public void open() {
+//        https://dev.gasworkers.ru/profile/notifications
+        stepWithRole("Открытие страницы " + PAGE_TITLE, () -> {
+            driver.open("/profile/notifications");
+        });
+    }
 
+    public void checkUrl() {
+        stepWithRole("Проверка URL страницы " + PAGE_TITLE, () -> {
+            urlChecker.urlContains("/profile/notifications");
+        });
+    }
 }

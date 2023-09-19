@@ -135,6 +135,26 @@ task webRepairTest(type: Test) {
         includeTags "web-repair"
     }
 }
+
+task webRepairClientTest(type: Test) {
+    useJUnitPlatform {
+        includeTags "web-repair&client"
+    }
+}
+//
+//task webRepairDispatcherTest(type: Test) {
+//    useJUnitPlatform {
+//        includePattern ".*web-repair.*dispatcher.*"
+//    }
+//}
+//
+//task webRepairMasterTest(type: Test) {
+//    useJUnitPlatform {
+//        includePattern ".*web-repair.*master.*"
+//    }
+//}
+
+
 task webRegistrationTest(type: Test) {
     useJUnitPlatform {
         includeTags "web-registration"

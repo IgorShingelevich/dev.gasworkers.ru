@@ -9,6 +9,7 @@ public final class AllureFeature {
             CLIENT_HOUSE = "Feature: Дом клиента",
             ORDERS = "Feature: Заказы",
             CONSULTATION_NOW = "Feature: Консультация сейчас",
-            REPAIR = "Feature: repair";
+            REPAIR = "Feature: repair",
+            REPAIR_STATE = "Feature: Состояние  заказа на ремонт";
     public static final String PRECONDITION = "Feature: Предусловия";
 }
