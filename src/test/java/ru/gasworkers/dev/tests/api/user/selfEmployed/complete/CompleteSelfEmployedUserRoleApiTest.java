@@ -30,7 +30,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.ACCOUNT)
 @Tag(AllureTag.SELF_EMPLOYED)
 @Tag(AllureTag.API)
-public class CompleteSelfEmployedRoleApiTest extends BaseApiTest {
+public class CompleteSelfEmployedUserRoleApiTest extends BaseApiTest {
     private final RegularRegistrationApi registrationApi = new RegularRegistrationApi();
     private final LoginApi loginApi = new LoginApi();
     private final CompleteSelfEmployedRoleApi completeSelfEmployedRoleApi = new CompleteSelfEmployedRoleApi();
@@ -58,7 +58,7 @@ public class CompleteSelfEmployedRoleApiTest extends BaseApiTest {
                     .extract().as(LoginResponseDto.class)
                     .getData().getToken();
         });
-        step("Check role", () -> {
+        step("Check userRole", () -> {
             UserResponseDto actualResponse = completeSelfEmployedRoleApi.completeSelfEmployedRole(testCase.getCompleteRoleDto(), token)
                     .statusCode(200)
                     .extract().as(UserResponseDto.class);

@@ -15,22 +15,22 @@ public final class DriverManager {
 
 
     public void back() {
-        step(roleBrowser.getRole() + ": back", () ->
+        step(roleBrowser.getUserRole() + ": back", () ->
                 roleBrowser.getDriver().back());
     }
 
     public void refresh() {
-        step(roleBrowser.getRole() + ": refresh", () ->
+        step(roleBrowser.getUserRole() + ": refresh", () ->
                 roleBrowser.getDriver().refresh());
     }
 
     public void forward() {
-        step(roleBrowser.getRole() + ": forward", () ->
+        step(roleBrowser.getUserRole() + ": forward", () ->
                 roleBrowser.getDriver().forward());
     }
 
     public void zoom(double factor) {
-        step(roleBrowser.getRole() + ": zoom", () ->
+        step(roleBrowser.getUserRole() + ": zoom", () ->
                 roleBrowser.getDriver().zoom(factor));
 //            executeJavaScript("document.body.style.zoom='50%'");
 //            executeJavaScript("window.devicePixelRatio = 0.5");
@@ -39,7 +39,7 @@ public final class DriverManager {
     }
 
     public void switchToTab(int index) {
-        step(roleBrowser.getRole() + ": switch to tab", () -> {
+        step(roleBrowser.getUserRole() + ": switch to tab", () -> {
             roleBrowser.getDriver().driver().switchTo().frame(index);
         });
     }
@@ -60,7 +60,7 @@ public final class DriverManager {
     }
 
     public void close() {
-        step(roleBrowser.getRole() + ": close", () ->
+        step(roleBrowser.getUserRole() + ": close", () ->
                 roleBrowser.getDriver().close());
     }
 

@@ -11,7 +11,7 @@ import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
-import ru.gasworkers.dev.model.Role;
+import ru.gasworkers.dev.model.UserRole;
 import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
@@ -30,7 +30,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.POSITIVE)
 @Tag(AllureTag.WEB_REGISTRATION)
 public class ByEmailUsualClientRegistrationTest extends BaseTest {
-    @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
+    @Browser(role = UserRole.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
     RandomClient randomClient = new RandomClient();
     @Test

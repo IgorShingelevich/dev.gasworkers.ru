@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
-import ru.gasworkers.dev.model.Role;
+import ru.gasworkers.dev.model.UserRole;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.SelfEmployedPages;
 import ru.gasworkers.dev.tests.BaseTest;
@@ -29,7 +29,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.POSITIVE)
 public class SelfEmployedRegistrationTest extends BaseTest {
     RandomSelfEmployedAndMaster randomSelfEmployedAndMaster = new RandomSelfEmployedAndMaster();
-    @Browser(role = Role.SELF_EMPLOYED, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
+    @Browser(role = UserRole.SELF_EMPLOYED, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     SelfEmployedPages selfEmployedPages;
 
     @Disabled

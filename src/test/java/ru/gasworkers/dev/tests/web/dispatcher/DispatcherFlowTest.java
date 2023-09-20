@@ -9,7 +9,7 @@ import ru.gasworkers.dev.pages.context.DispatcherPages;
 import ru.gasworkers.dev.tests.BaseTest;
 
 import static io.qameta.allure.Allure.step;
-import static ru.gasworkers.dev.model.Role.DISPATCHER;
+import static ru.gasworkers.dev.model.UserRole.DISPATCHER;
 
 @Disabled
 public class DispatcherFlowTest extends BaseTest {

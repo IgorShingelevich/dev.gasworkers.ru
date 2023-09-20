@@ -47,7 +47,7 @@ public class InfoMasterTabOrderCardClientComponent extends BaseOrderCardComponen
         });
     }
 
-    public void checkNoInfoBox() {
+    public void checkInfoNoExistNotification() {
         stepWithRole("Убедиться, что отсутствует информация", () -> {
             noInfoTextLocator.shouldHave(text("Информации пока нет."));
         });

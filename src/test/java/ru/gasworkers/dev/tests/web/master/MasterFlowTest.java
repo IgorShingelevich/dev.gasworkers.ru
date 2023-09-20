@@ -12,7 +12,7 @@ import ru.gasworkers.dev.pages.context.MasterPages;
 import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.UserBuilder;
 
-import static ru.gasworkers.dev.model.Role.MASTER;
+import static ru.gasworkers.dev.model.UserRole.MASTER;
 @Disabled
 public class MasterFlowTest extends BaseTest {
 

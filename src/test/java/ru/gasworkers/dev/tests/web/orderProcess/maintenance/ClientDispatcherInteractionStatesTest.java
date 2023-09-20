@@ -7,7 +7,7 @@
 //import ru.gasworkers.dev.allure.AllureTag;
 //import ru.gasworkers.dev.extension.browser.Browser;
 //import ru.gasworkers.dev.model.OrderStatus;
-//import ru.gasworkers.dev.model.Role;
+//import ru.gasworkers.dev.model.UserRole;
 //import ru.gasworkers.dev.model.ServiceType;
 //import ru.gasworkers.dev.model.browser.PositionBrowser;
 //import ru.gasworkers.dev.model.browser.SizeBrowser;
@@ -28,13 +28,13 @@
 //@Disabled
 //class ClientDispatcherInteractionStatesTest extends BaseTest {
 //
-//    @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
+//    @Browser(userRole = UserRole.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
 //    ClientPages clientPages;
 //
-//    @Browser(role = Role.DISPATCHER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.SECOND_ROLE)
+//    @Browser(userRole = UserRole.DISPATCHER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.SECOND_ROLE)
 //    DispatcherPages dispatcherPages;
 //
-//    @Browser(role = Role.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.THIRD_ROLE)
+//    @Browser(userRole = UserRole.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.THIRD_ROLE)
 //    MasterPages masterPages;
 //
 //    UserBuilder client = new UserBuilder(
@@ -189,7 +189,7 @@
 //                //driver.back();
 //                // check that Filial is not empty or set the Filial if it is empty
 //                // check that Address fnd Passport is not empty or set the Address and Passport if it is empty
-//                //SmsApi clientSmsApi1 = SmsApi.instance(Role.CLIENT); // for real number
+//                //SmsApi clientSmsApi1 = SmsApi.instance(UserRole.CLIENT); // for real number
 //            });
 //            step("Клиент заполняет документы", () -> {
 //                //todo check that all documents are filled up

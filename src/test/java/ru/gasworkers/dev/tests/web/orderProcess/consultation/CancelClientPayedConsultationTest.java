@@ -44,7 +44,7 @@ import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.client.WithClient;
 import ru.gasworkers.dev.extension.user.client.WithHouse;
-import ru.gasworkers.dev.model.Role;
+import ru.gasworkers.dev.model.UserRole;
 import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
@@ -85,9 +85,9 @@ public class CancelClientPayedConsultationTest extends BaseApiTest {
     private final ConsultationCancelApi consultationCancelApi = new ConsultationCancelApi();
     private final LoginApi loginApi = new LoginApi();
     private final GetUserWithAdminApi getUserWithAdminApi = new GetUserWithAdminApi();
-    @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
+    @Browser(role = UserRole.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
-    @Browser(role = Role.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.THIRD_ROLE)
+    @Browser(role = UserRole.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.THIRD_ROLE)
     MasterPages masterPages;
 
     @ParameterizedTest(name = "{0}")

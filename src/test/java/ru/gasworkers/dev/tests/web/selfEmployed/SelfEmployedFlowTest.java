@@ -10,7 +10,7 @@ import ru.gasworkers.dev.tests.BaseTest;
 import ru.gasworkers.dev.utils.userBuilder.UserBuilder;
 
 import static io.qameta.allure.Allure.step;
-import static ru.gasworkers.dev.model.Role.SELF_EMPLOYED;
+import static ru.gasworkers.dev.model.UserRole.SELF_EMPLOYED;
 @Disabled
 
 @Owner("Igor Shingelevich")

@@ -12,7 +12,7 @@ import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.client.WithClient;
 import ru.gasworkers.dev.extension.user.client.WithHouse;
-import ru.gasworkers.dev.model.Role;
+import ru.gasworkers.dev.model.UserRole;
 import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
@@ -40,14 +40,14 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.WEB_CONSULTATION)
 public class DraftOnlineMastersConsultationTest extends BaseWebTest {
 
-    @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
+    @Browser(role = UserRole.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
 
     @Test
     @DisplayName("Консультация - в состоянии draftOnlineMastersConsultation")
     void draftOnlineMastersConsultation(@WithClient(houses = {@WithHouse}) User client) {
         StateConsultation state = StateConsultation.DRAFT_ONLINE_MASTERS;
-        Role role = Role.CLIENT;
+        UserRole userRole = UserRole.CLIENT;
 
         PreconditionConsultation preconditionConsultation = new PreconditionConsultation();
         PreconditionConsultation.Result result = preconditionConsultation.applyPrecondition(client, state);
@@ -56,13 +56,13 @@ public class DraftOnlineMastersConsultationTest extends BaseWebTest {
         CommonFieldsDto commonFields = result.getCommonFieldsResult();
 //        ----------------------------  UI  --------------------------------
         step("WEB: авторизация Ролей ", () -> {
-            step(role + " авторизация", () -> {
+            step(userRole + " авторизация", () -> {
                 clientPages.getLoginPage().open();
                 clientPages.getLoginPage().login(String.valueOf(commonFields.getClientPhone()), "1234");
                 clientPages.getHomePage().checkUrl();
 
             });
-            step(role + " test run credentials ", () -> {
+            step(userRole + " test run credentials ", () -> {
                 Allure.addAttachment("Client creds", commonFields.getClientPhone() + ": " + "1234" + "/");
                 Allure.addAttachment("Master creds", commonFields.getMasterEmail() + "/" + "1234");
                 String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
@@ -71,28 +71,28 @@ public class DraftOnlineMastersConsultationTest extends BaseWebTest {
             });
         });
 
-        step(role + " кабинет в состоянии - в состоянии " + state, () -> {
+        step(userRole + " кабинет в состоянии - в состоянии " + state, () -> {
 
             Consumer<SoftAssert> case1 = softAssert -> {
-                step(role + " карточка последнего заказа - в состоянии " + state, () -> {
-                    clientPages.getHomePage().lastOrderComponent.checkState(state, stateInfo.getLastOrderInfoDto());
+                step(userRole + " карточка последнего заказа - в состоянии " + state, () -> {
+                    clientPages.getHomePage().lastOrderComponent.checkState(clientPages.getDriverManager(), state, stateInfo.getLastOrderInfoDto());
                 });
             };
 
             Consumer<SoftAssert> case2 = softAssert -> {
-                step(role + " компонент баннер ВК в лк - в состоянии " + state, () -> {
+                step(userRole + " компонент баннер ВК в лк - в состоянии " + state, () -> {
                     clientPages.getHomePage().consultationNotification.checkState(state);
                 });
             };
 
             Consumer<SoftAssert> case3 = softAssert -> {
-                step(role + " кнопка на дом стр Заполнить профиль - в состоянии " + state, () -> {
+                step(userRole + " кнопка на дом стр Заполнить профиль - в состоянии " + state, () -> {
                     clientPages.getHomePage().checkFillProfileButton();
                 });
             };
 
             Consumer<SoftAssert> case4 = softAssert -> {
-                step(role + " карточка заказа - в состоянии " + state, () -> {
+                step(userRole + " карточка заказа - в состоянии " + state, () -> {
                     clientPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderId()));
                     clientPages.getOrderCardPage().checkFinishLoading();
                     clientPages.getOrderCardPage().checkStateConsultation(state, stateInfo.getOrdersIdResponseDto());
@@ -100,7 +100,7 @@ public class DraftOnlineMastersConsultationTest extends BaseWebTest {
             };
 
             Consumer<SoftAssert> case5 = softAssert -> {
-                step(role + " уведомления - в состоянии " + state, () -> {
+                step(userRole + " уведомления - в состоянии " + state, () -> {
                     clientPages.getHomePage().open();
                     clientPages.getHomePage().checkFinishLoading();
                     Selenide.sleep(3000);
@@ -111,14 +111,14 @@ public class DraftOnlineMastersConsultationTest extends BaseWebTest {
             };
 
             Consumer<SoftAssert> case6 = softAssert -> {
-                step(role + " красное уведомление в лк - в состоянии " + state, () -> {
+                step(userRole + " красное уведомление в лк - в состоянии " + state, () -> {
                     clientPages.getHomePage().open();
                     clientPages.getHomePage().checkFinishLoading();
                     clientPages.getHomePage().redNotice.noNotice();
                 });
             };
 //            Consumer<SoftAssert> case7 = softAssert -> {
-//                step(role + "  стр лендинга - в состоянии " + state, () -> {
+//                step(userRole + "  стр лендинга - в состоянии " + state, () -> {
 //                    clientPages.getHomePage().open();
 //                    clientPages.getHomePage().checkFinishLoading();
 //                    clientPages.getHomePage().header.clickLogo();

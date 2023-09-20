@@ -64,7 +64,7 @@ import ru.gasworkers.dev.api.users.notification.NotificationsApi;
 import ru.gasworkers.dev.api.users.notification.NotificationsResponseDto;
 import ru.gasworkers.dev.api.users.profile.UserSettingsApi;
 import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.model.Role;
+import ru.gasworkers.dev.model.UserRole;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 import ru.gasworkers.dev.tests.api.story.repair.RepairTestCase;
@@ -164,13 +164,13 @@ public class PreconditionConsultation extends BaseApiTest {
     }
 
     private void applyDraftConsultationPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
-        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.DRAFT_ONLINE_MASTERS, () -> {
+        step("API: предусловие - " + UserRole.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.DRAFT_ONLINE_MASTERS, () -> {
 
             commonFields.setTokenClient(loginApi.getTokenPhone(client));
             commonFields.setClientObjectId(clientHousesApi.houseId(client, commonFields.getTokenClient()));
             commonFields.setClientPhone(Long.valueOf(client.getPhone()));
 
-            step(Role.CLIENT + "  add equipment", () -> {
+            step(UserRole.CLIENT + "  add equipment", () -> {
                 addEquipmentApi.addEquipment(AddEquipmentRequestDto.defaultBoilerEquipment(), commonFields.getClientObjectId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(AddEquipmentResponseDto.class);
@@ -200,7 +200,7 @@ public class PreconditionConsultation extends BaseApiTest {
             System.out.println("firstEquipmentId = " + firstEquipmentId);
             System.out.println("actualObjectId = " + commonFields.getClientObjectId());
 
-            step(Role.CLIENT + "  select object for order", () -> {
+            step(UserRole.CLIENT + "  select object for order", () -> {
                 selectHouseApi.selectObject(SelectHouseRequestDto.builder()
                                 .clientObjectId(commonFields.getClientObjectId())
                                 .orderId(commonFields.getOrderId())
@@ -209,7 +209,7 @@ public class PreconditionConsultation extends BaseApiTest {
                         .statusCode(200)
                         .extract().as(SelectHouseResponseDto.class);
             });
-            List<Integer> masterIdList = step(Role.CLIENT + "  get online masters", () -> {
+            List<Integer> masterIdList = step(UserRole.CLIENT + "  get online masters", () -> {
                 String responseString = onlineMastersApi.getOnlineMasters(OnlineMastersRequestDto.builder()
                                 .orderId(commonFields.getOrderId())
                                 .search("rating")
@@ -233,8 +233,8 @@ public class PreconditionConsultation extends BaseApiTest {
 
     private void applyClientWaitMasterPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
         applyDraftConsultationPrecondition(stateConsultation, client, commonFields);
-        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.CLIENT_WAIT_MASTER, () -> {
-            Integer timetableId = step(Role.CLIENT + " pick master", () -> {
+        step("API: предусловие - " + UserRole.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.CLIENT_WAIT_MASTER, () -> {
+            Integer timetableId = step(UserRole.CLIENT + " pick master", () -> {
                 return selectConsultationMasterApi.selectMaster(PickMasterRequestDto.builder()
                                         .orderId(commonFields.getOrderId())
                                         .online(true)
@@ -243,7 +243,7 @@ public class PreconditionConsultation extends BaseApiTest {
                         .statusCode(200)
                         .extract().as(PickMasterResponseDto.class).getData().getTimetableId();
             });
-            step(Role.CLIENT + "  apply master", () -> {
+            step(UserRole.CLIENT + "  apply master", () -> {
                 commonFields.setReceipts0Id(applyMasterApi.applyMaster(ApplyMasterRequestDto.builder()
                                         .orderId(commonFields.getOrderId())
                                         .timetableId(timetableId)
@@ -263,7 +263,7 @@ public class PreconditionConsultation extends BaseApiTest {
                         .statusCode(200)
                         .extract().as(SelectPaymentResponseDto.class);
             });
-            step(Role.ADMIN + " get master credentials", () -> {
+            step(UserRole.ADMIN + " get master credentials", () -> {
                 commonFields.setTokenAdmin(loginApi.login(LoginRequestDto.asAdmin())
                         .statusCode(200)
                         .extract().as(LoginResponseDto.class).getData().getToken());
@@ -276,11 +276,11 @@ public class PreconditionConsultation extends BaseApiTest {
 
     private void applyMasterStartConsultationPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
         applyClientWaitMasterPrecondition(stateConsultation, client, commonFields);
-        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.MASTER_START_CONSULTATION, () -> {
-            step(Role.MASTER + " авторизуется", () -> {
+        step("API: предусловие - " + UserRole.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.MASTER_START_CONSULTATION, () -> {
+            step(UserRole.MASTER + " авторизуется", () -> {
                 commonFields.setTokenMaster(loginApi.getUserToken(LoginRequestDto.asUserEmail(commonFields.getMasterEmail(), "1234")));
             });
-            step(Role.MASTER + " начинает ВК", () -> {
+            step(UserRole.MASTER + " начинает ВК", () -> {
                 System.out.println("codeByOrder masterStartConsultation");
                 CodeByOrderConsultationResponse actualResponse = codeByOrderConsultationApi.codeByOrder(CodeByOrderConsultationRequest.builder()
                                 .orderId(commonFields.getOrderId())
@@ -293,8 +293,8 @@ public class PreconditionConsultation extends BaseApiTest {
 
     private void applyClientJoinConsultationPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
         applyMasterStartConsultationPrecondition(stateConsultation, client, commonFields);
-        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.CLIENT_JOIN_CONSULTATION, () -> {
-            step(Role.CLIENT + " присоединяется к  ВК", () -> {
+        step("API: предусловие - " + UserRole.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.CLIENT_JOIN_CONSULTATION, () -> {
+            step(UserRole.CLIENT + " присоединяется к  ВК", () -> {
                 System.out.println("codeByOrder clientJoinConsultation");
                 CodeByOrderConsultationResponse actualResponse = codeByOrderConsultationApi.codeByOrder(CodeByOrderConsultationRequest.builder()
                                 .orderId(commonFields.getOrderId())
@@ -307,8 +307,8 @@ public class PreconditionConsultation extends BaseApiTest {
 
     private void applyMasterCompleteConclusionPrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
         applyClientJoinConsultationPrecondition(stateConsultation, client, commonFields);
-        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.MASTER_COMPLETE_CONSULTATION, () -> {
-            step(Role.MASTER + " завершает ВК", () -> {
+        step("API: предусловие - " + UserRole.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.MASTER_COMPLETE_CONSULTATION, () -> {
+            step(UserRole.MASTER + " завершает ВК", () -> {
                 // Wait for 3 seconds  for starting record on  backend
                 try {
                     Thread.sleep(3000);
@@ -327,8 +327,8 @@ public class PreconditionConsultation extends BaseApiTest {
 
     private void applyMasterFilledResumePrecondition(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
         applyMasterCompleteConclusionPrecondition(stateConsultation, client, commonFields);
-        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.MASTER_FILLED_RESUME, () -> {
-            step(Role.MASTER + " заполняет резюме", () -> {
+        step("API: предусловие - " + UserRole.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.MASTER_FILLED_RESUME, () -> {
+            step(UserRole.MASTER + " заполняет резюме", () -> {
                 System.out.println("resumeConsultation");
                 resumeConsultationApi.resume(ResumeConsultationRequest.builder()
                                 .orderId(String.valueOf(commonFields.getOrderId()))
@@ -341,14 +341,14 @@ public class PreconditionConsultation extends BaseApiTest {
 
     private void applyOrderCompletedPreconditionUser(StateConsultation stateConsultation, User client, CommonFieldsDto commonFields) {
         applyMasterFilledResumePrecondition(stateConsultation, client, commonFields);
-        step("API: предусловие - " + Role.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.ORDER_COMPLETED, () -> {
+        step("API: предусловие - " + UserRole.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.ORDER_COMPLETED, () -> {
 
         });
     }
 
     private LastOrderInfoResponseDto getLastOrderInfoDto(CommonFieldsDto commonFields, StateConsultation state) {
         System.out.println(state + ": LastOrderInfo");
-        return step("API: " + Role.CLIENT + " карточка последнего заказа - в состоянии " + state, () -> {
+        return step("API: " + UserRole.CLIENT + " карточка последнего заказа - в состоянии " + state, () -> {
             return lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                     .statusCode(200)
                     .extract().as(LastOrderInfoResponseDto.class);
@@ -357,7 +357,7 @@ public class PreconditionConsultation extends BaseApiTest {
 
     private OrdersIdResponseDto getOrdersIdDto(CommonFieldsDto commonFields, StateConsultation state) {
         System.out.println(state + ": OrdersId");
-        return step("API: " + Role.CLIENT + " карточка заказа - в состоянии " + state, () -> {
+        return step("API: " + UserRole.CLIENT + " карточка заказа - в состоянии " + state, () -> {
             return ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
                     .statusCode(200)
                     .extract().as(OrdersIdResponseDto.class);
@@ -366,7 +366,7 @@ public class PreconditionConsultation extends BaseApiTest {
 
     private NotificationsResponseDto getNotificationsDto(CommonFieldsDto commonFields, StateConsultation state) {
         System.out.println(state + ": Notifications");
-        return step("API: " + Role.CLIENT + " уведомления - в состоянии " + state, () -> {
+        return step("API: " + UserRole.CLIENT + " уведомления - в состоянии " + state, () -> {
             return notificationsApi.getNotifications(commonFields.getTokenClient())
                     .statusCode(200)
                     .extract().as(NotificationsResponseDto.class);

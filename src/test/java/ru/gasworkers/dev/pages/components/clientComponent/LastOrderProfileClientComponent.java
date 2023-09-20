@@ -2,6 +2,7 @@ package ru.gasworkers.dev.pages.components.clientComponent;
 
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
+import ru.gasworkers.dev.helpers.DriverManager;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.UrlCheckerSharedComponent;
@@ -148,14 +149,16 @@ public class LastOrderProfileClientComponent extends BaseComponent {
         });
     }
 
-    public void checkState(StateRepair state, LastOrderInfoResponseDto currentLastOrderInfoDto) {
+    public void checkState(DriverManager driverManager, StateRepair state, LastOrderInfoResponseDto currentLastOrderInfoDto) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
+            driverManager.screenshot("компонент карточки последнего заказа в состоянии " + state);
             state.checkLastOrderComponent(this, currentLastOrderInfoDto);
         });
     }
 
-    public void checkState(StateConsultation state, LastOrderInfoResponseDto currentLastOrderInfoDto) {
+    public void checkState(DriverManager driverManager, StateConsultation state, LastOrderInfoResponseDto currentLastOrderInfoDto) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
+            driverManager.screenshot("компонент карточки последнего заказа в состоянии " + state);
             state.checkLastOrderComponent(this, currentLastOrderInfoDto);
         });
     }

@@ -3,7 +3,7 @@ package ru.gasworkers.dev.tests.web;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.extension.browser.Browser;
-import ru.gasworkers.dev.model.Role;
+import ru.gasworkers.dev.model.UserRole;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.BaseTest;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.function.Consumer;
 
 public class SampleSoftAssertWebTest extends BaseTest {
-    @Browser(role = Role.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
+    @Browser(role = UserRole.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
     RandomClient randomClient = new RandomClient();
 

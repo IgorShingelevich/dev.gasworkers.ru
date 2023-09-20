@@ -13,7 +13,7 @@ import ru.gasworkers.dev.pages.sharedPages.LandingPage;
 import ru.gasworkers.dev.pages.sharedPages.conference.ConferenceQrPage;
 import ru.gasworkers.dev.pages.sharedPages.conference.ConferenceSharedPage;
 
-import static ru.gasworkers.dev.model.Role.CLIENT;
+import static ru.gasworkers.dev.model.UserRole.CLIENT;
 
 @Getter
 public final class ClientPages extends BaseRolePages {

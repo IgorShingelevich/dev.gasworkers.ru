@@ -9,8 +9,6 @@ import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.Dispa
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.$$;
 
 public class SelectMasterDispatcherPage extends BaseDispatcherPage {
 
@@ -49,7 +47,7 @@ public class SelectMasterDispatcherPage extends BaseDispatcherPage {
 //                    .ancestor("div .name")
         Integer masterNumericalOrder = selectNewMasterByIndex + 1;
         stepWithRole("Выбрать:" + masterNumericalOrder + "-го свободного мастера: " + masterName, () -> {
-            //how to warp up with  stepWith role the whole medhod with the description?
+            //how to warp up with  stepWith userRole the whole medhod with the description?
             System.out.println("selectedAvailableMasterByIndex: "+ selectNewMasterByIndex + " name: " + masterName);
 
         });
@@ -62,7 +60,7 @@ public class SelectMasterDispatcherPage extends BaseDispatcherPage {
 //                    .ancestor("div .name")
             Integer masterNumericalOrder = availableMasterIndex + 1;
         stepWithRole("Выбрать:" + masterNumericalOrder + "-го свободного мастера: " + masterName, () -> {
-            //how to warp up with  stepWith role the whole medhod with the description?
+            //how to warp up with  stepWith userRole the whole medhod with the description?
             System.out.println("selectedAvailableMasterByIndex: "+ availableMasterIndex + " name: " + masterName);
 
         });

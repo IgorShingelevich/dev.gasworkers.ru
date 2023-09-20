@@ -124,6 +124,12 @@ task apiTest(type: Test) {
     }
 }
 
+task apiRegistrationTest(type: Test) {
+    useJUnitPlatform {
+        includeTags "api&registration"
+    }
+}
+
 task webTest(type: Test) {
     useJUnitPlatform {
         includeTags "web"
@@ -141,18 +147,18 @@ task webRepairClientTest(type: Test) {
         includeTags "web-repair&client"
     }
 }
-//
-//task webRepairDispatcherTest(type: Test) {
-//    useJUnitPlatform {
-//        includePattern ".*web-repair.*dispatcher.*"
-//    }
-//}
-//
-//task webRepairMasterTest(type: Test) {
-//    useJUnitPlatform {
-//        includePattern ".*web-repair.*master.*"
-//    }
-//}
+
+task webRepairDispatcherTest(type: Test) {
+    useJUnitPlatform {
+        includeTags "web-repair&dispatcher"
+    }
+}
+
+task webRepairMasterTest(type: Test) {
+    useJUnitPlatform {
+        includeTags "web-repair&master"
+    }
+}
 
 
 task webRegistrationTest(type: Test) {

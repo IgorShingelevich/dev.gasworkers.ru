@@ -119,7 +119,7 @@ public class LandingPage extends BasePage {
     }
 
     public void checkStateConsultation(StateConsultation state) {
-        step(role + "  - в состоянии " + state, () -> {
+        step(userRole + "  - в состоянии " + state, () -> {
             noticeComponent.checkStateConsultation(state);
             switch (state) {
                 case DRAFT_ONLINE_MASTERS:

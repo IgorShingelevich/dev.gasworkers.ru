@@ -7,6 +7,7 @@ import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.model.Doc;
 import ru.gasworkers.dev.model.OrderStatus;
 import ru.gasworkers.dev.model.ServiceType;
+import ru.gasworkers.dev.model.UserRole;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.clientComponent.OffersCounterClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
@@ -42,7 +43,7 @@ public class OrderCardClientPage extends BaseClientPage {
             COMPLETE_ORDER_INFO = "Договор техобслуживания ВДГО необходимо предоставить в вашу газораспределительную компанию. Оставьте отзыв на работу мастера и вы сможете передать договор в вашу газораспределительную компанию",
             SUBMIT_AGREEMENT_SUBTITLE = "Кнопка «передать договор» в газораспределительную компанию будет активна после размещения отзыва";
     SelenideElement
-            titleNumberLocator = driver.$("h1.h3.mb-2").as(" Заголовок Карточки заказа"),
+            titleCardNumberLocator = driver.$("h1.h3.mb-2").as(" Заголовок Карточки заказа"),
             completeOrderInfoBannerLocator = driver.$(".hint-box p").as("Баннер с информацией о завершении заказа"),
             submitAgreementSubtitleLocator = driver.$("div p.text-secondary").as("Пояснение кнопки Передать Договор"),
             orderDetailsBlockLocator = driver.$("div.order-details").as("Блок с информацией о заказе"),
@@ -78,10 +79,10 @@ public class OrderCardClientPage extends BaseClientPage {
 
     public void checkFinishLoading() {
         checkUrl();
-        titleNumberLocator.shouldBe(visible);
-        String orderNumber = titleNumberLocator.getText().substring(ORDER_CARD_TITLE.length());
+        titleCardNumberLocator.shouldBe(visible);
+        String orderNumber = titleCardNumberLocator.getText().substring(ORDER_CARD_TITLE.length());
         stepWithRole("Убедиться, что Карточка Заказа: " + orderNumber + " загружена", () -> {
-            titleNumberLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(ORDER_CARD_TITLE));
+            titleCardNumberLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(ORDER_CARD_TITLE));
             orderDetailsBlockLocator.shouldBe(visible, Duration.ofSeconds(20));
         });
     }
@@ -164,7 +165,7 @@ public class OrderCardClientPage extends BaseClientPage {
     }
 
     public String getOrderNumber() {
-        return titleNumberLocator.getText().substring(titleNumberLocator.getText().length() - 4);
+        return titleCardNumberLocator.getText().substring(titleCardNumberLocator.getText().length() - 4);
     }
 
     public String getTitleNumber() {
@@ -251,25 +252,25 @@ public class OrderCardClientPage extends BaseClientPage {
 
     public void checkTitle() {
         stepWithRole("Убедиться, что заголовок Карточки заказа отображается", () -> {
-            titleNumberLocator.shouldBe(visible).shouldHave(text(ORDER_CARD_TITLE));
+            titleCardNumberLocator.shouldBe(visible).shouldHave(text(ORDER_CARD_TITLE));
         });
     }
 
     public void checkOrderNumber(String expectedOrderNumber) {
         stepWithRole("Убедиться, что номер заказа " + expectedOrderNumber + " соответствует ожидаемому", () -> {
-            titleNumberLocator.shouldHave(partialText(expectedOrderNumber));
+            titleCardNumberLocator.shouldHave(partialText(expectedOrderNumber));
         });
     }
 
-    public void checkStateRepair(StateRepair state, OrdersIdResponseDto dto) {
+    public void checkStateRepair(UserRole role, StateRepair state, OrdersIdResponseDto dto) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
             checkOrderNumber(dto.getData().getNumber());
             consultationNotification.noNoticeConsultationComponent();
             nav.noChecklistTab();
             nav.common();
-            state.checkCommonTab(this.commonTab, dto);
+            state.checkCommonTab(role, this.commonTab, dto);
             nav.infoMaster();
-            state.checkInfoMasterTab(this.infoMasterTab, dto);
+            state.checkInfoMasterTab(role, this.infoMasterTab, dto);
             switch (state) {
                 case CANCEL_CLIENT_PUBLISHED:
                 case CANCEL_CLIENT_HAS_OFFER:
@@ -278,7 +279,7 @@ public class OrderCardClientPage extends BaseClientPage {
                     break;
                 default:
                     nav.docs();
-                    state.checkDocsTab(this.docsTab, dto);
+                    state.checkDocsTab(role, this.docsTab, dto);
             }
         });
     }

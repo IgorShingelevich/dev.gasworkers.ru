@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent;
 import com.codeborne.selenide.SelenideDriver;
 import com.codeborne.selenide.SelenideElement;
 import lombok.AllArgsConstructor;
+import ru.gasworkers.dev.model.UserRole;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.StateConsultation;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
@@ -27,78 +28,78 @@ public class SharedButtonsOrderCardComponent extends BaseOrderCardComponent {
             switch (stateConsultation) {
                 case DRAFT_ONLINE_MASTERS:
                     notVisibleButtons = List.of(
-                            CREATE_CONCLUSION,
-                            START_CONSULTATION,
-                            SHOW_ON_MAP,
-                            SELECT_NEW_COMPANY,
-                            RETURN_TO_WORK,
-                            PAY_INVOICE,
-                            SIGN_ACT,
-                            MAKE_REVIEW);
+                            CLIENT_CREATE_CONCLUSION,
+                            CLIENT_START_CONSULTATION,
+                            CLIENT_SHOW_ON_MAP,
+                            CLIENT_SELECT_NEW_COMPANY,
+                            CLIENT_RETURN_TO_WORK,
+                            CLIENT_PAY_INVOICE,
+                            CLIENT_SIGN_ACT,
+                            CLIENT_MAKE_REVIEW);
                     visibleButtons = List.of(
-                            CANCEL_ORDER,
-                            SELECT_MASTER_CONSULTATION
+                            CLIENT_CANCEL_ORDER,
+                            CLIENT_SELECT_MASTER_CONSULTATION
                     );
                     break;
                 case CLIENT_WAIT_MASTER:
                     notVisibleButtons = List.of(
-                            CREATE_CONCLUSION,
-                            START_CONSULTATION,
-                            SHOW_ON_MAP,
-                            SELECT_NEW_COMPANY,
-                            SELECT_MASTER_CONSULTATION,
-                            RETURN_TO_WORK,
-                            PAY_INVOICE,
-                            SIGN_ACT,
-                            MAKE_REVIEW);
-                    visibleButtons = List.of(CANCEL_ORDER);
+                            CLIENT_CREATE_CONCLUSION,
+                            CLIENT_START_CONSULTATION,
+                            CLIENT_SHOW_ON_MAP,
+                            CLIENT_SELECT_NEW_COMPANY,
+                            CLIENT_SELECT_MASTER_CONSULTATION,
+                            CLIENT_RETURN_TO_WORK,
+                            CLIENT_PAY_INVOICE,
+                            CLIENT_SIGN_ACT,
+                            CLIENT_MAKE_REVIEW);
+                    visibleButtons = List.of(CLIENT_CANCEL_ORDER);
                     break;
                 case MASTER_START_CONSULTATION:
                 case CLIENT_JOIN_CONSULTATION:
                     notVisibleButtons = List.of(
-                            CREATE_CONCLUSION,
-                            CANCEL_ORDER,
-                            SHOW_ON_MAP,
-                            SELECT_MASTER_CONSULTATION,
-                            SELECT_NEW_COMPANY,
-                            RETURN_TO_WORK,
-                            PAY_INVOICE,
-                            SIGN_ACT,
-                            MAKE_REVIEW);
+                            CLIENT_CREATE_CONCLUSION,
+                            CLIENT_CANCEL_ORDER,
+                            CLIENT_SHOW_ON_MAP,
+                            CLIENT_SELECT_MASTER_CONSULTATION,
+                            CLIENT_SELECT_NEW_COMPANY,
+                            CLIENT_RETURN_TO_WORK,
+                            CLIENT_PAY_INVOICE,
+                            CLIENT_SIGN_ACT,
+                            CLIENT_MAKE_REVIEW);
                     visibleButtons = List.of(
-                            START_CONSULTATION
+                            CLIENT_START_CONSULTATION
                     );
                     break;
                 case MASTER_COMPLETE_CONSULTATION:
                     notVisibleButtons = List.of(
-                            CREATE_CONCLUSION,
-                            RETURN_TO_WORK,
-                            START_CONSULTATION,
-                            SHOW_ON_MAP,
-                            SELECT_MASTER_CONSULTATION,
-                            SELECT_NEW_COMPANY,
-                            CANCEL_ORDER,
-                            PAY_INVOICE,
-                            SIGN_ACT,
-                            MAKE_REVIEW
+                            CLIENT_CREATE_CONCLUSION,
+                            CLIENT_RETURN_TO_WORK,
+                            CLIENT_START_CONSULTATION,
+                            CLIENT_SHOW_ON_MAP,
+                            CLIENT_SELECT_MASTER_CONSULTATION,
+                            CLIENT_SELECT_NEW_COMPANY,
+                            CLIENT_CANCEL_ORDER,
+                            CLIENT_PAY_INVOICE,
+                            CLIENT_SIGN_ACT,
+                            CLIENT_MAKE_REVIEW
                     );
                     visibleButtons = List.of();
                     break;
                 case MASTER_FILLED_RESUME:
                 case ORDER_COMPLETED:
                     notVisibleButtons = List.of(
-                            CREATE_CONCLUSION,
-                            RETURN_TO_WORK,
-                            START_CONSULTATION,
-                            SHOW_ON_MAP,
-                            SELECT_MASTER_CONSULTATION,
-                            SELECT_NEW_COMPANY,
-                            CANCEL_ORDER,
-                            PAY_INVOICE,
-                            SIGN_ACT
+                            CLIENT_CREATE_CONCLUSION,
+                            CLIENT_RETURN_TO_WORK,
+                            CLIENT_START_CONSULTATION,
+                            CLIENT_SHOW_ON_MAP,
+                            CLIENT_SELECT_MASTER_CONSULTATION,
+                            CLIENT_SELECT_NEW_COMPANY,
+                            CLIENT_CANCEL_ORDER,
+                            CLIENT_PAY_INVOICE,
+                            CLIENT_SIGN_ACT
                     );
                     visibleButtons = List.of(
-                            MAKE_REVIEW
+                            CLIENT_MAKE_REVIEW
                     );
                     break;
                 default:
@@ -110,67 +111,144 @@ public class SharedButtonsOrderCardComponent extends BaseOrderCardComponent {
     }
 
 
-    public void checkStateRepair(StateRepair stateRepair) {
+    public void checkStateRepair(UserRole userRole, StateRepair stateRepair) {
         step("Проверить набор кнопок в состоянии " + stateRepair, () -> {
+
             List<Button> visibleButtons;
             List<Button> notVisibleButtons;
-            switch (stateRepair) {
-                case PUBLISHED:
-                case HAS_OFFER:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, START_CONSULTATION, SELECT_MASTER_CONSULTATION, SELECT_NEW_COMPANY, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
-                    visibleButtons = List.of(SHOW_ON_MAP, CANCEL_ORDER);
+            switch (userRole) {
+                case CLIENT:
+                    checkNoDispatcherButtons();
+                    switch (stateRepair) {
+                        case PUBLISHED:
+                        case HAS_OFFER:
+                            notVisibleButtons = List.of(CLIENT_CREATE_CONCLUSION, CLIENT_START_CONSULTATION, CLIENT_SELECT_MASTER_CONSULTATION, CLIENT_SELECT_NEW_COMPANY, CLIENT_RETURN_TO_WORK, CLIENT_PAY_INVOICE, CLIENT_SIGN_ACT, CLIENT_MAKE_REVIEW);
+                            visibleButtons = List.of(CLIENT_SHOW_ON_MAP, CLIENT_CANCEL_ORDER);
+                            break;
+                        case CANCEL_CLIENT_PUBLISHED:
+                        case CANCEL_CLIENT_HAS_OFFER:
+                        case CANCEL_DISPATCHER_HAS_OFFER:
+                            notVisibleButtons = List.of(
+                                    CLIENT_CREATE_CONCLUSION,
+                                    CLIENT_START_CONSULTATION,
+                                    CLIENT_SELECT_MASTER_CONSULTATION,
+                                    CLIENT_SHOW_ON_MAP,
+                                    CLIENT_SELECT_NEW_COMPANY,
+                                    CLIENT_RETURN_TO_WORK,
+                                    CLIENT_PAY_INVOICE,
+                                    CLIENT_SIGN_ACT,
+                                    CLIENT_MAKE_REVIEW,
+                                    CLIENT_CANCEL_ORDER);
+                            visibleButtons = List.of();
+                            break;
+                        case SCHEDULE_DATE:
+                            notVisibleButtons = List.of(CLIENT_CREATE_CONCLUSION, CLIENT_SELECT_MASTER_CONSULTATION, CLIENT_START_CONSULTATION, CLIENT_SHOW_ON_MAP, CLIENT_RETURN_TO_WORK, CLIENT_PAY_INVOICE, CLIENT_SIGN_ACT, CLIENT_MAKE_REVIEW);
+                            visibleButtons = List.of(CLIENT_CANCEL_ORDER, CLIENT_SELECT_NEW_COMPANY);
+                            break;
+                        case WAIT_MASTER:
+                            notVisibleButtons = List.of(CLIENT_CREATE_CONCLUSION, CLIENT_SELECT_MASTER_CONSULTATION, CLIENT_START_CONSULTATION, CLIENT_SHOW_ON_MAP, CLIENT_SELECT_NEW_COMPANY, CLIENT_RETURN_TO_WORK, CLIENT_PAY_INVOICE, CLIENT_SIGN_ACT, CLIENT_MAKE_REVIEW);
+                            visibleButtons = List.of(CLIENT_CANCEL_ORDER);
+                            break;
+                        case MASTER_START_WORK:
+                        case MATERIAL_INVOICE_PAID:
+                            notVisibleButtons = List.of(CLIENT_CREATE_CONCLUSION, CLIENT_SELECT_MASTER_CONSULTATION, CLIENT_START_CONSULTATION, CLIENT_SHOW_ON_MAP, CLIENT_SELECT_NEW_COMPANY, CLIENT_CANCEL_ORDER, CLIENT_PAY_INVOICE, CLIENT_SIGN_ACT, CLIENT_MAKE_REVIEW);
+                            visibleButtons = List.of(CLIENT_RETURN_TO_WORK);
+                            break;
+                        case MATERIAL_INVOICE_ISSUED:
+                        case ACTIONS_INVOICE_ISSUED:
+                            notVisibleButtons = List.of(CLIENT_CREATE_CONCLUSION, CLIENT_SELECT_MASTER_CONSULTATION, CLIENT_START_CONSULTATION, CLIENT_SHOW_ON_MAP, CLIENT_SELECT_NEW_COMPANY, CLIENT_CANCEL_ORDER, CLIENT_SIGN_ACT, CLIENT_MAKE_REVIEW);
+                            visibleButtons = List.of(CLIENT_RETURN_TO_WORK, CLIENT_PAY_INVOICE);
+                            break;
+                        case ACTIONS_INVOICE_PAID:
+                            notVisibleButtons = List.of(CLIENT_CREATE_CONCLUSION, CLIENT_SELECT_MASTER_CONSULTATION, CLIENT_START_CONSULTATION, CLIENT_SHOW_ON_MAP, CLIENT_SELECT_NEW_COMPANY, CLIENT_PAY_INVOICE, CLIENT_CANCEL_ORDER, CLIENT_SIGN_ACT, CLIENT_MAKE_REVIEW, CLIENT_START_CONSULTATION);
+                            visibleButtons = List.of(CLIENT_RETURN_TO_WORK);
+                            break;
+                        case MASTER_SIGN_ACT:
+                            notVisibleButtons = List.of(CLIENT_CREATE_CONCLUSION, CLIENT_SELECT_MASTER_CONSULTATION, CLIENT_START_CONSULTATION, CLIENT_SHOW_ON_MAP, CLIENT_SELECT_NEW_COMPANY, CLIENT_CANCEL_ORDER, CLIENT_PAY_INVOICE, CLIENT_MAKE_REVIEW);
+                            visibleButtons = List.of(CLIENT_RETURN_TO_WORK, CLIENT_SIGN_ACT);
+                            break;
+                        case CLIENT_SIGN_ACT:
+                            notVisibleButtons = List.of(CLIENT_CREATE_CONCLUSION, CLIENT_SELECT_MASTER_CONSULTATION, CLIENT_START_CONSULTATION, CLIENT_SHOW_ON_MAP, CLIENT_SELECT_NEW_COMPANY, CLIENT_CANCEL_ORDER, CLIENT_PAY_INVOICE, CLIENT_SIGN_ACT, CLIENT_RETURN_TO_WORK);
+                            visibleButtons = List.of(CLIENT_MAKE_REVIEW);
+                            break;
+                        default:
+                            throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);
+                    }
                     break;
-                case CANCEL_CLIENT_PUBLISHED:
-                case CANCEL_CLIENT_HAS_OFFER:
-                case CANCEL_DISPATCHER_HAS_OFFER:
-                    notVisibleButtons = List.of(
-                            CREATE_CONCLUSION,
-                            START_CONSULTATION,
-                            SELECT_MASTER_CONSULTATION,
-                            SHOW_ON_MAP,
-                            SELECT_NEW_COMPANY,
-                            RETURN_TO_WORK,
-                            PAY_INVOICE,
-                            SIGN_ACT,
-                            MAKE_REVIEW,
-                            CANCEL_ORDER);
-                    visibleButtons = List.of();
-                    break;
-                case SCHEDULE_DATE:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, SELECT_MASTER_CONSULTATION, START_CONSULTATION, SHOW_ON_MAP, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
-                    visibleButtons = List.of(CANCEL_ORDER, SELECT_NEW_COMPANY);
-                    break;
-                case WAIT_MASTER:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, SELECT_MASTER_CONSULTATION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, RETURN_TO_WORK, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
-                    visibleButtons = List.of(CANCEL_ORDER);
-                    break;
-                case MASTER_START_WORK:
-                case MATERIAL_INVOICE_PAID:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, SELECT_MASTER_CONSULTATION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, SIGN_ACT, MAKE_REVIEW);
-                    visibleButtons = List.of(RETURN_TO_WORK);
-                    break;
-                case MATERIAL_INVOICE_ISSUED:
-                case ACTIONS_INVOICE_ISSUED:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, SELECT_MASTER_CONSULTATION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, SIGN_ACT, MAKE_REVIEW);
-                    visibleButtons = List.of(RETURN_TO_WORK, PAY_INVOICE);
-                    break;
-                case ACTIONS_INVOICE_PAID:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, SELECT_MASTER_CONSULTATION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, PAY_INVOICE, CANCEL_ORDER, SIGN_ACT, MAKE_REVIEW, START_CONSULTATION);
-                    visibleButtons = List.of(RETURN_TO_WORK);
-                    break;
-                case MASTER_SIGN_ACT:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, SELECT_MASTER_CONSULTATION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, MAKE_REVIEW);
-                    visibleButtons = List.of(RETURN_TO_WORK, SIGN_ACT);
-                    break;
-                case CLIENT_SIGN_ACT:
-                    notVisibleButtons = List.of(CREATE_CONCLUSION, SELECT_MASTER_CONSULTATION, START_CONSULTATION, SHOW_ON_MAP, SELECT_NEW_COMPANY, CANCEL_ORDER, PAY_INVOICE, SIGN_ACT, RETURN_TO_WORK);
-                    visibleButtons = List.of(MAKE_REVIEW);
-                    break;
+                case DISPATCHER: {
+                    checkNoClientButtons();
+                    switch (stateRepair) {
+                        case PUBLISHED:
+                            visibleButtons = List.of(DISPATCHER_SELECT_MASTER, DISPATCHER_REFUSE);
+                            notVisibleButtons = List.of(DISPATCHER_ALREADY_SELECTED_MASTER, DISPATCHER_ALREADY_REFUSED, DISPATCHER_CANCEL);
+                            break;
+                        case REFUSED_OFFER_DISPATCHER:
+                            visibleButtons = List.of(DISPATCHER_ALREADY_REFUSED);
+                            notVisibleButtons = List.of(DISPATCHER_SELECT_MASTER, DISPATCHER_ALREADY_SELECTED_MASTER, DISPATCHER_CANCEL, DISPATCHER_REFUSE);
+                            break;
+                        case HAS_OFFER:
+                            visibleButtons = List.of(DISPATCHER_ALREADY_SELECTED_MASTER);
+                            notVisibleButtons = List.of(DISPATCHER_SELECT_MASTER, DISPATCHER_ALREADY_REFUSED, DISPATCHER_CANCEL, DISPATCHER_REFUSE);
+                            break;
+
+                        case CANCEL_CLIENT_PUBLISHED:
+                        case CANCEL_CLIENT_HAS_OFFER:
+                        case CANCEL_DISPATCHER_HAS_OFFER:
+                            notVisibleButtons = List.of();
+                            visibleButtons = List.of();
+                            break;
+                        case SCHEDULE_DATE:
+                        case WAIT_MASTER:
+                        case MASTER_START_WORK:
+                        case MATERIAL_INVOICE_PAID:
+                        case MATERIAL_INVOICE_ISSUED:
+                        case ACTIONS_INVOICE_ISSUED:
+                        case ACTIONS_INVOICE_PAID:
+                        case MASTER_SIGN_ACT:
+                        case CLIENT_SIGN_ACT:
+                            notVisibleButtons = List.of();
+                            visibleButtons = List.of();
+                            break;
+                        default:
+                            throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);
+                    }
+                }
+                break;
                 default:
-                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);
+                    throw new IllegalArgumentException("Unexpected user role: " + userRole);
             }
             visibleButtons.forEach(this::checkButtonIsVisible);
             notVisibleButtons.forEach(this::checkButtonIsNotVisible);
+        });
+    }
+
+    public void checkNoDispatcherButtons() {
+        step("Проверить, что кнопки диспетчера отсутствуют", () -> {
+            List<Button> buttons = List.of(
+                    DISPATCHER_SELECT_MASTER,
+                    DISPATCHER_ALREADY_SELECTED_MASTER,
+                    DISPATCHER_REFUSE,
+                    DISPATCHER_ALREADY_REFUSED,
+                    DISPATCHER_CANCEL
+            );
+            buttons.forEach(this::checkButtonIsNotVisible);
+        });
+    }
+
+    public void checkNoClientButtons() {
+        step("Проверить, что кнопки клиента отсутствуют", () -> {
+            List<Button> buttons = List.of(
+                    CLIENT_CREATE_CONCLUSION,
+                    CLIENT_START_CONSULTATION,
+                    CLIENT_SHOW_ON_MAP,
+                    CLIENT_SELECT_NEW_COMPANY,
+                    CLIENT_SELECT_MASTER_CONSULTATION,
+                    CLIENT_RETURN_TO_WORK,
+                    CLIENT_PAY_INVOICE,
+                    CLIENT_SIGN_ACT,
+                    CLIENT_MAKE_REVIEW
+            );
+            buttons.forEach(this::checkButtonIsNotVisible);
         });
     }
 
@@ -194,20 +272,22 @@ public class SharedButtonsOrderCardComponent extends BaseOrderCardComponent {
 
     @AllArgsConstructor
     public enum Button {
-        SHOW_ON_MAP("Показать на карте"),
-        START_CONSULTATION("Начать консультацию"),
-        CANCEL_ORDER("Отменить заказ"),
-        SELECT_NEW_COMPANY("Выбрать новую компанию"),
-        SELECT_MASTER_CONSULTATION("Выберите мастера"),
-        PAY_INVOICE("Оплатить счет"),
-        RETURN_TO_WORK("Вернуть в работу"),
-        SIGN_ACT("Подписать акт"),
-        CREATE_CONCLUSION("Создать резюме"),
-        MAKE_REVIEW("Оставить отзыв"),
+        CLIENT_SHOW_ON_MAP("Показать на карте"),
+        CLIENT_START_CONSULTATION("Начать консультацию"),
+        CLIENT_CANCEL_ORDER("Отменить заказ"),
+        CLIENT_SELECT_NEW_COMPANY("Выбрать новую компанию"),
+        CLIENT_SELECT_MASTER_CONSULTATION("Выберите мастера"),
+        CLIENT_PAY_INVOICE("Оплатить счет"),
+        CLIENT_RETURN_TO_WORK("Вернуть в работу"),
+        CLIENT_SIGN_ACT("Подписать акт"),
+        CLIENT_CREATE_CONCLUSION("Создать резюме"),
+        CLIENT_MAKE_REVIEW("Оставить отзыв"),
 
         //dispatcher buttons
         DISPATCHER_SELECT_MASTER("Выбрать мастера"),
+        DISPATCHER_ALREADY_SELECTED_MASTER("Уже участвуете"), // only  disabled
         DISPATCHER_REFUSE("Отказаться"),
+        DISPATCHER_ALREADY_REFUSED("Отказались"),  // only  disabled
         DISPATCHER_CANCEL("Отменить"),
         DISPATCHER_SAVE("Сохранить");
 

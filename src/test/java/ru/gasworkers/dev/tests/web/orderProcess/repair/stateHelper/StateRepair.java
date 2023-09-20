@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
+import ru.gasworkers.dev.model.UserRole;
 import ru.gasworkers.dev.pages.client.SelectServicePageClientPage;
 import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.DocsTabOrderCardComponent;
@@ -17,6 +18,7 @@ public enum StateRepair {
     DRAFT("Черновик", null),
     PUBLISHED("Опубликован", " опубликован"),
     CANCEL_CLIENT_PUBLISHED("Заказ отменен", null),
+    REFUSED_OFFER_DISPATCHER("Диспетчер отклонил новый тендер", null),
     HAS_OFFER("Есть предложения", "Отклик на заявку"),
     CANCEL_CLIENT_HAS_OFFER("Заказ отменен", "Заказ отменен"),
     CANCEL_DISPATCHER_HAS_OFFER("Заказ отменен", "Заказ отменен"),
@@ -31,8 +33,8 @@ public enum StateRepair {
     CLIENT_SIGN_ACT("Клиент подписал акт", "Оставьте отзыв по заявке");
 
     public static final StateBuilder builder = new StateBuilder();
-    private final String state;
     public final String notification;
+    private final String state;
 
     public void checkLastOrderComponent(LastOrderProfileClientComponent component, LastOrderInfoResponseDto dto) {
         step("Проверка компонента Последний заказ", () -> {
@@ -92,13 +94,13 @@ public enum StateRepair {
     }
 
 
-    public void checkCommonTab(CommonTabOrderCardComponent tab, OrdersIdResponseDto dto) {
+    public void checkCommonTab(UserRole role, CommonTabOrderCardComponent tab, OrdersIdResponseDto dto) {
         step("Убедиться, что вкладка Описание заказа в состоянии " + this, () -> {
             StateBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-            tab.status.checkStateRepair(this, data, dto);
+            tab.status.checkStateRepair(role, this, data, dto);
             tab.details.detailsRepair(this, data);
             tab.suggestedMasterRepair.checkState(this, dto, 0);
-            tab.buttons.checkStateRepair(this);
+            tab.buttons.checkStateRepair(role, this);
             switch (this) {
                 case PUBLISHED:
                     // todo stepper
@@ -142,18 +144,28 @@ public enum StateRepair {
     }
 
 
-    public void checkInfoMasterTab(InfoMasterTabOrderCardClientComponent tab, OrdersIdResponseDto dto) {
+    public void checkInfoMasterTab(UserRole role, InfoMasterTabOrderCardClientComponent tab, OrdersIdResponseDto dto) {
         step("Убедиться, что вкладка Информация по работам в состоянии " + this, () -> {
             StateBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-            tab.status.checkStateRepair(this, data, dto);
+            tab.status.checkStateRepair(role, this, data, dto);
             tab.suggestedMasterCardRepair.checkState(this, dto, 0);
             tab.approvedMasterCard.checkStateRepair(this, data);
-            tab.buttons.checkStateRepair(this);
+            tab.buttons.checkStateRepair(role, this);
             switch (this) {
                 case PUBLISHED:
                 case HAS_OFFER:
-                    tab.checkNoInfoBox();
-                    tab.repairDetails.noTables();
+                    switch (role) {
+                        case CLIENT:
+                            tab.checkInfoNoExistNotification();
+                            tab.checkResumeConference("Ваш заказ опубликован. Мастера уже откликаются на него. Выберите мастера и согласуйте дату и время визита.");
+                            break;
+                        case DISPATCHER:
+                            tab.repairDetails.checkMaterialsPrice("0");
+                            tab.repairDetails.checkActionsPrice("0");
+                            break;
+                        default:
+                            throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
+                    }
                     break;
                 case CANCEL_CLIENT_PUBLISHED:
                 case CANCEL_CLIENT_HAS_OFFER:
@@ -193,11 +205,11 @@ public enum StateRepair {
         });
     }
 
-    public void checkDocsTab(DocsTabOrderCardComponent tab, OrdersIdResponseDto dto) {
+    public void checkDocsTab(UserRole role, DocsTabOrderCardComponent tab, OrdersIdResponseDto dto) {
         StateBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-        tab.status.checkStateRepair(this, data, dto);
+        tab.status.checkStateRepair(role, this, data, dto);
         tab.suggestedMastersRepair.checkState(this, dto, 0);
-        tab.buttons.checkStateRepair(this);
+        tab.buttons.checkStateRepair(role, this);
         step("Убедиться, что вкладка Документы в состоянии " + this, () -> {
             switch (this) {
                 case PUBLISHED:

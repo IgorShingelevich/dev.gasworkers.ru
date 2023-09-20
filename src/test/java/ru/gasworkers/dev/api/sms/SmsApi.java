@@ -1,6 +1,6 @@
 package ru.gasworkers.dev.api.sms;
 
-import ru.gasworkers.dev.model.Role;
+import ru.gasworkers.dev.model.UserRole;
 import ru.sms_activate.SMSActivateApi;
 import ru.sms_activate.error.base.SMSActivateBaseException;
 import ru.sms_activate.response.api_rent.extra.SMSActivateRentNumber;
@@ -8,7 +8,7 @@ import ru.sms_activate.response.api_rent.extra.SMSActivateSMS;
 
 import java.util.List;
 
-import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Selenide.sleep;
 
 public final class SmsApi {
 
@@ -31,8 +31,8 @@ public final class SmsApi {
         }
     }
 
-    public static SmsApi instance(Role role) {
-        return instance(role.getPhoneNumber());
+    public static SmsApi instance(UserRole userRole) {
+        return instance(userRole.getPhoneNumber());
     }
 
     private static final String API_KEY = "7424Adff2b7241e6b15e1cbdfdf25773";

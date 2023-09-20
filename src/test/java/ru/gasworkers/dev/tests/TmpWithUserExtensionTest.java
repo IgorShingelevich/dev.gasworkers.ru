@@ -6,7 +6,7 @@ import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.client.WithClient;
 import ru.gasworkers.dev.pages.context.ClientPages;
 
-import static ru.gasworkers.dev.model.Role.CLIENT;
+import static ru.gasworkers.dev.model.UserRole.CLIENT;
 
 public class TmpWithUserExtensionTest {
 

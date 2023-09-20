@@ -18,7 +18,7 @@ import ru.gasworkers.dev.utils.userBuilder.UserBuilder;
 import java.io.File;
 
 import static io.qameta.allure.Allure.step;
-import static ru.gasworkers.dev.model.Role.CLIENT;
+import static ru.gasworkers.dev.model.UserRole.CLIENT;
 @Disabled
 class ClientFlowTest extends BaseTest {
     @Browser(role = CLIENT)

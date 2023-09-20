@@ -2,21 +2,21 @@ package ru.gasworkers.dev.model.browser;
 
 import com.codeborne.selenide.SelenideDriver;
 import lombok.Getter;
-import ru.gasworkers.dev.model.Role;
+import ru.gasworkers.dev.model.UserRole;
 
 @Getter
 public final class RoleBrowser {
 
-    public static RoleBrowser instance(SelenideDriver driver, Role role) {
-        return new RoleBrowser(driver, role);
-    }
+    private final UserRole userRole;
 
     private final SelenideDriver driver;
-    private final Role role;
-
-    private RoleBrowser(SelenideDriver driver, Role role) {
+    private RoleBrowser(SelenideDriver driver, UserRole userRole) {
         this.driver = driver;
-        this.role = role;
+        this.userRole = userRole;
+    }
+
+    public static RoleBrowser instance(SelenideDriver driver, UserRole userRole) {
+        return new RoleBrowser(driver, userRole);
     }
 
 }

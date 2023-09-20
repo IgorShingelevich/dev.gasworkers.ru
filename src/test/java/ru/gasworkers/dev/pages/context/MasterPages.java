@@ -9,7 +9,7 @@ import ru.gasworkers.dev.pages.master.ordersHystoryMasterPage.AllScheduledOrders
 import ru.gasworkers.dev.pages.sharedPages.conference.ConferenceQrPage;
 import ru.gasworkers.dev.pages.sharedPages.conference.ConferenceSharedPage;
 
-import static ru.gasworkers.dev.model.Role.MASTER;
+import static ru.gasworkers.dev.model.UserRole.MASTER;
 
 
 @Getter

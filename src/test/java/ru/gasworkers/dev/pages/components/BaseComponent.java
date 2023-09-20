@@ -3,7 +3,7 @@ package ru.gasworkers.dev.pages.components;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideDriver;
 import io.qameta.allure.Allure;
-import ru.gasworkers.dev.model.Role;
+import ru.gasworkers.dev.model.UserRole;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 
 import static com.codeborne.selenide.Selectors.byTagAndText;
@@ -11,10 +11,10 @@ import static com.codeborne.selenide.Selectors.byTagAndText;
 public abstract class BaseComponent {
 
     protected final SelenideDriver driver;
-    protected final Role role;
+    protected final UserRole userRole;
 
     public BaseComponent(RoleBrowser browser) {
-        role = browser.getRole();
+        userRole = browser.getUserRole();
         driver = browser.getDriver();
     }
 
@@ -27,7 +27,7 @@ public abstract class BaseComponent {
     }
 
     private String getStepNameWithRole(String name) {
-        return role + ": " + name;
+        return userRole + ": " + name;
     }
 
     public void scrollIntoButton(String button, boolean align) {

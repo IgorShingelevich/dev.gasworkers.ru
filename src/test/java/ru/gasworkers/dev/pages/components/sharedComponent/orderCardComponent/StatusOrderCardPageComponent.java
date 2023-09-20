@@ -5,6 +5,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.model.OrderStatus;
+import ru.gasworkers.dev.model.UserRole;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.StateConsultation;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateBuilder;
@@ -169,15 +170,24 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
         });
     }
 
-    public void checkStateRepair(StateRepair stateRepair, StateBuilder.OrderIdData data, OrdersIdResponseDto dto) {
+    public void checkStateRepair(UserRole role, StateRepair stateRepair, StateBuilder.OrderIdData data, OrdersIdResponseDto dto) {
 
         step("Проверить статус заказа и оплаты в состоянии " + stateRepair, () -> {
             switch (stateRepair) {
                 case PUBLISHED:
-                    checkCurrentStatus(OrderStatus.PUBLISHED);
                     noActivationStagePayment();
                     noMaterialsStagePayment();
                     noActionsStagePayment();
+                    switch (role) {
+                        case CLIENT:
+                            checkCurrentStatus(OrderStatus.PUBLISHED);
+                            break;
+                        case DISPATCHER:
+                            checkCurrentStatus(OrderStatus.NEW_TENDER);
+                            break;
+                        default:
+                            throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + role);
+                    }
                     break;
                 case HAS_OFFER:
                     checkCurrentStatus(OrderStatus.HAS_OFFER);
