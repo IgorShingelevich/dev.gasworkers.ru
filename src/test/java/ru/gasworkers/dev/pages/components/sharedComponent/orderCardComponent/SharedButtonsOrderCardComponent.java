@@ -128,17 +128,7 @@ public class SharedButtonsOrderCardComponent extends BaseOrderCardComponent {
                         case CANCEL_CLIENT_PUBLISHED:
                         case CANCEL_CLIENT_HAS_OFFER:
                         case CANCEL_DISPATCHER_HAS_OFFER:
-                            notVisibleButtons = List.of(
-                                    CLIENT_CREATE_CONCLUSION,
-                                    CLIENT_START_CONSULTATION,
-                                    CLIENT_SELECT_MASTER_CONSULTATION,
-                                    CLIENT_SHOW_ON_MAP,
-                                    CLIENT_SELECT_NEW_COMPANY,
-                                    CLIENT_RETURN_TO_WORK,
-                                    CLIENT_PAY_INVOICE,
-                                    CLIENT_SIGN_ACT,
-                                    CLIENT_MAKE_REVIEW,
-                                    CLIENT_CANCEL_ORDER);
+                            notVisibleButtons = List.of(CLIENT_CREATE_CONCLUSION, CLIENT_START_CONSULTATION, CLIENT_SELECT_MASTER_CONSULTATION, CLIENT_SHOW_ON_MAP, CLIENT_SELECT_NEW_COMPANY, CLIENT_RETURN_TO_WORK, CLIENT_PAY_INVOICE, CLIENT_SIGN_ACT, CLIENT_MAKE_REVIEW, CLIENT_CANCEL_ORDER);
                             visibleButtons = List.of();
                             break;
                         case SCHEDULE_DATE:
@@ -190,13 +180,9 @@ public class SharedButtonsOrderCardComponent extends BaseOrderCardComponent {
                             visibleButtons = List.of(DISPATCHER_ALREADY_SELECTED_MASTER);
                             notVisibleButtons = List.of(DISPATCHER_SELECT_MASTER, DISPATCHER_ALREADY_REFUSED, DISPATCHER_CANCEL, DISPATCHER_REFUSE);
                             break;
-
                         case CANCEL_CLIENT_PUBLISHED:
                         case CANCEL_CLIENT_HAS_OFFER:
                         case CANCEL_DISPATCHER_HAS_OFFER:
-                            notVisibleButtons = List.of();
-                            visibleButtons = List.of();
-                            break;
                         case SCHEDULE_DATE:
                         case WAIT_MASTER:
                         case MASTER_START_WORK:
@@ -284,7 +270,7 @@ public class SharedButtonsOrderCardComponent extends BaseOrderCardComponent {
         CLIENT_MAKE_REVIEW("Оставить отзыв"),
 
         //dispatcher buttons
-        DISPATCHER_SELECT_MASTER("Выбрать мастера"),
+        DISPATCHER_SELECT_MASTER("Назначить мастера"),
         DISPATCHER_ALREADY_SELECTED_MASTER("Уже участвуете"), // only  disabled
         DISPATCHER_REFUSE("Отказаться"),
         DISPATCHER_ALREADY_REFUSED("Отказались"),  // only  disabled

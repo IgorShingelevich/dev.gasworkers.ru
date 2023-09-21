@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompaniesMastersListResponse {
+public class CompaniesMastersResponseDto {
     private ArrayList<DataDto> data;
 
     @Data

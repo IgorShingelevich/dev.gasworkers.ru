@@ -41,7 +41,7 @@ import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesRespons
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoApi;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.api.users.companies.masters.CompaniesMastersApi;
-import ru.gasworkers.dev.api.users.companies.masters.dto.CompaniesMastersListResponse;
+import ru.gasworkers.dev.api.users.companies.masters.dto.CompaniesMastersResponseDto;
 import ru.gasworkers.dev.api.users.fspBankList.FspBankListApi;
 import ru.gasworkers.dev.api.users.fspBankList.FspBankListResponseDto;
 import ru.gasworkers.dev.api.users.notification.NotificationsApi;
@@ -140,7 +140,7 @@ public class PreconditionRepair extends BaseApiTest {
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
-            getActualDtoSet(commonFields, stateRepair);
+            actualDto(commonFields, stateRepair);
             StateInfo result = stateInfo.actualDtoSet();
             readAllNotificationsClient();
             return new Result(result, commonFields);
@@ -166,6 +166,9 @@ public class PreconditionRepair extends BaseApiTest {
             });
             step(UserRole.DISPATCHER + " авторизуется", () -> {
                 commonFields.setTokenDispatcher(loginApi.getUserToken(LoginRequestDto.asUserEmail(sssrDispatcher1Email, sssrDispatcher1Password)));
+                step("Диспетчер получает список  доступных  матеров", () -> {
+                    getCompaniesMastersDto(commonFields);
+                });
             });
             step(UserRole.CLIENT + " заказ на ремонт - в состоянии " + actualStateRepair, () -> {
                 step(UserRole.CLIENT + " карточка последнего заказа - в состоянии " + actualStateRepair, () -> {
@@ -183,6 +186,7 @@ public class PreconditionRepair extends BaseApiTest {
             step(UserRole.CLIENT + " получает список доступных предложений", () -> {
                 // sleep 3 sec
                 Thread.sleep(3000);
+                System.out.println("suggestServices");
                 SuggestServicesResponseDto suggestServiceDto = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SuggestServicesResponseDto.class);
@@ -240,7 +244,7 @@ public class PreconditionRepair extends BaseApiTest {
                 step(UserRole.DISPATCHER + " получает список доступных мастеров ", () -> {
                     commonFields.setMasterId(companiesMastersApi.getAcceptedMasters(commonFields.getTokenDispatcher())
                             .statusCode(200)
-                            .extract().as(CompaniesMastersListResponse.class).getData().get(0).getId());
+                            .extract().as(CompaniesMastersResponseDto.class).getData().get(0).getId());
                 });
                 step(UserRole.DISPATCHER + " подтверждает выбор первого мастера ", () -> {
                     selectMasterApi.selectMaster(commonFields.getOrderId(), commonFields.getMasterId(), commonFields.getTokenDispatcher())
@@ -444,7 +448,7 @@ public class PreconditionRepair extends BaseApiTest {
     }
 
     private LastOrderInfoResponseDto getLastOrderInfoDto(CommonFieldsDto commonFields, StateRepair state) {
-        System.out.println(state + ": LastOrderInfo");
+        System.out.println(state + ": lastOrderInfo");
         return step("API: " + UserRole.CLIENT + " карточка последнего заказа - в состоянии " + state, () -> {
             return lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                     .statusCode(200)
@@ -453,7 +457,7 @@ public class PreconditionRepair extends BaseApiTest {
     }
 
     private OrdersIdResponseDto getOrdersIdDto(CommonFieldsDto commonFields, StateRepair state) {
-        System.out.println(state + ": OrdersId");
+        System.out.println(state + ": ordersId");
         return step("API: " + UserRole.CLIENT + " карточка заказа - в состоянии " + state, () -> {
             return ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
                     .statusCode(200)
@@ -462,7 +466,7 @@ public class PreconditionRepair extends BaseApiTest {
     }
 
     private NotificationsResponseDto getNotificationsDto(CommonFieldsDto commonFields, StateRepair state) {
-        System.out.println(state + ": Notifications");
+        System.out.println(state + ": notifications");
         return step("API: " + UserRole.CLIENT + " уведомления - в состоянии " + state, () -> {
             return notificationsApi.getNotifications(commonFields.getTokenClient())
                     .statusCode(200)
@@ -470,10 +474,20 @@ public class PreconditionRepair extends BaseApiTest {
         });
     }
 
-    private void getActualDtoSet(CommonFieldsDto commonFields, StateRepair stateRepair) {
+    private CompaniesMastersResponseDto getCompaniesMastersDto(CommonFieldsDto commonFields) {
+        System.out.println("companiesMasters");
+        return step("API: " + UserRole.DISPATCHER + " список доступных мастеров ", () -> {
+            return companiesMastersApi.getAcceptedMasters(commonFields.getTokenDispatcher())
+                    .statusCode(200)
+                    .extract().as(CompaniesMastersResponseDto.class);
+        });
+    }
+
+    private void actualDto(CommonFieldsDto commonFields, StateRepair stateRepair) {
         stateInfo.setLastOrderInfoDto(getLastOrderInfoDto(commonFields, stateRepair));
         stateInfo.setOrdersIdResponseDto(getOrdersIdDto(commonFields, stateRepair));
         stateInfo.setNotificationsDto(getNotificationsDto(commonFields, stateRepair));
+        stateInfo.setCompaniesMastersResponseDto(getCompaniesMastersDto(commonFields));
     }
 
     @Getter

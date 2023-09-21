@@ -62,6 +62,12 @@ public class SuggestServicesResponseDto {
         public String rating;
         @JsonProperty("full_name")
         public String fullName;
+        @JsonProperty("first_name")
+        public String firstName;
+        @JsonProperty("last_name")
+        public String lastName;
+        @JsonProperty("middle_name")
+        public String middleName;
         public String avatar;
         @JsonProperty("reviews_as_target_count")
         public Integer reviewsAsTargetCount;

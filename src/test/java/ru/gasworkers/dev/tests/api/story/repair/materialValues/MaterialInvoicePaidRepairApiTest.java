@@ -38,7 +38,7 @@ import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesRespons
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoApi;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.api.users.companies.masters.CompaniesMastersApi;
-import ru.gasworkers.dev.api.users.companies.masters.dto.CompaniesMastersListResponse;
+import ru.gasworkers.dev.api.users.companies.masters.dto.CompaniesMastersResponseDto;
 import ru.gasworkers.dev.api.users.fspBankList.FspBankListApi;
 import ru.gasworkers.dev.api.users.fspBankList.FspBankListResponseDto;
 import ru.gasworkers.dev.extension.user.User;
@@ -167,7 +167,7 @@ public class MaterialInvoicePaidRepairApiTest extends BaseApiTest {
             step("диспетчер получает список доступных мастеров ", () -> {
                 commonFields.setMasterId(companiesMastersApi.getAcceptedMasters(commonFields.getTokenDispatcher())
                         .statusCode(200)
-                        .extract().as(CompaniesMastersListResponse.class).getData().get(0).getId());
+                        .extract().as(CompaniesMastersResponseDto.class).getData().get(0).getId());
             });
             step("диспетчер подтверждает выбор первого мастера ", () -> {
                 SelectMasterResponseDto actualSelectMasterResponse = selectMasterApi.selectMaster(commonFields.getOrderId(), commonFields.getMasterId(), commonFields.getTokenDispatcher())

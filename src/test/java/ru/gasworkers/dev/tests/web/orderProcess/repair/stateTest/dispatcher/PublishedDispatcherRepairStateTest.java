@@ -90,10 +90,10 @@ public class PublishedDispatcherRepairStateTest extends BaseWebTest {
                 step(userRole + " модальное окно  расценки офера - в состоянии " + state, () -> {
                     dispatcherPages.getOrderCardPage().commonTab.buttons.clickOnButton(SharedButtonsOrderCardComponent.Button.DISPATCHER_SELECT_MASTER);
                     dispatcherPages.getOrderCardPage().offerModal.checkFinishLoading();
-                    dispatcherPages.getOrderCardPage().offerModal.checkFinishLoading();
+                    dispatcherPages.getOrderCardPage().offerModal.checkOffer(stateInfo);
                     dispatcherPages.getOrderCardPage().offerModal.scrollIntoButton(SharedButtonsOrderCardComponent.Button.DISPATCHER_SAVE.toString(), false);
                     dispatcherPages.getDriverManager().screenshot(" стр модальное окно  расценки офера - в состоянии " + state);
-                    //todo check  card details
+                    //todo check   modal window details
                 });
             };
             Consumer<SoftAssert> case4 = softAssert -> {

@@ -98,7 +98,7 @@ public class AllNotificationsPage extends BasePage {
                 stepWithRole(" Ждем " + ifWaitMilliseconds + " мс", () -> {
                     System.out.println("waitNotifications: " + ifWaitMilliseconds + " ms");
                     Selenide.sleep(ifWaitMilliseconds);
-                    open();// Pause execution for the specified number of milliseconds
+                    open();
                 });
             }
             notificationsCollection.shouldHave(size(amount));
@@ -107,7 +107,7 @@ public class AllNotificationsPage extends BasePage {
 
     public void open() {
         stepWithRole("Открыть страницу Уведомления", () -> {
-            Selenide.sleep(3000);
+//            Selenide.sleep(3000);
             driver.open("/profile/notifications");
         });
     }

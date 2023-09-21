@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
+import ru.gasworkers.dev.api.users.companies.masters.dto.CompaniesMastersResponseDto;
 import ru.gasworkers.dev.api.users.notification.NotificationsResponseDto;
 import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 
@@ -20,6 +21,8 @@ public class StateInfo {
     private NotificationsResponseDto notificationsDto;
     private LastOrderInfoResponseDto lastOrderInfoDto;
     private OrdersIdResponseDto ordersIdResponseDto;
+    private CompaniesMastersResponseDto companiesMastersResponseDto;
+
 
     public StateInfo actualDtoSet() {
         return StateInfo.builder()
@@ -28,6 +31,7 @@ public class StateInfo {
                 .ordersIdResponseDto(ordersIdResponseDto)
                 .notificationsDto(notificationsDto)
                 .suggestedServiceDto(suggestedServiceDto)
+                .companiesMastersResponseDto(companiesMastersResponseDto)
                 .build();
     }
 }
