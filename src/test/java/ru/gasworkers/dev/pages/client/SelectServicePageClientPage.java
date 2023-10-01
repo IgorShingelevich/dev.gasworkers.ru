@@ -29,12 +29,15 @@ public class SelectServicePageClientPage extends BaseClientPage {
     public final MapSpinnerSelectServiceComponent mapSpinner;
     public final OffersCounterClientComponent offersCounter;
     public final PlayGuideComponent guide;
+    public final UpperRepairInfoBoxComponent upperRepairInfoBox;
+    public final TimeCounterComponent timeCounter;
     public final CompanyBoxSelectService companyBoxRepair;
+    public final SuggestedConsultationBannerComponent suggestedConsultationBannerComponent;
     private final String
             startMaintenancePrefixText = "Ваш заказ",
             endMaintenancePrefixText = "и обрабатывается диспетчерами",
-            startRepairPrefixText = "Ожидайте подтверждение заказа диспетчером. Номер заказа ",
-            endRepairPrefixText = "Ремонтные работы и запчасти оплачиваются дополнительно к указанной стоимости.",
+            startRepairPrefixText = "Ожидайте отклики исполнителей готовых выполнить Ваш заказ",
+            endRepairPrefixText = "Окончательную стоимость работы, запасных частей и расходных материалов определит мастер непосредственно на Вашем объекте.",
             publishedText = "Ожидайте подтверждение заказа диспетчером. После подтверждения цвет заказа изменится на зелёный и отобразится стоимость выезда мастера.",
             hasOffer1Text = "Мы оценили примерную стоимость ремонта, учитывая данные из вашей заявки. Обратите внимание, что окончательная стоимость может измениться после осмотра мастером объекта.",
             hasOffer2Text = "Сервис работает через безопасную сделку, необходимо оплатить 10 руб. для активации сделки и принятия мастера на заказ.";
@@ -48,7 +51,7 @@ public class SelectServicePageClientPage extends BaseClientPage {
             firstServiceTabLocator = driver.$("[id^=company-item]").as("Первая вкладка Сервисного предложения"),
             mapContainerLocator = driver.$("[id^=yandexMap]").as("Контейнер карты");
 
-        public SelectServicePageClientPage(RoleBrowser browser) {
+    public SelectServicePageClientPage(RoleBrowser browser) {
         super(browser);
         header = new FocusHeaderComponent(browser);
         stepper = new StepperComponent(browser);
@@ -56,13 +59,13 @@ public class SelectServicePageClientPage extends BaseClientPage {
         mapSpinner = new MapSpinnerSelectServiceComponent(browser);
         offersCounter = new OffersCounterClientComponent(browser);
         guide = new PlayGuideComponent(browser);
+        upperRepairInfoBox = new UpperRepairInfoBoxComponent(browser);
+        timeCounter = new TimeCounterComponent(browser);
         companyBoxRepair = new CompanyBoxSelectService(browser);
-    }    ElementsCollection
-            serviceBoxCollection = driver.$$("[id^='company-item-company-']").as("Блоки Сервисных компаний"),
-            boxesWithButtonCollectionOld = serviceBoxCollection.filterBy(cssClass("btn-primary")).as("Блоки с кнопкой Выбрать"),
-            boxesWithButtonCollection = serviceBoxCollection.filterBy(attribute("data-test-id", "primary")).as("Блоки с кнопкой Выбрать");
+        suggestedConsultationBannerComponent = new SuggestedConsultationBannerComponent(browser);
+    }
 
-public void checkFinishLoadingRepair() {
+    public void checkFinishLoadingRepair() {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
             serviceSpinner.checkPresence();
 //            spinnerScrollbarLocator.should(disappear);
@@ -81,6 +84,11 @@ public void checkFinishLoadingRepair() {
             getOrderNumber();
         });
     }
+
+    ElementsCollection
+            serviceBoxCollection = driver.$$("[id^='company-item-company-']").as("Блоки Сервисных компаний"),
+            boxesWithButtonCollectionOld = serviceBoxCollection.filterBy(cssClass("btn-primary")).as("Блоки с кнопкой Выбрать"),
+            boxesWithButtonCollection = serviceBoxCollection.filterBy(attribute("data-test-id", "primary")).as("Блоки с кнопкой Выбрать");
 
     public SelectServicePageClientPage backLink() {
         backButtonLocator.click();
@@ -131,8 +139,6 @@ public void checkFinishLoadingRepair() {
         });
     }
 
-
-
     public void checkPublishedState() {
         stepWithRole("Убедиться, что статус карты - Нет тендеров", () -> {
             boxesWithButtonCollectionOld.shouldBe(CollectionCondition.empty);
@@ -163,7 +169,6 @@ public void checkFinishLoadingRepair() {
         });
     }
 
-
     public SelectServicePageClientPage proceedWithFirstService() {
         stepWithRole("Нажать на кнопку Выбрать Компанию ", () -> {
             boxesWithButtonCollectionOld.first().shouldBe(visible, Duration.ofSeconds(40))
@@ -186,7 +191,6 @@ public void checkFinishLoadingRepair() {
         });
     }
 
-
     public String getOrderNumber() {
         return stepWithRole("Получить номер заказа", () -> {
             String text = titleLocator.getText();
@@ -208,7 +212,6 @@ public void checkFinishLoadingRepair() {
         });
     }
 
-
     public void notAvailable() {
         stepWithRole("Убедиться, что страница не доступна", () -> {
             urlChecker.urlContains("select-service");
@@ -221,6 +224,8 @@ public void checkFinishLoadingRepair() {
             driver.open("/orders/" + orderId + "/select-service");
         });
     }
+
+
 }
 
 

@@ -15,7 +15,7 @@ import static io.qameta.allure.Allure.step;
 public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
 
     ElementsCollection
-            selfCollection = driver.$$("div.order-details-item").as("Информация о заказе");
+            selfCollection = driver.$$("div.order-details-item").as("Элементы информация о заказе");
 
     public DetailsCommonTabOrderCardComponent(RoleBrowser browser) {
         super(browser);

@@ -69,6 +69,8 @@ public class LastOrderInfoResponseDto {
         private String additionalStatus;
         @JsonProperty("is_insurance_case")
         private Boolean isInsuranceCase;
+        @JsonProperty("current_history_status")
+        private String currentHistoryStatus;
         private List<HistoryDto> history;
 
         @Data

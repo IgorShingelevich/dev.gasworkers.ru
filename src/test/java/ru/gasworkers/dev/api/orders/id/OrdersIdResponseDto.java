@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,117 +25,133 @@ public class OrdersIdResponseDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Data {
-        public Integer id;
-        public String number;
-        public Master master;
-        public Client client;
-        public ServiceCenter serviceCenter;
+        private Integer id;
+        private String number;
+        private Master master;
+        private Client client;
+        private ServiceCenter serviceCenter;
         @JsonProperty("contract_type")
-        public Object contractType;
-        public ClientObject clientObject;
-        public ArrayList<Equipment> equipments;
-        public String address;
-        public Long phone;
-        public String status;
+        private Object contractType;
+        private ClientObject clientObject;
+        private ArrayList<Equipment> equipments;
+        private String address;
+        private Long phone;
+        private String status;
         @JsonProperty("payment_status")
-        public Boolean paymentStatus;
-        public String type;
+        private Boolean paymentStatus;
+        private String type;
         @JsonProperty("desired_date_interval_started_at")
-        public String desiredDateIntervalStartedAt;
+        private String desiredDateIntervalStartedAt;
         @JsonProperty("desired_date_interval_ended_at")
-        public String desiredDateIntervalEndedAt;
+        private String desiredDateIntervalEndedAt;
         @JsonProperty("desired_time_started")
-        public String desiredTimeStarted;
+        private String desiredTimeStarted;
         @JsonProperty("desired_time_ended")
-        public String desiredTimeEnded;
+        private String desiredTimeEnded;
         @JsonProperty("selected_date")
-        public String selectedDate;
-        public String description;
-        public ArrayList<Object> photos;
-        public ArrayList<Object> videos;
+        private String selectedDate;
+        private String description;
+        private ArrayList<Object> photos;
+        private ArrayList<Object> videos;
         @JsonProperty("created_at")
-        public String createdAt;
-        public ArrayList<Masters> masters;
+        private String createdAt;
+        private ArrayList<Masters> masters;
         @JsonProperty("master_recommendation")
-        public String masterRecommendation;
+        private String masterRecommendation;
         @JsonProperty("all_works")
-        public Boolean allWorks;
+        private Boolean allWorks;
         @JsonProperty("master_left_review")
-        public Boolean masterLeftReview;
+        private Boolean masterLeftReview;
         @JsonProperty("client_left_review")
-        public Boolean clientLeftReview;
+        private Boolean clientLeftReview;
         @JsonProperty("insurance_contract")
-        public Object insuranceContract;
+        private Object insuranceContract;
         @JsonProperty("insurance_policy")
-        public Object insurancePolicy;
+        private Object insurancePolicy;
         @JsonProperty("maintenance_act")
-        public Object maintenanceAct;
+        private Object maintenanceAct;
         @JsonProperty("creation_status")
-        public Object creationStatus;
+        private Object creationStatus;
         @JsonProperty("offers_count")
-        public Object offersCount;
-        public Offer offer;
-        public List<Receipts> receipts;
+        private Object offersCount;
+        private Offer offer;
+        private List<Receipts> receipts;
         @JsonProperty("repair_stage")
-        public Object repairStage;
+        private Object repairStage;
         @JsonProperty("need_sign")
-        public Boolean needSign;
+        private Boolean needSign;
         @JsonProperty("sign_type")
-        public Object signType;
+        private Object signType;
         @JsonProperty("need_master_sign")
-        public Boolean needMasterSign;
+        private Boolean needMasterSign;
         @JsonProperty("master_sign_type")
-        public Object masterSignType;
-        public DistributionCompany distributionCompany;
+        private Object masterSignType;
+        private DistributionCompany distributionCompany;
         @JsonProperty("check_list")
-        public ArrayList<Object> checkList;
-        public Dispatcher dispatcher;
+        private ArrayList<Object> checkList;
+        private Dispatcher dispatcher;
         @JsonProperty("conference_url")
-        public String conferenceUrl;
-        public Boolean online;
-        public ArrayList<Object> masterVideos;
+        private String conferenceUrl;
+        private Boolean online;
+        private ArrayList<Object> masterVideos;
         @JsonProperty("consultation_canceled")
-        public Boolean consultationCanceled;
+        private Boolean consultationCanceled;
         @JsonProperty("not_want_to_sign")
-        public Boolean notWantToSign;
+        private Boolean notWantToSign;
         @JsonProperty("not_want_to_pay")
-        public Boolean notWantToPay;
+        private Boolean notWantToPay;
         @JsonProperty("not_want_to_sign_by_client")
-        public Boolean notWantToSignByClient;
+        private Boolean notWantToSignByClient;
         @JsonProperty("active_dispatcher")
-        public Boolean activeDispatcher;
-        public ArrayList<Offers> offers;
+        private Boolean activeDispatcher;
+        private ArrayList<Offers> offers;
         @JsonProperty("additional_status")
-        public Object additionalStatus;
-        public ArrayList<History> history;
+        private Object additionalStatus;
+        private ArrayList<History> history;
         @JsonProperty("from_maintenance")
-        public Boolean fromMaintenance;
+        private Boolean fromMaintenance;
         @JsonProperty("is_insurance_case")
-        public Boolean isInsuranceCase;
+        private Boolean isInsuranceCase;
         @JsonProperty("repair_order_id")
-        public Integer repairOrderId;
+        private Integer repairOrderId;
         @JsonProperty("maintenance_order_id")
-        public Integer maintenanceOrderId;
+        private Integer maintenanceOrderId;
         @JsonProperty("possible_offer_id")
-        public Integer possibleOfferId;
+        private Integer possibleOfferId;
+        @JsonProperty("possible_offer")
+        private Object possibleOffer;
         @JsonProperty("material_values")
-        public List<MaterialValues> materialValues;
-        public List<Actions> actions;
-        public Boolean transfered;
+        private List<MaterialValues> materialValues;
+        private List<Actions> actions;
+        private Boolean transfered;
         @JsonProperty("need_master_selecting")
-        public Boolean needMasterSelecting;
+        private Boolean needMasterSelecting;
+        @JsonProperty("current_history_status")
+        private String currentHistoryStatus;
+        @JsonProperty("related_consultation_id")
+        private Integer relatedConsultationId;
+        @JsonProperty("related_repair_id")
+        private Integer relatedRepairId;
+        @JsonProperty("full_transfer")
+        private Boolean fullTransfer;
+        @JsonProperty("offer_dispatcher")
+        private Object offerDispatcher;
+        @JsonProperty("offer_master")
+        private Object offerMaster;
+
+
 
         @lombok.Data
         @Builder
         @AllArgsConstructor
         @NoArgsConstructor
         public static class MaterialValues {
-            public String title;
+            private String title;
             @JsonProperty("part_number")
-            public String partNumber;
-            public Integer qty;
-            public Double price;
-            public String manufacturer;
+            private String partNumber;
+            private Integer qty;
+            private Double price;
+            private String manufacturer;
         }
 
         @lombok.Data
@@ -142,9 +159,9 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Actions {
-            public String description;
-            public Integer qty;
-            public Double price;
+            private String description;
+            private Integer qty;
+            private Double price;
         }
 
         @lombok.Data
@@ -152,51 +169,51 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Address {
-            public Integer id;
-            public String full;
-            public String type;
+            private Integer id;
+            private String full;
+            private String type;
             @JsonProperty("full_with_zip")
-            public String fullWithZip;
-            public Object zip;
-            public String country;
+            private String fullWithZip;
+            private Object zip;
+            private String country;
             @JsonProperty("country_code")
-            public String countryCode;
-            public String region;
+            private String countryCode;
+            private String region;
             @JsonProperty("region_type")
-            public String regionType;
+            private String regionType;
             @JsonProperty("region_with_type")
-            public Object regionWithType;
-            public String area;
+            private Object regionWithType;
+            private String area;
             @JsonProperty("area_type")
-            public Object areaType;
+            private Object areaType;
             @JsonProperty("area_with_type")
-            public Object areaWithType;
-            public String city;
+            private Object areaWithType;
+            private String city;
             @JsonProperty("city_type")
-            public Object cityType;
+            private Object cityType;
             @JsonProperty("city_with_type")
-            public Object cityWithType;
-            public Object settlement;
+            private Object cityWithType;
+            private Object settlement;
             @JsonProperty("settlement_type")
-            public Object settlementType;
+            private Object settlementType;
             @JsonProperty("settlement_with_type")
-            public Object settlementWithType;
-            public Object street;
+            private Object settlementWithType;
+            private Object street;
             @JsonProperty("street_type")
-            public Object streetType;
+            private Object streetType;
             @JsonProperty("street_with_type")
-            public Object streetWithType;
-            public Object house;
+            private Object streetWithType;
+            private Object house;
             @JsonProperty("house_type")
-            public Object houseType;
+            private Object houseType;
             @JsonProperty("house_with_type")
-            public Object houseWithType;
-            public Object block;
-            public Object flat;
+            private Object houseWithType;
+            private Object block;
+            private Object flat;
             @JsonProperty("capital_marker")
-            public Object capitalMarker;
-            public Double longitude;
-            public Double latitude;
+            private Object capitalMarker;
+            private Double longitude;
+            private Double latitude;
         }
 
 
@@ -205,8 +222,8 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Branch {
-            public Integer id;
-            public String title;
+            private Integer id;
+            private String title;
         }
 
         @lombok.Data
@@ -214,18 +231,18 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Brand {
-            public Integer id;
-            public String title;
+            private Integer id;
+            private String title;
             @JsonProperty("is_foreign")
-            public Boolean isForeign;
+            private Boolean isForeign;
             @JsonProperty("is_custom")
-            public Boolean isCustom;
+            private Boolean isCustom;
             @JsonProperty("is_show_hidden")
-            public Boolean isShowHidden;
-            public String logo;
+            private Boolean isShowHidden;
+            private String logo;
             @JsonProperty("created_at")
-            public String createdAt;
-            public ArrayList<Types> types;
+            private String createdAt;
+            private ArrayList<Types> types;
         }
 
         @lombok.Data
@@ -233,146 +250,146 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Client {
-            public Integer id;
+            private Integer id;
             @JsonProperty("first_name")
-            public String firstName;
+            private String firstName;
             @JsonProperty("last_name")
-            public String lastName;
+            private String lastName;
             @JsonProperty("middle_name")
-            public String middleName;
-            public Long phone;
-            public Object login;
-            public String facetime;
-            public String whatsapp;
-            public Object skype;
-            public Object telegram;
-            public String email;
+            private String middleName;
+            private Long phone;
+            private Object login;
+            private String facetime;
+            private String whatsapp;
+            private Object skype;
+            private Object telegram;
+            private String email;
             @JsonProperty("email_verified_at")
-            public String emailVerifiedAt;
+            private String emailVerifiedAt;
             @JsonProperty("phone_verified_at")
-            public String phoneVerifiedAt;
-            public String gender;
-            public Object specialization;
-            public Object skills;
+            private String phoneVerifiedAt;
+            private String gender;
+            private Object specialization;
+            private Object skills;
             @JsonProperty("avatar_id")
-            public Integer avatarId;
+            private Integer avatarId;
             @JsonProperty("service_id")
-            public Object serviceId;
+            private Object serviceId;
             @JsonProperty("deleted_at")
-            public String deletedAt;
+            private String deletedAt;
             @JsonProperty("created_at")
-            public String createdAt;
+            private String createdAt;
             @JsonProperty("updated_at")
-            public String updatedAt;
+            private String updatedAt;
             @JsonProperty("requisites_filled")
-            public Boolean requisitesFilled;
+            private Boolean requisitesFilled;
             @JsonProperty("bank_details_filled")
-            public Boolean bankDetailsFilled;
+            private Boolean bankDetailsFilled;
             @JsonProperty("rate_filled")
-            public Boolean rateFilled;
+            private Boolean rateFilled;
             @JsonProperty("price_list_filled")
-            public Boolean priceListFilled;
+            private Boolean priceListFilled;
             @JsonProperty("distribution_company_agreement_filled")
-            public Boolean distributionCompanyAgreementFilled;
+            private Boolean distributionCompanyAgreementFilled;
             @JsonProperty("equipments_filled")
-            public Boolean equipmentsFilled;
+            private Boolean equipmentsFilled;
             @JsonProperty("contacts_filled")
-            public Boolean contactsFilled;
+            private Boolean contactsFilled;
             @JsonProperty("bank_id")
-            public Object bankId;
+            private Object bankId;
             @JsonProperty("account_number")
-            public Object accountNumber;
+            private Object accountNumber;
             @JsonProperty("distribution_company_id")
-            public Object distributionCompanyId;
+            private Object distributionCompanyId;
             @JsonProperty("country_id")
-            public Object countryId;
+            private Object countryId;
             @JsonProperty("post_address_id")
-            public Object postAddressId;
+            private Object postAddressId;
             @JsonProperty("on_verification")
-            public Boolean onVerification;
+            private Boolean onVerification;
             @JsonProperty("verified_at")
-            public String verifiedAt;
+            private String verifiedAt;
             @JsonProperty("verification_hash")
-            public Object verificationHash;
+            private Object verificationHash;
             @JsonProperty("first_accept")
-            public Integer firstAccept;
+            private Integer firstAccept;
             @JsonProperty("company_id")
-            public Integer companyId;
+            private Integer companyId;
             @JsonProperty("employment_status")
-            public String employmentStatus;
+            private String employmentStatus;
             @JsonProperty("dispatcher_company_id")
-            public Integer dispatcherCompanyId;
-            public String position;
-            public String rating;
+            private Integer dispatcherCompanyId;
+            private String position;
+            private String rating;
             @JsonProperty("accept_terms")
-            public Boolean acceptTerms;
+            private Boolean acceptTerms;
             @JsonProperty("new_messages_count")
-            public Integer newMessagesCount;
-            public String tz;
+            private Integer newMessagesCount;
+            private String tz;
             @JsonProperty("push_notifications_enable")
-            public Boolean pushNotificationsEnable;
+            private Boolean pushNotificationsEnable;
             @JsonProperty("email_notifications_enable")
-            public Boolean emailNotificationsEnable;
+            private Boolean emailNotificationsEnable;
             @JsonProperty("sms_notifications_enable")
-            public Boolean smsNotificationsEnable;
+            private Boolean smsNotificationsEnable;
             @JsonProperty("second_accept")
-            public Object secondAccept;
+            private Object secondAccept;
             @JsonProperty("can_consulting")
-            public Boolean canConsulting;
+            private Boolean canConsulting;
             @JsonProperty("consultation_price")
-            public Integer consultationPrice;
+            private Integer consultationPrice;
             @JsonProperty("push_id")
-            public String pushId;
+            private String pushId;
             @JsonProperty("ready_for_consultation")
-            public Boolean readyForConsultation;
+            private Boolean readyForConsultation;
             @JsonProperty("active_role")
-            public Object activeRole;
+            private Object activeRole;
             @JsonProperty("is_have_contract")
-            public Boolean isHaveContract;
+            private Boolean isHaveContract;
             @JsonProperty("is_ip")
-            public Boolean isIp;
+            private Boolean isIp;
             @JsonProperty("diploma_id")
-            public Object diplomaId;
-            public Object inn;
+            private Object diplomaId;
+            private Object inn;
             @JsonProperty("living_address_id")
-            public Object livingAddressId;
+            private Object livingAddressId;
             @JsonProperty("work_distance")
-            public Object workDistance;
+            private Object workDistance;
             @JsonProperty("joined_at")
-            public String joinedAt;
+            private String joinedAt;
             @JsonProperty("registered_at")
-            public String registeredAt;
+            private String registeredAt;
             @JsonProperty("sc_notified_about_my_reg")
-            public Boolean scNotifiedAboutMyReg;
+            private Boolean scNotifiedAboutMyReg;
             @JsonProperty("sc_notified_about_my_certificates")
-            public Boolean scNotifiedAboutMyCertificates;
-            public Integer debt;
+            private Boolean scNotifiedAboutMyCertificates;
+            private Integer debt;
             @JsonProperty("count_review")
-            public Integer countReview;
+            private Integer countReview;
             @JsonProperty("count_completed_orders")
-            public Integer countCompletedOrders;
+            private Integer countCompletedOrders;
             @JsonProperty("count_not_read_notification")
-            public Integer countNotReadNotification;
+            private Integer countNotReadNotification;
             @JsonProperty("fps_phone")
-            public String fpsPhone;
+            private String fpsPhone;
             @JsonProperty("fps_bank_id")
-            public Object fpsBankId;
+            private Object fpsBankId;
             @JsonProperty("selected_payment_method")
-            public Object selectedPaymentMethod;
+            private Object selectedPaymentMethod;
             @JsonProperty("referer_id")
-            public Object refererId;
+            private Object refererId;
             @JsonProperty("referer_code")
-            public String refererCode;
-            public Integer balance;
+            private String refererCode;
+            private Integer balance;
             @JsonProperty("default_referral_commission")
-            public Double defaultReferralCommission;
+            private Double defaultReferralCommission;
             @JsonProperty("additional_phone")
-            public Long additionalPhone;
-            public ArrayList<Roles> roles;
-            public Object company;
-            public Object service;
+            private Long additionalPhone;
+            private ArrayList<Roles> roles;
+            private Object company;
+            private Object service;
             @JsonProperty("full_name")
-            public String fullName;
+            private String fullName;
         }
 
         @lombok.Data
@@ -380,21 +397,21 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class ClientObject {
-            public Integer id;
-            public String title;
+            private Integer id;
+            private String title;
             @JsonProperty("active_offers_count")
-            public Integer activeOffersCount;
-            public ArrayList<Object> photos;
-            public Address address;
-            public ArrayList<Equipment> equipments;
-            public Branch branch;
-            public Company company;
+            private Integer activeOffersCount;
+            private ArrayList<Object> photos;
+            private Address address;
+            private ArrayList<Equipment> equipments;
+            private Branch branch;
+            private Company company;
             @JsonProperty("account_number")
-            public String accountNumber;
+            private String accountNumber;
             @JsonProperty("created_at")
-            public String createdAt;
+            private String createdAt;
             @JsonProperty("video_exists")
-            public Boolean videoExists;
+            private Boolean videoExists;
         }
 
         @lombok.Data
@@ -402,38 +419,38 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Company {
-            public Integer id;
-            public String title;
+            private Integer id;
+            private String title;
             @JsonProperty("short_title")
-            public String shortTitle;
-            public String inn;
-            public String kpp;
-            public String ogrn;
-            public String okved;
-            public String address;
+            private String shortTitle;
+            private String inn;
+            private String kpp;
+            private String ogrn;
+            private String okved;
+            private String address;
             @JsonProperty("register_date")
-            public String registerDate;
+            private String registerDate;
             @JsonProperty("is_ip")
-            public Boolean isIp;
-            public String site;
-            public String logo;
-            public String card;
-            public String description;
-            public Boolean specialized;
+            private Boolean isIp;
+            private String site;
+            private String logo;
+            private String card;
+            private String description;
+            private Boolean specialized;
             @JsonProperty("ministry_of_energy_agreement_exist")
-            public Boolean ministryOfEnergyAgreementExist;
-            public String rating;
+            private Boolean ministryOfEnergyAgreementExist;
+            private String rating;
             @JsonProperty("gen_dir")
-            public String genDir;
+            private String genDir;
             @JsonProperty("gen_dir_np")
-            public String genDirNp;
+            private String genDirNp;
             @JsonProperty("vdgo_contract_charter")
-            public String vdgoContractCharter;
+            private String vdgoContractCharter;
             @JsonProperty("is_self_employed_owner")
-            public Boolean isSelfEmployedOwner;
+            private Boolean isSelfEmployedOwner;
             @JsonProperty("first_accept")
-            public Double firstAccept;
-            public ArrayList<Branch> branches;
+            private Double firstAccept;
+            private ArrayList<Branch> branches;
         }
 
         @lombok.Data
@@ -441,7 +458,7 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Dispatcher {
-            public Long phone;
+            private Long phone;
         }
 
         @lombok.Data
@@ -449,9 +466,9 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class DistributionCompany {
-            public Integer id;
-            public String title;
-            public String url;
+            private Integer id;
+            private String title;
+            private String url;
         }
 
         @lombok.Data
@@ -459,22 +476,22 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Equipment {
-            public Integer id;
+            private Integer id;
             @JsonProperty("all_works")
-            public Boolean allWorks;
-            public Types type;
-            public Brand brand;
-            public Object title;
+            private Boolean allWorks;
+            private Types type;
+            private Brand brand;
+            private Object title;
             @JsonProperty("computed_title")
-            public String computedTitle;
-            public Integer power;
-            public ArrayList<Object> photos;
+            private String computedTitle;
+            private Integer power;
+            private ArrayList<Object> photos;
             @JsonProperty("last_photo")
-            public Object lastPhoto;
-            public ArrayList<Object> videos;
-            public Model model;
+            private Object lastPhoto;
+            private ArrayList<Object> videos;
+            private Model model;
             @JsonProperty("video_exists")
-            public Boolean videoExists;
+            private Boolean videoExists;
         }
 
         @lombok.Data
@@ -482,20 +499,20 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class FileCard {
-            public Integer id;
+            private Integer id;
             @JsonProperty("original_name")
-            public String originalName;
-            public Object title;
-            public String path;
-            public String extension;
+            private String originalName;
+            private Object title;
+            private String path;
+            private String extension;
             @JsonProperty("uploader_id")
-            public Integer uploaderId;
+            private Integer uploaderId;
             @JsonProperty("deleted_at")
-            public String deletedAt;
+            private String deletedAt;
             @JsonProperty("created_at")
-            public String createdAt;
+            private String createdAt;
             @JsonProperty("updated_at")
-            public String updatedAt;
+            private String updatedAt;
         }
 
         @lombok.Data
@@ -503,20 +520,20 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class FileLogo {
-            public Integer id;
+            private Integer id;
             @JsonProperty("original_name")
-            public String originalName;
-            public Object title;
-            public String path;
-            public String extension;
+            private String originalName;
+            private Object title;
+            private String path;
+            private String extension;
             @JsonProperty("uploader_id")
-            public Integer uploaderId;
+            private Integer uploaderId;
             @JsonProperty("deleted_at")
-            public String deletedAt;
+            private String deletedAt;
             @JsonProperty("created_at")
-            public String createdAt;
+            private String createdAt;
             @JsonProperty("updated_at")
-            public String updatedAt;
+            private String updatedAt;
         }
 
         @lombok.Data
@@ -524,21 +541,21 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class History {
-            public Integer id;
-            public String action;
+            private Integer id;
+            private String action;
             @JsonProperty("src_title")
-            public String srcTitle;
-            public String title;
-            public String description;
+            private String srcTitle;
+            private String title;
+            private String description;
             @JsonProperty("set_at")
-            public String setAt;
+            private String setAt;
             @JsonProperty("completed_at")
-            public String completedAt;
-            public Boolean completed;
+            private String completedAt;
+            private Boolean completed;
             @JsonProperty("is_current")
-            public Boolean isCurrent;
+            private Boolean isCurrent;
             @JsonProperty("sort_index")
-            public Integer sortIndex;
+            private Integer sortIndex;
         }
 
         @lombok.Data
@@ -546,28 +563,28 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Master {
-            public Integer id;
+            private Integer id;
             @JsonProperty("active_role")
-            public Object activeRole;
+            private Object activeRole;
             @JsonProperty("full_name")
-            public String fullName;
+            private String fullName;
             @JsonProperty("last_name")
-            public String lastName;
-            public String rating;
+            private String lastName;
+            private String rating;
             @JsonProperty("consultation_price")
-            public Double consultationPrice;
-            public String skills;
-            public String avatar;
-            public Company company;
+            private Double consultationPrice;
+            private String skills;
+            private String avatar;
+            private Company company;
             @JsonProperty("employment_status")
-            public String employmentStatus;
-            public ArrayList<Brand> brands;
+            private String employmentStatus;
+            private ArrayList<Brand> brands;
             @JsonProperty("reviews_count")
-            public Integer reviewsCount;
+            private Integer reviewsCount;
             @JsonProperty("completed_orders_count")
-            public Integer completedOrdersCount;
+            private Integer completedOrdersCount;
             @JsonProperty("created_at")
-            public String createdAt;
+            private String createdAt;
         }
 
         @lombok.Data
@@ -575,28 +592,28 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Masters {
-            public Integer id;
+            private Integer id;
             @JsonProperty("active_role")
-            public Object activeRole;
+            private Object activeRole;
             @JsonProperty("full_name")
-            public String fullName;
+            private String fullName;
             @JsonProperty("last_name")
-            public String lastName;
-            public String rating;
+            private String lastName;
+            private String rating;
             @JsonProperty("consultation_price")
-            public Double consultationPrice;
-            public String skills;
-            public String avatar;
-            public Company company;
+            private Double consultationPrice;
+            private String skills;
+            private String avatar;
+            private Company company;
             @JsonProperty("employment_status")
-            public String employmentStatus;
-            public ArrayList<Brand> brands;
+            private String employmentStatus;
+            private ArrayList<Brand> brands;
             @JsonProperty("reviews_count")
-            public Integer reviewsCount;
+            private Integer reviewsCount;
             @JsonProperty("completed_orders_count")
-            public Integer completedOrdersCount;
+            private Integer completedOrdersCount;
             @JsonProperty("created_at")
-            public String createdAt;
+            private String createdAt;
         }
 
         @lombok.Data
@@ -604,13 +621,13 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Model {
-            public Integer id;
-            public String title;
-            public String power;
-            public Brand brand;
-            public Types type;
+            private Integer id;
+            private String title;
+            private String power;
+            private Brand brand;
+            private Types type;
             @JsonProperty("is_custom")
-            public Boolean isCustom;
+            private Boolean isCustom;
         }
 
         @lombok.Data
@@ -618,35 +635,37 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Offer {
-            public Integer id;
+            private Integer id;
             @JsonProperty("master_equipment")
-            public ArrayList<Object> masterEquipment;
+            private ArrayList<Object> masterEquipment;
             @JsonProperty("start_price")
-            public Object startPrice;
-            public Double price;
+            private Object startPrice;
+            private Double price;
             @JsonProperty("price_wi")
-            public Double priceWi;
+            private Double priceWi;
             @JsonProperty("price_real")
-            public Double priceReal;
+            private Double priceReal;
             @JsonProperty("with_consultation")
-            public Boolean withConsultation;
+            private Boolean withConsultation;
             @JsonProperty("consultation_passed")
-            public Boolean consultationPassed;
+            private Boolean consultationPassed;
             @JsonProperty("client_closed")
-            public Boolean clientClosed;
+            private Boolean clientClosed;
             @JsonProperty("wait_from")
-            public Object waitFrom;
+            private Object waitFrom;
             @JsonProperty("wait_notification")
-            public Integer waitNotification;
+            private Integer waitNotification;
             @JsonProperty("master_selected")
-            public Boolean masterSelected;
+            private Boolean masterSelected;
             @JsonProperty("master_started")
-            public Boolean masterStarted;
-            public String status;
+            private Boolean masterStarted;
+            private String status;
             @JsonProperty("possible_full_repair_price")
-            public Double possibleFullRepairPrice;
+            private Double possibleFullRepairPrice;
             @JsonProperty("possible_first_accept_price")
-            public Double possibleFirstAcceptPrice;
+            private Double possibleFirstAcceptPrice;
+            private SuggestServicesResponseDto.Masters.SuggestedMaster master;
+            private Object company;
         }
 
         @lombok.Data
@@ -654,12 +673,12 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Offers {
-            public Integer id;
-            public Double price;
+            private Integer id;
+            private Double price;
             @JsonProperty("master_id")
-            public Object masterId;
+            private Object masterId;
             @JsonProperty("company_id")
-            public Integer companyId;
+            private Integer companyId;
         }
 
         @lombok.Data
@@ -668,11 +687,11 @@ public class OrdersIdResponseDto {
         @NoArgsConstructor
         public static class Pivot {
             @JsonProperty("model_id")
-            public Integer modelId;
+            private Integer modelId;
             @JsonProperty("role_id")
-            public Integer roleId;
+            private Integer roleId;
             @JsonProperty("model_type")
-            public String modelType;
+            private String modelType;
         }
 
         @lombok.Data
@@ -680,15 +699,15 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Range {
-            public Integer id;
+            private Integer id;
             @JsonProperty("from_value")
-            public Integer fromValue;
+            private Integer fromValue;
             @JsonProperty("to_value")
-            public Integer toValue;
+            private Integer toValue;
             @JsonProperty("domestic_price")
-            public Object domesticPrice;
+            private Object domesticPrice;
             @JsonProperty("foreign_price")
-            public Object foreignPrice;
+            private Object foreignPrice;
         }
 
         @lombok.Data
@@ -696,15 +715,15 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Receipts {
-            public Integer id;
-            public Double amount;
-            public Boolean paid;
-            public String title;
-            public String stage;
+            private Integer id;
+            private Double amount;
+            private Boolean paid;
+            private String title;
+            private String stage;
             @JsonProperty("remains_to_pay")
-            public Double remainsToPay;
+            private Double remainsToPay;
             @JsonProperty("created_at")
-            public String createdAt;
+            private String createdAt;
         }
 
         @lombok.Data
@@ -712,17 +731,17 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Roles {
-            public Integer id;
-            public String name;
+            private Integer id;
+            private String name;
             @JsonProperty("guard_name")
-            public String guardName;
+            private String guardName;
             @JsonProperty("created_at")
-            public String createdAt;
+            private String createdAt;
             @JsonProperty("updated_at")
-            public String updatedAt;
+            private String updatedAt;
             @JsonProperty("is_admin")
-            public Integer isAdmin;
-            public Pivot pivot;
+            private Integer isAdmin;
+            private Pivot pivot;
         }
 
         @lombok.Data
@@ -730,66 +749,66 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Service {
-            public Integer id;
-            public String title;
+            private Integer id;
+            private String title;
             @JsonProperty("short_title")
-            public String shortTitle;
-            public String inn;
-            public String kpp;
-            public String ogrn;
-            public String okved;
-            public String address;
-            public String site;
+            private String shortTitle;
+            private String inn;
+            private String kpp;
+            private String ogrn;
+            private String okved;
+            private String address;
+            private String site;
             @JsonProperty("is_ip")
-            public Boolean isIp;
+            private Boolean isIp;
             @JsonProperty("register_date")
-            public String registerDate;
+            private String registerDate;
             @JsonProperty("user_id")
-            public Integer userId;
+            private Integer userId;
             @JsonProperty("created_at")
-            public String createdAt;
+            private String createdAt;
             @JsonProperty("updated_at")
-            public String updatedAt;
-            public String description;
-            public String logo;
-            public Boolean specialized;
-            public String card;
+            private String updatedAt;
+            private String description;
+            private String logo;
+            private Boolean specialized;
+            private String card;
             @JsonProperty("ministry_of_energy_agreement_exist")
-            public Boolean ministryOfEnergyAgreementExist;
+            private Boolean ministryOfEnergyAgreementExist;
             @JsonProperty("not_connected")
-            public Boolean notConnected;
+            private Boolean notConnected;
             @JsonProperty("vdgo_contract_charter")
-            public String vdgoContractCharter;
+            private String vdgoContractCharter;
             @JsonProperty("gen_dir")
-            public String genDir;
+            private String genDir;
             @JsonProperty("gen_dir_np")
-            public String genDirNp;
-            public Double lat;
-            public Double lng;
+            private String genDirNp;
+            private Double lat;
+            private Double lng;
             @JsonProperty("logo_id")
-            public Integer logoId;
+            private Integer logoId;
             @JsonProperty("card_id")
-            public Integer cardId;
+            private Integer cardId;
             @JsonProperty("is_self_employed_owner")
-            public Boolean isSelfEmployedOwner;
+            private Boolean isSelfEmployedOwner;
             @JsonProperty("for_fake")
-            public Boolean forFake;
+            private Boolean forFake;
             @JsonProperty("moneta_unit_id")
-            public Integer monetaUnitId;
+            private Integer monetaUnitId;
             @JsonProperty("moneta_account_id")
-            public Integer monetaAccountId;
+            private Integer monetaAccountId;
             @JsonProperty("moneta_account_payment_password")
-            public Object monetaAccountPaymentPassword;
+            private Object monetaAccountPaymentPassword;
             @JsonProperty("moneta_bank_account_id")
-            public Integer monetaBankAccountId;
+            private Integer monetaBankAccountId;
             @JsonProperty("for_banner_price")
-            public Boolean forBannerPrice;
+            private Boolean forBannerPrice;
             @JsonProperty("is_test_state")
-            public Boolean isTestState;
+            private Boolean isTestState;
             @JsonProperty("file_logo")
-            public FileLogo fileLogo;
+            private FileLogo fileLogo;
             @JsonProperty("file_card")
-            public FileCard fileCard;
+            private FileCard fileCard;
         }
 
         @lombok.Data
@@ -797,163 +816,163 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class ServiceCenter {
-            public Integer id;
-            public String title;
+            private Integer id;
+            private String title;
             @JsonProperty("first_accept")
-            public Double firstAccept;
-            public ArrayList<ServiceCenterMasters> masters;
+            private Double firstAccept;
+            private ArrayList<ServiceCenterMasters> masters;
 
             @lombok.Data
             @Builder
             @AllArgsConstructor
             @NoArgsConstructor
             public static class ServiceCenterMasters {
-                public Integer id;
+                private Integer id;
                 @JsonProperty("first_name")
-                public String firstName;
+                private String firstName;
                 @JsonProperty("last_name")
-                public String lastName;
+                private String lastName;
                 @JsonProperty("middle_name")
-                public String middleName;
-                public Object phone;
-                public String login;
-                public Object facetime;
-                public Object whatsapp;
-                public Object skype;
-                public Object telegram;
-                public String email;
+                private String middleName;
+                private Object phone;
+                private String login;
+                private Object facetime;
+                private Object whatsapp;
+                private Object skype;
+                private Object telegram;
+                private String email;
                 @JsonProperty("email_verified_at")
-                public String emailVerifiedAt;
+                private String emailVerifiedAt;
                 @JsonProperty("phone_verified_at")
-                public String phoneVerifiedAt;
-                public String gender;
-                public String specialization;
-                public String skills;
+                private String phoneVerifiedAt;
+                private String gender;
+                private String specialization;
+                private String skills;
                 @JsonProperty("avatar_id")
-                public Integer avatarId;
+                private Integer avatarId;
                 @JsonProperty("service_id")
-                public Integer serviceId;
+                private Integer serviceId;
                 @JsonProperty("deleted_at")
-                public String deletedAt;
+                private String deletedAt;
                 @JsonProperty("created_at")
-                public String createdAt;
+                private String createdAt;
                 @JsonProperty("updated_at")
-                public String updatedAt;
+                private String updatedAt;
                 @JsonProperty("requisites_filled")
-                public Boolean requisitesFilled;
+                private Boolean requisitesFilled;
                 @JsonProperty("bank_details_filled")
-                public Boolean bankDetailsFilled;
+                private Boolean bankDetailsFilled;
                 @JsonProperty("rate_filled")
-                public Boolean rateFilled;
+                private Boolean rateFilled;
                 @JsonProperty("price_list_filled")
-                public Boolean priceListFilled;
+                private Boolean priceListFilled;
                 @JsonProperty("distribution_company_agreement_filled")
-                public Boolean distributionCompanyAgreementFilled;
+                private Boolean distributionCompanyAgreementFilled;
                 @JsonProperty("equipments_filled")
-                public Boolean equipmentsFilled;
+                private Boolean equipmentsFilled;
                 @JsonProperty("contacts_filled")
-                public Boolean contactsFilled;
+                private Boolean contactsFilled;
                 @JsonProperty("bank_id")
-                public Integer bank_id;
+                private Integer bank_id;
                 @JsonProperty("account_number")
-                public Object accountNumber;
+                private Object accountNumber;
                 @JsonProperty("distribution_company_id")
-                public Integer distributionCompanyId;
+                private Integer distributionCompanyId;
                 @JsonProperty("country_id")
-                public Integer countryId;
+                private Integer countryId;
                 @JsonProperty("post_address_id")
-                public Integer postAddressId;
+                private Integer postAddressId;
                 @JsonProperty("on_verification")
-                public Boolean onVerification;
+                private Boolean onVerification;
                 @JsonProperty("verified_at")
-                public String verifiedAt;
+                private String verifiedAt;
                 @JsonProperty("verification_hash")
-                public String verificationHash;
+                private String verificationHash;
                 @JsonProperty("first_accept")
-                public Integer firstAccept;
+                private Integer firstAccept;
                 @JsonProperty("company_id")
-                public Integer companyId;
+                private Integer companyId;
                 @JsonProperty("employment_status")
-                public String employmentStatus;
+                private String employmentStatus;
                 @JsonProperty("dispatcher_company_id")
-                public Integer dispatcherCompanyId;
-                public Object position;
-                public String rating;
+                private Integer dispatcherCompanyId;
+                private Object position;
+                private String rating;
                 @JsonProperty("accept_terms")
-                public Boolean acceptTerms;
+                private Boolean acceptTerms;
                 @JsonProperty("new_messages_count")
-                public Integer newMessagesCount;
-                public String tz;
+                private Integer newMessagesCount;
+                private String tz;
                 @JsonProperty("push_notifications_enable")
-                public Boolean pushNotificationsEnable;
+                private Boolean pushNotificationsEnable;
                 @JsonProperty("email_notifications_enable")
-                public Boolean emailNotificationsEnable;
+                private Boolean emailNotificationsEnable;
                 @JsonProperty("sms_notifications_enable")
-                public Boolean smsNotificationsEnable;
+                private Boolean smsNotificationsEnable;
                 @JsonProperty("second_accept")
-                public Object secondAccept;
+                private Object secondAccept;
                 @JsonProperty("can_consulting")
-                public Boolean canConsulting;
+                private Boolean canConsulting;
                 @JsonProperty("consultation_price")
-                public Integer consultationPrice;
+                private Integer consultationPrice;
                 @JsonProperty("push_id")
-                public String pushId;
+                private String pushId;
                 @JsonProperty("ready_for_consultation")
-                public Boolean readyForConsultation;
+                private Boolean readyForConsultation;
                 @JsonProperty("active_role")
-                public Object activeRole;
+                private Object activeRole;
                 @JsonProperty("is_have_contract")
-                public Boolean isHaveContract;
+                private Boolean isHaveContract;
                 @JsonProperty("is_ip")
-                public Boolean isIp;
+                private Boolean isIp;
                 @JsonProperty("diploma_id")
-                public Integer diplomaId;
-                public Object inn;
+                private Integer diplomaId;
+                private Object inn;
                 @JsonProperty("living_address_id")
-                public Integer livingAddressId;
+                private Integer livingAddressId;
                 @JsonProperty("work_distance")
-                public Object workDistance;
+                private Object workDistance;
                 @JsonProperty("joined_at")
-                public String joinedAt;
+                private String joinedAt;
                 @JsonProperty("registered_at")
-                public String registeredAt;
+                private String registeredAt;
                 @JsonProperty("sc_notified_about_my_reg")
-                public Boolean scNotifiedAboutMyReg;
+                private Boolean scNotifiedAboutMyReg;
                 @JsonProperty("sc_notified_about_my_certificates")
-                public Boolean scNotifiedAboutMyCertificates;
-                public Integer debt;
+                private Boolean scNotifiedAboutMyCertificates;
+                private Integer debt;
                 @JsonProperty("count_review")
-                public Integer countReview;
+                private Integer countReview;
                 @JsonProperty("count_completed_orders")
-                public Integer countCompletedOrders;
+                private Integer countCompletedOrders;
                 @JsonProperty("count_not_read_notification")
-                public Integer countNotReadNotification;
+                private Integer countNotReadNotification;
                 @JsonProperty("fps_phone")
-                public String fpsPhone;
+                private String fpsPhone;
                 @JsonProperty("fps_bank_id")
-                public Integer fpsBankId;
+                private Integer fpsBankId;
                 @JsonProperty("selected_payment_method")
-                public String selectedPaymentMethod;
+                private String selectedPaymentMethod;
                 @JsonProperty("referer_id")
-                public Integer refererId;
+                private Integer refererId;
                 @JsonProperty("referer_code")
-                public String refererCode;
-                public Integer balance;
+                private String refererCode;
+                private Integer balance;
                 @JsonProperty("default_referral_commission")
-                public Double defaultReferralCommission;
+                private Double defaultReferralCommission;
                 @JsonProperty("additional_phone")
-                public Object additionalPhone;
-                public ArrayList<Roles> roles;
-                public Object company;
-                public Service service;
+                private Object additionalPhone;
+                private ArrayList<Roles> roles;
+                private Object company;
+                private Service service;
                 @JsonProperty("full_name")
-                public String fullName;
-                public String avatar;
-                public ArrayList<Brand> brands;
+                private String fullName;
+                private String avatar;
+                private ArrayList<Brand> brands;
                 @JsonProperty("reviews_count")
-                public Integer reviewsCount;
+                private Integer reviewsCount;
                 @JsonProperty("completed_orders_count")
-                public Integer completedOrdersCount;
+                private Integer completedOrdersCount;
             }
         }
 
@@ -962,20 +981,20 @@ public class OrdersIdResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Types {
-            public Integer id;
+            private Integer id;
             @JsonProperty("sort_order")
-            public Integer sortOrder;
-            public String title;
+            private Integer sortOrder;
+            private String title;
             @JsonProperty("additional_parameter")
-            public String additionalParameter;
-            public Object note;
+            private String additionalParameter;
+            private Object note;
             @JsonProperty("power_required")
-            public Boolean powerRequired;
+            private Boolean powerRequired;
             @JsonProperty("included_in_price_list")
-            public Boolean includedInPriceList;
+            private Boolean includedInPriceList;
             @JsonProperty("is_show_hidden")
-            public Boolean isShowHidden;
-            public ArrayList<Range> ranges;
+            private Boolean isShowHidden;
+            private ArrayList<Range> ranges;
         }
 
 

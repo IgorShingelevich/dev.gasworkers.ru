@@ -13,9 +13,9 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SuggestServicesResponseDto {
-    public Integer status;
-    public String message;
-    public Data data;
+    private Integer status;
+    private String message;
+    private Data data;
 
     @lombok.Data
     @Builder
@@ -31,54 +31,84 @@ public class SuggestServicesResponseDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Masters {
-        public Integer id;
-        public String title;
-        public String logo;
-        public Object price;
+        private Integer id;
+        private String title;
+        private String logo;
+        private Object price;
         @JsonProperty("with_consultation")
-        public Boolean withConsultation;
+        private Boolean withConsultation;
         @JsonProperty("consultation_passed")
-        public Boolean consultationPassed;
+        private Boolean consultationPassed;
         @JsonProperty("client_closed")
-        public Boolean clientClosed;
+        private Boolean clientClosed;
         @JsonProperty("wait_from")
-        public Object waitFrom;
+        private Object waitFrom;
         @JsonProperty("wait_notification")
-        public Integer waitNotification;
+        private Integer waitNotification;
         @JsonProperty("master_selected")
-        public Boolean masterSelected;
+        private Boolean masterSelected;
         @JsonProperty("master_started")
-        public Boolean masterStarted;
+        private Boolean masterStarted;
         @JsonProperty("price_wi")
-        public Object priceWi;
+        private Object priceWi;
         @JsonProperty("start_price")
-        public Object startPrice;
+        private Object startPrice;
         @JsonProperty("chat_id")
-        public Object chatId;
+        private Object chatId;
         @JsonProperty("unread_count")
-        public Object unreadCount;
-        public String status;
-        public ArrayList<Double> coordinates;
-        public String rating;
+        private Object unreadCount;
+        private String status;
+        private ArrayList<Double> coordinates;
+        private String rating;
         @JsonProperty("full_name")
-        public String fullName;
+        private String fullName;
         @JsonProperty("first_name")
-        public String firstName;
+        private String firstName;
         @JsonProperty("last_name")
-        public String lastName;
+        private String lastName;
         @JsonProperty("middle_name")
-        public String middleName;
-        public String avatar;
+        private String middleName;
+        private String avatar;
         @JsonProperty("reviews_as_target_count")
-        public Integer reviewsAsTargetCount;
+        private Integer reviewsAsTargetCount;
         @JsonProperty("master_orders_count")
-        public Integer masterOrdersCount;
-        public ArrayList<Brand> brands;
+        private Integer masterOrdersCount;
+        private ArrayList<Brand> brands;
         @JsonProperty("offer_id")
-        public Integer offerId;
-        public Boolean showed;
+        private Integer offerId;
+        private Boolean showed;
+        private SuggestedMaster master;
         @JsonProperty("count_completed_orders")
-        public Integer countCompletedOrders;
+        private Integer countCompletedOrders;
+        @JsonProperty("possible_first_accept_price")
+        private Double possibleFirstAcceptPrice;
+        @JsonProperty("possible_full_repair_price")
+        private Double possibleFullRepairPrice;
+
+        @lombok.Data
+        @Builder
+        @AllArgsConstructor
+        @NoArgsConstructor
+        public static class SuggestedMaster {
+            private Integer id;
+            @JsonProperty("full_name")
+            private String fullName;
+            @JsonProperty("first_name")
+            private String firstName;
+            @JsonProperty("last_name")
+            private String lastName;
+            @JsonProperty("middle_name")
+            private String middleName;
+            @JsonProperty("count_completed_orders")
+            private Integer countCompletedOrders;
+            private String avatar;
+            private String rating;
+            @JsonProperty("reviews_as_target_count")
+            private Integer reviewsAsTargetCount;
+            @JsonProperty("master_orders_count")
+            private Integer masterOrdersCount;
+            private ArrayList<Brand> brands;
+        }
 
 
         @lombok.Data
@@ -86,9 +116,9 @@ public class SuggestServicesResponseDto {
         @AllArgsConstructor
         @NoArgsConstructor
         public static class Brand {
-            public Integer id;
-            public String title;
-            public String logo;
+            private Integer id;
+            private String title;
+            private String logo;
         }
     }
 
@@ -97,47 +127,47 @@ public class SuggestServicesResponseDto {
     @AllArgsConstructor
     @NoArgsConstructor
     public static class Service {
-        public Integer id;
-        public String title;
-        public String logo;
-        public Double price;
+        private Integer id;
+        private String title;
+        private String logo;
+        private Double price;
         @JsonProperty("price_wi")
-        public Double priceWi;
+        private Double priceWi;
         @JsonProperty("price_real")
-        public Double priceReal;
-        public ArrayList<Double> coordinates;
-        public Boolean connected;
-        public String status;
-        public String rating;
+        private Double priceReal;
+        private ArrayList<Double> coordinates;
+        private Boolean connected;
+        private String status;
+        private String rating;
         @JsonProperty("first_accept")
-        public Double firstAccept;
-        public MasterSC master;
-        public Integer index;
+        private Double firstAccept;
+        private MasterSC master;
+        private Integer index;
         @JsonProperty("offer_id")
-        public Integer offerId;
-        public Boolean showed;
+        private Integer offerId;
+        private Boolean showed;
         @JsonProperty("possible_first_accept_price")
-        public Double possibleFirstAcceptPrice;
+        private Double possibleFirstAcceptPrice;
         @JsonProperty("possible_full_repair_price")
-        public Double possibleFullRepairPrice;
+        private Double possibleFullRepairPrice;
 
         @lombok.Data
         @Builder
         @AllArgsConstructor
         @NoArgsConstructor
         public static class MasterSC {
-            public Integer id;
+            private Integer id;
             @JsonProperty("full_name")
-            public String fullName;
-            public String avatar;
-            public String rating;
+            private String fullName;
+            private String avatar;
+            private String rating;
             @JsonProperty("reviews_as_target_count")
-            public Integer reviewsAsTargetCount;
+            private Integer reviewsAsTargetCount;
             @JsonProperty("master_orders_count")
-            public Object masterOrdersCount;
-            public ArrayList<Masters.Brand> brands;
+            private Object masterOrdersCount;
+            private ArrayList<Masters.Brand> brands;
             @JsonProperty("count_completed_orders")
-            public Integer countCompletedOrders;
+            private Integer countCompletedOrders;
         }
     }
 }

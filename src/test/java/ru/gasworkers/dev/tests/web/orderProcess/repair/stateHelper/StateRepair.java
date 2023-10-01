@@ -16,7 +16,7 @@ import static io.qameta.allure.Allure.step;
 @AllArgsConstructor
 public enum StateRepair {
     DRAFT("Черновик", null),
-    PUBLISHED("Опубликован", " опубликован"),
+    PUBLISHED("опубликован", " опубликован"),
     CANCEL_CLIENT_PUBLISHED("Заказ отменен", null),
     REFUSED_OFFER_DISPATCHER("Диспетчер отклонил новый тендер", null),
     HAS_OFFER("Есть предложения", "Отклик на заявку"),
@@ -157,7 +157,6 @@ public enum StateRepair {
                     switch (role) {
                         case CLIENT:
                             tab.checkInfoNoExistNotification();
-                            tab.checkResumeConference("Ваш заказ опубликован. Мастера уже откликаются на него. Выберите мастера и согласуйте дату и время визита.");
                             break;
                         case DISPATCHER:
                             tab.repairDetails.checkMaterialsPrice("0");
