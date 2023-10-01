@@ -1,7 +1,6 @@
 package ru.gasworkers.dev.pages.components.clientComponent.repairComponent;
 
 import com.codeborne.selenide.CollectionCondition;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
@@ -10,12 +9,12 @@ import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepairHe
 
 import static com.codeborne.selenide.Condition.*;
 
-public class CompanyBoxSelectService extends BaseComponent {
+public class RespondedCompaniesBoxSelectService extends BaseComponent {
     ElementsCollection
-            noOfferBoxCollection = driver.$$(".grid [id^='company-item-company-']").as("Блоки без кнопки Выбрать"),
-            offerBoxCollection = driver.$$(".grid [id^='company-item-company-']").filterBy(Condition.partialText("Выбрать")).as("Блоки с кнопкой Выбрать");
+//            offerBoxCollection = driver.$$("div[id^='company-item-company-']").filterBy(Condition.partialText("Выбрать")).as("Блоки с кнопкой Выбрать");
+            offerBoxCollection = driver.$$("div[id^='company-item-company-']").as("Блоки с кнопкой Выбрать");
 
-    public CompanyBoxSelectService(RoleBrowser browser) {
+    public RespondedCompaniesBoxSelectService(RoleBrowser browser) {
         super(browser);
     }
 

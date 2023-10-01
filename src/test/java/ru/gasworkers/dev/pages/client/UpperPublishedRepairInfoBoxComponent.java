@@ -7,8 +7,8 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
 
-public class UpperRepairInfoBoxComponent extends BaseComponent {
-    public UpperRepairInfoBoxComponent(RoleBrowser browser) {
+public class UpperPublishedRepairInfoBoxComponent extends BaseComponent {
+    public UpperPublishedRepairInfoBoxComponent(RoleBrowser browser) {
         super(browser);
     }
 
@@ -25,11 +25,11 @@ public class UpperRepairInfoBoxComponent extends BaseComponent {
         stepWithRole("Убедиться, что верхняя информационная панель Ремонта не отображается", () -> {
             self.shouldNotBe(visible);
         });
-    }    SelenideElement
+    }
+
+    SelenideElement
             self = driver.$("div.gas-tip.w-100").as("Верхняя информационная панель Ремонта"),
             firstTextLocator = self.$("p.first-text").as("Первый текст верхней информационной панели Ремонта"),
             secondTextLocator = self.$("p.second-text").as("Второй текст верхней информационной панели Ремонта"),
             closeButtonLocator = self.$("div.gas-tip__close").as("Кнопка закрытия верхней информационной панели Ремонта");
-
-
 }

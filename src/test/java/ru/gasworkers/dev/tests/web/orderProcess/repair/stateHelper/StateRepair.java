@@ -252,13 +252,20 @@ public enum StateRepair {
             switch (this) {
                 case PUBLISHED:
                     page.offersCounter.noOffers();
-                    page.companyBoxRepair.checkNoOffers();
-                    page.checkPublishedBanner();
+                    page.upperPublishedRepairInfoBox.checkPublishedState();
+                    page.countdown.checkPublishedActiveState();
+                    page.suggestedConsultationBannerComponent.checkFinishLoading();
+                    page.suggestedConsultationBannerComponent.checkOpened();
+                    page.respondedCompaniesBox.checkNoOffers();
                     break;
                 case HAS_OFFER:
-                    page.offersCounter.amount(page.companyBoxRepair.getAmountOfferBox());
+                    page.offersCounter.amount(page.respondedCompaniesBox.getAmountOfferBox());
                     page.checkHasOfferBanner();
-                    page.companyBoxRepair.checkOfferBoxHasOfferState(0, dto);
+                    page.suggestedConsultationBannerComponent.checkFinishLoading();
+                    page.suggestedConsultationBannerComponent.checkClosed();
+                    page.respondedCompaniesBox.checkOfferBoxHasOfferState(0, dto);
+                    page.upperPublishedRepairInfoBox.noUpperInfoBox();
+
                     break;
                 default:
                     page.notAvailable();

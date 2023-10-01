@@ -6,7 +6,7 @@ import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.clientComponent.OffersCounterClientComponent;
-import ru.gasworkers.dev.pages.components.clientComponent.repairComponent.CompanyBoxSelectService;
+import ru.gasworkers.dev.pages.components.clientComponent.repairComponent.RespondedCompaniesBoxSelectService;
 import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.spinner.MapSpinnerSelectServiceComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.spinner.ServiceSpinnerSelectServiceComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.guideComponent.PlayGuideComponent;
@@ -29,9 +29,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
     public final MapSpinnerSelectServiceComponent mapSpinner;
     public final OffersCounterClientComponent offersCounter;
     public final PlayGuideComponent guide;
-    public final UpperRepairInfoBoxComponent upperRepairInfoBox;
-    public final TimeCounterComponent timeCounter;
-    public final CompanyBoxSelectService companyBoxRepair;
+    public final UpperPublishedRepairInfoBoxComponent upperPublishedRepairInfoBox;
+    public final CountdownComponent countdown;
+    public final RespondedCompaniesBoxSelectService respondedCompaniesBox;
     public final SuggestedConsultationBannerComponent suggestedConsultationBannerComponent;
     private final String
             startMaintenancePrefixText = "Ваш заказ",
@@ -59,9 +59,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
         mapSpinner = new MapSpinnerSelectServiceComponent(browser);
         offersCounter = new OffersCounterClientComponent(browser);
         guide = new PlayGuideComponent(browser);
-        upperRepairInfoBox = new UpperRepairInfoBoxComponent(browser);
-        timeCounter = new TimeCounterComponent(browser);
-        companyBoxRepair = new CompanyBoxSelectService(browser);
+        upperPublishedRepairInfoBox = new UpperPublishedRepairInfoBoxComponent(browser);
+        countdown = new CountdownComponent(browser);
+        respondedCompaniesBox = new RespondedCompaniesBoxSelectService(browser);
         suggestedConsultationBannerComponent = new SuggestedConsultationBannerComponent(browser);
     }
 
@@ -71,16 +71,8 @@ public class SelectServicePageClientPage extends BaseClientPage {
 //            spinnerScrollbarLocator.should(disappear);
             assertThat(titleLocator.getText(), startsWith(startRepairPrefixText));
             assertThat(titleLocator.getText(), endsWith(endRepairPrefixText));
-            mapContainerLocator.shouldBe(visible, Duration.ofSeconds(40));
-            stepWithRole("Убедиться что появился первый таб", () -> {
-                firstServiceTabLocator.shouldBe(exist, Duration.ofSeconds(40));
-            });
-            /*stepWithRole("Убедиться что компонент карты загрузился", () -> {
-                driver.refresh();
-                mapContainerLocator.shouldBe(visible, Duration.ofSeconds(40));
-                driver.$("[class*=zoom__plus]").as("Кнопка увеличения карты").shouldBe(visible, Duration.ofSeconds(40));
-            });*/
-            offersCounter.checkFinishLoading();
+            mapContainerLocator.shouldBe(visible, Duration.ofSeconds(15));
+            countdown.checkFinishLoading();
             getOrderNumber();
         });
     }
@@ -95,7 +87,6 @@ public class SelectServicePageClientPage extends BaseClientPage {
         return this;
     }
 
-    //    @DisplayName("Убедиться, что страница Выбор СК загружена")
     public void checkFinishLoadingMaintenance() {
         stepWithRole("Убедиться, что страница Выбор СК загружена", () -> {
 //            spinnerScrollbarLocator.should(disappear);

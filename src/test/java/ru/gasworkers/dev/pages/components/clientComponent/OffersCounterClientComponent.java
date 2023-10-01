@@ -22,33 +22,39 @@ public class OffersCounterClientComponent extends BaseComponent {
     }
 
     public void noComponent() {
-        stepWithRole("Убедиться, что нет компонента предложений", () -> {
+        stepWithRole(this + "Убедиться, что нет компонента предложений", () -> {
             self.shouldNotBe(visible);
         });
     }
 
     public void noOffers() {
-        stepWithRole("Убедиться, что нет предложений", () -> {
+        stepWithRole(this + "Убедиться, что нет предложений", () -> {
             self.shouldHave(text("Нет предложений"), Duration.ofSeconds(10));
         });
     }
 
     public void amount(Integer count) {
-        stepWithRole("Убедиться, что есть " + count + " предложений", () -> {
+        stepWithRole(this + "Убедиться, что есть " + count + " предложений", () -> {
             self.shouldHave(partialText(count.toString()), Duration.ofSeconds(10));
         });
     }
 
     public void clickOffers() {
-        stepWithRole("Нажать на компонент предложения", () -> {
+        stepWithRole(this + "Нажать на предложения", () -> {
             self.shouldBe(visible, Duration.ofSeconds(10)).click();
             urlChecker.urlContains("select-service");
         });
     }
 
     public void checkFinishLoading() {
-        stepWithRole("Убедиться, что компонент предложения загрузился", () -> {
+        stepWithRole(this + "Убедиться, что  загрузился", () -> {
             self.shouldBe(visible);
         });
+    }
+
+    @Override
+    //class name to string
+    public String toString() {
+        return "Компонент счетчик предложений: ";
     }
 }
