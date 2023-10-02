@@ -165,7 +165,7 @@ public class OfferPriceModalDispatcherComponent extends BaseComponent {
                 checkEquipmentModal(stateInfo);
             });
             stepWithRole("Убедиться,  что отображается  список мастеров", () -> {
-                checkMasters(stateInfo.getCompaniesMastersResponseDto().getData());
+                checkMasters(stateInfo.getDesignatedCompaniesMastersResponseDto().getData());
             });
             stepWithRole("Убедиться, что отображается  поле  стоимость выезда мастера", () -> {
 

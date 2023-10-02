@@ -26,6 +26,7 @@ import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterReque
 import ru.gasworkers.dev.api.consultation.masters.pickMaster.dto.PickMasterResponseDto;
 import ru.gasworkers.dev.api.consultation.resume.ResumeConsultationApi;
 import ru.gasworkers.dev.api.consultation.resume.ResumeConsultationRequest;
+import ru.gasworkers.dev.api.orders.OLDselectMaster.OLDSelectMasterApi;
 import ru.gasworkers.dev.api.orders.actions.OrdersActionsApi;
 import ru.gasworkers.dev.api.orders.actions.OrdersSaveActionsApi;
 import ru.gasworkers.dev.api.orders.approveDate.OrdersApproveDateApi;
@@ -42,7 +43,6 @@ import ru.gasworkers.dev.api.orders.materialValues.OrdersSaveMaterialValuesApi;
 import ru.gasworkers.dev.api.orders.selectHouse.SelectHouseApi;
 import ru.gasworkers.dev.api.orders.selectHouse.dto.SelectHouseRequestDto;
 import ru.gasworkers.dev.api.orders.selectHouse.dto.SelectHouseResponseDto;
-import ru.gasworkers.dev.api.orders.selectMaster.SelectMasterApi;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
 import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentRequestDto;
 import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentResponseDto;
@@ -96,7 +96,7 @@ public class PreconditionConsultation extends BaseApiTest {
     private final UserSettingsApi userSettingsApi = new UserSettingsApi();
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
-    private final SelectMasterApi selectMasterApi = new SelectMasterApi();
+    private final OLDSelectMasterApi OLDSelectMasterApi = new OLDSelectMasterApi();
     private final OrdersIdApi ordersIdApi = new OrdersIdApi();
     private final OrdersInfoApi ordersInfoApi = new OrdersInfoApi();
     private final SuggestedServicesApi suggestedServicesApi = new SuggestedServicesApi();

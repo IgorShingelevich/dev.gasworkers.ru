@@ -6,6 +6,7 @@ import ru.gasworkers.dev.api.administration.getUserWithAdmin.GetUserWithAdminApi
 import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
 import ru.gasworkers.dev.api.auth.login.dto.LoginResponseDto;
 import ru.gasworkers.dev.api.auth.user.UserResponseDto;
+import ru.gasworkers.dev.api.orders.OLDselectMaster.OLDSelectMasterApi;
 import ru.gasworkers.dev.api.orders.actions.OrdersActionsApi;
 import ru.gasworkers.dev.api.orders.actions.OrdersSaveActionsApi;
 import ru.gasworkers.dev.api.orders.actions.dto.OrdersActionsResponseDto;
@@ -20,14 +21,17 @@ import ru.gasworkers.dev.api.orders.checkList.SaveCheckListApi;
 import ru.gasworkers.dev.api.orders.checkList.SaveCheckListResponseDto;
 import ru.gasworkers.dev.api.orders.createAct.OrdersCreateActApi;
 import ru.gasworkers.dev.api.orders.createAct.OrdersCreateActResponseDto;
+import ru.gasworkers.dev.api.orders.dispatcherPricing.DispatcherPricingAPI;
+import ru.gasworkers.dev.api.orders.dispatcherPricing.DispatcherPricingRequestDto;
 import ru.gasworkers.dev.api.orders.id.OrdersIdApi;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.info.OrdersInfoApi;
+import ru.gasworkers.dev.api.orders.makeOffer.MakeOfferApi;
+import ru.gasworkers.dev.api.orders.makeOffer.MakeOfferRequestDto;
 import ru.gasworkers.dev.api.orders.materialValues.OrdersMaterialValuesApi;
 import ru.gasworkers.dev.api.orders.materialValues.OrdersSaveMaterialValuesApi;
 import ru.gasworkers.dev.api.orders.materialValues.dto.OrdersMaterialValuesResponseDto;
 import ru.gasworkers.dev.api.orders.materialValues.dto.OrdersSaveMaterialValuesResponseDto;
-import ru.gasworkers.dev.api.orders.selectMaster.SelectMasterApi;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
 import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentResponseDto;
 import ru.gasworkers.dev.api.orders.selectServiceCompany.SelectServiceCompanyApi;
@@ -69,7 +73,9 @@ public class PreconditionRepair extends BaseApiTest {
     private final UserSettingsApi userSettingsApi = new UserSettingsApi();
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
-    private final SelectMasterApi selectMasterApi = new SelectMasterApi();
+    private final DispatcherPricingAPI dispatcherPricing = new DispatcherPricingAPI();
+    private final MakeOfferApi makeOffer = new MakeOfferApi();
+    private final OLDSelectMasterApi OLDSelectMasterApi = new OLDSelectMasterApi();
     private final OrdersIdApi ordersIdApi = new OrdersIdApi();
     private final OrdersInfoApi ordersInfoApi = new OrdersInfoApi();
     private final SuggestedServicesApi suggestedServicesApi = new SuggestedServicesApi();
@@ -89,10 +95,13 @@ public class PreconditionRepair extends BaseApiTest {
     private final OrdersCreateActApi ordersCreateActApi = new OrdersCreateActApi();
     private final OrdersSendSignApi ordersSendSignApi = new OrdersSendSignApi();
     private final OrdersSignApi ordersSignApi = new OrdersSignApi();
-    private final String sssrDispatcher1Email = "test_gw_dispatcher_sssr1@rambler.ru";
-    private final String sssrDispatcher1Password = "1234";
-    private final String sssrMaster1Email = "test_gas_master_sssr1@rambler.ru";
-    private final String sssrMaster1Password = "1234";
+    private final String
+            superDispatcherEmail = "gw_test_superdispatcher@rambler.ru",
+            superDispatcherPassword = "1234",
+            sssrDispatcher1Email = "test_gw_dispatcher_sssr1@rambler.ru",
+            sssrDispatcher1Password = "1234",
+            sssrMaster1Email = "test_gas_master_sssr1@rambler.ru",
+            sssrMaster1Password = "1234";
 
     private StateInfo stateInfoResult;
     private CommonFieldsDto commonFieldsResult;
@@ -109,6 +118,9 @@ public class PreconditionRepair extends BaseApiTest {
                     break;
                 case HAS_OFFER:
                     applyHasOfferPrecondition(stateRepair, client, commonFields);
+                    break;
+                case SCHEDULE_SERVICE:
+                    applyScheduleServicePrecondition(stateRepair, client, commonFields);
                     break;
                 case SCHEDULE_DATE:
                     applyScheduleDatePrecondition(stateRepair, client, commonFields);
@@ -162,14 +174,21 @@ public class PreconditionRepair extends BaseApiTest {
         StateRepair actualStateRepair = StateRepair.PUBLISHED;
         step("API: предусловие - " + UserRole.CLIENT + " заказ на ремонт в состоянии " + actualStateRepair, () -> {
             step(UserRole.CLIENT + " авторизуется", () -> {
-            commonFields.setTokenClient(loginApi.getTokenThrough(client));
+                commonFields.setTokenClient(loginApi.getTokenThrough(client));
             });
             step(UserRole.DISPATCHER + " авторизуется", () -> {
                 commonFields.setTokenDispatcher(loginApi.getUserToken(LoginRequestDto.asUserEmail(sssrDispatcher1Email, sssrDispatcher1Password)));
-                step("Диспетчер получает список  доступных  матеров", () -> {
-                    getCompaniesMastersDto(commonFields);
+                step(UserRole.DISPATCHER + " получает список  доступных  мастеров", () -> {
+                    getCompaniesMastersDto(commonFields.getTokenDispatcher());
                 });
             });
+            step(UserRole.SUPER_DISPATCHER + " авторизуется", () -> {
+                commonFields.setTokenSuperDispatcher(loginApi.getUserToken(LoginRequestDto.asUserEmail(superDispatcherEmail, superDispatcherPassword)));
+                step(UserRole.SUPER_DISPATCHER + " получает список  доступных  мастеров", () -> {
+                    getCompaniesMastersDto(commonFields.getTokenSuperDispatcher());
+                });
+            });
+
             step(UserRole.CLIENT + " заказ на ремонт - в состоянии " + actualStateRepair, () -> {
                 step(UserRole.CLIENT + " карточка последнего заказа - в состоянии " + actualStateRepair, () -> {
                     System.out.println("publishedLastOrderInfo");
@@ -239,19 +258,36 @@ public class PreconditionRepair extends BaseApiTest {
                 //todo assert клиент - модель пользователя в  состоянии после заполнения профиля
                 // todo change all  dto to include  user details
             });
-            step(UserRole.DISPATCHER + " выбирает мастера ", () -> {
-
-                step(UserRole.DISPATCHER + " получает список доступных мастеров ", () -> {
-                    commonFields.setMasterId(companiesMastersApi.getAcceptedMasters(commonFields.getTokenDispatcher())
+            step(UserRole.SUPER_DISPATCHER + " расценивает офер и  выбирает мастера", () -> {
+                step(UserRole.SUPER_DISPATCHER + " получает список доступных мастеров ", () -> {
+                    commonFields.setSuperMasterId(companiesMastersApi.getAcceptedMasters(commonFields.getTokenSuperDispatcher())
                             .statusCode(200)
                             .extract().as(CompaniesMastersResponseDto.class).getData().get(0).getId());
                 });
-                step(UserRole.DISPATCHER + " подтверждает выбор первого мастера ", () -> {
-                    selectMasterApi.selectMaster(commonFields.getOrderId(), commonFields.getMasterId(), commonFields.getTokenDispatcher())
+                step(UserRole.SUPER_DISPATCHER + " расценивает офер", () -> {
+                    dispatcherPricing.dispatcherPricing(DispatcherPricingRequestDto.builder()
+                                            .firstAcceptPrice(3000)
+                                            .fullRepairPrice("3999")
+                                            .masterId(commonFields.getSuperMasterId())
+                                            .build(),
+                                    commonFields.getOrderId(), commonFields.getTokenSuperDispatcher())
                             .statusCode(200);
                 });
+                step(UserRole.SUPER_DISPATCHER + " делает офер", () -> {
+                    makeOffer.makeOffer(MakeOfferRequestDto.builder()
+                                            .orderId(commonFields.getOrderId())
+                                            .build(),
+                                    commonFields.getTokenSuperDispatcher())
+                            .statusCode(200);
+
+                });
             });
-            step("Получение учетных данных  выбранного мастера за  роль администратора", () -> {
+            step(UserRole.DISPATCHER + " получает список доступных мастеров ", () -> {
+                commonFields.setMasterId(companiesMastersApi.getAcceptedMasters(commonFields.getTokenDispatcher())
+                        .statusCode(200)
+                        .extract().as(CompaniesMastersResponseDto.class).getData().get(0).getId());
+            });
+            step("Получение учетных данных мастера назначенной СК за  роль администратора", () -> {
                 String tokenAdmin = loginApi.login(LoginRequestDto.asAdmin())
                         .statusCode(200)
                         .extract().as(LoginResponseDto.class).getData().getToken();
@@ -263,6 +299,7 @@ public class PreconditionRepair extends BaseApiTest {
             });
             step(UserRole.CLIENT + " заказ на ремонт в состоянии " + actualStateRepair, () -> {
                 step(UserRole.CLIENT + " получает список доступных предложений", () -> {
+                    System.out.println("suggestServices");
                     SuggestServicesResponseDto suggestedServiceDto = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
                             .statusCode(200)
                             .extract().as(SuggestServicesResponseDto.class);
@@ -282,6 +319,9 @@ public class PreconditionRepair extends BaseApiTest {
                 });
             });
         });
+    }
+
+    private void applyScheduleServicePrecondition(StateRepair stateRepair, User client, CommonFieldsDto commonFields) {
     }
 
     private void applyScheduleDatePrecondition(StateRepair stateRepair, User client, CommonFieldsDto commonFields) {
@@ -474,10 +514,10 @@ public class PreconditionRepair extends BaseApiTest {
         });
     }
 
-    private CompaniesMastersResponseDto getCompaniesMastersDto(CommonFieldsDto commonFields) {
+    private CompaniesMastersResponseDto getCompaniesMastersDto(String token) {
         System.out.println("companiesMasters");
         return step("API: " + UserRole.DISPATCHER + " список доступных мастеров ", () -> {
-            return companiesMastersApi.getAcceptedMasters(commonFields.getTokenDispatcher())
+            return companiesMastersApi.getAcceptedMasters(token)
                     .statusCode(200)
                     .extract().as(CompaniesMastersResponseDto.class);
         });
@@ -487,7 +527,8 @@ public class PreconditionRepair extends BaseApiTest {
         stateInfo.setLastOrderInfoDto(getLastOrderInfoDto(commonFields, stateRepair));
         stateInfo.setOrdersIdResponseDto(getOrdersIdDto(commonFields, stateRepair));
         stateInfo.setNotificationsDto(getNotificationsDto(commonFields, stateRepair));
-        stateInfo.setCompaniesMastersResponseDto(getCompaniesMastersDto(commonFields));
+        stateInfo.setSuperCompaniesMastersResponseDto(getCompaniesMastersDto(commonFields.getTokenSuperDispatcher()));
+        stateInfo.setDesignatedCompaniesMastersResponseDto(getCompaniesMastersDto(commonFields.getTokenDispatcher()));
     }
 
     @Getter

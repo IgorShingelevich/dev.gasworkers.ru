@@ -13,10 +13,10 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CommonFieldsDto {
-    private String tokenAdmin, tokenClient, tokenDispatcher, payment0Url, payment1Url, payment2Url, tokenMaster,
+    private String tokenAdmin, tokenClient, tokenDispatcher, tokenSuperDispatcher, payment0Url, payment1Url, payment2Url, tokenMaster,
             orderNumber, clientEmail, masterEmail, clientRefererCode, approveDate, selectedDate;
     private Long clientPhone;
-    private Integer clientNotificationsCount, serviceId, dispatcherId, masterId, orderId,
+    private Integer clientNotificationsCount, serviceId, dispatcherId, masterId, superMasterId, orderId,
             offerIdBeforePayment,
             offerIdHasOfferClient, possibleOfferId, offerIdPublishedByIdDispatcher, clientObjectId,
             equipments0Id, activeOffersCount = 0, receipts0Id, receipts1Id, receipts2Id, clientId,

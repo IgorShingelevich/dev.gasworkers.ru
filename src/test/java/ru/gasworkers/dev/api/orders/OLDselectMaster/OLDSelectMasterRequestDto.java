@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.api.orders.selectMaster;
+package ru.gasworkers.dev.api.orders.OLDselectMaster;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class SelectMasterRequestDto {
+public class OLDSelectMasterRequestDto {
     @JsonProperty("order_id")
     private Integer orderId;
     @JsonProperty("master_id")

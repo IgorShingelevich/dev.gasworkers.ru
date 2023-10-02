@@ -10,8 +10,6 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public class CountdownComponent extends BaseComponent {
-    ElementsCollection
-            filteredMasterCardRatingStarsCountLocator = hasOfferFilteredMasterCardLocator.$$("div.gas-stars__star.active").as("Количество звезд рейтинга отфильтрованного мастера");
 
     public CountdownComponent(RoleBrowser browser) {
         super(browser);
@@ -89,6 +87,7 @@ public class CountdownComponent extends BaseComponent {
             filteredMasterCardReviewCountLocator = hasOfferFilteredMasterCardLocator.$("p b").as("Количество отзывов отфильтрованного мастера"),
             filteredMasterCardFinishedOrdersCountLocator = hasOfferFilteredMasterCardLocator.$("div.bag.small.ms-auto.px-3").as("Количество выполненных заказов отфильтрованного мастера"),
             hasOfferSelectButtonLocator = self.$(byTagAndText("span", "Выбрать")).as("Кнопка выбрать отфильтрованного мастера");
-
+    ElementsCollection
+            filteredMasterCardRatingStarsCountLocator = hasOfferFilteredMasterCardLocator.$$("div.gas-stars__star.active").as("Количество звезд рейтинга отфильтрованного мастера");
 
 }

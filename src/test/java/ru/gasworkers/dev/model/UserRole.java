@@ -10,6 +10,7 @@ public enum UserRole {
     CLIENT("Client", 79312534936L, ClientPages.class),
     MASTER("Master", 79917644241L, MasterPages.class),
     SELF_EMPLOYED("Self-employed", null, SelfEmployedPages.class),
+    SUPER_DISPATCHER("SuperDispatcher", null, DispatcherPages.class),
     DISPATCHER("Dispatcher", null, DispatcherPages.class),
     SERVICE ("ServiceCompanyStaff", null, ServicePages.class);
 

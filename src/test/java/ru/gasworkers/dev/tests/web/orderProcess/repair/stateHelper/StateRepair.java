@@ -22,6 +22,7 @@ public enum StateRepair {
     HAS_OFFER("Есть предложения", "Отклик на заявку"),
     CANCEL_CLIENT_HAS_OFFER("Заказ отменен", "Заказ отменен"),
     CANCEL_DISPATCHER_HAS_OFFER("Заказ отменен", "Заказ отменен"),
+    SCHEDULE_SERVICE("Согласование даты заказа", "Оплатите счет по заказу"),
     SCHEDULE_DATE("Согласование даты заказа", "Оплатите счет по заказу"),
     WAIT_MASTER("Мастер в пути", "Назначено время заказа"),
     MASTER_START_WORK("Мастер приступил к работе", null),

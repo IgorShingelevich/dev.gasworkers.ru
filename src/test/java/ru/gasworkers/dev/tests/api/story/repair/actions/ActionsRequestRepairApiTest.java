@@ -15,6 +15,8 @@ import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
 import ru.gasworkers.dev.api.auth.user.UserApi;
 import ru.gasworkers.dev.api.auth.user.UserResponseDto;
+import ru.gasworkers.dev.api.orders.OLDselectMaster.OLDSelectMasterApi;
+import ru.gasworkers.dev.api.orders.OLDselectMaster.OLDSelectMasterResponseDto;
 import ru.gasworkers.dev.api.orders.actions.OrdersActionsApi;
 import ru.gasworkers.dev.api.orders.actions.OrdersSaveActionsApi;
 import ru.gasworkers.dev.api.orders.actions.dto.OrdersActionsResponseDto;
@@ -31,8 +33,6 @@ import ru.gasworkers.dev.api.orders.materialValues.OrdersMaterialValuesApi;
 import ru.gasworkers.dev.api.orders.materialValues.OrdersSaveMaterialValuesApi;
 import ru.gasworkers.dev.api.orders.materialValues.dto.OrdersMaterialValuesResponseDto;
 import ru.gasworkers.dev.api.orders.materialValues.dto.OrdersSaveMaterialValuesResponseDto;
-import ru.gasworkers.dev.api.orders.selectMaster.SelectMasterApi;
-import ru.gasworkers.dev.api.orders.selectMaster.SelectMasterResponseDto;
 import ru.gasworkers.dev.api.orders.selectPayment.SelectPaymentApi;
 import ru.gasworkers.dev.api.orders.selectPayment.dto.SelectPaymentResponseDto;
 import ru.gasworkers.dev.api.orders.selectServiceCompany.SelectServiceCompanyApi;
@@ -66,7 +66,7 @@ public class ActionsRequestRepairApiTest extends BaseApiTest {
     private final UserApi userApi = new UserApi();
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
-    private final SelectMasterApi selectMasterApi = new SelectMasterApi();
+    private final OLDSelectMasterApi OLDSelectMasterApi = new OLDSelectMasterApi();
     private final SuggestedServicesApi suggestedServicesApi = new SuggestedServicesApi();
     private final SelectServiceCompanyApi selectServiceCompanyApi = new SelectServiceCompanyApi();
     private final FspBankListApi fspBankListApi = new FspBankListApi();
@@ -134,9 +134,9 @@ public class ActionsRequestRepairApiTest extends BaseApiTest {
                         .extract().as(CompaniesMastersResponseDto.class).getData().get(0).getId());
             });
             step("диспетчер подтверждает выбор первого мастера ", () -> {
-                selectMasterApi.selectMaster(commonFields.getOrderId(), commonFields.getMasterId(), commonFields.getTokenDispatcher())
+                OLDSelectMasterApi.selectMaster(commonFields.getOrderId(), commonFields.getMasterId(), commonFields.getTokenDispatcher())
                         .statusCode(200)
-                        .extract().as(SelectMasterResponseDto.class);
+                        .extract().as(OLDSelectMasterResponseDto.class);
             });
         });
 

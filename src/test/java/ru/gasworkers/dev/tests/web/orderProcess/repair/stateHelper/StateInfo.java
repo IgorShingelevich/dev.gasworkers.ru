@@ -21,7 +21,8 @@ public class StateInfo {
     private NotificationsResponseDto notificationsDto;
     private LastOrderInfoResponseDto lastOrderInfoDto;
     private OrdersIdResponseDto ordersIdResponseDto;
-    private CompaniesMastersResponseDto companiesMastersResponseDto;
+    private CompaniesMastersResponseDto designatedCompaniesMastersResponseDto;
+    private CompaniesMastersResponseDto superCompaniesMastersResponseDto;
 
 
     public StateInfo actualDtoSet() {
@@ -31,7 +32,8 @@ public class StateInfo {
                 .ordersIdResponseDto(ordersIdResponseDto)
                 .notificationsDto(notificationsDto)
                 .suggestedServiceDto(suggestedServiceDto)
-                .companiesMastersResponseDto(companiesMastersResponseDto)
+                .designatedCompaniesMastersResponseDto(designatedCompaniesMastersResponseDto)
+                .superCompaniesMastersResponseDto(superCompaniesMastersResponseDto)
                 .build();
     }
 }
