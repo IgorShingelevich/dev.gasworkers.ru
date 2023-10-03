@@ -20,7 +20,7 @@ public enum StateRepair {
     PUBLISHED_STOPPED_COUNTDOWN("опубликован", " опубликован"), //  select service  page state
     CANCEL_CLIENT_PUBLISHED("Заказ отменен", null),
     REFUSED_OFFER_DISPATCHER("Диспетчер отклонил новый тендер", null),
-    HAS_OFFER("Есть предложения", "Отклик на заявку"),
+    HAS_OFFER("Отклик на заявку", "Отклик на заявку"),
     CANCEL_CLIENT_HAS_OFFER("Заказ отменен", "Заказ отменен"),
     CANCEL_DISPATCHER_HAS_OFFER("Заказ отменен", "Заказ отменен"),
     SCHEDULE_SERVICE("Согласование даты заказа", "Оплатите счет по заказу"),
@@ -263,7 +263,7 @@ public enum StateRepair {
 //                    page.countdown.checkPublishedActiveState();
 //                    page.suggestedConsultationBannerComponent.checkFinishLoading();
 //                    page.suggestedConsultationBannerComponent.checkOpened();
-                    page.respondedCompaniesBox.checkNoOffers();
+                    page.respondedCompaniesBox.noOffers();
                     break;
                 case HAS_OFFER:
                     page.offersCounter.amount(page.respondedCompaniesBox.getAmountOfferBox());

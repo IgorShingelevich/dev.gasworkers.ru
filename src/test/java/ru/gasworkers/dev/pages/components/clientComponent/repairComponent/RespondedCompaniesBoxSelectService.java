@@ -2,6 +2,7 @@ package ru.gasworkers.dev.pages.components.clientComponent.repairComponent;
 
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
+import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
@@ -36,7 +37,7 @@ public class RespondedCompaniesBoxSelectService extends BaseComponent {
         });
     }
 
-    public void checkNoOffers() {
+    public void noOffers() {
         stepWithRole("Убедиться, что отсутствуют предложения", () -> {
             offerBoxCollection.shouldHave(CollectionCondition.size(0));
         });
@@ -44,113 +45,133 @@ public class RespondedCompaniesBoxSelectService extends BaseComponent {
 
     public void checkBoxTitle(Integer offerIndex) {
         stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " отображается заголовок ", () -> {
-            offerBoxCollection.get(offerIndex).$(".gas-box .item-flex .text-object p").shouldHave(text("Предложение  сервисной компании"));
+            offerBoxCollection.get(offerIndex).$(".h5").shouldHave(text("Предложение  сервисной компании"));
         });
     }
 
     public void checkGeoTag(Integer offerIndex) {
         stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " отображается геотег", () -> {
-            offerBoxCollection.get(offerIndex).$(".gas-box .item-flex .small-icon.cursor-pointer.ms-2").shouldBe(visible);
-            offerBoxCollection.get(offerIndex).$(".gas-box .item-flex .small-icon.cursor-pointer.ms-2").shouldHave(attribute("src", "https://dev.gasworkers.ru/_nuxt/img/location-map.4ebe60e.svg"));
-
+            offerBoxCollection.get(offerIndex).$(".maintenance-offer-list_map-placemark-icon").shouldBe(visible);
         });
     }
 
-    public void checkRatingCompany(Integer offerIndex, Integer rating) {
-        stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " отображается рейтинг " + rating, () -> {
-            offerBoxCollection.get(offerIndex).$$(".gas-stars-wrap").get(0).$$(".active").shouldHave(CollectionCondition.size(rating));
+    public void checkServiceRating(Integer offerIndex, Integer rating) {
+        stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " отображается рейтинг компании " + rating, () -> {
+            offerBoxCollection.get(offerIndex).$$(".gas-stars-wrap").get(0).$$(".active").as("Количество активных звезд у компании")
+                    .shouldHave(CollectionCondition.size(rating));
         });
     }
 
-    public void getRatingCompany(Integer offerIndex) {
-        stepWithRole("Получить рейтинг компании  у" + offerIndex, () -> {
-            offerBoxCollection.get(offerIndex).$$(".gas-box .item-flex .gas-stars-wrap .gas-stars__star.active").size();
+    public void checkMasterRating(Integer offerIndex, Integer rating) {
+        stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " отображается рейтинг мастера" + rating, () -> {
+            offerBoxCollection.get(offerIndex).$$(".gas-stars-wrap").get(1).$$(".active").as("Количество активных звезд у мастера")
+                    .shouldHave(CollectionCondition.size(rating));
         });
     }
 
-    public void checkAvatarCompany(Integer offerIndex) {
+
+    public void checkAvatarMaster(Integer offerIndex, String offeredMasterAvatar) {
         stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " отображается изображение", () -> {
-            offerBoxCollection.get(offerIndex).$(".gas-box .item-flex .photo-object-company").shouldHave(attribute("src", "https://dev.gasworkers.ru/images/default-logo.svg"));
+            offerBoxCollection.get(offerIndex).$(".ava img").shouldHave(attribute("src", offeredMasterAvatar));
+
         });
     }
 
-    public void checkVisitPrice(Integer offerIndex, String price) {
+    public void checkPossibleVisitPrice(Integer offerIndex, String price) {
         // round string "3100.0" to "3100"
         double priceDouble = Double.parseDouble(price);
         int priceInt = (int) priceDouble; // Cast the double to an integer to remove the decimal part
         String formattedPrice = String.valueOf(priceInt); // Convert the integer to a string
 
         stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " отображается стоимость первоначального выезда мастера " + formattedPrice, () -> {
-            offerBoxCollection.get(offerIndex).$$(".gas-box .item-flex .bag-success").get(0).shouldHave(partialText(formattedPrice));
+            offerBoxCollection.get(offerIndex).$$(".item-flex").findBy(text("Выезд мастера:"))
+                    .shouldHave(partialText(formattedPrice));
         });
     }
 
-    public void checkFullRepairPrice(Integer offerIndex, String price) {
+    public void checkPossibleRepairPrice(Integer offerIndex, String price) {
         // round string "3100.0" to "3100"
         double priceDouble = Double.parseDouble(price);
         int priceInt = (int) priceDouble; // Cast the double to an integer to remove the decimal part
         String formattedPrice = String.valueOf(priceInt); // Convert the integer to a string
 
         stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " отображается ориентировочная стоимость ремонта: " + formattedPrice, () -> {
-            offerBoxCollection.get(offerIndex).$$(".gas-box .item-flex .bag-success").get(1).shouldHave(partialText(formattedPrice));
+            offerBoxCollection.get(offerIndex).$$(".item-flex").findBy(text("Ориентировочная стоимость ремонта:"))
+                    .shouldHave(partialText(formattedPrice));
+        });
+    }
+
+    public void noFullRepairPrice(Integer offerIndex) {
+        stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " нет ориентировочной стоимости ремонта", () -> {
+            offerBoxCollection.get(offerIndex).$$(".item-flex").findBy(text("Ориентировочная стоимость ремонта:"))
+                    .shouldHave(partialText("не определено"));
         });
     }
 
     public void checkNotificationPaymentAfterArrival(Integer offerIndex) {
         stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " отображается уведомление " + " Оплата после приезда мастера", () -> {
-            offerBoxCollection.get(offerIndex).$(".gas-box .item-flex .bag-orange").shouldHave(text("Оплата после приезда мастера"));
+            offerBoxCollection.get(offerIndex).$(".bag-orange").shouldHave(text("Оплата после приезда мастера"));
         });
     }
 
-    public void checkFullNameMaster(Integer offerIndex, String masterName) {
-        stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " отображается полное имя мастера " + masterName, () -> {
-            offerBoxCollection.get(offerIndex).$(".gas-box .gas-card__item .item-flex .text-object p").shouldHave(text(masterName));
+    public void checkFirstNameMaster(Integer offerIndex, String firstName) {
+        stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " отображается  имя мастера " + firstName, () -> {
+            offerBoxCollection.get(offerIndex).$$(" .text-wrap .small").get(1).shouldHave(text(firstName));
         });
     }
 
-    public void checkAvatarMaster(Integer offerIndex, String image) {
-        stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + "  отображается изображение", () -> {
-            offerBoxCollection.get(offerIndex).$(".gas-box .gas-card__item .item-flex .photo-object").shouldHave(attribute("src", image));
+    public void checkMiddleNameMaster(Integer offerIndex, String middleName) {
+        stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " отображается  отчество мастера " + middleName, () -> {
+            offerBoxCollection.get(offerIndex).$$(" .text-wrap .small").get(2).shouldHave(text(middleName));
         });
     }
 
-    public void checkRatingMaster(Integer offerIndex, Integer rating) {
-        stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + "  отображается рейтинг " + rating, () -> {
-            offerBoxCollection.get(offerIndex).$$(".gas-stars-wrap").get(0).$$(".active").shouldHave(CollectionCondition.size(rating));
+    public void checkLastNameMaster(Integer offerIndex, String lastName) {
+        stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " отображается  фамилия мастера " + lastName, () -> {
+            offerBoxCollection.get(offerIndex).$$(" .text-wrap .small").get(0).shouldHave(text(lastName));
         });
     }
 
     public void checkMasterReviewCount(Integer offerIndex, String reviews) {
-        stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + "  отображается количество отзывов " + reviews, () -> {
-            offerBoxCollection.get(offerIndex).$(" .gas-card__item .item-flex.mb-2 ").shouldHave(partialText(reviews));
+        stepWithRole("Убедиться, что у предложения с индексом: " + offerIndex + " отображается количество отзывов " + reviews, () -> {
+            SelenideElement reviewCountLocator = offerBoxCollection.get(offerIndex).$("div.medium.text-sm.w-100");
+            int reviewCount = Integer.parseInt(reviews);
+            if (reviewCount == 0) {
+                reviewCountLocator.shouldHave(partialText("Нет отзывов"));
+            } else {
+                reviewCountLocator.shouldHave(partialText(reviews));
+            }
         });
     }
 
+
     public void checkMasterCompletedOrders(Integer offerIndex, String completedOrders) {
         stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + "  отображается количество выполненных заказов " + completedOrders, () -> {
-            offerBoxCollection.get(offerIndex).$(" .gas-card__item .w-100.d-flex.align-items-center.mb-2 .bag").shouldHave(partialText(completedOrders));
+            offerBoxCollection.get(offerIndex).$(" div.bag.small.ms-auto.px-3").shouldHave(partialText(completedOrders));
         });
     }
 
     public void checkButtonActive(Integer offerIndex) {
         stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + "  отображается активная кнопка Выбрать", () -> {
-            offerBoxCollection.get(offerIndex).$(".gas-box .justify-content-center.flex-column.align-items-center button").shouldNotBe(disabled);
+            offerBoxCollection.get(offerIndex).$("button").shouldNotBe(disabled);
         });
     }
 
     public void selectButton(Integer offerIndex) {
         stepWithRole("Нажать на кнопку Выбрать у  предложения  с индексом: " + offerIndex, () -> {
-            offerBoxCollection.get(offerIndex).$(".gas-box .justify-content-center.flex-column.align-items-center button").click();
+            offerBoxCollection.get(offerIndex).$("button").click();
         });
     }
 
     public void checkOfferBoxHasOfferState(int offerIndex, SuggestServicesResponseDto dto) {
         StateRepairHelper helper = new StateRepairHelper();
-        int ratingCompany = helper.getSuggestServiceSuggestedMasterCompanyRating(dto);
-        int ratingMaster = helper.getCalculateRatingMaster(dto);
-        String visitPrice = helper.getServicePageOfferPossibleVisitPrice(dto, offerIndex),
-                fullRepairPrice = helper.getServicePageOfferPossibleFullRepairPrice(dto, offerIndex),
-                offeredMasterFullName = helper.getOfferedMasterFullName(dto, offerIndex),
+        int ratingService = helper.getServiceStarsSimple(dto, offerIndex);
+        int ratingMaster = helper.getMasterStarsSimple(dto, offerIndex);
+        String possibleVisitPrice = helper.getServicePageOfferPossibleVisitPrice(dto, offerIndex),
+                possibleRepairPrice = helper.getServicePageOfferPossibleRepairPrice(dto, offerIndex),
+                offerMasterFirstName = helper.getOfferMasterFirstName(dto, offerIndex),
+                offerMasterMiddleName = helper.getOfferMasterMiddleName(dto, offerIndex),
+                offerMasterLastName = helper.getOfferMasterLastName(dto, offerIndex),
                 offeredMasterAvatar = helper.getOfferedMasterAvatar(dto, offerIndex),
                 offeredMasterReviewCount = helper.getOfferedMasterReviewCount(dto, offerIndex),
                 offeredMasterCompletedOrders = helper.getOfferedMasterCompletedOrders(dto, offerIndex);
@@ -158,14 +179,15 @@ public class RespondedCompaniesBoxSelectService extends BaseComponent {
             offerBoxCollection.get(offerIndex).shouldBe(visible);
             checkBoxTitle(offerIndex);
             checkGeoTag(offerIndex);
-            checkRatingCompany(offerIndex, ratingCompany);
-            checkAvatarCompany(offerIndex);
-            checkVisitPrice(offerIndex, visitPrice);// todo set  suggested price instead of  the fixed one
-            checkFullRepairPrice(offerIndex, visitPrice);// todo set  suggested price instead of  the fixed one
-            checkNotificationPaymentAfterArrival(offerIndex);
-            checkFullNameMaster(offerIndex, offeredMasterFullName);
+            checkServiceRating(offerIndex, ratingService);
             checkAvatarMaster(offerIndex, offeredMasterAvatar);
-            checkRatingMaster(offerIndex, ratingMaster);
+            checkPossibleVisitPrice(offerIndex, possibleVisitPrice);
+            checkPossibleRepairPrice(offerIndex, possibleRepairPrice);
+            checkNotificationPaymentAfterArrival(offerIndex);
+            checkFirstNameMaster(offerIndex, offerMasterFirstName);
+            checkMiddleNameMaster(offerIndex, offerMasterMiddleName);
+            checkLastNameMaster(offerIndex, offerMasterLastName);
+            checkMasterRating(offerIndex, ratingMaster);
             checkMasterReviewCount(offerIndex, offeredMasterReviewCount);
             checkMasterCompletedOrders(offerIndex, offeredMasterCompletedOrders);
             checkButtonActive(offerIndex);

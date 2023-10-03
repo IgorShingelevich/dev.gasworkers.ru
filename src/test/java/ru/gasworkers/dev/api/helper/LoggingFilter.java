@@ -7,24 +7,22 @@ import io.restassured.specification.FilterableRequestSpecification;
 import io.restassured.specification.FilterableResponseSpecification;
 
 public class LoggingFilter implements Filter {
-
     @Override
     public Response filter(FilterableRequestSpecification requestSpec,
                            FilterableResponseSpecification responseSpec,
                            FilterContext filterContext) {
         Response response = filterContext.next(requestSpec, responseSpec);
-        String methodName = extractMethodName();
-        JsonLogger.log(methodName, response.asString());
+        String uri = requestSpec.getURI();
+        String responseBody = response.asString();
+        logResponseToFile(uri, responseBody);
         return response;
     }
 
-    private String extractMethodName() {
-        StackTraceElement[] stackTraceElements = Thread.currentThread().getStackTrace();
-        for (StackTraceElement element : stackTraceElements) {
-            if (element.getClassName().startsWith("ru.gasworkers.dev.api")) {
-                return element.getMethodName();
-            }
-        }
-        return "UnknownMethod";
+    private void logResponseToFile(String uri, String responseBody) {
+        // Replace all non-alphanumeric characters with underscores
+        String sanitizedUri = uri.replaceAll("\\W", "_");
+
+        // Use JsonLogger to log the response to a file
+        JsonLogger.log(sanitizedUri, responseBody);
     }
 }

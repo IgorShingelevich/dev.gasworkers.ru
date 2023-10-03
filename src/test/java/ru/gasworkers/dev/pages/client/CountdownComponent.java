@@ -77,7 +77,8 @@ public class CountdownComponent extends BaseComponent {
 
 
     ElementsCollection
-            filteredMasterCardRatingStarsCountLocator = masterCardLocator.$$("div.gas-stars__star.active").as("Количество звезд рейтинга отфильтрованного мастера");
+            filteredMasterCardRatingStarsCountLocator = driver.$("div.bg-light-secondary")
+            .$$("div.gas-stars__star.active").as("Количество звезд рейтинга отфильтрованного мастера");
 
     public void checkHasOfferState(SuggestServicesResponseDto dto) {
         stepWithRole("Убедиться, что компонент счетчик в Состоянии Есть предложения", () -> {
