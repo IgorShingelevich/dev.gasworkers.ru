@@ -30,9 +30,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
     public final OffersCounterClientComponent offersCounter;
     public final PlayGuideComponent guide;
     public final UpperPublishedRepairInfoBoxComponent upperPublishedRepairInfoBox;
-    public final CountdownComponent countdown;
+    public final CountdownComponent countdownComponent;
     public final RespondedCompaniesBoxSelectService respondedCompaniesBox;
-    public final SuggestedConsultationBannerComponent suggestedConsultationBannerComponent;
+    public final SuggestedConsultationBannerComponent suggestedConsultationBanner;
     private final String
             startMaintenancePrefixText = "Ваш заказ",
             endMaintenancePrefixText = "и обрабатывается диспетчерами",
@@ -60,9 +60,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
         offersCounter = new OffersCounterClientComponent(browser);
         guide = new PlayGuideComponent(browser);
         upperPublishedRepairInfoBox = new UpperPublishedRepairInfoBoxComponent(browser);
-        countdown = new CountdownComponent(browser);
+        countdownComponent = new CountdownComponent(browser);
         respondedCompaniesBox = new RespondedCompaniesBoxSelectService(browser);
-        suggestedConsultationBannerComponent = new SuggestedConsultationBannerComponent(browser);
+        suggestedConsultationBanner = new SuggestedConsultationBannerComponent(browser);
     }
 
     public void checkFinishLoadingRepair() {
@@ -72,7 +72,8 @@ public class SelectServicePageClientPage extends BaseClientPage {
             assertThat(titleLocator.getText(), startsWith(startRepairPrefixText));
             assertThat(titleLocator.getText(), endsWith(endRepairPrefixText));
             mapContainerLocator.shouldBe(visible, Duration.ofSeconds(15));
-            countdown.checkFinishLoading();
+            countdownComponent.checkFinishLoading();
+            suggestedConsultationBanner.checkFinishLoading();
             getOrderNumber();
         });
     }

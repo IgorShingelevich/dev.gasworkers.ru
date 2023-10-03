@@ -127,7 +127,7 @@ public class SuggestedMasterRepairCommonTabOrderCardComponent extends BaseOrderC
             tab.checkRegisterDateSuggestedMaster(masterIndex, dataSuggestedMaster.getSuggestedMasterRegisterDate());
             tab.checkRatingSuggestedMaster(masterIndex, dataSuggestedMaster.getSuggestedMasterRating());
             tab.checkReviewsSuggestedMaster(masterIndex, dataSuggestedMaster.getSuggestedMasterReviewCount());
-            tab.checkShortWorkPlaceSuggestedMaster(masterIndex, dataSuggestedMaster.getSuggestedMasterShortWorkPlace());
+//            tab.checkShortWorkPlaceSuggestedMaster(masterIndex, dataSuggestedMaster.getSuggestedMasterShortWorkPlace()); // no  SC name  in this iteration
             tab.checkRatingStarsCountCompanySuggestedMaster(masterIndex, dataSuggestedMaster.getSuggestedMasterCompanyRatingStarsCount());
             tab.certifiedEquipmentsSuggestedMaster(masterIndex, dataSuggestedMaster.getSuggestedMasterCertifiedEquipmentCount());
             tab.checkSkillsSuggestedMaster(masterIndex, dataSuggestedMaster.getSuggestedMasterSkills());

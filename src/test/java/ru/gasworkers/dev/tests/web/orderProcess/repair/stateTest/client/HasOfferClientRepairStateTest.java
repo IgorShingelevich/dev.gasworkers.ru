@@ -75,7 +75,7 @@ public class HasOfferClientRepairStateTest extends BaseWebTest {
             };
             Consumer<SoftAssert> case3 = softAssert -> {
                 step(userRole + " страница выбора услуги - в состоянии " + state, () -> {
-                    clientPages.getSelectServicePage().checkFinishLoadingRepair();
+//                    clientPages.getSelectServicePage().checkFinishLoadingRepair();
                     clientPages.getSelectServicePage().checkState(state, stateInfo.getSuggestedServiceDto());
                 });
             };

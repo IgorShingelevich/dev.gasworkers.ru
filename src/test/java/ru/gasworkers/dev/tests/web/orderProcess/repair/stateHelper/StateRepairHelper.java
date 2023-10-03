@@ -58,9 +58,19 @@ public class StateRepairHelper {
         return 0; // Default value if services list is empty or master or rating is null
     }
 
-    public String getServicePageOfferVisitPrice(SuggestServicesResponseDto dto, int offerIndex) {
+    public String getServicePageOfferPossibleVisitPrice(SuggestServicesResponseDto dto, int offerIndex) {
         if (dto.getData().getServices() != null && offerIndex < dto.getData().getServices().size()) {
-            return dto.getData().getServices().get(offerIndex).getFirstAccept().toString();
+//            return dto.getData().getServices().get(offerIndex).getFirstAccept().toString();
+            return dto.getData().getServices().get(offerIndex).getPossibleFirstAcceptPrice().toString();
+
+        }
+        return null; // Default value if services list is empty or index is out of bounds
+    }
+
+    public String getServicePageOfferPossibleFullRepairPrice(SuggestServicesResponseDto dto, int offerIndex) {
+        if (dto.getData().getServices() != null && offerIndex < dto.getData().getServices().size()) {
+//            return dto.getData().getServices().get(offerIndex).getFirstAccept().toString();
+            return dto.getData().getServices().get(offerIndex).getPossibleFullRepairPrice().toString();
         }
         return null; // Default value if services list is empty or index is out of bounds
     }

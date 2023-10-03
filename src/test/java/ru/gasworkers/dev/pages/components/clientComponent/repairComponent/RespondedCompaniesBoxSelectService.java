@@ -24,6 +24,12 @@ public class RespondedCompaniesBoxSelectService extends BaseComponent {
         });
     }
 
+    public void noBox() {
+        stepWithRole("Убедиться, что отсутствуют предложения", () -> {
+            offerBoxCollection.shouldHave(CollectionCondition.size(0));
+        });
+    }
+
     public int getAmountOfferBox() {
         return stepWithRole("Получить количество тендеров", () -> {
             return offerBoxCollection.size();
@@ -75,7 +81,18 @@ public class RespondedCompaniesBoxSelectService extends BaseComponent {
         String formattedPrice = String.valueOf(priceInt); // Convert the integer to a string
 
         stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " отображается стоимость первоначального выезда мастера " + formattedPrice, () -> {
-            offerBoxCollection.get(offerIndex).$(".gas-box .item-flex .bag-success").shouldHave(partialText(formattedPrice));
+            offerBoxCollection.get(offerIndex).$$(".gas-box .item-flex .bag-success").get(0).shouldHave(partialText(formattedPrice));
+        });
+    }
+
+    public void checkFullRepairPrice(Integer offerIndex, String price) {
+        // round string "3100.0" to "3100"
+        double priceDouble = Double.parseDouble(price);
+        int priceInt = (int) priceDouble; // Cast the double to an integer to remove the decimal part
+        String formattedPrice = String.valueOf(priceInt); // Convert the integer to a string
+
+        stepWithRole("Убедиться, что у  предложения  с индексом: " + offerIndex + " отображается ориентировочная стоимость ремонта: " + formattedPrice, () -> {
+            offerBoxCollection.get(offerIndex).$$(".gas-box .item-flex .bag-success").get(1).shouldHave(partialText(formattedPrice));
         });
     }
 
@@ -131,7 +148,8 @@ public class RespondedCompaniesBoxSelectService extends BaseComponent {
         StateRepairHelper helper = new StateRepairHelper();
         int ratingCompany = helper.getSuggestServiceSuggestedMasterCompanyRating(dto);
         int ratingMaster = helper.getCalculateRatingMaster(dto);
-        String visitPrice = helper.getServicePageOfferVisitPrice(dto, offerIndex),
+        String visitPrice = helper.getServicePageOfferPossibleVisitPrice(dto, offerIndex),
+                fullRepairPrice = helper.getServicePageOfferPossibleFullRepairPrice(dto, offerIndex),
                 offeredMasterFullName = helper.getOfferedMasterFullName(dto, offerIndex),
                 offeredMasterAvatar = helper.getOfferedMasterAvatar(dto, offerIndex),
                 offeredMasterReviewCount = helper.getOfferedMasterReviewCount(dto, offerIndex),
@@ -142,7 +160,8 @@ public class RespondedCompaniesBoxSelectService extends BaseComponent {
             checkGeoTag(offerIndex);
             checkRatingCompany(offerIndex, ratingCompany);
             checkAvatarCompany(offerIndex);
-//            checkVisitPrice(offerIndex, visitPrice);// todo set  suggested price instead of  the fixed one
+            checkVisitPrice(offerIndex, visitPrice);// todo set  suggested price instead of  the fixed one
+            checkFullRepairPrice(offerIndex, visitPrice);// todo set  suggested price instead of  the fixed one
             checkNotificationPaymentAfterArrival(offerIndex);
             checkFullNameMaster(offerIndex, offeredMasterFullName);
             checkAvatarMaster(offerIndex, offeredMasterAvatar);

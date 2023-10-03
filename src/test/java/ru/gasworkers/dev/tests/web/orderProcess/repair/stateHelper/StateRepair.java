@@ -17,6 +17,7 @@ import static io.qameta.allure.Allure.step;
 public enum StateRepair {
     DRAFT("Черновик", null),
     PUBLISHED("опубликован", " опубликован"),
+    PUBLISHED_STOPPED_COUNTDOWN("опубликован", " опубликован"), //  select service  page state
     CANCEL_CLIENT_PUBLISHED("Заказ отменен", null),
     REFUSED_OFFER_DISPATCHER("Диспетчер отклонил новый тендер", null),
     HAS_OFFER("Есть предложения", "Отклик на заявку"),
@@ -250,20 +251,26 @@ public enum StateRepair {
     public void checkSelectServicePage(SelectServicePageClientPage page, SuggestServicesResponseDto dto) {
         step("Убедиться, что  стр выбора  компании в состоянии " + this, () -> {
             //todo offerCount
+            page.checkFinishLoadingRepair();
+            page.countdownComponent.checkState(this, dto); //todo check focusMasterCrd
+            page.countdownComponent.checkMasterCardState(this, dto); //todo check focusMasterCrd
+
+            page.suggestedConsultationBanner.checkState(this);
             switch (this) {
                 case PUBLISHED:
                     page.offersCounter.noOffers();
                     page.upperPublishedRepairInfoBox.checkPublishedState();
-                    page.countdown.checkPublishedActiveState();
-                    page.suggestedConsultationBannerComponent.checkFinishLoading();
-                    page.suggestedConsultationBannerComponent.checkOpened();
+//                    page.countdown.checkPublishedActiveState();
+//                    page.suggestedConsultationBannerComponent.checkFinishLoading();
+//                    page.suggestedConsultationBannerComponent.checkOpened();
                     page.respondedCompaniesBox.checkNoOffers();
                     break;
                 case HAS_OFFER:
                     page.offersCounter.amount(page.respondedCompaniesBox.getAmountOfferBox());
-                    page.checkHasOfferBanner();
-                    page.suggestedConsultationBannerComponent.checkFinishLoading();
-                    page.suggestedConsultationBannerComponent.checkClosed();
+//                    page.checkHasOfferBanner(); //deleted
+//                    page.countdown.checkHasOfferState(dto);
+//                    page.suggestedConsultationBannerComponent.checkFinishLoading();
+//                    page.suggestedConsultationBannerComponent.checkClosed();
                     page.respondedCompaniesBox.checkOfferBoxHasOfferState(0, dto);
                     page.upperPublishedRepairInfoBox.noUpperInfoBox();
 

@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pages.sharedPages;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.Cookie;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.BasePage;
 import ru.gasworkers.dev.pages.components.clientComponent.NoticeComponent;
@@ -48,6 +49,15 @@ public class LandingPage extends BasePage {
 
     public void open() {
         stepWithRole("Открыть главную страницу", () -> {
+            driver.open("https://dev.gasworkers.ru/");
+            primaryHeaderLocator.shouldBe(visible);
+        });
+    }
+
+    public void open(String token) {
+        stepWithRole("Открыть главную страницу", () -> {
+            driver.getWebDriver().manage().addCookie(
+                    new Cookie("Authorization", "Bearer " + token, "dev.gasworkers.ru", "/", null));
             driver.open("https://dev.gasworkers.ru/");
             primaryHeaderLocator.shouldBe(visible);
         });

@@ -78,14 +78,14 @@ public class PublishedClientRepairStateTest extends BaseWebTest {
             };
             Consumer<SoftAssert> case3 = softAssert -> {
                 step(userRole + " страница выбора услуги - в состоянии " + state, () -> {
-                    clientPages.getSelectServicePage().checkFinishLoadingRepair();
+//                    clientPages.getSelectServicePage().checkFinishLoadingRepair();
                     clientPages.getSelectServicePage().checkState(state, stateInfo.getSuggestedServiceDto());
                 });
             };
             Consumer<SoftAssert> case4 = softAssert -> {
                 step(userRole + " карточка заказа - в состоянии " + state, () -> {
                     clientPages.getSelectServicePage().toOrderCard();
-                    clientPages.getOrderCardPage().checkFinishLoading();
+                    clientPages.getOrderCardPage().checkFinishLoading(); // TODO move checkFinishLoading to checkState
                     clientPages.getOrderCardPage().checkStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
 
                 });

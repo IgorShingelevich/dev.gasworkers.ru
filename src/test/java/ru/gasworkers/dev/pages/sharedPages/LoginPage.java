@@ -8,6 +8,7 @@ import ru.gasworkers.dev.pages.BasePage;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.value;
+import static com.codeborne.selenide.Selectors.byTagAndText;
 
 public final class LoginPage extends BasePage {
 
@@ -46,7 +47,8 @@ public final class LoginPage extends BasePage {
                 passwordFieldLocator.pressEnter();
                 passwordFieldLocator.shouldHave(value(password));
             });
-            primaryButton();
+//            primaryButton();
+            driver.$(byTagAndText("span", "Далее")).click();
         });
 
     }

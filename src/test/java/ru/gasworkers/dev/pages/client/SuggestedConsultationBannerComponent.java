@@ -6,6 +6,7 @@ import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import static com.codeborne.selenide.Condition.visible;
 
@@ -21,6 +22,21 @@ public class SuggestedConsultationBannerComponent extends BaseComponent {
 
     ElementsCollection
             mastersSliderCollection = self.$$("div.slick-track .slick-slide").as("Слайдер мастеров");
+
+    public void checkState(StateRepair state) {
+        checkFinishLoading();
+        switch (state) {
+            case PUBLISHED:
+            case PUBLISHED_STOPPED_COUNTDOWN:
+                checkOpened();
+                break;
+            case HAS_OFFER:
+                checkClosed();
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + state);
+        }
+    }
 
     public void checkFinishLoading() {
         stepWithRole("Убедиться, что баннер отображается", () -> {

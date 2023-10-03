@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pages.client;
 import com.codeborne.selenide.CollectionCondition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.Cookie;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.clientComponent.LastOrderProfileClientComponent;
 import ru.gasworkers.dev.pages.components.clientComponent.RedNoticeComponent;
@@ -61,6 +62,12 @@ public final class HomeClientPage extends BaseClientPage {
         stepWithRole("Открыть домашнюю страницу", () -> {
             driver.open("/profile/client");
         });
+    }
+
+    public void open(String token) {
+        driver.getWebDriver().manage().addCookie(
+                new Cookie("Authorization", "Bearer " + token, "dev.gasworkers.ru", "/", null));
+        driver.open("/profile/client");
     }
 
     public void checkFillProfileButton() {
@@ -199,4 +206,6 @@ public final class HomeClientPage extends BaseClientPage {
     public void checkUrl() {
         urlChecker.urlContains("profile/client");
     }
+
+
 }

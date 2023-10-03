@@ -138,6 +138,8 @@ public class OrdersIdResponseDto {
         private Object offerDispatcher;
         @JsonProperty("offer_master")
         private Object offerMaster;
+        @JsonProperty("from_mobile")
+        private Boolean fromMobile;
 
 
 
