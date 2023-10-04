@@ -150,12 +150,14 @@ public class AllNotificationsPage extends BasePage {
                     break;
                 case CANCEL_CLIENT_HAS_OFFER:
                 case CANCEL_DISPATCHER_HAS_OFFER:
-                case HAS_OFFER:
+                case HAS_SUPER_OFFER:
+                case HAS_SERVICE_OFFER:
                     checkExpectedAmountOfNotifications(2, 4000);
                     checkFirstNotificationText(stateRepair.notification());
                     assertThat(firstNotificationText, endsWith(stateRepair.notification()));
                     break;
-                case SCHEDULE_DATE:
+                case SCHEDULE_SUPER_OFFER:
+                case SCHEDULE_SERVICE:
                     checkExpectedAmountOfNotifications(3, 4000);
                     checkFirstNotificationText(stateRepair.notification());
                     assertThat(firstNotificationText, startsWith(stateRepair.notification()));

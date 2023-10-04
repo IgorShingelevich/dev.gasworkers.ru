@@ -42,7 +42,7 @@ public class HasOfferSuperDispatcherRepairStateTest extends BaseWebTest {
     @Test
     @DisplayName("Ремонт - в состоянии есть отклик СК")
     void hasOfferRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.HAS_OFFER;
+        StateRepair state = StateRepair.HAS_SERVICE_OFFER;
         UserRole userRole = UserRole.DISPATCHER;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);

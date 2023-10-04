@@ -15,6 +15,7 @@ import ru.gasworkers.dev.extension.user.WithThroughUser;
 import ru.gasworkers.dev.model.UserRole;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
+import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 import ru.gasworkers.dev.tests.web.BaseWebTest;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.PreconditionRepair;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateInfo;
@@ -35,20 +36,21 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class ScheduleDateClientRepairStateTest extends BaseWebTest {
+public class HasSuperOfferClientRepairStateTest extends BaseWebTest {
     @Browser(role = UserRole.CLIENT)
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Ремонт - в  состоянии согласование даты и времени")
-    void scheduleDateRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.SCHEDULE_DATE;
+    @DisplayName("Ремонт - в состоянии есть отклик СД")
+    void hasSuperOfferRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+        StateRepair state = StateRepair.HAS_SUPER_OFFER;
         UserRole userRole = UserRole.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
 
-// Get the StateInfo and CommonFieldsDto from the result
+// Get the StateInfo and CommonFieldsRepairDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
+        CommonFieldsDto commonFields = result.getCommonFieldsResult();
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("Web: " + userRole + " авторизация", () -> {
             clientPages.getLoginPage().open();
@@ -62,7 +64,8 @@ public class ScheduleDateClientRepairStateTest extends BaseWebTest {
                 Allure.addAttachment("RunStartTime: ", date);
             });
         });
-        step(userRole + " кабинет в состоянии - в состоянии " + state, () -> {
+
+        step(userRole + " кабинет  в состоянии - в состоянии " + state, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(userRole + " карточка последнего заказа - в состоянии " + state, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
@@ -70,14 +73,24 @@ public class ScheduleDateClientRepairStateTest extends BaseWebTest {
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
+                checkRedirectFromLastOrderToSelectService(userRole, state);
+            };
+            Consumer<SoftAssert> case3 = softAssert -> {
+                step(userRole + " страница выбора услуги - в состоянии " + state, () -> {
+//                    clientPages.getSelectServicePage().checkFinishLoadingRepair();
+                    clientPages.getSelectServicePage().openRepair(String.valueOf(commonFields.getOrderNumber()));
+                    clientPages.getSelectServicePage().checkState(state, stateInfo.getSuggestedServiceDto());
+                });
+            };
+
+            Consumer<SoftAssert> case4 = softAssert -> {
                 step(userRole + " карточка заказа - в состоянии " + state, () -> {
-                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-                    clientPages.getHomePage().lastOrderComponent.open();
+                    clientPages.getSelectServicePage().toOrderCard();
                     clientPages.getOrderCardPage().checkFinishLoading();
                     clientPages.getOrderCardPage().checkStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
                 });
             };
-            Consumer<SoftAssert> case3 = softAssert -> {
+            Consumer<SoftAssert> case5 = softAssert -> {
                 step(userRole + " уведомления - в состоянии " + state, () -> {
 //                    clientPages.getHomePage().open();
 //                    clientPages.getHomePage().checkFinishLoading();
@@ -88,21 +101,29 @@ public class ScheduleDateClientRepairStateTest extends BaseWebTest {
                     clientPages.getAllNotificationsPage().checkStateRepair(state, stateInfo.getNotificationsDto());
                 });
             };
-            Consumer<SoftAssert> case4 = softAssert -> {
+            Consumer<SoftAssert> case6 = softAssert -> {
                 step(userRole + " красное уведомление в лк - в состоянии " + state, () -> {
                     clientPages.getHomePage().open();
                     clientPages.getHomePage().checkFinishLoading();
                     clientPages.getHomePage().redNotice.noNotice();
                 });
             };
-            Consumer<SoftAssert> case5 = softAssert -> {
+            Consumer<SoftAssert> case7 = softAssert -> {
                 step(userRole + " красное уведомление на стр лендинга - в состоянии " + state, () -> {
                     clientPages.getLandingPage().open();
                     clientPages.getLandingPage().checkFinishLoading();
                     clientPages.getLandingPage().noticeComponent.noNotifications();
                 });
             };
-            assertAll(Arrays.asList(case1, case2, case3, case4, case5));
+            assertAll(Arrays.asList(case1, case2, case3, case4, case5, case6, case7));
+        });
+    }
+
+    private void checkRedirectFromLastOrderToSelectService(UserRole userRole, StateRepair state) {
+        step(userRole + " карточка заказа редирект на карту - в состоянии " + state, () -> {
+            clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
+            clientPages.getHomePage().lastOrderComponent.open();
+            clientPages.getSelectServicePage().checkUrl();
         });
     }
 }

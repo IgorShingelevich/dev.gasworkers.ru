@@ -45,7 +45,7 @@ public class HasOfferDispatcherRepairStateTest extends BaseWebTest {
     @Test
     @DisplayName("Ремонт - в состоянии есть отклик СК")
     void hasOfferRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.HAS_OFFER;
+        StateRepair state = StateRepair.HAS_SERVICE_OFFER;
         UserRole userRole = UserRole.DISPATCHER;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
@@ -77,8 +77,8 @@ public class HasOfferDispatcherRepairStateTest extends BaseWebTest {
             };
             Consumer<SoftAssert> case2 = softAssert -> {
                 step(userRole + " карточка заказа - в состоянии " + state, () -> {
-                    dispatcherPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderId()));
-                    dispatcherPages.getOrderCardPage().checkUrl(String.valueOf(commonFields.getOrderId()));
+                    dispatcherPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderNumber()));
+                    dispatcherPages.getOrderCardPage().checkUrl(String.valueOf(commonFields.getOrderNumber()));
                     dispatcherPages.getDriverManager().screenshot(" стр карточка заказа - в состоянии " + state);
                 });
             };

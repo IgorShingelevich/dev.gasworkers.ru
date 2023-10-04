@@ -211,9 +211,9 @@ public class SelectServicePageClientPage extends BaseClientPage {
         });
     }
 
-    public void open(String orderId) {
+    public void openRepair(String orderId) {
         stepWithRole("Открыть страницу Выбор СК", () -> {
-            driver.open("/orders/" + orderId + "/select-service");
+            driver.open("/orders/repair/" + orderId + "/select-service");
         });
     }
 

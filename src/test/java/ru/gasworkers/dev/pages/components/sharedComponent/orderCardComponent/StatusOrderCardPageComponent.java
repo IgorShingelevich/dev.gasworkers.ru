@@ -189,13 +189,15 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                             throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + role);
                     }
                     break;
-                case HAS_OFFER:
+                case HAS_SUPER_OFFER:
+                case HAS_SERVICE_OFFER:
                     checkCurrentStatus(OrderStatus.HAS_OFFER);
                     noActivationStagePayment();
                     noMaterialsStagePayment();
                     noActionsStagePayment();
                     break;
-                case SCHEDULE_DATE:
+                case SCHEDULE_SUPER_OFFER:
+                case SCHEDULE_SERVICE:
                     checkCurrentStatus(OrderStatus.SCHEDULE_DATE);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());

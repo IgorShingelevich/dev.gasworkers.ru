@@ -60,13 +60,15 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
         step("Проверить, что карточка назначенного мастера в состоянии " + stateRepair, () -> {
             switch (stateRepair) {
                 case PUBLISHED:
-                case HAS_OFFER:
+                case HAS_SUPER_OFFER:
+                case HAS_SERVICE_OFFER:
                 case CANCEL_CLIENT_PUBLISHED:
                 case CANCEL_CLIENT_HAS_OFFER:
                 case CANCEL_DISPATCHER_HAS_OFFER:
                     noApprovedMasterCard();
                     break;
-                case SCHEDULE_DATE:
+                case SCHEDULE_SUPER_OFFER:
+                case SCHEDULE_SERVICE:
                 case WAIT_MASTER:
                 case MASTER_START_WORK:
                 case MATERIAL_INVOICE_ISSUED:
@@ -87,6 +89,12 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
         });
+    }
+
+    public void checkRegisterDate(String expectedRegisterDate) {
+        stepWithRole("Убедиться, что дата регистрации мастера: " + expectedRegisterDate, () -> {
+            approvedMasterRegisterDateLocator.shouldHave(text(expectedRegisterDate));
+        });
     }    SelenideElement
             self = driver.$("div.master-card-wrap").as("Карточка назначенного мастера"),
             subtitleApprovedMastersTextLocator = driver.$("div.master-card-wrap p.h4").as("Текст подзаголовка назначенного мастера"),
@@ -96,14 +104,6 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
             approvedMasterRegisterDateLocator = self.$("div.register-date p.text").as("Дата регистрации назначенного мастера"),
             approvedMasterRatingLocator = self.$("div.rating div.rating-badge").as("Рейтинг назначенного мастера"),
             approvedMasterReviewsLocator = self.$("div.rating div.reviews a").as("Количество отзывов назначенного мастера");
-
-
-
-    public void checkRegisterDate(String expectedRegisterDate) {
-        stepWithRole("Убедиться, что дата регистрации мастера: " + expectedRegisterDate, () -> {
-            approvedMasterRegisterDateLocator.shouldHave(text(expectedRegisterDate));
-        });
-    }
 
     public void checkRating(String expectedRating) {
         stepWithRole("Убедиться, что рейтинг мастера: " + expectedRating, () -> {

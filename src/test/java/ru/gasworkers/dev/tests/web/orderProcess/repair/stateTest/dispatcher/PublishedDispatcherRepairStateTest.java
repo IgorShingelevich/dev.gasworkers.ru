@@ -79,8 +79,8 @@ public class PublishedDispatcherRepairStateTest extends BaseWebTest {
             };
             Consumer<SoftAssert> case2 = softAssert -> {
                 step(userRole + " карточка заказа - в состоянии " + state, () -> {
-                    dispatcherPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderId()));
-                    dispatcherPages.getOrderCardPage().checkUrl(String.valueOf(commonFields.getOrderId()));
+                    dispatcherPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderNumber()));
+                    dispatcherPages.getOrderCardPage().checkUrl(String.valueOf(commonFields.getOrderNumber()));
                     dispatcherPages.getOrderCardPage().checkStateRepair(dispatcherPages.getDriverManager(), userRole, state, stateInfo.getOrdersIdResponseDto());
                     dispatcherPages.getOrderCardPage().scrollIntoButton(SharedButtonsOrderCardComponent.Button.DISPATCHER_SELECT_MASTER.toString(), false);
                     //todo check  card details

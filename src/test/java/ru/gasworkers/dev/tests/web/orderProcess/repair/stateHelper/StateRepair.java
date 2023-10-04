@@ -20,11 +20,12 @@ public enum StateRepair {
     PUBLISHED_STOPPED_COUNTDOWN("опубликован", " опубликован"), //  select service  page state
     CANCEL_CLIENT_PUBLISHED("Заказ отменен", null),
     REFUSED_OFFER_DISPATCHER("Диспетчер отклонил новый тендер", null),
-    HAS_OFFER("Отклик на заявку", "Отклик на заявку"),
+    HAS_SERVICE_OFFER("Отклик на заявку", "Отклик на заявку"),
+    HAS_SUPER_OFFER("Отклик на заявку", "Отклик на заявку"),
     CANCEL_CLIENT_HAS_OFFER("Заказ отменен", "Заказ отменен"),
     CANCEL_DISPATCHER_HAS_OFFER("Заказ отменен", "Заказ отменен"),
+    SCHEDULE_SUPER_OFFER("Согласование даты заказа", "Оплатите счет по заказу"),
     SCHEDULE_SERVICE("Согласование даты заказа", "Оплатите счет по заказу"),
-    SCHEDULE_DATE("Согласование даты заказа", "Оплатите счет по заказу"),
     WAIT_MASTER("Мастер в пути", "Назначено время заказа"),
     MASTER_START_WORK("Мастер приступил к работе", null),
     MATERIAL_INVOICE_ISSUED("Выставлен счет на материалы", "Оплатите счет по заказу"),
@@ -58,14 +59,16 @@ public enum StateRepair {
                     // todo desired time and date
                     // todo stepper
                     break;
-                case HAS_OFFER:
+                case HAS_SUPER_OFFER:
+                case HAS_SERVICE_OFFER:
                     component.offersCounter.amount(data.getOffersCount());
                     checkDetailsLastOrder(component, data);
                     component.noMasterVisitDateAndTime();
 //                 todo   component.checkDesiredTime(data.getDesiredTime());
                     // todo stepper
                     break;
-                case SCHEDULE_DATE:
+                case SCHEDULE_SUPER_OFFER:
+                case SCHEDULE_SERVICE:
                     component.offersCounter.noComponent();
                     checkDetailsLastOrder(component, data);
                     //                 todo   component.checkDesiredTime(data.getDesiredTime());
@@ -110,10 +113,12 @@ public enum StateRepair {
                 case CANCEL_CLIENT_PUBLISHED:
                     // todo stepper
                     break;
-                case HAS_OFFER:
+                case HAS_SUPER_OFFER:
+                case HAS_SERVICE_OFFER:
                     // todo stepper
                     break;
-                case SCHEDULE_DATE:
+                case SCHEDULE_SUPER_OFFER:
+                case SCHEDULE_SERVICE:
                     // todo stepper
                     break;
                 case WAIT_MASTER:
@@ -155,7 +160,8 @@ public enum StateRepair {
             tab.buttons.checkStateRepair(role, this);
             switch (this) {
                 case PUBLISHED:
-                case HAS_OFFER:
+                case HAS_SUPER_OFFER:
+                case HAS_SERVICE_OFFER:
                     switch (role) {
                         case CLIENT:
                             tab.checkInfoNoExistNotification();
@@ -174,7 +180,8 @@ public enum StateRepair {
                     tab.repairDetails.checkMaterialsPrice("0");
                     tab.repairDetails.checkActionsPrice("0");
                     break;
-                case SCHEDULE_DATE:
+                case SCHEDULE_SUPER_OFFER:
+                case SCHEDULE_SERVICE:
                 case WAIT_MASTER:
                 case MASTER_START_WORK:
                     tab.repairDetails.checkFinishLoading();
@@ -214,11 +221,13 @@ public enum StateRepair {
         step("Убедиться, что вкладка Документы в состоянии " + this, () -> {
             switch (this) {
                 case PUBLISHED:
-                case HAS_OFFER:
+                case HAS_SUPER_OFFER:
+                case HAS_SERVICE_OFFER:
                     tab.noDocs();
                     tab.noTotalPrice();
                     break;
-                case SCHEDULE_DATE:
+                case SCHEDULE_SUPER_OFFER:
+                case SCHEDULE_SERVICE:
                 case WAIT_MASTER:
                 case MASTER_START_WORK:
                     tab.noDocs();
@@ -254,7 +263,6 @@ public enum StateRepair {
             page.checkFinishLoadingRepair();
             page.countdownComponent.checkState(this, dto); //todo check focusMasterCrd
             page.countdownComponent.checkMasterCardState(this, dto); //todo check focusMasterCrd
-
             page.suggestedConsultationBanner.checkState(this);
             switch (this) {
                 case PUBLISHED:
@@ -265,8 +273,9 @@ public enum StateRepair {
 //                    page.suggestedConsultationBannerComponent.checkOpened();
                     page.respondedCompaniesBox.noOffers();
                     break;
-                case HAS_OFFER:
-                    page.offersCounter.amount(page.respondedCompaniesBox.getAmountOfferBox());
+                case HAS_SUPER_OFFER:
+                case HAS_SERVICE_OFFER:
+//                    page.offersCounter.amount(page.respondedCompaniesBox.getAmountOfferBox());
 //                    page.checkHasOfferBanner(); //deleted
 //                    page.countdown.checkHasOfferState(dto);
 //                    page.suggestedConsultationBannerComponent.checkFinishLoading();

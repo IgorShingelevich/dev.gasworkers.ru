@@ -133,7 +133,11 @@ public class RespondedCompaniesBoxSelectService extends BaseComponent {
     }
 
     public void checkMasterReviewCount(Integer offerIndex, String reviews) {
-        stepWithRole("Убедиться, что у предложения с индексом: " + offerIndex + " отображается количество отзывов " + reviews, () -> {
+        String stepName = reviews.equals("0") ?
+                "Убедиться, что у предложения с индексом: " + offerIndex + " отображается текст 'Нет отзывов'" :
+                "Убедиться, что у предложения с индексом: " + offerIndex + " отображается количество отзывов " + reviews;
+
+        stepWithRole(stepName, () -> {
             SelenideElement reviewCountLocator = offerBoxCollection.get(offerIndex).$("div.medium.text-sm.w-100");
             int reviewCount = Integer.parseInt(reviews);
             if (reviewCount == 0) {

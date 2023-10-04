@@ -93,7 +93,7 @@ public class MasterCompleteConsultationTest extends BaseWebTest {
 
             Consumer<SoftAssert> case4 = softAssert -> {
                 step(userRole + " карточка заказа - в состоянии " + state, () -> {
-                    clientPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderId()));
+                    clientPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderNumber()));
                     clientPages.getOrderCardPage().checkFinishLoading();
                     clientPages.getOrderCardPage().checkStateConsultation(state, stateInfo.getOrdersIdResponseDto());
                 });

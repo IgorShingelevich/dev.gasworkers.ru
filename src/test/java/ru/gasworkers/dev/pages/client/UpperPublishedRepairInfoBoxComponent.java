@@ -22,7 +22,7 @@ public class UpperPublishedRepairInfoBoxComponent extends BaseComponent {
     }
 
     public void noUpperInfoBox() {
-        stepWithRole("Убедиться, что верхняя информационная панель Ремонта не отображается", () -> {
+        stepWithRole("Убедиться, что верхний баннер Ремонт Опубликован не отображается", () -> {
             self.shouldNotBe(visible);
         });
     }

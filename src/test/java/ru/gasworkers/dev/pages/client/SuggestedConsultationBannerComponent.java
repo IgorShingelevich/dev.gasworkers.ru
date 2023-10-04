@@ -30,7 +30,8 @@ public class SuggestedConsultationBannerComponent extends BaseComponent {
             case PUBLISHED_STOPPED_COUNTDOWN:
                 checkOpened();
                 break;
-            case HAS_OFFER:
+            case HAS_SUPER_OFFER:
+            case HAS_SERVICE_OFFER:
                 checkClosed();
                 break;
             default:

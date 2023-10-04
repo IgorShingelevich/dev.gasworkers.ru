@@ -120,6 +120,7 @@ public class PreconditionConsultation extends BaseApiTest {
 
     private StateInfo stateInfoResult;
     private CommonFieldsDto commonFieldsResult;
+    CommonFieldsDto commonFields = new CommonFieldsDto();
 
     public Result applyPrecondition(User client, StateConsultation stateConsultation) {
         return step("API: Видеоконсультация сейчас предусловие: " + stateConsultation, () -> {
@@ -175,7 +176,7 @@ public class PreconditionConsultation extends BaseApiTest {
                         .statusCode(200)
                         .extract().as(AddEquipmentResponseDto.class);
             });
-            commonFields.setOrderId(createOrdersApi.createOrder(CreateOrderRequestDto.builder()
+            commonFields.setOrderNumber(createOrdersApi.createOrder(CreateOrderRequestDto.builder()
                             .type("consultation")
                             .houseId(String.valueOf(commonFields.getClientObjectId()))
                             .build(), commonFields.getTokenClient())
@@ -203,7 +204,7 @@ public class PreconditionConsultation extends BaseApiTest {
             step(UserRole.CLIENT + "  select object for order", () -> {
                 selectHouseApi.selectObject(SelectHouseRequestDto.builder()
                                 .clientObjectId(commonFields.getClientObjectId())
-                                .orderId(commonFields.getOrderId())
+                                .orderId(commonFields.getOrderNumber())
                                 .equipment(equipmentList)
                                 .build(), commonFields.getTokenClient())
                         .statusCode(200)
@@ -211,7 +212,7 @@ public class PreconditionConsultation extends BaseApiTest {
             });
             List<Integer> masterIdList = step(UserRole.CLIENT + "  get online masters", () -> {
                 String responseString = onlineMastersApi.getOnlineMasters(OnlineMastersRequestDto.builder()
-                                .orderId(commonFields.getOrderId())
+                                .orderId(commonFields.getOrderNumber())
                                 .search("rating")
                                 .build(), commonFields.getTokenClient())
                         .statusCode(200)
@@ -236,7 +237,7 @@ public class PreconditionConsultation extends BaseApiTest {
         step("API: предусловие - " + UserRole.CLIENT + " заказ на ВК сейчас в состоянии " + StateConsultation.CLIENT_WAIT_MASTER, () -> {
             Integer timetableId = step(UserRole.CLIENT + " pick master", () -> {
                 return selectConsultationMasterApi.selectMaster(PickMasterRequestDto.builder()
-                                        .orderId(commonFields.getOrderId())
+                                        .orderId(commonFields.getOrderNumber())
                                         .online(true)
                                         .build(),
                                 commonFields.getMasterId(), commonFields.getTokenClient())
@@ -245,7 +246,7 @@ public class PreconditionConsultation extends BaseApiTest {
             });
             step(UserRole.CLIENT + "  apply master", () -> {
                 commonFields.setReceipts0Id(applyMasterApi.applyMaster(ApplyMasterRequestDto.builder()
-                                        .orderId(commonFields.getOrderId())
+                                        .orderId(commonFields.getOrderNumber())
                                         .timetableId(timetableId)
                                         .description("test description")
                                         .now(true)
@@ -256,7 +257,7 @@ public class PreconditionConsultation extends BaseApiTest {
             });
             SelectPaymentResponseDto selectPaymentResponse = step("Select payment", () -> {
                 return selectPaymentApi.selectPayment(SelectPaymentRequestDto.builder()
-                                .orderId(commonFields.getOrderId())
+                                .orderId(commonFields.getOrderNumber())
                                 .receiptId(commonFields.getReceipts0Id())
                                 .type("fps")
                                 .build(), commonFields.getTokenClient())
@@ -283,7 +284,7 @@ public class PreconditionConsultation extends BaseApiTest {
             step(UserRole.MASTER + " начинает ВК", () -> {
                 System.out.println("codeByOrder masterStartConsultation");
                 CodeByOrderConsultationResponse actualResponse = codeByOrderConsultationApi.codeByOrder(CodeByOrderConsultationRequest.builder()
-                                .orderId(commonFields.getOrderId())
+                                .orderId(commonFields.getOrderNumber())
                                 .build(), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(CodeByOrderConsultationResponse.class);
@@ -297,7 +298,7 @@ public class PreconditionConsultation extends BaseApiTest {
             step(UserRole.CLIENT + " присоединяется к  ВК", () -> {
                 System.out.println("codeByOrder clientJoinConsultation");
                 CodeByOrderConsultationResponse actualResponse = codeByOrderConsultationApi.codeByOrder(CodeByOrderConsultationRequest.builder()
-                                .orderId(commonFields.getOrderId())
+                                .orderId(commonFields.getOrderNumber())
                                 .build(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(CodeByOrderConsultationResponse.class);
@@ -317,7 +318,7 @@ public class PreconditionConsultation extends BaseApiTest {
                 }
                 System.out.println("completeConsultation");
                 CompleteConsultationResponse actualResponse = completeConsultationApi.complete(CompleteConsultationRequest.builder()
-                                .orderId(commonFields.getOrderId())
+                                .orderId(commonFields.getOrderNumber())
                                 .build(), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(CompleteConsultationResponse.class);
@@ -331,7 +332,7 @@ public class PreconditionConsultation extends BaseApiTest {
             step(UserRole.MASTER + " заполняет резюме", () -> {
                 System.out.println("resumeConsultation");
                 resumeConsultationApi.resume(ResumeConsultationRequest.builder()
-                                .orderId(String.valueOf(commonFields.getOrderId()))
+                                .orderId(String.valueOf(commonFields.getOrderNumber()))
                                 .description("test resume description")
                                 .build(), commonFields.getTokenMaster())
                         .statusCode(200);
@@ -358,7 +359,7 @@ public class PreconditionConsultation extends BaseApiTest {
     private OrdersIdResponseDto getOrdersIdDto(CommonFieldsDto commonFields, StateConsultation state) {
         System.out.println(state + ": OrdersId");
         return step("API: " + UserRole.CLIENT + " карточка заказа - в состоянии " + state, () -> {
-            return ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
+            return ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenClient())
                     .statusCode(200)
                     .extract().as(OrdersIdResponseDto.class);
         });

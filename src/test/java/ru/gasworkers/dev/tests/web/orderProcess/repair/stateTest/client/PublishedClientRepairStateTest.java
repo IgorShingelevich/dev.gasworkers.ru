@@ -15,6 +15,7 @@ import ru.gasworkers.dev.extension.user.WithThroughUser;
 import ru.gasworkers.dev.model.UserRole;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
+import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
 import ru.gasworkers.dev.tests.web.BaseWebTest;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.PreconditionRepair;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateInfo;
@@ -49,6 +50,7 @@ public class PublishedClientRepairStateTest extends BaseWebTest {
 
 // Get the StateInfo and CommonFieldsDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
+        CommonFieldsDto commonFields = result.getCommonFieldsResult();
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("Web: " + userRole + " авторизация", () -> {
             clientPages.getLoginPage().open();
@@ -78,7 +80,7 @@ public class PublishedClientRepairStateTest extends BaseWebTest {
             };
             Consumer<SoftAssert> case3 = softAssert -> {
                 step(userRole + " страница выбора услуги - в состоянии " + state, () -> {
-//                    clientPages.getSelectServicePage().checkFinishLoadingRepair();
+                    clientPages.getSelectServicePage().openRepair(String.valueOf(commonFields.getOrderNumber()));
                     clientPages.getSelectServicePage().checkState(state, stateInfo.getSuggestedServiceDto());
                 });
             };

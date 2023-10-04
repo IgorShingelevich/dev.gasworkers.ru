@@ -10,8 +10,6 @@ import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.Stepp
 import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.StateConsultation;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
-import java.time.Duration;
-
 import static com.codeborne.selenide.Condition.*;
 
 public class LastOrderProfileClientComponent extends BaseComponent {
@@ -26,18 +24,30 @@ public class LastOrderProfileClientComponent extends BaseComponent {
             LAST_ORDER_CARD_OBJECT_DESIRED_DATE_TITLE = "Выбранная дата",
             LAST_ORDER_CARD_OBJECT_DESIRED_TIME_TITLE = "Выбранное время",
             MASTER_VISIT_DATE_AND_TIME = "Дата и время приезда мастера";
-    SelenideElement
-            self = driver.$(".section .section.order").as("Бокс Карточка последнего заказа"),
-            lastOrderCardTitleLocator = driver.$(".section .header .title.d-flex.justify-content-between").as("Заголовок Карточки последнего заказа"),
-            lastOrderCardOrderNumberLinkLocator = driver.$(".section .content .h5.link-blue.text-primary.pointer").as("Ссылка на номер заказа"),
-            lastOrderCardActionButtonLocator = driver.$(".section .content .actions .actions__btn").as("Кнопка открытия меню действий карточки последнего заказа"),
-            lastOrderCardOrderActionOpenLinkLocator = driver.$(".section .content .actions .actions__slot--link").as("Кнопка открытия карточки заказа"),
-            lastOrderCardServiceTypeTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_SERVICE_TYPE_TITLE)).as("Тип заказа"),
-            lastOrderCardAddressTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_ADDRESS_TITLE)).as("Адрес объекта"),
-            lastOrderCardEquipmentTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_EQUIPMENT_TITLE)).as("Оборудование"),
-            lastOrderCardDesiredDateTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_DESIRED_DATE_TITLE)).as("Выбранная дата"),
-            lastOrderCardDesiredTimeTitleLocator = driver.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_DESIRED_TIME_TITLE)).as("Выбранное время"),
-            lastOrderCardMasterVisitDateAndTimeTitleLocator = driver.$$(".section__row.row").findBy(text(MASTER_VISIT_DATE_AND_TIME)).as("Дата и время приезда мастера");
+
+    public void open() {
+        stepWithRole("Нажать на номер Карточки последнего заказа", () -> {
+            lastOrderCardOrderNumberLinkLocator.click();
+        });
+    }
+
+    public void checkFinishLoading() {
+        stepWithRole("Убедиться, что секция Карточка последнего заказа отображается", () -> {
+            self.shouldBe(visible);
+            checkTitle();
+        });
+    }    SelenideElement
+            self = driver.$("div.card-wrapper").as("Бокс Карточка последнего заказа"),
+            lastOrderCardTitleLocator = self.$("div.justify-content-between h3").as("Заголовок Карточки последнего заказа"),
+            lastOrderCardOrderNumberLinkLocator = self.$("p.h5").as("Ссылка на номер заказа"),
+            lastOrderCardActionButtonLocator = self.$(".section .content .actions .actions__btn").as("Кнопка открытия меню действий карточки последнего заказа"),
+            lastOrderCardOrderActionOpenLinkLocator = self.$(".section .content .actions .actions__slot--link").as("Кнопка открытия карточки заказа"),
+            lastOrderCardServiceTypeTitleLocator = self.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_SERVICE_TYPE_TITLE)).as("Тип заказа"),
+            lastOrderCardAddressTitleLocator = self.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_ADDRESS_TITLE)).as("Адрес объекта"),
+            lastOrderCardEquipmentTitleLocator = self.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_EQUIPMENT_TITLE)).as("Оборудование"),
+            lastOrderCardDesiredDateTitleLocator = self.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_DESIRED_DATE_TITLE)).as("Выбранная дата"),
+            lastOrderCardDesiredTimeTitleLocator = self.$$(".section__row.row").findBy(text(LAST_ORDER_CARD_OBJECT_DESIRED_TIME_TITLE)).as("Выбранное время"),
+            lastOrderCardMasterVisitDateAndTimeTitleLocator = self.$$(".section__row.row").findBy(text(MASTER_VISIT_DATE_AND_TIME)).as("Дата и время приезда мастера");
 
 
     public LastOrderProfileClientComponent(RoleBrowser browser) {
@@ -69,19 +79,8 @@ public class LastOrderProfileClientComponent extends BaseComponent {
         lastOrderCardActionButtonLocator.shouldBe(visible).click();
     }
 
-    public void open() {
-        lastOrderCardActionButtonLocator.shouldBe(visible)
-                .click();
-        lastOrderCardOrderActionOpenLinkLocator.shouldBe(visible)
-                .click();
-    }
 
-    public void checkFinishLoading() {
-        stepWithRole("Убедиться, что секция Карточка последнего заказа отображается", () -> {
-            self.shouldBe(visible, Duration.ofSeconds(10));
-            checkTitle();
-        });
-    }
+
 
     public void checkTitle() {
         stepWithRole("Убедиться, что заголовок Карточки последнего заказа отображается", () -> {

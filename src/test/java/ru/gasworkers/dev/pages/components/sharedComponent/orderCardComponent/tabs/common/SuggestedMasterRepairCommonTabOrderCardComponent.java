@@ -144,7 +144,8 @@ public class SuggestedMasterRepairCommonTabOrderCardComponent extends BaseOrderC
                 case CANCEL_CLIENT_PUBLISHED:
                 case CANCEL_DISPATCHER_HAS_OFFER:
                 case CANCEL_CLIENT_HAS_OFFER:
-                case SCHEDULE_DATE:
+                case SCHEDULE_SUPER_OFFER:
+                case SCHEDULE_SERVICE:
                 case WAIT_MASTER:
                 case MASTER_START_WORK:
                 case MATERIAL_INVOICE_ISSUED:
@@ -155,7 +156,8 @@ public class SuggestedMasterRepairCommonTabOrderCardComponent extends BaseOrderC
                 case CLIENT_SIGN_ACT:
                     noSuggestedMastersCard();
                     break;
-                case HAS_OFFER:
+                case HAS_SUPER_OFFER:
+                case HAS_SERVICE_OFFER:
                     StateBuilder.SuggestedMasterRepairCommonTabOrderCardComponent dataSuggestedMaster = builder.extractMastersOrdersId(dto.getData().getMasters().get(0));
                     checkCountSuggestedMaster(dto.getData().getMasters().size());
                     checkSuggestedMastersDetails(this, dataSuggestedMaster, 0);

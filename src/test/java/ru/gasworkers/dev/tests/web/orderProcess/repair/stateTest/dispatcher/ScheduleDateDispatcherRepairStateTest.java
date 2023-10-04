@@ -45,7 +45,7 @@ public class ScheduleDateDispatcherRepairStateTest extends BaseWebTest {
     @Test
     @DisplayName("Ремонт - в  состоянии согласование даты и времени")
     void scheduleDateRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.SCHEDULE_DATE;
+        StateRepair state = StateRepair.SCHEDULE_SERVICE;
         UserRole userRole = UserRole.DISPATCHER;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
@@ -77,8 +77,8 @@ public class ScheduleDateDispatcherRepairStateTest extends BaseWebTest {
             };
             Consumer<SoftAssert> case2 = softAssert -> {
                 step(userRole + " карточка заказа - в состоянии " + state, () -> {
-                    dispatcherPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderId()));
-                    dispatcherPages.getOrderCardPage().checkUrl(String.valueOf(commonFields.getOrderId()));
+                    dispatcherPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderNumber()));
+                    dispatcherPages.getOrderCardPage().checkUrl(String.valueOf(commonFields.getOrderNumber()));
                     dispatcherPages.getDriverManager().screenshot(" стр карточка заказа - в состоянии " + state);
                 });
             };

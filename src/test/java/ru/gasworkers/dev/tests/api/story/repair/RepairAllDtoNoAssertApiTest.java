@@ -151,6 +151,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
     @Test
     @DisplayName("all dto repair")
     void allDtoRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+        CommonFieldsDto commonFields = new CommonFieldsDto();
         commonFields.setTokenClient(loginApi.getTokenThrough(client));
 
         step("клиент - заказ на ремонт клиента - в состоянии published", () -> {
@@ -183,15 +184,15 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
                 actualPublishedLastOrderResponse = lastOrderInfoApi.getLastOrderInfo(commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(LastOrderInfoResponseDto.class);
-                commonFields.setOrderId(actualPublishedLastOrderResponse.getData().getId());
-                commonFields.setOrderNumber(actualPublishedLastOrderResponse.getData().getNumber());
+                commonFields.setOrderNumber(actualPublishedLastOrderResponse.getData().getId());
+                commonFields.setOrderNumberFull(actualPublishedLastOrderResponse.getData().getNumber());
                 commonFields.setClientObjectId(actualPublishedLastOrderResponse.getData().getClientObject().getId());
                 commonFields.setEquipments0Id(actualPublishedLastOrderResponse.getData().getEquipments().get(0).getId());
                 LastOrderInfoResponseDto expectedResponse = repairCase.publishedLastOrderInfoBGRepair(commonFields);
 //                assertResponsePartialNoAt(expectedResponse, actualPublishedLastOrderResponse);
             });
             step(" клиент карточка заказа - убедиться что в  состоянии published", () -> {
-                actualPublishedOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
+                actualPublishedOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderNumber(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersInfoResponseDto.class);
                 OrdersInfoResponseDto expectedResponse = repairCase.publishedOrderInfoBGRepair(commonFields);
@@ -205,7 +206,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step("диспетчер карточка заказа - убедиться что в состоянии published", () -> {
                 System.out.println("publishedOrderIdAsDispatcherResponse");
-                actualPublishedOrderIdAsDispatcherResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                actualPublishedOrderIdAsDispatcherResponse = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenDispatcher())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 commonFields.setClientRefererCode(actualPublishedOrderIdAsDispatcherResponse.getData().getClient().getRefererCode());
@@ -220,7 +221,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
                         .extract().as(CompaniesMastersResponseDto.class).getData().get(0).getId());
             });
             step("диспетчер подтверждает выбор первого мастера ", () -> {
-                OLDSelectMasterResponseDto actualSelectMasterResponse = OLDSelectMasterApi.selectMaster(commonFields.getOrderId(), commonFields.getMasterId(), commonFields.getTokenDispatcher())
+                OLDSelectMasterResponseDto actualSelectMasterResponse = OLDSelectMasterApi.selectMaster(commonFields.getOrderNumber(), commonFields.getMasterId(), commonFields.getTokenDispatcher())
                         .statusCode(200)
                         .extract().as(OLDSelectMasterResponseDto.class);
                 //todo add dtoassert
@@ -239,7 +240,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
 //                assertResponsePartialNoAt(expectedResponse, actualHasOfferLastOrderResponse);
             });
             step("клиент карточка заказа - убедиться что в состоянии - есть отклик СК", () -> {
-                actualHasOfferOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
+                actualHasOfferOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderNumber(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersInfoResponseDto.class);
 //                offerIdHasOffer = actualHasOfferOrderInfoResponse.getDataDto().getOffer().getId();
@@ -249,7 +250,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step("диспетчер карточка заказа - убедиться что в состоянии - есть отклик СК", () -> {
                 System.out.println("actualHasOfferOrderIdResponseAsDispatcher");
-                actualHasOfferOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                actualHasOfferOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenDispatcher())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 commonFields.setMasters0CompletedOrdersCount(actualHasOfferOrderIdResponse.data.getMasters().get(0).getCompletedOrdersCount());
@@ -258,7 +259,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
 //                assertResponsePartialNoATExcludeFields(expectedHasOfferOrderIdResponse, actualHasOfferOrderIdResponse, List.of("data.client.countNotReadNotification"));  // vary 1 or 2 cannot determine
             });
             step("клиент получает список доступных предложений", () -> {
-                SuggestServicesResponseDto suggestedServiceResponse = suggestedServicesApi.suggestServices(commonFields.getOrderId(), commonFields.getTokenClient())
+                SuggestServicesResponseDto suggestedServiceResponse = suggestedServicesApi.suggestServices(commonFields.getOrderNumber(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SuggestServicesResponseDto.class);
                 List<SuggestServicesResponseDto.Service> services = suggestedServiceResponse.getData().getServices();
@@ -274,7 +275,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
                 commonFields.setPossibleOfferId(filteredServices.get(0).getOfferId());
             });
             step("клиент выбирает предложение", () -> {
-                SelectServiceCompanyResponseDto actualResponse = selectServiceCompanyApi.selectServiceCompany(commonFields.getOrderId(), commonFields.getServiceId(), commonFields.getTokenClient())
+                SelectServiceCompanyResponseDto actualResponse = selectServiceCompanyApi.selectServiceCompany(commonFields.getOrderNumber(), commonFields.getServiceId(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SelectServiceCompanyResponseDto.class);
 //                receiptId = actualResponse.getDataDto().getReceiptId();
@@ -292,7 +293,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step("клиент карточка заказа - убедиться что перед оплатой", () -> {
                 System.out.println("beforePaymentOrderInfoResponseAsClient");
-                actualBeforePaymentOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
+                actualBeforePaymentOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderNumber(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersInfoResponseDto.class);
 //                Integer offerIdBeforePayment = actualBeforePaymentOrderInfoResponse.getDataDto().getOffer().getId();
@@ -313,7 +314,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
 
         step("заказ на ремонт - в  состоянии согласование даты и времени", () -> {
             step("клиент оплачивает  выезд мастера", () -> {
-                SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderId(), commonFields.getTokenClient())
+                SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderNumber(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SelectPaymentResponseDto.class);
                 commonFields.setPayment0Url(actualResponse.getData().getPayUrl());
@@ -321,7 +322,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step("клиент карточка заказа - убедиться что согласование даты и времени", () -> {
                 System.out.println("dateSelectingOrderInfoResponseAsClient");
-                actualDateSelectingOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderId(), commonFields.getTokenClient())
+                actualDateSelectingOrderInfoResponse = ordersInfoApi.ordersInfo(commonFields.getOrderNumber(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersInfoResponseDto.class);
                 OrdersInfoResponseDto expectedResponse = repairCase.dateSelectingOrderInfoBGRepair(commonFields);
@@ -337,7 +338,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             step("диспетчер карточка заказа - убедиться что согласование даты и времени", () -> {
                 System.out.println("dateSelectingOrderIdResponseAsDispatcher");
                 commonFields.setApproveDate(client.getApproveDate());
-                actualDateSelectingOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                actualDateSelectingOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenDispatcher())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 expectedDateSelectingLastOrderResponse = repairCase.dateSelectingOrderIdBGRepair(commonFields);
@@ -356,7 +357,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step("диспетчер карточка заказа - убедиться что wait-for-master-starting", () -> {
                 System.out.println("waitMasterOrderIdResponseAsDispatcher");
-                actualWaitMasterAsDispatcherOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenDispatcher())
+                actualWaitMasterAsDispatcherOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenDispatcher())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 commonFields.setSelectedDate(client.getSelectedDate());
@@ -373,7 +374,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step("  клиент карточка заказа - убедиться что wait-for-master-starting", () -> {
                 System.out.println("waitMasterOrdersIdResponseAsClient");
-                OrdersIdResponseDto actualResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
+                OrdersIdResponseDto actualResponse = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 OrdersIdResponseDto expectedResponse = repairCase.waitMasterOrderIdAsClientBGRepair(commonFields);
@@ -384,7 +385,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step("мастер карточка заказа - убедиться что wait-for-master-starting", () -> {
                 System.out.println("waitMasterOrderIdResponseAsMaster");
-                actualWaitMasterAsMasterOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenMaster())
+                actualWaitMasterAsMasterOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 expectedWaitMasterAsMasterOrderIdResponse = repairCase.waitMasterOrderIdAsMasterBGRepair(commonFields);
@@ -402,7 +403,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step("мастер карточка заказа - убедиться что master-start-working", () -> {
                 System.out.println("masterStartWorkingOrderIdResponseAsMaster");
-                actualMasterStartWorkingAsMasterOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenMaster())
+                actualMasterStartWorkingAsMasterOrderIdResponse = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 expectedMasterStartWorkingAsMasterOrderIdResponse = repairCase.masterStartWorkingOrderIdAsMasterBGRepair(commonFields);
@@ -435,7 +436,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step("мастер карточка заказа - убедиться что material invoice issued", () -> {
                 System.out.println("materialInvoiceIssuedOrderIdResponseAsMaster");
-                materialInvoiceIssuedOrderIdResponseAsMaster = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenMaster())
+                materialInvoiceIssuedOrderIdResponseAsMaster = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 commonFields.setReceipts1Id(materialInvoiceIssuedOrderIdResponseAsMaster.getData().getReceipts().get(1).getId());
@@ -454,7 +455,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
 
         step("заказ на ремонт в состоянии materialInvoicePaid", () -> {
             step("клиент оплачивает счет на Материалы", () -> {
-                SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderId(), commonFields.getTokenClient())
+                SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderNumber(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SelectPaymentResponseDto.class);
                 commonFields.setPayment0Url(actualResponse.getData().getPayUrl());
@@ -470,7 +471,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step("мастер карточка заказа - убедиться что materialInvoicePaid", () -> {
                 System.out.println("materialInvoicePaidOrderIdResponseAsMaster");
-                materialInvoicePaidOrderIdResponseAsMaster = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenMaster())
+                materialInvoicePaidOrderIdResponseAsMaster = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 OrdersIdResponseDto expectedResponse = repairCase.materialInvoicePaidOrderIdAsMasterBGRepair(commonFields);
@@ -495,7 +496,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step("мастер карточка заказа - убедиться что actions-invoice-issued", () -> {
                 System.out.println("actionsInvoiceIssuedOrderIdResponseAsMaster");
-                actionsInvoiceIssuedOrderIdResponseAsMaster = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenMaster())
+                actionsInvoiceIssuedOrderIdResponseAsMaster = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 commonFields.setReceipts2Id(actionsInvoiceIssuedOrderIdResponseAsMaster.getData().getReceipts().get(2).getId());
@@ -512,7 +513,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step("  клиент карточка заказа - убедиться что actions-invoice-issued", () -> {
                 System.out.println("actionsInvoiceIssuedOrderIdResponseAsClient");
-                actionsInvoiceIssuedOrderIdResponseAsClient = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
+                actionsInvoiceIssuedOrderIdResponseAsClient = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 OrdersIdResponseDto expectedResponse = repairCase.actionsInvoiceIssuedOrderIdAsClientBGRepair(commonFields);
@@ -522,7 +523,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
 
         step("заказ на ремонт в состоянии actions-invoice-paid", () -> {
             step("клиент оплачивает счет на Работы", () -> {
-                SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderId(), commonFields.getTokenClient())
+                SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderNumber(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(SelectPaymentResponseDto.class);
                 commonFields.setPayment2Url(actualResponse.getData().getPayUrl());
@@ -538,7 +539,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step(" клиент карточка заказа - убедиться что actions-invoice-paid", () -> {
                 System.out.println("actionsInvoicePaidOrderIdResponseAsClient");
-                actionsInvoicePaidOrderIdResponseAsClient = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
+                actionsInvoicePaidOrderIdResponseAsClient = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 OrdersIdResponseDto expectedResponse = repairCase.actionsInvoicePaidOrderIdAsClientBGRepair(commonFields);
@@ -546,7 +547,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step("мастер карточка заказа - убедиться что actions-invoice-paid", () -> {
                 System.out.println("actionsInvoicePaidOrderIdResponseAsMaster");
-                actionsInvoicePaidOrderIdResponseAsMaster = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenMaster())
+                actionsInvoicePaidOrderIdResponseAsMaster = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 OrdersIdResponseDto expectedResponse = repairCase.actionsInvoicePaidOrderIdAsMasterBGRepair(commonFields);
@@ -565,7 +566,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
 
             step("мастер карточка заказа - убедиться что Акт подписан", () -> {
                 System.out.println("actSignedMasterOrderIdResponseAsMaster");
-                actSignedMasterOrderIdResponseAsMaster = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenMaster())
+                actSignedMasterOrderIdResponseAsMaster = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 OrdersIdResponseDto expectedResponse = repairCase.actSignedMasterOrderIdAsMasterBGRepair(commonFields);
@@ -581,7 +582,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step(" клиент карточка заказа - убедиться что Акт подписан", () -> {
                 System.out.println("actSignedMasterOrderIdResponseAsClient");
-                actSignedMasterOrderIdResponseAsClient = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
+                actSignedMasterOrderIdResponseAsClient = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 OrdersIdResponseDto expectedResponse = repairCase.actSignedMasterOrderIdAsClientBGRepair(commonFields);
@@ -606,7 +607,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step("мастер карточка заказа - убедиться что Акт подписан Клиентом", () -> {
                 System.out.println("actSignedClientOrderIdResponseAsMaster");
-                actSignedClientOrderIdResponseAsMaster = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenMaster())
+                actSignedClientOrderIdResponseAsMaster = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 //refresh completedOrdersCount
@@ -624,7 +625,7 @@ public class RepairAllDtoNoAssertApiTest extends BaseApiTest {
             });
             step(" клиент карточка заказа - убедиться что Акт подписан Клиентом", () -> {
                 System.out.println("actSignedClientOrderIdResponseAsClient");
-                actSignedClientOrderIdResponseAsClient = ordersIdApi.orderId(commonFields.getOrderId(), commonFields.getTokenClient())
+                actSignedClientOrderIdResponseAsClient = ordersIdApi.orderId(commonFields.getOrderNumber(), commonFields.getTokenClient())
                         .statusCode(200)
                         .extract().as(OrdersIdResponseDto.class);
                 OrdersIdResponseDto expectedResponse = repairCase.actSignedClientOrderIdAsClientBGRepair(commonFields);

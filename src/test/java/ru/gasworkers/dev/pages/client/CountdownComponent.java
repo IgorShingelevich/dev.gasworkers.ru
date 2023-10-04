@@ -26,7 +26,8 @@ public class CountdownComponent extends BaseComponent {
             case PUBLISHED_STOPPED_COUNTDOWN:
                 checkPublishedStoppedState();
                 break;
-            case HAS_OFFER:
+            case HAS_SUPER_OFFER:
+            case HAS_SERVICE_OFFER:
                 checkHasOfferState(dto);
                 break;
             default:
@@ -102,7 +103,8 @@ public class CountdownComponent extends BaseComponent {
                 case PUBLISHED_STOPPED_COUNTDOWN:
                     noMasterCard();
                     break;
-                case HAS_OFFER:
+                case HAS_SUPER_OFFER: //todo countdown mastercard
+                case HAS_SERVICE_OFFER:
                     /*filteredMasterCardFullName.shouldHave(text(dto.getMasterFullName()));
                     filteredMasterCardAvatar.shouldHave(cssValue("background-image", "url(\"" + dto.getMasterAvatar() + "\")"));
                     filteredMasterCardDeparturePriceLocator.shouldHave(text(dto.getDeparturePrice()));
