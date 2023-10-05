@@ -19,18 +19,22 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
             paymentCollection = driver.$$("ul.order-details__prices li").as("Коллекция платежей");
     SelenideElement
             orderStatusLocator = driver.$(".item-flex p.text").as("Статус заказа"),
-            activationStagePaymentLocatorBox = driver.$$("ul.order-details__prices li").findBy(text("Активация безопасной сделки")),
-            materialsStagePaymentLocatorBox = driver.$$("ul.order-details__prices li").findBy(text("Оплата материалов")),
-            actionsStagePaymentLocatorBox = driver.$$("ul.order-details__prices li").findBy(text("Оплата ремонтных работ")),
-            activationStatusPaymentLocator = activationStagePaymentLocatorBox.find(".order-details__prices--status .status"),
-            activationPricePaymentLocator = activationStagePaymentLocatorBox.find(".order-details__prices--price strong"),
-            activationStatusDatePaymentLocator = activationStagePaymentLocatorBox.find(".payment-date"),
-            materialsStatusPaymentLocator = materialsStagePaymentLocatorBox.find(".order-details__prices--status .status"),
-            materialsPricePaymentLocator = materialsStagePaymentLocatorBox.find(".order-details__prices--price strong"),
-            materialsDatePaymentLocator = materialsStagePaymentLocatorBox.find(".payment-date"),
-            actionsStatusPaymentLocator = actionsStagePaymentLocatorBox.find(".order-details__prices--status .status"),
-            actionsPricePaymentLocator = actionsStagePaymentLocatorBox.find(".order-details__prices--price strong"),
-            actionsDatePaymentLocator = actionsStagePaymentLocatorBox.find(".payment-date");
+            activationStagePaymentBoxLocator = driver.$$("ul.order-details__prices li").findBy(text("Активация безопасной сделки")).as(" Блок Активация безопасной сделки"),
+            materialsStagePaymentBoxLocator = driver.$$("ul.order-details__prices li").findBy(text("Оплата материалов")).as("Блок Оплата материалов"),
+            actionsStagePaymentBoxLocator = driver.$$("ul.order-details__prices li").findBy(text("Оплата ремонтных работ")).as("Блок Оплата ремонтных работ"),
+            possibleVisitPriceBoxLocator = driver.$$("ul.order-details__prices li").findBy(text("Первичный выезд мастера")).as("Блок Первичный выезд мастера"),
+            possibleRepairPriceBoxLocator = driver.$$("ul.order-details__prices li").findBy(text("Ориентировочная стоимость ремонта")).as("Блок Ориентировочная стоимость ремонта"),
+            possibleVisitPriceLocator = possibleVisitPriceBoxLocator.find(".order-details__prices--price strong").as("Сумма платежа за первичный выезд мастера"),
+            possibleRepairPriceLocator = possibleRepairPriceBoxLocator.find(".order-details__prices--price strong").as("Сумма платежа за ориентировочную стоимость ремонта"),
+            activationStatusPaymentLocator = activationStagePaymentBoxLocator.find(".order-details__prices--status .status").as("Статус платежа за активацию"),
+            activationPricePaymentLocator = activationStagePaymentBoxLocator.find(".order-details__prices--price strong").as("Сумма платежа за активацию"),
+            activationStatusDatePaymentLocator = activationStagePaymentBoxLocator.find(".payment-date").as("Дата платежа за активацию"),
+            materialsStatusPaymentLocator = materialsStagePaymentBoxLocator.find(".order-details__prices--status .status").as("Статус платежа за материалы"),
+            materialsPricePaymentLocator = materialsStagePaymentBoxLocator.find(".order-details__prices--price strong").as("Сумма платежа за материалы"),
+            materialsDatePaymentLocator = materialsStagePaymentBoxLocator.find(".payment-date").as("Дата платежа за материалы"),
+            actionsStatusPaymentLocator = actionsStagePaymentBoxLocator.find(".order-details__prices--status .status").as("Статус платежа за работы"),
+            actionsPricePaymentLocator = actionsStagePaymentBoxLocator.find(".order-details__prices--price strong").as("Сумма платежа за работы"),
+            actionsDatePaymentLocator = actionsStagePaymentBoxLocator.find(".payment-date").as("Дата платежа за работы");
 
     public StatusOrderCardPageComponent(RoleBrowser browser) {
         super(browser);
@@ -50,7 +54,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
 
     public void noActivationStagePayment() {
         stepWithRole("Убедиться, что нет платежа за активацию", () -> {
-            activationStagePaymentLocatorBox.shouldNotBe(visible);
+            activationStagePaymentBoxLocator.shouldNotBe(visible);
         });
     }
 
@@ -66,6 +70,30 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
         });
     }
 
+    public void noPossibleVisitPrice() {
+        stepWithRole("Убедиться, что нет платежа за первичный выезд мастера", () -> {
+            possibleVisitPriceBoxLocator.shouldNotBe(visible);
+        });
+    }
+
+    public void checkPossibleVisitPrice(String expectedPrice) {
+        stepWithRole("Убедиться, что сумма платежа за первичный выезд мастера " + expectedPrice + " соответствует ожидаемой", () -> {
+            possibleVisitPriceLocator.shouldHave(partialText(expectedPrice));
+        });
+    }
+
+    public void noPossibleRepairPrice() {
+        stepWithRole("Убедиться, что нет платежа за ориентировочную стоимость ремонта", () -> {
+            possibleRepairPriceBoxLocator.shouldNotBe(visible);
+        });
+    }
+
+    public void checkPossibleRepairPrice(String expectedPrice) {
+        stepWithRole("Убедиться, что сумма платежа за ориентировочную стоимость ремонта " + expectedPrice + " соответствует ожидаемой", () -> {
+            possibleRepairPriceLocator.shouldHave(partialText(expectedPrice));
+        });
+    }
+
     public void checkMaterialsStatusIsPaid(Boolean expectedStatus) {
         stepWithRole("Убедиться, что статус платежа за материалы" + expectedStatus.toString(), () -> {
             isPaid(expectedStatus, materialsStatusPaymentLocator);
@@ -74,7 +102,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
 
     public void noMaterialsStagePayment() {
         stepWithRole("Убедиться, что нет платежа за материалы", () -> {
-            materialsStagePaymentLocatorBox.shouldNotBe(visible);
+            materialsStagePaymentBoxLocator.shouldNotBe(visible);
         });
     }
 
@@ -96,7 +124,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
 
     public void noActionsStagePayment() {
         stepWithRole("Убедиться, что нет платежа за работы", () -> {
-            actionsStagePaymentLocatorBox.shouldNotBe(visible);
+            actionsStagePaymentBoxLocator.shouldNotBe(visible);
         });
     }
 
@@ -176,6 +204,8 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
             switch (stateRepair) {
                 case PUBLISHED:
                     noActivationStagePayment();
+                    noPossibleVisitPrice();
+                    noPossibleRepairPrice();
                     noMaterialsStagePayment();
                     noActionsStagePayment();
                     switch (role) {
@@ -192,6 +222,8 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                 case HAS_SUPER_OFFER:
                 case HAS_SERVICE_OFFER:
                     checkCurrentStatus(OrderStatus.HAS_OFFER);
+                    noPossibleVisitPrice();
+                    noPossibleRepairPrice();
                     noActivationStagePayment();
                     noMaterialsStagePayment();
                     noActionsStagePayment();
@@ -202,6 +234,8 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());
+                    checkPossibleVisitPrice(String.valueOf(data.getPossibleFirstAcceptPrice()));
+                    checkPossibleRepairPrice(String.valueOf(data.getPossibleFullRepairPrice()));
                     noMaterialsStagePayment();
                     noActionsStagePayment();
                     break;
@@ -210,6 +244,8 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());
+                    checkPossibleVisitPrice(String.valueOf(data.getPossibleFirstAcceptPrice()));
+                    checkPossibleRepairPrice(String.valueOf(data.getPossibleFullRepairPrice()));
                     noMaterialsStagePayment();
                     noActionsStagePayment();
                     break;
@@ -220,6 +256,8 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkActivationDatePayment(data.getActivationDate());
                     noMaterialsStagePayment();
                     noActionsStagePayment();
+                    noPossibleVisitPrice();
+                    noPossibleRepairPrice();
                     break;
                 case MATERIAL_INVOICE_ISSUED:
                     checkCurrentStatus(OrderStatus.MATERIAL_INVOICE_ISSUED);
@@ -230,6 +268,8 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkMaterialsPricePayment(data.getMaterialsPrice());
                     checkMaterialsDatePayment(data.getMaterialsDate());
                     noActionsStagePayment();
+                    noPossibleVisitPrice();
+                    noPossibleRepairPrice();
                     break;
                 case MATERIAL_INVOICE_PAID:
                     checkCurrentStatus(OrderStatus.MATERIAL_INVOICE_PAID);
@@ -240,6 +280,8 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkMaterialsPricePayment(data.getMaterialsPrice());
                     checkMaterialsDatePayment(data.getMaterialsDate());
                     noActionsStagePayment();
+                    noPossibleVisitPrice();
+                    noPossibleRepairPrice();
                     break;
                 case ACTIONS_INVOICE_ISSUED:
                     checkCurrentStatus(OrderStatus.ACTIONS_INVOICE_ISSUED);
@@ -252,6 +294,8 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkActionsStatusIsPaid(false);
                     checkActionsPricePayment(data.getActionsPrice());
                     checkActionsDatePayment(data.getActionsDate());
+                    noPossibleVisitPrice();
+                    noPossibleRepairPrice();
                     break;
                 case ACTIONS_INVOICE_PAID:
                     checkCurrentStatus(OrderStatus.ACTIONS_INVOICE_PAID);
@@ -264,6 +308,8 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkActionsStatusIsPaid(true);
                     checkActionsPricePayment(data.getActionsPrice());
                     checkActionsDatePayment(data.getActionsDate());
+                    noPossibleVisitPrice();
+                    noPossibleRepairPrice();
                     break;
                 case MASTER_SIGN_ACT:
                     checkCurrentStatus(OrderStatus.MASTER_SIGN_ACT);
@@ -276,6 +322,8 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkActionsStatusIsPaid(true);
                     checkActionsPricePayment(data.getActionsPrice());
                     checkActionsDatePayment(data.getActionsDate());
+                    noPossibleVisitPrice();
+                    noPossibleRepairPrice();
                     break;
                 case CLIENT_SIGN_ACT:
                     checkCurrentStatus(OrderStatus.CLIENT_SIGN_ACT);
@@ -288,6 +336,8 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkActionsStatusIsPaid(true);
                     checkActionsPricePayment(data.getActionsPrice());
                     checkActionsDatePayment(data.getActionsDate());
+                    noPossibleVisitPrice();
+                    noPossibleRepairPrice();
                     break;
                 case CANCEL_CLIENT_PUBLISHED:
                 case CANCEL_CLIENT_HAS_OFFER:
@@ -296,6 +346,8 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     noActivationStagePayment();
                     noMaterialsStagePayment();
                     noActionsStagePayment();
+                    noPossibleVisitPrice();
+                    noPossibleRepairPrice();
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + stateRepair);

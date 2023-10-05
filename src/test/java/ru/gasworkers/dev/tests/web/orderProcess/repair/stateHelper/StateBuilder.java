@@ -81,6 +81,8 @@ public class StateBuilder {
         Boolean actionsIsPaid = (receipts != null && receipts.size() > 2) ? receipts.get(2).getPaid() : false;
         String actionsPrice = (receipts != null && receipts.size() > 2) ? helper.priceFormatter(String.valueOf(receipts.get(2).getAmount())) : "";
         String actionsDate = (receipts != null && receipts.size() > 2) ? helper.createdAtFormatter(receipts.get(2).getCreatedAt()) : "";
+        String possibleVisitPrice = helper.priceFormatter(String.valueOf(dto.getData().getOffer().getPossibleFirstAcceptPrice()));
+        String possibleRepairPrice = helper.priceFormatter(String.valueOf(dto.getData().getOffer().getPossibleFullRepairPrice()));
 
 
         OrdersIdResponseDto.Data.ServiceCenter serviceCenter = dto.getData().getServiceCenter();
@@ -102,6 +104,8 @@ public class StateBuilder {
 
         return OrderIdData.builder()
                 .orderNumber(dto.getData().getNumber())
+                .possibleFirstAcceptPrice(possibleVisitPrice)
+                .possibleFullRepairPrice(possibleRepairPrice)
                 .activationIsPaid(activationIsPaid)
                 .activationPrice(activationPrice)
                 .activationDate(activationDate)
@@ -178,6 +182,8 @@ public class StateBuilder {
     public static class OrderIdData {
         private final Integer offersCount;
         private final String orderNumber;
+        private final String possibleFirstAcceptPrice;
+        private final String possibleFullRepairPrice;
         private final Boolean activationIsPaid;
         private final String activationPrice;
         private final String activationDate;

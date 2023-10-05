@@ -24,7 +24,7 @@ public enum StateRepair {
     HAS_SUPER_OFFER("Отклик на заявку", "Отклик на заявку"),
     CANCEL_CLIENT_HAS_OFFER("Заказ отменен", "Заказ отменен"),
     CANCEL_DISPATCHER_HAS_OFFER("Заказ отменен", "Заказ отменен"),
-    SCHEDULE_SUPER_OFFER("Согласование даты заказа", "Оплатите счет по заказу"),
+    SCHEDULE_SUPER_OFFER("Согласование даты заказа", "Отклик на заявку"),
     SCHEDULE_SERVICE("Согласование даты заказа", "Оплатите счет по заказу"),
     WAIT_MASTER("Мастер в пути", "Назначено время заказа"),
     MASTER_START_WORK("Мастер приступил к работе", null),
@@ -36,8 +36,8 @@ public enum StateRepair {
     CLIENT_SIGN_ACT("Клиент подписал акт", "Оставьте отзыв по заявке");
 
     public static final StateBuilder builder = new StateBuilder();
-    public final String notification;
     private final String state;
+    public final String notification;
 
     public void checkLastOrderComponent(LastOrderProfileClientComponent component, LastOrderInfoResponseDto dto) {
         step("Проверка компонента Последний заказ", () -> {
@@ -231,7 +231,7 @@ public enum StateRepair {
                 case WAIT_MASTER:
                 case MASTER_START_WORK:
                     tab.noDocs();
-                    tab.checkTotalPrice("10");
+                    tab.checkTotalPrice("7009.00");
                     // todo add tab.checkComputedToTalPrice - no field in json
                     break;
                 case MATERIAL_INVOICE_ISSUED:
