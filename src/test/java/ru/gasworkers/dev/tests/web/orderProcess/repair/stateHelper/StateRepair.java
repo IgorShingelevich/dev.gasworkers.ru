@@ -24,9 +24,10 @@ public enum StateRepair {
     HAS_SUPER_OFFER("Отклик на заявку", "Отклик на заявку"),
     CANCEL_CLIENT_HAS_OFFER("Заказ отменен", "Заказ отменен"),
     CANCEL_DISPATCHER_HAS_OFFER("Заказ отменен", "Заказ отменен"),
-    SCHEDULE_SUPER_OFFER("Согласование даты заказа", "Отклик на заявку"),
-    SCHEDULE_SERVICE("Согласование даты заказа", "Оплатите счет по заказу"),
-    WAIT_MASTER("Мастер в пути", "Назначено время заказа"),
+    SCHEDULE_SUPER_OFFER("Согласование даты заказа", "Отклик на заявку"),  // assigned superMaster
+    SCHEDULE_SERVICE("Согласование даты заказа", "Оплатите счет по заказу"), // assignedService
+    SCHEDULE_SERVICE_MASTER("Согласование даты заказа", null), // assignedServiceMaster and Prices
+    WAIT_MASTER("Мастер в пути", "Назначено время заказа"), //assignedTime
     MASTER_START_WORK("Мастер приступил к работе", null),
     MATERIAL_INVOICE_ISSUED("Выставлен счет на материалы", "Оплатите счет по заказу"),
     MATERIAL_INVOICE_PAID("Оплачен счет на материалы", null),

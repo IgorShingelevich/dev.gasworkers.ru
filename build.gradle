@@ -83,7 +83,8 @@ dependencies {
             "org.json:json:${orgJson}",
             "org.jetbrains:annotations:${annotationsVersion}",
             "org.skyscreamer:jsonassert:${jsonassertVersion}",
-            "org.apache.commons:commons-io:${commonsIoVersion}"
+            "org.apache.commons:commons-io:${commonsIoVersion}",
+            "org.apache.commons:commons-text:1.9"
     )
 }
 

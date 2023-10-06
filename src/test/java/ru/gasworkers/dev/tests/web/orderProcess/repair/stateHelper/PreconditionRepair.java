@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import ru.gasworkers.dev.api.administration.getUserWithAdmin.GetUserWithAdminApi;
 import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
+import ru.gasworkers.dev.api.companies.CompaniesSearchExecutorApi;
 import ru.gasworkers.dev.api.orders.OLDselectMaster.OLDSelectMasterApi;
 import ru.gasworkers.dev.api.orders.actions.OrdersActionsApi;
 import ru.gasworkers.dev.api.orders.actions.OrdersSaveActionsApi;
@@ -40,6 +41,8 @@ import ru.gasworkers.dev.api.orders.sign.dto.OrdersSendSignResponseDto;
 import ru.gasworkers.dev.api.orders.sign.dto.OrdersSignResponseDto;
 import ru.gasworkers.dev.api.orders.suggestedServices.SuggestedServicesApi;
 import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
+import ru.gasworkers.dev.api.orders.transfer.OrderTransferRequestDto;
+import ru.gasworkers.dev.api.orders.transfer.OrdersTransferApi;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoApi;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.api.users.companies.masters.CompaniesMastersApi;
@@ -81,6 +84,8 @@ public class PreconditionRepair extends BaseApiTest {
     private final SelectServiceCompanyApi selectServiceCompanyApi = new SelectServiceCompanyApi();
     private final FspBankListApi fspBankListApi = new FspBankListApi();
     private final SelectPaymentApi selectPaymentApi = new SelectPaymentApi();
+    private final CompaniesSearchExecutorApi companiesSearchExecutorApi = new CompaniesSearchExecutorApi();
+    private final OrdersTransferApi ordersTransferApi = new OrdersTransferApi();
     private final OrdersApproveDateApi ordersApproveDateApi = new OrdersApproveDateApi();
     private final SaveCheckListApi saveCheckListApi = new SaveCheckListApi();
     private final OrdersMaterialValuesApi ordersMaterialValuesApi = new OrdersMaterialValuesApi();
@@ -99,11 +104,12 @@ public class PreconditionRepair extends BaseApiTest {
             sssrDispatcher1Email = "test_gw_dispatcher_sssr1@rambler.ru",
             sssrDispatcher1Password = "1234",
             sssrMaster1Email = "test_gas_master_sssr1@rambler.ru",
-            sssrMaster1Password = "1234";
+            sssrMaster1Password = "1234",
+            sssrExecutorQuery = "sssr";
 
+    CommonFieldsDto commonFields = new CommonFieldsDto();
     private StateInfo stateInfoResult;
     private CommonFieldsDto commonFieldsResult;
-    CommonFieldsDto commonFields = new CommonFieldsDto();
 
     public Result applyPrecondition(User client, StateRepair stateRepair) {
         return step("API: ремонт предусловие: " + stateRepair, () -> {
@@ -126,6 +132,9 @@ public class PreconditionRepair extends BaseApiTest {
                     break;
                 case SCHEDULE_SERVICE:
                     applyScheduleServicePrecondition(stateRepair, client, commonFields);
+                    break;
+                case SCHEDULE_SERVICE_MASTER:
+                    applyScheduleServiceMasterPrecondition(stateRepair, client, commonFields);
                     break;
                 case WAIT_MASTER:
                     applyWaitMasterPreconditionUser(stateRepair, client, commonFields);
@@ -160,7 +169,6 @@ public class PreconditionRepair extends BaseApiTest {
             return new Result(result, commonFields);
         });
     }
-
 
 
     private void readAllNotificationsClient() {
@@ -334,8 +342,8 @@ public class PreconditionRepair extends BaseApiTest {
                 });
                 step(UserRole.SUPER_DISPATCHER + " расценивает офер", () -> {
                     dispatcherPricing.dispatcherPricing(DispatcherPricingRequestDto.builder()
-                                            .firstAcceptPrice(3000)
-                                            .fullRepairPrice("3999")
+                                            .firstAcceptPrice(3999)
+                                            .fullRepairPrice("4999")
                                             .masterId(commonFields.getSuperMasterId())
                                             .build(),
                                     commonFields.getOrderNumber(), commonFields.getTokenSuperDispatcher())
@@ -425,27 +433,47 @@ public class PreconditionRepair extends BaseApiTest {
         applyHasServiceOfferPrecondition(stateRepair, client, commonFields);
         StateRepair actualStateRepair = StateRepair.SCHEDULE_SERVICE;
         step("API: предусловие - " + UserRole.CLIENT + " заказ на ремонт в состоянии " + actualStateRepair, () -> {
-            step("клиент выбирает предложение", () -> {
-                SelectServiceCompanyResponseDto actualResponse = selectServiceCompanyApi.selectServiceCompany(commonFields.getOrderNumber(), commonFields.getServiceId(), commonFields.getTokenClient())
+           /* step(UserRole.SUPER_DISPATCHER + "  ищет  СК СССР для заказа по поиску", () -> {
+                commonFields.setExecutorCompanyId(companiesSearchExecutorApi.searchExecutor(CompaniesSearchExecutorRequestDto.builder()
+                                        .query(sssrExecutorQuery)
+                                        .build(),
+                                commonFields.getTokenSuperDispatcher())
                         .statusCode(200)
-                        .extract().as(SelectServiceCompanyResponseDto.class);
-                commonFields.setReceipts0Id(actualResponse.getData().getReceiptId());
-                SelectServiceCompanyResponseDto expectedResponse = SelectServiceCompanyResponseDto.successResponse(commonFields.getReceipts0Id()).build();
+                        .extract().as(CompaniesSearchExecutorResponseDto.class).getData().get(0).getId());
+            });*/
+            step(UserRole.SUPER_DISPATCHER + " передает полностью заказ в СК СССР", () -> {
+                ordersTransferApi.transfer(OrderTransferRequestDto.fullTransferRequest(commonFields.getOrderNumber(), 39), commonFields.getTokenSuperDispatcher())
+                        .statusCode(200);
             });
-            step("клиент получает список банков на оплату", () -> {
-                FspBankListResponseDto actualResponse = fspBankListApi.fspBankList(commonFields.getTokenClient())
-                        .statusCode(200)
-                        .extract().as(FspBankListResponseDto.class);
-                Integer availableBanks = actualResponse.getData().size();
-                System.out.println("availableBanks = " + availableBanks);
+        });
+    }
+
+
+    private void applyScheduleServiceMasterPrecondition(StateRepair stateRepair, User client, CommonFieldsDto commonFields) {
+        applyScheduleServicePrecondition(stateRepair, client, commonFields);
+        StateRepair actualStateRepair = StateRepair.SCHEDULE_SERVICE_MASTER;
+        step("API: предусловие - " + UserRole.CLIENT + " заказ на ремонт в состоянии " + actualStateRepair, () -> {
+            step(UserRole.DISPATCHER + " назначает мастера для заказа", () -> {
+
+                step(UserRole.DISPATCHER + " расценивает офер", () -> {
+                    dispatcherPricing.dispatcherPricing(DispatcherPricingRequestDto.builder()
+                                            .firstAcceptPrice(5999)
+                                            .fullRepairPrice("6999")
+                                            .masterId(commonFields.getSuperMasterId())
+                                            .build(),
+                                    commonFields.getOrderNumber(), commonFields.getTokenDispatcher())
+                            .statusCode(200);
+                });
+                step(UserRole.DISPATCHER + " делает офер", () -> {
+                    makeOffer.makeOffer(MakeOfferRequestDto.builder()
+                                            .orderId(commonFields.getOrderNumber())
+                                            .build(),
+                                    commonFields.getTokenDispatcher())
+                            .statusCode(200);
+
+                });
             });
-            step("клиент оплачивает  активацию сделки", () -> {
-                SelectPaymentResponseDto actualResponse = selectPaymentApi.payCard(commonFields.getOrderNumber(), commonFields.getTokenClient())
-                        .statusCode(200)
-                        .extract().as(SelectPaymentResponseDto.class);
-                commonFields.setPayment0Url(actualResponse.getData().getPayUrl());
-                commonFields.setPayment0Id(actualResponse.getData().getPaymentId());
-            });
+
         });
     }
 
