@@ -128,8 +128,8 @@ public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
                     checkDesiredDate(data.getDesiredDate());
                     checkDesiredTime(data.getDesiredTime());
                     break;
-                case SCHEDULE_SUPER_OFFER:
-                case SCHEDULE_SERVICE:
+                case CLIENT_PAID_SUPER_ACTIVATION:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE:
                     checkNoCompany();
                     noAssignedDateAndTime();
                     checkClientFullName(data.getClientFullName());

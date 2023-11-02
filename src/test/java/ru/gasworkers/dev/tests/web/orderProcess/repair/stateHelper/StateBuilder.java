@@ -41,7 +41,8 @@ public class StateBuilder {
         Integer convertDoubleToInt = suggestedMasterCompanyRatingStarsCount.intValue();
         Integer suggestedMasterCertifiedEquipmentCount = suggestedMaster.getBrands().size();
         String suggestedMasterCompletedOrdersCount = String.valueOf(suggestedMaster.getCompletedOrdersCount());
-        String suggestedMasterVisitPrice = suggestedMaster.getCompany().getFirstAccept().toString();
+        String suggestedMasterVisitPrice = "3999";
+//        String suggestedMasterVisitPrice = suggestedMaster.getCompany().getFirstAccept().toString();
 
         return SuggestedMasterRepairCommonTabOrderCardComponent.builder()
                 .suggestedMasterFullName(suggestedMasterFullName)

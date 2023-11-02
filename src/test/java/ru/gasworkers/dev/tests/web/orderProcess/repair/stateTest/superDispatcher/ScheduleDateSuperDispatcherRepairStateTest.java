@@ -42,7 +42,7 @@ public class ScheduleDateSuperDispatcherRepairStateTest extends BaseWebTest {
     @Test
     @DisplayName("Ремонт - в  состоянии согласование даты и времени")
     void scheduleDateRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.SCHEDULE_SERVICE;
+        StateRepair state = StateRepair.SUPER_DISPATCHER_ASSIGN_SERVICE;
         UserRole userRole = UserRole.DISPATCHER;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);

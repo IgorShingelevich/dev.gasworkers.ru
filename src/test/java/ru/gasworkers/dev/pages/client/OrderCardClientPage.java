@@ -73,6 +73,10 @@ public class OrderCardClientPage extends BaseClientPage {
         buttons = new ClientButtonsOrderCardComponent(browser);
     }
 
+    protected SelenideElement leftMenuItemTopology(String pointMenu) {
+        return driver.$x("//*[local-name() = 'svg'][@data-testid = 'WarehouseIcon']//ancestor::li//span[text() = '" + pointMenu + "']");
+    }
+
     public void open(String orderId) {
         driver.open("/profile/client/orders/" + orderId);
     }

@@ -570,6 +570,8 @@ public class OrdersIdResponseDto {
             private Object activeRole;
             @JsonProperty("full_name")
             private String fullName;
+            @JsonProperty("first_name")
+            private String firstName;
             @JsonProperty("last_name")
             private String lastName;
             private String rating;
@@ -601,6 +603,8 @@ public class OrdersIdResponseDto {
             private String fullName;
             @JsonProperty("last_name")
             private String lastName;
+            @JsonProperty("first_name")
+            private String firstName;
             private String rating;
             @JsonProperty("consultation_price")
             private Double consultationPrice;

@@ -65,10 +65,10 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
                 case CANCEL_CLIENT_PUBLISHED:
                 case CANCEL_CLIENT_HAS_OFFER:
                 case CANCEL_DISPATCHER_HAS_OFFER:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE:
                     noApprovedMasterCard();
                     break;
-                case SCHEDULE_SUPER_OFFER:
-                case SCHEDULE_SERVICE:
+                case CLIENT_PAID_SUPER_ACTIVATION:
                 case WAIT_MASTER:
                 case MASTER_START_WORK:
                 case MATERIAL_INVOICE_ISSUED:

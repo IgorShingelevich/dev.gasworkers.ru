@@ -35,14 +35,14 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_REPAIR)
-public class ScheduleSuperOfferClientRepairStateTest extends BaseWebTest {
+public class SuperDispatcherAssignServiceClientRepairStateTest extends BaseWebTest {
     @Browser(role = UserRole.CLIENT)
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Ремонт - в  состоянии согласование даты и времени - назначенный мастер СД")
-    void scheduleSuperOfferRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.SCHEDULE_SUPER_OFFER;
+    @DisplayName("Ремонт - в  состоянии согласование даты и времени - СД передал заказ в СК")
+    void superDispatcherAssignService(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
+        StateRepair state = StateRepair.SUPER_DISPATCHER_ASSIGN_SERVICE;
         UserRole userRole = UserRole.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);

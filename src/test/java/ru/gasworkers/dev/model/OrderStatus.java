@@ -11,6 +11,7 @@ public enum OrderStatus {
     NEW_ORDER("Новый заказ", "dispatcher, client"),
     HAS_OFFER("Новый заказ", "dispatcher, client"),
     SCHEDULE_DATE("Согласование даты заказа", UserRole.CLIENT + ", " + UserRole.DISPATCHER),
+    SUPER_DISPATCHER_ASSIGN_SERVICE("Выезд мастера", UserRole.CLIENT + ", " + UserRole.DISPATCHER + ", " + UserRole.MASTER),
     SELECT_MASTER("Выбор мастера", "dispatcher"),
     WAIT_MASTER("Мастер в пути", UserRole.CLIENT + ", " + UserRole.DISPATCHER + ", " + UserRole.MASTER),
     PAY_PRIMARY_VISIT("Оплата первичного выезда", "client"),

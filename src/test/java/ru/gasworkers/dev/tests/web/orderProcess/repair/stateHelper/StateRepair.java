@@ -24,8 +24,8 @@ public enum StateRepair {
     HAS_SUPER_OFFER("Отклик на заявку", "Отклик на заявку"),
     CANCEL_CLIENT_HAS_OFFER("Заказ отменен", "Заказ отменен"),
     CANCEL_DISPATCHER_HAS_OFFER("Заказ отменен", "Заказ отменен"),
-    SCHEDULE_SUPER_OFFER("Согласование даты заказа", "Отклик на заявку"),  // assigned superMaster
-    SCHEDULE_SERVICE("Согласование даты заказа", "Оплатите счет по заказу"), // assignedService
+    CLIENT_PAID_SUPER_ACTIVATION("Согласование даты заказа", "Отклик на заявку"),  // yellow state, activation is paid, assigned superMaster, client wait SuperDispatcher to assign the actual Service
+    SUPER_DISPATCHER_ASSIGN_SERVICE("Согласование даты заказа", "Отклик на заявку"), // assignedService
     SCHEDULE_SERVICE_MASTER("Согласование даты заказа", null), // assignedServiceMaster and Prices
     WAIT_MASTER("Мастер в пути", "Назначено время заказа"), //assignedTime
     MASTER_START_WORK("Мастер приступил к работе", null),
@@ -68,8 +68,8 @@ public enum StateRepair {
 //                 todo   component.checkDesiredTime(data.getDesiredTime());
                     // todo stepper
                     break;
-                case SCHEDULE_SUPER_OFFER:
-                case SCHEDULE_SERVICE:
+                case CLIENT_PAID_SUPER_ACTIVATION:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE:
                     component.offersCounter.noComponent();
                     checkDetailsLastOrder(component, data);
                     //                 todo   component.checkDesiredTime(data.getDesiredTime());
@@ -118,8 +118,8 @@ public enum StateRepair {
                 case HAS_SERVICE_OFFER:
                     // todo stepper
                     break;
-                case SCHEDULE_SUPER_OFFER:
-                case SCHEDULE_SERVICE:
+                case CLIENT_PAID_SUPER_ACTIVATION:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE:
                     // todo stepper
                     break;
                 case WAIT_MASTER:
@@ -181,8 +181,8 @@ public enum StateRepair {
                     tab.repairDetails.checkMaterialsPrice("0");
                     tab.repairDetails.checkActionsPrice("0");
                     break;
-                case SCHEDULE_SUPER_OFFER:
-                case SCHEDULE_SERVICE:
+                case CLIENT_PAID_SUPER_ACTIVATION:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE:
                 case WAIT_MASTER:
                 case MASTER_START_WORK:
                     tab.repairDetails.checkFinishLoading();
@@ -227,12 +227,12 @@ public enum StateRepair {
                     tab.noDocs();
                     tab.noTotalPrice();
                     break;
-                case SCHEDULE_SUPER_OFFER:
-                case SCHEDULE_SERVICE:
+                case CLIENT_PAID_SUPER_ACTIVATION:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE:
                 case WAIT_MASTER:
                 case MASTER_START_WORK:
                     tab.noDocs();
-                    tab.checkTotalPrice("7009.00");
+                    tab.checkTotalPrice("9008.00");
                     // todo add tab.checkComputedToTalPrice - no field in json
                     break;
                 case MATERIAL_INVOICE_ISSUED:

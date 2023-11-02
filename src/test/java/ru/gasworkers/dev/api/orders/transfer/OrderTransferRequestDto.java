@@ -47,13 +47,13 @@ public class OrderTransferRequestDto {
 
     public static OrderTransferRequestDto fullTransferRequest(Integer orderId, Integer executorCompanyId) {
         return OrderTransferRequestDto.builder()
-                .orderId(orderId)
                 .executorId(executorCompanyId)
                 .executorType("company")
-                .fullTransfer(true)
-                .selectedDate(null)
                 .firstAcceptPrice(3100)
                 .fullRepairPrice(3999)
+                .fullTransfer(true)
+                .orderId(orderId)
+                .selectedDate(null)
                 .build();
     }
 

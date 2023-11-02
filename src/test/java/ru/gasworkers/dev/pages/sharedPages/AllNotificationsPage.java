@@ -156,13 +156,13 @@ public class AllNotificationsPage extends BasePage {
                     checkFirstNotificationText(stateRepair.notification());
                     assertThat(firstNotificationText, endsWith(stateRepair.notification()));
                     break;
-                case SCHEDULE_SUPER_OFFER:
+                case CLIENT_PAID_SUPER_ACTIVATION:
                     checkExpectedAmountOfNotifications(2, 4000);
                     checkFirstNotificationText(stateRepair.notification());
                     assertThat(firstNotificationText, startsWith(stateRepair.notification()));
                     break;
-                case SCHEDULE_SERVICE:
-                    checkExpectedAmountOfNotifications(3, 4000);
+                case SUPER_DISPATCHER_ASSIGN_SERVICE:
+                    checkExpectedAmountOfNotifications(2, 4000);
                     checkFirstNotificationText(stateRepair.notification());
                     assertThat(firstNotificationText, startsWith(stateRepair.notification()));
                     break;

@@ -42,9 +42,16 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
 
     public void checkCurrentStatus(OrderStatus orderStatus) {
         stepWithRole("Убедиться, что статус заказа " + orderStatus.toString(), () -> {
-            orderStatusLocator.shouldHave(text(orderStatus.toString()));
+            orderStatusLocator.shouldHave(partialText(orderStatus.toString()));
         });
     }
+
+    public void checkCurrentStatus(StateRepair stateRepair) {
+        stepWithRole("Убедиться, что статус заказа " + stateRepair.toString() + " соответствует ожидаемому", () -> {
+            orderStatusLocator.shouldHave(partialText(stateRepair.toString()));
+        });
+    }
+
 
     public void checkActivationStatusIsPaid(Boolean expectedStatus) {
         stepWithRole("Убедиться, что статус платежа за активацию" + expectedStatus.toString(), () -> {
@@ -210,7 +217,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     noActionsStagePayment();
                     switch (role) {
                         case CLIENT:
-                            checkCurrentStatus(OrderStatus.PUBLISHED);
+                            checkCurrentStatus(StateRepair.PUBLISHED);
                             break;
                         case DISPATCHER:
                             checkCurrentStatus(OrderStatus.NEW_TENDER);
@@ -221,16 +228,16 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     break;
                 case HAS_SUPER_OFFER:
                 case HAS_SERVICE_OFFER:
-                    checkCurrentStatus(OrderStatus.HAS_OFFER);
+                    checkCurrentStatus(StateRepair.HAS_SERVICE_OFFER);
                     noPossibleVisitPrice();
                     noPossibleRepairPrice();
                     noActivationStagePayment();
                     noMaterialsStagePayment();
                     noActionsStagePayment();
                     break;
-                case SCHEDULE_SUPER_OFFER:
-                case SCHEDULE_SERVICE:
-                    checkCurrentStatus(OrderStatus.SCHEDULE_DATE);
+                case CLIENT_PAID_SUPER_ACTIVATION:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE:
+                    checkCurrentStatus(StateRepair.SUPER_DISPATCHER_ASSIGN_SERVICE);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());

@@ -28,6 +28,7 @@ enum StartRegistrationNegativeCase {
     CLIENT_NO_TYPE_EMAIL_AND_PHONE_ALREADY_EXIST(
             "No type, email, and phone already exist",
             StartRegistrationResponseDto.noTypeEmailAndPhoneAlreadyExistResponse()),
+
     CLIENT_INVALID_PHONE(
             "Invalid phone",
             StartRegistrationResponseDto.invalidPhoneResponse());
@@ -57,6 +58,9 @@ enum StartRegistrationNegativeCase {
             case CLIENT_INVALID_EMAIL:
                 return complexDto.toStartRegistration()
                         .setEmail("invalid_email");
+            case CLIENT_INVALID_PHONE:
+                return complexDto.toStartRegistration()
+                        .setPhone("invalid_phone");
             case CLIENT_PHONE_ALREADY_EXISTS:
                 return complexDto.toStartRegistration()
                         .setPhone("70012223344");
