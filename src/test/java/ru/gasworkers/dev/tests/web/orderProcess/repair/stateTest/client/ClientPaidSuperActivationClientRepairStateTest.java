@@ -43,7 +43,7 @@ public class ClientPaidSuperActivationClientRepairStateTest extends BaseWebTest 
     @DisplayName("Ремонт - в  состоянии  клиент оплатит активацию предложения СД")
         // client paid the activation and got the superMaster
     void scheduleSuperOfferRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.CLIENT_PAID_SUPER_ACTIVATION;
+        StateRepair state = StateRepair.CLIENT_PAID_SUPER_ACTIVATION_SD_PROCESS;
         UserRole userRole = UserRole.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
@@ -75,7 +75,7 @@ public class ClientPaidSuperActivationClientRepairStateTest extends BaseWebTest 
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                    clientPages.getOrderCardPage().checkAllStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {

@@ -226,7 +226,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                             throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + role);
                     }
                     break;
-                case HAS_SUPER_OFFER:
+                case HAS_SUPER_OFFER_SD_PROCESS:
                 case HAS_SERVICE_OFFER:
                     checkCurrentStatus(StateRepair.HAS_SERVICE_OFFER);
                     noPossibleVisitPrice();
@@ -235,9 +235,10 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     noMaterialsStagePayment();
                     noActionsStagePayment();
                     break;
-                case CLIENT_PAID_SUPER_ACTIVATION:
-                case SUPER_DISPATCHER_ASSIGN_SERVICE:
-                    checkCurrentStatus(StateRepair.SUPER_DISPATCHER_ASSIGN_SERVICE);
+                case CLIENT_PAID_SUPER_ACTIVATION_SD_PROCESS:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE_SD_PROCESS:
+                case SERVICE_SCHEDULED_MASTER_SD_PROCESS:
+                    checkCurrentStatus(StateRepair.SUPER_DISPATCHER_ASSIGN_SERVICE_SD_PROCESS);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());
@@ -246,7 +247,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     noMaterialsStagePayment();
                     noActionsStagePayment();
                     break;
-                case WAIT_MASTER:
+                case WAIT_SERVICE_MASTER_SD_PROCESS:
                     checkCurrentStatus(OrderStatus.WAIT_MASTER);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
@@ -261,10 +262,14 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());
+                    checkPossibleVisitPrice(String.valueOf(data.getPossibleFirstAcceptPrice()));//?
+                    checkPossibleRepairPrice(String.valueOf(data.getPossibleFullRepairPrice()));//?
                     noMaterialsStagePayment();
                     noActionsStagePayment();
-                    noPossibleVisitPrice();
-                    noPossibleRepairPrice();
+               /*     noMaterialsStagePayment();
+                    noActionsStagePayment();
+                    noPossibleVisitPrice();//!
+                    noPossibleRepairPrice();//!*/
                     break;
                 case MATERIAL_INVOICE_ISSUED:
                     checkCurrentStatus(OrderStatus.MATERIAL_INVOICE_ISSUED);

@@ -60,16 +60,17 @@ public class ApprovedMasterCardInfoMasterTabOrderCardComponent extends BaseOrder
         step("Проверить, что карточка назначенного мастера в состоянии " + stateRepair, () -> {
             switch (stateRepair) {
                 case PUBLISHED:
-                case HAS_SUPER_OFFER:
+                case HAS_SUPER_OFFER_SD_PROCESS:
                 case HAS_SERVICE_OFFER:
                 case CANCEL_CLIENT_PUBLISHED:
                 case CANCEL_CLIENT_HAS_OFFER:
                 case CANCEL_DISPATCHER_HAS_OFFER:
-                case SUPER_DISPATCHER_ASSIGN_SERVICE:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE_SD_PROCESS:
                     noApprovedMasterCard();
                     break;
-                case CLIENT_PAID_SUPER_ACTIVATION:
-                case WAIT_MASTER:
+                case CLIENT_PAID_SUPER_ACTIVATION_SD_PROCESS:
+                case SERVICE_SCHEDULED_MASTER_SD_PROCESS:
+                case WAIT_SERVICE_MASTER_SD_PROCESS:
                 case MASTER_START_WORK:
                 case MATERIAL_INVOICE_ISSUED:
                 case MATERIAL_INVOICE_PAID:

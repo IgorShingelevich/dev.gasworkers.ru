@@ -70,12 +70,30 @@ public class MaterialInvoicePaidClientRepairStateTest extends BaseWebTest {
                     clientPages.getHomePage().lastOrderComponent.checkState(clientPages.getDriverManager(), state, stateInfo.getLastOrderInfoDto());
                 });
             };
-            Consumer<SoftAssert> case2 = softAssert -> {
-                step(userRole + " карточка заказа - в состоянии " + state, () -> {
+            Consumer<SoftAssert> caseA = softAssert -> {
+                step(userRole + " карточка заказа - генеральная информация - в состоянии " + state, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                    clientPages.getOrderCardPage().checkGeneralStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                });
+            };
+
+            Consumer<SoftAssert> caseB = softAssert -> {
+                step(userRole + " карточка заказа - вкладка Общее - в состоянии " + state, () -> {
+                    clientPages.getOrderCardPage().checkTabCommonStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                });
+            };
+
+            Consumer<SoftAssert> caseC = softAssert -> {
+                step(userRole + " карточка заказа - вкладка Информация о заказе - в состоянии " + state, () -> {
+                    clientPages.getOrderCardPage().checkTabInfoMasterStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                });
+            };
+
+            Consumer<SoftAssert> caseD = softAssert -> {
+                step(userRole + " карточка заказа - вкладка Документы - в состоянии " + state, () -> {
+                    clientPages.getOrderCardPage().checkTabDocsStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {
@@ -105,7 +123,7 @@ public class MaterialInvoicePaidClientRepairStateTest extends BaseWebTest {
                     clientPages.getLandingPage().noticeComponent.noNotifications();
                 });
             };
-            assertAll(Arrays.asList(case1, case2, case3, case4, case5));
+            assertAll(Arrays.asList(case1, caseA, caseB, caseC, caseD, case3, case4, case5));
         });
     }
 }

@@ -57,7 +57,7 @@ public class WebRepairTestSteps extends BaseWebTest {
         step(userRole + " карточка заказа - в состоянии " + state, () -> {
             clientPages.getSelectServicePage().toOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+            clientPages.getOrderCardPage().checkAllStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
         });
     }
 

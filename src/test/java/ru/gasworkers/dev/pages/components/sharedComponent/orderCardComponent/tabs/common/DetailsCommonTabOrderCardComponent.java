@@ -118,18 +118,19 @@ public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
                     checkNoCompany();
                     noAssignedDateAndTime();
                     break;
-                case HAS_SUPER_OFFER:
+                case HAS_SUPER_OFFER_SD_PROCESS:
                 case HAS_SERVICE_OFFER:
                 case CANCEL_CLIENT_HAS_OFFER:
                 case CANCEL_DISPATCHER_HAS_OFFER:
+                case SERVICE_SCHEDULED_MASTER_SD_PROCESS:
                     checkNoCompany();
                     noAssignedDateAndTime();
                     checkClientFullName(data.getClientFullName());
                     checkDesiredDate(data.getDesiredDate());
                     checkDesiredTime(data.getDesiredTime());
                     break;
-                case CLIENT_PAID_SUPER_ACTIVATION:
-                case SUPER_DISPATCHER_ASSIGN_SERVICE:
+                case CLIENT_PAID_SUPER_ACTIVATION_SD_PROCESS:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE_SD_PROCESS:
                     checkNoCompany();
                     noAssignedDateAndTime();
                     checkClientFullName(data.getClientFullName());
@@ -137,7 +138,7 @@ public class DetailsCommonTabOrderCardComponent extends BaseOrderCardComponent {
                     checkDesiredDate(data.getDesiredDate());
                     checkDesiredTime(data.getDesiredTime());
                     break;
-                case WAIT_MASTER:
+                case WAIT_SERVICE_MASTER_SD_PROCESS:
                 case MASTER_START_WORK:
                 case MATERIAL_INVOICE_ISSUED:
                 case MATERIAL_INVOICE_PAID:

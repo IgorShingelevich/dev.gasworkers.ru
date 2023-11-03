@@ -121,23 +121,23 @@ public class PreconditionRepair extends BaseApiTest {
                 case CANCEL_CLIENT_PUBLISHED:
                     applyCancelClientPublishedPrecondition(stateRepair, client, commonFields);
                     break;
-                case HAS_SUPER_OFFER: // super dispatcher  made an offer, next supposed to  be SCHEDULE_SUPER_OFFER
+                case HAS_SUPER_OFFER_SD_PROCESS: // super dispatcher  made an offer, next supposed to  be SCHEDULE_SUPER_OFFER
                     applyHasSuperOfferPrecondition(stateRepair, client, commonFields);
                     break;
                 case HAS_SERVICE_OFFER: // direct service  company processing
                     applyHasServiceOfferPrecondition(stateRepair, client, commonFields);
                     break;
-                case CLIENT_PAID_SUPER_ACTIVATION: // yellow state
+                case CLIENT_PAID_SUPER_ACTIVATION_SD_PROCESS: // yellow state
                     applyClientPaidSuperActivationPrecondition(stateRepair, client, commonFields);
                     break;
-                case SUPER_DISPATCHER_ASSIGN_SERVICE:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE_SD_PROCESS:
                     applySuperDispatcherAssignServicePrecondition(stateRepair, client, commonFields);
                     break;
-                case SCHEDULE_SERVICE_MASTER:
-                    applyScheduleServiceMasterPrecondition(stateRepair, client, commonFields);
+                case SERVICE_SCHEDULED_MASTER_SD_PROCESS: // service scheduled master next need to schedule time
+                    applyServiceScheduleMasterPrecondition(stateRepair, client, commonFields);
                     break;
-                case WAIT_MASTER:
-                    applyWaitMasterPreconditionUser(stateRepair, client, commonFields);
+                case WAIT_SERVICE_MASTER_SD_PROCESS:  // dispatcher scheduled time, next supposed to be MASTER_START_WORK
+                    applyWaitServiceMasterPreconditionUser(stateRepair, client, commonFields);
                     break;
                 case MASTER_START_WORK:
                     applyMasterStartWorkPrecondition(stateRepair, client, commonFields);
@@ -332,7 +332,7 @@ public class PreconditionRepair extends BaseApiTest {
 
     private void applyHasSuperOfferPrecondition(StateRepair stateRepair, User client, CommonFieldsDto commonFields) {
         applyPublishedPrecondition(stateRepair, client, commonFields);
-        StateRepair actualStateRepair = StateRepair.HAS_SUPER_OFFER;
+        StateRepair actualStateRepair = StateRepair.HAS_SUPER_OFFER_SD_PROCESS;
         step("API: предусловие - " + UserRole.CLIENT + " заказ на ремонт в состоянии " + actualStateRepair, () -> {
             step(UserRole.SUPER_DISPATCHER + " расценивает офер и  выбирает мастера", () -> {
                 step(UserRole.SUPER_DISPATCHER + " получает список доступных мастеров ", () -> {
@@ -403,7 +403,7 @@ public class PreconditionRepair extends BaseApiTest {
 
     private void applyClientPaidSuperActivationPrecondition(StateRepair stateRepair, User client, CommonFieldsDto commonFields) {
         applyHasSuperOfferPrecondition(stateRepair, client, commonFields);
-        StateRepair actualStateRepair = StateRepair.CLIENT_PAID_SUPER_ACTIVATION;
+        StateRepair actualStateRepair = StateRepair.CLIENT_PAID_SUPER_ACTIVATION_SD_PROCESS;
         step("API: предусловие - " + UserRole.CLIENT + " заказ на ремонт в состоянии " + actualStateRepair, () -> {
             step("клиент выбирает предложение от СД", () -> {
                 SelectServiceCompanyResponseDto actualResponse = selectServiceCompanyApi.selectServiceCompany(commonFields.getOrderNumber(), commonFields.getSuperServiceId(), commonFields.getTokenClient())
@@ -431,7 +431,7 @@ public class PreconditionRepair extends BaseApiTest {
 
     private void applySuperDispatcherAssignServicePrecondition(StateRepair stateRepair, User client, CommonFieldsDto commonFields) {
         applyClientPaidSuperActivationPrecondition(stateRepair, client, commonFields);
-        StateRepair actualStateRepair = StateRepair.SUPER_DISPATCHER_ASSIGN_SERVICE;
+        StateRepair actualStateRepair = StateRepair.SUPER_DISPATCHER_ASSIGN_SERVICE_SD_PROCESS;
         step("API: предусловие - " + UserRole.CLIENT + " заказ на ремонт в состоянии " + actualStateRepair, () -> {
            /* step(UserRole.SUPER_DISPATCHER + "  ищет  СК СССР для заказа по поиску", () -> {
                 commonFields.setExecutorCompanyId(companiesSearchExecutorApi.searchExecutor(CompaniesSearchExecutorRequestDto.builder()
@@ -449,37 +449,43 @@ public class PreconditionRepair extends BaseApiTest {
     }
 
 
-    private void applyScheduleServiceMasterPrecondition(StateRepair stateRepair, User client, CommonFieldsDto commonFields) {
+    private void applyServiceScheduleMasterPrecondition(StateRepair stateRepair, User client, CommonFieldsDto commonFields) {
         applySuperDispatcherAssignServicePrecondition(stateRepair, client, commonFields);
-        StateRepair actualStateRepair = StateRepair.SCHEDULE_SERVICE_MASTER;
+        StateRepair actualStateRepair = StateRepair.SERVICE_SCHEDULED_MASTER_SD_PROCESS;
         step("API: предусловие - " + UserRole.CLIENT + " заказ на ремонт в состоянии " + actualStateRepair, () -> {
             step(UserRole.DISPATCHER + " назначает мастера для заказа", () -> {
+
+                step(UserRole.DISPATCHER + " получает список доступных мастеров ", () -> {
+                    commonFields.setMasterId(companiesMastersApi.getAcceptedMasters(commonFields.getTokenDispatcher())
+                            .statusCode(200)
+                            .extract().as(CompaniesMastersResponseDto.class).getData().get(0).getId());
+                });
 
                 step(UserRole.DISPATCHER + " расценивает офер", () -> {
                     dispatcherPricing.dispatcherPricing(DispatcherPricingRequestDto.builder()
                                             .firstAcceptPrice(5999)
                                             .fullRepairPrice("6999")
-                                            .masterId(commonFields.getSuperMasterId())
+                                            .masterId(commonFields.getMasterId())
                                             .build(),
                                     commonFields.getOrderNumber(), commonFields.getTokenDispatcher())
                             .statusCode(200);
                 });
-                step(UserRole.DISPATCHER + " делает офер", () -> {
+               /* step(UserRole.DISPATCHER + " делает офер", () -> {
                     makeOffer.makeOffer(MakeOfferRequestDto.builder()
                                             .orderId(commonFields.getOrderNumber())
                                             .build(),
                                     commonFields.getTokenDispatcher())
                             .statusCode(200);
 
-                });
+                });*/
             });
 
         });
     }
 
-    private void applyWaitMasterPreconditionUser(StateRepair stateRepair, User client, CommonFieldsDto commonFields) {
-        applySuperDispatcherAssignServicePrecondition(stateRepair, client, commonFields);
-        StateRepair actualStateRepair = StateRepair.WAIT_MASTER;
+    private void applyWaitServiceMasterPreconditionUser(StateRepair stateRepair, User client, CommonFieldsDto commonFields) {
+        applyServiceScheduleMasterPrecondition(stateRepair, client, commonFields);
+        StateRepair actualStateRepair = StateRepair.WAIT_SERVICE_MASTER_SD_PROCESS;
         step("API: предусловие - " + UserRole.CLIENT + " заказ на ремонт в состоянии " + actualStateRepair, () -> {
             step(UserRole.DISPATCHER + " подтверждает дату и время в состоянии" + actualStateRepair, () -> {
                 commonFields.setApproveDate(client.getApproveDate());
@@ -491,7 +497,7 @@ public class PreconditionRepair extends BaseApiTest {
     }
 
     private void applyMasterStartWorkPrecondition(StateRepair stateRepair, User client, CommonFieldsDto commonFields) {
-        applyWaitMasterPreconditionUser(stateRepair, client, commonFields);
+        applyWaitServiceMasterPreconditionUser(stateRepair, client, commonFields);
         StateRepair actualStateRepair = StateRepair.MASTER_START_WORK;
         step("API: предусловие - " + UserRole.CLIENT + " заказ на ремонт в состоянии " + actualStateRepair, () -> {
             step(UserRole.MASTER + "  авторизуется", () -> {

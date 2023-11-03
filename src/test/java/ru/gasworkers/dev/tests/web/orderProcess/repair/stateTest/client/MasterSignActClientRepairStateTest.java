@@ -74,7 +74,7 @@ public class MasterSignActClientRepairStateTest extends BaseWebTest {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                    clientPages.getOrderCardPage().checkAllStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {

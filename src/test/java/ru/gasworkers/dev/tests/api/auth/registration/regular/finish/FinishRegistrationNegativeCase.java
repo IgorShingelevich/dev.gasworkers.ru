@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.tests.api.auth.registration.regular.finish;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationFactory;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRequestDto;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.check.CheckRegistrationRequestDto;
@@ -37,12 +38,9 @@ enum FinishRegistrationNegativeCase {
             FinishRegistrationResponseDto.duplicatePhoneErrorResponse());
 
     private final String description;
+    @Getter
     private final FinishRegistrationResponseDto expectedResponse;
     private final ComplexRegistrationRequestDto complexDto = ComplexRegistrationFactory.defaultRandomClient();
-    public FinishRegistrationResponseDto getExpectedResponse() {
-        return expectedResponse;
-    }
-
 
 
     public StartRegistrationRequestDto getStartDto() {

@@ -40,7 +40,7 @@ public class MasterStartWorkClientRepairStateTest extends BaseWebTest {
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Ремонт - в  состоянии мастер приступил к работе")
+    @DisplayName("Ремонт - в  состоянии мастер заполнил  чек-лист и приступил к работе")
     void masterStartWork(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
         StateRepair state = StateRepair.MASTER_START_WORK;
         UserRole userRole = UserRole.CLIENT;
@@ -69,21 +69,36 @@ public class MasterStartWorkClientRepairStateTest extends BaseWebTest {
                     clientPages.getHomePage().lastOrderComponent.checkState(clientPages.getDriverManager(), state, stateInfo.getLastOrderInfoDto());
                 });
             };
-            Consumer<SoftAssert> case2 = softAssert -> {
-                step(userRole + " карточка заказа - в состоянии " + state, () -> {
+            Consumer<SoftAssert> caseA = softAssert -> {
+                step(userRole + " карточка заказа - генеральная информация - в состоянии " + state, () -> {
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                    clientPages.getOrderCardPage().checkGeneralStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
                 });
             };
+
+            Consumer<SoftAssert> caseB = softAssert -> {
+                step(userRole + " карточка заказа - вкладка Общее - в состоянии " + state, () -> {
+                    clientPages.getOrderCardPage().checkTabCommonStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                });
+            };
+
+            Consumer<SoftAssert> caseC = softAssert -> {
+                step(userRole + " карточка заказа - вкладка Информация о заказе - в состоянии " + state, () -> {
+                    clientPages.getOrderCardPage().checkTabInfoMasterStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                });
+            };
+
+            Consumer<SoftAssert> caseD = softAssert -> {
+                step(userRole + " карточка заказа - вкладка Документы - в состоянии " + state, () -> {
+                    clientPages.getOrderCardPage().checkTabDocsStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                });
+            };
+
+
             Consumer<SoftAssert> case3 = softAssert -> {
                 step(userRole + " уведомления - в состоянии " + state, () -> {
-//                    clientPages.getHomePage().open();
-//                    clientPages.getHomePage().checkFinishLoading();
-//                    Selenide.sleep(3000);
-//                    clientPages.getHomePage().header.actionsBlock.notifications();
-//                    clientPages.getAllNotificationsPage().checkFinishLoading();
                     clientPages.getAllNotificationsPage().open();
                     clientPages.getAllNotificationsPage().checkStateRepair(state, stateInfo.getNotificationsDto());
                 });
@@ -102,7 +117,21 @@ public class MasterStartWorkClientRepairStateTest extends BaseWebTest {
                     clientPages.getLandingPage().noticeComponent.noNotifications();
                 });
             };
-            assertAll(Arrays.asList(case1, case2, case3, case4, case5));
+            assertAll(Arrays.asList(case1, caseA, caseB, caseC, caseD, case3, case4, case5));
+
         });
     }
 }
+
+
+//                return clientPages.getOrderCardPage().collectStateChecks(userRole, state, stateInfo.getOrdersIdResponseDto());
+
+ /* List<Consumer<SoftAssert>> allChecks = new ArrayList<>();
+            allChecks.add(case1);
+            allChecks.add(case2);
+//            allChecks.addAll(collectedStateChecks);
+            allChecks.add(case3);
+            allChecks.add(case4);
+            allChecks.add(case5);
+            assertAll(allChecks);
+*/

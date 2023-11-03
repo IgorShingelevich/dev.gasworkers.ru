@@ -19,10 +19,14 @@ import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tab
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster.InfoMasterTabOrderCardClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
+import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.StateConsultation;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.List;
+import java.util.function.Consumer;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
@@ -266,7 +270,7 @@ public class OrderCardClientPage extends BaseClientPage {
         });
     }
 
-    public void checkStateRepair(UserRole role, StateRepair state, OrdersIdResponseDto dto) {
+    public void checkAllStateRepair(UserRole role, StateRepair state, OrdersIdResponseDto dto) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
             checkOrderNumber(dto.getData().getNumber());
             consultationNotification.noNoticeConsultationComponent();
@@ -288,6 +292,90 @@ public class OrderCardClientPage extends BaseClientPage {
         });
     }
 
+    public void checkGeneralStateRepair(UserRole role, StateRepair state, OrdersIdResponseDto dto) {
+        stepWithRole("Убедиться, что номер заказа " + state + " соответствует ожидаемому, отсутствуют несвойственные элементы", () -> {
+            checkOrderNumber(dto.getData().getNumber());
+            consultationNotification.noNoticeConsultationComponent();
+            nav.noChecklistTab();
+        });
+    }
+
+    public void checkTabCommonStateRepair(UserRole role, StateRepair state, OrdersIdResponseDto dto) {
+        stepWithRole("Убедиться, что вкладка  Общие в состоянии " + state, () -> {
+            nav.common();
+            state.checkCommonTab(role, this.commonTab, dto);
+        });
+    }
+
+    public void checkTabInfoMasterStateRepair(UserRole role, StateRepair state, OrdersIdResponseDto dto) {
+        stepWithRole("Убедиться, что вкладка  Информация о мастере в состоянии " + state, () -> {
+            nav.infoMaster();
+            state.checkInfoMasterTab(role, this.infoMasterTab, dto);
+        });
+    }
+
+    public void checkTabDocsStateRepair(UserRole role, StateRepair state, OrdersIdResponseDto dto) {
+        stepWithRole("Убедиться, что вкладка  Документы в состоянии " + state, () -> {
+            switch (state) {
+                case CANCEL_CLIENT_PUBLISHED:
+                case CANCEL_CLIENT_HAS_OFFER:
+                case CANCEL_DISPATCHER_HAS_OFFER:
+                    nav.noDocsTab();
+                    break;
+                default:
+                    nav.docs();
+                    state.checkDocsTab(role, this.docsTab, dto);
+            }
+        });
+    }
+
+    public List<Consumer<SoftAssert>> collectStateChecks(UserRole role, StateRepair state, OrdersIdResponseDto dto) {
+        Consumer<SoftAssert> checkOrderNumberConsumer = softAssert -> {
+            checkOrderNumber(dto.getData().getNumber());
+        };
+
+        Consumer<SoftAssert> consultationNotificationConsumer = softAssert -> {
+            consultationNotification.noNoticeConsultationComponent();
+        };
+
+        Consumer<SoftAssert> navNoChecklistTabConsumer = softAssert -> {
+            nav.noChecklistTab();
+        };
+
+        Consumer<SoftAssert> checkCommonTabConsumer = softAssert -> {
+            nav.common();
+            state.checkCommonTab(role, this.commonTab, dto);
+        };
+
+        Consumer<SoftAssert> checkInfoMasterTabConsumer = softAssert -> {
+            nav.infoMaster();
+            state.checkInfoMasterTab(role, this.infoMasterTab, dto);
+        };
+
+        Consumer<SoftAssert> chechDocsTabConsumer = softAssert -> {
+            switch (state) {
+                case CANCEL_CLIENT_PUBLISHED:
+                case CANCEL_CLIENT_HAS_OFFER:
+                case CANCEL_DISPATCHER_HAS_OFFER:
+                    nav.noDocsTab();
+                    break;
+                default:
+                    nav.docs();
+                    state.checkDocsTab(role, this.docsTab, dto);
+            }
+        };
+
+        return Arrays.asList(
+                checkOrderNumberConsumer,
+                consultationNotificationConsumer,
+                navNoChecklistTabConsumer,
+                checkCommonTabConsumer,
+                checkInfoMasterTabConsumer,
+                chechDocsTabConsumer
+        );
+    }
+
+
     public void checkStateConsultation(StateConsultation state, OrdersIdResponseDto dto) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
             checkOrderNumber(dto.getData().getNumber());
@@ -303,28 +391,3 @@ public class OrderCardClientPage extends BaseClientPage {
     }
 
 }
-/*public List<Consumer<SoftAssert>> checkStateList(StateRepair state, OrdersIdResponseDto dto) {
-        List<Consumer<SoftAssert>> softAssertions = new ArrayList<>();
-
-        stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
-            Consumer<SoftAssert> case1 = softAssert -> {
-                checkOrderNumber(dto.getDataDto().getNumber());
-                nav.common();
-                state.checkCommonTab(this.commonTab, dto);
-            };
-            Consumer<SoftAssert> case2 = softAssert -> {
-                nav.infoMaster();
-                state.checkInfoMasterTab(this.infoMasterTab, dto);
-            };
-            Consumer<SoftAssert> case3 = softAssert -> {
-                nav.docs();
-                state.checkDocsTab(this.docsTab, dto);
-            };
-
-            softAssertions.add(case1);
-            softAssertions.add(case2);
-            softAssertions.add(case3);
-        });
-
-        return softAssertions;
-    }*/

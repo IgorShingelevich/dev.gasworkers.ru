@@ -76,7 +76,7 @@ public class ClientSignActClientRepairStateTest extends BaseWebTest {
                 step(userRole + " карточка заказа - в состоянии " + state, () -> {
                     clientPages.getOrderCardPage().open(String.valueOf(commonFieldsFromStateInfo.getOrderNumber()));
                     clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                    clientPages.getOrderCardPage().checkAllStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {

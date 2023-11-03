@@ -43,7 +43,7 @@ public class HasSuperOfferClientRepairStateTest extends BaseWebTest {
     @Test
     @DisplayName("Ремонт - в состоянии есть отклик СД")
     void hasSuperOfferRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.HAS_SUPER_OFFER;
+        StateRepair state = StateRepair.HAS_SUPER_OFFER_SD_PROCESS;
         UserRole userRole = UserRole.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
@@ -83,11 +83,30 @@ public class HasSuperOfferClientRepairStateTest extends BaseWebTest {
                 });
             };
 
-            Consumer<SoftAssert> case4 = softAssert -> {
-                step(userRole + " карточка заказа - в состоянии " + state, () -> {
-                    clientPages.getSelectServicePage().toOrderCard();
+            Consumer<SoftAssert> caseA = softAssert -> {
+                step(userRole + " карточка заказа - генеральная информация - в состоянии " + state, () -> {
+                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
+                    clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                    clientPages.getOrderCardPage().checkGeneralStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                });
+            };
+
+            Consumer<SoftAssert> caseB = softAssert -> {
+                step(userRole + " карточка заказа - вкладка Общее - в состоянии " + state, () -> {
+                    clientPages.getOrderCardPage().checkTabCommonStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                });
+            };
+
+            Consumer<SoftAssert> caseC = softAssert -> {
+                step(userRole + " карточка заказа - вкладка Информация о заказе - в состоянии " + state, () -> {
+                    clientPages.getOrderCardPage().checkTabInfoMasterStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                });
+            };
+
+            Consumer<SoftAssert> caseD = softAssert -> {
+                step(userRole + " карточка заказа - вкладка Документы - в состоянии " + state, () -> {
+                    clientPages.getOrderCardPage().checkTabDocsStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
                 });
             };
             Consumer<SoftAssert> case5 = softAssert -> {
@@ -115,7 +134,7 @@ public class HasSuperOfferClientRepairStateTest extends BaseWebTest {
                     clientPages.getLandingPage().noticeComponent.noNotifications();
                 });
             };
-            assertAll(Arrays.asList(case1, case2, case3, case4, case5, case6, case7));
+            assertAll(Arrays.asList(case1, case2, case3, caseA, caseB, caseC, caseD, case5, case6, case7));
         });
     }
 

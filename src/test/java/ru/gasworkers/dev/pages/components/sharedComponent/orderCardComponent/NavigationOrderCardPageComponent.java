@@ -97,7 +97,7 @@ public class NavigationOrderCardPageComponent extends BaseComponent {
 
     public void checkNavStateMasterRole(StateRepair state) {
         switch (state) {
-            case WAIT_MASTER:
+            case WAIT_SERVICE_MASTER_SD_PROCESS:
                 checkChecklistTab();
                 break;
             default:

@@ -83,7 +83,7 @@ public class CancelClientPublishedClientRepairStateTest extends BaseWebTest {
                 step(userRole + " карточка заказа - в состоянии " + state, () -> {
                     clientPages.getOrderCardPage().open(stateInfo.getOrdersIdResponseDto().getData().getId().toString());
                     clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                    clientPages.getOrderCardPage().checkAllStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
 
                 });
             };

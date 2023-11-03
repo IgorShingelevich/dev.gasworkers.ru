@@ -21,13 +21,13 @@ public enum StateRepair {
     CANCEL_CLIENT_PUBLISHED("Заказ отменен", null),
     REFUSED_OFFER_DISPATCHER("Диспетчер отклонил новый тендер", null),
     HAS_SERVICE_OFFER("Отклик на заявку", "Отклик на заявку"),
-    HAS_SUPER_OFFER("Отклик на заявку", "Отклик на заявку"),
+    HAS_SUPER_OFFER_SD_PROCESS("Отклик на заявку", "Отклик на заявку"),
     CANCEL_CLIENT_HAS_OFFER("Заказ отменен", "Заказ отменен"),
     CANCEL_DISPATCHER_HAS_OFFER("Заказ отменен", "Заказ отменен"),
-    CLIENT_PAID_SUPER_ACTIVATION("Согласование даты заказа", "Отклик на заявку"),  // yellow state, activation is paid, assigned superMaster, client wait SuperDispatcher to assign the actual Service
-    SUPER_DISPATCHER_ASSIGN_SERVICE("Согласование даты заказа", "Отклик на заявку"), // assignedService
-    SCHEDULE_SERVICE_MASTER("Согласование даты заказа", null), // assignedServiceMaster and Prices
-    WAIT_MASTER("Мастер в пути", "Назначено время заказа"), //assignedTime
+    CLIENT_PAID_SUPER_ACTIVATION_SD_PROCESS("Согласование даты заказа", "Отклик на заявку"),  // yellow state, activation is paid, assigned superMaster, client wait SuperDispatcher to assign the actual Service
+    SUPER_DISPATCHER_ASSIGN_SERVICE_SD_PROCESS("Согласование даты заказа", "Отклик на заявку"), // assignedService
+    SERVICE_SCHEDULED_MASTER_SD_PROCESS("Согласование даты заказа", "В заказе произошли следующие изменения"), // assignedServiceMaster and Prices
+    WAIT_SERVICE_MASTER_SD_PROCESS("Мастер в пути", "Согласованы дата и время заказа"), //assignedTime
     MASTER_START_WORK("Мастер приступил к работе", null),
     MATERIAL_INVOICE_ISSUED("Выставлен счет на материалы", "Оплатите счет по заказу"),
     MATERIAL_INVOICE_PAID("Оплачен счет на материалы", null),
@@ -60,7 +60,7 @@ public enum StateRepair {
                     // todo desired time and date
                     // todo stepper
                     break;
-                case HAS_SUPER_OFFER:
+                case HAS_SUPER_OFFER_SD_PROCESS:
                 case HAS_SERVICE_OFFER:
                     component.offersCounter.amount(data.getOffersCount());
                     checkDetailsLastOrder(component, data);
@@ -68,14 +68,15 @@ public enum StateRepair {
 //                 todo   component.checkDesiredTime(data.getDesiredTime());
                     // todo stepper
                     break;
-                case CLIENT_PAID_SUPER_ACTIVATION:
-                case SUPER_DISPATCHER_ASSIGN_SERVICE:
+                case CLIENT_PAID_SUPER_ACTIVATION_SD_PROCESS:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE_SD_PROCESS:
+                case SERVICE_SCHEDULED_MASTER_SD_PROCESS:
                     component.offersCounter.noComponent();
                     checkDetailsLastOrder(component, data);
                     //                 todo   component.checkDesiredTime(data.getDesiredTime());
                     // todo stepper
                     break;
-                case WAIT_MASTER:
+                case WAIT_SERVICE_MASTER_SD_PROCESS:
                 case MASTER_START_WORK:
                 case MATERIAL_INVOICE_ISSUED:
                 case MATERIAL_INVOICE_PAID:
@@ -114,15 +115,16 @@ public enum StateRepair {
                 case CANCEL_CLIENT_PUBLISHED:
                     // todo stepper
                     break;
-                case HAS_SUPER_OFFER:
+                case HAS_SUPER_OFFER_SD_PROCESS:
                 case HAS_SERVICE_OFFER:
+                case SERVICE_SCHEDULED_MASTER_SD_PROCESS:
                     // todo stepper
                     break;
-                case CLIENT_PAID_SUPER_ACTIVATION:
-                case SUPER_DISPATCHER_ASSIGN_SERVICE:
+                case CLIENT_PAID_SUPER_ACTIVATION_SD_PROCESS:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE_SD_PROCESS:
                     // todo stepper
                     break;
-                case WAIT_MASTER:
+                case WAIT_SERVICE_MASTER_SD_PROCESS:
                     // todo stepper
                 case MASTER_START_WORK:
                     // todo stepper
@@ -161,7 +163,7 @@ public enum StateRepair {
             tab.buttons.checkStateRepair(role, this);
             switch (this) {
                 case PUBLISHED:
-                case HAS_SUPER_OFFER:
+                case HAS_SUPER_OFFER_SD_PROCESS:
                 case HAS_SERVICE_OFFER:
                     switch (role) {
                         case CLIENT:
@@ -181,9 +183,10 @@ public enum StateRepair {
                     tab.repairDetails.checkMaterialsPrice("0");
                     tab.repairDetails.checkActionsPrice("0");
                     break;
-                case CLIENT_PAID_SUPER_ACTIVATION:
-                case SUPER_DISPATCHER_ASSIGN_SERVICE:
-                case WAIT_MASTER:
+                case CLIENT_PAID_SUPER_ACTIVATION_SD_PROCESS:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE_SD_PROCESS:
+                case SERVICE_SCHEDULED_MASTER_SD_PROCESS:
+                case WAIT_SERVICE_MASTER_SD_PROCESS:
                 case MASTER_START_WORK:
                     tab.repairDetails.checkFinishLoading();
                     tab.repairDetails.checkMaterialsPrice("0");
@@ -222,17 +225,22 @@ public enum StateRepair {
         step("Убедиться, что вкладка Документы в состоянии " + this, () -> {
             switch (this) {
                 case PUBLISHED:
-                case HAS_SUPER_OFFER:
+                case HAS_SUPER_OFFER_SD_PROCESS:
                 case HAS_SERVICE_OFFER:
                     tab.noDocs();
                     tab.noTotalPrice();
                     break;
-                case CLIENT_PAID_SUPER_ACTIVATION:
-                case SUPER_DISPATCHER_ASSIGN_SERVICE:
-                case WAIT_MASTER:
-                case MASTER_START_WORK:
+                case CLIENT_PAID_SUPER_ACTIVATION_SD_PROCESS:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE_SD_PROCESS:
                     tab.noDocs();
                     tab.checkTotalPrice("9008.00");
+                    // todo add tab.checkComputedToTalPrice - no field in json
+                    break;
+                case SERVICE_SCHEDULED_MASTER_SD_PROCESS:
+                case WAIT_SERVICE_MASTER_SD_PROCESS:
+                case MASTER_START_WORK:
+                    tab.noDocs();
+                    tab.checkTotalPrice("13008.00");
                     // todo add tab.checkComputedToTalPrice - no field in json
                     break;
                 case MATERIAL_INVOICE_ISSUED:
@@ -274,7 +282,7 @@ public enum StateRepair {
 //                    page.suggestedConsultationBannerComponent.checkOpened();
                     page.respondedCompaniesBox.noOffers();
                     break;
-                case HAS_SUPER_OFFER:
+                case HAS_SUPER_OFFER_SD_PROCESS:
                 case HAS_SERVICE_OFFER:
 //                    page.offersCounter.amount(page.respondedCompaniesBox.getAmountOfferBox());
 //                    page.checkHasOfferBanner(); //deleted
