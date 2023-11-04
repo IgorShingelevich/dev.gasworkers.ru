@@ -81,11 +81,11 @@ public class AfterMaintenanceBGRegistrationTest extends BaseTest {
             });
             step("Страница Объекты", () -> {
                 clientPages.getAllNotificationsPage().sidebar.allObjects();
-                clientPages.getAllObjectsPage().checkFinishLoading();
-                clientPages.getAllObjectsPage().initialBGState(GAS_BOILER_TYPE, resultedEquipmentCollectionName, power.toString(), resultedAddress);
+                clientPages.getAllEquipmentPage().checkFinishLoading();
+                clientPages.getAllEquipmentPage().initialBGState(GAS_BOILER_TYPE, resultedEquipmentCollectionName, power.toString(), resultedAddress);
             });
             step("Страница Заказы", () -> {
-                clientPages.getAllObjectsPage().sidebar.allOrders();
+                clientPages.getAllEquipmentPage().sidebar.allOrders();
                 clientPages.getAllOrdersPage().checkFinishLoading();
                 clientPages.getAllOrdersPage().checkBGInitialState(orderNumber);
             });

@@ -81,8 +81,8 @@ public class ClientAfterRegistrationTest extends BaseTest {
             // todo appearence of the person summary component
             // clientPages.getHomePage().personSummaryComponent.checkInitialState(randomClient.getFullName(), randomClient.getSinceDate());
             clientPages.getHomePage().sidebar.allObjects();
-            clientPages.getAllObjectsPage().checkInitialState();
-            clientPages.getAllObjectsPage().sidebar.allOrders();
+            clientPages.getAllEquipmentPage().checkInitialState();
+            clientPages.getAllEquipmentPage().sidebar.allOrders();
             clientPages.getAllOrdersPage().checkInitialState();
             clientPages.getAllOrdersPage().sidebar.allInvoices();
             clientPages.getAllInvoicesPage().checkInitialState();
@@ -112,7 +112,7 @@ public class ClientAfterRegistrationTest extends BaseTest {
                     clientPages.getProfilePage().navNotificationsTab.checkInitialState();
                 });
             });
-            clientPages.getHomePage().open();
+            clientPages.getHomePage().open(clientPages.getHomePage().getToken());
             //TODO profile  check - photo. rest of the fields
         });
     }

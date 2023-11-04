@@ -20,7 +20,7 @@ public class OrdersSaveActionsResponseDto {
                 .status(0)
                 .message("Данные о необходимых работах сохранены")
                 .data(DataDto.builder()
-                        .totalAmount("2990.00")
+                        .totalAmount("12988.00")
                         .build())
                 .build();
     }

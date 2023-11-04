@@ -57,13 +57,13 @@ public class WebRepairTestSteps extends BaseWebTest {
         step(userRole + " карточка заказа - в состоянии " + state, () -> {
             clientPages.getSelectServicePage().toOrderCard();
             clientPages.getOrderCardPage().checkFinishLoading();
-            clientPages.getOrderCardPage().checkAllStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+            clientPages.getOrderCardPage().checkAllStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto(), stateInfo.getTotalPriceResponseDto());
         });
     }
 
     void checkNotificationsPage(UserRole userRole, StateRepair state, StateInfo stateInfo) {
         step(userRole + " уведомления - в состоянии " + state, () -> {
-            clientPages.getHomePage().open();
+            clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
             clientPages.getHomePage().checkFinishLoading();
             Selenide.sleep(3000);
             clientPages.getHomePage().header.actionsBlock.notifications();
@@ -74,7 +74,7 @@ public class WebRepairTestSteps extends BaseWebTest {
 
     void checkRedNotificationHomePage(UserRole userRole, StateRepair state) {
         step(userRole + " красное уведомление в лк - в состоянии " + state, () -> {
-            clientPages.getHomePage().open();
+            clientPages.getHomePage().open(clientPages.getHomePage().getToken());
             clientPages.getHomePage().checkFinishLoading();
             clientPages.getHomePage().redNotice.noNotice();
         });

@@ -3,6 +3,7 @@ package ru.gasworkers.dev.pages.client;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import ru.gasworkers.dev.api.administration.totalPrice.TotalPriceResponseDto;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.model.Doc;
 import ru.gasworkers.dev.model.OrderStatus;
@@ -77,12 +78,12 @@ public class OrderCardClientPage extends BaseClientPage {
         buttons = new ClientButtonsOrderCardComponent(browser);
     }
 
-    protected SelenideElement leftMenuItemTopology(String pointMenu) {
+    /*protected SelenideElement leftMenuItemTopology(String pointMenu) {
         return driver.$x("//*[local-name() = 'svg'][@data-testid = 'WarehouseIcon']//ancestor::li//span[text() = '" + pointMenu + "']");
-    }
+    }*/
 
     public void open(String orderId) {
-        driver.open("/profile/client/orders/" + orderId);
+        driver.open("profile/client/orders/" + orderId);
     }
 
     public void checkFinishLoading() {
@@ -93,6 +94,16 @@ public class OrderCardClientPage extends BaseClientPage {
             titleCardNumberLocator.shouldBe(visible, Duration.ofSeconds(20)).shouldHave(text(ORDER_CARD_TITLE));
             orderDetailsBlockLocator.shouldBe(visible, Duration.ofSeconds(20));
         });
+    }
+
+    // open  with  ?view=card like https://dev.gasworkers.ru/profile/client/orders/11081?view=card
+    public void openRedirected(Integer orderID, String token) {
+        open("profile/client/orders/" + orderID + "?view=card", token);
+    }
+
+    // open  normally like https://dev.gasworkers.ru/profile/client/orders/11081
+    public void open(Integer orderID, String token) {
+        open("profile/client/orders/" + orderID, token);
     }
 
     public void checkPublishedState(OrderStatus orderStatus, ServiceType serviceType) {
@@ -270,15 +281,15 @@ public class OrderCardClientPage extends BaseClientPage {
         });
     }
 
-    public void checkAllStateRepair(UserRole role, StateRepair state, OrdersIdResponseDto dto) {
+    public void checkAllStateRepair(UserRole role, StateRepair state, OrdersIdResponseDto orderDto, TotalPriceResponseDto totalPriceDto) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
-            checkOrderNumber(dto.getData().getNumber());
+            checkOrderNumber(orderDto.getData().getNumber());
             consultationNotification.noNoticeConsultationComponent();
             nav.noChecklistTab();
             nav.common();
-            state.checkCommonTab(role, this.commonTab, dto);
+            state.checkCommonTab(role, this.commonTab, orderDto);
             nav.infoMaster();
-            state.checkInfoMasterTab(role, this.infoMasterTab, dto);
+            state.checkInfoMasterTab(role, this.infoMasterTab, orderDto);
             switch (state) {
                 case CANCEL_CLIENT_PUBLISHED:
                 case CANCEL_CLIENT_HAS_OFFER:
@@ -287,7 +298,7 @@ public class OrderCardClientPage extends BaseClientPage {
                     break;
                 default:
                     nav.docs();
-                    state.checkDocsTab(role, this.docsTab, dto);
+                    state.checkDocsTab(role, this.docsTab, orderDto, totalPriceDto);
             }
         });
     }
@@ -314,7 +325,7 @@ public class OrderCardClientPage extends BaseClientPage {
         });
     }
 
-    public void checkTabDocsStateRepair(UserRole role, StateRepair state, OrdersIdResponseDto dto) {
+    public void checkTabDocsStateRepair(UserRole role, StateRepair state, OrdersIdResponseDto ordersDto, TotalPriceResponseDto totalPriceDto) {
         stepWithRole("Убедиться, что вкладка  Документы в состоянии " + state, () -> {
             switch (state) {
                 case CANCEL_CLIENT_PUBLISHED:
@@ -324,14 +335,14 @@ public class OrderCardClientPage extends BaseClientPage {
                     break;
                 default:
                     nav.docs();
-                    state.checkDocsTab(role, this.docsTab, dto);
+                    state.checkDocsTab(role, this.docsTab, ordersDto, totalPriceDto);
             }
         });
     }
 
-    public List<Consumer<SoftAssert>> collectStateChecks(UserRole role, StateRepair state, OrdersIdResponseDto dto) {
+    public List<Consumer<SoftAssert>> collectStateChecks(UserRole role, StateRepair state, OrdersIdResponseDto ordersDto, TotalPriceResponseDto totalPriceDto) {
         Consumer<SoftAssert> checkOrderNumberConsumer = softAssert -> {
-            checkOrderNumber(dto.getData().getNumber());
+            checkOrderNumber(ordersDto.getData().getNumber());
         };
 
         Consumer<SoftAssert> consultationNotificationConsumer = softAssert -> {
@@ -344,12 +355,12 @@ public class OrderCardClientPage extends BaseClientPage {
 
         Consumer<SoftAssert> checkCommonTabConsumer = softAssert -> {
             nav.common();
-            state.checkCommonTab(role, this.commonTab, dto);
+            state.checkCommonTab(role, this.commonTab, ordersDto);
         };
 
         Consumer<SoftAssert> checkInfoMasterTabConsumer = softAssert -> {
             nav.infoMaster();
-            state.checkInfoMasterTab(role, this.infoMasterTab, dto);
+            state.checkInfoMasterTab(role, this.infoMasterTab, ordersDto);
         };
 
         Consumer<SoftAssert> chechDocsTabConsumer = softAssert -> {
@@ -361,7 +372,7 @@ public class OrderCardClientPage extends BaseClientPage {
                     break;
                 default:
                     nav.docs();
-                    state.checkDocsTab(role, this.docsTab, dto);
+                    state.checkDocsTab(role, this.docsTab, ordersDto, totalPriceDto);
             }
         };
 

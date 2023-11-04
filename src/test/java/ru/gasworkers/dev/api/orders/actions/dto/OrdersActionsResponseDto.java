@@ -19,7 +19,7 @@ public class OrdersActionsResponseDto {
 
     public static OrdersActionsResponseDto successResponse() {
         return OrdersActionsResponseDto.builder()
-                .status(1)
+                .status(0)
                 .message("Список выполняемых работ по заказу")
                 .data(Collections.emptyList())
                 .build();

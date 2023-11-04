@@ -258,7 +258,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     noActionsStagePayment();
                     break;
                 case MASTER_START_WORK:
-                    checkCurrentStatus(OrderStatus.MASTER_START_WORK);
+                    checkCurrentStatus(StateRepair.MASTER_START_WORK);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());
@@ -272,7 +272,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     noPossibleRepairPrice();//!*/
                     break;
                 case MATERIAL_INVOICE_ISSUED:
-                    checkCurrentStatus(OrderStatus.MATERIAL_INVOICE_ISSUED);
+                    checkCurrentStatus(StateRepair.MATERIAL_INVOICE_ISSUED);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());
@@ -284,7 +284,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     noPossibleRepairPrice();
                     break;
                 case MATERIAL_INVOICE_PAID:
-                    checkCurrentStatus(OrderStatus.MATERIAL_INVOICE_PAID);
+                    checkCurrentStatus(StateRepair.MATERIAL_INVOICE_PAID);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());
@@ -296,7 +296,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     noPossibleRepairPrice();
                     break;
                 case ACTIONS_INVOICE_ISSUED:
-                    checkCurrentStatus(OrderStatus.ACTIONS_INVOICE_ISSUED);
+                    checkCurrentStatus(StateRepair.ACTIONS_INVOICE_ISSUED);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());
@@ -310,7 +310,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     noPossibleRepairPrice();
                     break;
                 case ACTIONS_INVOICE_PAID:
-                    checkCurrentStatus(OrderStatus.ACTIONS_INVOICE_PAID);
+                    checkCurrentStatus(StateRepair.ACTIONS_INVOICE_PAID);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());
@@ -324,7 +324,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     noPossibleRepairPrice();
                     break;
                 case MASTER_SIGN_ACT:
-                    checkCurrentStatus(OrderStatus.MASTER_SIGN_ACT);
+                    checkCurrentStatus(StateRepair.MASTER_SIGN_ACT);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());
@@ -338,7 +338,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                     noPossibleRepairPrice();
                     break;
                 case CLIENT_SIGN_ACT:
-                    checkCurrentStatus(OrderStatus.CLIENT_SIGN_ACT);
+                    checkCurrentStatus(StateRepair.CLIENT_SIGN_ACT);
                     checkActivationStatusIsPaid(true);
                     checkActivationPricePayment(data.getActivationPrice());
                     checkActivationDatePayment(data.getActivationDate());
@@ -354,7 +354,7 @@ public class StatusOrderCardPageComponent extends BaseOrderCardComponent {
                 case CANCEL_CLIENT_PUBLISHED:
                 case CANCEL_CLIENT_HAS_OFFER:
                 case CANCEL_DISPATCHER_HAS_OFFER:
-                    checkCurrentStatus(OrderStatus.CANCELED);
+                    checkCurrentStatus(StateRepair.CANCELED);
                     noActivationStagePayment();
                     noMaterialsStagePayment();
                     noActionsStagePayment();

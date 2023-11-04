@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.pages;
 
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.Cookie;
 import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.PopUpNotificationsSharedComponent;
@@ -32,6 +33,24 @@ public abstract class BasePage extends BaseComponent {
         step("Нажать на альтернативную кнопку", () -> {
             driver.$("[data-test-id='outline-primary']").click();
         });
+    }
+
+    protected void open(String relURL, String token) {
+        stepWithRole("Открыть страницу " + relURL, () -> {
+            String url = "https://dev.gasworkers.ru/" + relURL;
+            if (token != null) {
+                driver.getWebDriver().manage().addCookie(new Cookie("Authorization", token));
+            }
+            driver.open(url);
+        });
+    }
+
+    private void open2(String token) {
+        String url = "https://dev.gasworkers.ru/profile/notifications";
+        if (token != null) {
+            url += "?Authorization=" + token;
+        }
+        driver.open(url);
     }
 
     public void waitForDocumentReady() {

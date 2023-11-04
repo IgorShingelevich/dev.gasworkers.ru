@@ -101,7 +101,7 @@ public class ClientJoinConsultationTest extends BaseWebTest {
 
             Consumer<SoftAssert> case5 = softAssert -> {
                 step(userRole + " уведомления - в состоянии " + state, () -> {
-                    clientPages.getHomePage().open();
+                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
                     clientPages.getHomePage().checkFinishLoading();
                     Selenide.sleep(3000);
                     clientPages.getHomePage().header.actionsBlock.notifications();
@@ -112,14 +112,14 @@ public class ClientJoinConsultationTest extends BaseWebTest {
 
             Consumer<SoftAssert> case6 = softAssert -> {
                 step(userRole + " красное уведомление в лк - в состоянии " + state, () -> {
-                    clientPages.getHomePage().open();
+                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
                     clientPages.getHomePage().checkFinishLoading();
                     clientPages.getHomePage().redNotice.noNotice();
                 });
             };
 //            Consumer<SoftAssert> case7 = softAssert -> {
 //                step(userRole + "  стр лендинга - в состоянии " + state, () -> {
-//                    clientPages.getHomePage().open();
+//                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
 //                    clientPages.getHomePage().checkFinishLoading();
 //                    clientPages.getHomePage().header.clickLogo();
 //                    clientPages.getLandingPage().checkFinishLoading();

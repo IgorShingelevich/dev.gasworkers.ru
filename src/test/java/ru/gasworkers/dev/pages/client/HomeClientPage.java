@@ -15,6 +15,9 @@ import ru.gasworkers.dev.pages.components.sharedComponent.notificationsComponent
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 
 import java.time.Duration;
+import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.Set;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
@@ -58,17 +61,39 @@ public final class HomeClientPage extends BaseClientPage {
             gotoObjectActionCollection = driver.$$(".actions .actions__slot--link"),
             actionButtonCollection = driver.$$(".actions .actions__btn");
 
-    public void open() {
-        stepWithRole("Открыть домашнюю страницу", () -> {
-            driver.open("/profile/client");
-        });
+    public void open(String token) {
+        open("profile/client", token);
     }
 
-    public void open(String token) {
+    /*public String getToken() {
+        return driver.getWebDriver().manage().getCookieNamed("Authorization").getValue().replace("Bearer ", "");
+    }*/
+
+    public String getToken() {
+        // Get all cookies from the WebDriver instance
+        Set<Cookie> cookies = driver.getWebDriver().manage().getCookies();
+
+        // Find the cookie named "auth._token.local" in the set of cookies
+        Optional<Cookie> authorizationCookie = cookies.stream()
+                .filter(cookie -> "auth._token.local".equals(cookie.getName()))
+                .findFirst();
+
+        // If the "auth._token.local" cookie is found, extract the token
+        if (authorizationCookie.isPresent()) {
+            String tokenValue = authorizationCookie.get().getValue();
+            return tokenValue.replace("Bearer ", "");
+        } else {
+            // Handle the case where the "auth._token.local" cookie is not found
+            throw new NoSuchElementException("auth._token.local cookie not found");
+        }
+    }
+
+
+  /*  public void open(String token) {
         driver.getWebDriver().manage().addCookie(
                 new Cookie("Authorization", "Bearer " + token, "dev.gasworkers.ru", "/", null));
         driver.open("/profile/client");
-    }
+    }*/
 
     public void checkFillProfileButton() {
         stepWithRole("Убедиться, что присутствует кнопка Заполнить профиль", () -> {

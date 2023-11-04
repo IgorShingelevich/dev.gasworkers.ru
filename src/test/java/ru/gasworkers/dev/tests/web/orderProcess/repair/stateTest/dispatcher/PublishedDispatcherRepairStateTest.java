@@ -81,7 +81,7 @@ public class PublishedDispatcherRepairStateTest extends BaseWebTest {
                 step(userRole + " карточка заказа - в состоянии " + state, () -> {
                     dispatcherPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderNumber()));
                     dispatcherPages.getOrderCardPage().checkUrl(String.valueOf(commonFields.getOrderNumber()));
-                    dispatcherPages.getOrderCardPage().checkStateRepair(dispatcherPages.getDriverManager(), userRole, state, stateInfo.getOrdersIdResponseDto());
+                    dispatcherPages.getOrderCardPage().checkStateRepair(dispatcherPages.getDriverManager(), userRole, state, stateInfo.getOrdersIdResponseDto(), stateInfo.getTotalPriceResponseDto());
                     dispatcherPages.getOrderCardPage().scrollIntoButton(SharedButtonsOrderCardComponent.Button.DISPATCHER_SELECT_MASTER.toString(), false);
                     //todo check  card details
                 });

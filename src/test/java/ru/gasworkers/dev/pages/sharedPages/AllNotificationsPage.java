@@ -98,19 +98,17 @@ public class AllNotificationsPage extends BasePage {
                 stepWithRole(" Ждем " + ifWaitMilliseconds + " мс", () -> {
                     System.out.println("waitNotifications: " + ifWaitMilliseconds + " ms");
                     Selenide.sleep(ifWaitMilliseconds);
-                    open();
+                    driver.open("https://dev.gasworkers.ru/profile/notifications");
                 });
             }
             notificationsCollection.shouldHave(size(amount));
         });
     }
 
-    public void open() {
-        stepWithRole("Открыть страницу Уведомления", () -> {
-//            Selenide.sleep(3000);
-            driver.open("/profile/notifications");
-        });
+    public void open(String token) {
+        open("profile/notifications", token);
     }
+
 
     public void checkStateConsultation(StateConsultation stateConsultation, NotificationsResponseDto dto) {
         stepWithRole("Проверить уведомления в состоянии " + stateConsultation, () -> {
@@ -187,7 +185,8 @@ public class AllNotificationsPage extends BasePage {
                     assertThat(firstNotificationText, startsWith(stateRepair.notification()));
                     break;
                 case ACTIONS_INVOICE_PAID:
-                    checkExpectedAmountOfNotifications(6, 4000);
+                    checkExpectedAmountOfNotifications(7, 4000);
+                    assertThat(firstNotificationText, startsWith(stateRepair.notification()));
                     break;
                 case MASTER_SIGN_ACT:
                     checkExpectedAmountOfNotifications(7, 4000);

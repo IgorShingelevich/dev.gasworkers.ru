@@ -46,11 +46,12 @@ public final class ClientPages extends BaseRolePages {
     private final SignSuccessPage signSuccessPage = new SignSuccessPage(browser);
 
     private final AllInvoicesClientPage allInvoicesPage = new AllInvoicesClientPage(browser);
-    private final AllObjectsClientPage allObjectsPage = new AllObjectsClientPage(browser);
+    private final AllEquipmentClientPage allEquipmentPage = new AllEquipmentClientPage(browser);
     private final AllOrdersClientPage allOrdersPage = new AllOrdersClientPage(browser);
     private final AllNotificationsPage allNotificationsPage = new AllNotificationsPage(browser);
 
     private final ConferenceQrPage conferenceQrPage = new ConferenceQrPage(browser);
     private final ConferenceSharedPage conferencePage = new ConferenceSharedPage(browser);
     private final EndConferenceClientPage endConferencePage = new EndConferenceClientPage(browser);
+
 }

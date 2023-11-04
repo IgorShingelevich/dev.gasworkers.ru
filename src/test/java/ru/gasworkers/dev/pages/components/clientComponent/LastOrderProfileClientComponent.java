@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.pages.components.clientComponent;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
 import ru.gasworkers.dev.helpers.DriverManager;
@@ -27,6 +28,7 @@ public class LastOrderProfileClientComponent extends BaseComponent {
 
     public void open() {
         stepWithRole("Нажать на номер Карточки последнего заказа", () -> {
+            Selenide.sleep(1000);
             lastOrderCardOrderNumberLinkLocator.click();
         });
     }

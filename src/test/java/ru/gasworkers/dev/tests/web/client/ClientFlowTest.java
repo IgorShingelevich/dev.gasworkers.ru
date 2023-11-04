@@ -19,7 +19,8 @@ import java.io.File;
 
 import static io.qameta.allure.Allure.step;
 import static ru.gasworkers.dev.model.UserRole.CLIENT;
-@Disabled
+
+//@Disabled
 class ClientFlowTest extends BaseTest {
     @Browser(role = CLIENT)
     ClientPages clientPages;
@@ -30,7 +31,7 @@ class ClientFlowTest extends BaseTest {
             "Шингелевич",
             "Зарегистрирован с 15 ноября 2022 года",
             "shingelevich@gmail.com",
-            "123456",
+            "1234",
             null,
             70012223344L);
 
@@ -53,6 +54,16 @@ class ClientFlowTest extends BaseTest {
         clientPages.getProfilePage().navPasswordTab.checkFinishLoading();
         clientPages.getProfilePage().navPasswordTab.checkInitialState();
         clientPages.getProfilePage().navPasswordTab.generatePassword();
+    }
+
+    @Test
+    @Feature("open page")
+    @DisplayName("open page")
+    public void openPage() {
+        String token = clientPages.getHomePage().getToken();
+        clientPages.getHomePage().open(token);
+        clientPages.getAllNotificationsPage().open(token);
+        clientPages.getAllEquipmentPage().open(token);
     }
 
     @Test
@@ -106,8 +117,8 @@ class ClientFlowTest extends BaseTest {
     public void checkGotOffersStateObject() {
         clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
         clientPages.getHomePage().sidebar.allObjects();
-        clientPages.getAllObjectsPage().checkFinishLoading();
-        clientPages.getAllObjectsPage().openObjectByIndex(0);
+        clientPages.getAllEquipmentPage().checkFinishLoading();
+        clientPages.getAllEquipmentPage().openObjectByIndex(0);
         clientPages.getObjectCardPage().checkFinishLoading();
         step("Убедиться, что баннер Нельзя редактировать присутствует на всех вкладках", () -> {
             clientPages.getObjectCardPage().tabObject.noEditBanner.isExist();

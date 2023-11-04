@@ -3,6 +3,8 @@ package ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import ru.gasworkers.dev.api.administration.getUserWithAdmin.GetUserWithAdminApi;
+import ru.gasworkers.dev.api.administration.totalPrice.TotalPriceApi;
+import ru.gasworkers.dev.api.administration.totalPrice.TotalPriceResponseDto;
 import ru.gasworkers.dev.api.auth.login.dto.LoginRequestDto;
 import ru.gasworkers.dev.api.companies.CompaniesSearchExecutorApi;
 import ru.gasworkers.dev.api.orders.OLDselectMaster.OLDSelectMasterApi;
@@ -74,6 +76,7 @@ public class PreconditionRepair extends BaseApiTest {
     private final UserSettingsApi userSettingsApi = new UserSettingsApi();
     private final LastOrderInfoApi lastOrderInfoApi = new LastOrderInfoApi();
     private final CompaniesMastersApi companiesMastersApi = new CompaniesMastersApi();
+    private final TotalPriceApi totalPriceApi = new TotalPriceApi();
     private final DispatcherPricingAPI dispatcherPricing = new DispatcherPricingAPI();
     private final MakeOfferApi makeOffer = new MakeOfferApi();
     private final OLDSelectMasterApi OLDSelectMasterApi = new OLDSelectMasterApi();
@@ -518,6 +521,7 @@ public class PreconditionRepair extends BaseApiTest {
         StateRepair actualStateRepair = StateRepair.MATERIAL_INVOICE_ISSUED;
         step("API: предусловие - " + UserRole.CLIENT + " заказ на ремонт в состоянии " + actualStateRepair, () -> {
             step(UserRole.MASTER + " создает таблицу материалов - в состоянии " + actualStateRepair, () -> {
+                System.out.println("materialTable (create table request)");
                 OrdersMaterialValuesResponseDto actualResponse = ordersMaterialValuesApi.materialValuesTable(repairCase.materialValuesRequest(commonFields), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersMaterialValuesResponseDto.class);
@@ -525,6 +529,7 @@ public class PreconditionRepair extends BaseApiTest {
                 assertResponse(expectedResponse, actualResponse);
             });
             step(UserRole.MASTER + " сохраняет таблицу материалов - в состоянии " + actualStateRepair, () -> {
+                System.out.println("save Material (save table request)");
                 OrdersSaveMaterialValuesResponseDto actualResponse = ordersSaveMaterialValuesApi.saveMaterialValues(repairCase.saveMaterialValuesRequest(commonFields), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersSaveMaterialValuesResponseDto.class);
@@ -553,6 +558,7 @@ public class PreconditionRepair extends BaseApiTest {
         StateRepair actualStateRepair = StateRepair.ACTIONS_INVOICE_ISSUED;
         step("API: предусловие - " + UserRole.CLIENT + " заказ на ремонт в состоянии " + actualStateRepair, () -> {
             step(UserRole.MASTER + " создает таблицу проведенных работ по заказу - в состоянии " + actualStateRepair, () -> {
+                System.out.println("actionsTable (create table request)");
                 OrdersActionsResponseDto actualResponse = ordersActionsApi.actionsTable(repairCase.actionsRequest(commonFields), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersActionsResponseDto.class);
@@ -560,6 +566,7 @@ public class PreconditionRepair extends BaseApiTest {
                 assertResponse(expectedResponse, actualResponse);
             });
             step(UserRole.MASTER + " мастер сохраняет таблицу проведенных работ по заказу - в состоянии " + actualStateRepair, () -> {
+                System.out.println("saveActions (save table request)");
                 OrdersSaveActionsResponseDto actualResponse = ordersSaveActionsApi.saveActions(repairCase.saveActionsRequest(commonFields), commonFields.getTokenMaster())
                         .statusCode(200)
                         .extract().as(OrdersSaveActionsResponseDto.class);
@@ -654,12 +661,22 @@ public class PreconditionRepair extends BaseApiTest {
         });
     }
 
+    private TotalPriceResponseDto getTotalPriceDto(CommonFieldsDto commonFields) {
+        System.out.println("totalPrice");
+        return step("API: " + UserRole.ADMIN + " получает общую стоимость заказа", () -> {
+            return totalPriceApi.getTotalPrice(commonFields.getOrderNumber(), commonFields.getTokenClient())
+                    .statusCode(200)
+                    .extract().as(TotalPriceResponseDto.class);
+        });
+    }
+
     private void actualDto(CommonFieldsDto commonFields, StateRepair stateRepair) {
         stateInfo.setLastOrderInfoDto(getLastOrderInfoDto(commonFields, stateRepair));
         stateInfo.setOrdersIdResponseDto(getOrdersIdDto(commonFields, stateRepair));
         stateInfo.setNotificationsDto(getNotificationsDto(commonFields, stateRepair));
         stateInfo.setSuperCompaniesMastersResponseDto(getCompaniesMastersDto(commonFields.getTokenSuperDispatcher()));
         stateInfo.setDesignatedCompaniesMastersResponseDto(getCompaniesMastersDto(commonFields.getTokenDispatcher()));
+//        stateInfo.setTotalPriceResponseDto(getTotalPriceDto(commonFields));
     }
 
     @Getter

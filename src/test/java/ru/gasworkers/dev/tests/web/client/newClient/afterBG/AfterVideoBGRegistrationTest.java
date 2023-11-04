@@ -79,12 +79,12 @@ public class AfterVideoBGRegistrationTest extends BaseTest {
             });
             step("Страница Объекты", () -> {
                 clientPages.getAllNotificationsPage().sidebar.allObjects();
-                clientPages.getAllObjectsPage().checkFinishLoading();
+                clientPages.getAllEquipmentPage().checkFinishLoading();
                 // todo  through video  initial state - address removed
 //                clientPages.getAllObjectsPage().initialBGState(GAS_BOILER_TYPE, resultedEquipmentCollectionName, power.toString(), resultedAddress);
             });
             step("Страница Заказы", () -> {
-                clientPages.getAllObjectsPage().sidebar.allOrders();
+                clientPages.getAllEquipmentPage().sidebar.allOrders();
                 clientPages.getAllOrdersPage().checkFinishLoading();
                 clientPages.getAllOrdersPage().checkItemsAmount(1);
             });

@@ -2,6 +2,7 @@ package ru.gasworkers.dev.pages.dispatcher;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import ru.gasworkers.dev.api.administration.totalPrice.TotalPriceResponseDto;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.helpers.DriverManager;
 import ru.gasworkers.dev.model.UserRole;
@@ -106,17 +107,17 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
     }
 
 
-    public void checkStateRepair(DriverManager driverManager, UserRole role, StateRepair state, OrdersIdResponseDto dto) {
+    public void checkStateRepair(DriverManager driverManager, UserRole role, StateRepair state, OrdersIdResponseDto ordersDto, TotalPriceResponseDto totalPriceDto) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
-            checkOrderNumber(dto.getData().getNumber());
+            checkOrderNumber(ordersDto.getData().getNumber());
             consultationNotification.noNoticeConsultationComponent();
             nav.noChecklistTab();
             nav.common();
             driverManager.screenshot("вкладка описание заказа в состоянии " + state);
-            state.checkCommonTab(role, this.commonTab, dto);
+            state.checkCommonTab(role, this.commonTab, ordersDto);
             nav.infoMaster();
             driverManager.screenshot("вкладка информация по работам в состоянии " + state);
-            state.checkInfoMasterTab(role, this.infoMasterTab, dto);
+            state.checkInfoMasterTab(role, this.infoMasterTab, ordersDto);
             switch (state) {
                 case CANCEL_CLIENT_PUBLISHED:
                 case CANCEL_CLIENT_HAS_OFFER:
@@ -126,7 +127,7 @@ public class OrderCardDispatcherPage extends BaseDispatcherPage {
                 default:
                     nav.docs();
                     driverManager.screenshot("вкладка документы в состоянии " + state);
-                    state.checkDocsTab(role, this.docsTab, dto);
+                    state.checkDocsTab(role, this.docsTab, ordersDto, totalPriceDto);
             }
         });
     }

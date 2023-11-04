@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper;
 
 import lombok.AllArgsConstructor;
+import ru.gasworkers.dev.api.administration.totalPrice.TotalPriceResponseDto;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
@@ -16,25 +17,26 @@ import static io.qameta.allure.Allure.step;
 @AllArgsConstructor
 public enum StateRepair {
     DRAFT("Черновик", null),
-    PUBLISHED("опубликован", " опубликован"),
-    PUBLISHED_STOPPED_COUNTDOWN("опубликован", " опубликован"), //  select service  page state
-    CANCEL_CLIENT_PUBLISHED("Заказ отменен", null),
+    PUBLISHED("Новый заказ", " опубликован"),
+    PUBLISHED_STOPPED_COUNTDOWN("Новый заказ", " опубликован"), //  select service  page state
     REFUSED_OFFER_DISPATCHER("Диспетчер отклонил новый тендер", null),
-    HAS_SERVICE_OFFER("Отклик на заявку", "Отклик на заявку"),
-    HAS_SUPER_OFFER_SD_PROCESS("Отклик на заявку", "Отклик на заявку"),
-    CANCEL_CLIENT_HAS_OFFER("Заказ отменен", "Заказ отменен"),
-    CANCEL_DISPATCHER_HAS_OFFER("Заказ отменен", "Заказ отменен"),
+    HAS_SERVICE_OFFER("Новый заказ", "Отклик на заявку"),
+    HAS_SUPER_OFFER_SD_PROCESS("Новый заказ", "Отклик на заявку"),
     CLIENT_PAID_SUPER_ACTIVATION_SD_PROCESS("Согласование даты заказа", "Отклик на заявку"),  // yellow state, activation is paid, assigned superMaster, client wait SuperDispatcher to assign the actual Service
     SUPER_DISPATCHER_ASSIGN_SERVICE_SD_PROCESS("Согласование даты заказа", "Отклик на заявку"), // assignedService
     SERVICE_SCHEDULED_MASTER_SD_PROCESS("Согласование даты заказа", "В заказе произошли следующие изменения"), // assignedServiceMaster and Prices
     WAIT_SERVICE_MASTER_SD_PROCESS("Мастер в пути", "Согласованы дата и время заказа"), //assignedTime
     MASTER_START_WORK("Мастер приступил к работе", null),
-    MATERIAL_INVOICE_ISSUED("Выставлен счет на материалы", "Оплатите счет по заказу"),
-    MATERIAL_INVOICE_PAID("Оплачен счет на материалы", null),
-    ACTIONS_INVOICE_ISSUED("Выставлен счет на работы", "Оплатите счет по заказу"),
-    ACTIONS_INVOICE_PAID("Оплачен счет на работы", null),
-    MASTER_SIGN_ACT("Мастер заполнил данные по заказу", "Акт выполненных работ сформирован"),
-    CLIENT_SIGN_ACT("Клиент подписал акт", "Оставьте отзыв по заявке");
+    MATERIAL_INVOICE_ISSUED("Мастер приступил к работе", "Оплатите счет по заказу"),
+    MATERIAL_INVOICE_PAID("Мастер приступил к работе", null),
+    ACTIONS_INVOICE_ISSUED("Мастер приступил к работе", "Оплатите счет по заказу"),
+    ACTIONS_INVOICE_PAID("Завершен", "Оставьте отзыв по заявке"), //order is finished
+    MASTER_SIGN_ACT("Мастер заполнил данные по заказу", "Акт выполненных работ сформирован"), //obsolete
+    CLIENT_SIGN_ACT("Клиент подписал акт", "Оставьте отзыв по заявке"), //obsolete
+    CANCEL_CLIENT_PUBLISHED("Заказ отменен", null),
+    CANCEL_CLIENT_HAS_OFFER("Заказ отменен", "Заказ отменен"),
+    CANCEL_DISPATCHER_HAS_OFFER("Заказ отменен", "Заказ отменен"),
+    CANCELED("Заказ отменен", "Заказ отменен");
 
     public static final StateBuilder builder = new StateBuilder();
     private final String state;
@@ -217,10 +219,10 @@ public enum StateRepair {
         });
     }
 
-    public void checkDocsTab(UserRole role, DocsTabOrderCardComponent tab, OrdersIdResponseDto dto) {
-        StateBuilder.OrderIdData data = builder.extractOrdersIdData(dto);
-        tab.status.checkStateRepair(role, this, data, dto);
-        tab.suggestedMastersRepair.checkState(this, dto, 0);
+    public void checkDocsTab(UserRole role, DocsTabOrderCardComponent tab, OrdersIdResponseDto ordersDto, TotalPriceResponseDto totalPriceDto) {
+        StateBuilder.OrderIdData data = builder.extractOrdersIdData(ordersDto);
+        tab.status.checkStateRepair(role, this, data, ordersDto);
+        tab.suggestedMastersRepair.checkState(this, ordersDto, 0);
         tab.buttons.checkStateRepair(role, this);
         step("Убедиться, что вкладка Документы в состоянии " + this, () -> {
             switch (this) {
@@ -251,13 +253,14 @@ public enum StateRepair {
                 case ACTIONS_INVOICE_ISSUED:
                 case ACTIONS_INVOICE_PAID:
                     tab.noDocs();
-                    tab.checkTotalPrice("6300");
+                    tab.checkTotalPrice("16298");
+//                    tab.checkTotalPrice(totalPriceDto.getData().getTotal().toString());
                     // todo add tab.checkComputedToTalPrice - no field in json
                     break;
                 case MASTER_SIGN_ACT:
                 case CLIENT_SIGN_ACT:
                     tab.checkActDoc();
-                    tab.checkTotalPrice("6300");
+                    tab.checkTotalPrice("16298");
                     // todo add tab.checkComputedToTalPrice - no field in json
                     break;
                 default:

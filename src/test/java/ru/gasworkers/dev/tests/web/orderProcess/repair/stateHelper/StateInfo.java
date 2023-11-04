@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.gasworkers.dev.api.administration.totalPrice.TotalPriceResponseDto;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;
 import ru.gasworkers.dev.api.orders.suggestedServices.dto.SuggestServicesResponseDto;
 import ru.gasworkers.dev.api.users.client.lastOrderInfo.LastOrderInfoResponseDto;
@@ -23,6 +24,7 @@ public class StateInfo {
     private OrdersIdResponseDto ordersIdResponseDto;
     private CompaniesMastersResponseDto designatedCompaniesMastersResponseDto;
     private CompaniesMastersResponseDto superCompaniesMastersResponseDto;
+    private TotalPriceResponseDto totalPriceResponseDto;
 
 
     public StateInfo actualDtoSet() {
@@ -34,6 +36,7 @@ public class StateInfo {
                 .suggestedServiceDto(suggestedServiceDto)
                 .designatedCompaniesMastersResponseDto(designatedCompaniesMastersResponseDto)
                 .superCompaniesMastersResponseDto(superCompaniesMastersResponseDto)
+                .totalPriceResponseDto(totalPriceResponseDto)
                 .build();
     }
 }

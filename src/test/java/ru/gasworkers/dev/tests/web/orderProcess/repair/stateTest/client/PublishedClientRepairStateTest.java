@@ -51,6 +51,7 @@ public class PublishedClientRepairStateTest extends BaseWebTest {
 // Get the StateInfo and CommonFieldsDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
         CommonFieldsDto commonFields = result.getCommonFieldsResult();
+        String clientToken = commonFields.getTokenClient();
 //    ------------------------------------------------- UI -----------------------------------------------------------
         step("Web: " + userRole + " авторизация", () -> {
             clientPages.getLoginPage().open();
@@ -67,12 +68,14 @@ public class PublishedClientRepairStateTest extends BaseWebTest {
         step(userRole + " кабинет в состоянии - в состоянии " + state, () -> {
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(userRole + " карточка последнего заказа - в состоянии " + state, () -> {
+                    clientPages.getHomePage().open(clientToken);
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.checkState(clientPages.getDriverManager(), state, stateInfo.getLastOrderInfoDto());
                 });
             };
             Consumer<SoftAssert> case2 = softAssert -> {
                 step(userRole + " карточка заказа редирект на карту - в состоянии " + state, () -> {
+                    clientPages.getHomePage().open(clientToken);
                     clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
                     clientPages.getHomePage().lastOrderComponent.open();
                     clientPages.getSelectServicePage().checkUrl();
@@ -80,52 +83,48 @@ public class PublishedClientRepairStateTest extends BaseWebTest {
             };
             Consumer<SoftAssert> case3 = softAssert -> {
                 step(userRole + " страница выбора услуги - в состоянии " + state, () -> {
-                    clientPages.getSelectServicePage().openRepair(String.valueOf(commonFields.getOrderNumber()));
+                    clientPages.getSelectServicePage().openRepair(commonFields.getOrderNumber(), clientToken);
                     clientPages.getSelectServicePage().checkState(state, stateInfo.getSuggestedServiceDto());
                 });
             };
             Consumer<SoftAssert> caseA = softAssert -> {
                 step(userRole + " карточка заказа - генеральная информация - в состоянии " + state, () -> {
-                    clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-                    clientPages.getHomePage().lastOrderComponent.open();
-                    clientPages.getOrderCardPage().checkFinishLoading();
+                    clientPages.getOrderCardPage().openRedirected(commonFields.getOrderNumber(), clientToken);
                     clientPages.getOrderCardPage().checkGeneralStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
                 });
             };
 
             Consumer<SoftAssert> caseB = softAssert -> {
                 step(userRole + " карточка заказа - вкладка Общее - в состоянии " + state, () -> {
+                    clientPages.getOrderCardPage().openRedirected(commonFields.getOrderNumber(), clientToken);
                     clientPages.getOrderCardPage().checkTabCommonStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
                 });
             };
 
             Consumer<SoftAssert> caseC = softAssert -> {
                 step(userRole + " карточка заказа - вкладка Информация о заказе - в состоянии " + state, () -> {
+                    clientPages.getOrderCardPage().openRedirected(commonFields.getOrderNumber(), clientToken);
                     clientPages.getOrderCardPage().checkTabInfoMasterStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
                 });
             };
 
             Consumer<SoftAssert> caseD = softAssert -> {
                 step(userRole + " карточка заказа - вкладка Документы - в состоянии " + state, () -> {
-                    clientPages.getOrderCardPage().checkTabDocsStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                    clientPages.getOrderCardPage().openRedirected(commonFields.getOrderNumber(), clientToken);
+                    clientPages.getOrderCardPage().checkTabDocsStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto(), stateInfo.getTotalPriceResponseDto());
                 });
             };
 
             Consumer<SoftAssert> case5 = softAssert -> {
                 step(userRole + " уведомления - в состоянии " + state, () -> {
-//                    clientPages.getHomePage().open();
-//                    clientPages.getHomePage().checkFinishLoading();
-//                    Selenide.sleep(3000);
-//                    clientPages.getHomePage().header.actionsBlock.notifications();
-//                    clientPages.getAllNotificationsPage().checkFinishLoading();
-                    clientPages.getAllNotificationsPage().open();
+                    clientPages.getAllNotificationsPage().open(clientToken);
                     clientPages.getAllNotificationsPage().checkStateRepair(state, stateInfo.getNotificationsDto());
                 });
             };
 
             Consumer<SoftAssert> case6 = softAssert -> {
                 step(userRole + " красное уведомление в лк - в состоянии " + state, () -> {
-                    clientPages.getHomePage().open();
+                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
                     clientPages.getHomePage().checkFinishLoading();
                     clientPages.getHomePage().redNotice.noNotice();
                 });

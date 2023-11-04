@@ -15,38 +15,65 @@ import java.util.List;
 @NoArgsConstructor
 public class OrdersSaveActionsRequestDto {
 
+    /*{
+    "order_id": 11055,
+    "paid": false,
+    "actions": [
+        {
+            "title": "Первичный выезд мастера",
+            "qty": "1",
+            "price": 5999,
+            "searchQuery": "",
+            "actionList": [],
+            "searchActive": false
+        },
+        {
+            "title": "123",
+            "qty": 111,
+            "price": 1,
+            "searchQuery": "",
+            "actionList": [],
+            "searchActive": false
+        }
+    ],
+    "video": [
+        3811
+    ],
+    "all_works": true
+}*/
+
     @JsonProperty("order_id")
     private Integer orderId;
     private Boolean paid;
     private List<Actions> actions;
-
-    public static OrdersSaveActionsRequestDto actionRequest(Integer qty, Double price, Integer orderId) {
-        return OrdersSaveActionsRequestDto.builder()
-                .orderId(orderId)
-                .paid(false)
-                .actions(List.of(Actions.builder()
-                        .title("Work name")
-                        .qty(qty)
-                        .price(price)
-                        .searchQuery("")
-                        .actionList(Collections.emptyList())
-                        .searchActive(false)
-                        .build()))
-                .build();
-    }
+    private List<Integer> video;
+    @JsonProperty("all_works")
+    private Boolean allWorks;
 
     public static OrdersSaveActionsRequestDto oneActionRequest(Integer orderId) {
         return OrdersSaveActionsRequestDto.builder()
                 .orderId(orderId)
                 .paid(false)
-                .actions(List.of(Actions.builder()
-                        .title("Work name")
-                        .qty(3)
-                        .price(1000.0)
-                        .searchQuery("")
-                        .actionList(Collections.emptyList())
-                        .searchActive(false)
-                        .build()))
+                .actions(List.of(
+                        Actions.builder()
+                                .title("Первичный выезд мастера")
+                                .qty(1)
+                                .price(5999.0)
+                                .searchQuery("")
+                                .actionList(Collections.emptyList())
+                                .searchActive(false)
+                                .build(),
+                        Actions.builder()
+                                .title("Work name 1")
+                                .qty(1)
+                                .price(6999.0)
+                                .searchQuery("")
+                                .actionList(Collections.emptyList())
+                                .searchActive(false)
+                                .build()
+                ))
+                .video(List.of(3811))
+                .allWorks(true)
                 .build();
     }
 
@@ -54,22 +81,34 @@ public class OrdersSaveActionsRequestDto {
         return OrdersSaveActionsRequestDto.builder()
                 .orderId(orderId)
                 .paid(false)
-                .actions(List.of(Actions.builder()
-                                .title("Work name")
-                                .qty(3)
-                                .price(33.99)
+                .actions(List.of(
+                        Actions.builder()
+                                .title("Первичный выезд мастера")
+                                .qty(1)
+                                .price(5999.0)
+                                .searchQuery("")
+                                .actionList(Collections.emptyList())
+                                .searchActive(false)
+                                .build(),
+                        Actions.builder()
+                                .title("Work name 1")
+                                .qty(1)
+                                .price(6999.0)
                                 .searchQuery("")
                                 .actionList(Collections.emptyList())
                                 .searchActive(false)
                                 .build(),
                         Actions.builder()
                                 .title("Work name 2")
-                                .qty(9)
-                                .price(111.99)
+                                .qty(1)
+                                .price(7999.0)
                                 .searchQuery("")
                                 .actionList(Collections.emptyList())
                                 .searchActive(false)
-                                .build()))
+                                .build()
+                ))
+                .video(List.of(3811))
+                .allWorks(true)
                 .build();
     }
 

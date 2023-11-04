@@ -47,6 +47,8 @@ public class MaterialInvoiceIssuedClientRepairStateTest extends BaseWebTest {
         UserRole userRole = UserRole.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
+        String clientToken = result.getCommonFieldsResult().getTokenClient();
+
 
 // Get the StateInfo and CommonFieldsDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
@@ -93,24 +95,24 @@ public class MaterialInvoiceIssuedClientRepairStateTest extends BaseWebTest {
 
             Consumer<SoftAssert> caseD = softAssert -> {
                 step(userRole + " карточка заказа - вкладка Документы - в состоянии " + state, () -> {
-                    clientPages.getOrderCardPage().checkTabDocsStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                    clientPages.getOrderCardPage().checkTabDocsStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto(), stateInfo.getTotalPriceResponseDto());
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {
                 step(userRole + " уведомления - в состоянии " + state, () -> {
-//                    clientPages.getHomePage().open();
+//                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
 //                    clientPages.getHomePage().checkFinishLoading();
 //                    Selenide.sleep(3000);
 //                    clientPages.getHomePage().header.actionsBlock.notifications();
 //                    clientPages.getAllNotificationsPage().checkFinishLoading();
-                    clientPages.getAllNotificationsPage().open();
+                    clientPages.getAllNotificationsPage().open(clientToken);
                     clientPages.getAllNotificationsPage().checkStateRepair(state, stateInfo.getNotificationsDto());
                 });
             };
 
             Consumer<SoftAssert> case4 = softAssert -> {
                 step(userRole + " красное уведомление в лк - в состоянии " + state, () -> {
-                    clientPages.getHomePage().open();
+                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
                     clientPages.getHomePage().checkFinishLoading();
                     clientPages.getHomePage().redNotice.checkInvoiceIssuedNotice();
                 });

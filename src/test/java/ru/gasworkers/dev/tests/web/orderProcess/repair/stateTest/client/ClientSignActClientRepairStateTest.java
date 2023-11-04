@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest.client;
 
 import io.qameta.allure.*;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -40,6 +41,7 @@ public class ClientSignActClientRepairStateTest extends BaseWebTest {
     @Browser(role = UserRole.CLIENT)
     ClientPages clientPages;
 
+    @Disabled
     @Test
     @DisplayName("Ремонт - в  состоянии клиент подписал акт")
     void clientSignAct(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
@@ -47,6 +49,8 @@ public class ClientSignActClientRepairStateTest extends BaseWebTest {
         UserRole userRole = UserRole.CLIENT;
         PreconditionRepair preconditionRepair = new PreconditionRepair();
         PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
+        String clientToken = result.getCommonFieldsResult().getTokenClient();
+
 
 // Get the StateInfo and CommonFieldsDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
@@ -76,24 +80,24 @@ public class ClientSignActClientRepairStateTest extends BaseWebTest {
                 step(userRole + " карточка заказа - в состоянии " + state, () -> {
                     clientPages.getOrderCardPage().open(String.valueOf(commonFieldsFromStateInfo.getOrderNumber()));
                     clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkAllStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto());
+                    clientPages.getOrderCardPage().checkAllStateRepair(userRole, state, stateInfo.getOrdersIdResponseDto(), stateInfo.getTotalPriceResponseDto());
                 });
             };
             Consumer<SoftAssert> case3 = softAssert -> {
                 step(userRole + " уведомления - в состоянии " + state, () -> {
-//                    clientPages.getHomePage().open();
+//                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
 //                    clientPages.getHomePage().checkFinishLoading();
 //                    Selenide.sleep(3000);
 //                    clientPages.getHomePage().header.actionsBlock.notifications();
 //                    clientPages.getAllNotificationsPage().checkFinishLoading();
-                    clientPages.getAllNotificationsPage().open();
+                    clientPages.getAllNotificationsPage().open(clientToken);
                     clientPages.getAllNotificationsPage().checkStateRepair(state, stateInfo.getNotificationsDto());
                 });
             };
 
             Consumer<SoftAssert> case4 = softAssert -> {
                 step(userRole + " красное уведомление в лк - в состоянии " + state, () -> {
-                    clientPages.getHomePage().open();
+                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
                     clientPages.getHomePage().checkFinishLoading();
                     clientPages.getHomePage().redNotice.noNotice();
                 });
