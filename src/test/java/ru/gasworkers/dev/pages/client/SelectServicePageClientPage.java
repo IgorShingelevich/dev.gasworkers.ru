@@ -204,18 +204,17 @@ public class SelectServicePageClientPage extends BaseClientPage {
         });
     }
 
-    public void notAvailable() {
-        stepWithRole("Убедиться, что страница не доступна", () -> {
-            urlChecker.urlContains("select-service");
-            titleLocator.shouldHave(text("Страница не доступна"));
-        });
-    }
 
     public void openRepair(Integer orderId, String token) {
-        open("/orders/repair/" + orderId + "/select-service", token);
+        open("orders/repair/" + orderId + "/select-service", token);
     }
 
 
+    public void checkNotAvailable() {
+        stepWithRole("Убедиться, что страница не доступна", () -> {
+            urlChecker.urlContains("not-available");
+        });
+    }
 }
 
 

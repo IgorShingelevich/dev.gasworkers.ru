@@ -269,7 +269,7 @@ public enum StateRepair {
         });
     }
 
-    public void checkSelectServicePage(SelectServicePageClientPage page, SuggestServicesResponseDto dto) {
+    public void checkSelectServicePage1(SelectServicePageClientPage page, SuggestServicesResponseDto dto) {
         step("Убедиться, что  стр выбора  компании в состоянии " + this, () -> {
             //todo offerCount
             page.checkFinishLoadingRepair();
@@ -294,11 +294,59 @@ public enum StateRepair {
 //                    page.suggestedConsultationBannerComponent.checkClosed();
                     page.respondedCompaniesBox.checkOfferBoxHasOfferState(0, dto);
                     page.upperPublishedRepairInfoBox.noUpperInfoBox();
+                    break;
+                case CLIENT_PAID_SUPER_ACTIVATION_SD_PROCESS:
+                case SUPER_DISPATCHER_ASSIGN_SERVICE_SD_PROCESS:
+                case SERVICE_SCHEDULED_MASTER_SD_PROCESS:
+                case WAIT_SERVICE_MASTER_SD_PROCESS:
+                case MASTER_START_WORK:
+                case MATERIAL_INVOICE_ISSUED:
+                case MATERIAL_INVOICE_PAID:
+                case ACTIONS_INVOICE_ISSUED:
+                case ACTIONS_INVOICE_PAID:
+                    page.checkNotAvailable();
+                default:
+                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
+            }
+        });
+    }
 
+
+    public void checkSelectServicePage(SelectServicePageClientPage page, SuggestServicesResponseDto dto) {
+        step("Убедиться, что  стр выбора  компании в состоянии " + this, () -> {
+
+            // Check for prioritized cases first
+            if (this == CLIENT_PAID_SUPER_ACTIVATION_SD_PROCESS ||
+                    this == SUPER_DISPATCHER_ASSIGN_SERVICE_SD_PROCESS ||
+                    this == SERVICE_SCHEDULED_MASTER_SD_PROCESS ||
+                    this == WAIT_SERVICE_MASTER_SD_PROCESS ||
+                    this == MASTER_START_WORK ||
+                    this == MATERIAL_INVOICE_ISSUED ||
+                    this == MATERIAL_INVOICE_PAID ||
+                    this == ACTIONS_INVOICE_ISSUED ||
+                    this == ACTIONS_INVOICE_PAID) {
+                page.checkNotAvailable();
+                return;
+            }
+
+            page.checkFinishLoadingRepair();
+            page.countdownComponent.checkState(this, dto);
+            page.countdownComponent.checkMasterCardState(this, dto);
+            page.suggestedConsultationBanner.checkState(this);
+
+            switch (this) {
+                case PUBLISHED:
+                    page.offersCounter.noOffers();
+                    page.upperPublishedRepairInfoBox.checkPublishedState();
+                    page.respondedCompaniesBox.noOffers();
+                    break;
+                case HAS_SUPER_OFFER_SD_PROCESS:
+                case HAS_SERVICE_OFFER:
+                    page.respondedCompaniesBox.checkOfferBoxHasOfferState(0, dto);
+                    page.upperPublishedRepairInfoBox.noUpperInfoBox();
                     break;
                 default:
-                    page.notAvailable();
-
+                    throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
             }
         });
     }

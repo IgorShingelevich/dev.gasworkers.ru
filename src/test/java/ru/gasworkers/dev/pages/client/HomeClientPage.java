@@ -13,6 +13,8 @@ import ru.gasworkers.dev.pages.components.sharedComponent.guideComponent.PlayGui
 import ru.gasworkers.dev.pages.components.sharedComponent.headerComponent.actionblockComponent.ClientActionsBlockComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.notificationsComponent.conferenceNotification.ConsultationNotificationSharedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
+import ru.gasworkers.dev.pages.context.ClientPages;
+import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import java.time.Duration;
 import java.util.NoSuchElementException;
@@ -233,4 +235,33 @@ public final class HomeClientPage extends BaseClientPage {
     }
 
 
+    public void checkRedirectOrderCardToSelectService(StateRepair state, ClientPages clientPages) {
+        clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
+        switch (state) {
+            case PUBLISHED:
+            case HAS_SERVICE_OFFER:
+            case HAS_SUPER_OFFER_SD_PROCESS:
+                stepWithRole("Убедиться, что произошел редирект на страницу Выбора услуги", () -> {
+                    clientPages.getHomePage().lastOrderComponent.open();
+                    clientPages.getSelectServicePage().checkUrl();
+                });
+                break;
+            case CLIENT_PAID_SUPER_ACTIVATION_SD_PROCESS:
+            case SUPER_DISPATCHER_ASSIGN_SERVICE_SD_PROCESS:
+            case SERVICE_SCHEDULED_MASTER_SD_PROCESS:
+            case WAIT_SERVICE_MASTER_SD_PROCESS:
+            case MASTER_START_WORK:
+            case MATERIAL_INVOICE_ISSUED:
+            case MATERIAL_INVOICE_PAID:
+            case ACTIONS_INVOICE_ISSUED:
+            case ACTIONS_INVOICE_PAID:
+                stepWithRole("Убедиться, что произошел редирект на страницу Карточки заказа", () -> {
+                    clientPages.getHomePage().lastOrderComponent.open();
+                    clientPages.getOrderCardPage().checkUrl();
+                });
+                break;
+            default:
+                throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);
+        }
+    }
 }
