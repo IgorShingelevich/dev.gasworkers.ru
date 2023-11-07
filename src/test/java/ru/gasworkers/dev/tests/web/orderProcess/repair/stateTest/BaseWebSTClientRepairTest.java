@@ -2,7 +2,6 @@ package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Allure;
-import org.jetbrains.annotations.NotNull;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.model.UserRole;
 import ru.gasworkers.dev.pages.context.ClientPages;
@@ -43,7 +42,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
         });
     }
 
-    @NotNull
+    //    @NotNull
     protected Consumer<SoftAssert> lasOrderCardCheck(UserRole userRole, StateRepair state, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
         Consumer<SoftAssert> case1 = softAssert -> {
             step(userRole + " карточка последнего заказа - в состоянии " + state, () -> {
@@ -56,7 +55,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
         return case1;
     }
 
-    @NotNull
+    //    @NotNull
     protected Consumer<SoftAssert> selectServicePageCheck(UserRole userRole, StateRepair state, CommonFieldsDto commonFields, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
         Consumer<SoftAssert> case3 = softAssert -> {
             step(userRole + " страница выбора услуги - в состоянии " + state, () -> {
@@ -68,7 +67,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
         return case3;
     }
 
-    @NotNull
+    //    @NotNull
     protected Consumer<SoftAssert> redirectToSelectServicePageCheck(UserRole userRole, StateRepair state, String clientToken, ClientPages clientPages) {
         Consumer<SoftAssert> case2 = softAssert -> {
             step(userRole + " карточка заказа редирект на карту - в состоянии " + state, () -> {
@@ -81,7 +80,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
         return case2;
     }
 
-    @NotNull
+    //    @NotNull
     protected Consumer<SoftAssert> redNoticeLandingPageCheck(UserRole userRole, StateRepair state, String clientToken, ClientPages clientPages) {
         Consumer<SoftAssert> case7 = softAssert -> {
             clientPages.getLandingPage().open(clientToken);
@@ -115,7 +114,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
         return case7;
     }
 
-    @NotNull
+    //    @NotNull
     protected Consumer<SoftAssert> redNoticeHomePageCheck(UserRole userRole, StateRepair state, StateInfo stateInfo, ClientPages clientPages) {
         Consumer<SoftAssert> case6 = softAssert -> {
             //red notice all across the client pages context
@@ -150,7 +149,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
         return case6;
     }
 
-    @NotNull
+    //    @NotNull
     protected Consumer<SoftAssert> alNotificationPageCheck(UserRole userRole, StateRepair state, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
         Consumer<SoftAssert> case5 = softAssert -> {
             step(userRole + " уведомления - в состоянии " + state, () -> {
@@ -162,7 +161,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
         return case5;
     }
 
-    @NotNull
+    //    @NotNull
     protected Consumer<SoftAssert> ordersIdTabDocsCheck(UserRole userRole, StateRepair state, CommonFieldsDto commonFields, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
         Consumer<SoftAssert> caseD = softAssert -> {
             step(userRole + " карточка заказа - вкладка Документы - в состоянии " + state, () -> {
@@ -174,7 +173,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
         return caseD;
     }
 
-    @NotNull
+    //    @NotNull
     protected Consumer<SoftAssert> ordersIdTabInfoMasterCheck(UserRole userRole, StateRepair state, CommonFieldsDto commonFields, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
         Consumer<SoftAssert> caseC = softAssert -> {
             step(userRole + " карточка заказа - вкладка Информация о заказе - в состоянии " + state, () -> {
@@ -186,7 +185,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
         return caseC;
     }
 
-    @NotNull
+    //    @NotNull
     protected Consumer<SoftAssert> ordersIdTabCommonCheck(UserRole userRole, StateRepair state, CommonFieldsDto commonFields, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
         Consumer<SoftAssert> caseB = softAssert -> {
             step(userRole + " карточка заказа - вкладка Общее - в состоянии " + state, () -> {
@@ -198,7 +197,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
         return caseB;
     }
 
-    @NotNull
+    //    @NotNull
     protected Consumer<SoftAssert> ordersIdGeneralCheck(UserRole userRole, StateRepair state, CommonFieldsDto commonFields, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
         Consumer<SoftAssert> caseA = softAssert -> {
             step(userRole + " карточка заказа - генеральная информация - в состоянии " + state, () -> {

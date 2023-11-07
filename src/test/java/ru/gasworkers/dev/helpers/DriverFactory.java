@@ -24,7 +24,7 @@ public final class DriverFactory {
         config.browserSize(annotation.browserSize());
         config.browserPosition(annotation.browserPosition());
         config.timeout(8000);
-        config.headless(true);
+        config.headless(false);
         config.holdBrowserOpen(false); // check remote
         config.browserCapabilities(capabilities);
         ChromeOptions chromeOptions = new ChromeOptions();
