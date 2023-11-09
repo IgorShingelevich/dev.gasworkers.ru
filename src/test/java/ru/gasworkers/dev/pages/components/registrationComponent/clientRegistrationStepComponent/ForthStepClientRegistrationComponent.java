@@ -38,7 +38,7 @@ public class ForthStepClientRegistrationComponent extends BaseComponent {
 
     public void checkFourthStepByPhoneFinishLoading(String phone) {
         // turn 77778711855 to "+7(777)-871-1855"
-        String formatPhoneNumber = phone.substring(0, 1) + "(" + phone.substring(1, 4) + ")-" + phone.substring(4, 7) + "-" + phone.substring(7, 11);
+        String formatPhoneNumber = phone.charAt(0) + "(" + phone.substring(1, 4) + ")-" + phone.substring(4, 7) + "-" + phone.substring(7, 11);
         stepWithRole("Убедиться, что представлены компоненты четвертого шага регистрации: ", () -> {
             header.checkFinishLoading();
             stepNumber.checkStepNumber(4);
@@ -97,14 +97,14 @@ public class ForthStepClientRegistrationComponent extends BaseComponent {
                 stepWithRole("Плейсхолдер ввода отчества", () -> {
                     patronymicInputLocator.shouldBe(visible).as("Отчество");
                 });
-                //removed for business reason
+
                 /*stepWithRole("Подзаголовок и почта: " + email , () -> {
                     driver.$("div.d-flex.justify-content-between.mb-20").$$("div").get(0).shouldHave(text("Электронная почта")).as("Электронная почта");
                     driver.$("div.d-flex.justify-content-between.mb-20").$$("div").get(1).shouldHave(text(email)).as("email");
-                });*/
-                stepWithRole("Плейсхолдер ввода Номер телефона", () -> {
+                });*/ //removed for business reason
+               /* stepWithRole("Плейсхолдер ввода Номер телефона", () -> {
                     inputPhoneLocator.shouldBe(visible).as("Номер телефона");
-                });
+                });*/ //removed for business reason
             });
             stepWithRole("Убедиться, что отображается активная кнопка Далее", () -> {
 //                forwardButtonLocator.shouldHave(text("Далее")).shouldHave(attribute("disabled"));

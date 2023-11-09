@@ -11,8 +11,8 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationComponent.AddressBGRegistrationLandingComponent;
 import ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationComponent.ContactsBGRegistrationLandingComponent;
 import ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationComponent.DateBGRegistrationLandingComponent;
-import ru.gasworkers.dev.pages.components.sharedComponent.CommonCodeInputModalWindowComponent;
 import ru.gasworkers.dev.pages.components.landingComponent.bgRegistrationComponent.EquipmentBGRegistrationLandingComponent;
+import ru.gasworkers.dev.pages.components.sharedComponent.CommonCodeInputModalWindowComponent;
 
 import java.io.File;
 import java.time.LocalDate;
@@ -126,22 +126,6 @@ public class BackgroundRegistrationComponent extends BaseComponent {
             stepWithRole("Убедиться, что выбран тип заявки: " + BackgroundClientRequestType.MAINTENANCE.getTitle(), () -> {
                 requestTypeLocator.findBy(text(BackgroundClientRequestType.MAINTENANCE.getTitle())).shouldHave(Condition.cssClass("active"));
             });
-           /* stepWithRole("Указать адрес", () -> {
-                stepWithRole("начать вводить адрес: " + objectAddress, () -> {
-                    addressFieldLocator.setValue(objectAddress);
-                    System.out.println("start input address: " + addressFieldLocator.getValue());
-                });
-                stepWithRole("Выбрать первую подсказку: " + addressSuggestionsCollection.get(0).getText(), () -> {
-                    addressSuggestionsCollection.get(0).click();
-                    System.out.println("selected suggestion: " + addressSuggestionsCollection.get(0).getText());
-                });
-                stepWithRole("Убедиться, что скрыты подсказки адреса", () -> {
-                    addressSuggestionsCollection.shouldHave(size(0));
-                });
-                stepWithRole("Убедиться, что искомый запрос: " + objectAddress + " содержится в выбранном адресе: " + addressFieldLocator.getValue(), () -> {
-                    addressFieldLocator.shouldHave(partialValue(objectAddress));
-                });
-            });*/
         address.fillAddressField(objectAddress);
         equipment.fillMaintenanceEquipment(type, mark, brand, power);
         stepWithRole("Указать дату регистрации", () -> {
@@ -161,9 +145,9 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 stepWithRole("Ввести телефон: " + phone, () -> {
                     phoneFieldLocator.setValue(phone);
                 });
-                stepWithRole("Ввести email: " + email, () -> {
+                /*stepWithRole("Ввести email: " + email, () -> {
                     emailFieldLocator.setValue(email);
-                });
+                });*/ // email field removed
             });
             stepWithRole("Подтвердить контактные данные", () -> {
             approveCredentialsButtonLocator.click();
@@ -178,12 +162,12 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 filledDateFieldLocator.shouldHave(Condition.text(LocalDate.now().format(DateTimeFormatter.ofPattern("d MMMM yyyy"))));
                 System.out.println("result date: " + filledDateFieldLocator.getText());
             });
-            String formattedPhone = "+7(" + phone.toString().substring(1, 4) + ")-" + phone.toString().substring(4, 7) + "-" + phone.toString().substring(7);
-            stepWithRole("Убедиться, что заполнены  почта: " + filledCredentialsFieldLocator.get(0).getText() + ", и телефон: " + filledCredentialsFieldLocator.get(1).getText(), () -> {
-                filledCredentialsFieldLocator.get(0).shouldHave(text(email));
-                filledCredentialsFieldLocator.get(1).shouldHave(text(formattedPhone));
-                System.out.println("result email: " + filledCredentialsFieldLocator.get(0).getText());
-                System.out.println("result phone: " + filledCredentialsFieldLocator.get(1).getText());
+            String formattedPhone = "+7(" + phone.substring(1, 4) + ")-" + phone.substring(4, 7) + "-" + phone.substring(7);
+            stepWithRole("Убедиться, что заполнен телефон: " + filledCredentialsFieldLocator.get(0).getText(), () -> {
+//                filledCredentialsFieldLocator.get(0).shouldHave(text(email)); //removed for business reasons
+                filledCredentialsFieldLocator.get(0).shouldHave(text(formattedPhone));
+//                System.out.println("result email: " + filledCredentialsFieldLocator.get(0).getText()); //removed for business reasons
+                System.out.println("result phone: " + filledCredentialsFieldLocator.get(0).getText());
             });
         });
 
@@ -213,9 +197,9 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 stepWithRole("Ввести телефон: " + phone, () -> {
                     phoneFieldLocator.setValue(phone);
                 });
-                stepWithRole("Ввести email: " + email, () -> {
+              /*  stepWithRole("Ввести email: " + email, () -> {
                     emailFieldLocator.setValue(email);
-                });
+                });*/ //removed for business reasons
             });
             stepWithRole("Подтвердить контактные данные", () -> {
                 approveCredentialsButtonLocator.click();
@@ -243,9 +227,9 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 stepWithRole("Ввести телефон: " + phone, () -> {
                     phoneFieldLocator.setValue(phone);
                 });
-                stepWithRole("Ввести email: " + email, () -> {
+              /*  stepWithRole("Ввести email: " + email, () -> {
                     emailFieldLocator.setValue(email);
-                });
+                });*/ //removed for business reasons
             });
             stepWithRole("Подтвердить контактные данные", () -> {
                 approveCredentialsButtonLocator.click();
