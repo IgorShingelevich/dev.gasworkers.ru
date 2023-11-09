@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper;
+package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateHelper;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -153,13 +153,13 @@ public class PreconditionConsultation extends BaseApiTest {
             }
             getActualDtoSet(commonFields, stateConsultation);
             StateInfo result = stateInfo.actualDtoSet();
-//            readAllNotifications();
+            readAllNotificationsClient();
             return new Result(result, commonFields);
         });
     }
 
 
-    private void readAllNotifications() {
+    private void readAllNotificationsClient() {
         notificationsApi.readAllNotifications(commonFields.getTokenClient())
                 .statusCode(200);
     }

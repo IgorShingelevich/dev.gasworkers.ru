@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTest;
+package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateTest;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;
@@ -18,9 +18,8 @@ import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
-import ru.gasworkers.dev.tests.web.BaseWebTest;
-import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.PreconditionConsultation;
-import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.StateConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateHelper.PreconditionConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateHelper.StateConsultation;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateInfo;
 
 import java.time.LocalDate;
@@ -38,33 +37,32 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_CONSULTATION)
-public class ClientWaitMasterConsultationTest extends BaseWebTest {
+public class MasterCompleteConsultationTest extends BaseWebSTClientConsultationTest {
 
     @Browser(role = UserRole.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Консультация - в состоянии clientWaitMaster")
-    void clientWaitMaster(@WithClient(houses = {@WithHouse}) User client) {
-        StateConsultation state = StateConsultation.CLIENT_WAIT_MASTER;
+    @DisplayName("Консультация - в состоянии masterCompleteConsultation")
+    void masterCompleteConsultation(@WithClient(houses = {@WithHouse}) User client) {
+        StateConsultation state = StateConsultation.MASTER_COMPLETE_CONSULTATION;
         UserRole userRole = UserRole.CLIENT;
 
         PreconditionConsultation preconditionConsultation = new PreconditionConsultation();
         PreconditionConsultation.Result result = preconditionConsultation.applyPrecondition(client, state);
-
 // Get the StateInfo and CommonFieldsDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
         CommonFieldsDto commonFields = result.getCommonFieldsResult();
+        String clientToken = stateInfo.getCommonFields().getTokenClient();
 //        ----------------------------  UI  --------------------------------
-        step("авторизация Ролей ", () -> {
-            step("авторизация Клиента", () -> {
+        step("WEB: авторизация Ролей ", () -> {
+            step(userRole + " авторизация", () -> {
                 clientPages.getLoginPage().open();
                 clientPages.getLoginPage().login(String.valueOf(commonFields.getClientPhone()), "1234");
                 clientPages.getHomePage().checkUrl();
 
             });
-
-            step("Test run credentials ", () -> {
+            step(userRole + " test run credentials ", () -> {
                 Allure.addAttachment("Client creds", commonFields.getClientPhone() + ": " + "1234" + "/");
                 Allure.addAttachment("Master creds", commonFields.getMasterEmail() + "/" + "1234");
                 String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
@@ -72,7 +70,6 @@ public class ClientWaitMasterConsultationTest extends BaseWebTest {
                 Allure.addAttachment("RunStartTime: ", date);
             });
         });
-
 
         step(userRole + " кабинет в состоянии - в состоянии " + state, () -> {
 
@@ -96,7 +93,7 @@ public class ClientWaitMasterConsultationTest extends BaseWebTest {
 
             Consumer<SoftAssert> case4 = softAssert -> {
                 step(userRole + " карточка заказа - в состоянии " + state, () -> {
-                    clientPages.getOrderCardPage().openRedirected(stateInfo.getCommonFields().getOrderNumber(), stateInfo.getCommonFields().getTokenClient());
+                    clientPages.getOrderCardPage().open(commonFields.getOrderNumber(), clientToken);
                     clientPages.getOrderCardPage().checkFinishLoading();
                     clientPages.getOrderCardPage().checkStateConsultation(state, stateInfo.getOrdersIdResponseDto());
                 });
@@ -104,7 +101,7 @@ public class ClientWaitMasterConsultationTest extends BaseWebTest {
 
             Consumer<SoftAssert> case5 = softAssert -> {
                 step(userRole + " уведомления - в состоянии " + state, () -> {
-                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
+                    clientPages.getHomePage().open(clientToken);
                     clientPages.getHomePage().checkFinishLoading();
                     Selenide.sleep(3000);
                     clientPages.getHomePage().header.actionsBlock.notifications();
@@ -115,12 +112,11 @@ public class ClientWaitMasterConsultationTest extends BaseWebTest {
 
             Consumer<SoftAssert> case6 = softAssert -> {
                 step(userRole + " красное уведомление в лк - в состоянии " + state, () -> {
-                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
+                    clientPages.getHomePage().open(clientToken);
                     clientPages.getHomePage().checkFinishLoading();
                     clientPages.getHomePage().redNotice.noNotice();
                 });
             };
-
 //            Consumer<SoftAssert> case7 = softAssert -> {
 //                step(userRole + "  стр лендинга - в состоянии " + state, () -> {
 //                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
@@ -130,7 +126,6 @@ public class ClientWaitMasterConsultationTest extends BaseWebTest {
 //                    clientPages.getLandingPage().checkStateConsultation(state);
 //                });
 //            };
-
             assertAll(Arrays.asList(case1,
                     case2, case3,
                     case4, case5, case6

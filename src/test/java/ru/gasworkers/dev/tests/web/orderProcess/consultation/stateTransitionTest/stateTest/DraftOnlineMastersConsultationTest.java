@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest.client;
+package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateTest;
 
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
@@ -9,20 +9,20 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
-import ru.gasworkers.dev.allure.AllureStory;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.extension.user.User;
-import ru.gasworkers.dev.extension.user.WithOrderType;
-import ru.gasworkers.dev.extension.user.WithThroughUser;
+import ru.gasworkers.dev.extension.user.client.WithClient;
+import ru.gasworkers.dev.extension.user.client.WithHouse;
 import ru.gasworkers.dev.model.UserRole;
+import ru.gasworkers.dev.model.browser.PositionBrowser;
+import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.PreconditionRepair;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateHelper.PreconditionConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateHelper.StateConsultation;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateInfo;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
-import ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest.BaseWebSTClientRepairTest;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
@@ -30,40 +30,47 @@ import java.util.function.Consumer;
 import static io.qameta.allure.Allure.step;
 
 @Owner("Igor Shingelevich")
-@Epic(AllureEpic.REPAIR)
-@Feature(AllureFeature.REPAIR_STATE)
-@Story(AllureStory.REPAIR_STATE_CLIENT)
+@Epic(AllureEpic.CONSULTATION)
+@Feature(AllureFeature.CONSULTATION_NOW)
+@Story("Видеоконсультация")
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
-@Tag(AllureTag.WEB_REPAIR)
-public class ActionsInvoicePaidClientRepairStateTest extends BaseWebSTClientRepairTest {
-    @Browser(role = UserRole.CLIENT)
+@Tag(AllureTag.WEB_CONSULTATION)
+public class DraftOnlineMastersConsultationTest extends BaseWebSTClientConsultationTest {
+
+    @Browser(role = UserRole.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
+
     @Test
-    @DisplayName("Ремонт - в  состоянии клиент оплатил счет на работы")
-    void actionInvoicePaid(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {
-        StateRepair state = StateRepair.ACTIONS_INVOICE_PAID;
+    @DisplayName("Консультация - в состоянии draftOnlineMastersConsultation")
+    void draftOnlineMastersConsultation(@WithClient(houses = {@WithHouse}) User client) {
+        StateConsultation state = StateConsultation.DRAFT_ONLINE_MASTERS;
         UserRole userRole = UserRole.CLIENT;
-        PreconditionRepair preconditionRepair = new PreconditionRepair();
-        PreconditionRepair.Result result = preconditionRepair.applyPrecondition(client, state);
-        String clientToken = result.getCommonFieldsResult().getTokenClient();
-        CommonFieldsDto commonFields = result.getCommonFieldsResult();
+
+        PreconditionConsultation preconditionConsultation = new PreconditionConsultation();
+        PreconditionConsultation.Result result = preconditionConsultation.applyPrecondition(client, state);
         StateInfo stateInfo = result.getStateInfoResult();
-//    ------------------------------------------------- UI -----------------------------------------------------------
+        CommonFieldsDto commonFields = result.getCommonFieldsResult();
+        String clientToken = stateInfo.getCommonFields().getTokenClient();
+//        ----------------------------  UI  --------------------------------
         loginDynamicClient(client, userRole, clientPages);
         webAttachments(client, userRole, commonFields, clientToken);
         step(userRole + " кабинет в состоянии - в состоянии " + state, () -> {
-            Consumer<SoftAssert> case1 = lasOrderCardCheck(userRole, state, clientToken, stateInfo, clientPages);
-            Consumer<SoftAssert> case2 = redirectToSelectServicePageCheck(userRole, state, clientToken, clientPages);
-            Consumer<SoftAssert> case3 = selectServicePageCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
+            Consumer<SoftAssert> case1 = lastOrderCardCheck(userRole, state, stateInfo, clientPages);
+            Consumer<SoftAssert> case2 = bannerConsultationHomePageCheck(userRole, state, clientPages);
+            Consumer<SoftAssert> case3 = fillProfileButtonHomePageCheck(userRole, state, clientPages);
             Consumer<SoftAssert> case4 = orderCardGeneralCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
             Consumer<SoftAssert> case5 = orderCardTabCommonCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
             Consumer<SoftAssert> case6 = orderCardTabInfoMasterCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
             Consumer<SoftAssert> case7 = orderCardTabDocsCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
             Consumer<SoftAssert> case8 = allNotificationPageCheck(userRole, state, clientToken, stateInfo, clientPages);
             Consumer<SoftAssert> case9 = redNoticeHomePageCheck(userRole, state, stateInfo, clientPages);
-            Consumer<SoftAssert> case10 = redNoticeLandingPageCheck(userRole, state, clientToken, clientPages);
-            assertAll(Arrays.asList(case1, case2, case3, case4, case5, case6, case7, case8, case9, case10, case8, case9, case10));
+            assertAll(Arrays.asList(case1, case2, case3, case4, case5, case6, case7, case8, case9));
         });
+
     }
+
 }
+
+
+

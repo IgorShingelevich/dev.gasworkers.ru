@@ -58,11 +58,11 @@ public class ClientSignActClientRepairStateTest extends BaseWebSTClientRepairTes
             Consumer<SoftAssert> case1 = lasOrderCardCheck(userRole, state, clientToken, stateInfo, clientPages);
             Consumer<SoftAssert> case2 = redirectToSelectServicePageCheck(userRole, state, clientToken, clientPages);
             Consumer<SoftAssert> case3 = selectServicePageCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
-            Consumer<SoftAssert> case4 = ordersIdGeneralCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
-            Consumer<SoftAssert> case5 = ordersIdTabCommonCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
-            Consumer<SoftAssert> case6 = ordersIdTabInfoMasterCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
-            Consumer<SoftAssert> case7 = ordersIdTabDocsCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
-            Consumer<SoftAssert> case8 = alNotificationPageCheck(userRole, state, clientToken, stateInfo, clientPages);
+            Consumer<SoftAssert> case4 = orderCardGeneralCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
+            Consumer<SoftAssert> case5 = orderCardTabCommonCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
+            Consumer<SoftAssert> case6 = orderCardTabInfoMasterCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
+            Consumer<SoftAssert> case7 = orderCardTabDocsCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
+            Consumer<SoftAssert> case8 = allNotificationPageCheck(userRole, state, clientToken, stateInfo, clientPages);
             Consumer<SoftAssert> case9 = redNoticeHomePageCheck(userRole, state, stateInfo, clientPages);
             Consumer<SoftAssert> case10 = redNoticeLandingPageCheck(userRole, state, clientToken, clientPages);
             assertAll(Arrays.asList(case1, case2, case3, case4, case5, case6, case7, case8, case9, case10, case8, case9, case10));

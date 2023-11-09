@@ -150,7 +150,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
     }
 
     //    @NotNull
-    protected Consumer<SoftAssert> alNotificationPageCheck(UserRole userRole, StateRepair state, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
+    protected Consumer<SoftAssert> allNotificationPageCheck(UserRole userRole, StateRepair state, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
         Consumer<SoftAssert> case5 = softAssert -> {
             step(userRole + " уведомления - в состоянии " + state, () -> {
                 clientPages.getAllNotificationsPage().open(clientToken);
@@ -162,7 +162,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
     }
 
     //    @NotNull
-    protected Consumer<SoftAssert> ordersIdTabDocsCheck(UserRole userRole, StateRepair state, CommonFieldsDto commonFields, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
+    protected Consumer<SoftAssert> orderCardTabDocsCheck(UserRole userRole, StateRepair state, CommonFieldsDto commonFields, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
         Consumer<SoftAssert> caseD = softAssert -> {
             step(userRole + " карточка заказа - вкладка Документы - в состоянии " + state, () -> {
                 clientPages.getOrderCardPage().openRedirected(commonFields.getOrderNumber(), clientToken);
@@ -174,7 +174,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
     }
 
     //    @NotNull
-    protected Consumer<SoftAssert> ordersIdTabInfoMasterCheck(UserRole userRole, StateRepair state, CommonFieldsDto commonFields, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
+    protected Consumer<SoftAssert> orderCardTabInfoMasterCheck(UserRole userRole, StateRepair state, CommonFieldsDto commonFields, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
         Consumer<SoftAssert> caseC = softAssert -> {
             step(userRole + " карточка заказа - вкладка Информация о заказе - в состоянии " + state, () -> {
                 clientPages.getOrderCardPage().openRedirected(commonFields.getOrderNumber(), clientToken);
@@ -186,7 +186,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
     }
 
     //    @NotNull
-    protected Consumer<SoftAssert> ordersIdTabCommonCheck(UserRole userRole, StateRepair state, CommonFieldsDto commonFields, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
+    protected Consumer<SoftAssert> orderCardTabCommonCheck(UserRole userRole, StateRepair state, CommonFieldsDto commonFields, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
         Consumer<SoftAssert> caseB = softAssert -> {
             step(userRole + " карточка заказа - вкладка Общее - в состоянии " + state, () -> {
                 clientPages.getOrderCardPage().openRedirected(commonFields.getOrderNumber(), clientToken);
@@ -198,7 +198,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
     }
 
     //    @NotNull
-    protected Consumer<SoftAssert> ordersIdGeneralCheck(UserRole userRole, StateRepair state, CommonFieldsDto commonFields, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
+    protected Consumer<SoftAssert> orderCardGeneralCheck(UserRole userRole, StateRepair state, CommonFieldsDto commonFields, String clientToken, StateInfo stateInfo, ClientPages clientPages) {
         Consumer<SoftAssert> caseA = softAssert -> {
             step(userRole + " карточка заказа - генеральная информация - в состоянии " + state, () -> {
                 clientPages.getOrderCardPage().openRedirected(commonFields.getOrderNumber(), clientToken);

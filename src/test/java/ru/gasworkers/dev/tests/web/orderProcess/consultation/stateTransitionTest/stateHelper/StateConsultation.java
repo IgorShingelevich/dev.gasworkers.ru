@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper;
+package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateHelper;
 
 import lombok.AllArgsConstructor;
 import ru.gasworkers.dev.api.orders.id.OrdersIdResponseDto;

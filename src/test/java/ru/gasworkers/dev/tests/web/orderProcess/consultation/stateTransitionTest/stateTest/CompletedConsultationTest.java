@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTest;
+package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateTest;
 
 import com.codeborne.selenide.Selenide;
 import com.google.gson.JsonArray;
@@ -50,7 +50,6 @@ import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.MasterPages;
-import ru.gasworkers.dev.tests.web.BaseWebTest;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -67,7 +66,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB)
-public class CompletedConsultationTest extends BaseWebTest {
+public class CompletedConsultationTest extends BaseWebSTClientConsultationTest {
 
     private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();

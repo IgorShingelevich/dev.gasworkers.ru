@@ -20,14 +20,10 @@ import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tab
 import ru.gasworkers.dev.pages.components.sharedComponent.orderCardComponent.tabs.infoMaster.InfoMasterTabOrderCardClientComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.sidebarComponent.ClientSidebarComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
-import ru.gasworkers.dev.tests.SoftAssert;
-import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.StateConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateHelper.StateConsultation;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Consumer;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selectors.byTagAndText;
@@ -336,53 +332,6 @@ public class OrderCardClientPage extends BaseClientPage {
         });
     }
 
-    public List<Consumer<SoftAssert>> collectStateChecks(UserRole role, StateRepair state, OrdersIdResponseDto ordersDto, TotalPriceResponseDto totalPriceDto) {
-        Consumer<SoftAssert> checkOrderNumberConsumer = softAssert -> {
-            checkOrderNumber(ordersDto.getData().getNumber());
-        };
-
-        Consumer<SoftAssert> consultationNotificationConsumer = softAssert -> {
-            consultationNotification.noNoticeConsultationComponent();
-        };
-
-        Consumer<SoftAssert> navNoChecklistTabConsumer = softAssert -> {
-            nav.noChecklistTab();
-        };
-
-        Consumer<SoftAssert> checkCommonTabConsumer = softAssert -> {
-            nav.common();
-            state.checkCommonTab(role, this.commonTab, ordersDto);
-        };
-
-        Consumer<SoftAssert> checkInfoMasterTabConsumer = softAssert -> {
-            nav.infoMaster();
-            state.checkInfoMasterTab(role, this.infoMasterTab, ordersDto);
-        };
-
-        Consumer<SoftAssert> chechDocsTabConsumer = softAssert -> {
-            switch (state) {
-                case CANCEL_CLIENT_PUBLISHED:
-                case CANCEL_CLIENT_HAS_OFFER:
-                case CANCEL_DISPATCHER_HAS_OFFER:
-                    nav.noDocsTab();
-                    break;
-                default:
-                    nav.docs();
-                    state.checkDocsTab(role, this.docsTab, ordersDto, totalPriceDto);
-            }
-        };
-
-        return Arrays.asList(
-                checkOrderNumberConsumer,
-                consultationNotificationConsumer,
-                navNoChecklistTabConsumer,
-                checkCommonTabConsumer,
-                checkInfoMasterTabConsumer,
-                chechDocsTabConsumer
-        );
-    }
-
-
     public void checkStateConsultation(StateConsultation state, OrdersIdResponseDto dto) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
             checkOrderNumber(dto.getData().getNumber());
@@ -392,6 +341,35 @@ public class OrderCardClientPage extends BaseClientPage {
             state.checkCommonTab(this.commonTab, dto);
             nav.infoMaster();
             state.checkInfoMasterTab(this.infoMasterTab, dto);
+            nav.docs();
+            state.checkDocsTab(this.docsTab, dto);
+        });
+    }
+
+    public void checkGeneralStateConsultation(UserRole role, StateConsultation state, OrdersIdResponseDto dto) {
+        stepWithRole("Убедиться, что номер заказа " + state + " соответствует ожидаемому, отсутствуют несвойственные элементы", () -> {
+            checkOrderNumber(dto.getData().getNumber());
+            consultationNotification.checkState(state);
+            nav.noChecklistTab();
+        });
+    }
+
+    public void checkTabCommonStateConsultation(UserRole role, StateConsultation state, OrdersIdResponseDto dto) {
+        stepWithRole("Убедиться, что вкладка  Общие в состоянии " + state, () -> {
+            nav.common();
+            state.checkCommonTab(this.commonTab, dto);
+        });
+    }
+
+    public void checkTabInfoMasterStateConsultation(UserRole role, StateConsultation state, OrdersIdResponseDto dto) {
+        stepWithRole("Убедиться, что вкладка  Информация о мастере в состоянии " + state, () -> {
+            nav.infoMaster();
+            state.checkInfoMasterTab(this.infoMasterTab, dto);
+        });
+    }
+
+    public void checkTabDocsStateConsultation(UserRole role, StateConsultation state, OrdersIdResponseDto dto) {
+        stepWithRole("Убедиться, что вкладка  Документы в состоянии " + state, () -> {
             nav.docs();
             state.checkDocsTab(this.docsTab, dto);
         });

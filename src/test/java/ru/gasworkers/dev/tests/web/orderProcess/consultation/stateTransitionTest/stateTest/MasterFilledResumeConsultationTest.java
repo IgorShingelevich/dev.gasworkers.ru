@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTest;
+package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateTest;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.*;
@@ -18,9 +18,8 @@ import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.SoftAssert;
 import ru.gasworkers.dev.tests.api.story.repair.CommonFieldsDto;
-import ru.gasworkers.dev.tests.web.BaseWebTest;
-import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.PreconditionConsultation;
-import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateHelper.StateConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateHelper.PreconditionConsultation;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateHelper.StateConsultation;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateInfo;
 
 import java.time.LocalDate;
@@ -38,15 +37,15 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.REGRESSION)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.WEB_CONSULTATION)
-public class DraftOnlineMastersConsultationTest extends BaseWebTest {
+public class MasterFilledResumeConsultationTest extends BaseWebSTClientConsultationTest {
 
     @Browser(role = UserRole.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.FIRST_ROLE)
     ClientPages clientPages;
 
     @Test
-    @DisplayName("Консультация - в состоянии draftOnlineMastersConsultation")
-    void draftOnlineMastersConsultation(@WithClient(houses = {@WithHouse}) User client) {
-        StateConsultation state = StateConsultation.DRAFT_ONLINE_MASTERS;
+    @DisplayName("Консультация - в состоянии masterFilledResume")
+    void masterFilledResume(@WithClient(houses = {@WithHouse}) User client) {
+        StateConsultation state = StateConsultation.MASTER_FILLED_RESUME;
         UserRole userRole = UserRole.CLIENT;
 
         PreconditionConsultation preconditionConsultation = new PreconditionConsultation();
