@@ -42,7 +42,7 @@ public class WebRepairTestSteps extends BaseWebTest {
     void checkLastOrderComponent(UserRole userRole, StateRepair state, StateInfo stateInfo) {
         step(userRole + " карточка последнего заказа - в состоянии " + state, () -> {
             clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-            clientPages.getHomePage().lastOrderComponent.checkState(clientPages.getDriverManager(), state, stateInfo.getLastOrderInfoDto());
+            clientPages.getHomePage().lastOrderComponent.checkState(clientPages.getDriverManager(), state, stateInfo.getLastOrderInfoDto(), clientPages);
         });
     }
 

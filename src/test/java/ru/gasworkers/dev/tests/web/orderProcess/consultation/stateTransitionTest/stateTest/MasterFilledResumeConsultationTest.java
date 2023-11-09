@@ -75,7 +75,7 @@ public class MasterFilledResumeConsultationTest extends BaseWebSTClientConsultat
 
             Consumer<SoftAssert> case1 = softAssert -> {
                 step(userRole + " карточка последнего заказа - в состоянии " + state, () -> {
-                    clientPages.getHomePage().lastOrderComponent.checkState(clientPages.getDriverManager(), state, stateInfo.getLastOrderInfoDto());
+                    clientPages.getHomePage().lastOrderComponent.checkState(clientPages.getDriverManager(), state, stateInfo.getLastOrderInfoDto(), clientPages);
                 });
             };
 

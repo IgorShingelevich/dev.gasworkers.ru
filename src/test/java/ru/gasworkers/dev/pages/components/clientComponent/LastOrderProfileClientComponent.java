@@ -8,6 +8,7 @@ import ru.gasworkers.dev.model.browser.RoleBrowser;
 import ru.gasworkers.dev.pages.components.BaseComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.allRolesSharedComponent.UrlCheckerSharedComponent;
 import ru.gasworkers.dev.pages.components.sharedComponent.stepperComponent.StepperComponent;
+import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateHelper.StateConsultation;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateRepair;
 
@@ -150,16 +151,16 @@ public class LastOrderProfileClientComponent extends BaseComponent {
         });
     }
 
-    public void checkState(DriverManager driverManager, StateRepair state, LastOrderInfoResponseDto currentLastOrderInfoDto) {
+    public void checkState(DriverManager driverManager, StateRepair state, LastOrderInfoResponseDto currentLastOrderInfoDto, ClientPages clientPages) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
-            driverManager.screenshot("компонент карточки последнего заказа в состоянии " + state);
+//            clientPages.getDriverManager().screenshot("компонент карточки последнего заказа в состоянии " + state);
             state.checkLastOrderComponent(this, currentLastOrderInfoDto);
         });
     }
 
-    public void checkState(DriverManager driverManager, StateConsultation state, LastOrderInfoResponseDto currentLastOrderInfoDto) {
+    public void checkState(DriverManager driverManager, StateConsultation state, LastOrderInfoResponseDto currentLastOrderInfoDto, ClientPages clientPages) {
         stepWithRole("Убедиться, что статус " + state + " соответствует ожидаемому", () -> {
-            driverManager.screenshot("компонент карточки последнего заказа в состоянии " + state);
+//            clientPages.getDriverManager().screenshot("компонент карточки последнего заказа в состоянии " + state);
             state.checkLastOrderComponent(this, currentLastOrderInfoDto);
         });
     }

@@ -129,7 +129,8 @@ public class BaseWebSTClientConsultationTest extends BaseWebTest {
     protected Consumer<SoftAssert> lastOrderCardCheck(UserRole userRole, StateConsultation state, StateInfo stateInfo, ClientPages clientPages) {
         Consumer<SoftAssert> case1 = softAssert -> {
             step(userRole + " карточка последнего заказа - в состоянии " + state, () -> {
-                clientPages.getHomePage().lastOrderComponent.checkState(clientPages.getDriverManager(), state, stateInfo.getLastOrderInfoDto());
+                clientPages.getHomePage().lastOrderComponent.checkState(clientPages.getDriverManager(), state, stateInfo.getLastOrderInfoDto(), clientPages);
+
             });
         };
         return case1;

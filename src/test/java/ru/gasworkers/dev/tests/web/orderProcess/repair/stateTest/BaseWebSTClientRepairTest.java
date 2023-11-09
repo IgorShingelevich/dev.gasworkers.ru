@@ -49,7 +49,7 @@ public class BaseWebSTClientRepairTest extends BaseWebTest {
                 clientPages.getHomePage().open(clientToken);
                 Selenide.sleep(2000);
                 clientPages.getHomePage().lastOrderComponent.checkFinishLoading();
-                clientPages.getHomePage().lastOrderComponent.checkState(clientPages.getDriverManager(), state, stateInfo.getLastOrderInfoDto());
+                clientPages.getHomePage().lastOrderComponent.checkState(clientPages.getDriverManager(), state, stateInfo.getLastOrderInfoDto(), clientPages);
             });
         };
         return case1;

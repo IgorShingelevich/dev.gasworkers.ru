@@ -1,4 +1,4 @@
-package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateTest;
+package ru.gasworkers.dev.tests.web.orderProcess.consultation;
 
 import com.codeborne.selenide.Selenide;
 import com.google.gson.JsonArray;
@@ -50,6 +50,7 @@ import ru.gasworkers.dev.model.browser.PositionBrowser;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
 import ru.gasworkers.dev.pages.context.ClientPages;
 import ru.gasworkers.dev.pages.context.MasterPages;
+import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateTest.BaseWebSTClientConsultationTest;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
