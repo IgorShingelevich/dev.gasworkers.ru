@@ -54,6 +54,7 @@ public class MasterFilledResumeConsultationTest extends BaseWebTest {
 // Get the StateInfo and CommonFieldsDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
         CommonFieldsDto commonFields = result.getCommonFieldsResult();
+        String clientToken = stateInfo.getCommonFields().getTokenClient();
 //        ----------------------------  UI  --------------------------------
         step("WEB: авторизация Ролей ", () -> {
             step(userRole + " авторизация", () -> {
@@ -93,7 +94,7 @@ public class MasterFilledResumeConsultationTest extends BaseWebTest {
 
             Consumer<SoftAssert> case4 = softAssert -> {
                 step(userRole + " карточка заказа - в состоянии " + state, () -> {
-                    clientPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderNumber()));
+                    clientPages.getOrderCardPage().open(commonFields.getOrderNumber(), clientToken);
                     clientPages.getOrderCardPage().checkFinishLoading();
                     clientPages.getOrderCardPage().checkStateConsultation(state, stateInfo.getOrdersIdResponseDto());
                 });
@@ -101,7 +102,7 @@ public class MasterFilledResumeConsultationTest extends BaseWebTest {
 
             Consumer<SoftAssert> case5 = softAssert -> {
                 step(userRole + " уведомления - в состоянии " + state, () -> {
-                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
+                    clientPages.getHomePage().open(clientToken);
                     clientPages.getHomePage().checkFinishLoading();
                     Selenide.sleep(3000);
                     clientPages.getHomePage().header.actionsBlock.notifications();
@@ -112,7 +113,7 @@ public class MasterFilledResumeConsultationTest extends BaseWebTest {
 
             Consumer<SoftAssert> case6 = softAssert -> {
                 step(userRole + " красное уведомление в лк - в состоянии " + state, () -> {
-                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
+                    clientPages.getHomePage().open(clientToken);
                     clientPages.getHomePage().checkFinishLoading();
                     clientPages.getHomePage().redNotice.noNotice();
                 });

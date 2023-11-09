@@ -96,7 +96,7 @@ public class ClientWaitMasterConsultationTest extends BaseWebTest {
 
             Consumer<SoftAssert> case4 = softAssert -> {
                 step(userRole + " карточка заказа - в состоянии " + state, () -> {
-                    clientPages.getOrderCardPage().open(String.valueOf(commonFields.getOrderNumber()));
+                    clientPages.getOrderCardPage().openRedirected(stateInfo.getCommonFields().getOrderNumber(), stateInfo.getCommonFields().getTokenClient());
                     clientPages.getOrderCardPage().checkFinishLoading();
                     clientPages.getOrderCardPage().checkStateConsultation(state, stateInfo.getOrdersIdResponseDto());
                 });

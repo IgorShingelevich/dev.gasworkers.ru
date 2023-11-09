@@ -82,10 +82,6 @@ public class OrderCardClientPage extends BaseClientPage {
         return driver.$x("//*[local-name() = 'svg'][@data-testid = 'WarehouseIcon']//ancestor::li//span[text() = '" + pointMenu + "']");
     }*/
 
-    public void open(String orderId) {
-        driver.open("profile/client/orders/" + orderId);
-    }
-
     public void checkFinishLoading() {
         checkUrl();
         titleCardNumberLocator.shouldBe(visible);
