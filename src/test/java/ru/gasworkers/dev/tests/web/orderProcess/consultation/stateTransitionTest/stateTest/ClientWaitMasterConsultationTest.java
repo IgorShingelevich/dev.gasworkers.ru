@@ -46,16 +46,12 @@ public class ClientWaitMasterConsultationTest extends BaseWebSTClientConsultatio
     void clientWaitMaster(@WithClient(houses = {@WithHouse}) User client) {
         StateConsultation state = StateConsultation.CLIENT_WAIT_MASTER;
         UserRole userRole = UserRole.CLIENT;
-
         PreconditionConsultation preconditionConsultation = new PreconditionConsultation();
         PreconditionConsultation.Result result = preconditionConsultation.applyPrecondition(client, state);
-
-// Get the StateInfo and CommonFieldsDto from the result
         StateInfo stateInfo = result.getStateInfoResult();
         CommonFieldsDto commonFields = result.getCommonFieldsResult();
         String clientToken = stateInfo.getCommonFields().getTokenClient();
 //        ----------------------------  UI  --------------------------------
-
         loginDynamicClient(client, userRole, clientPages);
         webAttachments(client, userRole, commonFields, clientToken);
         step(userRole + " кабинет в состоянии - в состоянии " + state, () -> {
@@ -70,88 +66,6 @@ public class ClientWaitMasterConsultationTest extends BaseWebSTClientConsultatio
             Consumer<SoftAssert> case9 = redNoticeHomePageCheck(userRole, state, stateInfo, clientPages);
             assertAll(Arrays.asList(case1, case2, case3, case4, case5, case6, case7, case8, case9));
         });
-        /*step("авторизация Ролей ", () -> {
-            step("авторизация Клиента", () -> {
-                clientPages.getLoginPage().open();
-                clientPages.getLoginPage().login(String.valueOf(commonFields.getClientPhone()), "1234");
-                clientPages.getHomePage().checkUrl();
-
-            });
-
-            step("Test run credentials ", () -> {
-                Allure.addAttachment("Client creds", commonFields.getClientPhone() + ": " + "1234" + "/");
-                Allure.addAttachment("Master creds", commonFields.getMasterEmail() + "/" + "1234");
-                String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-                        + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-                Allure.addAttachment("RunStartTime: ", date);
-            });
-        });
-
-
-        step(userRole + " кабинет в состоянии - в состоянии " + state, () -> {
-
-            Consumer<SoftAssert> case1 = softAssert -> {
-                step(userRole + " карточка последнего заказа - в состоянии " + state, () -> {
-                    clientPages.getHomePage().lastOrderComponent.checkState(clientPages.getDriverManager(), state, stateInfo.getLastOrderInfoDto(),clientPages);
-                });
-            };
-
-            Consumer<SoftAssert> case2 = softAssert -> {
-                step(userRole + " компонент баннер ВК в лк - в состоянии " + state, () -> {
-                    clientPages.getHomePage().consultationNotification.checkState(state);
-                });
-            };
-
-            Consumer<SoftAssert> case3 = softAssert -> {
-                step(userRole + " кнопка на дом стр Заполнить профиль - в состоянии " + state, () -> {
-                    clientPages.getHomePage().checkFillProfileButton();
-                });
-            };
-
-            Consumer<SoftAssert> case4 = softAssert -> {
-                step(userRole + " карточка заказа - в состоянии " + state, () -> {
-                    clientPages.getOrderCardPage().openRedirected(stateInfo.getCommonFields().getOrderNumber(), stateInfo.getCommonFields().getTokenClient());
-                    clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkStateConsultation(state, stateInfo.getOrdersIdResponseDto());
-                });
-            };
-
-            Consumer<SoftAssert> case5 = softAssert -> {
-                step(userRole + " уведомления - в состоянии " + state, () -> {
-                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
-                    clientPages.getHomePage().checkFinishLoading();
-                    Selenide.sleep(3000);
-                    clientPages.getHomePage().header.actionsBlock.notifications();
-                    clientPages.getAllNotificationsPage().checkFinishLoading();
-                    clientPages.getAllNotificationsPage().checkStateConsultation(state, stateInfo.getNotificationsDto());
-                });
-            };
-
-            Consumer<SoftAssert> case6 = softAssert -> {
-                step(userRole + " красное уведомление в лк - в состоянии " + state, () -> {
-                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
-                    clientPages.getHomePage().checkFinishLoading();
-                    clientPages.getHomePage().redNotice.noNotice();
-                });
-            };
-
-//            Consumer<SoftAssert> case7 = softAssert -> {
-//                step(userRole + "  стр лендинга - в состоянии " + state, () -> {
-//                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
-//                    clientPages.getHomePage().checkFinishLoading();
-//                    clientPages.getHomePage().header.clickLogo();
-//                    clientPages.getLandingPage().checkFinishLoading();
-//                    clientPages.getLandingPage().checkStateConsultation(state);
-//                });
-//            };
-
-            assertAll(Arrays.asList(case1,
-                    case2, case3,
-                    case4, case5, case6
-//                    , case7
-            ));
-        });*/
-
     }
 }
 

@@ -120,7 +120,8 @@ public class AllNotificationsPage extends BasePage {
                 case MASTER_COMPLETE_CONSULTATION:
                 case MASTER_FILLED_RESUME:
                 case ORDER_COMPLETED:
-                    checkExpectedAmountOfNotifications(0, 4000);
+                    checkExpectedAmountOfNotifications(1, 4000);
+                    checkFirstNotificationText(stateConsultation.notification());
                     break;
                 default:
                     throw new IllegalStateException(this.getClass().getSimpleName() + " Unexpected value: " + this);

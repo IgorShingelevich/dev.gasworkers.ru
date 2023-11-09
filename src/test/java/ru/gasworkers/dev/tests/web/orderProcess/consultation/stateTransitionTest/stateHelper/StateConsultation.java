@@ -19,7 +19,7 @@ public enum StateConsultation {
     MASTER_START_CONSULTATION("Мастер приступил к работе", null),
     CLIENT_JOIN_CONSULTATION("Мастер приступил к работе", null),
     MASTER_COMPLETE_CONSULTATION("Мастер заполнил данные по заказу", null),
-    MASTER_FILLED_RESUME("Мастер заполнил данные по заказу", null),
+    MASTER_FILLED_RESUME("Мастер заполнил данные по заказу", "Резюме по видеоконсультации создано мастером"),
     ORDER_COMPLETED("Завершен", "Резюме по видеоконсультации создано мастером");
 
     public static final StateBuilder builder = new StateBuilder();

@@ -67,9 +67,7 @@ public class DraftOnlineMastersConsultationTest extends BaseWebSTClientConsultat
             Consumer<SoftAssert> case9 = redNoticeHomePageCheck(userRole, state, stateInfo, clientPages);
             assertAll(Arrays.asList(case1, case2, case3, case4, case5, case6, case7, case8, case9));
         });
-
     }
-
 }
 
 

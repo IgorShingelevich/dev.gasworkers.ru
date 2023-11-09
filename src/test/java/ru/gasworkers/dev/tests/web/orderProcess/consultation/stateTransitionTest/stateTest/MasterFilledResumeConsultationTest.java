@@ -1,7 +1,9 @@
 package ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateTest;
 
-import com.codeborne.selenide.Selenide;
-import io.qameta.allure.*;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Owner;
+import io.qameta.allure.Story;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -22,9 +24,6 @@ import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest
 import ru.gasworkers.dev.tests.web.orderProcess.consultation.stateTransitionTest.stateHelper.StateConsultation;
 import ru.gasworkers.dev.tests.web.orderProcess.repair.stateHelper.StateInfo;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.function.Consumer;
 
@@ -55,84 +54,20 @@ public class MasterFilledResumeConsultationTest extends BaseWebSTClientConsultat
         CommonFieldsDto commonFields = result.getCommonFieldsResult();
         String clientToken = stateInfo.getCommonFields().getTokenClient();
 //        ----------------------------  UI  --------------------------------
-        step("WEB: авторизация Ролей ", () -> {
-            step(userRole + " авторизация", () -> {
-                clientPages.getLoginPage().open();
-                clientPages.getLoginPage().login(String.valueOf(commonFields.getClientPhone()), "1234");
-                clientPages.getHomePage().checkUrl();
-
-            });
-            step(userRole + " test run credentials ", () -> {
-                Allure.addAttachment("Client creds", commonFields.getClientPhone() + ": " + "1234" + "/");
-                Allure.addAttachment("Master creds", commonFields.getMasterEmail() + "/" + "1234");
-                String date = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-                        + " " + LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"));
-                Allure.addAttachment("RunStartTime: ", date);
-            });
-        });
-
+        loginDynamicClient(client, userRole, clientPages);
+        webAttachments(client, userRole, commonFields, clientToken);
         step(userRole + " кабинет в состоянии - в состоянии " + state, () -> {
-
-            Consumer<SoftAssert> case1 = softAssert -> {
-                step(userRole + " карточка последнего заказа - в состоянии " + state, () -> {
-                    clientPages.getHomePage().lastOrderComponent.checkState(clientPages.getDriverManager(), state, stateInfo.getLastOrderInfoDto(), clientPages);
-                });
-            };
-
-            Consumer<SoftAssert> case2 = softAssert -> {
-                step(userRole + " компонент баннер ВК в лк - в состоянии " + state, () -> {
-                    clientPages.getHomePage().consultationNotification.checkState(state);
-                });
-            };
-
-            Consumer<SoftAssert> case3 = softAssert -> {
-                step(userRole + " кнопка на дом стр Заполнить профиль - в состоянии " + state, () -> {
-                    clientPages.getHomePage().checkFillProfileButton();
-                });
-            };
-
-            Consumer<SoftAssert> case4 = softAssert -> {
-                step(userRole + " карточка заказа - в состоянии " + state, () -> {
-                    clientPages.getOrderCardPage().open(commonFields.getOrderNumber(), clientToken);
-                    clientPages.getOrderCardPage().checkFinishLoading();
-                    clientPages.getOrderCardPage().checkStateConsultation(state, stateInfo.getOrdersIdResponseDto());
-                });
-            };
-
-            Consumer<SoftAssert> case5 = softAssert -> {
-                step(userRole + " уведомления - в состоянии " + state, () -> {
-                    clientPages.getHomePage().open(clientToken);
-                    clientPages.getHomePage().checkFinishLoading();
-                    Selenide.sleep(3000);
-                    clientPages.getHomePage().header.actionsBlock.notifications();
-                    clientPages.getAllNotificationsPage().checkFinishLoading();
-                    clientPages.getAllNotificationsPage().checkStateConsultation(state, stateInfo.getNotificationsDto());
-                });
-            };
-
-            Consumer<SoftAssert> case6 = softAssert -> {
-                step(userRole + " красное уведомление в лк - в состоянии " + state, () -> {
-                    clientPages.getHomePage().open(clientToken);
-                    clientPages.getHomePage().checkFinishLoading();
-                    clientPages.getHomePage().redNotice.noNotice();
-                });
-            };
-//            Consumer<SoftAssert> case7 = softAssert -> {
-//                step(userRole + "  стр лендинга - в состоянии " + state, () -> {
-//                    clientPages.getHomePage().open(stateInfo.getCommonFields().getTokenClient());
-//                    clientPages.getHomePage().checkFinishLoading();
-//                    clientPages.getHomePage().header.clickLogo();
-//                    clientPages.getLandingPage().checkFinishLoading();
-//                    clientPages.getLandingPage().checkStateConsultation(state);
-//                });
-//            };
-            assertAll(Arrays.asList(case1,
-                    case2, case3,
-                    case4, case5, case6
-//                    , case7
-            ));
+            Consumer<SoftAssert> case1 = lastOrderCardCheck(userRole, state, stateInfo, clientPages);
+            Consumer<SoftAssert> case2 = bannerConsultationHomePageCheck(userRole, state, clientPages);
+            Consumer<SoftAssert> case3 = fillProfileButtonHomePageCheck(userRole, state, clientPages);
+            Consumer<SoftAssert> case4 = orderCardGeneralCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
+            Consumer<SoftAssert> case5 = orderCardTabCommonCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
+            Consumer<SoftAssert> case6 = orderCardTabInfoMasterCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
+            Consumer<SoftAssert> case7 = orderCardTabDocsCheck(userRole, state, commonFields, clientToken, stateInfo, clientPages);
+            Consumer<SoftAssert> case8 = allNotificationPageCheck(userRole, state, clientToken, stateInfo, clientPages);
+            Consumer<SoftAssert> case9 = redNoticeHomePageCheck(userRole, state, stateInfo, clientPages);
+            assertAll(Arrays.asList(case1, case2, case3, case4, case5, case6, case7, case8, case9));
         });
-
     }
 }
 
