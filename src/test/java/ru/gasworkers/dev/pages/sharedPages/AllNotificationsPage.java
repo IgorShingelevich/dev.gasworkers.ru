@@ -118,6 +118,8 @@ public class AllNotificationsPage extends BasePage {
                 case MASTER_START_CONSULTATION:
                 case CLIENT_JOIN_CONSULTATION:
                 case MASTER_COMPLETE_CONSULTATION:
+                    checkExpectedAmountOfNotifications(0, 4000);
+                    break;
                 case MASTER_FILLED_RESUME:
                 case ORDER_COMPLETED:
                     checkExpectedAmountOfNotifications(1, 4000);
