@@ -153,7 +153,7 @@ public class SharedButtonsOrderCardComponent extends BaseOrderCardComponent {
                             visibleButtons = List.of(CLIENT_RETURN_TO_WORK, CLIENT_PAY_INVOICE);
                             break;
                         case ACTIONS_INVOICE_PAID:
-                            notVisibleButtons = List.of(CLIENT_CREATE_CONCLUSION, CLIENT_SELECT_MASTER_CONSULTATION, CLIENT_START_CONSULTATION, CLIENT_SHOW_ON_MAP, CLIENT_SELECT_NEW_COMPANY, CLIENT_PAY_INVOICE, CLIENT_CANCEL_ORDER, CLIENT_SIGN_ACT, CLIENT_MAKE_REVIEW, CLIENT_START_CONSULTATION, CLIENT_RETURN_TO_WORK);
+                            notVisibleButtons = List.of(CLIENT_CREATE_CONCLUSION, CLIENT_SELECT_MASTER_CONSULTATION, CLIENT_START_CONSULTATION, CLIENT_SHOW_ON_MAP, CLIENT_SELECT_NEW_COMPANY, CLIENT_PAY_INVOICE, CLIENT_CANCEL_ORDER, CLIENT_SIGN_ACT, CLIENT_START_CONSULTATION, CLIENT_RETURN_TO_WORK);
                             visibleButtons = List.of(CLIENT_MAKE_REVIEW);
                             break;
                         case MASTER_SIGN_ACT:
