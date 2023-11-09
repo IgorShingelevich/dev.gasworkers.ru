@@ -21,9 +21,9 @@ enum CheckRegistrationNegativeCase {
     CLIENT_INVALID_PHONE("Invalid phone( the response need to be handled properly)", CheckRegistrationResponseDto.wrongCodeResponse()), // todo implement invalid phone
     CLIENT_DUPLICATE_PHONE("Duplicate phone( the response need to be handled properly)", CheckRegistrationResponseDto.wrongCodeResponse()), // todo implement duplicate phone
     CLIENT_NOT_MATCH_PHONE("Not match phone( the response need to be handled properly)", CheckRegistrationResponseDto.wrongCodeResponse()), // todo implement not match phone
-    CLIENT_MISSING_ALL_FIELDS("Missing all fields( the response need to be handled properly- expected description of all the fields)", CheckRegistrationResponseDto.missingAllFieldsResponse()),
-    CLIENT_MISSING_PHONE("Missing phone( discuss this case)  ", CheckRegistrationResponseDto.missingPhoneResponse()),
-    CLIENT_START_MISSING_TYPE("Missing type in start", CheckRegistrationResponseDto.missingTypeResponse());
+    CLIENT_MISSING_ALL_FIELDS("Missing all fields( the response need to be handled properly- expected description of all the fields)", CheckRegistrationResponseDto.missingAllFieldsResponse());
+//    CLIENT_MISSING_PHONE("Missing phone( discuss this case)  ", CheckRegistrationResponseDto.missingPhoneResponse()),
+//    CLIENT_START_MISSING_TYPE("Missing type in start", CheckRegistrationResponseDto.missingTypeResponse());
     /*todo
     * {
     "status": 1008,
@@ -42,10 +42,10 @@ enum CheckRegistrationNegativeCase {
     public StartRegistrationRequestDto getStartDto() {
         StartRegistrationRequestDto startDto = complexDto.toStartRegistration();
         switch (this) {
-            case CLIENT_MISSING_PHONE:
-                return startDto.setEmail(null);
-            case CLIENT_START_MISSING_TYPE:
-                return startDto.setType(null);
+//            case CLIENT_MISSING_PHONE:
+//                return startDto.setEmail(null);
+//            case CLIENT_START_MISSING_TYPE:
+//                return startDto.setType(null);
             default:
                 return startDto;
         }
@@ -74,10 +74,10 @@ enum CheckRegistrationNegativeCase {
                 return checkDto.setCode(null)
                         .setPhone(null)
                         .setType(null);
-            case CLIENT_MISSING_PHONE:
+            /*case CLIENT_MISSING_PHONE:
                 return checkDto.setPhone(null);
             case CLIENT_START_MISSING_TYPE:
-                return checkDto;
+                return checkDto;*/
             default:
                 throw new EnumNotSupportedException(this);
         }

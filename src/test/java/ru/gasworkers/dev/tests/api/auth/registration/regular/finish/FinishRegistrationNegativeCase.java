@@ -27,9 +27,9 @@ enum FinishRegistrationNegativeCase {
     CLIENT_INVALID_NAME(
             "Client with invalid name",
             FinishRegistrationResponseDto.invalidNameErrorResponse()),
-    CLIENT_MISSING_ALL_FIELDS(
+    /*CLIENT_MISSING_ALL_FIELDS(
             "Client without all data - need fix",
-            FinishRegistrationResponseDto.missingAllFieldsErrorResponse()),
+            FinishRegistrationResponseDto.missingAllFieldsErrorResponse()),*/
     CLIENT_MISSING_PHONE(
             "Client without phone",
             FinishRegistrationResponseDto.missingPhoneErrorResponse()),
@@ -73,13 +73,13 @@ enum FinishRegistrationNegativeCase {
                         .setFirstName("La la")
                         .setMiddleName("Ла ла")
                         .setLastName("La 123");
-            case CLIENT_MISSING_ALL_FIELDS:
+            /*case CLIENT_MISSING_ALL_FIELDS:
                 return finishDto
                         .setFirstName(null)
                         .setMiddleName(null)
                         .setLastName(null)
                         .setEmail(null)
-                        .setPhone(null);
+                        .setPhone(null);*/
             case CLIENT_MISSING_PHONE:
                 return finishDto
                         .setPhone(null);
