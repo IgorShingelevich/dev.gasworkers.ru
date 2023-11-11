@@ -55,7 +55,7 @@ public final class DriverFactory {
         MutableCapabilities capabilities = config.browserCapabilities();
 
         MutableCapabilities selenoidCapabilities = new MutableCapabilities();
-        selenoidCapabilities.setCapability("enableVNC", true);
+        selenoidCapabilities.setCapability("enableVNC", false);
         selenoidCapabilities.setCapability("enableVideo", false);
 
         String currentRole = String.valueOf(annotation.role());
