@@ -56,7 +56,7 @@ public final class DriverFactory {
 
         MutableCapabilities selenoidCapabilities = new MutableCapabilities();
         selenoidCapabilities.setCapability("enableVNC", false);
-        selenoidCapabilities.setCapability("enableVideo", false);
+        selenoidCapabilities.setCapability("enableVideo", true);
 
         String currentRole = String.valueOf(annotation.role());
         String currentTestInstanceName = currentRole + ": " + actualContext.getDisplayName();
