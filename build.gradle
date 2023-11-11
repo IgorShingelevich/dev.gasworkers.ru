@@ -100,17 +100,17 @@ test {
     }
 }
 
-task registrationTest(type: Test) {
+/*task registrationTest(type: Test) {
     useJUnitPlatform {
         includeTags "registration"
     }
-}
+}*/ //todo need to be segmented in separate scopes
 
-task clientTest(type: Test) {
+/*task clientTest(type: Test) {
     useJUnitPlatform {
         includeTags "client"
     }
-}
+}*/ //todo need to be segmented for different user flow and user stories
 
 task bgRegistrationTest(type: Test) {
     useJUnitPlatform {
@@ -119,11 +119,11 @@ task bgRegistrationTest(type: Test) {
 }
 
 
-task apiTest(type: Test) {
+/*task apiTest(type: Test) {
     useJUnitPlatform {
         includeTags "api"
     }
-}
+}*/  //todo need to be segmented in separate scopes
 
 task apiRegistrationTest(type: Test) {
     useJUnitPlatform {
@@ -131,17 +131,17 @@ task apiRegistrationTest(type: Test) {
     }
 }
 
-task webTest(type: Test) {
+/*task webTest(type: Test) {
     useJUnitPlatform {
         includeTags "web"
     }
-}
+}*/ //todo need to be segmented in separate scopes
 
-task webRepairTest(type: Test) {
+/*task webRepairTest(type: Test) {
     useJUnitPlatform {
         includeTags "web-repair"
     }
-}
+} */ //todo need to be segmented in separate scopes
 
 task webRepairClientTest(type: Test) {
     useJUnitPlatform {
