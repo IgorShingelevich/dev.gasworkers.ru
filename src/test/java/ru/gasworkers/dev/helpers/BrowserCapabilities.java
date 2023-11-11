@@ -12,6 +12,7 @@ import ru.gasworkers.dev.exception.EnumNotSupportedException;
 public enum BrowserCapabilities {
     CHROME_114("chrome", "114.0"),
     CHROME_115("chrome", "115.0"),
+    CHROME_119("chrome", "119.0"),
     FIREFOX_114("firefox", "114.0"),
     FIREFOX_115("firefox", "115.0");
 
@@ -27,6 +28,10 @@ public enum BrowserCapabilities {
                 chromeOptions.setCapability("browserVersion", browserVersion);
                 return chromeOptions;
             case CHROME_115:
+                chromeOptions.addArguments("--use-fake-ui-for-media-stream");
+                chromeOptions.setCapability("browserVersion", browserVersion);
+                return chromeOptions;
+            case CHROME_119:
                 chromeOptions.addArguments("--use-fake-ui-for-media-stream");
                 chromeOptions.setCapability("browserVersion", browserVersion);
                 return chromeOptions;

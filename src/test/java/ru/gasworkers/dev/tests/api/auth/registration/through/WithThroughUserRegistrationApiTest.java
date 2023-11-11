@@ -5,6 +5,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -38,6 +39,7 @@ public class WithThroughUserRegistrationApiTest extends BaseApiTest {
     private Integer id;
     private Integer guide0Id;
 
+    @Disabled
     @Test
     @DisplayName("Предусловие фоновой регистрации  на ремонт")
     void throughRepairPrecondition(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {

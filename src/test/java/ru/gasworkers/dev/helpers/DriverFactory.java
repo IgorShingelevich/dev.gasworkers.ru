@@ -17,7 +17,7 @@ public final class DriverFactory {
         SelenideConfig config = new SelenideConfig();
         config.baseUrl("https://dev.gasworkers.ru");
 
-        MutableCapabilities capabilities = BrowserCapabilities.CHROME_115.getCapabilities();
+        MutableCapabilities capabilities = BrowserCapabilities.CHROME_119.getCapabilities();
 
         config.browser(capabilities.getBrowserName());
         config.browserVersion(capabilities.getBrowserVersion());

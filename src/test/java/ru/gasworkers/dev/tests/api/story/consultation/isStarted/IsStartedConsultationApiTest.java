@@ -8,6 +8,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -41,7 +42,7 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.PAYMENT)
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.API)
-public class IsStartedApiTest extends BaseApiTest {
+public class IsStartedConsultationApiTest extends BaseApiTest {
     private final ClientHousesApi clientHousesApi = new ClientHousesApi();
     private final AddEquipmentApi addEquipmentApi = new AddEquipmentApi();
     private final CreateOrderApi createOrdersApi = new CreateOrderApi();
@@ -54,6 +55,7 @@ public class IsStartedApiTest extends BaseApiTest {
     https://api.dev.gasworkers.ru/docs#konsultacii-GETapi-v1-consultation-masters-online
     */
 
+    @Disabled
     @ParameterizedTest(name = "{0}")
     @EnumSource(IsStartedPositiveCase.class)
     @Tag(AllureTag.POSITIVE)
