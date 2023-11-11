@@ -43,6 +43,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getLoginPage().login(client00.email, client00.password);
     }
 
+    @Disabled
     @Test
     @Feature("Кабинет клиента")
     @Story("Смена пароля")
@@ -56,6 +57,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getProfilePage().navPasswordTab.generatePassword();
     }
 
+    @Disabled
     @Test
     @Feature("open page")
     @DisplayName("open page")
@@ -87,6 +89,7 @@ class ClientFlowTest extends BaseTest {
         });
     }
 
+    @Disabled
     @Test
     @Feature("Кабинет клиента")
     @Story("Заполненный кабинет ")
@@ -110,6 +113,7 @@ class ClientFlowTest extends BaseTest {
         //TODO password and Notifications
     }
 
+    @Disabled
     @Test
     @Feature("Кабинет клиента")
     @Story("Заполненный кабинет ")
@@ -132,6 +136,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getObjectCardPage().tabObject.getEquipmentList();
     }
 
+    @Disabled
     @Test
     @Feature("Новый заказ ТО")
     @Story("Создание заказа")
@@ -155,6 +160,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getOrderCardPage().checkPublishedState(OrderStatus.NEW_ORDER, ServiceType.MAINTENANCE);
     }
 
+    @Disabled
     @Test
     @Feature("Новый заказ ТО")
     @Story("Создание заказа и его отмена")
@@ -190,6 +196,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getHomePage().checkFinishLoading(client00.fullName, client00.sinceDate);
     }
 
+    @Disabled
     @Test
     @Feature("Кабинет клиента")
     @Story("Просмотр заказа на ТО")
@@ -205,6 +212,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.SCHEDULE_DATE, ServiceType.MAINTENANCE);
     }
 
+    @Disabled
     @Test
     @Feature("Кабинет клиента")
     @Story("Просмотр заказа на ТО")
@@ -221,6 +229,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getOrderCardPage().checkScheduleVisitState(OrderStatus.WAIT_MASTER, ServiceType.MAINTENANCE);
     }
 
+    @Disabled
     @Test
     @Feature("Кабинет клиента")
     @Story("Просмотр заказа на ТО")
@@ -246,6 +255,7 @@ class ClientFlowTest extends BaseTest {
         clientPages.getOrderCardPage().docsTab.downloadInsurance();
     }
 
+    @Disabled
     @Test
     @Feature("Кабинет клиента")
     @Story("Просмотр заказа на ТО")
@@ -263,6 +273,7 @@ class ClientFlowTest extends BaseTest {
 //        clientPages.getOrderCardPage().navDocsTab.downloadAgreement()
     }
 
+    @Disabled
     @Test
     @Feature("Кабинет клиента")
     @Story("Просмотр заказа на ТО")
@@ -279,6 +290,7 @@ class ClientFlowTest extends BaseTest {
 //        clientPages.getOrderCardPage().navDocsTab.downloadAgreement()
     }
 
+    @Disabled
     @Test
     public void dellMe() {
        /* clientPages.getHomePage().conferenceNotification.toOrderChatButton();

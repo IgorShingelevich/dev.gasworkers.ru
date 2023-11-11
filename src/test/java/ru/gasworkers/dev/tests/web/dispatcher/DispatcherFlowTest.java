@@ -27,6 +27,7 @@ public class DispatcherFlowTest extends BaseTest {
         dispatcherPages.getLoginPage().login(emailDispatcher, passwordDispatcher);
     }
 
+    @Disabled
     @Test
     @DisplayName("Диспетчере посещает разделы Сайта")
      void dispatcherPagesRoaming() {

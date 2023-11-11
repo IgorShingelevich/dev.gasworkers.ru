@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.tests;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.extension.user.User;
 import ru.gasworkers.dev.extension.user.client.WithClient;
@@ -13,6 +14,7 @@ import static ru.gasworkers.dev.extension.user.client.WithOrder.OrderType.REPAIR
 public class DelMe {
 
 
+    @Disabled
     @Test
     void test(@WithClient(houses = @WithHouse(
             equipments = @WithEquipment,

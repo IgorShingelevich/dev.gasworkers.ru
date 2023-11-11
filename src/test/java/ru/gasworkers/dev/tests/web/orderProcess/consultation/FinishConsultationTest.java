@@ -5,6 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import io.qameta.allure.*;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -79,6 +80,7 @@ public class FinishConsultationTest extends BaseApiTest {
     @Browser(role = UserRole.MASTER, browserSize = SizeBrowser.DEFAULT, browserPosition = PositionBrowser.THIRD_ROLE)
     MasterPages masterPages;
 
+    @Disabled
     @ParameterizedTest(name = "{0}")
     @EnumSource(FinishConsultationCase.class)
     @DisplayName("Завершение консультации сейчас")

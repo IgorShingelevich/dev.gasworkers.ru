@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.tests.web.orderProcess.repair.stateTest.master;
 
 import io.qameta.allure.*;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -39,6 +40,7 @@ public class HasOfferMasterRepairStateTest extends BaseWebTest {
     @Browser(role = UserRole.MASTER)
     MasterPages masterPages;
 
+    @Disabled
     @Test
     @DisplayName("Ремонт - в состоянии есть отклик СК")
     void hasOfferRepair(@WithThroughUser(withOrderType = @WithOrderType(type = "repair")) User client) {

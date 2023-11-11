@@ -33,6 +33,7 @@ public final class AllureTag {
     public static final String
             ADMINISTRATION = "administration",
             REGISTRATION = "registration",
+            LOGIN = "login",
             AUTHORISATION = "authorisation",
             BG_REGISTRATION = "bg-registration",
             PAYMENT = "payment",

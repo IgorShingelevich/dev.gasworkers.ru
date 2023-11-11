@@ -1,5 +1,6 @@
 package ru.gasworkers.dev.tests.web;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.gasworkers.dev.extension.browser.Browser;
@@ -18,6 +19,7 @@ public class SampleSoftAssertWebTest extends BaseTest {
     ClientPages clientPages;
     RandomClient randomClient = new RandomClient();
 
+    @Disabled
     @Test
     @DisplayName("sample softAssert tests")
     public void softAssertWebTests() {

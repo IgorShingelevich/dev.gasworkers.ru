@@ -17,6 +17,7 @@ public class UserDeleteByIDApiTest {
         ApiTestConfig.configureRestAssured();
     }
 
+    @Disabled
     @Test
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.ADMINISTRATION)

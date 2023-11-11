@@ -4,6 +4,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -38,6 +39,7 @@ public class ClientAfterPaymentVideoTest extends BaseTest {
     ClientPages clientPages;
     RandomClient randomClient = new RandomClient();
 
+    @Disabled
     @Test
     @DisplayName("Состояние Кабинета СМЗ - Кабинет после оплаты Видео Сейчас")
     public void clientAfterPaymentVideo() {

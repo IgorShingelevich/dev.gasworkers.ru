@@ -20,6 +20,8 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.POSITIVE)
 @Tag(AllureTag.API)
+@Tag(AllureTag.LOGIN)
+
 @DisplayName("Login API Test")
 public class LoginApiTest extends BaseApiTest {
     private final RegularRegistrationApi registrationApi = new RegularRegistrationApi();

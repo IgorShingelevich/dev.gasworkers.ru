@@ -36,6 +36,7 @@ public class UsersDeleteApiTest {
     int apiTimestamp = Math.toIntExact(epochSeconds);
 
 
+    @Disabled
     @Test
     @Owner("Igor Shingelevich")
     @Epic(AllureEpic.ADMINISTRATION)

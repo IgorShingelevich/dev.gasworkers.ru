@@ -131,17 +131,23 @@ task apiRegistrationTest(type: Test) {
     }
 }
 
+task apiLoginTest(type: Test) {
+    useJUnitPlatform {
+        includeTags "api&login"
+    }
+}
+
 /*task webTest(type: Test) {
     useJUnitPlatform {
         includeTags "web"
     }
 }*/ //todo need to be segmented in separate scopes
 
-/*task webRepairTest(type: Test) {
+task webRepairTest(type: Test) {
     useJUnitPlatform {
         includeTags "web-repair"
     }
-} */ //todo need to be segmented in separate scopes
+}  //todo need to be segmented in separate scopes
 
 task webRepairClientTest(type: Test) {
     useJUnitPlatform {

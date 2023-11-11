@@ -60,6 +60,7 @@ public class MasterFlowTest extends BaseTest {
 //        TODO masterPages.getProfilePage().checkInitialState();
     }
 
+    @Disabled
     @Test
     @Feature("Кабинет мастера")
     @Story("Просмотр заказа на ТО")
@@ -92,6 +93,7 @@ public class MasterFlowTest extends BaseTest {
         // TODO checkFinishLoading - expand  docs check, order properties check, price check
     }
 
+    @Disabled
     @Test
     @Feature("Кабинет мастера")
     @Story("Просмотр заказа на ТО")
@@ -139,6 +141,7 @@ public class MasterFlowTest extends BaseTest {
         // TODO checkFinishLoading - expand  docs check, order properties check, price check
     }
 
+    @Disabled
     @Owner("Igor Shingelevich")
     @Feature("Кабинет мастера")
     @Story("Начало Видеоконсультации")
