@@ -12,17 +12,17 @@ import ru.gasworkers.dev.exception.EnumNotSupportedException;
 
 @AllArgsConstructor
 enum FinishRegistrationNegativeCase {
-    CLIENT_MISSING_EMAIL(
-            "Client without email",
-            FinishRegistrationResponseDto.missingEmailErrorResponse()),
+    /*  CLIENT_MISSING_EMAIL(
+              "Client missing email",
+              FinishRegistrationResponseDto.missingEmailErrorResponse()),*/ // now allowed
     CLIENT_INVALID_EMAIL(
             "Client with invalid email",
             FinishRegistrationResponseDto.invalidEmailErrorResponse()),
     CLIENT_DUPLICATE_EMAIL(
-            "Client with already existing email",
+            "Client with duplicate email",
             FinishRegistrationResponseDto.duplicateEmailErrorResponse()),
     CLIENT_MISSING_NAME(
-            "Client without first and last name",
+            "Client missing name",
             FinishRegistrationResponseDto.missingNameErrorResponse()),
     CLIENT_INVALID_NAME(
             "Client with invalid name",
@@ -31,10 +31,10 @@ enum FinishRegistrationNegativeCase {
             "Client without all data - need fix",
             FinishRegistrationResponseDto.missingAllFieldsErrorResponse()),*/
     CLIENT_MISSING_PHONE(
-            "Client without phone",
+            "Client missing phone",
             FinishRegistrationResponseDto.missingPhoneErrorResponse()),
     CLIENT_DUPLICATE_PHONE(
-            "Client with already existing phone",
+            "Client with duplicate phone",
             FinishRegistrationResponseDto.duplicatePhoneErrorResponse());
 
     private final String description;
@@ -58,8 +58,8 @@ enum FinishRegistrationNegativeCase {
         FinishRegistrationRequestDto finishDto = complexDto.toFinishRegistration();
 
         switch (this) {
-            case CLIENT_MISSING_EMAIL:
-                return finishDto.setEmail(null);
+            /*case CLIENT_MISSING_EMAIL:
+                return finishDto.setEmail(null);*/
             case CLIENT_INVALID_EMAIL:
                 return finishDto.setEmail("shingelevichgmail.com");
             case CLIENT_DUPLICATE_EMAIL:

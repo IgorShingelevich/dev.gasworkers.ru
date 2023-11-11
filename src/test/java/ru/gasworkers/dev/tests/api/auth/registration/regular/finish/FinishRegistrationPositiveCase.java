@@ -13,6 +13,8 @@ enum FinishRegistrationPositiveCase {
     // CLIENT
     CLIENT_WITH_EMAIL(
             "Client with email"),
+    CLIENT_ONLY_PHONE(
+            "Client missing email, only phone"),
     CLIENT_WITH_PHONE(
             "Client with phone"),
     SELF_EMPLOYED_WITH_EMAIL(
@@ -31,6 +33,7 @@ enum FinishRegistrationPositiveCase {
             case CLIENT_WITH_EMAIL:
                 return startClientDto.setPhone(null);
             case CLIENT_WITH_PHONE:
+            case CLIENT_ONLY_PHONE:
                 return startClientDto.setEmail(null);
             case SELF_EMPLOYED_WITH_EMAIL:
                 return startSelfEmployedDto.setPhone(null);
@@ -48,6 +51,7 @@ enum FinishRegistrationPositiveCase {
             case CLIENT_WITH_EMAIL:
                 return checkClientDto.setPhone(null);
             case CLIENT_WITH_PHONE:
+            case CLIENT_ONLY_PHONE:
                 return checkClientDto.setEmail(null);
             case SELF_EMPLOYED_WITH_EMAIL:
                 return checkSelfEmployedDto.setPhone(null);
@@ -64,6 +68,8 @@ enum FinishRegistrationPositiveCase {
                 return complexClientDto.toFinishRegistration();
             case CLIENT_WITH_PHONE:
                 return complexClientDto.toFinishRegistration();
+            case CLIENT_ONLY_PHONE:
+                return complexClientDto.toFinishRegistration().setEmail(null);
             case SELF_EMPLOYED_WITH_EMAIL:
                 return complexSelfEmployedDto.toFinishRegistration();
             case SELF_EMPLOYED_WITH_PHONE:
