@@ -7,6 +7,7 @@ import ru.gasworkers.dev.pages.components.BaseComponent;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.visible;
@@ -31,12 +32,27 @@ public class DateBGRegistrationLandingComponent extends BaseComponent {
         });
     }
 
-    public void setTodayDate() {
+    /*public void setTodayDate() {
         stepWithRole("Выбрать сегодняшнюю дату", () -> {
             todayButtonLocator.click();
             okButtonLocator.click();
             stepWithRole("Проверить, что дата выбрана: " + LocalDate.now().format(DateTimeFormatter.ofPattern("d MMMM yyyy")), () -> {
                 filledDateFieldLocator.shouldHave(Condition.text(LocalDate.now().format(DateTimeFormatter.ofPattern("d MMMM yyyy"))));
+            });
+            stepWithRole("Убедиться, что компонент Выбор Даты и Время закрыт", () -> {
+                containerLocator.shouldNotBe(visible);
+            });
+        });
+    }*/
+
+    public void setTodayDate() {
+        stepWithRole("Выбрать сегодняшнюю дату", () -> {
+            todayButtonLocator.click();
+            okButtonLocator.click();
+            stepWithRole("Проверить, что дата выбрана: " + LocalDate.now().format(DateTimeFormatter.ofPattern("d MMMM yyyy")), () -> {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", new Locale("ru", "RU"));
+                String formattedDate = LocalDate.now().format(formatter);
+                filledDateFieldLocator.shouldHave(Condition.text(formattedDate));
             });
             stepWithRole("Убедиться, что компонент Выбор Даты и Время закрыт", () -> {
                 containerLocator.shouldNotBe(visible);
