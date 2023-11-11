@@ -70,6 +70,7 @@ public final class DriverFactory {
         }});
 
         capabilities.setCapability("selenoid:options", selenoidCapabilities);
-        config.remote("http://tests.gasworkers.ru:4444/wd/hub");
+//        config.remote("http://tests.gasworkers.ru:4444/wd/hub");
+        config.remote("https://selenoid.tests.gasworkers.ru/wd/hub");
     }
 }

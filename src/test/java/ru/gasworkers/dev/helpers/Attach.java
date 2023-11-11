@@ -37,7 +37,8 @@ public final class Attach {
     @Attachment(value = "Video", type = "text/html", fileExtension = ".html")
     public static String addVideo(SelenideDriver driver) {
         SessionId sessionId = driver.getSessionId();
-        String videoUrl = "http://5.161.120.34:8080/video/" + sessionId + ".mp4";
+//        String videoUrl = "http://5.161.120.34:8080/video/" + sessionId + ".mp4";
+        String videoUrl = "http://tests.gasworkers.ru/video/" + sessionId + ".mp4";
         return "<html><body><video width='100%' height='100%' controls autoplay><source src='"
                 + videoUrl
                 + "' type='video/mp4'></video></body></html>";
