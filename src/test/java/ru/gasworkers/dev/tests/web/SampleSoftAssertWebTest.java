@@ -1,8 +1,10 @@
 package ru.gasworkers.dev.tests.web;
 
+import io.qameta.allure.Epic;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.extension.browser.Browser;
 import ru.gasworkers.dev.model.UserRole;
 import ru.gasworkers.dev.model.browser.SizeBrowser;
@@ -13,6 +15,8 @@ import ru.gasworkers.dev.utils.userBuilder.RandomClient;
 
 import java.util.Arrays;
 import java.util.function.Consumer;
+
+@Epic(AllureEpic.SAMPLE_TEST)
 
 public class SampleSoftAssertWebTest extends BaseTest {
     @Browser(role = UserRole.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")

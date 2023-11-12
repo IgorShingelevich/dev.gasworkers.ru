@@ -1,8 +1,13 @@
 package ru.gasworkers.dev.tests;
 
+import io.qameta.allure.Epic;
+import ru.gasworkers.dev.allure.AllureEpic;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+
+@Epic(AllureEpic.SAMPLE_TEST)
 
 public class SoftAssert {
     private final List<Throwable> failures = new ArrayList<>();

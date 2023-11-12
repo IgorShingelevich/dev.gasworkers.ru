@@ -33,7 +33,7 @@ public final class DriverFactory {
         config.browserCapabilities(chromeOptions);
 
         if (isLocalExecution()) {
-            configureLocalCapabilities(config, annotation, actualContext);
+//            configureLocalCapabilities(config, annotation, actualContext);
         } else {
             configureRemoteCapabilities(config, annotation, actualContext);
         }

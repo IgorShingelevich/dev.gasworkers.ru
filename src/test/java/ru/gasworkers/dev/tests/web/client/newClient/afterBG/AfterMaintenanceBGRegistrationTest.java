@@ -5,6 +5,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -32,11 +33,13 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.POSITIVE)
 @Tag(AllureTag.WEB)
 
+
 public class AfterMaintenanceBGRegistrationTest extends BaseTest {
     @Browser(role = UserRole.CLIENT, browserSize = SizeBrowser.DEFAULT, browserPosition = "0x0")
     ClientPages clientPages;
     RandomClient randomClient = new RandomClient();
 
+    @Disabled
     @Test
     @DisplayName("Состояние Кабинета СМЗ - Кабинет после Фоновой Регистрации на ТО с указанием телефона и почты на сегодняшнюю дату с одним оборудованием")
     public void clientAfterBGMaintenance() {

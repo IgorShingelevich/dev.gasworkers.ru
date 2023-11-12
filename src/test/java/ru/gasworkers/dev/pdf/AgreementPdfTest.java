@@ -1,8 +1,10 @@
 package ru.gasworkers.dev.pdf;
 
+import io.qameta.allure.Feature;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+@Feature("PDF")
 @Disabled
 
 public class AgreementPdfTest {

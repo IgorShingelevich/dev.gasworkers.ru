@@ -2,6 +2,7 @@ package ru.gasworkers.dev.allure;
 
 public final class AllureEpic {
     public static final String
+            SAMPLE_TEST = "Эпик: Примеры тестов",
             ADMINISTRATION = "Эпик: Администрирование",
             REGISTRATION = "Эпик: Регистрация",
             AUTHORIZATION = "Эпик: Авторизация",
