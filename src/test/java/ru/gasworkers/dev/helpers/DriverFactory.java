@@ -25,19 +25,15 @@ public final class DriverFactory {
         config.browserPosition(annotation.browserPosition());
         config.timeout(8000);
         config.headless(false);
-        config.holdBrowserOpen(false); // check remote
+        config.holdBrowserOpen(false);
         config.browserCapabilities(capabilities);
-        ChromeOptions chromeOptions = new ChromeOptions();
-        // Install and activate the extension
-//        chromeOptions.addExtensions(new File("src/test/resources/web/eimadpbcbfnmbkopoojfekhnkhdbieeh-4.9.64-Crx4Chrome.com.crx"));
-        // Enable camera and microphone access
-        chromeOptions.addArguments("--use-fake-ui-for-media-stream");
-//        chromeOptions.addArguments("auto-open-devtools-for-tabs"); // open dev tools
 
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--use-fake-ui-for-media-stream");
         config.browserCapabilities(chromeOptions);
 
         if (isLocalExecution()) {
-            // Handle local execution settings if needed
+            configureLocalCapabilities(config, annotation, actualContext);
         } else {
             configureRemoteCapabilities(config, annotation, actualContext);
         }
@@ -49,6 +45,20 @@ public final class DriverFactory {
     private static boolean isLocalExecution() {
         String localExecution = System.getenv("LOCAL_EXECUTION");
         return localExecution != null && localExecution.equalsIgnoreCase("true");
+    }
+
+    private static void configureLocalCapabilities(SelenideConfig config, Browser annotation, ExtensionContext actualContext) {
+        MutableCapabilities capabilities = config.browserCapabilities();
+
+        MutableCapabilities selenoidCapabilities = new MutableCapabilities();
+        selenoidCapabilities.setCapability("enableVNC", true);
+        selenoidCapabilities.setCapability("enableVideo", false);
+
+        String currentTestInstanceName = "Local: " + actualContext.getDisplayName();
+        selenoidCapabilities.setCapability("name", currentTestInstanceName);
+
+        capabilities.setCapability("selenoid:options", selenoidCapabilities);
+        config.remote("http://localhost:4444/wd/hub");
     }
 
     private static void configureRemoteCapabilities(SelenideConfig config, Browser annotation, ExtensionContext actualContext) {
@@ -70,7 +80,6 @@ public final class DriverFactory {
         }});
 
         capabilities.setCapability("selenoid:options", selenoidCapabilities);
-//        config.remote("http://tests.gasworkers.ru:4444/wd/hub");
         config.remote("https://selenoid.tests.gasworkers.ru/wd/hub");
     }
 }
