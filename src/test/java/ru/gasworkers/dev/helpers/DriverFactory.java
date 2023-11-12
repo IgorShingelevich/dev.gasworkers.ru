@@ -47,7 +47,7 @@ public final class DriverFactory {
         return localExecution != null && localExecution.equalsIgnoreCase("true");
     }
 
-    private static void configureLocalCapabilities(SelenideConfig config, Browser annotation, ExtensionContext actualContext) {
+    /*private static void configureLocalCapabilities(SelenideConfig config, Browser annotation, ExtensionContext actualContext) {
         MutableCapabilities capabilities = config.browserCapabilities();
 
         MutableCapabilities selenoidCapabilities = new MutableCapabilities();
@@ -59,7 +59,7 @@ public final class DriverFactory {
 
         capabilities.setCapability("selenoid:options", selenoidCapabilities);
         config.remote("http://localhost:4444/wd/hub");
-    }
+    }*/
 
     private static void configureRemoteCapabilities(SelenideConfig config, Browser annotation, ExtensionContext actualContext) {
         MutableCapabilities capabilities = config.browserCapabilities();
