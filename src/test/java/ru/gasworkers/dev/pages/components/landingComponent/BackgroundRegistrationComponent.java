@@ -17,6 +17,7 @@ import ru.gasworkers.dev.pages.components.sharedComponent.CommonCodeInputModalWi
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import static com.codeborne.selenide.Condition.*;
 
@@ -158,8 +159,11 @@ public class BackgroundRegistrationComponent extends BaseComponent {
                 addressFieldLocator.shouldNotBe(empty);
                 System.out.println("result address: " + addressFieldLocator.getValue());
             });
-            stepWithRole("Убедиться, что дата сегодняшняя  выбрана: " + filledDateFieldLocator.getValue(), () -> {
-                filledDateFieldLocator.shouldHave(Condition.text(LocalDate.now().format(DateTimeFormatter.ofPattern("d MMMM yyyy"))));
+            stepWithRole("Убедиться, что дата сегодняшняя выбрана: " + filledDateFieldLocator.getValue(), () -> {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMMM yyyy", new Locale("ru", "RU"));
+                String expectedDate = LocalDate.now().format(formatter);
+
+                filledDateFieldLocator.shouldHave(Condition.text(expectedDate));
                 System.out.println("result date: " + filledDateFieldLocator.getText());
             });
             String formattedPhone = "+7(" + phone.substring(1, 4) + ")-" + phone.substring(4, 7) + "-" + phone.substring(7);
