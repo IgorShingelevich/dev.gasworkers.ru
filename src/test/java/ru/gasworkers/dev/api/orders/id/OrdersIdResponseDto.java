@@ -141,6 +141,8 @@ public class OrdersIdResponseDto {
         private Object offerMaster;
         @JsonProperty("from_mobile")
         private Boolean fromMobile;
+        @JsonProperty("with_activation")
+        private Boolean withActivation;
 
 
 
