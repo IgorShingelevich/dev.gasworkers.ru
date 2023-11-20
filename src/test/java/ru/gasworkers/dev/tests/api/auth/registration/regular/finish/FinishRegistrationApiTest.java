@@ -12,7 +12,9 @@ import ru.gasworkers.dev.allure.AllureEpic;
 import ru.gasworkers.dev.allure.AllureFeature;
 import ru.gasworkers.dev.allure.AllureTag;
 import ru.gasworkers.dev.api.auth.registration.RegularRegistrationApi;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.check.CheckRegistrationRequestDto;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.finish.FinishRegistrationResponseDto;
+import ru.gasworkers.dev.api.auth.registration.regular.dto.start.StartRegistrationRequestDto;
 import ru.gasworkers.dev.tests.api.BaseApiTest;
 
 import static io.qameta.allure.Allure.step;
@@ -26,26 +28,17 @@ import static io.qameta.allure.Allure.step;
 @Tag(AllureTag.CLIENT)
 @Tag(AllureTag.API)
 public class FinishRegistrationApiTest extends BaseApiTest {
-
     private final RegularRegistrationApi registrationApi = new RegularRegistrationApi();
-
     @ParameterizedTest(name = "{0}")
     @EnumSource(FinishRegistrationPositiveCase.class)
     @Tag(AllureTag.POSITIVE)
-    @DisplayName("Success case:")
+    @DisplayName("Positive case:")
     void positiveTestCase(FinishRegistrationPositiveCase testCase) {
-        step("Start registration", () ->
-                registrationApi.startRegistration(testCase.getStartDto())
-                        .statusCode(200));
-
-        step("Check registration", () ->
-                registrationApi.checkRegistration(testCase.getCheckDto())
-                        .statusCode(200));
-
+        startAndCheckPrecondition(testCase.getStartDto(), testCase.getCheckDto());
         step("Finish registration", () -> {
             FinishRegistrationResponseDto expectedResponse = FinishRegistrationResponseDto.successResponse();
             FinishRegistrationResponseDto actualResponse = registrationApi.finishRegistration(testCase.getFinishDto())
-                    .statusCode(200)
+                    .statusCode(testCase.getExpectedStatusCode())
                     .extract().as(FinishRegistrationResponseDto.class);
             assertResponse(expectedResponse, actualResponse);
         });
@@ -57,23 +50,23 @@ public class FinishRegistrationApiTest extends BaseApiTest {
     @Tag(AllureTag.NEGATIVE)
     @DisplayName("Negative case:")
     void negativeTestCase(FinishRegistrationNegativeCase testCase) {
-        step("Start registration", () ->
-                registrationApi.startRegistration(testCase.getStartDto())
-                        .statusCode(200));
-
-        step("Check registration", () ->
-                registrationApi.checkRegistration(testCase.getCheckDto())
-                        .statusCode(200));
-
+        startAndCheckPrecondition(testCase.getStartDto(), testCase.getCheckDto());
         step("Finish registration", () -> {
-
             FinishRegistrationResponseDto actualResponse = registrationApi.finishRegistration(testCase.getFinishDto())
-                    .statusCode(422)
+                    .statusCode(testCase.getExpectedStatusCode())
                     .extract().as(FinishRegistrationResponseDto.class);
             FinishRegistrationResponseDto expectedResponse = testCase.getExpectedResponse();
             assertResponse(expectedResponse, actualResponse);
-
         });
     }
 
+    private void startAndCheckPrecondition(StartRegistrationRequestDto startDto, CheckRegistrationRequestDto checkDto) {
+        step("Start registration", () ->
+                registrationApi.startRegistration(startDto)
+                        .statusCode(200));
+
+        step("Check registration", () ->
+                registrationApi.checkRegistration(checkDto)
+                        .statusCode(200));
+    }
 }

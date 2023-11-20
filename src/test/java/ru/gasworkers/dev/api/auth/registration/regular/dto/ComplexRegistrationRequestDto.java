@@ -47,18 +47,18 @@ public class ComplexRegistrationRequestDto {
 
     public FinishRegistrationRequestDto toFinishRegistration() {
         return FinishRegistrationRequestDto.builder()
-                .type(userType)
-                .password(password)
-                .email(email)
-                .phone(phone)
-                .gender(gender)
-                .firstName(firstName)
-                .lastName(lastName)
-                .middleName(middleName)
-                .isHaveContract(isHaveContract)
-                .isIp(isIp)
-                .employedStatus(employedStatus)
-                .serviceId(serviceId)
+                .type(userType) //all roles mandatory
+                .password(password) //all roles mandatory
+                .email(email) //all roles optional mandatory
+                .phone(phone) //all roles mandatory
+                .gender(gender) // only client mandatory
+                .firstName(firstName) //all roles mandatory
+                .lastName(lastName) //all roles mandatory
+                .middleName(middleName) //all roles mandatory
+                .isHaveContract(isHaveContract) // only selfEmployed mandatory
+                .isIp(isIp) // only selfEmployed mandatory
+                .employedStatus(employedStatus) // only selfEmployed or master mandatory
+                .serviceId(serviceId) // only master mandatory
                 .build();
     }
 

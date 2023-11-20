@@ -1,6 +1,7 @@
 package ru.gasworkers.dev.tests.api.auth.registration.regular.finish;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationFactory;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.ComplexRegistrationRequestDto;
 import ru.gasworkers.dev.api.auth.registration.regular.dto.check.CheckRegistrationRequestDto;
@@ -23,6 +24,8 @@ enum FinishRegistrationPositiveCase {
             "Self-employed with phone");
 
     private final String description;
+    @Getter
+    private final int expectedStatusCode = 200;
     private final ComplexRegistrationRequestDto complexClientDto = ComplexRegistrationFactory.defaultRandomClient();
     private final ComplexRegistrationRequestDto complexSelfEmployedDto = ComplexRegistrationFactory.defaultRandomSelfEmployed();
 
@@ -65,13 +68,11 @@ enum FinishRegistrationPositiveCase {
     public FinishRegistrationRequestDto getFinishDto() {
         switch (this) {
             case CLIENT_WITH_EMAIL:
-                return complexClientDto.toFinishRegistration();
             case CLIENT_WITH_PHONE:
                 return complexClientDto.toFinishRegistration();
             case CLIENT_ONLY_PHONE:
                 return complexClientDto.toFinishRegistration().setEmail(null);
             case SELF_EMPLOYED_WITH_EMAIL:
-                return complexSelfEmployedDto.toFinishRegistration();
             case SELF_EMPLOYED_WITH_PHONE:
                 return complexSelfEmployedDto.toFinishRegistration();
             default:

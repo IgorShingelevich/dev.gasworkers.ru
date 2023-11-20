@@ -29,10 +29,18 @@ public abstract class BasePage extends BaseComponent {
         });
     }
 
+    protected SelenideElement selfPrimaryButton(SelenideElement self) {
+        return self.$("[data-test-id='primary']");
+    }
+
     public void outlineButton() {
         step("Нажать на альтернативную кнопку", () -> {
             driver.$("[data-test-id='outline-primary']").click();
         });
+    }
+
+    protected SelenideElement selfOutlineButton(SelenideElement self) {
+        return self.$("[data-test-id='outline-primary']");
     }
 
     protected void open(String relURL, String token) {

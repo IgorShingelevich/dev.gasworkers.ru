@@ -20,6 +20,46 @@ public class FinishRegistrationResponseDto {
     private List<Object> data;
     private ErrorsDto errors;
 
+    public static FinishRegistrationResponseDto missingPasswordErrorResponse() {
+        return fieldSpecificErrorResponse("password", "Поле Пароль обязательно для заполнения.");
+    }
+
+    public static FinishRegistrationResponseDto missingFirstNameErrorResponse() {
+        return fieldSpecificErrorResponse("first_name", "Поле не заполнено");
+    }
+
+    public static FinishRegistrationResponseDto missingLastNameErrorResponse() {
+        return fieldSpecificErrorResponse("last_name", "Поле не заполнено");
+    }
+
+    public static FinishRegistrationResponseDto invalidGenderErrorResponse() {
+        return fieldSpecificErrorResponse("gender", "Выбранное значение для gender ошибочно.");
+    }
+
+    public static FinishRegistrationResponseDto invalidRoleFieldErrorResponse(String field) {
+        return fieldSpecificErrorResponse(field, "Неверный формат");
+    }
+
+    public static FinishRegistrationResponseDto missingEmailAndPhoneErrorResponse() {
+        Map<String, List<String>> errorMap = new HashMap<>();
+//        errorMap.put("email", List.of("Поле E-Mail обязательно для заполнения."));
+        errorMap.put("phone", List.of("Поле Номер телефона обязательно для заполнения."));
+        ErrorsDto errorsDto = new ErrorsDto(errorMap);
+        return new FinishRegistrationResponseDto(null, "Поле Номер телефона обязательно для заполнения.", null, errorsDto);
+
+    }
+
+    public static FinishRegistrationResponseDto invalidPhoneFormatErrorResponse() {
+        Map<String, List<String>> errorMap = new HashMap<>();
+        errorMap.put("phone", List.of("Введите корректный номер", "Поле Номер телефона должно быть целым числом."));
+        ErrorsDto errorsDto = new ErrorsDto(errorMap);
+        return new FinishRegistrationResponseDto(null, "Введите корректный номер (и еще 1 ошибка)", null, errorsDto);
+    }
+
+    public static FinishRegistrationResponseDto invalidNameErrorResponse() {
+        return fieldSpecificErrorResponse("first_name", "Поле Имя может содержать только буквы и цифры.");
+    }
+
     @Data
     @NoArgsConstructor
     @AllArgsConstructor
@@ -37,15 +77,15 @@ public class FinishRegistrationResponseDto {
     }
 
     public static FinishRegistrationResponseDto missingEmailErrorResponse() {
-        return fieldRequiredErrorResponse("email", "Поле E-Mail обязательно для заполнения.");
+        return fieldSpecificErrorResponse("email", "Поле E-Mail обязательно для заполнения.");
     }
 
     public static FinishRegistrationResponseDto invalidEmailErrorResponse() {
-        return fieldRequiredErrorResponse("email", "Поле E-Mail должно быть действительным электронным адресом.");
+        return fieldSpecificErrorResponse("email", "Поле E-Mail должно быть действительным электронным адресом.");
     }
 
     public static FinishRegistrationResponseDto duplicateEmailErrorResponse() {
-        return userExistsErrorResponse("email");
+        return duplicateFieldErrorResponse("email");
     }
 
     public static FinishRegistrationResponseDto missingNameErrorResponse() {
@@ -56,7 +96,7 @@ public class FinishRegistrationResponseDto {
         return new FinishRegistrationResponseDto(null, "Поле не заполнено (и еще 1 ошибка)", null, errorsDto);
     }
 
-    public static FinishRegistrationResponseDto invalidNameErrorResponse() {
+    public static FinishRegistrationResponseDto invalidFullNameErrorResponse() {
         Map<String, List<String>> errorMap = new HashMap<>();
         errorMap.put("first_name", List.of("Поле Имя может содержать только буквы и цифры."));
         errorMap.put("last_name", List.of("Поле Фамилия может содержать только буквы и цифры."));
@@ -78,21 +118,21 @@ public class FinishRegistrationResponseDto {
     }
 
     public static FinishRegistrationResponseDto missingPhoneErrorResponse() {
-        return fieldRequiredErrorResponse("phone", "Поле Номер телефона обязательно для заполнения.");
+        return fieldSpecificErrorResponse("phone", "Поле Номер телефона обязательно для заполнения.");
     }
 
     public static FinishRegistrationResponseDto duplicatePhoneErrorResponse() {
-        return userExistsErrorResponse("phone");
+        return duplicateFieldErrorResponse("phone");
     }
 
-    private static FinishRegistrationResponseDto userExistsErrorResponse(String field) {
+    private static FinishRegistrationResponseDto duplicateFieldErrorResponse(String field) {
         Map<String, List<String>> errorMap = new HashMap<>();
         errorMap.put(field, List.of("Пользователь с такими данными уже существует"));
         ErrorsDto errorsDto = new ErrorsDto(errorMap);
         return new FinishRegistrationResponseDto(null, "Пользователь с такими данными уже существует (и еще 1 ошибка)", null, errorsDto);
     }
 
-    private static FinishRegistrationResponseDto fieldRequiredErrorResponse(String field, String message) {
+    private static FinishRegistrationResponseDto fieldSpecificErrorResponse(String field, String message) {
         Map<String, List<String>> errorMap = new HashMap<>();
         errorMap.put(field, List.of(message));
         ErrorsDto errorsDto = new ErrorsDto(errorMap);
