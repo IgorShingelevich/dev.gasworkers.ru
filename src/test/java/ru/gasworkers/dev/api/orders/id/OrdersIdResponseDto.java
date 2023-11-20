@@ -124,6 +124,7 @@ public class OrdersIdResponseDto {
         private List<MaterialValues> materialValues;
         private List<Actions> actions;
         private Boolean transfered;
+        private Boolean tenderable;
         @JsonProperty("need_master_selecting")
         private Boolean needMasterSelecting;
         @JsonProperty("current_history_status")
