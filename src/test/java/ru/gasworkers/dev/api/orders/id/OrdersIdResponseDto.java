@@ -51,6 +51,8 @@ public class OrdersIdResponseDto {
         @JsonProperty("selected_date")
         private String selectedDate;
         private String description;
+        @JsonProperty("from_sd")
+        private Boolean fromSd;
         private ArrayList<Object> photos;
         private ArrayList<Object> videos;
         @JsonProperty("created_at")
