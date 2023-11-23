@@ -256,6 +256,7 @@ public class PreconditionConsultation extends BaseApiTest {
                         .extract().as(ApplyMasterResponseDto.class).getData().getReceiptId());
             });
             SelectPaymentResponseDto selectPaymentResponse = step("Select payment", () -> {
+                System.out.println("selectPayment");
                 return selectPaymentApi.selectPayment(SelectPaymentRequestDto.builder()
                                 .orderId(commonFields.getOrderNumber())
                                 .receiptId(commonFields.getReceipts0Id())
@@ -265,6 +266,7 @@ public class PreconditionConsultation extends BaseApiTest {
                         .extract().as(SelectPaymentResponseDto.class);
             });
             step(UserRole.ADMIN + " get master credentials", () -> {
+                System.out.println("admin get master credentials");
                 commonFields.setTokenAdmin(loginApi.login(LoginRequestDto.asAdmin())
                         .statusCode(200)
                         .extract().as(LoginResponseDto.class).getData().getToken());
