@@ -137,6 +137,8 @@ public class OrdersIdResponseDto {
         private Integer relatedRepairId;
         @JsonProperty("full_transfer")
         private Boolean fullTransfer;
+        @JsonProperty("payment_rules_accepted")
+        private Boolean paymentRulesAccepted;
         @JsonProperty("offer_dispatcher")
         private Object offerDispatcher;
         @JsonProperty("offer_master")
